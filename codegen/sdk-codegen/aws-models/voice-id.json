@@ -9,7 +9,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You do not have sufficient permissions to perform this action. Check the error message and try \n            again.</p>",
+                "smithy.api#documentation": "<p>You do not have sufficient permissions to perform this action. Check the error message\n            and try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -86,54 +86,54 @@
                 "AuthenticationResultId": {
                     "target": "com.amazonaws.voiceid#UniqueIdLarge",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for this authentication result. Because there can be multiple authentications\n            for a given session, this field helps to identify if the returned result is from a previous streaming \n            activity or a new result. Note that in absence of any new streaming activity, \n            <code>AcceptanceThreshold</code> changes, or <code>SpeakerId</code> changes, Voice ID \n            always returns cached Authentication Result for this API.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for this authentication result. Because there can be multiple\n            authentications for a given session, this field helps to identify if the returned result\n            is from a previous streaming activity or a new result. Note that in absence of any new\n            streaming activity, <code>AcceptanceThreshold</code> changes, or <code>SpeakerId</code>\n            changes, Voice ID always returns cached Authentication Result for this API.</p>"
                     }
                 },
                 "AudioAggregationStartedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation started for this authentication result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation started for this authentication\n            result.</p>"
                     }
                 },
                 "AudioAggregationEndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation ended for this authentication result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation ended for this authentication\n            result.</p>"
                     }
                 },
                 "CustomerSpeakerId": {
                     "target": "com.amazonaws.voiceid#CustomerSpeakerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client-provided identifier for the speaker whose authentication result is produced. Only present if a\n            <code>SpeakerId</code> is provided for the session.</p>"
+                        "smithy.api#documentation": "<p>The client-provided identifier for the speaker whose authentication result is\n            produced. Only present if a <code>SpeakerId</code> is provided for the session.</p>"
                     }
                 },
                 "GeneratedSpeakerId": {
                     "target": "com.amazonaws.voiceid#GeneratedSpeakerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service-generated identifier for the speaker whose authentication result is produced.</p>"
+                        "smithy.api#documentation": "<p>The service-generated identifier for the speaker whose authentication result is\n            produced.</p>"
                     }
                 },
                 "Decision": {
                     "target": "com.amazonaws.voiceid#AuthenticationDecision",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication decision produced by Voice ID, processed against the current session state and streamed\n            audio of the speaker.</p>"
+                        "smithy.api#documentation": "<p>The authentication decision produced by Voice ID, processed against the current\n            session state and streamed audio of the speaker.</p>"
                     }
                 },
                 "Score": {
                     "target": "com.amazonaws.voiceid#Score",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication score for the speaker whose authentication result is produced. This value is \n            only present if the authentication decision is either <code>ACCEPT</code> or <code>REJECT</code>.</p>"
+                        "smithy.api#documentation": "<p>The authentication score for the speaker whose authentication result is produced. This\n            value is only present if the authentication decision is either <code>ACCEPT</code> or\n                <code>REJECT</code>.</p>"
                     }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.voiceid#AuthenticationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>AuthenticationConfiguration</code> used to generate this authentication result.</p>"
+                        "smithy.api#documentation": "<p>The <code>AuthenticationConfiguration</code> used to generate this authentication\n            result.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The authentication result produced by Voice ID, processed against the current session state and streamed\n            audio of the speaker.</p>"
+                "smithy.api#documentation": "<p>The authentication result produced by Voice ID, processed against the current session\n            state and streamed audio of the speaker.</p>"
             }
         },
         "com.amazonaws.voiceid#ClientTokenString": {
@@ -155,12 +155,12 @@
                 "ConflictType": {
                     "target": "com.amazonaws.voiceid#ConflictType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of conflict which caused a ConflictException. Possible types and the corresponding error messages\n            are as follows:</p>\n        <ul>\n            <li>\n                    <p>\n                  <code>DOMAIN_NOT_ACTIVE</code>: The domain is not active.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT</code>: You cannot change the speaker ID after an enrollment has been requested.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>ENROLLMENT_ALREADY_EXISTS</code>: There is already an enrollment for this session.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>SPEAKER_NOT_SET</code>: You must set the speaker ID before requesting an enrollment.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>SPEAKER_OPTED_OUT</code>: You cannot request an enrollment for an opted out speaker.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>CONCURRENT_CHANGES</code>: The request could not be processed as the resource was modified by another request during execution.</p>\n                </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of conflict which caused a ConflictException. Possible types and the\n            corresponding error messages are as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DOMAIN_NOT_ACTIVE</code>: The domain is not active.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CANNOT_CHANGE_SPEAKER_AFTER_ENROLLMENT</code>: You cannot change the\n                    speaker ID after an enrollment has been requested.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ENROLLMENT_ALREADY_EXISTS</code>: There is already an enrollment for\n                    this session.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SPEAKER_NOT_SET</code>: You must set the speaker ID before requesting an\n                    enrollment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SPEAKER_OPTED_OUT</code>: You cannot request an enrollment for an opted\n                    out speaker.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CONCURRENT_CHANGES</code>: The request could not be processed as the\n                    resource was modified by another request during execution.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed due to a conflict. Check the <code>ConflictType</code> and error message for\n            more details.</p>",
+                "smithy.api#documentation": "<p>The request failed due to a conflict. Check the <code>ConflictType</code> and error\n            message for more details.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -236,11 +236,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer \n            audio, and voiceprints.\n        </p>",
-                "smithy.api#http": {
-                    "method": "POST",
-                    "uri": "/domains"
-                },
+                "smithy.api#documentation": "<p>Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters,\n            customer audio, and voiceprints. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -257,27 +253,35 @@
                 "Description": {
                     "target": "com.amazonaws.voiceid#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of this domain.</p>"
+                        "smithy.api#documentation": "<p>A brief description of the domain.</p>"
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration, containing the KMS key identifier, to be used by Voice ID for \n            the server-side encryption of your data. Refer to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/encryption-at-rest.html#encryption-at-rest-voiceid\">\n                Amazon Connect Voice ID encryption at rest</a> for more details on how the KMS key is used.\n        </p>",
+                        "smithy.api#documentation": "<p>The configuration, containing the KMS key identifier, to be used by\n            Voice ID for the server-side encryption of your data. Refer to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/encryption-at-rest.html#encryption-at-rest-voiceid\">\n                Amazon Connect Voice ID encryption at rest</a> for more details on how the KMS key is used. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.voiceid#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for creating a new domain. If not provided, Amazon Web Services SDK populates \n            this field.</p>",
-                        "smithy.api#idempotencyToken": {}
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The idempotency token for creating a new domain. If not provided, Amazon Web Services\n            SDK populates this field.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.voiceid#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags you want added to the domain.</p>"
+                        "aws.cloudformation#cfnMutability": "full",
+                        "smithy.api#documentation": "<p>A list of tags you want added to the domain.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             }
@@ -334,11 +338,7 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified domain from Voice ID.</p>",
-                "smithy.api#http": {
-                    "method": "DELETE",
-                    "uri": "/domains/{DomainId}",
-                    "code": 204
-                }
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.voiceid#DeleteDomainRequest": {
@@ -348,7 +348,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain you want to delete.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -383,12 +382,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified fraudster from Voice ID.</p>",
-                "smithy.api#http": {
-                    "method": "DELETE",
-                    "uri": "/domains/{DomainId}/fraudsters/{FraudsterId}",
-                    "code": 204
-                }
+                "smithy.api#documentation": "<p>Deletes the specified fraudster from Voice ID.</p>"
             }
         },
         "com.amazonaws.voiceid#DeleteFraudsterRequest": {
@@ -398,7 +392,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -406,7 +399,6 @@
                     "target": "com.amazonaws.voiceid#FraudsterId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the fraudster you want to delete.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -441,12 +433,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified speaker from Voice ID.</p>",
-                "smithy.api#http": {
-                    "method": "DELETE",
-                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}",
-                    "code": 204
-                }
+                "smithy.api#documentation": "<p>Deletes the specified speaker from Voice ID.</p>"
             }
         },
         "com.amazonaws.voiceid#DeleteSpeakerRequest": {
@@ -456,7 +443,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the speaker.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -464,7 +450,6 @@
                     "target": "com.amazonaws.voiceid#SpeakerId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the speaker you want to delete.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -497,10 +482,7 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Describes the specified domain.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}"
-                }
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.voiceid#DescribeDomainRequest": {
@@ -510,7 +492,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain you are describing.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -522,7 +503,11 @@
                 "Domain": {
                     "target": "com.amazonaws.voiceid#Domain",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the specified domain.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Information about the specified domain.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
                     }
                 }
             }
@@ -553,11 +538,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified fraudster.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/fraudsters/{FraudsterId}"
-                }
+                "smithy.api#documentation": "<p>Describes the specified fraudster.</p>"
             }
         },
         "com.amazonaws.voiceid#DescribeFraudsterRegistrationJob": {
@@ -586,11 +567,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified fraudster registration job.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/fraudster-registration-jobs/{JobId}"
-                }
+                "smithy.api#documentation": "<p>Describes the specified fraudster registration job.</p>"
             }
         },
         "com.amazonaws.voiceid#DescribeFraudsterRegistrationJobRequest": {
@@ -600,7 +577,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the domain containing the fraudster registration job.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -608,7 +584,6 @@
                     "target": "com.amazonaws.voiceid#JobId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the fraudster registration job you are describing.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -632,7 +607,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -640,7 +614,6 @@
                     "target": "com.amazonaws.voiceid#FraudsterId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the fraudster you are describing.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -683,11 +656,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified speaker.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}"
-                }
+                "smithy.api#documentation": "<p>Describes the specified speaker.</p>"
             }
         },
         "com.amazonaws.voiceid#DescribeSpeakerEnrollmentJob": {
@@ -716,11 +685,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified speaker enrollment job.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs/{JobId}"
-                }
+                "smithy.api#documentation": "<p>Describes the specified speaker enrollment job.</p>"
             }
         },
         "com.amazonaws.voiceid#DescribeSpeakerEnrollmentJobRequest": {
@@ -730,7 +695,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the speaker enrollment job.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -738,7 +702,6 @@
                     "target": "com.amazonaws.voiceid#JobId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the speaker enrollment job you are describing.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -762,7 +725,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -770,7 +732,6 @@
                     "target": "com.amazonaws.voiceid#SpeakerId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the speaker you are describing.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -834,7 +795,7 @@
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server-side encryption configuration containing the KMS key identifier you want Voice ID to use\n            to encrypt your data.</p>"
+                        "smithy.api#documentation": "<p>The server-side encryption configuration containing the KMS key\n            identifier you want Voice ID to use to encrypt your data.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -852,7 +813,7 @@
                 "ServerSideEncryptionUpdateDetails": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionUpdateDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the server-side\n            encryption configuration is changed, dependency on the old KMS key is removed through an\n            asynchronous process. When this update is complete, the domain's data can only be accessed using the\n            new KMS key.</p>"
+                        "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the\n            server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is\n            complete, the domain's data can only be accessed using the new KMS key.</p>"
                     }
                 }
             },
@@ -879,6 +840,37 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.voiceid#DomainResource": {
+            "type": "resource",
+            "identifiers": {
+                "DomainId": {
+                    "target": "com.amazonaws.voiceid#DomainId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.voiceid#CreateDomain"
+            },
+            "read": {
+                "target": "com.amazonaws.voiceid#DescribeDomain"
+            },
+            "update": {
+                "target": "com.amazonaws.voiceid#UpdateDomain"
+            },
+            "delete": {
+                "target": "com.amazonaws.voiceid#DeleteDomain"
+            },
+            "list": {
+                "target": "com.amazonaws.voiceid#ListDomains"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Domain"
+                },
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
             }
         },
         "com.amazonaws.voiceid#DomainStatus": {
@@ -942,7 +934,7 @@
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The server-side encryption configuration containing the KMS key identifier you want Voice ID to use\n            to encrypt your data.</p>"
+                        "smithy.api#documentation": "<p>The server-side encryption configuration containing the KMS key\n            identifier you want Voice ID to use to encrypt your data.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -960,7 +952,7 @@
                 "ServerSideEncryptionUpdateDetails": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionUpdateDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the server-side\n            encryption configuration is changed, dependency on the old KMS key is removed through an\n            asynchronous process. When this update is complete, the domain’s data can only be accessed using the\n            new KMS key.</p>"
+                        "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the\n            server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is\n            complete, the domain's data can only be accessed using the new KMS key.</p>"
                     }
                 }
             },
@@ -989,7 +981,7 @@
                 "ExistingEnrollmentAction": {
                     "target": "com.amazonaws.voiceid#ExistingEnrollmentAction",
                     "traits": {
-                        "smithy.api#documentation": "<p> The action to take when the specified speaker is already enrolled in the specified domain. The default \n            value is <code>SKIP</code>, which skips the enrollment for the existing speaker. Setting the value to\n            <code>OVERWRITE</code> replaces the existing voice prints and enrollment audio stored for that speaker\n            with new data generated from the latest audio.</p>"
+                        "smithy.api#documentation": "<p> The action to take when the specified speaker is already enrolled in the specified\n            domain. The default value is <code>SKIP</code>, which skips the enrollment for the\n            existing speaker. Setting the value to <code>OVERWRITE</code> replaces the existing\n            voice prints and enrollment audio stored for that speaker with new data generated from\n            the latest audio.</p>"
                     }
                 },
                 "FraudDetectionConfig": {
@@ -1009,18 +1001,18 @@
                 "FraudDetectionAction": {
                     "target": "com.amazonaws.voiceid#FraudDetectionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the given speaker is flagged by the fraud detection system. The default value is\n            <code>FAIL</code>, which fails the speaker enrollment. Changing this value to <code>IGNORE</code> \n            results in the speaker being enrolled even if they are flagged by the fraud detection system.</p>"
+                        "smithy.api#documentation": "<p>The action to take when the given speaker is flagged by the fraud detection system.\n            The default value is <code>FAIL</code>, which fails the speaker enrollment. Changing\n            this value to <code>IGNORE</code> results in the speaker being enrolled even if they are\n            flagged by the fraud detection system.</p>"
                     }
                 },
                 "RiskThreshold": {
                     "target": "com.amazonaws.voiceid#Score",
                     "traits": {
-                        "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a high risk to be fraudulent. If the detected risk\n            score calculated by Voice ID is greater than or equal to the threshold, the speaker is considered a fraudster.</p>"
+                        "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a high risk to be fraudulent.\n            If the detected risk score calculated by Voice ID is greater than or equal to the\n            threshold, the speaker is considered a fraudster.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration defining the action to take when a speaker is flagged by the fraud detection system\n            during a batch speaker enrollment job, and the risk threshold to use for identification.</p>"
+                "smithy.api#documentation": "<p>The configuration defining the action to take when a speaker is flagged by the fraud\n            detection system during a batch speaker enrollment job, and the risk threshold to use\n            for identification.</p>"
             }
         },
         "com.amazonaws.voiceid#EvaluateSession": {
@@ -1052,11 +1044,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Evaluates a specified session based on audio data accumulated during a streaming Amazon Connect Voice \n            ID call.</p>",
-                "smithy.api#http": {
-                    "method": "PUT",
-                    "uri": "/sessions/{SessionNameOrId}/evaluate"
-                }
+                "smithy.api#documentation": "<p>Evaluates a specified session based on audio data accumulated during a streaming\n            Amazon Connect Voice ID call.</p>"
             }
         },
         "com.amazonaws.voiceid#EvaluateSessionRequest": {
@@ -1066,15 +1054,13 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain where the session started.</p>",
-                        "smithy.api#httpQuery": "domainId",
                         "smithy.api#required": {}
                     }
                 },
                 "SessionNameOrId": {
                     "target": "com.amazonaws.voiceid#SessionNameOrId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session identifier, or name of the session, that you want to evaluate. In Voice ID\n            integration, this is the Contact-Id.</p>",
-                        "smithy.api#httpLabel": {},
+                        "smithy.api#documentation": "<p>The session identifier, or name of the session, that you want to evaluate. In\n            Voice ID integration, this is the Contact-Id.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1104,7 +1090,7 @@
                 "StreamingStatus": {
                     "target": "com.amazonaws.voiceid#StreamingStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of audio streaming for this session. This field is useful to infer next steps when\n            the Authentication or Fraud Detection results are empty or the decision is <code>NOT_ENOUGH_SPEECH</code>.\n            In this situation, if the <code>StreamingStatus</code> is <code>ONGOING/PENDING_CONFIGURATION</code>, it can\n            mean that the client should call the API again later, after Voice ID has enough audio to produce a result.\n            If the decision remains <code>NOT_ENOUGH_SPEECH</code> even after <code>StreamingStatus</code> is <code>ENDED</code>,\n            it means that the previously streamed session did not have enough speech to perform evaluation, and a new\n            streaming session is needed to try again.</p>"
+                        "smithy.api#documentation": "<p>The current status of audio streaming for this session. This field is useful to infer\n            next steps when the Authentication or Fraud Detection results are empty or the decision\n            is <code>NOT_ENOUGH_SPEECH</code>. In this situation, if the\n                <code>StreamingStatus</code> is <code>ONGOING/PENDING_CONFIGURATION</code>, it can\n            mean that the client should call the API again later, after Voice ID has enough audio\n            to produce a result. If the decision remains <code>NOT_ENOUGH_SPEECH</code> even after\n                <code>StreamingStatus</code> is <code>ENDED</code>, it means that the previously\n            streamed session did not have enough speech to perform evaluation, and a new streaming\n            session is needed to try again.</p>"
                     }
                 },
                 "AuthenticationResult": {
@@ -1116,7 +1102,7 @@
                 "FraudDetectionResult": {
                     "target": "com.amazonaws.voiceid#FraudDetectionResult",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details resulting from the fraud detection process, such as fraud detection decision and risk score.</p>"
+                        "smithy.api#documentation": "<p>Details resulting from the fraud detection process, such as fraud detection decision\n            and risk score.</p>"
                     }
                 }
             }
@@ -1177,13 +1163,13 @@
                 "RiskThreshold": {
                     "target": "com.amazonaws.voiceid#Score",
                     "traits": {
-                        "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a fraudster. If the detected risk score \n            calculated by Voice ID is higher than the threshold, the speaker is considered a fraudster.</p>",
+                        "smithy.api#documentation": "<p>Threshold value for determining whether the speaker is a fraudster. If the detected\n            risk score calculated by Voice ID is higher than the threshold, the speaker is\n            considered a fraudster.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration used for performing fraud detection over a speaker during a session.</p>"
+                "smithy.api#documentation": "<p>The configuration used for performing fraud detection over a speaker during a\n            session.</p>"
             }
         },
         "com.amazonaws.voiceid#FraudDetectionDecision": {
@@ -1212,6 +1198,10 @@
                     {
                         "value": "KNOWN_FRAUDSTER",
                         "name": "KNOWN_FRAUDSTER"
+                    },
+                    {
+                        "value": "VOICE_SPOOFING",
+                        "name": "VOICE_SPOOFING"
                     }
                 ]
             }
@@ -1234,48 +1224,48 @@
                 "FraudDetectionResultId": {
                     "target": "com.amazonaws.voiceid#UniqueIdLarge",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for this fraud detection result. Given there can be multiple fraud detections \n            for a given session, this field helps in identifying if the returned result is from previous streaming \n            activity or a new result. Note that in the absence of any new streaming activity or risk threshold \n            changes, Voice ID always returns cached Fraud Detection result for this API.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for this fraud detection result. Given there can be multiple\n            fraud detections for a given session, this field helps in identifying if the returned\n            result is from previous streaming activity or a new result. Note that in the absence of\n            any new streaming activity or risk threshold changes, Voice ID always returns cached\n            Fraud Detection result for this API.</p>"
                     }
                 },
                 "AudioAggregationStartedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation started for this fraud detection result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation started for this fraud detection\n            result.</p>"
                     }
                 },
                 "AudioAggregationEndedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation ended for this fraud detection result.</p>"
+                        "smithy.api#documentation": "<p>A timestamp indicating when audio aggregation ended for this fraud detection\n            result.</p>"
                     }
                 },
                 "Configuration": {
                     "target": "com.amazonaws.voiceid#FraudDetectionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>FraudDetectionConfiguration</code> used to generate this fraud detection result.</p>"
+                        "smithy.api#documentation": "<p>The <code>FraudDetectionConfiguration</code> used to generate this fraud detection\n            result.</p>"
                     }
                 },
                 "Decision": {
                     "target": "com.amazonaws.voiceid#FraudDetectionDecision",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fraud detection decision produced by Voice ID, processed against the current session state and\n            streamed audio of the speaker.</p>"
+                        "smithy.api#documentation": "<p>The fraud detection decision produced by Voice ID, processed against the current\n            session state and streamed audio of the speaker.</p>"
                     }
                 },
                 "Reasons": {
                     "target": "com.amazonaws.voiceid#FraudDetectionReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason speaker was flagged by the fraud detection system. This is only be populated if fraud\n            detection Decision is <code>HIGH_RISK</code>, and only has one possible value:\n            <code>KNOWN_FRAUDSTER</code>.</p>"
+                        "smithy.api#documentation": "<p>The reason speaker was flagged by the fraud detection system. This is only be\n            populated if fraud detection Decision is <code>HIGH_RISK</code>, and the following\n            possible values: <code>KNOWN_FRAUDSTER</code> and <code>VOICE_SPOOFING</code>.</p>"
                     }
                 },
                 "RiskDetails": {
                     "target": "com.amazonaws.voiceid#FraudRiskDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about each risk analyzed for this speaker.</p>"
+                        "smithy.api#documentation": "<p>Details about each risk analyzed for this speaker. Currently, this contains\n            KnownFraudsterRisk and VoiceSpoofingRisk details.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The fraud detection result produced by Voice ID, processed against the current session state and streamed\n            audio of the speaker.</p>"
+                "smithy.api#documentation": "<p>The fraud detection result produced by Voice ID, processed against the current\n            session state and streamed audio of the speaker.</p>"
             }
         },
         "com.amazonaws.voiceid#FraudRiskDetails": {
@@ -1287,10 +1277,17 @@
                         "smithy.api#documentation": "<p>The details resulting from 'Known Fraudster Risk' analysis of the speaker.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "VoiceSpoofingRisk": {
+                    "target": "com.amazonaws.voiceid#VoiceSpoofingRisk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details regarding various fraud risk analyses performed against the current session state and streamed\n            audio of the speaker.</p>"
+                "smithy.api#documentation": "<p>Details regarding various fraud risk analyses performed against the current session\n            state and streamed audio of the speaker.</p>"
             }
         },
         "com.amazonaws.voiceid#Fraudster": {
@@ -1360,25 +1357,25 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.voiceid#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access customer's buckets\n            to read the input manifest file and write the job output file.</p>"
+                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access\n            customer's buckets to read the input manifest file and write the job output file.</p>"
                     }
                 },
                 "RegistrationConfig": {
                     "target": "com.amazonaws.voiceid#RegistrationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registration config containing details such as the action to take when a duplicate fraudster is \n            detected, and the similarity threshold to use for detecting a duplicate fraudster.</p>"
+                        "smithy.api#documentation": "<p>The registration config containing details such as the action to take when a duplicate\n            fraudster is detected, and the similarity threshold to use for detecting a duplicate\n            fraudster.</p>"
                     }
                 },
                 "InputDataConfig": {
                     "target": "com.amazonaws.voiceid#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input data config containing an S3 URI for the input manifest file that contains the list\n            of fraudster registration job requests.</p>"
+                        "smithy.api#documentation": "<p>The input data config containing an S3 URI for the input manifest file that contains\n            the list of fraudster registration job requests.</p>"
                     }
                 },
                 "OutputDataConfig": {
                     "target": "com.amazonaws.voiceid#OutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output data config containing the S3 location where you want Voice ID to write your job output \n            file; you must also include a KMS key iD in order to encrypt the file.</p>"
+                        "smithy.api#documentation": "<p>The output data config containing the S3 location where you want Voice ID to write\n            your job output file; you must also include a KMS key ID in order to\n            encrypt the file.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -1396,13 +1393,13 @@
                 "FailureDetails": {
                     "target": "com.amazonaws.voiceid#FailureDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of individual registration\n            job failures, the batch job as a whole doesn't fail; it is completed with a <code>JobStatus</code> of\n            <code>COMPLETED_WITH_ERRORS</code>. You can use the job output file to identify the individual \n            registration requests that failed.</p>"
+                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of\n            individual registration job failures, the batch job as a whole doesn't fail; it is\n            completed with a <code>JobStatus</code> of <code>COMPLETED_WITH_ERRORS</code>. You can\n            use the job output file to identify the individual registration requests that\n            failed.</p>"
                     }
                 },
                 "JobProgress": {
                     "target": "com.amazonaws.voiceid#JobProgress",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the completed percentage of registration requests listed in the input file.</p>"
+                        "smithy.api#documentation": "<p>Shows the completed percentage of registration requests listed in the input\n            file.</p>"
                     }
                 }
             },
@@ -1449,7 +1446,7 @@
                 "JobName": {
                     "target": "com.amazonaws.voiceid#JobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client-provied name for the fraudster registration job.</p>"
+                        "smithy.api#documentation": "<p>The client-provided name for the fraudster registration job.</p>"
                     }
                 },
                 "JobId": {
@@ -1485,13 +1482,13 @@
                 "FailureDetails": {
                     "target": "com.amazonaws.voiceid#FailureDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of individual registration\n            job failures, the batch job as a whole doesn't fail; it is completed with a <code>JobStatus</code> of\n            <code>COMPLETED_WITH_ERRORS</code>. You can use the job output file to identify the individual \n            registration requests that failed.</p>"
+                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of\n            individual registration job failures, the batch job as a whole doesn't fail; it is\n            completed with a <code>JobStatus</code> of <code>COMPLETED_WITH_ERRORS</code>. You can\n            use the job output file to identify the individual registration requests that\n            failed.</p>"
                     }
                 },
                 "JobProgress": {
                     "target": "com.amazonaws.voiceid#JobProgress",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the completed percentage of registration requests listed in the input file.</p>"
+                        "smithy.api#documentation": "<p>Shows the completed percentage of registration requests listed in the input\n            file.</p>"
                     }
                 }
             },
@@ -1535,7 +1532,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.voiceid#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 location for the input manifest file that contains the list of individual enrollment or registration\n            job requests.</p>",
+                        "smithy.api#documentation": "<p>The S3 location for the input manifest file that contains the list of individual\n            enrollment or registration job requests.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1590,7 +1587,7 @@
                 "PercentComplete": {
                     "target": "com.amazonaws.voiceid#Score",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the completed percentage of enrollment or registration requests listed in the input file.</p>"
+                        "smithy.api#documentation": "<p>Shows the completed percentage of enrollment or registration requests listed in the\n            input file.</p>"
                     }
                 }
             },
@@ -1620,12 +1617,12 @@
                 "GeneratedFraudsterId": {
                     "target": "com.amazonaws.voiceid#GeneratedFraudsterId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the fraudster that is the closest match to the speaker. If there are no fraudsters\n            registered in a given domain, or if there are no fraudsters with a non-zero RiskScore, this value is\n            <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the fraudster that is the closest match to the speaker. If there are\n            no fraudsters registered in a given domain, or if there are no fraudsters with a\n            non-zero RiskScore, this value is <code>null</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details produced as a result of performing known fraudster risk analysis on a speaker.</p>"
+                "smithy.api#documentation": "<p>Contains details produced as a result of performing known fraudster risk analysis on a\n            speaker.</p>"
             }
         },
         "com.amazonaws.voiceid#ListDomains": {
@@ -1651,17 +1648,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the domains in the Amazon Web Services account.\n        </p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains"
-                },
+                "smithy.api#documentation": "<p>Lists all the domains in the Amazon Web Services account. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
                     "items": "DomainSummaries",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.voiceid#ListDomainsRequest": {
@@ -1670,15 +1664,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForListDomainFe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain\n            further pages of results. The default is 100; the maximum allowed page size is also 100.\n        </p>",
-                        "smithy.api#httpQuery": "maxResults"
+                        "smithy.api#documentation": "<p>The maximum number of domains to list per API call.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>",
-                        "smithy.api#httpQuery": "nextToken"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1695,7 +1687,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1726,11 +1718,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the fraudster registration jobs in the domain with the given <code>JobStatus</code>.\n            If <code>JobStatus</code> is not provided, this lists all fraudster registration jobs in the given\n            domain.\n        </p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/fraudster-registration-jobs"
-                },
+                "smithy.api#documentation": "<p>Lists all the fraudster registration jobs in the domain with the given\n                <code>JobStatus</code>. If <code>JobStatus</code> is not provided, this lists all\n            fraudster registration jobs in the given domain. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1746,29 +1734,25 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration Jobs.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
                 "JobStatus": {
                     "target": "com.amazonaws.voiceid#FraudsterRegistrationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the status of your fraudster registration job.</p>",
-                        "smithy.api#httpQuery": "jobStatus"
+                        "smithy.api#documentation": "<p>Provides the status of your fraudster registration job.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain\n            further pages of results. The default is 100; the maximum allowed page size is also 100.\n        </p>",
-                        "smithy.api#httpQuery": "maxResults"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>NextToken</code> to obtain further pages of results. The default is 100; the\n            maximum allowed page size is also 100. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>",
-                        "smithy.api#httpQuery": "nextToken"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1785,7 +1769,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1816,11 +1800,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the speaker enrollment jobs in the domain with the specified <code>JobStatus</code>. If\n            <code>JobStatus</code> is not provided, this lists all jobs with all possible speaker enrollment job\n            statuses.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs"
-                },
+                "smithy.api#documentation": "<p>Lists all the speaker enrollment jobs in the domain with the specified\n                <code>JobStatus</code>. If <code>JobStatus</code> is not provided, this lists all\n            jobs with all possible speaker enrollment job statuses.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1836,29 +1816,25 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the speaker enrollment jobs.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
                 "JobStatus": {
                     "target": "com.amazonaws.voiceid#SpeakerEnrollmentJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the status of your speaker enrollment Job.</p>",
-                        "smithy.api#httpQuery": "jobStatus"
+                        "smithy.api#documentation": "<p>Provides the status of your speaker enrollment Job.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain\n            further pages of results. The default is 100; the maximum allowed page size is also 100.\n        </p>",
-                        "smithy.api#httpQuery": "maxResults"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>NextToken</code> to obtain further pages of results. The default is 100; the\n            maximum allowed page size is also 100. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>",
-                        "smithy.api#httpQuery": "nextToken"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1875,7 +1851,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1907,10 +1883,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists all speakers in a specified domain.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/domains/{DomainId}/speakers"
-                },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1926,22 +1898,19 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.voiceid#MaxResultsForList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>NextToken</code> to obtain\n            further pages of results. The default is 100; the maximum allowed page size is also 100.\n        </p>",
-                        "smithy.api#httpQuery": "maxResults"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use\n                <code>NextToken</code> to obtain further pages of results. The default is 100; the\n            maximum allowed page size is also 100. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>",
-                        "smithy.api#httpQuery": "nextToken"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1958,7 +1927,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of <code>NextToken</code>\n            is a unique pagination token for each page. Make the call again using the returned token to retrieve the\n            next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.\n        </p>"
+                        "smithy.api#documentation": "<p>If <code>NextToken</code> is returned, there are more results available. The value of\n                <code>NextToken</code> is a unique pagination token for each page. Make the call\n            again using the returned token to retrieve the next page. Keep all other arguments\n            unchanged. Each pagination token expires after 24 hours. </p>"
                     }
                 }
             }
@@ -1989,11 +1958,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags associated with a specified Voice ID resource.</p>",
-                "smithy.api#http": {
-                    "uri": "/tags/{ResourceArn}",
-                    "method": "GET"
-                }
+                "smithy.api#documentation": "<p>Lists all tags associated with a specified Voice ID resource.</p>"
             }
         },
         "com.amazonaws.voiceid#ListTagsForResourceRequest": {
@@ -2002,8 +1967,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.voiceid#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list the tags.</p>",
-                        "smithy.api#httpLabel": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Voice ID resource for which you want to list\n            the tags.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2072,6 +2036,9 @@
                     "target": "com.amazonaws.voiceid#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.voiceid#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.voiceid#ThrottlingException"
                 },
                 {
@@ -2079,11 +2046,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Opts out a speaker from Voice ID. A speaker can be opted out regardless of whether or not they\n            already exist in Voice ID. If they don't yet exist, a new speaker is created in an opted out state.\n            If they already exist, their existing status is overridden and they are opted out. Enrollment and\n            evaluation authentication requests are rejected for opted out speakers, and opted out speakers have\n            no voice embeddings stored in Voice ID.</p>",
-                "smithy.api#http": {
-                    "method": "PUT",
-                    "uri": "/domains/{DomainId}/speakers/{SpeakerId}/optout"
-                }
+                "smithy.api#documentation": "<p>Opts out a speaker from Voice ID. A speaker can be opted out regardless of whether or\n            not they already exist in Voice ID. If they don't yet exist, a new speaker is created\n            in an opted out state. If they already exist, their existing status is overridden and\n            they are opted out. Enrollment and evaluation authentication requests are rejected for\n            opted out speakers, and opted out speakers have no voice embeddings stored in\n            Voice ID.</p>"
             }
         },
         "com.amazonaws.voiceid#OptOutSpeakerRequest": {
@@ -2093,7 +2056,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain containing the speaker.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -2101,7 +2063,6 @@
                     "target": "com.amazonaws.voiceid#SpeakerId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the speaker you want opted-out.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
@@ -2124,14 +2085,14 @@
                 "S3Uri": {
                     "target": "com.amazonaws.voiceid#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 path of the folder where Voice ID writes the job output file. It has a \n            <code>*.out</code> extension. For example, if the input file name is <code>input-file.json</code> and \n            the output folder path is <code>s3://output-bucket/output-folder</code>, the full output file path is \n            <code>s3://output-bucket/output-folder/job-Id/input-file.json.out</code>.</p>",
+                        "smithy.api#documentation": "<p>The S3 path of the folder where Voice ID writes the job output file. It has a\n                <code>*.out</code> extension. For example, if the input file name is\n                <code>input-file.json</code> and the output folder path is\n                <code>s3://output-bucket/output-folder</code>, the full output file path is\n                <code>s3://output-bucket/output-folder/job-Id/input-file.json.out</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.voiceid#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>the identifier of the KMS key you want Voice ID to use to encrypt the output file of the fraudster\n            registration job.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS key you want Voice ID to use to encrypt the\n            output file of a speaker enrollment job/fraudster registration job.\n            </p>"
                     }
                 }
             },
@@ -2145,18 +2106,18 @@
                 "DuplicateRegistrationAction": {
                     "target": "com.amazonaws.voiceid#DuplicateRegistrationAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when a fraudster is identified as a duplicate. The default action is \n            <code>SKIP</code>, which skips registering the duplicate fraudster. Setting the value to\n            <code>REGISTER_AS_NEW</code> always registers a new fraudster into the specified domain.</p>"
+                        "smithy.api#documentation": "<p>The action to take when a fraudster is identified as a duplicate. The default action\n            is <code>SKIP</code>, which skips registering the duplicate fraudster. Setting the value\n            to <code>REGISTER_AS_NEW</code> always registers a new fraudster into the specified\n            domain.</p>"
                     }
                 },
                 "FraudsterSimilarityThreshold": {
                     "target": "com.amazonaws.voiceid#Score",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum similarity score between the new and old fraudsters in order to consider the new \n            fraudster a duplicate.</p>"
+                        "smithy.api#documentation": "<p>The minimum similarity score between the new and old fraudsters in order to consider\n            the new fraudster a duplicate.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration defining the action to take when a duplicate fraudster is detected, and the \n            similarity threshold to use for detecting a duplicate fraudster during a batch fraudster registration job.</p>"
+                "smithy.api#documentation": "<p>The configuration defining the action to take when a duplicate fraudster is detected,\n            and the similarity threshold to use for detecting a duplicate fraudster during a batch\n            fraudster registration job.</p>"
             }
         },
         "com.amazonaws.voiceid#ResourceNotFoundException": {
@@ -2168,12 +2129,12 @@
                 "ResourceType": {
                     "target": "com.amazonaws.voiceid#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource which cannot not be found. Possible types are <code>BATCH_JOB</code>, <code>COMPLIANCE_CONSENT</code>,\n            <code>DOMAIN</code>, <code>FRAUDSTER</code>, <code>SESSION</code> and <code>SPEAKER</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of resource which cannot not be found. Possible types are\n                <code>BATCH_JOB</code>, <code>COMPLIANCE_CONSENT</code>, <code>DOMAIN</code>,\n                <code>FRAUDSTER</code>, <code>SESSION</code> and <code>SPEAKER</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource cannot be found. Check the <code>ResourceType</code> and error message for\n            more details.</p>",
+                "smithy.api#documentation": "<p>The specified resource cannot be found. Check the <code>ResourceType</code> and error\n            message for more details.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2235,13 +2196,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.voiceid#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMS key you want Voice ID to use to encrypt your data.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the KMS key to use to encrypt data stored by\n            Voice ID. Voice ID doesn't support asymmetric customer managed keys. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration containing information about the customer managed key used for encrypting\n            customer data.</p>"
+                "smithy.api#documentation": "<p>The configuration containing information about the customer managed key used for\n            encrypting customer data.</p>"
             }
         },
         "com.amazonaws.voiceid#ServerSideEncryptionUpdateDetails": {
@@ -2256,18 +2217,18 @@
                 "UpdateStatus": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionUpdateStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the server-side encryption update. During an update, if there is an issue with the domain's\n            current or old KMS key ID, such as an inaccessible or disabled key, then the status\n            is FAILED. In order to resolve this, the key needs to be made accessible, and then an UpdateDomain call\n            with the existing server-side encryption configuration will re-attempt this update process.</p>"
+                        "smithy.api#documentation": "<p>Status of the server-side encryption update. During an update, if there is an issue\n            with the domain's current or old KMS key ID, such as an inaccessible or\n            disabled key, then the status is FAILED. In order to resolve this, the key needs to be\n            made accessible, and then an UpdateDomain call with the existing server-side encryption\n            configuration will re-attempt this update process.</p>"
                     }
                 },
                 "Message": {
                     "target": "com.amazonaws.voiceid#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Message explaining the current UpdateStatus. When the UpdateStatus is FAILED, this message explains\n            the cause of the failure.</p>"
+                        "smithy.api#documentation": "<p>Message explaining the current UpdateStatus. When the UpdateStatus is FAILED, this\n            message explains the cause of the failure.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the server-side\n            encryption configuration is changed, dependency on the old KMS key is removed through an\n            asynchronous process. When this update is complete, the domain’s data can only be accessed using the\n            new KMS key.</p>"
+                "smithy.api#documentation": "<p>Details about the most recent server-side encryption configuration update. When the\n            server-side encryption configuration is changed, dependency on the old KMS key is removed through an asynchronous process. When this update is\n            complete, the domain’s data can only be accessed using the new KMS key.</p>"
             }
         },
         "com.amazonaws.voiceid#ServerSideEncryptionUpdateStatus": {
@@ -2297,7 +2258,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request exceeded the service quota. Refer to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#voiceid-quotas\">Voice ID Service \n            Quotas</a> and try your request again.</p>",
+                "smithy.api#documentation": "<p>The request exceeded the service quota. Refer to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#voiceid-quotas\">Voice ID Service Quotas</a> and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -2374,7 +2335,7 @@
                 "LastAccessedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a\n            successful authentication. This timestamp is accurate to one hour.</p>"
                     }
                 }
             },
@@ -2412,25 +2373,25 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.voiceid#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access customer's buckets\n            to read the input manifest file and write the job output file.</p>"
+                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access\n            customer's buckets to read the input manifest file and write the job output file.</p>"
                     }
                 },
                 "EnrollmentConfig": {
                     "target": "com.amazonaws.voiceid#EnrollmentConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration that defines the action to take when the speaker is already enrolled in Voice ID, and the\n            <code>FraudDetectionConfig</code> to use.</p>"
+                        "smithy.api#documentation": "<p>The configuration that defines the action to take when the speaker is already enrolled\n            in Voice ID, and the <code>FraudDetectionConfig</code> to use.</p>"
                     }
                 },
                 "InputDataConfig": {
                     "target": "com.amazonaws.voiceid#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input data config containing an S3 URI for the input manifest file that contains the list\n            of speaker enrollment job requests.</p>"
+                        "smithy.api#documentation": "<p>The input data config containing an S3 URI for the input manifest file that contains\n            the list of speaker enrollment job requests.</p>"
                     }
                 },
                 "OutputDataConfig": {
                     "target": "com.amazonaws.voiceid#OutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output data config containing the S3 location where Voice ID writes the job output file; you must \n            also include a KMS key ID to encrypt the file.</p>"
+                        "smithy.api#documentation": "<p>The output data config containing the S3 location where Voice ID writes the job\n            output file; you must also include a KMS key ID to encrypt the\n            file.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -2448,13 +2409,13 @@
                 "FailureDetails": {
                     "target": "com.amazonaws.voiceid#FailureDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of individual registration\n            job failures, the batch job as a whole doesn't fail; it is completed with a <code>JobStatus</code> of\n            <code>COMPLETED_WITH_ERRORS</code>. You can use the job output file to identify the individual \n            registration requests that failed.</p>"
+                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of\n            individual registration job failures, the batch job as a whole doesn't fail; it is\n            completed with a <code>JobStatus</code> of <code>COMPLETED_WITH_ERRORS</code>. You can\n            use the job output file to identify the individual registration requests that\n            failed.</p>"
                     }
                 },
                 "JobProgress": {
                     "target": "com.amazonaws.voiceid#JobProgress",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides details on job progress. This field shows the completed percentage of registration \n            requests listed in the input file.</p>"
+                        "smithy.api#documentation": "<p>Provides details on job progress. This field shows the completed percentage of\n            registration requests listed in the input file.</p>"
                     }
                 }
             },
@@ -2537,13 +2498,13 @@
                 "FailureDetails": {
                     "target": "com.amazonaws.voiceid#FailureDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of individual registration\n            job failures, the batch job as a whole doesn't fail; it is completed with a <code>JobStatus</code> of\n            <code>COMPLETED_WITH_ERRORS</code>. You can use the job output file to identify the individual \n            registration requests that failed.</p>"
+                        "smithy.api#documentation": "<p>Contains details that are populated when an entire batch job fails. In cases of\n            individual registration job failures, the batch job as a whole doesn't fail; it is\n            completed with a <code>JobStatus</code> of <code>COMPLETED_WITH_ERRORS</code>. You can\n            use the job output file to identify the individual registration requests that\n            failed.</p>"
                     }
                 },
                 "JobProgress": {
                     "target": "com.amazonaws.voiceid#JobProgress",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides details regarding job progress. This field shows the completed percentage of enrollment \n            requests listed in the input file.</p>"
+                        "smithy.api#documentation": "<p>Provides details regarding job progress. This field shows the completed percentage of\n            enrollment requests listed in the input file.</p>"
                     }
                 }
             },
@@ -2633,7 +2594,7 @@
                 "LastAccessedAt": {
                     "target": "com.amazonaws.voiceid#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.</p>"
+                        "smithy.api#documentation": "<p>The timestamp when the speaker was last accessed for enrollment, re-enrollment or a\n            successful authentication. This timestamp is accurate to one hour.</p>"
                     }
                 }
             },
@@ -2674,10 +2635,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Starts a new batch fraudster registration job using provided details.</p>",
-                "smithy.api#http": {
-                    "method": "POST",
-                    "uri": "/domains/{DomainId}/fraudster-registration-jobs"
-                },
                 "smithy.api#idempotent": {}
             }
         },
@@ -2687,7 +2644,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.voiceid#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for starting a new fraudster registration job. If not provided, Amazon Web Services \n            SDK populates this field.</p>",
+                        "smithy.api#documentation": "<p>The idempotency token for starting a new fraudster registration job. If not provided,\n                Amazon Web Services SDK populates this field.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2700,35 +2657,34 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration job and in which the fraudsters are\n            registered.</p>",
-                        "smithy.api#httpLabel": {},
+                        "smithy.api#documentation": "<p>The identifier of the domain containing the fraudster registration job and in which\n            the fraudsters are registered.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.voiceid#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access customer's buckets\n            to read the input manifest file and write the Job output file. Refer to the\n            <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-fraudster-watchlist.html\">Create and\n                edit a fraudster watchlist</a> documentation for the permissions needed in this role.</p>",
+                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access\n            customer's buckets to read the input manifest file and write the Job output file. Refer\n            to the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-fraudster-watchlist.html\">Create and edit a\n                fraudster watchlist</a> documentation for the permissions needed in this\n            role.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RegistrationConfig": {
                     "target": "com.amazonaws.voiceid#RegistrationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registration config containing details such as the action to take when a duplicate fraudster is\n            detected, and the similarity threshold to use for detecting a duplicate fraudster.</p>"
+                        "smithy.api#documentation": "<p>The registration config containing details such as the action to take when a duplicate\n            fraudster is detected, and the similarity threshold to use for detecting a duplicate\n            fraudster. </p>"
                     }
                 },
                 "InputDataConfig": {
                     "target": "com.amazonaws.voiceid#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input data config containing an S3 URI for the input manifest file that contains the list\n            of fraudster registration requests.</p>",
+                        "smithy.api#documentation": "<p>The input data config containing an S3 URI for the input manifest file that contains\n            the list of fraudster registration requests.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OutputDataConfig": {
                     "target": "com.amazonaws.voiceid#OutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output data config containing the S3 location where Voice ID writes the job output file; you must\n            also include a KMS key ID to encrypt the file.</p>",
+                        "smithy.api#documentation": "<p>The output data config containing the S3 location where Voice ID writes the job\n            output file; you must also include a KMS key ID to encrypt the\n            file.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2778,10 +2734,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Starts a new batch speaker enrollment job using specified details.</p>",
-                "smithy.api#http": {
-                    "method": "POST",
-                    "uri": "/domains/{DomainId}/speaker-enrollment-jobs"
-                },
                 "smithy.api#idempotent": {}
             }
         },
@@ -2791,7 +2743,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.voiceid#ClientTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The idempotency token for starting a new speaker enrollment Job. If not provided, Amazon Web Services \n            SDK populates this field.</p>",
+                        "smithy.api#documentation": "<p>The idempotency token for starting a new speaker enrollment Job. If not provided,\n                Amazon Web Services SDK populates this field.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2804,35 +2756,34 @@
                 "DomainId": {
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker enrollment job and in which the speakers are\n            enrolled.\n        </p>",
-                        "smithy.api#httpLabel": {},
+                        "smithy.api#documentation": "<p>The identifier of the domain that contains the speaker enrollment job and in which the\n            speakers are enrolled. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.voiceid#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access customer's buckets\n            to read the input manifest file and write the job output file. Refer to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-batch-enrollment.html\">Batch enrollment using audio data from prior\n                calls</a> documentation for the permissions needed in this role.</p>",
+                        "smithy.api#documentation": "<p>The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to access\n            customer's buckets to read the input manifest file and write the job output file. Refer\n            to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-batch-enrollment.html\">Batch enrollment using\n                audio data from prior calls</a> for the permissions needed in this role.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EnrollmentConfig": {
                     "target": "com.amazonaws.voiceid#EnrollmentConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enrollment config that contains details such as the action to take when a speaker is already\n            enrolled in Voice ID or when a speaker is identified as a fraudster.</p>"
+                        "smithy.api#documentation": "<p>The enrollment config that contains details such as the action to take when a speaker\n            is already enrolled in Voice ID or when a speaker is identified as a fraudster.</p>"
                     }
                 },
                 "InputDataConfig": {
                     "target": "com.amazonaws.voiceid#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input data config containing the S3 location for the input manifest file that contains the list of\n            speaker enrollment requests.</p>",
+                        "smithy.api#documentation": "<p>The input data config containing the S3 location for the input manifest file that\n            contains the list of speaker enrollment requests.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "OutputDataConfig": {
                     "target": "com.amazonaws.voiceid#OutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output data config containing the S3 location where Voice ID writes the job output file; you must\n            also include a KMS key ID to encrypt the file.</p>",
+                        "smithy.api#documentation": "<p>The output data config containing the S3 location where Voice ID writes the job\n            output file; you must also include a KMS key ID to encrypt the\n            file.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2882,20 +2833,20 @@
                 "Key": {
                     "target": "com.amazonaws.voiceid#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first part of a key:value pair that forms a tag associated with a given resource. For example,\n            in the tag ‘Department’:’Sales’, the key is 'Department'.\n        </p>",
+                        "smithy.api#documentation": "<p>The first part of a key:value pair that forms a tag associated with a given resource.\n            For example, in the tag 'Department':'Sales', the key is 'Department'. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.voiceid#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The second part of a key:value pair that forms a tag associated with a given resource. For example,\n            in the tag ‘Department’:’Sales’, the value is 'Sales'.\n        </p>",
+                        "smithy.api#documentation": "<p>The second part of a key:value pair that forms a tag associated with a given resource.\n            For example, in the tag 'Department':'Sales', the value is 'Sales'. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag that can be assigned to a Voice ID resource.</p>"
+                "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
             }
         },
         "com.amazonaws.voiceid#TagKey": {
@@ -2962,11 +2913,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tags a Voice ID resource with the provided list of tags.</p>",
-                "smithy.api#http": {
-                    "uri": "/tags/{ResourceArn}",
-                    "method": "POST"
-                }
+                "smithy.api#documentation": "<p>Tags a Voice ID resource with the provided list of tags.</p>"
             }
         },
         "com.amazonaws.voiceid#TagResourceRequest": {
@@ -2976,7 +2923,6 @@
                     "target": "com.amazonaws.voiceid#AmazonResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Voice ID resource you want to tag.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -3012,7 +2958,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request was denied due to request throttling. Please slow down your request rate. Refer to\n            <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas\">\n                Amazon Connect Voice ID Service API throttling quotas\n            </a> and try your request again.</p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling. Please slow down your request rate.\n            Refer to <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas\">\n                Amazon Connect Voice ID Service API throttling quotas </a> and try your\n            request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -3059,12 +3005,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes specified tags from a specified Amazon Connect Voice ID resource.</p>",
-                "smithy.api#http": {
-                    "uri": "/tags/{ResourceArn}",
-                    "method": "DELETE",
-                    "code": 204
-                }
+                "smithy.api#documentation": "<p>Removes specified tags from a specified Amazon Connect Voice ID resource.</p>"
             }
         },
         "com.amazonaws.voiceid#UntagResourceRequest": {
@@ -3073,8 +3014,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.voiceid#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags from.</p>",
-                        "smithy.api#httpLabel": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Voice ID resource you want to remove tags\n            from.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3082,7 +3022,6 @@
                     "target": "com.amazonaws.voiceid#TagKeyList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tag keys you want to remove from the specified resource.</p>",
-                        "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
                 }
@@ -3121,11 +3060,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified domain. This API has clobber behavior, and clears and replaces all attributes.\n            If an optional field, such as 'Description' is not provided, it is removed from the domain.</p>",
-                "smithy.api#http": {
-                    "method": "PUT",
-                    "uri": "/domains/{DomainId}"
-                }
+                "smithy.api#documentation": "<p>Updates the specified domain. This API has clobber behavior, and clears and replaces\n            all attributes. If an optional field, such as 'Description' is not provided, it is\n            removed from the domain.</p>"
             }
         },
         "com.amazonaws.voiceid#UpdateDomainRequest": {
@@ -3135,7 +3070,6 @@
                     "target": "com.amazonaws.voiceid#DomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the domain to be updated.</p>",
-                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -3149,13 +3083,13 @@
                 "Description": {
                     "target": "com.amazonaws.voiceid#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description about this domain.</p>"
+                        "smithy.api#documentation": "<p>A brief description of the domain.</p>"
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.voiceid#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration, containing the KMS key identifier, to be used by Voice ID for the server-side\n            encryption of your data. Note that all the existing data in the domain are still encrypted using the\n            existing key, only the data added to domain after updating the key is encrypted using the new key. </p>",
+                        "smithy.api#documentation": "<p>The configuration, containing the KMS key identifier, to be used by\n            Voice ID for the server-side encryption of your data. Changing the domain's associated\n                KMS key immediately triggers an asynchronous process to remove\n            dependency on the old KMS key, such that the domain's data can only be\n            accessed using the new KMS key. The domain's\n                <code>ServerSideEncryptionUpdateDetails</code> contains the details for this\n            process.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3180,7 +3114,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed one or more validations; check the error message for more details.</p>",
+                "smithy.api#documentation": "<p>The request failed one or more validations; check the error message for more\n            details.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3199,25 +3133,16 @@
                     "name": "voiceid"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide\n            describes the APIs used for this service.\n        </p>",
+                "smithy.api#documentation": "<p>Amazon Connect Voice ID provides real-time caller authentication and fraud screening. This guide\n            describes the APIs used for this service. </p>",
                 "smithy.api#title": "Amazon Voice ID"
             },
             "version": "2021-09-27",
             "operations": [
                 {
-                    "target": "com.amazonaws.voiceid#CreateDomain"
-                },
-                {
-                    "target": "com.amazonaws.voiceid#DeleteDomain"
-                },
-                {
                     "target": "com.amazonaws.voiceid#DeleteFraudster"
                 },
                 {
                     "target": "com.amazonaws.voiceid#DeleteSpeaker"
-                },
-                {
-                    "target": "com.amazonaws.voiceid#DescribeDomain"
                 },
                 {
                     "target": "com.amazonaws.voiceid#DescribeFraudster"
@@ -3233,9 +3158,6 @@
                 },
                 {
                     "target": "com.amazonaws.voiceid#EvaluateSession"
-                },
-                {
-                    "target": "com.amazonaws.voiceid#ListDomains"
                 },
                 {
                     "target": "com.amazonaws.voiceid#ListFraudsterRegistrationJobs"
@@ -3263,11 +3185,28 @@
                 },
                 {
                     "target": "com.amazonaws.voiceid#UntagResource"
-                },
+                }
+            ],
+            "resources": [
                 {
-                    "target": "com.amazonaws.voiceid#UpdateDomain"
+                    "target": "com.amazonaws.voiceid#DomainResource"
                 }
             ]
+        },
+        "com.amazonaws.voiceid#VoiceSpoofingRisk": {
+            "type": "structure",
+            "members": {
+                "RiskScore": {
+                    "target": "com.amazonaws.voiceid#Score",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The score indicating the likelihood of speaker’s voice being spoofed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>"
+            }
         }
     }
 }
