@@ -1,3 +1,7 @@
+# v1.24.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-08-17)
 
 * **Feature**: Added support for customization of Consumer Group ID for MSK and Kafka Event Source Mappings.

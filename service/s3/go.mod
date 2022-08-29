@@ -3,15 +3,15 @@ module github.com/aws/aws-sdk-go-v2/service/s3
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.11
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.4
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.18
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.12
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.0.9
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.9.5
-	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.1.13
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.12
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.12
+	github.com/aws/aws-sdk-go-v2 v1.16.12
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.5
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.19
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.13
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.0.10
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.9.6
+	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.1.14
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.13
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.13
 	github.com/aws/smithy-go v1.13.0
 	github.com/google/go-cmp v0.5.8
 )

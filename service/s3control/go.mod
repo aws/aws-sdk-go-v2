@@ -3,10 +3,10 @@ module github.com/aws/aws-sdk-go-v2/service/s3control
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.16.11
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.18
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.12
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.12
+	github.com/aws/aws-sdk-go-v2 v1.16.12
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.19
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.13
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.13
 	github.com/aws/smithy-go v1.13.0
 )
 

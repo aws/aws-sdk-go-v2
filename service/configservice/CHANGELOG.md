@@ -1,3 +1,7 @@
+# v1.25.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2022-08-24)
 
 * **Feature**: AWS Config now supports ConformancePackTemplate documents in SSM Docs for the deployment and update of conformance packs.

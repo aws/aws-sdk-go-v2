@@ -1,3 +1,8 @@
+# v1.24.9 (2022-08-29)
+
+* **Documentation**: Documentation updates for Amazon FSx for NetApp ONTAP.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.8 (2022-08-11)
 
 * **Dependency Update**: Updated to the latest SDK module versions

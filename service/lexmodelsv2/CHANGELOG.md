@@ -1,3 +1,7 @@
+# v1.23.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2022-08-22)
 
 * **Feature**: This release introduces a new feature to stop a running BotRecommendation Job for Automated Chatbot Designer.

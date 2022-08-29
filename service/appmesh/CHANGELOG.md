@@ -1,3 +1,7 @@
+# v1.15.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-08-17)
 
 * **Feature**: AWS App Mesh release to support Multiple Listener and Access Log Format feature

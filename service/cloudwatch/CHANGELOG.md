@@ -1,3 +1,7 @@
+# v1.21.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-08-18)
 
 * **Feature**: Add support for managed Contributor Insights Rules

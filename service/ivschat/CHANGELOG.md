@@ -1,3 +1,7 @@
+# v1.0.14 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.13 (2022-08-25)
 
 * **Documentation**: Documentation change for IVS Chat API Reference. Doc-only update to add a paragraph on ARNs to the Welcome section.

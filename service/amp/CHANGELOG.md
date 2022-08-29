@@ -1,3 +1,7 @@
+# v1.15.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-08-14)
 
 * **Feature**: This release adds log APIs that allow customers to manage logging for their Amazon Managed Service for Prometheus workspaces.

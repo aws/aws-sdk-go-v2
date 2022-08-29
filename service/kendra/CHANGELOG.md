@@ -1,3 +1,7 @@
+# v1.33.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2022-08-19)
 
 * **Feature**: This release adds support for a new authentication type - Personal Access Token (PAT) for confluence server.

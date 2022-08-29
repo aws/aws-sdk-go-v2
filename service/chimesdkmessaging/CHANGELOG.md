@@ -1,3 +1,7 @@
+# v1.11.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2022-08-14)
 
 * **Feature**: The Amazon Chime SDK now supports channels with up to one million participants with elastic channels.

@@ -1,3 +1,7 @@
+# v1.17.2 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.1 (2022-08-24)
 
 * **Documentation**: Documentation Change for IVS API Reference - Doc-only update to type field description for CreateChannel and UpdateChannel actions and for Channel data type. Also added Amazon Resource Names (ARNs) paragraph to Welcome section.

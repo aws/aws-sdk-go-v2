@@ -1,3 +1,7 @@
+# v1.9.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2022-08-15)
 
 * **Feature**: This release introduces a new API PutFeedback that allows submitting feedback to Wisdom on content relevance.

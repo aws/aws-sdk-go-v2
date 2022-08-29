@@ -1,3 +1,7 @@
+# v1.28.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2022-08-19)
 
 * **Feature**: This release adds SearchSecurityProfiles API which can be used to search for Security Profile resources within a Connect Instance.

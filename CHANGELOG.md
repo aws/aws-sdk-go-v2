@@ -1,3 +1,14 @@
+# Release (2022-08-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.24.9](service/fsx/CHANGELOG.md#v1249-2022-08-29)
+  * **Documentation**: Documentation updates for Amazon FSx for NetApp ONTAP.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.11.0](service/voiceid/CHANGELOG.md#v1110-2022-08-29)
+  * **Feature**: Amazon Connect Voice ID now detects voice spoofing.  When a prospective fraudster tries to spoof caller audio using audio playback or synthesized speech, Voice ID will return a risk score and outcome to indicate the how likely it is that the voice is spoofed.
+
 # Release (2022-08-26)
 
 ## Module Highlights

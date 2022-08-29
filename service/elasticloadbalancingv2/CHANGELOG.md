@@ -1,3 +1,7 @@
+# v1.18.14 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.13 (2022-08-25)
 
 * **Documentation**: Documentation updates for ELBv2.  Gateway Load Balancer now supports Configurable Flow Stickiness, enabling you to configure the hashing used to maintain stickiness of flows to a specific target appliance.

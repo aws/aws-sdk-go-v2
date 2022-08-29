@@ -1,3 +1,7 @@
+# v1.12.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2022-08-22)
 
 * **Feature**: releasing What-If Analysis APIs

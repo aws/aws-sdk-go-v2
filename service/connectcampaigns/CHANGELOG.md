@@ -1,3 +1,7 @@
+# v1.1.1 (2022-08-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2022-08-17)
 
 * **Feature**: Updated exceptions for Amazon Connect Outbound Campaign api's.
