@@ -1,0 +1,8 @@
+{
+    "id": "5807ffec-df81-4d37-845a-ceeae3346d87",
+    "type": "feature",
+    "description": "Amazon Connect Voice ID now detects voice spoofing.  When a prospective fraudster tries to spoof caller audio using audio playback or synthesized speech, Voice ID will return a risk score and outcome to indicate the how likely it is that the voice is spoofed.",
+    "modules": [
+        "service/voiceid"
+    ]
+}

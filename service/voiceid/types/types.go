@@ -126,7 +126,7 @@ type DomainSummary struct {
 	// Details about the most recent server-side encryption configuration update. When
 	// the server-side encryption configuration is changed, dependency on the old KMS
 	// key is removed through an asynchronous process. When this update is complete,
-	// the domain’s data can only be accessed using the new KMS key.
+	// the domain's data can only be accessed using the new KMS key.
 	ServerSideEncryptionUpdateDetails *ServerSideEncryptionUpdateDetails
 
 	// The timestamp showing the domain's last update.
@@ -223,11 +223,12 @@ type FraudDetectionResult struct {
 	FraudDetectionResultId *string
 
 	// The reason speaker was flagged by the fraud detection system. This is only be
-	// populated if fraud detection Decision is HIGH_RISK, and only has one possible
-	// value: KNOWN_FRAUDSTER.
+	// populated if fraud detection Decision is HIGH_RISK, and the following possible
+	// values: KNOWN_FRAUDSTER and VOICE_SPOOFING.
 	Reasons []FraudDetectionReason
 
-	// Details about each risk analyzed for this speaker.
+	// Details about each risk analyzed for this speaker. Currently, this contains
+	// KnownFraudsterRisk and VoiceSpoofingRisk details.
 	RiskDetails *FraudRiskDetails
 
 	noSmithyDocumentSerde
@@ -241,6 +242,11 @@ type FraudRiskDetails struct {
 	//
 	// This member is required.
 	KnownFraudsterRisk *KnownFraudsterRisk
+
+	// The details resulting from 'Voice Spoofing Risk' analysis of the speaker.
+	//
+	// This member is required.
+	VoiceSpoofingRisk *VoiceSpoofingRisk
 
 	noSmithyDocumentSerde
 }
@@ -301,7 +307,7 @@ type FraudsterRegistrationJob struct {
 	JobStatus FraudsterRegistrationJobStatus
 
 	// The output data config containing the S3 location where you want Voice ID to
-	// write your job output file; you must also include a KMS key iD in order to
+	// write your job output file; you must also include a KMS key ID in order to
 	// encrypt the file.
 	OutputDataConfig *OutputDataConfig
 
@@ -334,7 +340,7 @@ type FraudsterRegistrationJobSummary struct {
 	// The service-generated identifier for the fraudster registration job.
 	JobId *string
 
-	// The client-provied name for the fraudster registration job.
+	// The client-provided name for the fraudster registration job.
 	JobName *string
 
 	// Shows the completed percentage of registration requests listed in the input
@@ -397,8 +403,8 @@ type OutputDataConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// the identifier of the KMS key you want Voice ID to use to encrypt the output
-	// file of the fraudster registration job.
+	// The identifier of the KMS key you want Voice ID to use to encrypt the output
+	// file of a speaker enrollment job/fraudster registration job.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -426,7 +432,8 @@ type RegistrationConfig struct {
 // encrypting customer data.
 type ServerSideEncryptionConfiguration struct {
 
-	// The identifier of the KMS key you want Voice ID to use to encrypt your data.
+	// The identifier of the KMS key to use to encrypt data stored by Voice ID. Voice
+	// ID doesn't support asymmetric customer managed keys.
 	//
 	// This member is required.
 	KmsKeyId *string
@@ -599,20 +606,32 @@ type SpeakerSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A tag that can be assigned to a Voice ID resource.
+// The tags used to organize, track, or control access for this resource. For
+// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 type Tag struct {
 
 	// The first part of a key:value pair that forms a tag associated with a given
-	// resource. For example, in the tag ‘Department’:’Sales’, the key is 'Department'.
+	// resource. For example, in the tag 'Department':'Sales', the key is 'Department'.
 	//
 	// This member is required.
 	Key *string
 
 	// The second part of a key:value pair that forms a tag associated with a given
-	// resource. For example, in the tag ‘Department’:’Sales’, the value is 'Sales'.
+	// resource. For example, in the tag 'Department':'Sales', the value is 'Sales'.
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The details resulting from 'Voice Spoofing Risk' analysis of the speaker.
+type VoiceSpoofingRisk struct {
+
+	// The score indicating the likelihood of speaker’s voice being spoofed.
+	//
+	// This member is required.
+	RiskScore *int32
 
 	noSmithyDocumentSerde
 }

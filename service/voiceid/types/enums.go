@@ -159,6 +159,7 @@ type FraudDetectionReason string
 // Enum values for FraudDetectionReason
 const (
 	FraudDetectionReasonKnownFraudster FraudDetectionReason = "KNOWN_FRAUDSTER"
+	FraudDetectionReasonVoiceSpoofing  FraudDetectionReason = "VOICE_SPOOFING"
 )
 
 // Values returns all known values for FraudDetectionReason. Note that this can be
@@ -167,6 +168,7 @@ const (
 func (FraudDetectionReason) Values() []FraudDetectionReason {
 	return []FraudDetectionReason{
 		"KNOWN_FRAUDSTER",
+		"VOICE_SPOOFING",
 	}
 }
 

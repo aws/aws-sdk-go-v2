@@ -34,7 +34,7 @@ type StartSpeakerEnrollmentJobInput struct {
 	// access customer's buckets to read the input manifest file and write the job
 	// output file. Refer to Batch enrollment using audio data from prior calls
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-batch-enrollment.html)
-	// documentation for the permissions needed in this role.
+	// for the permissions needed in this role.
 	//
 	// This member is required.
 	DataAccessRoleArn *string

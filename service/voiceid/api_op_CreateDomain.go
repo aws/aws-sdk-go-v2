@@ -49,7 +49,7 @@ type CreateDomainInput struct {
 	// Services SDK populates this field.
 	ClientToken *string
 
-	// A brief description of this domain.
+	// A brief description of the domain.
 	Description *string
 
 	// A list of tags you want added to the domain.

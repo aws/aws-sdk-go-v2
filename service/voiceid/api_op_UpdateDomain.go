@@ -42,14 +42,16 @@ type UpdateDomainInput struct {
 	Name *string
 
 	// The configuration, containing the KMS key identifier, to be used by Voice ID for
-	// the server-side encryption of your data. Note that all the existing data in the
-	// domain are still encrypted using the existing key, only the data added to domain
-	// after updating the key is encrypted using the new key.
+	// the server-side encryption of your data. Changing the domain's associated KMS
+	// key immediately triggers an asynchronous process to remove dependency on the old
+	// KMS key, such that the domain's data can only be accessed using the new KMS key.
+	// The domain's ServerSideEncryptionUpdateDetails contains the details for this
+	// process.
 	//
 	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// A brief description about this domain.
+	// A brief description of the domain.
 	Description *string
 
 	noSmithyDocumentSerde

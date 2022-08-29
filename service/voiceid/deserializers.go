@@ -1924,6 +1924,9 @@ func awsAwsjson10_deserializeOpErrorOptOutSpeaker(response *smithyhttp.Response,
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsAwsjson10_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
@@ -3695,6 +3698,11 @@ func awsAwsjson10_deserializeDocumentFraudRiskDetails(v **types.FraudRiskDetails
 				return err
 			}
 
+		case "VoiceSpoofingRisk":
+			if err := awsAwsjson10_deserializeDocumentVoiceSpoofingRisk(&sv.VoiceSpoofingRisk, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5203,6 +5211,50 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentVoiceSpoofingRisk(v **types.VoiceSpoofingRisk, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VoiceSpoofingRisk
+	if *v == nil {
+		sv = &types.VoiceSpoofingRisk{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RiskScore":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Score to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RiskScore = ptr.Int32(int32(i64))
 			}
 
 		default:
