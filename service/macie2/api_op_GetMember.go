@@ -31,8 +31,7 @@ func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns .
 
 type GetMemberInput struct {
 
-	// The unique identifier for the Amazon Macie resource or account that the request
-	// applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies to.
 	//
 	// This member is required.
 	Id *string
@@ -68,8 +67,8 @@ type GetMemberOutput struct {
 	// account.
 	RelationshipStatus types.RelationshipStatus
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
-	// associated with the member account in Amazon Macie.
+	// A map of key-value pairs that specifies which tags (keys and values) are
+	// associated with the account in Amazon Macie.
 	Tags map[string]string
 
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent

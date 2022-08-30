@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Checks whether occurrences of sensitive data can be retrieved (revealed) for a
-// finding.
+// Checks whether occurrences of sensitive data can be retrieved for a finding.
 func (c *Client) GetSensitiveDataOccurrencesAvailability(ctx context.Context, params *GetSensitiveDataOccurrencesAvailabilityInput, optFns ...func(*Options)) (*GetSensitiveDataOccurrencesAvailabilityOutput, error) {
 	if params == nil {
 		params = &GetSensitiveDataOccurrencesAvailabilityInput{}
@@ -62,18 +61,18 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 	//
 	// *
 	// OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might
-	// have been renamed, moved, or deleted. Or the object was changed after Amazon
-	// Macie created the finding.
+	// have been renamed, moved, or deleted. Or the object was changed after Macie
+	// created the finding.
 	//
-	// * UNSUPPORTED_FINDING_TYPE - The specified finding
-	// isn't a sensitive data finding.
+	// * UNSUPPORTED_FINDING_TYPE - The specified finding isn't a
+	// sensitive data finding.
 	//
-	// * UNSUPPORTED_OBJECT_TYPE - The affected S3
-	// object uses a file or storage format that Macie doesn't support for retrieving
-	// occurrences of sensitive data.
+	// * UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses
+	// a file or storage format that Macie doesn't support for retrieving occurrences
+	// of sensitive data.
 	//
-	// This value is null if sensitive data can be
-	// retrieved for the finding.
+	// This value is null if sensitive data can be retrieved for
+	// the finding.
 	Reasons []types.UnavailabilityReasonCode
 
 	// Metadata pertaining to the operation's result.

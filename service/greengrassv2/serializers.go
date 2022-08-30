@@ -1577,6 +1577,10 @@ func awsRestjson1_serializeOpHttpBindingsListInstalledComponentsInput(v *ListIns
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if len(v.TopologyFilter) > 0 {
+		encoder.SetQuery("topologyFilter").String(string(v.TopologyFilter))
+	}
+
 	return nil
 }
 

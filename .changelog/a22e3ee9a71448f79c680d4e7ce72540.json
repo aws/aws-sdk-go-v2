@@ -1,0 +1,8 @@
+{
+    "id": "a22e3ee9-a714-48f7-9c68-0d4e7ce72540",
+    "type": "feature",
+    "description": "This release of the Amazon Macie API adds support for using allow lists to define specific text and text patterns to ignore when inspecting data sources for sensitive data.",
+    "modules": [
+        "service/macie2"
+    ]
+}

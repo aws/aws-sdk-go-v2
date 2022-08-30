@@ -60,6 +60,10 @@ type CreateClassificationJobInput struct {
 	// This member is required.
 	S3JobDefinition *types.S3JobDefinition
 
+	// An array of unique identifiers, one for each allow list for the job to use when
+	// it analyzes data.
+	AllowListIds []string
+
 	// An array of unique identifiers, one for each custom data identifier for the job
 	// to use when it analyzes data. To use only managed data identifiers, don't
 	// specify a value for this property and specify a value other than NONE for the
@@ -73,14 +77,14 @@ type CreateClassificationJobInput struct {
 	// For a recurring job, specifies whether to analyze all existing, eligible objects
 	// immediately after the job is created (true). To analyze only those objects that
 	// are created or changed after you create the job and before the job's first
-	// scheduled run, set this value to false.If you configure the job to run only
+	// scheduled run, set this value to false. If you configure the job to run only
 	// once, don't specify a value for this property.
 	InitialRun bool
 
 	// An array of unique identifiers, one for each managed data identifier for the job
 	// to include (use) or exclude (not use) when it analyzes data. Inclusion or
 	// exclusion depends on the managed data identifier selection type that you specify
-	// for the job (managedDataIdentifierSelector).To retrieve a list of valid values
+	// for the job (managedDataIdentifierSelector). To retrieve a list of valid values
 	// for this property, use the ListManagedDataIdentifiers operation.
 	ManagedDataIdentifierIds []string
 

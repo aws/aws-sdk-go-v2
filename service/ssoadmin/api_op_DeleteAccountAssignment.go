@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a principal's access from a specified Amazon Web Services account using
-// a specified permission set. After a successful response, call
+// Deletes a principal's access from a specified AWS account using a specified
+// permission set. After a successful response, call
 // DescribeAccountAssignmentCreationStatus to describe the status of an assignment
 // deletion request.
 func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAccountAssignmentInput, optFns ...func(*Options)) (*DeleteAccountAssignmentOutput, error) {
@@ -32,10 +32,9 @@ func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAcco
 
 type DeleteAccountAssignmentInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -45,10 +44,10 @@ type DeleteAccountAssignmentInput struct {
 	// This member is required.
 	PermissionSetArn *string
 
-	// An identifier for an object in Amazon Web Services SSO, such as a user or group.
+	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in Amazon Web Services SSO, see the Amazon
-	// Web Services SSO Identity Store API Reference.
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity
+	// Center Identity Store API Reference.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -58,8 +57,8 @@ type DeleteAccountAssignmentInput struct {
 	// This member is required.
 	PrincipalType types.PrincipalType
 
-	// TargetID is an Amazon Web Services account identifier, typically a 10-12 digit
-	// string (For example, 123456789012).
+	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
+	// example, 123456789012).
 	//
 	// This member is required.
 	TargetId *string

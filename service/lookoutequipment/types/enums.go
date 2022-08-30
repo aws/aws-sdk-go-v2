@@ -108,6 +108,44 @@ func (IngestionJobStatus) Values() []IngestionJobStatus {
 	}
 }
 
+type LabelRating string
+
+// Enum values for LabelRating
+const (
+	LabelRatingAnomaly   LabelRating = "ANOMALY"
+	LabelRatingNoAnomaly LabelRating = "NO_ANOMALY"
+	LabelRatingNeutral   LabelRating = "NEUTRAL"
+)
+
+// Values returns all known values for LabelRating. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LabelRating) Values() []LabelRating {
+	return []LabelRating{
+		"ANOMALY",
+		"NO_ANOMALY",
+		"NEUTRAL",
+	}
+}
+
+type LatestInferenceResult string
+
+// Enum values for LatestInferenceResult
+const (
+	LatestInferenceResultAnomalous LatestInferenceResult = "ANOMALOUS"
+	LatestInferenceResultNormal    LatestInferenceResult = "NORMAL"
+)
+
+// Values returns all known values for LatestInferenceResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LatestInferenceResult) Values() []LatestInferenceResult {
+	return []LatestInferenceResult{
+		"ANOMALOUS",
+		"NORMAL",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus

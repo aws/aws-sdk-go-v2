@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Web Services managed policy that is attached to a specified
-// permission set.
+// Lists the AWS managed policy that is attached to a specified permission set.
 func (c *Client) ListManagedPoliciesInPermissionSet(ctx context.Context, params *ListManagedPoliciesInPermissionSetInput, optFns ...func(*Options)) (*ListManagedPoliciesInPermissionSetOutput, error) {
 	if params == nil {
 		params = &ListManagedPoliciesInPermissionSetInput{}
@@ -31,10 +30,9 @@ func (c *Client) ListManagedPoliciesInPermissionSet(ctx context.Context, params 
 
 type ListManagedPoliciesInPermissionSetInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string

@@ -30,8 +30,7 @@ func (c *Client) UpdateMemberSession(ctx context.Context, params *UpdateMemberSe
 
 type UpdateMemberSessionInput struct {
 
-	// The unique identifier for the Amazon Macie resource or account that the request
-	// applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies to.
 	//
 	// This member is required.
 	Id *string

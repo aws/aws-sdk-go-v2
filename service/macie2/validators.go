@@ -30,6 +30,26 @@ func (m *validateOpAcceptInvitation) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAllowList struct {
+}
+
+func (*validateOpCreateAllowList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAllowList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAllowListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAllowListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateClassificationJob struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpDeclineInvitations) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeclineInvitationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAllowList struct {
+}
+
+func (*validateOpDeleteAllowList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAllowList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAllowListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAllowListInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -305,6 +345,26 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableOrganizationAdminAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAllowList struct {
+}
+
+func (*validateOpGetAllowList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAllowList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAllowListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAllowListInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +630,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAllowList struct {
+}
+
+func (*validateOpUpdateAllowList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAllowList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAllowListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAllowListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClassificationJob struct {
 }
 
@@ -674,6 +754,10 @@ func addOpAcceptInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInvitation{}, middleware.After)
 }
 
+func addOpCreateAllowListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAllowList{}, middleware.After)
+}
+
 func addOpCreateClassificationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateClassificationJob{}, middleware.After)
 }
@@ -696,6 +780,10 @@ func addOpCreateMemberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeclineInvitationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeclineInvitations{}, middleware.After)
+}
+
+func addOpDeleteAllowListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAllowList{}, middleware.After)
 }
 
 func addOpDeleteCustomDataIdentifierValidationMiddleware(stack *middleware.Stack) error {
@@ -728,6 +816,10 @@ func addOpDisassociateMemberValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
+}
+
+func addOpGetAllowListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAllowList{}, middleware.After)
 }
 
 func addOpGetCustomDataIdentifierValidationMiddleware(stack *middleware.Stack) error {
@@ -782,6 +874,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAllowListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAllowList{}, middleware.After)
+}
+
 func addOpUpdateClassificationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateClassificationJob{}, middleware.After)
 }
@@ -829,6 +925,23 @@ func validateAccountDetail(v *types.AccountDetail) error {
 	}
 	if v.Email == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Email"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowListCriteria(v *types.AllowListCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowListCriteria"}
+	if v.S3WordsList != nil {
+		if err := validateS3WordsList(v.S3WordsList); err != nil {
+			invalidParams.AddNested("S3WordsList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -922,6 +1035,24 @@ func validateS3JobDefinition(v *types.S3JobDefinition) error {
 	}
 }
 
+func validateS3WordsList(v *types.S3WordsList) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3WordsList"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.ObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSecurityHubConfiguration(v *types.SecurityHubConfiguration) error {
 	if v == nil {
 		return nil
@@ -973,6 +1104,31 @@ func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptInvitationInput"}
 	if v.InvitationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAllowListInput(v *CreateAllowListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAllowListInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Criteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Criteria"))
+	} else if v.Criteria != nil {
+		if err := validateAllowListCriteria(v.Criteria); err != nil {
+			invalidParams.AddNested("Criteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1102,6 +1258,21 @@ func validateOpDeclineInvitationsInput(v *DeclineInvitationsInput) error {
 	}
 }
 
+func validateOpDeleteAllowListInput(v *DeleteAllowListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAllowListInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomDataIdentifierInput(v *DeleteCustomDataIdentifierInput) error {
 	if v == nil {
 		return nil
@@ -1214,6 +1385,21 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	invalidParams := smithy.InvalidParamsError{Context: "EnableOrganizationAdminAccountInput"}
 	if v.AdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAllowListInput(v *GetAllowListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAllowListInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1424,6 +1610,31 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAllowListInput(v *UpdateAllowListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAllowListInput"}
+	if v.Criteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Criteria"))
+	} else if v.Criteria != nil {
+		if err := validateAllowListCriteria(v.Criteria); err != nil {
+			invalidParams.AddNested("Criteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -41,7 +41,7 @@ type GetMacieSessionOutput struct {
 
 	// The frequency with which Amazon Macie publishes updates to policy findings for
 	// the account. This includes publishing updates to Security Hub and Amazon
-	// EventBridge (formerly called Amazon CloudWatch Events).
+	// EventBridge (formerly Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// The Amazon Resource Name (ARN) of the service-linked role that allows Amazon

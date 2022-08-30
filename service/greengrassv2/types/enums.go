@@ -220,6 +220,25 @@ func (InstalledComponentLifecycleState) Values() []InstalledComponentLifecycleSt
 	}
 }
 
+type InstalledComponentTopologyFilter string
+
+// Enum values for InstalledComponentTopologyFilter
+const (
+	InstalledComponentTopologyFilterAll  InstalledComponentTopologyFilter = "ALL"
+	InstalledComponentTopologyFilterRoot InstalledComponentTopologyFilter = "ROOT"
+)
+
+// Values returns all known values for InstalledComponentTopologyFilter. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstalledComponentTopologyFilter) Values() []InstalledComponentTopologyFilter {
+	return []InstalledComponentTopologyFilter{
+		"ALL",
+		"ROOT",
+	}
+}
+
 type IoTJobAbortAction string
 
 // Enum values for IoTJobAbortAction

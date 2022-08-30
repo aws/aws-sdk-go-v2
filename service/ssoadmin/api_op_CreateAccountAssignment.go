@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns access to a principal for a specified Amazon Web Services account using
-// a specified permission set. The term principal here refers to a user or group
-// that is defined in Amazon Web Services SSO. As part of a successful
-// CreateAccountAssignment call, the specified permission set will automatically be
-// provisioned to the account in the form of an IAM policy. That policy is attached
-// to the IAM role created in Amazon Web Services SSO. If the permission set is
-// subsequently updated, the corresponding IAM policies attached to roles in your
-// accounts will not be updated automatically. In this case, you must call
-// ProvisionPermissionSet to make these updates. After a successful response, call
+// Assigns access to a principal for a specified AWS account using a specified
+// permission set. The term principal here refers to a user or group that is
+// defined in IAM Identity Center. As part of a successful CreateAccountAssignment
+// call, the specified permission set will automatically be provisioned to the
+// account in the form of an IAM policy. That policy is attached to the IAM role
+// created in IAM Identity Center. If the permission set is subsequently updated,
+// the corresponding IAM policies attached to roles in your accounts will not be
+// updated automatically. In this case, you must call ProvisionPermissionSet to
+// make these updates. After a successful response, call
 // DescribeAccountAssignmentCreationStatus to describe the status of an assignment
 // creation request.
 func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAccountAssignmentInput, optFns ...func(*Options)) (*CreateAccountAssignmentOutput, error) {
@@ -39,10 +39,9 @@ func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAcco
 
 type CreateAccountAssignmentInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -53,10 +52,10 @@ type CreateAccountAssignmentInput struct {
 	// This member is required.
 	PermissionSetArn *string
 
-	// An identifier for an object in Amazon Web Services SSO, such as a user or group.
+	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in Amazon Web Services SSO, see the Amazon
-	// Web Services SSO Identity Store API Reference.
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity
+	// Center Identity Store API Reference.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -66,8 +65,8 @@ type CreateAccountAssignmentInput struct {
 	// This member is required.
 	PrincipalType types.PrincipalType
 
-	// TargetID is an Amazon Web Services account identifier, typically a 10-12 digit
-	// string (For example, 123456789012).
+	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
+	// example, 123456789012).
 	//
 	// This member is required.
 	TargetId *string

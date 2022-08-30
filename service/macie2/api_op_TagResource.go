@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates one or more tags (keys and values) that are associated with a
-// classification job, custom data identifier, findings filter, or member account.
+// Adds or updates one or more tags (keys and values) that are associated with an
+// Amazon Macie resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -29,8 +29,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the classification job, custom data
-	// identifier, findings filter, or member account.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceArn *string

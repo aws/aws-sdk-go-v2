@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Amazon Web Services SSO identity store attributes that you can use
-// with the Amazon Web Services SSO instance for attributes-based access control
-// (ABAC). When using an external identity provider as an identity source, you can
-// pass attributes through the SAML assertion as an alternative to configuring
-// attributes from the Amazon Web Services SSO identity store. If a SAML assertion
-// passes any of these attributes, Amazon Web Services SSO replaces the attribute
-// value with the value from the Amazon Web Services SSO identity store. For more
-// information about ABAC, see Attribute-Based Access Control in the Amazon Web
-// Services SSO User Guide.
+// Updates the IAM Identity Center identity store attributes that you can use with
+// the IAM Identity Center instance for attributes-based access control (ABAC).
+// When using an external identity provider as an identity source, you can pass
+// attributes through the SAML assertion as an alternative to configuring
+// attributes from the IAM Identity Center identity store. If a SAML assertion
+// passes any of these attributes, IAM Identity Center replaces the attribute value
+// with the value from the IAM Identity Center identity store. For more information
+// about ABAC, see Attribute-Based Access Control in the IAM Identity Center User
+// Guide.
 func (c *Client) UpdateInstanceAccessControlAttributeConfiguration(ctx context.Context, params *UpdateInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*UpdateInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceAccessControlAttributeConfigurationInput{}
@@ -42,8 +42,8 @@ type UpdateInstanceAccessControlAttributeConfigurationInput struct {
 	// This member is required.
 	InstanceAccessControlAttributeConfiguration *types.InstanceAccessControlAttributeConfiguration
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed.
 	//
 	// This member is required.
 	InstanceArn *string

@@ -40,6 +40,10 @@ type DescribeClassificationJobInput struct {
 
 type DescribeClassificationJobOutput struct {
 
+	// An array of unique identifiers, one for each allow list that the job uses when
+	// it analyzes data.
+	AllowListIds []string
+
 	// The token that was provided to ensure the idempotency of the request to create
 	// the job.
 	ClientToken *string
@@ -49,7 +53,7 @@ type DescribeClassificationJobOutput struct {
 	CreatedAt *time.Time
 
 	// An array of unique identifiers, one for each custom data identifier that the job
-	// uses to analyze data. This value is null if the job uses only managed data
+	// uses when it analyzes data. This value is null if the job uses only managed data
 	// identifiers to analyze data.
 	CustomDataIdentifierIds []string
 

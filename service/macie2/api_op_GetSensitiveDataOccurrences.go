@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Retrieves (reveals) occurrences of sensitive data reported by a finding.
+// Retrieves occurrences of sensitive data reported by a finding.
 func (c *Client) GetSensitiveDataOccurrences(ctx context.Context, params *GetSensitiveDataOccurrencesInput, optFns ...func(*Options)) (*GetSensitiveDataOccurrencesOutput, error) {
 	if params == nil {
 		params = &GetSensitiveDataOccurrencesInput{}

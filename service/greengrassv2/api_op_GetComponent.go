@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the recipe for a version of a component. Core devices can call this
-// operation to identify the artifacts and requirements to install a component.
+// Gets the recipe for a version of a component.
 func (c *Client) GetComponent(ctx context.Context, params *GetComponentInput, optFns ...func(*Options)) (*GetComponentOutput, error) {
 	if params == nil {
 		params = &GetComponentInput{}

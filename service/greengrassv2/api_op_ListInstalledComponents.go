@@ -13,27 +13,31 @@ import (
 )
 
 // Retrieves a paginated list of the components that a Greengrass core device runs.
-// This list doesn't include components that are deployed from local deployments or
-// components that are deployed as dependencies of other components. IoT Greengrass
-// relies on individual devices to send status updates to the Amazon Web Services
-// Cloud. If the IoT Greengrass Core software isn't running on the device, or if
-// device isn't connected to the Amazon Web Services Cloud, then the reported
-// status of that device might not reflect its current status. The status timestamp
-// indicates when the device status was last updated. Core devices send status
-// updates at the following times:
+// By default, this list doesn't include components that are deployed as
+// dependencies of other components. To include dependencies in the response, set
+// the topologyFilter parameter to ALL. IoT Greengrass relies on individual devices
+// to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass
+// Core software isn't running on the device, or if device isn't connected to the
+// Amazon Web Services Cloud, then the reported status of that device might not
+// reflect its current status. The status timestamp indicates when the device
+// status was last updated. Core devices send status updates at the following
+// times:
 //
-// * When the IoT Greengrass Core software
-// starts
+// * When the IoT Greengrass Core software starts
 //
-// * When the core device receives a deployment from the Amazon Web
-// Services Cloud
+// * When the core device
+// receives a deployment from the Amazon Web Services Cloud
 //
-// * When the status of any component on the core device becomes
-// BROKEN
+// * When the status of
+// any component on the core device becomes BROKEN
 //
-// * At a regular interval that you can configure
+// * At a regular interval that
+// you can configure
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss),
 // which defaults to 24 hours
+//
+// * For IoT Greengrass Core v2.7.0, the core device
+// sends status updates upon local deployment and cloud deployment
 func (c *Client) ListInstalledComponents(ctx context.Context, params *ListInstalledComponentsInput, optFns ...func(*Options)) (*ListInstalledComponentsOutput, error) {
 	if params == nil {
 		params = &ListInstalledComponentsInput{}
@@ -62,12 +66,29 @@ type ListInstalledComponentsInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
+	// The filter for the list of components. Choose from the following options:
+	//
+	// * ALL
+	// – The list includes all components installed on the core device.
+	//
+	// * ROOT – The
+	// list includes only root components, which are components that you specify in a
+	// deployment. When you choose this option, the list doesn't include components
+	// that the core device installs as dependencies of other components.
+	//
+	// Default:
+	// ROOT
+	TopologyFilter types.InstalledComponentTopologyFilter
+
 	noSmithyDocumentSerde
 }
 
 type ListInstalledComponentsOutput struct {
 
-	// A list that summarizes each component on the core device.
+	// A list that summarizes each component on the core device. Accuracy of the
+	// lastStatusChangeTimestamp response depends on Greengrass nucleus v2.7.0. It
+	// performs best on Greengrass nucleus v2.7.0 and can be inaccurate on earlier
+	// versions.
 	InstalledComponents []types.InstalledComponent
 
 	// The token for the next set of results, or null if there are no additional

@@ -76,6 +76,10 @@ type DescribeInferenceSchedulerOutput struct {
 	// The name of the inference scheduler being described.
 	InferenceSchedulerName *string
 
+	// Indicates whether the latest execution for the inference scheduler was Anomalous
+	// (anomalous events found) or Normal (no anomalous events found).
+	LatestInferenceResult types.LatestInferenceResult
+
 	// The Amazon Resource Name (ARN) of the ML model of the inference scheduler being
 	// described.
 	ModelArn *string

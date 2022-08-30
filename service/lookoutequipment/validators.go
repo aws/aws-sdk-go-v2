@@ -50,6 +50,46 @@ func (m *validateOpCreateInferenceScheduler) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLabelGroup struct {
+}
+
+func (*validateOpCreateLabelGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLabelGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLabelGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLabelGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLabel struct {
+}
+
+func (*validateOpCreateLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLabelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModel struct {
 }
 
@@ -105,6 +145,46 @@ func (m *validateOpDeleteInferenceScheduler) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteInferenceSchedulerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLabelGroup struct {
+}
+
+func (*validateOpDeleteLabelGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLabelGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLabelGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLabelGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLabel struct {
+}
+
+func (*validateOpDeleteLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLabelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +270,46 @@ func (m *validateOpDescribeInferenceScheduler) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeLabelGroup struct {
+}
+
+func (*validateOpDescribeLabelGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLabelGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLabelGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLabelGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeLabel struct {
+}
+
+func (*validateOpDescribeLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeLabelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeModel struct {
 }
 
@@ -245,6 +365,26 @@ func (m *validateOpListInferenceExecutions) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInferenceExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListLabels struct {
+}
+
+func (*validateOpListLabels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListLabels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListLabelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListLabelsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,12 +550,40 @@ func (m *validateOpUpdateInferenceScheduler) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLabelGroup struct {
+}
+
+func (*validateOpUpdateLabelGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLabelGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLabelGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLabelGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
 }
 
 func addOpCreateInferenceSchedulerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInferenceScheduler{}, middleware.After)
+}
+
+func addOpCreateLabelGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLabelGroup{}, middleware.After)
+}
+
+func addOpCreateLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLabel{}, middleware.After)
 }
 
 func addOpCreateModelValidationMiddleware(stack *middleware.Stack) error {
@@ -428,6 +596,14 @@ func addOpDeleteDatasetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteInferenceSchedulerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInferenceScheduler{}, middleware.After)
+}
+
+func addOpDeleteLabelGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLabelGroup{}, middleware.After)
+}
+
+func addOpDeleteLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLabel{}, middleware.After)
 }
 
 func addOpDeleteModelValidationMiddleware(stack *middleware.Stack) error {
@@ -446,6 +622,14 @@ func addOpDescribeInferenceSchedulerValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDescribeInferenceScheduler{}, middleware.After)
 }
 
+func addOpDescribeLabelGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLabelGroup{}, middleware.After)
+}
+
+func addOpDescribeLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeLabel{}, middleware.After)
+}
+
 func addOpDescribeModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeModel{}, middleware.After)
 }
@@ -456,6 +640,10 @@ func addOpListInferenceEventsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListInferenceExecutionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInferenceExecutions{}, middleware.After)
+}
+
+func addOpListLabelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListLabels{}, middleware.After)
 }
 
 func addOpListSensorStatisticsValidationMiddleware(stack *middleware.Stack) error {
@@ -488,6 +676,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateInferenceSchedulerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInferenceScheduler{}, middleware.After)
+}
+
+func addOpUpdateLabelGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLabelGroup{}, middleware.After)
 }
 
 func validateInferenceInputConfiguration(v *types.InferenceInputConfiguration) error {
@@ -595,9 +787,7 @@ func validateLabelsInputConfiguration(v *types.LabelsInputConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LabelsInputConfiguration"}
-	if v.S3InputConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3InputConfiguration"))
-	} else if v.S3InputConfiguration != nil {
+	if v.S3InputConfiguration != nil {
 		if err := validateLabelsS3InputConfiguration(v.S3InputConfiguration); err != nil {
 			invalidParams.AddNested("S3InputConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -728,6 +918,56 @@ func validateOpCreateInferenceSchedulerInput(v *CreateInferenceSchedulerInput) e
 	}
 }
 
+func validateOpCreateLabelGroupInput(v *CreateLabelGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLabelGroupInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLabelInput(v *CreateLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLabelInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if len(v.Rating) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Rating"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelInput(v *CreateModelInput) error {
 	if v == nil {
 		return nil
@@ -781,6 +1021,39 @@ func validateOpDeleteInferenceSchedulerInput(v *DeleteInferenceSchedulerInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteInferenceSchedulerInput"}
 	if v.InferenceSchedulerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InferenceSchedulerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLabelGroupInput(v *DeleteLabelGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLabelGroupInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLabelInput(v *DeleteLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLabelInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if v.LabelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -849,6 +1122,39 @@ func validateOpDescribeInferenceSchedulerInput(v *DescribeInferenceSchedulerInpu
 	}
 }
 
+func validateOpDescribeLabelGroupInput(v *DescribeLabelGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLabelGroupInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeLabelInput(v *DescribeLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeLabelInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
+	}
+	if v.LabelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeModelInput(v *DescribeModelInput) error {
 	if v == nil {
 		return nil
@@ -892,6 +1198,21 @@ func validateOpListInferenceExecutionsInput(v *ListInferenceExecutionsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ListInferenceExecutionsInput"}
 	if v.InferenceSchedulerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InferenceSchedulerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListLabelsInput(v *ListLabelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListLabelsInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1045,6 +1366,21 @@ func validateOpUpdateInferenceSchedulerInput(v *UpdateInferenceSchedulerInput) e
 		if err := validateInferenceOutputConfiguration(v.DataOutputConfiguration); err != nil {
 			invalidParams.AddNested("DataOutputConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLabelGroupInput(v *UpdateLabelGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLabelGroupInput"}
+	if v.LabelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

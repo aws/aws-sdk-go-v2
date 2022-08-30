@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags (keys and values) from a classification job, custom
-// data identifier, findings filter, or member account.
+// Removes one or more tags (keys and values) from an Amazon Macie resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,15 +28,14 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the classification job, custom data
-	// identifier, findings filter, or member account.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// One or more tags (keys) to remove from the resource. In an HTTP request to
 	// remove multiple tags, append the tagKeys parameter and argument for each tag to
-	// remove, and separate them with an ampersand (&).
+	// remove, separated by an ampersand (&).
 	//
 	// This member is required.
 	TagKeys []string

@@ -11,13 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the attributes-based access control (ABAC) feature for the specified
-// Amazon Web Services SSO instance. You can also specify new attributes to add to
-// your ABAC configuration during the enabling process. For more information about
-// ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User
-// Guide. After a successful response, call
-// DescribeInstanceAccessControlAttributeConfiguration to validate that
-// InstanceAccessControlAttributeConfiguration was created.
+// Enables the attributes-based access control (ABAC) feature for the specified IAM
+// Identity Center instance. You can also specify new attributes to add to your
+// ABAC configuration during the enabling process. For more information about ABAC,
+// see Attribute-Based Access Control in the IAM Identity Center User Guide. After
+// a successful response, call DescribeInstanceAccessControlAttributeConfiguration
+// to validate that InstanceAccessControlAttributeConfiguration was created.
 func (c *Client) CreateInstanceAccessControlAttributeConfiguration(ctx context.Context, params *CreateInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*CreateInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateInstanceAccessControlAttributeConfigurationInput{}
@@ -35,19 +34,19 @@ func (c *Client) CreateInstanceAccessControlAttributeConfiguration(ctx context.C
 
 type CreateInstanceAccessControlAttributeConfigurationInput struct {
 
-	// Specifies the Amazon Web Services SSO identity store attributes to add to your
-	// ABAC configuration. When using an external identity provider as an identity
-	// source, you can pass attributes through the SAML assertion. Doing so provides an
-	// alternative to configuring attributes from the Amazon Web Services SSO identity
-	// store. If a SAML assertion passes any of these attributes, Amazon Web Services
-	// SSO will replace the attribute value with the value from the Amazon Web Services
-	// SSO identity store.
+	// Specifies the IAM Identity Center identity store attributes to add to your ABAC
+	// configuration. When using an external identity provider as an identity source,
+	// you can pass attributes through the SAML assertion. Doing so provides an
+	// alternative to configuring attributes from the IAM Identity Center identity
+	// store. If a SAML assertion passes any of these attributes, IAM Identity Center
+	// will replace the attribute value with the value from the IAM Identity Center
+	// identity store.
 	//
 	// This member is required.
 	InstanceAccessControlAttributeConfiguration *types.InstanceAccessControlAttributeConfiguration
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed.
 	//
 	// This member is required.
 	InstanceArn *string

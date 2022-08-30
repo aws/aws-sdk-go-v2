@@ -11,11 +11,11 @@ import (
 )
 
 // Disables the attributes-based access control (ABAC) feature for the specified
-// Amazon Web Services SSO instance and deletes all of the attribute mappings that
-// have been configured. Once deleted, any attributes that are received from an
-// identity source and any custom attributes you have previously configured will
-// not be passed. For more information about ABAC, see Attribute-Based Access
-// Control in the Amazon Web Services SSO User Guide.
+// IAM Identity Center instance and deletes all of the attribute mappings that have
+// been configured. Once deleted, any attributes that are received from an identity
+// source and any custom attributes you have previously configured will not be
+// passed. For more information about ABAC, see Attribute-Based Access Control in
+// the IAM Identity Center User Guide.
 func (c *Client) DeleteInstanceAccessControlAttributeConfiguration(ctx context.Context, params *DeleteInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*DeleteInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceAccessControlAttributeConfigurationInput{}
@@ -33,8 +33,8 @@ func (c *Client) DeleteInstanceAccessControlAttributeConfiguration(ctx context.C
 
 type DeleteInstanceAccessControlAttributeConfigurationInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed.
 	//
 	// This member is required.
 	InstanceArn *string

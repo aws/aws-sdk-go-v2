@@ -6809,6 +6809,22 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				sv.IsRoot = jtv
 			}
 
+		case "lastStatusChangeTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastStatusChangeTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "lifecycleState":
 			if value != nil {
 				jtv, ok := value.(string)

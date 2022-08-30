@@ -29,8 +29,7 @@ func (c *Client) GetFindingsFilter(ctx context.Context, params *GetFindingsFilte
 
 type GetFindingsFilterInput struct {
 
-	// The unique identifier for the Amazon Macie resource or account that the request
-	// applies to.
+	// The unique identifier for the Amazon Macie resource that the request applies to.
 	//
 	// This member is required.
 	Id *string
@@ -65,7 +64,7 @@ type GetFindingsFilterOutput struct {
 	// findings, relative to other filters that are also applied to the findings.
 	Position int32
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// A map of key-value pairs that specifies which tags (keys and values) are
 	// associated with the filter.
 	Tags map[string]string
 

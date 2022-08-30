@@ -20,6 +20,36 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AllowListStatusCode string
+
+// Enum values for AllowListStatusCode
+const (
+	AllowListStatusCodeOk                   AllowListStatusCode = "OK"
+	AllowListStatusCodeS3ObjectNotFound     AllowListStatusCode = "S3_OBJECT_NOT_FOUND"
+	AllowListStatusCodeS3UserAccessDenied   AllowListStatusCode = "S3_USER_ACCESS_DENIED"
+	AllowListStatusCodeS3ObjectAccessDenied AllowListStatusCode = "S3_OBJECT_ACCESS_DENIED"
+	AllowListStatusCodeS3Throttled          AllowListStatusCode = "S3_THROTTLED"
+	AllowListStatusCodeS3ObjectOversize     AllowListStatusCode = "S3_OBJECT_OVERSIZE"
+	AllowListStatusCodeS3ObjectEmpty        AllowListStatusCode = "S3_OBJECT_EMPTY"
+	AllowListStatusCodeUnknownError         AllowListStatusCode = "UNKNOWN_ERROR"
+)
+
+// Values returns all known values for AllowListStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AllowListStatusCode) Values() []AllowListStatusCode {
+	return []AllowListStatusCode{
+		"OK",
+		"S3_OBJECT_NOT_FOUND",
+		"S3_USER_ACCESS_DENIED",
+		"S3_OBJECT_ACCESS_DENIED",
+		"S3_THROTTLED",
+		"S3_OBJECT_OVERSIZE",
+		"S3_OBJECT_EMPTY",
+		"UNKNOWN_ERROR",
+	}
+}
+
 type AllowsUnencryptedObjectUploads string
 
 // Enum values for AllowsUnencryptedObjectUploads

@@ -344,6 +344,10 @@ type InferenceSchedulerSummary struct {
 	// The name of the inference scheduler.
 	InferenceSchedulerName *string
 
+	// Indicates whether the latest execution for the inference scheduler was Anomalous
+	// (anomalous events found) or Normal (no anomalous events found).
+	LatestInferenceResult LatestInferenceResult
+
 	// The Amazon Resource Name (ARN) of the ML model used by the inference scheduler.
 	ModelArn *string
 
@@ -447,13 +451,32 @@ type InvalidSensorData struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the label group.
+type LabelGroupSummary struct {
+
+	// The time at which the label group was created.
+	CreatedAt *time.Time
+
+	// The ARN of the label group.
+	LabelGroupArn *string
+
+	// The name of the label group.
+	LabelGroupName *string
+
+	// The time at which the label group was updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains the configuration information for the S3 location being used to hold
 // label data.
 type LabelsInputConfiguration struct {
 
+	// The name of the label group to be used for label data.
+	LabelGroupName *string
+
 	// Contains location information for the S3 location being used for label data.
-	//
-	// This member is required.
 	S3InputConfiguration *LabelsS3InputConfiguration
 
 	noSmithyDocumentSerde
@@ -470,6 +493,41 @@ type LabelsS3InputConfiguration struct {
 
 	// The prefix for the S3 bucket used for the label data.
 	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the label.
+type LabelSummary struct {
+
+	// The time at which the label was created.
+	CreatedAt *time.Time
+
+	// The timestamp indicating the end of the label.
+	EndTime *time.Time
+
+	// Indicates that a label pertains to a particular piece of equipment.
+	Equipment *string
+
+	// Indicates the type of anomaly associated with the label. Data in this field will
+	// be retained for service usage. Follow best practices for the security of your
+	// data.
+	FaultCode *string
+
+	// The ARN of the label group.
+	LabelGroupArn *string
+
+	// The name of the label group.
+	LabelGroupName *string
+
+	// The ID of the label.
+	LabelId *string
+
+	// Indicates whether a labeled event represents an anomaly.
+	Rating LabelRating
+
+	// The timestamp indicating the start of the label.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -37,14 +37,14 @@ type ListInferenceEventsInput struct {
 	// This member is required.
 	InferenceSchedulerName *string
 
-	// Lookout for Equipment will return all the inference events with end time equal
-	// to or less than the end time given.
+	// Returns all the inference events with an end start time equal to or greater than
+	// less than the end time given
 	//
 	// This member is required.
 	IntervalEndTime *time.Time
 
-	// Lookout for Equipment will return all the inference events with start time equal
-	// to or greater than the start time given.
+	// Lookout for Equipment will return all the inference events with an end time
+	// equal to or greater than the start time given.
 	//
 	// This member is required.
 	IntervalStartTime *time.Time

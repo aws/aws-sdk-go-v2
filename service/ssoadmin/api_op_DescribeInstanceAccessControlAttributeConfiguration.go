@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of Amazon Web Services SSO identity store attributes that have
-// been configured to work with attributes-based access control (ABAC) for the
-// specified Amazon Web Services SSO instance. This will not return attributes
-// configured and sent by an external identity provider. For more information about
-// ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User
-// Guide.
+// Returns the list of IAM Identity Center identity store attributes that have been
+// configured to work with attributes-based access control (ABAC) for the specified
+// IAM Identity Center instance. This will not return attributes configured and
+// sent by an external identity provider. For more information about ABAC, see
+// Attribute-Based Access Control in the IAM Identity Center User Guide.
 func (c *Client) DescribeInstanceAccessControlAttributeConfiguration(ctx context.Context, params *DescribeInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*DescribeInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceAccessControlAttributeConfigurationInput{}
@@ -34,8 +33,8 @@ func (c *Client) DescribeInstanceAccessControlAttributeConfiguration(ctx context
 
 type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -45,8 +44,8 @@ type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 
 type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 
-	// Gets the list of Amazon Web Services SSO identity store attributes that have
-	// been added to your ABAC configuration.
+	// Gets the list of IAM Identity Center identity store attributes that have been
+	// added to your ABAC configuration.
 	InstanceAccessControlAttributeConfiguration *types.InstanceAccessControlAttributeConfiguration
 
 	// The status of the attribute configuration process.

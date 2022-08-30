@@ -1,0 +1,8 @@
+{
+    "id": "70940e20-b884-4776-8841-ee451f839f78",
+    "type": "documentation",
+    "description": "Documentation updates for the AWS IAM Identity Center CLI Reference.",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

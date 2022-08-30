@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the status and configuration settings for retrieving (revealing)
-// occurrences of sensitive data reported by findings.
+// Retrieves the status and configuration settings for retrieving occurrences of
+// sensitive data reported by findings.
 func (c *Client) GetRevealConfiguration(ctx context.Context, params *GetRevealConfigurationInput, optFns ...func(*Options)) (*GetRevealConfigurationOutput, error) {
 	if params == nil {
 		params = &GetRevealConfigurationInput{}

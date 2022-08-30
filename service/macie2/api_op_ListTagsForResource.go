@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the tags (keys and values) that are associated with a classification
-// job, custom data identifier, findings filter, or member account.
+// Retrieves the tags (keys and values) that are associated with an Amazon Macie
+// resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,8 +29,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the classification job, custom data
-	// identifier, findings filter, or member account.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -40,7 +39,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// A map of key-value pairs that specifies which tags (keys and values) are
 	// associated with the resource.
 	Tags map[string]string
 

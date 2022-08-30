@@ -32,6 +32,9 @@ import (
 // interval that you can configure
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss),
 // which defaults to 24 hours
+//
+// * For IoT Greengrass Core v2.7.0, the core device
+// sends status updates upon local deployment and cloud deployment
 func (c *Client) ListCoreDevices(ctx context.Context, params *ListCoreDevicesInput, optFns ...func(*Options)) (*ListCoreDevicesOutput, error) {
 	if params == nil {
 		params = &ListCoreDevicesInput{}

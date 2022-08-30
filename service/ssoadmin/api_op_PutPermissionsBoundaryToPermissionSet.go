@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an Amazon Web Services managed or customer managed policy to the
-// specified PermissionSet as a permissions boundary.
+// Attaches an AWS managed or customer managed policy to the specified
+// PermissionSet as a permissions boundary.
 func (c *Client) PutPermissionsBoundaryToPermissionSet(ctx context.Context, params *PutPermissionsBoundaryToPermissionSetInput, optFns ...func(*Options)) (*PutPermissionsBoundaryToPermissionSetOutput, error) {
 	if params == nil {
 		params = &PutPermissionsBoundaryToPermissionSetInput{}
@@ -30,8 +30,8 @@ func (c *Client) PutPermissionsBoundaryToPermissionSet(ctx context.Context, para
 
 type PutPermissionsBoundaryToPermissionSetInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed.
 	//
 	// This member is required.
 	InstanceArn *string

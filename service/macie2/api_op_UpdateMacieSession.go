@@ -32,7 +32,7 @@ type UpdateMacieSessionInput struct {
 
 	// Specifies how often to publish updates to policy findings for the account. This
 	// includes publishing updates to Security Hub and Amazon EventBridge (formerly
-	// called Amazon CloudWatch Events).
+	// Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
 	// Specifies a new status for the account. Valid values are: ENABLED, resume all

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of the permission set provisioning requests for a specified
-// Amazon Web Services SSO instance.
+// Lists the status of the permission set provisioning requests for a specified IAM
+// Identity Center instance.
 func (c *Client) ListPermissionSetProvisioningStatus(ctx context.Context, params *ListPermissionSetProvisioningStatusInput, optFns ...func(*Options)) (*ListPermissionSetProvisioningStatusOutput, error) {
 	if params == nil {
 		params = &ListPermissionSetProvisioningStatusInput{}
@@ -31,10 +31,9 @@ func (c *Client) ListPermissionSetProvisioningStatus(ctx context.Context, params
 
 type ListPermissionSetProvisioningStatusInput struct {
 
-	// The ARN of the Amazon Web Services SSO instance under which the operation will
-	// be executed. For more information about ARNs, see Amazon Resource Names (ARNs)
-	// and Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// The ARN of the IAM Identity Center instance under which the operation will be
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string

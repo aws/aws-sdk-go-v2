@@ -64,6 +64,107 @@ type AdminAccount struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the criteria for an allow list. The criteria must specify a regular
+// expression (regex) or an S3 object (s3WordsList). It can't specify both.
+type AllowListCriteria struct {
+
+	// The regular expression (regex) that defines the text pattern to ignore. The
+	// expression can contain as many as 512 characters.
+	Regex *string
+
+	// The location and name of the S3 object that lists specific text to ignore.
+	S3WordsList *S3WordsList
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about the current status of an allow list, which indicates
+// whether Amazon Macie can access and use the list's criteria.
+type AllowListStatus struct {
+
+	// The current status of the allow list. If the list's criteria specify a regular
+	// expression (regex), this value is typically OK. Amazon Macie can compile the
+	// expression. If the list's criteria specify an S3 object, possible values are:
+	//
+	// *
+	// OK - Macie can retrieve and parse the contents of the object.
+	//
+	// *
+	// S3_OBJECT_ACCESS_DENIED - Macie isn't allowed to access the object or the object
+	// is encrypted with a customer managed KMS key that Macie isn't allowed to use.
+	// Check the bucket policy and other permissions settings for the bucket and the
+	// object. If the object is encrypted, also ensure that it's encrypted with a key
+	// that Macie is allowed to use.
+	//
+	// * S3_OBJECT_EMPTY - Macie can retrieve the object
+	// but the object doesn't contain any content. Ensure that the object contains the
+	// correct entries. Also ensure that the list's criteria specify the correct bucket
+	// and object names.
+	//
+	// * S3_OBJECT_NOT_FOUND - The object doesn't exist in Amazon
+	// S3. Ensure that the list's criteria specify the correct bucket and object
+	// names.
+	//
+	// * S3_OBJECT_OVERSIZE - Macie can retrieve the object. However, the
+	// object contains too many entries or its storage size exceeds the quota for an
+	// allow list. Try breaking the list into multiple files and ensure that each file
+	// doesn't exceed any quotas. Then configure list settings in Macie for each
+	// file.
+	//
+	// * S3_THROTTLED - Amazon S3 throttled the request to retrieve the object.
+	// Wait a few minutes and then try again.
+	//
+	// * S3_USER_ACCESS_DENIED - Amazon S3
+	// denied the request to retrieve the object. If the specified object exists,
+	// you're not allowed to access it or it's encrypted with an KMS key that you're
+	// not allowed to use. Work with your Amazon Web Services administrator to ensure
+	// that the list's criteria specify the correct bucket and object names, and you
+	// have read access to the bucket and the object. If the object is encrypted, also
+	// ensure that it's encrypted with a key that you're allowed to use.
+	//
+	// *
+	// UNKNOWN_ERROR - A transient or internal error occurred when Macie attempted to
+	// retrieve or parse the object. Wait a few minutes and then try again. A list can
+	// also have this status if it's encrypted with a key that Amazon S3 and Macie
+	// can't access or use.
+	//
+	// This member is required.
+	Code AllowListStatusCode
+
+	// A brief description of the status of the allow list. Amazon Macie uses this
+	// value to provide additional information about an error that occurred when Macie
+	// tried to access and use the list's criteria.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a subset of information about an allow list.
+type AllowListSummary struct {
+
+	// The Amazon Resource Name (ARN) of the allow list.
+	Arn *string
+
+	// The date and time, in UTC and extended ISO 8601 format, when the allow list was
+	// created in Amazon Macie.
+	CreatedAt *time.Time
+
+	// The custom description of the allow list.
+	Description *string
+
+	// The unique identifier for the allow list.
+	Id *string
+
+	// The custom name of the allow list.
+	Name *string
+
+	// The date and time, in UTC and extended ISO 8601 format, when the allow list's
+	// settings were most recently changed in Amazon Macie.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about an API operation that an entity invoked for an
 // affected resource.
 type ApiCallDetails struct {
@@ -1146,7 +1247,7 @@ type FindingsFilterListItem struct {
 	// The custom name of the filter.
 	Name *string
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// A map of key-value pairs that specifies which tags (keys and values) are
 	// associated with the filter.
 	Tags map[string]string
 
@@ -1704,7 +1805,7 @@ type Member struct {
 	// account.
 	RelationshipStatus RelationshipStatus
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// A map of key-value pairs that specifies which tags (keys and values) are
 	// associated with the account in Amazon Macie.
 	Tags map[string]string
 
@@ -1787,14 +1888,12 @@ type ObjectLevelStatistics struct {
 
 // Specifies the location of 1-15 occurrences of sensitive data that was detected
 // by a managed data identifier or a custom data identifier and produced a
-// sensitive data finding. Depending on the file or storage format of the affected
-// S3 object, you can optionally retrieve (reveal) sample occurrences of the
-// sensitive data that was detected.
+// sensitive data finding.
 type Occurrences struct {
 
 	// An array of objects, one for each occurrence of sensitive data in a Microsoft
 	// Excel workbook, CSV file, or TSV file. This value is null for all other types of
-	// files.Each Cell object specifies a cell or field that contains the sensitive
+	// files. Each Cell object specifies a cell or field that contains the sensitive
 	// data.
 	Cells []Cell
 
@@ -1813,8 +1912,8 @@ type Occurrences struct {
 	OffsetRanges []Range
 
 	// An array of objects, one for each occurrence of sensitive data in an Adobe
-	// Portable Document Format file. This value is null for all other types of
-	// files.Each Page object specifies a page that contains the sensitive data.
+	// Portable Document Format file. This value is null for all other types of files.
+	// Each Page object specifies a page that contains the sensitive data.
 	Pages []Page
 
 	// An array of objects, one for each occurrence of sensitive data in an Apache Avro
@@ -1939,9 +2038,9 @@ type ResourcesAffected struct {
 // Specifies the configuration settings for retrieving occurrences of sensitive
 // data reported by findings, and the status of the configuration for an Amazon
 // Macie account. When you enable the configuration for the first time, your
-// request must specify an AWS Key Management Service (AWS KMS) key. Otherwise, an
-// error occurs. Macie uses the specified key to encrypt the sensitive data that
-// you retrieve.
+// request must specify an Key Management Service (KMS) key. Otherwise, an error
+// occurs. Macie uses the specified key to encrypt the sensitive data that you
+// retrieve.
 type RevealConfiguration struct {
 
 	// The status of the configuration for the Amazon Macie account. In a request,
@@ -2157,6 +2256,22 @@ type S3Object struct {
 
 	// The identifier for the affected version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an S3 object that lists specific text to ignore.
+type S3WordsList struct {
+
+	// The full name of the S3 bucket that contains the object.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The full name (key) of the object.
+	//
+	// This member is required.
+	ObjectKey *string
 
 	noSmithyDocumentSerde
 }
