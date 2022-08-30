@@ -35,7 +35,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssoadmin#AccessControlAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute associated with your identities in your identity source. This is\n      used to map a specified attribute in your identity source with an attribute in\n      Amazon Web Services SSO.</p>",
+                        "smithy.api#documentation": "<p>The name of the attribute associated with your identities in your identity source. This is\n      used to map a specified attribute in your identity source with an attribute in\n      IAM Identity Center.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48,7 +48,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These are Amazon Web Services SSO identity store attributes that you can configure for use in\n      attributes-based access control (ABAC). You can create permissions policies that determine who\n      can access your Amazon Web Services resources based upon the configured attribute values. When you enable\n      ABAC and specify <code>AccessControlAttributes</code>, Amazon Web Services SSO passes the attribute values of\n      the authenticated user into IAM for use in policy evaluation.</p>"
+                "smithy.api#documentation": "<p>These are IAM Identity Center identity store attributes that you can configure for use in\n      attributes-based access control (ABAC). You can create permissions policies that determine who\n      can access your AWS resources based upon the configured attribute values. When you enable\n      ABAC and specify <code>AccessControlAttributes</code>, IAM Identity Center passes the attribute values of\n      the authenticated user into IAM for use in policy evaluation.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AccessControlAttributeKey": {
@@ -79,13 +79,13 @@
                 "Source": {
                     "target": "com.amazonaws.ssoadmin#AccessControlAttributeValueSourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity source to use when mapping a specified attribute to Amazon Web Services SSO.</p>",
+                        "smithy.api#documentation": "<p>The identity source to use when mapping a specified attribute to IAM Identity Center.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The value used for mapping a specified attribute to an identity source. For more\n      information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html\">Attribute mappings</a>\n      in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The value used for mapping a specified attribute to an identity source. For more\n      information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/attributemappingsconcept.html\">Attribute mappings</a>\n      in the <i>IAM Identity Center User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AccessControlAttributeValueSource": {
@@ -132,13 +132,13 @@
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the AWS account.</p>"
                     }
                 },
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 },
                 "PrincipalType": {
@@ -150,12 +150,12 @@
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The assignment that indicates a principal's limited access to a specified Amazon Web Services account\n      with a specified permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in Amazon Web Services SSO.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The assignment that indicates a principal's limited access to a specified AWS account\n      with a specified permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in IAM Identity Center.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#AccountAssignmentList": {
@@ -188,7 +188,7 @@
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
                     }
                 },
                 "TargetType": {
@@ -200,7 +200,7 @@
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 },
                 "PrincipalType": {
@@ -212,7 +212,7 @@
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>"
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>"
                     }
                 },
                 "CreatedDate": {
@@ -315,7 +315,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -329,7 +329,7 @@
                 "CustomerManagedPolicyReference": {
                     "target": "com.amazonaws.ssoadmin#CustomerManagedPolicyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -371,7 +371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches an Amazon Web Services managed policy ARN to a permission set.</p>\n         <note>\n            <p>If the permission set is already referenced by one or more account assignments, you will\n        need to call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> after this operation.\n        Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates\n        to all assigned accounts.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Attaches an AWS managed policy ARN to a permission set.</p>\n         <note>\n            <p>If the permission set is already referenced by one or more account assignments, you will\n        need to call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> after this operation.\n        Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates\n        to all assigned accounts.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#AttachManagedPolicyToPermissionSetRequest": {
@@ -380,7 +380,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -394,7 +394,7 @@
                 "ManagedPolicyArn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services managed policy ARN to be attached to a permission set.</p>",
+                        "smithy.api#documentation": "<p>The AWS managed policy ARN to be attached to a permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -410,18 +410,18 @@
                 "Name": {
                     "target": "com.amazonaws.ssoadmin#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Web Services managed policy.</p>"
+                        "smithy.api#documentation": "<p>The name of the AWS managed policy.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services managed policy. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the AWS managed policy. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that stores the details of the Amazon Web Services managed policy.</p>"
+                "smithy.api#documentation": "<p>A structure that stores the details of the AWS managed policy.</p>"
             }
         },
         "com.amazonaws.ssoadmin#AttachedManagedPolicyList": {
@@ -478,7 +478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns access to a principal for a specified Amazon Web Services account using a specified\n      permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in Amazon Web Services SSO.</p>\n         </note>\n         <note>\n            <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified\n        permission set will automatically be provisioned to the account in the form of an IAM\n        policy. That policy is attached to the IAM role created in Amazon Web Services SSO. If the permission set\n        is subsequently updated, the corresponding IAM policies attached to roles in your accounts\n        will not be updated automatically. In this case, you must call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> to make these updates.</p>\n         </note>\n         <note>\n            <p>\n        After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request.\n      </p>\n         </note>"
+                "smithy.api#documentation": "<p>Assigns access to a principal for a specified AWS account using a specified\n      permission set.</p>\n         <note>\n            <p>The term <i>principal</i> here refers to a user or group that is defined\n        in IAM Identity Center.</p>\n         </note>\n         <note>\n            <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified\n        permission set will automatically be provisioned to the account in the form of an IAM\n        policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set\n        is subsequently updated, the corresponding IAM policies attached to roles in your accounts\n        will not be updated automatically. In this case, you must call <code>\n                  <a>ProvisionPermissionSet</a>\n               </code> to make these updates.</p>\n         </note>\n         <note>\n            <p>\n        After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment creation request.\n      </p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreateAccountAssignmentRequest": {
@@ -487,14 +487,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>",
+                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -522,7 +522,7 @@
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -568,7 +568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO\n      instance. You can also specify new attributes to add to your ABAC configuration during the\n      enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeInstanceAccessControlAttributeConfiguration</code> to validate that\n      <code>InstanceAccessControlAttributeConfiguration</code> was created.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center\n      instance. You can also specify new attributes to add to your ABAC configuration during the\n      enabling process. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeInstanceAccessControlAttributeConfiguration</code> to validate that\n      <code>InstanceAccessControlAttributeConfiguration</code> was created.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreateInstanceAccessControlAttributeConfigurationRequest": {
@@ -577,14 +577,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceAccessControlAttributeConfiguration": {
                     "target": "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Web Services SSO identity store attributes to add to your ABAC configuration. When\n      using an external identity provider as an identity source, you can pass attributes through the\n      SAML assertion. Doing so provides an alternative to configuring attributes from the Amazon Web Services SSO\n      identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO will replace the\n      attribute value with the value from the Amazon Web Services SSO identity store.</p>",
+                        "smithy.api#documentation": "<p>Specifies the IAM Identity Center identity store attributes to add to your ABAC configuration. When\n      using an external identity provider as an identity source, you can pass attributes through the\n      SAML assertion. Doing so provides an alternative to configuring attributes from the IAM Identity Center\n      identity store. If a SAML assertion passes any of these attributes, IAM Identity Center will replace the\n      attribute value with the value from the IAM Identity Center identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -626,7 +626,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a permission set within a specified Amazon Web Services SSO instance.</p>\n         <note>\n            <p>To grant users and groups access to Amazon Web Services account resources, use <code>\n                  <a>CreateAccountAssignment</a>\n               </code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a permission set within a specified IAM Identity Center instance.</p>\n         <note>\n            <p>To grant users and groups access to AWS account resources, use <code>\n                  <a>CreateAccountAssignment</a>\n               </code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#CreatePermissionSetRequest": {
@@ -648,7 +648,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -678,7 +678,7 @@
                 "PermissionSet": {
                     "target": "com.amazonaws.ssoadmin#PermissionSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the level of access on an Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>Defines the level of access on an AWS account.</p>"
                     }
                 }
             }
@@ -696,12 +696,12 @@
                 "Path": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the IAM policy that you have configured in each account where you want to deploy your permission set. The default is <code>/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly\n        names and paths</a> in the <i>Identity and Access Management User\n      Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The path to the IAM policy that you have configured in each account where you want to deploy your permission set. The default is <code>/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names\">Friendly\n      names and paths</a> in the <i>IAM User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>"
+                "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
             }
         },
         "com.amazonaws.ssoadmin#CustomerManagedPolicyReferenceList": {
@@ -742,7 +742,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a principal's access from a specified Amazon Web Services account using a specified permission\n      set.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment deletion request.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a principal's access from a specified AWS account using a specified permission\n      set.</p>\n         <note>\n            <p>After a successful response, call <code>DescribeAccountAssignmentCreationStatus</code> to describe the status of an assignment deletion request.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssoadmin#DeleteAccountAssignmentRequest": {
@@ -751,14 +751,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>",
+                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -786,7 +786,7 @@
                 "PrincipalId": {
                     "target": "com.amazonaws.ssoadmin#PrincipalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Amazon Web Services SSO Identity Store API Reference</a>.</p>",
+                        "smithy.api#documentation": "<p>An identifier for an object in IAM Identity Center, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in IAM Identity Center, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">IAM Identity Center Identity Store API Reference</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -841,7 +841,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -887,7 +887,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO\n      instance and deletes all of the attribute mappings that have been configured. Once deleted,\n      any attributes that are received from an identity source and any custom attributes you have\n      previously configured will not be passed. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center\n      instance and deletes all of the attribute mappings that have been configured. Once deleted,\n      any attributes that are received from an identity source and any custom attributes you have\n      previously configured will not be passed. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#DeleteInstanceAccessControlAttributeConfigurationRequest": {
@@ -896,7 +896,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -944,7 +944,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -996,7 +996,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1048,7 +1048,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1107,7 +1107,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1157,7 +1157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of Amazon Web Services SSO identity store attributes that have been configured to work\n      with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This will not\n      return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Returns the list of IAM Identity Center identity store attributes that have been configured to work\n      with attributes-based access control (ABAC) for the specified IAM Identity Center instance. This will not\n      return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#DescribeInstanceAccessControlAttributeConfigurationRequest": {
@@ -1166,7 +1166,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1190,7 +1190,7 @@
                 "InstanceAccessControlAttributeConfiguration": {
                     "target": "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the list of Amazon Web Services SSO identity store attributes that have been added to your ABAC\n      configuration.</p>"
+                        "smithy.api#documentation": "<p>Gets the list of IAM Identity Center identity store attributes that have been added to your ABAC\n      configuration.</p>"
                     }
                 }
             }
@@ -1259,7 +1259,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1289,7 +1289,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1308,7 +1308,7 @@
                 "PermissionSet": {
                     "target": "com.amazonaws.ssoadmin#PermissionSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the level of access on an Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>Describes the level of access on an AWS account.</p>"
                     }
                 }
             }
@@ -1351,7 +1351,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1365,7 +1365,7 @@
                 "CustomerManagedPolicyReference": {
                     "target": "com.amazonaws.ssoadmin#CustomerManagedPolicyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>",
+                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1404,7 +1404,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches the attached Amazon Web Services managed policy ARN from the specified permission set.</p>"
+                "smithy.api#documentation": "<p>Detaches the attached AWS managed policy ARN from the specified permission set.</p>"
             }
         },
         "com.amazonaws.ssoadmin#DetachManagedPolicyFromPermissionSetRequest": {
@@ -1413,7 +1413,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1427,7 +1427,7 @@
                 "ManagedPolicyArn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services managed policy ARN to be detached from a permission set.</p>",
+                        "smithy.api#documentation": "<p>The AWS managed policy ARN to be detached from a permission set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1482,7 +1482,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1541,7 +1541,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1581,7 +1581,7 @@
                 "AccessControlAttributes": {
                     "target": "com.amazonaws.ssoadmin#AccessControlAttributeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the attributes that are configured for ABAC in the specified Amazon Web Services SSO\n      instance.</p>",
+                        "smithy.api#documentation": "<p>Lists the attributes that are configured for ABAC in the specified IAM Identity Center\n      instance.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1634,18 +1634,18 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 },
                 "IdentityStoreId": {
                     "target": "com.amazonaws.ssoadmin#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the Amazon Web Services SSO instance.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the IAM Identity Center instance.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the Amazon Web Services SSO instance.</p>"
+                "smithy.api#documentation": "<p>Provides information about the IAM Identity Center instance.</p>"
             }
         },
         "com.amazonaws.ssoadmin#InternalFailureMessage": {
@@ -1690,7 +1690,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the status of the Amazon Web Services account assignment creation requests for a specified Amazon Web Services SSO\n      instance.</p>",
+                "smithy.api#documentation": "<p>Lists the status of the AWS account assignment creation requests for a specified IAM Identity Center\n      instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1705,7 +1705,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1772,7 +1772,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the status of the Amazon Web Services account assignment deletion requests for a specified Amazon Web Services SSO\n      instance.</p>",
+                "smithy.api#documentation": "<p>Lists the status of the AWS account assignment deletion requests for a specified IAM Identity Center\n      instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1787,7 +1787,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1854,7 +1854,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the assignee of the specified Amazon Web Services account with the specified permission set.</p>",
+                "smithy.api#documentation": "<p>Lists the assignee of the specified AWS account with the specified permission set.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1869,14 +1869,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1907,7 +1907,7 @@
                 "AccountAssignments": {
                     "target": "com.amazonaws.ssoadmin#AccountAssignmentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of assignments that match the input Amazon Web Services account and permission set.</p>"
+                        "smithy.api#documentation": "<p>The list of assignments that match the input AWS account and permission set.</p>"
                     }
                 },
                 "NextToken": {
@@ -1944,7 +1944,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the Amazon Web Services accounts where the specified permission set is provisioned.</p>",
+                "smithy.api#documentation": "<p>Lists all the AWS accounts where the specified permission set is provisioned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1959,21 +1959,21 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <a>PermissionSet</a> from which the associated Amazon Web Services accounts\n      will be listed.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the <a>PermissionSet</a> from which the associated AWS accounts\n      will be listed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ProvisioningStatus": {
                     "target": "com.amazonaws.ssoadmin#ProvisioningStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permission set provisioning status for an Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>The permission set provisioning status for an AWS account.</p>"
                     }
                 },
                 "MaxResults": {
@@ -1996,7 +1996,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.ssoadmin#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon Web Services <code>AccountIds</code>.</p>"
+                        "smithy.api#documentation": "<p>The list of AWS <code>AccountIds</code>.</p>"
                     }
                 },
                 "NextToken": {
@@ -2048,7 +2048,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2113,7 +2113,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Web Services SSO instances that the caller has access to.</p>",
+                "smithy.api#documentation": "<p>Lists the IAM Identity Center instances that the caller has access to.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2145,7 +2145,7 @@
                 "Instances": {
                     "target": "com.amazonaws.ssoadmin#InstanceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the Amazon Web Services SSO instances that the caller has access to.</p>"
+                        "smithy.api#documentation": "<p>Lists the IAM Identity Center instances that the caller has access to.</p>"
                     }
                 },
                 "NextToken": {
@@ -2182,7 +2182,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Web Services managed policy that is attached to a specified permission set.</p>",
+                "smithy.api#documentation": "<p>Lists the AWS managed policy that is attached to a specified permission set.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2197,7 +2197,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2265,7 +2265,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the status of the permission set provisioning requests for a specified Amazon Web Services SSO\n      instance.</p>",
+                "smithy.api#documentation": "<p>Lists the status of the permission set provisioning requests for a specified IAM Identity Center\n      instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2280,7 +2280,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2347,7 +2347,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the <a>PermissionSet</a>s in an Amazon Web Services SSO instance.</p>",
+                "smithy.api#documentation": "<p>Lists the <a>PermissionSet</a>s in an IAM Identity Center instance.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2382,7 +2382,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the permission sets that are provisioned to a specified Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists all the permission sets that are provisioned to a specified AWS account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2397,14 +2397,14 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2440,7 +2440,7 @@
                 "PermissionSets": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the level of access that an Amazon Web Services account has.</p>"
+                        "smithy.api#documentation": "<p>Defines the level of access that an AWS account has.</p>"
                     }
                 }
             }
@@ -2451,7 +2451,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2475,7 +2475,7 @@
                 "PermissionSets": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the level of access on an Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>Defines the level of access on an AWS account.</p>"
                     }
                 },
                 "NextToken": {
@@ -2526,7 +2526,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2637,7 +2637,7 @@
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 },
                 "Description": {
@@ -2733,13 +2733,13 @@
                 "AccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account from which to list the assignments.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the AWS account from which to list the assignments.</p>"
                     }
                 },
                 "PermissionSetArn": {
                     "target": "com.amazonaws.ssoadmin#PermissionSetArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>"
                     }
                 },
                 "FailureReason": {
@@ -2797,18 +2797,18 @@
                 "CustomerManagedPolicyReference": {
                     "target": "com.amazonaws.ssoadmin#CustomerManagedPolicyReference",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each Amazon Web Services account where you want to deploy your permission set.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name and path of a customer managed policy. You must have an IAM policy that matches the name and path in each AWS account where you want to deploy your permission set.</p>"
                     }
                 },
                 "ManagedPolicyArn": {
                     "target": "com.amazonaws.ssoadmin#ManagedPolicyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services managed policy ARN that you want to attach to a permission set as a permissions\n      boundary.</p>"
+                        "smithy.api#documentation": "<p>The AWS managed policy ARN that you want to attach to a permission set as a permissions\n      boundary.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration of the Amazon Web Services managed or customer managed policy that you want\n      to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code>\n      to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use\n      the ARN of an Amazon Web Services managed policy. A permissions boundary represents the maximum permissions\n      that any policy can grant your role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n        entities</a> in the <i>Identity and Access Management User Guide</i>.</p>\n         <important>\n            <p>Policies used as permissions boundaries don't provide permissions. You must also attach\n        an IAM policy to the role. To learn how the effective permissions for a role are\n        evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy\n          evaluation logic</a> in the <i>Identity and Access Management User\n        Guide</i>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Specifies the configuration of the AWS managed or customer managed policy that you want\n      to set as a permissions boundary. Specify either <code>CustomerManagedPolicyReference</code>\n      to use the name and path of a customer managed policy, or <code>ManagedPolicyArn</code> to use\n      the ARN of an AWS managed policy. A permissions boundary represents the maximum permissions\n      that any policy can grant your role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n        entities</a> in the <i>IAM User Guide</i>.</p>\n         <important>\n            <p>Policies used as permissions boundaries don't provide permissions. You must also attach\n        an IAM policy to the role. To learn how the effective permissions for a role are\n        evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy\n          evaluation logic</a> in the <i>IAM User Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssoadmin#PrincipalId": {
@@ -2874,7 +2874,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2888,7 +2888,7 @@
                 "TargetId": {
                     "target": "com.amazonaws.ssoadmin#TargetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
+                        "smithy.api#documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
                     }
                 },
                 "TargetType": {
@@ -2982,7 +2982,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3035,7 +3035,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches an Amazon Web Services managed or customer managed policy to the specified <a>PermissionSet</a> as a permissions boundary.</p>"
+                "smithy.api#documentation": "<p>Attaches an AWS managed or customer managed policy to the specified <a>PermissionSet</a> as a permissions boundary.</p>"
             }
         },
         "com.amazonaws.ssoadmin#PutPermissionsBoundaryToPermissionSetRequest": {
@@ -3044,7 +3044,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. </p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3114,7 +3114,7 @@
                     "name": "sso"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Single Sign On helps you securely create, or connect, your workforce identities and manage their\n      access centrally across Amazon Web Services accounts and applications. Amazon Web Services SSO is the recommended\n      approach for workforce authentication and authorization in Amazon Web Services, for organizations of any size\n      and type.</p>\n         <note>\n            <p>Although Amazon Web Services Single Sign-On was renamed, the <code>sso</code> and\n        <code>identitystore</code> API namespaces will continue to retain their original name for\n        backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">Amazon Web Services SSO rename</a>.</p>\n         </note>\n         <p>This reference guide provides information on single sign-on operations which could be used for\n      access management of Amazon Web Services accounts. For information about Amazon Web Services SSO features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">Amazon Web Services SSO User\n        Guide</a>.</p>\n         <p>Many operations in the Amazon Web Services SSO APIs rely on identifiers for users and groups, known as\n      principals. For more information about how to work with principals and principal IDs in Amazon Web Services SSO,\n      see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n        Reference</a>.</p>\n         <note>\n            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a\n        convenient way to create programmatic access to Amazon Web Services SSO and other Amazon Web Services services. For more\n        information about the Amazon Web Services SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>AWS IAM Identity Center (successor to AWS Single Sign-On) helps you securely create, or connect, your workforce identities and manage their\n      access centrally across AWS accounts and applications. IAM Identity Center is the recommended\n      approach for workforce authentication and authorization in AWS, for organizations of any size\n      and type.</p>\n         <note>\n            <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and\n        <code>identitystore</code> API namespaces will continue to retain their original name for\n        backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">IAM Identity Center rename</a>.</p>\n         </note>\n         <p>This reference guide provides information on single sign-on operations which could be used for\n      access management of AWS accounts. For information about IAM Identity Center features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User\n        Guide</a>.</p>\n         <p>Many operations in the IAM Identity Center APIs rely on identifiers for users and groups, known as\n      principals. For more information about how to work with principals and principal IDs in IAM Identity Center,\n      see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API\n        Reference</a>.</p>\n         <note>\n            <p>AWS provides SDKs that consist of libraries and sample code for various programming\n        languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a\n        convenient way to create programmatic access to IAM Identity Center and other AWS services. For more\n        information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p>\n         </note>",
                 "smithy.api#title": "AWS Single Sign-On Admin"
             },
             "version": "2020-07-20",
@@ -3286,7 +3286,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to\n      permission sets and cannot be applied to corresponding roles that Amazon Web Services SSO creates in Amazon Web Services\n      accounts.</p>"
+                "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be applied to\n      permission sets and cannot be applied to corresponding roles that IAM Identity Center creates in AWS\n      accounts.</p>"
             }
         },
         "com.amazonaws.ssoadmin#TagKey": {
@@ -3364,7 +3364,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3503,7 +3503,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3556,7 +3556,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO instance\n      for attributes-based access control (ABAC). When using an external identity provider as an\n      identity source, you can pass attributes through the SAML assertion as an alternative to\n      configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of\n      these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO\n      identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance\n      for attributes-based access control (ABAC). When using an external identity provider as an\n      identity source, you can pass attributes through the SAML assertion as an alternative to\n      configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of\n      these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center\n      identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationRequest": {
@@ -3565,7 +3565,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3620,7 +3620,7 @@
                 "InstanceArn": {
                     "target": "com.amazonaws.ssoadmin#InstanceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services SSO instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },

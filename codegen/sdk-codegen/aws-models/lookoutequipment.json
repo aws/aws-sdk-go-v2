@@ -43,7 +43,7 @@
                     "name": "lookoutequipment"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics\n         to identify anomalies in machines from sensor data for use in predictive maintenance.\n      </p>",
+                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics to identify\n         anomalies in machines from sensor data for use in predictive maintenance. </p>",
                 "smithy.api#title": "Amazon Lookout for Equipment"
             },
             "version": "2020-12-15",
@@ -55,6 +55,12 @@
                     "target": "com.amazonaws.lookoutequipment#CreateInferenceScheduler"
                 },
                 {
+                    "target": "com.amazonaws.lookoutequipment#CreateLabel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#CreateLabelGroup"
+                },
+                {
                     "target": "com.amazonaws.lookoutequipment#CreateModel"
                 },
                 {
@@ -62,6 +68,12 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DeleteInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DeleteLabel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DeleteLabelGroup"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DeleteModel"
@@ -74,6 +86,12 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DescribeInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeLabel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeLabelGroup"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#DescribeModel"
@@ -92,6 +110,12 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ListInferenceSchedulers"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListLabelGroups"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListLabels"
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ListModels"
@@ -119,6 +143,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#UpdateInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#UpdateLabelGroup"
                 }
             ]
         },
@@ -179,6 +206,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> Entity that comprises information on categorical values in data. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#Comments": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2560
+                },
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,2560}$"
             }
         },
         "com.amazonaws.lookoutequipment#ComponentName": {
@@ -387,13 +424,13 @@
                 "DataDelayOffsetInMinutes": {
                     "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For\n         example, if five minutes is selected, the inference scheduler will wake up at the\n         configured frequency with the additional five minute delay time to check the customer S3\n         bucket. The customer can upload data at the same frequency and they don't need to stop and\n         restart the scheduler when uploading new data. </p>"
+                        "smithy.api#documentation": "<p>The interval (in minutes) of planned delay at the start of each inference segment. For\n         example, if inference is set to run every ten minutes, the delay is set to five minutes and the time is 09:08. The inference scheduler will wake up at the\n         configured interval (which, without a delay configured, would be 09:10) plus the additional five minute delay time (so 09:15) to check your Amazon S3\n         bucket. The delay provides a buffer for you to upload data at the same frequency, so that you don't have to stop and\n         restart the scheduler when uploading new data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html\">Understanding the inference process</a>.</p>"
                     }
                 },
                 "DataUploadFrequency": {
                     "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p> How often data is uploaded to the source S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon\n         Lookout for Equipment will upload the real-time data to the source bucket once every 5\n         minutes. This frequency also determines how often Amazon Lookout for Equipment starts a\n         scheduled inference on your data. In this example, it starts once every 5 minutes. </p>",
+                        "smithy.api#documentation": "<p> How often data is uploaded to the source Amazon S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5\n         minutes. This frequency also determines how often Amazon Lookout for Equipment runs inference on your data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html\">Understanding the inference process</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -459,6 +496,192 @@
                     "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the <code>CreateInferenceScheduler</code> operation. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateLabel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#CreateLabelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#CreateLabelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a label for an event.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateLabelGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#CreateLabelGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#CreateLabelGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nCreates a group of labels.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateLabelGroupRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nNames a group of labels.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FaultCodes": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe acceptable fault codes (indicating the type of anomaly associated with the label) that can be used with this label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier for the request to create a label group. If you do not set the client request token, Lookout for Equipment generates one.\n</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nTags that provide metadata about the label group you are creating.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateLabelGroupResponse": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group that you have created. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>"
+                    }
+                },
+                "LabelGroupArn": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the label group that you have created.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateLabelRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of a group of labels. </p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe start time of the labeled event.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe end time of the labeled event.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rating": {
+                    "target": "com.amazonaws.lookoutequipment#LabelRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether a labeled event represents an anomaly.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FaultCode": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nProvides additional information about the label. The fault code must be defined in the FaultCodes attribute of the label group.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>"
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.lookoutequipment#Comments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nMetadata providing additional information about the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                },
+                "Equipment": {
+                    "target": "com.amazonaws.lookoutequipment#Equipment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates that a label pertains to a particular piece of equipment.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA unique identifier for the request to create a label. If you do not set the client request token, Lookout for Equipment generates one.\n</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateLabelResponse": {
+            "type": "structure",
+            "members": {
+                "LabelId": {
+                    "target": "com.amazonaws.lookoutequipment#LabelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID of the label that you have created.\n</p>"
                     }
                 }
             }
@@ -941,6 +1164,95 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#DeleteLabel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteLabelRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes a label.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteLabelGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteLabelGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nDeletes a group of labels.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteLabelGroupRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteLabelRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group that contains the label that you want to delete. Data in this field will be retained for service usage. Follow best practices for the security of your data.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LabelId": {
+                    "target": "com.amazonaws.lookoutequipment#LabelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID of the label that you want to delete.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.lookoutequipment#DeleteModel": {
             "type": "operation",
             "input": {
@@ -1080,25 +1392,25 @@
                 "StatusDetail": {
                     "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Provides details about status of the ingestion job that is currently in progress.\n      </p>"
+                        "smithy.api#documentation": "<p> Provides details about status of the ingestion job that is currently in progress.\n      </p>"
                     }
                 },
                 "IngestedDataSize": {
                     "target": "com.amazonaws.lookoutequipment#DataSizeInBytes",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the size of the ingested dataset.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates the size of the ingested dataset. </p>"
                     }
                 },
                 "DataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the earliest timestamp corresponding to data that was successfully ingested during this specific ingestion job.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates the earliest timestamp corresponding to data that was successfully ingested\n         during this specific ingestion job. </p>"
                     }
                 },
                 "DataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the latest timestamp corresponding to data that was successfully ingested during this specific ingestion job.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates the latest timestamp corresponding to data that was successfully ingested\n         during this specific ingestion job. </p>"
                     }
                 }
             }
@@ -1210,19 +1522,19 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the IAM role that you are using for this the data ingestion job. \n      </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the IAM role that you are using for this the data\n         ingestion job. </p>"
                     }
                 },
                 "DataStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the earliest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates the earliest timestamp corresponding to data that was successfully ingested\n         during the most recent ingestion of this particular dataset. </p>"
                     }
                 },
                 "DataEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Indicates the latest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates the latest timestamp corresponding to data that was successfully ingested\n         during the most recent ingestion of this particular dataset. </p>"
                     }
                 }
             }
@@ -1347,6 +1659,201 @@
                     "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt inference scheduler data by\n         Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "LatestInferenceResult": {
+                    "target": "com.amazonaws.lookoutequipment#LatestInferenceResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the latest execution for the inference scheduler was Anomalous\n         (anomalous events found) or Normal (no anomalous events found).</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeLabel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeLabelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeLabelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nReturns the name of the label.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeLabelGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeLabelGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeLabelGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nReturns information about the label group.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeLabelGroupRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nReturns the name of the label group.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeLabelGroupResponse": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group.\n</p>"
+                    }
+                },
+                "LabelGroupArn": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the label group.\n</p>"
+                    }
+                },
+                "FaultCodes": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nCodes indicating the type of anomaly associated with the labels in the lagbel group.\n</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time at which the label group was created.\n</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time at which the label group was updated.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeLabelRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nReturns the name of the group containing the label.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LabelId": {
+                    "target": "com.amazonaws.lookoutequipment#LabelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nReturns the ID of the label.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeLabelResponse": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the requested label group.\n</p>"
+                    }
+                },
+                "LabelGroupArn": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the requested label group.\n</p>"
+                    }
+                },
+                "LabelId": {
+                    "target": "com.amazonaws.lookoutequipment#LabelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID of the requested label.\n</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe start time of the requested label.\n</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe end time of the requested label.\n</p>"
+                    }
+                },
+                "Rating": {
+                    "target": "com.amazonaws.lookoutequipment#LabelRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether a labeled event represents an anomaly.\n</p>"
+                    }
+                },
+                "FaultCode": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the type of anomaly associated with the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                },
+                "Notes": {
+                    "target": "com.amazonaws.lookoutequipment#Comments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata providing additional information about the label.</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                },
+                "Equipment": {
+                    "target": "com.amazonaws.lookoutequipment#Equipment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates that a label pertains to a particular piece of equipment.\n</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time at which the label was created.\n</p>"
                     }
                 }
             }
@@ -1538,12 +2045,44 @@
                 "smithy.api#documentation": "<p> Entity that comprises information abount duplicate timestamps in the dataset. </p>"
             }
         },
+        "com.amazonaws.lookoutequipment#Equipment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,200}$"
+            }
+        },
         "com.amazonaws.lookoutequipment#EventDurationInSeconds": {
             "type": "long",
             "traits": {
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#FaultCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,100}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#FaultCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#FaultCode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
                 }
             }
         },
@@ -1600,25 +2139,25 @@
                 "EventStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the starting time of an inference event.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates the starting time of an inference event. </p>"
                     }
                 },
                 "EventEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the ending time of an inference event.\n      </p>"
+                        "smithy.api#documentation": "<p>Indicates the ending time of an inference event. </p>"
                     }
                 },
                 "Diagnostics": {
                     "target": "com.amazonaws.lookoutequipment#ModelMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array which specifies the names and values of all sensors contributing to an inference event.</p>"
+                        "smithy.api#documentation": "<p> An array which specifies the names and values of all sensors contributing to an\n         inference event.</p>"
                     }
                 },
                 "EventDurationInSeconds": {
                     "target": "com.amazonaws.lookoutequipment#EventDurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the size of an inference event in seconds.\n      </p>"
+                        "smithy.api#documentation": "<p> Indicates the size of an inference event in seconds. </p>"
                     }
                 }
             },
@@ -1943,6 +2482,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. This value is the\n         length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout\n         for Equipment will upload the real-time data to the source bucket once every 5 minutes.\n         This frequency also determines how often Amazon Lookout for Equipment starts a scheduled\n         inference on your data. In this example, it starts once every 5 minutes. </p>"
                     }
+                },
+                "LatestInferenceResult": {
+                    "target": "com.amazonaws.lookoutequipment#LatestInferenceResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the latest execution for the inference scheduler was Anomalous\n         (anomalous events found) or Normal (no anomalous events found).</p>"
+                    }
                 }
             },
             "traits": {
@@ -2133,14 +2678,174 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:[a-z0-9\\-]*:\\d{12}:[\\w\\-\\/]+$"
             }
         },
+        "com.amazonaws.lookoutequipment#LabelGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:label-group\\/.+$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelGroupSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#LabelGroupSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelGroupSummary": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group.\n</p>"
+                    }
+                },
+                "LabelGroupArn": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the label group.\n</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time at which the label group was created.\n</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time at which the label group was updated.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nContains information about the label group.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Fa-f0-9]{0,32}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelRating": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ANOMALY",
+                        "name": "ANOMALY"
+                    },
+                    {
+                        "value": "NO_ANOMALY",
+                        "name": "NO_ANOMALY"
+                    },
+                    {
+                        "value": "NEUTRAL",
+                        "name": "NEUTRAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#LabelSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelSummary": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group.\n</p>"
+                    }
+                },
+                "LabelId": {
+                    "target": "com.amazonaws.lookoutequipment#LabelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ID of the label.\n</p>"
+                    }
+                },
+                "LabelGroupArn": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe ARN of the label group.\n</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp indicating the start of the label.\n</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp indicating the end of the label.\n</p>"
+                    }
+                },
+                "Rating": {
+                    "target": "com.amazonaws.lookoutequipment#LabelRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates whether a labeled event represents an anomaly.\n</p>"
+                    }
+                },
+                "FaultCode": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates the type of anomaly associated with the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
+                    }
+                },
+                "Equipment": {
+                    "target": "com.amazonaws.lookoutequipment#Equipment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nIndicates that a label pertains to a particular piece of equipment.\n</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe time at which the label was created.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nInformation about the label.\n</p>"
+            }
+        },
         "com.amazonaws.lookoutequipment#LabelsInputConfiguration": {
             "type": "structure",
             "members": {
                 "S3InputConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#LabelsS3InputConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains location information for the S3 location being used for label data. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Contains location information for the S3 location being used for label data. </p>"
+                    }
+                },
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group to be used for label data.\n</p>"
                     }
                 }
             },
@@ -2196,6 +2901,21 @@
                 "smithy.api#documentation": "<p> Entity that comprises information on large gaps between consecutive timestamps in data.\n      </p>"
             }
         },
+        "com.amazonaws.lookoutequipment#LatestInferenceResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ANOMALOUS",
+                        "name": "ANOMALOUS"
+                    },
+                    {
+                        "value": "NORMAL",
+                        "name": "NORMAL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lookoutequipment#ListDataIngestionJobs": {
             "type": "operation",
             "input": {
@@ -2239,7 +2959,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of data ingestion\n         jobs. </p>"
+                        "smithy.api#documentation": "<p>An opaque pagination token indicating where to continue the listing of data ingestion\n         jobs. </p>"
                     }
                 },
                 "MaxResults": {
@@ -2370,7 +3090,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists all inference events that have been found for the specified inference\n         scheduler. </p>",
+                "smithy.api#documentation": "<p> Lists all inference events that have been found for the specified inference scheduler.\n      </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2403,14 +3123,14 @@
                 "IntervalStartTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> Lookout for Equipment will return all the inference events with start time equal to or greater than the start time given.</p>",
+                        "smithy.api#documentation": "<p> Lookout for Equipment will return all the inference events with an end time equal to or greater than the\n         start time given.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IntervalEndTime": {
                     "target": "com.amazonaws.lookoutequipment#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lookout for Equipment will return all the inference events with end time equal to or less than the end time given.</p>",
+                        "smithy.api#documentation": "<p>Returns all the inference events with an end start time equal to or greater than less than the end time given</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2428,7 +3148,7 @@
                 "InferenceEventSummaries": {
                     "target": "com.amazonaws.lookoutequipment#InferenceEventSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides an array of information about the individual inference events returned from\n         the <code>ListInferenceEvents</code> operation, including scheduler used, event start time,\n         event end time, diagnostics, and so on. </p>"
+                        "smithy.api#documentation": "<p>Provides an array of information about the individual inference events returned from the\n            <code>ListInferenceEvents</code> operation, including scheduler used, event start time,\n         event end time, diagnostics, and so on. </p>"
                     }
                 }
             }
@@ -2603,6 +3323,173 @@
                 }
             }
         },
+        "com.amazonaws.lookoutequipment#ListLabelGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListLabelGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListLabelGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nReturns a list of the label groups.\n</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListLabelGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupNameBeginsWith": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe beginning of the name of the label groups to be listed.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of label groups.\n</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum number of label groups to list.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListLabelGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of label groups.\n</p>"
+                    }
+                },
+                "LabelGroupSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA summary of the label groups.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListLabels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListLabelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListLabelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nProvides a list of labels.\n</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListLabelsRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nRetruns the name of the label group.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntervalStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nReturns all the labels with a end time equal to or later than the start time given.\n</p>"
+                    }
+                },
+                "IntervalEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nReturns all labels with a start time earlier than the end time given.\n</p>"
+                    }
+                },
+                "FaultCode": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nReturns labels with a particular fault code.\n</p>"
+                    }
+                },
+                "Equipment": {
+                    "target": "com.amazonaws.lookoutequipment#Equipment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nLists the labels that pertain to a particular piece of equipment.\n</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of label groups.\n</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nSpecifies the maximum number of labels to list.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListLabelsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nAn opaque pagination token indicating where to continue the listing of datasets.\n</p>"
+                    }
+                },
+                "LabelSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#LabelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nA summary of the items in the label group.\n</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lookoutequipment#ListModels": {
             "type": "operation",
             "input": {
@@ -2750,13 +3637,13 @@
                 "MaxResults": {
                     "target": "com.amazonaws.lookoutequipment#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the maximum number of sensors for which to retrieve statistics. </p>"
+                        "smithy.api#documentation": "<p>Specifies the maximum number of sensors for which to retrieve statistics. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of sensor\n         statistics. </p>"
+                        "smithy.api#documentation": "<p>An opaque pagination token indicating where to continue the listing of sensor\n         statistics. </p>"
                     }
                 }
             }
@@ -2767,13 +3654,13 @@
                 "SensorStatisticsSummaries": {
                     "target": "com.amazonaws.lookoutequipment#SensorStatisticsSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p> Provides ingestion-based statistics regarding the specified sensor with respect to\n         various validation types, such as whether data exists, the number and percentage of missing\n         values, and the number and percentage of duplicate timestamps. </p>"
+                        "smithy.api#documentation": "<p>Provides ingestion-based statistics regarding the specified sensor with respect to\n         various validation types, such as whether data exists, the number and percentage of missing\n         values, and the number and percentage of duplicate timestamps. </p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.lookoutequipment#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of sensor\n         statistics. </p>"
+                        "smithy.api#documentation": "<p>An opaque pagination token indicating where to continue the listing of sensor\n         statistics. </p>"
                     }
                 }
             }
@@ -3873,6 +4760,56 @@
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the inference scheduler. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateLabelGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#UpdateLabelGroupRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\nUpdates the label group.\n</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateLabelGroupRequest": {
+            "type": "structure",
+            "members": {
+                "LabelGroupName": {
+                    "target": "com.amazonaws.lookoutequipment#LabelGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe name of the label group to be updated.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FaultCodes": {
+                    "target": "com.amazonaws.lookoutequipment#FaultCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nUpdates the code indicating the type of anomaly associated with the label.\n</p>\n         <p>Data in this field will be retained for service usage. Follow best practices for the security of your data.</p>"
                     }
                 }
             }

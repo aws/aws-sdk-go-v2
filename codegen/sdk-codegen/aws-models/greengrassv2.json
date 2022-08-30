@@ -722,7 +722,7 @@
                 "attributes": {
                     "target": "com.amazonaws.greengrassv2#PlatformAttributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A dictionary of attributes for the platform. The IoT Greengrass Core software defines the\n        <code>os</code> and <code>platform</code> by default. You can specify additional platform\n      attributes for a core device when you deploy the Greengrass nucleus component. For more information,\n      see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html\">Greengrass nucleus\n        component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A dictionary of attributes for the platform. The IoT Greengrass Core software defines the\n        <code>os</code> and <code>architecture</code> by default. You can specify additional\n      platform attributes for a core device when you deploy the Greengrass nucleus component. For more\n      information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html\">Greengrass nucleus\n        component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -1133,7 +1133,7 @@
                     }
                 },
                 "deploymentName": {
-                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "target": "com.amazonaws.greengrassv2#DeploymentNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the deployment.</p>"
                     }
@@ -1521,6 +1521,15 @@
         },
         "com.amazonaws.greengrassv2#DeploymentName": {
             "type": "string"
+        },
+        "com.amazonaws.greengrassv2#DeploymentNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.greengrassv2#DeploymentPolicies": {
             "type": "structure",
@@ -1955,7 +1964,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the recipe for a version of a component. Core devices can call this operation to\n      identify the artifacts and requirements to install a component.</p>",
+                "smithy.api#documentation": "<p>Gets the recipe for a version of a component.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/components/{arn}",
@@ -2158,7 +2167,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves metadata for a Greengrass core device.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves metadata for a Greengrass core device.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}",
@@ -2541,6 +2550,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether or not the component is a root component.</p>"
                     }
+                },
+                "lastStatusChangeTimestamp": {
+                    "target": "com.amazonaws.greengrassv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of how current the data is.</p>\n         <p>This response is based off of component state changes. The status reflects component\n      disruptions and deployments. If a component only sees a configuration update during a\n      deployment, it might not undergo a state change and this status would not be updated.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2590,6 +2605,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.greengrassv2#InstalledComponent"
+            }
+        },
+        "com.amazonaws.greengrassv2#InstalledComponentTopologyFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "ROOT",
+                        "name": "ROOT"
+                    }
+                ]
             }
         },
         "com.amazonaws.greengrassv2#InternalServerException": {
@@ -3106,17 +3136,11 @@
                 ]
             }
         },
-        "com.amazonaws.greengrassv2#LambdaFunctionARNWithVersionNumber": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^arn:[^:]*:lambda:[^:]+:[0-9]+:function:[a-zA-Z0-9-_]+:[0-9]+$"
-            }
-        },
         "com.amazonaws.greengrassv2#LambdaFunctionRecipeSource": {
             "type": "structure",
             "members": {
                 "lambdaArn": {
-                    "target": "com.amazonaws.greengrassv2#LambdaFunctionARNWithVersionNumber",
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the Lambda function. The ARN must include the version of the function to\n      import. You can't use version aliases like <code>$LATEST</code>.</p>",
                         "smithy.api#required": {}
@@ -3534,7 +3558,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of Greengrass core devices.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices",
@@ -3798,7 +3822,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of the components that a Greengrass core device runs.\n      This list doesn't include components that are deployed from local deployments or\n      components that are deployed as dependencies of other components.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval\n            that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of the components that a Greengrass core device runs. By default,\n      this list doesn't include components that are deployed as dependencies of other components. To\n      include dependencies in the response, set the <code>topologyFilter</code> parameter to\n        <code>ALL</code>.</p>\n         <note>\n            <p>IoT Greengrass relies on individual devices to send status updates to the Amazon Web Services Cloud. If the IoT Greengrass Core\n        software isn't running on the device, or if device isn't connected to the Amazon Web Services Cloud, then\n        the reported status of that device might not reflect its current status. The status timestamp\n        indicates when the device status was last updated.</p>\n            <p>Core devices send status updates at the following times:</p>\n            <ul>\n               <li>\n                  <p>When the IoT Greengrass Core software starts</p>\n               </li>\n               <li>\n                  <p>When the core device receives a deployment from the Amazon Web Services Cloud</p>\n               </li>\n               <li>\n                  <p>When the status of any component on the core device becomes <code>BROKEN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>At a <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss\">regular interval that you can configure</a>, which defaults to 24 hours</p>\n               </li>\n               <li>\n                  <p>For IoT Greengrass Core v2.7.0, the core device sends status updates upon local deployment and\n            cloud deployment</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents",
@@ -3837,6 +3861,13 @@
                         "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
+                },
+                "topologyFilter": {
+                    "target": "com.amazonaws.greengrassv2#InstalledComponentTopologyFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter for the list of components. Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – The list includes all components installed on the core\n          device.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROOT</code> – The list includes only <i>root</i>\n          components, which are components that you specify in a deployment. When you choose this\n          option, the list doesn't include components that the core device installs as dependencies\n          of other components.</p>\n            </li>\n         </ul>\n         <p>Default: <code>ROOT</code>\n         </p>",
+                        "smithy.api#httpQuery": "topologyFilter"
+                    }
                 }
             }
         },
@@ -3846,7 +3877,7 @@
                 "installedComponents": {
                     "target": "com.amazonaws.greengrassv2#InstalledComponentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that summarizes each component on the core device.</p>"
+                        "smithy.api#documentation": "<p>A list that summarizes each component on the core device.</p>\n         <note>\n            <p>Accuracy of the <code>lastStatusChangeTimestamp</code> response depends on Greengrass nucleus\n        v2.7.0. It performs best on Greengrass nucleus v2.7.0 and can be inaccurate on earlier\n        versions.</p>\n         </note>"
                     }
                 },
                 "nextToken": {

@@ -216,6 +216,141 @@
                 ]
             }
         },
+        "com.amazonaws.macie2#AllowListCriteria": {
+            "type": "structure",
+            "members": {
+                "regex": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max512PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regular expression (<i>regex</i>) that defines the text pattern to ignore. The expression can contain as many as 512 characters.</p>",
+                        "smithy.api#jsonName": "regex"
+                    }
+                },
+                "s3WordsList": {
+                    "target": "com.amazonaws.macie2#S3WordsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location and name of the S3 object that lists specific text to ignore.</p>",
+                        "smithy.api#jsonName": "s3WordsList"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the criteria for an allow list. The criteria must specify a regular expression (regex) or an S3 object (s3WordsList). It can't specify both.</p>"
+            }
+        },
+        "com.amazonaws.macie2#AllowListStatus": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.macie2#AllowListStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the allow list. If the list's criteria specify a regular expression (regex), this value is typically OK. Amazon Macie can compile the expression.</p> <p>If the list's criteria specify an S3 object, possible values are:</p> <ul><li><p>OK - Macie can retrieve and parse the contents of the object.</p></li> <li><p>S3_OBJECT_ACCESS_DENIED - Macie isn't allowed to access the object or the object is encrypted with a customer managed KMS key that Macie isn't allowed to use. Check the bucket policy and other permissions settings for the bucket and the object. If the object is encrypted, also ensure that it's encrypted with a key that Macie is allowed to use.</p></li> <li><p>S3_OBJECT_EMPTY - Macie can retrieve the object but the object doesn't contain any content. Ensure that the object contains the correct entries. Also ensure that the list's criteria specify the correct bucket and object names.</p></li> <li><p>S3_OBJECT_NOT_FOUND - The object doesn't exist in Amazon S3. Ensure that the list's criteria specify the correct bucket and object names.</p></li> <li><p>S3_OBJECT_OVERSIZE - Macie can retrieve the object. However, the object contains too many entries or its storage size exceeds the quota for an allow list. Try breaking the list into multiple files and ensure that each file doesn't exceed any quotas. Then configure list settings in Macie for each file.</p></li> <li><p>S3_THROTTLED - Amazon S3 throttled the request to retrieve the object. Wait a few minutes and then try again.</p></li> <li><p>S3_USER_ACCESS_DENIED - Amazon S3 denied the request to retrieve the object. If the specified object exists, you're not allowed to access it or it's encrypted with an KMS key that you're not allowed to use. Work with your Amazon Web Services administrator to ensure that the list's criteria specify the correct bucket and object names, and you have read access to the bucket and the object. If the object is encrypted, also ensure that it's encrypted with a key that you're allowed to use.</p></li> <li><p>UNKNOWN_ERROR - A transient or internal error occurred when Macie attempted to retrieve or parse the object. Wait a few minutes and then try again. A list can also have this status if it's encrypted with a key that Amazon S3 and Macie can't access or use.</p></li></ul>",
+                        "smithy.api#jsonName": "code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max1024PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the status of the allow list. Amazon Macie uses this value to provide additional information about an error that occurred when Macie tried to access and use the list's criteria.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the current status of an allow list, which indicates whether Amazon Macie can access and use the list's criteria.</p>"
+            }
+        },
+        "com.amazonaws.macie2#AllowListStatusCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the current status of an allow list. Depending on the type of criteria that the list specifies, possible values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "OK",
+                        "name": "OK"
+                    },
+                    {
+                        "value": "S3_OBJECT_NOT_FOUND",
+                        "name": "S3_OBJECT_NOT_FOUND"
+                    },
+                    {
+                        "value": "S3_USER_ACCESS_DENIED",
+                        "name": "S3_USER_ACCESS_DENIED"
+                    },
+                    {
+                        "value": "S3_OBJECT_ACCESS_DENIED",
+                        "name": "S3_OBJECT_ACCESS_DENIED"
+                    },
+                    {
+                        "value": "S3_THROTTLED",
+                        "name": "S3_THROTTLED"
+                    },
+                    {
+                        "value": "S3_OBJECT_OVERSIZE",
+                        "name": "S3_OBJECT_OVERSIZE"
+                    },
+                    {
+                        "value": "S3_OBJECT_EMPTY",
+                        "name": "S3_OBJECT_EMPTY"
+                    },
+                    {
+                        "value": "UNKNOWN_ERROR",
+                        "name": "UNKNOWN_ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.macie2#AllowListSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.macie2#__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the allow list.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.macie2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the allow list was created in Amazon Macie.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max512PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom description of the allow list.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.macie2#__stringMin22Max22PatternAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the allow list.</p>",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max128Pattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom name of the allow list.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.macie2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the allow list's settings were most recently changed in Amazon Macie.</p>",
+                        "smithy.api#jsonName": "updatedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a subset of information about an allow list.</p>"
+            }
+        },
         "com.amazonaws.macie2#AllowsUnencryptedObjectUploads": {
             "type": "string",
             "traits": {
@@ -1249,6 +1384,109 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.macie2#CreateAllowList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#CreateAllowListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#CreateAllowListResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates and defines the settings for an allow list.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/allow-lists",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#CreateAllowListRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken",
+                        "smithy.api#required": {}
+                    }
+                },
+                "criteria": {
+                    "target": "com.amazonaws.macie2#AllowListCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that specify the text or text pattern to ignore. The criteria can be the location and name of an S3 object that lists specific text to ignore (s3WordsList), or a regular expression (regex) that defines a text pattern to ignore.</p>",
+                        "smithy.api#jsonName": "criteria",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max512PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom description of the allow list. The description can contain as many as 512 characters.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max128Pattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom name for the allow list. The name can contain as many as 128 characters.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.macie2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies the tags to associate with the allow list.</p> <p>An allow list can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#CreateAllowListResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.macie2#__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the allow list.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.macie2#__stringMin22Max22PatternAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the allow list.</p>",
+                        "smithy.api#jsonName": "id"
+                    }
+                }
+            }
+        },
         "com.amazonaws.macie2#CreateClassificationJob": {
             "type": "operation",
             "input": {
@@ -1292,6 +1530,13 @@
         "com.amazonaws.macie2#CreateClassificationJobRequest": {
             "type": "structure",
             "members": {
+                "allowListIds": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each allow list for the job to use when it analyzes data.</p>",
+                        "smithy.api#jsonName": "allowListIds"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
@@ -1318,7 +1563,7 @@
                 "initialRun": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.</p><p>If you configure the job to run only once, don't specify a value for this property.</p>",
+                        "smithy.api#documentation": "<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.</p> <p>If you configure the job to run only once, don't specify a value for this property.</p>",
                         "smithy.api#jsonName": "initialRun"
                     }
                 },
@@ -1333,7 +1578,7 @@
                 "managedDataIdentifierIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).</p><p>To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.</p>",
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).</p> <p>To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.</p>",
                         "smithy.api#jsonName": "managedDataIdentifierIds"
                     }
                 },
@@ -2242,6 +2487,64 @@
                 "smithy.api#documentation": "<p>Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding, and the number of occurrences of each type of sensitive data that was detected.</p>"
             }
         },
+        "com.amazonaws.macie2#DeleteAllowList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#DeleteAllowListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#DeleteAllowListResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an allow list.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/allow-lists/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#DeleteAllowListRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ignoreJobChecks": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to force deletion of the allow list, even if active classification jobs are configured to use the list.</p> <p>When you try to delete an allow list, Amazon Macie checks for classification jobs that use the list and have a status other than COMPLETE or CANCELLED. By default, Macie rejects your request if any jobs meet these criteria. To skip these checks and delete the list, set this value to true. To delete the list only if no active jobs are configured to use it, set this value to false.</p>",
+                        "smithy.api#httpQuery": "ignoreJobChecks"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#DeleteAllowListResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.macie2#DeleteCustomDataIdentifier": {
             "type": "operation",
             "input": {
@@ -2288,7 +2591,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2345,7 +2648,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2467,7 +2770,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2632,6 +2935,13 @@
         "com.amazonaws.macie2#DescribeClassificationJobResponse": {
             "type": "structure",
             "members": {
+                "allowListIds": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each allow list that the job uses when it analyzes data.</p>",
+                        "smithy.api#jsonName": "allowListIds"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
@@ -2650,7 +2960,7 @@
                 "customDataIdentifierIds": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.</p>",
+                        "smithy.api#documentation": "<p>An array of unique identifiers, one for each custom data identifier that the job uses when it analyzes data. This value is null if the job uses only managed data identifiers to analyze data.</p>",
                         "smithy.api#jsonName": "customDataIdentifierIds"
                     }
                 },
@@ -3101,7 +3411,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3200,7 +3510,7 @@
                 "findingPublishingFrequency": {
                     "target": "com.amazonaws.macie2#FindingPublishingFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>",
+                        "smithy.api#documentation": "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events).</p>",
                         "smithy.api#jsonName": "findingPublishingFrequency"
                     }
                 },
@@ -3596,7 +3906,7 @@
         "com.amazonaws.macie2#FindingPublishingFrequency": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>",
+                "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "FIFTEEN_MINUTES",
@@ -3749,7 +4059,7 @@
                 "tags": {
                     "target": "com.amazonaws.macie2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the filter.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -3810,6 +4120,121 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>",
                         "smithy.api#jsonName": "administrator"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetAllowList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#GetAllowListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#GetAllowListResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the settings and status of an allow list.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/allow-lists/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetAllowListRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetAllowListResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.macie2#__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the allow list.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.macie2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the allow list was created in Amazon Macie.</p>",
+                        "smithy.api#jsonName": "createdAt"
+                    }
+                },
+                "criteria": {
+                    "target": "com.amazonaws.macie2#AllowListCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that specify the text or text pattern to ignore. The criteria can be the location and name of an S3 object that lists specific text to ignore (s3WordsList), or a regular expression (regex) that defines a text pattern to ignore.</p>",
+                        "smithy.api#jsonName": "criteria"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max512PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom description of the allow list.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.macie2#__stringMin22Max22PatternAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the allow list.</p>",
+                        "smithy.api#jsonName": "id"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max128Pattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom name of the allow list.</p>",
+                        "smithy.api#jsonName": "name"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.macie2#AllowListStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the allow list, which indicates whether Amazon Macie can access and use the list's criteria.</p>",
+                        "smithy.api#jsonName": "status"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.macie2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the allow list.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.macie2#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the allow list's settings were most recently changed in Amazon Macie.</p>",
+                        "smithy.api#jsonName": "updatedAt"
                     }
                 }
             }
@@ -4064,7 +4489,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4332,7 +4757,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4394,7 +4819,7 @@
                 "tags": {
                     "target": "com.amazonaws.macie2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the filter.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -4601,7 +5026,7 @@
                 "findingPublishingFrequency": {
                     "target": "com.amazonaws.macie2#FindingPublishingFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>",
+                        "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events).</p>",
                         "smithy.api#jsonName": "findingPublishingFrequency"
                     }
                 },
@@ -4730,7 +5155,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4792,7 +5217,7 @@
                 "tags": {
                     "target": "com.amazonaws.macie2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the member account in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the account in Amazon Macie.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 },
@@ -4828,7 +5253,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.</p>",
+                "smithy.api#documentation": "<p>Retrieves the status and configuration settings for retrieving occurrences of sensitive data reported by findings.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/reveal-configuration",
@@ -4881,7 +5306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves (reveals) occurrences of sensitive data reported by a finding.</p>",
+                "smithy.api#documentation": "<p>Retrieves occurrences of sensitive data reported by a finding.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/findings/{findingId}/reveal",
@@ -4939,7 +5364,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Checks whether occurrences of sensitive data can be retrieved (revealed) for a finding.</p>",
+                "smithy.api#documentation": "<p>Checks whether occurrences of sensitive data can be retrieved for a finding.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/findings/{findingId}/reveal/availability",
@@ -4973,7 +5398,7 @@
                 "reasons": {
                     "target": "com.amazonaws.macie2#__listOfUnavailabilityReasonCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are:</p> <ul><li><p>INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Amazon Macie created the finding.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding.</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul> <p>This value is null if sensitive data can be retrieved for the finding.</p>",
+                        "smithy.api#documentation": "<p>Specifies why occurrences of sensitive data can't be retrieved for the finding. Possible values are:</p> <ul><li><p>INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Macie created the finding.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding.</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul> <p>This value is null if sensitive data can be retrieved for the finding.</p>",
                         "smithy.api#jsonName": "reasons"
                     }
                 }
@@ -5834,6 +6259,75 @@
                 ]
             }
         },
+        "com.amazonaws.macie2#ListAllowLists": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#ListAllowListsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#ListAllowListsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a subset of information about all the allow lists for an account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/allow-lists",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#ListAllowListsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.macie2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken string that specifies which page of results to return in a paginated response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#ListAllowListsResponse": {
+            "type": "structure",
+            "members": {
+                "allowLists": {
+                    "target": "com.amazonaws.macie2#__listOfAllowListSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each allow list.</p>",
+                        "smithy.api#jsonName": "allowLists"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.macie2#ListClassificationJobs": {
             "type": "operation",
             "input": {
@@ -6635,7 +7129,7 @@
                 "target": "com.amazonaws.macie2#ListTagsForResourceResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.</p>",
+                "smithy.api#documentation": "<p>Retrieves the tags (keys and values) that are associated with an Amazon Macie resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -6649,7 +7143,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the classification job, custom data identifier, findings filter, or member account.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6662,7 +7156,7 @@
                 "tags": {
                     "target": "com.amazonaws.macie2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the resource.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the resource.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -6694,6 +7188,9 @@
                     "target": "com.amazonaws.macie2#BatchGetCustomDataIdentifiers"
                 },
                 {
+                    "target": "com.amazonaws.macie2#CreateAllowList"
+                },
+                {
                     "target": "com.amazonaws.macie2#CreateClassificationJob"
                 },
                 {
@@ -6713,6 +7210,9 @@
                 },
                 {
                     "target": "com.amazonaws.macie2#DeclineInvitations"
+                },
+                {
+                    "target": "com.amazonaws.macie2#DeleteAllowList"
                 },
                 {
                     "target": "com.amazonaws.macie2#DeleteCustomDataIdentifier"
@@ -6758,6 +7258,9 @@
                 },
                 {
                     "target": "com.amazonaws.macie2#GetAdministratorAccount"
+                },
+                {
+                    "target": "com.amazonaws.macie2#GetAllowList"
                 },
                 {
                     "target": "com.amazonaws.macie2#GetBucketStatistics"
@@ -6808,6 +7311,9 @@
                     "target": "com.amazonaws.macie2#GetUsageTotals"
                 },
                 {
+                    "target": "com.amazonaws.macie2#ListAllowLists"
+                },
+                {
                     "target": "com.amazonaws.macie2#ListClassificationJobs"
                 },
                 {
@@ -6851,6 +7357,9 @@
                 },
                 {
                     "target": "com.amazonaws.macie2#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.macie2#UpdateAllowList"
                 },
                 {
                     "target": "com.amazonaws.macie2#UpdateClassificationJob"
@@ -7112,7 +7621,7 @@
                 "tags": {
                     "target": "com.amazonaws.macie2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the account in Amazon Macie.</p>",
+                        "smithy.api#documentation": "<p>A map of key-value pairs that specifies which tags (keys and values) are associated with the account in Amazon Macie.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 },
@@ -7221,7 +7730,7 @@
                 "cells": {
                     "target": "com.amazonaws.macie2#Cells",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files.</p><p>Each Cell object specifies a cell or field that contains the sensitive data.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files.</p> <p>Each Cell object specifies a cell or field that contains the sensitive data.</p>",
                         "smithy.api#jsonName": "cells"
                     }
                 },
@@ -7242,7 +7751,7 @@
                 "pages": {
                     "target": "com.amazonaws.macie2#Pages",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files.</p><p>Each Page object specifies a page that contains the sensitive data.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files.</p> <p>Each Page object specifies a page that contains the sensitive data.</p>",
                         "smithy.api#jsonName": "pages"
                     }
                 },
@@ -7255,7 +7764,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding. Depending on the file or storage format of the affected S3 object, you can optionally retrieve (reveal) sample occurrences of the sensitive data that was detected.</p>"
+                "smithy.api#documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding.</p>"
             }
         },
         "com.amazonaws.macie2#OrderBy": {
@@ -7679,7 +8188,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration settings for retrieving occurrences of sensitive data reported by findings, and the status of the configuration for an Amazon Macie account. When you enable the configuration for the first time, your request must specify an AWS Key Management Service (AWS KMS) key. Otherwise, an error occurs. Macie uses the specified key to encrypt the sensitive data that you retrieve.</p>"
+                "smithy.api#documentation": "<p>Specifies the configuration settings for retrieving occurrences of sensitive data reported by findings, and the status of the configuration for an Amazon Macie account. When you enable the configuration for the first time, your request must specify an Key Management Service (KMS) key. Otherwise, an error occurs. Macie uses the specified key to encrypt the sensitive data that you retrieve.</p>"
             }
         },
         "com.amazonaws.macie2#RevealRequestStatus": {
@@ -7705,7 +8214,7 @@
         "com.amazonaws.macie2#RevealStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The status of the configuration for the Amazon Macie account. In a request, valid values are:</p>",
+                "smithy.api#documentation": "<p>The status of the configuration for retrieving occurrences of sensitive data reported by findings. Valid values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "ENABLED",
@@ -8000,6 +8509,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the S3 object that a finding applies to.</p>"
+            }
+        },
+        "com.amazonaws.macie2#S3WordsList": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.macie2#__stringMin3Max255PatternAZaZ093255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name of the S3 bucket that contains the object.</p>",
+                        "smithy.api#jsonName": "bucketName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "objectKey": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max1024PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name (key) of the object.</p>",
+                        "smithy.api#jsonName": "objectKey",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an S3 object that lists specific text to ignore.</p>"
             }
         },
         "com.amazonaws.macie2#ScopeFilterKey": {
@@ -8930,7 +9463,7 @@
                 "target": "com.amazonaws.macie2#__string"
             },
             "traits": {
-                "smithy.api#documentation": "<p>A string-to-string map of key-value pairs that specifies the tags (keys and values) for a classification job, custom data identifier, findings filter, or member account.</p>"
+                "smithy.api#documentation": "<p>A string-to-string map of key-value pairs that specifies the tags (keys and values) for an Amazon Macie resource.</p>"
             }
         },
         "com.amazonaws.macie2#TagResource": {
@@ -8942,7 +9475,7 @@
                 "target": "com.amazonaws.macie2#TagResourceResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates one or more tags (keys and values) that are associated with a classification job, custom data identifier, findings filter, or member account.</p>",
+                "smithy.api#documentation": "<p>Adds or updates one or more tags (keys and values) that are associated with an Amazon Macie resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -8956,7 +9489,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the classification job, custom data identifier, findings filter, or member account.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9236,7 +9769,7 @@
                 "message": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of error that occurred and prevented Amazon Macie from retrieving occurrences of sensitive data reported by the finding. Possible values are:</p> <ul><li><p>INVALID_CLASSIFICATION_RESULT</code> - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Amazon Macie created the finding.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding..</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Amazon Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The type of error that occurred and prevented Amazon Macie from retrieving occurrences of sensitive data reported by the finding. Possible values are:</p> <ul><li><p>INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of the sensitive data to retrieve. There isn't a corresponding sensitive data discovery result for the finding. Or the sensitive data discovery result specified by the ClassificationDetails.detailedResultsLocation field of the finding isn't available, is malformed or corrupted, or uses an unsupported storage format.</p></li> <li><p>OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object exceeds the size quota for retrieving occurrences of sensitive data.</p></li> <li><p>OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object might have been renamed, moved, or deleted. Or the object was changed after Macie created the finding.</p></li> <li><p>UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data finding.</p></li> <li><p>UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage format that Macie doesn't support for retrieving occurrences of sensitive data.</p></li></ul>",
                         "smithy.api#jsonName": "message",
                         "smithy.api#required": {}
                     }
@@ -9286,7 +9819,7 @@
                 "target": "com.amazonaws.macie2#UntagResourceResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags (keys and values) from a classification job, custom data identifier, findings filter, or member account.</p>",
+                "smithy.api#documentation": "<p>Removes one or more tags (keys and values) from an Amazon Macie resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -9300,7 +9833,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the classification job, custom data identifier, findings filter, or member account.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9308,7 +9841,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, and separate them with an ampersand (&amp;).</p>",
+                        "smithy.api#documentation": "<p>One or more tags (keys) to remove from the resource. In an HTTP request to remove multiple tags, append the tagKeys parameter and argument for each tag to remove, separated by an ampersand (&amp;).</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -9318,6 +9851,95 @@
         "com.amazonaws.macie2#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.macie2#UpdateAllowList": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#UpdateAllowListRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#UpdateAllowListResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the settings for an allow list.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/allow-lists/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#UpdateAllowListRequest": {
+            "type": "structure",
+            "members": {
+                "criteria": {
+                    "target": "com.amazonaws.macie2#AllowListCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that specify the text or text pattern to ignore. The criteria can be the location and name of an S3 object that lists specific text to ignore (s3WordsList), or a regular expression that defines a text pattern to ignore (regex).</p> <p>You can change a list's underlying criteria, such as the name of the S3 object or the regular expression to use. However, you can't change the type from s3WordsList to regex or the other way around.</p>",
+                        "smithy.api#jsonName": "criteria",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max512PatternSS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom description of the allow list. The description can contain as many as 512 characters.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.macie2#__stringMin1Max128Pattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom name for the allow list. The name can contain as many as 128 characters.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#UpdateAllowListResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.macie2#__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the allow list.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.macie2#__stringMin22Max22PatternAZ0922",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the allow list.</p>",
+                        "smithy.api#jsonName": "id"
+                    }
+                }
+            }
         },
         "com.amazonaws.macie2#UpdateClassificationJob": {
             "type": "operation",
@@ -9451,7 +10073,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9545,7 +10167,7 @@
                 "findingPublishingFrequency": {
                     "target": "com.amazonaws.macie2#FindingPublishingFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>",
+                        "smithy.api#documentation": "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly Amazon CloudWatch Events).</p>",
                         "smithy.api#jsonName": "findingPublishingFrequency"
                     }
                 },
@@ -9608,7 +10230,7 @@
                 "id": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the Amazon Macie resource that the request applies to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -9707,7 +10329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the status and configuration settings for retrieving (revealing) occurrences of sensitive data reported by findings.</p>",
+                "smithy.api#documentation": "<p>Updates the status and configuration settings for retrieving occurrences of sensitive data reported by findings.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/reveal-configuration",
@@ -10179,6 +10801,12 @@
                 "target": "com.amazonaws.macie2#AdminAccount"
             }
         },
+        "com.amazonaws.macie2#__listOfAllowListSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#AllowListSummary"
+            }
+        },
         "com.amazonaws.macie2#__listOfBatchGetCustomDataIdentifierSummary": {
             "type": "list",
             "member": {
@@ -10364,6 +10992,16 @@
         "com.amazonaws.macie2#__string": {
             "type": "string"
         },
+        "com.amazonaws.macie2#__stringMin1Max1024PatternSS": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
         "com.amazonaws.macie2#__stringMin1Max128": {
             "type": "string",
             "traits": {
@@ -10373,6 +11011,16 @@
                 }
             }
         },
+        "com.amazonaws.macie2#__stringMin1Max128Pattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
         "com.amazonaws.macie2#__stringMin1Max2048": {
             "type": "string",
             "traits": {
@@ -10380,6 +11028,46 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.macie2#__stringMin1Max512PatternSS": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.macie2#__stringMin22Max22PatternAZ0922": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 22,
+                    "max": 22
+                },
+                "smithy.api#pattern": "^[a-z0-9]{22}$"
+            }
+        },
+        "com.amazonaws.macie2#__stringMin3Max255PatternAZaZ093255": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9.\\-_]{3,255}$"
+            }
+        },
+        "com.amazonaws.macie2#__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 71,
+                    "max": 89
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):macie2:[a-z1-9-]{9,20}:\\d{12}:allow-list\\/[a-z0-9]{22}$"
             }
         },
         "com.amazonaws.macie2#__timestampIso8601": {
