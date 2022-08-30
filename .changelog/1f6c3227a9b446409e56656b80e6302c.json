@@ -1,8 +1,0 @@
-{
-    "id": "1f6c3227-a9b4-4640-9e56-656b80e6302c",
-    "type": "documentation",
-    "description": "Documentation updates for the AWS IAM Identity Center Portal CLI Reference.",
-    "modules": [
-        "service/sso"
-    ]
-}

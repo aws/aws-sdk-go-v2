@@ -1,8 +1,0 @@
-{
-    "id": "6b9865ba-dd18-4bf4-956d-bae6b13fbce4",
-    "type": "feature",
-    "description": "Adds topologyFilter to ListInstalledComponentsRequest which allows filtration of components by ROOT or ALL (including root and dependency components). Adds lastStatusChangeTimestamp to ListInstalledComponents response to show the last time a component changed state on a device.",
-    "modules": [
-        "service/greengrassv2"
-    ]
-}

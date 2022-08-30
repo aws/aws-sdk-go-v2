@@ -1,3 +1,7 @@
+# v1.15.7 (2022-08-30)
+
+* **Documentation**: Documentation updates for the AWS IAM Identity Center CLI Reference.
+
 # v1.15.6 (2022-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

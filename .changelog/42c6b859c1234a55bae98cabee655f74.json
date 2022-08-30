@@ -1,8 +1,0 @@
-{
-    "id": "42c6b859-c123-4a55-bae9-8cabee655f74",
-    "type": "feature",
-    "description": "This release adds new apis for providing labels.",
-    "modules": [
-        "service/lookoutequipment"
-    ]
-}

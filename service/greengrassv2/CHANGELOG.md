@@ -1,3 +1,7 @@
+# v1.17.0 (2022-08-30)
+
+* **Feature**: Adds topologyFilter to ListInstalledComponentsRequest which allows filtration of components by ROOT or ALL (including root and dependency components). Adds lastStatusChangeTimestamp to ListInstalledComponents response to show the last time a component changed state on a device.
+
 # v1.16.8 (2022-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

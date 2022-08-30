@@ -1,3 +1,7 @@
+# v1.18.17 (2022-08-30)
+
+* No change notes available for this release.
+
 # v1.18.16 (2022-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,22 @@
+# Release (2022-08-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.17.0](service/greengrassv2/CHANGELOG.md#v1170-2022-08-30)
+  * **Feature**: Adds topologyFilter to ListInstalledComponentsRequest which allows filtration of components by ROOT or ALL (including root and dependency components). Adds lastStatusChangeTimestamp to ListInstalledComponents response to show the last time a component changed state on a device.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.14.15](service/identitystore/CHANGELOG.md#v11415-2022-08-30)
+  * **Documentation**: Documentation updates for the Identity Store CLI Reference.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.15.0](service/lookoutequipment/CHANGELOG.md#v1150-2022-08-30)
+  * **Feature**: This release adds new apis for providing labels.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.23.0](service/macie2/CHANGELOG.md#v1230-2022-08-30)
+  * **Feature**: This release of the Amazon Macie API adds support for using allow lists to define specific text and text patterns to ignore when inspecting data sources for sensitive data.
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.11.19](service/sso/CHANGELOG.md#v11119-2022-08-30)
+  * **Documentation**: Documentation updates for the AWS IAM Identity Center Portal CLI Reference.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.15.7](service/ssoadmin/CHANGELOG.md#v1157-2022-08-30)
+  * **Documentation**: Documentation updates for the AWS IAM Identity Center CLI Reference.
+
 # Release (2022-08-29)
 
 ## General Highlights

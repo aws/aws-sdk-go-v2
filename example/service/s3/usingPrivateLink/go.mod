@@ -4,9 +4,9 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.12
-	github.com/aws/aws-sdk-go-v2/config v1.17.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.6
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.14
+	github.com/aws/aws-sdk-go-v2/config v1.17.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.7
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.21.15
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

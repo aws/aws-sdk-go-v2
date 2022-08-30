@@ -1,3 +1,7 @@
+# v1.14.15 (2022-08-30)
+
+* **Documentation**: Documentation updates for the Identity Store CLI Reference.
+
 # v1.14.14 (2022-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
