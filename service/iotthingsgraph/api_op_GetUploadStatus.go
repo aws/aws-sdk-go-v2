@@ -13,6 +13,8 @@ import (
 )
 
 // Gets the status of the specified upload.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetUploadStatus(ctx context.Context, params *GetUploadStatusInput, optFns ...func(*Options)) (*GetUploadStatusOutput, error) {
 	if params == nil {
 		params = &GetUploadStatusInput{}

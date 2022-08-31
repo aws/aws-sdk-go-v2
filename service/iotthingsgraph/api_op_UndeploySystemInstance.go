@@ -12,6 +12,8 @@ import (
 )
 
 // Removes a system instance from its target (Cloud or Greengrass).
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) UndeploySystemInstance(ctx context.Context, params *UndeploySystemInstanceInput, optFns ...func(*Options)) (*UndeploySystemInstanceOutput, error) {
 	if params == nil {
 		params = &UndeploySystemInstanceInput{}

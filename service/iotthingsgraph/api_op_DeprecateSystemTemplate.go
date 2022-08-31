@@ -11,6 +11,8 @@ import (
 )
 
 // Deprecates the specified system.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) DeprecateSystemTemplate(ctx context.Context, params *DeprecateSystemTemplateInput, optFns ...func(*Options)) (*DeprecateSystemTemplateOutput, error) {
 	if params == nil {
 		params = &DeprecateSystemTemplateInput{}

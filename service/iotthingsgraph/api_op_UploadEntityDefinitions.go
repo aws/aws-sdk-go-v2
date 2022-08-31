@@ -28,6 +28,8 @@ import (
 // definitions can refer to entities in the public namespace. Valid entities are
 // Device, DeviceModel, Service, Capability, State, Action, Event, Property,
 // Mapping, Enum.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) UploadEntityDefinitions(ctx context.Context, params *UploadEntityDefinitionsInput, optFns ...func(*Options)) (*UploadEntityDefinitionsOutput, error) {
 	if params == nil {
 		params = &UploadEntityDefinitionsInput{}

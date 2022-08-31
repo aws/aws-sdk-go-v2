@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a tag for the specified resource.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

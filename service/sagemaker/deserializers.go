@@ -53889,6 +53889,92 @@ func awsAwsjson11_deserializeDocumentRealtimeInferenceInstanceTypes(v *[]types.P
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRecommendationJobContainerConfig(v **types.RecommendationJobContainerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecommendationJobContainerConfig
+	if *v == nil {
+		sv = &types.RecommendationJobContainerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "Framework":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Framework = ptr.String(jtv)
+			}
+
+		case "FrameworkVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FrameworkVersion = ptr.String(jtv)
+			}
+
+		case "NearestModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NearestModelName = ptr.String(jtv)
+			}
+
+		case "PayloadConfig":
+			if err := awsAwsjson11_deserializeDocumentRecommendationJobPayloadConfig(&sv.PayloadConfig, value); err != nil {
+				return err
+			}
+
+		case "SupportedInstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentRecommendationJobSupportedInstanceTypes(&sv.SupportedInstanceTypes, value); err != nil {
+				return err
+			}
+
+		case "Task":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Task = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRecommendationJobInputConfig(v **types.RecommendationJobInputConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -53911,6 +53997,11 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInputConfig(v **types.Reco
 
 	for key, value := range shape {
 		switch key {
+		case "ContainerConfig":
+			if err := awsAwsjson11_deserializeDocumentRecommendationJobContainerConfig(&sv.ContainerConfig, value); err != nil {
+				return err
+			}
+
 		case "EndpointConfigurations":
 			if err := awsAwsjson11_deserializeDocumentEndpointInputConfigurations(&sv.EndpointConfigurations, value); err != nil {
 				return err
@@ -53955,6 +54046,51 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInputConfig(v **types.Reco
 					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
 				}
 				sv.VolumeKmsKeyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecommendationJobPayloadConfig(v **types.RecommendationJobPayloadConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecommendationJobPayloadConfig
+	if *v == nil {
+		sv = &types.RecommendationJobPayloadConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SamplePayloadUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SamplePayloadUrl = ptr.String(jtv)
+			}
+
+		case "SupportedContentTypes":
+			if err := awsAwsjson11_deserializeDocumentRecommendationJobSupportedContentTypes(&sv.SupportedContentTypes, value); err != nil {
+				return err
 			}
 
 		default:
@@ -54069,6 +54205,78 @@ func awsAwsjson11_deserializeDocumentRecommendationJobStoppingConditions(v **typ
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecommendationJobSupportedContentTypes(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecommendationJobSupportedInstanceTypes(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

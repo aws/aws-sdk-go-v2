@@ -15,6 +15,8 @@ import (
 // Searches for summary information about systems in the user's account. You can
 // filter by the ID of a workflow to return only systems that use the specified
 // workflow.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) SearchSystemTemplates(ctx context.Context, params *SearchSystemTemplatesInput, optFns ...func(*Options)) (*SearchSystemTemplatesOutput, error) {
 	if params == nil {
 		params = &SearchSystemTemplatesInput{}

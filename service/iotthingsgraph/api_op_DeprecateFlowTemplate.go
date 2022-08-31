@@ -13,6 +13,8 @@ import (
 // Deprecates the specified workflow. This action marks the workflow for deletion.
 // Deprecated flows can't be deployed, but existing deployments will continue to
 // run.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) DeprecateFlowTemplate(ctx context.Context, params *DeprecateFlowTemplateInput, optFns ...func(*Options)) (*DeprecateFlowTemplateOutput, error) {
 	if params == nil {
 		params = &DeprecateFlowTemplateInput{}

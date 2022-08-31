@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a CloudFront origin access control.
+// Gets a CloudFront origin access control, including its unique identifier.
 func (c *Client) GetOriginAccessControl(ctx context.Context, params *GetOriginAccessControlInput, optFns ...func(*Options)) (*GetOriginAccessControlOutput, error) {
 	if params == nil {
 		params = &GetOriginAccessControlInput{}
@@ -42,7 +42,7 @@ type GetOriginAccessControlOutput struct {
 	// The version identifier for the current version of the origin access control.
 	ETag *string
 
-	// Contains an origin access control.
+	// Contains an origin access control, including its unique identifier.
 	OriginAccessControl *types.OriginAccessControl
 
 	// Metadata pertaining to the operation's result.

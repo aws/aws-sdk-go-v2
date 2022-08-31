@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.11.19
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.13.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.15
-	github.com/aws/smithy-go v1.13.0
+	github.com/aws/smithy-go v1.13.1
 	github.com/google/go-cmp v0.5.8
 )
 

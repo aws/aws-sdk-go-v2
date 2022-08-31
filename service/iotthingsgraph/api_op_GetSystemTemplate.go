@@ -12,6 +12,8 @@ import (
 )
 
 // Gets a system.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetSystemTemplate(ctx context.Context, params *GetSystemTemplateInput, optFns ...func(*Options)) (*GetSystemTemplateOutput, error) {
 	if params == nil {
 		params = &GetSystemTemplateInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Gets a system instance.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetSystemInstance(ctx context.Context, params *GetSystemInstanceInput, optFns ...func(*Options)) (*GetSystemInstanceOutput, error) {
 	if params == nil {
 		params = &GetSystemInstanceInput{}

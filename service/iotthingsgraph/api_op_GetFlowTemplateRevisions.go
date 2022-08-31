@@ -16,6 +16,8 @@ import (
 // stored. If the workflow has been deprecated, this action will return revisions
 // that occurred before the deprecation. This action won't work for workflows that
 // have been deleted.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetFlowTemplateRevisions(ctx context.Context, params *GetFlowTemplateRevisionsInput, optFns ...func(*Options)) (*GetFlowTemplateRevisionsOutput, error) {
 	if params == nil {
 		params = &GetFlowTemplateRevisionsInput{}

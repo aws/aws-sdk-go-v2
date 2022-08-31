@@ -60,10 +60,10 @@ type DescribeUserProfileOutput struct {
 	// The last modified time.
 	LastModifiedTime *time.Time
 
-	// The SSO user identifier.
+	// The Amazon Web Services SSO user identifier.
 	SingleSignOnUserIdentifier *string
 
-	// The SSO user value.
+	// The Amazon Web Services SSO user value.
 	SingleSignOnUserValue *string
 
 	// The status.

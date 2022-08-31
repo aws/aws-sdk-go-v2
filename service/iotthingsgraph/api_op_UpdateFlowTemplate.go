@@ -16,6 +16,8 @@ import (
 // don't want this behavior, copy the workflow (creating a new workflow with a
 // different ID), and update the copy. The workflow can contain only entities in
 // the specified namespace.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) UpdateFlowTemplate(ctx context.Context, params *UpdateFlowTemplateInput, optFns ...func(*Options)) (*UpdateFlowTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateFlowTemplateInput{}

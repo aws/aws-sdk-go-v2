@@ -5191,6 +5191,19 @@ func awsRestjson1_deserializeDocumentRecordingConfiguration(v **types.RecordingC
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "recordingReconnectWindowSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RecordingReconnectWindowSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RecordingReconnectWindowSeconds = int32(i64)
+			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)

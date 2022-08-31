@@ -86,7 +86,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.14
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.22.4
-	github.com/aws/smithy-go v1.13.0
+	github.com/aws/smithy-go v1.13.1
 	github.com/google/go-cmp v0.5.8
 )
 

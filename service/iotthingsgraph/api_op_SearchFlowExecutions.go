@@ -14,6 +14,8 @@ import (
 )
 
 // Searches for AWS IoT Things Graph workflow execution instances.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) SearchFlowExecutions(ctx context.Context, params *SearchFlowExecutionsInput, optFns ...func(*Options)) (*SearchFlowExecutionsOutput, error) {
 	if params == nil {
 		params = &SearchFlowExecutionsInput{}

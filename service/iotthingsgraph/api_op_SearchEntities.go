@@ -14,6 +14,8 @@ import (
 
 // Searches for entities of the specified type. You can search for entities in your
 // namespace and the public namespace that you're tracking.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) SearchEntities(ctx context.Context, params *SearchEntitiesInput, optFns ...func(*Options)) (*SearchEntitiesOutput, error) {
 	if params == nil {
 		params = &SearchEntitiesInput{}

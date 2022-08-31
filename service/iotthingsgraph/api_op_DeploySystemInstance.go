@@ -22,6 +22,8 @@ import (
 // core device when you use this API, see AWS IoT Things Graph and AWS IoT
 // Greengrass
 // (https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html).
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) DeploySystemInstance(ctx context.Context, params *DeploySystemInstanceInput, optFns ...func(*Options)) (*DeploySystemInstanceOutput, error) {
 	if params == nil {
 		params = &DeploySystemInstanceInput{}

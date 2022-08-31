@@ -14,6 +14,8 @@ import (
 // Dissociates a device entity from a concrete thing. The action takes only the
 // type of the entity that you need to dissociate because only one entity of a
 // particular type can be associated with a thing.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) DissociateEntityFromThing(ctx context.Context, params *DissociateEntityFromThingInput, optFns ...func(*Options)) (*DissociateEntityFromThingOutput, error) {
 	if params == nil {
 		params = &DissociateEntityFromThingInput{}

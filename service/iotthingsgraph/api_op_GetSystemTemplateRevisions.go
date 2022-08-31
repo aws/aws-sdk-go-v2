@@ -16,6 +16,8 @@ import (
 // revisions are stored. If the system has been deprecated, this action will return
 // the revisions that occurred before its deprecation. This action won't work with
 // systems that have been deleted.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetSystemTemplateRevisions(ctx context.Context, params *GetSystemTemplateRevisionsInput, optFns ...func(*Options)) (*GetSystemTemplateRevisionsOutput, error) {
 	if params == nil {
 		params = &GetSystemTemplateRevisionsInput{}

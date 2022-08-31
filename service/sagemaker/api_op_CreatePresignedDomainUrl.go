@@ -14,7 +14,7 @@ import (
 // browser, the user will be automatically signed in to Amazon SageMaker Studio,
 // and granted access to all of the Apps and files associated with the Domain's
 // Amazon Elastic File System (EFS) volume. This operation can only be called when
-// the authentication mode equals IAM. The IAM role or user used to call this API
+// the authentication mode equals IAM. The IAM role or user passed to this API
 // defines the permissions to access the app. Once the presigned URL is created, no
 // additional permission is required to access this URL. IAM authorization policies
 // for this API are also enforced for every HTTP request and WebSocket frame that

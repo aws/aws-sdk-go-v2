@@ -13,6 +13,8 @@ import (
 )
 
 // Searches for system instances in the user's account.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) SearchSystemInstances(ctx context.Context, params *SearchSystemInstancesInput, optFns ...func(*Options)) (*SearchSystemInstancesOutput, error) {
 	if params == nil {
 		params = &SearchSystemInstancesInput{}

@@ -101,7 +101,7 @@ type DescribeDomainOutput struct {
 	// apps and the RStudioServerPro app.
 	SecurityGroupIdForDomainBoundary *string
 
-	// The SSO managed application instance ID.
+	// The Amazon Web Services SSO managed application instance ID.
 	SingleSignOnManagedApplicationInstanceId *string
 
 	// The status.

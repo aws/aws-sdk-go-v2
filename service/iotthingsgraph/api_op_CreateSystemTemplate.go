@@ -14,6 +14,8 @@ import (
 // Creates a system. The system is validated against the entities in the latest
 // version of the user's namespace unless another namespace version is specified in
 // the request.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) CreateSystemTemplate(ctx context.Context, params *CreateSystemTemplateInput, optFns ...func(*Options)) (*CreateSystemTemplateOutput, error) {
 	if params == nil {
 		params = &CreateSystemTemplateInput{}

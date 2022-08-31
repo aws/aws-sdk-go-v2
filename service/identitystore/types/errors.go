@@ -28,12 +28,42 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This request cannot be completed for one of the following reasons:
+//
+// * Performing
+// the requested operation would violate an existing uniqueness claim in the
+// identity store. Resolve the conflict before retrying this request.
+//
+// * The
+// requested resource was being concurrently modified by another request.
+type ConflictException struct {
+	Message *string
+
+	RequestId *string
+	Reason    ConflictExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request processing has failed because of an unknown error, exception or
 // failure with an internal server.
 type InternalServerException struct {
 	Message *string
 
-	RequestId *string
+	RequestId         *string
+	RetryAfterSeconds int32
 
 	noSmithyDocumentSerde
 }
@@ -73,12 +103,35 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request would cause the number of users or groups in the identity store to
+// exceed the maximum allowed.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Indicates that the principal has crossed the throttling limits of the API
 // operations.
 type ThrottlingException struct {
 	Message *string
 
-	RequestId *string
+	RequestId         *string
+	RetryAfterSeconds int32
 
 	noSmithyDocumentSerde
 }

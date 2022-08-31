@@ -321,6 +321,11 @@ func awsRestjson1_serializeOpDocumentCreateRecordingConfigurationInput(v *Create
 		ok.String(*v.Name)
 	}
 
+	if v.RecordingReconnectWindowSeconds != 0 {
+		ok := object.Key("recordingReconnectWindowSeconds")
+		ok.Integer(v.RecordingReconnectWindowSeconds)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {

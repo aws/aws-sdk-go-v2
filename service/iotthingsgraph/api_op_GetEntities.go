@@ -36,6 +36,8 @@ import (
 //
 // This action doesn't return definitions for
 // systems, flows, and deployments.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optFns ...func(*Options)) (*GetEntitiesOutput, error) {
 	if params == nil {
 		params = &GetEntitiesInput{}

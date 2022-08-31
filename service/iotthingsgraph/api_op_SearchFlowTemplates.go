@@ -13,6 +13,8 @@ import (
 )
 
 // Searches for summary information about workflows.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) SearchFlowTemplates(ctx context.Context, params *SearchFlowTemplatesInput, optFns ...func(*Options)) (*SearchFlowTemplatesOutput, error) {
 	if params == nil {
 		params = &SearchFlowTemplatesInput{}

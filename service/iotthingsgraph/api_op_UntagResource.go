@@ -11,6 +11,8 @@ import (
 )
 
 // Removes a tag from the specified resource.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

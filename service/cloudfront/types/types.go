@@ -2897,7 +2897,7 @@ type Origin struct {
 	noSmithyDocumentSerde
 }
 
-// A CloudFront origin access control.
+// A CloudFront origin access control, including its unique identifier.
 type OriginAccessControl struct {
 
 	// The unique identifier of the origin access control.
@@ -2911,7 +2911,7 @@ type OriginAccessControl struct {
 	noSmithyDocumentSerde
 }
 
-// A CloudFront origin access control.
+// A CloudFront origin access control configuration.
 type OriginAccessControlConfig struct {
 
 	// A description of the origin access control.
@@ -2950,8 +2950,8 @@ type OriginAccessControlConfig struct {
 	// request contains the Authorization header, then CloudFront doesn't sign the
 	// origin request and instead passes along the Authorization header from the viewer
 	// request. WARNING: To pass along the Authorization header from the viewer
-	// request, you must add the Authorization header to an origin request policy
-	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html)
+	// request, you must add the Authorization header to a cache policy
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html)
 	// for all cache behaviors that use origins associated with this origin access
 	// control.
 	//

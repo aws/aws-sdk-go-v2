@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all tags on an AWS IoT Things Graph resource.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

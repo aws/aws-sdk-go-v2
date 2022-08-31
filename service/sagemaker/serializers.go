@@ -20392,9 +20392,62 @@ func awsAwsjson11_serializeDocumentRecommendationJobCompiledOutputConfig(v *type
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRecommendationJobContainerConfig(v *types.RecommendationJobContainerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Domain != nil {
+		ok := object.Key("Domain")
+		ok.String(*v.Domain)
+	}
+
+	if v.Framework != nil {
+		ok := object.Key("Framework")
+		ok.String(*v.Framework)
+	}
+
+	if v.FrameworkVersion != nil {
+		ok := object.Key("FrameworkVersion")
+		ok.String(*v.FrameworkVersion)
+	}
+
+	if v.NearestModelName != nil {
+		ok := object.Key("NearestModelName")
+		ok.String(*v.NearestModelName)
+	}
+
+	if v.PayloadConfig != nil {
+		ok := object.Key("PayloadConfig")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobPayloadConfig(v.PayloadConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SupportedInstanceTypes != nil {
+		ok := object.Key("SupportedInstanceTypes")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobSupportedInstanceTypes(v.SupportedInstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Task != nil {
+		ok := object.Key("Task")
+		ok.String(*v.Task)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.RecommendationJobInputConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ContainerConfig != nil {
+		ok := object.Key("ContainerConfig")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobContainerConfig(v.ContainerConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndpointConfigurations != nil {
 		ok := object.Key("EndpointConfigurations")
@@ -20454,6 +20507,25 @@ func awsAwsjson11_serializeDocumentRecommendationJobOutputConfig(v *types.Recomm
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRecommendationJobPayloadConfig(v *types.RecommendationJobPayloadConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SamplePayloadUrl != nil {
+		ok := object.Key("SamplePayloadUrl")
+		ok.String(*v.SamplePayloadUrl)
+	}
+
+	if v.SupportedContentTypes != nil {
+		ok := object.Key("SupportedContentTypes")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobSupportedContentTypes(v.SupportedContentTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRecommendationJobResourceLimit(v *types.RecommendationJobResourceLimit, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20487,6 +20559,28 @@ func awsAwsjson11_serializeDocumentRecommendationJobStoppingConditions(v *types.
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobSupportedContentTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobSupportedInstanceTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

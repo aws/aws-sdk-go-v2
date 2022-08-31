@@ -13,6 +13,8 @@ import (
 
 // Gets the latest version of the DefinitionDocument and FlowTemplateSummary for
 // the specified workflow.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetFlowTemplate(ctx context.Context, params *GetFlowTemplateInput, optFns ...func(*Options)) (*GetFlowTemplateOutput, error) {
 	if params == nil {
 		params = &GetFlowTemplateInput{}

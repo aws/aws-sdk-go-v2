@@ -14,6 +14,8 @@ import (
 // will fail to update or deploy. Existing deployments that contain the workflow
 // will continue to run (since they use a snapshot of the workflow taken at the
 // time of deployment).
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) DeleteFlowTemplate(ctx context.Context, params *DeleteFlowTemplateInput, optFns ...func(*Options)) (*DeleteFlowTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteFlowTemplateInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the status of a namespace deletion task.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) GetNamespaceDeletionStatus(ctx context.Context, params *GetNamespaceDeletionStatusInput, optFns ...func(*Options)) (*GetNamespaceDeletionStatusOutput, error) {
 	if params == nil {
 		params = &GetNamespaceDeletionStatusInput{}

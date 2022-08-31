@@ -16,6 +16,8 @@ import (
 // contain only entities in the specified namespace. The workflow is validated
 // against the entities in the latest version of the user's namespace unless
 // another namespace version is specified in the request.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) CreateFlowTemplate(ctx context.Context, params *CreateFlowTemplateInput, optFns ...func(*Options)) (*CreateFlowTemplateOutput, error) {
 	if params == nil {
 		params = &CreateFlowTemplateInput{}

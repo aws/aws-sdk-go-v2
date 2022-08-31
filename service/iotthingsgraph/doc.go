@@ -10,4 +10,5 @@
 // connecting devices and services and defining how they interact at an abstract
 // level. For more information about how AWS IoT Things Graph works, see the User
 // Guide (https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-whatis.html).
+// The AWS IoT Things Graph service is discontinued.
 package iotthingsgraph

@@ -47,6 +47,11 @@ type CreateRecordingConfigurationInput struct {
 	// Recording-configuration name. The value does not need to be unique.
 	Name *string
 
+	// If a broadcast disconnects and then reconnects within the specified interval,
+	// the multiple streams will be considered a single broadcast and merged together.
+	// Default: 0.
+	RecordingReconnectWindowSeconds int32
+
 	// Array of 1-50 maps, each of the form string:string (key:value). See Tagging
 	// Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more

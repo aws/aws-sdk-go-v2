@@ -18,6 +18,8 @@ import (
 // camera1 and thing2 to camera2. SearchThings(camera2) will return only thing2,
 // but SearchThings(camera) will return both thing1 and thing2. This action
 // searches for exact matches and doesn't perform partial text matching.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, optFns ...func(*Options)) (*SearchThingsOutput, error) {
 	if params == nil {
 		params = &SearchThingsInput{}

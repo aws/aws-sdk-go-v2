@@ -14,6 +14,8 @@ import (
 
 // Returns a list of objects that contain information about events in a flow
 // execution.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) ListFlowExecutionMessages(ctx context.Context, params *ListFlowExecutionMessagesInput, optFns ...func(*Options)) (*ListFlowExecutionMessagesOutput, error) {
 	if params == nil {
 		params = &ListFlowExecutionMessagesInput{}

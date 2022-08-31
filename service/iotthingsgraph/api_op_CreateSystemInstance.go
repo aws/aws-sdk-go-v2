@@ -24,6 +24,8 @@ import (
 // access AWS services, such as AWS Lambda and AWS IoT, that the flow uses when it
 // executes. If the definition document doesn't specify a version of the user's
 // namespace, the latest version will be used by default.
+//
+// Deprecated: since: 2022-08-30
 func (c *Client) CreateSystemInstance(ctx context.Context, params *CreateSystemInstanceInput, optFns ...func(*Options)) (*CreateSystemInstanceOutput, error) {
 	if params == nil {
 		params = &CreateSystemInstanceInput{}

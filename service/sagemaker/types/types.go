@@ -1685,9 +1685,9 @@ type AutoMLJobCompletionCriteria struct {
 	// The maximum number of times a training job is allowed to run.
 	MaxCandidates *int32
 
-	// The maximum time, in seconds, that each training job is allowed to run as part
-	// of a hyperparameter tuning job. For more information, see the used by the
-	// action.
+	// The maximum time, in seconds, that each training job executed inside
+	// hyperparameter tuning is allowed to run as part of a hyperparameter tuning job.
+	// For more information, see the used by the action.
 	MaxRuntimePerTrainingJobInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -6033,7 +6033,7 @@ type HyperParameterTrainingJobDefinition struct {
 	// The configuration for the hyperparameter tuning resources, including the compute
 	// instances and storage volumes, used for training jobs launched by the tuning
 	// job. By default, storage volumes hold model artifacts and incremental states.
-	// Choose File for TrainingInputMode in the AlgorithmSpecificationparameter to
+	// Choose File for TrainingInputMode in the AlgorithmSpecification parameter to
 	// additionally store training data in the storage volume (optional).
 	HyperParameterTuningResourceConfig *HyperParameterTuningResourceConfig
 
@@ -6357,8 +6357,8 @@ type HyperParameterTuningResourceConfig struct {
 	// hyperparameter jobs. These resources include compute instances and storage
 	// volumes to use in model training jobs launched by hyperparameter tuning jobs.
 	// The AllocationStrategy controls the order in which multiple configurations
-	// provided in InstanceConfigs are used. If you only want to use a single
-	// InstanceConfig inside the HyperParameterTuningResourceConfig API, do not provide
+	// provided in InstanceConfigs are used. If you only want to use a single instance
+	// configuration inside the HyperParameterTuningResourceConfig API, do not provide
 	// a value for InstanceConfigs. Instead, use InstanceType, VolumeSizeInGB and
 	// InstanceCount. If you use InstanceConfigs, do not provide values for
 	// InstanceType, VolumeSizeInGB or InstanceCount.
@@ -6376,19 +6376,19 @@ type HyperParameterTuningResourceConfig struct {
 	// information.
 	InstanceType TrainingInstanceType
 
-	// A key used by AWS Key Management Service to encrypt data on the storage volume
-	// attached to the compute instances used to run the training job. You can use
-	// either of the following formats to specify a key. KMS Key ID:
-	// "1234abcd-12ab-34cd-56ef-1234567890ab" Amazon Resource Name (ARN) of a AWS KMS
-	// key:
+	// A key used by Amazon Web Services Key Management Service to encrypt data on the
+	// storage volume attached to the compute instances used to run the training job.
+	// You can use either of the following formats to specify a key. KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab" Amazon Resource Name (ARN) of a KMS key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	// Some instances use local storage, which use a hardware module to encrypt
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html)
 	// storage volumes. If you choose one of these instance types, you cannot request a
 	// VolumeKmsKeyId. For a list of instance types that use local storage, see
 	// instance store volumes
-	// (https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/). For
-	// more information about AWS Key Management Service, see AWS KMS encryption
+	// (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/). For
+	// more information about Amazon Web Services Key Management Service, see KMS
+	// encryption
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html)
 	// for more information.
 	VolumeKmsKeyId *string
@@ -6401,7 +6401,7 @@ type HyperParameterTuningResourceConfig struct {
 	// storage size. If you select one of these instances for training, VolumeSizeInGB
 	// cannot be greater than this total size. For a list of instance types with local
 	// instance storage and their sizes, see instance store volumes
-	// (https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/).
+	// (http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/).
 	// SageMaker supports only the General Purpose SSD (gp2)
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
 	// storage volume type.
@@ -11002,6 +11002,47 @@ type RecommendationJobCompiledOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies mandatory fields for running an Inference Recommender job directly in
+// the CreateInferenceRecommendationsJob
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html)
+// API. The fields specified in ContainerConfig override the corresponding fields
+// in the model package. Use ContainerConfig if you want to specify these fields
+// for the recommendation job but don't want to edit them in your model package.
+type RecommendationJobContainerConfig struct {
+
+	// The machine learning domain of the model and its components. Valid Values:
+	// COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING | MACHINE_LEARNING
+	Domain *string
+
+	// The machine learning framework of the container image. Valid Values: TENSORFLOW
+	// | PYTORCH | XGBOOST | SAGEMAKER-SCIKIT-LEARN
+	Framework *string
+
+	// The framework version of the container image.
+	FrameworkVersion *string
+
+	// The name of a pre-trained machine learning model benchmarked by Amazon SageMaker
+	// Inference Recommender that matches your model. Valid Values: efficientnetb7 |
+	// unet | xgboost | faster-rcnn-resnet101 | nasnetlarge | vgg16 | inception-v3 |
+	// mask-rcnn | sagemaker-scikit-learn | densenet201-gluon | resnet18v2-gluon |
+	// xception | densenet201 | yolov4 | resnet152 | bert-base-cased | xceptionV1-keras
+	// | resnet50 | retinanet
+	NearestModelName *string
+
+	// Specifies the SamplePayloadUrl and all other sample payload-related fields.
+	PayloadConfig *RecommendationJobPayloadConfig
+
+	// A list of the instance types that are used to generate inferences in real-time.
+	SupportedInstanceTypes []string
+
+	// The machine learning task that the model accomplishes. Valid Values:
+	// IMAGE_CLASSIFICATION | OBJECT_DETECTION | TEXT_GENERATION | IMAGE_SEGMENTATION |
+	// FILL_MASK | CLASSIFICATION | REGRESSION | OTHER
+	Task *string
+
+	noSmithyDocumentSerde
+}
+
 // The input configuration of the recommendation job.
 type RecommendationJobInputConfig struct {
 
@@ -11009,6 +11050,11 @@ type RecommendationJobInputConfig struct {
 	//
 	// This member is required.
 	ModelPackageVersionArn *string
+
+	// Specifies mandatory fields for running an Inference Recommender job. The fields
+	// specified in ContainerConfig override the corresponding fields in the model
+	// package.
+	ContainerConfig *RecommendationJobContainerConfig
 
 	// Specifies the endpoint configuration to use for a job.
 	EndpointConfigurations []EndpointInputConfiguration
@@ -11082,6 +11128,20 @@ type RecommendationJobOutputConfig struct {
 	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
 	// documentation.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the payload for a recommendation job.
+type RecommendationJobPayloadConfig struct {
+
+	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload is
+	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
+	// suffix).
+	SamplePayloadUrl *string
+
+	// The supported MIME types for the input data.
+	SupportedContentTypes []string
 
 	noSmithyDocumentSerde
 }
@@ -11273,15 +11333,22 @@ type ResourceConfig struct {
 	// store model artifacts and incremental states. Training algorithms might also use
 	// the ML storage volume for scratch space. If you want to store the training data
 	// in the ML storage volume, choose File as the TrainingInputMode in the algorithm
-	// specification. You must specify sufficient ML storage for your scenario.
-	// SageMaker supports only the General Purpose SSD (gp2) ML storage volume type.
-	// Certain Nitro-based instances include local storage with a fixed total size,
-	// dependent on the instance type. When using these instances for training,
-	// SageMaker mounts the local instance storage instead of Amazon EBS gp2 storage.
-	// You can't request a VolumeSizeInGB greater than the total size of the local
-	// instance storage. For a list of instance types that support local instance
-	// storage, including the total size per instance type, see Instance Store Volumes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes).
+	// specification. When using an ML instance with NVMe SSD volumes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes),
+	// SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage.
+	// Available storage is fixed to the NVMe-type instance's storage capacity.
+	// SageMaker configures storage paths for training datasets, checkpoints, model
+	// artifacts, and outputs to use the entire capacity of the instance storage. For
+	// example, ML instance families with the NVMe-type instance storage include
+	// ml.p4d, ml.g4dn, and ml.g5. When using an ML instance with the EBS-only storage
+	// option and without instance storage, you must define the size of EBS volume
+	// through VolumeSizeInGB in the ResourceConfig API. For example, ML instance
+	// families that use EBS volumes include ml.c5 and ml.p2. To look up instance types
+	// and their instance storage types and volumes, see Amazon EC2 Instance Types
+	// (http://aws.amazon.com/ec2/instance-types/). To find the default local paths
+	// defined by the SageMaker training platform, see Amazon SageMaker Training
+	// Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and Outputs
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html).
 	//
 	// This member is required.
 	VolumeSizeInGB int32
@@ -11973,13 +12040,15 @@ type SourceIpConfig struct {
 type StoppingCondition struct {
 
 	// The maximum length of time, in seconds, that a training or compilation job can
-	// run. For compilation jobs, if the job does not complete during this time, a
-	// TimeOut error is generated. We recommend starting with 900 seconds and
-	// increasing as necessary based on your model. For all other jobs, if the job does
-	// not complete during this time, SageMaker ends the job. When RetryStrategy is
-	// specified in the job request, MaxRuntimeInSeconds specifies the maximum time for
-	// all of the attempts in total, not each individual attempt. The default value is
-	// 1 day. The maximum value is 28 days.
+	// run before it is stopped. For compilation jobs, if the job does not complete
+	// during this time, a TimeOut error is generated. We recommend starting with 900
+	// seconds and increasing as necessary based on your model. For all other jobs, if
+	// the job does not complete during this time, SageMaker ends the job. When
+	// RetryStrategy is specified in the job request, MaxRuntimeInSeconds specifies the
+	// maximum time for all of the attempts in total, not each individual attempt. The
+	// default value is 1 day. The maximum value is 28 days. The maximum time that a
+	// TrainingJob can run in total, including any time spent publishing metrics or
+	// archiving and uploading models after it has been stopped, is 30 days.
 	MaxRuntimeInSeconds int32
 
 	// The maximum length of time, in seconds, that a managed Spot training job has to
