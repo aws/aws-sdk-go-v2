@@ -100,7 +100,8 @@ func (r RetryableConnectionError) IsErrorRetryable(err error) aws.Ternary {
 	case errors.As(err, &conErr) && conErr.ConnectionError():
 		retryable = true
 
-	case strings.Contains(err.Error(), "connection reset"):
+	case strings.Contains(err.Error(), "connection reset"),
+		strings.Contains(err.Error(), "use of closed network connection"):
 		retryable = true
 
 	case errors.As(err, &urlErr):
