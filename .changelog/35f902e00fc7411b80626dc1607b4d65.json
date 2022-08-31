@@ -1,8 +1,0 @@
-{
-    "id": "35f902e0-0fc7-411b-8062-6dc1607b4d65",
-    "type": "feature",
-    "description": "SageMaker Inference Recommender now accepts Inference Recommender fields: Domain, Task, Framework, SamplePayloadUrl, SupportedContentTypes, SupportedInstanceTypes, directly in our CreateInferenceRecommendationsJob API through ContainerConfig",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

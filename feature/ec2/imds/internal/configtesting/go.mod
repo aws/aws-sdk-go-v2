@@ -3,8 +3,8 @@ module github.com/aws/aws-sdk-go-v2/feature/ec2/imds/internal/configtesting
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2/config v1.17.3
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.13
+	github.com/aws/aws-sdk-go-v2/config v1.17.4
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.12.14
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../../

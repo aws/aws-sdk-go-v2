@@ -1,3 +1,8 @@
+# v1.20.2 (2022-08-31)
+
+* **Documentation**: Update API documentation for CloudFront origin access control (OAC)
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2022-08-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

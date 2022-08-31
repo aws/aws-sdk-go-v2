@@ -1,8 +1,0 @@
-{
-    "id": "68db875b-685d-41e6-ae3f-ad0afe2d7e19",
-    "type": "documentation",
-    "description": "Documentation updates for RDS Data API",
-    "modules": [
-        "service/rdsdata"
-    ]
-}

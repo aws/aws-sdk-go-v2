@@ -1,8 +1,0 @@
-{
-    "id": "66e3ac55-cadf-46ab-a8c8-5618f1c08475",
-    "type": "feature",
-    "description": "IVS Merge Fragmented Streams. This release adds support for recordingReconnectWindow field in IVS recordingConfigurations. For more information see https://docs.aws.amazon.com/ivs/latest/APIReference/Welcome.html",
-    "modules": [
-        "service/ivs"
-    ]
-}

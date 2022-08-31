@@ -1,8 +1,0 @@
-{
-    "id": "bc338f34-dc3d-4ba4-a119-304a30358ebe",
-    "type": "documentation",
-    "description": "Update API documentation for CloudFront origin access control (OAC)",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

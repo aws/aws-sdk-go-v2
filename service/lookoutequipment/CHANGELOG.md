@@ -1,3 +1,7 @@
+# v1.15.1 (2022-08-31)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-08-30)
 
 * **Feature**: This release adds new apis for providing labels.

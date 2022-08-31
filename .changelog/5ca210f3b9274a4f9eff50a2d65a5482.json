@@ -1,8 +1,0 @@
-{
-    "id": "5ca210f3-b927-4a4f-9eff-50a2d65a5482",
-    "type": "feature",
-    "description": "Expand IdentityStore API to support Create, Read, Update, Delete and Get operations for User, Group and GroupMembership resources.",
-    "modules": [
-        "service/identitystore"
-    ]
-}

@@ -1,3 +1,22 @@
+# Release (2022-08-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.20.2](service/cloudfront/CHANGELOG.md#v1202-2022-08-31)
+  * **Documentation**: Update API documentation for CloudFront origin access control (OAC)
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.15.0](service/identitystore/CHANGELOG.md#v1150-2022-08-31)
+  * **Feature**: Expand IdentityStore API to support Create, Read, Update, Delete and Get operations for User, Group and GroupMembership resources.
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.13.0](service/iotthingsgraph/CHANGELOG.md#v1130-2022-08-31)
+  * **Feature**: This release deprecates all APIs of the ThingsGraph service
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.18.0](service/ivs/CHANGELOG.md#v1180-2022-08-31)
+  * **Feature**: IVS Merge Fragmented Streams. This release adds support for recordingReconnectWindow field in IVS recordingConfigurations. For more information see https://docs.aws.amazon.com/ivs/latest/APIReference/Welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.12.12](service/rdsdata/CHANGELOG.md#v11212-2022-08-31)
+  * **Documentation**: Documentation updates for RDS Data API
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.40.0](service/sagemaker/CHANGELOG.md#v1400-2022-08-31)
+  * **Feature**: SageMaker Inference Recommender now accepts Inference Recommender fields: Domain, Task, Framework, SamplePayloadUrl, SupportedContentTypes, SupportedInstanceTypes, directly in our CreateInferenceRecommendationsJob API through ContainerConfig
+
 # Release (2022-08-30)
 
 ## General Highlights
