@@ -6663,7 +6663,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a CloudFront origin access control.</p>",
+                "smithy.api#documentation": "<p>Gets a CloudFront origin access control, including its unique identifier.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-05-31/origin-access-control/{Id}",
@@ -6688,7 +6688,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a CloudFront origin access control.</p>",
+                "smithy.api#documentation": "<p>Gets a CloudFront origin access control configuration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2020-05-31/origin-access-control/{Id}/config",
@@ -6715,7 +6715,7 @@
                 "OriginAccessControlConfig": {
                     "target": "com.amazonaws.cloudfront#OriginAccessControlConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an origin access control.</p>",
+                        "smithy.api#documentation": "<p>Contains an origin access control configuration.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
@@ -6747,7 +6747,7 @@
                 "OriginAccessControl": {
                     "target": "com.amazonaws.cloudfront#OriginAccessControl",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an origin access control.</p>",
+                        "smithy.api#documentation": "<p>Contains an origin access control, including its unique identifier.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
@@ -10056,7 +10056,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A CloudFront origin access control.</p>"
+                "smithy.api#documentation": "<p>A CloudFront origin access control, including its unique identifier.</p>"
             }
         },
         "com.amazonaws.cloudfront#OriginAccessControlAlreadyExists": {
@@ -10099,7 +10099,7 @@
                 "SigningBehavior": {
                     "target": "com.amazonaws.cloudfront#OriginAccessControlSigningBehaviors",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which requests CloudFront signs (adds authentication information to). Specify\n\t\t\t<code>always</code> for the most common use case. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings\">origin access control advanced settings</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>This field can have one of the following values:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>always</code> – CloudFront signs all origin requests, overwriting the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request if one exists.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>never</code> – CloudFront doesn't sign any origin requests. This value turns off origin\n\t\t\t\t\taccess control for all origins in all distributions that use this origin access\n\t\t\t\t\tcontrol.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>no-override</code> – If the viewer request doesn't contain the\n\t\t\t\t\t<code>Authorization</code> header, then CloudFront signs the origin request. If the\n\t\t\t\t\tviewer request contains the <code>Authorization</code> header, then CloudFront doesn't\n\t\t\t\t\tsign the origin request and instead passes along the <code>Authorization</code>\n\t\t\t\t\theader from the viewer request. <b>WARNING: To pass along the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request, you\n\t\t\t\t\t<i>must</i> add the <code>Authorization</code> header to an <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html\">origin request policy</a> for all cache behaviors that\n\t\t\t\t\tuse origins associated with this origin access control.</b>\n               </p>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies which requests CloudFront signs (adds authentication information to). Specify\n\t\t\t<code>always</code> for the most common use case. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings\">origin access control advanced settings</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>This field can have one of the following values:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>always</code> – CloudFront signs all origin requests, overwriting the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request if one exists.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>never</code> – CloudFront doesn't sign any origin requests. This value turns off origin\n\t\t\t\t\taccess control for all origins in all distributions that use this origin access\n\t\t\t\t\tcontrol.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>no-override</code> – If the viewer request doesn't contain the\n\t\t\t\t\t<code>Authorization</code> header, then CloudFront signs the origin request. If the\n\t\t\t\t\tviewer request contains the <code>Authorization</code> header, then CloudFront doesn't\n\t\t\t\t\tsign the origin request and instead passes along the <code>Authorization</code>\n\t\t\t\t\theader from the viewer request. <b>WARNING: To pass along the\n\t\t\t\t\t<code>Authorization</code> header from the viewer request, you\n\t\t\t\t\t<i>must</i> add the <code>Authorization</code> header to a <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html\">cache policy</a> for all cache behaviors that use\n\t\t\t\t\torigins associated with this origin access control.</b>\n               </p>\n\t\t\t         </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10112,7 +10112,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A CloudFront origin access control.</p>"
+                "smithy.api#documentation": "<p>A CloudFront origin access control configuration.</p>"
             }
         },
         "com.amazonaws.cloudfront#OriginAccessControlInUse": {

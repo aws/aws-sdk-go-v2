@@ -1,41 +1,53 @@
 {
-    "smithy": "1.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.identitystore#AWSIdentityStore": {
             "type": "service",
+            "version": "2020-06-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.identitystore#GetGroupId"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#GetGroupMembershipId"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#GetUserId"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#IsMemberInGroups"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ListGroupMembershipsForMember"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.identitystore#GroupMembershipResource"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#GroupResource"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#UserResource"
+                }
+            ],
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ThrottlingException"
+                }
+            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "identitystore",
                     "arnNamespace": "identitystore",
-                    "cloudFormationName": "Identitystore",
+                    "cloudFormationName": "IdentityStore",
                     "cloudTrailEventSource": "identitystore.amazonaws.com",
                     "endpointPrefix": "identitystore"
                 },
@@ -43,30 +55,15 @@
                     "name": "identitystore"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>The Identity Store service used by AWS IAM Identity Center (successor to AWS Single Sign-On) provides a single place to retrieve all of\n         your identities (users and groups). For more information, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User\n            Guide</a>.</p>\n      \n         <note>\n            <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and\n            <code>identitystore</code> API namespaces will continue to retain their original name for\n            backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">IAM Identity Center rename</a>.</p>\n         </note>\n      \n         <p>This reference guide describes the identity store operations that you can call\n         programatically and includes detailed information on data types and errors.</p>",
+                "smithy.api#documentation": "<p>The AWS Single Sign-On (SSO) Identity Store service provides a single place to retrieve all of your\n         identities (users and groups). For more information about AWS, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Single Sign-On User\n            Guide</a>.</p>",
                 "smithy.api#title": "AWS SSO Identity Store"
-            },
-            "version": "2020-06-15",
-            "operations": [
-                {
-                    "target": "com.amazonaws.identitystore#DescribeGroup"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#DescribeUser"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#ListGroups"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#ListUsers"
-                }
-            ]
+            }
         },
         "com.amazonaws.identitystore#AccessDeniedException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.identitystore#Message"
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
                 },
                 "RequestId": {
                     "target": "com.amazonaws.identitystore#RequestId",
@@ -81,6 +78,128 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.identitystore#Address": {
+            "type": "structure",
+            "members": {
+                "StreetAddress": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The street of the address.</p>"
+                    }
+                },
+                "Locality": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of the address locality.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The region of the address.</p>"
+                    }
+                },
+                "PostalCode": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of the address.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country of the address.</p>"
+                    }
+                },
+                "Formatted": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a formatted version of the address for display.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the type of address. For example, \"Home.\"</p>"
+                    }
+                },
+                "Primary": {
+                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean representing whether this is the primary address for the associated resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The address associated with the specified user.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#Addresses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#Address"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.identitystore#AlternateIdentifier": {
+            "type": "union",
+            "members": {
+                "ExternalId": {
+                    "target": "com.amazonaws.identitystore#ExternalId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier issued to this resource by an external identity provider.</p>"
+                    }
+                },
+                "UniqueAttribute": {
+                    "target": "com.amazonaws.identitystore#UniqueAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An entity attribute that's unique to a specific entity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A unique identifier for the group value that is not the group's primary identifier. This value can be\n         an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a\n         unique <code>GroupDisplayName</code>.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#AttributeOperation": {
+            "type": "structure",
+            "members": {
+                "AttributePath": {
+                    "target": "com.amazonaws.identitystore#AttributePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representation of the path to a given attribute or sub-attribute. Supports\n         JMESPath.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeValue": {
+                    "target": "com.amazonaws.identitystore#AttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that applies to the requested group. This operation might add, replace, or remove an attribute.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#AttributeOperations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#AttributeOperation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.identitystore#AttributePath": {
             "type": "string",
             "traits": {
@@ -88,8 +207,470 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}  ]+$"
+                "smithy.api#pattern": "^\\p{L}+(?:\\.\\p{L}+){0,2}$"
             }
+        },
+        "com.amazonaws.identitystore#AttributeValue": {
+            "type": "document",
+            "traits": {
+                "smithy.api#documentation": "<p>The value of the attribute.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystore#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by the identity store service for each sent request, and is then returned inside the exception if the request fails.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.identitystore#ConflictExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This request cannot be completed for one of the following reasons:</p>\n         <ul>\n            <li>\n               <p>Performing the requested operation would violate an existing uniqueness claim in the identity store. Resolve the conflict before retrying this request.</p>\n            </li>\n            <li>\n               <p>The requested resource was being concurrently modified by another request.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This request cannot be completed for one of the following reasons:</p>\n         <ul>\n            <li>\n               <p>Performing the requested operation would violate an existing uniqueness claim in the identity store. Resolve the conflict before retrying this request.</p>\n            </li>\n            <li>\n               <p>The requested resource was being concurrently modified by another request.</p>\n            </li>\n         </ul>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.identitystore#ConflictExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNIQUENESS_CONSTRAINT_VIOLATION",
+                        "name": "UNIQUENESS_CONSTRAINT_VIOLATION"
+                    },
+                    {
+                        "value": "CONCURRENT_MODIFICATION",
+                        "name": "CONCURRENT_MODIFICATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.identitystore#CreateGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#CreateGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#CreateGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a group within the specified identity store.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#CreateGroupMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#CreateGroupMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#CreateGroupMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a relationship between a member and a group. The following identifiers must be specified: <code>GroupId</code>, <code>IdentityStoreId</code>, and <code>MemberId</code>.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#CreateGroupMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#CreateGroupMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#CreateGroupRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.identitystore#GroupDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the name of the group. This value is commonly displayed when the group is referenced.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the description of the group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#CreateGroupResponse": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the newly created group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#CreateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#CreateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#CreateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new user within the specified identity store.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#CreateUserRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserName": {
+                    "target": "com.amazonaws.identitystore#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string used to identify the user. The length limit is 128 characters. \n         This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. \n         This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.identitystore#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the user's name.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's name. This value is typically formatted for display when\n         the user is referenced. For example, \"John Doe.\"</p>"
+                    }
+                },
+                "NickName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing an alternate name for the user.</p>"
+                    }
+                },
+                "ProfileUrl": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a URL that may be associated with the user.</p>"
+                    }
+                },
+                "Emails": {
+                    "target": "com.amazonaws.identitystore#Emails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Email</code> objects containing email addresses associated with the user.</p>"
+                    }
+                },
+                "Addresses": {
+                    "target": "com.amazonaws.identitystore#Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Address</code> objects containing addresses associated with the user.</p>"
+                    }
+                },
+                "PhoneNumbers": {
+                    "target": "com.amazonaws.identitystore#PhoneNumbers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>PhoneNumber</code> objects containing phone numbers associated with the user.</p>"
+                    }
+                },
+                "UserType": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string indicating the user's type. Possible values depend on each customer's specific needs, so they are left unspecified.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's title. Possible values are left unspecified given that they depend on each customer's specific needs.</p>"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the preferred language of the user. For example, \"American English\"\n         or \"en-us.\"</p>"
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's geographical region or location.</p>"
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's time zone.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#CreateUserResponse": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the newly created user in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#DeleteGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#DeleteGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#DeleteGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a group within an identity store given <code>GroupId</code>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.identitystore#DeleteGroupMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#DeleteGroupMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#DeleteGroupMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a membership within a group given <code>MembershipId</code>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.identitystore#DeleteGroupMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#DeleteGroupMembershipResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.identitystore#DeleteGroupRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#DeleteGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.identitystore#DeleteUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#DeleteUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#DeleteUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a user within an identity store given <code>UserId</code>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.identitystore#DeleteUserRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#DeleteUserResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.identitystore#DescribeGroup": {
             "type": "operation",
@@ -101,23 +682,87 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.identitystore#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#InternalServerException"
-                },
-                {
                     "target": "com.amazonaws.identitystore#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.identitystore#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the group metadata and attributes from <code>GroupId</code> in an identity\n         store.</p>"
+                "smithy.api#documentation": "<p>Retrieves the group metadata and attributes from <code>GroupId</code> in an identity store.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#DescribeGroupMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#DescribeGroupMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#DescribeGroupMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves membership metadata and attributes from <code>MembershipId</code> in a group.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#DescribeGroupMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#DescribeGroupMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.identitystore#DescribeGroupRequest": {
@@ -126,7 +771,7 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains numbers and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -152,7 +797,25 @@
                 "DisplayName": {
                     "target": "com.amazonaws.identitystore#GroupDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time that the\n         group is created and stored as an attribute of the group object in the identity\n         store.</p>",
+                        "smithy.api#documentation": "<p>The group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time that the\n         group is created and stored as an attribute of the group object in the identity\n         store.</p>"
+                    }
+                },
+                "ExternalIds": {
+                    "target": "com.amazonaws.identitystore#ExternalIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ExternalId</code> objects that contains the identifiers issued to this\n         resource by an external identity provider.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a description of the group.</p>"
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -168,23 +831,15 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.identitystore#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#InternalServerException"
-                },
-                {
                     "target": "com.amazonaws.identitystore#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.identitystore#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the user metadata and attributes from <code>UserId</code> in an identity\n         store.</p>"
+                "smithy.api#documentation": "<p>Retrieves the user metadata and attributes from the <code>UserId</code> in an identity store.</p>",
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.identitystore#DescribeUserRequest": {
@@ -193,7 +848,7 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains numbers and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -212,8 +867,7 @@
                 "UserName": {
                     "target": "com.amazonaws.identitystore#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the user’s user name value. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user’s username value. The length limit is 128 characters. This value can consist of\n         letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
                     }
                 },
                 "UserId": {
@@ -222,6 +876,189 @@
                         "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ExternalIds": {
+                    "target": "com.amazonaws.identitystore#ExternalIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ExternalId</code> objects that contains the identifiers issued to this\n         resource by an external identity provider.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.identitystore#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's name value for display.</p>"
+                    }
+                },
+                "NickName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alternative descriptive name for the user.</p>"
+                    }
+                },
+                "ProfileUrl": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL link for the user's profile.</p>"
+                    }
+                },
+                "Emails": {
+                    "target": "com.amazonaws.identitystore#Emails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's email value.</p>"
+                    }
+                },
+                "Addresses": {
+                    "target": "com.amazonaws.identitystore#Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's physical address.</p>"
+                    }
+                },
+                "PhoneNumbers": {
+                    "target": "com.amazonaws.identitystore#PhoneNumbers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>PhoneNumber</code> objects associated with a user.</p>"
+                    }
+                },
+                "UserType": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string indicating the user's type.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's title.</p>"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred language of the user.</p>"
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's geographical region or location.</p>"
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone for a user.</p>"
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#Email": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing an email address. For example, \"johndoe@amazon.com.\"</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the type of address. For example, \"Work.\"</p>"
+                    }
+                },
+                "Primary": {
+                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean representing whether this is the primary email for the associated resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The email address associated with the user.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#Emails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#Email"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.identitystore#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.identitystore#ExternalId": {
+            "type": "structure",
+            "members": {
+                "Issuer": {
+                    "target": "com.amazonaws.identitystore#ExternalIdIssuer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issuer for an external identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.identitystore#ExternalIdIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier issued to this resource by an external identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier issued to this resource by an external identity provider.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#ExternalIdIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystore#ExternalIdIssuer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^(?!(?i)(arn|aws):)[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystore#ExternalIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#ExternalId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -238,19 +1075,209 @@
                 "AttributeValue": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the data for an attribute. Each attribute value is described as a name-value\n         pair. </p>",
+                        "smithy.api#documentation": "<p>Represents the data for an attribute. Each attribute value is described as a name-value pair. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A query filter used by <code>ListUsers</code> and <code>ListGroups</code>. This filter\n         object provides the attribute name and attribute value to search users or groups.</p>"
+                "smithy.api#documentation": "<p>A query filter used by <code>ListUsers</code> and <code>ListGroups</code>. This filter object provides the attribute name and attribute value to\n         search users or groups.</p>"
             }
         },
         "com.amazonaws.identitystore#Filters": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.identitystore#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GetGroupId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#GetGroupIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#GetGroupIdResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves <code>GroupId</code> in an identity store.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#GetGroupIdRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AlternateIdentifier": {
+                    "target": "com.amazonaws.identitystore#AlternateIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the group value that is not the group's primary identifier. This value can be\n         an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a\n         unique <code>GroupDisplayName</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GetGroupIdResponse": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GetGroupMembershipId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#GetGroupMembershipIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#GetGroupMembershipIdResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the <code>MembershipId</code> in a group.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#GetGroupMembershipIdRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GetGroupMembershipIdResponse": {
+            "type": "structure",
+            "members": {
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GetUserId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#GetUserIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#GetUserIdResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the <code>UserId</code> in an identity store.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#GetUserIdRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AlternateIdentifier": {
+                    "target": "com.amazonaws.identitystore#AlternateIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any unique attribute associated with a user that is not the <code>UserId</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GetUserIdResponse": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.identitystore#Group": {
@@ -266,13 +1293,31 @@
                 "DisplayName": {
                     "target": "com.amazonaws.identitystore#GroupDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time the group is\n         created and stored as an attribute of the group object in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the group\n         is created and stored as an attribute of the group object in the identity store.</p>"
+                    }
+                },
+                "ExternalIds": {
+                    "target": "com.amazonaws.identitystore#ExternalIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ExternalId</code> objects that contains the identifiers issued to this\n         resource by an external identity provider.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a description of the specified group.</p>"
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A group object, which contains a specified group’s metadata and attributes.</p>"
+                "smithy.api#documentation": "<p>A group object that contains a specified group’s metadata and attributes.</p>"
             }
         },
         "com.amazonaws.identitystore#GroupDisplayName": {
@@ -282,7 +1327,147 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$"
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystore#GroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#ResourceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.identitystore#GroupMembership": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> object in the identity store.</p>"
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>"
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the identifiers for a group, a group member, and a <code>GroupMembership</code>\n         object in the identity store.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#GroupMembershipExistenceResult": {
+            "type": "structure",
+            "members": {
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>"
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>"
+                    }
+                },
+                "MembershipExists": {
+                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether a membership relation exists or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether a resource is a member of a group in the identity store.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#GroupMembershipExistenceResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#GroupMembershipExistenceResult"
+            }
+        },
+        "com.amazonaws.identitystore#GroupMembershipResource": {
+            "type": "resource",
+            "identifiers": {
+                "MembershipId": {
+                    "target": "com.amazonaws.identitystore#ResourceId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.identitystore#CreateGroupMembership"
+            },
+            "read": {
+                "target": "com.amazonaws.identitystore#DescribeGroupMembership"
+            },
+            "delete": {
+                "target": "com.amazonaws.identitystore#DeleteGroupMembership"
+            },
+            "list": {
+                "target": "com.amazonaws.identitystore#ListGroupMemberships"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "GroupMembership"
+                },
+                "smithy.api#documentation": "Resource Type definition for AWS:IdentityStore::GroupMembership"
+            }
+        },
+        "com.amazonaws.identitystore#GroupMemberships": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#GroupMembership"
+            }
+        },
+        "com.amazonaws.identitystore#GroupResource": {
+            "type": "resource",
+            "identifiers": {
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.identitystore#CreateGroup"
+            },
+            "read": {
+                "target": "com.amazonaws.identitystore#DescribeGroup"
+            },
+            "update": {
+                "target": "com.amazonaws.identitystore#UpdateGroup"
+            },
+            "delete": {
+                "target": "com.amazonaws.identitystore#DeleteGroup"
+            },
+            "list": {
+                "target": "com.amazonaws.identitystore#ListGroups"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "Group"
+                },
+                "smithy.api#documentation": "Resource Type definition for AWS::IdentityStore::Group"
             }
         },
         "com.amazonaws.identitystore#Groups": {
@@ -296,28 +1481,248 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 12
+                    "max": 36
                 },
-                "smithy.api#pattern": "^d-[0-9a-f]{10}$"
+                "smithy.api#pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.identitystore#InternalServerException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.identitystore#Message"
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
                 },
                 "RequestId": {
                     "target": "com.amazonaws.identitystore#RequestId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
                     }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.identitystore#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds that you would like to wait before retrying the next request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure with\n         an internal server.</p>",
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure with an internal server.</p>",
                 "smithy.api#error": "server",
-                "smithy.api#httpError": 500
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.identitystore#IsMemberInGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#IsMemberInGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#IsMemberInGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns if a member exists in specified groups.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#IsMemberInGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the identifier of a group member.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupIds": {
+                    "target": "com.amazonaws.identitystore#GroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of identifiers for groups in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#IsMemberInGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.identitystore#GroupMembershipExistenceResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing results of batch <code>IsMemberInGroups</code> call.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#ListGroupMemberships": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#ListGroupMembershipsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#ListGroupMembershipsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For the specified group in the specified identity store, returns the list of all <code>GroupMembership</code> objects and returns results in paginated form.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "GroupMemberships",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#ListGroupMembershipsForMember": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#ListGroupMembershipsForMemberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#ListGroupMembershipsForMemberResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For the specified member in the specified identity store, returns the list of all <code>GroupMembership</code> objects and returns results in paginated form.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "GroupMemberships",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.identitystore#ListGroupMembershipsForMemberRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberId": {
+                    "target": "com.amazonaws.identitystore#MemberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the identifier of a group member. Setting the <code>UserID</code> field to the specific identifier for a user indicates that the user is a member of the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.identitystore#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results to return in one page. The length limit is 50 characters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.identitystore#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#ListGroupMembershipsForMemberResponse": {
+            "type": "structure",
+            "members": {
+                "GroupMemberships": {
+                    "target": "com.amazonaws.identitystore#GroupMemberships",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>GroupMembership</code> objects in the group for a specified member.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.identitystore#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.\n         </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#ListGroupMembershipsRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.identitystore#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.identitystore#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#ListGroupMembershipsResponse": {
+            "type": "structure",
+            "members": {
+                "GroupMemberships": {
+                    "target": "com.amazonaws.identitystore#GroupMemberships",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>GroupMembership</code> objects in the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.identitystore#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.identitystore#ListGroups": {
@@ -330,28 +1735,21 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.identitystore#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#InternalServerException"
-                },
-                {
                     "target": "com.amazonaws.identitystore#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.identitystore#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the attribute name and value of the group that you specified in the search. We\n         only support <code>DisplayName</code> as a valid filter attribute path currently, and\n         filter is required. This API returns minimum attributes, including <code>GroupId</code> and\n         group <code>DisplayName</code> in the response.</p>",
+                "smithy.api#documentation": "<p>\n            <i>Filtering for a group by the group <code>DisplayName</code> attribute is deprecated. Instead, use the <code>GetGroupId</code> API action.</i>\n         </p>\n         <p>Lists all groups in the identity store. Returns a paginated list of complete <code>Group</code> objects.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
+                    "items": "Groups",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.identitystore#ListGroupsRequest": {
@@ -360,14 +1758,14 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains numbers and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.identitystore#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
                     }
                 },
                 "NextToken": {
@@ -379,7 +1777,10 @@
                 "Filters": {
                     "target": "com.amazonaws.identitystore#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> request. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "Using filters with ListGroups API is deprecated, please use GetGroupId API instead."
+                        },
+                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects that is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> requests.</p>"
                     }
                 }
             }
@@ -412,28 +1813,21 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.identitystore#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#InternalServerException"
-                },
-                {
                     "target": "com.amazonaws.identitystore#ResourceNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.identitystore#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.identitystore#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the attribute name and value of the user that you specified in the search. We only\n         support <code>UserName</code> as a valid filter attribute path currently, and filter is\n         required. This API returns minimum attributes, including <code>UserId</code> and\n            <code>UserName</code> in the response.</p>",
+                "smithy.api#documentation": "<p>\n            <i>Filtering for a user by the <code>UserName</code> attribute is deprecated. Instead, use the <code>GetUserId</code> API action.</i>\n         </p>\n         <p>Lists all users in the identity store. Returns a paginated list of complete <code>User</code> objects.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
+                    "items": "Users",
                     "outputToken": "NextToken",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.api#readonly": {}
             }
         },
         "com.amazonaws.identitystore#ListUsersRequest": {
@@ -442,14 +1836,14 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains numbers and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.identitystore#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
                     }
                 },
                 "NextToken": {
@@ -461,7 +1855,10 @@
                 "Filters": {
                     "target": "com.amazonaws.identitystore#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> request. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "Using filters with ListUsers API is deprecated, please use GetGroupId API instead."
+                        },
+                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects that is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> requests.</p>"
                     }
                 }
             }
@@ -487,20 +1884,68 @@
         "com.amazonaws.identitystore#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 50
+                    "max": 100
                 }
             }
         },
-        "com.amazonaws.identitystore#Message": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 65535
+        "com.amazonaws.identitystore#MemberId": {
+            "type": "union",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the identifiers of resources that can be members.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the identifier of a group member.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#Name": {
+            "type": "structure",
+            "members": {
+                "Formatted": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a formatted version of the name for display.</p>"
+                    }
+                },
+                "FamilyName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The family name of the user.</p>"
+                    }
+                },
+                "GivenName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The given name of the user.</p>"
+                    }
+                },
+                "MiddleName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The middle name of the user.</p>"
+                    }
+                },
+                "HonorificPrefix": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The honorific prefix of the user. For example, \"Dr.\"</p>"
+                    }
+                },
+                "HonorificSuffix": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The honorific suffix of the user. For example, \"M.D.\"</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the user.</p>"
             }
         },
         "com.amazonaws.identitystore#NextToken": {
@@ -513,9 +1958,52 @@
                 "smithy.api#pattern": "^[-a-zA-Z0-9+=/:]*$"
             }
         },
+        "com.amazonaws.identitystore#PhoneNumber": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a phone number. For example, \"8675309\" or \"+1 (800) 123-4567\".</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the type of a phone number. For example, \"Mobile.\"</p>"
+                    }
+                },
+                "Primary": {
+                    "target": "com.amazonaws.identitystore#SensitiveBooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean representing whether this is the primary phone number for the associated resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The phone number associated with the user.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#PhoneNumbers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.identitystore#PhoneNumber"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.identitystore#RequestId": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
                 "smithy.api#pattern": "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
             }
         },
@@ -535,17 +2023,17 @@
                 "ResourceType": {
                     "target": "com.amazonaws.identitystore#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource in the identity store service, which is an enum object. Valid\n         values include USER, GROUP, and IDENTITY_STORE.</p>"
+                        "smithy.api#documentation": "<p>An enum object indicating the type of resource in the identity store service. Valid values include USER, GROUP, and IDENTITY_STORE.</p>"
                     }
                 },
                 "ResourceId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a resource in the identity store, which can be used as\n            <code>UserId</code> or <code>GroupId</code>. The format for <code>ResourceId</code> is\n         either <code>UUID</code> or <code>1234567890-UUID</code>, where <code>UUID</code> is a\n         randomly generated value for each resource when it is created and <code>1234567890</code>\n         represents the <code>IdentityStoreId</code> string value. In the case that the identity\n         store is migrated from a legacy single sign-on identity store, the <code>ResourceId</code> for that\n         identity store will be in the format of <code>UUID</code>. Otherwise, it will be in the\n            <code>1234567890-UUID</code> format.</p>"
+                        "smithy.api#documentation": "<p>The identifier for a resource in the identity store that can be used as <code>UserId</code> or <code>GroupId</code>. The format for <code>ResourceId</code> is either <code>UUID</code> or <code>1234567890-UUID</code>, where <code>UUID</code> is a randomly generated value for each resource when it is created and <code>1234567890</code> represents the <code>IdentityStoreId</code> string value. In the case that the identity store is migrated from a legacy SSO identity store, the <code>ResourceId</code> for that identity store will be in the format of <code>UUID</code>. Otherwise, it will be in the <code>1234567890-UUID</code> format.</p>"
                     }
                 },
                 "Message": {
-                    "target": "com.amazonaws.identitystore#Message"
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
                 },
                 "RequestId": {
                     "target": "com.amazonaws.identitystore#RequestId",
@@ -575,8 +2063,21 @@
                     {
                         "value": "IDENTITY_STORE",
                         "name": "IDENTITY_STORE"
+                    },
+                    {
+                        "value": "GROUP_MEMBERSHIP",
+                        "name": "GROUP_MEMBERSHIP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.identitystore#RetryAfterSeconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.identitystore#SensitiveBooleanType": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.identitystore#SensitiveStringType": {
@@ -586,36 +2087,170 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
+                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.identitystore#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.identitystore#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by the identity store service for each sent request, and is then returned inside the exception if the request fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request would cause the number of users or groups in the identity store to exceed the maximum allowed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
             }
         },
         "com.amazonaws.identitystore#ThrottlingException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.identitystore#Message"
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
                 },
                 "RequestId": {
                     "target": "com.amazonaws.identitystore#RequestId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for each request. This value is a globally unique ID that is generated by\n         the identity store service for each sent request, and is then returned inside the exception\n         if the request fails.</p>"
                     }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.identitystore#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds that you would like to wait before retrying the next\n         request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that the principal has crossed the throttling limits of the API\n         operations.</p>",
+                "smithy.api#documentation": "<p>Indicates that the principal has crossed the throttling limits of the API operations.</p>",
                 "smithy.api#error": "client",
-                "smithy.api#httpError": 429
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
             }
         },
-        "com.amazonaws.identitystore#User": {
+        "com.amazonaws.identitystore#UniqueAttribute": {
             "type": "structure",
             "members": {
-                "UserName": {
-                    "target": "com.amazonaws.identitystore#UserName",
+                "AttributePath": {
+                    "target": "com.amazonaws.identitystore#AttributePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the user’s user name value. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>",
+                        "smithy.api#documentation": "<p>A string representation of the path to a given attribute or sub-attribute. Supports\n         JMESPath.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AttributeValue": {
+                    "target": "com.amazonaws.identitystore#AttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An entity attribute that's unique to a specific entity.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#UpdateGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#UpdateGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#UpdateGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For the specified group in the specified identity store, updates the group metadata and attributes.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#UpdateGroupRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a group in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operations": {
+                    "target": "com.amazonaws.identitystore#AttributeOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AttributeOperation</code> objects to apply to the requested group. These\n         operations might add, replace, or remove an attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#UpdateGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.identitystore#UpdateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.identitystore#UpdateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.identitystore#UpdateUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.identitystore#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.identitystore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For the specified user in the specified identity store, updates the user metadata and attributes.</p>"
+            }
+        },
+        "com.amazonaws.identitystore#UpdateUserRequest": {
+            "type": "structure",
+            "members": {
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -625,10 +2260,124 @@
                         "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Operations": {
+                    "target": "com.amazonaws.identitystore#AttributeOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AttributeOperation</code> objects to apply to the requested user. These\n         operations might add, replace, or remove an attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.identitystore#UpdateUserResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.identitystore#User": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.identitystore#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user’s user name value. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.identitystore#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a user in the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExternalIds": {
+                    "target": "com.amazonaws.identitystore#ExternalIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ExternalId</code> objects that contains the identifiers issued to this\n         resource by an external identity provider.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.identitystore#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the user's name.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's name that's formatted for display when the user is\n         referenced. For example, \"John Doe.\"</p>"
+                    }
+                },
+                "NickName": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing an alternate name for the user.</p>"
+                    }
+                },
+                "ProfileUrl": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing a URL that may be associated with the user.</p>"
+                    }
+                },
+                "Emails": {
+                    "target": "com.amazonaws.identitystore#Emails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Email</code> objects containing email addresses associated with the user.</p>"
+                    }
+                },
+                "Addresses": {
+                    "target": "com.amazonaws.identitystore#Addresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Address</code> objects containing addresses associated with the user.</p>"
+                    }
+                },
+                "PhoneNumbers": {
+                    "target": "com.amazonaws.identitystore#PhoneNumbers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>PhoneNumber</code> objects containing phone numbers associated with the user.</p>"
+                    }
+                },
+                "UserType": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string indicating the user's type. Possible values depend on each customer's specific needs, so they are left unspecified.</p>"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's title. Possible values depend on each customer's specific needs, so they are left unspecified</p>"
+                    }
+                },
+                "PreferredLanguage": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the preferred language of the user. For example, \"American English\"\n         or \"en-us.\"</p>"
+                    }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's geographical region or location.</p>"
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.identitystore#SensitiveStringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string containing the user's time zone.</p>"
+                    }
+                },
+                "IdentityStoreId": {
+                    "target": "com.amazonaws.identitystore#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A user object, which contains a specified user’s metadata and attributes.</p>"
+                "smithy.api#documentation": "<p>A user object that contains a specified user’s metadata and attributes.</p>"
             }
         },
         "com.amazonaws.identitystore#UserName": {
@@ -642,6 +2391,35 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.identitystore#UserResource": {
+            "type": "resource",
+            "identifiers": {
+                "UserId": {
+                    "target": "com.amazonaws.identitystore#ResourceId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.identitystore#CreateUser"
+            },
+            "read": {
+                "target": "com.amazonaws.identitystore#DescribeUser"
+            },
+            "update": {
+                "target": "com.amazonaws.identitystore#UpdateUser"
+            },
+            "delete": {
+                "target": "com.amazonaws.identitystore#DeleteUser"
+            },
+            "list": {
+                "target": "com.amazonaws.identitystore#ListUsers"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {
+                    "name": "User"
+                },
+                "smithy.api#documentation": "Resource Type definition for AWS:IdentityStore::User"
+            }
+        },
         "com.amazonaws.identitystore#Users": {
             "type": "list",
             "member": {
@@ -652,7 +2430,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.identitystore#Message"
+                    "target": "com.amazonaws.identitystore#ExceptionMessage"
                 },
                 "RequestId": {
                     "target": "com.amazonaws.identitystore#RequestId",

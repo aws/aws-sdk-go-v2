@@ -121,7 +121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n        <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request\n                submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't\n                process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the\n                number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and\n                the size of each parameter set.</p>\n            <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p>    \n        </important>",
+                "smithy.api#documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n        <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n        <note>\n            <p>If a call isn't part of a transaction because it doesn't include the <code>transactionID</code> parameter,\n                changes that result from the call are committed automatically.</p>\n            <p>There isn't a fixed upper limit on the number of parameter sets. However, the maximum size of the HTTP request\n                submitted through the Data API is 4 MiB. If the request exceeds this limit, the Data API returns an error and doesn't\n                process the request. This 4-MiB limit includes the size of the HTTP headers and the JSON notation in the request. Thus, the\n                number of parameter sets that you can include depends on a combination of factors, such as the size of the SQL statement and\n                the size of each parameter set.</p>\n            <p>The response size limit is 1 MiB. If the call returns more than 1 MiB of response data, the call is terminated.</p>\n        </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -225,7 +225,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a SQL transaction.</p>\n        \n        <important>    \n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and \n                rolled back automatically after 24 hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. \n                If a transaction times out before it's committed, it's rolled back\n                automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend \n                that you run each DDL statement in a separate <code>ExecuteStatement</code> call with \n                <code>continueAfterTimeout</code> enabled.</p>    \n        </important>",
+                "smithy.api#documentation": "<p>Starts a SQL transaction.</p>\n        <note>\n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and rolled back automatically after 24\n                hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. If a transaction times out before it's\n                committed, it's rolled back automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend that you run each DDL statement in a separate\n                    <code>ExecuteStatement</code> call with <code>continueAfterTimeout</code> enabled.</p>\n        </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -566,7 +566,7 @@
                     "message": "The ExecuteSql API is deprecated, please use the ExecuteStatement API.",
                     "since": "2019-03-21"
                 },
-                "smithy.api#documentation": "<p>Runs one or more SQL statements.</p>\n        <important>\n            <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or\n                    <code>ExecuteStatement</code> operation.</p>\n        </important>",
+                "smithy.api#documentation": "<p>Runs one or more SQL statements.</p>\n        <note>\n            <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or\n                    <code>ExecuteStatement</code> operation.</p>\n        </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -658,7 +658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a SQL statement against a database.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>    \n        </important>",
+                "smithy.api#documentation": "<p>Runs a SQL statement against a database.</p>\n        <note>\n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>\n            <p>If the binary response data from the database is more than 1 MB, the call is terminated.</p>\n        </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -723,7 +723,7 @@
                 "continueAfterTimeout": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to continue running the statement after \n            the call times out. By default, the statement stops running when the call \n            times out.</p>\n        <important>\n            <p>For DDL statements, we recommend continuing to run the statement after \n               the call times out. When a DDL statement terminates before it is finished \n               running, it can result in errors and possibly corrupted data structures.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to continue running the statement after \n            the call times out. By default, the statement stops running when the call \n            times out.</p>\n        <note>\n            <p>For DDL statements, we recommend continuing to run the statement after \n               the call times out. When a DDL statement terminates before it is finished \n               running, it can result in errors and possibly corrupted data structures.</p>\n        </note>"
                     }
                 },
                 "resultSetOptions": {
@@ -940,7 +940,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>Amazon RDS Data Service</fullname>\n        <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora\n            Serverless DB cluster. To run these statements, you work with the Data Service\n            API.</p>\n        <p>For more information about the Data Service API, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon RDS Data Service</fullname>\n        <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless v1 DB cluster. To run these\n            statements, you work with the Data Service API.</p>\n        <note>\n            <p>The Data Service API isn't supported on Amazon Aurora Serverless v2 DB clusters.</p>\n        </note>\n        <p>For more information about the Data Service API, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>",
                 "smithy.api#title": "AWS RDS DataService"
             },
             "version": "2018-08-01",
@@ -976,7 +976,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A record returned by a call.</p>\n        <important>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </important>"
+                "smithy.api#documentation": "<p>A record returned by a call.</p>\n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
             }
         },
         "com.amazonaws.rdsdata#Records": {
@@ -1020,7 +1020,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result set returned by a SQL statement.</p>\n        <important>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </important>"
+                "smithy.api#documentation": "<p>The result set returned by a SQL statement.</p>\n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
             }
         },
         "com.amazonaws.rdsdata#ResultSetMetadata": {
@@ -1049,7 +1049,7 @@
                 "decimalReturnType": {
                     "target": "com.amazonaws.rdsdata#DecimalReturnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates how a field of <code>DECIMAL</code> type is represented\n            in the response. The value of <code>STRING</code>, the default, specifies that\n            it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>\n            specifies that it is converted to a Long value if its scale is 0, or to a Double\n            value otherwise.</p>\n        <important>\n            <p>Conversion to Double or Long can result in roundoff errors due to precision loss.\n                We recommend converting to String, especially when working with currency values.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>A value that indicates how a field of <code>DECIMAL</code> type is represented\n            in the response. The value of <code>STRING</code>, the default, specifies that\n            it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>\n            specifies that it is converted to a Long value if its scale is 0, or to a Double\n            value otherwise.</p>\n        <note>\n            <p>Conversion to Double or Long can result in roundoff errors due to precision loss.\n                We recommend converting to String, especially when working with currency values.</p>\n        </note>"
                     }
                 },
                 "longReturnType": {
@@ -1230,7 +1230,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of a SQL statement.</p>\n        \n        <important>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </important>"
+                "smithy.api#documentation": "<p>The result of a SQL statement.</p>\n        \n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
             }
         },
         "com.amazonaws.rdsdata#SqlStatementResults": {
@@ -1284,7 +1284,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure value returned by a call.</p>\n        <important>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </important>"
+                "smithy.api#documentation": "<p>A structure value returned by a call.</p>\n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
             }
         },
         "com.amazonaws.rdsdata#TransactionStatus": {
@@ -1411,7 +1411,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the value of a column.</p>\n        \n        <important>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </important>"
+                "smithy.api#documentation": "<p>Contains the value of a column.</p>\n        \n        <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n        </note>"
             }
         }
     }

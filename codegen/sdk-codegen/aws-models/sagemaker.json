@@ -2110,7 +2110,7 @@
                 "MaxRuntimePerTrainingJobInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimePerTrainingJobInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that each training job is allowed to run as part of a\n         hyperparameter tuning job. For more information, see the  used by the  action.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a\n         hyperparameter tuning job. For more information, see the  used by the  action.</p>"
                     }
                 },
                 "MaxAutoMLJobRuntimeInSeconds": {
@@ -7276,7 +7276,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a URL for a specified UserProfile in a Domain.  When accessed in a web browser,\n       the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of\n       the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume.\n       This operation can only be called when the authentication mode equals IAM.\n   </p>\n         <p>The IAM role or user used to call this API defines the permissions to access the app. Once\n      the presigned URL is created, no additional permission is required to access this URL. IAM\n         authorization policies for this API are also enforced for every HTTP request and WebSocket\n         frame that attempts to connect to the app.</p>\n         <p>You can restrict access to this API and to the\n      URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html\">Connect to SageMaker Studio Through an Interface VPC Endpoint</a>\n         .</p>\n         <note>\n            <p>The URL that you get from a call to <code>CreatePresignedDomainUrl</code> has a default timeout of 5 minutes. You can configure this value using <code>ExpiresInSeconds</code>. If you try to use the URL after the timeout limit expires, you\n          are directed to the Amazon Web Services console sign-in page.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a URL for a specified UserProfile in a Domain.  When accessed in a web browser,\n       the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of\n       the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume.\n       This operation can only be called when the authentication mode equals IAM.\n   </p>\n         <p>The IAM role or user passed to this API defines the permissions to access the app. Once\n      the presigned URL is created, no additional permission is required to access this URL. IAM\n         authorization policies for this API are also enforced for every HTTP request and WebSocket\n         frame that attempts to connect to the app.</p>\n         <p>You can restrict access to this API and to the\n      URL that it returns to a list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html\">Connect to SageMaker Studio Through an Interface VPC Endpoint</a>\n         .</p>\n         <note>\n            <p>The URL that you get from a call to <code>CreatePresignedDomainUrl</code> has a default timeout of 5 minutes. You can configure this value using <code>ExpiresInSeconds</code>. If you try to use the URL after the timeout limit expires, you\n          are directed to the Amazon Web Services console sign-in page.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreatePresignedDomainUrlRequest": {
@@ -8055,7 +8055,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a user profile. A user profile represents a single user within a domain, and is\n     the main way to reference a \"person\" for the purposes of sharing, reporting, and other\n     user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an\n     administrator invites a person by email or imports them from SSO, a user profile is\n     automatically created. A user profile is the primary holder of settings for an individual\n     user and has a reference to the user's private Amazon Elastic File System (EFS) home directory.\n   </p>"
+                "smithy.api#documentation": "<p>Creates a user profile. A user profile represents a single user within a domain, and is\n     the main way to reference a \"person\" for the purposes of sharing, reporting, and other\n     user-oriented features. This entity is created when a user onboards to Amazon SageMaker Studio. If an\n     administrator invites a person by email or imports them from Amazon Web Services SSO, a user profile is\n     automatically created. A user profile is the primary holder of settings for an individual\n     user and has a reference to the user's private Amazon Elastic File System (EFS) home directory.\n   </p>"
             }
         },
         "com.amazonaws.sagemaker#CreateUserProfileRequest": {
@@ -8078,13 +8078,13 @@
                 "SingleSignOnUserIdentifier": {
                     "target": "com.amazonaws.sagemaker#SingleSignOnUserIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A specifier for the type of value specified in SingleSignOnUserValue.  Currently, the only supported value is \"UserName\".\n           If the Domain's AuthMode is SSO, this field is required.  If the Domain's AuthMode is not SSO, this field cannot be specified.\n       </p>"
+                        "smithy.api#documentation": "<p>A specifier for the type of value specified in SingleSignOnUserValue.  Currently, the only supported value is \"UserName\".\n          If the Domain's AuthMode is Amazon Web Services SSO, this field is required.  If the Domain's AuthMode is not Amazon Web Services SSO, this field cannot be specified.\n       </p>"
                     }
                 },
                 "SingleSignOnUserValue": {
                     "target": "com.amazonaws.sagemaker#String256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the associated Amazon Web Services Single Sign-On User for this UserProfile.  If the Domain's AuthMode is SSO, this field is\n           required, and must match a valid username of a user in your directory.  If the Domain's AuthMode is not SSO, this field cannot be specified.\n       </p>"
+                        "smithy.api#documentation": "<p>The username of the associated Amazon Web Services Single Sign-On User for this UserProfile.  If the Domain's AuthMode is Amazon Web Services SSO, this field is\n          required, and must match a valid username of a user in your directory.  If the Domain's AuthMode is not Amazon Web Services SSO, this field cannot be specified.\n       </p>"
                     }
                 },
                 "Tags": {
@@ -9224,7 +9224,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to delete a domain.\n     If you onboarded with IAM mode, you will need to delete your domain to onboard again using SSO.\n     Use with caution. All of the members of the domain will lose access to their EFS volume,\n     including data, notebooks, and other artifacts.\n   </p>"
+                "smithy.api#documentation": "<p>Used to delete a domain.\n      If you onboarded with IAM mode, you will need to delete your domain to onboard again using Amazon Web Services SSO.\n     Use with caution. All of the members of the domain will lose access to their EFS volume,\n     including data, notebooks, and other artifacts.\n   </p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteDomainRequest": {
@@ -11663,7 +11663,7 @@
                 "SingleSignOnManagedApplicationInstanceId": {
                     "target": "com.amazonaws.sagemaker#String256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SSO managed application instance ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services SSO managed application instance ID.</p>"
                     }
                 },
                 "Status": {
@@ -16090,13 +16090,13 @@
                 "SingleSignOnUserIdentifier": {
                     "target": "com.amazonaws.sagemaker#SingleSignOnUserIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SSO user identifier.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services SSO user identifier.</p>"
                     }
                 },
                 "SingleSignOnUserValue": {
                     "target": "com.amazonaws.sagemaker#String256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SSO user value.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services SSO user value.</p>"
                     }
                 },
                 "UserSettings": {
@@ -20298,7 +20298,7 @@
                 "ResourceConfig": {
                     "target": "com.amazonaws.sagemaker#ResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources,\n            including\n            the compute instances and storage volumes, to use for the training\n            jobs that the tuning job launches.</p>\n        <p>Storage volumes store model artifacts and\n            incremental\n            states. Training algorithms might also use storage volumes for\n            scratch\n            space. If you want SageMaker to use the storage volume to store the\n            training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the\n            algorithm specification. For distributed training algorithms, specify an instance count\n            greater than 1.</p>\n        <note>\n            <p>If you want to use hyperparameter optimization with instance type flexibility, use <code>HyperParameterTuningResourceConfig</code> instead.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The resources,\n            including\n            the compute instances and storage volumes, to use for the training\n            jobs that the tuning job launches.</p>\n        <p>Storage volumes store model artifacts and\n            incremental\n            states. Training algorithms might also use storage volumes for\n            scratch\n            space. If you want SageMaker to use the storage volume to store the\n            training data, choose <code>File</code> as the <code>TrainingInputMode</code> in the\n            algorithm specification. For distributed training algorithms, specify an instance count\n            greater than 1.</p>\n        <note>\n            <p>If you want to use hyperparameter optimization with instance type flexibility, use\n                    <code>HyperParameterTuningResourceConfig</code> instead.</p>\n        </note>"
                     }
                 },
                 "StoppingCondition": {
@@ -20338,7 +20338,7 @@
                 "HyperParameterTuningResourceConfig": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningResourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the hyperparameter tuning resources, including the compute\n            instances and storage volumes, used for training jobs launched by the tuning job. By\n            default, storage volumes hold model artifacts and incremental states. Choose\n                <code>File</code> for <code>TrainingInputMode</code> in the\n                <code>AlgorithmSpecification</code>parameter to additionally store training data in\n            the storage volume (optional).</p>"
+                        "smithy.api#documentation": "<p>The configuration for the hyperparameter tuning resources, including the compute\n            instances and storage volumes, used for training jobs launched by the tuning job. By\n            default, storage volumes hold model artifacts and incremental states. Choose\n                <code>File</code> for <code>TrainingInputMode</code> in the\n                <code>AlgorithmSpecification</code> parameter to additionally store training data in\n            the storage volume (optional).</p>"
                     }
                 }
             },
@@ -20818,13 +20818,13 @@
                 "VolumeSizeInGB": {
                     "target": "com.amazonaws.sagemaker#OptionalVolumeSizeInGB",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume size in GB for the storage volume to be used in processing hyperparameter\n            optimization jobs (optional). These volumes store model artifacts, incremental states\n            and optionally, scratch space for training algorithms. Do not provide a value for this\n            parameter if a value for <code>InstanceConfigs</code> is also specified.</p>\n        <p>Some instance types have a fixed total local storage size. If you select one of these\n            instances for training, <code>VolumeSizeInGB</code> cannot be greater than this total\n            size. For a list of instance types with local instance storage and their sizes, see\n                <a href=\"https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>.</p>\n        <note>\n            <p>SageMaker supports only the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html\">General Purpose SSD (gp2)</a> storage volume type.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The volume size in GB for the storage volume to be used in processing hyperparameter\n            optimization jobs (optional). These volumes store model artifacts, incremental states\n            and optionally, scratch space for training algorithms. Do not provide a value for this\n            parameter if a value for <code>InstanceConfigs</code> is also specified.</p>\n        <p>Some instance types have a fixed total local storage size. If you select one of these\n            instances for training, <code>VolumeSizeInGB</code> cannot be greater than this total\n            size. For a list of instance types with local instance storage and their sizes, see\n                <a href=\"http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>.</p>\n        <note>\n            <p>SageMaker supports only the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html\">General Purpose SSD\n                    (gp2)</a> storage volume type.</p>\n        </note>"
                     }
                 },
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key used by AWS Key Management Service to encrypt data on the storage volume attached to the compute\n            instances used to run the training job. You can use either of the following formats to\n            specify a key.</p>\n        <p>KMS Key ID:</p>\n        <p>\n            <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n         </p>\n        <p>Amazon Resource Name (ARN) of a AWS KMS key:</p>\n        <p>\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n         </p>\n        <p>Some instances use local storage, which use a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">hardware module to encrypt</a> storage volumes. If you choose one of these\n            instance types, you cannot request a <code>VolumeKmsKeyId</code>. For a list of instance\n            types that use local storage, see <a href=\"https://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store volumes</a>. For more information about AWS Key Management Service, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html\">AWS KMS encryption</a> for more information.</p>"
+                        "smithy.api#documentation": "<p>A key used by Amazon Web Services Key Management Service to encrypt data on the storage volume\n            attached to the compute instances used to run the training job. You can use either of\n            the following formats to specify a key.</p>\n        <p>KMS Key ID:</p>\n        <p>\n            <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n         </p>\n        <p>Amazon Resource Name (ARN) of a KMS key:</p>\n        <p>\n            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n         </p>\n        <p>Some instances use local storage, which use a <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">hardware module to\n                encrypt</a> storage volumes. If you choose one of these instance types, you\n            cannot request a <code>VolumeKmsKeyId</code>. For a list of instance types that use\n            local storage, see <a href=\"http://aws.amazon.com/releasenotes/host-instance-storage-volumes-table/\">instance store\n                volumes</a>. For more information about Amazon Web Services Key Management Service, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-kms-permissions.html\">KMS\n                encryption</a> for more information.</p>"
                     }
                 },
                 "AllocationStrategy": {
@@ -20836,12 +20836,12 @@
                 "InstanceConfigs": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningInstanceConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the configuration(s) for one or more resources for processing\n            hyperparameter jobs. These resources include compute instances and storage volumes to\n            use in model training jobs launched by hyperparameter tuning jobs. The\n                <code>AllocationStrategy</code> controls the order in which multiple configurations\n            provided in <code>InstanceConfigs</code> are used.</p>\n        <note>\n            <p>If you only want to use a single InstanceConfig inside the\n                    <code>HyperParameterTuningResourceConfig</code> API, do not provide a value for\n                    <code>InstanceConfigs</code>. Instead, use <code>InstanceType</code>,\n                    <code>VolumeSizeInGB</code> and <code>InstanceCount</code>. If you use\n                    <code>InstanceConfigs</code>, do not provide values for\n                    <code>InstanceType</code>, <code>VolumeSizeInGB</code> or\n                    <code>InstanceCount</code>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>A list containing the configuration(s) for one or more resources for processing\n            hyperparameter jobs. These resources include compute instances and storage volumes to\n            use in model training jobs launched by hyperparameter tuning jobs. The\n                <code>AllocationStrategy</code> controls the order in which multiple configurations\n            provided in <code>InstanceConfigs</code> are used.</p>\n        <note>\n            <p>If you only want to use a single instance configuration inside the\n                    <code>HyperParameterTuningResourceConfig</code> API, do not provide a value for\n                    <code>InstanceConfigs</code>. Instead, use <code>InstanceType</code>,\n                    <code>VolumeSizeInGB</code> and <code>InstanceCount</code>. If you use\n                    <code>InstanceConfigs</code>, do not provide values for\n                    <code>InstanceType</code>, <code>VolumeSizeInGB</code> or\n                    <code>InstanceCount</code>.</p>\n        </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of resources, including compute instances and storage volumes for\n            use in training jobs launched by hyperparameter tuning jobs. Specify one or more\n            instance type and count and the allocation strategy for instance selection.</p>\n        <note>\n            <p>HyperParameterTuningResourceConfig supports all of the capabilities of\n                ResourceConfig with added functionality for flexible instance management.</p>\n        </note>"
+                "smithy.api#documentation": "<p>The configuration of resources, including compute instances and storage volumes for\n            use in training jobs launched by hyperparameter tuning jobs. Specify one or more\n            instance type and count and the allocation strategy for instance selection.</p>\n        <note>\n            <p>\n               <code>HyperParameterTuningResourceConfig</code> supports all of the capabilities\n                of ResourceConfig with added functionality for flexible instance management.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterValue": {
@@ -32026,7 +32026,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The\n                <code>KmsKeyId</code> can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services\n                Key Management Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The\n                <code>KmsKeyId</code> can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services\n                Key Management Service Developer Guide</i>.</p>"
                     }
                 },
                 "S3OutputPath": {
@@ -34097,7 +34097,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the core dump data at rest using Amazon S3 server-side encryption. The\n                <code>KmsKeyId</code> can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management\n                Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker\n            uses to encrypt the core dump data at rest using Amazon S3 server-side encryption. The\n                <code>KmsKeyId</code> can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        <p>If you use a KMS key ID or an alias of your KMS key, the SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            SageMaker uses the default KMS key for Amazon S3 for your role's account. SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management\n                Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -35615,6 +35615,56 @@
                 "smithy.api#documentation": "<p>Provides information about the output configuration for the compiled \n         model.</p>"
             }
         },
+        "com.amazonaws.sagemaker#RecommendationJobContainerConfig": {
+            "type": "structure",
+            "members": {
+                "Domain": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning domain of the model and its components.</p>\n         <p>Valid Values: <code>COMPUTER_VISION | NATURAL_LANGUAGE_PROCESSING |\n      MACHINE_LEARNING</code>\n         </p>"
+                    }
+                },
+                "Task": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning task that the model accomplishes.</p>\n         <p>Valid Values: <code>IMAGE_CLASSIFICATION | OBJECT_DETECTION\n         | TEXT_GENERATION | IMAGE_SEGMENTATION | FILL_MASK | CLASSIFICATION |\n      REGRESSION | OTHER</code>\n         </p>"
+                    }
+                },
+                "Framework": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning framework of the container image.</p>\n         <p>Valid Values: <code>TENSORFLOW | PYTORCH | XGBOOST | SAGEMAKER-SCIKIT-LEARN</code>\n         </p>"
+                    }
+                },
+                "FrameworkVersion": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The framework version of the container image.</p>"
+                    }
+                },
+                "PayloadConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobPayloadConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <code>SamplePayloadUrl</code> and all other sample payload-related fields.</p>"
+                    }
+                },
+                "NearestModelName": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a pre-trained machine learning model benchmarked by Amazon SageMaker Inference Recommender that matches your model.</p>\n         <p>Valid Values: <code>efficientnetb7 | unet | xgboost | faster-rcnn-resnet101 | nasnetlarge | vgg16 | inception-v3 | mask-rcnn | sagemaker-scikit-learn |\n      densenet201-gluon | resnet18v2-gluon | xception | densenet201 | yolov4 | resnet152 | bert-base-cased | xceptionV1-keras | resnet50 | retinanet</code>\n         </p>"
+                    }
+                },
+                "SupportedInstanceTypes": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobSupportedInstanceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the instance types that are used to generate inferences in real-time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies mandatory fields for running an Inference Recommender job directly in the\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJob</a>\n         API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use\n      <code>ContainerConfig</code> if you want to specify these fields for the recommendation job but don't want to edit them in your model package.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#RecommendationJobDescription": {
             "type": "string",
             "traits": {
@@ -35663,6 +35713,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key \n         that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. \n         This key will be passed to SageMaker Hosting for endpoint creation. </p>\n      \n         <p>The SageMaker execution role must have <code>kms:CreateGrant</code> permission in order to encrypt data on the storage \n         volume of the endpoints created for inference recommendation. The inference recommendation job will fail \n         asynchronously during endpoint configuration creation if the role passed does not have \n         <code>kms:CreateGrant</code> permission.</p>\n      \n         <p>The <code>KmsKeyId</code> can be any of the following formats:</p>\n         <ul>\n            <li>\n               <p>// KMS Key ID</p>\n               <p>\n                  <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n               <p>\n                  <code>\"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// KMS Key Alias</p>\n               <p>\n                  <code>\"alias/ExampleAlias\"</code>\n               </p>\n            </li>\n            <li>\n               <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n               <p>\n                  <code>\"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about key identifiers, see \n         <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">Key identifiers (KeyID)</a> in the \n         Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.</p>"
                     }
+                },
+                "ContainerConfig": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobContainerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies mandatory fields for running an Inference Recommender job. The fields specified in <code>ContainerConfig</code>\n         override the corresponding fields in the model package.</p>"
+                    }
                 }
             },
             "traits": {
@@ -35697,6 +35753,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the output configuration for the compiled model.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobPayloadConfig": {
+            "type": "structure",
+            "members": {
+                "SamplePayloadUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).</p>"
+                    }
+                },
+                "SupportedContentTypes": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobSupportedContentTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported MIME types for the input data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the payload for a recommendation job.</p>"
             }
         },
         "com.amazonaws.sagemaker#RecommendationJobResourceLimit": {
@@ -35768,6 +35844,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies conditions for stopping a job. When a job reaches a \n           stopping condition limit, SageMaker ends the job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobSupportedContentTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#String"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobSupportedInstanceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#String"
             }
         },
         "com.amazonaws.sagemaker#RecommendationJobType": {
@@ -36239,7 +36327,7 @@
                 "VolumeSizeInGB": {
                     "target": "com.amazonaws.sagemaker#VolumeSizeInGB",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the ML storage volume that you want to provision. </p>\n        <p>ML storage volumes store model artifacts and incremental states. Training\n            algorithms might also use the ML storage volume for scratch space. If you want to store\n            the training data in the ML storage volume, choose <code>File</code> as the\n                <code>TrainingInputMode</code> in the algorithm specification. </p>\n        <p>You must specify sufficient ML storage for your scenario. </p>\n        <note>\n            <p> SageMaker supports only the General Purpose SSD (gp2) ML storage volume type.\n            </p>\n        </note>\n        <note>\n            <p>Certain Nitro-based instances include local storage with a fixed total size,\n                dependent on the instance type. When using these instances for training, SageMaker mounts\n                the local instance storage instead of Amazon EBS gp2 storage. You can't request a\n                    <code>VolumeSizeInGB</code> greater than the total size of the local instance\n                storage.</p>\n            <p>For a list of instance types that support local instance storage, including the\n                total size per instance type, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The size of the ML storage volume that you want to provision. </p>\n        <p>ML storage volumes store model artifacts and incremental states. Training\n            algorithms might also use the ML storage volume for scratch space. If you want to store\n            the training data in the ML storage volume, choose <code>File</code> as the\n                <code>TrainingInputMode</code> in the algorithm specification. </p>\n        <p>When using an ML instance with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html#nvme-ssd-volumes\">NVMe SSD\n                volumes</a>, SageMaker doesn't provision Amazon EBS General Purpose SSD (gp2) storage.\n            Available storage is fixed to the NVMe-type instance's storage capacity. SageMaker configures\n            storage paths for training datasets, checkpoints, model artifacts, and outputs to use\n            the entire capacity of the instance storage. For example, ML instance families with the\n            NVMe-type instance storage include <code>ml.p4d</code>, <code>ml.g4dn</code>, and\n                <code>ml.g5</code>. </p>\n        <p>When using an ML instance with the EBS-only storage option and without instance\n            storage, you must define the size of EBS volume through <code>VolumeSizeInGB</code> in\n            the <code>ResourceConfig</code> API. For example, ML instance families that use EBS\n            volumes include <code>ml.c5</code> and <code>ml.p2</code>. </p>\n        <p>To look up instance types and their instance storage types and volumes, see <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a>.</p>\n        <p>To find the default local paths defined by the SageMaker training platform, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-train-storage.html\">Amazon SageMaker\n                Training Storage Folders for Training Datasets, Checkpoints, Model Artifacts, and\n                Outputs</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39241,7 +39329,7 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can\n            run.</p>\n        <p>For compilation jobs, if the job does not complete during this time, a\n                <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and\n            increasing as necessary based on your model.</p>\n        <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job.\n            When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is\n            28 days.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run\n            before it is stopped.</p>\n        <p>For compilation jobs, if the job does not complete during this time, a\n                <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and\n            increasing as necessary based on your model.</p>\n        <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job.\n            When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is\n            28 days.</p>\n        <p>The maximum time that a <code>TrainingJob</code> can run in total, including any time spent\n            publishing metrics or archiving and uploading models after it has been stopped, is 30\n            days.</p>"
                     }
                 },
                 "MaxWaitTimeInSeconds": {
