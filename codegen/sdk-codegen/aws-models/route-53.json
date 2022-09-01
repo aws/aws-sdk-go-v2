@@ -56,7 +56,7 @@
                     "name": "route53"
                 },
                 "aws.protocols#restXml": {},
-                "smithy.api#documentation": "<p>Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web\n\t\t\tservice.</p>",
+                "smithy.api#documentation": "<p>Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web\n\t\t\tservice.</p>\n\t\t       <p>You can use Route 53 to:</p>\n\t\t       <ul>\n            <li>\n               <p>Register domain names.</p>\n\t\t\t\t           <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-domain-registration.html\">How domain registration works</a>.</p>\n            </li>\n            <li>\n               <p>Route internet traffic to the resources for your domain</p>\n\t\t\t\t           <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html\">How internet traffic is routed to your website or web application</a>.</p>\n            </li>\n            <li>\n               <p>Check the health of your resources.</p>\n\t\t\t\t           <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-health-checks.html\">How Route 53 checks the health of your resources</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Route 53",
                 "smithy.api#xmlNamespace": {
                     "uri": "https://route53.amazonaws.com/doc/2013-04-01/"
@@ -454,7 +454,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that\n\t\t\tyou want to route traffic to.</p>\n\t\t       <p>When creating resource record sets for a private hosted zone, note the\n\t\t\tfollowing:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Creating geolocation alias resource record sets or latency alias resource\n\t\t\t\t\trecord sets in a private hosted zone is unsupported.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>For information about creating failover resource record sets in a private\n\t\t\t\t\thosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a>.</p>\n\t\t\t         </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that\n\t\t\tyou want to route traffic to.</p>\n\t\t       <p>When creating resource record sets for a private hosted zone, note the\n\t\t\tfollowing:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>For information about creating failover resource record sets in a private\n\t\t\t\t\thosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a>.</p>\n\t\t\t         </li>\n         </ul>"
             }
         },
         "com.amazonaws.route53#AssociateVPCComment": {
@@ -638,7 +638,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates, changes, or deletes CIDR blocks within a collection. Contains authoritative\n\t\t\tIP information mapping blocks to one or multiple locations.</p>\n\t\t       <p>A change request can update multiple locations in a collection at a time, which is\n\t\t\thelpful if you want to move one or more CIDR blocks from one location to another in one\n\t\t\ttransaction, without downtime. </p>\n\t\t       <p>\n            <b>Limits</b>\n         </p>\n\t\t       <p>The max number of CIDR blocks included in the request is\n\t\t\t1000.\n\t\t\tAs a result, big updates require multiple API calls.</p>\n\t\t       <p>\n            <b> PUT and DELETE_IF_EXISTS</b>\n         </p>\n\t\t       <p>Use <code>ChangeCidrCollection</code> to perform the following actions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>PUT</code>: Create a CIDR block within the specified collection.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code> DELETE_IF_EXISTS</code>: Delete an existing CIDR block from the\n\t\t\t\t\tcollection.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates, changes, or deletes CIDR blocks within a collection. Contains authoritative\n\t\t\tIP information mapping blocks to one or multiple locations.</p>\n\t\t       <p>A change request can update multiple locations in a collection at a time, which is\n\t\t\thelpful if you want to move one or more CIDR blocks from one location to another in one\n\t\t\ttransaction, without downtime. </p>\n\t\t       <p>\n            <b>Limits</b>\n         </p>\n\t\t       <p>The max number of CIDR blocks included in the request is 1000. As a result, big updates\n\t\t\trequire multiple API calls.</p>\n\t\t       <p>\n            <b> PUT and DELETE_IF_EXISTS</b>\n         </p>\n\t\t       <p>Use <code>ChangeCidrCollection</code> to perform the following actions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>PUT</code>: Create a CIDR block within the specified collection.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code> DELETE_IF_EXISTS</code>: Delete an existing CIDR block from the\n\t\t\t\t\tcollection.</p>\n\t\t\t         </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/cidrcollection/{Id}",
@@ -1509,7 +1509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a CIDR collection in the\n\t\t\tcurrent\n\t\t\t\tAmazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Creates a CIDR collection in the current Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/cidrcollection",
@@ -5928,7 +5928,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.route53#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An opaque\n\t\t\tpagination token to indicate where the service is to begin enumerating results.</p>\n\t\t       <p>If no value is provided, the listing of results starts from the beginning.</p>"
+                        "smithy.api#documentation": "<p>An opaque pagination token to indicate where the service is to begin enumerating\n\t\t\tresults.</p>\n\t\t       <p>If no value is provided, the listing of results starts from the beginning.</p>"
                     }
                 },
                 "CidrLocations": {
@@ -8097,7 +8097,7 @@
                 "AliasTarget": {
                     "target": "com.amazonaws.route53#AliasTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that\n\t\t\tyou want to route traffic to. </p>\n\t\t       <p>If you're creating resource records sets for a private hosted zone, note the\n\t\t\tfollowing:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>You can't create an alias resource record set in a private hosted zone to\n\t\t\t\t\troute traffic to a CloudFront distribution.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Creating geolocation alias resource record sets or latency alias resource\n\t\t\t\t\trecord sets in a private hosted zone is unsupported.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>For information about creating failover resource record sets in a private\n\t\t\t\t\thosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a> in the\n\t\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an Amazon S3 bucket, that\n\t\t\tyou want to route traffic to. </p>\n\t\t       <p>If you're creating resource records sets for a private hosted zone, note the\n\t\t\tfollowing:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>You can't create an alias resource record set in a private hosted zone to\n\t\t\t\t\troute traffic to a CloudFront distribution.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>For information about creating failover resource record sets in a private\n\t\t\t\t\thosted zone, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html\">Configuring Failover in a Private Hosted Zone</a> in the\n\t\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
                 "HealthCheckId": {

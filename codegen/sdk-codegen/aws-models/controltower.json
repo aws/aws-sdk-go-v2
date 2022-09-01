@@ -1,0 +1,616 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.controltower#AWSControlTowerApis": {
+            "type": "service",
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ControlTower",
+                    "arnNamespace": "controltower",
+                    "endpointPrefix": "controltower",
+                    "cloudTrailEventSource": "controltower.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "controltower"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id",
+                        "content-length",
+                        "x-api-key",
+                        "authorization",
+                        "x-amz-date",
+                        "x-amz-security-token"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>These interfaces allow you to apply the AWS library of pre-defined <i>controls</i> to your\norganizational units, programmatically. In this context, controls are the same as AWS Control Tower guardrails.</p>   \n         <p>To call these APIs, you'll need to know:</p>\n         <ul>\n            <li>\n               <p>the <code>ControlARN</code> for the control--that is, the\n        guardrail--you are targeting,</p>\n            </li>\n            <li>\n               <p>and the ARN associated with the target organizational unit (OU).</p>\n            </li>\n         </ul>\n         <p>\n            <b>To get the <code>ControlARN</code> for your AWS Control Tower guardrail:</b>\n         </p>\n         <p>The <code>ControlARN</code> contains the control name which is specified in each guardrail. For a list of control names for <i>Strongly recommended</i> and <i>Elective</i> guardrails, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html\">Resource identifiers for APIs and guardrails</a> in the <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/automating-tasks.html\">Automating tasks section</a> of the AWS Control Tower User Guide. Remember that <i>Mandatory</i> guardrails cannot be added or removed.</p>\n         <note>\n            <p>\n               <b>ARN format:</b> \n               <code>arn:aws:controltower:{REGION}::control/{CONTROL_NAME}</code>\n            </p>     \n            <p>\n               <b>Example:</b>\n            </p>\n            <p>\n               <code>arn:aws:controltower:us-west-2::control/AWS-GR_AUTOSCALING_LAUNCH_CONFIG_PUBLIC_IP_DISABLED</code>\n            </p>\n         </note>\n         <p>\n            <b>To get the ARN for an OU:</b>\n         </p>\n         <p>In the AWS Organizations console, you can find the ARN for the OU on the <b>Organizational unit details</b> page associated with that OU.</p>\n         <note> \n            <p>\n               <b>OU ARN format:</b>\n            </p>       \n            <p>\n               <code>arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}</code>\n            </p>\n         </note>   \n         <p class=\"title\">\n            <b>Details and examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html\">List of resource identifiers for APIs and guardrails</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/guardrail-api-examples-short.html\">Guardrail API examples (CLI)</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html\">Enable controls with AWS CloudFormation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html\">Creating AWS Control Tower resources with AWS CloudFormation</a>\n               </p>\n            </li>\n         </ul> \n         <p>To view the open source resource repository on GitHub, see <a href=\"https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower\">aws-cloudformation/aws-cloudformation-resource-providers-controltower</a>\n         </p>\n         <p>\n            <b>Recording API Requests</b>\n         </p>       \n         <p>AWS Control Tower supports AWS CloudTrail, a service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. By using information collected by CloudTrail, you can determine which requests the AWS Control Tower service received, who made the request and when, and so on. For more about AWS Control Tower and its support for CloudTrail, see <a href=\"https://docs.aws.amazon.com/controltower/latest/userguide/logging-using-cloudtrail.html\">Logging AWS Control Tower Actions with AWS CloudTrail</a> in the AWS Control Tower User Guide. To learn more about CloudTrail, including how to turn it on and find your log files, see the AWS CloudTrail User Guide.</p>",
+                "smithy.api#title": "AWS Control Tower"
+            },
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.controltower#DisableControl"
+                },
+                {
+                    "target": "com.amazonaws.controltower#EnableControl"
+                },
+                {
+                    "target": "com.amazonaws.controltower#GetControlOperation"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ListEnabledControls"
+                }
+            ]
+        },
+        "com.amazonaws.controltower#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>User does not have sufficient access to perform this action. \n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.controltower#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.controltower#ControlIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$"
+            }
+        },
+        "com.amazonaws.controltower#ControlOperation": {
+            "type": "structure",
+            "members": {
+                "operationType": {
+                    "target": "com.amazonaws.controltower#ControlOperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One of <code>ENABLE_CONTROL</code> or <code>DISABLE_CONTROL</code>.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.controltower#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the operation began.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.controltower#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the operation finished.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.controltower#ControlOperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One of <code>IN_PROGRESS</code>, <code>SUCEEDED</code>, or <code>FAILED</code>.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the operation result is <code>FAILED</code>, this string contains a message explaining why the operation failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation performed by the control.</p>"
+            }
+        },
+        "com.amazonaws.controltower#ControlOperationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.controltower#ControlOperationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLE_CONTROL",
+                        "value": "ENABLE_CONTROL"
+                    },
+                    {
+                        "name": "DISABLE_CONTROL",
+                        "value": "DISABLE_CONTROL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.controltower#DisableControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#DisableControlInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#DisableControlOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API call turns off a control. It starts an asynchronous operation that deletes AWS resources on the specified\n        organizational unit and the accounts it contains. The resources will vary according to the\n        control that you specify.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/disable-control"
+                }
+            }
+        },
+        "com.amazonaws.controltower#DisableControlInput": {
+            "type": "structure",
+            "members": {
+                "controlIdentifier": {
+                    "target": "com.amazonaws.controltower#ControlIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and <b>Elective</b> controls are permitted,\n      with the exception of the <b>Region deny</b> guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetIdentifier": {
+                    "target": "com.amazonaws.controltower#TargetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the organizational unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#DisableControlOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asynchronous operation, which is used to track status. The operation is\n      available for 90 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnableControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#EnableControlInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#EnableControlOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API call activates a control. It starts an asynchronous operation that creates AWS resources on the specified\n      organizational unit and the accounts it contains. The resources created will vary according to\n      the control that you specify.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/enable-control"
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnableControlInput": {
+            "type": "structure",
+            "members": {
+                "controlIdentifier": {
+                    "target": "com.amazonaws.controltower#ControlIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and <b>Elective</b> controls are permitted,\n        with the exception of the <b>Region deny</b> guardrail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetIdentifier": {
+                    "target": "com.amazonaws.controltower#TargetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the organizational unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnableControlOutput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asynchronous operation, which is used to track status. The operation is\n      available for 90 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#EnabledControlSummary": {
+            "type": "structure",
+            "members": {
+                "controlIdentifier": {
+                    "target": "com.amazonaws.controltower#ControlIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the control. Only <b>Strongly recommended</b> and <b>Elective</b> controls are permitted,\n        with the exception of the <b>Region deny</b> guardrail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of enabled controls.</p>"
+            }
+        },
+        "com.amazonaws.controltower#EnabledControls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controltower#EnabledControlSummary"
+            }
+        },
+        "com.amazonaws.controltower#GetControlOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#GetControlOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#GetControlOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status of a particular <code>EnableControl</code> or\n        <code>DisableControl</code> operation. Displays a message in case of error.\n      Details for an operation are available for 90 days.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-control-operation"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#GetControlOperationInput": {
+            "type": "structure",
+            "members": {
+                "operationIdentifier": {
+                    "target": "com.amazonaws.controltower#OperationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asynchronous operation, which is used to track status. The operation is\n      available for 90 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#GetControlOperationOutput": {
+            "type": "structure",
+            "members": {
+                "controlOperation": {
+                    "target": "com.amazonaws.controltower#ControlOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected error during processing of request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledControls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controltower#ListEnabledControlsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.controltower#ListEnabledControlsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controltower#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controltower#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the controls enabled by AWS Control Tower on the specified organizational unit and\n      the accounts it contains.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-enabled-controls"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "enabledControls"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledControlsInput": {
+            "type": "structure",
+            "members": {
+                "targetIdentifier": {
+                    "target": "com.amazonaws.controltower#TargetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the organizational unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to continue the list from a previous API call with the same parameters.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.controltower#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How many results to return per API call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#ListEnabledControlsOutput": {
+            "type": "structure",
+            "members": {
+                "enabledControls": {
+                    "target": "com.amazonaws.controltower#EnabledControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the controls enabled by AWS Control Tower on the specified organizational unit and\n      the accounts it contains.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the next page of results. If the string is empty, the current response is the\n      end of the results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.controltower#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controltower#OperationIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.controltower#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.controltower#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded. The limit is 10 concurrent operations. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.controltower#TargetIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$"
+            }
+        },
+        "com.amazonaws.controltower#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service that is associated with the error.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the service quota that was exceeded.</p>"
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds the caller should wait before retrying.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.controltower#Timestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.controltower#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}
