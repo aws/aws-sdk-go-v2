@@ -1,3 +1,14 @@
+# Release (2022-09-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.16.11](service/codegurureviewer/CHANGELOG.md#v11611-2022-09-01)
+  * **Documentation**: Documentation updates to fix formatting issues in CLI and SDK documentation.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.0.0](service/controltower/CHANGELOG.md#v100-2022-09-01)
+  * **Release**: New AWS service client module
+  * **Feature**: This release contains the first SDK for AWS Control Tower. It introduces  a new set of APIs: EnableControl, DisableControl, GetControlOperation, and ListEnabledControls.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.21.10](service/route53/CHANGELOG.md#v12110-2022-09-01)
+  * **Documentation**: Documentation updates for Amazon Route 53.
+
 # Release (2022-08-31)
 
 ## General Highlights

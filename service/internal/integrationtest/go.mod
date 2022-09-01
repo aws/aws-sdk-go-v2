@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.15
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.17.8
-	github.com/aws/aws-sdk-go-v2/service/athena v1.18.6
+	github.com/aws/aws-sdk-go-v2/service/athena v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.23.13
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.13
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.7
@@ -63,7 +63,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rds v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.7
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.20.2
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.9
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.21.10
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.14
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.15
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.8

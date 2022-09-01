@@ -1,8 +1,0 @@
-{
-    "id": "f81d7f27-c8f2-47a9-b3bb-e24c0690e42b",
-    "type": "documentation",
-    "description": "Documentation updates to fix formatting issues in CLI and SDK documentation.",
-    "modules": [
-        "service/codegurureviewer"
-    ]
-}

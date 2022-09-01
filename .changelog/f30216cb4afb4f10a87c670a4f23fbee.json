@@ -1,8 +1,0 @@
-{
-    "id": "f30216cb-4afb-4f10-a87c-670a4f23fbee",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon Route 53.",
-    "modules": [
-        "service/route53"
-    ]
-}
