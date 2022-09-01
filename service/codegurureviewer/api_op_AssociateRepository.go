@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to associate an Amazon Web Services CodeCommit repository or a repostory
+// Use to associate an Amazon Web Services CodeCommit repository or a repository
 // managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru
 // Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code
 // changes in the repository's pull requests and provides automatic
@@ -65,7 +65,7 @@ type AssociateRepositoryInput struct {
 	// Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
 	//
 	// * The
-	// ID of the Amazon Web Services KMS key that is associated with this respository
+	// ID of the Amazon Web Services KMS key that is associated with this repository
 	// association.
 	KMSKeyDetails *types.KMSKeyDetails
 

@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver Athena endpoint resolver
+// Resolver ControlTower endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
@@ -106,28 +106,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "athena.{region}.api.aws",
+				Hostname:          "controltower.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.amazonaws.com",
+				Hostname:          "controltower-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.api.aws",
+				Hostname:          "controltower-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "athena.{region}.amazonaws.com",
+				Hostname:          "controltower.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -136,19 +136,10 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "af-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-south-1",
@@ -160,19 +151,28 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "ap-southeast-3",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "controltower-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ca-central-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
@@ -184,45 +184,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "fips-us-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "athena-fips.us-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-east-2",
-			}: endpoints.Endpoint{
-				Hostname: "athena-fips.us-east-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "athena-fips.us-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-west-2",
-			}: endpoints.Endpoint{
-				Hostname: "athena-fips.us-west-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-2",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "me-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -232,7 +193,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "athena-fips.us-east-1.amazonaws.com",
+				Hostname: "controltower-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
@@ -241,16 +211,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "athena-fips.us-east-2.amazonaws.com",
+				Hostname: "controltower-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
-				Region: "us-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-west-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "athena-fips.us-west-1.amazonaws.com",
+				Region: "us-east-2-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
@@ -259,7 +229,16 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "athena-fips.us-west-2.amazonaws.com",
+				Hostname: "controltower-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 		},
 	},
@@ -269,42 +248,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "athena.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "controltower.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.amazonaws.com.cn",
+				Hostname:          "controltower-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "controltower-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "athena.{region}.amazonaws.com.cn",
+				Hostname:          "controltower.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "cn-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso",
@@ -312,14 +283,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.c2s.ic.gov",
+				Hostname:          "controltower-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "athena.{region}.c2s.ic.gov",
+				Hostname:          "controltower.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -333,14 +304,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "controltower-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "athena.{region}.sc2s.sgov.gov",
+				Hostname:          "controltower.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -354,71 +325,33 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "athena.{region}.api.aws",
+				Hostname:          "controltower.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.amazonaws.com",
+				Hostname:          "controltower-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "athena-fips.{region}.api.aws",
+				Hostname:          "controltower-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "athena.{region}.amazonaws.com",
+				Hostname:          "controltower.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "fips-us-gov-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "athena-fips.us-gov-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "fips-us-gov-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "athena-fips.us-gov-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "us-gov-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-gov-east-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "athena-fips.us-gov-east-1.amazonaws.com",
-			},
-			endpoints.EndpointKey{
-				Region: "us-gov-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region:  "us-gov-west-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "athena-fips.us-gov-west-1.amazonaws.com",
-			},
-		},
 	},
 }

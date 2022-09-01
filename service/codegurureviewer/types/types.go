@@ -277,7 +277,7 @@ type EventInfo struct {
 // (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
 //
 // * The ID of the
-// Amazon Web Services KMS key that is associated with a respository association.
+// Amazon Web Services KMS key that is associated with a repository association.
 type KMSKeyDetails struct {
 
 	// The encryption option for a repository association. It is either owned by Amazon
@@ -285,7 +285,7 @@ type KMSKeyDetails struct {
 	// (CUSTOMER_MANAGED_CMK).
 	EncryptionOption EncryptionOption
 
-	// The ID of the Amazon Web Services KMS key that is associated with a respository
+	// The ID of the Amazon Web Services KMS key that is associated with a repository
 	// association.
 	KMSKeyId *string
 
@@ -509,7 +509,7 @@ type RepositoryAssociation struct {
 	// Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
 	//
 	// * The
-	// ID of the Amazon Web Services KMS key that is associated with this respository
+	// ID of the Amazon Web Services KMS key that is associated with this repository
 	// association.
 	KMSKeyDetails *KMSKeyDetails
 
@@ -562,9 +562,9 @@ type RepositoryAssociation struct {
 	// *
 	// Disassociated: CodeGuru Reviewer successfully disassociated the repository. You
 	// can create a new association with this repository if you want to review source
-	// code in it later. You can control access to code reviews created in an
-	// associated repository with tags after it has been disassociated. For more
-	// information, see Using tags to control access to associated repositories
+	// code in it later. You can control access to code reviews created in anassociated
+	// repository with tags after it has been disassociated. For more information, see
+	// Using tags to control access to associated repositories
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
 	// in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
@@ -642,9 +642,9 @@ type RepositoryAssociationSummary struct {
 	// *
 	// Disassociated: CodeGuru Reviewer successfully disassociated the repository. You
 	// can create a new association with this repository if you want to review source
-	// code in it later. You can control access to code reviews created in an
-	// associated repository with tags after it has been disassociated. For more
-	// information, see Using tags to control access to associated repositories
+	// code in it later. You can control access to code reviews created in anassociated
+	// repository with tags after it has been disassociated. For more information, see
+	// Using tags to control access to associated repositories
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
 	// in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
@@ -828,7 +828,7 @@ type ThirdPartySourceRepository struct {
 
 	// The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket
 	// repository, this is the username for the account that owns the repository. For
-	// an S3 repository, this can be the username or Amazon Web Services account ID.
+	// an S3 repository, this can be the username or Amazon Web Services account ID
 	//
 	// This member is required.
 	Owner *string
