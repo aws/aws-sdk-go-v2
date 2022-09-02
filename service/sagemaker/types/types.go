@@ -3284,6 +3284,11 @@ type DomainDetails struct {
 // specified through the CreateDomain API call.
 type DomainSettings struct {
 
+	// The configuration for attaching a SageMaker user profile name to the execution
+	// role as a sts:SourceIdentity key
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html).
+	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
+
 	// A collection of settings that configure the RStudioServerPro Domain-level app.
 	RStudioServerProDomainSettings *RStudioServerProDomainSettings
 
@@ -3296,6 +3301,13 @@ type DomainSettings struct {
 
 // A collection of Domain configuration settings to update.
 type DomainSettingsForUpdate struct {
+
+	// The configuration for attaching a SageMaker user profile name to the execution
+	// role as a sts:SourceIdentity key
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html).
+	// This configuration can only be modified if there are no apps in the InService or
+	// Pending state.
+	ExecutionRoleIdentityConfig ExecutionRoleIdentityConfig
 
 	// A collection of RStudioServerPro Domain-level app settings to update.
 	RStudioServerProDomainSettingsForUpdate *RStudioServerProDomainSettingsForUpdate

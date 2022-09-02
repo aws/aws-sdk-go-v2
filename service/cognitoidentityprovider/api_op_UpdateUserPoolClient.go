@@ -82,6 +82,12 @@ type UpdateUserPoolClientInput struct {
 	// sending events to Amazon Pinpoint projects within that same Region.
 	AnalyticsConfiguration *types.AnalyticsConfigurationType
 
+	// Amazon Cognito creates a session token for each API request in an authentication
+	// flow. AuthSessionValidity is the duration, in minutes, of that session token.
+	// Your user pool native user must respond to each authentication challenge before
+	// the session expires.
+	AuthSessionValidity *int32
+
 	// A list of allowed redirect (callback) URLs for the IdPs. A redirect URI must:
 	//
 	// *

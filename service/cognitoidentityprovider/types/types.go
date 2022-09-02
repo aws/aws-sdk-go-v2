@@ -352,25 +352,43 @@ type CustomSMSLambdaVersionConfigType struct {
 	noSmithyDocumentSerde
 }
 
-// The device-remembering configuration for a user pool. A null value indicates
-// that you have deactivated device remembering in your user pool. When you provide
-// a value for any DeviceConfiguration field, you activate the Amazon Cognito
-// device-remembering feature.
+// The device-remembering configuration for a user pool. A  DescribeUserPool
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html)
+// request returns a null value for this object when the user pool isn't configured
+// to remember devices. When device remembering is active, you can remember a
+// user's device with a ConfirmDevice
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmDevice.html)
+// API request. Additionally. when the property DeviceOnlyRememberedOnUserPrompt is
+// true, you must follow ConfirmDevice with an UpdateDeviceStatus
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html)
+// API request that sets the user's device to remembered or not_remembered. To sign
+// in with a remembered device, include DEVICE_KEY in the authentication parameters
+// in your user's  InitiateAuth
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html)
+// request. If your app doesn't include a DEVICE_KEY parameter, the response
+// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html#API_InitiateAuth_ResponseSyntax)
+// from Amazon Cognito includes newly-generated DEVICE_KEY and DEVICE_GROUP_KEY
+// values under NewDeviceMetadata. Store these values to use in future
+// device-authentication requests. When you provide a value for any property of
+// DeviceConfiguration, you activate the device remembering for the user pool.
 type DeviceConfigurationType struct {
 
-	// When true, device authentication can replace SMS and time-based one-time
-	// password (TOTP) factors for multi-factor authentication (MFA). Regardless of the
-	// value of this field, users that sign in with new devices that have not been
-	// confirmed or remembered must provide a second factor if your user pool requires
-	// MFA.
+	// When true, a remembered device can sign in with device authentication instead of
+	// SMS and time-based one-time password (TOTP) factors for multi-factor
+	// authentication (MFA). Whether or not ChallengeRequiredOnNewDevice is true, users
+	// who sign in with devices that have not been confirmed or remembered must still
+	// provide a second factor in a user pool that requires MFA.
 	ChallengeRequiredOnNewDevice bool
 
-	// When true, Amazon Cognito doesn't remember newly-confirmed devices. Users who
-	// want to authenticate with their device can instead opt in to remembering their
-	// device. To collect a choice from your user, create an input prompt in your app
-	// and return the value that the user chooses in an UpdateDeviceStatus
+	// When true, Amazon Cognito doesn't automatically remember a user's device when
+	// your app sends a  ConfirmDevice
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmDevice.html)
+	// API request. In your app, create a prompt for your user to choose whether they
+	// want to remember their device. Return the user's choice in an
+	// UpdateDeviceStatus
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateDeviceStatus.html)
-	// API request.
+	// API request. When DeviceOnlyRememberedOnUserPrompt is false, Amazon Cognito
+	// immediately remembers devices that you register in a ConfirmDevice API request.
 	DeviceOnlyRememberedOnUserPrompt bool
 
 	noSmithyDocumentSerde
@@ -1462,6 +1480,12 @@ type UserPoolClientType struct {
 	// user pool resides.
 	AnalyticsConfiguration *AnalyticsConfigurationType
 
+	// Amazon Cognito creates a session token for each API request in an authentication
+	// flow. AuthSessionValidity is the duration, in minutes, of that session token.
+	// Your user pool native user must respond to each authentication challenge before
+	// the session expires.
+	AuthSessionValidity *int32
+
 	// A list of allowed redirect (callback) URLs for the IdPs. A redirect URI must:
 	//
 	// *
@@ -1704,10 +1728,12 @@ type UserPoolType struct {
 	// problems with user pool email configuration.
 	EmailConfigurationFailure *string
 
-	// The contents of the email verification message.
+	// This parameter is no longer used. See VerificationMessageTemplateType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
 	EmailVerificationMessage *string
 
-	// The subject of the email verification message.
+	// This parameter is no longer used. See VerificationMessageTemplateType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
 	EmailVerificationSubject *string
 
 	// A number estimating the size of the user pool.
@@ -1769,7 +1795,8 @@ type UserPoolType struct {
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).
 	SmsConfigurationFailure *string
 
-	// The contents of the SMS verification message.
+	// This parameter is no longer used. See VerificationMessageTemplateType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
 	SmsVerificationMessage *string
 
 	// The status of a user pool.

@@ -1283,6 +1283,24 @@ func (EndpointStatus) Values() []EndpointStatus {
 	}
 }
 
+type ExecutionRoleIdentityConfig string
+
+// Enum values for ExecutionRoleIdentityConfig
+const (
+	ExecutionRoleIdentityConfigUserProfileName ExecutionRoleIdentityConfig = "USER_PROFILE_NAME"
+	ExecutionRoleIdentityConfigDisabled        ExecutionRoleIdentityConfig = "DISABLED"
+)
+
+// Values returns all known values for ExecutionRoleIdentityConfig. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionRoleIdentityConfig) Values() []ExecutionRoleIdentityConfig {
+	return []ExecutionRoleIdentityConfig{
+		"USER_PROFILE_NAME",
+		"DISABLED",
+	}
+}
+
 type ExecutionStatus string
 
 // Enum values for ExecutionStatus

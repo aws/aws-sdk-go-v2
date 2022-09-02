@@ -81,10 +81,12 @@ type UpdateUserPoolInput struct {
 	// invitation and verification messages from your user pool.
 	EmailConfiguration *types.EmailConfigurationType
 
-	// The contents of the email verification message.
+	// This parameter is no longer used. See VerificationMessageTemplateType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
 	EmailVerificationMessage *string
 
-	// The subject of the email verification message.
+	// This parameter is no longer used. See VerificationMessageTemplateType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
 	EmailVerificationSubject *string
 
 	// The Lambda configuration information from the request to update the user pool.
@@ -118,7 +120,8 @@ type UpdateUserPoolInput struct {
 	// and Access Management (IAM) role in your Amazon Web Services account.
 	SmsConfiguration *types.SmsConfigurationType
 
-	// A container with information about the SMS verification message.
+	// This parameter is no longer used. See VerificationMessageTemplateType
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerificationMessageTemplateType.html).
 	SmsVerificationMessage *string
 
 	// The settings for updates to user attributes. These settings include the property

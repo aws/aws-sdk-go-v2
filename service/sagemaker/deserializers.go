@@ -36023,6 +36023,15 @@ func awsAwsjson11_deserializeDocumentDomainSettings(v **types.DomainSettings, va
 
 	for key, value := range shape {
 		switch key {
+		case "ExecutionRoleIdentityConfig":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionRoleIdentityConfig to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleIdentityConfig = types.ExecutionRoleIdentityConfig(jtv)
+			}
+
 		case "RStudioServerProDomainSettings":
 			if err := awsAwsjson11_deserializeDocumentRStudioServerProDomainSettings(&sv.RStudioServerProDomainSettings, value); err != nil {
 				return err

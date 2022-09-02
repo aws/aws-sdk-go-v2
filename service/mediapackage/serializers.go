@@ -1531,6 +1531,11 @@ func awsRestjson1_serializeDocumentCmafEncryption(v *types.CmafEncryption, value
 		ok.String(*v.ConstantInitializationVector)
 	}
 
+	if len(v.EncryptionMethod) > 0 {
+		ok := object.Key("encryptionMethod")
+		ok.String(string(v.EncryptionMethod))
+	}
+
 	if v.KeyRotationIntervalSeconds != 0 {
 		ok := object.Key("keyRotationIntervalSeconds")
 		ok.Integer(v.KeyRotationIntervalSeconds)

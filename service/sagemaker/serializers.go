@@ -16354,6 +16354,11 @@ func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ExecutionRoleIdentityConfig) > 0 {
+		ok := object.Key("ExecutionRoleIdentityConfig")
+		ok.String(string(v.ExecutionRoleIdentityConfig))
+	}
+
 	if v.RStudioServerProDomainSettings != nil {
 		ok := object.Key("RStudioServerProDomainSettings")
 		if err := awsAwsjson11_serializeDocumentRStudioServerProDomainSettings(v.RStudioServerProDomainSettings, ok); err != nil {
@@ -16374,6 +16379,11 @@ func awsAwsjson11_serializeDocumentDomainSettings(v *types.DomainSettings, value
 func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettingsForUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.ExecutionRoleIdentityConfig) > 0 {
+		ok := object.Key("ExecutionRoleIdentityConfig")
+		ok.String(string(v.ExecutionRoleIdentityConfig))
+	}
 
 	if v.RStudioServerProDomainSettingsForUpdate != nil {
 		ok := object.Key("RStudioServerProDomainSettingsForUpdate")

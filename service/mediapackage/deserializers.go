@@ -4267,6 +4267,15 @@ func awsRestjson1_deserializeDocumentCmafEncryption(v **types.CmafEncryption, va
 				sv.ConstantInitializationVector = ptr.String(jtv)
 			}
 
+		case "encryptionMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafEncryptionMethod to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMethod = types.CmafEncryptionMethod(jtv)
+			}
+
 		case "keyRotationIntervalSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)

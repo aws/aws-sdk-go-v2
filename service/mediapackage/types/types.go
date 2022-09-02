@@ -66,6 +66,9 @@ type CmafEncryption struct {
 	// value, then MediaPackage creates the constant initialization vector (IV).
 	ConstantInitializationVector *string
 
+	// The encryption method to use.
+	EncryptionMethod CmafEncryptionMethod
+
 	// Time (in seconds) between each encryption key rotation.
 	KeyRotationIntervalSeconds int32
 

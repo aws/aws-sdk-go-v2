@@ -43,7 +43,9 @@ type UpdateSecurityProfileInput struct {
 	// The description of the security profile.
 	Description *string
 
-	// The permissions granted to a security profile.
+	// The permissions granted to a security profile. For a list of valid permissions,
+	// see List of security profile permissions
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
 	Permissions []string
 
 	noSmithyDocumentSerde

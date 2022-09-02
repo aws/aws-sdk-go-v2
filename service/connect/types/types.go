@@ -1355,6 +1355,41 @@ type QueueReference struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return queues.
+type QueueSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []QueueSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []QueueSearchCriteria
+
+	// The type of queue.
+	QueueTypeCondition SearchableQueueType
+
+	// A leaf node condition which can be used to specify a string condition, for
+	// example, username = 'abc'.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type QueueSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR of AND (List of List) input where:
+	//
+	// * Top level list
+	// specifies conditions that need to be applied with OR operator
+	//
+	// * Inner list
+	// specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a queue.
 type QueueSummary struct {
 
@@ -1567,6 +1602,12 @@ type RoutingProfile struct {
 	// The name of the routing profile.
 	Name *string
 
+	// The number of associated queues in routing profile.
+	NumberOfAssociatedQueues *int64
+
+	// The number of associated users in routing profile.
+	NumberOfAssociatedUsers *int64
+
 	// The Amazon Resource Name (ARN) of the routing profile.
 	RoutingProfileArn *string
 
@@ -1674,6 +1715,38 @@ type RoutingProfileReference struct {
 
 	// The identifier of the routing profile.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return routing profiles.
+type RoutingProfileSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []RoutingProfileSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []RoutingProfileSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition, for
+	// example, username = 'abc'.
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type RoutingProfileSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter.
+	// This accepts an OR of AND (List of List) input where:
+	//
+	// * Top level list
+	// specifies conditions that need to be applied with OR operator
+	//
+	// * Inner list
+	// specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
 }
@@ -2166,7 +2239,10 @@ type UserReference struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria to be used to return users.
+// The search criteria to be used to return users. The Username, Firstname, and
+// Lastname fields support "contains" queries with a minimum of 2 characters and a
+// maximum of 25 characters. Any queries with character lengths outside of this
+// range result in empty results.
 type UserSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.

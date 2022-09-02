@@ -43,7 +43,9 @@ type CreateSecurityProfileInput struct {
 	// The description of the security profile.
 	Description *string
 
-	// Permissions assigned to the security profile.
+	// Permissions assigned to the security profile. For a list of valid permissions,
+	// see List of security profile permissions
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
 	Permissions []string
 
 	// The tags used to organize, track, or control access for this resource. For

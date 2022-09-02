@@ -13,8 +13,9 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Returns a paginated list of all the Amazon Lex bots currently associated with
-// the instance.
+// Returns a paginated list of all the Amazon Lex V1 bots currently associated with
+// the instance. To return both Amazon Lex V1 and V2 bots, use the ListBots
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html) API.
 func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optFns ...func(*Options)) (*ListLexBotsOutput, error) {
 	if params == nil {
 		params = &ListLexBotsInput{}

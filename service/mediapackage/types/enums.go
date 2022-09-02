@@ -92,6 +92,24 @@ func (AdsOnDeliveryRestrictions) Values() []AdsOnDeliveryRestrictions {
 	}
 }
 
+type CmafEncryptionMethod string
+
+// Enum values for CmafEncryptionMethod
+const (
+	CmafEncryptionMethodSampleAes CmafEncryptionMethod = "SAMPLE_AES"
+	CmafEncryptionMethodAesCtr    CmafEncryptionMethod = "AES_CTR"
+)
+
+// Values returns all known values for CmafEncryptionMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafEncryptionMethod) Values() []CmafEncryptionMethod {
+	return []CmafEncryptionMethod{
+		"SAMPLE_AES",
+		"AES_CTR",
+	}
+}
+
 type EncryptionMethod string
 
 // Enum values for EncryptionMethod

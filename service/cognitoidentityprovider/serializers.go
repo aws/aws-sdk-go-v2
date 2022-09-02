@@ -7942,6 +7942,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolClientInput(v *CreateUserPool
 		}
 	}
 
+	if v.AuthSessionValidity != nil {
+		ok := object.Key("AuthSessionValidity")
+		ok.Integer(*v.AuthSessionValidity)
+	}
+
 	if v.CallbackURLs != nil {
 		ok := object.Key("CallbackURLs")
 		if err := awsAwsjson11_serializeDocumentCallbackURLsListType(v.CallbackURLs, ok); err != nil {
@@ -9530,6 +9535,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolClientInput(v *UpdateUserPool
 		if err := awsAwsjson11_serializeDocumentAnalyticsConfigurationType(v.AnalyticsConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AuthSessionValidity != nil {
+		ok := object.Key("AuthSessionValidity")
+		ok.Integer(*v.AuthSessionValidity)
 	}
 
 	if v.CallbackURLs != nil {

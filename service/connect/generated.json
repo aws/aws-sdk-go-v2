@@ -112,6 +112,8 @@
         "api_op_ReleasePhoneNumber.go",
         "api_op_ResumeContactRecording.go",
         "api_op_SearchAvailablePhoneNumbers.go",
+        "api_op_SearchQueues.go",
+        "api_op_SearchRoutingProfiles.go",
         "api_op_SearchSecurityProfiles.go",
         "api_op_SearchUsers.go",
         "api_op_SearchVocabularies.go",

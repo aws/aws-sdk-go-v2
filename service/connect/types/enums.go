@@ -1245,6 +1245,22 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type SearchableQueueType string
+
+// Enum values for SearchableQueueType
+const (
+	SearchableQueueTypeStandard SearchableQueueType = "STANDARD"
+)
+
+// Values returns all known values for SearchableQueueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SearchableQueueType) Values() []SearchableQueueType {
+	return []SearchableQueueType{
+		"STANDARD",
+	}
+}
+
 type SourceType string
 
 // Enum values for SourceType

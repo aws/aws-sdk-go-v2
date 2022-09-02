@@ -56,7 +56,9 @@ type ListSecurityProfilePermissionsOutput struct {
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
 
-	// The permissions granted to the security profile.
+	// The permissions granted to the security profile. For a complete list of valid
+	// permissions, see List of security profile permissions
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
 	Permissions []string
 
 	// Metadata pertaining to the operation's result.
