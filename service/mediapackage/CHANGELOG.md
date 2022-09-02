@@ -1,3 +1,8 @@
+# v1.19.0 (2022-09-02)
+
+* **Feature**: Added support for AES_CTR encryption to CMAF origin endpoints
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2022-08-31)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "867d3dd9-c538-4665-9025-651c9080cace",
-    "type": "feature",
-    "description": "Added support for AES_CTR encryption to CMAF origin endpoints",
-    "modules": [
-        "service/mediapackage"
-    ]
-}

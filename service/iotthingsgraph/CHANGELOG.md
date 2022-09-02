@@ -1,3 +1,7 @@
+# v1.13.1 (2022-09-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-08-31)
 
 * **Feature**: This release deprecates all APIs of the ThingsGraph service

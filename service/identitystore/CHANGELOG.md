@@ -1,3 +1,7 @@
+# v1.15.1 (2022-09-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-08-31)
 
 * **Feature**: Expand IdentityStore API to support Create, Read, Update, Delete and Get operations for User, Group and GroupMembership resources.

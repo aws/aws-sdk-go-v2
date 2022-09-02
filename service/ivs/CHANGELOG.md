@@ -1,3 +1,7 @@
+# v1.18.1 (2022-09-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-08-31)
 
 * **Feature**: IVS Merge Fragmented Streams. This release adds support for recordingReconnectWindow field in IVS recordingConfigurations. For more information see https://docs.aws.amazon.com/ivs/latest/APIReference/Welcome.html

@@ -1,3 +1,8 @@
+# v1.29.0 (2022-09-02)
+
+* **Feature**: This release adds search APIs for Routing Profiles and Queues, which can be used to search for those resources within a Connect Instance.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.2 (2022-08-31)
 
 * **Dependency Update**: Updated to the latest SDK module versions

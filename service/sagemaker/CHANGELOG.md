@@ -1,3 +1,8 @@
+# v1.41.0 (2022-09-02)
+
+* **Feature**: This release enables administrators to attribute user activity and API calls from Studio notebooks, Data Wrangler and Canvas to specific users even when users share the same execution IAM role.  ExecutionRoleIdentityConfig at Sagemaker domain level enables this feature.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2022-08-31)
 
 * **Feature**: SageMaker Inference Recommender now accepts Inference Recommender fields: Domain, Task, Framework, SamplePayloadUrl, SupportedContentTypes, SupportedInstanceTypes, directly in our CreateInferenceRecommendationsJob API through ContainerConfig

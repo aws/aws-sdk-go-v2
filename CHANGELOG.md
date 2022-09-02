@@ -1,3 +1,18 @@
+# Release (2022-09-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.19.0](service/cognitoidentityprovider/CHANGELOG.md#v1190-2022-09-02)
+  * **Feature**: This release adds a new "AuthSessionValidity" field to the UserPoolClient in Cognito. Application admins can configure this value for their users' authentication duration, which is currently fixed at 3 minutes, up to 15 minutes. Setting this field will also apply to the SMS MFA authentication flow.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.29.0](service/connect/CHANGELOG.md#v1290-2022-09-02)
+  * **Feature**: This release adds search APIs for Routing Profiles and Queues, which can be used to search for those resources within a Connect Instance.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.19.0](service/mediapackage/CHANGELOG.md#v1190-2022-09-02)
+  * **Feature**: Added support for AES_CTR encryption to CMAF origin endpoints
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.41.0](service/sagemaker/CHANGELOG.md#v1410-2022-09-02)
+  * **Feature**: This release enables administrators to attribute user activity and API calls from Studio notebooks, Data Wrangler and Canvas to specific users even when users share the same execution IAM role.  ExecutionRoleIdentityConfig at Sagemaker domain level enables this feature.
+
 # Release (2022-09-01)
 
 ## Module Highlights

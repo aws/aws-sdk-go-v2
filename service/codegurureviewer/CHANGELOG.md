@@ -1,3 +1,7 @@
+# v1.16.12 (2022-09-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.11 (2022-09-01)
 
 * **Documentation**: Documentation updates to fix formatting issues in CLI and SDK documentation.
