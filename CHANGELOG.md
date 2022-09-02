@@ -1,3 +1,9 @@
+# Release (2022-09-02.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.15.2](service/identitystore/CHANGELOG.md#v1152-2022-09-022)
+  * **Bug Fix**: Reverts a change to the identitystore module so that MaxResults members of ListGroupMemberShips, ListGroupMembershipsForMembers, ListGroups, and ListUsers are correctly generated as pointer types instead of value types
+
 # Release (2022-09-02)
 
 ## General Highlights

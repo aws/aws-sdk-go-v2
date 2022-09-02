@@ -1,3 +1,7 @@
+# v1.15.2 (2022-09-02.2)
+
+* **Bug Fix**: Reverts a change to the identitystore module so that MaxResults members of ListGroupMemberShips, ListGroupMembershipsForMembers, ListGroups, and ListUsers are correctly generated as pointer types instead of value types
+
 # v1.15.1 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
