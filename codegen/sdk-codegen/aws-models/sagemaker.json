@@ -16919,6 +16919,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level\n            app.</p>"
                     }
+                },
+                "ExecutionRoleIdentityConfig": {
+                    "target": "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">\n               <code>sts:SourceIdentity</code> key</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16932,6 +16938,12 @@
                     "target": "com.amazonaws.sagemaker#RStudioServerProDomainSettingsForUpdate",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to\n            update.</p>"
+                    }
+                },
+                "ExecutionRoleIdentityConfig": {
+                    "target": "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">\n               <code>sts:SourceIdentity</code> key</a>. This configuration can only be modified if there are no apps in the <code>InService</code> or <code>Pending</code> state.</p>"
                     }
                 }
             },
@@ -18258,6 +18270,21 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^[\\S\\s]*$"
+            }
+        },
+        "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "USER_PROFILE_NAME",
+                        "name": "USER_PROFILE_NAME"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.sagemaker#ExecutionStatus": {

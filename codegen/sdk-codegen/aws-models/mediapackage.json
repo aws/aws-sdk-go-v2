@@ -172,6 +172,12 @@
                         "smithy.api#jsonName": "constantInitializationVector"
                     }
                 },
+                "EncryptionMethod": {
+                    "target": "com.amazonaws.mediapackage#CmafEncryptionMethod",
+                    "traits": {
+                        "smithy.api#jsonName": "encryptionMethod"
+                    }
+                },
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {
@@ -189,6 +195,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "A Common Media Application Format (CMAF) encryption configuration."
+            }
+        },
+        "com.amazonaws.mediapackage#CmafEncryptionMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The encryption method to use.",
+                "smithy.api#enum": [
+                    {
+                        "value": "SAMPLE_AES",
+                        "name": "SAMPLE_AES"
+                    },
+                    {
+                        "value": "AES_CTR",
+                        "name": "AES_CTR"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediapackage#CmafPackage": {
