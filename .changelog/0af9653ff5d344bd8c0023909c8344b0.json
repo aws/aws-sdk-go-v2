@@ -1,0 +1,8 @@
+{
+    "id": "0af9653f-f5d3-44bd-8c00-23909c8344b0",
+    "type": "bugfix",
+    "description": "Reverts a change to the identitystore module so that MaxResults members of ListGroupMemberShips, ListGroupMembershipsForMembers, ListGroups, and ListUsers are correctly generated as pointer types instead of value types",
+    "modules": [
+        "service/identitystore"
+    ]
+}
