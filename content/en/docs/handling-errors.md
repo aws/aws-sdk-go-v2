@@ -55,7 +55,7 @@ import "github.com/aws/smithy-go"
 // ...
 
 if err != nil {
-	var oe *smithy.OperationError
+	var oe smithy.OperationError
 	if errors.As(err, &oe) {
 		log.Printf("failed to call service: %s, operation: %s, error: %v", oe.Service(), oe.Operation(), oe.Unwrap())
     }
@@ -80,7 +80,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3/types"
 // ...
 
 if err != nil {
-	var bne *types.BucketAlreadyExists
+	var bne types.BucketAlreadyExists
 	if errors.As(err, &bne) {
 		log.Println("error:", bne)
     }
@@ -123,7 +123,7 @@ import awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 // ...
 
 if err != nil {
-	var re *awshttp.ResponseError
+	var re awshttp.ResponseError
 	if errors.As(err, &re) {
 		log.Printf("requestID: %s, error: %v", re.ServiceRequestID(), re.Unwrap());
     }
