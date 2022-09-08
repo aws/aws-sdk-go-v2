@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.7
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.21
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.15
-	github.com/aws/smithy-go v1.13.2
+	github.com/aws/smithy-go v1.13.3-0.20220908182138-c7b2f21885a9
 	github.com/jmespath/go-jmespath v0.4.0
 )
 

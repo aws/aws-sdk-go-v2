@@ -1722,9 +1722,9 @@ func awsAwsjson11_serializeOpDocumentListGroupMembershipsForMemberInput(v *ListG
 		ok.String(*v.IdentityStoreId)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.MemberId != nil {
@@ -1756,9 +1756,9 @@ func awsAwsjson11_serializeOpDocumentListGroupMembershipsInput(v *ListGroupMembe
 		ok.String(*v.IdentityStoreId)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1785,9 +1785,9 @@ func awsAwsjson11_serializeOpDocumentListGroupsInput(v *ListGroupsInput, value s
 		ok.String(*v.IdentityStoreId)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1814,9 +1814,9 @@ func awsAwsjson11_serializeOpDocumentListUsersInput(v *ListUsersInput, value smi
 		ok.String(*v.IdentityStoreId)
 	}
 
-	if v.MaxResults != nil {
+	if v.MaxResults != 0 {
 		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
+		ok.Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
