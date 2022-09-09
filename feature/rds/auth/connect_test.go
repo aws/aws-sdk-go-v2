@@ -3,6 +3,7 @@ package auth_test
 import (
 	"context"
 	"regexp"
+	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -15,27 +16,51 @@ func TestBuildAuthToken(t *testing.T) {
 		region        string
 		user          string
 		expectedRegex string
+		expectedError string
 	}{
 		{
-			"https://prod-instance.us-east-1.rds.amazonaws.com:3306",
-			"us-west-2",
-			"mysqlUser",
-			`^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+			endpoint:      "https://prod-instance.us-east-1.rds.amazonaws.com:3306",
+			region:        "us-west-2",
+			user:          "mysqlUser",
+			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
 		},
 		{
-			"prod-instance.us-east-1.rds.amazonaws.com:3306",
-			"us-west-2",
-			"mysqlUser",
-			`^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com:3306",
+			region:        "us-west-2",
+			user:          "mysqlUser",
+			expectedRegex: `^prod-instance\.us-east-1\.rds\.amazonaws\.com:3306\?Action=connect.*?DBUser=mysqlUser.*`,
+		},
+		{
+			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com",
+			region:        "us-west-2",
+			user:          "mysqlUser",
+			expectedError: "port",
+		},
+		{
+			endpoint:      "prod-instance.us-east-1.rds.amazonaws.com:kakasdkasd",
+			region:        "us-west-2",
+			user:          "mysqlUser",
+			expectedError: "port",
 		},
 	}
 
 	for _, c := range cases {
 		creds := &staticCredentials{AccessKey: "AKID", SecretKey: "SECRET", Session: "SESSION"}
 		url, err := auth.BuildAuthToken(context.Background(), c.endpoint, c.region, c.user, creds)
-		if err != nil {
-			t.Errorf("expect no error, got %v", err)
+		if len(c.expectedError) > 0 {
+			if err != nil {
+				if !strings.Contains(err.Error(), c.expectedError) {
+					t.Fatalf("expect err: %v, actual err: %v", c.expectedError, err)
+				} else {
+					continue
+				}
+			} else {
+				t.Fatalf("expect err: %v, actual err: %v", c.expectedError, err)
+			}
+		} else if err != nil {
+			t.Fatalf("expect no err, got: %v", err)
 		}
+
 		if re, a := regexp.MustCompile(c.expectedRegex), url; !re.MatchString(a) {
 			t.Errorf("expect %s to match %s", re, a)
 		}
