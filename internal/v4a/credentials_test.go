@@ -9,9 +9,15 @@ import (
 
 type rotatingCredsProvider struct {
 	count int
+	fail  chan struct{}
 }
 
 func (r *rotatingCredsProvider) Retrieve(ctx context.Context) (aws.Credentials, error) {
+	select {
+	case <-r.fail:
+		return aws.Credentials{}, fmt.Errorf("rotatingCredsProvider error")
+	default:
+	}
 	credentials := aws.Credentials{
 		AccessKeyID:     fmt.Sprintf("ACCESS_KEY_ID_%d", r.count),
 		SecretAccessKey: fmt.Sprintf("SECRET_ACCESS_KEY_%d", r.count),
@@ -21,7 +27,10 @@ func (r *rotatingCredsProvider) Retrieve(ctx context.Context) (aws.Credentials, 
 }
 
 func TestSymmetricCredentialAdaptor(t *testing.T) {
-	provider := &rotatingCredsProvider{}
+	provider := &rotatingCredsProvider{
+		count: 0,
+		fail:  make(chan struct{}),
+	}
 
 	adaptor := &SymmetricCredentialAdaptor{SymmetricProvider: provider}
 
@@ -57,5 +66,11 @@ func TestSymmetricCredentialAdaptor(t *testing.T) {
 
 	if load := adaptor.asymmetric.Load(); load.(*Credentials) != nil {
 		t.Errorf("expect asymmetric credentials to be nil")
+	}
+
+	close(provider.fail) // All requests to the original provider will now fail from this point-on.
+	_, err := adaptor.Retrieve(context.Background())
+	if err == nil {
+		t.Error("expect error, got nil")
 	}
 }
