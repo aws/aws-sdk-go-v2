@@ -1,0 +1,8 @@
+{
+    "id": "363e17c6-1715-4bf4-b6f4-f27355dce260",
+    "type": "bugfix",
+    "description": "Fixes an issues where an error from an underlying SigV4 credential provider would not be surfaced from the SigV4a credential provider. Contribution by [sakthipriyan-aqfer](https://github.com/sakthipriyan-aqfer).",
+    "modules": [
+        "internal/v4a"
+    ]
+}
