@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -44,6 +45,11 @@ type BuildAuthTokenOptions struct{}
 // See http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 // for more information on using IAM database authentication with RDS.
 func BuildAuthToken(ctx context.Context, endpoint, region, dbUser string, creds aws.CredentialsProvider, optFns ...func(options *BuildAuthTokenOptions)) (string, error) {
+	_, port := validateURL(endpoint)
+	if port == "" {
+		return "", fmt.Errorf("the provided endpoint is missing a port, or the provided port is invalid")
+	}
+
 	o := BuildAuthTokenOptions{}
 
 	for _, fn := range optFns {
@@ -93,4 +99,27 @@ func BuildAuthToken(ctx context.Context, endpoint, region, dbUser string, creds 
 	}
 
 	return url, nil
+}
+
+func validateURL(hostPort string) (host, port string) {
+	colon := strings.LastIndexByte(hostPort, ':')
+	if colon != -1 {
+		host, port = hostPort[:colon], hostPort[colon+1:]
+	}
+	if !validatePort(port) {
+		port = ""
+		return
+	}
+	if strings.HasPrefix(host, "[") && strings.HasSuffix(host, "]") {
+		host = host[1 : len(host)-1]
+	}
+
+	return
+}
+
+func validatePort(port string) bool {
+	if _, err := strconv.Atoi(port); err == nil {
+		return true
+	}
+	return false
 }
