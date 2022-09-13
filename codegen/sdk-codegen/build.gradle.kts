@@ -24,6 +24,7 @@ val smithyVersion: String by project
 buildscript {
     val smithyVersion: String by project
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
