@@ -6246,6 +6246,9 @@ func validateOpUnlabelParameterVersionInput(v *UnlabelParameterVersionInput) err
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.ParameterVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterVersion"))
+	}
 	if v.Labels == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Labels"))
 	}

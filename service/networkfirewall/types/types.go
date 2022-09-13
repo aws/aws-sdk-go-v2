@@ -1108,7 +1108,7 @@ type StatefulRuleGroupReference struct {
 	// priority settings of your rule groups at any time. To make it easier to insert
 	// rule groups later, number them so there's a wide range in between, for example
 	// use 100, 200, and so on.
-	Priority int32
+	Priority *int32
 
 	noSmithyDocumentSerde
 }

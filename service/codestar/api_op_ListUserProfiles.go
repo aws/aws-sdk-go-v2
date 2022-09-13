@@ -30,7 +30,7 @@ func (c *Client) ListUserProfiles(ctx context.Context, params *ListUserProfilesI
 type ListUserProfilesInput struct {
 
 	// The maximum number of results to return in a response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.

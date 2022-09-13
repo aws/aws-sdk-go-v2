@@ -48,7 +48,7 @@ type GetParametersByPathInput struct {
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
@@ -63,10 +63,10 @@ type GetParametersByPathInput struct {
 	// permission to access path /a, then the user can also access /a/b. Even if a user
 	// has explicitly been denied access in IAM for parameter /a/b, they can still call
 	// the GetParametersByPath API operation recursively for /a and view /a/b.
-	Recursive bool
+	Recursive *bool
 
 	// Retrieve all parameters in a hierarchy with their value decrypted.
-	WithDecryption bool
+	WithDecryption *bool
 
 	noSmithyDocumentSerde
 }
@@ -185,8 +185,8 @@ func NewGetParametersByPathPaginator(client GetParametersByPathAPIClient, params
 	}
 
 	options := GetParametersByPathPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -216,7 +216,11 @@ func (p *GetParametersByPathPaginator) NextPage(ctx context.Context, optFns ...f
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetParametersByPath(ctx, &params, optFns...)
 	if err != nil {

@@ -3252,7 +3252,7 @@ func awsAwsjson11_deserializeDocumentCognitoIdentityProvider(v **types.CognitoId
 				if !ok {
 					return fmt.Errorf("expected CognitoIdentityProviderTokenCheck to be of type *bool, got %T instead", value)
 				}
-				sv.ServerSideTokenCheck = jtv
+				sv.ServerSideTokenCheck = ptr.Bool(jtv)
 			}
 
 		default:

@@ -18965,7 +18965,7 @@ func awsAwsjson11_deserializeDocumentSchemaAttributeType(v **types.SchemaAttribu
 				if !ok {
 					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
-				sv.DeveloperOnlyAttribute = jtv
+				sv.DeveloperOnlyAttribute = ptr.Bool(jtv)
 			}
 
 		case "Mutable":
@@ -18974,7 +18974,7 @@ func awsAwsjson11_deserializeDocumentSchemaAttributeType(v **types.SchemaAttribu
 				if !ok {
 					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
-				sv.Mutable = jtv
+				sv.Mutable = ptr.Bool(jtv)
 			}
 
 		case "Name":
@@ -18997,7 +18997,7 @@ func awsAwsjson11_deserializeDocumentSchemaAttributeType(v **types.SchemaAttribu
 				if !ok {
 					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
-				sv.Required = jtv
+				sv.Required = ptr.Bool(jtv)
 			}
 
 		case "StringAttributeConstraints":
@@ -20661,7 +20661,7 @@ func awsAwsjson11_deserializeDocumentUserPoolClientType(v **types.UserPoolClient
 				if !ok {
 					return fmt.Errorf("expected BooleanType to be of type *bool, got %T instead", value)
 				}
-				sv.AllowedOAuthFlowsUserPoolClient = jtv
+				sv.AllowedOAuthFlowsUserPoolClient = ptr.Bool(jtv)
 			}
 
 		case "AllowedOAuthScopes":

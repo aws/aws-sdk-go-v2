@@ -3191,9 +3191,9 @@ func awsAwsjson11_serializeOpDocumentGetReservationCoverageInput(v *GetReservati
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Metrics != nil {
@@ -3309,9 +3309,9 @@ func awsAwsjson11_serializeOpDocumentGetReservationUtilizationInput(v *GetReserv
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextPageToken != nil {
@@ -3395,9 +3395,9 @@ func awsAwsjson11_serializeOpDocumentGetSavingsPlansCoverageInput(v *GetSavingsP
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Metrics != nil {
@@ -3496,9 +3496,9 @@ func awsAwsjson11_serializeOpDocumentGetSavingsPlansUtilizationDetailsInput(v *G
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3644,9 +3644,9 @@ func awsAwsjson11_serializeOpDocumentListCostAllocationTagsInput(v *ListCostAllo
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3683,9 +3683,9 @@ func awsAwsjson11_serializeOpDocumentListCostCategoryDefinitionsInput(v *ListCos
 		ok.String(*v.EffectiveOn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

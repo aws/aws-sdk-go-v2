@@ -76,13 +76,13 @@ type DeleteSecretInput struct {
 	// RecoveryWindowInDays parameter. If you delete a secret with the
 	// ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the
 	// secret. You lose the secret permanently.
-	ForceDeleteWithoutRecovery bool
+	ForceDeleteWithoutRecovery *bool
 
 	// The number of days from 7 to 30 that Secrets Manager waits before permanently
 	// deleting the secret. You can't use both this parameter and
 	// ForceDeleteWithoutRecovery in the same call. If you don't use either, then
 	// Secrets Manager defaults to a 30 day recovery window.
-	RecoveryWindowInDays int64
+	RecoveryWindowInDays *int64
 
 	noSmithyDocumentSerde
 }

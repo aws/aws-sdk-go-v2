@@ -1306,7 +1306,7 @@ func awsAwsjson11_deserializeDocumentTimeoutConfig(v **types.TimeoutConfig, valu
 				if err != nil {
 					return err
 				}
-				sv.MaxLifetimeTimeoutMinutes = int32(i64)
+				sv.MaxLifetimeTimeoutMinutes = ptr.Int32(int32(i64))
 			}
 
 		default:

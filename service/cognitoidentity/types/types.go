@@ -23,7 +23,7 @@ type CognitoIdentityProvider struct {
 	// user has not been globally signed out or deleted before the identity pool
 	// provides an OIDC token or AWS credentials for the user. If the user is signed
 	// out or deleted, the identity pool will return a 400 Not Authorized error.
-	ServerSideTokenCheck bool
+	ServerSideTokenCheck *bool
 
 	noSmithyDocumentSerde
 }

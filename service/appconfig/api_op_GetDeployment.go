@@ -38,7 +38,7 @@ type GetDeploymentInput struct {
 	// The sequence number of the deployment.
 	//
 	// This member is required.
-	DeploymentNumber int32
+	DeploymentNumber *int32
 
 	// The ID of the environment that includes the deployment you want to get.
 	//

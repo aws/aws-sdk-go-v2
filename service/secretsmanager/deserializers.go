@@ -3756,7 +3756,7 @@ func awsAwsjson11_deserializeDocumentRotationRulesType(v **types.RotationRulesTy
 				if err != nil {
 					return err
 				}
-				sv.AutomaticallyAfterDays = i64
+				sv.AutomaticallyAfterDays = ptr.Int64(i64)
 			}
 
 		case "Duration":
@@ -3948,7 +3948,7 @@ func awsAwsjson11_deserializeDocumentSecretListEntry(v **types.SecretListEntry, 
 				if !ok {
 					return fmt.Errorf("expected RotationEnabledType to be of type *bool, got %T instead", value)
 				}
-				sv.RotationEnabled = jtv
+				sv.RotationEnabled = ptr.Bool(jtv)
 			}
 
 		case "RotationLambdaARN":
@@ -4772,7 +4772,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeSecretOutput(v **DescribeSecretOu
 				if !ok {
 					return fmt.Errorf("expected RotationEnabledType to be of type *bool, got %T instead", value)
 				}
-				sv.RotationEnabled = jtv
+				sv.RotationEnabled = ptr.Bool(jtv)
 			}
 
 		case "RotationLambdaARN":

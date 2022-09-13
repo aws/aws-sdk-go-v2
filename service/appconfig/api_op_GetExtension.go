@@ -36,7 +36,7 @@ type GetExtensionInput struct {
 
 	// The extension version number. If no version number was defined, AppConfig uses
 	// the highest version.
-	VersionNumber int32
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

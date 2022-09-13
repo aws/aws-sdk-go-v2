@@ -52,7 +52,7 @@ type CreateExtensionAssociationInput struct {
 
 	// The version number of the extension. If not specified, AppConfig uses the
 	// maximum version of the extension.
-	ExtensionVersionNumber int32
+	ExtensionVersionNumber *int32
 
 	// The parameter names and values defined in the extensions. Extension parameters
 	// marked Required must be entered for this field.

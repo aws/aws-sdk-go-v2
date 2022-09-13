@@ -36,7 +36,7 @@ type DeleteExtensionInput struct {
 
 	// A specific version of an extension to delete. If omitted, the highest version is
 	// deleted.
-	VersionNumber int32
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

@@ -420,7 +420,7 @@ type DeploymentComponentUpdatePolicy struct {
 	// The amount of time in seconds that each component on a device has to report that
 	// it's safe to update. If the component waits for longer than this timeout, then
 	// the deployment proceeds on the device. Default: 60
-	TimeoutInSeconds int32
+	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -441,7 +441,7 @@ type DeploymentConfigurationValidationPolicy struct {
 	// The amount of time in seconds that a component can validate its configuration
 	// updates. If the validation time exceeds this timeout, then the deployment
 	// proceeds for the device. Default: 30
-	TimeoutInSeconds int32
+	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -655,7 +655,7 @@ type IoTJobExecutionsRolloutConfig struct {
 
 	// The maximum number of devices that receive a pending job notification, per
 	// minute.
-	MaximumPerMinute int32
+	MaximumPerMinute *int32
 
 	noSmithyDocumentSerde
 }
@@ -692,11 +692,11 @@ type IoTJobRateIncreaseCriteria struct {
 
 	// The number of devices to receive the job notification before the rollout rate
 	// increases.
-	NumberOfNotifiedThings int32
+	NumberOfNotifiedThings *int32
 
 	// The number of devices to successfully run the configuration job before the
 	// rollout rate increases.
-	NumberOfSucceededThings int32
+	NumberOfSucceededThings *int32
 
 	noSmithyDocumentSerde
 }
@@ -709,7 +709,7 @@ type IoTJobTimeoutConfig struct {
 	// change to a terminal state before the time expires, then the job status is set
 	// to TIMED_OUT. The timeout interval must be between 1 minute and 7 days (10080
 	// minutes).
-	InProgressTimeoutInMinutes int64
+	InProgressTimeoutInMinutes *int64
 
 	noSmithyDocumentSerde
 }
@@ -722,11 +722,11 @@ type LambdaContainerParams struct {
 	Devices []LambdaDeviceMount
 
 	// The memory size of the container, expressed in kilobytes. Default: 16384 (16 MB)
-	MemorySizeInKB int32
+	MemorySizeInKB *int32
 
 	// Whether or not the container can read information from the device's /sys folder.
 	// Default: false
-	MountROSysfs bool
+	MountROSysfs *bool
 
 	// The list of volumes that the container can access.
 	Volumes []LambdaVolumeMount
@@ -745,7 +745,7 @@ type LambdaDeviceMount struct {
 
 	// Whether or not to add the component's system user as an owner of the device.
 	// Default: false
-	AddGroupOwner bool
+	AddGroupOwner *bool
 
 	// The permission to access the device: read/only (ro) or read/write (rw). Default:
 	// ro
@@ -804,16 +804,16 @@ type LambdaExecutionParameters struct {
 
 	// The maximum amount of time in seconds that a non-pinned Lambda function can idle
 	// before the IoT Greengrass Core software stops its process.
-	MaxIdleTimeInSeconds int32
+	MaxIdleTimeInSeconds *int32
 
 	// The maximum number of instances that a non-pinned Lambda function can run at the
 	// same time.
-	MaxInstancesCount int32
+	MaxInstancesCount *int32
 
 	// The maximum size of the message queue for the Lambda function component. The IoT
 	// Greengrass core stores messages in a FIFO (first-in-first-out) queue until it
 	// can run the Lambda function to consume each message.
-	MaxQueueSize int32
+	MaxQueueSize *int32
 
 	// Whether or not the Lambda function is pinned, or long-lived.
 	//
@@ -827,15 +827,15 @@ type LambdaExecutionParameters struct {
 	// of the function.
 	//
 	// Default: true
-	Pinned bool
+	Pinned *bool
 
 	// The interval in seconds at which a pinned (also known as long-lived) Lambda
 	// function component sends status updates to the Lambda manager component.
-	StatusTimeoutInSeconds int32
+	StatusTimeoutInSeconds *int32
 
 	// The maximum amount of time in seconds that the Lambda function can process a
 	// work item.
-	TimeoutInSeconds int32
+	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -904,7 +904,7 @@ type LambdaVolumeMount struct {
 
 	// Whether or not to add the IoT Greengrass user group as an owner of the volume.
 	// Default: false
-	AddGroupOwner bool
+	AddGroupOwner *bool
 
 	// The permission to access the volume: read/only (ro) or read/write (rw). Default:
 	// ro

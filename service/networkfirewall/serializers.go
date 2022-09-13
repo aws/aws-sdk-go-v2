@@ -2488,9 +2488,9 @@ func awsAwsjson10_serializeDocumentStatefulRuleGroupReference(v *types.StatefulR
 		}
 	}
 
-	if v.Priority != 0 {
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	if v.ResourceArn != nil {

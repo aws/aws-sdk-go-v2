@@ -25387,7 +25387,7 @@ func awsRestjson1_deserializeDocumentBorderStyle(v **types.BorderStyle, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Show = jtv
+				sv.Show = ptr.Bool(jtv)
 			}
 
 		default:
@@ -28955,7 +28955,7 @@ func awsRestjson1_deserializeDocumentGutterStyle(v **types.GutterStyle, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Show = jtv
+				sv.Show = ptr.Bool(jtv)
 			}
 
 		default:
@@ -29321,7 +29321,7 @@ func awsRestjson1_deserializeDocumentIngestion(v **types.Ingestion, value interf
 				if err != nil {
 					return err
 				}
-				sv.IngestionSizeInBytes = i64
+				sv.IngestionSizeInBytes = ptr.Int64(i64)
 			}
 
 		case "IngestionStatus":
@@ -29343,7 +29343,7 @@ func awsRestjson1_deserializeDocumentIngestion(v **types.Ingestion, value interf
 				if err != nil {
 					return err
 				}
-				sv.IngestionTimeInSeconds = i64
+				sv.IngestionTimeInSeconds = ptr.Int64(i64)
 			}
 
 		case "QueueInfo":
@@ -29828,7 +29828,7 @@ func awsRestjson1_deserializeDocumentJoinKeyProperties(v **types.JoinKeyProperti
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.UniqueKey = jtv
+				sv.UniqueKey = ptr.Bool(jtv)
 			}
 
 		default:
@@ -30150,7 +30150,7 @@ func awsRestjson1_deserializeDocumentMarginStyle(v **types.MarginStyle, value in
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Show = jtv
+				sv.Show = ptr.Bool(jtv)
 			}
 
 		default:
@@ -31688,7 +31688,7 @@ func awsRestjson1_deserializeDocumentRowInfo(v **types.RowInfo, value interface{
 				if err != nil {
 					return err
 				}
-				sv.RowsDropped = i64
+				sv.RowsDropped = ptr.Int64(i64)
 			}
 
 		case "RowsIngested":
@@ -31701,7 +31701,7 @@ func awsRestjson1_deserializeDocumentRowInfo(v **types.RowInfo, value interface{
 				if err != nil {
 					return err
 				}
-				sv.RowsIngested = i64
+				sv.RowsIngested = ptr.Int64(i64)
 			}
 
 		case "TotalRowsInDataset":
@@ -31714,7 +31714,7 @@ func awsRestjson1_deserializeDocumentRowInfo(v **types.RowInfo, value interface{
 				if err != nil {
 					return err
 				}
-				sv.TotalRowsInDataset = i64
+				sv.TotalRowsInDataset = ptr.Int64(i64)
 			}
 
 		default:
@@ -34710,7 +34710,7 @@ func awsRestjson1_deserializeDocumentUploadSettings(v **types.UploadSettings, va
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.ContainsHeader = jtv
+				sv.ContainsHeader = ptr.Bool(jtv)
 			}
 
 		case "Delimiter":
@@ -34741,7 +34741,7 @@ func awsRestjson1_deserializeDocumentUploadSettings(v **types.UploadSettings, va
 				if err != nil {
 					return err
 				}
-				sv.StartFromRow = int32(i64)
+				sv.StartFromRow = ptr.Int32(int32(i64))
 			}
 
 		case "TextQualifier":

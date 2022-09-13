@@ -35,7 +35,7 @@ type ListResourcesInput struct {
 	ProjectId *string
 
 	// The maximum amount of data that can be contained in a single set of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.

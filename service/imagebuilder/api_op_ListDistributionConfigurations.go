@@ -34,7 +34,7 @@ type ListDistributionConfigurationsInput struct {
 	Filters []types.Filter
 
 	// The maximum items to return in a request.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -159,8 +159,8 @@ func NewListDistributionConfigurationsPaginator(client ListDistributionConfigura
 	}
 
 	options := ListDistributionConfigurationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -190,7 +190,11 @@ func (p *ListDistributionConfigurationsPaginator) NextPage(ctx context.Context, 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListDistributionConfigurations(ctx, &params, optFns...)
 	if err != nil {

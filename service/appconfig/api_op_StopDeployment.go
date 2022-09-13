@@ -39,7 +39,7 @@ type StopDeploymentInput struct {
 	// The sequence number of the deployment.
 	//
 	// This member is required.
-	DeploymentNumber int32
+	DeploymentNumber *int32
 
 	// The environment ID.
 	//

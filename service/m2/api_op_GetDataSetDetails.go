@@ -51,7 +51,7 @@ type GetDataSetDetailsOutput struct {
 	DataSetName *string
 
 	// The size of the block on disk.
-	Blocksize int32
+	Blocksize *int32
 
 	// The timestamp when the data set was created.
 	CreationTime *time.Time
@@ -70,7 +70,7 @@ type GetDataSetDetailsOutput struct {
 	Location *string
 
 	// The length of records in the data set.
-	RecordLength int32
+	RecordLength *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

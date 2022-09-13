@@ -3431,9 +3431,9 @@ func awsRestjson1_serializeDocumentSAPODataConnectorProfileProperties(v *types.S
 		}
 	}
 
-	{
+	if v.PortNumber != nil {
 		ok := object.Key("portNumber")
-		ok.Integer(v.PortNumber)
+		ok.Integer(*v.PortNumber)
 	}
 
 	if v.PrivateLinkServiceName != nil {
@@ -3508,9 +3508,9 @@ func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.Scheduled
 		ok.Double(smithytime.FormatEpochSeconds(*v.FirstExecutionFrom))
 	}
 
-	if v.FlowErrorDeactivationThreshold != 0 {
+	if v.FlowErrorDeactivationThreshold != nil {
 		ok := object.Key("flowErrorDeactivationThreshold")
-		ok.Integer(v.FlowErrorDeactivationThreshold)
+		ok.Integer(*v.FlowErrorDeactivationThreshold)
 	}
 
 	if v.ScheduleEndTime != nil {
@@ -3523,9 +3523,9 @@ func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.Scheduled
 		ok.String(*v.ScheduleExpression)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("scheduleOffset")
-		ok.Long(v.ScheduleOffset)
+		ok.Long(*v.ScheduleOffset)
 	}
 
 	if v.ScheduleStartTime != nil {

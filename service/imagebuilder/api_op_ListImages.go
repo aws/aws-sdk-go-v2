@@ -51,7 +51,7 @@ type ListImagesInput struct {
 	IncludeDeprecated *bool
 
 	// The maximum items to return in a request.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -183,8 +183,8 @@ func NewListImagesPaginator(client ListImagesAPIClient, params *ListImagesInput,
 	}
 
 	options := ListImagesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -214,7 +214,11 @@ func (p *ListImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Opti
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListImages(ctx, &params, optFns...)
 	if err != nil {

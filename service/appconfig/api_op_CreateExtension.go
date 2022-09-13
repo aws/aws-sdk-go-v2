@@ -54,7 +54,7 @@ type CreateExtensionInput struct {
 	// You can omit this field when you create an extension. When you create a new
 	// version, specify the most recent current version number. For example, you create
 	// version 3, enter 2 for this field.
-	LatestVersionNumber int32
+	LatestVersionNumber *int32
 
 	// The parameters accepted by the extension. You specify parameter values when you
 	// associate the extension to an AppConfig resource by using the

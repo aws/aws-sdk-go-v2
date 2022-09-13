@@ -41,20 +41,20 @@ type UpdateMaintenanceWindowInput struct {
 
 	// Whether targets must be registered with the maintenance window before tasks can
 	// be defined for those targets.
-	AllowUnassociatedTargets bool
+	AllowUnassociatedTargets *bool
 
 	// The number of hours before the end of the maintenance window that Amazon Web
 	// Services Systems Manager stops scheduling new tasks for execution.
-	Cutoff int32
+	Cutoff *int32
 
 	// An optional description for the update request.
 	Description *string
 
 	// The duration of the maintenance window in hours.
-	Duration int32
+	Duration *int32
 
 	// Whether the maintenance window is enabled.
-	Enabled bool
+	Enabled *bool
 
 	// The date and time, in ISO-8601 Extended format, for when you want the
 	// maintenance window to become inactive. EndDate allows you to set a date and time
@@ -67,7 +67,7 @@ type UpdateMaintenanceWindowInput struct {
 	// If True, then all fields that are required by the CreateMaintenanceWindow
 	// operation are also required for this API request. Optional fields that aren't
 	// specified are set to null.
-	Replace bool
+	Replace *bool
 
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
@@ -77,7 +77,7 @@ type UpdateMaintenanceWindowInput struct {
 	// cron expression schedules a maintenance window to run the third Tuesday of every
 	// month at 11:30 PM. cron(30 23 ? * TUE#3 *) If the schedule offset is 2, the
 	// maintenance window won't run until two days later.
-	ScheduleOffset int32
+	ScheduleOffset *int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
@@ -125,7 +125,7 @@ type UpdateMaintenanceWindowOutput struct {
 
 	// The number of days to wait to run a maintenance window after the scheduled cron
 	// expression date and time.
-	ScheduleOffset int32
+	ScheduleOffset *int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:

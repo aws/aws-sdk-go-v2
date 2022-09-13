@@ -44,7 +44,7 @@ type ListDeploymentsInput struct {
 	// items that have not yet been returned, the response will include a non-null
 	// NextToken that you can provide in a subsequent call to get the next set of
 	// results.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token returned by a prior call to this operation indicating the next set of
 	// results to be returned. If not specified, the operation will return the first
@@ -169,8 +169,8 @@ func NewListDeploymentsPaginator(client ListDeploymentsAPIClient, params *ListDe
 	}
 
 	options := ListDeploymentsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -200,7 +200,11 @@ func (p *ListDeploymentsPaginator) NextPage(ctx context.Context, optFns ...func(
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListDeployments(ctx, &params, optFns...)
 	if err != nil {

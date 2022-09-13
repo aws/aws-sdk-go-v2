@@ -47,7 +47,7 @@ type ListEdgeDeploymentPlansInput struct {
 	LastModifiedTimeBefore *time.Time
 
 	// The maximum number of results to select (50 by default).
-	MaxResults int32
+	MaxResults *int32
 
 	// Selects edge deployment plans with names containing this name.
 	NameContains *string
@@ -178,8 +178,8 @@ func NewListEdgeDeploymentPlansPaginator(client ListEdgeDeploymentPlansAPIClient
 	}
 
 	options := ListEdgeDeploymentPlansPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -209,7 +209,11 @@ func (p *ListEdgeDeploymentPlansPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListEdgeDeploymentPlans(ctx, &params, optFns...)
 	if err != nil {

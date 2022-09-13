@@ -1457,7 +1457,7 @@ type Variable struct {
 	DatasetContentVersionValue *DatasetContentVersionValue
 
 	// The value of the variable as a double (numeric).
-	DoubleValue float64
+	DoubleValue *float64
 
 	// The value of the variable as a structure that specifies an output file URI.
 	OutputFileUriValue *OutputFileUriValue

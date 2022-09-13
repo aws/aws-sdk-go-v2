@@ -37,7 +37,7 @@ type ActionParameter struct {
 	Description *string
 
 	// Indicates whether the parameter is required.
-	Required bool
+	Required *bool
 
 	noSmithyDocumentSerde
 }
@@ -609,7 +609,7 @@ type TargetResourceTypeParameter struct {
 	Description *string
 
 	// Indicates whether the parameter is required.
-	Required bool
+	Required *bool
 
 	noSmithyDocumentSerde
 }

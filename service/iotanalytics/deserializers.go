@@ -10289,7 +10289,7 @@ func awsRestjson1_deserializeDocumentVariable(v **types.Variable, value interfac
 					if err != nil {
 						return err
 					}
-					sv.DoubleValue = f64
+					sv.DoubleValue = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -10307,7 +10307,7 @@ func awsRestjson1_deserializeDocumentVariable(v **types.Variable, value interfac
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.DoubleValue = f64
+					sv.DoubleValue = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected DoubleValue to be a JSON Number, got %T instead", value)

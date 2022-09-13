@@ -131,7 +131,7 @@ type SendCommandInput struct {
 
 	// If this time is reached and the command hasn't already started running, it won't
 	// run.
-	TimeoutSeconds int32
+	TimeoutSeconds *int32
 
 	noSmithyDocumentSerde
 }

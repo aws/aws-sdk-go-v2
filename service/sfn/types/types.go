@@ -64,7 +64,7 @@ type ActivityScheduledEventDetails struct {
 	Resource *string
 
 	// The maximum allowed duration between two heartbeats for the activity task.
-	HeartbeatInSeconds int64
+	HeartbeatInSeconds *int64
 
 	// The JSON data input to the activity task. Length constraints apply to the
 	// payload size, and are expressed as bytes in UTF-8 encoding.
@@ -74,7 +74,7 @@ type ActivityScheduledEventDetails struct {
 	InputDetails *HistoryEventExecutionDataDetails
 
 	// The maximum allowed duration of the activity task.
-	TimeoutInSeconds int64
+	TimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
 }
@@ -438,7 +438,7 @@ type LambdaFunctionScheduledEventDetails struct {
 	InputDetails *HistoryEventExecutionDataDetails
 
 	// The maximum allowed duration of the lambda function.
-	TimeoutInSeconds int64
+	TimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
 }
@@ -706,10 +706,10 @@ type TaskScheduledEventDetails struct {
 	ResourceType *string
 
 	// The maximum allowed duration between two heartbeats for the task.
-	HeartbeatInSeconds int64
+	HeartbeatInSeconds *int64
 
 	// The maximum allowed duration of the task.
-	TimeoutInSeconds int64
+	TimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
 }

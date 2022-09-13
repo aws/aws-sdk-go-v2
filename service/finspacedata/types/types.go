@@ -65,12 +65,12 @@ type ChangesetSummary struct {
 	// Beginning time from which the Changeset is active. The value is determined as
 	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
 	// 12:00:00 PM UTC is specified as 1635768000000.
-	ActiveFromTimestamp int64
+	ActiveFromTimestamp *int64
 
 	// Time until which the Changeset is active. The value is determined as epoch time
 	// in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
-	ActiveUntilTimestamp int64
+	ActiveUntilTimestamp *int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
 	//
@@ -302,7 +302,7 @@ type DataViewSummary struct {
 	// Time range to use for the Dataview. The value is determined as epoch time in
 	// milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM
 	// UTC is specified as 1635768000000.
-	AsOfTimestamp int64
+	AsOfTimestamp *int64
 
 	// The flag to indicate Dataview should be updated automatically.
 	AutoUpdate bool

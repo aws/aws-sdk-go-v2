@@ -2255,7 +2255,7 @@ type VirtualGatewayHttpConnectionPool struct {
 
 	// Number of overflowing requests after max_connections Envoy will queue to
 	// upstream cluster.
-	MaxPendingRequests int32
+	MaxPendingRequests *int32
 
 	noSmithyDocumentSerde
 }
@@ -2780,7 +2780,7 @@ type VirtualNodeHttpConnectionPool struct {
 
 	// Number of overflowing requests after max_connections Envoy will queue to
 	// upstream cluster.
-	MaxPendingRequests int32
+	MaxPendingRequests *int32
 
 	noSmithyDocumentSerde
 }

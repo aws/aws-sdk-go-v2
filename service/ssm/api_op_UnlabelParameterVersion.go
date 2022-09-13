@@ -42,7 +42,7 @@ type UnlabelParameterVersionInput struct {
 	// labels from. If it isn't present, the call will fail.
 	//
 	// This member is required.
-	ParameterVersion int64
+	ParameterVersion *int64
 
 	noSmithyDocumentSerde
 }

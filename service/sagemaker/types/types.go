@@ -4290,10 +4290,10 @@ type FileSource struct {
 type FileSystemConfig struct {
 
 	// The default POSIX group ID (GID). If not specified, defaults to 100.
-	DefaultGid int32
+	DefaultGid *int32
 
 	// The default POSIX user ID (UID). If not specified, defaults to 1000.
-	DefaultUid int32
+	DefaultUid *int32
 
 	// The path within the image to mount the user's EFS home directory. The directory
 	// should be empty. If not specified, defaults to /home/sagemaker-user.

@@ -38,7 +38,7 @@ type ListDevicesInput struct {
 	LatestHeartbeatAfter *time.Time
 
 	// Maximum number of results to select.
-	MaxResults int32
+	MaxResults *int32
 
 	// A filter that searches devices that contains this name in any of their models.
 	ModelName *string
@@ -160,8 +160,8 @@ func NewListDevicesPaginator(client ListDevicesAPIClient, params *ListDevicesInp
 	}
 
 	options := ListDevicesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -191,7 +191,11 @@ func (p *ListDevicesPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListDevices(ctx, &params, optFns...)
 	if err != nil {

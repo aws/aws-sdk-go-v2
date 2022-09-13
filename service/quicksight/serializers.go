@@ -5565,8 +5565,8 @@ func awsRestjson1_serializeOpHttpBindingsListAnalysesInput(v *ListAnalysesInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -5631,8 +5631,8 @@ func awsRestjson1_serializeOpHttpBindingsListDashboardsInput(v *ListDashboardsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -5706,8 +5706,8 @@ func awsRestjson1_serializeOpHttpBindingsListDashboardVersionsInput(v *ListDashb
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -5772,8 +5772,8 @@ func awsRestjson1_serializeOpHttpBindingsListDataSetsInput(v *ListDataSetsInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -5838,8 +5838,8 @@ func awsRestjson1_serializeOpHttpBindingsListDataSourcesInput(v *ListDataSources
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -5913,8 +5913,8 @@ func awsRestjson1_serializeOpHttpBindingsListFolderMembersInput(v *ListFolderMem
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -5979,8 +5979,8 @@ func awsRestjson1_serializeOpHttpBindingsListFoldersInput(v *ListFoldersInput, e
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6054,8 +6054,8 @@ func awsRestjson1_serializeOpHttpBindingsListGroupMembershipsInput(v *ListGroupM
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -6129,8 +6129,8 @@ func awsRestjson1_serializeOpHttpBindingsListGroupsInput(v *ListGroupsInput, enc
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -6215,8 +6215,8 @@ func awsRestjson1_serializeOpHttpBindingsListIAMPolicyAssignmentsInput(v *ListIA
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -6302,8 +6302,8 @@ func awsRestjson1_serializeOpHttpBindingsListIAMPolicyAssignmentsForUserInput(v 
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -6395,8 +6395,8 @@ func awsRestjson1_serializeOpHttpBindingsListIngestionsInput(v *ListIngestionsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6461,8 +6461,8 @@ func awsRestjson1_serializeOpHttpBindingsListNamespacesInput(v *ListNamespacesIn
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6585,8 +6585,8 @@ func awsRestjson1_serializeOpHttpBindingsListTemplateAliasesInput(v *ListTemplat
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-result").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-result").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6660,8 +6660,8 @@ func awsRestjson1_serializeOpHttpBindingsListTemplatesInput(v *ListTemplatesInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-result").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-result").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6726,8 +6726,8 @@ func awsRestjson1_serializeOpHttpBindingsListTemplateVersionsInput(v *ListTempla
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6801,8 +6801,8 @@ func awsRestjson1_serializeOpHttpBindingsListThemeAliasesInput(v *ListThemeAlias
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-result").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-result").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6876,8 +6876,8 @@ func awsRestjson1_serializeOpHttpBindingsListThemesInput(v *ListThemesInput, enc
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -6946,8 +6946,8 @@ func awsRestjson1_serializeOpHttpBindingsListThemeVersionsInput(v *ListThemeVers
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -7021,8 +7021,8 @@ func awsRestjson1_serializeOpHttpBindingsListUserGroupsInput(v *ListUserGroupsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -7105,8 +7105,8 @@ func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encod
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -7407,9 +7407,9 @@ func awsRestjson1_serializeOpDocumentSearchAnalysesInput(v *SearchAnalysesInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -7500,9 +7500,9 @@ func awsRestjson1_serializeOpDocumentSearchDashboardsInput(v *SearchDashboardsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -7593,9 +7593,9 @@ func awsRestjson1_serializeOpDocumentSearchFoldersInput(v *SearchFoldersInput, v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -7672,8 +7672,8 @@ func awsRestjson1_serializeOpHttpBindingsSearchGroupsInput(v *SearchGroupsInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("max-results").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
 	}
 
 	if v.Namespace == nil || len(*v.Namespace) == 0 {
@@ -10575,9 +10575,9 @@ func awsRestjson1_serializeDocumentBorderStyle(v *types.BorderStyle, value smith
 	object := value.Object()
 	defer object.Close()
 
-	if v.Show {
+	if v.Show != nil {
 		ok := object.Key("Show")
-		ok.Boolean(v.Show)
+		ok.Boolean(*v.Show)
 	}
 
 	return nil
@@ -11508,9 +11508,9 @@ func awsRestjson1_serializeDocumentGutterStyle(v *types.GutterStyle, value smith
 	object := value.Object()
 	defer object.Close()
 
-	if v.Show {
+	if v.Show != nil {
 		ok := object.Key("Show")
-		ok.Boolean(v.Show)
+		ok.Boolean(*v.Show)
 	}
 
 	return nil
@@ -11673,9 +11673,9 @@ func awsRestjson1_serializeDocumentJoinKeyProperties(v *types.JoinKeyProperties,
 	object := value.Object()
 	defer object.Close()
 
-	if v.UniqueKey {
+	if v.UniqueKey != nil {
 		ok := object.Key("UniqueKey")
-		ok.Boolean(v.UniqueKey)
+		ok.Boolean(*v.UniqueKey)
 	}
 
 	return nil
@@ -11777,9 +11777,9 @@ func awsRestjson1_serializeDocumentMarginStyle(v *types.MarginStyle, value smith
 	object := value.Object()
 	defer object.Close()
 
-	if v.Show {
+	if v.Show != nil {
 		ok := object.Key("Show")
-		ok.Boolean(v.Show)
+		ok.Boolean(*v.Show)
 	}
 
 	return nil
@@ -12966,9 +12966,9 @@ func awsRestjson1_serializeDocumentUploadSettings(v *types.UploadSettings, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.ContainsHeader {
+	if v.ContainsHeader != nil {
 		ok := object.Key("ContainsHeader")
-		ok.Boolean(v.ContainsHeader)
+		ok.Boolean(*v.ContainsHeader)
 	}
 
 	if v.Delimiter != nil {
@@ -12981,9 +12981,9 @@ func awsRestjson1_serializeDocumentUploadSettings(v *types.UploadSettings, value
 		ok.String(string(v.Format))
 	}
 
-	if v.StartFromRow != 0 {
+	if v.StartFromRow != nil {
 		ok := object.Key("StartFromRow")
-		ok.Integer(v.StartFromRow)
+		ok.Integer(*v.StartFromRow)
 	}
 
 	if len(v.TextQualifier) > 0 {

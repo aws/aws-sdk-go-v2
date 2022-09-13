@@ -16868,14 +16868,14 @@ func awsAwsjson11_serializeDocumentFileSystemConfig(v *types.FileSystemConfig, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.DefaultGid != 0 {
+	if v.DefaultGid != nil {
 		ok := object.Key("DefaultGid")
-		ok.Integer(v.DefaultGid)
+		ok.Integer(*v.DefaultGid)
 	}
 
-	if v.DefaultUid != 0 {
+	if v.DefaultUid != nil {
 		ok := object.Key("DefaultUid")
-		ok.Integer(v.DefaultUid)
+		ok.Integer(*v.DefaultUid)
 	}
 
 	if v.MountPath != nil {
@@ -26148,9 +26148,9 @@ func awsAwsjson11_serializeOpDocumentListAutoMLJobsInput(v *ListAutoMLJobsInput,
 		ok.Double(smithytime.FormatEpochSeconds(*v.LastModifiedTimeBefore))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NameContains != nil {
@@ -26195,9 +26195,9 @@ func awsAwsjson11_serializeOpDocumentListCandidatesForAutoMLJobInput(v *ListCand
 		ok.String(*v.CandidateNameEquals)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -26450,9 +26450,9 @@ func awsAwsjson11_serializeOpDocumentListDeviceFleetsInput(v *ListDeviceFleetsIn
 		ok.Double(smithytime.FormatEpochSeconds(*v.LastModifiedTimeBefore))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NameContains != nil {
@@ -26492,9 +26492,9 @@ func awsAwsjson11_serializeOpDocumentListDevicesInput(v *ListDevicesInput, value
 		ok.Double(smithytime.FormatEpochSeconds(*v.LatestHeartbeatAfter))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.ModelName != nil {
@@ -26556,9 +26556,9 @@ func awsAwsjson11_serializeOpDocumentListEdgeDeploymentPlansInput(v *ListEdgeDep
 		ok.Double(smithytime.FormatEpochSeconds(*v.LastModifiedTimeBefore))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NameContains != nil {
@@ -26608,9 +26608,9 @@ func awsAwsjson11_serializeOpDocumentListEdgePackagingJobsInput(v *ListEdgePacka
 		ok.Double(smithytime.FormatEpochSeconds(*v.LastModifiedTimeBefore))
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.ModelNameContains != nil {
@@ -28087,9 +28087,9 @@ func awsAwsjson11_serializeOpDocumentListStageDevicesInput(v *ListStageDevicesIn
 		ok.Boolean(v.ExcludeDevicesDeployedInOtherStage)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

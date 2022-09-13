@@ -52,7 +52,7 @@ type AssociateTeamMemberInput struct {
 
 	// Whether the team member is allowed to use an SSH public/private key pair to
 	// remotely access project resources, for example Amazon EC2 instances.
-	RemoteAccessAllowed bool
+	RemoteAccessAllowed *bool
 
 	noSmithyDocumentSerde
 }

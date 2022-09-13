@@ -37,7 +37,7 @@ type ListImagePackagesInput struct {
 	ImageBuildVersionArn *string
 
 	// The maxiumum number of results to return from the ListImagePackages request.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -161,8 +161,8 @@ func NewListImagePackagesPaginator(client ListImagePackagesAPIClient, params *Li
 	}
 
 	options := ListImagePackagesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -192,7 +192,11 @@ func (p *ListImagePackagesPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListImagePackages(ctx, &params, optFns...)
 	if err != nil {

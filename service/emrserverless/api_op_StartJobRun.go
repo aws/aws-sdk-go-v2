@@ -51,7 +51,7 @@ type StartJobRunInput struct {
 
 	// The maximum duration for the job run to run. If the job run runs beyond this
 	// duration, it will be automatically cancelled.
-	ExecutionTimeoutMinutes int64
+	ExecutionTimeoutMinutes *int64
 
 	// The job driver for the job run.
 	JobDriver types.JobDriver

@@ -6313,7 +6313,7 @@ func awsRestjson1_deserializeDocumentDeploymentComponentUpdatePolicy(v **types.D
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInSeconds = int32(i64)
+				sv.TimeoutInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -6357,7 +6357,7 @@ func awsRestjson1_deserializeDocumentDeploymentConfigurationValidationPolicy(v *
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInSeconds = int32(i64)
+				sv.TimeoutInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7142,7 +7142,7 @@ func awsRestjson1_deserializeDocumentIoTJobExecutionsRolloutConfig(v **types.IoT
 				if err != nil {
 					return err
 				}
-				sv.MaximumPerMinute = int32(i64)
+				sv.MaximumPerMinute = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7269,7 +7269,7 @@ func awsRestjson1_deserializeDocumentIoTJobRateIncreaseCriteria(v **types.IoTJob
 				if err != nil {
 					return err
 				}
-				sv.NumberOfNotifiedThings = int32(i64)
+				sv.NumberOfNotifiedThings = ptr.Int32(int32(i64))
 			}
 
 		case "numberOfSucceededThings":
@@ -7282,7 +7282,7 @@ func awsRestjson1_deserializeDocumentIoTJobRateIncreaseCriteria(v **types.IoTJob
 				if err != nil {
 					return err
 				}
-				sv.NumberOfSucceededThings = int32(i64)
+				sv.NumberOfSucceededThings = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -7326,7 +7326,7 @@ func awsRestjson1_deserializeDocumentIoTJobTimeoutConfig(v **types.IoTJobTimeout
 				if err != nil {
 					return err
 				}
-				sv.InProgressTimeoutInMinutes = i64
+				sv.InProgressTimeoutInMinutes = ptr.Int64(i64)
 			}
 
 		default:

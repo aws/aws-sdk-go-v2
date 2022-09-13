@@ -36,7 +36,7 @@ type DescribeAnomalyDetectionExecutionsInput struct {
 	AnomalyDetectorArn *string
 
 	// The number of items to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
@@ -162,8 +162,8 @@ func NewDescribeAnomalyDetectionExecutionsPaginator(client DescribeAnomalyDetect
 	}
 
 	options := DescribeAnomalyDetectionExecutionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -193,7 +193,11 @@ func (p *DescribeAnomalyDetectionExecutionsPaginator) NextPage(ctx context.Conte
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeAnomalyDetectionExecutions(ctx, &params, optFns...)
 	if err != nil {

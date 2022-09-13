@@ -44,7 +44,7 @@ type ListEdgePackagingJobsInput struct {
 	LastModifiedTimeBefore *time.Time
 
 	// Maximum number of results to select.
-	MaxResults int32
+	MaxResults *int32
 
 	// Filter for jobs where the model name contains this string.
 	ModelNameContains *string
@@ -179,8 +179,8 @@ func NewListEdgePackagingJobsPaginator(client ListEdgePackagingJobsAPIClient, pa
 	}
 
 	options := ListEdgePackagingJobsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -210,7 +210,11 @@ func (p *ListEdgePackagingJobsPaginator) NextPage(ctx context.Context, optFns ..
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListEdgePackagingJobs(ctx, &params, optFns...)
 	if err != nil {

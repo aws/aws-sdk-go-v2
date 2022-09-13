@@ -79,7 +79,7 @@ type GetMaintenanceWindowOutput struct {
 
 	// The number of days to wait to run a maintenance window after the scheduled cron
 	// expression date and time.
-	ScheduleOffset int32
+	ScheduleOffset *int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:

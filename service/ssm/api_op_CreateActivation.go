@@ -69,7 +69,7 @@ type CreateActivationInput struct {
 
 	// Specify the maximum number of managed nodes you want to register. The default
 	// value is 1.
-	RegistrationLimit int32
+	RegistrationLimit *int32
 
 	// Reserved for internal use.
 	RegistrationMetadata []types.RegistrationMetadataItem

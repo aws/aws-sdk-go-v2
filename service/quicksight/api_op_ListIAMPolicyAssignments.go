@@ -44,7 +44,7 @@ type ListIAMPolicyAssignmentsInput struct {
 	AssignmentStatus types.AssignmentStatus
 
 	// The maximum number of results to be returned per request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string

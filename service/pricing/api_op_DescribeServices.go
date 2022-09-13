@@ -39,7 +39,7 @@ type DescribeServicesInput struct {
 	FormatVersion *string
 
 	// The maximum number of results that you want returned in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
@@ -164,8 +164,8 @@ func NewDescribeServicesPaginator(client DescribeServicesAPIClient, params *Desc
 	}
 
 	options := DescribeServicesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -195,7 +195,11 @@ func (p *DescribeServicesPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeServices(ctx, &params, optFns...)
 	if err != nil {

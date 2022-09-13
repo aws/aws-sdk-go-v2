@@ -7451,7 +7451,7 @@ func awsAwsjson10_deserializeDocumentStatefulRuleGroupReference(v **types.Statef
 				if err != nil {
 					return err
 				}
-				sv.Priority = int32(i64)
+				sv.Priority = ptr.Int32(int32(i64))
 			}
 
 		case "ResourceArn":

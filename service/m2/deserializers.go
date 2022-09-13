@@ -2041,7 +2041,7 @@ func awsRestjson1_deserializeOpDocumentGetDataSetDetailsOutput(v **GetDataSetDet
 				if err != nil {
 					return err
 				}
-				sv.Blocksize = int32(i64)
+				sv.Blocksize = ptr.Int32(int32(i64))
 			}
 
 		case "creationTime":
@@ -2125,7 +2125,7 @@ func awsRestjson1_deserializeOpDocumentGetDataSetDetailsOutput(v **GetDataSetDet
 				if err != nil {
 					return err
 				}
-				sv.RecordLength = int32(i64)
+				sv.RecordLength = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -8464,7 +8464,7 @@ func awsRestjson1_deserializeDocumentVsamDetailAttributes(v **types.VsamDetailAt
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.CacheAtStartup = jtv
+				sv.CacheAtStartup = ptr.Bool(jtv)
 			}
 
 		case "compressed":
@@ -8473,7 +8473,7 @@ func awsRestjson1_deserializeDocumentVsamDetailAttributes(v **types.VsamDetailAt
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.Compressed = jtv
+				sv.Compressed = ptr.Bool(jtv)
 			}
 
 		case "encoding":

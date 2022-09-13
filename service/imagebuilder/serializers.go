@@ -2203,9 +2203,9 @@ func awsRestjson1_serializeOpDocumentListComponentBuildVersionsInput(v *ListComp
 		ok.String(*v.ComponentVersionArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2288,9 +2288,9 @@ func awsRestjson1_serializeOpDocumentListComponentsInput(v *ListComponentsInput,
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2373,9 +2373,9 @@ func awsRestjson1_serializeOpDocumentListContainerRecipesInput(v *ListContainerR
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2458,9 +2458,9 @@ func awsRestjson1_serializeOpDocumentListDistributionConfigurationsInput(v *List
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2543,9 +2543,9 @@ func awsRestjson1_serializeOpDocumentListImageBuildVersionsInput(v *ListImageBui
 		ok.String(*v.ImageVersionArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2621,9 +2621,9 @@ func awsRestjson1_serializeOpDocumentListImagePackagesInput(v *ListImagePackages
 		ok.String(*v.ImageBuildVersionArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2706,9 +2706,9 @@ func awsRestjson1_serializeOpDocumentListImagePipelineImagesInput(v *ListImagePi
 		ok.String(*v.ImagePipelineArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2786,9 +2786,9 @@ func awsRestjson1_serializeOpDocumentListImagePipelinesInput(v *ListImagePipelin
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2866,9 +2866,9 @@ func awsRestjson1_serializeOpDocumentListImageRecipesInput(v *ListImageRecipesIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2961,9 +2961,9 @@ func awsRestjson1_serializeOpDocumentListImagesInput(v *ListImagesInput, value s
 		ok.Boolean(*v.IncludeDeprecated)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -3046,9 +3046,9 @@ func awsRestjson1_serializeOpDocumentListInfrastructureConfigurationsInput(v *Li
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

@@ -74,7 +74,7 @@ type LabelParameterVersionInput struct {
 	// The specific version of the parameter on which you want to attach one or more
 	// labels. If no version is specified, the system attaches the label to the latest
 	// version.
-	ParameterVersion int64
+	ParameterVersion *int64
 
 	noSmithyDocumentSerde
 }

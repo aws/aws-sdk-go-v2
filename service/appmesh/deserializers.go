@@ -13128,7 +13128,7 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHttpConnectionPool(v **types.
 				if err != nil {
 					return err
 				}
-				sv.MaxPendingRequests = int32(i64)
+				sv.MaxPendingRequests = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -14369,7 +14369,7 @@ func awsRestjson1_deserializeDocumentVirtualNodeHttpConnectionPool(v **types.Vir
 				if err != nil {
 					return err
 				}
-				sv.MaxPendingRequests = int32(i64)
+				sv.MaxPendingRequests = ptr.Int32(int32(i64))
 			}
 
 		default:

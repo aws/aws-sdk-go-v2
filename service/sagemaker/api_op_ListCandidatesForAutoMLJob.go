@@ -39,7 +39,7 @@ type ListCandidatesForAutoMLJobInput struct {
 	CandidateNameEquals *string
 
 	// List the job's candidates up to a specified limit.
-	MaxResults int32
+	MaxResults *int32
 
 	// If the previous response was truncated, you receive this token. Use it in your
 	// next request to receive the next set of results.
@@ -174,8 +174,8 @@ func NewListCandidatesForAutoMLJobPaginator(client ListCandidatesForAutoMLJobAPI
 	}
 
 	options := ListCandidatesForAutoMLJobPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -205,7 +205,11 @@ func (p *ListCandidatesForAutoMLJobPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListCandidatesForAutoMLJob(ctx, &params, optFns...)
 	if err != nil {

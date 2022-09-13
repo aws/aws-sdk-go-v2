@@ -65,7 +65,7 @@ type ListJobsInput struct {
 	// response. If there are more jobs than this number, the response will include a
 	// pagination token in the NextToken field to enable you to retrieve the next page
 	// of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// A pagination token to request the next page of results. Use the token that
 	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
@@ -240,8 +240,8 @@ func NewListJobsPaginator(client ListJobsAPIClient, params *ListJobsInput, optFn
 	}
 
 	options := ListJobsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -271,7 +271,11 @@ func (p *ListJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Option
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListJobs(ctx, &params, optFns...)
 	if err != nil {

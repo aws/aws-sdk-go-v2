@@ -135,12 +135,12 @@ type UpdateMaintenanceWindowTaskInput struct {
 
 	// The new task priority to specify. The lower the number, the higher the priority.
 	// Tasks that have the same priority are scheduled in parallel.
-	Priority int32
+	Priority *int32
 
 	// If True, then all fields that are required by the
 	// RegisterTaskWithMaintenanceWindow operation are also required for this API
 	// request. Optional fields that aren't specified are set to null.
-	Replace bool
+	Replace *bool
 
 	// The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services
 	// Systems Manager to assume when running a maintenance window task. If you do not

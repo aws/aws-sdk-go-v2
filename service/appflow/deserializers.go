@@ -9522,7 +9522,7 @@ func awsRestjson1_deserializeDocumentSAPODataConnectorProfileProperties(v **type
 				if err != nil {
 					return err
 				}
-				sv.PortNumber = int32(i64)
+				sv.PortNumber = ptr.Int32(int32(i64))
 			}
 
 		case "privateLinkServiceName":
@@ -9735,7 +9735,7 @@ func awsRestjson1_deserializeDocumentScheduledTriggerProperties(v **types.Schedu
 				if err != nil {
 					return err
 				}
-				sv.FlowErrorDeactivationThreshold = int32(i64)
+				sv.FlowErrorDeactivationThreshold = ptr.Int32(int32(i64))
 			}
 
 		case "scheduleEndTime":
@@ -9773,7 +9773,7 @@ func awsRestjson1_deserializeDocumentScheduledTriggerProperties(v **types.Schedu
 				if err != nil {
 					return err
 				}
-				sv.ScheduleOffset = i64
+				sv.ScheduleOffset = ptr.Int64(i64)
 			}
 
 		case "scheduleStartTime":

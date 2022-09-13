@@ -36,13 +36,13 @@ type CreateDeploymentStrategyInput struct {
 	// Total amount of time for a deployment to last.
 	//
 	// This member is required.
-	DeploymentDurationInMinutes int32
+	DeploymentDurationInMinutes *int32
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
 	//
 	// This member is required.
-	GrowthFactor float32
+	GrowthFactor *float32
 
 	// A name for the deployment strategy.
 	//

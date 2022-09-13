@@ -296,9 +296,9 @@ func awsAwsjson10_serializeOpDocumentListRoutingControlsInput(v *ListRoutingCont
 		ok.String(*v.ControlPanelArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

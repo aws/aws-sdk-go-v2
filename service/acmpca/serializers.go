@@ -1499,9 +1499,9 @@ func awsAwsjson11_serializeDocumentCrlConfiguration(v *types.CrlConfiguration, v
 		ok.String(*v.CustomCname)
 	}
 
-	{
+	if v.Enabled != nil {
 		ok := object.Key("Enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.ExpirationInDays != nil {
@@ -1577,9 +1577,9 @@ func awsAwsjson11_serializeDocumentCustomExtension(v *types.CustomExtension, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.Critical {
+	if v.Critical != nil {
 		ok := object.Key("Critical")
-		ok.Boolean(v.Critical)
+		ok.Boolean(*v.Critical)
 	}
 
 	if v.ObjectIdentifier != nil {
@@ -1819,9 +1819,9 @@ func awsAwsjson11_serializeDocumentOcspConfiguration(v *types.OcspConfiguration,
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.Enabled != nil {
 		ok := object.Key("Enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.OcspCustomCname != nil {

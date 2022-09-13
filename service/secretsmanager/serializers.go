@@ -1312,9 +1312,9 @@ func awsAwsjson11_serializeDocumentRotationRulesType(v *types.RotationRulesType,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AutomaticallyAfterDays != 0 {
+	if v.AutomaticallyAfterDays != nil {
 		ok := object.Key("AutomaticallyAfterDays")
-		ok.Long(v.AutomaticallyAfterDays)
+		ok.Long(*v.AutomaticallyAfterDays)
 	}
 
 	if v.Duration != nil {
@@ -1466,14 +1466,14 @@ func awsAwsjson11_serializeOpDocumentDeleteSecretInput(v *DeleteSecretInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.ForceDeleteWithoutRecovery {
+	if v.ForceDeleteWithoutRecovery != nil {
 		ok := object.Key("ForceDeleteWithoutRecovery")
-		ok.Boolean(v.ForceDeleteWithoutRecovery)
+		ok.Boolean(*v.ForceDeleteWithoutRecovery)
 	}
 
-	if v.RecoveryWindowInDays != 0 {
+	if v.RecoveryWindowInDays != nil {
 		ok := object.Key("RecoveryWindowInDays")
-		ok.Long(v.RecoveryWindowInDays)
+		ok.Long(*v.RecoveryWindowInDays)
 	}
 
 	if v.SecretId != nil {
@@ -1505,39 +1505,39 @@ func awsAwsjson11_serializeOpDocumentGetRandomPasswordInput(v *GetRandomPassword
 		ok.String(*v.ExcludeCharacters)
 	}
 
-	if v.ExcludeLowercase {
+	if v.ExcludeLowercase != nil {
 		ok := object.Key("ExcludeLowercase")
-		ok.Boolean(v.ExcludeLowercase)
+		ok.Boolean(*v.ExcludeLowercase)
 	}
 
-	if v.ExcludeNumbers {
+	if v.ExcludeNumbers != nil {
 		ok := object.Key("ExcludeNumbers")
-		ok.Boolean(v.ExcludeNumbers)
+		ok.Boolean(*v.ExcludeNumbers)
 	}
 
-	if v.ExcludePunctuation {
+	if v.ExcludePunctuation != nil {
 		ok := object.Key("ExcludePunctuation")
-		ok.Boolean(v.ExcludePunctuation)
+		ok.Boolean(*v.ExcludePunctuation)
 	}
 
-	if v.ExcludeUppercase {
+	if v.ExcludeUppercase != nil {
 		ok := object.Key("ExcludeUppercase")
-		ok.Boolean(v.ExcludeUppercase)
+		ok.Boolean(*v.ExcludeUppercase)
 	}
 
-	if v.IncludeSpace {
+	if v.IncludeSpace != nil {
 		ok := object.Key("IncludeSpace")
-		ok.Boolean(v.IncludeSpace)
+		ok.Boolean(*v.IncludeSpace)
 	}
 
-	if v.PasswordLength != 0 {
+	if v.PasswordLength != nil {
 		ok := object.Key("PasswordLength")
-		ok.Long(v.PasswordLength)
+		ok.Long(*v.PasswordLength)
 	}
 
-	if v.RequireEachIncludedType {
+	if v.RequireEachIncludedType != nil {
 		ok := object.Key("RequireEachIncludedType")
-		ok.Boolean(v.RequireEachIncludedType)
+		ok.Boolean(*v.RequireEachIncludedType)
 	}
 
 	return nil
@@ -1588,9 +1588,9 @@ func awsAwsjson11_serializeOpDocumentListSecretsInput(v *ListSecretsInput, value
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1610,14 +1610,14 @@ func awsAwsjson11_serializeOpDocumentListSecretVersionIdsInput(v *ListSecretVers
 	object := value.Object()
 	defer object.Close()
 
-	if v.IncludeDeprecated {
+	if v.IncludeDeprecated != nil {
 		ok := object.Key("IncludeDeprecated")
-		ok.Boolean(v.IncludeDeprecated)
+		ok.Boolean(*v.IncludeDeprecated)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1637,9 +1637,9 @@ func awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicy
 	object := value.Object()
 	defer object.Close()
 
-	if v.BlockPublicPolicy {
+	if v.BlockPublicPolicy != nil {
 		ok := object.Key("BlockPublicPolicy")
-		ok.Boolean(v.BlockPublicPolicy)
+		ok.Boolean(*v.BlockPublicPolicy)
 	}
 
 	if v.ResourcePolicy != nil {
@@ -1753,9 +1753,9 @@ func awsAwsjson11_serializeOpDocumentRotateSecretInput(v *RotateSecretInput, val
 		ok.String(*v.ClientRequestToken)
 	}
 
-	if v.RotateImmediately {
+	if v.RotateImmediately != nil {
 		ok := object.Key("RotateImmediately")
-		ok.Boolean(v.RotateImmediately)
+		ok.Boolean(*v.RotateImmediately)
 	}
 
 	if v.RotationLambdaARN != nil {

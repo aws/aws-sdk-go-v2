@@ -1929,7 +1929,7 @@ func awsRestjson1_deserializeOpDocumentGetChangesetOutput(v **GetChangesetOutput
 				if err != nil {
 					return err
 				}
-				sv.ActiveFromTimestamp = i64
+				sv.ActiveFromTimestamp = ptr.Int64(i64)
 			}
 
 		case "activeUntilTimestamp":
@@ -1942,7 +1942,7 @@ func awsRestjson1_deserializeOpDocumentGetChangesetOutput(v **GetChangesetOutput
 				if err != nil {
 					return err
 				}
-				sv.ActiveUntilTimestamp = i64
+				sv.ActiveUntilTimestamp = ptr.Int64(i64)
 			}
 
 		case "changesetArn":
@@ -2451,7 +2451,7 @@ func awsRestjson1_deserializeOpDocumentGetDataViewOutput(v **GetDataViewOutput, 
 				if err != nil {
 					return err
 				}
-				sv.AsOfTimestamp = i64
+				sv.AsOfTimestamp = ptr.Int64(i64)
 			}
 
 		case "autoUpdate":
@@ -6019,7 +6019,7 @@ func awsRestjson1_deserializeDocumentChangesetSummary(v **types.ChangesetSummary
 				if err != nil {
 					return err
 				}
-				sv.ActiveFromTimestamp = i64
+				sv.ActiveFromTimestamp = ptr.Int64(i64)
 			}
 
 		case "activeUntilTimestamp":
@@ -6032,7 +6032,7 @@ func awsRestjson1_deserializeDocumentChangesetSummary(v **types.ChangesetSummary
 				if err != nil {
 					return err
 				}
-				sv.ActiveUntilTimestamp = i64
+				sv.ActiveUntilTimestamp = ptr.Int64(i64)
 			}
 
 		case "changesetArn":
@@ -6752,7 +6752,7 @@ func awsRestjson1_deserializeDocumentDataViewSummary(v **types.DataViewSummary, 
 				if err != nil {
 					return err
 				}
-				sv.AsOfTimestamp = i64
+				sv.AsOfTimestamp = ptr.Int64(i64)
 			}
 
 		case "autoUpdate":

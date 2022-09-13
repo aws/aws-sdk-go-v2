@@ -447,9 +447,9 @@ func awsRestjson1_serializeOpDocumentCreateMetricSetInput(v *CreateMetricSetInpu
 		}
 	}
 
-	if v.Offset != 0 {
+	if v.Offset != nil {
 		ok := object.Key("Offset")
-		ok.Integer(v.Offset)
+		ok.Integer(*v.Offset)
 	}
 
 	if v.Tags != nil {
@@ -811,9 +811,9 @@ func awsRestjson1_serializeOpDocumentDescribeAnomalyDetectionExecutionsInput(v *
 		ok.String(*v.AnomalyDetectorArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1258,9 +1258,9 @@ func awsRestjson1_serializeOpDocumentGetFeedbackInput(v *GetFeedbackInput, value
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1406,9 +1406,9 @@ func awsRestjson1_serializeOpDocumentListAlertsInput(v *ListAlertsInput, value s
 		ok.String(*v.AnomalyDetectorArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1479,9 +1479,9 @@ func awsRestjson1_serializeOpDocumentListAnomalyDetectorsInput(v *ListAnomalyDet
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1562,9 +1562,9 @@ func awsRestjson1_serializeOpDocumentListAnomalyGroupRelatedMetricsInput(v *List
 		ok.String(*v.AnomalyGroupId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1645,9 +1645,9 @@ func awsRestjson1_serializeOpDocumentListAnomalyGroupSummariesInput(v *ListAnoma
 		ok.String(*v.AnomalyDetectorArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1733,9 +1733,9 @@ func awsRestjson1_serializeOpDocumentListAnomalyGroupTimeSeriesInput(v *ListAnom
 		ok.String(*v.AnomalyGroupId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.MetricName != nil {
@@ -1816,9 +1816,9 @@ func awsRestjson1_serializeOpDocumentListMetricSetsInput(v *ListMetricSetsInput,
 		ok.String(*v.AnomalyDetectorArn)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2382,9 +2382,9 @@ func awsRestjson1_serializeOpDocumentUpdateMetricSetInput(v *UpdateMetricSetInpu
 		}
 	}
 
-	if v.Offset != 0 {
+	if v.Offset != nil {
 		ok := object.Key("Offset")
-		ok.Integer(v.Offset)
+		ok.Integer(*v.Offset)
 	}
 
 	if v.TimestampColumn != nil {
@@ -2896,9 +2896,9 @@ func awsRestjson1_serializeDocumentRDSSourceConfig(v *types.RDSSourceConfig, val
 		ok.String(*v.DatabaseName)
 	}
 
-	if v.DatabasePort != 0 {
+	if v.DatabasePort != nil {
 		ok := object.Key("DatabasePort")
-		ok.Integer(v.DatabasePort)
+		ok.Integer(*v.DatabasePort)
 	}
 
 	if v.DBInstanceIdentifier != nil {
@@ -2950,9 +2950,9 @@ func awsRestjson1_serializeDocumentRedshiftSourceConfig(v *types.RedshiftSourceC
 		ok.String(*v.DatabaseName)
 	}
 
-	if v.DatabasePort != 0 {
+	if v.DatabasePort != nil {
 		ok := object.Key("DatabasePort")
-		ok.Integer(v.DatabasePort)
+		ok.Integer(*v.DatabasePort)
 	}
 
 	if v.RoleArn != nil {

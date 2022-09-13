@@ -42,7 +42,7 @@ type ListThemeVersionsInput struct {
 	ThemeId *string
 
 	// The maximum number of results to be returned per request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -167,8 +167,8 @@ func NewListThemeVersionsPaginator(client ListThemeVersionsAPIClient, params *Li
 	}
 
 	options := ListThemeVersionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *ListThemeVersionsPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListThemeVersions(ctx, &params, optFns...)
 	if err != nil {

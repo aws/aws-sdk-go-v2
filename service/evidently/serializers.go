@@ -201,9 +201,9 @@ func awsRestjson1_serializeOpDocumentCreateExperimentInput(v *CreateExperimentIn
 		ok.String(*v.RandomizationSalt)
 	}
 
-	if v.SamplingRate != 0 {
+	if v.SamplingRate != nil {
 		ok := object.Key("samplingRate")
-		ok.Long(v.SamplingRate)
+		ok.Long(*v.SamplingRate)
 	}
 
 	if v.Segment != nil {
@@ -2707,9 +2707,9 @@ func awsRestjson1_serializeOpDocumentUpdateExperimentInput(v *UpdateExperimentIn
 		ok.Boolean(v.RemoveSegment)
 	}
 
-	if v.SamplingRate != 0 {
+	if v.SamplingRate != nil {
 		ok := object.Key("samplingRate")
-		ok.Long(v.SamplingRate)
+		ok.Long(*v.SamplingRate)
 	}
 
 	if v.Segment != nil {

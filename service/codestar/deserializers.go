@@ -3206,7 +3206,7 @@ func awsAwsjson11_deserializeDocumentTeamMember(v **types.TeamMember, value inte
 				if !ok {
 					return fmt.Errorf("expected RemoteAccessAllowed to be of type *bool, got %T instead", value)
 				}
-				sv.RemoteAccessAllowed = jtv
+				sv.RemoteAccessAllowed = ptr.Bool(jtv)
 			}
 
 		case "userArn":
@@ -4462,7 +4462,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateTeamMemberOutput(v **UpdateTeamMemb
 				if !ok {
 					return fmt.Errorf("expected RemoteAccessAllowed to be of type *bool, got %T instead", value)
 				}
-				sv.RemoteAccessAllowed = jtv
+				sv.RemoteAccessAllowed = ptr.Bool(jtv)
 			}
 
 		case "userArn":

@@ -8071,9 +8071,9 @@ func awsAwsjson11_serializeDocumentCreateAssociationBatchRequestEntry(v *types.C
 		ok.String(*v.ScheduleExpression)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("ScheduleOffset")
-		ok.Integer(v.ScheduleOffset)
+		ok.Integer(*v.ScheduleOffset)
 	}
 
 	if len(v.SyncCompliance) > 0 {
@@ -8825,9 +8825,9 @@ func awsAwsjson11_serializeDocumentMaintenanceWindowRunCommandParameters(v *type
 		ok.String(*v.ServiceRoleArn)
 	}
 
-	if v.TimeoutSeconds != 0 {
+	if v.TimeoutSeconds != nil {
 		ok := object.Key("TimeoutSeconds")
-		ok.Integer(v.TimeoutSeconds)
+		ok.Integer(*v.TimeoutSeconds)
 	}
 
 	return nil
@@ -9645,9 +9645,9 @@ func awsAwsjson11_serializeDocumentPatchRule(v *types.PatchRule, value smithyjso
 	object := value.Object()
 	defer object.Close()
 
-	if v.ApproveAfterDays != 0 {
+	if v.ApproveAfterDays != nil {
 		ok := object.Key("ApproveAfterDays")
-		ok.Integer(v.ApproveAfterDays)
+		ok.Integer(*v.ApproveAfterDays)
 	}
 
 	if v.ApproveUntilDate != nil {
@@ -9660,9 +9660,9 @@ func awsAwsjson11_serializeDocumentPatchRule(v *types.PatchRule, value smithyjso
 		ok.String(string(v.ComplianceLevel))
 	}
 
-	if v.EnableNonSecurity {
+	if v.EnableNonSecurity != nil {
 		ok := object.Key("EnableNonSecurity")
-		ok.Boolean(v.EnableNonSecurity)
+		ok.Boolean(*v.EnableNonSecurity)
 	}
 
 	if v.PatchFilterGroup != nil {
@@ -10460,9 +10460,9 @@ func awsAwsjson11_serializeOpDocumentCreateActivationInput(v *CreateActivationIn
 		ok.String(*v.IamRole)
 	}
 
-	if v.RegistrationLimit != 0 {
+	if v.RegistrationLimit != nil {
 		ok := object.Key("RegistrationLimit")
-		ok.Integer(v.RegistrationLimit)
+		ok.Integer(*v.RegistrationLimit)
 	}
 
 	if v.RegistrationMetadata != nil {
@@ -10571,9 +10571,9 @@ func awsAwsjson11_serializeOpDocumentCreateAssociationInput(v *CreateAssociation
 		ok.String(*v.ScheduleExpression)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("ScheduleOffset")
-		ok.Integer(v.ScheduleOffset)
+		ok.Integer(*v.ScheduleOffset)
 	}
 
 	if len(v.SyncCompliance) > 0 {
@@ -10712,9 +10712,9 @@ func awsAwsjson11_serializeOpDocumentCreateMaintenanceWindowInput(v *CreateMaint
 		ok.String(*v.Schedule)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("ScheduleOffset")
-		ok.Integer(v.ScheduleOffset)
+		ok.Integer(*v.ScheduleOffset)
 	}
 
 	if v.ScheduleTimezone != nil {
@@ -10876,9 +10876,9 @@ func awsAwsjson11_serializeOpDocumentCreatePatchBaselineInput(v *CreatePatchBase
 		ok.String(string(v.ApprovedPatchesComplianceLevel))
 	}
 
-	if v.ApprovedPatchesEnableNonSecurity {
+	if v.ApprovedPatchesEnableNonSecurity != nil {
 		ok := object.Key("ApprovedPatchesEnableNonSecurity")
-		ok.Boolean(v.ApprovedPatchesEnableNonSecurity)
+		ok.Boolean(*v.ApprovedPatchesEnableNonSecurity)
 	}
 
 	if v.ClientToken != nil {
@@ -11168,9 +11168,9 @@ func awsAwsjson11_serializeOpDocumentDeregisterTargetFromMaintenanceWindowInput(
 	object := value.Object()
 	defer object.Close()
 
-	if v.Safe {
+	if v.Safe != nil {
 		ok := object.Key("Safe")
-		ok.Boolean(v.Safe)
+		ok.Boolean(*v.Safe)
 	}
 
 	if v.WindowId != nil {
@@ -11214,9 +11214,9 @@ func awsAwsjson11_serializeOpDocumentDescribeActivationsInput(v *DescribeActivat
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11243,9 +11243,9 @@ func awsAwsjson11_serializeOpDocumentDescribeAssociationExecutionsInput(v *Descr
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11277,9 +11277,9 @@ func awsAwsjson11_serializeOpDocumentDescribeAssociationExecutionTargetsInput(v 
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11328,9 +11328,9 @@ func awsAwsjson11_serializeOpDocumentDescribeAutomationExecutionsInput(v *Descri
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11357,9 +11357,9 @@ func awsAwsjson11_serializeOpDocumentDescribeAutomationStepExecutionsInput(v *De
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11367,9 +11367,9 @@ func awsAwsjson11_serializeOpDocumentDescribeAutomationStepExecutionsInput(v *De
 		ok.String(*v.NextToken)
 	}
 
-	if v.ReverseOrder {
+	if v.ReverseOrder != nil {
 		ok := object.Key("ReverseOrder")
-		ok.Boolean(v.ReverseOrder)
+		ok.Boolean(*v.ReverseOrder)
 	}
 
 	return nil
@@ -11386,9 +11386,9 @@ func awsAwsjson11_serializeOpDocumentDescribeAvailablePatchesInput(v *DescribeAv
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11425,9 +11425,9 @@ func awsAwsjson11_serializeOpDocumentDescribeDocumentPermissionInput(v *Describe
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Name != nil {
@@ -11457,9 +11457,9 @@ func awsAwsjson11_serializeOpDocumentDescribeEffectiveInstanceAssociationsInput(
 		ok.String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11479,9 +11479,9 @@ func awsAwsjson11_serializeOpDocumentDescribeEffectivePatchesForPatchBaselineInp
 		ok.String(*v.BaselineId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11501,9 +11501,9 @@ func awsAwsjson11_serializeOpDocumentDescribeInstanceAssociationsStatusInput(v *
 		ok.String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11532,9 +11532,9 @@ func awsAwsjson11_serializeOpDocumentDescribeInstanceInformationInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11561,9 +11561,9 @@ func awsAwsjson11_serializeOpDocumentDescribeInstancePatchesInput(v *DescribeIns
 		ok.String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11585,9 +11585,9 @@ func awsAwsjson11_serializeOpDocumentDescribeInstancePatchStatesForPatchGroupInp
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11614,9 +11614,9 @@ func awsAwsjson11_serializeOpDocumentDescribeInstancePatchStatesInput(v *Describ
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11636,9 +11636,9 @@ func awsAwsjson11_serializeOpDocumentDescribeInventoryDeletionsInput(v *Describe
 		ok.String(*v.DeletionId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11660,9 +11660,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowExecutionsInput(v 
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11689,9 +11689,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowExecutionTaskInvoc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11723,9 +11723,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowExecutionTasksInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11752,9 +11752,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowScheduleInput(v *D
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11786,9 +11786,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowsForTargetInput(v 
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11822,9 +11822,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowsInput(v *Describe
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11846,9 +11846,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowTargetsInput(v *De
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11875,9 +11875,9 @@ func awsAwsjson11_serializeOpDocumentDescribeMaintenanceWindowTasksInput(v *Desc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11928,9 +11928,9 @@ func awsAwsjson11_serializeOpDocumentDescribeParametersInput(v *DescribeParamete
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11959,9 +11959,9 @@ func awsAwsjson11_serializeOpDocumentDescribePatchBaselinesInput(v *DescribePatc
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -11983,9 +11983,9 @@ func awsAwsjson11_serializeOpDocumentDescribePatchGroupsInput(v *DescribePatchGr
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12012,9 +12012,9 @@ func awsAwsjson11_serializeOpDocumentDescribePatchPropertiesInput(v *DescribePat
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12051,9 +12051,9 @@ func awsAwsjson11_serializeOpDocumentDescribeSessionsInput(v *DescribeSessionsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12232,9 +12232,9 @@ func awsAwsjson11_serializeOpDocumentGetInventoryInput(v *GetInventoryInput, val
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12261,9 +12261,9 @@ func awsAwsjson11_serializeOpDocumentGetInventorySchemaInput(v *GetInventorySche
 		ok.Boolean(v.Aggregator)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12271,9 +12271,9 @@ func awsAwsjson11_serializeOpDocumentGetInventorySchemaInput(v *GetInventorySche
 		ok.String(*v.NextToken)
 	}
 
-	if v.SubType {
+	if v.SubType != nil {
 		ok := object.Key("SubType")
-		ok.Boolean(v.SubType)
+		ok.Boolean(*v.SubType)
 	}
 
 	if v.TypeName != nil {
@@ -12380,9 +12380,9 @@ func awsAwsjson11_serializeOpDocumentGetOpsMetadataInput(v *GetOpsMetadataInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12416,9 +12416,9 @@ func awsAwsjson11_serializeOpDocumentGetOpsSummaryInput(v *GetOpsSummaryInput, v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12445,9 +12445,9 @@ func awsAwsjson11_serializeOpDocumentGetParameterHistoryInput(v *GetParameterHis
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Name != nil {
@@ -12460,9 +12460,9 @@ func awsAwsjson11_serializeOpDocumentGetParameterHistoryInput(v *GetParameterHis
 		ok.String(*v.NextToken)
 	}
 
-	if v.WithDecryption {
+	if v.WithDecryption != nil {
 		ok := object.Key("WithDecryption")
-		ok.Boolean(v.WithDecryption)
+		ok.Boolean(*v.WithDecryption)
 	}
 
 	return nil
@@ -12477,9 +12477,9 @@ func awsAwsjson11_serializeOpDocumentGetParameterInput(v *GetParameterInput, val
 		ok.String(*v.Name)
 	}
 
-	if v.WithDecryption {
+	if v.WithDecryption != nil {
 		ok := object.Key("WithDecryption")
-		ok.Boolean(v.WithDecryption)
+		ok.Boolean(*v.WithDecryption)
 	}
 
 	return nil
@@ -12489,9 +12489,9 @@ func awsAwsjson11_serializeOpDocumentGetParametersByPathInput(v *GetParametersBy
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12511,14 +12511,14 @@ func awsAwsjson11_serializeOpDocumentGetParametersByPathInput(v *GetParametersBy
 		ok.String(*v.Path)
 	}
 
-	if v.Recursive {
+	if v.Recursive != nil {
 		ok := object.Key("Recursive")
-		ok.Boolean(v.Recursive)
+		ok.Boolean(*v.Recursive)
 	}
 
-	if v.WithDecryption {
+	if v.WithDecryption != nil {
 		ok := object.Key("WithDecryption")
-		ok.Boolean(v.WithDecryption)
+		ok.Boolean(*v.WithDecryption)
 	}
 
 	return nil
@@ -12535,9 +12535,9 @@ func awsAwsjson11_serializeOpDocumentGetParametersInput(v *GetParametersInput, v
 		}
 	}
 
-	if v.WithDecryption {
+	if v.WithDecryption != nil {
 		ok := object.Key("WithDecryption")
-		ok.Boolean(v.WithDecryption)
+		ok.Boolean(*v.WithDecryption)
 	}
 
 	return nil
@@ -12600,9 +12600,9 @@ func awsAwsjson11_serializeOpDocumentLabelParameterVersionInput(v *LabelParamete
 		ok.String(*v.Name)
 	}
 
-	if v.ParameterVersion != 0 {
+	if v.ParameterVersion != nil {
 		ok := object.Key("ParameterVersion")
-		ok.Long(v.ParameterVersion)
+		ok.Long(*v.ParameterVersion)
 	}
 
 	return nil
@@ -12619,9 +12619,9 @@ func awsAwsjson11_serializeOpDocumentListAssociationsInput(v *ListAssociationsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12641,9 +12641,9 @@ func awsAwsjson11_serializeOpDocumentListAssociationVersionsInput(v *ListAssocia
 		ok.String(*v.AssociationId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12680,9 +12680,9 @@ func awsAwsjson11_serializeOpDocumentListCommandInvocationsInput(v *ListCommandI
 		ok.String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12714,9 +12714,9 @@ func awsAwsjson11_serializeOpDocumentListCommandsInput(v *ListCommandsInput, val
 		ok.String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12738,9 +12738,9 @@ func awsAwsjson11_serializeOpDocumentListComplianceItemsInput(v *ListComplianceI
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12776,9 +12776,9 @@ func awsAwsjson11_serializeOpDocumentListComplianceSummariesInput(v *ListComplia
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12798,9 +12798,9 @@ func awsAwsjson11_serializeOpDocumentListDocumentMetadataHistoryInput(v *ListDoc
 		ok.String(*v.DocumentVersion)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if len(v.Metadata) > 0 {
@@ -12839,9 +12839,9 @@ func awsAwsjson11_serializeOpDocumentListDocumentsInput(v *ListDocumentsInput, v
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12856,9 +12856,9 @@ func awsAwsjson11_serializeOpDocumentListDocumentVersionsInput(v *ListDocumentVe
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.Name != nil {
@@ -12890,9 +12890,9 @@ func awsAwsjson11_serializeOpDocumentListInventoryEntriesInput(v *ListInventoryE
 		ok.String(*v.InstanceId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12972,9 +12972,9 @@ func awsAwsjson11_serializeOpDocumentListOpsMetadataInput(v *ListOpsMetadataInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -12996,9 +12996,9 @@ func awsAwsjson11_serializeOpDocumentListResourceComplianceSummariesInput(v *Lis
 		}
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -13013,9 +13013,9 @@ func awsAwsjson11_serializeOpDocumentListResourceDataSyncInput(v *ListResourceDa
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -13178,9 +13178,9 @@ func awsAwsjson11_serializeOpDocumentPutParameterInput(v *PutParameterInput, val
 		ok.String(*v.Name)
 	}
 
-	if v.Overwrite {
+	if v.Overwrite != nil {
 		ok := object.Key("Overwrite")
-		ok.Boolean(v.Overwrite)
+		ok.Boolean(*v.Overwrite)
 	}
 
 	if v.Policies != nil {
@@ -13327,9 +13327,9 @@ func awsAwsjson11_serializeOpDocumentRegisterTaskWithMaintenanceWindowInput(v *R
 		ok.String(*v.Name)
 	}
 
-	if v.Priority != 0 {
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
 	if v.ServiceRoleArn != nil {
@@ -13542,9 +13542,9 @@ func awsAwsjson11_serializeOpDocumentSendCommandInput(v *SendCommandInput, value
 		}
 	}
 
-	if v.TimeoutSeconds != 0 {
+	if v.TimeoutSeconds != nil {
 		ok := object.Key("TimeoutSeconds")
-		ok.Integer(v.TimeoutSeconds)
+		ok.Integer(*v.TimeoutSeconds)
 	}
 
 	return nil
@@ -13783,9 +13783,9 @@ func awsAwsjson11_serializeOpDocumentUnlabelParameterVersionInput(v *UnlabelPara
 		ok.String(*v.Name)
 	}
 
-	{
+	if v.ParameterVersion != nil {
 		ok := object.Key("ParameterVersion")
-		ok.Long(v.ParameterVersion)
+		ok.Long(*v.ParameterVersion)
 	}
 
 	return nil
@@ -13871,9 +13871,9 @@ func awsAwsjson11_serializeOpDocumentUpdateAssociationInput(v *UpdateAssociation
 		ok.String(*v.ScheduleExpression)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("ScheduleOffset")
-		ok.Integer(v.ScheduleOffset)
+		ok.Integer(*v.ScheduleOffset)
 	}
 
 	if len(v.SyncCompliance) > 0 {
@@ -14023,14 +14023,14 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowInput(v *UpdateMaint
 	object := value.Object()
 	defer object.Close()
 
-	if v.AllowUnassociatedTargets {
+	if v.AllowUnassociatedTargets != nil {
 		ok := object.Key("AllowUnassociatedTargets")
-		ok.Boolean(v.AllowUnassociatedTargets)
+		ok.Boolean(*v.AllowUnassociatedTargets)
 	}
 
-	if v.Cutoff != 0 {
+	if v.Cutoff != nil {
 		ok := object.Key("Cutoff")
-		ok.Integer(v.Cutoff)
+		ok.Integer(*v.Cutoff)
 	}
 
 	if v.Description != nil {
@@ -14038,14 +14038,14 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowInput(v *UpdateMaint
 		ok.String(*v.Description)
 	}
 
-	if v.Duration != 0 {
+	if v.Duration != nil {
 		ok := object.Key("Duration")
-		ok.Integer(v.Duration)
+		ok.Integer(*v.Duration)
 	}
 
-	if v.Enabled {
+	if v.Enabled != nil {
 		ok := object.Key("Enabled")
-		ok.Boolean(v.Enabled)
+		ok.Boolean(*v.Enabled)
 	}
 
 	if v.EndDate != nil {
@@ -14058,9 +14058,9 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowInput(v *UpdateMaint
 		ok.String(*v.Name)
 	}
 
-	if v.Replace {
+	if v.Replace != nil {
 		ok := object.Key("Replace")
-		ok.Boolean(v.Replace)
+		ok.Boolean(*v.Replace)
 	}
 
 	if v.Schedule != nil {
@@ -14068,9 +14068,9 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowInput(v *UpdateMaint
 		ok.String(*v.Schedule)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("ScheduleOffset")
-		ok.Integer(v.ScheduleOffset)
+		ok.Integer(*v.ScheduleOffset)
 	}
 
 	if v.ScheduleTimezone != nil {
@@ -14110,9 +14110,9 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowTargetInput(v *Updat
 		ok.String(*v.OwnerInformation)
 	}
 
-	if v.Replace {
+	if v.Replace != nil {
 		ok := object.Key("Replace")
-		ok.Boolean(v.Replace)
+		ok.Boolean(*v.Replace)
 	}
 
 	if v.Targets != nil {
@@ -14171,14 +14171,14 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowTaskInput(v *UpdateM
 		ok.String(*v.Name)
 	}
 
-	if v.Priority != 0 {
+	if v.Priority != nil {
 		ok := object.Key("Priority")
-		ok.Integer(v.Priority)
+		ok.Integer(*v.Priority)
 	}
 
-	if v.Replace {
+	if v.Replace != nil {
 		ok := object.Key("Replace")
-		ok.Boolean(v.Replace)
+		ok.Boolean(*v.Replace)
 	}
 
 	if v.ServiceRoleArn != nil {
@@ -14381,9 +14381,9 @@ func awsAwsjson11_serializeOpDocumentUpdatePatchBaselineInput(v *UpdatePatchBase
 		ok.String(string(v.ApprovedPatchesComplianceLevel))
 	}
 
-	if v.ApprovedPatchesEnableNonSecurity {
+	if v.ApprovedPatchesEnableNonSecurity != nil {
 		ok := object.Key("ApprovedPatchesEnableNonSecurity")
-		ok.Boolean(v.ApprovedPatchesEnableNonSecurity)
+		ok.Boolean(*v.ApprovedPatchesEnableNonSecurity)
 	}
 
 	if v.BaselineId != nil {
@@ -14420,9 +14420,9 @@ func awsAwsjson11_serializeOpDocumentUpdatePatchBaselineInput(v *UpdatePatchBase
 		ok.String(string(v.RejectedPatchesAction))
 	}
 
-	if v.Replace {
+	if v.Replace != nil {
 		ok := object.Key("Replace")
-		ok.Boolean(v.Replace)
+		ok.Boolean(*v.Replace)
 	}
 
 	if v.Sources != nil {

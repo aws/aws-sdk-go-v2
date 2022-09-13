@@ -3825,7 +3825,7 @@ func awsAwsjson10_deserializeDocumentActivityScheduledEventDetails(v **types.Act
 				if err != nil {
 					return err
 				}
-				sv.HeartbeatInSeconds = i64
+				sv.HeartbeatInSeconds = ptr.Int64(i64)
 			}
 
 		case "input":
@@ -3861,7 +3861,7 @@ func awsAwsjson10_deserializeDocumentActivityScheduledEventDetails(v **types.Act
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInSeconds = i64
+				sv.TimeoutInSeconds = ptr.Int64(i64)
 			}
 
 		default:
@@ -5472,7 +5472,7 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventDetails(v **typ
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInSeconds = i64
+				sv.TimeoutInSeconds = ptr.Int64(i64)
 			}
 
 		default:
@@ -6624,7 +6624,7 @@ func awsAwsjson10_deserializeDocumentTaskScheduledEventDetails(v **types.TaskSch
 				if err != nil {
 					return err
 				}
-				sv.HeartbeatInSeconds = i64
+				sv.HeartbeatInSeconds = ptr.Int64(i64)
 			}
 
 		case "parameters":
@@ -6673,7 +6673,7 @@ func awsAwsjson10_deserializeDocumentTaskScheduledEventDetails(v **types.TaskSch
 				if err != nil {
 					return err
 				}
-				sv.TimeoutInSeconds = i64
+				sv.TimeoutInSeconds = ptr.Int64(i64)
 			}
 
 		default:

@@ -2557,7 +2557,7 @@ func awsRestjson1_deserializeDocumentActionParameter(v **types.ActionParameter, 
 				if !ok {
 					return fmt.Errorf("expected ActionParameterRequired to be of type *bool, got %T instead", value)
 				}
-				sv.Required = jtv
+				sv.Required = ptr.Bool(jtv)
 			}
 
 		default:
@@ -5046,7 +5046,7 @@ func awsRestjson1_deserializeDocumentTargetResourceTypeParameter(v **types.Targe
 				if !ok {
 					return fmt.Errorf("expected TargetResourceTypeParameterRequired to be of type *bool, got %T instead", value)
 				}
-				sv.Required = jtv
+				sv.Required = ptr.Bool(jtv)
 			}
 
 		default:

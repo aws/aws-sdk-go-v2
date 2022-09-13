@@ -25482,7 +25482,7 @@ func awsRestjson1_deserializeDocumentHoursOfOperationTimeSlice(v **types.HoursOf
 				if err != nil {
 					return err
 				}
-				sv.Hours = int32(i64)
+				sv.Hours = ptr.Int32(int32(i64))
 			}
 
 		case "Minutes":
@@ -25495,7 +25495,7 @@ func awsRestjson1_deserializeDocumentHoursOfOperationTimeSlice(v **types.HoursOf
 				if err != nil {
 					return err
 				}
-				sv.Minutes = int32(i64)
+				sv.Minutes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -27719,7 +27719,7 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 				if err != nil {
 					return err
 				}
-				sv.MaxContacts = int32(i64)
+				sv.MaxContacts = ptr.Int32(int32(i64))
 			}
 
 		case "Name":

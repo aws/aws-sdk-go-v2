@@ -54,7 +54,7 @@ type CreatePatchBaselineInput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the managed nodes. The default value is false. Applies
 	// to Linux managed nodes only.
-	ApprovedPatchesEnableNonSecurity bool
+	ApprovedPatchesEnableNonSecurity *bool
 
 	// User-provided idempotency token.
 	ClientToken *string

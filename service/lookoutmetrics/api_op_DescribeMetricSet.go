@@ -75,7 +75,7 @@ type DescribeMetricSetOutput struct {
 	// After an interval ends, the amount of seconds that the detector waits before
 	// importing data. Offset is only supported for S3, Redshift, Athena and
 	// datasources.
-	Offset int32
+	Offset *int32
 
 	// Contains information about the column used for tracking time in your source
 	// data.

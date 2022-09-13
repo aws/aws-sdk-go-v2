@@ -51,7 +51,7 @@ type CreateQueueInput struct {
 
 	// The maximum number of contacts that can be in the queue before it is considered
 	// full.
-	MaxContacts int32
+	MaxContacts *int32
 
 	// The outbound caller ID name, number, and outbound whisper flow.
 	OutboundCallerConfig *types.OutboundCallerConfig

@@ -1920,7 +1920,7 @@ type SAPODataConnectorProfileProperties struct {
 	// The port number of the SAPOData instance.
 	//
 	// This member is required.
-	PortNumber int32
+	PortNumber *int32
 
 	// The logon language of SAPOData instance.
 	LogonLanguage *string
@@ -2000,7 +2000,7 @@ type ScheduledTriggerProperties struct {
 
 	// Defines how many times a scheduled flow fails consecutively before Amazon
 	// AppFlow deactivates it.
-	FlowErrorDeactivationThreshold int32
+	FlowErrorDeactivationThreshold *int32
 
 	// The time at which the scheduled flow ends. The time is formatted as a timestamp
 	// that follows the ISO 8601 standard, such as 2022-04-27T13:00:00-07:00.
@@ -2008,7 +2008,7 @@ type ScheduledTriggerProperties struct {
 
 	// Specifies the optional offset that is added to the time interval for a
 	// schedule-triggered flow.
-	ScheduleOffset int64
+	ScheduleOffset *int64
 
 	// The time at which the scheduled flow starts. The time is formatted as a
 	// timestamp that follows the ISO 8601 standard, such as 2022-04-26T13:00:00-07:00.

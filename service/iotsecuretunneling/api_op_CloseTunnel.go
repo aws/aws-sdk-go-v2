@@ -39,7 +39,7 @@ type CloseTunnelInput struct {
 	TunnelId *string
 
 	// When set to true, IoT Secure Tunneling deletes the tunnel data immediately.
-	Delete bool
+	Delete *bool
 
 	noSmithyDocumentSerde
 }

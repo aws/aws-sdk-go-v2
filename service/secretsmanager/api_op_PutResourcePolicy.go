@@ -56,7 +56,7 @@ type PutResourcePolicyInput struct {
 
 	// Specifies whether to block resource-based policies that allow broad access to
 	// the secret, for example those that use a wildcard for the principal.
-	BlockPublicPolicy bool
+	BlockPublicPolicy *bool
 
 	noSmithyDocumentSerde
 }

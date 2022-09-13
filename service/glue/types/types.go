@@ -5343,7 +5343,7 @@ type SchemaReference struct {
 	SchemaVersionId *string
 
 	// The version number of the schema.
-	SchemaVersionNumber int64
+	SchemaVersionNumber *int64
 
 	noSmithyDocumentSerde
 }

@@ -39336,7 +39336,7 @@ func awsAwsjson11_deserializeDocumentFileSystemConfig(v **types.FileSystemConfig
 				if err != nil {
 					return err
 				}
-				sv.DefaultGid = int32(i64)
+				sv.DefaultGid = ptr.Int32(int32(i64))
 			}
 
 		case "DefaultUid":
@@ -39349,7 +39349,7 @@ func awsAwsjson11_deserializeDocumentFileSystemConfig(v **types.FileSystemConfig
 				if err != nil {
 					return err
 				}
-				sv.DefaultUid = int32(i64)
+				sv.DefaultUid = ptr.Int32(int32(i64))
 			}
 
 		case "MountPath":
