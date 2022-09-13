@@ -2,4 +2,4 @@ For changes to files under the `/codegen/aws-models` folder, and manual edits to
 
 If there is an existing bug or feature this PR is answers please reference it here.
 
-To help speed up the process and reduce the time to merge please ensure that Allow edits and access to secrets by maintainers is checked before submitting your PR. This will allow the project maintainers to make minor adjustments or improvements to the submitted PR, allow us to reduce the roundtrip time for merging your request.
+To help speed up the process and reduce the time to merge please ensure that `Allow edits and access to secrets by maintainers` is checked before submitting your PR. This will allow the project maintainers to make minor adjustments or improvements to the submitted PR, allow us to reduce the roundtrip time for merging your request.
