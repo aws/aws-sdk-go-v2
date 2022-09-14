@@ -55,7 +55,7 @@
                     "name": "identitystore"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>The AWS Single Sign-On (SSO) Identity Store service provides a single place to retrieve all of your\n         identities (users and groups). For more information about AWS, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Single Sign-On User\n            Guide</a>.</p>",
+                "smithy.api#documentation": "<p>The Identity Store service used by AWS IAM Identity Center (successor to AWS Single Sign-On) provides a single place to retrieve all of\n         your identities (users and groups). For more information, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User\n            Guide</a>.</p>\n      \n         <note>\n            <p>Although AWS Single Sign-On was renamed, the <code>sso</code> and\n            <code>identitystore</code> API namespaces will continue to retain their original name for\n            backward compatibility purposes. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html#renamed\">IAM Identity Center rename</a>.</p>\n         </note>\n      \n         <p>This reference guide describes the identity store operations that you can call\n         programatically and includes detailed information on data types and errors.</p>",
                 "smithy.api#title": "AWS SSO Identity Store"
             }
         },
@@ -84,7 +84,7 @@
                 "StreetAddress": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The street of the address.</p>"
+                        "smithy.api#documentation": "<p>The\n         street\n         of the address.</p>"
                     }
                 },
                 "Locality": {
@@ -96,7 +96,7 @@
                 "Region": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The region of the address.</p>"
+                        "smithy.api#documentation": "<p>The\n         region\n         of the address.</p>"
                     }
                 },
                 "PostalCode": {
@@ -127,7 +127,7 @@
                     "target": "com.amazonaws.identitystore#SensitiveBooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean representing whether this is the primary address for the associated resource.</p>"
+                        "smithy.api#documentation": "<p>A\n         Boolean\n         value\n         representing whether this is the primary address for the associated\n         resource.</p>"
                     }
                 }
             },
@@ -164,7 +164,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A unique identifier for the group value that is not the group's primary identifier. This value can be\n         an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a\n         unique <code>GroupDisplayName</code>.</p>"
+                "smithy.api#documentation": "<p>A unique identifier for a user or group that is not the its primary identifier. This value can be\n         an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a\n         unique <code>GroupDisplayName</code>.</p>"
             }
         },
         "com.amazonaws.identitystore#AttributeOperation": {
@@ -180,7 +180,7 @@
                 "AttributeValue": {
                     "target": "com.amazonaws.identitystore#AttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute.</p>"
+                        "smithy.api#documentation": "<p>The value of the attribute. This is a <code>Document</code> type.\n         This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.</p>"
                     }
                 }
             },
@@ -213,7 +213,7 @@
         "com.amazonaws.identitystore#AttributeValue": {
             "type": "document",
             "traits": {
-                "smithy.api#documentation": "<p>The value of the attribute.</p>"
+                "smithy.api#documentation": "<p>The value of the attribute. This is a <code>Document</code> type.\n         This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.</p>"
             }
         },
         "com.amazonaws.identitystore#ConflictException": {
@@ -340,7 +340,7 @@
                 "MembershipId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The identifier for a newly created <code>GroupMembership</code> in an identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -383,7 +383,7 @@
                 "GroupId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the newly created group in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The\n         identifier\n         of the newly created group in the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -435,7 +435,7 @@
                 "UserName": {
                     "target": "com.amazonaws.identitystore#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string used to identify the user. The length limit is 128 characters. \n         This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. \n         This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.</p>"
+                        "smithy.api#documentation": "<p>A unique string used to identify the user. The length limit is 128 characters. \n         This value can consist of letters, accented characters, symbols, numbers, and punctuation. \n         This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.</p>"
                     }
                 },
                 "Name": {
@@ -592,7 +592,7 @@
                 "MembershipId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in an identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -689,7 +689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the group metadata and attributes from <code>GroupId</code> in an identity store.</p>",
+                "smithy.api#documentation": "<p>Retrieves the group metadata and attributes from <code>GroupId</code> in an identity\n         store.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -710,7 +710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves membership metadata and attributes from <code>MembershipId</code> in a group.</p>",
+                "smithy.api#documentation": "<p>Retrieves membership metadata and attributes from <code>MembershipId</code> in an identity store.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -727,7 +727,7 @@
                 "MembershipId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in an identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -746,7 +746,7 @@
                 "MembershipId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in an identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -867,7 +867,7 @@
                 "UserName": {
                     "target": "com.amazonaws.identitystore#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user’s username value. The length limit is 128 characters. This value can consist of\n         letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
+                        "smithy.api#documentation": "<p>A unique string used to identify the user. The length limit is 128 characters. This value can consist of\n         letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
                     }
                 },
                 "UserId": {
@@ -983,7 +983,7 @@
                     "target": "com.amazonaws.identitystore#SensitiveBooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean representing whether this is the primary email for the associated resource.</p>"
+                        "smithy.api#documentation": "<p>A\n         Boolean\n         value\n         representing whether this is the primary email\n         address\n         for the associated resource.</p>"
                     }
                 }
             },
@@ -1075,13 +1075,13 @@
                 "AttributeValue": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the data for an attribute. Each attribute value is described as a name-value pair. </p>",
+                        "smithy.api#documentation": "<p>Represents the data for an attribute. Each attribute value is described as a name-value\n         pair. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A query filter used by <code>ListUsers</code> and <code>ListGroups</code>. This filter object provides the attribute name and attribute value to\n         search users or groups.</p>"
+                "smithy.api#documentation": "<p>A query filter used by <code>ListUsers</code> and <code>ListGroups</code>. This filter\n         object provides the attribute name and attribute value to search users or groups.</p>"
             }
         },
         "com.amazonaws.identitystore#Filters": {
@@ -1130,7 +1130,7 @@
                 "AlternateIdentifier": {
                     "target": "com.amazonaws.identitystore#AlternateIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the group value that is not the group's primary identifier. This value can be\n         an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a\n         unique <code>GroupDisplayName</code>.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for an identity resource that is not the primary identifier. This value can be\n         an identifier from an external identity provider (IdP) that is associated with the group or a unique attribute. For example, a\n         unique <code>GroupDisplayName</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1172,7 +1172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the <code>MembershipId</code> in a group.</p>",
+                "smithy.api#documentation": "<p>Retrieves the <code>MembershipId</code> in an identity store.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1208,7 +1208,7 @@
                 "MembershipId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in the identity store.</p>",
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> in an identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1255,7 +1255,7 @@
                 "AlternateIdentifier": {
                     "target": "com.amazonaws.identitystore#AlternateIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any unique attribute associated with a user that is not the <code>UserId</code>.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for an identity resource that is not the primary identifier.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1293,7 +1293,7 @@
                 "DisplayName": {
                     "target": "com.amazonaws.identitystore#GroupDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the group\n         is created and stored as an attribute of the group object in the identity store.</p>"
+                        "smithy.api#documentation": "<p>The group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the group is\n         created and stored as an attribute of the group object in the identity store.</p>"
                     }
                 },
                 "ExternalIds": {
@@ -1356,7 +1356,7 @@
                 "MembershipId": {
                     "target": "com.amazonaws.identitystore#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> object in the identity store.</p>"
+                        "smithy.api#documentation": "<p>The identifier for a <code>GroupMembership</code> object in an identity store.</p>"
                     }
                 },
                 "GroupId": {
@@ -1531,7 +1531,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns if a member exists in specified groups.</p>",
+                "smithy.api#documentation": "<p>Checks the user's membership in all requested groups and returns if the member exists in all queried groups.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -1567,7 +1567,7 @@
                 "Results": {
                     "target": "com.amazonaws.identitystore#GroupMembershipExistenceResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing results of batch <code>IsMemberInGroups</code> call.</p>",
+                        "smithy.api#documentation": "<p>A list containing the results of membership existence checks.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1653,7 +1653,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
                     }
                 }
             }
@@ -1671,7 +1671,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.\n         </p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.\n         </p>"
                     }
                 }
             }
@@ -1696,7 +1696,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.identitystore#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> requests to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in all\n            <code>List</code> requests to specify how many results to return in one page.</p>"
                     }
                 },
                 "NextToken": {
@@ -1720,7 +1720,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code> and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code>, <code>ListGroups</code>, and <code>ListGroupMemberships</code> API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.</p>"
                     }
                 }
             }
@@ -1742,7 +1742,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <i>Filtering for a group by the group <code>DisplayName</code> attribute is deprecated. Instead, use the <code>GetGroupId</code> API action.</i>\n         </p>\n         <p>Lists all groups in the identity store. Returns a paginated list of complete <code>Group</code> objects.</p>",
+                "smithy.api#documentation": "<p>Lists the attribute name and value of the group that you specified in the search. We\n         only support <code>DisplayName</code> as a valid filter attribute path currently, and\n         filter is required. This API returns minimum attributes, including <code>GroupId</code> and\n         group <code>DisplayName</code> in the response.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "items": "Groups",
@@ -1780,7 +1780,7 @@
                         "smithy.api#deprecated": {
                             "message": "Using filters with ListGroups API is deprecated, please use GetGroupId API instead."
                         },
-                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects that is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> requests.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> requests.</p>"
                     }
                 }
             }
@@ -1820,7 +1820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <i>Filtering for a user by the <code>UserName</code> attribute is deprecated. Instead, use the <code>GetUserId</code> API action.</i>\n         </p>\n         <p>Lists all users in the identity store. Returns a paginated list of complete <code>User</code> objects.</p>",
+                "smithy.api#documentation": "<p>Lists the attribute name and value of the user that you specified in the search. We only\n         support <code>UserName</code> as a valid filter attribute path currently, and filter is\n         required. This API returns minimum attributes, including <code>UserId</code> and\n            <code>UserName</code> in the response.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "items": "Users",
@@ -1858,7 +1858,7 @@
                         "smithy.api#deprecated": {
                             "message": "Using filters with ListUsers API is deprecated, please use GetGroupId API instead."
                         },
-                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects that is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> requests.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>Filter</code> objects, which is used in the <code>ListUsers</code> and\n            <code>ListGroups</code> requests. </p>"
                     }
                 }
             }
@@ -1945,7 +1945,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name of the user.</p>"
+                "smithy.api#documentation": "<p>The\n         full name\n         of the user.</p>"
             }
         },
         "com.amazonaws.identitystore#NextToken": {
@@ -1964,7 +1964,7 @@
                 "Value": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing a phone number. For example, \"8675309\" or \"+1 (800) 123-4567\".</p>"
+                        "smithy.api#documentation": "<p>A string containing a phone number. For example,\n         \"8675309\"\n         or \"+1 (800) 123-4567\".</p>"
                     }
                 },
                 "Type": {
@@ -1977,7 +1977,7 @@
                     "target": "com.amazonaws.identitystore#SensitiveBooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean representing whether this is the primary phone number for the associated resource.</p>"
+                        "smithy.api#documentation": "<p>A\n         Boolean\n         value\n         representing whether this is the primary phone number for the associated\n         resource.</p>"
                     }
                 }
             },
@@ -2072,11 +2072,15 @@
             }
         },
         "com.amazonaws.identitystore#RetryAfterSeconds": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.identitystore#SensitiveBooleanType": {
             "type": "boolean",
             "traits": {
+                "smithy.api#default": false,
                 "smithy.api#sensitive": {}
             }
         },
@@ -2153,7 +2157,7 @@
                 "AttributeValue": {
                     "target": "com.amazonaws.identitystore#AttributeValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute.</p>",
+                        "smithy.api#documentation": "<p>The value of the attribute. This is a <code>Document</code> type.\n         This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2280,7 +2284,7 @@
                 "UserName": {
                     "target": "com.amazonaws.identitystore#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user’s user name value. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code>&lt;&gt;;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
+                        "smithy.api#documentation": "<p>A unique string used to identify the user. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>"
                     }
                 },
                 "UserId": {
@@ -2347,7 +2351,7 @@
                 "Title": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing the user's title. Possible values depend on each customer's specific needs, so they are left unspecified</p>"
+                        "smithy.api#documentation": "<p>A string containing the user's title. Possible values depend on each customer's specific\n         needs, so they are left\n         unspecified.</p>"
                     }
                 },
                 "PreferredLanguage": {
@@ -2365,7 +2369,7 @@
                 "Timezone": {
                     "target": "com.amazonaws.identitystore#SensitiveStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string containing the user's time zone.</p>"
+                        "smithy.api#documentation": "<p>A string containing the\n         user's\n         time zone.</p>"
                     }
                 },
                 "IdentityStoreId": {

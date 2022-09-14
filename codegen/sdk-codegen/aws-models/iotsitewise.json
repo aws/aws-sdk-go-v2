@@ -3249,7 +3249,7 @@
                 "assetName": {
                     "target": "com.amazonaws.iotsitewise#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, friendly name for the asset.</p>",
+                        "smithy.api#documentation": "<p>A friendly name for the asset.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3339,7 +3339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is in preview release for IoT SiteWise and is subject to change. \n      We recommend that you use this operation only with test data, and not in production environments.</p>\n         </note>\n         <p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, \n  see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html\">Create a bulk import job (CLI)</a> \n  in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <important>\n            <p>You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. \n      For more information about how to configure storage settings, \n      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html\">PutStorageConfiguration</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, \n  see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html\">Create a bulk import job (CLI)</a> \n  in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <important>\n            <p>You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. \n      For more information about how to configure storage settings, \n      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html\">PutStorageConfiguration</a>.</p>\n         </important>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -4985,7 +4985,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is in preview release for IoT SiteWise and is subject to change. \n      We recommend that you use this operation only with test data, and not in production environments.</p>\n         </note>\n         <p>Retrieves information about a bulk import job request. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html\">Describe a bulk import job (CLI)</a> \n    in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a bulk import job request. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html\">Describe a bulk import job (CLI)</a> \n    in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -7956,7 +7956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API operation is in preview release for IoT SiteWise and is subject to change. \n      We recommend that you use this operation only with test data, and not in production environments.</p>\n         </note>\n         <p>Retrieves a paginated list of bulk import job requests. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html\">List bulk import jobs (CLI)</a> \n    in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of bulk import job requests. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html\">List bulk import jobs (CLI)</a> \n    in the <i>IoT SiteWise User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -10528,6 +10528,12 @@
                         "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "propertyUnit": {
+                    "target": "com.amazonaws.iotsitewise#PropertyUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the \n      value of the <code>assetModelProperty</code> in the asset model.</p>"
+                    }
                 }
             }
         },
@@ -10545,7 +10551,7 @@
                 "assetName": {
                     "target": "com.amazonaws.iotsitewise#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, friendly name for the asset.</p>",
+                        "smithy.api#documentation": "<p>A friendly name for the asset.</p>",
                         "smithy.api#required": {}
                     }
                 },

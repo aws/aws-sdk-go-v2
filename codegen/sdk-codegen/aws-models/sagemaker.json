@@ -2110,7 +2110,7 @@
                 "MaxRuntimePerTrainingJobInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimePerTrainingJobInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a\n         hyperparameter tuning job. For more information, see the  used by the  action.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that each training job executed inside hyperparameter\n         tuning is allowed to run as part of a hyperparameter tuning job. For more information, see\n         the  used by the  action.</p>"
                     }
                 },
                 "MaxAutoMLJobRuntimeInSeconds": {
@@ -2149,6 +2149,12 @@
                     "target": "com.amazonaws.sagemaker#AutoMLCandidateGenerationConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for generating a candidate for an AutoML job (optional). </p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.sagemaker#AutoMLMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method that Autopilot uses to train the data. You can either specify the mode manually\n         or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In\n            <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than\n         100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p>\n         <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict\n         classification and regression tasks directly from your dataset. This machine learning mode\n         combines several base models to produce an optimal predictive model. It then uses a\n         stacking ensemble method to combine predictions from contributing members. A multi-stack\n         ensemble model can provide better performance over a single model by combining the\n         predictive capabilities of multiple models. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by\n            <code>ENSEMBLING</code> mode.</p>\n         <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train\n         the best version of a model. HPO will automatically select an algorithm for the type of\n         problem you want to solve. Then HPO finds the best hyperparameters according to your\n         objective metric. See <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt\">Autopilot algorithm support</a> for a list of algorithms supported by\n            <code>HYPERPARAMETER_TUNING</code> mode.</p>"
                     }
                 }
             },
@@ -2471,6 +2477,25 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#AutoMLMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AUTO",
+                        "name": "AUTO"
+                    },
+                    {
+                        "value": "ENSEMBLING",
+                        "name": "ENSEMBLING"
+                    },
+                    {
+                        "value": "HYPERPARAMETER_TUNING",
+                        "name": "HYPERPARAMETER_TUNING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.sagemaker#AutoMLNameContains": {
             "type": "string",
             "traits": {
@@ -2534,7 +2559,7 @@
                 "S3DataType": {
                     "target": "com.amazonaws.sagemaker#AutoMLS3DataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type.</p>\n         <p>A ManifestFile should have the format shown below:</p>\n         <p>\n            <code>[ {\"prefix\": \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/\"}, </code>\n         </p>\n         <p>\n            <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1\",</code>\n         </p>\n         <p>\n            <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2\",</code>\n         </p> \n         <p>\n            <code>... \"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N\" ]</code>\n         </p>\n         <p>An S3Prefix should have the following format: </p>\n         <p>\n            <code>s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The data type.</p>\n         <p>A ManifestFile should have the format shown below:</p>\n         <p>\n            <code>[ {\"prefix\": \"s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/\"},\n         </code>\n         </p>\n         <p>\n            <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1\",</code>\n         </p>\n         <p>\n            <code>\"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2\",</code>\n         </p>\n         <p>\n            <code>... \"DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N\" ]</code>\n         </p>\n         <p>An S3Prefix should have the following format: </p>\n         <p>\n            <code>s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7616,7 +7641,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a model training job. After training completes, SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n        <p>If you choose to host your model using SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than SageMaker, provided that you know how to use them for\n            inference. \n        </p>\n        <p>In the request body, you provide the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n                <p>\n                    <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3,\n                    EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n                \n            </li>\n            <li>\n                <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot\n                    training job has to complete. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environment</code> - The environment variables to set in the Docker\n                    container.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the job\n                    fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n        <p> For more information about SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+                "smithy.api#documentation": "<p>Starts a model training job. After training completes, SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n        <p>If you choose to host your model using SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than SageMaker, provided that you know how to use them for\n            inference. \n        </p>\n        <p>In the request body, you provide the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n                <p>\n                    <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n                <important>\n                  <p>You must not include any security-sensitive information, such as \n                    account access IDs, secrets, and tokens, in the dictionary for configuring \n                    hyperparameters. SageMaker rejects the training job request and returns an \n                    exception error for detected credentials, if such user input is found.</p>\n               </important>\n            </li>\n            <li>\n                <p>\n                  <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3,\n                    EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n                \n            </li>\n            <li>\n                <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long a managed spot\n                    training job has to complete. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environment</code> - The environment variables to set in the Docker\n                    container.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the job\n                    fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n        <p> For more information about SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTrainingJobRequest": {
@@ -7632,7 +7657,7 @@
                 "HyperParameters": {
                     "target": "com.amazonaws.sagemaker#HyperParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Algorithm-specific parameters that influence the quality of the model. You set\n            hyperparameters before you start the learning process. For a list of hyperparameters for\n            each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n        <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a\n            key-value pair. Each key and value is limited to 256 characters, as specified by the\n                <code>Length Constraint</code>. </p>"
+                        "smithy.api#documentation": "<p>Algorithm-specific parameters that influence the quality of the model. You set\n            hyperparameters before you start the learning process. For a list of hyperparameters for\n            each training algorithm provided by SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n        <p>You can specify a maximum of 100 hyperparameters. Each hyperparameter is a\n            key-value pair. Each key and value is limited to 256 characters, as specified by the\n                <code>Length Constraint</code>. </p>\n        <important>\n            <p>You must not include any security-sensitive information, such as \n            account access IDs, secrets, and tokens, in the dictionary for configuring \n            hyperparameters. SageMaker rejects the training job request and returns an \n            exception error for detected credentials, if such user input is found.</p>\n         </important>"
                     }
                 },
                 "AlgorithmSpecification": {
@@ -20645,6 +20670,89 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#HyperParameterTuningJobObjective"
+            }
+        },
+        "com.amazonaws.sagemaker#HyperParameterTuningJobSearchEntity": {
+            "type": "structure",
+            "members": {
+                "HyperParameterTuningJobName": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a hyperparameter tuning job.</p>"
+                    }
+                },
+                "HyperParameterTuningJobArn": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a hyperparameter tuning job.</p>"
+                    }
+                },
+                "HyperParameterTuningJobConfig": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobConfig"
+                },
+                "TrainingJobDefinition": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTrainingJobDefinition"
+                },
+                "TrainingJobDefinitions": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTrainingJobDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job definitions included in a hyperparameter tuning job.</p>"
+                    }
+                },
+                "HyperParameterTuningJobStatus": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a hyperparameter tuning job.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that a hyperparameter tuning job was created.</p>"
+                    }
+                },
+                "HyperParameterTuningEndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that a hyperparameter tuning job ended.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that a hyperparameter tuning job was last modified.</p>"
+                    }
+                },
+                "TrainingJobStatusCounters": {
+                    "target": "com.amazonaws.sagemaker#TrainingJobStatusCounters"
+                },
+                "ObjectiveStatusCounters": {
+                    "target": "com.amazonaws.sagemaker#ObjectiveStatusCounters"
+                },
+                "BestTrainingJob": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTrainingJobSummary"
+                },
+                "OverallBestTrainingJob": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTrainingJobSummary"
+                },
+                "WarmStartConfig": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobWarmStartConfig"
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error that was created when a hyperparameter tuning job failed.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with a hyperparameter tuning job. For more information see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An entity having characteristics over which a user can search for a hyperparameter\n            tuning job.</p>"
             }
         },
         "com.amazonaws.sagemaker#HyperParameterTuningJobSortByOptions": {
@@ -34074,6 +34182,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The serverless configuration for an endpoint. Specifies a serverless endpoint configuration instead of an instance-based endpoint configuration.</p>"
                     }
+                },
+                "VolumeSizeInGB": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantVolumeSizeInGB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size, in GB, of the ML storage volume attached to individual\n          inference instance associated with the production variant. Currenly only\n          Amazon EBS gp2 storage volumes are supported.</p>"
+                    }
+                },
+                "ModelDataDownloadTimeoutInSeconds": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantModelDataDownloadTimeoutInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timeout value, in seconds, to download and extract the\n          model that you want to host from Amazon S3 to the individual inference instance associated with\n          this production variant.</p>"
+                    }
+                },
+                "ContainerStartupHealthCheckTimeoutInSeconds": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantContainerStartupHealthCheckTimeoutInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timeout value, in seconds, for your inference container\n          to pass health check by SageMaker Hosting. For more information about health\n          check, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests\">How\n          Your Container Should Respond to Health Check (Ping)\n          Requests</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -34109,6 +34235,16 @@
                         "name": "ML_EIA2_XLARGE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.sagemaker#ProductionVariantContainerStartupHealthCheckTimeoutInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 3600
+                }
             }
         },
         "com.amazonaws.sagemaker#ProductionVariantCoreDumpConfig": {
@@ -34487,6 +34623,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ProductionVariantModelDataDownloadTimeoutInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 3600
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ProductionVariantServerlessConfig": {
             "type": "structure",
             "members": {
@@ -34619,6 +34765,16 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ProductionVariantVolumeSizeInGB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 512
                 }
             }
         },
@@ -36545,6 +36701,10 @@
                     {
                         "value": "FeatureMetadata",
                         "name": "FEATURE_METADATA"
+                    },
+                    {
+                        "value": "HyperParameterTuningJob",
+                        "name": "HYPER_PARAMETER_TUNING_JOB"
                     }
                 ]
             }
@@ -37863,6 +38023,12 @@
                     "target": "com.amazonaws.sagemaker#FeatureMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>The feature metadata used to search through the features.</p>"
+                    }
+                },
+                "HyperParameterTuningJob": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobSearchEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of a hyperparameter tuning job.</p>"
                     }
                 }
             },
@@ -39356,7 +39522,7 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run\n            before it is stopped.</p>\n        <p>For compilation jobs, if the job does not complete during this time, a\n                <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and\n            increasing as necessary based on your model.</p>\n        <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job.\n            When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is\n            28 days.</p>\n        <p>The maximum time that a <code>TrainingJob</code> can run in total, including any time spent\n            publishing metrics or archiving and uploading models after it has been stopped, is 30\n            days.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run\n            before it is stopped.</p>\n        <p>For compilation jobs, if the job does not complete during this time, a\n                <code>TimeOut</code> error is generated. We recommend starting with 900 seconds and\n            increasing as necessary based on your model.</p>\n        <p>For all other jobs, if the job does not complete during this time, SageMaker ends the job.\n            When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is\n            28 days.</p>\n        <p>The maximum time that a <code>TrainingJob</code> can run in total, including any time\n            spent publishing metrics or archiving and uploading models after it has been stopped, is\n            30 days.</p>"
                     }
                 },
                 "MaxWaitTimeInSeconds": {

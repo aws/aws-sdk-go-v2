@@ -40,6 +40,9 @@
             "input": {
                 "target": "com.amazonaws.sns#AddPermissionInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sns#AuthorizationErrorException"
@@ -156,6 +159,9 @@
                     "target": "com.amazonaws.sns#DeleteTopic"
                 },
                 {
+                    "target": "com.amazonaws.sns#GetDataProtectionPolicy"
+                },
+                {
                     "target": "com.amazonaws.sns#GetEndpointAttributes"
                 },
                 {
@@ -208,6 +214,9 @@
                 },
                 {
                     "target": "com.amazonaws.sns#PublishBatch"
+                },
+                {
+                    "target": "com.amazonaws.sns#PutDataProtectionPolicy"
                 },
                 {
                     "target": "com.amazonaws.sns#RemovePermission"
@@ -741,6 +750,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of tags to add to a new topic.</p>\n        <note>\n            <p>To be able to tag a topic on creation, you must have the\n                    <code>sns:CreateTopic</code> and <code>sns:TagResource</code>\n                permissions.</p>\n        </note>"
                     }
+                },
+                "DataProtectionPolicy": {
+                    "target": "com.amazonaws.sns#attributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the policy document you want to use for this topic.</p>\n        <p>You can only add one policy per topic.</p>\n        <p>The policy must be in JSON string format.</p> \n        <p>Length Constraints: Maximum length of 30,720.</p>"
+                    }
                 }
             },
             "traits": {
@@ -771,6 +786,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#DeleteEndpointInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -806,6 +824,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#DeletePlatformApplicationInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -889,6 +910,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#DeleteTopicInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1004,6 +1028,58 @@
                 "smithy.api#documentation": "<p>Indicates that the number of filter polices in your Amazon Web Services account exceeds the limit. To\n            add more filter polices, submit an Amazon SNS Limit Increase case in the Amazon Web Services Support\n            Center.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sns#GetDataProtectionPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sns#GetDataProtectionPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sns#GetDataProtectionPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sns#AuthorizationErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidSecurityException"
+                },
+                {
+                    "target": "com.amazonaws.sns#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the specified inline <code>DataProtectionPolicy</code> document that is stored in the specified Amazon SNS topic. </p>"
+            }
+        },
+        "com.amazonaws.sns#GetDataProtectionPolicyInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.sns#topicARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the topic whose <code>DataProtectionPolicy</code> you want to get.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n            in the Amazon Web Services General Reference.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sns#GetDataProtectionPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "DataProtectionPolicy": {
+                    "target": "com.amazonaws.sns#attributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the <code>DataProtectionPolicy</code> in JSON string format.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.sns#GetEndpointAttributes": {
@@ -1697,6 +1773,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "PhoneNumbers",
                     "pageSize": "MaxResults"
                 }
             }
@@ -2538,6 +2615,9 @@
                 },
                 {
                     "target": "com.amazonaws.sns#PlatformApplicationDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.sns#ValidationException"
                 }
             ],
             "traits": {
@@ -2609,6 +2689,9 @@
                 },
                 {
                     "target": "com.amazonaws.sns#TooManyEntriesInBatchRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sns#ValidationException"
                 }
             ],
             "traits": {
@@ -2824,10 +2907,61 @@
                 "smithy.api#documentation": "<p>Response for Publish action.</p>"
             }
         },
+        "com.amazonaws.sns#PutDataProtectionPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sns#PutDataProtectionPolicyInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sns#AuthorizationErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.sns#InvalidSecurityException"
+                },
+                {
+                    "target": "com.amazonaws.sns#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is stored in the specified Amazon SNS topic.</p>"
+            }
+        },
+        "com.amazonaws.sns#PutDataProtectionPolicyInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.sns#topicARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the topic whose <code>DataProtectionPolicy</code> you want to add or update.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n            in the Amazon Web Services General Reference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataProtectionPolicy": {
+                    "target": "com.amazonaws.sns#attributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON serialization of the topic's <code>DataProtectionPolicy</code>.</p>\n        <p>The <code>DataProtectionPolicy</code> must be in JSON string format.</p>\n        <p>Length Constraints: Maximum length of 30,720.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.sns#RemovePermission": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#RemovePermissionInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2953,6 +3087,9 @@
             "input": {
                 "target": "com.amazonaws.sns#SetEndpointAttributesInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sns#AuthorizationErrorException"
@@ -2997,6 +3134,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#SetPlatformApplicationAttributesInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3091,6 +3231,9 @@
             "input": {
                 "target": "com.amazonaws.sns#SetSubscriptionAttributesInput"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.sns#AuthorizationErrorException"
@@ -3144,6 +3287,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#SetTopicAttributesInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -3607,6 +3753,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.sns#UnsubscribeInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {

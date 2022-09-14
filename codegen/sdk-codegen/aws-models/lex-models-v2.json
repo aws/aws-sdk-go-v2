@@ -1655,6 +1655,20 @@
                 "smithy.api#documentation": "<p>Contains information about code hooks that Amazon Lex calls during a\n         conversation.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#CompositeSlotTypeSetting": {
+            "type": "structure",
+            "members": {
+                "subSlots": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Subslots in the composite slot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A composite slot is a combination of two or more slots \n       that capture multiple pieces of information in a single user input.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#Condition": {
             "type": "structure",
             "members": {
@@ -3072,6 +3086,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the slot returns multiple values in one response.\n         Multi-value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>. </p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
+                },
+                "subSlotSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the constituent sub slots and the  \n        expression for the composite slot.</p>"
+                    }
                 }
             }
         },
@@ -3148,6 +3168,12 @@
                     "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the slot returns multiple values in one\n         response.</p>"
+                    }
+                },
+                "subSlotSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the constituent sub slots and the  \n        expression for the composite slot.</p>"
                     }
                 }
             }
@@ -3252,6 +3278,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the type of external information used to create the slot\n         type.</p>"
                     }
+                },
+                "compositeSlotTypeSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#CompositeSlotTypeSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for a composite slot type.</p>"
+                    }
                 }
             }
         },
@@ -3322,6 +3354,12 @@
                     "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of external information used to create the slot\n         type.</p>"
+                    }
+                },
+                "compositeSlotTypeSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#CompositeSlotTypeSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for a composite slot type.</p>"
                     }
                 }
             }
@@ -6293,6 +6331,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the slot accepts multiple values in a single\n         utterance.</p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
+                },
+                "subSlotSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the constituent sub slots and the  \n        expression for the composite slot.</p>"
+                    }
                 }
             }
         },
@@ -6438,6 +6482,12 @@
                 },
                 "externalSourceSetting": {
                     "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting"
+                },
+                "compositeSlotTypeSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#CompositeSlotTypeSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for a composite slot type.</p>"
+                    }
                 }
             }
         },
@@ -11161,6 +11211,10 @@
                     {
                         "value": "ExternalGrammar",
                         "name": "ExternalGrammar"
+                    },
+                    {
+                        "value": "Composite",
+                        "name": "Composite"
                     }
                 ]
             }
@@ -11425,7 +11479,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Settings that you can use for eliciting a slot value.</p>"
+                "smithy.api#documentation": "<p>Specifies the elicitation setting details for constituent sub slots of a composite slot.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#SlotValueOverride": {
@@ -11489,6 +11543,10 @@
                     {
                         "value": "TopResolution",
                         "name": "TopResolution"
+                    },
+                    {
+                        "value": "Concatenation",
+                        "name": "Concatenation"
                     }
                 ]
             }
@@ -11539,6 +11597,28 @@
                         "name": "Descending"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#Specifications": {
+            "type": "structure",
+            "members": {
+                "slotTypeId": {
+                    "target": "com.amazonaws.lexmodelsv2#BuiltInOrCustomSlotTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the slot type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "valueElicitationSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotValueElicitationSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the elicitation setting details for constituent sub slots of a composite slot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Subslot specifications.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#StartBotRecommendation": {
@@ -11957,6 +12037,111 @@
             },
             "value": {
                 "target": "com.amazonaws.lexmodelsv2#String"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SubSlotExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 640
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z_\\s\\(\\)]+$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SubSlotSetting": {
+            "type": "structure",
+            "members": {
+                "expression": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression text for defining the constituent sub slots in the composite slot using logical AND and OR operators.</p>"
+                    }
+                },
+                "slotSpecifications": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotSpecificationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the constituent sub slots of a composite slot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifications for the constituent sub slots and the  \n        expression for the composite slot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SubSlotSpecificationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexmodelsv2#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.lexmodelsv2#Specifications"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SubSlotTypeComposition": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of a constituent sub slot inside a composite slot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "slotTypeId": {
+                    "target": "com.amazonaws.lexmodelsv2#BuiltInOrCustomSlotTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to a slot type. \n        This refers to either a built-in slot type or the unique slotTypeId of a custom slot type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Subslot type composition.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SubSlotTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#SubSlotTypeComposition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SubSlotValueElicitationSetting": {
+            "type": "structure",
+            "members": {
+                "defaultValueSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#SlotDefaultValueSpecification"
+                },
+                "promptSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#PromptSpecification",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "sampleUtterances": {
+                    "target": "com.amazonaws.lexmodelsv2#SampleUtterancesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you know a specific pattern that users might respond to an Amazon Lex request for a sub slot value, \n      you can provide those utterances to improve accuracy. This is optional. In most cases Amazon Lex is capable \n      of understanding user utterances. This is similar to <code>SampleUtterances</code> for slots.</p>"
+                    }
+                },
+                "waitAndContinueSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#WaitAndContinueSpecification"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Subslot elicitation settings.</p>\n         <p>\n            <code>DefaultValueSpecification</code> is a list of default values for a constituent sub slot in a composite slot. Default values are used when \n        Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, \n        session attributes, and defined values. This is similar to <code>DefaultValueSpecification</code> for slots.</p>\n         <p>\n            <code>PromptSpecification</code> is the prompt that Amazon Lex uses to elicit the sub slot value from the user. \n        This is similar to <code>PromptSpecification</code> for slots.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#SynonymList": {
@@ -13449,6 +13634,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether the slot accepts multiple values in one response.\n         Multiple value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>.</p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
+                },
+                "subSlotSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the constituent sub slots and the  \n        expression for the composite slot.</p>"
+                    }
                 }
             }
         },
@@ -13531,6 +13722,12 @@
                     "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the slot accepts multiple values in one\n         response.</p>"
+                    }
+                },
+                "subSlotSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#SubSlotSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the constituent sub slots and the  \n        expression for the composite slot.</p>"
                     }
                 }
             }
@@ -13640,6 +13837,12 @@
                 },
                 "externalSourceSetting": {
                     "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting"
+                },
+                "compositeSlotTypeSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#CompositeSlotTypeSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for a composite slot type.</p>"
+                    }
                 }
             }
         },
@@ -13714,6 +13917,12 @@
                 },
                 "externalSourceSetting": {
                     "target": "com.amazonaws.lexmodelsv2#ExternalSourceSetting"
+                },
+                "compositeSlotTypeSetting": {
+                    "target": "com.amazonaws.lexmodelsv2#CompositeSlotTypeSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for a composite slot type.</p>"
+                    }
                 }
             }
         },

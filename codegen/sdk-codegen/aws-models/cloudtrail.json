@@ -142,7 +142,7 @@
                 "Field": {
                     "target": "com.amazonaws.cloudtrail#SelectorField",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. If you do not add this field, CloudTrail logs both both <code>read</code> and\n            <code>write</code> events. A value of <code>true</code> logs only <code>read</code> events. A value of <code>false</code> \n            logs only <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code> or <code>GetSnapshotBlock</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required.\n                  <code>resources.type</code> can only use the <code>Equals</code> operator, and the\n            value can be one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::S3::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Lambda::Function</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Table</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3Outposts::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::ManagedBlockchain::Node</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3ObjectLambda::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::Snapshot</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Stream</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Glue::Table</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>\n               You can have only one <code>resources.type</code> ﬁeld per selector. To log data\n               events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with\n               <code>resources.ARN</code>, but if you use <code>Equals</code> or <code>NotEquals</code>, the\n               value must exactly match the ARN of a valid resource of the type you've speciﬁed in\n               the template as the value of resources.type. For example, if resources.type equals\n                  <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. To\n               log all data events for all objects in a specific S3 bucket, use the\n                  <code>StartsWith</code> operator, and include only the bucket ARN as the matching value.</p>\n               <p>The trailing slash is intentional; do not exclude it. Replace the text between\n               less than and greater than symbols (<>) with resource-specific information. </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/<object_path>/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3::AccessPoint</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               one of the following formats. To log events on all objects in an S3 access point, we\n               recommend that you use only the access point ARN, don’t include the object path, and\n               use the <code>StartsWith</code> or <code>NotStartsWith</code> operators.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:lambda:<region>:<account_ID>:function:<function_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::DynamoDB::Table</code>, and the operator is\n               set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the\n               following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::ManagedBlockchain::Node</code>,\n               and the operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN\n               must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, and the operator is set to\n                  <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following\n               format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::EC2::Snapshot</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:ec2:<region>::snapshot/<snapshot_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::DynamoDB::Stream</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>/stream/<date_time></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::Glue::Table</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. If you do not add this field, CloudTrail logs both <code>read</code> and\n            <code>write</code> events. A value of <code>true</code> logs only <code>read</code> events. A value of <code>false</code> \n            logs only <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code> or <code>GetSnapshotBlock</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required.\n                  <code>resources.type</code> can only use the <code>Equals</code> operator, and the\n            value can be one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::S3::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Lambda::Function</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Table</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3Outposts::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::ManagedBlockchain::Node</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3ObjectLambda::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::Snapshot</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Stream</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Glue::Table</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>\n               You can have only one <code>resources.type</code> ﬁeld per selector. To log data\n               events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with\n               <code>resources.ARN</code>, but if you use <code>Equals</code> or <code>NotEquals</code>, the\n               value must exactly match the ARN of a valid resource of the type you've speciﬁed in\n               the template as the value of resources.type. For example, if resources.type equals\n                  <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. To\n               log all data events for all objects in a specific S3 bucket, use the\n                  <code>StartsWith</code> operator, and include only the bucket ARN as the matching value.</p>\n               <p>The trailing slash is intentional; do not exclude it. Replace the text between\n               less than and greater than symbols (<>) with resource-specific information. </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/<object_path>/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3::AccessPoint</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               one of the following formats. To log events on all objects in an S3 access point, we\n               recommend that you use only the access point ARN, don’t include the object path, and\n               use the <code>StartsWith</code> or <code>NotStartsWith</code> operators.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:lambda:<region>:<account_ID>:function:<function_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::DynamoDB::Table</code>, and the operator is\n               set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the\n               following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::ManagedBlockchain::Node</code>,\n               and the operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN\n               must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, and the operator is set to\n                  <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following\n               format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::EC2::Snapshot</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:ec2:<region>::snapshot/<snapshot_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::DynamoDB::Stream</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>/stream/<date_time></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::Glue::Table</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -287,6 +287,92 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#Channel": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.cloudtrail#ChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the channel.\n      </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudtrail#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the CloudTrail channel. For service-linked channels, the name is <code>aws-service-channel/service-name/custom-suffix</code> where <code>service-name</code> represents the name of the \n         Amazon Web Services service that created the channel and <code>custom-suffix</code> represents the suffix created by the Amazon Web Services service.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Contains information about a returned CloudTrail channel.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#ChannelARNInvalidException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ChannelARNInvalid",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n         The specified channel ARN is not valid or does not map to a channel in your account.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudtrail#ChannelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#ChannelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._\\-]+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#ChannelNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ChannelNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>\n         The specified channel was not found.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudtrail#Channels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#Channel"
+            }
+        },
         "com.amazonaws.cloudtrail#CloudTrailARNInvalidException": {
             "type": "structure",
             "members": {
@@ -394,6 +480,9 @@
                     "target": "com.amazonaws.cloudtrail#DescribeTrails"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#GetChannel"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#GetEventDataStore"
                 },
                 {
@@ -410,6 +499,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#GetTrailStatus"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ListChannels"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#ListEventDataStores"
@@ -579,7 +671,7 @@
                 "RetentionPeriod": {
                     "target": "com.amazonaws.cloudtrail#RetentionPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention period of the event data store, in days. You can set a retention period of up to 2555 days, \n      the equivalent of seven years.</p>"
+                        "smithy.api#documentation": "<p>The retention period of the event data store, in days. You can set a retention period of up to 2557 days, \n      the equivalent of seven years.</p>"
                     }
                 },
                 "TerminationProtectionEnabled": {
@@ -1227,6 +1319,55 @@
                 "smithy.api#documentation": "<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
             }
         },
+        "com.amazonaws.cloudtrail#Destination": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.cloudtrail#DestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The type of service. For service-linked channels, the value is <code>AWS_SERVICE</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.cloudtrail#Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The location of the service. For service-linked channels, this is the name of the Amazon Web Services service.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Contains information about the service where CloudTrail delivers events.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#DestinationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EVENT_DATA_STORE",
+                        "name": "EVENT_DATA_STORE"
+                    },
+                    {
+                        "value": "AWS_SERVICE",
+                        "name": "AWS_SERVICE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudtrail#Destinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#Destination"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.cloudtrail#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -1399,7 +1540,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events \n         that you have logged on your account from the last 90 to 2555 days \n         (about three months to up to seven years). To select events for an event data store, \n         use <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced\">advanced event selectors</a>.</p>"
+                "smithy.api#documentation": "<p>A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events \n         that you have logged on your account from the last 90 to 2557 days \n         (about three months to up to seven years). To select events for an event data store, \n         use <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced\">advanced event selectors</a>.</p>"
             }
         },
         "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException": {
@@ -1595,6 +1736,80 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudtrail#String"
+            }
+        },
+        "com.amazonaws.cloudtrail#GetChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#GetChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#GetChannelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ChannelARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ChannelNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns the specified CloudTrail service-linked channel. Amazon Web Services services create service-linked channels to view CloudTrail events.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#GetChannelRequest": {
+            "type": "structure",
+            "members": {
+                "Channel": {
+                    "target": "com.amazonaws.cloudtrail#ChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the CloudTrail service-linked channel.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#GetChannelResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.cloudtrail#ChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ARN of the CloudTrail service-linked channel.\n      </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.cloudtrail#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the CloudTrail service-linked channel. For service-linked channels, the value is <code>aws-service-channel/service-name/custom-suffix</code> \n         where <code>service-name</code> represents the name of the \n         Amazon Web Services service that created the channel and <code>custom-suffix</code> represents the suffix generated by the Amazon Web Services service.\n      </p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.cloudtrail#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The trail or event data store for the CloudTrail service-linked channel.\n      </p>"
+                    }
+                },
+                "SourceConfig": {
+                    "target": "com.amazonaws.cloudtrail#SourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides information about the advanced event selectors configured for the service-linked channel, and whether the service-linked channel applies to all regions or one region.\n      </p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.cloudtrail#Destinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Web Services service that created the CloudTrail service-linked channel.\n      </p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#GetEventDataStore": {
@@ -2837,6 +3052,79 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudtrail#ListChannels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#ListChannelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#ListChannelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns all CloudTrail channels.\n      </p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListChannelsMaxResultsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListChannelsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudtrail#ListChannelsMaxResultsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The maximum number of CloudTrail channels to display on a single page.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of results.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListChannelsResponse": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.cloudtrail#Channels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The list of CloudTrail channels.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token used to get the next page of results.\n      </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudtrail#ListEventDataStores": {
             "type": "operation",
             "input": {
@@ -3230,7 +3518,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. This token must be passed \n         in with the same parameters that were specified in the the original call. For example, if the original \n         call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should \n         include those same parameters.</p>"
+                        "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. This token must be passed \n         in with the same parameters that were specified in the original call. For example, if the original \n         call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should \n         include those same parameters.</p>"
                     }
                 }
             }
@@ -3250,6 +3538,16 @@
                         "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. If the token does not appear, \n         there are no more results to return. The token must be passed in with the same parameters as the previous call. \n         For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with \n         NextToken should include those same parameters.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudtrail#Location": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
             }
         },
         "com.amazonaws.cloudtrail#Long": {
@@ -3403,7 +3701,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.cloudtrail#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. \n         For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.</p>"
+                        "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the original call. \n         For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.</p>"
                     }
                 }
             },
@@ -4368,6 +4666,36 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.cloudtrail#Source": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.cloudtrail#SourceConfig": {
+            "type": "structure",
+            "members": {
+                "ApplyToAllRegions": {
+                    "target": "com.amazonaws.cloudtrail#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies whether the service-linked channel applies to one region or all regions. \n      </p>"
+                    }
+                },
+                "AdvancedEventSelectors": {
+                    "target": "com.amazonaws.cloudtrail#AdvancedEventSelectors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The advanced event selectors configured for the service-linked channel.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Contains configuration information about the service-linked channel.\n      </p>"
+            }
+        },
         "com.amazonaws.cloudtrail#StartLogging": {
             "type": "operation",
             "input": {
@@ -4910,7 +5238,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an event data store. The required <code>EventDataStore</code> value is an ARN or the ID portion of the ARN. \n         Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. \n         <code>RetentionPeriod</code> is in days, and valid values are integers between 90 and 2555. \n         By default, <code>TerminationProtection</code> is enabled. <code>AdvancedEventSelectors</code> includes or excludes management \n         and data events in your event data store; for more information about <code>AdvancedEventSelectors</code>, see \n         <a>PutEventSelectorsRequest$AdvancedEventSelectors</a>.</p>",
+                "smithy.api#documentation": "<p>Updates an event data store. The required <code>EventDataStore</code> value is an ARN or the ID portion of the ARN. \n         Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. \n         <code>RetentionPeriod</code> is in days, and valid values are integers between 90 and 2557. \n         By default, <code>TerminationProtection</code> is enabled. <code>AdvancedEventSelectors</code> includes or excludes management \n         and data events in your event data store; for more information about <code>AdvancedEventSelectors</code>, see \n         <a>PutEventSelectorsRequest$AdvancedEventSelectors</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.evidently#AccessDeniedException": {
             "type": "structure",
@@ -12,6 +12,12 @@
                 "smithy.api#documentation": "<p>You do not have sufficient permissions to perform this action. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.evidently#AppConfigResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[a-z0-9]{4,7}"
             }
         },
         "com.amazonaws.evidently#Arn": {
@@ -242,7 +248,7 @@
                 "samplingRate": {
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent. For example, specify 10,000 to allocate 10% of the available audience.</p>"
                     }
                 },
@@ -536,6 +542,12 @@
                         "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store\n      evaluation events for longer term storage, if you choose to do so. If you choose\n      not to store these events, Evidently deletes them after using them to produce metrics and other experiment\n      results that you can view.</p>"
                     }
                 },
+                "appConfigResource": {
+                    "target": "com.amazonaws.evidently#ProjectAppConfigResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter if the project will use <i>client-side evaluation powered by AppConfig</i>. Client-side\n      evaluation allows your application to assign variations to user\n      sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation. This \n      mitigates the latency and availability risks that come with an API call. For more information, \n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-client-side-evaluation.html\">\n        Client-side evaluation - powered by AppConfig.</a>\n         </p>\n         <p>This parameter is a structure that\n      contains information about the AppConfig application and environment that will be used as for client-side evaluation.</p>\n         <p>To create a project that uses client-side evaluation, you must have the\n      <code>evidently:ExportProjectAsConfiguration</code> permission.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
@@ -579,7 +591,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to define a <i>segment</i> of your audience. A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>Using a segment in an experiment limits that experiment to evaluate only the users who match the segment \n      criteria. Using one or more segments in a launch allow you to define different traffic splits for the different\n      audience segments.</p>\n    \n         <p>For more information about segment pattern syntax, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>\n    \n         <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which\n      is passed into Evidently in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation,\n      when Evidently assigns a feature variation to a user.</p>",
+                "smithy.api#documentation": "<p>Use this operation to define a <i>segment</i> of your audience. A segment\n      is a portion of your audience that share one or more characteristics. Examples could be Chrome browser users, \n      users in Europe, or Firefox browser users in Europe who also fit other criteria that your application collects,\n      such as age.</p>\n         <p>Using a segment in an experiment limits that experiment to evaluate only the users who match the segment \n      criteria. Using one or more segments in a launch allows you to define different traffic splits for the different\n      audience segments.</p>\n    \n         <p>For more information about segment pattern syntax, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>\n    \n         <p>The pattern that you define for a segment is matched against the value of <code>evaluationContext</code>, which\n      is passed into Evidently in the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation,\n      when Evidently assigns a feature variation to a user.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/segments",
@@ -600,7 +612,7 @@
                 "pattern": {
                     "target": "com.amazonaws.evidently#SegmentPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pattern to use for the segment. For more information about pattern syntax, \n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>",
+                        "smithy.api#documentation": "<p>The pattern to use for the segment. For more information about pattern syntax, \n      see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html\">\n        Segment rule pattern syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1285,29 +1297,6 @@
         },
         "com.amazonaws.evidently#Evidently": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Evidently",
-                    "arnNamespace": "evidently"
-                },
-                "aws.auth#sigv4": {
-                    "name": "evidently"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "Content-Type",
-                        "X-Amz-Date",
-                        "Authorization",
-                        "X-Api-Key",
-                        "X-Amz-Security-Token",
-                        "x-amz-content-sha256",
-                        "X-Amz-User-Agent"
-                    ]
-                },
-                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Evidently to safely validate new features by serving \n      them to a specified percentage\n      of your users while you roll out the feature. You can monitor the performance of the new feature\n      to help you decide when to ramp up traffic to your users. This helps you \n      reduce risk and identify unintended consequences before you fully launch the feature.</p>\n         <p>You can also conduct A/B experiments to make feature design decisions based on evidence\n      and data. An experiment can test as many as five variations at once. Evidently collects\n      experiment data and analyzes it using statistical methods. It also provides clear\n      recommendations about which variations perform better. You can test both user-facing features\n      and backend features.</p>",
-                "smithy.api#title": "Amazon CloudWatch Evidently"
-            },
             "version": "2021-02-01",
             "operations": [
                 {
@@ -1330,7 +1319,30 @@
                 {
                     "target": "com.amazonaws.evidently#SegmentResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Evidently",
+                    "arnNamespace": "evidently"
+                },
+                "aws.auth#sigv4": {
+                    "name": "evidently"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "X-Amz-Date",
+                        "Authorization",
+                        "X-Api-Key",
+                        "X-Amz-Security-Token",
+                        "x-amz-content-sha256",
+                        "X-Amz-User-Agent"
+                    ]
+                },
+                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Evidently to safely validate new features by serving \n      them to a specified percentage\n      of your users while you roll out the feature. You can monitor the performance of the new feature\n      to help you decide when to ramp up traffic to your users. This helps you \n      reduce risk and identify unintended consequences before you fully launch the feature.</p>\n         <p>You can also conduct A/B experiments to make feature design decisions based on evidence\n      and data. An experiment can test as many as five variations at once. Evidently collects\n      experiment data and analyzes it using statistical methods. It also provides clear\n      recommendations about which variations perform better. You can test both user-facing features\n      and backend features.</p>",
+                "smithy.api#title": "Amazon CloudWatch Evidently"
+            }
         },
         "com.amazonaws.evidently#Experiment": {
             "type": "structure",
@@ -1421,6 +1433,7 @@
                 "samplingRate": {
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>In thousandths of a percent, the amount of the available audience that is allocated to this experiment. \n      The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent, so a value of 10,000 is 10% of the available audience.</p>"
                     }
                 },
@@ -2141,7 +2154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the results of a running or completed experiment. No results are available until\n       there have been 100 events for each variation and at least 10 minutes have passed since the start of the experiment.</p>\n         <p>Experiment\n       results are available up to 63 days after the start of the experiment. They are not available after that because\n       of CloudWatch data retention policies.</p>",
+                "smithy.api#documentation": "<p>Retrieves the results of a running or completed experiment. No results are available until\n       there have been 100 events for each variation and at least 10 minutes have passed since the start of the experiment.\n       To increase the statistical power, Evidently performs an additional offline p-value analysis at the end of the experiment.\n       Offline p-value analysis can detect statistical significance in some cases where the anytime p-values used during \n       the experiment do not find statistical significance.</p>\n         <p>Experiment\n       results are available up to 63 days after the start of the experiment. They are not available after that because\n       of CloudWatch data retention policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/projects/{project}/experiments/{experiment}/results",
@@ -2215,6 +2228,7 @@
                 "period": {
                     "target": "com.amazonaws.evidently#ResultsPeriod",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>In seconds, the amount of time to aggregate results together. </p>"
                     }
                 }
@@ -3404,7 +3418,6 @@
         "com.amazonaws.evidently#MaxExperiments": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3414,7 +3427,6 @@
         "com.amazonaws.evidently#MaxFeatures": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3424,7 +3436,6 @@
         "com.amazonaws.evidently#MaxLaunches": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3434,7 +3445,6 @@
         "com.amazonaws.evidently#MaxProjects": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3444,7 +3454,6 @@
         "com.amazonaws.evidently#MaxReferences": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3454,7 +3463,6 @@
         "com.amazonaws.evidently#MaxSegments": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3814,6 +3822,12 @@
                         "smithy.api#documentation": "<p>A structure that contains information about where Evidently is to store\n       evaluation events for longer term storage.</p>"
                     }
                 },
+                "appConfigResource": {
+                    "target": "com.amazonaws.evidently#ProjectAppConfigResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure defines the configuration of how your application \n      integrates with AppConfig to run client-side evaluation.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.evidently#TagMap",
                     "traits": {
@@ -3823,6 +3837,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This structure defines a project, which is the logical object in Evidently that can contain features, launches, and \n      experiments. Use projects to group similar features together.</p>"
+            }
+        },
+        "com.amazonaws.evidently#ProjectAppConfigResource": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.evidently#AppConfigResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AppConfig application to use for client-side evaluation. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evidently#AppConfigResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AppConfig environment to use for client-side evaluation. This must be an \n    environment that is within the application that you specify for <code>applicationId</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationProfileId": {
+                    "target": "com.amazonaws.evidently#AppConfigResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AppConfig profile to use for client-side evaluation. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is a structure that defines the configuration of how your application \n      integrates with AppConfig to run client-side evaluation.</p>"
+            }
+        },
+        "com.amazonaws.evidently#ProjectAppConfigResourceConfig": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.evidently#AppConfigResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AppConfig application to use for client-side evaluation. </p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.evidently#AppConfigResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AppConfig environment to use for client-side evaluation. This must be an \n      environment that is within the application that you specify for <code>applicationId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this parameter to configure client-side evaluation for your project. Client-side evaluation allows your application to assign \n      variations to user\n      sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation to assign the \n      variations. This mitigates the latency and availability risks that come with an API call.</p>\n         <p>\n            <code>ProjectAppConfigResource</code> is a structure that defines the configuration of how your application \n      integrates with AppConfig to run client-side evaluation.</p>"
             }
         },
         "com.amazonaws.evidently#ProjectArn": {
@@ -4283,6 +4346,7 @@
         "com.amazonaws.evidently#ResultsPeriod": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 300,
                     "max": 90000
@@ -4495,7 +4559,7 @@
                 "pattern": {
                     "target": "com.amazonaws.evidently#SegmentPattern",
                     "traits": {
-                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#documentation": "<p>The pattern that defines the attributes to use to evalute whether a user session will be in the segment. \n    For more information about the pattern syntax, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html\">Segment rule pattern syntax</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4722,6 +4786,7 @@
         "com.amazonaws.evidently#SplitWeight": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100000
@@ -5463,7 +5528,7 @@
                 "samplingRate": {
                     "target": "com.amazonaws.evidently#SplitWeight",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The portion of the available audience that you want to allocate to this experiment, in thousandths of a percent. The available audience\n      is the total audience minus the audience that you have allocated to overrides or current launches of\n      this feature.</p>\n         <p>This is represented in thousandths of a percent. For example, specify 20,000 to allocate 20% of the available audience.</p>"
                     }
                 },
@@ -5476,6 +5541,7 @@
                 "removeSegment": {
                     "target": "smithy.api#PrimitiveBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Removes a segment from being used in an experiment. You can't use this parameter if the experiment is currently\n      running.</p>"
                     }
                 },
@@ -5810,6 +5876,12 @@
                         "smithy.api#documentation": "<p>The name or ARN of the project to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "appConfigResource": {
+                    "target": "com.amazonaws.evidently#ProjectAppConfigResourceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter if the project will use client-side evaluation powered by AppConfig. Client-side\n     evaluation allows your application to assign variations to user\n     sessions locally instead of by calling the <a href=\"https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html\">EvaluateFeature</a> operation. This \n     mitigates the latency and availability risks that come with an API call. allows\n      you to</p>\n         <p>This parameter is a structure that\n      contains information about the AppConfig application that will be used for client-side evaluation.</p>"
                     }
                 },
                 "description": {

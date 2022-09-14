@@ -43,8 +43,13 @@
                     "name": "lex"
                 },
                 "aws.protocols#restJson1": {
-                    "http": ["http/1.1", "h2"],
-                    "eventStreamHttp": ["h2"]
+                    "http": [
+                        "http/1.1",
+                        "h2"
+                    ],
+                    "eventStreamHttp": [
+                        "h2"
+                    ]
                 },
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#title": "Amazon Lex Runtime V2"
@@ -401,7 +406,7 @@
                 "welcomeMessages": {
                     "target": "com.amazonaws.lexruntimev2#Messages",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of messages to send to the user.</p>"
+                        "smithy.api#documentation": "<p>A list of messages to send to the user.</p>\n         <p>If you set the <code>welcomeMessage</code> field, you must also set\n         the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html\">\n               <code>DialogAction</code>\n            </a> structure's <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type\">\n               <code>type</code>\n            </a> field.</p>"
                     }
                 },
                 "disablePlayback": {
@@ -640,7 +645,7 @@
                 "type": {
                     "target": "com.amazonaws.lexruntimev2#DialogActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the\n         user. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that there will not be a\n               response from the user. For example, the statement \"Your order\n               has been placed\" does not require a response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the\n               user if the intent is complete and ready to be fulfilled. This is\n               a yes/no question such as \"Place the order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delegate</code> - The next action is determined by\n               Amazon Lex V2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot\n               value from the user.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the\n         user. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that there will not be a\n               response from the user. For example, the statement \"Your order\n               has been placed\" does not require a response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the\n               user if the intent is complete and ready to be fulfilled. This is\n               a yes/no question such as \"Place the order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delegate</code> - The next action is determined by\n               Amazon Lex V2.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitIntent</code> - The next action is to elicit an\n               intent from the user.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot\n               value from the user.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -654,6 +659,12 @@
                     "target": "com.amazonaws.lexruntimev2#StyleType",
                     "traits": {
                         "smithy.api#documentation": "<p>Configures the slot to use spell-by-letter or spell-by-word style.\n         When you use a style on a slot, users can spell out their input to make\n         it clear to your bot.</p>\n         <ul>\n            <li>\n               <p>Spell by letter - \"b\" \"o\" \"b\"</p>\n            </li>\n            <li>\n               <p>Spell by word - \"b as in boy\" \"o as in oscar\" \"b as in\n               boy\"</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-spelling.html\">\n            Using spelling to enter slot values </a>.</p>"
+                    }
+                },
+                "subSlotToElicit": {
+                    "target": "com.amazonaws.lexruntimev2#ElicitSubSlot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the constituent sub slot of the composite slot \n      specified in slotToElicit that should be elicited from the user.</p>"
                     }
                 }
             },
@@ -714,6 +725,27 @@
         },
         "com.amazonaws.lexruntimev2#Double": {
             "type": "double"
+        },
+        "com.amazonaws.lexruntimev2#ElicitSubSlot": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the slot that should be elicited from the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subSlotToElicit": {
+                    "target": "com.amazonaws.lexruntimev2#ElicitSubSlot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field is not supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specific constituent sub slot of the composite slot to elicit in dialog action.</p>"
+            }
         },
         "com.amazonaws.lexruntimev2#EpochMillis": {
             "type": "long"
@@ -1709,8 +1741,13 @@
                 "runtimeHintValues": {
                     "target": "com.amazonaws.lexruntimev2#RuntimeHintValuesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more strings that Amazon Lex V2 should look for in the input to the\n         bot. Each phrase is given preference when deciding on slot\n         values.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>One or more strings that Amazon Lex V2 should look for in the input to the\n         bot. Each phrase is given preference when deciding on slot\n         values.</p>"
+                    }
+                },
+                "subSlotHints": {
+                    "target": "com.amazonaws.lexruntimev2#SlotHintsSlotMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of constituent sub slot names inside a composite slot in the intent and the phrases \n      that should be added for each sub slot. Inside each composite slot hints, this structure provides \n      a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots. \n      The intent name, composite slot name and the constituent sub slot names must exist.</p>"
                     }
                 }
             },
@@ -1760,12 +1797,12 @@
                 "slotHints": {
                     "target": "com.amazonaws.lexruntimev2#SlotHintsIntentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the slots in the intent that should have runtime hints\n         added, and the phrases that should be added for each slot.</p>\n         <p>The first level of the <code>slotHints</code> map is the name of the\n         intent. The second level is the name of the slot within the intent. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml\">Using hints to improve\n            accuracy</a>.</p>\n         <p>The intent name and slot name must exist.</p>"
+                        "smithy.api#documentation": "<p>A list of the slots in the intent that should have runtime hints\n         added, and the phrases that should be added for each slot.</p>\n         <p>The first level of the <code>slotHints</code> map is the name of the\n         intent. The second level is the name of the slot within the intent. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html\">Using hints to improve\n            accuracy</a>.</p>\n         <p>The intent name and slot name must exist.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You can provide Amazon Lex V2 with hints to the phrases that a customer is\n         likely to use for a slot. When a slot with hints is resolved, the\n         phrases in the runtime hints are preferred in the resolution. You can\n         provide hints for a maximum of 100 intents. You can provide a maximum\n         of 100 slots.</p>\n         <p>Before you can use runtime hints with an existing bot, you must\n         first rebuild the bot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml\">Using hints to improve\n            accuracy</a>.</p>"
+                "smithy.api#documentation": "<p>You can provide Amazon Lex V2 with hints to the phrases that a customer is\n         likely to use for a slot. When a slot with hints is resolved, the\n         phrases in the runtime hints are preferred in the resolution. You can\n         provide hints for a maximum of 100 intents. You can provide a maximum\n         of 100 slots.</p>\n         <p>Before you can use runtime hints with an existing bot, you must\n         first rebuild the bot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html\">Using runtime hints to\n            improve recognition of slot values</a>.</p>"
             }
         },
         "com.amazonaws.lexruntimev2#SensitiveNonEmptyString": {
@@ -1892,7 +1929,7 @@
                 "runtimeHints": {
                     "target": "com.amazonaws.lexruntimev2#RuntimeHints",
                     "traits": {
-                        "smithy.api#documentation": "<p>Hints for phrases that a customer is likely to use \n      for a slot. Amazon Lex V2 uses the hints to help determine the correct\n      value of a slot.</p>"
+                        "smithy.api#documentation": "<p>Hints for phrases that a customer is likely to use for a slot. Amazon Lex V2\n         uses the hints to help determine the correct value of a slot.</p>"
                     }
                 }
             },
@@ -1911,6 +1948,10 @@
                     {
                         "value": "List",
                         "name": "LIST"
+                    },
+                    {
+                        "value": "Composite",
+                        "name": "COMPOSITE"
                     }
                 ]
             }
@@ -1934,6 +1975,12 @@
                     "target": "com.amazonaws.lexruntimev2#Values",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of one or more values that the user provided for the slot.\n         For example, if a for a slot that elicits pizza toppings, the values\n         might be \"pepperoni\" and \"pineapple.\" </p>"
+                    }
+                },
+                "subSlots": {
+                    "target": "com.amazonaws.lexruntimev2#Slots",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The constituent sub slots of a composite slot.</p>"
                     }
                 }
             },

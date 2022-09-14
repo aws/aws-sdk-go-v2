@@ -68,7 +68,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a new key value with a specific profile, such as a Contact Trace Record (CTR)\n         ContactId.</p>\n         <p>A profile object can have a single unique key and any number of additional keys that can\n         be used to identify the profile that it belongs to.</p>",
+                "smithy.api#documentation": "<p>Associates a new key value with a specific profile, such as a Contact Record\n         ContactId.</p>\n         <p>A profile object can have a single unique key and any number of additional keys that can\n         be used to identify the profile that it belongs to.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/profiles/keys",
@@ -2400,6 +2400,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
                     }
+                },
+                "IsUnstructured": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean to indicate if the Flow associated with the Integration is created via Appflow \n         console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition</p>"
+                    }
                 }
             }
         },
@@ -3503,6 +3509,12 @@
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
                         "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
+                    }
+                },
+                "IsUnstructured": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean to indicate if the Flow associated with the Integration is created via Appflow\n         console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition</p>"
                     }
                 }
             },
@@ -4812,7 +4824,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes\n         Amazon AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>",
+                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes\n         Amazon AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>\n         <p>To add or remove tags on an existing Integration, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\"> TagResource\n      </a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">\n         UntagResource</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/integrations",
@@ -4917,6 +4929,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique identifier for the workflow.</p>"
                     }
+                },
+                "IsUnstructured": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean to indicate if the Flow associated with the Integration is created via Appflow \n         console or with ObjectTypeName equals _unstructured via API/CLI in flowDefinition</p>"
+                    }
                 }
             }
         },
@@ -4946,7 +4964,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds additional objects to customer profiles of a given ObjectType.</p>\n         <p>When adding a specific profile object, like a Contact Trace Record (CTR), an inferred\n         profile can get created if it is not mapped to an existing profile. The resulting profile\n         will only have a phone number populated in the standard ProfileObject. Any additional CTRs\n         with the same phone number will be mapped to the same inferred profile.</p>\n         <p>When a ProfileObject is created and if a ProfileObjectType already exists for the\n         ProfileObject, it will provide data to a standard profile depending on the\n         ProfileObjectType definition.</p>\n         <p>PutProfileObject needs an ObjectType, which can be created using\n         PutProfileObjectType.</p>",
+                "smithy.api#documentation": "<p>Adds additional objects to customer profiles of a given ObjectType.</p>\n         <p>When adding a specific profile object, like a Contact Record, an inferred profile can\n         get created if it is not mapped to an existing profile. The resulting profile will only\n         have a phone number populated in the standard ProfileObject. Any additional Contact Records\n         with the same phone number will be mapped to the same inferred profile.</p>\n         <p>When a ProfileObject is created and if a ProfileObjectType already exists for the\n         ProfileObject, it will provide data to a standard profile depending on the\n         ProfileObjectType definition.</p>\n         <p>PutProfileObject needs an ObjectType, which can be created using\n         PutProfileObjectType.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/profiles/objects",
@@ -5018,7 +5036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines a ProfileObjectType.</p>",
+                "smithy.api#documentation": "<p>Defines a ProfileObjectType.</p>\n         <p>To add or remove tags on an existing ObjectType, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\">\n         TagResource</a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/object-types/{ObjectTypeName}",
@@ -6356,7 +6374,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>After a domain is created, the name can’t be changed.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true. </p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>",
+                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>After a domain is created, the name can’t be changed.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true. </p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>\n         <p>To add or remove tags on an existing Domain, see <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html\">TagResource</a>/<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}",

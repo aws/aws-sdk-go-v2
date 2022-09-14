@@ -496,7 +496,7 @@
             "type": "structure",
             "members": {
                 "lagDuration": {
-                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "target": "com.amazonaws.drs#ISO8601DurationString",
                     "traits": {
                         "smithy.api#documentation": "<p>Data replication lag duration.</p>"
                     }
@@ -2120,6 +2120,15 @@
                 "smithy.api#pattern": "^[1-9][0-9]*-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([0-1][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?Z$"
             }
         },
+        "com.amazonaws.drs#ISO8601DurationString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.drs#IdentificationHints": {
             "type": "structure",
             "members": {
@@ -2713,7 +2722,7 @@
                     }
                 },
                 "elapsedReplicationDuration": {
-                    "target": "com.amazonaws.drs#ISO8601DatetimeString",
+                    "target": "com.amazonaws.drs#ISO8601DurationString",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time that the Source Server has been replicating for.</p>"
                     }
