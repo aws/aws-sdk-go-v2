@@ -699,6 +699,12 @@
                         "smithy.api#jsonName": "ac3Settings"
                     }
                 },
+                "Eac3AtmosSettings": {
+                    "target": "com.amazonaws.medialive#Eac3AtmosSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "eac3AtmosSettings"
+                    }
+                },
                 "Eac3Settings": {
                     "target": "com.amazonaws.medialive#Eac3Settings",
                     "traits": {
@@ -6456,6 +6462,13 @@
                 ]
             }
         },
+        "com.amazonaws.medialive#DolbyVision81Settings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Dolby Vision Profile 8.1 Settings"
+            }
+        },
         "com.amazonaws.medialive#DvbNitSettings": {
             "type": "structure",
             "members": {
@@ -6881,6 +6894,147 @@
             },
             "traits": {
                 "smithy.api#documentation": "DVB Time and Date Table (SDT)"
+            }
+        },
+        "com.amazonaws.medialive#Eac3AtmosCodingMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Eac3 Atmos Coding Mode",
+                "smithy.api#enum": [
+                    {
+                        "value": "CODING_MODE_5_1_4",
+                        "name": "CODING_MODE_5_1_4"
+                    },
+                    {
+                        "value": "CODING_MODE_7_1_4",
+                        "name": "CODING_MODE_7_1_4"
+                    },
+                    {
+                        "value": "CODING_MODE_9_1_6",
+                        "name": "CODING_MODE_9_1_6"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#Eac3AtmosDrcLine": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Eac3 Atmos Drc Line",
+                "smithy.api#enum": [
+                    {
+                        "value": "FILM_LIGHT",
+                        "name": "FILM_LIGHT"
+                    },
+                    {
+                        "value": "FILM_STANDARD",
+                        "name": "FILM_STANDARD"
+                    },
+                    {
+                        "value": "MUSIC_LIGHT",
+                        "name": "MUSIC_LIGHT"
+                    },
+                    {
+                        "value": "MUSIC_STANDARD",
+                        "name": "MUSIC_STANDARD"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "SPEECH",
+                        "name": "SPEECH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#Eac3AtmosDrcRf": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Eac3 Atmos Drc Rf",
+                "smithy.api#enum": [
+                    {
+                        "value": "FILM_LIGHT",
+                        "name": "FILM_LIGHT"
+                    },
+                    {
+                        "value": "FILM_STANDARD",
+                        "name": "FILM_STANDARD"
+                    },
+                    {
+                        "value": "MUSIC_LIGHT",
+                        "name": "MUSIC_LIGHT"
+                    },
+                    {
+                        "value": "MUSIC_STANDARD",
+                        "name": "MUSIC_STANDARD"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "SPEECH",
+                        "name": "SPEECH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#Eac3AtmosSettings": {
+            "type": "structure",
+            "members": {
+                "Bitrate": {
+                    "target": "com.amazonaws.medialive#__double",
+                    "traits": {
+                        "smithy.api#documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.\n//  * @affectsRightSizing true",
+                        "smithy.api#jsonName": "bitrate"
+                    }
+                },
+                "CodingMode": {
+                    "target": "com.amazonaws.medialive#Eac3AtmosCodingMode",
+                    "traits": {
+                        "smithy.api#documentation": "Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.",
+                        "smithy.api#jsonName": "codingMode"
+                    }
+                },
+                "Dialnorm": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max31",
+                    "traits": {
+                        "smithy.api#documentation": "Sets the dialnorm for the output. Default 23.",
+                        "smithy.api#jsonName": "dialnorm"
+                    }
+                },
+                "DrcLine": {
+                    "target": "com.amazonaws.medialive#Eac3AtmosDrcLine",
+                    "traits": {
+                        "smithy.api#documentation": "Sets the Dolby dynamic range compression profile.",
+                        "smithy.api#jsonName": "drcLine"
+                    }
+                },
+                "DrcRf": {
+                    "target": "com.amazonaws.medialive#Eac3AtmosDrcRf",
+                    "traits": {
+                        "smithy.api#documentation": "Sets the profile for heavy Dolby dynamic range compression, ensures that the instantaneous signal peaks do not exceed specified levels.",
+                        "smithy.api#jsonName": "drcRf"
+                    }
+                },
+                "HeightTrim": {
+                    "target": "com.amazonaws.medialive#__double",
+                    "traits": {
+                        "smithy.api#documentation": "Height dimensional trim. Sets the maximum amount to attenuate the height channels when the downstream player isn??t configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.",
+                        "smithy.api#jsonName": "heightTrim"
+                    }
+                },
+                "SurroundTrim": {
+                    "target": "com.amazonaws.medialive#__double",
+                    "traits": {
+                        "smithy.api#documentation": "Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.",
+                        "smithy.api#jsonName": "surroundTrim"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Eac3 Atmos Settings"
             }
         },
         "com.amazonaws.medialive#Eac3AttenuationControl": {
@@ -8963,6 +9117,12 @@
                     "target": "com.amazonaws.medialive#ColorSpacePassthroughSettings",
                     "traits": {
                         "smithy.api#jsonName": "colorSpacePassthroughSettings"
+                    }
+                },
+                "DolbyVision81Settings": {
+                    "target": "com.amazonaws.medialive#DolbyVision81Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "dolbyVision81Settings"
                     }
                 },
                 "Hdr10Settings": {

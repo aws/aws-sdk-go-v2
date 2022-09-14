@@ -35,6 +35,8 @@ const (
 	AcceleratorNameM60           AcceleratorName = "m60"
 	AcceleratorNameRadeonProV520 AcceleratorName = "radeon-pro-v520"
 	AcceleratorNameVu9p          AcceleratorName = "vu9p"
+	AcceleratorNameInferentia    AcceleratorName = "inferentia"
+	AcceleratorNameK520          AcceleratorName = "k520"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -49,6 +51,8 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"m60",
 		"radeon-pro-v520",
 		"vu9p",
+		"inferentia",
+		"k520",
 	}
 }
 
@@ -4430,6 +4434,24 @@ func (LocalGatewayRouteState) Values() []LocalGatewayRouteState {
 	}
 }
 
+type LocalGatewayRouteTableMode string
+
+// Enum values for LocalGatewayRouteTableMode
+const (
+	LocalGatewayRouteTableModeDirectVpcRouting LocalGatewayRouteTableMode = "direct-vpc-routing"
+	LocalGatewayRouteTableModeCoip             LocalGatewayRouteTableMode = "coip"
+)
+
+// Values returns all known values for LocalGatewayRouteTableMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocalGatewayRouteTableMode) Values() []LocalGatewayRouteTableMode {
+	return []LocalGatewayRouteTableMode{
+		"direct-vpc-routing",
+		"coip",
+	}
+}
+
 type LocalGatewayRouteType string
 
 // Enum values for LocalGatewayRouteType
@@ -4510,8 +4532,9 @@ type LogDestinationType string
 
 // Enum values for LogDestinationType
 const (
-	LogDestinationTypeCloudWatchLogs LogDestinationType = "cloud-watch-logs"
-	LogDestinationTypeS3             LogDestinationType = "s3"
+	LogDestinationTypeCloudWatchLogs      LogDestinationType = "cloud-watch-logs"
+	LogDestinationTypeS3                  LogDestinationType = "s3"
+	LogDestinationTypeKinesisDataFirehose LogDestinationType = "kinesis-data-firehose"
 )
 
 // Values returns all known values for LogDestinationType. Note that this can be
@@ -4521,6 +4544,7 @@ func (LogDestinationType) Values() []LogDestinationType {
 	return []LogDestinationType{
 		"cloud-watch-logs",
 		"s3",
+		"kinesis-data-firehose",
 	}
 }
 
@@ -5342,6 +5366,7 @@ const (
 	ResourceTypeClientVpnEndpoint                                      ResourceType = "client-vpn-endpoint"
 	ResourceTypeCustomerGateway                                        ResourceType = "customer-gateway"
 	ResourceTypeCarrierGateway                                         ResourceType = "carrier-gateway"
+	ResourceTypeCoipPool                                               ResourceType = "coip-pool"
 	ResourceTypeDedicatedHost                                          ResourceType = "dedicated-host"
 	ResourceTypeDhcpOptions                                            ResourceType = "dhcp-options"
 	ResourceTypeEgressOnlyInternetGateway                              ResourceType = "egress-only-internet-gateway"
@@ -5411,6 +5436,7 @@ const (
 	ResourceTypeCapacityReservationFleet                               ResourceType = "capacity-reservation-fleet"
 	ResourceTypeTrafficMirrorFilterRule                                ResourceType = "traffic-mirror-filter-rule"
 	ResourceTypeVpcEndpointConnectionDeviceType                        ResourceType = "vpc-endpoint-connection-device-type"
+	ResourceTypeVpnConnectionDeviceType                                ResourceType = "vpn-connection-device-type"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -5422,6 +5448,7 @@ func (ResourceType) Values() []ResourceType {
 		"client-vpn-endpoint",
 		"customer-gateway",
 		"carrier-gateway",
+		"coip-pool",
 		"dedicated-host",
 		"dhcp-options",
 		"egress-only-internet-gateway",
@@ -5491,6 +5518,7 @@ func (ResourceType) Values() []ResourceType {
 		"capacity-reservation-fleet",
 		"traffic-mirror-filter-rule",
 		"vpc-endpoint-connection-device-type",
+		"vpn-connection-device-type",
 	}
 }
 

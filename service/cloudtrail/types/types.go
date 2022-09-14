@@ -52,8 +52,8 @@ type AdvancedFieldSelector struct {
 	//
 	// * readOnly - Optional. Can be set
 	// to Equals a value of true or false. If you do not add this field, CloudTrail
-	// logs both both read and write events. A value of true logs only read events. A
-	// value of false logs only write events.
+	// logs both read and write events. A value of true logs only read events. A value
+	// of false logs only write events.
 	//
 	// * eventSource - For filtering management
 	// events only. This can be set only to NotEqualskms.amazonaws.com.
@@ -205,6 +205,21 @@ type AdvancedFieldSelector struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a returned CloudTrail channel.
+type Channel struct {
+
+	// The Amazon Resource Name (ARN) of the channel.
+	ChannelArn *string
+
+	// The name of the CloudTrail channel. For service-linked channels, the name is
+	// aws-service-channel/service-name/custom-suffix where service-name represents the
+	// name of the Amazon Web Services service that created the channel and
+	// custom-suffix represents the suffix created by the Amazon Web Services service.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 buckets, Lambda functions, or Amazon DynamoDB tables that you
 // specify in your event selectors for your trail to log data events. Data events
 // provide information about the resource operations performed on or within a
@@ -328,6 +343,23 @@ type DataResource struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the service where CloudTrail delivers events.
+type Destination struct {
+
+	// The location of the service. For service-linked channels, this is the name of
+	// the Amazon Web Services service.
+	//
+	// This member is required.
+	Location *string
+
+	// The type of service. For service-linked channels, the value is AWS_SERVICE.
+	//
+	// This member is required.
+	Type DestinationType
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an event that was returned by a lookup request. The
 // result includes a representation of a CloudTrail event.
 type Event struct {
@@ -367,7 +399,7 @@ type Event struct {
 
 // A storage lake of event data against which you can run complex SQL-based
 // queries. An event data store can include events that you have logged on your
-// account from the last 90 to 2555 days (about three months to up to seven years).
+// account from the last 90 to 2557 days (about three months to up to seven years).
 // To select events for an event data store, use advanced event selectors
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced).
 type EventDataStore struct {
@@ -611,6 +643,19 @@ type ResourceTag struct {
 
 	// A list of tags.
 	TagsList []Tag
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration information about the service-linked channel.
+type SourceConfig struct {
+
+	// The advanced event selectors configured for the service-linked channel.
+	AdvancedEventSelectors []AdvancedEventSelector
+
+	// Specifies whether the service-linked channel applies to one region or all
+	// regions.
+	ApplyToAllRegions *bool
 
 	noSmithyDocumentSerde
 }

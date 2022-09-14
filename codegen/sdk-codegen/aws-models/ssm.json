@@ -4302,6 +4302,9 @@
                     "target": "com.amazonaws.ssm#InvalidSchedule"
                 },
                 {
+                    "target": "com.amazonaws.ssm#InvalidTag"
+                },
+                {
                     "target": "com.amazonaws.ssm#InvalidTarget"
                 },
                 {
@@ -4638,6 +4641,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps\n   can't be specified together.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssm#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds or overwrites one or more tags for a State Manager association. <i>Tags</i>\n   are metadata that you can assign to your Amazon Web Services resources. Tags enable you to categorize your\n   resources in different ways, for example, by purpose, owner, or environment. Each tag consists of\n   a key and an optional value, both of which you define. </p>"
+                    }
                 }
             }
         },
@@ -4709,7 +4718,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the SSM document.</p>\n         <important>\n            <p>You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services\n    for use as document name prefixes:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>aws-</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amzn</code>\n                  </p>\n               </li>\n            </ul>\n         </important>",
+                        "smithy.api#documentation": "<p>A name for the SSM document.</p>\n         <important>\n            <p>You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services\n    for use as document name prefixes:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>aws</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amzn</code>\n                  </p>\n               </li>\n            </ul>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6981,7 +6990,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#InstanceInformationStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of managed nodes. You can\n   filter based on tags applied to EC2 instances. Use this <code>Filters</code> data type instead of\n    <code>InstanceInformationFilterList</code>, which is deprecated.</p>"
+                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of managed nodes. You can\n   filter based on tags applied to your managed nodes. Use this <code>Filters</code> data type\n   instead of <code>InstanceInformationFilterList</code>, which is deprecated.</p>"
                     }
                 },
                 "MaxResults": {
@@ -12549,7 +12558,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssm#InstanceInformationStringFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes. For example:</p>\n         <p>\"InstanceIds\"|\"AgentVersion\"|\"PingStatus\"|\"PlatformTypes\"|\"ActivationIds\"|\"IamRole\"|\"ResourceType\"|\"AssociationStatus\"|\"Tag\n   Key\"</p>\n         <important>\n            <p>\n               <code>Tag key</code> isn't a valid filter. You must specify either <code>tag-key</code> or\n     <code>tag:keyname</code> and a string. Here are some valid examples: tag-key, tag:123, tag:al!,\n    tag:Windows. Here are some <i>invalid</i> examples: tag-keys, Tag Key, tag:,\n    tagKey, abc:keyname.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes. For example:</p>\n         <p>\"InstanceIds\" | \"AgentVersion\" | \"PingStatus\" | \"PlatformTypes\" | \"ActivationIds\" |\n   \"IamRole\" | \"ResourceType\" | \"AssociationStatus\" | \"tag-key\" | \"tag:<code>{keyname}</code>\n         </p>\n         <important>\n            <p>\n               <code>Tag Key</code> isn't a valid filter. You must specify either <code>tag-key</code> or\n     <code>tag:{keyname}</code> and a string. Here are some valid examples: <code>tag-key</code>,\n     <code>tag:123</code>, <code>tag:al!</code>, <code>tag:Windows</code>. Here are some\n     <i>invalid</i> examples: <code>tag-keys</code>, <code>Tag Key</code>,\n     <code>tag:</code>, <code>tagKey</code>, <code>abc:keyname</code>.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13564,6 +13573,22 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The schedule is invalid. Verify your cron or rate expression and try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#InvalidTag": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTag",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified tag key or value is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -22333,6 +22358,10 @@
                     {
                         "value": "Automation",
                         "name": "AUTOMATION"
+                    },
+                    {
+                        "value": "Association",
+                        "name": "ASSOCIATION"
                     }
                 ]
             }
@@ -22884,7 +22913,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) service role to use to publish\n    Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Identity and Access Management (IAM) service role to use to publish\n    Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.</p>\n         <p>This role must provide the <code>sns:Publish</code> permission for your notification topic.\n   For information about creating and using this service role, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html\">Monitoring Systems Manager status changes using Amazon SNS notifications</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "NotificationConfig": {
@@ -23805,7 +23834,7 @@
                 "TokenValue": {
                     "target": "com.amazonaws.ssm#TokenValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>An encrypted token value containing session and caller information. Used to authenticate the\n   connection to the managed node.</p>"
+                        "smithy.api#documentation": "<p>An encrypted token value containing session and caller information. This token is used to authenticate the connection to the managed node, and is valid only long enough to ensure the connection is successful. Never share your session's token.</p>"
                     }
                 },
                 "StreamUrl": {

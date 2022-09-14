@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.inspector2#AccessDeniedException": {
             "type": "structure",
@@ -109,7 +109,7 @@
             }
         },
         "com.amazonaws.inspector2#AccountIdSet": {
-            "type": "set",
+            "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#AccountId"
             },
@@ -117,7 +117,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
-                }
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.inspector2#AccountList": {
@@ -187,7 +188,10 @@
             }
         },
         "com.amazonaws.inspector2#AggCounts": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.inspector2#AggregationFindingType": {
             "type": "string",
@@ -1067,6 +1071,7 @@
                 "count": {
                     "target": "com.amazonaws.inspector2#AggCounts",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of resources.</p>"
                     }
                 },
@@ -2975,6 +2980,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details on the related vulnerabilities used to filter findings.</p>"
                     }
+                },
+                "fixAvailable": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on whether a fix is available through a version update. This value can be <code>YES</code>, <code>NO</code>, or <code>PARTIAL</code>.  A <code>PARTIAL</code> fix means that some, but not all, of the packages identified in the finding have fixes available through updated versions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3122,6 +3133,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains the details of a package vulnerability finding.</p>"
                     }
+                },
+                "fixAvailable": {
+                    "target": "com.amazonaws.inspector2#FixAvailable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on whether a fix is available through a version update. This value can be <code>YES</code>, <code>NO</code>, or <code>PARTIAL</code>.  A <code>PARTIAL</code> fix means that some, but not all, of the packages identified in the finding have fixes available through updated versions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3267,6 +3284,25 @@
                     {
                         "value": "ALL",
                         "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#FixAvailable": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "YES",
+                        "name": "YES"
+                    },
+                    {
+                        "value": "NO",
+                        "name": "NO"
+                    },
+                    {
+                        "value": "PARTIAL",
+                        "name": "PARTIAL"
                     }
                 ]
             }
@@ -3800,25 +3836,6 @@
         },
         "com.amazonaws.inspector2#Inspector2": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Inspector2",
-                    "arnNamespace": "inspector2",
-                    "cloudTrailEventSource": "inspector2.amazon.aws",
-                    "cloudFormationName": "Inspector2"
-                },
-                "aws.auth#sigv4": {
-                    "name": "inspector2"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "*"
-                    ]
-                },
-                "smithy.api#documentation": "<p>Amazon Inspector is a vulnerability discovery service that automates continuous scanning for\n         security vulnerabilities within your Amazon EC2 and Amazon ECR environments.</p>",
-                "smithy.api#title": "Inspector2"
-            },
             "version": "2020-06-08",
             "operations": [
                 {
@@ -3917,7 +3934,26 @@
                 {
                     "target": "com.amazonaws.inspector2#UpdateOrganizationConfiguration"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Inspector2",
+                    "arnNamespace": "inspector2",
+                    "cloudTrailEventSource": "inspector2.amazon.aws",
+                    "cloudFormationName": "Inspector2"
+                },
+                "aws.auth#sigv4": {
+                    "name": "inspector2"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Amazon Inspector is a vulnerability discovery service that automates continuous scanning for\n         security vulnerabilities within your Amazon EC2 and Amazon ECR environments.</p>",
+                "smithy.api#title": "Inspector2"
+            }
         },
         "com.amazonaws.inspector2#InspectorScoreDetails": {
             "type": "structure",
@@ -4028,7 +4064,6 @@
         "com.amazonaws.inspector2#ListAccountPermissionsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1024
@@ -4113,7 +4148,6 @@
         "com.amazonaws.inspector2#ListCoverageMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 200
@@ -4314,7 +4348,6 @@
         "com.amazonaws.inspector2#ListDelegatedAdminMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -4324,7 +4357,6 @@
         "com.amazonaws.inspector2#ListFilterMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4452,7 +4484,6 @@
         "com.amazonaws.inspector2#ListFindingAggregationsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4556,7 +4587,6 @@
         "com.amazonaws.inspector2#ListFindingsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4649,7 +4679,6 @@
         "com.amazonaws.inspector2#ListMembersMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -4791,7 +4820,6 @@
         "com.amazonaws.inspector2#ListUsageTotalsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -4973,6 +5001,7 @@
         "com.amazonaws.inspector2#MonthlyCostEstimate": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5186,7 +5215,10 @@
             }
         },
         "com.amazonaws.inspector2#PackageEpoch": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.inspector2#PackageFilter": {
             "type": "structure",
@@ -5374,8 +5406,7 @@
                 "vulnerablePackages": {
                     "target": "com.amazonaws.inspector2#VulnerablePackageList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The packages impacted by this vulnerability.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The packages impacted by this vulnerability.</p>"
                     }
                 },
                 "source": {
@@ -5478,7 +5509,6 @@
         "com.amazonaws.inspector2#Port": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 65535
@@ -6066,6 +6096,14 @@
                     {
                         "value": "PENDING_DISABLE",
                         "name": "PENDING_DISABLE"
+                    },
+                    {
+                        "value": "NO_INVENTORY",
+                        "name": "NO_INVENTORY"
+                    },
+                    {
+                        "value": "STALE_INVENTORY",
+                        "name": "STALE_INVENTORY"
                     }
                 ]
             }
@@ -6924,12 +6962,14 @@
                 "total": {
                     "target": "com.amazonaws.inspector2#UsageValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total of usage.</p>"
                     }
                 },
                 "estimatedMonthlyCost": {
                     "target": "com.amazonaws.inspector2#MonthlyCostEstimate",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The estimated monthly cost of Amazon Inspector.</p>"
                     }
                 },
@@ -7016,6 +7056,7 @@
         "com.amazonaws.inspector2#UsageValue": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -7138,6 +7179,7 @@
                 "epoch": {
                     "target": "com.amazonaws.inspector2#PackageEpoch",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The epoch of the vulnerable package.</p>"
                     }
                 },
@@ -7170,6 +7212,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the package that contains the vulnerability fix.</p>"
                     }
+                },
+                "remediation": {
+                    "target": "com.amazonaws.inspector2#VulnerablePackageRemediation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code to run in your environment to update packages with a fix available.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7180,6 +7228,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#VulnerablePackage"
+            }
+        },
+        "com.amazonaws.inspector2#VulnerablePackageRemediation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         }
     }

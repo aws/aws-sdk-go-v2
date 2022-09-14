@@ -1,0 +1,8 @@
+{
+    "id": "7b24c176-7dc1-4ce6-b1e3-79112f89b42b",
+    "type": "feature",
+    "description": "This release adds Mode to AutoMLJobConfig.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

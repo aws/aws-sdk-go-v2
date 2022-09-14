@@ -101,6 +101,10 @@ type DescribeSlotOutput struct {
 	// slot.
 	SlotTypeId *string
 
+	// Specifications for the constituent sub slots and the expression for the
+	// composite slot.
+	SubSlotSetting *types.SubSlotSetting
+
 	// Prompts that Amazon Lex uses to elicit a value for the slot.
 	ValueElicitationSetting *types.SlotValueElicitationSetting
 

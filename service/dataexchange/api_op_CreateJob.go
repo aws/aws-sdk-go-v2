@@ -28,7 +28,6 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 	return out, nil
 }
 
-// The request body for CreateJob.
 type CreateJobInput struct {
 
 	// The details for the CreateJob request.

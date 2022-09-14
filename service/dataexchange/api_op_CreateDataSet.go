@@ -28,7 +28,6 @@ func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, 
 	return out, nil
 }
 
-// The request body for CreateDataSet.
 type CreateDataSetInput struct {
 
 	// The type of asset that is added to a data set.

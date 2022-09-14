@@ -29,7 +29,7 @@ func (c *Client) GetUserId(ctx context.Context, params *GetUserIdInput, optFns .
 
 type GetUserIdInput struct {
 
-	// Any unique attribute associated with a user that is not the UserId.
+	// A unique identifier for an identity resource that is not the primary identifier.
 	//
 	// This member is required.
 	AlternateIdentifier types.AlternateIdentifier

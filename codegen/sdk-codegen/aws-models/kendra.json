@@ -677,48 +677,48 @@
                 "EqualsTo": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs an equals operation on two document attributes.</p>"
+                        "smithy.api#documentation": "<p>Performs an equals operation on two document attributes or metadata fields.</p>"
                     }
                 },
                 "ContainsAll": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns true when a document contains all of the specified document\n         attributes. This filter is only applicable to\n            <code>StringListValue</code> metadata.</p>"
+                        "smithy.api#documentation": "<p>Returns true when a document contains all of the specified document\n         attributes or metadata fields. This filter is only applicable to\n            <code>StringListValue</code> metadata.</p>"
                     }
                 },
                 "ContainsAny": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns true when a document contains any of the specified document\n         attributes. This filter is only applicable to\n            <code>StringListValue</code> metadata.</p>"
+                        "smithy.api#documentation": "<p>Returns true when a document contains any of the specified document\n         attributes or metadata fields. This filter is only applicable to\n            <code>StringListValue</code> metadata.</p>"
                     }
                 },
                 "GreaterThan": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a greater than operation on two document attributes. Use\n         with a document attribute of type <code>Date</code> or\n            <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a greater than operation on two document attributes or metadata fields. Use\n         with a document attribute of type <code>Date</code> or\n            <code>Long</code>.</p>"
                     }
                 },
                 "GreaterThanOrEquals": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a greater or equals than operation on two document\n         attributes. Use with a document attribute of type <code>Date</code>\n         or <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a greater or equals than operation on two document\n         attributes or metadata fields. Use with a document attribute of type <code>Date</code>\n         or <code>Long</code>.</p>"
                     }
                 },
                 "LessThan": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a less than operation on two document attributes. Use with\n         a document attribute of type <code>Date</code> or\n         <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a less than operation on two document attributes or metadata fields. Use with\n         a document attribute of type <code>Date</code> or\n         <code>Long</code>.</p>"
                     }
                 },
                 "LessThanOrEquals": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a less than or equals operation on two document attributes.\n         Use with a document attribute of type <code>Date</code> or\n            <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a less than or equals operation on two document attributes or metadata fields.\n         Use with a document attribute of type <code>Date</code> or\n            <code>Long</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualsTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more \n         than 2.\"</p>\n         <p>If you use more than 10 attribute filters in a given list for \n         <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive \n         a <code>ValidationException</code> with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
+                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes or metadata fields.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualsTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more \n         than 2.\"</p>\n         <p>If you use more than 10 attribute filters in a given list for \n         <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive \n         a <code>ValidationException</code> with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
             }
         },
         "com.amazonaws.kendra#AttributeFilterList": {
@@ -11087,6 +11087,10 @@
                     {
                         "value": "SHAREPOINT_ONLINE",
                         "name": "SHAREPOINT_ONLINE"
+                    },
+                    {
+                        "value": "SHAREPOINT_2019",
+                        "name": "SHAREPOINT_2019"
                     }
                 ]
             }

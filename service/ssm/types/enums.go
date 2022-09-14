@@ -1770,6 +1770,7 @@ const (
 	ResourceTypeForTaggingOpsItem           ResourceTypeForTagging = "OpsItem"
 	ResourceTypeForTaggingOpsmetadata       ResourceTypeForTagging = "OpsMetadata"
 	ResourceTypeForTaggingAutomation        ResourceTypeForTagging = "Automation"
+	ResourceTypeForTaggingAssociation       ResourceTypeForTagging = "Association"
 )
 
 // Values returns all known values for ResourceTypeForTagging. Note that this can
@@ -1785,6 +1786,7 @@ func (ResourceTypeForTagging) Values() []ResourceTypeForTagging {
 		"OpsItem",
 		"OpsMetadata",
 		"Automation",
+		"Association",
 	}
 }
 

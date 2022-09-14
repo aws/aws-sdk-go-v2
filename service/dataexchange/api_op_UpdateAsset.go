@@ -28,7 +28,6 @@ func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optF
 	return out, nil
 }
 
-// The request body for UpdateAsset.
 type UpdateAssetInput struct {
 
 	// The unique identifier for an asset.

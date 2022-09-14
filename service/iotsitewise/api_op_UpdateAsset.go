@@ -37,7 +37,7 @@ type UpdateAssetInput struct {
 	// This member is required.
 	AssetId *string
 
-	// A unique, friendly name for the asset.
+	// A friendly name for the asset.
 	//
 	// This member is required.
 	AssetName *string

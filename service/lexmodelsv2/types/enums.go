@@ -831,6 +831,7 @@ const (
 	SlotTypeCategoryCustom          SlotTypeCategory = "Custom"
 	SlotTypeCategoryExtended        SlotTypeCategory = "Extended"
 	SlotTypeCategoryExternalGrammar SlotTypeCategory = "ExternalGrammar"
+	SlotTypeCategoryComposite       SlotTypeCategory = "Composite"
 )
 
 // Values returns all known values for SlotTypeCategory. Note that this can be
@@ -841,6 +842,7 @@ func (SlotTypeCategory) Values() []SlotTypeCategory {
 		"Custom",
 		"Extended",
 		"ExternalGrammar",
+		"Composite",
 	}
 }
 
@@ -904,6 +906,7 @@ type SlotValueResolutionStrategy string
 const (
 	SlotValueResolutionStrategyOriginalValue SlotValueResolutionStrategy = "OriginalValue"
 	SlotValueResolutionStrategyTopResolution SlotValueResolutionStrategy = "TopResolution"
+	SlotValueResolutionStrategyConcatenation SlotValueResolutionStrategy = "Concatenation"
 )
 
 // Values returns all known values for SlotValueResolutionStrategy. Note that this
@@ -913,6 +916,7 @@ func (SlotValueResolutionStrategy) Values() []SlotValueResolutionStrategy {
 	return []SlotValueResolutionStrategy{
 		"OriginalValue",
 		"TopResolution",
+		"Concatenation",
 	}
 }
 

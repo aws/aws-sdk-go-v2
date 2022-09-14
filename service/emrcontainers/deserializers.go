@@ -3087,6 +3087,11 @@ func awsRestjson1_deserializeDocumentJobDriver(v **types.JobDriver, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "sparkSqlJobDriver":
+			if err := awsRestjson1_deserializeDocumentSparkSqlJobDriver(&sv.SparkSqlJobDriver, value); err != nil {
+				return err
+			}
+
 		case "sparkSubmitJobDriver":
 			if err := awsRestjson1_deserializeDocumentSparkSubmitJobDriver(&sv.SparkSubmitJobDriver, value); err != nil {
 				return err
@@ -3469,6 +3474,55 @@ func awsRestjson1_deserializeDocumentSensitivePropertiesMap(v *map[string]string
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSparkSqlJobDriver(v **types.SparkSqlJobDriver, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SparkSqlJobDriver
+	if *v == nil {
+		sv = &types.SparkSqlJobDriver{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entryPoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryPointPath to be of type string, got %T instead", value)
+				}
+				sv.EntryPoint = ptr.String(jtv)
+			}
+
+		case "sparkSqlParameters":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SparkSqlParameters to be of type string, got %T instead", value)
+				}
+				sv.SparkSqlParameters = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

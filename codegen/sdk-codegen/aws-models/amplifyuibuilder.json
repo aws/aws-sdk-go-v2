@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.amplifyuibuilder#ActionParameters": {
             "type": "structure",
@@ -7,7 +7,7 @@
                 "type": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>.\n      This value is required for a navigation action.</p>"
+                        "smithy.api#documentation": "<p>The type of navigation action. Valid values are <code>url</code> and <code>anchor</code>. This value is required for a navigation action.</p>"
                     }
                 },
                 "url": {
@@ -19,7 +19,7 @@
                 "anchor": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation\n      action.</p>"
+                        "smithy.api#documentation": "<p>The HTML anchor link to the location to open. Specify this value for a navigation action.</p>"
                     }
                 },
                 "target": {
@@ -31,13 +31,13 @@
                 "global": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperty",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth\n      sign out action.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the user should be signed out globally. Specify this value for an auth sign out action.</p>"
                     }
                 },
                 "model": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore model.</p>"
+                        "smithy.api#documentation": "<p>The name of the data model. Use when the action performs an operation on an Amplify DataStore\n      model.</p>"
                     }
                 },
                 "id": {
@@ -49,7 +49,7 @@
                 "fields": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields\n      in a data model. Use when the action performs an operation on an Amplify\n      DataStore model.</p>"
+                        "smithy.api#documentation": "<p>A dictionary of key-value pairs mapping Amplify Studio properties to fields in a data model. Use when the action\n      performs an operation on an Amplify DataStore model.</p>"
                     }
                 },
                 "state": {
@@ -60,11 +60,37 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code> or\n        <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
+                "smithy.api#documentation": "<p>Represents the event action configuration for an element of a <code>Component</code>\n      or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio\n      that allows you to bind events and actions to components. <code>ActionParameters</code>\n      defines the action that is performed when an event occurs on the component.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#AmplifyUIBuilder": {
             "type": "service",
+            "version": "2021-08-11",
+            "operations": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ExchangeCodeForToken"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#GetMetadata"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#PutMetadataFlag"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#RefreshToken"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ComponentResource"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#FormResource"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThemeResource"
+                }
+            ],
             "traits": {
                 "aws.api#service": {
                     "sdkId": "AmplifyUIBuilder",
@@ -102,24 +128,7 @@
                 "smithy.api#cors": {},
                 "smithy.api#documentation": "<p>The Amplify UI Builder API provides a programmatic interface for creating\n      and configuring user interface (UI) component libraries and themes for use in your Amplify applications. You can then connect these UI components to an application's\n      backend Amazon Web Services resources.</p>\n         <p>You can also use the Amplify Studio visual designer to create UI components\n      and model data for an app. For more information, see <a href=\"https://docs.amplify.aws/console/adminui/intro\">Introduction</a> in the\n        <i>Amplify Docs</i>.</p>\n         <p>The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and\n      documentation for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework</a>. For more information about\n      deploying an Amplify application to Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify User Guide</a>.</p>",
                 "smithy.api#title": "AWS Amplify UI Builder"
-            },
-            "version": "2021-08-11",
-            "operations": [
-                {
-                    "target": "com.amazonaws.amplifyuibuilder#ExchangeCodeForToken"
-                },
-                {
-                    "target": "com.amazonaws.amplifyuibuilder#RefreshToken"
-                }
-            ],
-            "resources": [
-                {
-                    "target": "com.amazonaws.amplifyuibuilder#ComponentResource"
-                },
-                {
-                    "target": "com.amazonaws.amplifyuibuilder#ThemeResource"
-                }
-            ]
+            }
         },
         "com.amazonaws.amplifyuibuilder#Component": {
             "type": "structure",
@@ -232,7 +241,7 @@
                 "events": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in\n        Amplify Studio that allows you to bind events and actions to\n      components.</p>"
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
                     }
                 },
                 "schemaVersion": {
@@ -330,6 +339,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The default value to assign to the property.</p>"
                     }
+                },
+                "slotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a component slot.</p>"
+                    }
                 }
             },
             "traits": {
@@ -369,7 +384,7 @@
                 "events": {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow\n      feature in Amplify Studio that allows you to bind events and actions to\n      components.</p>"
+                        "smithy.api#documentation": "<p>Describes the events that can be raised on the child component. Use for the workflow feature in Amplify Studio that allows you to\n      bind events and actions to components.</p>"
                     }
                 },
                 "sourceId": {
@@ -499,12 +514,12 @@
                 "bindingEvent": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Binds an event to an action on a component. When you specify a <code>bindingEvent</code>, the event is called when the action is performed.</p>"
+                        "smithy.api#documentation": "<p>Binds an event to an action on a component. When you specify a <code>bindingEvent</code>,\n      the event is called when the action is performed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding action\n      to a <code>Component</code> or a <code>ComponentChild</code>. A button click is an example of\n      an event. </p>"
+                "smithy.api#documentation": "<p>Describes the configuration of an event. You can bind an event and a corresponding\n      action to a <code>Component</code> or a <code>ComponentChild</code>. A button click\n      is an example of an event. </p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#ComponentEvents": {
@@ -999,6 +1014,164 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#CreateForm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateFormRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateFormResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Creates a new form for an Amplify app.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/forms",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateFormData": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormDataTypeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source to use to create the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formActionType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to perform a create or update action on the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the form's fields.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "style": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the form's style.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sectionalElements": {
+                    "target": "com.amazonaws.amplifyuibuilder#SectionalElementMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the visual helper elements for the form. These elements\n      are not associated with any data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cta": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormCTA",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>FormCTA</code> object that stores the call to action configuration for the\n      form.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the form data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents all of the information that is required to create a form.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateFormRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app to associate with the form.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The unique client token.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "formToCreate": {
+                    "target": "com.amazonaws.amplifyuibuilder#CreateFormData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Represents the configuration of the form to create.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CreateFormResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#Form",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the new form.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplifyuibuilder#CreateTheme": {
             "type": "operation",
             "input": {
@@ -1176,6 +1349,66 @@
                     "target": "com.amazonaws.amplifyuibuilder#Uuid",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID of the component to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#DeleteForm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#DeleteFormRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Deletes a form from an Amplify app.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/forms/{id}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#DeleteFormRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the form to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the form to delete.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1408,6 +1641,82 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#ExportForms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ExportFormsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ExportFormsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Exports form configurations to code that is ready to integrate into an Amplify app.</p>",
+                "smithy.api#http": {
+                    "uri": "/export/app/{appId}/environment/{environmentName}/forms",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "entities"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportFormsRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app to export forms to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ExportFormsResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the configuration of the exported forms.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplifyuibuilder#ExportThemes": {
             "type": "operation",
             "input": {
@@ -1484,6 +1793,336 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#FeaturesMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FieldConfig": {
+            "type": "structure",
+            "members": {
+                "label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label for the field.</p>"
+                    }
+                },
+                "position": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the field position.</p>"
+                    }
+                },
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to hide a field.</p>"
+                    }
+                },
+                "inputType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldInputConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration for the default input value to display for a field.</p>"
+                    }
+                },
+                "validations": {
+                    "target": "com.amazonaws.amplifyuibuilder#ValidationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validations to perform on the value in the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration information for a field in a table.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FieldInputConfig": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type for the field. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a field that requires input.</p>"
+                    }
+                },
+                "readOnly": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a read only field.</p>"
+                    }
+                },
+                "placeholder": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to display as a placeholder for the field.</p>"
+                    }
+                },
+                "defaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for the field.</p>"
+                    }
+                },
+                "descriptiveText": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to display to describe the field.</p>"
+                    }
+                },
+                "defaultChecked": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a field has a default value.</p>"
+                    }
+                },
+                "defaultCountryCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default country code for a phone number.</p>"
+                    }
+                },
+                "valueMappings": {
+                    "target": "com.amazonaws.amplifyuibuilder#ValueMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information to use to customize the input fields with data at runtime.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>"
+                    }
+                },
+                "minValue": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value to display for the field.</p>"
+                    }
+                },
+                "maxValue": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum value to display for the field.</p>"
+                    }
+                },
+                "step": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stepping increment for a numeric value in a field.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for the default input values to display for a field.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FieldPosition": {
+            "type": "union",
+            "members": {
+                "fixed": {
+                    "target": "com.amazonaws.amplifyuibuilder#FixedPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field position is fixed and doesn't change in relation to other fields.</p>"
+                    }
+                },
+                "rightOf": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field position is to the right of the field specified by the string.</p>"
+                    }
+                },
+                "below": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field position is below the field specified by the string.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the field position.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FieldValidationConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation to perform on an object type.<code/>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "strValues": {
+                    "target": "com.amazonaws.amplifyuibuilder#StrValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation to perform on a string value.</p>"
+                    }
+                },
+                "numValues": {
+                    "target": "com.amazonaws.amplifyuibuilder#NumValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation to perform on a number value.</p>"
+                    }
+                },
+                "validationMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation message to display.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the validation configuration for a field.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FieldsMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#FieldConfig"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FixedPosition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "first",
+                        "name": "FIRST"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#Form": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formActionType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to perform on the specified form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "style": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores the configuration for the form's style.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormDataTypeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source to use to create the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores the information about the form's fields.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sectionalElements": {
+                    "target": "com.amazonaws.amplifyuibuilder#SectionalElementMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores the visual helper elements for the form that are not associated with any\n      data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the form when it was imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the form.</p>"
+                    }
+                },
+                "cta": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormCTA",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores the call to action configuration for the form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration settings for a <code>Form</code> user interface (UI) element\n      for an Amplify app. A form is a component you can add to your project by specifying a data\n      source as the default configuration for the form.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.amplifyuibuilder#FormResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "create",
+                        "name": "CREATE"
+                    },
+                    {
+                        "value": "update",
+                        "name": "UPDATE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.amplifyuibuilder#FormBindingElement": {
             "type": "structure",
             "members": {
@@ -1513,6 +2152,301 @@
             },
             "value": {
                 "target": "com.amazonaws.amplifyuibuilder#FormBindingElement"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormButton": {
+            "type": "structure",
+            "members": {
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the button is visible on the form.</p>"
+                    }
+                },
+                "children": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the button's properties.</p>"
+                    }
+                },
+                "position": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the button.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for a button UI element that is a part of a form.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormButtonsPosition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "top",
+                        "name": "TOP"
+                    },
+                    {
+                        "value": "bottom",
+                        "name": "BOTTOM"
+                    },
+                    {
+                        "value": "top_and_bottom",
+                        "name": "TOP_AND_BOTTOM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormCTA": {
+            "type": "structure",
+            "members": {
+                "position": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormButtonsPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the button.</p>"
+                    }
+                },
+                "clear": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormButton",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays a clear button.</p>"
+                    }
+                },
+                "cancel": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormButton",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays a cancel button.</p>"
+                    }
+                },
+                "submit": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormButton",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays a submit button.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the call to action button configuration for the form..</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormDataSourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DataStore",
+                        "name": "DATASTORE",
+                        "documentation": "Will use a provided Amplify DataStore enabled API"
+                    },
+                    {
+                        "value": "Custom",
+                        "name": "CUSTOM",
+                        "documentation": "Will use passed in hooks to use when creating a form from scratch"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormDataTypeConfig": {
+            "type": "structure",
+            "members": {
+                "dataSourceType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source type, either an Amplify DataStore model or a custom data type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataTypeName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the data type you are using as the data source for the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data type configuration for the data source associated with a form.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormInputValueProperty": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to assign to the input field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for an input field on a form. Use\n      <code>FormInputValueProperty</code> to specify the values to render or bind by\n      default.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#Form"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid"
+                },
+                "appId": {
+                    "target": "smithy.api#String"
+                },
+                "environmentName": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.amplifyuibuilder#CreateForm"
+            },
+            "read": {
+                "target": "com.amazonaws.amplifyuibuilder#GetForm"
+            },
+            "update": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateForm"
+            },
+            "delete": {
+                "target": "com.amazonaws.amplifyuibuilder#DeleteForm"
+            },
+            "list": {
+                "target": "com.amazonaws.amplifyuibuilder#ListForms"
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ExportForms"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "app/{appId}/environment/{environmentName}/forms/{id}"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "Form",
+                    "additionalSchemas": [
+                        "com.amazonaws.amplifyuibuilder#Form"
+                    ]
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormStyle": {
+            "type": "structure",
+            "members": {
+                "horizontalGap": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormStyleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spacing for the horizontal gap.</p>"
+                    }
+                },
+                "verticalGap": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormStyleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The spacing for the vertical gap.</p>"
+                    }
+                },
+                "outerPadding": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormStyleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the outer padding for the form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for the form's style.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormStyleConfig": {
+            "type": "union",
+            "members": {
+                "tokenReference": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to a design token to use to bind the form's style properties to an existing\n      theme.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the style setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration settings for the form's style properties.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormSummary": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the app associated with the form summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormDataTypeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The form's data source type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formActionType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of operation to perform on the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the basic information about a form.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#FormSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#FormSummary"
             }
         },
         "com.amazonaws.amplifyuibuilder#GetComponent": {
@@ -1584,6 +2518,137 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>Represents the configuration settings for the component.</p>",
                         "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetForm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#GetFormRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#GetFormResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Returns an existing form for an Amplify app.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/forms/{id}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetFormRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the form.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetFormResponse": {
+            "type": "structure",
+            "members": {
+                "form": {
+                    "target": "com.amazonaws.amplifyuibuilder#Form",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>Represents the configuration settings for the form.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#GetMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#GetMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns existing metadata for an Amplify app.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/metadata",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "features": {
+                    "target": "com.amazonaws.amplifyuibuilder#FeaturesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the configuration settings for the features metadata.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1730,6 +2795,7 @@
         "com.amazonaws.amplifyuibuilder#ListComponentsLimit": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1765,6 +2831,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.amplifyuibuilder#ListComponentsLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of components to retrieve.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1778,6 +2845,104 @@
                     "target": "com.amazonaws.amplifyuibuilder#ComponentSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of components for the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListForms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ListFormsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ListFormsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Retrieves a list of forms for a specified Amplify app and backend environment.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/forms",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "entities"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListFormsLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListFormsRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.amplifyuibuilder#ListFormsLimit",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of forms to retrieve.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListFormsResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of forms for the Amplify app.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1826,6 +2991,7 @@
         "com.amazonaws.amplifyuibuilder#ListThemesLimit": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1861,6 +3027,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.amplifyuibuilder#ListThemesLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of theme results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1911,7 +3078,13 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another element\n      within the same component.</p>"
+                "smithy.api#documentation": "<p>Represents the state configuration when an action modifies a property of another\n      element within the same component.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#NumValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
             }
         },
         "com.amazonaws.amplifyuibuilder#Predicate": {
@@ -1956,6 +3129,82 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amplifyuibuilder#Predicate"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#PutMetadataFlag": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#PutMetadataFlagRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stores the metadata information about a feature on a form or view.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/metadata/features/{featureName}",
+                    "method": "PUT"
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#PutMetadataFlagBody": {
+            "type": "structure",
+            "members": {
+                "newValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new information to store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores the metadata information about a feature on a form or view.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#PutMetadataFlagRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "featureName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the feature associated with the metadata.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.amplifyuibuilder#PutMetadataFlagBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata information to store.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.amplifyuibuilder#RefreshToken": {
@@ -2060,6 +3309,54 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.amplifyuibuilder#SectionalElement": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of sectional element. Valid values are <code>Heading</code>, <code>Text</code>,\n      and <code>Divider</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "position": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the position of the text in a field for a <code>Text</code> sectional\n      element.</p>"
+                    }
+                },
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text for a <code>Text</code> sectional element.</p>"
+                    }
+                },
+                "level": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the size of the font for a <code>Heading</code> sectional element. Valid values\n      are <code>1 | 2 | 3 | 4 | 5 | 6</code>.</p>"
+                    }
+                },
+                "orientation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the orientation for a <code>Divider</code> sectional element. Valid values are\n      <code>horizontal</code> or <code>vertical</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores the configuration information for a visual helper element for a form. A sectional\n      element can be a header, a text block, or a divider. These elements are static and not\n      associated with any data.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#SectionalElementMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#SectionalElement"
+            }
+        },
         "com.amazonaws.amplifyuibuilder#SensitiveString": {
             "type": "string",
             "traits": {
@@ -2118,6 +3415,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amplifyuibuilder#SortProperty"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#StrValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.amplifyuibuilder#TagKey": {
@@ -2389,6 +3692,19 @@
                 ]
             }
         },
+        "com.amazonaws.amplifyuibuilder#UnauthorizedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have permission to perform this operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
         "com.amazonaws.amplifyuibuilder#UpdateComponent": {
             "type": "operation",
             "input": {
@@ -2559,6 +3875,152 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#UpdateForm": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateFormRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#UpdateFormResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceConflictException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Updates an existing form.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/forms/{id}",
+                    "method": "PATCH"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateFormData": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the form.</p>"
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormDataTypeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source to use to create the form.</p>"
+                    }
+                },
+                "formActionType": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to perform a create or update action on the form.</p>"
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.amplifyuibuilder#FieldsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the form's fields.</p>"
+                    }
+                },
+                "style": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the form's style.</p>"
+                    }
+                },
+                "sectionalElements": {
+                    "target": "com.amazonaws.amplifyuibuilder#SectionalElementMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the visual helper elements for the form. These elements\n      are not associated with any data.</p>"
+                    }
+                },
+                "schemaVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the form.</p>"
+                    }
+                },
+                "cta": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormCTA",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>FormCTA</code> object that stores the call to action configuration for the\n      form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates and saves all of the information about a form, based on form ID.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateFormRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the form.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The unique client token.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "updatedForm": {
+                    "target": "com.amazonaws.amplifyuibuilder#UpdateFormData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The request accepts the following data in JSON format.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#UpdateFormResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#Form",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration of the updated form.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplifyuibuilder#UpdateTheme": {
             "type": "operation",
             "input": {
@@ -2684,6 +4146,54 @@
         },
         "com.amazonaws.amplifyuibuilder#Uuid": {
             "type": "string"
+        },
+        "com.amazonaws.amplifyuibuilder#ValidationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#FieldValidationConfiguration"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ValueMapping": {
+            "type": "structure",
+            "members": {
+                "displayValue": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormInputValueProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to display for the complex object.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.amplifyuibuilder#FormInputValueProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The complex object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a complex object with a display value. Use <code>ValueMapping</code> to store\n      how to represent complex objects when they are displayed.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ValueMappingList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#ValueMapping"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ValueMappings": {
+            "type": "structure",
+            "members": {
+                "values": {
+                    "target": "com.amazonaws.amplifyuibuilder#ValueMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value and display value pairs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the data binding configuration for a value map.</p>"
+            }
         }
     }
 }

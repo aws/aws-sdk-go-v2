@@ -10,10 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a new key value with a specific profile, such as a Contact Trace
-// Record (CTR) ContactId. A profile object can have a single unique key and any
-// number of additional keys that can be used to identify the profile that it
-// belongs to.
+// Associates a new key value with a specific profile, such as a Contact Record
+// ContactId. A profile object can have a single unique key and any number of
+// additional keys that can be used to identify the profile that it belongs to.
 func (c *Client) AddProfileKey(ctx context.Context, params *AddProfileKeyInput, optFns ...func(*Options)) (*AddProfileKeyOutput, error) {
 	if params == nil {
 		params = &AddProfileKeyInput{}

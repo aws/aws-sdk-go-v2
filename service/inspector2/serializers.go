@@ -2941,6 +2941,13 @@ func awsRestjson1_serializeDocumentFilterCriteria(v *types.FilterCriteria, value
 		}
 	}
 
+	if v.FixAvailable != nil {
+		ok := object.Key("fixAvailable")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.FixAvailable, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InspectorScore != nil {
 		ok := object.Key("inspectorScore")
 		if err := awsRestjson1_serializeDocumentNumberFilterList(v.InspectorScore, ok); err != nil {

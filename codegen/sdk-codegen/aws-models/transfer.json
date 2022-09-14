@@ -1287,6 +1287,54 @@
                 }
             }
         },
+        "com.amazonaws.transfer#DeleteHostKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DeleteHostKeyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the host key that's specified in the <code>HoskKeyId</code> parameter.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DeleteHostKeyRequest": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the server that contains the host key that you are deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the host key that you are deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#DeleteProfile": {
             "type": "operation",
             "input": {
@@ -1807,6 +1855,63 @@
                     "target": "com.amazonaws.transfer#DescribedExecution",
                     "traits": {
                         "smithy.api#documentation": "<p>The structure that contains the details of the workflow' execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#DescribeHostKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DescribeHostKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#DescribeHostKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of the host key that's specified by the <code>HostKeyId</code> and <code>ServerId</code>.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribeHostKeyRequest": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the server that contains the host key that you want described.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the host key that you want described.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#DescribeHostKeyResponse": {
+            "type": "structure",
+            "members": {
+                "HostKey": {
+                    "target": "com.amazonaws.transfer#DescribedHostKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the details for the specified host key.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2439,6 +2544,57 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details for an execution object.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedHostKey": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique Amazon Resource Name (ARN) for the host key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the host key.</p>"
+                    }
+                },
+                "HostKeyFingerprint": {
+                    "target": "com.amazonaws.transfer#HostKeyFingerprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.transfer#HostKeyDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text description for this host key.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transfer#HostKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption algorithm used for the host key. The <code>Type</code> is one of the\n      following values:</p>\n         <ul>\n            <li>\n               <p>ssh-rsa</p>\n            </li>\n            <li>\n               <p>ssh-ed25519</p>\n            </li>\n            <li>\n               <p>ecdsa-sha2-nistp256\n        </p>\n            </li>\n            <li>\n               <p>ecdsa-sha2-nistp384</p>\n            </li>\n            <li>\n               <p>ecdsa-sha2-nistp521</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DateImported": {
+                    "target": "com.amazonaws.transfer#DateImported",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the host key was added to the server.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for host keys.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for a server host key.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedProfile": {
@@ -3211,7 +3367,30 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.transfer#HostKeyDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[\\p{Print}]*$"
+            }
+        },
         "com.amazonaws.transfer#HostKeyFingerprint": {
+            "type": "string"
+        },
+        "com.amazonaws.transfer#HostKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 25,
+                    "max": 25
+                },
+                "smithy.api#pattern": "^hostkey-[0-9a-f]{17}$"
+            }
+        },
+        "com.amazonaws.transfer#HostKeyType": {
             "type": "string"
         },
         "com.amazonaws.transfer#IdentityProviderDetails": {
@@ -3358,6 +3537,88 @@
                     "target": "com.amazonaws.transfer#CertificateId",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of identifiers for the imported certificates. You use this identifier for working with profiles and partner profiles.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ImportHostKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#ImportHostKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#ImportHostKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a host key to the server specified by the <code>ServerId</code> parameter.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ImportHostKeyRequest": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the server that contains the host key that you are importing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyBody": {
+                    "target": "com.amazonaws.transfer#HostKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key portion of an SSH key pair.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.transfer#HostKeyDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enter a text description to identify this host key.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for host keys.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ImportHostKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the server ID that contains the imported key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the host key ID for the imported key.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3898,6 +4159,84 @@
                     "target": "com.amazonaws.transfer#ListedExecutions",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the details for each execution.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NextToken</b>: returned from a call to several APIs,\n      you can use pass it to a subsequent command to continue listing additional executions.</p>\n            </li>\n            <li>\n               <p>\n                  <b>StartTime</b>: timestamp indicating when the execution began.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Executions</b>: details of the execution, including the execution ID, initial file location,\n      and Service metadata.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: one of the following values:\n        <code>IN_PROGRESS</code>, <code>COMPLETED</code>, <code>EXCEPTION</code>, <code>HANDLING_EXEPTION</code>.\n      </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListHostKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#ListHostKeysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#ListHostKeysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of host keys for the server specified by the <code>ServerId</code> paramter.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ListHostKeysRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.transfer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of host keys to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When there are additional results that were not returned, a <code>NextToken</code>\n      parameter is returned. You can use that value for a subsequent call to\n      <code>ListHostKeys</code> to continue listing results.</p>"
+                    }
+                },
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the server that contains the host keys that you want to view.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListHostKeysResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a token that you can use to call <code>ListHostKeys</code> again and receive\n      additional results, if there are any.</p>"
+                    }
+                },
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the server ID that contains the listed host keys.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeys": {
+                    "target": "com.amazonaws.transfer#ListedHostKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an array, where each item contains the details of a host key.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4567,6 +4906,57 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transfer#ListedExecution"
+            }
+        },
+        "com.amazonaws.transfer#ListedHostKey": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique Amazon Resource Name (ARN) of the host key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                },
+                "Fingerprint": {
+                    "target": "com.amazonaws.transfer#HostKeyFingerprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key fingerprint, which is a short sequence of bytes used to identify the longer public key.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.transfer#HostKeyDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current description for the host key. You can change it by calling the <code>UpdateHostKey</code> operation and providing a new description.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transfer#HostKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption algorithm used for the host key. The <code>Type</code> is one of the\n      following values:</p>\n         <ul>\n            <li>\n               <p>ssh-rsa</p>\n            </li>\n            <li>\n               <p>ssh-ed25519</p>\n            </li>\n            <li>\n               <p>ecdsa-sha2-nistp256\n        </p>\n            </li>\n            <li>\n               <p>ecdsa-sha2-nistp384</p>\n            </li>\n            <li>\n               <p>ecdsa-sha2-nistp521</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DateImported": {
+                    "target": "com.amazonaws.transfer#DateImported",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the host key was added to the server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns properties of the host key that is specified.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ListedHostKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ListedHostKey"
             }
         },
         "com.amazonaws.transfer#ListedProfile": {
@@ -6154,6 +6544,9 @@
                     "target": "com.amazonaws.transfer#DeleteConnector"
                 },
                 {
+                    "target": "com.amazonaws.transfer#DeleteHostKey"
+                },
+                {
                     "target": "com.amazonaws.transfer#DeleteProfile"
                 },
                 {
@@ -6184,6 +6577,9 @@
                     "target": "com.amazonaws.transfer#DescribeExecution"
                 },
                 {
+                    "target": "com.amazonaws.transfer#DescribeHostKey"
+                },
+                {
                     "target": "com.amazonaws.transfer#DescribeProfile"
                 },
                 {
@@ -6202,6 +6598,9 @@
                     "target": "com.amazonaws.transfer#ImportCertificate"
                 },
                 {
+                    "target": "com.amazonaws.transfer#ImportHostKey"
+                },
+                {
                     "target": "com.amazonaws.transfer#ImportSshPublicKey"
                 },
                 {
@@ -6218,6 +6617,9 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ListExecutions"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ListHostKeys"
                 },
                 {
                     "target": "com.amazonaws.transfer#ListProfiles"
@@ -6269,6 +6671,9 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#UpdateConnector"
+                },
+                {
+                    "target": "com.amazonaws.transfer#UpdateHostKey"
                 },
                 {
                     "target": "com.amazonaws.transfer#UpdateProfile"
@@ -6662,6 +7067,80 @@
                     "target": "com.amazonaws.transfer#ConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the identifier of the connector object that you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#UpdateHostKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#UpdateHostKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#UpdateHostKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the description for the host key specified by the specified by the <code>ServerId</code> and <code>HostKeyId</code> parameters.</p>"
+            }
+        },
+        "com.amazonaws.transfer#UpdateHostKeyRequest": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the server that contains the host key that you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the ID of the host key that you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.transfer#HostKeyDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide an updated description for the host key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#UpdateHostKeyResponse": {
+            "type": "structure",
+            "members": {
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the server ID for the server that contains the updated host key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HostKeyId": {
+                    "target": "com.amazonaws.transfer#HostKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the host key ID for the updated host key.</p>",
                         "smithy.api#required": {}
                     }
                 }

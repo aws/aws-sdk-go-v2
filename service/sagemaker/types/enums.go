@@ -616,6 +616,26 @@ func (AutoMLMetricExtendedEnum) Values() []AutoMLMetricExtendedEnum {
 	}
 }
 
+type AutoMLMode string
+
+// Enum values for AutoMLMode
+const (
+	AutoMLModeAuto                 AutoMLMode = "AUTO"
+	AutoMLModeEnsembling           AutoMLMode = "ENSEMBLING"
+	AutoMLModeHyperparameterTuning AutoMLMode = "HYPERPARAMETER_TUNING"
+)
+
+// Values returns all known values for AutoMLMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AutoMLMode) Values() []AutoMLMode {
+	return []AutoMLMode{
+		"AUTO",
+		"ENSEMBLING",
+		"HYPERPARAMETER_TUNING",
+	}
+}
+
 type AutoMLS3DataType string
 
 // Enum values for AutoMLS3DataType
@@ -3528,6 +3548,7 @@ const (
 	ResourceTypeFeatureGroup             ResourceType = "FeatureGroup"
 	ResourceTypeProject                  ResourceType = "Project"
 	ResourceTypeFeatureMetadata          ResourceType = "FeatureMetadata"
+	ResourceTypeHyperParameterTuningJob  ResourceType = "HyperParameterTuningJob"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -3547,6 +3568,7 @@ func (ResourceType) Values() []ResourceType {
 		"FeatureGroup",
 		"Project",
 		"FeatureMetadata",
+		"HyperParameterTuningJob",
 	}
 }
 

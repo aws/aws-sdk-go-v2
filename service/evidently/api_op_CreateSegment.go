@@ -16,10 +16,10 @@ import (
 // Chrome browser users, users in Europe, or Firefox browser users in Europe who
 // also fit other criteria that your application collects, such as age. Using a
 // segment in an experiment limits that experiment to evaluate only the users who
-// match the segment criteria. Using one or more segments in a launch allow you to
+// match the segment criteria. Using one or more segments in a launch allows you to
 // define different traffic splits for the different audience segments. For more
 // information about segment pattern syntax, see  Segment rule pattern syntax
-// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html).
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html).
 // The pattern that you define for a segment is matched against the value of
 // evaluationContext, which is passed into Evidently in the EvaluateFeature
 // (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
@@ -48,7 +48,7 @@ type CreateSegmentInput struct {
 
 	// The pattern to use for the segment. For more information about pattern syntax,
 	// see  Segment rule pattern syntax
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments-syntax.html).
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html#CloudWatch-Evidently-segments-syntax.html).
 	//
 	// This value conforms to the media type: application/json
 	//

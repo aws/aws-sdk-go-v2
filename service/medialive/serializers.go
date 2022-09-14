@@ -5063,6 +5063,13 @@ func awsRestjson1_serializeDocumentAudioCodecSettings(v *types.AudioCodecSetting
 		}
 	}
 
+	if v.Eac3AtmosSettings != nil {
+		ok := object.Key("eac3AtmosSettings")
+		if err := awsRestjson1_serializeDocumentEac3AtmosSettings(v.Eac3AtmosSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Eac3Settings != nil {
 		ok := object.Key("eac3Settings")
 		if err := awsRestjson1_serializeDocumentEac3Settings(v.Eac3Settings, ok); err != nil {
@@ -5963,6 +5970,13 @@ func awsRestjson1_serializeDocumentColorSpacePassthroughSettings(v *types.ColorS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDolbyVision81Settings(v *types.DolbyVision81Settings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDvbNitSettings(v *types.DvbNitSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6130,6 +6144,87 @@ func awsRestjson1_serializeDocumentDvbTdtSettings(v *types.DvbTdtSettings, value
 	if v.RepInterval != 0 {
 		ok := object.Key("repInterval")
 		ok.Integer(v.RepInterval)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEac3AtmosSettings(v *types.Eac3AtmosSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bitrate != 0 {
+		ok := object.Key("bitrate")
+		switch {
+		case math.IsNaN(v.Bitrate):
+			ok.String("NaN")
+
+		case math.IsInf(v.Bitrate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Bitrate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Bitrate)
+
+		}
+	}
+
+	if len(v.CodingMode) > 0 {
+		ok := object.Key("codingMode")
+		ok.String(string(v.CodingMode))
+	}
+
+	if v.Dialnorm != 0 {
+		ok := object.Key("dialnorm")
+		ok.Integer(v.Dialnorm)
+	}
+
+	if len(v.DrcLine) > 0 {
+		ok := object.Key("drcLine")
+		ok.String(string(v.DrcLine))
+	}
+
+	if len(v.DrcRf) > 0 {
+		ok := object.Key("drcRf")
+		ok.String(string(v.DrcRf))
+	}
+
+	if v.HeightTrim != 0 {
+		ok := object.Key("heightTrim")
+		switch {
+		case math.IsNaN(v.HeightTrim):
+			ok.String("NaN")
+
+		case math.IsInf(v.HeightTrim, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.HeightTrim, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.HeightTrim)
+
+		}
+	}
+
+	if v.SurroundTrim != 0 {
+		ok := object.Key("surroundTrim")
+		switch {
+		case math.IsNaN(v.SurroundTrim):
+			ok.String("NaN")
+
+		case math.IsInf(v.SurroundTrim, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.SurroundTrim, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.SurroundTrim)
+
+		}
 	}
 
 	return nil
@@ -6993,6 +7088,13 @@ func awsRestjson1_serializeDocumentH265ColorSpaceSettings(v *types.H265ColorSpac
 	if v.ColorSpacePassthroughSettings != nil {
 		ok := object.Key("colorSpacePassthroughSettings")
 		if err := awsRestjson1_serializeDocumentColorSpacePassthroughSettings(v.ColorSpacePassthroughSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DolbyVision81Settings != nil {
+		ok := object.Key("dolbyVision81Settings")
+		if err := awsRestjson1_serializeDocumentDolbyVision81Settings(v.DolbyVision81Settings, ok); err != nil {
 			return err
 		}
 	}

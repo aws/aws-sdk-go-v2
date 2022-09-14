@@ -58,7 +58,7 @@ type CreateDocumentInput struct {
 	// name prefixes. These are reserved by Amazon Web Services for use as document
 	// name prefixes:
 	//
-	// * aws-
+	// * aws
 	//
 	// * amazon
 	//

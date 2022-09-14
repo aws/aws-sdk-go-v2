@@ -67,6 +67,11 @@ type UpdateAssetPropertyInput struct {
 	// state is set to DISABLED.
 	PropertyNotificationState types.PropertyNotificationState
 
+	// The unit of measure (such as Newtons or RPM) of the asset property. If you don't
+	// specify a value for this parameter, the service uses the value of the
+	// assetModelProperty in the asset model.
+	PropertyUnit *string
+
 	noSmithyDocumentSerde
 }
 

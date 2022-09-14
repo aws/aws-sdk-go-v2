@@ -58,6 +58,9 @@ type UpdateSlotTypeInput struct {
 	// This member is required.
 	SlotTypeName *string
 
+	// Specifications for a composite slot type.
+	CompositeSlotTypeSetting *types.CompositeSlotTypeSetting
+
 	// The new description of the slot type.
 	Description *string
 
@@ -85,6 +88,9 @@ type UpdateSlotTypeOutput struct {
 
 	// The version of the bot that contains the slot type. This is always DRAFT.
 	BotVersion *string
+
+	// Specifications for a composite slot type.
+	CompositeSlotTypeSetting *types.CompositeSlotTypeSetting
 
 	// The timestamp of the date and time that the slot type was created.
 	CreationDateTime *time.Time

@@ -1,0 +1,8 @@
+{
+    "id": "f4e93fee-2af0-40fe-ba56-72dc52a61723",
+    "type": "feature",
+    "description": "This release enables our customer to choose the option of Sharepoint 2019 for the on-premise Sharepoint connector.",
+    "modules": [
+        "service/kendra"
+    ]
+}

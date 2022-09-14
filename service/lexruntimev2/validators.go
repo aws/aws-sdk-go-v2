@@ -297,6 +297,11 @@ func validateDialogAction(v *types.DialogAction) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if v.SubSlotToElicit != nil {
+		if err := validateElicitSubSlot(v.SubSlotToElicit); err != nil {
+			invalidParams.AddNested("SubSlotToElicit", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -311,6 +316,26 @@ func validateDTMFInputEvent(v *types.DTMFInputEvent) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DTMFInputEvent"}
 	if v.InputCharacter == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputCharacter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateElicitSubSlot(v *types.ElicitSubSlot) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ElicitSubSlot"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SubSlotToElicit != nil {
+		if err := validateElicitSubSlot(v.SubSlotToElicit); err != nil {
+			invalidParams.AddNested("SubSlotToElicit", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -401,11 +426,14 @@ func validateRuntimeHintDetails(v *types.RuntimeHintDetails) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RuntimeHintDetails"}
-	if v.RuntimeHintValues == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RuntimeHintValues"))
-	} else if v.RuntimeHintValues != nil {
+	if v.RuntimeHintValues != nil {
 		if err := validateRuntimeHintValuesList(v.RuntimeHintValues); err != nil {
 			invalidParams.AddNested("RuntimeHintValues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubSlotHints != nil {
+		if err := validateSlotHintsSlotMap(v.SubSlotHints); err != nil {
+			invalidParams.AddNested("SubSlotHints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -509,6 +537,11 @@ func validateSlot(v *types.Slot) error {
 	if v.Values != nil {
 		if err := validateValues(v.Values); err != nil {
 			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubSlots != nil {
+		if err := validateSlots(v.SubSlots); err != nil {
+			invalidParams.AddNested("SubSlots", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

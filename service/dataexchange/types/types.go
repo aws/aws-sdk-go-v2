@@ -450,7 +450,7 @@ type ExportRevisionsToS3ResponseDetails struct {
 
 // Encryption configuration of the export job. Includes the encryption type in
 // addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS
-// encryption. type.
+// encryption type.
 type ExportServerSideEncryption struct {
 
 	// The type of server side encryption used for encrypting the objects in Amazon S3.
@@ -851,16 +851,16 @@ type RequestDetails struct {
 	// Details about the export to Amazon S3 request.
 	ExportRevisionsToS3 *ExportRevisionsToS3RequestDetails
 
-	// Information about the import asset from API Gateway API request.
+	// Details about the import from signed URL request.
 	ImportAssetFromApiGatewayApi *ImportAssetFromApiGatewayApiRequestDetails
 
-	// Details about the import from signed URL request.
+	// Details about the import from Amazon S3 request.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlRequestDetails
 
 	// Details from an import from Amazon Redshift datashare request.
 	ImportAssetsFromRedshiftDataShares *ImportAssetsFromRedshiftDataSharesRequestDetails
 
-	// Details about the import from Amazon S3 request.
+	// Information about the import asset from API Gateway API request.
 	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
 
 	noSmithyDocumentSerde

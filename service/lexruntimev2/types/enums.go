@@ -180,8 +180,9 @@ type Shape string
 
 // Enum values for Shape
 const (
-	ShapeScalar Shape = "Scalar"
-	ShapeList   Shape = "List"
+	ShapeScalar    Shape = "Scalar"
+	ShapeList      Shape = "List"
+	ShapeComposite Shape = "Composite"
 )
 
 // Values returns all known values for Shape. Note that this can be expanded in the
@@ -191,6 +192,7 @@ func (Shape) Values() []Shape {
 	return []Shape{
 		"Scalar",
 		"List",
+		"Composite",
 	}
 }
 

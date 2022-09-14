@@ -103,3 +103,22 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You don't have permission to perform this operation.
+type UnauthorizedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

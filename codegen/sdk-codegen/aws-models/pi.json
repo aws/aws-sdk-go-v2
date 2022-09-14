@@ -781,7 +781,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 10
+                    "max": 25
                 }
             }
         },
@@ -957,7 +957,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 20
+                    "max": 25
                 }
             }
         },

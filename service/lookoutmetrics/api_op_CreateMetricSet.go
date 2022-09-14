@@ -49,6 +49,9 @@ type CreateMetricSetInput struct {
 	// This member is required.
 	MetricSource *types.MetricSource
 
+	// A list of filters that specify which data is kept for anomaly detection.
+	DimensionFilterList []types.MetricSetDimensionFilter
+
 	// A list of the fields you want to treat as dimensions.
 	DimensionList []string
 

@@ -210,6 +210,22 @@ func (DataQualityMetricType) Values() []DataQualityMetricType {
 	}
 }
 
+type FilterOperation string
+
+// Enum values for FilterOperation
+const (
+	FilterOperationEquals FilterOperation = "EQUALS"
+)
+
+// Values returns all known values for FilterOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterOperation) Values() []FilterOperation {
+	return []FilterOperation{
+		"EQUALS",
+	}
+}
+
 type Frequency string
 
 // Enum values for Frequency

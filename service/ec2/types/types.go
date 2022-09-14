@@ -1320,10 +1320,10 @@ type ClassicLinkDnsSupport struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
-// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
-// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide. Describes a linked EC2-Classic
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
+// VPC. For more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide. Describes a linked EC2-Classic
 // instance.
 type ClassicLinkInstance struct {
 
@@ -1789,6 +1789,21 @@ type CoipAddressUsage struct {
 
 	// The customer-owned IP address.
 	CoIp *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a customer-owned IP address range.
+type CoipCidr struct {
+
+	// An address range in a customer-owned IP address space.
+	Cidr *string
+
+	// The ID of the address pool.
+	CoipPoolId *string
+
+	// The ID of the local gateway route table.
+	LocalGatewayRouteTableId *string
 
 	noSmithyDocumentSerde
 }
@@ -4017,6 +4032,10 @@ type FlowLog struct {
 	// The date and time the flow log was created.
 	CreationTime *time.Time
 
+	// The ARN of the IAM role that allows the service to publish flow logs across
+	// accounts.
+	DeliverCrossAccountRole *string
+
 	// Information about the error that occurred. Rate limited indicates that
 	// CloudWatch Logs throttling has been applied for one or more network interfaces,
 	// or that you've reached the limit on the number of log groups that you can
@@ -4025,7 +4044,7 @@ type FlowLog struct {
 	// error indicates an internal error.
 	DeliverLogsErrorMessage *string
 
-	// The ARN of the IAM role that posts logs to CloudWatch Logs.
+	// The ARN of the IAM role allows the service to publish logs to CloudWatch Logs.
 	DeliverLogsPermissionArn *string
 
 	// The status of the logs delivery (SUCCESS | FAILED).
@@ -4034,22 +4053,16 @@ type FlowLog struct {
 	// The destination options.
 	DestinationOptions *DestinationOptionsResponse
 
-	// The flow log ID.
+	// The ID of the flow log.
 	FlowLogId *string
 
 	// The status of the flow log (ACTIVE).
 	FlowLogStatus *string
 
-	// The destination to which the flow log data is published. Flow log data can be
-	// published to an CloudWatch Logs log group or an Amazon S3 bucket. If the flow
-	// log publishes to CloudWatch Logs, this element indicates the Amazon Resource
-	// Name (ARN) of the CloudWatch Logs log group to which the data is published. If
-	// the flow log publishes to Amazon S3, this element indicates the ARN of the
-	// Amazon S3 bucket to which the data is published.
+	// The Amazon Resource Name (ARN) of the destination for the flow log data.
 	LogDestination *string
 
-	// The type of destination to which the flow log data is published. Flow log data
-	// can be published to CloudWatch Logs or Amazon S3.
+	// The type of destination for the flow log data.
 	LogDestinationType LogDestinationType
 
 	// The format of the flow log record.
@@ -4066,7 +4079,7 @@ type FlowLog struct {
 	// the specified value. Valid Values: 60 | 600
 	MaxAggregationInterval *int32
 
-	// The ID of the resource on which the flow log was created.
+	// The ID of the resource being monitored.
 	ResourceId *string
 
 	// The tags for the flow log.
@@ -8553,6 +8566,9 @@ type LocalGateway struct {
 // Describes a route for a local gateway route table.
 type LocalGatewayRoute struct {
 
+	// The ID of the customer-owned address pool.
+	CoipPoolId *string
+
 	// The CIDR block used for destination matches.
 	DestinationCidrBlock *string
 
@@ -8565,11 +8581,17 @@ type LocalGatewayRoute struct {
 	// The ID of the virtual interface group.
 	LocalGatewayVirtualInterfaceGroupId *string
 
+	// The ID of the network interface.
+	NetworkInterfaceId *string
+
 	// The ID of the Amazon Web Services account that owns the local gateway route.
 	OwnerId *string
 
 	// The state of the route.
 	State LocalGatewayRouteState
+
+	// The ID of the subnet.
+	SubnetId *string
 
 	// The route type.
 	Type LocalGatewayRouteType
@@ -8589,6 +8611,9 @@ type LocalGatewayRouteTable struct {
 	// The ID of the local gateway route table.
 	LocalGatewayRouteTableId *string
 
+	// The mode of the local gateway route table.
+	Mode LocalGatewayRouteTableMode
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -8598,6 +8623,9 @@ type LocalGatewayRouteTable struct {
 
 	// The state of the local gateway route table.
 	State *string
+
+	// Describes a state change.
+	StateReason *StateReason
 
 	// The tags assigned to the local gateway route table.
 	Tags []Tag
@@ -9929,11 +9957,11 @@ type PeeringAttachmentStatus struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
-// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
-// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide. Describes the VPC peering
-// connection options.
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
+// VPC. For more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide. Describes the VPC peering connection
+// options.
 type PeeringConnectionOptions struct {
 
 	// If true, the public DNS hostnames of instances in the specified VPC resolve to
@@ -9951,10 +9979,10 @@ type PeeringConnectionOptions struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
-// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
-// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide. The VPC peering connection options.
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
+// VPC. For more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide. The VPC peering connection options.
 type PeeringConnectionOptionsRequest struct {
 
 	// If true, enables a local VPC to resolve public DNS hostnames to private IP
@@ -15824,11 +15852,11 @@ type VpcCidrBlockState struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
-// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
-// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide. Describes whether a VPC is enabled
-// for ClassicLink.
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
+// VPC. For more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide. Describes whether a VPC is enabled for
+// ClassicLink.
 type VpcClassicLink struct {
 
 	// Indicates whether the VPC is enabled for ClassicLink.
@@ -15990,11 +16018,11 @@ type VpcPeeringConnection struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
-// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
-// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide. Describes the VPC peering
-// connection options.
+// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a
+// VPC. For more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide. Describes the VPC peering connection
+// options.
 type VpcPeeringConnectionOptionsDescription struct {
 
 	// Indicates whether a local VPC can resolve public DNS hostnames to private IP

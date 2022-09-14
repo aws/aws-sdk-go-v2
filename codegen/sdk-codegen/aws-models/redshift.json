@@ -236,18 +236,18 @@
                 "AquaStatus": {
                     "target": "com.amazonaws.redshift#AquaStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value indicates the status of AQUA on the cluster. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - AQUA is enabled.</p>\n            </li>\n            <li>\n               <p>disabled - AQUA is not enabled. </p>\n            </li>\n            <li>\n               <p>applying - AQUA status is being applied. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 },
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
+                "smithy.api#documentation": "<p>The operation that uses this structure is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>"
             }
         },
         "com.amazonaws.redshift#AquaConfigurationStatus": {
@@ -1328,7 +1328,7 @@
                 "AquaConfiguration": {
                     "target": "com.amazonaws.redshift#AquaConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
+                        "smithy.api#documentation": "<p>This field is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 },
                 "DefaultIamRoleArn": {
@@ -2653,7 +2653,7 @@
                 "ElasticIp": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a \n            publicly accessible cluster with AvailabilityZoneRelocation turned on.</p>\n        <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible\n            through an Internet gateway. For more information about provisioning clusters in\n            EC2-VPC, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms\">Supported\n                Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>"
+                        "smithy.api#documentation": "<p>The Elastic IP (EIP) address for the cluster.</p>\n        <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible\n            through an Internet gateway. For more information about provisioning clusters in\n            EC2-VPC, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms\">Supported\n                Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>"
                     }
                 },
                 "Tags": {
@@ -2707,7 +2707,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 },
                 "DefaultIamRoleArn": {
@@ -8050,14 +8050,14 @@
                 "DbUser": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a database user. If a user name matching <code>DbUser</code> exists in\n            the database, the temporary user credentials have the same permissions as the existing\n            user. If <code>DbUser</code> doesn't exist in the database and <code>Autocreate</code>\n            is <code>True</code>, a new user is created using the value for <code>DbUser</code> with\n            PUBLIC permissions. If a database user matching the value for <code>DbUser</code>\n            doesn't exist and <code>Autocreate</code> is <code>False</code>, then the command\n            succeeds but the connection attempt will fail because the user doesn't exist in the\n            database.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html\">CREATE USER</a> in the Amazon\n            Redshift Database Developer Guide. </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be\n                        <code>PUBLIC</code>.</p>\n            </li>\n            <li>\n                <p>Must contain only lowercase letters, numbers, underscore, plus sign, period\n                    (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Must not contain a colon ( : ) or slash ( / ). </p>\n            </li>\n            <li>\n                <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon\n                    Redshift Database Developer Guide.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of a database user. If a user name matching <code>DbUser</code> exists in\n            the database, the temporary user credentials have the same permissions as the existing\n            user. If <code>DbUser</code> doesn't exist in the database and <code>Autocreate</code>\n            is <code>True</code>, a new user is created using the value for <code>DbUser</code> with\n            PUBLIC permissions. If a database user matching the value for <code>DbUser</code>\n            doesn't exist and <code>Autocreate</code> is <code>False</code>, then the command\n            succeeds but the connection attempt will fail because the user doesn't exist in the\n            database.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html\">CREATE USER</a> in the Amazon\n            Redshift Database Developer Guide. </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be\n                        <code>PUBLIC</code>.</p>\n            </li>\n            <li>\n                <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period\n                    (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Must not contain a colon ( : ) or slash ( / ). </p>\n            </li>\n            <li>\n                <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon\n                    Redshift Database Developer Guide.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "DbName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a database that <code>DbUser</code> is authorized to log on to. If\n                <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing\n            database.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 64 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n                <p>Must contain only lowercase letters, numbers, underscore, plus sign, period\n                    (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Must not contain a colon ( : ) or slash ( / ). </p>\n            </li>\n            <li>\n                <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon\n                    Redshift Database Developer Guide.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of a database that <code>DbUser</code> is authorized to log on to. If\n                <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing\n            database.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 64 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n                <p>Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period\n                    (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Must not contain a colon ( : ) or slash ( / ). </p>\n            </li>\n            <li>\n                <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon\n                    Redshift Database Developer Guide.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterIdentifier": {
@@ -9376,7 +9376,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies whether a cluster can use AQUA (Advanced Query Accelerator). </p>"
+                "smithy.api#documentation": "<p>This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). </p>"
             }
         },
         "com.amazonaws.redshift#ModifyAquaInputMessage": {
@@ -9392,7 +9392,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This parameter is retired. Amazon Redshift automatically  determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 }
             }
@@ -9403,7 +9403,7 @@
                 "AquaConfiguration": {
                     "target": "com.amazonaws.redshift#AquaConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated AQUA configuration of the cluster. </p>"
+                        "smithy.api#documentation": "<p>This parameter is retired. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). </p>"
                     }
                 }
             }
@@ -12645,13 +12645,13 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the snapshot from which to create the new cluster. This parameter isn't\n            case sensitive.</p>\n        <p>Example: <code>my-snapshot-id</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The name of the snapshot from which to create the new cluster. This parameter isn't\n            case sensitive. You can specify this parameter or <code>snapshotArn</code>, but not both.</p>\n        <p>Example: <code>my-snapshot-id</code>\n        </p>"
                     }
                 },
                 "SnapshotArn": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the snapshot associated with the message to restore from a cluster. You can specify\n            this parameter or <code>snapshotIdentifier</code>, but not both.</p>"
                     }
                 },
                 "SnapshotClusterIdentifier": {
@@ -12711,7 +12711,7 @@
                 "ElasticIp": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The elastic IP (EIP) address for the cluster. You don't have to specify the EIP for a \n            publicly accessible cluster with AvailabilityZoneRelocation turned on.</p>"
+                        "smithy.api#documentation": "<p>The elastic IP (EIP) address for the cluster.</p>"
                     }
                 },
                 "ClusterParameterGroupName": {
@@ -12807,7 +12807,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>This parameter is retired. It does not set the AQUA configuration status. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).</p>"
                     }
                 },
                 "DefaultIamRoleArn": {

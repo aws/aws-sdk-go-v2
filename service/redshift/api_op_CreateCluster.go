@@ -114,17 +114,9 @@ type CreateClusterInput struct {
 	// Redshift engine that is running on your cluster. Default: true
 	AllowVersionUpgrade *bool
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query
-	// Accelerator) when it is created. Possible values include the following.
-	//
-	// *
-	// enabled - Use AQUA if it is available for the current Amazon Web Services Region
-	// and Amazon Redshift node type.
-	//
-	// * disabled - Don't use AQUA.
-	//
-	// * auto - Amazon
-	// Redshift determines whether to use AQUA.
+	// This parameter is retired. It does not set the AQUA configuration status. Amazon
+	// Redshift automatically determines whether to use AQUA (Advanced Query
+	// Accelerator).
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	// The number of days that automated snapshots are retained. If the value is 0,
@@ -212,11 +204,10 @@ type CreateClusterInput struct {
 	// cluster when the cluster was created.
 	DefaultIamRoleArn *string
 
-	// The Elastic IP (EIP) address for the cluster. You don't have to specify the EIP
-	// for a publicly accessible cluster with AvailabilityZoneRelocation turned on.
-	// Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible
-	// through an Internet gateway. For more information about provisioning clusters in
-	// EC2-VPC, go to Supported Platforms to Launch Your Cluster
+	// The Elastic IP (EIP) address for the cluster. Constraints: The cluster must be
+	// provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For
+	// more information about provisioning clusters in EC2-VPC, go to Supported
+	// Platforms to Launch Your Cluster
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms)
 	// in the Amazon Redshift Cluster Management Guide.
 	ElasticIp *string

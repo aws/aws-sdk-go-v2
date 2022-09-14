@@ -1096,6 +1096,13 @@ func awsRestjson1_serializeOpDocumentCreateSlotInput(v *CreateSlotInput, value s
 		ok.String(*v.SlotTypeId)
 	}
 
+	if v.SubSlotSetting != nil {
+		ok := object.Key("subSlotSetting")
+		if err := awsRestjson1_serializeDocumentSubSlotSetting(v.SubSlotSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ValueElicitationSetting != nil {
 		ok := object.Key("valueElicitationSetting")
 		if err := awsRestjson1_serializeDocumentSlotValueElicitationSetting(v.ValueElicitationSetting, ok); err != nil {
@@ -1196,6 +1203,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateSlotTypeInput(v *CreateSlotTypeIn
 func awsRestjson1_serializeOpDocumentCreateSlotTypeInput(v *CreateSlotTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CompositeSlotTypeSetting != nil {
+		ok := object.Key("compositeSlotTypeSetting")
+		if err := awsRestjson1_serializeDocumentCompositeSlotTypeSetting(v.CompositeSlotTypeSetting, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -6112,6 +6126,13 @@ func awsRestjson1_serializeOpDocumentUpdateSlotInput(v *UpdateSlotInput, value s
 		ok.String(*v.SlotTypeId)
 	}
 
+	if v.SubSlotSetting != nil {
+		ok := object.Key("subSlotSetting")
+		if err := awsRestjson1_serializeDocumentSubSlotSetting(v.SubSlotSetting, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ValueElicitationSetting != nil {
 		ok := object.Key("valueElicitationSetting")
 		if err := awsRestjson1_serializeDocumentSlotValueElicitationSetting(v.ValueElicitationSetting, ok); err != nil {
@@ -6221,6 +6242,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSlotTypeInput(v *UpdateSlotTypeIn
 func awsRestjson1_serializeOpDocumentUpdateSlotTypeInput(v *UpdateSlotTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CompositeSlotTypeSetting != nil {
+		ok := object.Key("compositeSlotTypeSetting")
+		if err := awsRestjson1_serializeDocumentCompositeSlotTypeSetting(v.CompositeSlotTypeSetting, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -6806,6 +6834,20 @@ func awsRestjson1_serializeDocumentCodeHookSpecification(v *types.CodeHookSpecif
 	if v.LambdaCodeHook != nil {
 		ok := object.Key("lambdaCodeHook")
 		if err := awsRestjson1_serializeDocumentLambdaCodeHook(v.LambdaCodeHook, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCompositeSlotTypeSetting(v *types.CompositeSlotTypeSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SubSlots != nil {
+		ok := object.Key("subSlots")
+		if err := awsRestjson1_serializeDocumentSubSlotTypeList(v.SubSlots, ok); err != nil {
 			return err
 		}
 	}
@@ -8815,6 +8857,25 @@ func awsRestjson1_serializeDocumentSlotValueSelectionSetting(v *types.SlotValueS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSpecifications(v *types.Specifications, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SlotTypeId != nil {
+		ok := object.Key("slotTypeId")
+		ok.String(*v.SlotTypeId)
+	}
+
+	if v.ValueElicitationSetting != nil {
+		ok := object.Key("valueElicitationSetting")
+		if err := awsRestjson1_serializeDocumentSubSlotValueElicitationSetting(v.ValueElicitationSetting, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSSMLMessage(v *types.SSMLMessage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8864,6 +8925,104 @@ func awsRestjson1_serializeDocumentStringMap(v map[string]string, value smithyjs
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubSlotSetting(v *types.SubSlotSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("expression")
+		ok.String(*v.Expression)
+	}
+
+	if v.SlotSpecifications != nil {
+		ok := object.Key("slotSpecifications")
+		if err := awsRestjson1_serializeDocumentSubSlotSpecificationMap(v.SlotSpecifications, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubSlotSpecificationMap(v map[string]types.Specifications, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentSpecifications(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubSlotTypeComposition(v *types.SubSlotTypeComposition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.SlotTypeId != nil {
+		ok := object.Key("slotTypeId")
+		ok.String(*v.SlotTypeId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubSlotTypeList(v []types.SubSlotTypeComposition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSubSlotTypeComposition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubSlotValueElicitationSetting(v *types.SubSlotValueElicitationSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultValueSpecification != nil {
+		ok := object.Key("defaultValueSpecification")
+		if err := awsRestjson1_serializeDocumentSlotDefaultValueSpecification(v.DefaultValueSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PromptSpecification != nil {
+		ok := object.Key("promptSpecification")
+		if err := awsRestjson1_serializeDocumentPromptSpecification(v.PromptSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SampleUtterances != nil {
+		ok := object.Key("sampleUtterances")
+		if err := awsRestjson1_serializeDocumentSampleUtterancesList(v.SampleUtterances, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WaitAndContinueSpecification != nil {
+		ok := object.Key("waitAndContinueSpecification")
+		if err := awsRestjson1_serializeDocumentWaitAndContinueSpecification(v.WaitAndContinueSpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

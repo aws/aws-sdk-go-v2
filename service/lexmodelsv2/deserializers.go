@@ -2289,6 +2289,11 @@ func awsRestjson1_deserializeOpDocumentCreateSlotOutput(v **CreateSlotOutput, va
 				sv.SlotTypeId = ptr.String(jtv)
 			}
 
+		case "subSlotSetting":
+			if err := awsRestjson1_deserializeDocumentSubSlotSetting(&sv.SubSlotSetting, value); err != nil {
+				return err
+			}
+
 		case "valueElicitationSetting":
 			if err := awsRestjson1_deserializeDocumentSlotValueElicitationSetting(&sv.ValueElicitationSetting, value); err != nil {
 				return err
@@ -2467,6 +2472,11 @@ func awsRestjson1_deserializeOpDocumentCreateSlotTypeOutput(v **CreateSlotTypeOu
 					return fmt.Errorf("expected DraftBotVersion to be of type string, got %T instead", value)
 				}
 				sv.BotVersion = ptr.String(jtv)
+			}
+
+		case "compositeSlotTypeSetting":
+			if err := awsRestjson1_deserializeDocumentCompositeSlotTypeSetting(&sv.CompositeSlotTypeSetting, value); err != nil {
+				return err
 			}
 
 		case "creationDateTime":
@@ -7500,6 +7510,11 @@ func awsRestjson1_deserializeOpDocumentDescribeSlotOutput(v **DescribeSlotOutput
 				sv.SlotTypeId = ptr.String(jtv)
 			}
 
+		case "subSlotSetting":
+			if err := awsRestjson1_deserializeDocumentSubSlotSetting(&sv.SubSlotSetting, value); err != nil {
+				return err
+			}
+
 		case "valueElicitationSetting":
 			if err := awsRestjson1_deserializeDocumentSlotValueElicitationSetting(&sv.ValueElicitationSetting, value); err != nil {
 				return err
@@ -7675,6 +7690,11 @@ func awsRestjson1_deserializeOpDocumentDescribeSlotTypeOutput(v **DescribeSlotTy
 					return fmt.Errorf("expected BotVersion to be of type string, got %T instead", value)
 				}
 				sv.BotVersion = ptr.String(jtv)
+			}
+
+		case "compositeSlotTypeSetting":
+			if err := awsRestjson1_deserializeDocumentCompositeSlotTypeSetting(&sv.CompositeSlotTypeSetting, value); err != nil {
+				return err
 			}
 
 		case "creationDateTime":
@@ -13646,6 +13666,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSlotOutput(v **UpdateSlotOutput, va
 				sv.SlotTypeId = ptr.String(jtv)
 			}
 
+		case "subSlotSetting":
+			if err := awsRestjson1_deserializeDocumentSubSlotSetting(&sv.SubSlotSetting, value); err != nil {
+				return err
+			}
+
 		case "valueElicitationSetting":
 			if err := awsRestjson1_deserializeDocumentSlotValueElicitationSetting(&sv.ValueElicitationSetting, value); err != nil {
 				return err
@@ -13824,6 +13849,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSlotTypeOutput(v **UpdateSlotTypeOu
 					return fmt.Errorf("expected DraftBotVersion to be of type string, got %T instead", value)
 				}
 				sv.BotVersion = ptr.String(jtv)
+			}
+
+		case "compositeSlotTypeSetting":
+			if err := awsRestjson1_deserializeDocumentCompositeSlotTypeSetting(&sv.CompositeSlotTypeSetting, value); err != nil {
+				return err
 			}
 
 		case "creationDateTime":
@@ -16251,6 +16281,42 @@ func awsRestjson1_deserializeDocumentCodeHookSpecification(v **types.CodeHookSpe
 		switch key {
 		case "lambdaCodeHook":
 			if err := awsRestjson1_deserializeDocumentLambdaCodeHook(&sv.LambdaCodeHook, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCompositeSlotTypeSetting(v **types.CompositeSlotTypeSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CompositeSlotTypeSetting
+	if *v == nil {
+		sv = &types.CompositeSlotTypeSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "subSlots":
+			if err := awsRestjson1_deserializeDocumentSubSlotTypeList(&sv.SubSlots, value); err != nil {
 				return err
 			}
 
@@ -20914,6 +20980,51 @@ func awsRestjson1_deserializeDocumentSlotValueSelectionSetting(v **types.SlotVal
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSpecifications(v **types.Specifications, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Specifications
+	if *v == nil {
+		sv = &types.Specifications{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "slotTypeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BuiltInOrCustomSlotTypeId to be of type string, got %T instead", value)
+				}
+				sv.SlotTypeId = ptr.String(jtv)
+			}
+
+		case "valueElicitationSetting":
+			if err := awsRestjson1_deserializeDocumentSubSlotValueElicitationSetting(&sv.ValueElicitationSetting, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSSMLMessage(v **types.SSMLMessage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21058,6 +21169,220 @@ func awsRestjson1_deserializeDocumentStringMap(v *map[string]string, value inter
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubSlotSetting(v **types.SubSlotSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubSlotSetting
+	if *v == nil {
+		sv = &types.SubSlotSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubSlotExpression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "slotSpecifications":
+			if err := awsRestjson1_deserializeDocumentSubSlotSpecificationMap(&sv.SlotSpecifications, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubSlotSpecificationMap(v *map[string]types.Specifications, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.Specifications
+	if *v == nil {
+		mv = map[string]types.Specifications{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.Specifications
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentSpecifications(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubSlotTypeComposition(v **types.SubSlotTypeComposition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubSlotTypeComposition
+	if *v == nil {
+		sv = &types.SubSlotTypeComposition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "slotTypeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BuiltInOrCustomSlotTypeId to be of type string, got %T instead", value)
+				}
+				sv.SlotTypeId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubSlotTypeList(v *[]types.SubSlotTypeComposition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SubSlotTypeComposition
+	if *v == nil {
+		cv = []types.SubSlotTypeComposition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SubSlotTypeComposition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSubSlotTypeComposition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubSlotValueElicitationSetting(v **types.SubSlotValueElicitationSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubSlotValueElicitationSetting
+	if *v == nil {
+		sv = &types.SubSlotValueElicitationSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "defaultValueSpecification":
+			if err := awsRestjson1_deserializeDocumentSlotDefaultValueSpecification(&sv.DefaultValueSpecification, value); err != nil {
+				return err
+			}
+
+		case "promptSpecification":
+			if err := awsRestjson1_deserializeDocumentPromptSpecification(&sv.PromptSpecification, value); err != nil {
+				return err
+			}
+
+		case "sampleUtterances":
+			if err := awsRestjson1_deserializeDocumentSampleUtterancesList(&sv.SampleUtterances, value); err != nil {
+				return err
+			}
+
+		case "waitAndContinueSpecification":
+			if err := awsRestjson1_deserializeDocumentWaitAndContinueSpecification(&sv.WaitAndContinueSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

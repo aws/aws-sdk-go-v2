@@ -10581,6 +10581,13 @@ func awsAwsjson11_serializeOpDocumentCreateAssociationInput(v *CreateAssociation
 		ok.String(string(v.SyncCompliance))
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetLocations != nil {
 		ok := object.Key("TargetLocations")
 		if err := awsAwsjson11_serializeDocumentTargetLocations(v.TargetLocations, ok); err != nil {

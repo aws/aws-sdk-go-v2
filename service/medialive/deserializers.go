@@ -13417,6 +13417,11 @@ func awsRestjson1_deserializeDocumentAudioCodecSettings(v **types.AudioCodecSett
 				return err
 			}
 
+		case "eac3AtmosSettings":
+			if err := awsRestjson1_deserializeDocumentEac3AtmosSettings(&sv.Eac3AtmosSettings, value); err != nil {
+				return err
+			}
+
 		case "eac3Settings":
 			if err := awsRestjson1_deserializeDocumentEac3Settings(&sv.Eac3Settings, value); err != nil {
 				return err
@@ -15844,6 +15849,37 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDolbyVision81Settings(v **types.DolbyVision81Settings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DolbyVision81Settings
+	if *v == nil {
+		sv = &types.DolbyVision81Settings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDvbNitSettings(v **types.DvbNitSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16283,6 +16319,179 @@ func awsRestjson1_deserializeDocumentDvbTdtSettings(v **types.DvbTdtSettings, va
 					return err
 				}
 				sv.RepInterval = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEac3AtmosSettings(v **types.Eac3AtmosSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Eac3AtmosSettings
+	if *v == nil {
+		sv = &types.Eac3AtmosSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bitrate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Bitrate = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Bitrate = f64
+
+				default:
+					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "codingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Eac3AtmosCodingMode to be of type string, got %T instead", value)
+				}
+				sv.CodingMode = types.Eac3AtmosCodingMode(jtv)
+			}
+
+		case "dialnorm":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max31 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Dialnorm = int32(i64)
+			}
+
+		case "drcLine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Eac3AtmosDrcLine to be of type string, got %T instead", value)
+				}
+				sv.DrcLine = types.Eac3AtmosDrcLine(jtv)
+			}
+
+		case "drcRf":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Eac3AtmosDrcRf to be of type string, got %T instead", value)
+				}
+				sv.DrcRf = types.Eac3AtmosDrcRf(jtv)
+			}
+
+		case "heightTrim":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.HeightTrim = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.HeightTrim = f64
+
+				default:
+					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "surroundTrim":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.SurroundTrim = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.SurroundTrim = f64
+
+				default:
+					return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -18253,6 +18462,11 @@ func awsRestjson1_deserializeDocumentH265ColorSpaceSettings(v **types.H265ColorS
 		switch key {
 		case "colorSpacePassthroughSettings":
 			if err := awsRestjson1_deserializeDocumentColorSpacePassthroughSettings(&sv.ColorSpacePassthroughSettings, value); err != nil {
+				return err
+			}
+
+		case "dolbyVision81Settings":
+			if err := awsRestjson1_deserializeDocumentDolbyVision81Settings(&sv.DolbyVision81Settings, value); err != nil {
 				return err
 			}
 

@@ -34,30 +34,16 @@ type AccountWithRestoreAccess struct {
 	noSmithyDocumentSerde
 }
 
-// The AQUA (Advanced Query Accelerator) configuration of the cluster.
+// The operation that uses this structure is retired. Amazon Redshift automatically
+// determines whether to use AQUA (Advanced Query Accelerator).
 type AquaConfiguration struct {
 
-	// The value represents how the cluster is configured to use AQUA. Possible values
-	// include the following.
-	//
-	// * enabled - Use AQUA if it is available for the current
-	// Amazon Web Services Region and Amazon Redshift node type.
-	//
-	// * disabled - Don't
-	// use AQUA.
-	//
-	// * auto - Amazon Redshift determines whether to use AQUA.
+	// This field is retired. Amazon Redshift automatically determines whether to use
+	// AQUA (Advanced Query Accelerator).
 	AquaConfigurationStatus AquaConfigurationStatus
 
-	// The value indicates the status of AQUA on the cluster. Possible values include
-	// the following.
-	//
-	// * enabled - AQUA is enabled.
-	//
-	// * disabled - AQUA is not
-	// enabled.
-	//
-	// * applying - AQUA status is being applied.
+	// This field is retired. Amazon Redshift automatically determines whether to use
+	// AQUA (Advanced Query Accelerator).
 	AquaStatus AquaStatus
 
 	noSmithyDocumentSerde
@@ -104,7 +90,8 @@ type Cluster struct {
 	// applied automatically to the cluster during the maintenance window.
 	AllowVersionUpgrade bool
 
-	// The AQUA (Advanced Query Accelerator) configuration of the cluster.
+	// This field is retired. Amazon Redshift automatically determines whether to use
+	// AQUA (Advanced Query Accelerator).
 	AquaConfiguration *AquaConfiguration
 
 	// The number of days that automatic cluster snapshots are retained.

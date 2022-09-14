@@ -27,7 +27,6 @@ func (c *Client) UpdateRevision(ctx context.Context, params *UpdateRevisionInput
 	return out, nil
 }
 
-// The request body for UpdateRevision.
 type UpdateRevisionInput struct {
 
 	// The unique identifier for a data set.

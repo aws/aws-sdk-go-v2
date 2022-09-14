@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves membership metadata and attributes from MembershipId in a group.
+// Retrieves membership metadata and attributes from MembershipId in an identity
+// store.
 func (c *Client) DescribeGroupMembership(ctx context.Context, params *DescribeGroupMembershipInput, optFns ...func(*Options)) (*DescribeGroupMembershipOutput, error) {
 	if params == nil {
 		params = &DescribeGroupMembershipInput{}
@@ -34,7 +35,7 @@ type DescribeGroupMembershipInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// The identifier for a GroupMembership in the identity store.
+	// The identifier for a GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string
@@ -59,7 +60,7 @@ type DescribeGroupMembershipOutput struct {
 	// This member is required.
 	MemberId types.MemberId
 
-	// The identifier for a GroupMembership in the identity store.
+	// The identifier for a GroupMembership in an identity store.
 	//
 	// This member is required.
 	MembershipId *string

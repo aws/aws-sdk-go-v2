@@ -1,0 +1,8 @@
+{
+    "id": "7f53bac3-4fa5-4ac5-96a7-809b3bf1e23a",
+    "type": "feature",
+    "description": "EMR on EKS now allows running Spark SQL using the newly introduced Spark SQL Job Driver in the Start Job Run API",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

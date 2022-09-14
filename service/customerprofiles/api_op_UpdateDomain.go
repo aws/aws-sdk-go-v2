@@ -21,7 +21,10 @@ import (
 // set Matching to true. To prevent cross-service impersonation when you call this
 // API, see Cross-service confused deputy prevention
 // (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html)
-// for sample policies that you should apply.
+// for sample policies that you should apply. To add or remove tags on an existing
+// Domain, see TagResource
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)/UntagResource
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html).
 func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, optFns ...func(*Options)) (*UpdateDomainOutput, error) {
 	if params == nil {
 		params = &UpdateDomainInput{}

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns if a member exists in specified groups.
+// Checks the user's membership in all requested groups and returns if the member
+// exists in all queried groups.
 func (c *Client) IsMemberInGroups(ctx context.Context, params *IsMemberInGroupsInput, optFns ...func(*Options)) (*IsMemberInGroupsOutput, error) {
 	if params == nil {
 		params = &IsMemberInGroupsInput{}
@@ -49,7 +50,7 @@ type IsMemberInGroupsInput struct {
 
 type IsMemberInGroupsOutput struct {
 
-	// An object containing results of batch IsMemberInGroups call.
+	// A list containing the results of membership existence checks.
 	//
 	// This member is required.
 	Results []types.GroupMembershipExistenceResult

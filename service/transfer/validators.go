@@ -230,6 +230,26 @@ func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteHostKey struct {
+}
+
+func (*validateOpDeleteHostKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHostKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHostKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHostKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteProfile struct {
 }
 
@@ -430,6 +450,26 @@ func (m *validateOpDescribeExecution) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeHostKey struct {
+}
+
+func (*validateOpDescribeHostKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeHostKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeHostKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeHostKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeProfile struct {
 }
 
@@ -550,6 +590,26 @@ func (m *validateOpImportCertificate) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportHostKey struct {
+}
+
+func (*validateOpImportHostKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportHostKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportHostKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportHostKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportSshPublicKey struct {
 }
 
@@ -625,6 +685,26 @@ func (m *validateOpListExecutions) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHostKeys struct {
+}
+
+func (*validateOpListHostKeys) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHostKeys) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHostKeysInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHostKeysInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +970,26 @@ func (m *validateOpUpdateConnector) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHostKey struct {
+}
+
+func (*validateOpUpdateHostKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHostKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHostKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHostKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProfile struct {
 }
 
@@ -994,6 +1094,10 @@ func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
 }
 
+func addOpDeleteHostKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHostKey{}, middleware.After)
+}
+
 func addOpDeleteProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProfile{}, middleware.After)
 }
@@ -1034,6 +1138,10 @@ func addOpDescribeExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeExecution{}, middleware.After)
 }
 
+func addOpDescribeHostKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeHostKey{}, middleware.After)
+}
+
 func addOpDescribeProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProfile{}, middleware.After)
 }
@@ -1058,6 +1166,10 @@ func addOpImportCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportCertificate{}, middleware.After)
 }
 
+func addOpImportHostKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportHostKey{}, middleware.After)
+}
+
 func addOpImportSshPublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportSshPublicKey{}, middleware.After)
 }
@@ -1072,6 +1184,10 @@ func addOpListAgreementsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListExecutions{}, middleware.After)
+}
+
+func addOpListHostKeysValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHostKeys{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1124,6 +1240,10 @@ func addOpUpdateCertificateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnector{}, middleware.After)
+}
+
+func addOpUpdateHostKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHostKey{}, middleware.After)
 }
 
 func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1631,6 +1751,24 @@ func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
 	}
 }
 
+func validateOpDeleteHostKeyInput(v *DeleteHostKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHostKeyInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.HostKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteProfileInput(v *DeleteProfileInput) error {
 	if v == nil {
 		return nil
@@ -1799,6 +1937,24 @@ func validateOpDescribeExecutionInput(v *DescribeExecutionInput) error {
 	}
 }
 
+func validateOpDescribeHostKeyInput(v *DescribeHostKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeHostKeyInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.HostKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeProfileInput(v *DescribeProfileInput) error {
 	if v == nil {
 		return nil
@@ -1900,6 +2056,29 @@ func validateOpImportCertificateInput(v *ImportCertificateInput) error {
 	}
 }
 
+func validateOpImportHostKeyInput(v *ImportHostKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportHostKeyInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.HostKeyBody == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostKeyBody"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportSshPublicKeyInput(v *ImportSshPublicKeyInput) error {
 	if v == nil {
 		return nil
@@ -1958,6 +2137,21 @@ func validateOpListExecutionsInput(v *ListExecutionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListExecutionsInput"}
 	if v.WorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHostKeysInput(v *ListHostKeysInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHostKeysInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2194,6 +2388,27 @@ func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorInput"}
 	if v.ConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHostKeyInput(v *UpdateHostKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHostKeyInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.HostKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostKeyId"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

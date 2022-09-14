@@ -1453,6 +1453,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html\">tags</a> to apply to the dataset.</p>"
                     }
+                },
+                "DimensionFilterList": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricSetDimensionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filters that specify which data is kept for anomaly detection.</p>"
+                    }
                 }
             }
         },
@@ -2186,6 +2192,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the dataset's source data.</p>"
                     }
+                },
+                "DimensionFilterList": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricSetDimensionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions and their values that were used to filter the dataset.</p>"
+                    }
                 }
             }
         },
@@ -2623,6 +2635,48 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a source file's formatting.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#Filter": {
+            "type": "structure",
+            "members": {
+                "DimensionValue": {
+                    "target": "com.amazonaws.lookoutmetrics#DimensionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that you want to include in the filter.</p>"
+                    }
+                },
+                "FilterOperation": {
+                    "target": "com.amazonaws.lookoutmetrics#FilterOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition to apply.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter for choosing a subset of dimension values. Each filter consists of the dimension that you want to include and the condition statement. The condition statement is specified in the <code>FilterOperation</code> object.</p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#FilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.lookoutmetrics#FilterOperation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    }
+                ]
             }
         },
         "com.amazonaws.lookoutmetrics#FlowName": {
@@ -3973,6 +4027,32 @@
                 "smithy.api#pattern": "\\S"
             }
         },
+        "com.amazonaws.lookoutmetrics#MetricSetDimensionFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lookoutmetrics#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension that you want to filter on.</p>"
+                    }
+                },
+                "FilterList": {
+                    "target": "com.amazonaws.lookoutmetrics#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of filters that you are applying.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a list of filters for choosing a subset of dimension values. Each filter consists of the dimension and one of its values that you want to include. When multiple dimensions or values are specified, the dimensions are joined with an AND operation and the values are joined with an OR operation. </p>"
+            }
+        },
+        "com.amazonaws.lookoutmetrics#MetricSetDimensionFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutmetrics#MetricSetDimensionFilter"
+            }
+        },
         "com.amazonaws.lookoutmetrics#MetricSetName": {
             "type": "string",
             "traits": {
@@ -5224,6 +5304,12 @@
                 },
                 "MetricSource": {
                     "target": "com.amazonaws.lookoutmetrics#MetricSource"
+                },
+                "DimensionFilterList": {
+                    "target": "com.amazonaws.lookoutmetrics#MetricSetDimensionFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes a list of filters for choosing specific dimensions and specific values. Each\n      filter consists of the dimension and one of its values that you want to include. When\n      multiple dimensions or values are specified, the dimensions are joined with an AND operation\n      and the values are joined with an OR operation.</p>"
+                    }
                 }
             }
         },

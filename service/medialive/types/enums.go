@@ -967,6 +967,78 @@ func (DvbSubOcrLanguage) Values() []DvbSubOcrLanguage {
 	}
 }
 
+type Eac3AtmosCodingMode string
+
+// Enum values for Eac3AtmosCodingMode
+const (
+	Eac3AtmosCodingModeCodingMode514 Eac3AtmosCodingMode = "CODING_MODE_5_1_4"
+	Eac3AtmosCodingModeCodingMode714 Eac3AtmosCodingMode = "CODING_MODE_7_1_4"
+	Eac3AtmosCodingModeCodingMode916 Eac3AtmosCodingMode = "CODING_MODE_9_1_6"
+)
+
+// Values returns all known values for Eac3AtmosCodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosCodingMode) Values() []Eac3AtmosCodingMode {
+	return []Eac3AtmosCodingMode{
+		"CODING_MODE_5_1_4",
+		"CODING_MODE_7_1_4",
+		"CODING_MODE_9_1_6",
+	}
+}
+
+type Eac3AtmosDrcLine string
+
+// Enum values for Eac3AtmosDrcLine
+const (
+	Eac3AtmosDrcLineFilmLight     Eac3AtmosDrcLine = "FILM_LIGHT"
+	Eac3AtmosDrcLineFilmStandard  Eac3AtmosDrcLine = "FILM_STANDARD"
+	Eac3AtmosDrcLineMusicLight    Eac3AtmosDrcLine = "MUSIC_LIGHT"
+	Eac3AtmosDrcLineMusicStandard Eac3AtmosDrcLine = "MUSIC_STANDARD"
+	Eac3AtmosDrcLineNone          Eac3AtmosDrcLine = "NONE"
+	Eac3AtmosDrcLineSpeech        Eac3AtmosDrcLine = "SPEECH"
+)
+
+// Values returns all known values for Eac3AtmosDrcLine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosDrcLine) Values() []Eac3AtmosDrcLine {
+	return []Eac3AtmosDrcLine{
+		"FILM_LIGHT",
+		"FILM_STANDARD",
+		"MUSIC_LIGHT",
+		"MUSIC_STANDARD",
+		"NONE",
+		"SPEECH",
+	}
+}
+
+type Eac3AtmosDrcRf string
+
+// Enum values for Eac3AtmosDrcRf
+const (
+	Eac3AtmosDrcRfFilmLight     Eac3AtmosDrcRf = "FILM_LIGHT"
+	Eac3AtmosDrcRfFilmStandard  Eac3AtmosDrcRf = "FILM_STANDARD"
+	Eac3AtmosDrcRfMusicLight    Eac3AtmosDrcRf = "MUSIC_LIGHT"
+	Eac3AtmosDrcRfMusicStandard Eac3AtmosDrcRf = "MUSIC_STANDARD"
+	Eac3AtmosDrcRfNone          Eac3AtmosDrcRf = "NONE"
+	Eac3AtmosDrcRfSpeech        Eac3AtmosDrcRf = "SPEECH"
+)
+
+// Values returns all known values for Eac3AtmosDrcRf. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Eac3AtmosDrcRf) Values() []Eac3AtmosDrcRf {
+	return []Eac3AtmosDrcRf{
+		"FILM_LIGHT",
+		"FILM_STANDARD",
+		"MUSIC_LIGHT",
+		"MUSIC_STANDARD",
+		"NONE",
+		"SPEECH",
+	}
+}
+
 type Eac3AttenuationControl string
 
 // Enum values for Eac3AttenuationControl

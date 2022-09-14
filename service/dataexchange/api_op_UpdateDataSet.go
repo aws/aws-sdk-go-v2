@@ -28,7 +28,6 @@ func (c *Client) UpdateDataSet(ctx context.Context, params *UpdateDataSetInput, 
 	return out, nil
 }
 
-// The request body for UpdateDataSet.
 type UpdateDataSetInput struct {
 
 	// The unique identifier for a data set.

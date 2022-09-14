@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Defines a ProfileObjectType.
+// Defines a ProfileObjectType. To add or remove tags on an existing ObjectType,
+// see  TagResource
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)/UntagResource
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html).
 func (c *Client) PutProfileObjectType(ctx context.Context, params *PutProfileObjectTypeInput, optFns ...func(*Options)) (*PutProfileObjectTypeOutput, error) {
 	if params == nil {
 		params = &PutProfileObjectTypeInput{}

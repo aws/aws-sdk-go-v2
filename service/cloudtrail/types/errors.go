@@ -7,6 +7,45 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The specified channel ARN is not valid or does not map to a channel in your
+// account.
+type ChannelARNInvalidException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelARNInvalidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelARNInvalidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelARNInvalidException) ErrorCode() string             { return "ChannelARNInvalidException" }
+func (e *ChannelARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified channel was not found.
+type ChannelNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ChannelNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ChannelNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ChannelNotFoundException) ErrorCode() string             { return "ChannelNotFoundException" }
+func (e *ChannelNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This exception is thrown when trusted access has not been enabled between
 // CloudTrail and Organizations. For more information, see Enabling Trusted Access
 // with Other Amazon Web Services Services

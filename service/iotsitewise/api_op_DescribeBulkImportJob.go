@@ -13,10 +13,8 @@ import (
 	"time"
 )
 
-// This API operation is in preview release for IoT SiteWise and is subject to
-// change. We recommend that you use this operation only with test data, and not in
-// production environments. Retrieves information about a bulk import job request.
-// For more information, see Describe a bulk import job (CLI)
+// Retrieves information about a bulk import job request. For more information, see
+// Describe a bulk import job (CLI)
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html)
 // in the Amazon Simple Storage Service User Guide.
 func (c *Client) DescribeBulkImportJob(ctx context.Context, params *DescribeBulkImportJobInput, optFns ...func(*Options)) (*DescribeBulkImportJobOutput, error) {

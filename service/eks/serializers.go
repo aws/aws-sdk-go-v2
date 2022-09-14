@@ -396,6 +396,13 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.OutpostConfig != nil {
+		ok := object.Key("outpostConfig")
+		if err := awsRestjson1_serializeDocumentOutpostConfigRequest(v.OutpostConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourcesVpcConfig != nil {
 		ok := object.Key("resourcesVpcConfig")
 		if err := awsRestjson1_serializeDocumentVpcConfigRequest(v.ResourcesVpcConfig, ok); err != nil {
@@ -3126,6 +3133,25 @@ func awsRestjson1_serializeDocumentOidcIdentityProviderConfigRequest(v *types.Oi
 	if v.UsernamePrefix != nil {
 		ok := object.Key("usernamePrefix")
 		ok.String(*v.UsernamePrefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutpostConfigRequest(v *types.OutpostConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ControlPlaneInstanceType != nil {
+		ok := object.Key("controlPlaneInstanceType")
+		ok.String(*v.ControlPlaneInstanceType)
+	}
+
+	if v.OutpostArns != nil {
+		ok := object.Key("outpostArns")
+		if err := awsRestjson1_serializeDocumentStringList(v.OutpostArns, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -30932,6 +30932,15 @@ func awsAwsjson11_deserializeDocumentAutoMLJobConfig(v **types.AutoMLJobConfig, 
 				return err
 			}
 
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.AutoMLMode(jtv)
+			}
+
 		case "SecurityConfig":
 			if err := awsAwsjson11_deserializeDocumentAutoMLSecurityConfig(&sv.SecurityConfig, value); err != nil {
 				return err
@@ -41267,6 +41276,166 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobObjectives(v *[]type
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTuningJobSearchEntity(v **types.HyperParameterTuningJobSearchEntity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperParameterTuningJobSearchEntity
+	if *v == nil {
+		sv = &types.HyperParameterTuningJobSearchEntity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BestTrainingJob":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTrainingJobSummary(&sv.BestTrainingJob, value); err != nil {
+				return err
+			}
+
+		case "CreationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "HyperParameterTuningEndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.HyperParameterTuningEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "HyperParameterTuningJobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HyperParameterTuningJobArn to be of type string, got %T instead", value)
+				}
+				sv.HyperParameterTuningJobArn = ptr.String(jtv)
+			}
+
+		case "HyperParameterTuningJobConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobConfig(&sv.HyperParameterTuningJobConfig, value); err != nil {
+				return err
+			}
+
+		case "HyperParameterTuningJobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HyperParameterTuningJobName to be of type string, got %T instead", value)
+				}
+				sv.HyperParameterTuningJobName = ptr.String(jtv)
+			}
+
+		case "HyperParameterTuningJobStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HyperParameterTuningJobStatus to be of type string, got %T instead", value)
+				}
+				sv.HyperParameterTuningJobStatus = types.HyperParameterTuningJobStatus(jtv)
+			}
+
+		case "LastModifiedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "ObjectiveStatusCounters":
+			if err := awsAwsjson11_deserializeDocumentObjectiveStatusCounters(&sv.ObjectiveStatusCounters, value); err != nil {
+				return err
+			}
+
+		case "OverallBestTrainingJob":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTrainingJobSummary(&sv.OverallBestTrainingJob, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "TrainingJobDefinition":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(&sv.TrainingJobDefinition, value); err != nil {
+				return err
+			}
+
+		case "TrainingJobDefinitions":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinitions(&sv.TrainingJobDefinitions, value); err != nil {
+				return err
+			}
+
+		case "TrainingJobStatusCounters":
+			if err := awsAwsjson11_deserializeDocumentTrainingJobStatusCounters(&sv.TrainingJobStatusCounters, value); err != nil {
+				return err
+			}
+
+		case "WarmStartConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobWarmStartConfig(&sv.WarmStartConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -52394,6 +52563,19 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				sv.AcceleratorType = types.ProductionVariantAcceleratorType(jtv)
 			}
 
+		case "ContainerStartupHealthCheckTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantContainerStartupHealthCheckTimeoutInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ContainerStartupHealthCheckTimeoutInSeconds = ptr.Int32(int32(i64))
+			}
+
 		case "CoreDumpConfig":
 			if err := awsAwsjson11_deserializeDocumentProductionVariantCoreDumpConfig(&sv.CoreDumpConfig, value); err != nil {
 				return err
@@ -52455,6 +52637,19 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
 			}
 
+		case "ModelDataDownloadTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantModelDataDownloadTimeoutInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ModelDataDownloadTimeoutInSeconds = ptr.Int32(int32(i64))
+			}
+
 		case "ModelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -52476,6 +52671,19 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 					return fmt.Errorf("expected VariantName to be of type string, got %T instead", value)
 				}
 				sv.VariantName = ptr.String(jtv)
+			}
+
+		case "VolumeSizeInGB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantVolumeSizeInGB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VolumeSizeInGB = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -55537,6 +55745,11 @@ func awsAwsjson11_deserializeDocumentSearchRecord(v **types.SearchRecord, value 
 
 		case "FeatureMetadata":
 			if err := awsAwsjson11_deserializeDocumentFeatureMetadata(&sv.FeatureMetadata, value); err != nil {
+				return err
+			}
+
+		case "HyperParameterTuningJob":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobSearchEntity(&sv.HyperParameterTuningJob, value); err != nil {
 				return err
 			}
 

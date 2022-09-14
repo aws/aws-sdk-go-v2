@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Filtering for a group by the group DisplayName attribute is deprecated. Instead,
-// use the GetGroupId API action. Lists all groups in the identity store. Returns a
-// paginated list of complete Group objects.
+// Lists the attribute name and value of the group that you specified in the
+// search. We only support DisplayName as a valid filter attribute path currently,
+// and filter is required. This API returns minimum attributes, including GroupId
+// and group DisplayName in the response.
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
 		params = &ListGroupsInput{}
@@ -40,7 +41,8 @@ type ListGroupsInput struct {
 	// This member is required.
 	IdentityStoreId *string
 
-	// A list of Filter objects that is used in the ListUsers and ListGroups requests.
+	// A list of Filter objects, which is used in the ListUsers and ListGroups
+	// requests.
 	//
 	// Deprecated: Using filters with ListGroups API is deprecated, please use
 	// GetGroupId API instead.

@@ -27,7 +27,6 @@ func (c *Client) RevokeRevision(ctx context.Context, params *RevokeRevisionInput
 	return out, nil
 }
 
-// The request body for RevokeRevision.
 type RevokeRevisionInput struct {
 
 	// The unique identifier for a data set.

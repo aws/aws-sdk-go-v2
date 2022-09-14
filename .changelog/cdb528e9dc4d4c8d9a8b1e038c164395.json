@@ -1,0 +1,8 @@
+{
+    "id": "cdb528e9-dc4d-4c8d-9a8b-1e038c164395",
+    "type": "feature",
+    "description": "Release dimension value filtering feature to allow customers to define dimension filters for including only a subset of their dataset to be used by LookoutMetrics.",
+    "modules": [
+        "service/lookoutmetrics"
+    ]
+}

@@ -95,12 +95,21 @@ type CreateClusterInput struct {
 	// CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
 	Logging *types.Logging
 
+	// An object representing the configuration of your local Amazon EKS cluster on an
+	// Amazon Web Services Outpost. Before creating a local cluster on an Outpost,
+	// review Creating an Amazon EKS cluster on an Amazon Web Services Outpost
+	// (https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html)
+	// in the Amazon EKS User Guide. This object isn't available for creating Amazon
+	// EKS clusters on the Amazon Web Services cloud.
+	OutpostConfig *types.OutpostConfigRequest
+
 	// The metadata to apply to the cluster to assist with categorization and
 	// organization. Each tag consists of a key and an optional value. You define both.
 	Tags map[string]string
 
 	// The desired Kubernetes version for your cluster. If you don't specify a value
-	// here, the latest version available in Amazon EKS is used.
+	// here, the default version available in Amazon EKS is used. The default version
+	// might not be the latest version available.
 	Version *string
 
 	noSmithyDocumentSerde

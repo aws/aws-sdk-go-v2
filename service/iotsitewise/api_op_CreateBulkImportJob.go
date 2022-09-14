@@ -12,10 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API operation is in preview release for IoT SiteWise and is subject to
-// change. We recommend that you use this operation only with test data, and not in
-// production environments. Defines a job to ingest data to IoT SiteWise from
-// Amazon S3. For more information, see Create a bulk import job (CLI)
+// Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
+// information, see Create a bulk import job (CLI)
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html)
 // in the Amazon Simple Storage Service User Guide. You must enable IoT SiteWise to
 // export data to Amazon S3 before you create a bulk import job. For more

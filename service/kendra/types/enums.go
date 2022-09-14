@@ -1114,6 +1114,7 @@ const (
 	SharePointVersionSharepoint2013   SharePointVersion = "SHAREPOINT_2013"
 	SharePointVersionSharepoint2016   SharePointVersion = "SHAREPOINT_2016"
 	SharePointVersionSharepointOnline SharePointVersion = "SHAREPOINT_ONLINE"
+	SharePointVersionSharepoint2019   SharePointVersion = "SHAREPOINT_2019"
 )
 
 // Values returns all known values for SharePointVersion. Note that this can be
@@ -1124,6 +1125,7 @@ func (SharePointVersion) Values() []SharePointVersion {
 		"SHAREPOINT_2013",
 		"SHAREPOINT_2016",
 		"SHAREPOINT_ONLINE",
+		"SHAREPOINT_2019",
 	}
 }
 

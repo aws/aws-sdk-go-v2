@@ -62,7 +62,7 @@ type CreateManagedEndpointInput struct {
 	// This member is required.
 	VirtualClusterId *string
 
-	// The certificate ARN provided by users for the managed endpoint. This fiedd is
+	// The certificate ARN provided by users for the managed endpoint. This field is
 	// under deprecation and will be removed in future releases.
 	//
 	// Deprecated: Customer provided certificate-arn is deprecated and would be removed

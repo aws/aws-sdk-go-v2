@@ -2300,12 +2300,12 @@ type InstanceInformationFilter struct {
 // The filters to describe or get information about your managed nodes.
 type InstanceInformationStringFilter struct {
 
-	// The filter key name to describe your managed nodes. For example:
-	// "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag
-	// Key" Tag key isn't a valid filter. You must specify either tag-key or
-	// tag:keyname and a string. Here are some valid examples: tag-key, tag:123,
-	// tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:,
-	// tagKey, abc:keyname.
+	// The filter key name to describe your managed nodes. For example: "InstanceIds" |
+	// "AgentVersion" | "PingStatus" | "PlatformTypes" | "ActivationIds" | "IamRole" |
+	// "ResourceType" | "AssociationStatus" | "tag-key" | "tag:{keyname}Tag Key isn't a
+	// valid filter. You must specify either tag-key or tag:{keyname} and a string.
+	// Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are
+	// some invalid examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname.
 	//
 	// This member is required.
 	Key *string

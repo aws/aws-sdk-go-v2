@@ -6168,7 +6168,7 @@ func awsRestjson1_deserializeDocumentDataReplicationInfo(v **types.DataReplicati
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ISO8601DatetimeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ISO8601DurationString to be of type string, got %T instead", value)
 				}
 				sv.LagDuration = ptr.String(jtv)
 			}
@@ -7136,7 +7136,7 @@ func awsRestjson1_deserializeDocumentLifeCycle(v **types.LifeCycle, value interf
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ISO8601DatetimeString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ISO8601DurationString to be of type string, got %T instead", value)
 				}
 				sv.ElapsedReplicationDuration = ptr.String(jtv)
 			}

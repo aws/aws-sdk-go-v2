@@ -56,6 +56,9 @@ type CreateSlotTypeInput struct {
 	// This member is required.
 	SlotTypeName *string
 
+	// Specifications for a composite slot type.
+	CompositeSlotTypeSetting *types.CompositeSlotTypeSetting
+
 	// A description of the slot type. Use the description to help identify the slot
 	// type in lists.
 	Description *string
@@ -98,6 +101,9 @@ type CreateSlotTypeOutput struct {
 
 	// The version of the bot associated with the slot type.
 	BotVersion *string
+
+	// Specifications for a composite slot type.
+	CompositeSlotTypeSetting *types.CompositeSlotTypeSetting
 
 	// A timestamp of the date and time that the slot type was created.
 	CreationDateTime *time.Time
