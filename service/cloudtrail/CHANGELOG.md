@@ -1,3 +1,8 @@
+# v1.17.0 (2022-09-14)
+
+* **Feature**: This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.12 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

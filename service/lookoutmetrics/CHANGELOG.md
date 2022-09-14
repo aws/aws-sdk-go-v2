@@ -1,3 +1,9 @@
+# v1.18.0 (2022-09-14)
+
+* **Feature**: Fixed a bug in the API client generation which caused some operation parameters to be incorrectly generated as value types instead of pointer types. The service API always required these affected parameters to be nilable. This fixes the SDK client to match the expectations of the the service API.
+* **Feature**: Release dimension value filtering feature to allow customers to define dimension filters for including only a subset of their dataset to be used by LookoutMetrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.3 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

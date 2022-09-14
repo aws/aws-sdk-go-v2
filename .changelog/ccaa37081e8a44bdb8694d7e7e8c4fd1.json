@@ -1,8 +1,0 @@
-{
-    "id": "ccaa3708-1e8a-44bd-b869-4d7e7e8c4fd1",
-    "type": "feature",
-    "description": "Fixed the data type of lagDuration that is returned in Describe Source Server API",
-    "modules": [
-        "service/drs"
-    ]
-}

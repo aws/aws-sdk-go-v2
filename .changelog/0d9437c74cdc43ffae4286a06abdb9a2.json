@@ -1,8 +1,0 @@
-{
-    "id": "0d9437c7-4cdc-43ff-ae42-86a06abdb9a2",
-    "type": "feature",
-    "description": "SageMaker Hosting now allows customization on ML instance storage volume size, model data download timeout and inference container startup ping health check timeout for each ProductionVariant in CreateEndpointConfig API.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

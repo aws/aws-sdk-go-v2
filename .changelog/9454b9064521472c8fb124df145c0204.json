@@ -1,8 +1,0 @@
-{
-    "id": "9454b906-4521-472c-8fb1-24df145c0204",
-    "type": "feature",
-    "description": "Added isUnstructured in response for Customer Profiles Integration APIs",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

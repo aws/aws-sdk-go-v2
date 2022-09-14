@@ -1,8 +1,0 @@
-{
-    "id": "7e20ccc8-023f-4386-9884-f0423faf96b1",
-    "type": "feature",
-    "description": "Allow specifying units in Asset Properties",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

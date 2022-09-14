@@ -1,3 +1,8 @@
+# v1.23.0 (2022-09-14)
+
+* **Feature**: This change exposes API settings which allow Dolby Atmos and Dolby Vision to be used when running a channel using Elemental Media Live
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.7 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

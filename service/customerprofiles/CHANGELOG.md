@@ -1,3 +1,9 @@
+# v1.19.0 (2022-09-14)
+
+* **Feature**: Added isUnstructured in response for Customer Profiles Integration APIs
+* **Feature**: Fixed a bug in the API client generation which caused some operation parameters to be incorrectly generated as value types instead of pointer types. The service API always required these affected parameters to be nilable. This fixes the SDK client to match the expectations of the the service API.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.8 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

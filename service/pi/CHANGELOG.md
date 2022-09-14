@@ -1,3 +1,8 @@
+# v1.15.0 (2022-09-14)
+
+* **Feature**: Increases the maximum values of two RDS Performance Insights APIs. The maximum value of the Limit parameter of DimensionGroup is 25. The MaxResult maximum is now 25 for the following APIs: DescribeDimensionKeys, GetResourceMetrics, ListAvailableResourceDimensions, and ListAvailableResourceMetrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.18 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

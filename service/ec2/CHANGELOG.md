@@ -1,3 +1,11 @@
+# v1.55.0 (2022-09-14)
+
+* **Feature**: Documentation updates for Amazon EC2.
+* **Feature**: This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type
+* **Feature**: This update introduces API operations to manage and create local gateway route tables, CoIP pools, and VIF group associations.
+* **Feature**: Two new features for local gateway route tables: support for static routes targeting Elastic Network Interfaces and direct VPC routing.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.4 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "88086a9f-c60d-49cc-b435-c2240d8badaa",
-    "type": "feature",
-    "description": "This release adds support to send VPC Flow Logs to kinesis-data-firehose as new destination type",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,9 @@
+# v1.9.0 (2022-09-14)
+
+* **Feature**: Fixed a bug in the API client generation which caused some operation parameters to be incorrectly generated as value types instead of pointer types. The service API always required these affected parameters to be nilable. This fixes the SDK client to match the expectations of the the service API.
+* **Feature**: This release adds support for the client-side evaluation - powered by AWS AppConfig feature.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.7 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

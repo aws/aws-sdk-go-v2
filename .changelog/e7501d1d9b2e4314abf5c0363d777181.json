@@ -1,8 +1,0 @@
-{
-    "id": "e7501d1d-9b2e-4314-abf5-c0363d777181",
-    "type": "feature",
-    "description": "This release adds support for the client-side evaluation - powered by AWS AppConfig feature.",
-    "modules": [
-        "service/evidently"
-    ]
-}

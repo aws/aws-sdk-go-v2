@@ -1,3 +1,8 @@
+# v1.2.0 (2022-09-14)
+
+* **Feature**: Updated `BuildAuthToken` to validate the provided endpoint contains a port.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.31 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

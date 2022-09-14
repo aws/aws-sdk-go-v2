@@ -1,8 +1,0 @@
-{
-    "id": "9eb9410c-5e30-402d-8d24-0ad5d4a2a671",
-    "type": "feature",
-    "description": "Documentation updates for AWS Data Exchange.",
-    "modules": [
-        "service/dataexchange"
-    ]
-}

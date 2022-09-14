@@ -1,8 +1,0 @@
-{
-    "id": "aaba2642-a8f6-4293-a3ad-7dd5bc0e9ef7",
-    "type": "feature",
-    "description": "Updated `BuildAuthToken` to validate the provided endpoint contains a port.",
-    "modules": [
-        "feature/rds/auth"
-    ]
-}

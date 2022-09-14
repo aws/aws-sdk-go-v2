@@ -1,3 +1,11 @@
+# v1.42.0 (2022-09-14)
+
+* **Feature**: Fixed a bug in the API client generation which caused some operation parameters to be incorrectly generated as value types instead of pointer types. The service API always required these affected parameters to be nilable. This fixes the SDK client to match the expectations of the the service API.
+* **Feature**: SageMaker Hosting now allows customization on ML instance storage volume size, model data download timeout and inference container startup ping health check timeout for each ProductionVariant in CreateEndpointConfig API.
+* **Feature**: This release adds HyperParameterTuningJob type in Search API.
+* **Feature**: This release adds Mode to AutoMLJobConfig.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2022-09-02)
 
 * **Feature**: This release enables administrators to attribute user activity and API calls from Studio notebooks, Data Wrangler and Canvas to specific users even when users share the same execution IAM role.  ExecutionRoleIdentityConfig at Sagemaker domain level enables this feature.

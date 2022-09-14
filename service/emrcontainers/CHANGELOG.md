@@ -1,3 +1,8 @@
+# v1.14.0 (2022-09-14)
+
+* **Feature**: EMR on EKS now allows running Spark SQL using the newly introduced Spark SQL Job Driver in the Start Job Run API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.16 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

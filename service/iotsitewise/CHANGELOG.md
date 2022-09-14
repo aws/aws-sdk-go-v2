@@ -1,3 +1,8 @@
+# v1.25.0 (2022-09-14)
+
+* **Feature**: Allow specifying units in Asset Properties
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.3 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

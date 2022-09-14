@@ -1,3 +1,8 @@
+# v1.18.0 (2022-09-14)
+
+* **Feature**: Amazon SNS introduces the Data Protection Policy APIs, which enable customers to attach a data protection policy to an SNS topic. This allows topic owners to enable the new message data protection feature to audit and block sensitive data that is exchanged through their topics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.17 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

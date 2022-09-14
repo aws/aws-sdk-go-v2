@@ -1,3 +1,8 @@
+# v1.16.0 (2022-09-14)
+
+* **Feature**: Documentation updates for AWS Data Exchange.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.15 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

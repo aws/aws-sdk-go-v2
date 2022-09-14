@@ -1,3 +1,9 @@
+# v1.22.0 (2022-09-14)
+
+* **Feature**: Adding support for local Amazon EKS clusters on Outposts
+* **Feature**: Adds support for EKS Addons ResolveConflicts "preserve" flag. Also adds new update failed status for EKS Addons.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.11 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

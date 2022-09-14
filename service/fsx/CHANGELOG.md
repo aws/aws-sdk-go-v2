@@ -1,3 +1,8 @@
+# v1.24.12 (2022-09-14)
+
+* **Documentation**: Documentation update for Amazon FSx.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.11 (2022-09-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

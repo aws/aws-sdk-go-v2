@@ -1,8 +1,0 @@
-{
-    "id": "b1f031c6-e950-470b-a8f0-d8422bd61449",
-    "type": "feature",
-    "description": "This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

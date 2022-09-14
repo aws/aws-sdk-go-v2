@@ -1,8 +1,0 @@
-{
-    "id": "e4ca4763-b740-4ad2-bcf8-34a5c04e684e",
-    "type": "feature",
-    "description": "This release adds support for Systems Manager State Manager Association tagging.",
-    "modules": [
-        "service/ssm"
-    ]
-}

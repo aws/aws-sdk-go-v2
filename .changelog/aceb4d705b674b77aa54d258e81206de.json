@@ -1,8 +1,0 @@
-{
-    "id": "aceb4d70-5b67-4b77-aa54-d258e81206de",
-    "type": "feature",
-    "description": "This release adds new fields like fixAvailable, fixedInVersion and remediation to the finding model. The requirement to have vulnerablePackages in the finding model has also been removed. The documentation has been updated to reflect these changes.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

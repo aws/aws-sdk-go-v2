@@ -1,8 +1,0 @@
-{
-    "id": "b031389c-3c96-4553-a084-be4f4ed6c41e",
-    "type": "feature",
-    "description": "Amplify Studio UIBuilder is introducing forms functionality. Forms can be configured from Data Store models, JSON, or from scratch. These forms can then be generated in your project and used like any other React components.",
-    "modules": [
-        "service/amplifyuibuilder"
-    ]
-}

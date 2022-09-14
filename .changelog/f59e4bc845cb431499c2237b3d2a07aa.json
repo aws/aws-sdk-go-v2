@@ -1,8 +1,0 @@
-{
-    "id": "f59e4bc8-45cb-4314-99c2-237b3d2a07aa",
-    "type": "feature",
-    "description": "This update introduces API operations to manage and create local gateway route tables, CoIP pools, and VIF group associations.",
-    "modules": [
-        "service/ec2"
-    ]
-}
