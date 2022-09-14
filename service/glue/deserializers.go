@@ -40785,7 +40785,7 @@ func awsAwsjson11_deserializeDocumentSchemaReference(v **types.SchemaReference, 
 				if err != nil {
 					return err
 				}
-				sv.SchemaVersionNumber = i64
+				sv.SchemaVersionNumber = ptr.Int64(i64)
 			}
 
 		default:

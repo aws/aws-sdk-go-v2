@@ -83,7 +83,7 @@ type GetSavingsPlansCoverageInput struct {
 
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
-	MaxResults int32
+	MaxResults *int32
 
 	// The measurement that you want your Savings Plans coverage reported in. The only
 	// valid value is SpendCoveredBySavingsPlans.
@@ -237,8 +237,8 @@ func NewGetSavingsPlansCoveragePaginator(client GetSavingsPlansCoverageAPIClient
 	}
 
 	options := GetSavingsPlansCoveragePaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -268,7 +268,11 @@ func (p *GetSavingsPlansCoveragePaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetSavingsPlansCoverage(ctx, &params, optFns...)
 	if err != nil {

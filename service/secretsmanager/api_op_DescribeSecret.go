@@ -109,7 +109,7 @@ type DescribeSecretOutput struct {
 
 	// Specifies whether automatic rotation is turned on for this secret. To turn on
 	// rotation, use RotateSecret. To turn off rotation, use CancelRotateSecret.
-	RotationEnabled bool
+	RotationEnabled *bool
 
 	// The ARN of the Lambda function that Secrets Manager invokes to rotate the
 	// secret.

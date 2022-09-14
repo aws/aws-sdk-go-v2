@@ -71,7 +71,7 @@ type UpdateExperimentInput struct {
 	// audience minus the audience that you have allocated to overrides or current
 	// launches of this feature. This is represented in thousandths of a percent. For
 	// example, specify 20,000 to allocate 20% of the available audience.
-	SamplingRate int64
+	SamplingRate *int64
 
 	// Adds an audience segment to an experiment. When a segment is used in an
 	// experiment, only user sessions that match the segment pattern are used in the

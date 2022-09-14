@@ -89,7 +89,7 @@ type GetReservationUtilizationInput struct {
 	// objects are available, in the response, Amazon Web Services provides a
 	// NextPageToken value that you can use in a subsequent call to get the next batch
 	// of objects.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum

@@ -871,12 +871,12 @@ type HoursOfOperationTimeSlice struct {
 	// The hours.
 	//
 	// This member is required.
-	Hours int32
+	Hours *int32
 
 	// The minutes.
 	//
 	// This member is required.
-	Minutes int32
+	Minutes *int32
 
 	noSmithyDocumentSerde
 }
@@ -1290,7 +1290,7 @@ type Queue struct {
 
 	// The maximum number of contacts that can be in the queue before it is considered
 	// full.
-	MaxContacts int32
+	MaxContacts *int32
 
 	// The name of the queue.
 	Name *string
@@ -1631,14 +1631,14 @@ type RoutingProfileQueueConfig struct {
 	// in the Amazon Connect Administrator Guide.
 	//
 	// This member is required.
-	Delay int32
+	Delay *int32
 
 	// The order in which contacts are to be handled for the queue. For more
 	// information, see Queues: priority and delay
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html).
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// Contains information about a queue resource.
 	//

@@ -47,7 +47,7 @@ type UpdateExtensionInput struct {
 	Parameters map[string]types.Parameter
 
 	// The extension version number.
-	VersionNumber int32
+	VersionNumber *int32
 
 	noSmithyDocumentSerde
 }

@@ -9079,7 +9079,7 @@ func awsRestxml_deserializeDocumentJobDescriptor(v **types.JobDescriptor, decode
 				if err != nil {
 					return fmt.Errorf("expected ConfirmationRequired to be of type *bool, got %T instead", val)
 				}
-				sv.ConfirmationRequired = xtv
+				sv.ConfirmationRequired = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("CreationTime", t.Name.Local):
@@ -9881,7 +9881,7 @@ func awsRestxml_deserializeDocumentJobManifestGeneratorFilter(v **types.JobManif
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EligibleForReplication = xtv
+				sv.EligibleForReplication = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ObjectReplicationStatuses", t.Name.Local):
@@ -10160,7 +10160,7 @@ func awsRestxml_deserializeDocumentJobProgressSummary(v **types.JobProgressSumma
 				if err != nil {
 					return err
 				}
-				sv.NumberOfTasksFailed = i64
+				sv.NumberOfTasksFailed = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("NumberOfTasksSucceeded", t.Name.Local):
@@ -10177,7 +10177,7 @@ func awsRestxml_deserializeDocumentJobProgressSummary(v **types.JobProgressSumma
 				if err != nil {
 					return err
 				}
-				sv.NumberOfTasksSucceeded = i64
+				sv.NumberOfTasksSucceeded = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("Timers", t.Name.Local):
@@ -10200,7 +10200,7 @@ func awsRestxml_deserializeDocumentJobProgressSummary(v **types.JobProgressSumma
 				if err != nil {
 					return err
 				}
-				sv.TotalNumberOfTasks = i64
+				sv.TotalNumberOfTasks = ptr.Int64(i64)
 			}
 
 		default:
@@ -10406,7 +10406,7 @@ func awsRestxml_deserializeDocumentJobTimers(v **types.JobTimers, decoder smithy
 				if err != nil {
 					return err
 				}
-				sv.ElapsedTimeInActiveSeconds = i64
+				sv.ElapsedTimeInActiveSeconds = ptr.Int64(i64)
 			}
 
 		default:
@@ -14234,7 +14234,7 @@ func awsRestxml_deserializeDocumentS3ObjectMetadata(v **types.S3ObjectMetadata, 
 				if err != nil {
 					return err
 				}
-				sv.ContentLength = i64
+				sv.ContentLength = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("ContentMD5", t.Name.Local):
@@ -14612,7 +14612,7 @@ func awsRestxml_deserializeDocumentS3SetObjectRetentionOperation(v **types.S3Set
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.BypassGovernanceRetention = xtv
+				sv.BypassGovernanceRetention = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Retention", t.Name.Local):

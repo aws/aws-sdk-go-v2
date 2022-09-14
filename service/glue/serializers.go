@@ -15446,9 +15446,9 @@ func awsAwsjson11_serializeDocumentSchemaReference(v *types.SchemaReference, val
 		ok.String(*v.SchemaVersionId)
 	}
 
-	if v.SchemaVersionNumber != 0 {
+	if v.SchemaVersionNumber != nil {
 		ok := object.Key("SchemaVersionNumber")
-		ok.Long(v.SchemaVersionNumber)
+		ok.Long(*v.SchemaVersionNumber)
 	}
 
 	return nil

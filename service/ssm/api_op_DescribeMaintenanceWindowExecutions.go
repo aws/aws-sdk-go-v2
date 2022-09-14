@@ -50,7 +50,7 @@ type DescribeMaintenanceWindowExecutionsInput struct {
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -175,8 +175,8 @@ func NewDescribeMaintenanceWindowExecutionsPaginator(client DescribeMaintenanceW
 	}
 
 	options := DescribeMaintenanceWindowExecutionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -206,7 +206,11 @@ func (p *DescribeMaintenanceWindowExecutionsPaginator) NextPage(ctx context.Cont
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeMaintenanceWindowExecutions(ctx, &params, optFns...)
 	if err != nil {

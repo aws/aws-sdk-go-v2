@@ -58,7 +58,7 @@ type GetPatchBaselineOutput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the managed nodes. The default value is false. Applies
 	// to Linux managed nodes only.
-	ApprovedPatchesEnableNonSecurity bool
+	ApprovedPatchesEnableNonSecurity *bool
 
 	// The ID of the retrieved patch baseline.
 	BaselineId *string

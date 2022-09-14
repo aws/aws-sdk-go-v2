@@ -53,7 +53,7 @@ type UpdatePatchBaselineInput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the managed nodes. The default value is false. Applies
 	// to Linux managed nodes only.
-	ApprovedPatchesEnableNonSecurity bool
+	ApprovedPatchesEnableNonSecurity *bool
 
 	// A description of the patch baseline.
 	Description *string
@@ -89,7 +89,7 @@ type UpdatePatchBaselineInput struct {
 	// If True, then all fields that are required by the CreatePatchBaseline operation
 	// are also required for this API request. Optional fields that aren't specified
 	// are set to null.
-	Replace bool
+	Replace *bool
 
 	// Information about the patches to use to update the managed nodes, including
 	// target operating systems and source repositories. Applies to Linux managed nodes
@@ -114,7 +114,7 @@ type UpdatePatchBaselineOutput struct {
 	// Indicates whether the list of approved patches includes non-security updates
 	// that should be applied to the managed nodes. The default value is false. Applies
 	// to Linux managed nodes only.
-	ApprovedPatchesEnableNonSecurity bool
+	ApprovedPatchesEnableNonSecurity *bool
 
 	// The ID of the deleted patch baseline.
 	BaselineId *string

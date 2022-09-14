@@ -43,7 +43,7 @@ type ListComponentBuildVersionsInput struct {
 	ComponentVersionArn *string
 
 	// The maximum items to return in a request.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
@@ -171,8 +171,8 @@ func NewListComponentBuildVersionsPaginator(client ListComponentBuildVersionsAPI
 	}
 
 	options := ListComponentBuildVersionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -202,7 +202,11 @@ func (p *ListComponentBuildVersionsPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListComponentBuildVersions(ctx, &params, optFns...)
 	if err != nil {

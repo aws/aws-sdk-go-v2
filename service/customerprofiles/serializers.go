@@ -4078,9 +4078,9 @@ func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.Scheduled
 		ok.String(*v.ScheduleExpression)
 	}
 
-	if v.ScheduleOffset != 0 {
+	if v.ScheduleOffset != nil {
 		ok := object.Key("ScheduleOffset")
-		ok.Long(v.ScheduleOffset)
+		ok.Long(*v.ScheduleOffset)
 	}
 
 	if v.ScheduleStartTime != nil {

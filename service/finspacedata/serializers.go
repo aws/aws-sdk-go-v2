@@ -386,9 +386,9 @@ func awsRestjson1_serializeOpDocumentCreateDataViewInput(v *CreateDataViewInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AsOfTimestamp != 0 {
+	if v.AsOfTimestamp != nil {
 		ok := object.Key("asOfTimestamp")
-		ok.Long(v.AsOfTimestamp)
+		ok.Long(*v.AsOfTimestamp)
 	}
 
 	if v.AutoUpdate {
@@ -1520,8 +1520,8 @@ func awsRestjson1_serializeOpHttpBindingsListChangesetsInput(v *ListChangesetsIn
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1577,8 +1577,8 @@ func awsRestjson1_serializeOpHttpBindingsListDatasetsInput(v *ListDatasetsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1643,8 +1643,8 @@ func awsRestjson1_serializeOpHttpBindingsListDataViewsInput(v *ListDataViewsInpu
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

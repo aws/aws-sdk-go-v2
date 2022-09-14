@@ -79,7 +79,7 @@ type CreateJobInput struct {
 	// The numerical priority for this job. Higher numbers indicate higher priority.
 	//
 	// This member is required.
-	Priority int32
+	Priority *int32
 
 	// Configuration parameters for the optional job-completion report.
 	//
@@ -95,7 +95,7 @@ type CreateJobInput struct {
 
 	// Indicates whether confirmation is required before Amazon S3 runs the job.
 	// Confirmation is only required for jobs created through the Amazon S3 console.
-	ConfirmationRequired bool
+	ConfirmationRequired *bool
 
 	// A description for this job. You can use any string within the permitted length.
 	// Descriptions don't need to be unique and can be used for multiple jobs.

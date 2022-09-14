@@ -968,7 +968,7 @@ type ScheduledTriggerProperties struct {
 
 	// Specifies the optional offset that is added to the time interval for a
 	// schedule-triggered flow.
-	ScheduleOffset int64
+	ScheduleOffset *int64
 
 	// Specifies the scheduled start time for a scheduled-trigger flow.
 	ScheduleStartTime *time.Time

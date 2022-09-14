@@ -529,9 +529,9 @@ func awsAwsjson11_serializeDocumentTimeoutConfig(v *types.TimeoutConfig, value s
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxLifetimeTimeoutMinutes != 0 {
+	if v.MaxLifetimeTimeoutMinutes != nil {
 		ok := object.Key("maxLifetimeTimeoutMinutes")
-		ok.Integer(v.MaxLifetimeTimeoutMinutes)
+		ok.Integer(*v.MaxLifetimeTimeoutMinutes)
 	}
 
 	return nil
@@ -541,9 +541,9 @@ func awsAwsjson11_serializeOpDocumentCloseTunnelInput(v *CloseTunnelInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.Delete {
+	if v.Delete != nil {
 		ok := object.Key("delete")
-		ok.Boolean(v.Delete)
+		ok.Boolean(*v.Delete)
 	}
 
 	if v.TunnelId != nil {
@@ -582,9 +582,9 @@ func awsAwsjson11_serializeOpDocumentListTunnelsInput(v *ListTunnelsInput, value
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

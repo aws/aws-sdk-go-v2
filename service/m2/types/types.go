@@ -881,12 +881,12 @@ type VsamDetailAttributes struct {
 
 	// If set to True, enforces loading the data set into cache before it’s used by the
 	// application.
-	CacheAtStartup bool
+	CacheAtStartup *bool
 
 	// Indicates whether indexes for this dataset are stored as compressed values. If
 	// you have a large data set (typically > 100 Mb), consider setting this flag to
 	// True.
-	Compressed bool
+	Compressed *bool
 
 	// The character set used by the data set. Can be ASCII, EBCDIC, or unknown.
 	Encoding *string

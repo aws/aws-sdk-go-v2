@@ -50,12 +50,12 @@ type ListSecretVersionIdsInput struct {
 	// Specifies whether to include versions of secrets that don't have any staging
 	// labels attached to them. Versions without staging labels are considered
 	// deprecated and are subject to deletion by Secrets Manager.
-	IncludeDeprecated bool
+	IncludeDeprecated *bool
 
 	// The number of results to include in the response. If there are more results
 	// available, in the response, Secrets Manager includes NextToken. To get the next
 	// results, call ListSecretVersionIds again with the value from NextToken.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token that indicates where the output should continue from, if a previous call
 	// did not show all results. To get the next results, call ListSecretVersionIds
@@ -188,8 +188,8 @@ func NewListSecretVersionIdsPaginator(client ListSecretVersionIdsAPIClient, para
 	}
 
 	options := ListSecretVersionIdsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -219,7 +219,11 @@ func (p *ListSecretVersionIdsPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSecretVersionIds(ctx, &params, optFns...)
 	if err != nil {

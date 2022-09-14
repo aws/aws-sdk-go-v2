@@ -61,7 +61,7 @@ type ListInstalledComponentsInput struct {
 	CoreDeviceThingName *string
 
 	// The maximum number of results to be returned per paginated request.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
@@ -200,8 +200,8 @@ func NewListInstalledComponentsPaginator(client ListInstalledComponentsAPIClient
 	}
 
 	options := ListInstalledComponentsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -231,7 +231,11 @@ func (p *ListInstalledComponentsPaginator) NextPage(ctx context.Context, optFns 
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListInstalledComponents(ctx, &params, optFns...)
 	if err != nil {

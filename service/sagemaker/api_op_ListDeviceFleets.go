@@ -44,7 +44,7 @@ type ListDeviceFleetsInput struct {
 	LastModifiedTimeBefore *time.Time
 
 	// The maximum number of results to select.
-	MaxResults int32
+	MaxResults *int32
 
 	// Filter for fleets containing this name in their fleet device name.
 	NameContains *string
@@ -173,8 +173,8 @@ func NewListDeviceFleetsPaginator(client ListDeviceFleetsAPIClient, params *List
 	}
 
 	options := ListDeviceFleetsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -204,7 +204,11 @@ func (p *ListDeviceFleetsPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListDeviceFleets(ctx, &params, optFns...)
 	if err != nil {

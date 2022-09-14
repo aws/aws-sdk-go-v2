@@ -61,7 +61,7 @@ type CreateMetricSetInput struct {
 	// After an interval ends, the amount of seconds that the detector waits before
 	// importing data. Offset is only supported for S3, Redshift, Athena and
 	// datasources.
-	Offset int32
+	Offset *int32
 
 	// A list of tags
 	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to

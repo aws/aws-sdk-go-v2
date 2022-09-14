@@ -3682,20 +3682,20 @@ func awsRestjson1_serializeDocumentVariable(v *types.Variable, value smithyjson.
 		}
 	}
 
-	if v.DoubleValue != 0 {
+	if v.DoubleValue != nil {
 		ok := object.Key("doubleValue")
 		switch {
-		case math.IsNaN(v.DoubleValue):
+		case math.IsNaN(*v.DoubleValue):
 			ok.String("NaN")
 
-		case math.IsInf(v.DoubleValue, 1):
+		case math.IsInf(*v.DoubleValue, 1):
 			ok.String("Infinity")
 
-		case math.IsInf(v.DoubleValue, -1):
+		case math.IsInf(*v.DoubleValue, -1):
 			ok.String("-Infinity")
 
 		default:
-			ok.Double(v.DoubleValue)
+			ok.Double(*v.DoubleValue)
 
 		}
 	}

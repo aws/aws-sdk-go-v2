@@ -37,7 +37,7 @@ type ListAssociatedAttributeGroupsInput struct {
 
 	// The upper bound of the number of results to return (cannot exceed 25). If this
 	// parameter is omitted, it defaults to 25. This value is optional.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to use to get the next page of results after a previous API call.
 	NextToken *string
@@ -160,8 +160,8 @@ func NewListAssociatedAttributeGroupsPaginator(client ListAssociatedAttributeGro
 	}
 
 	options := ListAssociatedAttributeGroupsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -191,7 +191,11 @@ func (p *ListAssociatedAttributeGroupsPaginator) NextPage(ctx context.Context, o
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListAssociatedAttributeGroups(ctx, &params, optFns...)
 	if err != nil {

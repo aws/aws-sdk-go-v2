@@ -47,7 +47,7 @@ type DescribePatchGroupStateOutput struct {
 	// be missing, have failed installation, were rejected, or were installed but
 	// awaiting a required managed node reboot. The status of these managed nodes is
 	// NON_COMPLIANT.
-	InstancesWithCriticalNonCompliantPatches int32
+	InstancesWithCriticalNonCompliantPatches *int32
 
 	// The number of managed nodes with patches from the patch baseline that failed to
 	// install.
@@ -63,14 +63,14 @@ type DescribePatchGroupStateOutput struct {
 	// The number of managed nodes with patches installed by Patch Manager that haven't
 	// been rebooted after the patch installation. The status of these managed nodes is
 	// NON_COMPLIANT.
-	InstancesWithInstalledPendingRebootPatches int32
+	InstancesWithInstalledPendingRebootPatches *int32
 
 	// The number of managed nodes with patches installed that are specified in a
 	// RejectedPatches list. Patches with a status of INSTALLED_REJECTED were typically
 	// installed before they were added to a RejectedPatches list. If
 	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
 	// of InstancesWithInstalledRejectedPatches will always be 0 (zero).
-	InstancesWithInstalledRejectedPatches int32
+	InstancesWithInstalledRejectedPatches *int32
 
 	// The number of managed nodes with missing patches from the patch baseline.
 	InstancesWithMissingPatches int32
@@ -81,18 +81,18 @@ type DescribePatchGroupStateOutput struct {
 	// The number of managed nodes with patches installed that are specified as other
 	// than Critical or Security but aren't compliant with the patch baseline. The
 	// status of these managed nodes is NON_COMPLIANT.
-	InstancesWithOtherNonCompliantPatches int32
+	InstancesWithOtherNonCompliantPatches *int32
 
 	// The number of managed nodes where patches that are specified as Security in a
 	// patch advisory aren't installed. These patches might be missing, have failed
 	// installation, were rejected, or were installed but awaiting a required managed
 	// node reboot. The status of these managed nodes is NON_COMPLIANT.
-	InstancesWithSecurityNonCompliantPatches int32
+	InstancesWithSecurityNonCompliantPatches *int32
 
 	// The number of managed nodes with NotApplicable patches beyond the supported
 	// limit, which aren't reported by name to Inventory. Inventory is a capability of
 	// Amazon Web Services Systems Manager.
-	InstancesWithUnreportedNotApplicablePatches int32
+	InstancesWithUnreportedNotApplicablePatches *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -35,7 +35,7 @@ func (c *Client) ListTunnels(ctx context.Context, params *ListTunnelsInput, optF
 type ListTunnelsInput struct {
 
 	// The maximum number of results to return at once.
-	MaxResults int32
+	MaxResults *int32
 
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
@@ -155,8 +155,8 @@ func NewListTunnelsPaginator(client ListTunnelsAPIClient, params *ListTunnelsInp
 	}
 
 	options := ListTunnelsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -186,7 +186,11 @@ func (p *ListTunnelsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListTunnels(ctx, &params, optFns...)
 	if err != nil {

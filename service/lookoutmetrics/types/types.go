@@ -775,7 +775,7 @@ type RDSSourceConfig struct {
 	DatabaseName *string
 
 	// The port number where the database can be accessed.
-	DatabasePort int32
+	DatabasePort *int32
 
 	// The Amazon Resource Name (ARN) of the role.
 	RoleArn *string
@@ -806,7 +806,7 @@ type RedshiftSourceConfig struct {
 	DatabaseName *string
 
 	// The port number where the database can be accessed.
-	DatabasePort int32
+	DatabasePort *int32
 
 	// The Amazon Resource Name (ARN) of the role providing access to the database.
 	RoleArn *string

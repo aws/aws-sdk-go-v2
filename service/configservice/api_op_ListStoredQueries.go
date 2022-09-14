@@ -32,7 +32,7 @@ func (c *Client) ListStoredQueries(ctx context.Context, params *ListStoredQuerie
 type ListStoredQueriesInput struct {
 
 	// The maximum number of results to be returned with a single call.
-	MaxResults int32
+	MaxResults *int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -153,8 +153,8 @@ func NewListStoredQueriesPaginator(client ListStoredQueriesAPIClient, params *Li
 	}
 
 	options := ListStoredQueriesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -184,7 +184,11 @@ func (p *ListStoredQueriesPaginator) NextPage(ctx context.Context, optFns ...fun
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListStoredQueries(ctx, &params, optFns...)
 	if err != nil {

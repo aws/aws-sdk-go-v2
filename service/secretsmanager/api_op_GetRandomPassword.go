@@ -39,33 +39,33 @@ type GetRandomPasswordInput struct {
 
 	// Specifies whether to exclude lowercase letters from the password. If you don't
 	// include this switch, the password can contain lowercase letters.
-	ExcludeLowercase bool
+	ExcludeLowercase *bool
 
 	// Specifies whether to exclude numbers from the password. If you don't include
 	// this switch, the password can contain numbers.
-	ExcludeNumbers bool
+	ExcludeNumbers *bool
 
 	// Specifies whether to exclude the following punctuation characters from the
 	// password: ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~. If
 	// you don't include this switch, the password can contain punctuation.
-	ExcludePunctuation bool
+	ExcludePunctuation *bool
 
 	// Specifies whether to exclude uppercase letters from the password. If you don't
 	// include this switch, the password can contain uppercase letters.
-	ExcludeUppercase bool
+	ExcludeUppercase *bool
 
 	// Specifies whether to include the space character. If you include this switch,
 	// the password can contain space characters.
-	IncludeSpace bool
+	IncludeSpace *bool
 
 	// The length of the password. If you don't include this parameter, the default
 	// length is 32 characters.
-	PasswordLength int64
+	PasswordLength *int64
 
 	// Specifies whether to include at least one upper and lowercase letter, one
 	// number, and one punctuation. If you don't include this switch, the password
 	// contains at least one of every character type.
-	RequireEachIncludedType bool
+	RequireEachIncludedType *bool
 
 	noSmithyDocumentSerde
 }

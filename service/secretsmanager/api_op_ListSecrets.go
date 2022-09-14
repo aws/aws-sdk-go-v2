@@ -49,7 +49,7 @@ type ListSecretsInput struct {
 	// The number of results to include in the response. If there are more results
 	// available, in the response, Secrets Manager includes NextToken. To get the next
 	// results, call ListSecrets again with the value from NextToken.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token that indicates where the output should continue from, if a previous call
 	// did not show all results. To get the next results, call ListSecrets again with
@@ -174,8 +174,8 @@ func NewListSecretsPaginator(client ListSecretsAPIClient, params *ListSecretsInp
 	}
 
 	options := ListSecretsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -205,7 +205,11 @@ func (p *ListSecretsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListSecrets(ctx, &params, optFns...)
 	if err != nil {

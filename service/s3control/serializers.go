@@ -445,7 +445,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 		el := value.MemberElement(root)
 		el.String(*v.ClientRequestToken)
 	}
-	if v.ConfirmationRequired {
+	if v.ConfirmationRequired != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -454,7 +454,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.ConfirmationRequired)
+		el.Boolean(*v.ConfirmationRequired)
 	}
 	if v.Description != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -506,7 +506,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			return err
 		}
 	}
-	{
+	if v.Priority != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -515,7 +515,7 @@ func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smith
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Integer(v.Priority)
+		el.Integer(*v.Priority)
 	}
 	if v.Report != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2942,8 +2942,8 @@ func awsRestxml_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder *
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -4751,7 +4751,7 @@ func awsRestxml_serializeDocumentJobManifestGeneratorFilter(v *types.JobManifest
 		el := value.MemberElement(root)
 		el.String(smithytime.FormatDateTime(*v.CreatedBefore))
 	}
-	if v.EligibleForReplication {
+	if v.EligibleForReplication != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -4760,7 +4760,7 @@ func awsRestxml_serializeDocumentJobManifestGeneratorFilter(v *types.JobManifest
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.EligibleForReplication)
+		el.Boolean(*v.EligibleForReplication)
 	}
 	if v.ObjectReplicationStatuses != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -6369,7 +6369,7 @@ func awsRestxml_serializeDocumentS3ObjectMetadata(v *types.S3ObjectMetadata, val
 		el := value.MemberElement(root)
 		el.String(*v.ContentLanguage)
 	}
-	if v.ContentLength != 0 {
+	if v.ContentLength != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -6378,7 +6378,7 @@ func awsRestxml_serializeDocumentS3ObjectMetadata(v *types.S3ObjectMetadata, val
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(v.ContentLength)
+		el.Long(*v.ContentLength)
 	}
 	if v.ContentMD5 != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -6548,7 +6548,7 @@ func awsRestxml_serializeDocumentS3SetObjectLegalHoldOperation(v *types.S3SetObj
 
 func awsRestxml_serializeDocumentS3SetObjectRetentionOperation(v *types.S3SetObjectRetentionOperation, value smithyxml.Value) error {
 	defer value.Close()
-	if v.BypassGovernanceRetention {
+	if v.BypassGovernanceRetention != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -6557,7 +6557,7 @@ func awsRestxml_serializeDocumentS3SetObjectRetentionOperation(v *types.S3SetObj
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Boolean(v.BypassGovernanceRetention)
+		el.Boolean(*v.BypassGovernanceRetention)
 	}
 	if v.Retention != nil {
 		rootAttr := []smithyxml.Attr{}

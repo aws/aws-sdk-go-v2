@@ -41,7 +41,7 @@ type GetFeedbackInput struct {
 	AnomalyGroupTimeSeriesFeedback *types.AnomalyGroupTimeSeries
 
 	// The maximum number of results to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
@@ -160,8 +160,8 @@ func NewGetFeedbackPaginator(client GetFeedbackAPIClient, params *GetFeedbackInp
 	}
 
 	options := GetFeedbackPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -191,7 +191,11 @@ func (p *GetFeedbackPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetFeedback(ctx, &params, optFns...)
 	if err != nil {

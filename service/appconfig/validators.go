@@ -1062,6 +1062,12 @@ func validateOpCreateDeploymentStrategyInput(v *CreateDeploymentStrategyInput) e
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.DeploymentDurationInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentDurationInMinutes"))
+	}
+	if v.GrowthFactor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GrowthFactor"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1334,6 +1340,9 @@ func validateOpGetDeploymentInput(v *GetDeploymentInput) error {
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
 	}
+	if v.DeploymentNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentNumber"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1540,6 +1549,9 @@ func validateOpStopDeploymentInput(v *StopDeploymentInput) error {
 	}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.DeploymentNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

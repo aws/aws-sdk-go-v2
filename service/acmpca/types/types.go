@@ -324,7 +324,7 @@ type CrlConfiguration struct {
 	// action.
 	//
 	// This member is required.
-	Enabled bool
+	Enabled *bool
 
 	// Name inserted into the certificate CRL Distribution Points extension that
 	// enables the use of an alias for the CRL distribution point. Use this value if
@@ -413,7 +413,7 @@ type CustomExtension struct {
 	Value *string
 
 	// Specifies the critical flag of the X.509 extension.
-	Critical bool
+	Critical *bool
 
 	noSmithyDocumentSerde
 }
@@ -564,7 +564,7 @@ type OcspConfiguration struct {
 	// validating certificate revocation status.
 	//
 	// This member is required.
-	Enabled bool
+	Enabled *bool
 
 	// By default, ACM Private CA injects an Amazon Web Services domain into
 	// certificates being validated by the Online Certificate Status Protocol (OCSP). A

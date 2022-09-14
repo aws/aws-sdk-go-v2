@@ -43,7 +43,7 @@ type ListContainerRecipesInput struct {
 	Filters []types.Filter
 
 	// The maximum number of results to return in the list.
-	MaxResults int32
+	MaxResults *int32
 
 	// Provides a token for pagination, which determines where to begin the next set of
 	// results when the current set reaches the maximum for one request.
@@ -172,8 +172,8 @@ func NewListContainerRecipesPaginator(client ListContainerRecipesAPIClient, para
 	}
 
 	options := ListContainerRecipesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -203,7 +203,11 @@ func (p *ListContainerRecipesPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListContainerRecipes(ctx, &params, optFns...)
 	if err != nil {

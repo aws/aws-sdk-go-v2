@@ -358,7 +358,7 @@ type AwsIotAnalyticsParameters struct {
 type BorderStyle struct {
 
 	// The option to enable display of borders for visuals.
-	Show bool
+	Show *bool
 
 	noSmithyDocumentSerde
 }
@@ -1527,7 +1527,7 @@ type GutterStyle struct {
 
 	// This Boolean value controls whether to display a gutter space between sheet
 	// tiles.
-	Show bool
+	Show *bool
 
 	noSmithyDocumentSerde
 }
@@ -1593,10 +1593,10 @@ type Ingestion struct {
 	IngestionId *string
 
 	// The size of the data ingested, in bytes.
-	IngestionSizeInBytes int64
+	IngestionSizeInBytes *int64
 
 	// The time that this ingestion took, measured in seconds.
-	IngestionTimeInSeconds int64
+	IngestionTimeInSeconds *int64
 
 	// Information about a queued dataset SPICE ingestion.
 	QueueInfo *QueueInfo
@@ -1694,7 +1694,7 @@ type JoinKeyProperties struct {
 	// A value that indicates that a row in a table is uniquely identified by the
 	// columns in a join key. This is used by Amazon QuickSight to optimize query
 	// performance.
-	UniqueKey bool
+	UniqueKey *bool
 
 	noSmithyDocumentSerde
 }
@@ -1768,7 +1768,7 @@ type ManifestFileLocation struct {
 type MarginStyle struct {
 
 	// This Boolean value controls whether to display sheet margins.
-	Show bool
+	Show *bool
 
 	noSmithyDocumentSerde
 }
@@ -2269,13 +2269,13 @@ type ResourcePermission struct {
 type RowInfo struct {
 
 	// The number of rows that were not ingested.
-	RowsDropped int64
+	RowsDropped *int64
 
 	// The number of rows that were ingested.
-	RowsIngested int64
+	RowsIngested *int64
 
 	// The total number of rows in the dataset.
-	TotalRowsInDataset int64
+	TotalRowsInDataset *int64
 
 	noSmithyDocumentSerde
 }
@@ -3151,7 +3151,7 @@ type UntagColumnOperation struct {
 type UploadSettings struct {
 
 	// Whether the file has a header row, or the files each have a header row.
-	ContainsHeader bool
+	ContainsHeader *bool
 
 	// The delimiter between values in the file.
 	Delimiter *string
@@ -3160,7 +3160,7 @@ type UploadSettings struct {
 	Format FileFormat
 
 	// A row number to start reading data from.
-	StartFromRow int32
+	StartFromRow *int32
 
 	// Text qualifier.
 	TextQualifier TextQualifier

@@ -1404,6 +1404,9 @@ func validateSAPODataConnectorProfileProperties(v *types.SAPODataConnectorProfil
 	if v.ApplicationServicePath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationServicePath"))
 	}
+	if v.PortNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortNumber"))
+	}
 	if v.ClientNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientNumber"))
 	}

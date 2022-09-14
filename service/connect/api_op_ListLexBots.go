@@ -41,7 +41,7 @@ type ListLexBotsInput struct {
 
 	// The maximum number of results to return per page. If no value is specified, the
 	// default is 10.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
@@ -162,8 +162,8 @@ func NewListLexBotsPaginator(client ListLexBotsAPIClient, params *ListLexBotsInp
 	}
 
 	options := ListLexBotsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -193,7 +193,11 @@ func (p *ListLexBotsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListLexBots(ctx, &params, optFns...)
 	if err != nil {

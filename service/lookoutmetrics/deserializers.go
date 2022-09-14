@@ -1836,7 +1836,7 @@ func awsRestjson1_deserializeOpDocumentDescribeMetricSetOutput(v **DescribeMetri
 				if err != nil {
 					return err
 				}
-				sv.Offset = int32(i64)
+				sv.Offset = ptr.Int32(int32(i64))
 			}
 
 		case "TimestampColumn":
@@ -8469,7 +8469,7 @@ func awsRestjson1_deserializeDocumentRDSSourceConfig(v **types.RDSSourceConfig, 
 				if err != nil {
 					return err
 				}
-				sv.DatabasePort = int32(i64)
+				sv.DatabasePort = ptr.Int32(int32(i64))
 			}
 
 		case "DBInstanceIdentifier":
@@ -8581,7 +8581,7 @@ func awsRestjson1_deserializeDocumentRedshiftSourceConfig(v **types.RedshiftSour
 				if err != nil {
 					return err
 				}
-				sv.DatabasePort = int32(i64)
+				sv.DatabasePort = ptr.Int32(int32(i64))
 			}
 
 		case "RoleArn":

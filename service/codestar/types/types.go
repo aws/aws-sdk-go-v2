@@ -186,7 +186,7 @@ type TeamMember struct {
 
 	// Whether the user is allowed to remotely access project resources using an SSH
 	// public/private key pair.
-	RemoteAccessAllowed bool
+	RemoteAccessAllowed *bool
 
 	noSmithyDocumentSerde
 }

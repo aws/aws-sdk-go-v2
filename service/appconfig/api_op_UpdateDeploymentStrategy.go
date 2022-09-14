@@ -35,18 +35,18 @@ type UpdateDeploymentStrategyInput struct {
 	DeploymentStrategyId *string
 
 	// Total amount of time for a deployment to last.
-	DeploymentDurationInMinutes int32
+	DeploymentDurationInMinutes *int32
 
 	// A description of the deployment strategy.
 	Description *string
 
 	// The amount of time that AppConfig monitors for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic rollback.
-	FinalBakeTimeInMinutes int32
+	FinalBakeTimeInMinutes *int32
 
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
-	GrowthFactor float32
+	GrowthFactor *float32
 
 	// The algorithm used to define how percentage grows over time. AppConfig supports
 	// the following growth types: Linear: For this type, AppConfig processes the

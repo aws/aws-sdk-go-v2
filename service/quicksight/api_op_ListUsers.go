@@ -42,7 +42,7 @@ type ListUsersInput struct {
 	Namespace *string
 
 	// The maximum number of results to return from this request.
-	MaxResults int32
+	MaxResults *int32
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string

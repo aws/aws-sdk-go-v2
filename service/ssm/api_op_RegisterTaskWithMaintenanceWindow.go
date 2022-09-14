@@ -108,7 +108,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// The priority of the task in the maintenance window, the lower the number the
 	// higher the priority. Tasks in a maintenance window are scheduled in priority
 	// order with tasks that have the same priority scheduled in parallel.
-	Priority int32
+	Priority *int32
 
 	// The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services
 	// Systems Manager to assume when running a maintenance window task. If you do not

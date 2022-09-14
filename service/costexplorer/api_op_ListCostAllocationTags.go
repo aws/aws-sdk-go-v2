@@ -33,7 +33,7 @@ type ListCostAllocationTagsInput struct {
 
 	// The maximum number of objects that are returned for this request. By default,
 	// the request returns 100 results.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
@@ -167,8 +167,8 @@ func NewListCostAllocationTagsPaginator(client ListCostAllocationTagsAPIClient, 
 	}
 
 	options := ListCostAllocationTagsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *ListCostAllocationTagsPaginator) NextPage(ctx context.Context, optFns .
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListCostAllocationTags(ctx, &params, optFns...)
 	if err != nil {

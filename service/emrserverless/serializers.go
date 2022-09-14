@@ -739,9 +739,9 @@ func awsRestjson1_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 		ok.String(*v.ExecutionRoleArn)
 	}
 
-	if v.ExecutionTimeoutMinutes != 0 {
+	if v.ExecutionTimeoutMinutes != nil {
 		ok := object.Key("executionTimeoutMinutes")
-		ok.Long(v.ExecutionTimeoutMinutes)
+		ok.Long(*v.ExecutionTimeoutMinutes)
 	}
 
 	if v.JobDriver != nil {

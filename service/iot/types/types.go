@@ -561,7 +561,7 @@ type AuthorizerConfig struct {
 
 	// A Boolean that specifies whether the domain configuration's authorization
 	// service can be overridden.
-	AllowAuthorizerOverride bool
+	AllowAuthorizerOverride *bool
 
 	// The name of the authorization service for a domain configuration.
 	DefaultAuthorizerName *string
@@ -3275,29 +3275,29 @@ type StatisticalThreshold struct {
 type Statistics struct {
 
 	// The average of the aggregated field values.
-	Average float64
+	Average *float64
 
 	// The count of things that match the query string criteria and contain a valid
 	// aggregation field value.
 	Count int32
 
 	// The maximum aggregated field value.
-	Maximum float64
+	Maximum *float64
 
 	// The minimum aggregated field value.
-	Minimum float64
+	Minimum *float64
 
 	// The standard deviation of the aggregated field values.
-	StdDeviation float64
+	StdDeviation *float64
 
 	// The sum of the aggregated field values.
-	Sum float64
+	Sum *float64
 
 	// The sum of the squares of the aggregated field values.
-	SumOfSquares float64
+	SumOfSquares *float64
 
 	// The variance of the aggregated field values.
-	Variance float64
+	Variance *float64
 
 	noSmithyDocumentSerde
 }

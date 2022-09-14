@@ -58,7 +58,7 @@ type CreateHostedConfigurationVersionInput struct {
 	// overwritten when creating multiple hosted configuration versions in rapid
 	// succession, specify the version number of the latest hosted configuration
 	// version.
-	LatestVersionNumber int32
+	LatestVersionNumber *int32
 
 	noSmithyDocumentSerde
 }

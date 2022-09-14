@@ -45,7 +45,7 @@ type ListStageDevicesInput struct {
 	ExcludeDevicesDeployedInOtherStage bool
 
 	// The maximum number of requests to select.
-	MaxResults int32
+	MaxResults *int32
 
 	// The response from the last list when returning a list large enough to neeed
 	// tokening.
@@ -167,8 +167,8 @@ func NewListStageDevicesPaginator(client ListStageDevicesAPIClient, params *List
 	}
 
 	options := ListStageDevicesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -198,7 +198,11 @@ func (p *ListStageDevicesPaginator) NextPage(ctx context.Context, optFns ...func
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListStageDevices(ctx, &params, optFns...)
 	if err != nil {

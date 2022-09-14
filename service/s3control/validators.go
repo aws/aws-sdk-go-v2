@@ -2380,6 +2380,9 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 			invalidParams.AddNested("Manifest", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}

@@ -3806,6 +3806,12 @@ func validateHoursOfOperationTimeSlice(v *types.HoursOfOperationTimeSlice) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "HoursOfOperationTimeSlice"}
+	if v.Hours == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Hours"))
+	}
+	if v.Minutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Minutes"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4039,6 +4045,12 @@ func validateRoutingProfileQueueConfig(v *types.RoutingProfileQueueConfig) error
 		if err := validateRoutingProfileQueueReference(v.QueueReference); err != nil {
 			invalidParams.AddNested("QueueReference", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Delay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Delay"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

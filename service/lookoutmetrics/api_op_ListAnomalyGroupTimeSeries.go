@@ -46,7 +46,7 @@ type ListAnomalyGroupTimeSeriesInput struct {
 	MetricName *string
 
 	// The maximum number of results to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
@@ -178,8 +178,8 @@ func NewListAnomalyGroupTimeSeriesPaginator(client ListAnomalyGroupTimeSeriesAPI
 	}
 
 	options := ListAnomalyGroupTimeSeriesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -209,7 +209,11 @@ func (p *ListAnomalyGroupTimeSeriesPaginator) NextPage(ctx context.Context, optF
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListAnomalyGroupTimeSeries(ctx, &params, optFns...)
 	if err != nil {

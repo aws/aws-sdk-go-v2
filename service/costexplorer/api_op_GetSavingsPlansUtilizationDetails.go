@@ -68,7 +68,7 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
@@ -229,8 +229,8 @@ func NewGetSavingsPlansUtilizationDetailsPaginator(client GetSavingsPlansUtiliza
 	}
 
 	options := GetSavingsPlansUtilizationDetailsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -260,7 +260,11 @@ func (p *GetSavingsPlansUtilizationDetailsPaginator) NextPage(ctx context.Contex
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetSavingsPlansUtilizationDetails(ctx, &params, optFns...)
 	if err != nil {

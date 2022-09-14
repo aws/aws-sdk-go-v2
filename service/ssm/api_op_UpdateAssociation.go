@@ -159,7 +159,7 @@ type UpdateAssociationInput struct {
 	// in the Amazon Web Services Systems Manager User Guide. To use offsets, you must
 	// specify the ApplyOnlyAtCronInterval parameter. This option tells the system not
 	// to run an association immediately after you create it.
-	ScheduleOffset int32
+	ScheduleOffset *int32
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to

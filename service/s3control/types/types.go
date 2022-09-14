@@ -305,7 +305,7 @@ type JobDescriptor struct {
 	// Indicates whether confirmation is required before Amazon S3 begins running the
 	// specified job. Confirmation is required only for jobs created through the Amazon
 	// S3 console.
-	ConfirmationRequired bool
+	ConfirmationRequired *bool
 
 	// A timestamp indicating when this job was created.
 	CreationTime *time.Time
@@ -470,7 +470,7 @@ type JobManifestGeneratorFilter struct {
 
 	// Include objects in the generated manifest only if they are eligible for
 	// replication according to the Replication configuration on the source bucket.
-	EligibleForReplication bool
+	EligibleForReplication *bool
 
 	// If provided, the generated manifest should include only source bucket objects
 	// that have one of the specified Replication statuses.
@@ -576,16 +576,16 @@ type JobOperation struct {
 type JobProgressSummary struct {
 
 	//
-	NumberOfTasksFailed int64
+	NumberOfTasksFailed *int64
 
 	//
-	NumberOfTasksSucceeded int64
+	NumberOfTasksSucceeded *int64
 
 	// The JobTimers attribute of a job's progress summary.
 	Timers *JobTimers
 
 	//
-	TotalNumberOfTasks int64
+	TotalNumberOfTasks *int64
 
 	noSmithyDocumentSerde
 }
@@ -621,7 +621,7 @@ type JobReport struct {
 type JobTimers struct {
 
 	// Indicates the elapsed time in seconds the job has been in the Active job state.
-	ElapsedTimeInActiveSeconds int64
+	ElapsedTimeInActiveSeconds *int64
 
 	noSmithyDocumentSerde
 }
@@ -1416,7 +1416,7 @@ type S3ObjectMetadata struct {
 	ContentLanguage *string
 
 	//
-	ContentLength int64
+	ContentLength *int64
 
 	//
 	ContentMD5 *string
@@ -1523,7 +1523,7 @@ type S3SetObjectRetentionOperation struct {
 
 	// Indicates if the action should be applied to objects in the Batch Operations job
 	// even if they have Object Lock  GOVERNANCE type in place.
-	BypassGovernanceRetention bool
+	BypassGovernanceRetention *bool
 
 	noSmithyDocumentSerde
 }

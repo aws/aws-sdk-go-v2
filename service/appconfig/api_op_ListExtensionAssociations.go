@@ -37,11 +37,11 @@ type ListExtensionAssociationsInput struct {
 	ExtensionIdentifier *string
 
 	// The version number for the extension defined in the association.
-	ExtensionVersionNumber int32
+	ExtensionVersionNumber *int32
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// A token to start the list. Use this token to get the next set of results or pass
 	// null to get the first set of results.
@@ -166,8 +166,8 @@ func NewListExtensionAssociationsPaginator(client ListExtensionAssociationsAPICl
 	}
 
 	options := ListExtensionAssociationsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -197,7 +197,11 @@ func (p *ListExtensionAssociationsPaginator) NextPage(ctx context.Context, optFn
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListExtensionAssociations(ctx, &params, optFns...)
 	if err != nil {

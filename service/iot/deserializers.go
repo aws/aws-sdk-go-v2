@@ -39689,7 +39689,7 @@ func awsRestjson1_deserializeDocumentAuthorizerConfig(v **types.AuthorizerConfig
 				if !ok {
 					return fmt.Errorf("expected AllowAuthorizerOverride to be of type *bool, got %T instead", value)
 				}
-				sv.AllowAuthorizerOverride = jtv
+				sv.AllowAuthorizerOverride = ptr.Bool(jtv)
 			}
 
 		case "defaultAuthorizerName":
@@ -51397,7 +51397,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.Average = f64
+					sv.Average = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51415,7 +51415,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Average = f64
+					sv.Average = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Average to be a JSON Number, got %T instead", value)
@@ -51444,7 +51444,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.Maximum = f64
+					sv.Maximum = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51462,7 +51462,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Maximum = f64
+					sv.Maximum = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Maximum to be a JSON Number, got %T instead", value)
@@ -51478,7 +51478,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.Minimum = f64
+					sv.Minimum = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51496,7 +51496,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Minimum = f64
+					sv.Minimum = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Minimum to be a JSON Number, got %T instead", value)
@@ -51512,7 +51512,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.StdDeviation = f64
+					sv.StdDeviation = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51530,7 +51530,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.StdDeviation = f64
+					sv.StdDeviation = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected StdDeviation to be a JSON Number, got %T instead", value)
@@ -51546,7 +51546,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.Sum = f64
+					sv.Sum = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51564,7 +51564,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Sum = f64
+					sv.Sum = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Sum to be a JSON Number, got %T instead", value)
@@ -51580,7 +51580,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.SumOfSquares = f64
+					sv.SumOfSquares = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51598,7 +51598,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.SumOfSquares = f64
+					sv.SumOfSquares = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected SumOfSquares to be a JSON Number, got %T instead", value)
@@ -51614,7 +51614,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 					if err != nil {
 						return err
 					}
-					sv.Variance = f64
+					sv.Variance = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -51632,7 +51632,7 @@ func awsRestjson1_deserializeDocumentStatistics(v **types.Statistics, value inte
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					sv.Variance = f64
+					sv.Variance = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Variance to be a JSON Number, got %T instead", value)

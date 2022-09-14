@@ -1180,8 +1180,8 @@ func awsRestjson1_serializeOpHttpBindingsListClientDevicesAssociatedWithCoreDevi
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1237,8 +1237,8 @@ func awsRestjson1_serializeOpHttpBindingsListComponentsInput(v *ListComponentsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1307,8 +1307,8 @@ func awsRestjson1_serializeOpHttpBindingsListComponentVersionsInput(v *ListCompo
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1364,8 +1364,8 @@ func awsRestjson1_serializeOpHttpBindingsListCoreDevicesInput(v *ListCoreDevices
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1433,8 +1433,8 @@ func awsRestjson1_serializeOpHttpBindingsListDeploymentsInput(v *ListDeployments
 		encoder.SetQuery("historyFilter").String(string(v.HistoryFilter))
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1503,8 +1503,8 @@ func awsRestjson1_serializeOpHttpBindingsListEffectiveDeploymentsInput(v *ListEf
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1569,8 +1569,8 @@ func awsRestjson1_serializeOpHttpBindingsListInstalledComponentsInput(v *ListIns
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2228,9 +2228,9 @@ func awsRestjson1_serializeDocumentDeploymentComponentUpdatePolicy(v *types.Depl
 		ok.String(string(v.Action))
 	}
 
-	if v.TimeoutInSeconds != 0 {
+	if v.TimeoutInSeconds != nil {
 		ok := object.Key("timeoutInSeconds")
-		ok.Integer(v.TimeoutInSeconds)
+		ok.Integer(*v.TimeoutInSeconds)
 	}
 
 	return nil
@@ -2240,9 +2240,9 @@ func awsRestjson1_serializeDocumentDeploymentConfigurationValidationPolicy(v *ty
 	object := value.Object()
 	defer object.Close()
 
-	if v.TimeoutInSeconds != 0 {
+	if v.TimeoutInSeconds != nil {
 		ok := object.Key("timeoutInSeconds")
-		ok.Integer(v.TimeoutInSeconds)
+		ok.Integer(*v.TimeoutInSeconds)
 	}
 
 	return nil
@@ -2405,9 +2405,9 @@ func awsRestjson1_serializeDocumentIoTJobExecutionsRolloutConfig(v *types.IoTJob
 		}
 	}
 
-	if v.MaximumPerMinute != 0 {
+	if v.MaximumPerMinute != nil {
 		ok := object.Key("maximumPerMinute")
-		ok.Integer(v.MaximumPerMinute)
+		ok.Integer(*v.MaximumPerMinute)
 	}
 
 	return nil
@@ -2454,14 +2454,14 @@ func awsRestjson1_serializeDocumentIoTJobRateIncreaseCriteria(v *types.IoTJobRat
 	object := value.Object()
 	defer object.Close()
 
-	if v.NumberOfNotifiedThings != 0 {
+	if v.NumberOfNotifiedThings != nil {
 		ok := object.Key("numberOfNotifiedThings")
-		ok.Integer(v.NumberOfNotifiedThings)
+		ok.Integer(*v.NumberOfNotifiedThings)
 	}
 
-	if v.NumberOfSucceededThings != 0 {
+	if v.NumberOfSucceededThings != nil {
 		ok := object.Key("numberOfSucceededThings")
-		ok.Integer(v.NumberOfSucceededThings)
+		ok.Integer(*v.NumberOfSucceededThings)
 	}
 
 	return nil
@@ -2471,9 +2471,9 @@ func awsRestjson1_serializeDocumentIoTJobTimeoutConfig(v *types.IoTJobTimeoutCon
 	object := value.Object()
 	defer object.Close()
 
-	if v.InProgressTimeoutInMinutes != 0 {
+	if v.InProgressTimeoutInMinutes != nil {
 		ok := object.Key("inProgressTimeoutInMinutes")
-		ok.Long(v.InProgressTimeoutInMinutes)
+		ok.Long(*v.InProgressTimeoutInMinutes)
 	}
 
 	return nil
@@ -2490,14 +2490,14 @@ func awsRestjson1_serializeDocumentLambdaContainerParams(v *types.LambdaContaine
 		}
 	}
 
-	if v.MemorySizeInKB != 0 {
+	if v.MemorySizeInKB != nil {
 		ok := object.Key("memorySizeInKB")
-		ok.Integer(v.MemorySizeInKB)
+		ok.Integer(*v.MemorySizeInKB)
 	}
 
-	if v.MountROSysfs {
+	if v.MountROSysfs != nil {
 		ok := object.Key("mountROSysfs")
-		ok.Boolean(v.MountROSysfs)
+		ok.Boolean(*v.MountROSysfs)
 	}
 
 	if v.Volumes != nil {
@@ -2527,9 +2527,9 @@ func awsRestjson1_serializeDocumentLambdaDeviceMount(v *types.LambdaDeviceMount,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AddGroupOwner {
+	if v.AddGroupOwner != nil {
 		ok := object.Key("addGroupOwner")
-		ok.Boolean(v.AddGroupOwner)
+		ok.Boolean(*v.AddGroupOwner)
 	}
 
 	if v.Path != nil {
@@ -2634,34 +2634,34 @@ func awsRestjson1_serializeDocumentLambdaExecutionParameters(v *types.LambdaExec
 		}
 	}
 
-	if v.MaxIdleTimeInSeconds != 0 {
+	if v.MaxIdleTimeInSeconds != nil {
 		ok := object.Key("maxIdleTimeInSeconds")
-		ok.Integer(v.MaxIdleTimeInSeconds)
+		ok.Integer(*v.MaxIdleTimeInSeconds)
 	}
 
-	if v.MaxInstancesCount != 0 {
+	if v.MaxInstancesCount != nil {
 		ok := object.Key("maxInstancesCount")
-		ok.Integer(v.MaxInstancesCount)
+		ok.Integer(*v.MaxInstancesCount)
 	}
 
-	if v.MaxQueueSize != 0 {
+	if v.MaxQueueSize != nil {
 		ok := object.Key("maxQueueSize")
-		ok.Integer(v.MaxQueueSize)
+		ok.Integer(*v.MaxQueueSize)
 	}
 
-	if v.Pinned {
+	if v.Pinned != nil {
 		ok := object.Key("pinned")
-		ok.Boolean(v.Pinned)
+		ok.Boolean(*v.Pinned)
 	}
 
-	if v.StatusTimeoutInSeconds != 0 {
+	if v.StatusTimeoutInSeconds != nil {
 		ok := object.Key("statusTimeoutInSeconds")
-		ok.Integer(v.StatusTimeoutInSeconds)
+		ok.Integer(*v.StatusTimeoutInSeconds)
 	}
 
-	if v.TimeoutInSeconds != 0 {
+	if v.TimeoutInSeconds != nil {
 		ok := object.Key("timeoutInSeconds")
-		ok.Integer(v.TimeoutInSeconds)
+		ok.Integer(*v.TimeoutInSeconds)
 	}
 
 	return nil
@@ -2746,9 +2746,9 @@ func awsRestjson1_serializeDocumentLambdaVolumeMount(v *types.LambdaVolumeMount,
 	object := value.Object()
 	defer object.Close()
 
-	if v.AddGroupOwner {
+	if v.AddGroupOwner != nil {
 		ok := object.Key("addGroupOwner")
-		ok.Boolean(v.AddGroupOwner)
+		ok.Boolean(*v.AddGroupOwner)
 	}
 
 	if v.DestinationPath != nil {

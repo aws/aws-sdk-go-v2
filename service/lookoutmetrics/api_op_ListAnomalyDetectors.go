@@ -34,7 +34,7 @@ func (c *Client) ListAnomalyDetectors(ctx context.Context, params *ListAnomalyDe
 type ListAnomalyDetectorsInput struct {
 
 	// The maximum number of results to return.
-	MaxResults int32
+	MaxResults *int32
 
 	// If the result of the previous request was truncated, the response includes a
 	// NextToken. To retrieve the next set of results, use the token in the next
@@ -154,8 +154,8 @@ func NewListAnomalyDetectorsPaginator(client ListAnomalyDetectorsAPIClient, para
 	}
 
 	options := ListAnomalyDetectorsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -185,7 +185,11 @@ func (p *ListAnomalyDetectorsPaginator) NextPage(ctx context.Context, optFns ...
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListAnomalyDetectors(ctx, &params, optFns...)
 	if err != nil {

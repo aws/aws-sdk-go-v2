@@ -34,7 +34,7 @@ type ListTagsForProjectInput struct {
 	Id *string
 
 	// Reserved for future use.
-	MaxResults int32
+	MaxResults *int32
 
 	// Reserved for future use.
 	NextToken *string

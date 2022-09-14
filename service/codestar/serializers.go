@@ -1236,9 +1236,9 @@ func awsAwsjson11_serializeOpDocumentAssociateTeamMemberInput(v *AssociateTeamMe
 		ok.String(*v.ProjectRole)
 	}
 
-	if v.RemoteAccessAllowed {
+	if v.RemoteAccessAllowed != nil {
 		ok := object.Key("remoteAccessAllowed")
-		ok.Boolean(v.RemoteAccessAllowed)
+		ok.Boolean(*v.RemoteAccessAllowed)
 	}
 
 	if v.UserArn != nil {
@@ -1403,9 +1403,9 @@ func awsAwsjson11_serializeOpDocumentListProjectsInput(v *ListProjectsInput, val
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1420,9 +1420,9 @@ func awsAwsjson11_serializeOpDocumentListResourcesInput(v *ListResourcesInput, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1447,9 +1447,9 @@ func awsAwsjson11_serializeOpDocumentListTagsForProjectInput(v *ListTagsForProje
 		ok.String(*v.Id)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1464,9 +1464,9 @@ func awsAwsjson11_serializeOpDocumentListTeamMembersInput(v *ListTeamMembersInpu
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1486,9 +1486,9 @@ func awsAwsjson11_serializeOpDocumentListUserProfilesInput(v *ListUserProfilesIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1573,9 +1573,9 @@ func awsAwsjson11_serializeOpDocumentUpdateTeamMemberInput(v *UpdateTeamMemberIn
 		ok.String(*v.ProjectRole)
 	}
 
-	if v.RemoteAccessAllowed {
+	if v.RemoteAccessAllowed != nil {
 		ok := object.Key("remoteAccessAllowed")
-		ok.Boolean(v.RemoteAccessAllowed)
+		ok.Boolean(*v.RemoteAccessAllowed)
 	}
 
 	if v.UserArn != nil {

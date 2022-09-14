@@ -100,7 +100,7 @@ type RotateSecretInput struct {
 	// of the Lambda rotation function. The test creates an AWSPENDING version of the
 	// secret and then removes it. If you don't specify this value, then by default,
 	// Secrets Manager rotates the secret immediately.
-	RotateImmediately bool
+	RotateImmediately *bool
 
 	// The ARN of the Lambda rotation function that can rotate the secret.
 	RotationLambdaARN *string

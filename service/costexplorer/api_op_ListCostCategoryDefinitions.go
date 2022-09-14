@@ -40,7 +40,7 @@ type ListCostCategoryDefinitionsInput struct {
 	EffectiveOn *string
 
 	// The number of entries a paginated response contains.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
 	// token when the response from a previous call has more results than the maximum
@@ -164,8 +164,8 @@ func NewListCostCategoryDefinitionsPaginator(client ListCostCategoryDefinitionsA
 	}
 
 	options := ListCostCategoryDefinitionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -195,7 +195,11 @@ func (p *ListCostCategoryDefinitionsPaginator) NextPage(ctx context.Context, opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListCostCategoryDefinitions(ctx, &params, optFns...)
 	if err != nil {

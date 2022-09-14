@@ -51,7 +51,7 @@ type UpdateTeamMemberInput struct {
 	// SSH public key associated with the user's profile. Even if this is set to True,
 	// the user must associate a public key with their profile before the user can
 	// access resources.
-	RemoteAccessAllowed bool
+	RemoteAccessAllowed *bool
 
 	noSmithyDocumentSerde
 }
@@ -63,7 +63,7 @@ type UpdateTeamMemberOutput struct {
 
 	// Whether a team member is allowed to remotely access project resources using the
 	// SSH public key associated with the user's profile.
-	RemoteAccessAllowed bool
+	RemoteAccessAllowed *bool
 
 	// The Amazon Resource Name (ARN) of the user whose team membership attributes were
 	// updated.

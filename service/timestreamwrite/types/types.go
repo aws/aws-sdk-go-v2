@@ -180,7 +180,7 @@ type Record struct {
 	// cases where the measure value is the same, Version will still be updated .
 	// Default value is 1. Version must be 1 or greater, or you will receive a
 	// ValidationException error.
-	Version int64
+	Version *int64
 
 	noSmithyDocumentSerde
 }
@@ -208,7 +208,7 @@ type RejectedRecord struct {
 	// The existing version of the record. This value is populated in scenarios where
 	// an identical record exists with a higher version than the version in the write
 	// request.
-	ExistingVersion int64
+	ExistingVersion *int64
 
 	// The reason why a record was not successfully inserted into Timestream. Possible
 	// causes of failure include:

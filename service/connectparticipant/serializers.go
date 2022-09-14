@@ -410,9 +410,9 @@ func awsRestjson1_serializeOpDocumentGetTranscriptInput(v *GetTranscriptInput, v
 		ok.String(*v.ContactId)
 	}
 
-	if v.MaxResults != 0 {
+	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
-		ok.Integer(v.MaxResults)
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

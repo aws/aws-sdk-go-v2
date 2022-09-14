@@ -151,7 +151,7 @@ type GetReservationCoverageInput struct {
 	// objects are available, in the response, Amazon Web Services provides a
 	// NextPageToken value that you can use in a subsequent call to get the next batch
 	// of objects.
-	MaxResults int32
+	MaxResults *int32
 
 	// The measurement that you want your reservation coverage reported in. Valid
 	// values are Hour, Unit, and Cost. You can use multiple values in a request.

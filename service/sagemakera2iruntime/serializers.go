@@ -189,8 +189,8 @@ func awsRestjson1_serializeOpHttpBindingsListHumanLoopsInput(v *ListHumanLoopsIn
 		encoder.SetQuery("FlowDefinitionArn").String(*v.FlowDefinitionArn)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("MaxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {

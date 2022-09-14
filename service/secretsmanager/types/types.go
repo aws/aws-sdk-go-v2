@@ -84,7 +84,7 @@ type RotationRulesType struct {
 	// is calculated from the rotation schedule after every successful rotation. In
 	// RotateSecret, you can set the rotation schedule in RotationRules with
 	// AutomaticallyAfterDays or ScheduleExpression, but not both.
-	AutomaticallyAfterDays int64
+	AutomaticallyAfterDays *int64
 
 	// The length of the rotation window in hours, for example 3h for a three hour
 	// window. Secrets Manager rotates your secret at any time during this window. The
@@ -168,7 +168,7 @@ type SecretListEntry struct {
 	PrimaryRegion *string
 
 	// Indicates whether automatic, scheduled rotation is enabled for this secret.
-	RotationEnabled bool
+	RotationEnabled *bool
 
 	// The ARN of an Amazon Web Services Lambda function invoked by Secrets Manager to
 	// rotate and expire the secret either automatically per the schedule or manually

@@ -17924,9 +17924,9 @@ func awsRestjson1_serializeDocumentAuthorizerConfig(v *types.AuthorizerConfig, v
 	object := value.Object()
 	defer object.Close()
 
-	if v.AllowAuthorizerOverride {
+	if v.AllowAuthorizerOverride != nil {
 		ok := object.Key("allowAuthorizerOverride")
-		ok.Boolean(v.AllowAuthorizerOverride)
+		ok.Boolean(*v.AllowAuthorizerOverride)
 	}
 
 	if v.DefaultAuthorizerName != nil {

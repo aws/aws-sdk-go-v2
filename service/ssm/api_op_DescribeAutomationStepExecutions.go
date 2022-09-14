@@ -42,7 +42,7 @@ type DescribeAutomationStepExecutionsInput struct {
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults int32
+	MaxResults *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -50,7 +50,7 @@ type DescribeAutomationStepExecutionsInput struct {
 
 	// Indicates whether to list step executions in reverse order by start time. The
 	// default value is 'false'.
-	ReverseOrder bool
+	ReverseOrder *bool
 
 	noSmithyDocumentSerde
 }
@@ -172,8 +172,8 @@ func NewDescribeAutomationStepExecutionsPaginator(client DescribeAutomationStepE
 	}
 
 	options := DescribeAutomationStepExecutionsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -203,7 +203,11 @@ func (p *DescribeAutomationStepExecutionsPaginator) NextPage(ctx context.Context
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.DescribeAutomationStepExecutions(ctx, &params, optFns...)
 	if err != nil {

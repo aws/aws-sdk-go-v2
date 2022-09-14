@@ -5411,9 +5411,9 @@ func awsRestjson1_serializeDocumentVirtualGatewayHttpConnectionPool(v *types.Vir
 		ok.Integer(v.MaxConnections)
 	}
 
-	if v.MaxPendingRequests != 0 {
+	if v.MaxPendingRequests != nil {
 		ok := object.Key("maxPendingRequests")
-		ok.Integer(v.MaxPendingRequests)
+		ok.Integer(*v.MaxPendingRequests)
 	}
 
 	return nil
@@ -5826,9 +5826,9 @@ func awsRestjson1_serializeDocumentVirtualNodeHttpConnectionPool(v *types.Virtua
 		ok.Integer(v.MaxConnections)
 	}
 
-	if v.MaxPendingRequests != 0 {
+	if v.MaxPendingRequests != nil {
 		ok := object.Key("maxPendingRequests")
-		ok.Integer(v.MaxPendingRequests)
+		ok.Integer(*v.MaxPendingRequests)
 	}
 
 	return nil

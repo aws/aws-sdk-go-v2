@@ -84,7 +84,7 @@ type CreateMaintenanceWindowInput struct {
 	// cron expression schedules a maintenance window to run on the third Tuesday of
 	// every month at 11:30 PM. cron(30 23 ? * TUE#3 *) If the schedule offset is 2,
 	// the maintenance window won't run until two days later.
-	ScheduleOffset int32
+	ScheduleOffset *int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:

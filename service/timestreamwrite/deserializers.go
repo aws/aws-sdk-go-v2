@@ -2739,7 +2739,7 @@ func awsAwsjson10_deserializeDocumentRejectedRecord(v **types.RejectedRecord, va
 				if err != nil {
 					return err
 				}
-				sv.ExistingVersion = i64
+				sv.ExistingVersion = ptr.Int64(i64)
 			}
 
 		case "Reason":

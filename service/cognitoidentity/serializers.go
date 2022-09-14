@@ -1293,9 +1293,9 @@ func awsAwsjson11_serializeDocumentCognitoIdentityProvider(v *types.CognitoIdent
 		ok.String(*v.ProviderName)
 	}
 
-	if v.ServerSideTokenCheck {
+	if v.ServerSideTokenCheck != nil {
 		ok := object.Key("ServerSideTokenCheck")
-		ok.Boolean(v.ServerSideTokenCheck)
+		ok.Boolean(*v.ServerSideTokenCheck)
 	}
 
 	return nil

@@ -43,7 +43,7 @@ type GetProductsInput struct {
 	FormatVersion *string
 
 	// The maximum number of results to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
@@ -166,8 +166,8 @@ func NewGetProductsPaginator(client GetProductsAPIClient, params *GetProductsInp
 	}
 
 	options := GetProductsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -197,7 +197,11 @@ func (p *GetProductsPaginator) NextPage(ctx context.Context, optFns ...func(*Opt
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.GetProducts(ctx, &params, optFns...)
 	if err != nil {

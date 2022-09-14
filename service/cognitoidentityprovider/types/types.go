@@ -1082,7 +1082,7 @@ type SchemaAttributeType struct {
 	// Users won't be able to modify this attribute using their access token. For
 	// example, DeveloperOnlyAttribute can be modified using AdminUpdateUserAttributes
 	// but can't be updated using UpdateUserAttributes.
-	DeveloperOnlyAttribute bool
+	DeveloperOnlyAttribute *bool
 
 	// Specifies whether the value of the attribute can be changed. For any user pool
 	// attribute that is mapped to an IdP attribute, you must set this parameter to
@@ -1091,7 +1091,7 @@ type SchemaAttributeType struct {
 	// an error when it attempts to update the attribute. For more information, see
 	// Specifying Identity Provider Attribute Mappings for Your User Pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
-	Mutable bool
+	Mutable *bool
 
 	// A schema attribute of the name type.
 	Name *string
@@ -1102,7 +1102,7 @@ type SchemaAttributeType struct {
 	// Specifies whether a user pool attribute is required. If the attribute is
 	// required and the user doesn't provide a value, registration or sign-in will
 	// fail.
-	Required bool
+	Required *bool
 
 	// Specifies the constraints for an attribute of the string type.
 	StringAttributeConstraints *StringAttributeConstraintsType
@@ -1466,7 +1466,7 @@ type UserPoolClientType struct {
 
 	// Set to true if the client is allowed to follow the OAuth protocol when
 	// interacting with Amazon Cognito user pools.
-	AllowedOAuthFlowsUserPoolClient bool
+	AllowedOAuthFlowsUserPoolClient *bool
 
 	// The OAuth scopes that your app client supports. Possible values that OAuth
 	// provides are phone, email, openid, and profile. Possible values that Amazon Web

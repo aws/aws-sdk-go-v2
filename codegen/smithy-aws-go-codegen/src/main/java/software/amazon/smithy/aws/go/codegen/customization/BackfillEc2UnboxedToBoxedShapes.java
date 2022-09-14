@@ -1,16 +1,18 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
-import software.amazon.smithy.codegen.core.CodegenException;
-import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.transform.ModelTransformer;
+import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
-import software.amazon.smithy.model.shapes.ShapeType;
-import software.amazon.smithy.model.traits.BoxTrait;
+import software.amazon.smithy.model.shapes.StructureShape;
+import software.amazon.smithy.model.traits.ClientOptionalTrait;
 import software.amazon.smithy.utils.SetUtils;
 
 public class BackfillEc2UnboxedToBoxedShapes implements GoIntegration {
@@ -26,7 +28,7 @@ public class BackfillEc2UnboxedToBoxedShapes implements GoIntegration {
 
     /**
      * /**
-     * Updates the API model to customize all number and boolean unboxed shapes to be boxed.
+     * Updates the API model to customize all structured members to be nullable.
      *
      * @param model    API model
      * @param settings Go codegen settings
@@ -39,63 +41,12 @@ public class BackfillEc2UnboxedToBoxedShapes implements GoIntegration {
             return model;
         }
 
-        Model.Builder builder = model.toBuilder();
-
-        for (Shape shape : model.toSet()) {
-            // Only consider number and boolean shapes that are unboxed
-            if (shape.isMemberShape()) {
-                continue;
+        List<Shape> updates = new ArrayList<>();
+        for (StructureShape struct : model.getStructureShapes()) {
+            for (MemberShape member : struct.getAllMembers().values()) {
+                updates.add(member.toBuilder().addTrait(new ClientOptionalTrait()).build());
             }
-            if (!(CodegenUtils.isNumber(shape) || shape.getType() == ShapeType.BOOLEAN)) {
-                continue;
-            }
-            if (shape.hasTrait(BoxTrait.class)) {
-                continue;
-            }
-
-            switch (shape.getType()) {
-                case BYTE:
-                    shape = shape.asByteShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                case SHORT:
-                    shape = shape.asShortShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                case INTEGER:
-                    shape = shape.asIntegerShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                case LONG:
-                    shape = shape.asLongShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                case FLOAT:
-                    shape = shape.asFloatShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                case DOUBLE:
-                    shape = shape.asDoubleShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                case BOOLEAN:
-                    shape = shape.asBooleanShape().get().toBuilder()
-                            .addTrait(new BoxTrait())
-                            .build();
-                    break;
-                default:
-                    throw new CodegenException("unexpected shape type for " + shape.getId() + ", " + shape.getType());
-            }
-
-            builder.addShape(shape);
         }
-
-        return builder.build();
+        return ModelTransformer.create().replaceShapes(model, updates);
     }
 }
