@@ -1,0 +1,8 @@
+{
+    "id": "139ac133-dc9a-4cd9-99f6-f1a5728351e6",
+    "type": "feature",
+    "description": "Two new features for local gateway route tables: support for static routes targeting Elastic Network Interfaces and direct VPC routing.",
+    "modules": [
+        "service/ec2"
+    ]
+}

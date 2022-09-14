@@ -1,0 +1,8 @@
+{
+    "id": "f5e6fdc6-ff5f-433a-884f-c9ce5b7beb85",
+    "type": "documentation",
+    "description": "This release updates documentation for AQUA features and other description updates.",
+    "modules": [
+        "service/redshift"
+    ]
+}

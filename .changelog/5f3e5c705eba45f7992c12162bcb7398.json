@@ -1,0 +1,8 @@
+{
+    "id": "5f3e5c70-5eba-45f7-992c-12162bcb7398",
+    "type": "feature",
+    "description": "This release adds HyperParameterTuningJob type in Search API.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

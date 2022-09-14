@@ -1,0 +1,8 @@
+{
+    "id": "723b50ca-0d43-4294-a520-ded75c868f78",
+    "type": "feature",
+    "description": "Adds support for EKS Addons ResolveConflicts \"preserve\" flag. Also adds new update failed status for EKS Addons.",
+    "modules": [
+        "service/eks"
+    ]
+}

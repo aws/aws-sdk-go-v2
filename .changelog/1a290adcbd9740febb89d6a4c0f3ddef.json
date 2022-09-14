@@ -1,0 +1,8 @@
+{
+    "id": "1a290adc-bd97-40fe-bb89-d6a4c0f3ddef",
+    "type": "feature",
+    "description": "Amazon Route 53 now supports the Middle East (UAE) Region (me-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.",
+    "modules": [
+        "service/route53"
+    ]
+}
