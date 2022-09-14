@@ -712,6 +712,16 @@ type CodeHookSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// A composite slot is a combination of two or more slots that capture multiple
+// pieces of information in a single user input.
+type CompositeSlotTypeSetting struct {
+
+	// Subslots in the composite slot.
+	SubSlots []SubSlotTypeComposition
+
+	noSmithyDocumentSerde
+}
+
 // Provides an expression that evaluates to true or false.
 type Condition struct {
 
@@ -2292,7 +2302,8 @@ type SlotValue struct {
 	noSmithyDocumentSerde
 }
 
-// Settings that you can use for eliciting a slot value.
+// Specifies the elicitation setting details for constituent sub slots of a
+// composite slot.
 type SlotValueElicitationSetting struct {
 
 	// Specifies whether the slot is required or optional.
@@ -2400,6 +2411,23 @@ type SlotValueSelectionSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Subslot specifications.
+type Specifications struct {
+
+	// The unique identifier assigned to the slot type.
+	//
+	// This member is required.
+	SlotTypeId *string
+
+	// Specifies the elicitation setting details for constituent sub slots of a
+	// composite slot.
+	//
+	// This member is required.
+	ValueElicitationSetting *SubSlotValueElicitationSetting
+
+	noSmithyDocumentSerde
+}
+
 // Defines a Speech Synthesis Markup Language (SSML) prompt.
 type SSMLMessage struct {
 
@@ -2436,6 +2464,69 @@ type StillWaitingResponseSpecification struct {
 	// Indicates that the user can interrupt the response by speaking while the message
 	// is being played.
 	AllowInterrupt *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifications for the constituent sub slots and the expression for the
+// composite slot.
+type SubSlotSetting struct {
+
+	// The expression text for defining the constituent sub slots in the composite slot
+	// using logical AND and OR operators.
+	Expression *string
+
+	// Specifications for the constituent sub slots of a composite slot.
+	SlotSpecifications map[string]Specifications
+
+	noSmithyDocumentSerde
+}
+
+// Subslot type composition.
+type SubSlotTypeComposition struct {
+
+	// Name of a constituent sub slot inside a composite slot.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique identifier assigned to a slot type. This refers to either a built-in
+	// slot type or the unique slotTypeId of a custom slot type.
+	//
+	// This member is required.
+	SlotTypeId *string
+
+	noSmithyDocumentSerde
+}
+
+// Subslot elicitation settings. DefaultValueSpecification is a list of default
+// values for a constituent sub slot in a composite slot. Default values are used
+// when Amazon Lex hasn't determined a value for a slot. You can specify default
+// values from context variables, session attributes, and defined values. This is
+// similar to DefaultValueSpecification for slots. PromptSpecification is the
+// prompt that Amazon Lex uses to elicit the sub slot value from the user. This is
+// similar to PromptSpecification for slots.
+type SubSlotValueElicitationSetting struct {
+
+	// Specifies a list of message groups that Amazon Lex sends to a user to elicit a
+	// response.
+	//
+	// This member is required.
+	PromptSpecification *PromptSpecification
+
+	// Defines a list of values that Amazon Lex should use as the default value for a
+	// slot.
+	DefaultValueSpecification *SlotDefaultValueSpecification
+
+	// If you know a specific pattern that users might respond to an Amazon Lex request
+	// for a sub slot value, you can provide those utterances to improve accuracy. This
+	// is optional. In most cases Amazon Lex is capable of understanding user
+	// utterances. This is similar to SampleUtterances for slots.
+	SampleUtterances []SampleUtterance
+
+	// Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
+	// input.
+	WaitAndContinueSpecification *WaitAndContinueSpecification
 
 	noSmithyDocumentSerde
 }

@@ -2,6 +2,24 @@
 
 package types
 
+type DestinationType string
+
+// Enum values for DestinationType
+const (
+	DestinationTypeEventDataStore DestinationType = "EVENT_DATA_STORE"
+	DestinationTypeAwsService     DestinationType = "AWS_SERVICE"
+)
+
+// Values returns all known values for DestinationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationType) Values() []DestinationType {
+	return []DestinationType{
+		"EVENT_DATA_STORE",
+		"AWS_SERVICE",
+	}
+}
+
 type EventCategory string
 
 // Enum values for EventCategory

@@ -43,6 +43,7 @@ const (
 	AddonStatusDeleting     AddonStatus = "DELETING"
 	AddonStatusDeleteFailed AddonStatus = "DELETE_FAILED"
 	AddonStatusDegraded     AddonStatus = "DEGRADED"
+	AddonStatusUpdateFailed AddonStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for AddonStatus. Note that this can be expanded
@@ -57,6 +58,7 @@ func (AddonStatus) Values() []AddonStatus {
 		"DELETING",
 		"DELETE_FAILED",
 		"DEGRADED",
+		"UPDATE_FAILED",
 	}
 }
 
@@ -105,6 +107,32 @@ func (CapacityTypes) Values() []CapacityTypes {
 	return []CapacityTypes{
 		"ON_DEMAND",
 		"SPOT",
+	}
+}
+
+type ClusterIssueCode string
+
+// Enum values for ClusterIssueCode
+const (
+	ClusterIssueCodeAccessDenied          ClusterIssueCode = "AccessDenied"
+	ClusterIssueCodeClusterUnreachable    ClusterIssueCode = "ClusterUnreachable"
+	ClusterIssueCodeConfigurationConflict ClusterIssueCode = "ConfigurationConflict"
+	ClusterIssueCodeInternalFailure       ClusterIssueCode = "InternalFailure"
+	ClusterIssueCodeResourceLimitExceeded ClusterIssueCode = "ResourceLimitExceeded"
+	ClusterIssueCodeResourceNotFound      ClusterIssueCode = "ResourceNotFound"
+)
+
+// Values returns all known values for ClusterIssueCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterIssueCode) Values() []ClusterIssueCode {
+	return []ClusterIssueCode{
+		"AccessDenied",
+		"ClusterUnreachable",
+		"ConfigurationConflict",
+		"InternalFailure",
+		"ResourceLimitExceeded",
+		"ResourceNotFound",
 	}
 }
 
@@ -386,6 +414,7 @@ type ResolveConflicts string
 const (
 	ResolveConflictsOverwrite ResolveConflicts = "OVERWRITE"
 	ResolveConflictsNone      ResolveConflicts = "NONE"
+	ResolveConflictsPreserve  ResolveConflicts = "PRESERVE"
 )
 
 // Values returns all known values for ResolveConflicts. Note that this can be
@@ -395,6 +424,7 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 	return []ResolveConflicts{
 		"OVERWRITE",
 		"NONE",
+		"PRESERVE",
 	}
 }
 

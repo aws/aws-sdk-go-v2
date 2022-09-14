@@ -43,8 +43,7 @@ type AssociateIdentityProviderConfigInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// An object that represents an OpenID Connect (OIDC) identity provider
-	// configuration.
+	// An object representing an OpenID Connect (OIDC) identity provider configuration.
 	//
 	// This member is required.
 	Oidc *types.OidcIdentityProviderConfigRequest

@@ -462,6 +462,26 @@ func (FindingTypeSortBy) Values() []FindingTypeSortBy {
 	}
 }
 
+type FixAvailable string
+
+// Enum values for FixAvailable
+const (
+	FixAvailableYes     FixAvailable = "YES"
+	FixAvailableNo      FixAvailable = "NO"
+	FixAvailablePartial FixAvailable = "PARTIAL"
+)
+
+// Values returns all known values for FixAvailable. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FixAvailable) Values() []FixAvailable {
+	return []FixAvailable{
+		"YES",
+		"NO",
+		"PARTIAL",
+	}
+}
+
 type FreeTrialInfoErrorCode string
 
 // Enum values for FreeTrialInfoErrorCode
@@ -860,6 +880,8 @@ const (
 	ScanStatusReasonScanFrequencyScanOnPush ScanStatusReason = "SCAN_FREQUENCY_SCAN_ON_PUSH"
 	ScanStatusReasonEc2InstanceStopped      ScanStatusReason = "EC2_INSTANCE_STOPPED"
 	ScanStatusReasonPendingDisable          ScanStatusReason = "PENDING_DISABLE"
+	ScanStatusReasonNoInventory             ScanStatusReason = "NO_INVENTORY"
+	ScanStatusReasonStaleInventory          ScanStatusReason = "STALE_INVENTORY"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -881,6 +903,8 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"SCAN_FREQUENCY_SCAN_ON_PUSH",
 		"EC2_INSTANCE_STOPPED",
 		"PENDING_DISABLE",
+		"NO_INVENTORY",
+		"STALE_INVENTORY",
 	}
 }
 

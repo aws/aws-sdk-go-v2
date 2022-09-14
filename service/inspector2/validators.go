@@ -957,6 +957,11 @@ func validateFilterCriteria(v *types.FilterCriteria) error {
 			invalidParams.AddNested("RelatedVulnerabilities", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FixAvailable != nil {
+		if err := validateStringFilterList(v.FixAvailable); err != nil {
+			invalidParams.AddNested("FixAvailable", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

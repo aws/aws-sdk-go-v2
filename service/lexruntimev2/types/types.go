@@ -191,7 +191,12 @@ type ConfigurationEvent struct {
 	// The state of the user's session with Amazon Lex V2.
 	SessionState *SessionState
 
-	// A list of messages to send to the user.
+	// A list of messages to send to the user. If you set the welcomeMessage field, you
+	// must also set the DialogAction
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html)
+	// structure's type
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type)
+	// field.
 	WelcomeMessages []Message
 
 	noSmithyDocumentSerde
@@ -214,7 +219,10 @@ type DialogAction struct {
 	// * Delegate - The next action is determined by Amazon Lex
 	// V2.
 	//
-	// * ElicitSlot - The next action is to elicit a slot value from the user.
+	// * ElicitIntent - The next action is to elicit an intent from the user.
+	//
+	// *
+	// ElicitSlot - The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
 	Type DialogActionType
@@ -234,6 +242,10 @@ type DialogAction struct {
 
 	// The name of the slot that should be elicited from the user.
 	SlotToElicit *string
+
+	// The name of the constituent sub slot of the composite slot specified in
+	// slotToElicit that should be elicited from the user.
+	SubSlotToElicit *ElicitSubSlot
 
 	noSmithyDocumentSerde
 }
@@ -272,6 +284,21 @@ type DTMFInputEvent struct {
 	// A unique identifier that your application assigns to the event. You can use this
 	// to identify events in logs.
 	EventId *string
+
+	noSmithyDocumentSerde
+}
+
+// The specific constituent sub slot of the composite slot to elicit in dialog
+// action.
+type ElicitSubSlot struct {
+
+	// The name of the slot that should be elicited from the user.
+	//
+	// This member is required.
+	Name *string
+
+	// The field is not supported.
+	SubSlotToElicit *ElicitSubSlot
 
 	noSmithyDocumentSerde
 }
@@ -455,9 +482,14 @@ type RuntimeHintDetails struct {
 
 	// One or more strings that Amazon Lex V2 should look for in the input to the bot.
 	// Each phrase is given preference when deciding on slot values.
-	//
-	// This member is required.
 	RuntimeHintValues []RuntimeHintValue
+
+	// A map of constituent sub slot names inside a composite slot in the intent and
+	// the phrases that should be added for each sub slot. Inside each composite slot
+	// hints, this structure provides a mechanism to add granular sub slot phrases.
+	// Only sub slot hints are supported for composite slots. The intent name,
+	// composite slot name and the constituent sub slot names must exist.
+	SubSlotHints map[string]RuntimeHintDetails
 
 	noSmithyDocumentSerde
 }
@@ -467,15 +499,15 @@ type RuntimeHintDetails struct {
 // runtime hints are preferred in the resolution. You can provide hints for a
 // maximum of 100 intents. You can provide a maximum of 100 slots. Before you can
 // use runtime hints with an existing bot, you must first rebuild the bot. For more
-// information, see Using hints to improve accuracy
-// (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml).
+// information, see Using runtime hints to improve recognition of slot values
+// (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html).
 type RuntimeHints struct {
 
 	// A list of the slots in the intent that should have runtime hints added, and the
 	// phrases that should be added for each slot. The first level of the slotHints map
 	// is the name of the intent. The second level is the name of the slot within the
 	// intent. For more information, see Using hints to improve accuracy
-	// (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml). The intent name
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html). The intent name
 	// and slot name must exist.
 	SlotHints map[string]map[string]RuntimeHintDetails
 
@@ -570,6 +602,9 @@ type Slot struct {
 	// of slot values. When the value is Scalar, it indicates that the value field
 	// contains a single value.
 	Shape Shape
+
+	// The constituent sub slots of a composite slot.
+	SubSlots map[string]Slot
 
 	// The current value of the slot.
 	Value *Value

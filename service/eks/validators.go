@@ -835,6 +835,24 @@ func validateOidcIdentityProviderConfigRequest(v *types.OidcIdentityProviderConf
 	}
 }
 
+func validateOutpostConfigRequest(v *types.OutpostConfigRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutpostConfigRequest"}
+	if v.OutpostArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostArns"))
+	}
+	if v.ControlPlaneInstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ControlPlaneInstanceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateEncryptionConfigInput(v *AssociateEncryptionConfigInput) error {
 	if v == nil {
 		return nil
@@ -906,6 +924,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	}
 	if v.ResourcesVpcConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourcesVpcConfig"))
+	}
+	if v.OutpostConfig != nil {
+		if err := validateOutpostConfigRequest(v.OutpostConfig); err != nil {
+			invalidParams.AddNested("OutpostConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

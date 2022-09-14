@@ -1759,6 +1759,11 @@ func awsRestjson1_deserializeOpDocumentDescribeMetricSetOutput(v **DescribeMetri
 				}
 			}
 
+		case "DimensionFilterList":
+			if err := awsRestjson1_deserializeDocumentMetricSetDimensionFilterList(&sv.DimensionFilterList, value); err != nil {
+				return err
+			}
+
 		case "DimensionList":
 			if err := awsRestjson1_deserializeDocumentDimensionList(&sv.DimensionList, value); err != nil {
 				return err
@@ -7365,6 +7370,89 @@ func awsRestjson1_deserializeDocumentFileFormatDescriptor(v **types.FileFormatDe
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFilter(v **types.Filter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Filter
+	if *v == nil {
+		sv = &types.Filter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DimensionValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DimensionValue to be of type string, got %T instead", value)
+				}
+				sv.DimensionValue = ptr.String(jtv)
+			}
+
+		case "FilterOperation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FilterOperation to be of type string, got %T instead", value)
+				}
+				sv.FilterOperation = types.FilterOperation(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFilterList(v *[]types.Filter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Filter
+	if *v == nil {
+		cv = []types.Filter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Filter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFilter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHeaderList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8113,6 +8201,85 @@ func awsRestjson1_deserializeDocumentMetricSetDataQualityMetricList(v *[]types.M
 		var col types.MetricSetDataQualityMetric
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentMetricSetDataQualityMetric(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetricSetDimensionFilter(v **types.MetricSetDimensionFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricSetDimensionFilter
+	if *v == nil {
+		sv = &types.MetricSetDimensionFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FilterList":
+			if err := awsRestjson1_deserializeDocumentFilterList(&sv.FilterList, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetricSetDimensionFilterList(v *[]types.MetricSetDimensionFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MetricSetDimensionFilter
+	if *v == nil {
+		cv = []types.MetricSetDimensionFilter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MetricSetDimensionFilter
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMetricSetDimensionFilter(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

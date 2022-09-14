@@ -524,6 +524,13 @@ func awsRestjson1_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AppConfigResource != nil {
+		ok := object.Key("appConfigResource")
+		if err := awsRestjson1_serializeDocumentProjectAppConfigResourceConfig(v.AppConfigResource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataDelivery != nil {
 		ok := object.Key("dataDelivery")
 		if err := awsRestjson1_serializeDocumentProjectDataDeliveryConfig(v.DataDelivery, ok); err != nil {
@@ -3037,6 +3044,13 @@ func awsRestjson1_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AppConfigResource != nil {
+		ok := object.Key("appConfigResource")
+		if err := awsRestjson1_serializeDocumentProjectAppConfigResourceConfig(v.AppConfigResource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -3417,6 +3431,23 @@ func awsRestjson1_serializeDocumentOnlineAbConfig(v *types.OnlineAbConfig, value
 		if err := awsRestjson1_serializeDocumentTreatmentToWeightMap(v.TreatmentWeights, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProjectAppConfigResourceConfig(v *types.ProjectAppConfigResourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationId != nil {
+		ok := object.Key("applicationId")
+		ok.String(*v.ApplicationId)
+	}
+
+	if v.EnvironmentId != nil {
+		ok := object.Key("environmentId")
+		ok.String(*v.EnvironmentId)
 	}
 
 	return nil

@@ -42,6 +42,15 @@ type UpdateProjectInput struct {
 	// This member is required.
 	Project *string
 
+	// Use this parameter if the project will use client-side evaluation powered by
+	// AppConfig. Client-side evaluation allows your application to assign variations
+	// to user sessions locally instead of by calling the EvaluateFeature
+	// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
+	// operation. This mitigates the latency and availability risks that come with an
+	// API call. allows you to This parameter is a structure that contains information
+	// about the AppConfig application that will be used for client-side evaluation.
+	AppConfigResource *types.ProjectAppConfigResourceConfig
+
 	// An optional description of the project.
 	Description *string
 

@@ -4866,6 +4866,11 @@ func awsRestjson1_serializeOpDocumentUpdateAssetPropertyInput(v *UpdateAssetProp
 		ok.String(string(v.PropertyNotificationState))
 	}
 
+	if v.PropertyUnit != nil {
+		ok := object.Key("propertyUnit")
+		ok.String(*v.PropertyUnit)
+	}
+
 	return nil
 }
 

@@ -28,7 +28,6 @@ func (c *Client) CreateEventAction(ctx context.Context, params *CreateEventActio
 	return out, nil
 }
 
-// The request body for CreateEventAction.
 type CreateEventActionInput struct {
 
 	// What occurs after a certain event.

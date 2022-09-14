@@ -84,6 +84,10 @@ type UpdateSlotInput struct {
 	// The unique identifier of the new slot type to associate with this slot.
 	SlotTypeId *string
 
+	// Specifications for the constituent sub slots and the expression for the
+	// composite slot.
+	SubSlotSetting *types.SubSlotSetting
+
 	noSmithyDocumentSerde
 }
 
@@ -125,6 +129,10 @@ type UpdateSlotOutput struct {
 
 	// The updated identifier of the slot type that provides values for the slot.
 	SlotTypeId *string
+
+	// Specifications for the constituent sub slots and the expression for the
+	// composite slot.
+	SubSlotSetting *types.SubSlotSetting
 
 	// The updated prompts that Amazon Lex sends to the user to elicit a response that
 	// provides a value for the slot.

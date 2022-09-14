@@ -2714,6 +2714,15 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				sv.DomainName = ptr.String(jtv)
 			}
 
+		case "IsUnstructured":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected optionalBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsUnstructured = ptr.Bool(jtv)
+			}
+
 		case "LastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5695,6 +5704,15 @@ func awsRestjson1_deserializeOpDocumentPutIntegrationOutput(v **PutIntegrationOu
 				sv.DomainName = ptr.String(jtv)
 			}
 
+		case "IsUnstructured":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected optionalBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsUnstructured = ptr.Bool(jtv)
+			}
+
 		case "LastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8520,6 +8538,15 @@ func awsRestjson1_deserializeDocumentListIntegrationItem(v **types.ListIntegrati
 					return fmt.Errorf("expected name to be of type string, got %T instead", value)
 				}
 				sv.DomainName = ptr.String(jtv)
+			}
+
+		case "IsUnstructured":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected optionalBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsUnstructured = ptr.Bool(jtv)
 			}
 
 		case "LastUpdatedAt":

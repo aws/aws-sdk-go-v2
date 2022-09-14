@@ -150,6 +150,26 @@ func (m *validateOpDescribeQuery) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetChannel struct {
+}
+
+func (*validateOpGetChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEventDataStore struct {
 }
 
@@ -538,6 +558,10 @@ func addOpDescribeQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeQuery{}, middleware.After)
 }
 
+func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
+}
+
 func addOpGetEventDataStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventDataStore{}, middleware.After)
 }
@@ -873,6 +897,21 @@ func validateOpDescribeQueryInput(v *DescribeQueryInput) error {
 	}
 	if v.QueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetChannelInput(v *GetChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelInput"}
+	if v.Channel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

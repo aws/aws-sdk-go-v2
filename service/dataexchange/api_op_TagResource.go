@@ -26,7 +26,6 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
-// The request body for TagResource.
 type TagResourceInput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.

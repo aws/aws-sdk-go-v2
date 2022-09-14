@@ -12,12 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API operation is in preview release for IoT SiteWise and is subject to
-// change. We recommend that you use this operation only with test data, and not in
-// production environments. Retrieves a paginated list of bulk import job requests.
-// For more information, see List bulk import jobs (CLI)
+// Retrieves a paginated list of bulk import job requests. For more information,
+// see List bulk import jobs (CLI)
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html)
-// in the Amazon Simple Storage Service User Guide.
+// in the IoT SiteWise User Guide.
 func (c *Client) ListBulkImportJobs(ctx context.Context, params *ListBulkImportJobsInput, optFns ...func(*Options)) (*ListBulkImportJobsOutput, error) {
 	if params == nil {
 		params = &ListBulkImportJobsInput{}

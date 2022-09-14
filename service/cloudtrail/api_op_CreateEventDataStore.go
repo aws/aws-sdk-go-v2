@@ -51,7 +51,7 @@ type CreateEventDataStoreInput struct {
 	OrganizationEnabled *bool
 
 	// The retention period of the event data store, in days. You can set a retention
-	// period of up to 2555 days, the equivalent of seven years.
+	// period of up to 2557 days, the equivalent of seven years.
 	RetentionPeriod *int32
 
 	// A list of tags.

@@ -1707,6 +1707,26 @@ type AutoMLJobConfig struct {
 	// AutoMLDataSplitConfig
 	DataSplitConfig *AutoMLDataSplitConfig
 
+	// The method that Autopilot uses to train the data. You can either specify the
+	// mode manually or let Autopilot choose for you based on the dataset size by
+	// selecting AUTO. In AUTO mode, Autopilot chooses ENSEMBLING for datasets smaller
+	// than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING mode uses
+	// a multi-stack ensemble model to predict classification and regression tasks
+	// directly from your dataset. This machine learning mode combines several base
+	// models to produce an optimal predictive model. It then uses a stacking ensemble
+	// method to combine predictions from contributing members. A multi-stack ensemble
+	// model can provide better performance over a single model by combining the
+	// predictive capabilities of multiple models. See Autopilot algorithm support
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
+	// for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING
+	// (HPO) mode uses the best hyperparameters to train the best version of a model.
+	// HPO will automatically select an algorithm for the type of problem you want to
+	// solve. Then HPO finds the best hyperparameters according to your objective
+	// metric. See Autopilot algorithm support
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
+	// for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
+	Mode AutoMLMode
+
 	// The security configuration for traffic encryption or Amazon VPC settings.
 	SecurityConfig *AutoMLSecurityConfig
 
@@ -6249,6 +6269,77 @@ type HyperParameterTuningJobObjective struct {
 	noSmithyDocumentSerde
 }
 
+// An entity having characteristics over which a user can search for a
+// hyperparameter tuning job.
+type HyperParameterTuningJobSearchEntity struct {
+
+	// The container for the summary information about a training job.
+	BestTrainingJob *HyperParameterTrainingJobSummary
+
+	// The time that a hyperparameter tuning job was created.
+	CreationTime *time.Time
+
+	// The error that was created when a hyperparameter tuning job failed.
+	FailureReason *string
+
+	// The time that a hyperparameter tuning job ended.
+	HyperParameterTuningEndTime *time.Time
+
+	// The Amazon Resource Name (ARN) of a hyperparameter tuning job.
+	HyperParameterTuningJobArn *string
+
+	// Configures a hyperparameter tuning job.
+	HyperParameterTuningJobConfig *HyperParameterTuningJobConfig
+
+	// The name of a hyperparameter tuning job.
+	HyperParameterTuningJobName *string
+
+	// The status of a hyperparameter tuning job.
+	HyperParameterTuningJobStatus HyperParameterTuningJobStatus
+
+	// The time that a hyperparameter tuning job was last modified.
+	LastModifiedTime *time.Time
+
+	// Specifies the number of training jobs that this hyperparameter tuning job
+	// launched, categorized by the status of their objective metric. The objective
+	// metric status shows whether the final objective metric for the training job has
+	// been evaluated by the tuning job and used in the hyperparameter tuning process.
+	ObjectiveStatusCounters *ObjectiveStatusCounters
+
+	// The container for the summary information about a training job.
+	OverallBestTrainingJob *HyperParameterTrainingJobSummary
+
+	// The tags associated with a hyperparameter tuning job. For more information see
+	// Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	Tags []Tag
+
+	// Defines the training jobs launched by a hyperparameter tuning job.
+	TrainingJobDefinition *HyperParameterTrainingJobDefinition
+
+	// The job definitions included in a hyperparameter tuning job.
+	TrainingJobDefinitions []HyperParameterTrainingJobDefinition
+
+	// The numbers of training jobs launched by a hyperparameter tuning job,
+	// categorized by status.
+	TrainingJobStatusCounters *TrainingJobStatusCounters
+
+	// Specifies the configuration for a hyperparameter tuning job that uses one or
+	// more previous hyperparameter tuning jobs as a starting point. The results of
+	// previous tuning jobs are used to inform which combinations of hyperparameters to
+	// search over in the new tuning job. All training jobs launched by the new
+	// hyperparameter tuning job are evaluated by using the objective metric, and the
+	// training job that performs the best is compared to the best training jobs from
+	// the parent tuning jobs. From these, the training job that performs the best as
+	// measured by the objective metric is returned as the overall best training job.
+	// All training jobs launched by parent hyperparameter tuning jobs and the new
+	// hyperparameter tuning jobs count against the limit of training jobs for the
+	// tuning job.
+	WarmStartConfig *HyperParameterTuningJobWarmStartConfig
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information about a hyperparameter tuning job.
 type HyperParameterTuningJobSummary struct {
 
@@ -10304,6 +10395,12 @@ type ProductionVariant struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
 	AcceleratorType ProductionVariantAcceleratorType
 
+	// The timeout value, in seconds, for your inference container to pass health check
+	// by SageMaker Hosting. For more information about health check, see How Your
+	// Container Should Respond to Health Check (Ping) Requests
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-algo-ping-requests).
+	ContainerStartupHealthCheckTimeoutInSeconds *int32
+
 	// Specifies configuration for a core dump from the model container when the
 	// process crashes.
 	CoreDumpConfig *ProductionVariantCoreDumpConfig
@@ -10320,9 +10417,19 @@ type ProductionVariant struct {
 	// The ML compute instance type.
 	InstanceType ProductionVariantInstanceType
 
+	// The timeout value, in seconds, to download and extract the model that you want
+	// to host from Amazon S3 to the individual inference instance associated with this
+	// production variant.
+	ModelDataDownloadTimeoutInSeconds *int32
+
 	// The serverless configuration for an endpoint. Specifies a serverless endpoint
 	// configuration instead of an instance-based endpoint configuration.
 	ServerlessConfig *ProductionVariantServerlessConfig
+
+	// The size, in GB, of the ML storage volume attached to individual inference
+	// instance associated with the production variant. Currenly only Amazon EBS gp2
+	// storage volumes are supported.
+	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
@@ -11723,6 +11830,9 @@ type SearchRecord struct {
 
 	// The feature metadata used to search through the features.
 	FeatureMetadata *FeatureMetadata
+
+	// The properties of a hyperparameter tuning job.
+	HyperParameterTuningJob *HyperParameterTuningJobSearchEntity
 
 	// A versioned model that can be deployed for SageMaker inference.
 	ModelPackage *ModelPackage

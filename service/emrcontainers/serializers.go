@@ -1323,6 +1323,13 @@ func awsRestjson1_serializeDocumentJobDriver(v *types.JobDriver, value smithyjso
 	object := value.Object()
 	defer object.Close()
 
+	if v.SparkSqlJobDriver != nil {
+		ok := object.Key("sparkSqlJobDriver")
+		if err := awsRestjson1_serializeDocumentSparkSqlJobDriver(v.SparkSqlJobDriver, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SparkSubmitJobDriver != nil {
 		ok := object.Key("sparkSubmitJobDriver")
 		if err := awsRestjson1_serializeDocumentSparkSubmitJobDriver(v.SparkSubmitJobDriver, ok); err != nil {
@@ -1379,6 +1386,23 @@ func awsRestjson1_serializeDocumentSensitivePropertiesMap(v map[string]string, v
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSparkSqlJobDriver(v *types.SparkSqlJobDriver, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntryPoint != nil {
+		ok := object.Key("entryPoint")
+		ok.String(*v.EntryPoint)
+	}
+
+	if v.SparkSqlParameters != nil {
+		ok := object.Key("sparkSqlParameters")
+		ok.String(*v.SparkSqlParameters)
+	}
+
 	return nil
 }
 

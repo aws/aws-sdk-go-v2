@@ -72,9 +72,8 @@ type CreateUserInput struct {
 
 	// A unique string used to identify the user. The length limit is 128 characters.
 	// This value can consist of letters, accented characters, symbols, numbers, and
-	// punctuation. The characters <>;:% are excluded. This value is specified at the
-	// time the user is created and stored as an attribute of the user object in the
-	// identity store.
+	// punctuation. This value is specified at the time the user is created and stored
+	// as an attribute of the user object in the identity store.
 	UserName *string
 
 	// A string indicating the user's type. Possible values depend on each customer's

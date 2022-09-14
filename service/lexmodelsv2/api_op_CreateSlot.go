@@ -88,6 +88,10 @@ type CreateSlotInput struct {
 	// determines the values that can be entered into the slot.
 	SlotTypeId *string
 
+	// Specifications for the constituent sub slots and the expression for the
+	// composite slot.
+	SubSlotSetting *types.SubSlotSetting
+
 	noSmithyDocumentSerde
 }
 
@@ -127,6 +131,10 @@ type CreateSlotOutput struct {
 
 	// The unique identifier of the slot type associated with this slot.
 	SlotTypeId *string
+
+	// Specifications for the constituent sub slots and the expression for the
+	// composite slot.
+	SubSlotSetting *types.SubSlotSetting
 
 	// The value elicitation settings specified for the slot.
 	ValueElicitationSetting *types.SlotValueElicitationSetting

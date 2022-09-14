@@ -155,6 +155,13 @@ type CreateAssociationInput struct {
 	// associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
+	// Adds or overwrites one or more tags for a State Manager association. Tags are
+	// metadata that you can assign to your Amazon Web Services resources. Tags enable
+	// you to categorize your resources in different ways, for example, by purpose,
+	// owner, or environment. Each tag consists of a key and an optional value, both of
+	// which you define.
+	Tags []types.Tag
+
 	// A location is a combination of Amazon Web Services Regions and Amazon Web
 	// Services accounts where you want to run the association. Use this action to
 	// create an association in multiple Regions and multiple accounts.

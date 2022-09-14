@@ -115,7 +115,11 @@ type SendCommandInput struct {
 
 	// The ARN of the Identity and Access Management (IAM) service role to use to
 	// publish Amazon Simple Notification Service (Amazon SNS) notifications for Run
-	// Command commands.
+	// Command commands. This role must provide the sns:Publish permission for your
+	// notification topic. For information about creating and using this service role,
+	// see Monitoring Systems Manager status changes using Amazon SNS notifications
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html)
+	// in the Amazon Web Services Systems Manager User Guide.
 	ServiceRoleArn *string
 
 	// An array of search criteria that targets managed nodes using a Key,Value

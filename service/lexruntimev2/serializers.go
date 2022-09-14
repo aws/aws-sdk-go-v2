@@ -957,6 +957,13 @@ func awsRestjson1_serializeDocumentDialogAction(v *types.DialogAction, value smi
 		ok.String(*v.SlotToElicit)
 	}
 
+	if v.SubSlotToElicit != nil {
+		ok := object.Key("subSlotToElicit")
+		if err := awsRestjson1_serializeDocumentElicitSubSlot(v.SubSlotToElicit, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))
@@ -999,6 +1006,25 @@ func awsRestjson1_serializeDocumentDTMFInputEvent(v *types.DTMFInputEvent, value
 	if v.InputCharacter != nil {
 		ok := object.Key("inputCharacter")
 		ok.String(*v.InputCharacter)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentElicitSubSlot(v *types.ElicitSubSlot, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.SubSlotToElicit != nil {
+		ok := object.Key("subSlotToElicit")
+		if err := awsRestjson1_serializeDocumentElicitSubSlot(v.SubSlotToElicit, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1127,6 +1153,13 @@ func awsRestjson1_serializeDocumentRuntimeHintDetails(v *types.RuntimeHintDetail
 		}
 	}
 
+	if v.SubSlotHints != nil {
+		ok := object.Key("subSlotHints")
+		if err := awsRestjson1_serializeDocumentSlotHintsSlotMap(v.SubSlotHints, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1223,6 +1256,13 @@ func awsRestjson1_serializeDocumentSlot(v *types.Slot, value smithyjson.Value) e
 	if len(v.Shape) > 0 {
 		ok := object.Key("shape")
 		ok.String(string(v.Shape))
+	}
+
+	if v.SubSlots != nil {
+		ok := object.Key("subSlots")
+		if err := awsRestjson1_serializeDocumentSlots(v.SubSlots, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Value != nil {

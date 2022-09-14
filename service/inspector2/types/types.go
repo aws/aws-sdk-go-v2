@@ -989,6 +989,12 @@ type FilterCriteria struct {
 	// Details on the date and time a finding was first seen used to filter findings.
 	FirstObservedAt []DateFilter
 
+	// Details on whether a fix is available through a version update. This value can
+	// be YES, NO, or PARTIAL. A PARTIAL fix means that some, but not all, of the
+	// packages identified in the finding have fixes available through updated
+	// versions.
+	FixAvailable []StringFilter
+
 	// The Amazon Inspector score to filter on.
 	InspectorScore []NumberFilter
 
@@ -1090,6 +1096,12 @@ type Finding struct {
 	//
 	// This member is required.
 	Type FindingType
+
+	// Details on whether a fix is available through a version update. This value can
+	// be YES, NO, or PARTIAL. A PARTIAL fix means that some, but not all, of the
+	// packages identified in the finding have fixes available through updated
+	// versions.
+	FixAvailable FixAvailable
 
 	// The Amazon Inspector score given to the finding.
 	InspectorScore *float64
@@ -1418,11 +1430,6 @@ type PackageVulnerabilityDetails struct {
 	// This member is required.
 	VulnerabilityId *string
 
-	// The packages impacted by this vulnerability.
-	//
-	// This member is required.
-	VulnerablePackages []VulnerablePackage
-
 	// An object that contains details about the CVSS score of a finding.
 	Cvss []CvssScore
 
@@ -1444,6 +1451,9 @@ type PackageVulnerabilityDetails struct {
 
 	// The date and time the vendor last updated this vulnerability in their database.
 	VendorUpdatedAt *time.Time
+
+	// The packages impacted by this vulnerability.
+	VulnerablePackages []VulnerablePackage
 
 	noSmithyDocumentSerde
 }
@@ -1867,6 +1877,9 @@ type VulnerablePackage struct {
 
 	// The release of the vulnerable package.
 	Release *string
+
+	// The code to run in your environment to update packages with a fix available.
+	Remediation *string
 
 	// The source layer hash of the vulnerable package.
 	SourceLayerHash *string

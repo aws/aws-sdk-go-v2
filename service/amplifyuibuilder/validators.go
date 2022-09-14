@@ -30,6 +30,26 @@ func (m *validateOpCreateComponent) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateForm struct {
+}
+
+func (*validateOpCreateForm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateForm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFormInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFormInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTheme struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpDeleteComponent) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteForm struct {
+}
+
+func (*validateOpDeleteForm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteForm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFormInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFormInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +170,26 @@ func (m *validateOpExportComponents) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExportForms struct {
+}
+
+func (*validateOpExportForms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportForms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportFormsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportFormsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpExportThemes struct {
 }
 
@@ -165,6 +225,46 @@ func (m *validateOpGetComponent) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetForm struct {
+}
+
+func (*validateOpGetForm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetForm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFormInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFormInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMetadata struct {
+}
+
+func (*validateOpGetMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetadataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +310,26 @@ func (m *validateOpListComponents) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListForms struct {
+}
+
+func (*validateOpListForms) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListForms) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFormsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFormsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListThemes struct {
 }
 
@@ -225,6 +345,26 @@ func (m *validateOpListThemes) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListThemesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutMetadataFlag struct {
+}
+
+func (*validateOpPutMetadataFlag) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMetadataFlag) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMetadataFlagInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMetadataFlagInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +410,26 @@ func (m *validateOpUpdateComponent) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateForm struct {
+}
+
+func (*validateOpUpdateForm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateForm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFormInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFormInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTheme struct {
 }
 
@@ -294,12 +454,20 @@ func addOpCreateComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateComponent{}, middleware.After)
 }
 
+func addOpCreateFormValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateForm{}, middleware.After)
+}
+
 func addOpCreateThemeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTheme{}, middleware.After)
 }
 
 func addOpDeleteComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComponent{}, middleware.After)
+}
+
+func addOpDeleteFormValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteForm{}, middleware.After)
 }
 
 func addOpDeleteThemeValidationMiddleware(stack *middleware.Stack) error {
@@ -314,12 +482,24 @@ func addOpExportComponentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportComponents{}, middleware.After)
 }
 
+func addOpExportFormsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportForms{}, middleware.After)
+}
+
 func addOpExportThemesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportThemes{}, middleware.After)
 }
 
 func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponent{}, middleware.After)
+}
+
+func addOpGetFormValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetForm{}, middleware.After)
+}
+
+func addOpGetMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetadata{}, middleware.After)
 }
 
 func addOpGetThemeValidationMiddleware(stack *middleware.Stack) error {
@@ -330,8 +510,16 @@ func addOpListComponentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListComponents{}, middleware.After)
 }
 
+func addOpListFormsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListForms{}, middleware.After)
+}
+
 func addOpListThemesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListThemes{}, middleware.After)
+}
+
+func addOpPutMetadataFlagValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMetadataFlag{}, middleware.After)
 }
 
 func addOpRefreshTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -340,6 +528,10 @@ func addOpRefreshTokenValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateComponent{}, middleware.After)
+}
+
+func addOpUpdateFormValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateForm{}, middleware.After)
 }
 
 func addOpUpdateThemeValidationMiddleware(stack *middleware.Stack) error {
@@ -681,6 +873,51 @@ func validateCreateComponentData(v *types.CreateComponentData) error {
 	}
 }
 
+func validateCreateFormData(v *types.CreateFormData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFormData"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DataType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	} else if v.DataType != nil {
+		if err := validateFormDataTypeConfig(v.DataType); err != nil {
+			invalidParams.AddNested("DataType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.FormActionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FormActionType"))
+	}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateFieldsMap(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Style == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Style"))
+	}
+	if v.SectionalElements == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SectionalElements"))
+	} else if v.SectionalElements != nil {
+		if err := validateSectionalElementMap(v.SectionalElements); err != nil {
+			invalidParams.AddNested("SectionalElements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SchemaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateThemeData(v *types.CreateThemeData) error {
 	if v == nil {
 		return nil
@@ -709,6 +946,81 @@ func validateExchangeCodeForTokenRequestBody(v *types.ExchangeCodeForTokenReques
 	}
 	if v.RedirectUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RedirectUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldConfig(v *types.FieldConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldConfig"}
+	if v.InputType != nil {
+		if err := validateFieldInputConfig(v.InputType); err != nil {
+			invalidParams.AddNested("InputType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Validations != nil {
+		if err := validateValidationsList(v.Validations); err != nil {
+			invalidParams.AddNested("Validations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldInputConfig(v *types.FieldInputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldInputConfig"}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ValueMappings != nil {
+		if err := validateValueMappings(v.ValueMappings); err != nil {
+			invalidParams.AddNested("ValueMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldsMap(v map[string]types.FieldConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldsMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateFieldConfig(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldValidationConfiguration(v *types.FieldValidationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldValidationConfiguration"}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -753,6 +1065,24 @@ func validateFormBindings(v map[string]types.FormBindingElement) error {
 	}
 }
 
+func validateFormDataTypeConfig(v *types.FormDataTypeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FormDataTypeConfig"}
+	if len(v.DataSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if v.DataTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataTypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMutationActionSetStateParameter(v *types.MutationActionSetStateParameter) error {
 	if v == nil {
 		return nil
@@ -778,6 +1108,21 @@ func validateMutationActionSetStateParameter(v *types.MutationActionSetStatePara
 	}
 }
 
+func validatePutMetadataFlagBody(v *types.PutMetadataFlagBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMetadataFlagBody"}
+	if v.NewValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRefreshTokenRequestBody(v *types.RefreshTokenRequestBody) error {
 	if v == nil {
 		return nil
@@ -785,6 +1130,39 @@ func validateRefreshTokenRequestBody(v *types.RefreshTokenRequestBody) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RefreshTokenRequestBody"}
 	if v.Token == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSectionalElement(v *types.SectionalElement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SectionalElement"}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSectionalElementMap(v map[string]types.SectionalElement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SectionalElementMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateSectionalElement(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -860,6 +1238,33 @@ func validateUpdateComponentData(v *types.UpdateComponentData) error {
 	}
 }
 
+func validateUpdateFormData(v *types.UpdateFormData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFormData"}
+	if v.DataType != nil {
+		if err := validateFormDataTypeConfig(v.DataType); err != nil {
+			invalidParams.AddNested("DataType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Fields != nil {
+		if err := validateFieldsMap(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SectionalElements != nil {
+		if err := validateSectionalElementMap(v.SectionalElements); err != nil {
+			invalidParams.AddNested("SectionalElements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateThemeData(v *types.UpdateThemeData) error {
 	if v == nil {
 		return nil
@@ -867,6 +1272,74 @@ func validateUpdateThemeData(v *types.UpdateThemeData) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateThemeData"}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValidationsList(v []types.FieldValidationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidationsList"}
+	for i := range v {
+		if err := validateFieldValidationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValueMapping(v *types.ValueMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValueMapping"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValueMappingList(v []types.ValueMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValueMappingList"}
+	for i := range v {
+		if err := validateValueMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValueMappings(v *types.ValueMappings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValueMappings"}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	} else if v.Values != nil {
+		if err := validateValueMappingList(v.Values); err != nil {
+			invalidParams.AddNested("Values", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -891,6 +1364,31 @@ func validateOpCreateComponentInput(v *CreateComponentInput) error {
 	} else if v.ComponentToCreate != nil {
 		if err := validateCreateComponentData(v.ComponentToCreate); err != nil {
 			invalidParams.AddNested("ComponentToCreate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFormInput(v *CreateFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFormInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.FormToCreate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormToCreate"))
+	} else if v.FormToCreate != nil {
+		if err := validateCreateFormData(v.FormToCreate); err != nil {
+			invalidParams.AddNested("FormToCreate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -930,6 +1428,27 @@ func validateOpDeleteComponentInput(v *DeleteComponentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteComponentInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFormInput(v *DeleteFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFormInput"}
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
@@ -1007,6 +1526,24 @@ func validateOpExportComponentsInput(v *ExportComponentsInput) error {
 	}
 }
 
+func validateOpExportFormsInput(v *ExportFormsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportFormsInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpExportThemesInput(v *ExportThemesInput) error {
 	if v == nil {
 		return nil
@@ -1038,6 +1575,45 @@ func validateOpGetComponentInput(v *GetComponentInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFormInput(v *GetFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFormInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMetadataInput(v *GetMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetadataInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1085,6 +1661,24 @@ func validateOpListComponentsInput(v *ListComponentsInput) error {
 	}
 }
 
+func validateOpListFormsInput(v *ListFormsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFormsInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListThemesInput(v *ListThemesInput) error {
 	if v == nil {
 		return nil
@@ -1095,6 +1689,34 @@ func validateOpListThemesInput(v *ListThemesInput) error {
 	}
 	if v.EnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutMetadataFlagInput(v *PutMetadataFlagInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMetadataFlagInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.FeatureName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	} else if v.Body != nil {
+		if err := validatePutMetadataFlagBody(v.Body); err != nil {
+			invalidParams.AddNested("Body", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1144,6 +1766,34 @@ func validateOpUpdateComponentInput(v *UpdateComponentInput) error {
 	} else if v.UpdatedComponent != nil {
 		if err := validateUpdateComponentData(v.UpdatedComponent); err != nil {
 			invalidParams.AddNested("UpdatedComponent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFormInput(v *UpdateFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFormInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.UpdatedForm == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdatedForm"))
+	} else if v.UpdatedForm != nil {
+		if err := validateUpdateFormData(v.UpdatedForm); err != nil {
+			invalidParams.AddNested("UpdatedForm", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

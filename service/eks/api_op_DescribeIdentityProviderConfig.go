@@ -34,7 +34,7 @@ type DescribeIdentityProviderConfigInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// An object that represents an identity provider configuration.
+	// An object representing an identity provider configuration.
 	//
 	// This member is required.
 	IdentityProviderConfig *types.IdentityProviderConfig

@@ -22,8 +22,8 @@ type Address struct {
 	// The postal code of the address.
 	PostalCode *string
 
-	// A boolean representing whether this is the primary address for the associated
-	// resource.
+	// A Boolean value representing whether this is the primary address for the
+	// associated resource.
 	Primary bool
 
 	// The region of the address.
@@ -38,10 +38,10 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
-// A unique identifier for the group value that is not the group's primary
-// identifier. This value can be an identifier from an external identity provider
-// (IdP) that is associated with the group or a unique attribute. For example, a
-// unique GroupDisplayName.
+// A unique identifier for a user or group that is not the its primary identifier.
+// This value can be an identifier from an external identity provider (IdP) that is
+// associated with the group or a unique attribute. For example, a unique
+// GroupDisplayName.
 //
 // The following types satisfy this interface:
 //
@@ -79,7 +79,8 @@ type AttributeOperation struct {
 	// This member is required.
 	AttributePath *string
 
-	// The value of the attribute.
+	// The value of the attribute. This is a Document type. This type is not supported
+	// by Java V1, Go V1, and older versions of the AWS CLI.
 	AttributeValue document.Interface
 
 	noSmithyDocumentSerde
@@ -88,8 +89,8 @@ type AttributeOperation struct {
 // The email address associated with the user.
 type Email struct {
 
-	// A boolean representing whether this is the primary email for the associated
-	// resource.
+	// A Boolean value representing whether this is the primary email address for the
+	// associated resource.
 	Primary bool
 
 	// A string representing the type of address. For example, "Work."
@@ -185,7 +186,7 @@ type GroupMembership struct {
 	// of the group.
 	MemberId MemberId
 
-	// The identifier for a GroupMembership object in the identity store.
+	// The identifier for a GroupMembership object in an identity store.
 	MembershipId *string
 
 	noSmithyDocumentSerde
@@ -226,7 +227,7 @@ type MemberIdMemberUserId struct {
 
 func (*MemberIdMemberUserId) isMemberId() {}
 
-// The name of the user.
+// The full name of the user.
 type Name struct {
 
 	// The family name of the user.
@@ -253,7 +254,7 @@ type Name struct {
 // The phone number associated with the user.
 type PhoneNumber struct {
 
-	// A boolean representing whether this is the primary phone number for the
+	// A Boolean value representing whether this is the primary phone number for the
 	// associated resource.
 	Primary bool
 
@@ -276,7 +277,8 @@ type UniqueAttribute struct {
 	// This member is required.
 	AttributePath *string
 
-	// The value of the attribute.
+	// The value of the attribute. This is a Document type. This type is not supported
+	// by Java V1, Go V1, and older versions of the AWS CLI.
 	//
 	// This member is required.
 	AttributeValue document.Interface
@@ -334,13 +336,13 @@ type User struct {
 	Timezone *string
 
 	// A string containing the user's title. Possible values depend on each customer's
-	// specific needs, so they are left unspecified
+	// specific needs, so they are left unspecified.
 	Title *string
 
-	// The user’s user name value. The length limit is 128 characters. This value can
-	// consist of letters, accented characters, symbols, numbers, and punctuation. The
-	// characters <>;:% are excluded. This value is specified at the time the user is
-	// created and stored as an attribute of the user object in the identity store.
+	// A unique string used to identify the user. The length limit is 128 characters.
+	// This value can consist of letters, accented characters, symbols, numbers, and
+	// punctuation. This value is specified at the time the user is created and stored
+	// as an attribute of the user object in the identity store.
 	UserName *string
 
 	// A string indicating the user's type. Possible values depend on each customer's

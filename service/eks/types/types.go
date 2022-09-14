@@ -27,7 +27,7 @@ type Addon struct {
 	// The date and time that the add-on was created.
 	CreatedAt *time.Time
 
-	// An object that represents the health of the add-on.
+	// An object representing the health of the add-on.
 	Health *AddonHealth
 
 	// The date and time that the add-on was last modified.
@@ -51,7 +51,7 @@ type Addon struct {
 // The health of the add-on.
 type AddonHealth struct {
 
-	// An object that represents the add-on's health issues.
+	// An object representing the health issues for an add-on.
 	Issues []AddonIssue
 
 	noSmithyDocumentSerde
@@ -63,7 +63,7 @@ type AddonInfo struct {
 	// The name of the add-on.
 	AddonName *string
 
-	// An object that represents information about available add-on versions and
+	// An object representing information about available add-on versions and
 	// compatible Kubernetes versions.
 	AddonVersions []AddonVersionInfo
 
@@ -97,7 +97,7 @@ type AddonVersionInfo struct {
 	// The architectures that the version supports.
 	Architecture []string
 
-	// An object that represents the compatibilities of a version.
+	// An object representing the compatibilities of a version.
 	Compatibilities []Compatibility
 
 	noSmithyDocumentSerde
@@ -149,6 +149,16 @@ type Cluster struct {
 	// The endpoint for your Kubernetes API server.
 	Endpoint *string
 
+	// An object representing the health of your local Amazon EKS cluster on an Amazon
+	// Web Services Outpost. This object isn't available for clusters on the Amazon Web
+	// Services cloud.
+	Health *ClusterHealth
+
+	// The ID of your local Amazon EKS cluster on an Amazon Web Services Outpost. This
+	// property isn't available for an Amazon EKS cluster on the Amazon Web Services
+	// cloud.
+	Id *string
+
 	// The identity provider information for the cluster.
 	Identity *Identity
 
@@ -160,6 +170,11 @@ type Cluster struct {
 
 	// The name of the cluster.
 	Name *string
+
+	// An object representing the configuration of your local Amazon EKS cluster on an
+	// Amazon Web Services Outpost. This object isn't available for clusters on the
+	// Amazon Web Services cloud.
+	OutpostConfig *OutpostConfigResponse
 
 	// The platform version of your Amazon EKS cluster. For more information, see
 	// Platform Versions
@@ -192,6 +207,35 @@ type Cluster struct {
 
 	// The Kubernetes server version for the cluster.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the health of your local Amazon EKS cluster on an Amazon
+// Web Services Outpost. You can't use this API with an Amazon EKS cluster on the
+// Amazon Web Services cloud.
+type ClusterHealth struct {
+
+	// An object representing the health issues of your local Amazon EKS cluster on an
+	// Amazon Web Services Outpost.
+	Issues []ClusterIssue
+
+	noSmithyDocumentSerde
+}
+
+// An issue with your local Amazon EKS cluster on an Amazon Web Services Outpost.
+// You can't use this API with an Amazon EKS cluster on the Amazon Web Services
+// cloud.
+type ClusterIssue struct {
+
+	// The error code of the issue.
+	Code ClusterIssueCode
+
+	// A description of the issue.
+	Message *string
+
+	// The resource IDs that the issue relates to.
+	ResourceIds []string
 
 	noSmithyDocumentSerde
 }
@@ -383,8 +427,7 @@ type IdentityProviderConfig struct {
 // The full description of your identity configuration.
 type IdentityProviderConfigResponse struct {
 
-	// An object that represents an OpenID Connect (OIDC) identity provider
-	// configuration.
+	// An object representing an OpenID Connect (OIDC) identity provider configuration.
 	Oidc *OidcIdentityProviderConfig
 
 	noSmithyDocumentSerde
@@ -546,7 +589,7 @@ type KubernetesNetworkConfigResponse struct {
 }
 
 // An object representing a node group launch template specification. The launch
-// template cannot include SubnetId
+// template can't include SubnetId
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html),
 // IamInstanceProfile
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html),
@@ -562,17 +605,22 @@ type KubernetesNetworkConfigResponse struct {
 // in the Amazon EC2 API Reference. For more information about using launch
 // templates with Amazon EKS, see Launch template support
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
-// Amazon EKS User Guide. Specify either name or id, but not both.
+// Amazon EKS User Guide. You must specify either the launch template ID or the
+// launch template name in the request, but not both.
 type LaunchTemplateSpecification struct {
 
-	// The ID of the launch template.
+	// The ID of the launch template. You must specify either the launch template ID or
+	// the launch template name in the request, but not both.
 	Id *string
 
-	// The name of the launch template.
+	// The name of the launch template. You must specify either the launch template
+	// name or the launch template ID in the request, but not both.
 	Name *string
 
-	// The version of the launch template to use. If no version is specified, then the
-	// template's default version is used.
+	// The launch template version number, $Latest, or $Default. If the value is
+	// $Latest, Amazon EKS uses the latest version of the launch template. If the value
+	// is $Default, Amazon EKS uses the default version of the launch template.
+	// Default: The default version of the launch template.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -793,8 +841,8 @@ type OIDC struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents the configuration for an OpenID Connect (OIDC)
-// identity provider.
+// An object representing the configuration for an OpenID Connect (OIDC) identity
+// provider.
 type OidcIdentityProviderConfig struct {
 
 	// This is also known as audience. The ID of the client application that makes
@@ -902,6 +950,66 @@ type OidcIdentityProviderConfigRequest struct {
 	// email, the prefix defaults to issuerurl#. You can use the value - to disable all
 	// prefixing.
 	UsernamePrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of your local Amazon EKS cluster on an Amazon Web Services
+// Outpost. Before creating a cluster on an Outpost, review Creating a local Amazon
+// EKS cluster on an Amazon Web Services Outpost
+// (https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html)
+// in the Amazon EKS User Guide. This API isn't available for Amazon EKS clusters
+// on the Amazon Web Services cloud.
+type OutpostConfigRequest struct {
+
+	// The Amazon EC2 instance type that you want to use for your local Amazon EKS
+	// cluster on Outposts. The instance type that you specify is used for all
+	// Kubernetes control plane instances. The instance type can't be changed after
+	// cluster creation. Choose an instance type based on the number of nodes that your
+	// cluster will have. If your cluster will have:
+	//
+	// * 1–20 nodes, then we recommend
+	// specifying a large instance type.
+	//
+	// * 21–100 nodes, then we recommend specifying
+	// an xlarge instance type.
+	//
+	// * 101–250 nodes, then we recommend specifying a
+	// 2xlarge instance type.
+	//
+	// For a list of the available Amazon EC2 instance types,
+	// see Compute and storage in Outposts rack features
+	// (http://aws.amazon.com/outposts/rack/features/). The control plane is not
+	// automatically scaled by Amazon EKS.
+	//
+	// This member is required.
+	ControlPlaneInstanceType *string
+
+	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on
+	// Outposts. Only a single Outpost ARN is supported.
+	//
+	// This member is required.
+	OutpostArns []string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing the configuration of your local Amazon EKS cluster on an
+// Amazon Web Services Outpost. This API isn't available for Amazon EKS clusters on
+// the Amazon Web Services cloud.
+type OutpostConfigResponse struct {
+
+	// The Amazon EC2 instance type used for the control plane. The instance type is
+	// the same for all control plane instances.
+	//
+	// This member is required.
+	ControlPlaneInstanceType *string
+
+	// The ARN of the Outpost that you specified for use with your local Amazon EKS
+	// cluster on Outposts.
+	//
+	// This member is required.
+	OutpostArns []string
 
 	noSmithyDocumentSerde
 }

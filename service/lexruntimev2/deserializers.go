@@ -2229,6 +2229,11 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				sv.SlotToElicit = ptr.String(jtv)
 			}
 
+		case "subSlotToElicit":
+			if err := awsRestjson1_deserializeDocumentElicitSubSlot(&sv.SubSlotToElicit, value); err != nil {
+				return err
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2236,6 +2241,51 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 					return fmt.Errorf("expected DialogActionType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.DialogActionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentElicitSubSlot(v **types.ElicitSubSlot, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElicitSubSlot
+	if *v == nil {
+		sv = &types.ElicitSubSlot{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "subSlotToElicit":
+			if err := awsRestjson1_deserializeDocumentElicitSubSlot(&sv.SubSlotToElicit, value); err != nil {
+				return err
 			}
 
 		default:
@@ -2819,6 +2869,11 @@ func awsRestjson1_deserializeDocumentRuntimeHintDetails(v **types.RuntimeHintDet
 				return err
 			}
 
+		case "subSlotHints":
+			if err := awsRestjson1_deserializeDocumentSlotHintsSlotMap(&sv.SubSlotHints, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3244,6 +3299,11 @@ func awsRestjson1_deserializeDocumentSlot(v **types.Slot, value interface{}) err
 					return fmt.Errorf("expected Shape to be of type string, got %T instead", value)
 				}
 				sv.Shape = types.Shape(jtv)
+			}
+
+		case "subSlots":
+			if err := awsRestjson1_deserializeDocumentSlots(&sv.SubSlots, value); err != nil {
+				return err
 			}
 
 		case "value":

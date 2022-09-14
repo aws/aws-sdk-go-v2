@@ -66,17 +66,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// the Amazon Redshift engine that is running on the cluster. Default: true
 	AllowVersionUpgrade *bool
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query
-	// Accelerator) after the cluster is restored. Possible values include the
-	// following.
-	//
-	// * enabled - Use AQUA if it is available for the current Amazon Web
-	// Services Region and Amazon Redshift node type.
-	//
-	// * disabled - Don't use AQUA.
-	//
-	// *
-	// auto - Amazon Redshift determines whether to use AQUA.
+	// This parameter is retired. It does not set the AQUA configuration status. Amazon
+	// Redshift automatically determines whether to use AQUA (Advanced Query
+	// Accelerator).
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	// The number of days that automated snapshots are retained. If the value is 0,
@@ -125,8 +117,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// snapshot.
 	DefaultIamRoleArn *string
 
-	// The elastic IP (EIP) address for the cluster. You don't have to specify the EIP
-	// for a publicly accessible cluster with AvailabilityZoneRelocation turned on.
+	// The elastic IP (EIP) address for the cluster.
 	ElasticIp *string
 
 	// Enables support for restoring an unencrypted snapshot to a cluster encrypted
@@ -221,7 +212,8 @@ type RestoreFromClusterSnapshotInput struct {
 	ReservedNodeId *string
 
 	// The Amazon Resource Name (ARN) of the snapshot associated with the message to
-	// restore from a cluster.
+	// restore from a cluster. You can specify this parameter or snapshotIdentifier,
+	// but not both.
 	SnapshotArn *string
 
 	// The name of the cluster the source snapshot was created from. This parameter is
@@ -230,7 +222,8 @@ type RestoreFromClusterSnapshotInput struct {
 	SnapshotClusterIdentifier *string
 
 	// The name of the snapshot from which to create the new cluster. This parameter
-	// isn't case sensitive. Example: my-snapshot-id
+	// isn't case sensitive. You can specify this parameter or snapshotArn, but not
+	// both. Example: my-snapshot-id
 	SnapshotIdentifier *string
 
 	// A unique identifier for the snapshot schedule.

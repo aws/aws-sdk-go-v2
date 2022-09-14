@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies whether a cluster can use AQUA (Advanced Query Accelerator).
+// This operation is retired. Calling this operation does not change AQUA
+// configuration. Amazon Redshift automatically determines whether to use AQUA
+// (Advanced Query Accelerator).
 func (c *Client) ModifyAquaConfiguration(ctx context.Context, params *ModifyAquaConfigurationInput, optFns ...func(*Options)) (*ModifyAquaConfigurationOutput, error) {
 	if params == nil {
 		params = &ModifyAquaConfigurationInput{}
@@ -34,16 +36,8 @@ type ModifyAquaConfigurationInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The new value of AQUA configuration status. Possible values include the
-	// following.
-	//
-	// * enabled - Use AQUA if it is available for the current Amazon Web
-	// Services Region and Amazon Redshift node type.
-	//
-	// * disabled - Don't use AQUA.
-	//
-	// *
-	// auto - Amazon Redshift determines whether to use AQUA.
+	// This parameter is retired. Amazon Redshift automatically determines whether to
+	// use AQUA (Advanced Query Accelerator).
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	noSmithyDocumentSerde
@@ -51,7 +45,8 @@ type ModifyAquaConfigurationInput struct {
 
 type ModifyAquaConfigurationOutput struct {
 
-	// The updated AQUA configuration of the cluster.
+	// This parameter is retired. Amazon Redshift automatically determines whether to
+	// use AQUA (Advanced Query Accelerator).
 	AquaConfiguration *types.AquaConfiguration
 
 	// Metadata pertaining to the operation's result.

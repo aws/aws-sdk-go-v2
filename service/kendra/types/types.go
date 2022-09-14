@@ -170,45 +170,46 @@ type AlfrescoConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides filtering the query results based on document attributes. When you use
-// the AndAllFilters or OrAllFilters, filters you can use 2 layers under the first
-// attribute filter. For example, you can use:
+// Provides filtering the query results based on document attributes or metadata
+// fields. When you use the AndAllFilters or OrAllFilters, filters you can use 2
+// layers under the first attribute filter. For example, you can use:
 //
-// If you use more than 2 layers, you
-// receive a ValidationException exception with the message "AttributeFilter cannot
-// have a depth of more than 2." If you use more than 10 attribute filters in a
-// given list for AndAllFilters or OrAllFilters, you receive a ValidationException
-// with the message "AttributeFilter cannot have a length of more than 10".
+// If you use
+// more than 2 layers, you receive a ValidationException exception with the message
+// "AttributeFilter cannot have a depth of more than 2." If you use more than 10
+// attribute filters in a given list for AndAllFilters or OrAllFilters, you receive
+// a ValidationException with the message "AttributeFilter cannot have a length of
+// more than 10".
 type AttributeFilter struct {
 
 	// Performs a logical AND operation on all supplied filters.
 	AndAllFilters []AttributeFilter
 
-	// Returns true when a document contains all of the specified document attributes.
-	// This filter is only applicable to StringListValue metadata.
+	// Returns true when a document contains all of the specified document attributes
+	// or metadata fields. This filter is only applicable to StringListValue metadata.
 	ContainsAll *DocumentAttribute
 
-	// Returns true when a document contains any of the specified document attributes.
-	// This filter is only applicable to StringListValue metadata.
+	// Returns true when a document contains any of the specified document attributes
+	// or metadata fields. This filter is only applicable to StringListValue metadata.
 	ContainsAny *DocumentAttribute
 
-	// Performs an equals operation on two document attributes.
+	// Performs an equals operation on two document attributes or metadata fields.
 	EqualsTo *DocumentAttribute
 
-	// Performs a greater than operation on two document attributes. Use with a
-	// document attribute of type Date or Long.
+	// Performs a greater than operation on two document attributes or metadata fields.
+	// Use with a document attribute of type Date or Long.
 	GreaterThan *DocumentAttribute
 
-	// Performs a greater or equals than operation on two document attributes. Use with
-	// a document attribute of type Date or Long.
+	// Performs a greater or equals than operation on two document attributes or
+	// metadata fields. Use with a document attribute of type Date or Long.
 	GreaterThanOrEquals *DocumentAttribute
 
-	// Performs a less than operation on two document attributes. Use with a document
-	// attribute of type Date or Long.
+	// Performs a less than operation on two document attributes or metadata fields.
+	// Use with a document attribute of type Date or Long.
 	LessThan *DocumentAttribute
 
-	// Performs a less than or equals operation on two document attributes. Use with a
-	// document attribute of type Date or Long.
+	// Performs a less than or equals operation on two document attributes or metadata
+	// fields. Use with a document attribute of type Date or Long.
 	LessThanOrEquals *DocumentAttribute
 
 	// Performs a logical NOT operation on all supplied filters.

@@ -34,6 +34,13 @@ type UpdateMetricSetInput struct {
 	// This member is required.
 	MetricSetArn *string
 
+	// Describes a list of filters for choosing specific dimensions and specific
+	// values. Each filter consists of the dimension and one of its values that you
+	// want to include. When multiple dimensions or values are specified, the
+	// dimensions are joined with an AND operation and the values are joined with an OR
+	// operation.
+	DimensionFilterList []types.MetricSetDimensionFilter
+
 	// The dimension list.
 	DimensionList []string
 

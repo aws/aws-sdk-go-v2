@@ -376,6 +376,48 @@ type DescribedExecution struct {
 	noSmithyDocumentSerde
 }
 
+// The details for a server host key.
+type DescribedHostKey struct {
+
+	// The unique Amazon Resource Name (ARN) for the host key.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date on which the host key was added to the server.
+	DateImported *time.Time
+
+	// The text description for this host key.
+	Description *string
+
+	// The public key fingerprint, which is a short sequence of bytes used to identify
+	// the longer public key.
+	HostKeyFingerprint *string
+
+	// A unique identifier for the host key.
+	HostKeyId *string
+
+	// Key-value pairs that can be used to group and search for host keys.
+	Tags []Tag
+
+	// The encryption algorithm used for the host key. The Type is one of the following
+	// values:
+	//
+	// * ssh-rsa
+	//
+	// * ssh-ed25519
+	//
+	// * ecdsa-sha2-nistp256
+	//
+	// *
+	// ecdsa-sha2-nistp384
+	//
+	// * ecdsa-sha2-nistp521
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // The details for a local or partner AS2 profile. profile.
 type DescribedProfile struct {
 
@@ -1046,6 +1088,46 @@ type ListedExecution struct {
 	// The status is one of the execution. Can be in progress, completed, exception
 	// encountered, or handling the exception.
 	Status ExecutionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Returns properties of the host key that is specified.
+type ListedHostKey struct {
+
+	// Specifies the unique Amazon Resource Name (ARN) of the host key.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date on which the host key was added to the server.
+	DateImported *time.Time
+
+	// The current description for the host key. You can change it by calling the
+	// UpdateHostKey operation and providing a new description.
+	Description *string
+
+	// The public key fingerprint, which is a short sequence of bytes used to identify
+	// the longer public key.
+	Fingerprint *string
+
+	//
+	HostKeyId *string
+
+	// The encryption algorithm used for the host key. The Type is one of the following
+	// values:
+	//
+	// * ssh-rsa
+	//
+	// * ssh-ed25519
+	//
+	// * ecdsa-sha2-nistp256
+	//
+	// *
+	// ecdsa-sha2-nistp384
+	//
+	// * ecdsa-sha2-nistp521
+	Type *string
 
 	noSmithyDocumentSerde
 }

@@ -181,6 +181,9 @@ type ComponentBindingPropertiesValueProperties struct {
 	// A list of predicates for binding a component's properties to data.
 	Predicates []Predicate
 
+	// The name of a component slot.
+	SlotName *string
+
 	// An authenticated user attribute.
 	UserAttribute *string
 
@@ -468,6 +471,54 @@ type CreateComponentData struct {
 	noSmithyDocumentSerde
 }
 
+// Represents all of the information that is required to create a form.
+type CreateFormData struct {
+
+	// The type of data source to use to create the form.
+	//
+	// This member is required.
+	DataType *FormDataTypeConfig
+
+	// The configuration information for the form's fields.
+	//
+	// This member is required.
+	Fields map[string]FieldConfig
+
+	// Specifies whether to perform a create or update action on the form.
+	//
+	// This member is required.
+	FormActionType FormActionType
+
+	// The name of the form.
+	//
+	// This member is required.
+	Name *string
+
+	// The schema version of the form.
+	//
+	// This member is required.
+	SchemaVersion *string
+
+	// The configuration information for the visual helper elements for the form. These
+	// elements are not associated with any data.
+	//
+	// This member is required.
+	SectionalElements map[string]SectionalElement
+
+	// The configuration for the form's style.
+	//
+	// This member is required.
+	Style *FormStyle
+
+	// The FormCTA object that stores the call to action configuration for the form.
+	Cta *FormCTA
+
+	// One or more key-value pairs to use when tagging the form data.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Represents all of the information that is required to create a theme.
 type CreateThemeData struct {
 
@@ -507,6 +558,200 @@ type ExchangeCodeForTokenRequestBody struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the configuration information for a field in a table.
+type FieldConfig struct {
+
+	// Specifies whether to hide a field.
+	Excluded *bool
+
+	// Describes the configuration for the default input value to display for a field.
+	InputType *FieldInputConfig
+
+	// The label for the field.
+	Label *string
+
+	// Specifies the field position.
+	Position FieldPosition
+
+	// The validations to perform on the value in the field.
+	Validations []FieldValidationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for the default input values to display for a field.
+type FieldInputConfig struct {
+
+	// The input type for the field.
+	//
+	// This member is required.
+	Type *string
+
+	// Specifies whether a field has a default value.
+	DefaultChecked *bool
+
+	// The default country code for a phone number.
+	DefaultCountryCode *string
+
+	// The default value for the field.
+	DefaultValue *string
+
+	// The text to display to describe the field.
+	DescriptiveText *string
+
+	// The maximum value to display for the field.
+	MaxValue *float32
+
+	// The minimum value to display for the field.
+	MinValue *float32
+
+	// The name of the field.
+	Name *string
+
+	// The text to display as a placeholder for the field.
+	Placeholder *string
+
+	// Specifies a read only field.
+	ReadOnly *bool
+
+	// Specifies a field that requires input.
+	Required *bool
+
+	// The stepping increment for a numeric value in a field.
+	Step *float32
+
+	// The value for the field.
+	Value *string
+
+	// The information to use to customize the input fields with data at runtime.
+	ValueMappings *ValueMappings
+
+	noSmithyDocumentSerde
+}
+
+// Describes the field position.
+//
+// The following types satisfy this interface:
+//
+//	FieldPositionMemberBelow
+//	FieldPositionMemberFixed
+//	FieldPositionMemberRightOf
+type FieldPosition interface {
+	isFieldPosition()
+}
+
+// The field position is below the field specified by the string.
+type FieldPositionMemberBelow struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldPositionMemberBelow) isFieldPosition() {}
+
+// The field position is fixed and doesn't change in relation to other fields.
+type FieldPositionMemberFixed struct {
+	Value FixedPosition
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldPositionMemberFixed) isFieldPosition() {}
+
+// The field position is to the right of the field specified by the string.
+type FieldPositionMemberRightOf struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldPositionMemberRightOf) isFieldPosition() {}
+
+// Describes the validation configuration for a field.
+type FieldValidationConfiguration struct {
+
+	// The validation to perform on an object type.
+	//
+	// This member is required.
+	Type *string
+
+	// The validation to perform on a number value.
+	NumValues []int32
+
+	// The validation to perform on a string value.
+	StrValues []string
+
+	// The validation message to display.
+	ValidationMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration settings for a Form user interface (UI) element for
+// an Amplify app. A form is a component you can add to your project by specifying
+// a data source as the default configuration for the form.
+type Form struct {
+
+	// The unique ID of the Amplify app associated with the form.
+	//
+	// This member is required.
+	AppId *string
+
+	// The type of data source to use to create the form.
+	//
+	// This member is required.
+	DataType *FormDataTypeConfig
+
+	// The name of the backend environment that is a part of the Amplify app.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// Stores the information about the form's fields.
+	//
+	// This member is required.
+	Fields map[string]FieldConfig
+
+	// The operation to perform on the specified form.
+	//
+	// This member is required.
+	FormActionType FormActionType
+
+	// The unique ID of the form.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the form.
+	//
+	// This member is required.
+	Name *string
+
+	// The schema version of the form when it was imported.
+	//
+	// This member is required.
+	SchemaVersion *string
+
+	// Stores the visual helper elements for the form that are not associated with any
+	// data.
+	//
+	// This member is required.
+	SectionalElements map[string]SectionalElement
+
+	// Stores the configuration for the form's style.
+	//
+	// This member is required.
+	Style *FormStyle
+
+	// Stores the call to action configuration for the form.
+	Cta *FormCTA
+
+	// One or more key-value pairs to use when tagging the form.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Describes how to bind a component property to form data.
 type FormBindingElement struct {
 
@@ -519,6 +764,146 @@ type FormBindingElement struct {
 	//
 	// This member is required.
 	Property *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for a button UI element that is a part of a form.
+type FormButton struct {
+
+	// Describes the button's properties.
+	Children *string
+
+	// Specifies whether the button is visible on the form.
+	Excluded *bool
+
+	// The position of the button.
+	Position FieldPosition
+
+	noSmithyDocumentSerde
+}
+
+// Describes the call to action button configuration for the form..
+type FormCTA struct {
+
+	// Displays a cancel button.
+	Cancel *FormButton
+
+	// Displays a clear button.
+	Clear *FormButton
+
+	// The position of the button.
+	Position FormButtonsPosition
+
+	// Displays a submit button.
+	Submit *FormButton
+
+	noSmithyDocumentSerde
+}
+
+// Describes the data type configuration for the data source associated with a
+// form.
+type FormDataTypeConfig struct {
+
+	// The data source type, either an Amplify DataStore model or a custom data type.
+	//
+	// This member is required.
+	DataSourceType FormDataSourceType
+
+	// The unique name of the data type you are using as the data source for the form.
+	//
+	// This member is required.
+	DataTypeName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for an input field on a form. Use
+// FormInputValueProperty to specify the values to render or bind by default.
+type FormInputValueProperty struct {
+
+	// The value to assign to the input field.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for the form's style.
+type FormStyle struct {
+
+	// The spacing for the horizontal gap.
+	HorizontalGap FormStyleConfig
+
+	// The size of the outer padding for the form.
+	OuterPadding FormStyleConfig
+
+	// The spacing for the vertical gap.
+	VerticalGap FormStyleConfig
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration settings for the form's style properties.
+//
+// The following types satisfy this interface:
+//
+//	FormStyleConfigMemberTokenReference
+//	FormStyleConfigMemberValue
+type FormStyleConfig interface {
+	isFormStyleConfig()
+}
+
+// A reference to a design token to use to bind the form's style properties to an
+// existing theme.
+type FormStyleConfigMemberTokenReference struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FormStyleConfigMemberTokenReference) isFormStyleConfig() {}
+
+// The value of the style setting.
+type FormStyleConfigMemberValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FormStyleConfigMemberValue) isFormStyleConfig() {}
+
+// Describes the basic information about a form.
+type FormSummary struct {
+
+	// The unique ID for the app associated with the form summary.
+	//
+	// This member is required.
+	AppId *string
+
+	// The form's data source type.
+	//
+	// This member is required.
+	DataType *FormDataTypeConfig
+
+	// The name of the backend environment that is part of the Amplify app.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The type of operation to perform on the form.
+	//
+	// This member is required.
+	FormActionType FormActionType
+
+	// The ID of the form.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the form.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -567,6 +952,17 @@ type Predicate struct {
 	noSmithyDocumentSerde
 }
 
+// Stores the metadata information about a feature on a form or view.
+type PutMetadataFlagBody struct {
+
+	// The new information to store.
+	//
+	// This member is required.
+	NewValue *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a refresh token.
 type RefreshTokenRequestBody struct {
 
@@ -575,6 +971,33 @@ type RefreshTokenRequestBody struct {
 	//
 	// This member is required.
 	Token *string
+
+	noSmithyDocumentSerde
+}
+
+// Stores the configuration information for a visual helper element for a form. A
+// sectional element can be a header, a text block, or a divider. These elements
+// are static and not associated with any data.
+type SectionalElement struct {
+
+	// The type of sectional element. Valid values are Heading, Text, and Divider.
+	//
+	// This member is required.
+	Type *string
+
+	// Specifies the size of the font for a Heading sectional element. Valid values are
+	// 1 | 2 | 3 | 4 | 5 | 6.
+	Level *int32
+
+	// Specifies the orientation for a Divider sectional element. Valid values are
+	// horizontal or vertical.
+	Orientation *string
+
+	// Specifies the position of the text in a field for a Text sectional element.
+	Position FieldPosition
+
+	// The text for a Text sectional element.
+	Text *string
 
 	noSmithyDocumentSerde
 }
@@ -737,6 +1160,37 @@ type UpdateComponentData struct {
 	noSmithyDocumentSerde
 }
 
+// Updates and saves all of the information about a form, based on form ID.
+type UpdateFormData struct {
+
+	// The FormCTA object that stores the call to action configuration for the form.
+	Cta *FormCTA
+
+	// The type of data source to use to create the form.
+	DataType *FormDataTypeConfig
+
+	// The configuration information for the form's fields.
+	Fields map[string]FieldConfig
+
+	// Specifies whether to perform a create or update action on the form.
+	FormActionType FormActionType
+
+	// The name of the form.
+	Name *string
+
+	// The schema version of the form.
+	SchemaVersion *string
+
+	// The configuration information for the visual helper elements for the form. These
+	// elements are not associated with any data.
+	SectionalElements map[string]SectionalElement
+
+	// The configuration for the form's style.
+	Style *FormStyle
+
+	noSmithyDocumentSerde
+}
+
 // Saves the data binding information for a theme.
 type UpdateThemeData struct {
 
@@ -757,4 +1211,42 @@ type UpdateThemeData struct {
 	noSmithyDocumentSerde
 }
 
+// Associates a complex object with a display value. Use ValueMapping to store how
+// to represent complex objects when they are displayed.
+type ValueMapping struct {
+
+	// The complex object.
+	//
+	// This member is required.
+	Value *FormInputValueProperty
+
+	// The value to display for the complex object.
+	DisplayValue *FormInputValueProperty
+
+	noSmithyDocumentSerde
+}
+
+// Represents the data binding configuration for a value map.
+type ValueMappings struct {
+
+	// The value and display value pairs.
+	//
+	// This member is required.
+	Values []ValueMapping
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isFieldPosition()   {}
+func (*UnknownUnionMember) isFormStyleConfig() {}

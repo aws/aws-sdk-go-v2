@@ -8038,6 +8038,11 @@ func awsRestjson1_deserializeDocumentProject(v **types.Project, value interface{
 				sv.ActiveLaunchCount = ptr.Int64(i64)
 			}
 
+		case "appConfigResource":
+			if err := awsRestjson1_deserializeDocumentProjectAppConfigResource(&sv.AppConfigResource, value); err != nil {
+				return err
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8153,6 +8158,64 @@ func awsRestjson1_deserializeDocumentProject(v **types.Project, value interface{
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProjectAppConfigResource(v **types.ProjectAppConfigResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProjectAppConfigResource
+	if *v == nil {
+		sv = &types.ProjectAppConfigResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppConfigResourceId to be of type string, got %T instead", value)
+				}
+				sv.ApplicationId = ptr.String(jtv)
+			}
+
+		case "configurationProfileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppConfigResourceId to be of type string, got %T instead", value)
+				}
+				sv.ConfigurationProfileId = ptr.String(jtv)
+			}
+
+		case "environmentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppConfigResourceId to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentId = ptr.String(jtv)
 			}
 
 		default:

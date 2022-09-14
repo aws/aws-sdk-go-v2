@@ -15060,6 +15060,11 @@ func awsAwsjson11_serializeDocumentAutoMLJobConfig(v *types.AutoMLJobConfig, val
 		}
 	}
 
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
 	if v.SecurityConfig != nil {
 		ok := object.Key("SecurityConfig")
 		if err := awsAwsjson11_serializeDocumentAutoMLSecurityConfig(v.SecurityConfig, ok); err != nil {
@@ -20008,6 +20013,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		ok.String(string(v.AcceleratorType))
 	}
 
+	if v.ContainerStartupHealthCheckTimeoutInSeconds != nil {
+		ok := object.Key("ContainerStartupHealthCheckTimeoutInSeconds")
+		ok.Integer(*v.ContainerStartupHealthCheckTimeoutInSeconds)
+	}
+
 	if v.CoreDumpConfig != nil {
 		ok := object.Key("CoreDumpConfig")
 		if err := awsAwsjson11_serializeDocumentProductionVariantCoreDumpConfig(v.CoreDumpConfig, ok); err != nil {
@@ -20043,6 +20053,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		ok.String(string(v.InstanceType))
 	}
 
+	if v.ModelDataDownloadTimeoutInSeconds != nil {
+		ok := object.Key("ModelDataDownloadTimeoutInSeconds")
+		ok.Integer(*v.ModelDataDownloadTimeoutInSeconds)
+	}
+
 	if v.ModelName != nil {
 		ok := object.Key("ModelName")
 		ok.String(*v.ModelName)
@@ -20058,6 +20073,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 	if v.VariantName != nil {
 		ok := object.Key("VariantName")
 		ok.String(*v.VariantName)
+	}
+
+	if v.VolumeSizeInGB != nil {
+		ok := object.Key("VolumeSizeInGB")
+		ok.Integer(*v.VolumeSizeInGB)
 	}
 
 	return nil

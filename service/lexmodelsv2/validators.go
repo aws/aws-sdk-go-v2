@@ -2136,6 +2136,23 @@ func validateCodeHookSpecification(v *types.CodeHookSpecification) error {
 	}
 }
 
+func validateCompositeSlotTypeSetting(v *types.CompositeSlotTypeSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeSlotTypeSetting"}
+	if v.SubSlots != nil {
+		if err := validateSubSlotTypeList(v.SubSlots); err != nil {
+			invalidParams.AddNested("SubSlots", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCondition(v *types.Condition) error {
 	if v == nil {
 		return nil
@@ -3838,6 +3855,28 @@ func validateSlotValueSelectionSetting(v *types.SlotValueSelectionSetting) error
 	}
 }
 
+func validateSpecifications(v *types.Specifications) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Specifications"}
+	if v.SlotTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SlotTypeId"))
+	}
+	if v.ValueElicitationSetting == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueElicitationSetting"))
+	} else if v.ValueElicitationSetting != nil {
+		if err := validateSubSlotValueElicitationSetting(v.ValueElicitationSetting); err != nil {
+			invalidParams.AddNested("ValueElicitationSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSSMLMessage(v *types.SSMLMessage) error {
 	if v == nil {
 		return nil
@@ -3870,6 +3909,110 @@ func validateStillWaitingResponseSpecification(v *types.StillWaitingResponseSpec
 	}
 	if v.TimeoutInSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimeoutInSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubSlotSetting(v *types.SubSlotSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubSlotSetting"}
+	if v.SlotSpecifications != nil {
+		if err := validateSubSlotSpecificationMap(v.SlotSpecifications); err != nil {
+			invalidParams.AddNested("SlotSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubSlotSpecificationMap(v map[string]types.Specifications) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubSlotSpecificationMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateSpecifications(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubSlotTypeComposition(v *types.SubSlotTypeComposition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubSlotTypeComposition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SlotTypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SlotTypeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubSlotTypeList(v []types.SubSlotTypeComposition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubSlotTypeList"}
+	for i := range v {
+		if err := validateSubSlotTypeComposition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubSlotValueElicitationSetting(v *types.SubSlotValueElicitationSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubSlotValueElicitationSetting"}
+	if v.DefaultValueSpecification != nil {
+		if err := validateSlotDefaultValueSpecification(v.DefaultValueSpecification); err != nil {
+			invalidParams.AddNested("DefaultValueSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PromptSpecification == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptSpecification"))
+	} else if v.PromptSpecification != nil {
+		if err := validatePromptSpecification(v.PromptSpecification); err != nil {
+			invalidParams.AddNested("PromptSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SampleUtterances != nil {
+		if err := validateSampleUtterancesList(v.SampleUtterances); err != nil {
+			invalidParams.AddNested("SampleUtterances", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WaitAndContinueSpecification != nil {
+		if err := validateWaitAndContinueSpecification(v.WaitAndContinueSpecification); err != nil {
+			invalidParams.AddNested("WaitAndContinueSpecification", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4350,6 +4493,11 @@ func validateOpCreateSlotInput(v *CreateSlotInput) error {
 	if v.IntentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntentId"))
 	}
+	if v.SubSlotSetting != nil {
+		if err := validateSubSlotSetting(v.SubSlotSetting); err != nil {
+			invalidParams.AddNested("SubSlotSetting", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4387,6 +4535,11 @@ func validateOpCreateSlotTypeInput(v *CreateSlotTypeInput) error {
 	if v.ExternalSourceSetting != nil {
 		if err := validateExternalSourceSetting(v.ExternalSourceSetting); err != nil {
 			invalidParams.AddNested("ExternalSourceSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeSlotTypeSetting != nil {
+		if err := validateCompositeSlotTypeSetting(v.CompositeSlotTypeSetting); err != nil {
+			invalidParams.AddNested("CompositeSlotTypeSetting", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5651,6 +5804,11 @@ func validateOpUpdateSlotInput(v *UpdateSlotInput) error {
 	if v.IntentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntentId"))
 	}
+	if v.SubSlotSetting != nil {
+		if err := validateSubSlotSetting(v.SubSlotSetting); err != nil {
+			invalidParams.AddNested("SubSlotSetting", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5691,6 +5849,11 @@ func validateOpUpdateSlotTypeInput(v *UpdateSlotTypeInput) error {
 	if v.ExternalSourceSetting != nil {
 		if err := validateExternalSourceSetting(v.ExternalSourceSetting); err != nil {
 			invalidParams.AddNested("ExternalSourceSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeSlotTypeSetting != nil {
+		if err := validateCompositeSlotTypeSetting(v.CompositeSlotTypeSetting); err != nil {
+			invalidParams.AddNested("CompositeSlotTypeSetting", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

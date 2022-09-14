@@ -95,6 +95,11 @@ type CreateTopicInput struct {
 	// specify a value for the MessageDeduplicationId parameter for the Publish action.
 	Attributes map[string]string
 
+	// The body of the policy document you want to use for this topic. You can only add
+	// one policy per topic. The policy must be in JSON string format. Length
+	// Constraints: Maximum length of 30,720.
+	DataProtectionPolicy *string
+
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,
 	// you must have the sns:CreateTopic and sns:TagResource permissions.
 	Tags []types.Tag

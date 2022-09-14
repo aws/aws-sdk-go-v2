@@ -28,7 +28,6 @@ func (c *Client) SendApiAsset(ctx context.Context, params *SendApiAssetInput, op
 	return out, nil
 }
 
-// The request body for SendApiAsset.
 type SendApiAssetInput struct {
 
 	// Asset ID value for the API request.
@@ -54,7 +53,7 @@ type SendApiAssetInput struct {
 	Method *string
 
 	// URI path value for the API request. Alternatively, you can set the URI path
-	// directly by invoking /v1/{pathValue}
+	// directly by invoking /v1/{pathValue}.
 	Path *string
 
 	// Attach query string parameters to the end of the URI (for example,

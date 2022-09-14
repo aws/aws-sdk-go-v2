@@ -199,6 +199,9 @@ type AudioCodecSettings struct {
 	// Ac3 Settings
 	Ac3Settings *Ac3Settings
 
+	// Eac3 Atmos Settings
+	Eac3AtmosSettings *Eac3AtmosSettings
+
 	// Eac3 Settings
 	Eac3Settings *Eac3Settings
 
@@ -1066,6 +1069,11 @@ type ColorSpacePassthroughSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Dolby Vision Profile 8.1 Settings
+type DolbyVision81Settings struct {
+	noSmithyDocumentSerde
+}
+
 // DVB Network Information Table (NIT)
 type DvbNitSettings struct {
 
@@ -1241,6 +1249,39 @@ type DvbTdtSettings struct {
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
 	RepInterval int32
+
+	noSmithyDocumentSerde
+}
+
+// Eac3 Atmos Settings
+type Eac3AtmosSettings struct {
+
+	// Average bitrate in bits/second. Valid bitrates depend on the coding mode. // *
+	// @affectsRightSizing true
+	Bitrate float64
+
+	// Dolby Digital Plus with Dolby Atmos coding mode. Determines number of channels.
+	CodingMode Eac3AtmosCodingMode
+
+	// Sets the dialnorm for the output. Default 23.
+	Dialnorm int32
+
+	// Sets the Dolby dynamic range compression profile.
+	DrcLine Eac3AtmosDrcLine
+
+	// Sets the profile for heavy Dolby dynamic range compression, ensures that the
+	// instantaneous signal peaks do not exceed specified levels.
+	DrcRf Eac3AtmosDrcRf
+
+	// Height dimensional trim. Sets the maximum amount to attenuate the height
+	// channels when the downstream player isn??t configured to handle Dolby Digital
+	// Plus with Dolby Atmos and must remix the channels.
+	HeightTrim float64
+
+	// Surround dimensional trim. Sets the maximum amount to attenuate the surround
+	// channels when the downstream player isn't configured to handle Dolby Digital
+	// Plus with Dolby Atmos and must remix the channels.
+	SurroundTrim float64
 
 	noSmithyDocumentSerde
 }
@@ -1949,6 +1990,9 @@ type H265ColorSpaceSettings struct {
 
 	// Passthrough applies no color space conversion to the output
 	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings
+
+	// Dolby Vision Profile 8.1 Settings
+	DolbyVision81Settings *DolbyVision81Settings
 
 	// Hdr10 Settings
 	Hdr10Settings *Hdr10Settings

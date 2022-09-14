@@ -70,16 +70,16 @@ type GetClusterCredentialsInput struct {
 	// alphanumeric characters or hyphens. The user name can't be PUBLIC.
 	//
 	// * Must
-	// contain only lowercase letters, numbers, underscore, plus sign, period (dot), at
-	// symbol (@), or hyphen.
+	// contain uppercase or lowercase letters, numbers, underscore, plus sign, period
+	// (dot), at symbol (@), or hyphen.
 	//
 	// * First character must be a letter.
 	//
-	// * Must not contain
-	// a colon ( : ) or slash ( / ).
+	// * Must
+	// not contain a colon ( : ) or slash ( / ).
 	//
-	// * Cannot be a reserved word. A list of reserved
-	// words can be found in Reserved Words
+	// * Cannot be a reserved word. A list
+	// of reserved words can be found in Reserved Words
 	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
 	// Redshift Database Developer Guide.
 	//
@@ -118,18 +118,19 @@ type GetClusterCredentialsInput struct {
 	// * Must be 1
 	// to 64 alphanumeric characters or hyphens
 	//
-	// * Must contain only lowercase letters,
-	// numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.
+	// * Must contain uppercase or lowercase
+	// letters, numbers, underscore, plus sign, period (dot), at symbol (@), or
+	// hyphen.
 	//
-	// * First
-	// character must be a letter.
+	// * First character must be a letter.
 	//
-	// * Must not contain a colon ( : ) or slash ( / ).
+	// * Must not contain a colon ( : )
+	// or slash ( / ).
 	//
-	// *
-	// Cannot be a reserved word. A list of reserved words can be found in Reserved
-	// Words (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
-	// Amazon Redshift Database Developer Guide.
+	// * Cannot be a reserved word. A list of reserved words can be
+	// found in Reserved Words
+	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
+	// Redshift Database Developer Guide.
 	DbName *string
 
 	// The number of seconds until the returned temporary password expires. Constraint:

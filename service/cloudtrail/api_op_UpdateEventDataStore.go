@@ -15,7 +15,7 @@ import (
 // Updates an event data store. The required EventDataStore value is an ARN or the
 // ID portion of the ARN. Other parameters are optional, but at least one optional
 // parameter must be specified, or CloudTrail throws an error. RetentionPeriod is
-// in days, and valid values are integers between 90 and 2555. By default,
+// in days, and valid values are integers between 90 and 2557. By default,
 // TerminationProtection is enabled. AdvancedEventSelectors includes or excludes
 // management and data events in your event data store; for more information about
 // AdvancedEventSelectors, see PutEventSelectorsRequest$AdvancedEventSelectors.

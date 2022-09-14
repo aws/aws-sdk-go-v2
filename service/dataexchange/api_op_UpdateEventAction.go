@@ -28,7 +28,6 @@ func (c *Client) UpdateEventAction(ctx context.Context, params *UpdateEventActio
 	return out, nil
 }
 
-// The request body for UpdateEventAction.
 type UpdateEventActionInput struct {
 
 	// The unique identifier for the event action.

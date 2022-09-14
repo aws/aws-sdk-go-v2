@@ -48,6 +48,9 @@ type DescribeMetricSetOutput struct {
 	// The time at which the dataset was created.
 	CreationTime *time.Time
 
+	// The dimensions and their values that were used to filter the dataset.
+	DimensionFilterList []types.MetricSetDimensionFilter
+
 	// A list of the dimensions chosen for analysis.
 	DimensionList []string
 

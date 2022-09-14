@@ -183,6 +183,9 @@ type Endpoint struct {
 // Specify the driver that the job runs on.
 type JobDriver struct {
 
+	// The job driver for job type.
+	SparkSqlJobDriver *SparkSqlJobDriver
+
 	// The job driver parameters specified for spark submit.
 	SparkSubmitJobDriver *SparkSubmitJobDriver
 
@@ -267,6 +270,18 @@ type S3MonitoringConfiguration struct {
 	//
 	// This member is required.
 	LogUri *string
+
+	noSmithyDocumentSerde
+}
+
+// The job driver for job type.
+type SparkSqlJobDriver struct {
+
+	// The SQL file to be executed.
+	EntryPoint *string
+
+	// The Spark parameters to be included in the Spark SQL command.
+	SparkSqlParameters *string
 
 	noSmithyDocumentSerde
 }

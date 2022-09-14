@@ -735,6 +735,10 @@ type Project struct {
 	// The number of ongoing launches currently in the project.
 	ActiveLaunchCount *int64
 
+	// This structure defines the configuration of how your application integrates with
+	// AppConfig to run client-side evaluation.
+	AppConfigResource *ProjectAppConfigResource
+
 	// A structure that contains information about where Evidently is to store
 	// evaluation events for longer term storage.
 	DataDelivery *ProjectDataDelivery
@@ -756,6 +760,51 @@ type Project struct {
 
 	// The list of tag keys and values associated with this project.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// This is a structure that defines the configuration of how your application
+// integrates with AppConfig to run client-side evaluation.
+type ProjectAppConfigResource struct {
+
+	// The ID of the AppConfig application to use for client-side evaluation.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The ID of the AppConfig profile to use for client-side evaluation.
+	//
+	// This member is required.
+	ConfigurationProfileId *string
+
+	// The ID of the AppConfig environment to use for client-side evaluation. This must
+	// be an environment that is within the application that you specify for
+	// applicationId.
+	//
+	// This member is required.
+	EnvironmentId *string
+
+	noSmithyDocumentSerde
+}
+
+// Use this parameter to configure client-side evaluation for your project.
+// Client-side evaluation allows your application to assign variations to user
+// sessions locally instead of by calling the EvaluateFeature
+// (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_EvaluateFeature.html)
+// operation to assign the variations. This mitigates the latency and availability
+// risks that come with an API call. ProjectAppConfigResource is a structure that
+// defines the configuration of how your application integrates with AppConfig to
+// run client-side evaluation.
+type ProjectAppConfigResourceConfig struct {
+
+	// The ID of the AppConfig application to use for client-side evaluation.
+	ApplicationId *string
+
+	// The ID of the AppConfig environment to use for client-side evaluation. This must
+	// be an environment that is within the application that you specify for
+	// applicationId.
+	EnvironmentId *string
 
 	noSmithyDocumentSerde
 }
@@ -1038,7 +1087,10 @@ type Segment struct {
 	// This member is required.
 	Name *string
 
-	//
+	// The pattern that defines the attributes to use to evalute whether a user session
+	// will be in the segment. For more information about the pattern syntax, see
+	// Segment rule pattern syntax
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Evidently-segments.html).
 	//
 	// This value conforms to the media type: application/json
 	//

@@ -7774,6 +7774,11 @@ func awsRestjson1_deserializeDocumentFilterCriteria(v **types.FilterCriteria, va
 				return err
 			}
 
+		case "fixAvailable":
+			if err := awsRestjson1_deserializeDocumentStringFilterList(&sv.FixAvailable, value); err != nil {
+				return err
+			}
+
 		case "inspectorScore":
 			if err := awsRestjson1_deserializeDocumentNumberFilterList(&sv.InspectorScore, value); err != nil {
 				return err
@@ -7955,6 +7960,15 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 					return fmt.Errorf("expected DateTimeTimestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "fixAvailable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FixAvailable to be of type string, got %T instead", value)
+				}
+				sv.FixAvailable = types.FixAvailable(jtv)
 			}
 
 		case "inspectorScore":
@@ -11267,6 +11281,15 @@ func awsRestjson1_deserializeDocumentVulnerablePackage(v **types.VulnerablePacka
 					return fmt.Errorf("expected PackageRelease to be of type string, got %T instead", value)
 				}
 				sv.Release = ptr.String(jtv)
+			}
+
+		case "remediation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VulnerablePackageRemediation to be of type string, got %T instead", value)
+				}
+				sv.Remediation = ptr.String(jtv)
 			}
 
 		case "sourceLayerHash":
