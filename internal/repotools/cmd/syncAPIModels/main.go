@@ -97,7 +97,7 @@ func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 					path, err)
 				return err
 			}
-			if !strings.HasPrefix(check.Smithy, "1.") {
+			if !strings.HasPrefix(check.Smithy, "1.") && !strings.HasPrefix(check.Smithy, "2.") {
 				return nil
 			}
 			var shapes map[string]SmithyShape
