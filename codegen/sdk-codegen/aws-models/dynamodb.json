@@ -1208,7 +1208,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 100
                 }
             }
         },
@@ -5147,7 +5147,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 100
                 }
             }
         },
@@ -6095,7 +6095,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 100
                 }
             }
         },
@@ -8924,7 +8924,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 100
                 }
             }
         },
@@ -8960,7 +8960,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>\n            <code>TransactGetItems</code> is a synchronous operation that atomically retrieves\n            multiple items from one or more tables (but not from indexes) in a single account and\n            Region. A <code>TransactGetItems</code> call can contain up to 25\n                <code>TransactGetItem</code> objects, each of which contains a <code>Get</code>\n            structure that specifies an item to retrieve from a table in the account and Region. A\n            call to <code>TransactGetItems</code> cannot retrieve items from tables in more than one\n                Amazon Web Services account or Region. The aggregate size of the items in the\n            transaction cannot exceed 4 MB.</p>\n        <p>DynamoDB rejects the entire <code>TransactGetItems</code> request if any of\n            the following is true:</p>\n        <ul>\n            <li>\n                <p>A conflicting operation is in the process of updating an item to be\n                    read.</p>\n            </li>\n            <li>\n                <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n                <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n                <p>The aggregate size of the items in the transaction cannot exceed 4 MB.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <code>TransactGetItems</code> is a synchronous operation that atomically retrieves\n            multiple items from one or more tables (but not from indexes) in a single account and\n            Region. A <code>TransactGetItems</code> call can contain up to 100\n                <code>TransactGetItem</code> objects, each of which contains a <code>Get</code>\n            structure that specifies an item to retrieve from a table in the account and Region. A\n            call to <code>TransactGetItems</code> cannot retrieve items from tables in more than one\n                Amazon Web Services account or Region. The aggregate size of the items in the\n            transaction cannot exceed 4 MB.</p>\n        <p>DynamoDB rejects the entire <code>TransactGetItems</code> request if any of\n            the following is true:</p>\n        <ul>\n            <li>\n                <p>A conflicting operation is in the process of updating an item to be\n                    read.</p>\n            </li>\n            <li>\n                <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n                <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n                <p>The aggregate size of the items in the transaction cannot exceed 4 MB.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dynamodb#TransactGetItemsInput": {
@@ -8969,7 +8969,7 @@
                 "TransactItems": {
                     "target": "com.amazonaws.dynamodb#TransactGetItemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered array of up to 25 <code>TransactGetItem</code> objects, each of which\n            contains a <code>Get</code> structure.</p>",
+                        "smithy.api#documentation": "<p>An ordered array of up to 100 <code>TransactGetItem</code> objects, each of which\n            contains a <code>Get</code> structure.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8993,7 +8993,7 @@
                 "Responses": {
                     "target": "com.amazonaws.dynamodb#ItemResponseList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered array of up to 25 <code>ItemResponse</code> objects, each of which\n            corresponds to the <code>TransactGetItem</code> object in the same position in the\n                <i>TransactItems</i> array. Each <code>ItemResponse</code> object\n            contains a Map of the name-value pairs that are the projected attributes of the\n            requested item.</p>\n        <p>If a requested item could not be retrieved, the corresponding\n                <code>ItemResponse</code> object is Null, or if the requested item has no projected\n            attributes, the corresponding <code>ItemResponse</code> object is an empty Map. </p>"
+                        "smithy.api#documentation": "<p>An ordered array of up to 100 <code>ItemResponse</code> objects, each of which\n            corresponds to the <code>TransactGetItem</code> object in the same position in the\n                <i>TransactItems</i> array. Each <code>ItemResponse</code> object\n            contains a Map of the name-value pairs that are the projected attributes of the\n            requested item.</p>\n        <p>If a requested item could not be retrieved, the corresponding\n                <code>ItemResponse</code> object is Null, or if the requested item has no projected\n            attributes, the corresponding <code>ItemResponse</code> object is an empty Map. </p>"
                     }
                 }
             }
@@ -9038,7 +9038,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 100
                 }
             }
         },
@@ -9080,7 +9080,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>\n            <code>TransactWriteItems</code> is a synchronous write operation that groups up to 25\n            action requests. These actions can target items in different tables, but not in\n            different Amazon Web Services accounts or Regions, and no two actions can target the same\n            item. For example, you cannot both <code>ConditionCheck</code> and <code>Update</code>\n            the same item. The aggregate size of the items in the transaction cannot exceed 4\n            MB.</p>\n\n        <p>The actions are completed atomically so that either all of them succeed, or all of\n            them fail. They are defined by the following objects:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <code>Put</code>  —   Initiates a <code>PutItem</code>\n                    operation to write a new item. This structure specifies the primary key of the\n                    item to be written, the name of the table to write it in, an optional condition\n                    expression that must be satisfied for the write to succeed, a list of the item's\n                    attributes, and a field indicating whether to retrieve the item's attributes if\n                    the condition is not met.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Update</code>  —   Initiates an <code>UpdateItem</code>\n                    operation to update an existing item. This structure specifies the primary key\n                    of the item to be updated, the name of the table where it resides, an optional\n                    condition expression that must be satisfied for the update to succeed, an\n                    expression that defines one or more attributes to be updated, and a field\n                    indicating whether to retrieve the item's attributes if the condition is not\n                    met.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Delete</code>  —   Initiates a <code>DeleteItem</code>\n                    operation to delete an existing item. This structure specifies the primary key\n                    of the item to be deleted, the name of the table where it resides, an optional\n                    condition expression that must be satisfied for the deletion to succeed, and a\n                    field indicating whether to retrieve the item's attributes if the condition is\n                    not met.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ConditionCheck</code>  —   Applies a condition to an item\n                    that is not being modified by the transaction. This structure specifies the\n                    primary key of the item to be checked, the name of the table where it resides, a\n                    condition expression that must be satisfied for the transaction to succeed, and\n                    a field indicating whether to retrieve the item's attributes if the condition is\n                    not met.</p>\n            </li>\n         </ul>\n\n        <p>DynamoDB rejects the entire <code>TransactWriteItems</code> request if any of the\n            following is true:</p>\n        <ul>\n            <li>\n                <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n                <p>An ongoing operation is in the process of updating the same item.</p>\n            </li>\n            <li>\n                <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n                <p>An item size becomes too large (bigger than 400 KB), a local secondary index\n                    (LSI) becomes too large, or a similar validation error occurs because of changes\n                    made by the transaction.</p>\n            </li>\n            <li>\n                <p>The aggregate size of the items in the transaction exceeds 4 MB.</p>\n            </li>\n            <li>\n                <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <code>TransactWriteItems</code> is a synchronous write operation that groups up to 100\n            action requests. These actions can target items in different tables, but not in\n            different Amazon Web Services accounts or Regions, and no two actions can target the same\n            item. For example, you cannot both <code>ConditionCheck</code> and <code>Update</code>\n            the same item. The aggregate size of the items in the transaction cannot exceed 4\n            MB.</p>\n\n        <p>The actions are completed atomically so that either all of them succeed, or all of\n            them fail. They are defined by the following objects:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <code>Put</code>  —   Initiates a <code>PutItem</code>\n                    operation to write a new item. This structure specifies the primary key of the\n                    item to be written, the name of the table to write it in, an optional condition\n                    expression that must be satisfied for the write to succeed, a list of the item's\n                    attributes, and a field indicating whether to retrieve the item's attributes if\n                    the condition is not met.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Update</code>  —   Initiates an <code>UpdateItem</code>\n                    operation to update an existing item. This structure specifies the primary key\n                    of the item to be updated, the name of the table where it resides, an optional\n                    condition expression that must be satisfied for the update to succeed, an\n                    expression that defines one or more attributes to be updated, and a field\n                    indicating whether to retrieve the item's attributes if the condition is not\n                    met.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Delete</code>  —   Initiates a <code>DeleteItem</code>\n                    operation to delete an existing item. This structure specifies the primary key\n                    of the item to be deleted, the name of the table where it resides, an optional\n                    condition expression that must be satisfied for the deletion to succeed, and a\n                    field indicating whether to retrieve the item's attributes if the condition is\n                    not met.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ConditionCheck</code>  —   Applies a condition to an item\n                    that is not being modified by the transaction. This structure specifies the\n                    primary key of the item to be checked, the name of the table where it resides, a\n                    condition expression that must be satisfied for the transaction to succeed, and\n                    a field indicating whether to retrieve the item's attributes if the condition is\n                    not met.</p>\n            </li>\n         </ul>\n\n        <p>DynamoDB rejects the entire <code>TransactWriteItems</code> request if any of the\n            following is true:</p>\n        <ul>\n            <li>\n                <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n                <p>An ongoing operation is in the process of updating the same item.</p>\n            </li>\n            <li>\n                <p>There is insufficient provisioned capacity for the transaction to be\n                    completed.</p>\n            </li>\n            <li>\n                <p>An item size becomes too large (bigger than 400 KB), a local secondary index\n                    (LSI) becomes too large, or a similar validation error occurs because of changes\n                    made by the transaction.</p>\n            </li>\n            <li>\n                <p>The aggregate size of the items in the transaction exceeds 4 MB.</p>\n            </li>\n            <li>\n                <p>There is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.dynamodb#TransactWriteItemsInput": {
@@ -9089,7 +9089,7 @@
                 "TransactItems": {
                     "target": "com.amazonaws.dynamodb#TransactWriteItemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ordered array of up to 25 <code>TransactWriteItem</code> objects, each of which\n            contains a <code>ConditionCheck</code>, <code>Put</code>, <code>Update</code>, or\n                <code>Delete</code> object. These can operate on items in different tables, but the\n            tables must reside in the same Amazon Web Services account and Region, and no two of them\n            can operate on the same item. </p>",
+                        "smithy.api#documentation": "<p>An ordered array of up to 100 <code>TransactWriteItem</code> objects, each of which\n            contains a <code>ConditionCheck</code>, <code>Put</code>, <code>Update</code>, or\n                <code>Delete</code> object. These can operate on items in different tables, but the\n            tables must reside in the same Amazon Web Services account and Region, and no two of them\n            can operate on the same item. </p>",
                         "smithy.api#required": {}
                     }
                 },

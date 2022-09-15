@@ -4618,7 +4618,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a running app for the specified UserProfile. Supported apps are\n      <code>JupyterServer</code> and <code>KernelGateway</code>. This operation is automatically\n      invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel\n      configurations are selected by the user. A user may have multiple Apps active simultaneously.</p>"
+                "smithy.api#documentation": "<p>Creates a running app for the specified UserProfile. This operation is automatically\n      invoked by Amazon SageMaker Studio upon access to the associated Domain, and when new kernel\n      configurations are selected by the user. A user may have multiple Apps active simultaneously.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAppImageConfig": {
@@ -4693,7 +4693,7 @@
                 "AppType": {
                     "target": "com.amazonaws.sagemaker#AppType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of app. Supported apps are <code>JupyterServer</code> and\n        <code>KernelGateway</code>. <code>TensorBoard</code> is not supported.</p>",
+                        "smithy.api#documentation": "<p>The type of app.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16948,7 +16948,7 @@
                 "ExecutionRoleIdentityConfig": {
                     "target": "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">\n               <code>sts:SourceIdentity</code> key</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>.</p>"
                     }
                 }
             },
@@ -16968,7 +16968,7 @@
                 "ExecutionRoleIdentityConfig": {
                     "target": "com.amazonaws.sagemaker#ExecutionRoleIdentityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">\n               <code>sts:SourceIdentity</code> key</a>. This configuration can only be modified if there are no apps in the <code>InService</code> or <code>Pending</code> state.</p>"
+                        "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>. This configuration can only be modified if there are no apps in the <code>InService</code> or <code>Pending</code> state.</p>"
                     }
                 }
             },
@@ -20073,7 +20073,7 @@
                 "MaxConcurrentTaskCount": {
                     "target": "com.amazonaws.sagemaker#MaxConcurrentTaskCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the maximum number of data objects that can be labeled by human workers at the\n            same time. Also referred to as batch size. Each object may have more than one worker at one time.\n            The default value is 1000 objects.</p>"
+                        "smithy.api#documentation": "<p>Defines the maximum number of data objects that can be labeled by human workers at the\n            same time. Also referred to as batch size. Each object may have more than one worker at one time.\n            The default value is 1000 objects. To increase the maximum value to 5000 objects, contact Amazon Web Services Support.</p>"
                     }
                 },
                 "AnnotationConsolidationConfig": {
@@ -20579,8 +20579,14 @@
                 "Strategy": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobStrategyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how hyperparameter tuning chooses the combinations of hyperparameter values\n            to use for the training job it launches. To use the Bayesian search strategy, set this\n            to <code>Bayesian</code>. To randomly search, set it to <code>Random</code>. For\n            information about search strategies, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html\">How\n                Hyperparameter Tuning Works</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies how hyperparameter tuning chooses the combinations of hyperparameter values\n            to use for the training job it launches. For information about search strategies, see\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html\">How\n                Hyperparameter Tuning Works</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "StrategyConfig": {
+                    "target": "com.amazonaws.sagemaker#HyperParameterTuningJobStrategyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the <code>Hyperband</code> optimization strategy. This parameter\n         should be provided only if <code>Hyperband</code> is selected as the strategy for\n            <code>HyperParameterTuningJobConfig</code>.</p>"
                     }
                 },
                 "HyperParameterTuningJobObjective": {
@@ -20605,7 +20611,7 @@
                 "TrainingJobEarlyStoppingType": {
                     "target": "com.amazonaws.sagemaker#TrainingJobEarlyStoppingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to use early stopping for training jobs launched by the\n            hyperparameter tuning job. This can be one of the following values (the default value is\n                <code>OFF</code>):</p>\n        <dl>\n            <dt>OFF</dt>\n            <dd>\n                    <p>Training jobs launched by the hyperparameter tuning job do not use early\n                        stopping.</p>\n                </dd>\n            <dt>AUTO</dt>\n            <dd>\n                    <p>SageMaker stops training jobs launched by the hyperparameter tuning job when\n                        they are unlikely to perform better than previously completed training jobs.\n                        For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">Stop Training Jobs Early</a>.</p>\n                </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Specifies whether to use early stopping for training jobs launched by the\n            hyperparameter tuning job. Because the <code>Hyperband</code> strategy has its own\n            advanced internal early stopping mechanism,\n            <code>TrainingJobEarlyStoppingType</code> must be <code>OFF</code> to use <code>Hyperband</code>. This parameter can take on one of the following values (the\n            default value is <code>OFF</code>):</p>\n        <dl>\n            <dt>OFF</dt>\n            <dd>\n                    <p>Training jobs launched by the hyperparameter tuning job do not use early\n                        stopping.</p>\n                </dd>\n            <dt>AUTO</dt>\n            <dd>\n                    <p>SageMaker stops training jobs launched by the hyperparameter tuning job when\n                        they are unlikely to perform better than previously completed training jobs.\n                        For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">Stop Training Jobs Early</a>.</p>\n                </dd>\n         </dl>"
                     }
                 },
                 "TuningJobCompletionCriteria": {
@@ -20801,6 +20807,20 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#HyperParameterTuningJobStrategyConfig": {
+            "type": "structure",
+            "members": {
+                "HyperbandStrategyConfig": {
+                    "target": "com.amazonaws.sagemaker#HyperbandStrategyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the object that specifies the <code>Hyperband</code> strategy.\n         This parameter is only supported for the <code>Hyperband</code> selection for\n            <code>Strategy</code> within the <code>HyperParameterTuningJobConfig</code> API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a training job launched by a hyperparameter tuning job. Choose\n            <code>Bayesian</code> for Bayesian optimization, and <code>Random</code> for random\n         search optimization. For more advanced use cases, use <code>Hyperband</code>, which\n         evaluates objective metrics for training jobs after every epoch. For more information about\n         strategies, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html\">How Hyperparameter\n            Tuning Works</a>.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#HyperParameterTuningJobStrategyType": {
             "type": "string",
             "traits": {
@@ -20813,6 +20833,10 @@
                     {
                         "value": "Random",
                         "name": "RANDOM"
+                    },
+                    {
+                        "value": "Hyperband",
+                        "name": "HYPERBAND"
                     }
                 ]
             }
@@ -20850,7 +20874,7 @@
                 "Strategy": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobStrategyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the search strategy hyperparameter tuning uses to choose which\n            hyperparameters to\n            use\n            for each iteration. Currently, the only valid value is\n            Bayesian.</p>",
+                        "smithy.api#documentation": "<p>Specifies the search strategy hyperparameter tuning uses to choose which\n            hyperparameters to\n            evaluate\n            at each iteration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21001,6 +21025,44 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#HyperbandStrategyConfig": {
+            "type": "structure",
+            "members": {
+                "MinResource": {
+                    "target": "com.amazonaws.sagemaker#HyperbandStrategyMinResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of resources (such as epochs) that can be used by a training job\n         launched by a hyperparameter tuning job. If the value for <code>MinResource</code> has not\n         been reached, the training job will not be stopped by <code>Hyperband</code>.</p>"
+                    }
+                },
+                "MaxResource": {
+                    "target": "com.amazonaws.sagemaker#HyperbandStrategyMaxResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of resources (such as epochs) that can be used by a training job\n         launched by a hyperparameter tuning job. Once a job reaches the <code>MaxResource</code>\n         value, it is stopped. If a value for <code>MaxResource</code> is not provided, and\n            <code>Hyperband</code> is selected as the hyperparameter tuning strategy,\n            <code>HyperbandTrainingJ</code> attempts to infer <code>MaxResource</code> from the\n         following keys (if present) in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters\">StaticsHyperParameters</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>numepochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n_epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>num_epochs</code>\n               </p>\n            </li>\n         </ul>\n         <p>If <code>HyperbandStrategyConfig</code> is unable to infer a value for\n            <code>MaxResource</code>, it generates a validation error. The maximum value is 20,000\n         epochs. All metrics that correspond to an objective metric are used to derive <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">early stopping\n            decisions</a>. For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html\">distributive</a> training jobs,\n         ensure that duplicate metrics are not printed in the logs across the individual nodes in a\n         training job. If multiple nodes are publishing duplicate or incorrect metrics, training\n         jobs may make an incorrect stopping decision and stop the job prematurely. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for <code>Hyperband</code>, a multi-fidelity based hyperparameter\n         tuning strategy. <code>Hyperband</code> uses the final and intermediate results of a\n         training job to dynamically allocate resources to utilized hyperparameter configurations\n         while automatically stopping under-performing configurations. This parameter should be\n         provided only if <code>Hyperband</code> is selected as the <code>StrategyConfig</code>\n         under the <code>HyperParameterTuningJobConfig</code> API.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#HyperbandStrategyMaxResource": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#HyperbandStrategyMinResource": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
                 }
             }
         },
@@ -28535,7 +28597,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 1000
+                    "max": 5000
                 }
             }
         },
