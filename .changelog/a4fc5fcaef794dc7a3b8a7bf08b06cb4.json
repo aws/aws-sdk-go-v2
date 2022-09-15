@@ -1,8 +1,0 @@
-{
-    "id": "a4fc5fca-ef79-4dc7-a3b8-a7bf08b06cb4",
-    "type": "feature",
-    "description": "Amazon SageMaker Automatic Model Tuning now supports specifying Hyperband strategy for tuning jobs, which uses a multi-fidelity based tuning strategy to stop underperforming hyperparameter configurations early.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

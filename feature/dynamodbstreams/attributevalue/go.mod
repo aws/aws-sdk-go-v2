@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.16.5
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.13.19
 	github.com/aws/smithy-go v1.13.3
 	github.com/google/go-cmp v0.5.8

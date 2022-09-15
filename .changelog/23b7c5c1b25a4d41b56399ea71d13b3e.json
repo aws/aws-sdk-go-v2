@@ -1,8 +1,0 @@
-{
-    "id": "23b7c5c1-b25a-4d41-b563-99ea71d13b3e",
-    "type": "feature",
-    "description": "This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.",
-    "modules": [
-        "service/ec2"
-    ]
-}

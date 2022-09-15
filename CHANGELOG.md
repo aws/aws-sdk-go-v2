@@ -1,3 +1,16 @@
+# Release (2022-09-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.17.0](service/dynamodb/CHANGELOG.md#v1170-2022-09-15)
+  * **Feature**: Increased DynamoDB transaction limit from 25 to 100.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.56.0](service/ec2/CHANGELOG.md#v1560-2022-09-15)
+  * **Feature**: This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.43.0](service/sagemaker/CHANGELOG.md#v1430-2022-09-15)
+  * **Feature**: Amazon SageMaker Automatic Model Tuning now supports specifying Hyperband strategy for tuning jobs, which uses a multi-fidelity based tuning strategy to stop underperforming hyperparameter configurations early.
+
 # Release (2022-09-14)
 
 ## General Highlights

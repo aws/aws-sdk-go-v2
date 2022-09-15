@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.17
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.10
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.16.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.55.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.56.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.17
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.20
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.14
@@ -74,7 +74,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.17.8
 	github.com/aws/aws-sdk-go-v2/service/sms v1.12.17
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.16
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.17
 	github.com/aws/aws-sdk-go-v2/service/sns v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.9
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.28.0
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.16
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.17
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.22.7
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.22.7
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.22.8
 	github.com/aws/smithy-go v1.13.3
 	github.com/google/go-cmp v0.5.8
 )

@@ -5,7 +5,7 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2 v1.16.15
 	github.com/aws/aws-sdk-go-v2/config v1.17.6
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.16.5
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

@@ -1,3 +1,7 @@
+# v1.56.0 (2022-09-15)
+
+* **Feature**: This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.
+
 # v1.55.0 (2022-09-14)
 
 * **Feature**: Documentation updates for Amazon EC2.

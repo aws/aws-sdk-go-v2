@@ -1,3 +1,7 @@
+# v1.17.0 (2022-09-15)
+
+* **Feature**: Increased DynamoDB transaction limit from 25 to 100.
+
 # v1.16.5 (2022-09-14)
 
 * **Dependency Update**: Updated to the latest SDK module versions
