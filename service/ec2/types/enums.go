@@ -5428,7 +5428,9 @@ const (
 	ResourceTypeVolume                                                 ResourceType = "volume"
 	ResourceTypeVpc                                                    ResourceType = "vpc"
 	ResourceTypeVpcEndpoint                                            ResourceType = "vpc-endpoint"
+	ResourceTypeVpcEndpointConnection                                  ResourceType = "vpc-endpoint-connection"
 	ResourceTypeVpcEndpointService                                     ResourceType = "vpc-endpoint-service"
+	ResourceTypeVpcEndpointServicePermission                           ResourceType = "vpc-endpoint-service-permission"
 	ResourceTypeVpcPeeringConnection                                   ResourceType = "vpc-peering-connection"
 	ResourceTypeVpnConnection                                          ResourceType = "vpn-connection"
 	ResourceTypeVpnGateway                                             ResourceType = "vpn-gateway"
@@ -5510,7 +5512,9 @@ func (ResourceType) Values() []ResourceType {
 		"volume",
 		"vpc",
 		"vpc-endpoint",
+		"vpc-endpoint-connection",
 		"vpc-endpoint-service",
+		"vpc-endpoint-service-permission",
 		"vpc-peering-connection",
 		"vpn-connection",
 		"vpn-gateway",

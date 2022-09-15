@@ -40448,6 +40448,63 @@ func awsAwsjson11_deserializeDocumentHumanTaskUiSummary(v **types.HumanTaskUiSum
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentHyperbandStrategyConfig(v **types.HyperbandStrategyConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperbandStrategyConfig
+	if *v == nil {
+		sv = &types.HyperbandStrategyConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxResource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected HyperbandStrategyMaxResource to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxResource = ptr.Int32(int32(i64))
+			}
+
+		case "MinResource":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected HyperbandStrategyMinResource to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinResource = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentHyperParameterAlgorithmSpecification(v **types.HyperParameterAlgorithmSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41173,6 +41230,11 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobConfig(v **types.Hyp
 				sv.Strategy = types.HyperParameterTuningJobStrategyType(jtv)
 			}
 
+		case "StrategyConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobStrategyConfig(&sv.StrategyConfig, value); err != nil {
+				return err
+			}
+
 		case "TrainingJobEarlyStoppingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -41427,6 +41489,42 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobSearchEntity(v **typ
 
 		case "WarmStartConfig":
 			if err := awsAwsjson11_deserializeDocumentHyperParameterTuningJobWarmStartConfig(&sv.WarmStartConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHyperParameterTuningJobStrategyConfig(v **types.HyperParameterTuningJobStrategyConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HyperParameterTuningJobStrategyConfig
+	if *v == nil {
+		sv = &types.HyperParameterTuningJobStrategyConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HyperbandStrategyConfig":
+			if err := awsAwsjson11_deserializeDocumentHyperbandStrategyConfig(&sv.HyperbandStrategyConfig, value); err != nil {
 				return err
 			}
 

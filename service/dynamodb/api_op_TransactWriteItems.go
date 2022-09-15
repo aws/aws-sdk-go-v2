@@ -13,7 +13,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// TransactWriteItems is a synchronous write operation that groups up to 25 action
+// TransactWriteItems is a synchronous write operation that groups up to 100 action
 // requests. These actions can target items in different tables, but not in
 // different Amazon Web Services accounts or Regions, and no two actions can target
 // the same item. For example, you cannot both ConditionCheck and Update the same
@@ -87,8 +87,8 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 
 type TransactWriteItemsInput struct {
 
-	// An ordered array of up to 25 TransactWriteItem objects, each of which contains a
-	// ConditionCheck, Put, Update, or Delete object. These can operate on items in
+	// An ordered array of up to 100 TransactWriteItem objects, each of which contains
+	// a ConditionCheck, Put, Update, or Delete object. These can operate on items in
 	// different tables, but the tables must reside in the same Amazon Web Services
 	// account and Region, and no two of them can operate on the same item.
 	//

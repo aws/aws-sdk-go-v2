@@ -1667,8 +1667,9 @@ type HyperParameterTuningJobStrategyType string
 
 // Enum values for HyperParameterTuningJobStrategyType
 const (
-	HyperParameterTuningJobStrategyTypeBayesian HyperParameterTuningJobStrategyType = "Bayesian"
-	HyperParameterTuningJobStrategyTypeRandom   HyperParameterTuningJobStrategyType = "Random"
+	HyperParameterTuningJobStrategyTypeBayesian  HyperParameterTuningJobStrategyType = "Bayesian"
+	HyperParameterTuningJobStrategyTypeRandom    HyperParameterTuningJobStrategyType = "Random"
+	HyperParameterTuningJobStrategyTypeHyperband HyperParameterTuningJobStrategyType = "Hyperband"
 )
 
 // Values returns all known values for HyperParameterTuningJobStrategyType. Note
@@ -1679,6 +1680,7 @@ func (HyperParameterTuningJobStrategyType) Values() []HyperParameterTuningJobStr
 	return []HyperParameterTuningJobStrategyType{
 		"Bayesian",
 		"Random",
+		"Hyperband",
 	}
 }
 

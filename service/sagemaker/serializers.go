@@ -17206,6 +17206,23 @@ func awsAwsjson11_serializeDocumentHumanTaskConfig(v *types.HumanTaskConfig, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHyperbandStrategyConfig(v *types.HyperbandStrategyConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResource != nil {
+		ok := object.Key("MaxResource")
+		ok.Integer(*v.MaxResource)
+	}
+
+	if v.MinResource != nil {
+		ok := object.Key("MinResource")
+		ok.Integer(*v.MinResource)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHyperParameterAlgorithmSpecification(v *types.HyperParameterAlgorithmSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17497,6 +17514,13 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningJobConfig(v *types.HyperP
 		ok.String(string(v.Strategy))
 	}
 
+	if v.StrategyConfig != nil {
+		ok := object.Key("StrategyConfig")
+		if err := awsAwsjson11_serializeDocumentHyperParameterTuningJobStrategyConfig(v.StrategyConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TrainingJobEarlyStoppingType) > 0 {
 		ok := object.Key("TrainingJobEarlyStoppingType")
 		ok.String(string(v.TrainingJobEarlyStoppingType))
@@ -17539,6 +17563,20 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningJobObjectives(v []types.H
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHyperParameterTuningJobStrategyConfig(v *types.HyperParameterTuningJobStrategyConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HyperbandStrategyConfig != nil {
+		ok := object.Key("HyperbandStrategyConfig")
+		if err := awsAwsjson11_serializeDocumentHyperbandStrategyConfig(v.HyperbandStrategyConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

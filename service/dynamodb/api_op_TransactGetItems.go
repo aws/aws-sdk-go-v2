@@ -15,7 +15,7 @@ import (
 
 // TransactGetItems is a synchronous operation that atomically retrieves multiple
 // items from one or more tables (but not from indexes) in a single account and
-// Region. A TransactGetItems call can contain up to 25 TransactGetItem objects,
+// Region. A TransactGetItems call can contain up to 100 TransactGetItem objects,
 // each of which contains a Get structure that specifies an item to retrieve from a
 // table in the account and Region. A call to TransactGetItems cannot retrieve
 // items from tables in more than one Amazon Web Services account or Region. The
@@ -50,7 +50,7 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 
 type TransactGetItemsInput struct {
 
-	// An ordered array of up to 25 TransactGetItem objects, each of which contains a
+	// An ordered array of up to 100 TransactGetItem objects, each of which contains a
 	// Get structure.
 	//
 	// This member is required.
@@ -72,7 +72,7 @@ type TransactGetItemsOutput struct {
 	// the read-capacity units consumed by the TransactGetItems call in that table.
 	ConsumedCapacity []types.ConsumedCapacity
 
-	// An ordered array of up to 25 ItemResponse objects, each of which corresponds to
+	// An ordered array of up to 100 ItemResponse objects, each of which corresponds to
 	// the TransactGetItem object in the same position in the TransactItems array. Each
 	// ItemResponse object contains a Map of the name-value pairs that are the
 	// projected attributes of the requested item. If a requested item could not be

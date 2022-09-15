@@ -5863,7 +5863,8 @@ type HumanTaskConfig struct {
 
 	// Defines the maximum number of data objects that can be labeled by human workers
 	// at the same time. Also referred to as batch size. Each object may have more than
-	// one worker at one time. The default value is 1000 objects.
+	// one worker at one time. The default value is 1000 objects. To increase the
+	// maximum value to 5000 objects, contact Amazon Web Services Support.
 	MaxConcurrentTaskCount *int32
 
 	// The price that you pay for each task performed by an Amazon Mechanical Turk
@@ -5907,6 +5908,54 @@ type HumanTaskUiSummary struct {
 	//
 	// This member is required.
 	HumanTaskUiName *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for Hyperband, a multi-fidelity based hyperparameter tuning
+// strategy. Hyperband uses the final and intermediate results of a training job to
+// dynamically allocate resources to utilized hyperparameter configurations while
+// automatically stopping under-performing configurations. This parameter should be
+// provided only if Hyperband is selected as the StrategyConfig under the
+// HyperParameterTuningJobConfig API.
+type HyperbandStrategyConfig struct {
+
+	// The maximum number of resources (such as epochs) that can be used by a training
+	// job launched by a hyperparameter tuning job. Once a job reaches the MaxResource
+	// value, it is stopped. If a value for MaxResource is not provided, and Hyperband
+	// is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts
+	// to infer MaxResource from the following keys (if present) in
+	// StaticsHyperParameters
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters):
+	//
+	// *
+	// epochs
+	//
+	// * numepochs
+	//
+	// * n-epochs
+	//
+	// * n_epochs
+	//
+	// * num_epochs
+	//
+	// If
+	// HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates
+	// a validation error. The maximum value is 20,000 epochs. All metrics that
+	// correspond to an objective metric are used to derive early stopping decisions
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
+	// For distributive
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html)
+	// training jobs, ensure that duplicate metrics are not printed in the logs across
+	// the individual nodes in a training job. If multiple nodes are publishing
+	// duplicate or incorrect metrics, training jobs may make an incorrect stopping
+	// decision and stop the job prematurely.
+	MaxResource *int32
+
+	// The minimum number of resources (such as epochs) that can be used by a training
+	// job launched by a hyperparameter tuning job. If the value for MinResource has
+	// not been reached, the training job will not be stopped by Hyperband.
+	MinResource *int32
 
 	noSmithyDocumentSerde
 }
@@ -6218,9 +6267,8 @@ type HyperParameterTuningJobConfig struct {
 	ResourceLimits *ResourceLimits
 
 	// Specifies how hyperparameter tuning chooses the combinations of hyperparameter
-	// values to use for the training job it launches. To use the Bayesian search
-	// strategy, set this to Bayesian. To randomly search, set it to Random. For
-	// information about search strategies, see How Hyperparameter Tuning Works
+	// values to use for the training job it launches. For information about search
+	// strategies, see How Hyperparameter Tuning Works
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
 	//
 	// This member is required.
@@ -6234,11 +6282,18 @@ type HyperParameterTuningJobConfig struct {
 	// this tuning job searches.
 	ParameterRanges *ParameterRanges
 
+	// The configuration for the Hyperband optimization strategy. This parameter should
+	// be provided only if Hyperband is selected as the strategy for
+	// HyperParameterTuningJobConfig.
+	StrategyConfig *HyperParameterTuningJobStrategyConfig
+
 	// Specifies whether to use early stopping for training jobs launched by the
-	// hyperparameter tuning job. This can be one of the following values (the default
-	// value is OFF): OFF Training jobs launched by the hyperparameter tuning job do
-	// not use early stopping. AUTO SageMaker stops training jobs launched by the
-	// hyperparameter tuning job when they are unlikely to perform better than
+	// hyperparameter tuning job. Because the Hyperband strategy has its own advanced
+	// internal early stopping mechanism, TrainingJobEarlyStoppingType must be OFF to
+	// use Hyperband. This parameter can take on one of the following values (the
+	// default value is OFF): OFF Training jobs launched by the hyperparameter tuning
+	// job do not use early stopping. AUTO SageMaker stops training jobs launched by
+	// the hyperparameter tuning job when they are unlikely to perform better than
 	// previously completed training jobs. For more information, see Stop Training Jobs
 	// Early
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html).
@@ -6340,6 +6395,22 @@ type HyperParameterTuningJobSearchEntity struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a training job launched by a hyperparameter tuning job.
+// Choose Bayesian for Bayesian optimization, and Random for random search
+// optimization. For more advanced use cases, use Hyperband, which evaluates
+// objective metrics for training jobs after every epoch. For more information
+// about strategies, see How Hyperparameter Tuning Works
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+type HyperParameterTuningJobStrategyConfig struct {
+
+	// The configuration for the object that specifies the Hyperband strategy. This
+	// parameter is only supported for the Hyperband selection for Strategy within the
+	// HyperParameterTuningJobConfig API.
+	HyperbandStrategyConfig *HyperbandStrategyConfig
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information about a hyperparameter tuning job.
 type HyperParameterTuningJobSummary struct {
 
@@ -6370,8 +6441,7 @@ type HyperParameterTuningJobSummary struct {
 	ObjectiveStatusCounters *ObjectiveStatusCounters
 
 	// Specifies the search strategy hyperparameter tuning uses to choose which
-	// hyperparameters to use for each iteration. Currently, the only valid value is
-	// Bayesian.
+	// hyperparameters to evaluate at each iteration.
 	//
 	// This member is required.
 	Strategy HyperParameterTuningJobStrategyType

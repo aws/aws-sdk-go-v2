@@ -1,0 +1,8 @@
+{
+    "id": "50e3ab95-1fec-4a7f-99cd-9a9e0a4d08c6",
+    "type": "feature",
+    "description": "Increased DynamoDB transaction limit from 25 to 100.",
+    "modules": [
+        "service/dynamodb"
+    ]
+}
