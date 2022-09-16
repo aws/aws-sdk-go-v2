@@ -90,28 +90,11 @@ import (
 // more information, see Amazon ECS deployment types
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
 // in the Amazon Elastic Container Service Developer Guide. When the service
-// scheduler launches new tasks, it determines task placement in your cluster using
-// the following logic:
-//
-// * Determine which of the container instances in your
-// cluster can support the task definition of your service. For example, they have
-// the required CPU, memory, ports, and container instance attributes.
-//
-// * By
-// default, the service scheduler attempts to balance tasks across Availability
-// Zones in this manner. This is the case even if you can choose a different
-// placement strategy with the placementStrategy parameter.
-//
-// * Sort the valid
-// container instances, giving priority to instances that have the fewest number of
-// running tasks for this service in their respective Availability Zone. For
-// example, if zone A has one running service task and zones B and C each have
-// zero, valid container instances in either zone B or C are considered optimal for
-// placement.
-//
-// * Place the new service task on a valid container instance in an
-// optimal Availability Zone based on the previous steps, favoring container
-// instances with the fewest number of running tasks for this service.
+// scheduler launches new tasks, it determines task placement. For information
+// about task placement and task placement strategies, see Amazon ECS task
+// placement
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html)
+// in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}

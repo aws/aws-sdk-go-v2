@@ -38,13 +38,16 @@ type UpdateNotificationRuleInput struct {
 	Arn *string
 
 	// The level of detail to include in the notifications for this resource. BASIC
-	// will include only the contents of the event as it would appear in AWS
+	// will include only the contents of the event as it would appear in Amazon
 	// CloudWatch. FULL will include any supplemental information provided by AWS
 	// CodeStar Notifications and/or the service for the resource for which the
 	// notification is created.
 	DetailType types.DetailType
 
-	// A list of event types associated with this notification rule.
+	// A list of event types associated with this notification rule. For a complete
+	// list of event types and IDs, see Notification concepts
+	// (https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api)
+	// in the Developer Tools Console User Guide.
 	EventTypeIds []string
 
 	// The name of the notification rule.

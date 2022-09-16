@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the notification rules for an AWS account.
+// Returns a list of the notification rules for an Amazon Web Services account.
 func (c *Client) ListNotificationRules(ctx context.Context, params *ListNotificationRulesInput, optFns ...func(*Options)) (*ListNotificationRulesOutput, error) {
 	if params == nil {
 		params = &ListNotificationRulesInput{}
@@ -53,8 +53,8 @@ type ListNotificationRulesOutput struct {
 	// the results.
 	NextToken *string
 
-	// The list of notification rules for the AWS account, by Amazon Resource Name
-	// (ARN) and ID.
+	// The list of notification rules for the Amazon Web Services account, by Amazon
+	// Resource Name (ARN) and ID.
 	NotificationRules []types.NotificationRuleSummary
 
 	// Metadata pertaining to the operation's result.

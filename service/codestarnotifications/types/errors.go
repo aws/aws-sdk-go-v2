@@ -110,7 +110,7 @@ func (e *LimitExceededException) ErrorCode() string             { return "LimitE
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource with the same name or ID already exists. Notification rule names must
-// be unique in your AWS account.
+// be unique in your Amazon Web Services account.
 type ResourceAlreadyExistsException struct {
 	Message *string
 

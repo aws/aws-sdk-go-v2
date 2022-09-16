@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an association between a notification rule and an SNS topic so that the
-// associated target can receive notifications when the events described in the
-// rule are triggered.
+// Creates an association between a notification rule and an Chatbot topic or
+// Chatbot client so that the associated target can receive notifications when the
+// events described in the rule are triggered.
 func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns ...func(*Options)) (*SubscribeOutput, error) {
 	if params == nil {
 		params = &SubscribeInput{}
@@ -37,7 +37,8 @@ type SubscribeInput struct {
 	// This member is required.
 	Arn *string
 
-	// Information about the SNS topics associated with a notification rule.
+	// Information about the Chatbot topics or Chatbot clients associated with a
+	// notification rule.
 	//
 	// This member is required.
 	Target *types.Target

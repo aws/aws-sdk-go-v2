@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the notification rule targets for an AWS account.
+// Returns a list of the notification rule targets for an Amazon Web Services
+// account.
 func (c *Client) ListTargets(ctx context.Context, params *ListTargetsInput, optFns ...func(*Options)) (*ListTargetsOutput, error) {
 	if params == nil {
 		params = &ListTargetsInput{}

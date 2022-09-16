@@ -1396,6 +1396,9 @@ func awsRestjson1_deserializeOpErrorSubscribe(response *smithyhttp.Response, met
 	}
 
 	switch {
+	case strings.EqualFold("ConfigurationException", errorCode):
+		return awsRestjson1_deserializeErrorConfigurationException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1552,6 +1555,9 @@ func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -1829,6 +1835,9 @@ func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1915,6 +1924,9 @@ func awsRestjson1_deserializeOpErrorUpdateNotificationRule(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConfigurationException", errorCode):
+		return awsRestjson1_deserializeErrorConfigurationException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 

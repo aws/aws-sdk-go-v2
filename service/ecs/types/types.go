@@ -534,12 +534,13 @@ type ContainerDefinition struct {
 	Cpu int32
 
 	// The dependencies defined for container startup and shutdown. A container can
-	// contain multiple dependencies. When a dependency is defined for container
-	// startup, for container shutdown it is reversed. For tasks using the EC2 launch
-	// type, the container instances require at least version 1.26.0 of the container
-	// agent to turn on container dependencies. However, we recommend using the latest
-	// container agent version. For information about checking your agent version and
-	// updating to the latest version, see Updating the Amazon ECS Container Agent
+	// contain multiple dependencies on other containers in a task definition. When a
+	// dependency is defined for container startup, for container shutdown it is
+	// reversed. For tasks using the EC2 launch type, the container instances require
+	// at least version 1.26.0 of the container agent to turn on container
+	// dependencies. However, we recommend using the latest container agent version.
+	// For information about checking your agent version and updating to the latest
+	// version, see Updating the Amazon ECS Container Agent
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)
 	// in the Amazon Elastic Container Service Developer Guide. If you're using an
 	// Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of
@@ -845,9 +846,11 @@ type ContainerDefinition struct {
 	// time, you can set a memoryReservation of 128 MiB, and a memory hard limit of 300
 	// MiB. This configuration would allow the container to only reserve 128 MiB of
 	// memory from the remaining resources on the container instance, but also allow
-	// the container to consume more memory resources when needed. The Docker daemon
-	// reserves a minimum of 4 MiB of memory for a container. Therefore, we recommend
-	// that you specify fewer than 4 MiB of memory for your containers.
+	// the container to consume more memory resources when needed. The Docker 20.10.0
+	// or later daemon reserves a minimum of 6 MiB of memory for a container. So, don't
+	// specify less than 6 MiB of memory for your containers. The Docker 19.03.13-ce or
+	// earlier daemon reserves a minimum of 4 MiB of memory for a container. So, don't
+	// specify less than 4 MiB of memory for your containers.
 	MemoryReservation *int32
 
 	// The mount points for data volumes in your container. This parameter maps to
@@ -1972,10 +1975,10 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 type HealthCheck struct {
 
 	// A string array representing the command that the container runs to determine if
-	// it is healthy. The string array must start with CMD to execute the command
-	// arguments directly, or CMD-SHELL to run the command with the container's default
-	// shell. When you use the Amazon Web Services Management Console JSON panel, the
-	// Command Line Interface, or the APIs, enclose the list of commands in brackets. [
+	// it is healthy. The string array must start with CMD to run the command arguments
+	// directly, or CMD-SHELL to run the command with the container's default shell.
+	// When you use the Amazon Web Services Management Console JSON panel, the Command
+	// Line Interface, or the APIs, enclose the list of commands in brackets. [
 	// "CMD-SHELL", "curl -f http://localhost/ || exit 1" ] You don't need to include
 	// the brackets when you use the Amazon Web Services Management Console.
 	// "CMD-SHELL", "curl -f http://localhost/ || exit 1"  An exit code of 0 indicates
@@ -2751,7 +2754,7 @@ type ResourceRequirement struct {
 }
 
 // Information about the platform for the Amazon ECS service or task. For more
-// informataion about RuntimePlatform, see RuntimePlatform
+// information about RuntimePlatform, see RuntimePlatform
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform)
 // in the Amazon Elastic Container Service Developer Guide.
 type RuntimePlatform struct {
@@ -3216,11 +3219,18 @@ type Task struct {
 	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
 	//
 	// * 2048 (2 vCPU) - Available
-	// memory values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1
-	// GB)
+	// memory values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
 	//
-	// * 4096 (4 vCPU) - Available memory values: Between 8192 (8 GB) and 30720
-	// (30 GB) in increments of 1024 (1 GB)
+	// *
+	// 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in
+	// increments of 1024 (1 GB)
+	//
+	// * 8192 (8 vCPU) - Available memory values: 16 GB and
+	// 60 GB in 4 GB increments This option requires Linux platform 1.4.0 or later.
+	//
+	// *
+	// 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments
+	// This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The Unix timestamp for the time when the task was created. More specifically,
@@ -3294,6 +3304,14 @@ type Task struct {
 	//
 	// * Between 8192 (8 GB) and 30720 (30 GB) in increments
 	// of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	//
+	// * Between 16 GB and 60 GB
+	// in 4 GB increments - Available cpu values: 8192 (8 vCPU) This option requires
+	// Linux platform 1.4.0 or later.
+	//
+	// * Between 32GB and 120 GB in 8 GB increments -
+	// Available cpu values: 16384 (16 vCPU) This option requires Linux platform 1.4.0
+	// or later.
 	Memory *string
 
 	// One or more container overrides.
@@ -3441,11 +3459,18 @@ type TaskDefinition struct {
 	// (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8
 	// GB)
 	//
-	// * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and 16384
-	// (16 GB) in increments of 1024 (1 GB)
+	// * 2048 (2 vCPU) - Available memory values: 4096 (4 GB) and 16384 (16 GB) in
+	// increments of 1024 (1 GB)
 	//
-	// * 4096 (4 vCPU) - Available memory values:
-	// Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+	// * 4096 (4 vCPU) - Available memory values: 8192 (8
+	// GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+	//
+	// * 8192 (8 vCPU) - Available
+	// memory values: 16 GB and 60 GB in 4 GB increments This option requires Linux
+	// platform 1.4.0 or later.
+	//
+	// * 16384 (16vCPU) - Available memory values: 32GB and
+	// 120 GB in 8 GB increments This option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The Unix timestamp for the time when the task definition was deregistered.
@@ -3529,6 +3554,14 @@ type TaskDefinition struct {
 	//
 	// * Between 8192 (8 GB) and 30720 (30 GB) in
 	// increments of 1024 (1 GB) - Available cpu values: 4096 (4 vCPU)
+	//
+	// * Between 16 GB
+	// and 60 GB in 4 GB increments - Available cpu values: 8192 (8 vCPU) This option
+	// requires Linux platform 1.4.0 or later.
+	//
+	// * Between 32GB and 120 GB in 8 GB
+	// increments - Available cpu values: 16384 (16 vCPU) This option requires Linux
+	// platform 1.4.0 or later.
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid

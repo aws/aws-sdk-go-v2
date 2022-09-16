@@ -52,7 +52,7 @@ type DescribeNotificationRuleOutput struct {
 	CreatedTimestamp *time.Time
 
 	// The level of detail included in the notifications for this resource. BASIC will
-	// include only the contents of the event as it would appear in AWS CloudWatch.
+	// include only the contents of the event as it would appear in Amazon CloudWatch.
 	// FULL will include any supplemental information provided by AWS CodeStar
 	// Notifications and/or the service for the resource for which the notification is
 	// created.
@@ -79,7 +79,8 @@ type DescribeNotificationRuleOutput struct {
 	// The tags associated with the notification rule.
 	Tags map[string]string
 
-	// A list of the SNS topics associated with the notification rule.
+	// A list of the Chatbot topics and Chatbot clients associated with the
+	// notification rule.
 	Targets []types.TargetSummary
 
 	// Metadata pertaining to the operation's result.

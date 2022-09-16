@@ -1,0 +1,8 @@
+{
+    "id": "8c4cc531-a5da-47b9-97d3-65431506adb1",
+    "type": "feature",
+    "description": "This release adds tag based access control for the UntagResource API.",
+    "modules": [
+        "service/codestarnotifications"
+    ]
+}

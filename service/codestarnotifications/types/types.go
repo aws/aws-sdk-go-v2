@@ -9,7 +9,10 @@ import (
 // Returns information about an event that has triggered a notification rule.
 type EventTypeSummary struct {
 
-	// The system-generated ID of the event.
+	// The system-generated ID of the event. For a complete list of event types and
+	// IDs, see Notification concepts
+	// (https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api)
+	// in the Developer Tools Console User Guide.
 	EventTypeId *string
 
 	// The name of the event.
@@ -54,7 +57,7 @@ type ListNotificationRulesFilter struct {
 
 	// The value of the attribute you want to use to filter the returned notification
 	// rules. For example, if you specify filtering by RESOURCE in Name, you might
-	// specify the ARN of a pipeline in AWS CodePipeline for the value.
+	// specify the ARN of a pipeline in CodePipeline for the value.
 	//
 	// This member is required.
 	Value *string
@@ -64,8 +67,8 @@ type ListNotificationRulesFilter struct {
 
 // Information about a filter to apply to the list of returned targets. You can
 // filter by target type, address, or status. For example, to filter results to
-// notification rules that have active Amazon SNS topics as targets, you could
-// specify a ListTargetsFilter Name as TargetType and a Value of SNS, and a Name of
+// notification rules that have active Chatbot topics as targets, you could specify
+// a ListTargetsFilter Name as TargetType and a Value of SNS, and a Name of
 // TARGET_STATUS and a Value of ACTIVE.
 type ListTargetsFilter struct {
 
@@ -96,13 +99,19 @@ type NotificationRuleSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the SNS topics associated with a notification rule.
+// Information about the Chatbot topics or Chatbot clients associated with a
+// notification rule.
 type Target struct {
 
-	// The Amazon Resource Name (ARN) of the SNS topic.
+	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
 	TargetAddress *string
 
-	// The target type. Can be an Amazon SNS topic.
+	// The target type. Can be an Chatbot topic or Chatbot client.
+	//
+	// * Chatbot topics
+	// are specified as SNS.
+	//
+	// * Chatbot clients are specified as AWSChatbotSlack.
 	TargetType *string
 
 	noSmithyDocumentSerde
@@ -111,13 +120,18 @@ type Target struct {
 // Information about the targets specified for a notification rule.
 type TargetSummary struct {
 
-	// The Amazon Resource Name (ARN) of the SNS topic.
+	// The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.
 	TargetAddress *string
 
 	// The status of the target.
 	TargetStatus TargetStatus
 
 	// The type of the target (for example, SNS).
+	//
+	// * Chatbot topics are specified as
+	// SNS.
+	//
+	// * Chatbot clients are specified as AWSChatbotSlack.
 	TargetType *string
 
 	noSmithyDocumentSerde

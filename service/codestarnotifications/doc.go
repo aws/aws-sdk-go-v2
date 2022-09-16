@@ -33,30 +33,30 @@
 // Targets, by calling the following:
 //
 // * DeleteTarget, which
-// removes a notification rule target (SNS topic) from a notification rule.
+// removes a notification rule target from a notification rule.
 //
-// *
-// ListTargets, which lists the targets associated with a notification
-// rule.
+// * ListTargets,
+// which lists the targets associated with a notification rule.
 //
-// Events, by calling the following:
+// Events, by calling
+// the following:
 //
-// * ListEventTypes, which lists the
-// event types you can include in a notification rule.
+// * ListEventTypes, which lists the event types you can include in
+// a notification rule.
 //
-// Tags, by calling the
-// following:
+// Tags, by calling the following:
 //
-// * ListTagsForResource, which lists the tags already associated with
-// a notification rule in your account.
+// * ListTagsForResource,
+// which lists the tags already associated with a notification rule in your
+// account.
 //
-// * TagResource, which associates a tag you
-// provide with a notification rule in your account.
+// * TagResource, which associates a tag you provide with a notification
+// rule in your account.
 //
-// * UntagResource, which
-// removes a tag from a notification rule in your account.
+// * UntagResource, which removes a tag from a notification
+// rule in your account.
 //
-// For information about
-// how to use AWS CodeStar Notifications, see link in the CodeStarNotifications
-// User Guide.
+// For information about how to use AWS CodeStar
+// Notifications, see the Amazon Web Services Developer Tools Console User Guide
+// (https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html).
 package codestarnotifications

@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a notification rule for a resource. The rule specifies the events you
-// want notifications about and the targets (such as SNS topics) where you want to
-// receive them.
+// want notifications about and the targets (such as Chatbot topics or Chatbot
+// clients configured for Slack) where you want to receive them.
 func (c *Client) CreateNotificationRule(ctx context.Context, params *CreateNotificationRuleInput, optFns ...func(*Options)) (*CreateNotificationRuleOutput, error) {
 	if params == nil {
 		params = &CreateNotificationRuleInput{}
@@ -33,7 +33,7 @@ func (c *Client) CreateNotificationRule(ctx context.Context, params *CreateNotif
 type CreateNotificationRuleInput struct {
 
 	// The level of detail to include in the notifications for this resource. BASIC
-	// will include only the contents of the event as it would appear in AWS
+	// will include only the contents of the event as it would appear in Amazon
 	// CloudWatch. FULL will include any supplemental information provided by AWS
 	// CodeStar Notifications and/or the service for the resource for which the
 	// notification is created.
@@ -47,21 +47,21 @@ type CreateNotificationRuleInput struct {
 	// This member is required.
 	EventTypeIds []string
 
-	// The name for the notification rule. Notifictaion rule names must be unique in
-	// your AWS account.
+	// The name for the notification rule. Notification rule names must be unique in
+	// your Amazon Web Services account.
 	//
 	// This member is required.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the resource to associate with the
-	// notification rule. Supported resources include pipelines in AWS CodePipeline,
-	// repositories in AWS CodeCommit, and build projects in AWS CodeBuild.
+	// notification rule. Supported resources include pipelines in CodePipeline,
+	// repositories in CodeCommit, and build projects in CodeBuild.
 	//
 	// This member is required.
 	Resource *string
 
-	// A list of Amazon Resource Names (ARNs) of SNS topics to associate with the
-	// notification rule.
+	// A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service
+	// topics and Chatbot clients to associate with the notification rule.
 	//
 	// This member is required.
 	Targets []types.Target
@@ -69,9 +69,9 @@ type CreateNotificationRuleInput struct {
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// with the same parameters is received and a token is included, the request
-	// returns information about the initial request that used that token. The AWS SDKs
-	// prepopulate client request tokens. If you are using an AWS SDK, an idempotency
-	// token is created for you.
+	// returns information about the initial request that used that token. The Amazon
+	// Web Services SDKs prepopulate client request tokens. If you are using an Amazon
+	// Web Services SDK, an idempotency token is created for you.
 	ClientRequestToken *string
 
 	// The status of the notification rule. The default value is ENABLED. If the status
