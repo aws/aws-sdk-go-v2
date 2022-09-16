@@ -1,3 +1,11 @@
+# Release (2022-09-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.13.0](service/codestarnotifications/CHANGELOG.md#v1130-2022-09-16)
+  * **Feature**: This release adds tag based access control for the UntagResource API.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.21](service/ecs/CHANGELOG.md#v11821-2022-09-16)
+  * **Documentation**: This release supports new task definition sizes.
+
 # Release (2022-09-15)
 
 ## General Highlights

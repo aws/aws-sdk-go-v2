@@ -1,8 +1,0 @@
-{
-    "id": "d8255647-0fde-48b1-a919-31c341a67c2d",
-    "type": "documentation",
-    "description": "This release supports new task definition sizes.",
-    "modules": [
-        "service/ecs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.18.21 (2022-09-16)
+
+* **Documentation**: This release supports new task definition sizes.
+
 # v1.18.20 (2022-09-14)
 
 * **Dependency Update**: Updated to the latest SDK module versions
