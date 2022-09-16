@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -42,56 +42,48 @@
             }
         },
         "com.amazonaws.ecs#AgentUpdateStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "STAGING",
-                        "name": "STAGING"
-                    },
-                    {
-                        "value": "STAGED",
-                        "name": "STAGED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "UPDATED",
-                        "name": "UPDATED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "STAGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STAGING"
+                    }
+                },
+                "STAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STAGED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#AmazonEC2ContainerServiceV20141113": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "ECS",
-                    "arnNamespace": "ecs",
-                    "cloudFormationName": "ECS",
-                    "cloudTrailEventSource": "ecs.amazonaws.com",
-                    "endpointPrefix": "ecs"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ecs"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic Container Service</fullname>\n\t\t       <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service. It makes\n\t\t\tit easy to run, stop, and manage Docker containers. You can host your cluster on a\n\t\t\tserverless infrastructure that's managed by Amazon ECS by launching your services or tasks on\n\t\t\tFargate. For more control, you can host your tasks on a cluster of Amazon Elastic Compute Cloud (Amazon EC2)\n\t\t\tor External (on-premises) instances that you manage.</p>\n\t\t       <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API\n\t\t\tcalls. This makes it easy to get the state of your cluster from a centralized service,\n\t\t\tand gives you access to many familiar Amazon EC2 features.</p>\n\t\t       <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on\n\t\t\tyour resource needs, isolation policies, and availability requirements. With Amazon ECS, you\n\t\t\tdon't need to operate your own cluster management and configuration management systems.\n\t\t\tYou also don't need to worry about scaling your management infrastructure.</p>",
-                "smithy.api#title": "Amazon EC2 Container Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://ecs.amazonaws.com/doc/2014-11-13/"
-                }
-            },
             "version": "2014-11-13",
             "operations": [
                 {
@@ -250,21 +242,41 @@
                 {
                     "target": "com.amazonaws.ecs#UpdateTaskSet"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ECS",
+                    "arnNamespace": "ecs",
+                    "cloudFormationName": "ECS",
+                    "cloudTrailEventSource": "ecs.amazonaws.com",
+                    "endpointPrefix": "ecs"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ecs"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon Elastic Container Service</fullname>\n\t\t       <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service. It makes\n\t\t\tit easy to run, stop, and manage Docker containers. You can host your cluster on a\n\t\t\tserverless infrastructure that's managed by Amazon ECS by launching your services or tasks on\n\t\t\tFargate. For more control, you can host your tasks on a cluster of Amazon Elastic Compute Cloud (Amazon EC2)\n\t\t\tor External (on-premises) instances that you manage.</p>\n\t\t       <p>Amazon ECS makes it easy to launch and stop container-based applications with simple API\n\t\t\tcalls. This makes it easy to get the state of your cluster from a centralized service,\n\t\t\tand gives you access to many familiar Amazon EC2 features.</p>\n\t\t       <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on\n\t\t\tyour resource needs, isolation policies, and availability requirements. With Amazon ECS, you\n\t\t\tdon't need to operate your own cluster management and configuration management systems.\n\t\t\tYou also don't need to worry about scaling your management infrastructure.</p>",
+                "smithy.api#title": "Amazon EC2 Container Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://ecs.amazonaws.com/doc/2014-11-13/"
+                }
+            }
         },
         "com.amazonaws.ecs#AssignPublicIp": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Attachment": {
@@ -409,6 +421,8 @@
                 "managedTerminationProtection": {
                     "target": "com.amazonaws.ecs#ManagedTerminationProtection",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "DISABLED",
                         "smithy.api#documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity\n\t\t\tprovider. This determines whether the Auto Scaling group has managed termination\n\t\t\tprotection. The default is disabled.</p>\n\t\t       <important>\n\t\t\t         <p>When using managed termination protection, managed scaling must also be used\n\t\t\t\totherwise managed termination protection doesn't work.</p>\n\t\t       </important>\n\t\t       <p>When managed termination protection is enabled, Amazon ECS prevents the Amazon EC2 instances in\n\t\t\tan Auto Scaling group that contain tasks from being terminated during a scale-in action.\n\t\t\tThe Auto Scaling group and each instance in the Auto Scaling group must have instance\n\t\t\tprotection from scale-in actions enabled as well. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>\n\t\t       <p>When managed termination protection is disabled, your Amazon EC2 instances aren't protected\n\t\t\tfrom termination when the Auto Scaling group scales in.</p>"
                     }
                 }
@@ -477,33 +491,32 @@
             }
         },
         "com.amazonaws.ecs#Boolean": {
-            "type": "boolean"
-        },
-        "com.amazonaws.ecs#BoxedBoolean": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
+        },
+        "com.amazonaws.ecs#BoxedBoolean": {
+            "type": "boolean"
         },
         "com.amazonaws.ecs#BoxedInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.ecs#CPUArchitecture": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "X86_64",
-                        "name": "X86_64"
-                    },
-                    {
-                        "value": "ARM64",
-                        "name": "ARM64"
+            "type": "enum",
+            "members": {
+                "X86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X86_64"
                     }
-                ]
+                },
+                "ARM64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARM64"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#CapacityProvider": {
@@ -557,14 +570,14 @@
             }
         },
         "com.amazonaws.ecs#CapacityProviderField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#CapacityProviderFieldList": {
@@ -574,18 +587,20 @@
             }
         },
         "com.amazonaws.ecs#CapacityProviderStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#CapacityProviderStrategy": {
@@ -607,12 +622,14 @@
                 "weight": {
                     "target": "com.amazonaws.ecs#CapacityProviderStrategyItemWeight",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The <i>weight</i> value designates the relative percentage of the total\n\t\t\tnumber of tasks launched that should use the specified capacity provider. The\n\t\t\t\t<code>weight</code> value is taken into consideration after the <code>base</code>\n\t\t\tvalue, if defined, is satisfied.</p>\n\t\t       <p>If no <code>weight</code> value is specified, the default value of <code>0</code> is\n\t\t\tused. When multiple capacity providers are specified within a capacity provider\n\t\t\tstrategy, at least one of the capacity providers must have a weight value greater than\n\t\t\tzero and any capacity providers with a weight of <code>0</code> can't be used to place\n\t\t\ttasks. If you specify multiple capacity providers in a strategy that all have a weight\n\t\t\tof <code>0</code>, any <code>RunTask</code> or <code>CreateService</code> actions using\n\t\t\tthe capacity provider strategy will fail.</p>\n\t\t       <p>An example scenario for using weights is defining a strategy that contains two\n\t\t\tcapacity providers and both have a weight of <code>1</code>, then when the\n\t\t\t\t<code>base</code> is satisfied, the tasks will be split evenly across the two\n\t\t\tcapacity providers. Using that same logic, if you specify a weight of <code>1</code> for\n\t\t\t\t<i>capacityProviderA</i> and a weight of <code>4</code> for\n\t\t\t\t<i>capacityProviderB</i>, then for every one task that's run using\n\t\t\t\t<i>capacityProviderA</i>, four tasks would use\n\t\t\t\t<i>capacityProviderB</i>.</p>"
                     }
                 },
                 "base": {
                     "target": "com.amazonaws.ecs#CapacityProviderStrategyItemBase",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The <i>base</i> value designates how many tasks, at a minimum, to run on\n\t\t\tthe specified capacity provider. Only one capacity provider in a capacity provider\n\t\t\tstrategy can have a <i>base</i> defined. If no value is specified, the\n\t\t\tdefault value of <code>0</code> is used.</p>"
                     }
                 }
@@ -624,6 +641,7 @@
         "com.amazonaws.ecs#CapacityProviderStrategyItemBase": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100000
@@ -633,6 +651,7 @@
         "com.amazonaws.ecs#CapacityProviderStrategyItemWeight": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000
@@ -640,34 +659,44 @@
             }
         },
         "com.amazonaws.ecs#CapacityProviderUpdateStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DELETE_IN_PROGRESS",
-                        "name": "DELETE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "DELETE_COMPLETE",
-                        "name": "DELETE_COMPLETE"
-                    },
-                    {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
-                    },
-                    {
-                        "value": "UPDATE_IN_PROGRESS",
-                        "name": "UPDATE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "UPDATE_COMPLETE",
-                        "name": "UPDATE_COMPLETE"
-                    },
-                    {
-                        "value": "UPDATE_FAILED",
-                        "name": "UPDATE_FAILED"
+            "type": "enum",
+            "members": {
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
                     }
-                ]
+                },
+                "DELETE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_COMPLETE"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_COMPLETE"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#CapacityProviders": {
@@ -718,24 +747,28 @@
                 "registeredContainerInstancesCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of container instances registered into the cluster. This includes container\n\t\t\tinstances in both <code>ACTIVE</code> and <code>DRAINING</code> status.</p>"
                     }
                 },
                 "runningTasksCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the cluster that are in the <code>RUNNING</code> state.</p>"
                     }
                 },
                 "pendingTasksCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the cluster that are in the <code>PENDING</code> state.</p>"
                     }
                 },
                 "activeServicesCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of services that are running on the cluster in an <code>ACTIVE</code>\n\t\t\tstate. You can view these services with <a>ListServices</a>.</p>"
                     }
                 },
@@ -837,30 +870,38 @@
             }
         },
         "com.amazonaws.ecs#ClusterField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ATTACHMENTS",
-                        "name": "ATTACHMENTS"
-                    },
-                    {
-                        "value": "CONFIGURATIONS",
-                        "name": "CONFIGURATIONS"
-                    },
-                    {
-                        "value": "SETTINGS",
-                        "name": "SETTINGS"
-                    },
-                    {
-                        "value": "STATISTICS",
-                        "name": "STATISTICS"
-                    },
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
+            "type": "enum",
+            "members": {
+                "ATTACHMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENTS"
                     }
-                ]
+                },
+                "CONFIGURATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIGURATIONS"
+                    }
+                },
+                "SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETTINGS"
+                    }
+                },
+                "STATISTICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATISTICS"
+                    }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ClusterFieldList": {
@@ -902,14 +943,14 @@
             }
         },
         "com.amazonaws.ecs#ClusterSettingName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "containerInsights",
-                        "name": "CONTAINER_INSIGHTS"
+            "type": "enum",
+            "members": {
+                "CONTAINER_INSIGHTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "containerInsights"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#ClusterSettings": {
@@ -925,22 +966,26 @@
             }
         },
         "com.amazonaws.ecs#Compatibility": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EC2",
-                        "name": "EC2"
-                    },
-                    {
-                        "value": "FARGATE",
-                        "name": "FARGATE"
-                    },
-                    {
-                        "value": "EXTERNAL",
-                        "name": "EXTERNAL"
+            "type": "enum",
+            "members": {
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
                     }
-                ]
+                },
+                "FARGATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FARGATE"
+                    }
+                },
+                "EXTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#CompatibilityList": {
@@ -950,18 +995,20 @@
             }
         },
         "com.amazonaws.ecs#Connectivity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECTED",
-                        "name": "CONNECTED"
-                    },
-                    {
-                        "value": "DISCONNECTED",
-                        "name": "DISCONNECTED"
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
                     }
-                ]
+                },
+                "DISCONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Container": {
@@ -1075,26 +1122,32 @@
             }
         },
         "com.amazonaws.ecs#ContainerCondition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "START",
-                        "name": "START"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
+            "type": "enum",
+            "members": {
+                "START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START"
                     }
-                ]
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ContainerDefinition": {
@@ -1121,6 +1174,7 @@
                 "cpu": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of <code>cpu</code> units reserved for the container. This parameter maps\n\t\t\tto <code>CpuShares</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>This field is optional for tasks using the Fargate launch type, and the\n\t\t\tonly requirement is that the total amount of CPU reserved for all containers within a\n\t\t\ttask be lower than the task-level <code>cpu</code> value.</p>\n\t\t       <note>\n\t\t\t         <p>You can determine the number of CPU units that are available per EC2 instance type\n\t\t\t\tby multiplying the vCPUs listed for that instance type on the <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instances</a> detail page\n\t\t\t\tby 1,024.</p>\n\t\t       </note>\n\t\t       <p>Linux containers share unallocated CPU units with other containers on the container\n\t\t\tinstance with the same ratio as their allocated amount. For example, if you run a\n\t\t\tsingle-container task on a single-core instance type with 512 CPU units specified for\n\t\t\tthat container, and that's the only task running on the container instance, that\n\t\t\tcontainer could use the full 1,024 CPU unit share at any given time. However, if you\n\t\t\tlaunched another copy of the same task on that container instance, each task is\n\t\t\tguaranteed a minimum of 512 CPU units when needed. Moreover, each container could float\n\t\t\tto higher CPU usage if the other container was not using it. If both tasks were 100%\n\t\t\tactive all of the time, they would be limited to 512 CPU units.</p>\n\t\t       <p>On Linux container instances, the Docker daemon on the container instance uses the CPU\n\t\t\tvalue to calculate the relative CPU share ratios for running containers. For more\n\t\t\tinformation, see <a href=\"https://docs.docker.com/engine/reference/run/#cpu-share-constraint\">CPU share\n\t\t\t\tconstraint</a> in the Docker documentation. The minimum valid CPU share value\n\t\t\tthat the Linux kernel allows is 2. However, the CPU parameter isn't required, and you\n\t\t\tcan use CPU values below 2 in your container definitions. For CPU values below 2\n\t\t\t(including null), the behavior varies based on your Amazon ECS container agent\n\t\t\tversion:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <b>Agent versions less than or equal to 1.1.0:</b>\n\t\t\t\t\tNull and zero CPU values are passed to Docker as 0, which Docker then converts\n\t\t\t\t\tto 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux\n\t\t\t\t\tkernel converts to two CPU shares.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <b>Agent versions greater than or equal to 1.2.0:</b>\n\t\t\t\t\tNull, zero, and CPU values of 1 are passed to Docker as 2.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>On Windows container instances, the CPU limit is enforced as an absolute limit, or a\n\t\t\tquota. Windows containers only have access to the specified amount of CPU that's\n\t\t\tdescribed in the task definition. A null or zero CPU value is passed to Docker as\n\t\t\t\t<code>0</code>, which Windows interprets as 1% of one CPU.</p>"
                     }
                 },
@@ -1133,7 +1187,7 @@
                 "memoryReservation": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The soft limit (in MiB) of memory to reserve for the container. When system memory is\n\t\t\tunder heavy contention, Docker attempts to keep the container memory to this soft limit.\n\t\t\tHowever, your container can consume more memory when it needs to, up to either the hard\n\t\t\tlimit specified with the <code>memory</code> parameter (if applicable), or all of the\n\t\t\tavailable memory on the container instance, whichever comes first. This parameter maps\n\t\t\tto <code>MemoryReservation</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of\n\t\t\tthe <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--memory-reservation</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>If a task-level memory value is not specified, you must specify a non-zero integer for\n\t\t\tone or both of <code>memory</code> or <code>memoryReservation</code> in a container\n\t\t\tdefinition. If you specify both, <code>memory</code> must be greater than\n\t\t\t\t<code>memoryReservation</code>. If you specify <code>memoryReservation</code>, then\n\t\t\tthat value is subtracted from the available memory resources for the container instance\n\t\t\twhere the container is placed. Otherwise, the value of <code>memory</code> is\n\t\t\tused.</p>\n\t\t       <p>For example, if your container normally uses 128 MiB of memory, but occasionally\n\t\t\tbursts to 256 MiB of memory for short periods of time, you can set a\n\t\t\t\t<code>memoryReservation</code> of 128 MiB, and a <code>memory</code> hard limit of\n\t\t\t300 MiB. This configuration would allow the container to only reserve 128 MiB of memory\n\t\t\tfrom the remaining resources on the container instance, but also allow the container to\n\t\t\tconsume more memory resources when needed.</p>\n\t\t       <p>The Docker daemon reserves a minimum of 4 MiB of memory for a container. Therefore, we\n\t\t\trecommend that you specify fewer than 4 MiB of memory for your containers. </p>"
+                        "smithy.api#documentation": "<p>The soft limit (in MiB) of memory to reserve for the container. When system memory is\n\t\t\tunder heavy contention, Docker attempts to keep the container memory to this soft limit.\n\t\t\tHowever, your container can consume more memory when it needs to, up to either the hard\n\t\t\tlimit specified with the <code>memory</code> parameter (if applicable), or all of the\n\t\t\tavailable memory on the container instance, whichever comes first. This parameter maps\n\t\t\tto <code>MemoryReservation</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of\n\t\t\tthe <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--memory-reservation</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <p>If a task-level memory value is not specified, you must specify a non-zero integer for\n\t\t\tone or both of <code>memory</code> or <code>memoryReservation</code> in a container\n\t\t\tdefinition. If you specify both, <code>memory</code> must be greater than\n\t\t\t\t<code>memoryReservation</code>. If you specify <code>memoryReservation</code>, then\n\t\t\tthat value is subtracted from the available memory resources for the container instance\n\t\t\twhere the container is placed. Otherwise, the value of <code>memory</code> is\n\t\t\tused.</p>\n\t\t       <p>For example, if your container normally uses 128 MiB of memory, but occasionally\n\t\t\tbursts to 256 MiB of memory for short periods of time, you can set a\n\t\t\t\t<code>memoryReservation</code> of 128 MiB, and a <code>memory</code> hard limit of\n\t\t\t300 MiB. This configuration would allow the container to only reserve 128 MiB of memory\n\t\t\tfrom the remaining resources on the container instance, but also allow the container to\n\t\t\tconsume more memory resources when needed.</p>\n\t\t       <p>The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a\n\t\t\tcontainer. So, don't specify less than 6 MiB of memory for your containers. </p>\n\t\t       <p>The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a\n\t\t\tcontainer. So, don't specify less than 4 MiB of memory for your containers.</p>"
                     }
                 },
                 "links": {
@@ -1205,7 +1259,7 @@
                 "dependsOn": {
                     "target": "com.amazonaws.ecs#ContainerDependencies",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n\t\t       <p>For tasks using the EC2 launch type, the container instances require at\n\t\t\tleast version 1.26.0 of the container agent to turn on container dependencies. However,\n\t\t\twe recommend using the latest container agent version. For information about checking\n\t\t\tyour agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using\n\t\t\tan Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform version <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform version <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies on other containers in a task definition. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n\t\t       <p>For tasks using the EC2 launch type, the container instances require at\n\t\t\tleast version 1.26.0 of the container agent to turn on container dependencies. However,\n\t\t\twe recommend using the latest container agent version. For information about checking\n\t\t\tyour agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using\n\t\t\tan Amazon ECS-optimized Linux AMI, your instance needs at least version 1.26.0-1 of the\n\t\t\t\t<code>ecs-init</code> package. If your container instances are launched from version\n\t\t\t\t<code>20190301</code> or later, then they contain the required versions of the\n\t\t\tcontainer agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform version <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform version <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
                 "startTimeout": {
@@ -1217,6 +1271,8 @@
                 "stopTimeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 30,
                         "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it\n\t\t\tdoesn't exit normally on its own.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform version <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform version <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>The max stop timeout value is 120 seconds and if the parameter is not specified, the\n\t\t\tdefault value of 30 seconds is used.</p>\n\t\t       <p>For tasks that use the EC2 launch type, if the <code>stopTimeout</code>\n\t\t\tparameter isn't specified, the value set for the Amazon ECS container agent configuration\n\t\t\tvariable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the\n\t\t\t\t<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>\n\t\t\tagent configuration variable are set, then the default values of 30 seconds for Linux\n\t\t\tcontainers and 30 seconds on Windows containers are used. Your container instances\n\t\t\trequire at least version 1.26.0 of the container agent to use a container stop timeout\n\t\t\tvalue. However, we recommend using the latest container agent version. For information\n\t\t\tabout checking your agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS Container Agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI, your\n\t\t\tinstance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your\n\t\t\tcontainer instances are launched from version <code>20190301</code> or later, then they\n\t\t\tcontain the required versions of the container agent and <code>ecs-init</code>. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
@@ -1397,6 +1453,7 @@
                 "version": {
                     "target": "com.amazonaws.ecs#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version counter for the container instance. Every time a container instance\n\t\t\texperiences a change that triggers a CloudWatch event, the version counter is\n\t\t\tincremented. If you're replicating your Amazon ECS container instance state with CloudWatch\n\t\t\tEvents, you can compare the version of a container instance reported by the Amazon ECS APIs\n\t\t\twith the version reported in CloudWatch Events for the container instance (inside the\n\t\t\t\t<code>detail</code> object) to verify that the version in your event stream is\n\t\t\tcurrent.</p>"
                     }
                 },
@@ -1433,18 +1490,21 @@
                 "agentConnected": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This parameter returns <code>true</code> if the agent is connected to Amazon ECS. An\n\t\t\tinstance with an agent that may be unhealthy or stopped return <code>false</code>. Only\n\t\t\tinstances connected to an agent can accept task placement requests.</p>"
                     }
                 },
                 "runningTasksCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks on the container instance that are in the <code>RUNNING</code>\n\t\t\tstatus.</p>"
                     }
                 },
                 "pendingTasksCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks on the container instance that are in the <code>PENDING</code>\n\t\t\tstatus.</p>"
                     }
                 },
@@ -1490,18 +1550,20 @@
             }
         },
         "com.amazonaws.ecs#ContainerInstanceField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
-                    },
-                    {
-                        "value": "CONTAINER_INSTANCE_HEALTH",
-                        "name": "CONTAINER_INSTANCE_HEALTH"
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
                     }
-                ]
+                },
+                "CONTAINER_INSTANCE_HEALTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINER_INSTANCE_HEALTH"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ContainerInstanceFieldList": {
@@ -1531,30 +1593,38 @@
             }
         },
         "com.amazonaws.ecs#ContainerInstanceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DRAINING",
-                        "name": "DRAINING"
-                    },
-                    {
-                        "value": "REGISTERING",
-                        "name": "REGISTERING"
-                    },
-                    {
-                        "value": "DEREGISTERING",
-                        "name": "DEREGISTERING"
-                    },
-                    {
-                        "value": "REGISTRATION_FAILED",
-                        "name": "REGISTRATION_FAILED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "DRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAINING"
+                    }
+                },
+                "REGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERING"
+                    }
+                },
+                "DEREGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERING"
+                    }
+                },
+                "REGISTRATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRATION_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ContainerInstances": {
@@ -1862,7 +1932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n\t\t       <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n\t\t       <p>There are two service scheduler strategies available:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n\t\t       <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n\t\t       <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>When the service scheduler launches new tasks, it determines task placement in your\n\t\t\tcluster using the following logic:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Determine which of the container instances in your cluster can support the\n\t\t\t\t\ttask definition of your service. For example, they have the required CPU,\n\t\t\t\t\tmemory, ports, and container instance attributes.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>By default, the service scheduler attempts to balance tasks across\n\t\t\t\t\tAvailability Zones in this manner. This is the case even if you can choose a\n\t\t\t\t\tdifferent placement strategy with the <code>placementStrategy</code>\n\t\t\t\t\tparameter.</p>\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>Sort the valid container instances, giving priority to instances that\n\t\t\t\t\t\t\thave the fewest number of running tasks for this service in their\n\t\t\t\t\t\t\trespective Availability Zone. For example, if zone A has one running\n\t\t\t\t\t\t\tservice task and zones B and C each have zero, valid container instances\n\t\t\t\t\t\t\tin either zone B or C are considered optimal for placement.</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>Place the new service task on a valid container instance in an optimal\n\t\t\t\t\t\t\tAvailability Zone based on the previous steps, favoring container\n\t\t\t\t\t\t\tinstances with the fewest number of running tasks for this\n\t\t\t\t\t\t\tservice.</p>\n\t\t\t\t\t             </li>\n               </ul>\n\t\t\t         </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n\t\t       <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n\t\t       <p>There are two service scheduler strategies available:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n\t\t       <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n\t\t       <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>When the service scheduler launches new tasks, it determines task placement. For information\n\t\t\tabout task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS task placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#CreateServiceRequest": {
@@ -1986,6 +2056,7 @@
                 "enableECSManagedTags": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging your Amazon ECS\n\t\t\t\tresources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
@@ -1998,6 +2069,7 @@
                 "enableExecuteCommand": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the execute command functionality is enabled for the service. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe service tasks.</p>"
                     }
                 }
@@ -2538,24 +2610,28 @@
                 "desiredCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The most recent desired count of tasks that was specified for the service to deploy or\n\t\t\tmaintain.</p>"
                     }
                 },
                 "pendingCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the deployment that are in the <code>PENDING</code>\n\t\t\tstatus.</p>"
                     }
                 },
                 "runningCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the deployment that are in the <code>RUNNING</code>\n\t\t\tstatus.</p>"
                     }
                 },
                 "failedTasks": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of consecutively failed tasks in the deployment. A task is considered a\n\t\t\tfailure if the service scheduler can't launch the task, the task doesn't transition to a\n\t\t\t\t<code>RUNNING</code> state, or if it fails any of its defined health checks and is\n\t\t\tstopped.</p>\n\t\t       <note>\n\t\t\t         <p>Once a service deployment has one or more successfully running tasks, the failed\n\t\t\t\ttask count resets to zero and stops being evaluated.</p>\n\t\t       </note>"
                     }
                 },
@@ -2624,6 +2700,7 @@
                 "enable": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to use the deployment circuit breaker logic for the service.</p>",
                         "smithy.api#required": {}
                     }
@@ -2631,6 +2708,7 @@
                 "rollback": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to configure Amazon ECS to roll back the service if a service deployment\n\t\t\tfails. If rollback is enabled, when a service deployment fails, the service is rolled\n\t\t\tback to the last deployment that completed successfully.</p>",
                         "smithy.api#required": {}
                     }
@@ -2672,6 +2750,8 @@
                 "type": {
                     "target": "com.amazonaws.ecs#DeploymentControllerType",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "ECS",
                         "smithy.api#documentation": "<p>The deployment controller type to use.</p>\n\t\t       <p>There are three deployment controller types available:</p>\n\t\t       <dl>\n            <dt>ECS</dt>\n            <dd>\n\t\t\t\t\t          <p>The rolling update (<code>ECS</code>) deployment type involves replacing\n\t\t\t\t\t\tthe current running version of the container with the latest version. The\n\t\t\t\t\t\tnumber of containers Amazon ECS adds or removes from the service during a rolling\n\t\t\t\t\t\tupdate is controlled by adjusting the minimum and maximum number of healthy\n\t\t\t\t\t\ttasks allowed during a service deployment, as specified in the <a>DeploymentConfiguration</a>.</p>\n\t\t\t\t        </dd>\n            <dt>CODE_DEPLOY</dt>\n            <dd>\n\t\t\t\t\t          <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the\n\t\t\t\t\t\tblue/green deployment model powered by CodeDeploy, which allows you to verify a\n\t\t\t\t\t\tnew deployment of a service before sending production traffic to it.</p>\n\t\t\t\t        </dd>\n            <dt>EXTERNAL</dt>\n            <dd>\n\t\t\t\t\t          <p>The external (<code>EXTERNAL</code>) deployment type enables you to use\n\t\t\t\t\t\tany third-party deployment controller for full control over the deployment\n\t\t\t\t\t\tprocess for an Amazon ECS service.</p>\n\t\t\t\t        </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
@@ -2682,41 +2762,49 @@
             }
         },
         "com.amazonaws.ecs#DeploymentControllerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ECS",
-                        "name": "ECS"
-                    },
-                    {
-                        "value": "CODE_DEPLOY",
-                        "name": "CODE_DEPLOY"
-                    },
-                    {
-                        "value": "EXTERNAL",
-                        "name": "EXTERNAL"
+            "type": "enum",
+            "members": {
+                "ECS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECS"
                     }
-                ]
+                },
+                "CODE_DEPLOY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE_DEPLOY"
+                    }
+                },
+                "EXTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#DeploymentRolloutState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Deployments": {
@@ -3434,22 +3522,26 @@
             }
         },
         "com.amazonaws.ecs#DesiredStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Device": {
@@ -3480,22 +3572,26 @@
             }
         },
         "com.amazonaws.ecs#DeviceCgroupPermission": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "read",
-                        "name": "READ"
-                    },
-                    {
-                        "value": "write",
-                        "name": "WRITE"
-                    },
-                    {
-                        "value": "mknod",
-                        "name": "MKNOD"
+            "type": "enum",
+            "members": {
+                "READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "read"
                     }
-                ]
+                },
+                "WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "write"
+                    }
+                },
+                "MKNOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mknod"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#DeviceCgroupPermissions": {
@@ -3612,7 +3708,10 @@
             }
         },
         "com.amazonaws.ecs#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ecs#EFSAuthorizationConfig": {
             "type": "structure",
@@ -3626,6 +3725,8 @@
                 "iam": {
                     "target": "com.amazonaws.ecs#EFSAuthorizationConfigIAM",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "DISABLED",
                         "smithy.api#documentation": "<p>Determines whether to use the Amazon ECS task IAM role defined in a task definition when\n\t\t\tmounting the Amazon EFS file system. If enabled, transit encryption must be enabled in the\n\t\t\t\t<code>EFSVolumeConfiguration</code>. If this parameter is omitted, the default value\n\t\t\tof <code>DISABLED</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints\">Using\n\t\t\t\tAmazon EFS access points</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 }
@@ -3635,33 +3736,37 @@
             }
         },
         "com.amazonaws.ecs#EFSAuthorizationConfigIAM": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#EFSTransitEncryption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#EFSVolumeConfiguration": {
@@ -3683,6 +3788,8 @@
                 "transitEncryption": {
                     "target": "com.amazonaws.ecs#EFSTransitEncryption",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "DISABLED",
                         "smithy.api#documentation": "<p>Determines whether to use encryption for Amazon EFS data in transit between the Amazon ECS host\n\t\t\tand the Amazon EFS server. Transit encryption must be enabled if Amazon EFS IAM authorization is\n\t\t\tused. If this parameter is omitted, the default value of <code>DISABLED</code> is used.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html\">Encrypting data in transit</a> in\n\t\t\tthe <i>Amazon Elastic File System User Guide</i>.</p>"
                     }
                 },
@@ -3726,14 +3833,14 @@
             }
         },
         "com.amazonaws.ecs#EnvironmentFileType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "s3",
-                        "name": "S3"
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "s3"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#EnvironmentFiles": {
@@ -3754,6 +3861,7 @@
                 "sizeInGiB": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount, in GiB, of ephemeral storage to set for the task. The minimum\n\t\t\tsupported value is <code>21</code> GiB and the maximum supported value is\n\t\t\t\t<code>200</code> GiB.</p>",
                         "smithy.api#required": {}
                     }
@@ -3807,6 +3915,8 @@
                 "logging": {
                     "target": "com.amazonaws.ecs#ExecuteCommandLogging",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "DEFAULT",
                         "smithy.api#documentation": "<p>The log setting to use for redirecting logs for your execute command results. The\n\t\t\tfollowing log settings are available.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>NONE</code>: The execute command session is not logged.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>DEFAULT</code>: The <code>awslogs</code> configuration in the task\n\t\t\t\t\tdefinition is used. If no logging parameter is specified, it defaults to this\n\t\t\t\t\tvalue. If no <code>awslogs</code> log driver is configured in the task\n\t\t\t\t\tdefinition, the output won't be logged.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>OVERRIDE</code>: Specify the logging details as a part of\n\t\t\t\t\t\t<code>logConfiguration</code>. If the <code>OVERRIDE</code> logging option\n\t\t\t\t\tis specified, the <code>logConfiguration</code> is required.</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
@@ -3833,6 +3943,7 @@
                 "cloudWatchEncryptionEnabled": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to use encryption on the CloudWatch logs. If not specified,\n\t\t\tencryption will be disabled.</p>"
                     }
                 },
@@ -3845,6 +3956,7 @@
                 "s3EncryptionEnabled": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to use encryption on the S3 logs. If not specified, encryption is\n\t\t\tnot used.</p>"
                     }
                 },
@@ -3860,22 +3972,26 @@
             }
         },
         "com.amazonaws.ecs#ExecuteCommandLogging": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "DEFAULT",
-                        "name": "DEFAULT"
-                    },
-                    {
-                        "value": "OVERRIDE",
-                        "name": "OVERRIDE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "OVERRIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDE"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ExecuteCommandRequest": {
@@ -3903,6 +4019,7 @@
                 "interactive": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Use this flag to run your command in interactive mode.</p>",
                         "smithy.api#required": {}
                     }
@@ -3940,6 +4057,7 @@
                 "interactive": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the execute command session is running in interactive mode. Amazon ECS\n\t\t\tonly supports initiating interactive sessions, so you must specify <code>true</code> for\n\t\t\tthis value.</p>"
                     }
                 },
@@ -4071,18 +4189,20 @@
             }
         },
         "com.amazonaws.ecs#FirelensConfigurationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "fluentd",
-                        "name": "FLUENTD"
-                    },
-                    {
-                        "value": "fluentbit",
-                        "name": "FLUENTBIT"
+            "type": "enum",
+            "members": {
+                "FLUENTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fluentd"
                     }
-                ]
+                },
+                "FLUENTBIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fluentbit"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#GpuIds": {
@@ -4097,25 +4217,31 @@
                 "command": {
                     "target": "com.amazonaws.ecs#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string array representing the command that the container runs to determine if it is\n\t\t\thealthy. The string array must start with <code>CMD</code> to execute the command\n\t\t\targuments directly, or <code>CMD-SHELL</code> to run the command with the container's\n\t\t\tdefault shell. </p>\n\t\t       <p> When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, enclose the list\n\t\t\tof commands in brackets.</p>\n\t\t       <p>\n\t\t\t         <code>[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]</code>\n\t\t       </p>\n\t\t       <p>You don't need to include the brackets when you use the Amazon Web Services Management Console.</p>\n\t\t       <p>\n\t\t\t         <code> \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" </code>\n\t\t       </p>\n\t\t       <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For\n\t\t\tmore information, see <code>HealthCheck</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a>\n\t\t\tsection of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a>.</p>",
+                        "smithy.api#documentation": "<p>A string array representing the command that the container runs to determine if it is\n\t\t\thealthy. The string array must start with <code>CMD</code> to run the command arguments\n\t\t\tdirectly, or <code>CMD-SHELL</code> to run the command with the container's default\n\t\t\tshell. </p>\n\t\t       <p> When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, enclose the list\n\t\t\tof commands in brackets.</p>\n\t\t       <p>\n\t\t\t         <code>[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]</code>\n\t\t       </p>\n\t\t       <p>You don't need to include the brackets when you use the Amazon Web Services Management Console.</p>\n\t\t       <p>\n\t\t\t         <code> \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" </code>\n\t\t       </p>\n\t\t       <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For\n\t\t\tmore information, see <code>HealthCheck</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a>\n\t\t\tsection of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "interval": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 30,
                         "smithy.api#documentation": "<p>The time period in seconds between each health check execution. You may specify\n\t\t\tbetween 5 and 300 seconds. The default value is 30 seconds.</p>"
                     }
                 },
                 "timeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 5,
                         "smithy.api#documentation": "<p>The time period in seconds to wait for a health check to succeed before it is\n\t\t\tconsidered a failure. You may specify between 2 and 60 seconds. The default value is\n\t\t\t5.</p>"
                     }
                 },
                 "retries": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 3,
                         "smithy.api#documentation": "<p>The number of times to retry a failed health check before the container is considered\n\t\t\tunhealthy. You may specify between 1 and 10 retries. The default value is 3.</p>"
                     }
                 },
@@ -4131,22 +4257,26 @@
             }
         },
         "com.amazonaws.ecs#HealthStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
                     }
-                ]
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#HostEntry": {
@@ -4284,41 +4414,50 @@
             }
         },
         "com.amazonaws.ecs#InstanceHealthCheckState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OK",
-                        "name": "OK"
-                    },
-                    {
-                        "value": "IMPAIRED",
-                        "name": "IMPAIRED"
-                    },
-                    {
-                        "value": "INSUFFICIENT_DATA",
-                        "name": "INSUFFICIENT_DATA"
-                    },
-                    {
-                        "value": "INITIALIZING",
-                        "name": "INITIALIZING"
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OK"
                     }
-                ]
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPAIRED"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_DATA"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#InstanceHealthCheckType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONTAINER_RUNTIME",
-                        "name": "CONTAINER_RUNTIME"
+            "type": "enum",
+            "members": {
+                "CONTAINER_RUNTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINER_RUNTIME"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ecs#InvalidParameterException": {
             "type": "structure",
@@ -4333,22 +4472,26 @@
             }
         },
         "com.amazonaws.ecs#IpcMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "host",
-                        "name": "HOST"
-                    },
-                    {
-                        "value": "task",
-                        "name": "TASK"
-                    },
-                    {
-                        "value": "none",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host"
                     }
-                ]
+                },
+                "TASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "task"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#KernelCapabilities": {
@@ -4392,22 +4535,26 @@
             }
         },
         "com.amazonaws.ecs#LaunchType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EC2",
-                        "name": "EC2"
-                    },
-                    {
-                        "value": "FARGATE",
-                        "name": "FARGATE"
-                    },
-                    {
-                        "value": "EXTERNAL",
-                        "name": "EXTERNAL"
+            "type": "enum",
+            "members": {
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
                     }
-                ]
+                },
+                "FARGATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FARGATE"
+                    }
+                },
+                "EXTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#LimitExceededException": {
@@ -4464,6 +4611,8 @@
                 "swappiness": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 60,
                         "smithy.api#documentation": "<p>This allows you to tune a container's memory swappiness behavior. A\n\t\t\t\t<code>swappiness</code> value of <code>0</code> will cause swapping to not happen\n\t\t\tunless absolutely necessary. A <code>swappiness</code> value of <code>100</code> will\n\t\t\tcause pages to be swapped very aggressively. Accepted values are whole numbers between\n\t\t\t\t<code>0</code> and <code>100</code>. If the <code>swappiness</code> parameter is not\n\t\t\tspecified, a default value of <code>60</code> is used. If a value is not specified for\n\t\t\t\t<code>maxSwap</code> then this parameter is ignored. This parameter maps to the\n\t\t\t\t<code>--memory-swappiness</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <note>\n\t\t\t         <p>If you're using tasks that use the Fargate launch type, the\n\t\t\t\t\t<code>swappiness</code> parameter isn't supported.</p>\n\t\t       </note>"
                     }
                 }
@@ -4525,6 +4674,7 @@
                 "effectiveSettings": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to return the effective settings. If <code>true</code>, the account\n\t\t\tsettings for the root user or the default setting for the <code>principalArn</code> are\n\t\t\treturned. If <code>false</code>, the account settings for the <code>principalArn</code>\n\t\t\tare returned if they're set. Otherwise, no account settings are returned.</p>"
                     }
                 },
@@ -4537,6 +4687,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of account setting results returned by\n\t\t\t\t<code>ListAccountSettings</code> in paginated output. When this parameter is used,\n\t\t\t\t<code>ListAccountSettings</code> only returns <code>maxResults</code> results in a\n\t\t\tsingle page along with a <code>nextToken</code> response element. The remaining results\n\t\t\tof the initial request can be seen by sending another <code>ListAccountSettings</code>\n\t\t\trequest with the returned <code>nextToken</code> value. This value can be between\n\t\t\t1 and 10. If this\n\t\t\tparameter isn't used, then <code>ListAccountSettings</code> returns up to\n\t\t\t10 results and a <code>nextToken</code> value\n\t\t\tif applicable.</p>"
                     }
                 }
@@ -5266,46 +5417,63 @@
             }
         },
         "com.amazonaws.ecs#LogDriver": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "json-file",
-                        "name": "JSON_FILE"
-                    },
-                    {
-                        "value": "syslog",
-                        "name": "SYSLOG"
-                    },
-                    {
-                        "value": "journald",
-                        "name": "JOURNALD"
-                    },
-                    {
-                        "value": "gelf",
-                        "name": "GELF"
-                    },
-                    {
-                        "value": "fluentd",
-                        "name": "FLUENTD"
-                    },
-                    {
-                        "value": "awslogs",
-                        "name": "AWSLOGS"
-                    },
-                    {
-                        "value": "splunk",
-                        "name": "SPLUNK"
-                    },
-                    {
-                        "value": "awsfirelens",
-                        "name": "AWSFIRELENS"
+            "type": "enum",
+            "members": {
+                "JSON_FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json-file"
                     }
-                ]
+                },
+                "SYSLOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "syslog"
+                    }
+                },
+                "JOURNALD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "journald"
+                    }
+                },
+                "GELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gelf"
+                    }
+                },
+                "FLUENTD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fluentd"
+                    }
+                },
+                "AWSLOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "awslogs"
+                    }
+                },
+                "SPLUNK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "splunk"
+                    }
+                },
+                "AWSFIRELENS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "awsfirelens"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.ecs#ManagedAgent": {
             "type": "structure",
@@ -5340,14 +5508,14 @@
             }
         },
         "com.amazonaws.ecs#ManagedAgentName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ExecuteCommandAgent",
-                        "name": "ExecuteCommandAgent"
+            "type": "enum",
+            "members": {
+                "ExecuteCommandAgent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExecuteCommandAgent"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#ManagedAgentStateChange": {
@@ -5415,18 +5583,24 @@
                 "minimumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 1,
                         "smithy.api#documentation": "<p>The minimum number of container instances that Amazon ECS scales in or scales out at one\n\t\t\ttime. If this parameter is omitted, the default value of <code>1</code> is used.</p>"
                     }
                 },
                 "maximumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 10000,
                         "smithy.api#documentation": "<p>The maximum number of container instances that Amazon ECS scales in or scales out at one\n\t\t\ttime. If this parameter is omitted, the default value of <code>10000</code> is\n\t\t\tused.</p>"
                     }
                 },
                 "instanceWarmupPeriod": {
                     "target": "com.amazonaws.ecs#ManagedScalingInstanceWarmupPeriod",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 300,
                         "smithy.api#documentation": "<p>The period of time, in seconds, after a newly launched Amazon EC2 instance can contribute\n\t\t\tto CloudWatch metrics for Auto Scaling group. If this parameter is omitted, the default value\n\t\t\tof <code>300</code> seconds is used.</p>"
                     }
                 }
@@ -5438,7 +5612,6 @@
         "com.amazonaws.ecs#ManagedScalingInstanceWarmupPeriod": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 10000
@@ -5446,24 +5619,25 @@
             }
         },
         "com.amazonaws.ecs#ManagedScalingStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ManagedScalingStepSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10000
@@ -5473,7 +5647,6 @@
         "com.amazonaws.ecs#ManagedScalingTargetCapacity": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -5481,18 +5654,20 @@
             }
         },
         "com.amazonaws.ecs#ManagedTerminationProtection": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#MissingVersionException": {
@@ -5525,6 +5700,8 @@
                 "readOnly": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this value is <code>true</code>, the container has read-only access to the volume.\n\t\t\tIf this value is <code>false</code>, then the container can write to the volume. The\n\t\t\tdefault value is <code>false</code>.</p>"
                     }
                 }
@@ -5624,26 +5801,32 @@
             }
         },
         "com.amazonaws.ecs#NetworkMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "bridge",
-                        "name": "BRIDGE"
-                    },
-                    {
-                        "value": "host",
-                        "name": "HOST"
-                    },
-                    {
-                        "value": "awsvpc",
-                        "name": "AWSVPC"
-                    },
-                    {
-                        "value": "none",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "BRIDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bridge"
                     }
-                ]
+                },
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host"
+                    }
+                },
+                "AWSVPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "awsvpc"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#NoUpdateAvailableException": {
@@ -5659,57 +5842,73 @@
             }
         },
         "com.amazonaws.ecs#OSFamily": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WINDOWS_SERVER_2019_FULL",
-                        "name": "WINDOWS_SERVER_2019_FULL"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2019_CORE",
-                        "name": "WINDOWS_SERVER_2019_CORE"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2016_FULL",
-                        "name": "WINDOWS_SERVER_2016_FULL"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2004_CORE",
-                        "name": "WINDOWS_SERVER_2004_CORE"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2022_CORE",
-                        "name": "WINDOWS_SERVER_2022_CORE"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2022_FULL",
-                        "name": "WINDOWS_SERVER_2022_FULL"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_20H2_CORE",
-                        "name": "WINDOWS_SERVER_20H2_CORE"
-                    },
-                    {
-                        "value": "LINUX",
-                        "name": "LINUX"
+            "type": "enum",
+            "members": {
+                "WINDOWS_SERVER_2019_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2019_FULL"
                     }
-                ]
+                },
+                "WINDOWS_SERVER_2019_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2019_CORE"
+                    }
+                },
+                "WINDOWS_SERVER_2016_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2016_FULL"
+                    }
+                },
+                "WINDOWS_SERVER_2004_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2004_CORE"
+                    }
+                },
+                "WINDOWS_SERVER_2022_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2022_CORE"
+                    }
+                },
+                "WINDOWS_SERVER_2022_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2022_FULL"
+                    }
+                },
+                "WINDOWS_SERVER_20H2_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_20H2_CORE"
+                    }
+                },
+                "LINUX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#PidMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "host",
-                        "name": "HOST"
-                    },
-                    {
-                        "value": "task",
-                        "name": "TASK"
+            "type": "enum",
+            "members": {
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host"
                     }
-                ]
+                },
+                "TASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "task"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#PlacementConstraint": {
@@ -5733,18 +5932,20 @@
             }
         },
         "com.amazonaws.ecs#PlacementConstraintType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "distinctInstance",
-                        "name": "DISTINCT_INSTANCE"
-                    },
-                    {
-                        "value": "memberOf",
-                        "name": "MEMBER_OF"
+            "type": "enum",
+            "members": {
+                "DISTINCT_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "distinctInstance"
                     }
-                ]
+                },
+                "MEMBER_OF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "memberOf"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#PlacementConstraints": {
@@ -5780,22 +5981,26 @@
             }
         },
         "com.amazonaws.ecs#PlacementStrategyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "random",
-                        "name": "RANDOM"
-                    },
-                    {
-                        "value": "spread",
-                        "name": "SPREAD"
-                    },
-                    {
-                        "value": "binpack",
-                        "name": "BINPACK"
+            "type": "enum",
+            "members": {
+                "RANDOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "random"
                     }
-                ]
+                },
+                "SPREAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spread"
+                    }
+                },
+                "BINPACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "binpack"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#PlatformDevice": {
@@ -5821,14 +6026,14 @@
             }
         },
         "com.amazonaws.ecs#PlatformDeviceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GPU",
-                        "name": "GPU"
+            "type": "enum",
+            "members": {
+                "GPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPU"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#PlatformDevices": {
@@ -5879,6 +6084,8 @@
                 "protocol": {
                     "target": "com.amazonaws.ecs#TransportProtocol",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "tcp",
                         "smithy.api#documentation": "<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and\n\t\t\t\t<code>udp</code>. The default is <code>tcp</code>.</p>"
                     }
                 }
@@ -5894,22 +6101,26 @@
             }
         },
         "com.amazonaws.ecs#PropagateTags": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TASK_DEFINITION",
-                        "name": "TASK_DEFINITION"
-                    },
-                    {
-                        "value": "SERVICE",
-                        "name": "SERVICE"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "TASK_DEFINITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TASK_DEFINITION"
                     }
-                ]
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#ProxyConfiguration": {
@@ -5946,14 +6157,14 @@
             }
         },
         "com.amazonaws.ecs#ProxyConfigurationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "APPMESH",
-                        "name": "APPMESH"
+            "type": "enum",
+            "members": {
+                "APPMESH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPMESH"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#PutAccountSetting": {
@@ -6333,6 +6544,8 @@
                 "networkMode": {
                     "target": "com.amazonaws.ecs#NetworkMode",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "bridge",
                         "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n            <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n        <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n            <important>\n                        <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n                    </important>\n        <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a>NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n        <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>\n        <p>For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#network-settings\">Network\n                settings</a> in the <i>Docker run reference</i>.</p>"
                     }
                 },
@@ -6364,13 +6577,13 @@
                 "cpu": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of CPU units used by the task. It can be expressed as an integer using CPU\n\t\t\tunits (for example, <code>1024</code>) or as a string using vCPUs (for example, <code>1\n\t\t\t\tvCPU</code> or <code>1 vcpu</code>) in a task definition. String values are\n\t\t\tconverted to an integer indicating the CPU units when the task definition is\n\t\t\tregistered.</p>\n\t\t       <note>\n\t\t\t         <p>Task-level CPU and memory parameters are ignored for Windows containers. We\n\t\t\t\trecommend specifying container-level resources for Windows containers.</p>\n\t\t       </note>\n\t\t       <p>If you're using the EC2 launch type, this field is optional. Supported\n\t\t\tvalues are between <code>128</code> CPU units (<code>0.125</code> vCPUs) and\n\t\t\t\t<code>10240</code> CPU units (<code>10</code> vCPUs).</p>\n\t\t       <p>If you're using the Fargate launch type, this field is required and you\n\t\t\tmust use one of the following values, which determines your range of supported values\n\t\t\tfor the <code>memory</code> parameter:</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p>\n            </li>\n            <li>\n                <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p>\n            </li>\n            <li>\n                <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p>\n            </li>\n            <li>\n                <p>2048 (2 vCPU) - Available <code>memory</code> values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>4096 (4 vCPU) - Available <code>memory</code> values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of CPU units used by the task. It can be expressed as an integer using CPU\n\t\t\tunits (for example, <code>1024</code>) or as a string using vCPUs (for example, <code>1\n\t\t\t\tvCPU</code> or <code>1 vcpu</code>) in a task definition. String values are\n\t\t\tconverted to an integer indicating the CPU units when the task definition is\n\t\t\tregistered.</p>\n\t\t       <note>\n\t\t\t         <p>Task-level CPU and memory parameters are ignored for Windows containers. We\n\t\t\t\trecommend specifying container-level resources for Windows containers.</p>\n\t\t       </note>\n\t\t       <p>If you're using the EC2 launch type, this field is optional. Supported values\n\t\t\tare between <code>128</code> CPU units (<code>0.125</code> vCPUs) and <code>10240</code>\n\t\t\tCPU units (<code>10</code> vCPUs). If you do not specify a value, the parameter is\n\t\t\tignored.</p>\n\t\t       <p>If you're using the Fargate launch type, this field is required and you\n\t\t\tmust use one of the following values, which determines your range of supported values\n\t\t\tfor the <code>memory</code> parameter:</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p>\n            </li>\n            <li>\n                <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p>\n            </li>\n            <li>\n                <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p>\n            </li>\n            <li>\n                <p>2048 (2 vCPU) - Available <code>memory</code> values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>4096 (4 vCPU) - Available <code>memory</code> values: 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>8192 (8 vCPU)  - Available <code>memory</code> values: 16 GB and 60 GB in 4 GB increments</p>\n            \n                 <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n            <li>\n                <p>16384 (16vCPU)  - Available <code>memory</code> values: 32GB and 120 GB in 8 GB increments</p>\n                 <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "memory": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of memory (in MiB) used by the task. It can be expressed as an integer\n\t\t\tusing MiB (for example ,<code>1024</code>) or as a string using GB (for example,\n\t\t\t\t<code>1GB</code> or <code>1 GB</code>) in a task definition. String values are\n\t\t\tconverted to an integer indicating the MiB when the task definition is\n\t\t\tregistered.</p>\n\t\t       <note>\n\t\t\t         <p>Task-level CPU and memory parameters are ignored for Windows containers. We\n\t\t\t\trecommend specifying container-level resources for Windows containers.</p>\n\t\t       </note>\n\t\t       <p>If using the EC2 launch type, this field is optional.</p>\n\t\t       <p>If using the Fargate launch type, this field is required and you must\n\t\t\tuse one of the following values. This determines your range of supported values for the\n\t\t\t\t<code>cpu</code> parameter.</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>\n            </li>\n            <li>\n                <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>\n            </li>\n            <li>\n                <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The amount of memory (in MiB) used by the task. It can be expressed as an integer\n\t\t\tusing MiB (for example ,<code>1024</code>) or as a string using GB (for example,\n\t\t\t\t<code>1GB</code> or <code>1 GB</code>) in a task definition. String values are\n\t\t\tconverted to an integer indicating the MiB when the task definition is\n\t\t\tregistered.</p>\n\t\t       <note>\n\t\t\t         <p>Task-level CPU and memory parameters are ignored for Windows containers. We\n\t\t\t\trecommend specifying container-level resources for Windows containers.</p>\n\t\t       </note>\n\t\t       <p>If using the EC2 launch type, this field is optional.</p>\n\t\t       <p>If using the Fargate launch type, this field is required and you must\n\t\t\tuse one of the following values. This determines your range of supported values for the\n\t\t\t\t<code>cpu</code> parameter.</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>\n            </li>\n            <li>\n                <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>\n            </li>\n            <li>\n                <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 16 GB and 60 GB in 4 GB increments - Available <code>cpu</code> values: 8192 (8 vCPU)</p>\n                <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n            <li>\n                <p>Between 32GB and 120 GB in 8 GB increments - Available <code>cpu</code> values: 16384 (16 vCPU)</p>\n                <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "tags": {
@@ -6473,18 +6686,21 @@
                 "doubleValue": {
                     "target": "com.amazonaws.ecs#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>When the <code>doubleValue</code> type is set, the value of the resource must be a\n\t\t\tdouble precision floating-point type.</p>"
                     }
                 },
                 "longValue": {
                     "target": "com.amazonaws.ecs#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>When the <code>longValue</code> type is set, the value of the resource must be an\n\t\t\textended precision floating-point type.</p>"
                     }
                 },
                 "integerValue": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>When the <code>integerValue</code> type is set, the value of the resource must be an\n\t\t\tinteger.</p>"
                     }
                 },
@@ -6552,18 +6768,20 @@
             }
         },
         "com.amazonaws.ecs#ResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GPU",
-                        "name": "GPU"
-                    },
-                    {
-                        "value": "InferenceAccelerator",
-                        "name": "INFERENCE_ACCELERATOR"
+            "type": "enum",
+            "members": {
+                "GPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPU"
                     }
-                ]
+                },
+                "INFERENCE_ACCELERATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InferenceAccelerator"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Resources": {
@@ -6637,12 +6855,14 @@
                 "enableECSManagedTags": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to use Amazon ECS managed tags for the task. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS\n\t\t\t\tResources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "enableExecuteCommand": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to use the execute command functionality for the containers in this\n\t\t\ttask. If <code>true</code>, this enables execute command functionality on all containers\n\t\t\tin the task.</p>\n\t\t       <p>If <code>true</code>, then the task definition must have a task role, or you must\n\t\t\tprovide one as an override.</p>"
                     }
                 },
@@ -6755,7 +6975,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the platform for the Amazon ECS service or task.</p>\n\t\t       <p>For more informataion about <code>RuntimePlatform</code>, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform\">RuntimePlatform</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Information about the platform for the Amazon ECS service or task.</p>\n\t\t       <p>For more information about <code>RuntimePlatform</code>, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform\">RuntimePlatform</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#Scale": {
@@ -6764,6 +6984,7 @@
                 "value": {
                     "target": "com.amazonaws.ecs#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value, specified as a percent total of a service's <code>desiredCount</code>, to\n\t\t\tscale the task set. Accepted values are numbers between 0 and 100.</p>"
                     }
                 },
@@ -6779,44 +7000,48 @@
             }
         },
         "com.amazonaws.ecs#ScaleUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PERCENT",
-                        "name": "PERCENT"
+            "type": "enum",
+            "members": {
+                "PERCENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#SchedulingStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REPLICA",
-                        "name": "REPLICA"
-                    },
-                    {
-                        "value": "DAEMON",
-                        "name": "DAEMON"
+            "type": "enum",
+            "members": {
+                "REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLICA"
                     }
-                ]
+                },
+                "DAEMON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAEMON"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Scope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "task",
-                        "name": "TASK"
-                    },
-                    {
-                        "value": "shared",
-                        "name": "SHARED"
+            "type": "enum",
+            "members": {
+                "TASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "task"
                     }
-                ]
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shared"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Secret": {
@@ -6907,18 +7132,21 @@
                 "desiredCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The desired number of instantiations of the task definition to keep running on the\n\t\t\tservice. This value is specified when the service is created with <a>CreateService</a>, and it can be modified with <a>UpdateService</a>.</p>"
                     }
                 },
                 "runningCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the cluster that are in the <code>RUNNING</code> state.</p>"
                     }
                 },
                 "pendingCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the cluster that are in the <code>PENDING</code> state.</p>"
                     }
                 },
@@ -7039,6 +7267,7 @@
                 "enableECSManagedTags": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to use Amazon ECS managed tags for the tasks in the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS\n\t\t\t\tResources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
@@ -7051,6 +7280,7 @@
                 "enableExecuteCommand": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the execute command functionality is enabled for the service. If\n\t\t\t\t<code>true</code>, the execute command functionality is enabled for all containers\n\t\t\tin tasks as part of the service.</p>"
                     }
                 }
@@ -7092,14 +7322,14 @@
             }
         },
         "com.amazonaws.ecs#ServiceField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#ServiceFieldList": {
@@ -7229,30 +7459,38 @@
             }
         },
         "com.amazonaws.ecs#SettingName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "serviceLongArnFormat",
-                        "name": "SERVICE_LONG_ARN_FORMAT"
-                    },
-                    {
-                        "value": "taskLongArnFormat",
-                        "name": "TASK_LONG_ARN_FORMAT"
-                    },
-                    {
-                        "value": "containerInstanceLongArnFormat",
-                        "name": "CONTAINER_INSTANCE_LONG_ARN_FORMAT"
-                    },
-                    {
-                        "value": "awsvpcTrunking",
-                        "name": "AWSVPC_TRUNKING"
-                    },
-                    {
-                        "value": "containerInsights",
-                        "name": "CONTAINER_INSIGHTS"
+            "type": "enum",
+            "members": {
+                "SERVICE_LONG_ARN_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "serviceLongArnFormat"
                     }
-                ]
+                },
+                "TASK_LONG_ARN_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "taskLongArnFormat"
+                    }
+                },
+                "CONTAINER_INSTANCE_LONG_ARN_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "containerInstanceLongArnFormat"
+                    }
+                },
+                "AWSVPC_TRUNKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "awsvpcTrunking"
+                    }
+                },
+                "CONTAINER_INSIGHTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "containerInsights"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Settings": {
@@ -7262,33 +7500,37 @@
             }
         },
         "com.amazonaws.ecs#SortOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASC",
-                        "name": "ASC"
-                    },
-                    {
-                        "value": "DESC",
-                        "name": "DESC"
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
                     }
-                ]
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#StabilityStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STEADY_STATE",
-                        "name": "STEADY_STATE"
-                    },
-                    {
-                        "value": "STABILIZING",
-                        "name": "STABILIZING"
+            "type": "enum",
+            "members": {
+                "STEADY_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STEADY_STATE"
                     }
-                ]
+                },
+                "STABILIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STABILIZING"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#StartTask": {
@@ -7336,12 +7578,14 @@
                 "enableECSManagedTags": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to use Amazon ECS managed tags for the task. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS\n\t\t\t\tResources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "enableExecuteCommand": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not the execute command functionality is enabled for the task. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe task.</p>"
                     }
                 },
@@ -7903,14 +8147,14 @@
             }
         },
         "com.amazonaws.ecs#TargetType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "container-instance",
-                        "name": "CONTAINER_INSTANCE"
+            "type": "enum",
+            "members": {
+                "CONTAINER_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "container-instance"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#Task": {
@@ -7973,7 +8217,7 @@
                 "cpu": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of CPU units used by the task as expressed in a task definition. It can be\n\t\t\texpressed as an integer using CPU units (for example, <code>1024</code>). It can also be\n\t\t\texpressed as a string using vCPUs (for example, <code>1 vCPU</code> or <code>1\n\t\t\t\tvcpu</code>). String values are converted to an integer that indicates the CPU units\n\t\t\twhen the task definition is registered.</p>\n\t\t       <p>If you use the EC2 launch type, this field is optional. Supported values\n\t\t\tare between <code>128</code> CPU units (<code>0.125</code> vCPUs) and <code>10240</code>\n\t\t\tCPU units (<code>10</code> vCPUs).</p>\n\t\t       <p>If you use the Fargate launch type, this field is required. You must use\n\t\t\tone of the following values. These values determine the range of supported values for\n\t\t\tthe <code>memory</code> parameter:</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p>\n            </li>\n            <li>\n                <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p>\n            </li>\n            <li>\n                <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p>\n            </li>\n            <li>\n                <p>2048 (2 vCPU) - Available <code>memory</code> values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>4096 (4 vCPU) - Available <code>memory</code> values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of CPU units used by the task as expressed in a task definition. It can be\n\t\t\texpressed as an integer using CPU units (for example, <code>1024</code>). It can also be\n\t\t\texpressed as a string using vCPUs (for example, <code>1 vCPU</code> or <code>1\n\t\t\t\tvcpu</code>). String values are converted to an integer that indicates the CPU units\n\t\t\twhen the task definition is registered.</p>\n\t\t       <p>If you use the EC2 launch type, this field is optional. Supported values\n\t\t\tare between <code>128</code> CPU units (<code>0.125</code> vCPUs) and <code>10240</code>\n\t\t\tCPU units (<code>10</code> vCPUs).</p>\n\t\t       <p>If you use the Fargate launch type, this field is required. You must use\n\t\t\tone of the following values. These values determine the range of supported values for\n\t\t\tthe <code>memory</code> parameter:</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p>\n            </li>\n            <li>\n                <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p>\n            </li>\n            <li>\n                <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p>\n            </li>\n            <li>\n                <p>2048 (2 vCPU) - Available <code>memory</code> values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>4096 (4 vCPU) - Available <code>memory</code> values: 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>8192 (8 vCPU)  - Available <code>memory</code> values: 16 GB and 60 GB in 4 GB increments</p>\n            \n                 <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n            <li>\n                <p>16384 (16vCPU)  - Available <code>memory</code> values: 32GB and 120 GB in 8 GB increments</p>\n                 <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "createdAt": {
@@ -7991,6 +8235,7 @@
                 "enableExecuteCommand": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether execute command functionality is enabled for this task. If\n\t\t\t\t<code>true</code>, execute command functionality is enabled on all the containers in\n\t\t\tthe task.</p>"
                     }
                 },
@@ -8033,7 +8278,7 @@
                 "memory": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of memory (in MiB) that the task uses as expressed in a task definition. It\n\t\t\tcan be expressed as an integer using MiB (for example, <code>1024</code>). If it's\n\t\t\texpressed as a string using GB (for example, <code>1GB</code> or <code>1 GB</code>),\n\t\t\tit's converted to an integer indicating the MiB when the task definition is\n\t\t\tregistered.</p>\n\t\t       <p>If you use the EC2 launch type, this field is optional.</p>\n\t\t       <p>If you use the Fargate launch type, this field is required. You must use\n\t\t\tone of the following values. The value that you choose determines the range of supported\n\t\t\tvalues for the <code>cpu</code> parameter.</p>\n\t\t       <ul>\n            <li>\n                <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>\n            </li>\n            <li>\n                <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>\n            </li>\n            <li>\n                <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The amount of memory (in MiB) that the task uses as expressed in a task definition. It\n\t\t\tcan be expressed as an integer using MiB (for example, <code>1024</code>). If it's\n\t\t\texpressed as a string using GB (for example, <code>1GB</code> or <code>1 GB</code>),\n\t\t\tit's converted to an integer indicating the MiB when the task definition is\n\t\t\tregistered.</p>\n\t\t       <p>If you use the EC2 launch type, this field is optional.</p>\n\t\t       <p>If you use the Fargate launch type, this field is required. You must use\n\t\t\tone of the following values. The value that you choose determines the range of supported\n\t\t\tvalues for the <code>cpu</code> parameter.</p>\n\t\t       <ul>\n            <li>\n                <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>\n            </li>\n            <li>\n                <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>\n            </li>\n            <li>\n                <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 16 GB and 60 GB in 4 GB increments - Available <code>cpu</code> values: 8192 (8 vCPU)</p>\n                <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n            <li>\n                <p>Between 32GB and 120 GB in 8 GB increments - Available <code>cpu</code> values: 16384 (16 vCPU)</p>\n                <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "overrides": {
@@ -8123,6 +8368,7 @@
                 "version": {
                     "target": "com.amazonaws.ecs#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version counter for the task. Every time a task experiences a change that starts a\n\t\t\tCloudWatch event, the version counter is incremented. If you replicate your Amazon ECS task state\n\t\t\twith CloudWatch Events, you can compare the version of a task reported by the Amazon ECS API\n\t\t\tactions with the version reported in CloudWatch Events for the task (inside the\n\t\t\t\t<code>detail</code> object) to verify that the version in your event stream is\n\t\t\tcurrent.</p>"
                     }
                 },
@@ -8173,12 +8419,15 @@
                 "networkMode": {
                     "target": "com.amazonaws.ecs#NetworkMode",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "bridge",
                         "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n            <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n        <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n            <important>\n                        <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n                    </important>\n        <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a>NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n        <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>\n        <p>For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#network-settings\">Network\n                settings</a> in the <i>Docker run reference</i>.</p>"
                     }
                 },
                 "revision": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The revision of the task in a particular family. The revision is a version number of a\n\t\t\ttask definition in a family. When you register a task definition for the first time, the\n\t\t\trevision is <code>1</code>. Each time that you register a new revision of a task\n\t\t\tdefinition in the same family, the revision value always increases by one. This is even\n\t\t\tif you deregistered previous revisions in this family.</p>"
                     }
                 },
@@ -8227,13 +8476,13 @@
                 "cpu": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of <code>cpu</code> units used by the task. If you use the EC2 launch type,\n\t\t\tthis field is optional. Any value can be used. If you use the Fargate launch type, this\n\t\t\tfield is required. You must use one of the following values. The value that you choose\n\t\t\tdetermines your range of valid values for the <code>memory</code> parameter.</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p>\n            </li>\n            <li>\n                <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p>\n            </li>\n            <li>\n                <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p>\n            </li>\n            <li>\n                <p>2048 (2 vCPU) - Available <code>memory</code> values: Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>4096 (4 vCPU) - Available <code>memory</code> values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of <code>cpu</code> units used by the task. If you use the EC2 launch type,\n\t\t\tthis field is optional. Any value can be used. If you use the Fargate launch type, this\n\t\t\tfield is required. You must use one of the following values. The value that you choose\n\t\t\tdetermines your range of valid values for the <code>memory</code> parameter.</p>\n\t\t       <p>The CPU units cannot be less than 1 vCPU when you use Windows containers on\n\t\t\tFargate.</p>\n\t\t       <ul>\n            <li>\n                <p>256 (.25 vCPU) - Available <code>memory</code> values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)</p>\n            </li>\n            <li>\n                <p>512 (.5 vCPU) - Available <code>memory</code> values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)</p>\n            </li>\n            <li>\n                <p>1024 (1 vCPU) - Available <code>memory</code> values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)</p>\n            </li>\n            <li>\n                <p>2048 (2 vCPU) - Available <code>memory</code> values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>4096 (4 vCPU) - Available <code>memory</code> values: 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)</p>\n            </li>\n            <li>\n                <p>8192 (8 vCPU)  - Available <code>memory</code> values: 16 GB and 60 GB in 4 GB increments</p>\n            \n                 <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n            <li>\n                <p>16384 (16vCPU)  - Available <code>memory</code> values: 32GB and 120 GB in 8 GB increments</p>\n                 <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "memory": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount (in MiB) of memory used by the task.</p>\n\t\t       <p>If your tasks runs on Amazon EC2 instances, you must specify either a task-level memory\n\t\t\tvalue or a container-level memory value. This field is optional and any value can be\n\t\t\tused. If a task-level memory value is specified, the container-level memory value is\n\t\t\toptional. For more information regarding container-level memory and memory reservation,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html\">ContainerDefinition</a>.</p>\n\t\t       <p>If your tasks runs on Fargate, this field is required. You must use one of the\n\t\t\tfollowing values. The value you choose determines your range of valid values for the\n\t\t\t\t<code>cpu</code> parameter.</p>\n\t\t       <ul>\n            <li>\n                <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>\n            </li>\n            <li>\n                <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>\n            </li>\n            <li>\n                <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The amount (in MiB) of memory used by the task.</p>\n\t\t       <p>If your tasks runs on Amazon EC2 instances, you must specify either a task-level memory\n\t\t\tvalue or a container-level memory value. This field is optional and any value can be\n\t\t\tused. If a task-level memory value is specified, the container-level memory value is\n\t\t\toptional. For more information regarding container-level memory and memory reservation,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html\">ContainerDefinition</a>.</p>\n\t\t       <p>If your tasks runs on Fargate, this field is required. You must use one of the\n\t\t\tfollowing values. The value you choose determines your range of valid values for the\n\t\t\t\t<code>cpu</code> parameter.</p>\n\t\t       <ul>\n            <li>\n                <p>512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available <code>cpu</code> values: 256 (.25 vCPU)</p>\n            </li>\n            <li>\n                <p>1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available <code>cpu</code> values: 512 (.5 vCPU)</p>\n            </li>\n            <li>\n                <p>2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available <code>cpu</code> values: 1024 (1 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 2048 (2 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available <code>cpu</code> values: 4096 (4 vCPU)</p>\n            </li>\n            <li>\n                <p>Between 16 GB and 60 GB in 4 GB increments - Available <code>cpu</code> values: 8192 (8 vCPU)</p>\n                <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n            <li>\n                <p>Between 32GB and 120 GB in 8 GB increments - Available <code>cpu</code> values: 16384 (16 vCPU)</p>\n                <p>This option requires Linux platform <code>1.4.0</code> or\n                                        later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "inferenceAccelerators": {
@@ -8290,33 +8539,37 @@
             }
         },
         "com.amazonaws.ecs#TaskDefinitionFamilyStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#TaskDefinitionField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#TaskDefinitionFieldList": {
@@ -8346,14 +8599,14 @@
             }
         },
         "com.amazonaws.ecs#TaskDefinitionPlacementConstraintType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "memberOf",
-                        "name": "MEMBER_OF"
+            "type": "enum",
+            "members": {
+                "MEMBER_OF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "memberOf"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#TaskDefinitionPlacementConstraints": {
@@ -8363,29 +8616,31 @@
             }
         },
         "com.amazonaws.ecs#TaskDefinitionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#TaskField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#TaskFieldList": {
@@ -8498,18 +8753,21 @@
                 "computedDesiredCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The computed desired count for the task set. This is calculated by multiplying the\n\t\t\tservice's <code>desiredCount</code> by the task set's <code>scale</code> percentage. The\n\t\t\tresult is always rounded up. For example, if the computed desired count is 1.2, it\n\t\t\trounds up to 2 tasks.</p>"
                     }
                 },
                 "pendingCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the task set that are in the <code>PENDING</code> status during\n\t\t\ta deployment. A task in the <code>PENDING</code> state is preparing to enter the\n\t\t\t\t<code>RUNNING</code> state. A task set enters the <code>PENDING</code> status when\n\t\t\tit launches for the first time or when it's restarted after being in the\n\t\t\t\t<code>STOPPED</code> state.</p>"
                     }
                 },
                 "runningCount": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the task set that are in the <code>RUNNING</code> status during\n\t\t\ta deployment. A task in the <code>RUNNING</code> state is running and ready for\n\t\t\tuse.</p>"
                     }
                 },
@@ -8597,14 +8855,14 @@
             }
         },
         "com.amazonaws.ecs#TaskSetField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
+            "type": "enum",
+            "members": {
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ecs#TaskSetFieldList": {
@@ -8632,22 +8890,26 @@
             }
         },
         "com.amazonaws.ecs#TaskStopCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TaskFailedToStart",
-                        "name": "TASK_FAILED_TO_START"
-                    },
-                    {
-                        "value": "EssentialContainerExited",
-                        "name": "ESSENTIAL_CONTAINER_EXITED"
-                    },
-                    {
-                        "value": "UserInitiated",
-                        "name": "USER_INITIATED"
+            "type": "enum",
+            "members": {
+                "TASK_FAILED_TO_START": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TaskFailedToStart"
                     }
-                ]
+                },
+                "ESSENTIAL_CONTAINER_EXITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EssentialContainerExited"
+                    }
+                },
+                "USER_INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UserInitiated"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Tasks": {
@@ -8672,6 +8934,7 @@
                 "size": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum size (in MiB) of the tmpfs volume.</p>",
                         "smithy.api#required": {}
                     }
@@ -8694,18 +8957,20 @@
             }
         },
         "com.amazonaws.ecs#TransportProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "tcp",
-                        "name": "TCP"
-                    },
-                    {
-                        "value": "udp",
-                        "name": "UDP"
+            "type": "enum",
+            "members": {
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tcp"
                     }
-                ]
+                },
+                "UDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "udp"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#Ulimit": {
@@ -8721,6 +8986,7 @@
                 "softLimit": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The soft limit for the ulimit type.</p>",
                         "smithy.api#required": {}
                     }
@@ -8728,6 +8994,7 @@
                 "hardLimit": {
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The hard limit for the ulimit type.</p>",
                         "smithy.api#required": {}
                     }
@@ -8744,70 +9011,98 @@
             }
         },
         "com.amazonaws.ecs#UlimitName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "core",
-                        "name": "CORE"
-                    },
-                    {
-                        "value": "cpu",
-                        "name": "CPU"
-                    },
-                    {
-                        "value": "data",
-                        "name": "DATA"
-                    },
-                    {
-                        "value": "fsize",
-                        "name": "FSIZE"
-                    },
-                    {
-                        "value": "locks",
-                        "name": "LOCKS"
-                    },
-                    {
-                        "value": "memlock",
-                        "name": "MEMLOCK"
-                    },
-                    {
-                        "value": "msgqueue",
-                        "name": "MSGQUEUE"
-                    },
-                    {
-                        "value": "nice",
-                        "name": "NICE"
-                    },
-                    {
-                        "value": "nofile",
-                        "name": "NOFILE"
-                    },
-                    {
-                        "value": "nproc",
-                        "name": "NPROC"
-                    },
-                    {
-                        "value": "rss",
-                        "name": "RSS"
-                    },
-                    {
-                        "value": "rtprio",
-                        "name": "RTPRIO"
-                    },
-                    {
-                        "value": "rttime",
-                        "name": "RTTIME"
-                    },
-                    {
-                        "value": "sigpending",
-                        "name": "SIGPENDING"
-                    },
-                    {
-                        "value": "stack",
-                        "name": "STACK"
+            "type": "enum",
+            "members": {
+                "CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "core"
                     }
-                ]
+                },
+                "CPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cpu"
+                    }
+                },
+                "DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "data"
+                    }
+                },
+                "FSIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fsize"
+                    }
+                },
+                "LOCKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "locks"
+                    }
+                },
+                "MEMLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "memlock"
+                    }
+                },
+                "MSGQUEUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "msgqueue"
+                    }
+                },
+                "NICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nice"
+                    }
+                },
+                "NOFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nofile"
+                    }
+                },
+                "NPROC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nproc"
+                    }
+                },
+                "RSS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rss"
+                    }
+                },
+                "RTPRIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rtprio"
+                    }
+                },
+                "RTTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rttime"
+                    }
+                },
+                "SIGPENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sigpending"
+                    }
+                },
+                "STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stack"
+                    }
+                }
             }
         },
         "com.amazonaws.ecs#UnsupportedFeatureException": {
@@ -9374,6 +9669,7 @@
                 "forceNewDeployment": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to force a new deployment of the service. By default, deployments\n\t\t\taren't forced. You can use this option to start a new deployment with no service\n\t\t\tdefinition changes. For example, you can update a service's tasks to use a newer Docker\n\t\t\timage with the same image/tag combination (<code>my_image:latest</code>) or to roll\n\t\t\tFargate tasks onto a newer platform version.</p>"
                     }
                 },
@@ -9587,6 +9883,8 @@
                 "readOnly": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this value is <code>true</code>, the container has read-only access to the volume.\n\t\t\tIf this value is <code>false</code>, then the container can write to the volume. The\n\t\t\tdefault value is <code>false</code>.</p>"
                     }
                 }

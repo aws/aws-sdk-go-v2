@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -108,7 +108,7 @@
                     "name": "codestar-notifications"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the\n      operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API\n      to work with the following objects:</p>\n      \n         <p>Notification rules, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateNotificationRule</a>, which creates a notification rule for a\n                    resource in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteNotificationRule</a>, which deletes a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeNotificationRule</a>, which provides information about a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListNotificationRules</a>, which lists the notification rules associated with\n          your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateNotificationRule</a>, which changes the name, events, or targets associated with a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Subscribe</a>, which subscribes a target to a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Unsubscribe</a>, which removes a target from a notification rule. </p>\n            </li>\n         </ul>\n      \n         <p>Targets, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteTarget</a>, which removes a notification rule target (SNS topic) from a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTargets</a>, which lists the targets associated with a\n                    notification rule. </p>\n            </li>\n         </ul>\n      \n         <p>Events, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListEventTypes</a>, which lists the event types you can include in\n                    a notification rule. </p>\n            </li>\n         </ul>\n         <p>Tags, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a>, which lists the tags already associated\n                    with a notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>, which associates a tag you provide with a\n                    notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a>, which removes a tag from a notification rule in\n                    your account. </p>\n            </li>\n         </ul>\n      \n\n      \n         <p> For information about how to use AWS CodeStar Notifications, see link in the CodeStarNotifications User Guide.\n    </p>",
+                "smithy.api#documentation": "<p>This AWS CodeStar Notifications API Reference provides descriptions and usage examples of the\n      operations and data types for the AWS CodeStar Notifications API. You can use the AWS CodeStar Notifications API\n      to work with the following objects:</p>\n      \n         <p>Notification rules, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateNotificationRule</a>, which creates a notification rule for a\n                    resource in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteNotificationRule</a>, which deletes a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeNotificationRule</a>, which provides information about a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListNotificationRules</a>, which lists the notification rules associated with\n          your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateNotificationRule</a>, which changes the name, events, or targets associated with a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Subscribe</a>, which subscribes a target to a notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>Unsubscribe</a>, which removes a target from a notification rule. </p>\n            </li>\n         </ul>\n      \n         <p>Targets, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteTarget</a>, which removes a notification rule target from a\n          notification rule. </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTargets</a>, which lists the targets associated with a\n                    notification rule. </p>\n            </li>\n         </ul>\n      \n         <p>Events, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListEventTypes</a>, which lists the event types you can include in\n                    a notification rule. </p>\n            </li>\n         </ul>\n         <p>Tags, by calling the following: </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a>, which lists the tags already associated\n                    with a notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>, which associates a tag you provide with a\n                    notification rule in your account. </p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a>, which removes a tag from a notification rule in\n                    your account. </p>\n            </li>\n         </ul>\n      \n\n      \n        <p> For information about how to use AWS CodeStar Notifications, see the <a href=\"https://docs.aws.amazon.com/dtconsole/latest/userguide/what-is-dtconsole.html\">Amazon Web Services Developer Tools Console User Guide</a>.\n    </p>",
                 "smithy.api#title": "AWS CodeStar Notifications"
             }
         },
@@ -167,7 +167,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a notification rule for a resource. The rule specifies the events you want\n            notifications about and the targets (such as SNS topics) where you want to receive\n            them.</p>",
+                "smithy.api#documentation": "<p>Creates a notification rule for a resource. The rule specifies the events you want\n            notifications about and the targets (such as Chatbot topics or Chatbot clients configured for Slack) where you want to receive\n            them.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createNotificationRule",
@@ -181,7 +181,7 @@
                 "Name": {
                     "target": "com.amazonaws.codestarnotifications#NotificationRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the notification rule. Notifictaion rule names must be unique in your AWS\n            account.</p>",
+                        "smithy.api#documentation": "<p>The name for the notification rule. Notification rule names must be unique in your Amazon Web Services account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -195,41 +195,43 @@
                 "Resource": {
                     "target": "com.amazonaws.codestarnotifications#NotificationRuleResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in AWS CodePipeline,\n      repositories in AWS CodeCommit, and build projects in AWS CodeBuild.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to associate with the notification rule. Supported resources include pipelines in CodePipeline,\n      repositories in CodeCommit, and build projects in CodeBuild.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Targets": {
                     "target": "com.amazonaws.codestarnotifications#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (ARNs) of SNS topics to associate with the\n      notification rule.</p>",
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (ARNs) of Amazon Simple Notification Service topics and Chatbot clients to associate with the\n      notification rule.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DetailType": {
                     "target": "com.amazonaws.codestarnotifications#DetailType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of detail to include in the notifications for this resource. BASIC will include only the \n        contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information\n        provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>",
+                        "smithy.api#documentation": "<p>The level of detail to include in the notifications for this resource. <code>BASIC</code> will include only the \n        contents of the event as it would appear in Amazon CloudWatch. <code>FULL</code> will include any supplemental information\n        provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientRequestToken": {
                     "target": "com.amazonaws.codestarnotifications#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request with the same\n            parameters is received and a token is included, the request returns information about\n            the initial request that used that token.</p>\n        <note>\n            <p>The AWS SDKs prepopulate client request tokens. If you are using an AWS SDK, an\n                idempotency token is created for you.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>A unique, client-generated idempotency token that, when provided in a request, ensures\n            the request cannot be repeated with a changed parameter. If a request with the same\n            parameters is received and a token is included, the request returns information about\n            the initial request that used that token.</p>\n        <note>\n            <p>The Amazon Web Services SDKs prepopulate client request tokens. If you are using an Amazon Web Services SDK, an\n                idempotency token is created for you.</p>\n        </note>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.codestarnotifications#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags to apply to this notification rule. Key names cannot start with \"aws\". </p>"
+                        "smithy.api#documentation": "<p>A list of tags to apply to this notification rule. Key names cannot start with \"<code>aws</code>\". </p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.codestarnotifications#NotificationRuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the notification rule. The default value is ENABLED. If the status is\n            set to DISABLED, notifications aren't sent for the notification rule.</p>"
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "ENABLED",
+                        "smithy.api#documentation": "<p>The status of the notification rule. The default value is <code>ENABLED</code>. If the status is\n            set to <code>DISABLED</code>, notifications aren't sent for the notification rule.</p>"
                     }
                 }
             }
@@ -327,14 +329,15 @@
                 "TargetAddress": {
                     "target": "com.amazonaws.codestarnotifications#TargetAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic to delete.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client to delete.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ForceUnsubscribeAll": {
                     "target": "com.amazonaws.codestarnotifications#ForceUnsubscribeAll",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that can be used to delete all associations with this SNS topic. The\n            default value is FALSE. If set to TRUE, all associations between that target and every\n            notification rule in your AWS account are deleted.</p>"
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean value that can be used to delete all associations with this Chatbot topic. The\n            default value is FALSE. If set to TRUE, all associations between that target and every\n            notification rule in your Amazon Web Services account are deleted.</p>"
                     }
                 }
             }
@@ -411,13 +414,13 @@
                 "Targets": {
                     "target": "com.amazonaws.codestarnotifications#TargetsBatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the SNS topics associated with the notification rule.</p>"
+                        "smithy.api#documentation": "<p>A list of the Chatbot topics and Chatbot clients associated with the notification rule.</p>"
                     }
                 },
                 "DetailType": {
                     "target": "com.amazonaws.codestarnotifications#DetailType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of detail included in the notifications for this resource. BASIC will include only the \n            contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information\n            provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>"
+                        "smithy.api#documentation": "<p>The level of detail included in the notifications for this resource. BASIC will include only the \n            contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information\n            provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>"
                     }
                 },
                 "CreatedBy": {
@@ -453,18 +456,20 @@
             }
         },
         "com.amazonaws.codestarnotifications#DetailType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BASIC",
-                        "name": "BASIC"
-                    },
-                    {
-                        "value": "FULL",
-                        "name": "FULL"
+            "type": "enum",
+            "members": {
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
                     }
-                ]
+                },
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarnotifications#EventTypeBatch": {
@@ -497,7 +502,7 @@
                 "EventTypeId": {
                     "target": "com.amazonaws.codestarnotifications#EventTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system-generated ID of the event.</p>"
+                        "smithy.api#documentation": "<p>The system-generated ID of the event. For a complete list of event types and IDs, see \n          <a href=\"https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api\">Notification concepts</a>\n          in the <i>Developer Tools Console User Guide</i>.</p>"
                     }
                 },
                 "ServiceName": {
@@ -524,7 +529,10 @@
             }
         },
         "com.amazonaws.codestarnotifications#ForceUnsubscribeAll": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.codestarnotifications#InvalidNextTokenException": {
             "type": "structure",
@@ -609,18 +617,20 @@
             }
         },
         "com.amazonaws.codestarnotifications#ListEventTypesFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RESOURCE_TYPE",
-                        "name": "RESOURCE_TYPE"
-                    },
-                    {
-                        "value": "SERVICE_NAME",
-                        "name": "SERVICE_NAME"
+            "type": "enum",
+            "members": {
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_TYPE"
                     }
-                ]
+                },
+                "SERVICE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarnotifications#ListEventTypesFilterValue": {
@@ -650,7 +660,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.codestarnotifications#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>A non-negative integer used to limit the number of returned results. The default number is 50. The maximum number of\n      results that can be returned is 100.</p>"
                     }
                 }
@@ -690,7 +700,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the notification rules for an AWS account.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the notification rules for an Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listNotificationRules",
@@ -717,7 +727,7 @@
                 "Value": {
                     "target": "com.amazonaws.codestarnotifications#ListNotificationRulesFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute you want to use to filter the returned notification rules. For example, if you specify filtering by <i>RESOURCE</i> \n          in Name, you might specify the ARN of a pipeline in AWS CodePipeline for the value.</p>",
+                        "smithy.api#documentation": "<p>The value of the attribute you want to use to filter the returned notification rules. For example, if you specify filtering by <i>RESOURCE</i> \n          in Name, you might specify the ARN of a pipeline in CodePipeline for the value.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -727,30 +737,42 @@
             }
         },
         "com.amazonaws.codestarnotifications#ListNotificationRulesFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EVENT_TYPE_ID",
-                        "name": "EVENT_TYPE_ID"
-                    },
-                    {
-                        "value": "CREATED_BY",
-                        "name": "CREATED_BY"
-                    },
-                    {
-                        "value": "RESOURCE",
-                        "name": "RESOURCE"
-                    },
-                    {
-                        "value": "TARGET_ADDRESS",
-                        "name": "TARGET_ADDRESS"
+            "type": "enum",
+            "members": {
+                "EVENT_TYPE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT_TYPE_ID"
                     }
-                ]
+                },
+                "CREATED_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED_BY"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                },
+                "TARGET_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_ADDRESS"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarnotifications#ListNotificationRulesFilterValue": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.codestarnotifications#ListNotificationRulesFilters": {
             "type": "list",
@@ -776,7 +798,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.codestarnotifications#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>A non-negative integer used to limit the number of returned results. The maximum number of\n      results that can be returned is 100.</p>"
                     }
                 }
@@ -794,7 +816,7 @@
                 "NotificationRules": {
                     "target": "com.amazonaws.codestarnotifications#NotificationRuleBatch",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of notification rules for the AWS account, by Amazon Resource Name (ARN) and ID. </p>"
+                        "smithy.api#documentation": "<p>The list of notification rules for the Amazon Web Services account, by Amazon Resource Name (ARN) and ID. </p>"
                     }
                 }
             }
@@ -864,7 +886,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the notification rule targets for an AWS account.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the notification rule targets for an Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listTargets",
@@ -891,36 +913,46 @@
                 "Value": {
                     "target": "com.amazonaws.codestarnotifications#ListTargetsFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute you want to use to filter the returned targets. For example,\n            if you specify <i>SNS</i> for the Target type, you could specify an Amazon\n            Resource Name (ARN) for a topic as the value.</p>",
+                        "smithy.api#documentation": "<p>The value of the attribute you want to use to filter the returned targets. For example,\n            if you specify <code>SNS</code> for the Target type, you could specify an Amazon\n            Resource Name (ARN) for a topic as the value.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a filter to apply to the list of returned targets. You can filter by\n            target type, address, or status. For example, to filter results to notification rules\n            that have active Amazon SNS topics as targets, you could specify a ListTargetsFilter\n            Name as TargetType and a Value of SNS, and a Name of TARGET_STATUS and a Value of\n            ACTIVE.</p>"
+                "smithy.api#documentation": "<p>Information about a filter to apply to the list of returned targets. You can filter by\n            target type, address, or status. For example, to filter results to notification rules\n            that have active Chatbot topics as targets, you could specify a ListTargetsFilter\n            Name as <code>TargetType</code> and a Value of <code>SNS</code>, and a Name of <code>TARGET_STATUS</code> and a Value of\n            <code>ACTIVE</code>.</p>"
             }
         },
         "com.amazonaws.codestarnotifications#ListTargetsFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TARGET_TYPE",
-                        "name": "TARGET_TYPE"
-                    },
-                    {
-                        "value": "TARGET_ADDRESS",
-                        "name": "TARGET_ADDRESS"
-                    },
-                    {
-                        "value": "TARGET_STATUS",
-                        "name": "TARGET_STATUS"
+            "type": "enum",
+            "members": {
+                "TARGET_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_TYPE"
                     }
-                ]
+                },
+                "TARGET_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_ADDRESS"
+                    }
+                },
+                "TARGET_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_STATUS"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarnotifications#ListTargetsFilterValue": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.codestarnotifications#ListTargetsFilters": {
             "type": "list",
@@ -946,7 +978,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.codestarnotifications#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>A non-negative integer used to limit the number of returned results. The maximum number of\n      results that can be returned is 100.</p>"
                     }
                 }
@@ -972,6 +1004,7 @@
         "com.amazonaws.codestarnotifications#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1028,7 +1061,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[A-Za-z0-9\\-_ ]+$",
+                "smithy.api#pattern": "^[A-Za-z0-9\\-_ ]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1039,18 +1072,20 @@
             }
         },
         "com.amazonaws.codestarnotifications#NotificationRuleStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarnotifications#NotificationRuleSummary": {
@@ -1081,7 +1116,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A resource with the same name or ID already exists. Notification rule names must be\n            unique in your AWS account.</p>",
+                "smithy.api#documentation": "<p>A resource with the same name or ID already exists. Notification rule names must be\n            unique in your Amazon Web Services account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1121,6 +1156,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.codestarnotifications#ConfigurationException"
+                },
+                {
                     "target": "com.amazonaws.codestarnotifications#ResourceNotFoundException"
                 },
                 {
@@ -1128,7 +1166,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an association between a notification rule and an SNS topic so that the\n            associated target can receive notifications when the events described in the rule are\n            triggered.</p>",
+                "smithy.api#documentation": "<p>Creates an association between a notification rule and an Chatbot topic or Chatbot client so that the\n            associated target can receive notifications when the events described in the rule are\n            triggered.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/subscribe",
@@ -1200,6 +1238,9 @@
                     "target": "com.amazonaws.codestarnotifications#ConcurrentModificationException"
                 },
                 {
+                    "target": "com.amazonaws.codestarnotifications#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.codestarnotifications#ResourceNotFoundException"
                 },
                 {
@@ -1228,7 +1269,7 @@
                 "Tags": {
                     "target": "com.amazonaws.codestarnotifications#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags to associate with the resource. Tag key names cannot start with \"aws\".</p>",
+                        "smithy.api#documentation": "<p>The list of tags to associate with the resource. Tag key names cannot start with \"<code>aws</code>\".</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1270,18 +1311,18 @@
                 "TargetType": {
                     "target": "com.amazonaws.codestarnotifications#TargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target type. Can be an Amazon SNS topic.</p>"
+                        "smithy.api#documentation": "<p>The target type. Can be an Chatbot topic or Chatbot client.</p>\n         <ul>\n            <li>\n               <p>Chatbot topics are specified as <code>SNS</code>.</p>\n            </li>\n            <li>\n               <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TargetAddress": {
                     "target": "com.amazonaws.codestarnotifications#TargetAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the SNS topics associated with a  notification rule.</p>"
+                "smithy.api#documentation": "<p>Information about the Chatbot topics or Chatbot clients associated with a  notification rule.</p>"
             }
         },
         "com.amazonaws.codestarnotifications#TargetAddress": {
@@ -1295,30 +1336,38 @@
             }
         },
         "com.amazonaws.codestarnotifications#TargetStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "UNREACHABLE",
-                        "name": "UNREACHABLE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "DEACTIVATED",
-                        "name": "DEACTIVATED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNREACHABLE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "DEACTIVATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEACTIVATED"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarnotifications#TargetSummary": {
@@ -1327,13 +1376,13 @@
                 "TargetAddress": {
                     "target": "com.amazonaws.codestarnotifications#TargetAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Chatbot topic or Chatbot client.</p>"
                     }
                 },
                 "TargetType": {
                     "target": "com.amazonaws.codestarnotifications#TargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the target (for example, SNS).</p>"
+                        "smithy.api#documentation": "<p>The type of the target (for example, <code>SNS</code>).</p>\n         <ul>\n            <li>\n               <p>Chatbot topics are specified as <code>SNS</code>.</p>\n            </li>\n            <li>\n               <p>Chatbot clients are specified as <code>AWSChatbotSlack</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TargetStatus": {
@@ -1385,7 +1434,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes an association between a notification rule and an Amazon SNS topic so that\n            subscribers to that topic stop receiving notifications when the events described in the\n            rule are triggered.</p>",
+                "smithy.api#documentation": "<p>Removes an association between a notification rule and an Chatbot topic so that\n            subscribers to that topic stop receiving notifications when the events described in the\n            rule are triggered.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/unsubscribe",
@@ -1406,7 +1455,7 @@
                 "TargetAddress": {
                     "target": "com.amazonaws.codestarnotifications#TargetAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the SNS topic to unsubscribe from the notification rule.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Chatbot topic to unsubscribe from the notification rule.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1437,6 +1486,9 @@
                     "target": "com.amazonaws.codestarnotifications#ConcurrentModificationException"
                 },
                 {
+                    "target": "com.amazonaws.codestarnotifications#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.codestarnotifications#ResourceNotFoundException"
                 },
                 {
@@ -1447,7 +1499,7 @@
                 "smithy.api#documentation": "<p>Removes the association between one or more provided tags and a notification\n            rule.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/untagResource",
+                    "uri": "/untagResource/{Arn}",
                     "code": 200
                 }
             }
@@ -1459,6 +1511,7 @@
                     "target": "com.amazonaws.codestarnotifications#NotificationRuleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notification rule from which to remove the\n      tags.</p>",
+                        "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 },
@@ -1466,6 +1519,7 @@
                     "target": "com.amazonaws.codestarnotifications#TagKeys",
                     "traits": {
                         "smithy.api#documentation": "<p>The key names of the tags to remove.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
                 }
@@ -1484,6 +1538,9 @@
                 "target": "com.amazonaws.codestarnotifications#UpdateNotificationRuleResult"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.codestarnotifications#ConfigurationException"
+                },
                 {
                     "target": "com.amazonaws.codestarnotifications#ResourceNotFoundException"
                 },
@@ -1525,7 +1582,7 @@
                 "EventTypeIds": {
                     "target": "com.amazonaws.codestarnotifications#EventTypeIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of event types associated with this notification rule.</p>"
+                        "smithy.api#documentation": "<p>A list of event types associated with this notification rule. For a complete list of event types and IDs, see \n          <a href=\"https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api\">Notification concepts</a>\n       in the <i>Developer Tools Console User Guide</i>.</p>"
                     }
                 },
                 "Targets": {
@@ -1537,7 +1594,7 @@
                 "DetailType": {
                     "target": "com.amazonaws.codestarnotifications#DetailType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of detail to include in the notifications for this resource. BASIC will include only the \n            contents of the event as it would appear in AWS CloudWatch. FULL will include any supplemental information\n            provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>"
+                        "smithy.api#documentation": "<p>The level of detail to include in the notifications for this resource. BASIC will include only the \n            contents of the event as it would appear in Amazon CloudWatch. FULL will include any supplemental information\n            provided by AWS CodeStar Notifications and/or the service for the resource for which the notification is created.</p>"
                     }
                 }
             }
