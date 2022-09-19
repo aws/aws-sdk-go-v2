@@ -1073,6 +1073,12 @@ type SetSourceRequest struct {
 	// sender.
 	SenderIpAddress *string
 
+	// Source IP or domain name for SRT-caller protocol.
+	SourceListenerAddress *string
+
+	// Source port for SRT-caller protocol.
+	SourceListenerPort int32
+
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string
@@ -1201,6 +1207,12 @@ type Transport struct {
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency int32
+
+	// Source IP or domain name for SRT-caller protocol.
+	SourceListenerAddress *string
+
+	// Source port for SRT-caller protocol.
+	SourceListenerPort int32
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.

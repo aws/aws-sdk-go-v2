@@ -87,6 +87,12 @@ type UpdateFlowSourceInput struct {
 	// sender.
 	SenderIpAddress *string
 
+	// Source IP or domain name for SRT-caller protocol.
+	SourceListenerAddress *string
+
+	// Source port for SRT-caller protocol.
+	SourceListenerPort int32
+
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string

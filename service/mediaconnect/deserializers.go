@@ -8166,6 +8166,28 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				sv.SmoothingLatency = int32(i64)
 			}
 
+		case "sourceListenerAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SourceListenerAddress = ptr.String(jtv)
+			}
+
+		case "sourceListenerPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourceListenerPort = int32(i64)
+			}
+
 		case "streamId":
 			if value != nil {
 				jtv, ok := value.(string)

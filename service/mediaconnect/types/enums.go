@@ -256,6 +256,7 @@ const (
 	ProtocolSt2110Jpegxs Protocol = "st2110-jpegxs"
 	ProtocolCdi          Protocol = "cdi"
 	ProtocolSrtListener  Protocol = "srt-listener"
+	ProtocolSrtCaller    Protocol = "srt-caller"
 	ProtocolFujitsuQos   Protocol = "fujitsu-qos"
 )
 
@@ -272,6 +273,7 @@ func (Protocol) Values() []Protocol {
 		"st2110-jpegxs",
 		"cdi",
 		"srt-listener",
+		"srt-caller",
 		"fujitsu-qos",
 	}
 }

@@ -307,7 +307,7 @@ type DataResource struct {
 	// specified objects.
 	//
 	// * To log data events for all objects in all S3 buckets in
-	// your Amazon Web Services account, specify the prefix as arn:aws:s3:::. This also
+	// your Amazon Web Services account, specify the prefix as arn:aws:s3. This also
 	// enables logging of data event activity performed by any user or role in your
 	// Amazon Web Services account, even if that activity is performed on a bucket that
 	// belongs to another Amazon Web Services account.
@@ -479,7 +479,7 @@ type EventSelector struct {
 	// resources cannot exceed 250 across all event selectors in a trail. This limit
 	// does not apply if you configure resource logging for all data events. For more
 	// information, see Data Events
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events)
+	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
 	// and Limits in CloudTrail
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 	// in the CloudTrail User Guide.
@@ -496,7 +496,7 @@ type EventSelector struct {
 
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
+	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)
 	// in the CloudTrail User Guide. By default, the value is true. The first copy of
 	// management events is free. You are charged for additional copies of management
 	// events that you are logging on any subsequent trail in the same region. For more
@@ -508,6 +508,80 @@ type EventSelector struct {
 	// all. For example, the EC2 GetConsoleOutput is a read-only API operation and
 	// RunInstances is a write-only API operation. By default, the value is All.
 	ReadWriteType ReadWriteType
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about an import failure.
+type ImportFailureListItem struct {
+
+	// Provides the reason the import failed.
+	ErrorMessage *string
+
+	// The type of import error.
+	ErrorType *string
+
+	// When the import was last updated.
+	LastUpdatedTime *time.Time
+
+	// The location of the failure in the S3 bucket.
+	Location *string
+
+	// The status of the import.
+	Status ImportFailureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about an import that was returned by a lookup request.
+type ImportsListItem struct {
+
+	// The timestamp of the import's creation.
+	CreatedTimestamp *time.Time
+
+	// The destination event data store.
+	Destinations []string
+
+	// The ID of the import.
+	ImportId *string
+
+	// The status of the import.
+	ImportStatus ImportStatus
+
+	// The timestamp of the import's last update.
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The import source.
+type ImportSource struct {
+
+	// The source S3 bucket.
+	//
+	// This member is required.
+	S3 *S3ImportSource
+
+	noSmithyDocumentSerde
+}
+
+// Provides statistics for the specified ImportID.
+type ImportStatistics struct {
+
+	// The number of trail events imported.
+	EventsCompleted *int64
+
+	// The number of failed entries.
+	FailedEntries *int64
+
+	// The number of files that completed import.
+	FilesCompleted *int64
+
+	// The number of S3 prefixes that completed import.
+	PrefixesCompleted *int64
+
+	// The number of S3 prefixes found for the import.
+	PrefixesFound *int64
 
 	noSmithyDocumentSerde
 }
@@ -643,6 +717,27 @@ type ResourceTag struct {
 
 	// A list of tags.
 	TagsList []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The settings for the source S3 bucket.
+type S3ImportSource struct {
+
+	// The IAM ARN role used to access the source S3 bucket.
+	//
+	// This member is required.
+	S3BucketAccessRoleArn *string
+
+	// The region associated with the source S3 bucket.
+	//
+	// This member is required.
+	S3BucketRegion *string
+
+	// The URI for the source S3 bucket.
+	//
+	// This member is required.
+	S3LocationUri *string
 
 	noSmithyDocumentSerde
 }

@@ -40,8 +40,10 @@ import (
 // The PutEventSelectors operation must be called from the region in which
 // the trail was created; otherwise, an InvalidHomeRegionException exception is
 // thrown. You can configure up to five event selectors for each trail. For more
-// information, see Logging data and management events for trails
-// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
+// information, see Logging management events for trails
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html),
+// Logging data events for trails
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html),
 // and Quotas in CloudTrail
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 // in the CloudTrail User Guide. You can add advanced event selectors, and

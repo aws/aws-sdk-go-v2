@@ -7,6 +7,28 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// This exception is thrown when you start a new import and a previous import is
+// still in progress.
+type AccountHasOngoingImportException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccountHasOngoingImportException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccountHasOngoingImportException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccountHasOngoingImportException) ErrorCode() string {
+	return "AccountHasOngoingImportException"
+}
+func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified channel ARN is not valid or does not map to a channel in your
 // account.
 type ChannelARNInvalidException struct {
@@ -211,6 +233,30 @@ func (e *EventDataStoreARNInvalidException) ErrorCode() string {
 }
 func (e *EventDataStoreARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when you try to update or delete an event data store
+// that currently has an import in progress.
+type EventDataStoreHasOngoingImportException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EventDataStoreHasOngoingImportException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EventDataStoreHasOngoingImportException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EventDataStoreHasOngoingImportException) ErrorCode() string {
+	return "EventDataStoreHasOngoingImportException"
+}
+func (e *EventDataStoreHasOngoingImportException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Your account has used the maximum number of event data stores.
 type EventDataStoreMaxLimitExceededException struct {
 	Message *string
@@ -278,6 +324,25 @@ func (e *EventDataStoreTerminationProtectedException) ErrorCode() string {
 func (e *EventDataStoreTerminationProtectedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// The specified import was not found.
+type ImportNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ImportNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ImportNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ImportNotFoundException) ErrorCode() string             { return "ImportNotFoundException" }
+func (e *ImportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The event data store is inactive.
 type InactiveEventDataStoreException struct {
@@ -526,6 +591,30 @@ func (e *InvalidEventCategoryException) ErrorMessage() string {
 func (e *InvalidEventCategoryException) ErrorCode() string             { return "InvalidEventCategoryException" }
 func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when the event data store category is not valid for the
+// import.
+type InvalidEventDataStoreCategoryException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidEventDataStoreCategoryException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidEventDataStoreCategoryException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidEventDataStoreCategoryException) ErrorCode() string {
+	return "InvalidEventDataStoreCategoryException"
+}
+func (e *InvalidEventDataStoreCategoryException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The event data store is not in a status that supports the operation.
 type InvalidEventDataStoreStatusException struct {
 	Message *string
@@ -610,6 +699,26 @@ func (e *InvalidHomeRegionException) ErrorMessage() string {
 }
 func (e *InvalidHomeRegionException) ErrorCode() string             { return "InvalidHomeRegionException" }
 func (e *InvalidHomeRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the provided source S3 bucket is not valid for
+// import.
+type InvalidImportSourceException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidImportSourceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidImportSourceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidImportSourceException) ErrorCode() string             { return "InvalidImportSourceException" }
+func (e *InvalidImportSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The formatting or syntax of the InsightSelectors JSON statement in your
 // PutInsightSelectors or GetInsightSelectors request is not valid, or the

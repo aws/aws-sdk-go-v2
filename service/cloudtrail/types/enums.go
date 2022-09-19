@@ -56,6 +56,50 @@ func (EventDataStoreStatus) Values() []EventDataStoreStatus {
 	}
 }
 
+type ImportFailureStatus string
+
+// Enum values for ImportFailureStatus
+const (
+	ImportFailureStatusFailed    ImportFailureStatus = "FAILED"
+	ImportFailureStatusRetry     ImportFailureStatus = "RETRY"
+	ImportFailureStatusSucceeded ImportFailureStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for ImportFailureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportFailureStatus) Values() []ImportFailureStatus {
+	return []ImportFailureStatus{
+		"FAILED",
+		"RETRY",
+		"SUCCEEDED",
+	}
+}
+
+type ImportStatus string
+
+// Enum values for ImportStatus
+const (
+	ImportStatusInitializing ImportStatus = "INITIALIZING"
+	ImportStatusInProgress   ImportStatus = "IN_PROGRESS"
+	ImportStatusFailed       ImportStatus = "FAILED"
+	ImportStatusStopped      ImportStatus = "STOPPED"
+	ImportStatusCompleted    ImportStatus = "COMPLETED"
+)
+
+// Values returns all known values for ImportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImportStatus) Values() []ImportStatus {
+	return []ImportStatus{
+		"INITIALIZING",
+		"IN_PROGRESS",
+		"FAILED",
+		"STOPPED",
+		"COMPLETED",
+	}
+}
+
 type InsightType string
 
 // Enum values for InsightType

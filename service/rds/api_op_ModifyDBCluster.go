@@ -113,7 +113,7 @@ type ModifyDBClusterInput struct {
 	CopyTagsToSnapshot *bool
 
 	// The compute and memory capacity of each DB instance in the Multi-AZ DB cluster,
-	// for example db.m6g.xlarge. Not all DB instance classes are available in all
+	// for example db.m6gd.xlarge. Not all DB instance classes are available in all
 	// Amazon Web Services Regions, or for all database engines. For the full list of
 	// DB instance classes and availability for your engine, see  DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)

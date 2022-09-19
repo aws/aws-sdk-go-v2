@@ -53489,6 +53489,140 @@ func awsEc2query_deserializeDocumentCancelSpotFleetRequestsSuccessSetUnwrapped(v
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentCapacityAllocation(v **types.CapacityAllocation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CapacityAllocation
+	if *v == nil {
+		sv = &types.CapacityAllocation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("allocationType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AllocationType = types.AllocationType(xtv)
+			}
+
+		case strings.EqualFold("count", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentCapacityAllocations(v *[]types.CapacityAllocation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.CapacityAllocation
+	if *v == nil {
+		sv = make([]types.CapacityAllocation, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("item", t.Name.Local):
+			var col types.CapacityAllocation
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsEc2query_deserializeDocumentCapacityAllocation(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentCapacityAllocationsUnwrapped(v *[]types.CapacityAllocation, decoder smithyxml.NodeDecoder) error {
+	var sv []types.CapacityAllocation
+	if *v == nil {
+		sv = make([]types.CapacityAllocation, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.CapacityAllocation
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsEc2query_deserializeDocumentCapacityAllocation(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReservation, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -53552,6 +53686,12 @@ func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReserv
 					return err
 				}
 				sv.AvailableInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("capacityAllocationSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentCapacityAllocations(&sv.CapacityAllocations, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("capacityReservationArn", t.Name.Local):

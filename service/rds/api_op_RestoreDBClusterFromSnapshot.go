@@ -100,9 +100,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	CopyTagsToSnapshot *bool
 
 	// The compute and memory capacity of the each DB instance in the Multi-AZ DB
-	// cluster, for example db.m6g.xlarge. Not all DB instance classes are available in
-	// all Amazon Web Services Regions, or for all database engines. For the full list
-	// of DB instance classes, and availability for your engine, see DB Instance Class
+	// cluster, for example db.m6gd.xlarge. Not all DB instance classes are available
+	// in all Amazon Web Services Regions, or for all database engines. For the full
+	// list of DB instance classes, and availability for your engine, see DB Instance
+	// Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide. Valid for: Multi-AZ DB clusters only
 	DBClusterInstanceClass *string

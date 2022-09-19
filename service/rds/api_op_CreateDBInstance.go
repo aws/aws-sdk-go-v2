@@ -363,11 +363,11 @@ type CreateDBInstanceInput struct {
 	// * It must contain 1 to 63 alphanumeric
 	// characters.
 	//
-	// * It must begin with a letter or an underscore. Subsequent
-	// characters can be letters, underscores, or digits (0 to 9).
+	// * It must begin with a letter. Subsequent characters can be
+	// letters, underscores, or digits (0 to 9).
 	//
-	// * It can't be a
-	// word reserved by the database engine.
+	// * It can't be a word reserved by the
+	// database engine.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
@@ -375,13 +375,13 @@ type CreateDBInstanceInput struct {
 	// engine and version is used. This setting doesn't apply to RDS Custom.
 	// Constraints:
 	//
-	// * Must be 1 to 255 letters, numbers, or hyphens.
+	// * It must be 1 to 255 letters, numbers, or hyphens.
 	//
-	// * First
-	// character must be a letter
+	// * The first
+	// character must be a letter.
 	//
-	// * Can't end with a hyphen or contain two consecutive
-	// hyphens
+	// * It can't end with a hyphen or contain two
+	// consecutive hyphens.
 	DBParameterGroupName *string
 
 	// A list of DB security groups to associate with this DB instance. This setting

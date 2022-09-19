@@ -251,8 +251,9 @@ type ConnectionPoolConfiguration struct {
 
 	// The maximum size of the connection pool for each target in a target group. The
 	// value is expressed as a percentage of the max_connections setting for the RDS DB
-	// instance or Aurora DB cluster used by the target group. Default: 100
-	// Constraints: between 1 and 100
+	// instance or Aurora DB cluster used by the target group. Default: 10 for RDS for
+	// Microsoft SQL Server, and 100 for all other engines Constraints: Must be between
+	// 1 and 100.
 	MaxConnectionsPercent *int32
 
 	// Controls how actively the proxy closes idle database connections in the
@@ -260,8 +261,12 @@ type ConnectionPoolConfiguration struct {
 	// setting for the RDS DB instance or Aurora DB cluster used by the target group.
 	// With a high value, the proxy leaves a high percentage of idle database
 	// connections open. A low value causes the proxy to close more idle connections
-	// and return them to the database. Default: 50 Constraints: between 0 and
-	// MaxConnectionsPercent
+	// and return them to the database. Default: The default value is half of the value
+	// of MaxConnectionsPercent. For example, if MaxConnectionsPercent is 80, then the
+	// default value of MaxIdleConnectionsPercent is 40. If the value of
+	// MaxConnectionsPercent isn't specified, then for SQL Server,
+	// MaxIdleConnectionsPercent is 5, and for all other engines, the default is 50.
+	// Constraints: Must be between 0 and the value of MaxConnectionsPercent.
 	MaxIdleConnectionsPercent *int32
 
 	// Each item in the list represents a class of SQL operations that normally cause
@@ -306,8 +311,9 @@ type ConnectionPoolConfigurationInfo struct {
 	// Each item in the list represents a class of SQL operations that normally cause
 	// all later statements in a session using a proxy to be pinned to the same
 	// underlying database connection. Including an item in the list exempts that class
-	// of SQL operations from the pinning behavior. Currently, the only allowed value
-	// is EXCLUDE_VARIABLE_SETS.
+	// of SQL operations from the pinning behavior. This setting is only supported for
+	// MySQL engine family databases. Currently, the only allowed value is
+	// EXCLUDE_VARIABLE_SETS.
 	SessionPinningFilters []string
 
 	noSmithyDocumentSerde
@@ -1747,7 +1753,7 @@ type DBProxy struct {
 	// which database network protocol the proxy recognizes when it interprets network
 	// traffic to and from the database. MYSQL supports Aurora MySQL, RDS for MariaDB,
 	// and RDS for MySQL databases. POSTGRESQL supports Aurora PostgreSQL and RDS for
-	// PostgreSQL databases.
+	// PostgreSQL databases. SQLSERVER supports RDS for Microsoft SQL Server databases.
 	EngineFamily *string
 
 	// The number of seconds a connection to the proxy can have no activity before the
@@ -3641,7 +3647,8 @@ type UserAuthConfig struct {
 	Description *string
 
 	// Whether to require or disallow Amazon Web Services Identity and Access
-	// Management (IAM) authentication for connections to the proxy.
+	// Management (IAM) authentication for connections to the proxy. The ENABLED value
+	// is valid only for proxies with RDS for Microsoft SQL Server.
 	IAMAuth IAMAuthMode
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to
@@ -3668,7 +3675,8 @@ type UserAuthConfigInfo struct {
 	Description *string
 
 	// Whether to require or disallow Amazon Web Services Identity and Access
-	// Management (IAM) authentication for connections to the proxy.
+	// Management (IAM) authentication for connections to the proxy. The ENABLED value
+	// is valid only for proxies with RDS for Microsoft SQL Server.
 	IAMAuth IAMAuthMode
 
 	// The Amazon Resource Name (ARN) representing the secret that the proxy uses to

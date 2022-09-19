@@ -216,6 +216,22 @@ func (AllocationStrategy) Values() []AllocationStrategy {
 	}
 }
 
+type AllocationType string
+
+// Enum values for AllocationType
+const (
+	AllocationTypeUsed AllocationType = "used"
+)
+
+// Values returns all known values for AllocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AllocationType) Values() []AllocationType {
+	return []AllocationType{
+		"used",
+	}
+}
+
 type AllowsMultipleInstanceTypes string
 
 // Enum values for AllowsMultipleInstanceTypes

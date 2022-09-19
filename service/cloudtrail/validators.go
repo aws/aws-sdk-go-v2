@@ -210,6 +210,26 @@ func (m *validateOpGetEventSelectors) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetImport struct {
+}
+
+func (*validateOpGetImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInsightSelectors struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpGetTrailStatus) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTrailStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListImportFailures struct {
+}
+
+func (*validateOpListImportFailures) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListImportFailures) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListImportFailuresInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListImportFailuresInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +470,26 @@ func (m *validateOpRestoreEventDataStore) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartImport struct {
+}
+
+func (*validateOpStartImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartImportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartLogging struct {
 }
 
@@ -465,6 +525,26 @@ func (m *validateOpStartQuery) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopImport struct {
+}
+
+func (*validateOpStopImport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopImport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopImportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopImportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +650,10 @@ func addOpGetEventSelectorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEventSelectors{}, middleware.After)
 }
 
+func addOpGetImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImport{}, middleware.After)
+}
+
 func addOpGetInsightSelectorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInsightSelectors{}, middleware.After)
 }
@@ -584,6 +668,10 @@ func addOpGetTrailValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTrailStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrailStatus{}, middleware.After)
+}
+
+func addOpListImportFailuresValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListImportFailures{}, middleware.After)
 }
 
 func addOpListQueriesValidationMiddleware(stack *middleware.Stack) error {
@@ -614,12 +702,20 @@ func addOpRestoreEventDataStoreValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpRestoreEventDataStore{}, middleware.After)
 }
 
+func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartImport{}, middleware.After)
+}
+
 func addOpStartLoggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartLogging{}, middleware.After)
 }
 
 func addOpStartQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartQuery{}, middleware.After)
+}
+
+func addOpStopImportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopImport{}, middleware.After)
 }
 
 func addOpStopLoggingValidationMiddleware(stack *middleware.Stack) error {
@@ -702,6 +798,25 @@ func validateAdvancedFieldSelectors(v []types.AdvancedFieldSelector) error {
 	}
 }
 
+func validateImportSource(v *types.ImportSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportSource"}
+	if v.S3 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3"))
+	} else if v.S3 != nil {
+		if err := validateS3ImportSource(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLookupAttribute(v *types.LookupAttribute) error {
 	if v == nil {
 		return nil
@@ -729,6 +844,27 @@ func validateLookupAttributesList(v []types.LookupAttribute) error {
 		if err := validateLookupAttribute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ImportSource(v *types.S3ImportSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ImportSource"}
+	if v.S3LocationUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3LocationUri"))
+	}
+	if v.S3BucketRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketRegion"))
+	}
+	if v.S3BucketAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketAccessRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -950,6 +1086,21 @@ func validateOpGetEventSelectorsInput(v *GetEventSelectorsInput) error {
 	}
 }
 
+func validateOpGetImportInput(v *GetImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImportInput"}
+	if v.ImportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInsightSelectorsInput(v *GetInsightSelectorsInput) error {
 	if v == nil {
 		return nil
@@ -1005,6 +1156,21 @@ func validateOpGetTrailStatusInput(v *GetTrailStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTrailStatusInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListImportFailuresInput(v *ListImportFailuresInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListImportFailuresInput"}
+	if v.ImportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1135,6 +1301,23 @@ func validateOpRestoreEventDataStoreInput(v *RestoreEventDataStoreInput) error {
 	}
 }
 
+func validateOpStartImportInput(v *StartImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartImportInput"}
+	if v.ImportSource != nil {
+		if err := validateImportSource(v.ImportSource); err != nil {
+			invalidParams.AddNested("ImportSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartLoggingInput(v *StartLoggingInput) error {
 	if v == nil {
 		return nil
@@ -1157,6 +1340,21 @@ func validateOpStartQueryInput(v *StartQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartQueryInput"}
 	if v.QueryStatement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopImportInput(v *StopImportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopImportInput"}
+	if v.ImportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -42,7 +42,8 @@ type UpdateEventDataStoreInput struct {
 	// This member is required.
 	EventDataStore *string
 
-	// The advanced event selectors used to select events for the event data store.
+	// The advanced event selectors used to select events for the event data store. You
+	// can configure up to five advanced event selectors for each event data store.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
 	// Specifies whether an event data store collects events from all regions, or only

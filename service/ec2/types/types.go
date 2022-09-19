@@ -871,6 +871,20 @@ type CancelSpotFleetRequestsSuccessItem struct {
 	noSmithyDocumentSerde
 }
 
+// Information about instance capacity usage for a Capacity Reservation.
+type CapacityAllocation struct {
+
+	// The usage type. used indicates that the instance capacity is in use by instances
+	// that are running in the Capacity Reservation.
+	AllocationType AllocationType
+
+	// The amount of instance capacity associated with the usage. For example a value
+	// of 4 indicates that instance capacity for 4 instances is currently in use.
+	Count *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes a Capacity Reservation.
 type CapacityReservation struct {
 
@@ -883,6 +897,9 @@ type CapacityReservation struct {
 	// The remaining capacity. Indicates the number of instances that can be launched
 	// in the Capacity Reservation.
 	AvailableInstanceCount *int32
+
+	// Information about instance capacity usage.
+	CapacityAllocations []CapacityAllocation
 
 	// The Amazon Resource Name (ARN) of the Capacity Reservation.
 	CapacityReservationArn *string
@@ -3839,10 +3856,10 @@ type FleetLaunchTemplateOverrides struct {
 
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes. If you specify
-	// InstanceRequirements, you can't specify InstanceTypes.
+	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirements
 
-	// The instance type. If you specify InstanceTypes, you can't specify
+	// The instance type. If you specify InstanceType, you can't specify
 	// InstanceRequirements.
 	InstanceType InstanceType
 
@@ -3885,10 +3902,10 @@ type FleetLaunchTemplateOverridesRequest struct {
 
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes. If you specify
-	// InstanceRequirements, you can't specify InstanceTypes.
+	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirementsRequest
 
-	// The instance type. If you specify InstanceTypes, you can't specify
+	// The instance type. If you specify InstanceType, you can't specify
 	// InstanceRequirements.
 	InstanceType InstanceType
 
@@ -5588,12 +5605,12 @@ type InstanceMetadataOptionsRequest struct {
 	HttpPutResponseHopLimit *int32
 
 	// The state of token usage for your instance metadata requests. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a signed
-	// token header on your request. If you retrieve the IAM role credentials without a
-	// token, the version 1.0 role credentials are returned. If you retrieve the IAM
-	// role credentials using a valid signed token, the version 2.0 role credentials
-	// are returned. If the state is required, you must send a signed token header with
-	// any instance metadata retrieval requests. In this state, retrieving the IAM role
+	// optional, you can choose to retrieve instance metadata with or without a session
+	// token on your request. If you retrieve the IAM role credentials without a token,
+	// the version 1.0 role credentials are returned. If you retrieve the IAM role
+	// credentials using a valid session token, the version 2.0 role credentials are
+	// returned. If the state is required, you must send a session token with any
+	// instance metadata retrieval requests. In this state, retrieving the IAM role
 	// credentials always returns the version 2.0 credentials; the version 1.0
 	// credentials are not available. Default: optional
 	HttpTokens HttpTokensState
@@ -5625,13 +5642,13 @@ type InstanceMetadataOptionsResponse struct {
 	HttpPutResponseHopLimit *int32
 
 	// The state of token usage for your instance metadata requests. If the state is
-	// optional, you can choose to retrieve instance metadata with or without a signed
-	// token header on your request. If you retrieve the IAM role credentials without a
-	// token, the version 1.0 role credentials are returned. If you retrieve the IAM
-	// role credentials using a valid signed token, the version 2.0 role credentials
-	// are returned. If the state is required, you must send a signed token header with
-	// any instance metadata retrieval requests. In this state, retrieving the IAM role
-	// credential always returns the version 2.0 credentials; the version 1.0
+	// optional, you can choose to retrieve instance metadata with or without a session
+	// token on your request. If you retrieve the IAM role credentials without a token,
+	// the version 1.0 role credentials are returned. If you retrieve the IAM role
+	// credentials using a valid session token, the version 2.0 role credentials are
+	// returned. If the state is required, you must send a session token with any
+	// instance metadata retrieval requests. In this state, retrieving the IAM role
+	// credentials always returns the version 2.0 credentials; the version 1.0
 	// credentials are not available. Default: optional
 	HttpTokens HttpTokensState
 
@@ -5902,10 +5919,10 @@ type InstancePrivateIpAddress struct {
 
 // The attributes for the instance types. When you specify instance attributes,
 // Amazon EC2 will identify instance types with these attributes. When you specify
-// multiple parameters, you get instance types that satisfy all of the specified
-// parameters. If you specify multiple values for a parameter, you get instance
+// multiple attributes, you get instance types that satisfy all of the specified
+// attributes. If you specify multiple values for an attribute, you get instance
 // types that satisfy any of the specified values. You must specify VCpuCount and
-// MemoryMiB. All other parameters are optional. Any unspecified optional parameter
+// MemoryMiB. All other attributes are optional. Any unspecified optional attribute
 // is set to its default. For more information, see Attribute-based instance type
 // selection for EC2 Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html),
@@ -5959,6 +5976,12 @@ type InstanceRequirements struct {
 	//
 	// * For instance types with Xilinx VU9P FPGAs,
 	// specify vu9p.
+	//
+	// * For instance types with Amazon Web Services Inferentia GPUs,
+	// specify inferentia.
+	//
+	// * For instance types with NVIDIA GRID K520 GPUs, specify
+	// k520.
 	//
 	// Default: Any accelerator
 	AcceleratorNames []AcceleratorName
@@ -6141,10 +6164,10 @@ type InstanceRequirements struct {
 
 // The attributes for the instance types. When you specify instance attributes,
 // Amazon EC2 will identify instance types with these attributes. When you specify
-// multiple parameters, you get instance types that satisfy all of the specified
-// parameters. If you specify multiple values for a parameter, you get instance
+// multiple attributes, you get instance types that satisfy all of the specified
+// attributes. If you specify multiple values for an attribute, you get instance
 // types that satisfy any of the specified values. You must specify VCpuCount and
-// MemoryMiB. All other parameters are optional. Any unspecified optional parameter
+// MemoryMiB. All other attributes are optional. Any unspecified optional attribute
 // is set to its default. For more information, see Attribute-based instance type
 // selection for EC2 Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html),
@@ -6208,6 +6231,12 @@ type InstanceRequirementsRequest struct {
 	//
 	// * For instance types with Xilinx VU9P FPGAs,
 	// specify  vu9p.
+	//
+	// * For instance types with Amazon Web Services Inferentia GPUs,
+	// specify inferentia.
+	//
+	// * For instance types with NVIDIA GRID K520 GPUs, specify
+	// k520.
 	//
 	// Default: Any accelerator
 	AcceleratorNames []AcceleratorName
@@ -7460,11 +7489,7 @@ type LaunchPermissionModifications struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the launch specification for an instance. We are retiring EC2-Classic
-// on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For
-// more information, see Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon EC2 User Guide for Linux Instances.
+// Describes the launch specification for an instance.
 type LaunchSpecification struct {
 
 	// Deprecated.
@@ -8199,7 +8224,7 @@ type LaunchTemplateOverrides struct {
 	// will identify instance types with the provided requirements, and then use your
 	// On-Demand and Spot allocation strategies to launch instances from these instance
 	// types, in the same way as when you specify a list of instance types. If you
-	// specify InstanceRequirements, you can't specify InstanceTypes.
+	// specify InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirements
 
 	// The instance type.
@@ -10909,7 +10934,7 @@ type RequestLaunchTemplateData struct {
 
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with these attributes. If you specify
-	// InstanceRequirements, you can't specify InstanceTypes.
+	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirementsRequest
 
 	// The instance type. For more information, see Instance types
@@ -11083,11 +11108,7 @@ type RequestSpotLaunchSpecification struct {
 
 // Describes a launch request for one or more instances, and includes owner,
 // requester, and security group information that applies to all instances in the
-// launch request. We are retiring EC2-Classic on August 15, 2022. We recommend
-// that you migrate from EC2-Classic to a VPC. For more information, see Migrate
-// from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon EC2 User Guide.
+// launch request.
 type Reservation struct {
 
 	// [EC2-Classic only] The security groups.
@@ -11261,11 +11282,7 @@ type ReservedInstances struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration settings for the modified Reserved Instances. We are
-// retiring EC2-Classic on August 15, 2022. We recommend that you migrate from
-// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// Describes the configuration settings for the modified Reserved Instances.
 type ReservedInstancesConfiguration struct {
 
 	// The Availability Zone for the modified Reserved Instances.
@@ -11785,11 +11802,7 @@ type S3Storage struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Scheduled Instance. We are retiring EC2-Classic on August 15, 2022.
-// We recommend that you migrate from EC2-Classic to a VPC. For more information,
-// see Migrate from EC2-Classic to a VPC
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Describes a Scheduled Instance.
 type ScheduledInstance struct {
 
 	// The Availability Zone.
@@ -11840,11 +11853,7 @@ type ScheduledInstance struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a schedule that is available for your Scheduled Instances. We are
-// retiring EC2-Classic on August 15, 2022. We recommend that you migrate from
-// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// Describes a schedule that is available for your Scheduled Instances.
 type ScheduledInstanceAvailability struct {
 
 	// The Availability Zone.
@@ -12836,10 +12845,6 @@ type SpotDatafeedSubscription struct {
 // network device, you can't use SpotFleetLaunchSpecification; you must use
 // LaunchTemplateConfig
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html).
-// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
-// from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to
-// a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon EC2 User Guide for Linux Instances.
 type SpotFleetLaunchSpecification struct {
 
 	// Deprecated.
@@ -12867,7 +12872,7 @@ type SpotFleetLaunchSpecification struct {
 
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes. If you specify
-	// InstanceRequirements, you can't specify InstanceTypes.
+	// InstanceRequirements, you can't specify InstanceType.
 	InstanceRequirements *InstanceRequirements
 
 	// The instance type.
@@ -12995,22 +13000,29 @@ type SpotFleetRequestConfigData struct {
 	// This member is required.
 	TargetCapacity *int32
 
-	// Indicates how to allocate the target Spot Instance capacity across the Spot
-	// Instance pools specified by the Spot Fleet request. If the allocation strategy
-	// is lowestPrice, Spot Fleet launches instances from the Spot Instance pools with
-	// the lowest price. This is the default allocation strategy. If the allocation
-	// strategy is diversified, Spot Fleet launches instances from all the Spot
-	// Instance pools that you specify. If the allocation strategy is capacityOptimized
-	// (recommended), Spot Fleet launches instances from Spot Instance pools with
-	// optimal capacity for the number of instances that are launching. To give certain
-	// instance types a higher chance of launching first, use
-	// capacityOptimizedPrioritized. Set a priority for each instance type by using the
-	// Priority parameter for LaunchTemplateOverrides. You can assign the same priority
-	// to different LaunchTemplateOverrides. EC2 implements the priorities on a
-	// best-effort basis, but optimizes for capacity first.
-	// capacityOptimizedPrioritized is supported only if your Spot Fleet uses a launch
-	// template. Note that if the OnDemandAllocationStrategy is set to prioritized, the
-	// same priority is applied when fulfilling On-Demand capacity.
+	// The strategy that determines how to allocate the target Spot Instance capacity
+	// across the Spot Instance pools specified by the Spot Fleet launch configuration.
+	// For more information, see Allocation strategies for Spot Instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html)
+	// in the Amazon EC2 User Guide for Linux Instances. lowestPrice - Spot Fleet
+	// launches instances from the lowest-price Spot Instance pool that has available
+	// capacity. If the cheapest pool doesn't have available capacity, the Spot
+	// Instances come from the next cheapest pool that has available capacity. If a
+	// pool runs out of capacity before fulfilling your desired capacity, Spot Fleet
+	// will continue to fulfill your request by drawing from the next cheapest pool. To
+	// ensure that your desired capacity is met, you might receive Spot Instances from
+	// several pools. diversified - Spot Fleet launches instances from all of the Spot
+	// Instance pools that you specify. capacityOptimized (recommended) - Spot Fleet
+	// launches instances from Spot Instance pools with optimal capacity for the number
+	// of instances that are launching. To give certain instance types a higher chance
+	// of launching first, use capacityOptimizedPrioritized. Set a priority for each
+	// instance type by using the Priority parameter for LaunchTemplateOverrides. You
+	// can assign the same priority to different LaunchTemplateOverrides. EC2
+	// implements the priorities on a best-effort basis, but optimizes for capacity
+	// first. capacityOptimizedPrioritized is supported only if your Spot Fleet uses a
+	// launch template. Note that if the OnDemandAllocationStrategy is set to
+	// prioritized, the same priority is applied when fulfilling On-Demand capacity.
+	// Default: lowestPrice
 	AllocationStrategy AllocationStrategy
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -13344,8 +13356,16 @@ type SpotMarketOptions struct {
 type SpotOptions struct {
 
 	// The strategy that determines how to allocate the target Spot Instance capacity
-	// across the Spot Instance pools specified by the EC2 Fleet. lowest-price - EC2
-	// Fleet launches instances from the Spot Instance pools with the lowest price.
+	// across the Spot Instance pools specified by the EC2 Fleet launch configuration.
+	// For more information, see Allocation strategies for Spot Instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
+	// in the Amazon EC2 User Guide. lowest-price - EC2 Fleet launches instances from
+	// the lowest-price Spot Instance pool that has available capacity. If the cheapest
+	// pool doesn't have available capacity, the Spot Instances come from the next
+	// cheapest pool that has available capacity. If a pool runs out of capacity before
+	// fulfilling your desired capacity, EC2 Fleet will continue to fulfill your
+	// request by drawing from the next cheapest pool. To ensure that your desired
+	// capacity is met, you might receive Spot Instances from several pools.
 	// diversified - EC2 Fleet launches instances from all of the Spot Instance pools
 	// that you specify. capacity-optimized (recommended) - EC2 Fleet launches
 	// instances from Spot Instance pools with optimal capacity for the number of
@@ -13408,8 +13428,16 @@ type SpotOptions struct {
 type SpotOptionsRequest struct {
 
 	// The strategy that determines how to allocate the target Spot Instance capacity
-	// across the Spot Instance pools specified by the EC2 Fleet. lowest-price - EC2
-	// Fleet launches instances from the Spot Instance pools with the lowest price.
+	// across the Spot Instance pools specified by the EC2 Fleet launch configuration.
+	// For more information, see Allocation strategies for Spot Instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
+	// in the Amazon EC2 User Guide. lowest-price - EC2 Fleet launches instances from
+	// the lowest-price Spot Instance pool that has available capacity. If the cheapest
+	// pool doesn't have available capacity, the Spot Instances come from the next
+	// cheapest pool that has available capacity. If a pool runs out of capacity before
+	// fulfilling your desired capacity, EC2 Fleet will continue to fulfill your
+	// request by drawing from the next cheapest pool. To ensure that your desired
+	// capacity is met, you might receive Spot Instances from several pools.
 	// diversified - EC2 Fleet launches instances from all of the Spot Instance pools
 	// that you specify. capacity-optimized (recommended) - EC2 Fleet launches
 	// instances from Spot Instance pools with optimal capacity for the number of

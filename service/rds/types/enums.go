@@ -236,6 +236,7 @@ type EngineFamily string
 const (
 	EngineFamilyMysql      EngineFamily = "MYSQL"
 	EngineFamilyPostgresql EngineFamily = "POSTGRESQL"
+	EngineFamilySqlserver  EngineFamily = "SQLSERVER"
 )
 
 // Values returns all known values for EngineFamily. Note that this can be expanded
@@ -245,6 +246,7 @@ func (EngineFamily) Values() []EngineFamily {
 	return []EngineFamily{
 		"MYSQL",
 		"POSTGRESQL",
+		"SQLSERVER",
 	}
 }
 
@@ -274,6 +276,7 @@ type IAMAuthMode string
 const (
 	IAMAuthModeDisabled IAMAuthMode = "DISABLED"
 	IAMAuthModeRequired IAMAuthMode = "REQUIRED"
+	IAMAuthModeEnabled  IAMAuthMode = "ENABLED"
 )
 
 // Values returns all known values for IAMAuthMode. Note that this can be expanded
@@ -283,6 +286,7 @@ func (IAMAuthMode) Values() []IAMAuthMode {
 	return []IAMAuthMode{
 		"DISABLED",
 		"REQUIRED",
+		"ENABLED",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "bf575dee-378a-4df0-b411-7175fdab8d02",
+    "type": "feature",
+    "description": "This release adds CapacityAllocations field to DescribeCapacityReservations",
+    "modules": [
+        "service/ec2"
+    ]
+}

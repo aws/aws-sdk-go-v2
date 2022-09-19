@@ -2386,6 +2386,16 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.String(*v.SenderIpAddress)
 	}
 
+	if v.SourceListenerAddress != nil {
+		ok := object.Key("sourceListenerAddress")
+		ok.String(*v.SourceListenerAddress)
+	}
+
+	if v.SourceListenerPort != 0 {
+		ok := object.Key("sourceListenerPort")
+		ok.Integer(v.SourceListenerPort)
+	}
+
 	if v.StreamId != nil {
 		ok := object.Key("streamId")
 		ok.String(*v.StreamId)
@@ -3088,6 +3098,16 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.SenderIpAddress != nil {
 		ok := object.Key("senderIpAddress")
 		ok.String(*v.SenderIpAddress)
+	}
+
+	if v.SourceListenerAddress != nil {
+		ok := object.Key("sourceListenerAddress")
+		ok.String(*v.SourceListenerAddress)
+	}
+
+	if v.SourceListenerPort != 0 {
+		ok := object.Key("sourceListenerPort")
+		ok.Integer(v.SourceListenerPort)
 	}
 
 	if v.StreamId != nil {
