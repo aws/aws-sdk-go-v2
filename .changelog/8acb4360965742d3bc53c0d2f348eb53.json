@@ -1,8 +1,0 @@
-{
-    "id": "8acb4360-9657-42d3-bc53-c0d2f348eb53",
-    "type": "feature",
-    "description": "This release adds support for Amazon RDS Proxy with SQL Server compatibility.",
-    "modules": [
-        "service/rds"
-    ]
-}

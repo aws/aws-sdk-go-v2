@@ -1,8 +1,0 @@
-{
-    "id": "a0cc0f9b-9914-48b1-b2b7-bd2f124d321b",
-    "type": "feature",
-    "description": "This release includes support for importing existing trails into CloudTrail Lake.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

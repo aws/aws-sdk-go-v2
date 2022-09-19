@@ -15,7 +15,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.17
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.16
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.17.0
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.16
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.16
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.10
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.56.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.57.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.17
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.21
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.14
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.16
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.17
 	github.com/aws/aws-sdk-go-v2/service/polly v1.17.8
-	github.com/aws/aws-sdk-go-v2/service/rds v1.25.6
+	github.com/aws/aws-sdk-go-v2/service/rds v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.9
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.22.0

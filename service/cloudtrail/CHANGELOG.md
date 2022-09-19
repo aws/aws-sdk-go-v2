@@ -1,3 +1,7 @@
+# v1.18.0 (2022-09-19)
+
+* **Feature**: This release includes support for importing existing trails into CloudTrail Lake.
+
 # v1.17.0 (2022-09-14)
 
 * **Feature**: This release adds CloudTrail getChannel and listChannels APIs to allow customer to view the ServiceLinkedChannel configurations.

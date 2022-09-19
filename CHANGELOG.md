@@ -1,3 +1,15 @@
+# Release (2022-09-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.18.0](service/cloudtrail/CHANGELOG.md#v1180-2022-09-19)
+  * **Feature**: This release includes support for importing existing trails into CloudTrail Lake.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.57.0](service/ec2/CHANGELOG.md#v1570-2022-09-19)
+  * **Feature**: This release adds CapacityAllocations field to DescribeCapacityReservations
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.17.0](service/mediaconnect/CHANGELOG.md#v1170-2022-09-19)
+  * **Feature**: This change allows the customer to use the SRT Caller protocol as part of their flows
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.26.0](service/rds/CHANGELOG.md#v1260-2022-09-19)
+  * **Feature**: This release adds support for Amazon RDS Proxy with SQL Server compatibility.
+
 # Release (2022-09-16)
 
 ## Module Highlights

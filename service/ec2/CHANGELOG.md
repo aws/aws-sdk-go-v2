@@ -1,3 +1,7 @@
+# v1.57.0 (2022-09-19)
+
+* **Feature**: This release adds CapacityAllocations field to DescribeCapacityReservations
+
 # v1.56.0 (2022-09-15)
 
 * **Feature**: This feature allows customers to create tags for vpc-endpoint-connections and vpc-endpoint-service-permissions.

@@ -1,8 +1,0 @@
-{
-    "id": "56285e96-9f88-421c-953e-dff772ac88c8",
-    "type": "feature",
-    "description": "This change allows the customer to use the SRT Caller protocol as part of their flows",
-    "modules": [
-        "service/mediaconnect"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.24.13 (2022-09-19)
+
+* No change notes available for this release.
+
 # v1.24.12 (2022-09-14)
 
 * **Documentation**: Documentation update for Amazon FSx.
