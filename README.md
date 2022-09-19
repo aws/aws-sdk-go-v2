@@ -87,7 +87,7 @@ func main() {
 ###### Compile and Execute
 ```sh
 $ go run .
-Table:
+Tables:
 tableOne
 tableTwo
 ```
