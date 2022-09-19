@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -55,12 +55,14 @@
                 "Used": {
                     "target": "com.amazonaws.rds#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount currently used toward the quota maximum.</p>"
                     }
                 },
                 "Max": {
                     "target": "com.amazonaws.rds#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowed value for the quota.</p>"
                     }
                 }
@@ -79,18 +81,20 @@
             }
         },
         "com.amazonaws.rds#ActivityStreamMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "sync",
-                        "name": "sync"
-                    },
-                    {
-                        "value": "async",
-                        "name": "async"
+            "type": "enum",
+            "members": {
+                "sync": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sync"
                     }
-                ]
+                },
+                "async": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "async"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#ActivityStreamModeList": {
@@ -100,49 +104,61 @@
             }
         },
         "com.amazonaws.rds#ActivityStreamPolicyStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "locked",
-                        "name": "locked"
-                    },
-                    {
-                        "value": "unlocked",
-                        "name": "unlocked"
-                    },
-                    {
-                        "value": "locking-policy",
-                        "name": "locking_policy"
-                    },
-                    {
-                        "value": "unlocking-policy",
-                        "name": "unlocking_policy"
+            "type": "enum",
+            "members": {
+                "locked": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "locked"
                     }
-                ]
+                },
+                "unlocked": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unlocked"
+                    }
+                },
+                "locking_policy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "locking-policy"
+                    }
+                },
+                "unlocking_policy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unlocking-policy"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#ActivityStreamStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "stopped",
-                        "name": "stopped"
-                    },
-                    {
-                        "value": "starting",
-                        "name": "starting"
-                    },
-                    {
-                        "value": "started",
-                        "name": "started"
-                    },
-                    {
-                        "value": "stopping",
-                        "name": "stopping"
+            "type": "enum",
+            "members": {
+                "stopped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stopped"
                     }
-                ]
+                },
+                "starting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "starting"
+                    }
+                },
+                "started": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "started"
+                    }
+                },
+                "stopping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stopping"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#AddRoleToDBCluster": {
@@ -351,24 +367,6 @@
         },
         "com.amazonaws.rds#AmazonRDSv19": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "RDS",
-                    "arnNamespace": "rds",
-                    "cloudFormationName": "RDS",
-                    "cloudTrailEventSource": "rds.amazonaws.com",
-                    "endpointPrefix": "rds"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rds"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Amazon Relational Database Service</fullname>\n        <p></p>\n        \n        <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and \n          scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational \n          database and manages common database administration tasks, freeing up developers to focus on what makes their applications \n          and businesses unique.</p>\n        <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, \n          Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools \n          you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS \n          automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS \n          is flexible: you can scale your DB instance's compute resources and storage capacity to meet your \n          application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for \n          the resources you use.</p>\n        <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface \n          you can use to manage Amazon RDS. Amazon RDS is asynchronous, which means that some interfaces might \n          require techniques such as polling or callback functions to determine when a command has been applied. In this \n          reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, \n          or during the maintenance window. The reference structure is as follows, and we list following some related topics \n          from the user guide.</p>\n        <p>\n            <b>Amazon RDS API Reference</b>\n         </p>\n        <ul>\n            <li>\n                <p>For the alphabetical list of API actions, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html\">API Actions</a>.</p>\n            </li>\n            <li>\n                <p>For the alphabetical list of data types, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html\">Data Types</a>.</p>\n            </li>\n            <li>\n                <p>For a list of common query parameters, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p>\n            </li>\n            <li>\n                <p>For descriptions of the error codes, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon RDS User Guide</b>\n         </p>\n        <ul>\n            <li>\n                <p>For a summary of the Amazon RDS interfaces, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>.</p>\n            </li>\n            <li>\n                <p>For more information about how to use the Query API, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html\">Using the Query API</a>.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon Relational Database Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
-                }
-            },
             "version": "2014-10-31",
             "operations": [
                 {
@@ -782,21 +780,41 @@
                 {
                     "target": "com.amazonaws.rds#SwitchoverReadReplica"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "RDS",
+                    "arnNamespace": "rds",
+                    "cloudFormationName": "RDS",
+                    "cloudTrailEventSource": "rds.amazonaws.com",
+                    "endpointPrefix": "rds"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rds"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Amazon Relational Database Service</fullname>\n        <p></p>\n        \n        <p>Amazon Relational Database Service (Amazon RDS) is a web service that makes it easier to set up, operate, and \n          scale a relational database in the cloud. It provides cost-efficient, resizeable capacity for an industry-standard relational \n          database and manages common database administration tasks, freeing up developers to focus on what makes their applications \n          and businesses unique.</p>\n        <p>Amazon RDS gives you access to the capabilities of a MySQL, MariaDB, PostgreSQL, Microsoft SQL Server, \n          Oracle, or Amazon Aurora database server. These capabilities mean that the code, applications, and tools \n          you already use today with your existing databases work with Amazon RDS without modification. Amazon RDS \n          automatically backs up your database and maintains the database software that powers your DB instance. Amazon RDS \n          is flexible: you can scale your DB instance's compute resources and storage capacity to meet your \n          application's demand. As with all Amazon Web Services, there are no up-front investments, and you pay only for \n          the resources you use.</p>\n        <p>This interface reference for Amazon RDS contains documentation for a programming or command line interface \n          you can use to manage Amazon RDS. Amazon RDS is asynchronous, which means that some interfaces might \n          require techniques such as polling or callback functions to determine when a command has been applied. In this \n          reference, the parameter descriptions indicate whether a command is applied immediately, on the next instance reboot, \n          or during the maintenance window. The reference structure is as follows, and we list following some related topics \n          from the user guide.</p>\n        <p>\n            <b>Amazon RDS API Reference</b>\n         </p>\n        <ul>\n            <li>\n                <p>For the alphabetical list of API actions, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Operations.html\">API Actions</a>.</p>\n            </li>\n            <li>\n                <p>For the alphabetical list of data types, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_Types.html\">Data Types</a>.</p>\n            </li>\n            <li>\n                <p>For a list of common query parameters, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonParameters.html\">Common Parameters</a>.</p>\n            </li>\n            <li>\n                <p>For descriptions of the error codes, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon RDS User Guide</b>\n         </p>\n        <ul>\n            <li>\n                <p>For a summary of the Amazon RDS interfaces, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Interfaces\">Available RDS Interfaces</a>.</p>\n            </li>\n            <li>\n                <p>For more information about how to use the Query API, see \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Using_the_Query_API.html\">Using the Query API</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon Relational Database Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
+                }
+            }
         },
         "com.amazonaws.rds#ApplyMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "immediate",
-                        "name": "immediate"
-                    },
-                    {
-                        "value": "pending-reboot",
-                        "name": "pending_reboot"
+            "type": "enum",
+            "members": {
+                "immediate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "immediate"
                     }
-                ]
+                },
+                "pending_reboot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-reboot"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#ApplyPendingMaintenanceAction": {
@@ -869,29 +887,31 @@
             }
         },
         "com.amazonaws.rds#AuditPolicyState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "locked",
-                        "name": "LOCKED_POLICY"
-                    },
-                    {
-                        "value": "unlocked",
-                        "name": "UNLOCKED_POLICY"
+            "type": "enum",
+            "members": {
+                "LOCKED_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "locked"
                     }
-                ]
+                },
+                "UNLOCKED_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unlocked"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#AuthScheme": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SECRETS",
-                        "name": "SECRETS"
+            "type": "enum",
+            "members": {
+                "SECRETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.rds#AuthorizationAlreadyExistsFault": {
@@ -1019,18 +1039,20 @@
             }
         },
         "com.amazonaws.rds#AutomationMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "full",
-                        "name": "FULL"
-                    },
-                    {
-                        "value": "all-paused",
-                        "name": "ALL_PAUSED"
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "full"
                     }
-                ]
+                },
+                "ALL_PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "all-paused"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#AvailabilityZone": {
@@ -1184,13 +1206,13 @@
             }
         },
         "com.amazonaws.rds#Boolean": {
-            "type": "boolean"
-        },
-        "com.amazonaws.rds#BooleanOptional": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
+        },
+        "com.amazonaws.rds#BooleanOptional": {
+            "type": "boolean"
         },
         "com.amazonaws.rds#BucketName": {
             "type": "string",
@@ -1417,13 +1439,13 @@
                 "MaxConnectionsPercent": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum size of the connection pool for each target in a target group. The value is expressed as a percentage of the\n        <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.</p>\n        <p>Default: 100</p>\n        <p>Constraints: between 1 and 100</p>"
+                        "smithy.api#documentation": "<p>The maximum size of the connection pool for each target in a target group. The value is expressed as a percentage of the\n        <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.</p>\n        <p>Default: 10 for RDS for Microsoft SQL Server, and 100 for all other engines</p>\n        <p>Constraints: Must be between 1 and 100.</p>"
                     }
                 },
                 "MaxIdleConnectionsPercent": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Controls how actively the proxy closes idle database connections in the connection pool.\n        The value is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.\n        With a high value, the proxy leaves a high percentage of idle database connections open. A low value causes the proxy to close more idle connections and return them to the database.</p>\n        <p>Default: 50</p>\n        <p>Constraints: between 0 and <code>MaxConnectionsPercent</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Controls how actively the proxy closes idle database connections in the connection pool.\n        The value is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.\n        With a high value, the proxy leaves a high percentage of idle database connections open. A low value causes the proxy to close more idle connections and return them to the database.</p>\n        <p>Default: The default value is half of the value of <code>MaxConnectionsPercent</code>. For example, if <code>MaxConnectionsPercent</code> is 80, then the default value of \n        <code>MaxIdleConnectionsPercent</code> is 40. If the value of <code>MaxConnectionsPercent</code> isn't specified, then for SQL Server, <code>MaxIdleConnectionsPercent</code> is 5, and \n        for all other engines, the default is 50.</p>\n        <p>Constraints: Must be between 0 and the value of <code>MaxConnectionsPercent</code>.</p>"
                     }
                 },
                 "ConnectionBorrowTimeout": {
@@ -1455,25 +1477,28 @@
                 "MaxConnectionsPercent": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum size of the connection pool for each target in a target group. The value is expressed as a percentage of the\n        <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.</p>"
                     }
                 },
                 "MaxIdleConnectionsPercent": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Controls how actively the proxy closes idle database connections in the connection pool.\n        The value is expressed as a percentage of the <code>max_connections</code> setting for the RDS DB instance or Aurora DB cluster used by the target group.\n        With a high value, the proxy leaves a high percentage of idle database connections open. A low value causes the proxy to close more idle connections and return them to the database.</p>"
                     }
                 },
                 "ConnectionBorrowTimeout": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds for a proxy to wait for a connection to become available in the connection pool. Only applies when the\n        proxy has opened its maximum number of connections and all connections are busy with client sessions.</p>"
                     }
                 },
                 "SessionPinningFilters": {
                     "target": "com.amazonaws.rds#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each item in the list represents a class of SQL operations that normally cause all later statements\n        in a session using a proxy to be pinned to the same underlying database connection. Including an item\n        in the list exempts that class of SQL operations from the pinning behavior. Currently, the only\n        allowed value is <code>EXCLUDE_VARIABLE_SETS</code>.</p>"
+                        "smithy.api#documentation": "<p>Each item in the list represents a class of SQL operations that normally cause all later statements\n        in a session using a proxy to be pinned to the same underlying database connection. Including an item\n        in the list exempts that class of SQL operations from the pinning behavior. This setting is only supported for MySQL engine family databases. \n        Currently, the only allowed value is <code>EXCLUDE_VARIABLE_SETS</code>.</p>"
                     }
                 },
                 "InitQuery": {
@@ -2279,7 +2304,7 @@
                 "DBClusterInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance class</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>This setting is required to create a Multi-AZ DB cluster.</p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6gd.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance class</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>This setting is required to create a Multi-AZ DB cluster.</p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "AllocatedStorage": {
@@ -2315,6 +2340,8 @@
                 "MonitoringInterval": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off \n            collecting Enhanced Monitoring metrics, specify 0. The default is 0.</p>\n        <p>If <code>MonitoringRoleArn</code> is specified, also set <code>MonitoringInterval</code>\n            to a value other than 0.</p>\n        <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code>\n         </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
@@ -2572,7 +2599,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p>\n            <b>MySQL</b>\n         </p>\n        <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n                <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n                <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n        <p>\n            <b>MariaDB</b>\n         </p>\n        <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n                <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n                <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n        <p>\n            <b>PostgreSQL</b>\n         </p>\n        <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, a database named <code>postgres</code> \n          is created in the DB instance.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n                <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n                <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n        <p>\n            <b>Oracle</b>\n         </p>\n        <p>The Oracle System ID (SID) of the created DB instance.\n          If you specify <code>null</code>, the default value <code>ORCL</code> is used.\n          You can't specify the string NULL, or any other reserved word, for <code>DBName</code>.</p>\n        <p>Default: <code>ORCL</code>\n         </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon RDS Custom for Oracle</b>\n         </p>\n        <p>The Oracle System ID (SID) of the created RDS Custom DB instance.\n          If you don't specify a value, the default value is <code>ORCL</code>.</p>\n        <p>Default: <code>ORCL</code>\n         </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must contain 1 to 8 alphanumeric characters.</p>\n            </li>\n            <li>\n                <p>It must contain a letter.</p>\n            </li>\n            <li>\n                <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon RDS Custom for SQL Server</b>\n         </p>\n        <p>Not applicable. Must be null.</p>\n        <p>\n            <b>SQL Server</b>\n         </p>\n        <p>Not applicable. Must be null.</p>\n        <p>\n            <b>Amazon Aurora MySQL</b>\n         </p>\n        <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n          created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n          in the DB cluster.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must contain 1 to 64 alphanumeric characters.</p>\n            </li>\n            <li>\n                <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon Aurora PostgreSQL</b>\n         </p>\n        <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n          created. If this parameter isn't specified for an Aurora PostgreSQL DB cluster, \n          a database named <code>postgres</code> is created in the DB cluster.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must contain 1 to 63 alphanumeric characters.</p>\n            </li>\n            <li>\n                <p>It must begin with a letter or an underscore.\n                  Subsequent characters can be letters, underscores, or digits\n                  (0 to 9).</p>\n            </li>\n            <li>\n                <p>It can't be a word reserved by the\n                  database engine.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n        <p>\n            <b>MySQL</b>\n         </p>\n        <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n                <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n                <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n        <p>\n            <b>MariaDB</b>\n         </p>\n        <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n                <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n                <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n        <p>\n            <b>PostgreSQL</b>\n         </p>\n        <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, a database named <code>postgres</code> \n          is created in the DB instance.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n                <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n                <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n        <p>\n            <b>Oracle</b>\n         </p>\n        <p>The Oracle System ID (SID) of the created DB instance.\n          If you specify <code>null</code>, the default value <code>ORCL</code> is used.\n          You can't specify the string NULL, or any other reserved word, for <code>DBName</code>.</p>\n        <p>Default: <code>ORCL</code>\n         </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon RDS Custom for Oracle</b>\n         </p>\n        <p>The Oracle System ID (SID) of the created RDS Custom DB instance.\n          If you don't specify a value, the default value is <code>ORCL</code>.</p>\n        <p>Default: <code>ORCL</code>\n         </p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must contain 1 to 8 alphanumeric characters.</p>\n            </li>\n            <li>\n                <p>It must contain a letter.</p>\n            </li>\n            <li>\n                <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon RDS Custom for SQL Server</b>\n         </p>\n        <p>Not applicable. Must be null.</p>\n        <p>\n            <b>SQL Server</b>\n         </p>\n        <p>Not applicable. Must be null.</p>\n        <p>\n            <b>Amazon Aurora MySQL</b>\n         </p>\n        <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n          created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n          in the DB cluster.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must contain 1 to 64 alphanumeric characters.</p>\n            </li>\n            <li>\n                <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n        <p>\n            <b>Amazon Aurora PostgreSQL</b>\n         </p>\n        <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n          created. If this parameter isn't specified for an Aurora PostgreSQL DB cluster, \n          a database named <code>postgres</code> is created in the DB cluster.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must contain 1 to 63 alphanumeric characters.</p>\n            </li>\n            <li>\n                <p>It must begin with a letter.\n                  Subsequent characters can be letters, underscores, or digits\n                  (0 to 9).</p>\n            </li>\n            <li>\n                <p>It can't be a word reserved by the\n                  database engine.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBInstanceIdentifier": {
@@ -2647,7 +2674,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB parameter group to associate with this DB instance. If you do not specify a value, then \n          the default DB parameter group for the specified DB engine and version is used.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n                <p>First character must be a letter</p>\n            </li>\n            <li>\n                <p>Can't end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the DB parameter group to associate with this DB instance. If you do not specify a value, then \n          the default DB parameter group for the specified DB engine and version is used.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>It must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n                <p>The first character must be a letter.</p>\n            </li>\n            <li>\n                <p>It can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BackupRetentionPeriod": {
@@ -2779,6 +2806,8 @@
                 "MonitoringInterval": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for \n          the DB instance. To disable collection of Enhanced Monitoring metrics, specify 0. The default is 0.</p>\n        <p>If <code>MonitoringRoleArn</code> is specified, then you must set <code>MonitoringInterval</code>\n      to a value other than 0.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>\n        <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code>\n         </p>"
                     }
                 },
@@ -2869,6 +2898,8 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "region",
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored.</p>\n        <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
@@ -3058,6 +3089,8 @@
                 "MonitoringInterval": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The interval, in seconds, between points when Enhanced Monitoring metrics are\n            collected for the read replica. To disable collecting Enhanced Monitoring metrics,\n            specify 0. The default is 0.</p>\n        <p>If <code>MonitoringRoleArn</code> is specified, then you must also set <code>MonitoringInterval</code>\n      to a value other than 0.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>\n        <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code>\n         </p>"
                     }
                 },
@@ -3329,7 +3362,9 @@
                 "TargetRole": {
                     "target": "com.amazonaws.rds#DBProxyEndpointTargetRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the DB proxy endpoint can be used for read/write\n        or read-only operations. The default is <code>READ_WRITE</code>.</p>"
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "READ_WRITE",
+                        "smithy.api#documentation": "<p>A value that indicates whether the DB proxy endpoint can be used for read/write\n        or read-only operations. The default is <code>READ_WRITE</code>. The only role that proxies for RDS for Microsoft SQL Server \n        support is <code>READ_WRITE</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -3361,7 +3396,7 @@
                 "EngineFamily": {
                     "target": "com.amazonaws.rds#EngineFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. \n          This value determines which database network protocol the proxy recognizes when it interprets\n        network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify <code>MYSQL</code>. \n        For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>.</p>",
+                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. \n          This value determines which database network protocol the proxy recognizes when it interprets\n        network traffic to and from the database. For Aurora MySQL, RDS for MariaDB, and RDS for MySQL databases, specify <code>MYSQL</code>. \n        For Aurora PostgreSQL and RDS for PostgreSQL databases, specify <code>POSTGRESQL</code>. For RDS for Microsoft SQL Server, specify \n        <code>SQLSERVER</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3395,6 +3430,7 @@
                 "RequireTLS": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.\n        By enabling this setting, you can enforce encrypted TLS connections to the proxy.</p>"
                     }
                 },
@@ -3407,6 +3443,7 @@
                 "DebugLogging": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the proxy includes detailed information about SQL statements in its logs.\n        This information helps you to debug issues involving SQL behavior or the performance\n        and scalability of the proxy connections. The debug information includes the text of\n        SQL statements that you submit through the proxy. Thus, only enable this setting\n        when needed for debugging, and only when you have security measures in place to\n        safeguard any sensitive information that appears in the logs.</p>"
                     }
                 },
@@ -3961,22 +3998,26 @@
             }
         },
         "com.amazonaws.rds#CustomEngineVersionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "available",
-                        "name": "available"
-                    },
-                    {
-                        "value": "inactive",
-                        "name": "inactive"
-                    },
-                    {
-                        "value": "inactive-except-restore",
-                        "name": "inactive_except_restore"
+            "type": "enum",
+            "members": {
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
                     }
-                ]
+                },
+                "inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inactive"
+                    }
+                },
+                "inactive_except_restore": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inactive-except-restore"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#DBCluster": {
@@ -4159,6 +4200,7 @@
                 "StorageEncrypted": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB cluster is encrypted.</p>"
                     }
                 },
@@ -4345,6 +4387,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates that minor version patches are applied automatically.</p>\n        <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>"
                     }
                 },
@@ -4710,6 +4753,7 @@
                 "IsClusterWriter": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Value that is <code>true</code> if the cluster member is the primary instance for the DB cluster and <code>false</code> otherwise.</p>"
                     }
                 },
@@ -5062,6 +5106,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
                     }
                 },
@@ -5074,6 +5119,7 @@
                 "Port": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the DB cluster was listening on at the time of the snapshot.</p>"
                     }
                 },
@@ -5116,12 +5162,14 @@
                 "PercentProgress": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the percentage of the estimated data that has been transferred.</p>"
                     }
                 },
                 "StorageEncrypted": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB cluster snapshot is encrypted.</p>"
                     }
                 },
@@ -5146,6 +5194,7 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p>"
                     }
                 },
@@ -5341,12 +5390,14 @@
                 "SupportsLogExportsToCloudwatchLogs": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.</p>"
                     }
                 },
                 "SupportsReadReplica": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the database engine version supports read replicas.</p>"
                     }
                 },
@@ -5371,12 +5422,14 @@
                 "SupportsParallelQuery": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora parallel query with a specific DB engine version.</p>"
                     }
                 },
                 "SupportsGlobalDatabases": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora global databases with a specific DB engine version.</p>"
                     }
                 },
@@ -5422,6 +5475,7 @@
                 "SupportsBabelfish": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the engine version supports Babelfish for Aurora PostgreSQL.</p>"
                     }
                 }
@@ -5513,6 +5567,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the allocated storage size specified in gibibytes (GiB).</p>"
                     }
                 },
@@ -5531,6 +5586,7 @@
                 "BackupRetentionPeriod": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the number of days for which automatic DB snapshots are retained.</p>"
                     }
                 },
@@ -5585,6 +5641,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies if the DB instance is a Multi-AZ deployment. This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
@@ -5597,6 +5654,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates that minor version patches are applied automatically.</p>"
                     }
                 },
@@ -5621,6 +5679,8 @@
                 "ReplicaMode": {
                     "target": "com.amazonaws.rds#ReplicaMode",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "open-read-only",
                         "smithy.api#documentation": "<p>The open mode of an Oracle read replica. The default is <code>open-read-only</code>. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with Oracle Read Replicas for Amazon RDS</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n        <note>\n            <p>This attribute is only supported in RDS for Oracle.</p>\n        </note>"
                     }
                 },
@@ -5663,6 +5723,7 @@
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies the accessibility options for the DB instance.</p>\n        <p>When the DB cluster is publicly accessible, its Domain Name System (DNS) endpoint\n          resolves to the private IP address from within the DB cluster's virtual private cloud\n          (VPC). It resolves to the public IP address from outside of the DB cluster's VPC. Access\n          to the DB cluster is ultimately controlled by the security group it uses. That public\n          access isn't permitted if the security group assigned to the DB cluster doesn't permit\n          it.</p>\n        <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p>\n        <p>For more information, see <a>CreateDBInstance</a>.</p>"
                     }
                 },
@@ -5687,6 +5748,7 @@
                 "DbInstancePort": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the DB instance listens on. If the DB instance is part of a DB cluster, this can be a different port than the DB cluster port.</p>"
                     }
                 },
@@ -5699,6 +5761,7 @@
                 "StorageEncrypted": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB instance is encrypted.</p>"
                     }
                 },
@@ -5729,6 +5792,7 @@
                 "CopyTagsToSnapshot": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether tags are copied from the DB instance to snapshots of the DB instance.</p>\n        <p>\n            <b>Amazon Aurora</b>\n         </p>\n        <p>Not applicable. Copying tags to snapshots is managed by the DB cluster. Setting this\n            value for an Aurora DB instance has no effect on the DB cluster setting. For more\n            information, see <code>DBCluster</code>.</p>"
                     }
                 },
@@ -5771,6 +5835,7 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p>\n        <p>IAM database authentication can be enabled for the following database engines</p>\n        <ul>\n            <li>\n                <p>For MySQL 5.6, minor version 5.6.34 or higher</p>\n            </li>\n            <li>\n                <p>For MySQL 5.7, minor version 5.7.16 or higher</p>\n            </li>\n            <li>\n                <p>Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see DBCluster Type.</p>\n            </li>\n         </ul>"
                     }
                 },
@@ -5807,6 +5872,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if the DB instance has deletion protection enabled.\n            The database can't be deleted when deletion protection is enabled.\n            For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\">\n                Deleting a DB Instance</a>.</p>"
                     }
                 },
@@ -5973,6 +6039,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
                     }
                 },
@@ -5985,6 +6052,7 @@
                 "Port": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port number that the automated backup used for connections.</p>\n        <p>Default: Inherits from the source DB instance</p>\n        <p>Valid Values: <code>1150-65535</code>\n         </p>"
                     }
                 },
@@ -6051,6 +6119,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the automated backup is encrypted.</p>"
                     }
                 },
@@ -6075,6 +6144,7 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, \n            and otherwise false.</p>"
                     }
                 },
@@ -6337,6 +6407,7 @@
                 "Normal": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value that is true if the instance is operating normally, or false if the instance is in an error state.</p>"
                     }
                 },
@@ -6582,7 +6653,7 @@
                 "EngineFamily": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol \n        the proxy recognizes when it interprets network traffic to and from the database. <code>MYSQL</code> supports Aurora MySQL, \n        RDS for MariaDB, and RDS for MySQL databases. <code>POSTGRESQL</code> supports Aurora PostgreSQL and RDS for PostgreSQL databases.</p>"
+                        "smithy.api#documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol \n        the proxy recognizes when it interprets network traffic to and from the database. <code>MYSQL</code> supports Aurora MySQL, \n        RDS for MariaDB, and RDS for MySQL databases. <code>POSTGRESQL</code> supports Aurora PostgreSQL and RDS for PostgreSQL databases. \n        <code>SQLSERVER</code> supports RDS for Microsoft SQL Server databases.</p>"
                     }
                 },
                 "VpcId": {
@@ -6624,18 +6695,21 @@
                 "RequireTLS": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether Transport Layer Security (TLS) encryption is required for connections to the proxy.</p>"
                     }
                 },
                 "IdleClientTimeout": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds a connection to the proxy can have no activity before the proxy drops the client connection.\n        The proxy keeps the underlying database connection open and puts it back into the connection pool for reuse by\n        later connection requests.</p>\n        <p>Default: 1800 (30 minutes)</p>\n        <p>Constraints: 1 to 28,800</p>"
                     }
                 },
                 "DebugLogging": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the proxy includes detailed information about SQL statements in its logs.\n        This information helps you to debug issues involving SQL behavior or the performance\n        and scalability of the proxy connections. The debug information includes the text of\n        SQL statements that you submit through the proxy. Thus, only enable this setting\n        when needed for debugging, and only when you have security measures in place to\n        safeguard any sensitive information that appears in the logs.</p>"
                     }
                 },
@@ -6739,6 +6813,7 @@
                 "IsDefault": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether this endpoint is the default endpoint for the associated DB proxy.\n        Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the\n        DB proxy can be either read/write or read-only.</p>"
                     }
                 }
@@ -6815,49 +6890,61 @@
             }
         },
         "com.amazonaws.rds#DBProxyEndpointStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "available",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "modifying",
-                        "name": "MODIFYING"
-                    },
-                    {
-                        "value": "incompatible-network",
-                        "name": "INCOMPATIBLE_NETWORK"
-                    },
-                    {
-                        "value": "insufficient-resource-limits",
-                        "name": "INSUFFICIENT_RESOURCE_LIMITS"
-                    },
-                    {
-                        "value": "creating",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
                     }
-                ]
+                },
+                "MODIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "modifying"
+                    }
+                },
+                "INCOMPATIBLE_NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "incompatible-network"
+                    }
+                },
+                "INSUFFICIENT_RESOURCE_LIMITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-resource-limits"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creating"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#DBProxyEndpointTargetRole": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "READ_WRITE",
-                        "name": "READ_WRITE"
-                    },
-                    {
-                        "value": "READ_ONLY",
-                        "name": "READ_ONLY"
+            "type": "enum",
+            "members": {
+                "READ_WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ_WRITE"
                     }
-                ]
+                },
+                "READ_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ_ONLY"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#DBProxyList": {
@@ -6911,46 +6998,62 @@
             }
         },
         "com.amazonaws.rds#DBProxyStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "available",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "modifying",
-                        "name": "MODIFYING"
-                    },
-                    {
-                        "value": "incompatible-network",
-                        "name": "INCOMPATIBLE_NETWORK"
-                    },
-                    {
-                        "value": "insufficient-resource-limits",
-                        "name": "INSUFFICIENT_RESOURCE_LIMITS"
-                    },
-                    {
-                        "value": "creating",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "deleting",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "suspended",
-                        "name": "SUSPENDED"
-                    },
-                    {
-                        "value": "suspending",
-                        "name": "SUSPENDING"
-                    },
-                    {
-                        "value": "reactivating",
-                        "name": "REACTIVATING"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
                     }
-                ]
+                },
+                "MODIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "modifying"
+                    }
+                },
+                "INCOMPATIBLE_NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "incompatible-network"
+                    }
+                },
+                "INSUFFICIENT_RESOURCE_LIMITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-resource-limits"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "creating"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "suspended"
+                    }
+                },
+                "SUSPENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "suspending"
+                    }
+                },
+                "REACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reactivating"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#DBProxyTarget": {
@@ -6983,6 +7086,7 @@
                 "Port": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that the RDS Proxy uses to connect to the target RDS DB instance or Aurora DB cluster.</p>"
                     }
                 },
@@ -7050,6 +7154,7 @@
                 "IsDefault": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether this target group is the first one used for connection requests by the associated proxy.\n        Because each proxy is currently associated with a single target group, currently this setting\n        is always <code>true</code>.</p>"
                     }
                 },
@@ -7331,6 +7436,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
                     }
                 },
@@ -7343,6 +7449,7 @@
                 "Port": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the database engine was listening on at the time of the snapshot.</p>"
                     }
                 },
@@ -7403,6 +7510,7 @@
                 "PercentProgress": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the estimated data that has been transferred.</p>"
                     }
                 },
@@ -7433,6 +7541,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the DB snapshot is encrypted.</p>"
                     }
                 },
@@ -7457,6 +7566,7 @@
                 "IAMDatabaseAuthenticationEnabled": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p>"
                     }
                 },
@@ -7924,6 +8034,7 @@
                 "SkipFinalSnapshot": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to skip the creation of a final DB cluster snapshot before the DB cluster is deleted.\n          If skip is specified, no DB cluster snapshot is created. If skip isn't specified, a DB cluster snapshot \n          is created before the DB cluster is deleted. By default, skip isn't specified, and the DB cluster snapshot is created. \n          By default, this parameter is disabled.</p>\n        <note>\n            <p>You must specify a <code>FinalDBSnapshotIdentifier</code> parameter if <code>SkipFinalSnapshot</code> is disabled.</p>\n        </note>"
                     }
                 },
@@ -8117,6 +8228,7 @@
                 "SkipFinalSnapshot": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to skip the creation of a final DB snapshot before deleting the instance.\n          If you enable this parameter, RDS doesn't create a DB snapshot. If you don't enable this parameter, \n          RDS creates a DB snapshot before the DB instance is deleted. By default, skip isn't enabled, \n          and the DB snapshot is created.</p>\n        <note>\n            <p>If you don't enable this parameter, you must specify the <code>FinalDBSnapshotIdentifier</code> parameter.</p>\n        </note>\n        <p>When a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, \n          or <code>incompatible-network</code>, RDS can delete the instance only if you enable this parameter.</p>\n        <p>If you delete a read replica or an RDS Custom instance, you must enable this setting.</p>\n        <p>This setting is required for RDS Custom.</p>"
                     }
                 },
@@ -9107,12 +9219,14 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to include shared manual DB cluster snapshots \n            from other Amazon Web Services accounts that this Amazon Web Services account has been given \n            permission to copy or restore. By default, these snapshots are not included.</p>\n        <p>You can give an Amazon Web Services account permission to restore a manual DB cluster snapshot from\n            another Amazon Web Services account by the <code>ModifyDBClusterSnapshotAttribute</code> API action.</p>"
                     }
                 },
                 "IncludePublic": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to include manual DB cluster snapshots that are public and can be copied \n            or restored by any Amazon Web Services account. By default, the public snapshots are not included.</p>\n        <p>You can share a manual DB cluster snapshot  as public by using the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>"
                     }
                 }
@@ -9302,6 +9416,7 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Optional Boolean parameter that specifies whether the output includes information about clusters\n          shared from other Amazon Web Services accounts.</p>"
                     }
                 }
@@ -9370,6 +9485,7 @@
                 "DefaultOnly": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether only the default version of the specified engine or engine and major version combination is returned.</p>"
                     }
                 },
@@ -9681,12 +9797,14 @@
                 "LastWritten": {
                     "target": "com.amazonaws.rds#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A POSIX timestamp when the last log entry was written.</p>"
                     }
                 },
                 "Size": {
                     "target": "com.amazonaws.rds#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size, in bytes, of the log file for the specified DB instance.</p>"
                     }
                 }
@@ -9723,12 +9841,14 @@
                 "FileLastWritten": {
                     "target": "com.amazonaws.rds#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Filters the available log files for files written since the specified date, in POSIX timestamp format with milliseconds.</p>"
                     }
                 },
                 "FileSize": {
                     "target": "com.amazonaws.rds#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Filters the available log files for files larger than the specified size.</p>"
                     }
                 },
@@ -10494,12 +10614,14 @@
                 "IncludeShared": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to include shared manual DB cluster snapshots \n          from other Amazon Web Services accounts that this Amazon Web Services account has been given \n          permission to copy or restore. By default, these snapshots are not included.</p>\n        <p>You can give an Amazon Web Services account permission to restore a manual DB snapshot from\n    another Amazon Web Services account by using the <code>ModifyDBSnapshotAttribute</code> API action.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
                 "IncludePublic": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to include manual DB cluster snapshots that are public and can be copied \n          or restored by any Amazon Web Services account. By default, the public snapshots are not included.</p>\n        <p>You can share a manual DB snapshot as public by using the <a>ModifyDBSnapshotAttribute</a> API.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
@@ -11409,7 +11531,7 @@
                 "target": "com.amazonaws.rds#SourceRegionMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the source Amazon Web Services Regions where the current Amazon Web Services Region can create a read replica, \n         copy a DB snapshot from, or replicate automated backups from. This API action supports pagination.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the source Amazon Web Services Regions where the current Amazon Web Services Region can create a read replica, \n         copy a DB snapshot from, or replicate automated backups from.</p>\n        <p>Use this operation to determine whether cross-Region features are supported between other Regions \n            and your current Region. This operation supports pagination.</p>\n        <p>To return information about the Regions that are enabled for your account, or all Regions, \n            use the EC2 operation <code>DescribeRegions</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html\">\n                DescribeRegions</a> in the <i>Amazon EC2 API Reference</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -11562,13 +11684,13 @@
             }
         },
         "com.amazonaws.rds#Double": {
-            "type": "double"
-        },
-        "com.amazonaws.rds#DoubleOptional": {
             "type": "double",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": 0
             }
+        },
+        "com.amazonaws.rds#DoubleOptional": {
+            "type": "double"
         },
         "com.amazonaws.rds#DoubleRange": {
             "type": "structure",
@@ -11576,12 +11698,14 @@
                 "From": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum value in the range.</p>"
                     }
                 },
                 "To": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum value in the range.</p>"
                     }
                 }
@@ -11642,6 +11766,7 @@
                 "AdditionalDataPending": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value that if true, indicates there is more data to be downloaded.</p>"
                     }
                 }
@@ -11676,6 +11801,7 @@
                 "NumberOfLines": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of lines to download. If the number of lines specified results in a file over 1 MB in size, the file is truncated at 1 MB in size.</p>\n        <p>If the NumberOfLines parameter is specified, then the block of lines returned can be from the beginning \n            or the end of the log file, depending on the value of the Marker parameter.</p>\n        <ul>\n            <li>\n                <p>If neither Marker or NumberOfLines are specified, the entire log file is returned up to a \n              maximum of 10000 lines, starting with the most recent log entries first.</p>\n            </li>\n            <li>\n                <p>If \n              NumberOfLines is specified and Marker isn't specified, then the most recent lines from the end \n                    of the log file are returned.</p>\n            </li>\n            <li>\n                <p>If Marker is specified as \"0\", then the specified \n                      number of lines from the beginning of the log file are returned.</p>\n            </li>\n            <li>\n                <p>You can \n                        download the log file in blocks of lines by specifying the size of the block using \n                    the NumberOfLines parameter, and by specifying a value of \"0\" for the Marker parameter in your \n                    first request. Include the Marker value returned in the response as the Marker value for the next \n                    request, continuing until the AdditionalDataPending response element returns false.</p>\n            </li>\n         </ul>"
                     }
                 }
@@ -11737,6 +11863,7 @@
                 "Port": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the port that the database engine is listening on.</p>"
                     }
                 },
@@ -11778,18 +11905,26 @@
             }
         },
         "com.amazonaws.rds#EngineFamily": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MYSQL",
-                        "name": "MYSQL"
-                    },
-                    {
-                        "value": "POSTGRESQL",
-                        "name": "POSTGRESQL"
+            "type": "enum",
+            "members": {
+                "MYSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MYSQL"
                     }
-                ]
+                },
+                "POSTGRESQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTGRESQL"
+                    }
+                },
+                "SQLSERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQLSERVER"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#EngineModeList": {
@@ -11957,6 +12092,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.</p>"
                     }
                 },
@@ -12112,12 +12248,14 @@
                 "PercentProgress": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The progress of the snapshot export task as a percentage.</p>"
                     }
                 },
                 "TotalExtractedDataInGB": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount of data exported, in gigabytes.</p>"
                     }
                 },
@@ -12330,22 +12468,26 @@
             }
         },
         "com.amazonaws.rds#FailoverStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "failing-over",
-                        "name": "FAILING_OVER"
-                    },
-                    {
-                        "value": "cancelling",
-                        "name": "CANCELLING"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
                     }
-                ]
+                },
+                "FAILING_OVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failing-over"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cancelling"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#FeatureNameList": {
@@ -12522,6 +12664,7 @@
                 "IsWriter": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the Aurora cluster is the primary cluster\n        (that is, has read-write capability) for the Aurora global\n        database with which it is associated.</p>"
                     }
                 },
@@ -12597,18 +12740,26 @@
             }
         },
         "com.amazonaws.rds#IAMAuthMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "REQUIRED",
-                        "name": "REQUIRED"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#IPRange": {
@@ -12760,13 +12911,13 @@
             }
         },
         "com.amazonaws.rds#Integer": {
-            "type": "integer"
-        },
-        "com.amazonaws.rds#IntegerOptional": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": 0
             }
+        },
+        "com.amazonaws.rds#IntegerOptional": {
+            "type": "integer"
         },
         "com.amazonaws.rds#InvalidCustomDBEngineVersionStateFault": {
             "type": "structure",
@@ -13283,18 +13434,17 @@
             }
         },
         "com.amazonaws.rds#Long": {
-            "type": "long"
-        },
-        "com.amazonaws.rds#LongOptional": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": 0
             }
+        },
+        "com.amazonaws.rds#LongOptional": {
+            "type": "long"
         },
         "com.amazonaws.rds#MaxRecords": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 20,
                     "max": 100
@@ -13495,6 +13645,8 @@
                 "SecondsBeforeTimeout": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 300,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point\n            to perform seamless scaling before enforcing the timeout action. The default is\n            300.</p>\n        <p>Specify a value between 10 and 600 seconds.</p>"
                     }
                 },
@@ -13685,6 +13837,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the modifications in this request and\n      any pending modifications are asynchronously applied\n      as soon as possible, regardless of the\n      <code>PreferredMaintenanceWindow</code> setting for the DB cluster. \n      If this parameter is disabled, changes to the\n      DB cluster are applied during the next maintenance window.</p>\n        <p>The <code>ApplyImmediately</code> parameter only affects the <code>EnableIAMDatabaseAuthentication</code>, \n      <code>MasterUserPassword</code>, and <code>NewDBClusterIdentifier</code> values. If the <code>ApplyImmediately</code> \n      parameter is disabled, then changes to the <code>EnableIAMDatabaseAuthentication</code>, <code>MasterUserPassword</code>, \n      and <code>NewDBClusterIdentifier</code> values are applied during the next maintenance window. All other changes are\n      applied immediately, regardless of the value of the <code>ApplyImmediately</code> parameter.</p>\n        <p>By default, this parameter is disabled.</p>\n        <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
@@ -13763,6 +13916,7 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n        <p>Constraints: You must allow major version upgrades when specifying a value for the\n                <code>EngineVersion</code> parameter that is a different major version than the DB\n            cluster's current version.</p>\n        <p>Valid for: Aurora DB clusters only</p>"
                     }
                 },
@@ -13817,7 +13971,7 @@
                 "DBClusterInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">\n        DB Instance Class</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6gd.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">\n        DB Instance Class</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "AllocatedStorage": {
@@ -13847,6 +14001,8 @@
                 "MonitoringInterval": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. \n            To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.</p>\n        <p>If <code>MonitoringRoleArn</code> is specified, also set <code>MonitoringInterval</code>\n            to a value other than 0.</p>\n        <p>Valid Values: <code>0, 1, 5, 10, 15, 30, 60</code>\n         </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
@@ -14120,6 +14276,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, \n          regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. By default, this parameter is disabled.</p>\n        <p>If this parameter is disabled, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage\n        and are applied on the next call to <a>RebootDBInstance</a>, or the next failure reboot. Review the table of parameters in \n        <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html\">Modifying a DB Instance</a> in the \n        <i>Amazon RDS User Guide</i> to see the impact of enabling or disabling <code>ApplyImmediately</code> for each modified parameter and to \n        determine when the changes are applied.</p>"
                     }
                 },
@@ -14168,6 +14325,7 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't \n          result in an outage and the change is asynchronously applied as soon as possible.</p>\n        <p>This setting doesn't apply to RDS Custom.</p>\n        <p>Constraints: Major version upgrades must be allowed when specifying a value \n          for the EngineVersion parameter that is a different major version than the DB instance's current version.</p>"
                     }
                 },
@@ -15010,6 +15168,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to apply the change immediately or during the next maintenance window for each instance associated with the option group.</p>"
                     }
                 }
@@ -15061,12 +15220,14 @@
                 "Persistent": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicate if this option is persistent.</p>"
                     }
                 },
                 "Permanent": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicate if this option is permanent.</p>"
                     }
                 },
@@ -15195,6 +15356,7 @@
                 "AllowsVpcAndNonVpcInstanceMemberships": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this option group can be applied to both VPC \n           and non-VPC instances. The value <code>true</code> indicates the option group \n           can be applied to both VPC and non-VPC instances.</p>"
                     }
                 },
@@ -15314,6 +15476,7 @@
                 "PortRequired": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the option requires a port.</p>"
                     }
                 },
@@ -15338,24 +15501,28 @@
                 "Persistent": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Persistent options can't be removed from an option group while DB instances are associated with the option group. If you disassociate all DB instances from the option group, your can remove the persistent option from the option group.</p>"
                     }
                 },
                 "Permanent": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Permanent options can never be removed from an option group. An option group containing a permanent option can't be removed from a DB instance.</p>"
                     }
                 },
                 "RequiresAutoMinorEngineVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, you must enable the Auto Minor Version Upgrade setting for your DB instance \n            before you can use this option.\n            You can enable Auto Minor Version Upgrade when you first create your DB instance,\n            or by modifying your DB instance later.</p>"
                     }
                 },
                 "VpcOnly": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, you can only use this option with a DB instance that is in a VPC.</p>"
                     }
                 },
@@ -15418,12 +15585,14 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value where true indicates that this option group option can be changed from the default value.</p>"
                     }
                 },
                 "IsRequired": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value where true indicates that a value must be specified for this option setting of the option group option.</p>"
                     }
                 },
@@ -15585,12 +15754,14 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that, when true, indicates the option setting can be modified from the default.</p>"
                     }
                 },
                 "IsCollection": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if the option setting is part of a collection.</p>"
                     }
                 }
@@ -15629,6 +15800,7 @@
                 "IsDefault": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if the version is the default version of the option, and otherwise false.</p>"
                     }
                 }
@@ -15706,24 +15878,28 @@
                 "MultiAZCapable": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance is Multi-AZ capable.</p>"
                     }
                 },
                 "ReadReplicaCapable": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance can have a read replica.</p>"
                     }
                 },
                 "Vpc": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance is in a VPC.</p>"
                     }
                 },
                 "SupportsStorageEncryption": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports encrypted storage.</p>"
                     }
                 },
@@ -15736,24 +15912,28 @@
                 "SupportsIops": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports provisioned IOPS.</p>"
                     }
                 },
                 "SupportsEnhancedMonitoring": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1 to 60 seconds.</p>"
                     }
                 },
                 "SupportsIAMDatabaseAuthentication": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a DB instance supports IAM database authentication.</p>"
                     }
                 },
                 "SupportsPerformanceInsights": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>True if a DB instance supports Performance Insights, otherwise false.</p>"
                     }
                 },
@@ -15820,6 +16000,7 @@
                 "OutpostCapable": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether a DB instance supports RDS on Outposts.</p>\n        <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 },
@@ -15832,12 +16013,14 @@
                 "SupportsGlobalDatabases": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether you can use Aurora global databases with a specific combination of other DB engine attributes.</p>"
                     }
                 },
                 "SupportsClusters": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether DB instances can be configured as a Multi-AZ DB cluster.</p>\n        <p>For more information on Multi-AZ DB clusters, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">\n               Multi-AZ deployments with two readable standby DB instances</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 },
@@ -15943,6 +16126,7 @@
                 "IsModifiable": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified.\n        Some parameters have security or operational implications\n        that prevent them from being changed.</p>"
                     }
                 },
@@ -16421,12 +16605,14 @@
                 "From": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum value in the range.</p>"
                     }
                 },
                 "To": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum value in the range.</p>"
                     }
                 },
@@ -16581,6 +16767,7 @@
                 "RecurringChargeAmount": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of the recurring charge.</p>"
                     }
                 },
@@ -16933,18 +17120,20 @@
             }
         },
         "com.amazonaws.rds#ReplicaMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "open-read-only",
-                        "name": "OPEN_READ_ONLY"
-                    },
-                    {
-                        "value": "mounted",
-                        "name": "MOUNTED"
+            "type": "enum",
+            "members": {
+                "OPEN_READ_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "open-read-only"
                     }
-                ]
+                },
+                "MOUNTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mounted"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#ReservedDBInstance": {
@@ -16977,18 +17166,21 @@
                 "Duration": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the reservation in seconds.</p>"
                     }
                 },
                 "FixedPrice": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The fixed price charged for this reserved DB instance.</p>"
                     }
                 },
                 "UsagePrice": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The hourly price charged for this reserved DB instance.</p>"
                     }
                 },
@@ -17001,6 +17193,7 @@
                 "DBInstanceCount": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of reserved DB instances.</p>"
                     }
                 },
@@ -17019,6 +17212,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if the reservation applies to Multi-AZ deployments.</p>"
                     }
                 },
@@ -17149,18 +17343,21 @@
                 "Duration": {
                     "target": "com.amazonaws.rds#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the offering in seconds.</p>"
                     }
                 },
                 "FixedPrice": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The fixed price charged for this offering.</p>"
                     }
                 },
                 "UsagePrice": {
                     "target": "com.amazonaws.rds#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The hourly price charged for this offering.</p>"
                     }
                 },
@@ -17185,6 +17382,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if the offering applies to Multi-AZ deployments.</p>"
                     }
                 },
@@ -17278,6 +17476,7 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to reset all parameters in the DB cluster parameter group \n        to their default values. You can't use this parameter if there \n        is a list of parameter names specified for the <code>Parameters</code> parameter.</p>"
                     }
                 },
@@ -17325,6 +17524,7 @@
                 "ResetAllParameters": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to reset all parameters in the DB parameter group to default values. \n          By default, all parameters in the DB parameter group are reset to default values.</p>"
                     }
                 },
@@ -17611,6 +17811,8 @@
                 "CopyTagsToSnapshot": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to copy all tags from the restored DB cluster to snapshots of the restored DB cluster. The default is not to copy them.</p>"
                     }
                 },
@@ -17851,7 +18053,7 @@
                 "DBClusterInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes, and availability for your engine, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster, for example db.m6gd.xlarge.\n            Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes, and availability for your engine, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "StorageType": {
@@ -17994,6 +18196,7 @@
                 "UseLatestRestorableTime": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to restore the DB cluster to the latest \n            restorable backup time. By default, the DB cluster isn't restored to the latest \n            restorable backup time.</p>\n        <p>Constraints: Can't be specified if <code>RestoreToTime</code> parameter is provided.</p>\n        <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
@@ -18093,7 +18296,7 @@
                 "DBClusterInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster,\n            for example db.m6g.xlarge. Not all DB instance classes are available in all Amazon Web Services\n            Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance class</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The compute and memory capacity of the each DB instance in the Multi-AZ DB cluster,\n            for example db.m6gd.xlarge. Not all DB instance classes are available in all Amazon Web Services\n            Regions, or for all database engines.</p>\n        <p>For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance class</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n        <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "StorageType": {
@@ -18398,6 +18601,8 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "region",
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>\n        <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
@@ -18886,6 +19091,7 @@
                 "UseLatestRestorableTime": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance \n          isn't restored from the latest backup time.</p>\n        <p>Constraints: Can't be specified if the <code>RestoreTime</code> parameter is provided.</p>"
                     }
                 },
@@ -19075,6 +19281,8 @@
                 "BackupTarget": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "region",
                         "smithy.api#documentation": "<p>Specifies where automated backups and manual snapshots are stored for the restored DB instance.</p>\n        <p>Possible values are <code>outposts</code> (Amazon Web Services Outposts) and <code>region</code> (Amazon Web Services Region). The default is <code>region</code>.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working \n            with Amazon RDS on Amazon Web Services Outposts</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
@@ -19274,6 +19482,8 @@
                 "SecondsBeforeTimeout": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 300,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point\n            to perform seamless scaling before enforcing the timeout action. The default is 300.</p>\n        <p>Specify a value between 60 and 600 seconds.</p>"
                     }
                 }
@@ -19450,6 +19660,7 @@
                 "SupportsDBInstanceAutomatedBackupsReplication": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the source Amazon Web Services Region supports replicating automated backups to the current Amazon Web Services Region.</p>"
                     }
                 }
@@ -19488,42 +19699,56 @@
             }
         },
         "com.amazonaws.rds#SourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "db-instance",
-                        "name": "db_instance"
-                    },
-                    {
-                        "value": "db-parameter-group",
-                        "name": "db_parameter_group"
-                    },
-                    {
-                        "value": "db-security-group",
-                        "name": "db_security_group"
-                    },
-                    {
-                        "value": "db-snapshot",
-                        "name": "db_snapshot"
-                    },
-                    {
-                        "value": "db-cluster",
-                        "name": "db_cluster"
-                    },
-                    {
-                        "value": "db-cluster-snapshot",
-                        "name": "db_cluster_snapshot"
-                    },
-                    {
-                        "value": "custom-engine-version",
-                        "name": "custom_engine_version"
-                    },
-                    {
-                        "value": "db-proxy",
-                        "name": "db_proxy"
+            "type": "enum",
+            "members": {
+                "db_instance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-instance"
                     }
-                ]
+                },
+                "db_parameter_group": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-parameter-group"
+                    }
+                },
+                "db_security_group": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-security-group"
+                    }
+                },
+                "db_snapshot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-snapshot"
+                    }
+                },
+                "db_cluster": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-cluster"
+                    }
+                },
+                "db_cluster_snapshot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-cluster-snapshot"
+                    }
+                },
+                "custom_engine_version": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "custom-engine-version"
+                    }
+                },
+                "db_proxy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db-proxy"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#StartActivityStream": {
@@ -19626,6 +19851,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether or not the database activity stream will start as soon as possible, \n            regardless of the maintenance window for the database.</p>"
                     }
                 },
@@ -20423,30 +20649,38 @@
             }
         },
         "com.amazonaws.rds#TargetHealthReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNREACHABLE",
-                        "name": "UNREACHABLE"
-                    },
-                    {
-                        "value": "CONNECTION_FAILED",
-                        "name": "CONNECTION_FAILED"
-                    },
-                    {
-                        "value": "AUTH_FAILURE",
-                        "name": "AUTH_FAILURE"
-                    },
-                    {
-                        "value": "PENDING_PROXY_CAPACITY",
-                        "name": "PENDING_PROXY_CAPACITY"
-                    },
-                    {
-                        "value": "INVALID_REPLICATION_STATE",
-                        "name": "INVALID_REPLICATION_STATE"
+            "type": "enum",
+            "members": {
+                "UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNREACHABLE"
                     }
-                ]
+                },
+                "CONNECTION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_FAILED"
+                    }
+                },
+                "AUTH_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTH_FAILURE"
+                    }
+                },
+                "PENDING_PROXY_CAPACITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_PROXY_CAPACITY"
+                    }
+                },
+                "INVALID_REPLICATION_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_REPLICATION_STATE"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#TargetList": {
@@ -20456,60 +20690,72 @@
             }
         },
         "com.amazonaws.rds#TargetRole": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "READ_WRITE",
-                        "name": "READ_WRITE"
-                    },
-                    {
-                        "value": "READ_ONLY",
-                        "name": "READ_ONLY"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "READ_WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ_WRITE"
                     }
-                ]
+                },
+                "READ_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ_ONLY"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#TargetState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REGISTERING",
-                        "name": "registering"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "UNAVAILABLE",
-                        "name": "unavailable"
+            "type": "enum",
+            "members": {
+                "registering": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "unavailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#TargetType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RDS_INSTANCE",
-                        "name": "RDS_INSTANCE"
-                    },
-                    {
-                        "value": "RDS_SERVERLESS_ENDPOINT",
-                        "name": "RDS_SERVERLESS_ENDPOINT"
-                    },
-                    {
-                        "value": "TRACKED_CLUSTER",
-                        "name": "TRACKED_CLUSTER"
+            "type": "enum",
+            "members": {
+                "RDS_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS_INSTANCE"
                     }
-                ]
+                },
+                "RDS_SERVERLESS_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS_SERVERLESS_ENDPOINT"
+                    }
+                },
+                "TRACKED_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRACKED_CLUSTER"
+                    }
+                }
             }
         },
         "com.amazonaws.rds#Timezone": {
@@ -20550,12 +20796,14 @@
                 "AutoUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the target version is applied to any source DB instances that have <code>AutoMinorVersionUpgrade</code> set to true.</p>"
                     }
                 },
                 "IsMajorVersionUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether upgrading to the target version requires upgrading the major version of the database engine.</p>"
                     }
                 },
@@ -20618,7 +20866,7 @@
                 "IAMAuth": {
                     "target": "com.amazonaws.rds#IAMAuthMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
+                        "smithy.api#documentation": "<p>Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. \n        The <code>ENABLED</code> value is valid only for proxies with RDS for Microsoft SQL Server.</p>"
                     }
                 }
             },
@@ -20656,7 +20904,7 @@
                 "IAMAuth": {
                     "target": "com.amazonaws.rds#IAMAuthMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
+                        "smithy.api#documentation": "<p>Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. \n        The <code>ENABLED</code> value is valid only for proxies with RDS for Microsoft SQL Server.</p>"
                     }
                 }
             },
@@ -20726,6 +20974,7 @@
                 "SupportsStorageAutoscaling": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not Amazon RDS can automatically scale storage for DB instances that use the new instance class.</p>"
                     }
                 }
@@ -20791,30 +21040,38 @@
             }
         },
         "com.amazonaws.rds#WriteForwardingStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "enabled",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "disabled",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "enabling",
-                        "name": "ENABLING"
-                    },
-                    {
-                        "value": "disabling",
-                        "name": "DISABLING"
-                    },
-                    {
-                        "value": "unknown",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "ENABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabling"
+                    }
+                },
+                "DISABLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabling"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknown"
+                    }
+                }
             }
         }
     }

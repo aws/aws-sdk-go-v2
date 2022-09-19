@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -29,6 +29,26 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.cloudtrail#AccountHasOngoingImportException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccountHasOngoingImport",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when you start a new import and a \n         previous import is still in progress.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#AddTags": {
             "type": "operation",
             "input": {
@@ -199,10 +219,7 @@
             }
         },
         "com.amazonaws.cloudtrail#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudtrail#ByteBuffer": {
             "type": "blob"
@@ -435,24 +452,6 @@
         },
         "com.amazonaws.cloudtrail#CloudTrail_20131101": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CloudTrail",
-                    "arnNamespace": "cloudtrail",
-                    "cloudFormationName": "CloudTrail",
-                    "cloudTrailEventSource": "cloudtrail.amazonaws.com",
-                    "endpointPrefix": "cloudtrail"
-                },
-                "aws.auth#sigv4": {
-                    "name": "cloudtrail"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>CloudTrail</fullname>\n         <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p>\n         <p>CloudTrail is a web service that records Amazon Web Services API calls for your Amazon Web Services account and delivers log files to an Amazon S3 bucket. \n         The recorded information includes the identity of the user, the start time of the Amazon Web Services API call, the source IP address, the request parameters, and the response elements returned by the service.</p> \n      \n         <note>\n            <p>As an alternative to the API,\n            you can use one of the Amazon Web Services SDKs, which consist of libraries and sample code for various\n         programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs\n         provide programmatic access to CloudTrail. For example, the SDKs\n         handle cryptographically signing requests, managing errors, and retrying requests\n         automatically. For more information about the Amazon Web Services SDKs, including how to download and install\n            them, see <a href=\"http://aws.amazon.com/tools/\">Tools to Build on Amazon Web Services</a>.</p> \n         </note> \n         <p>See the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html\">CloudTrail User \n         Guide</a> for information about the data that is included with each Amazon Web Services API call listed in the log files.</p>",
-                "smithy.api#title": "AWS CloudTrail",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://cloudtrail.amazonaws.com/doc/2013-11-01/"
-                }
-            },
             "version": "2013-11-01",
             "operations": [
                 {
@@ -489,6 +488,9 @@
                     "target": "com.amazonaws.cloudtrail#GetEventSelectors"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#GetImport"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#GetInsightSelectors"
                 },
                 {
@@ -505,6 +507,12 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#ListEventDataStores"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ListImportFailures"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ListImports"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#ListPublicKeys"
@@ -534,10 +542,16 @@
                     "target": "com.amazonaws.cloudtrail#RestoreEventDataStore"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#StartImport"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#StartLogging"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#StartQuery"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#StopImport"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#StopLogging"
@@ -548,7 +562,25 @@
                 {
                     "target": "com.amazonaws.cloudtrail#UpdateTrail"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudTrail",
+                    "arnNamespace": "cloudtrail",
+                    "cloudFormationName": "CloudTrail",
+                    "cloudTrailEventSource": "cloudtrail.amazonaws.com",
+                    "endpointPrefix": "cloudtrail"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cloudtrail"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>CloudTrail</fullname>\n         <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p>\n         <p>CloudTrail is a web service that records Amazon Web Services API calls for your Amazon Web Services account and delivers log files to an Amazon S3 bucket. \n         The recorded information includes the identity of the user, the start time of the Amazon Web Services API call, the source IP address, the request parameters, and the response elements returned by the service.</p> \n      \n         <note>\n            <p>As an alternative to the API,\n            you can use one of the Amazon Web Services SDKs, which consist of libraries and sample code for various\n         programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs\n         provide programmatic access to CloudTrail. For example, the SDKs\n         handle cryptographically signing requests, managing errors, and retrying requests\n         automatically. For more information about the Amazon Web Services SDKs, including how to download and install\n            them, see <a href=\"http://aws.amazon.com/tools/\">Tools to Build on Amazon Web Services</a>.</p> \n         </note> \n         <p>See the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html\">CloudTrail User \n         Guide</a> for information about the data that is included with each Amazon Web Services API call listed in the log files.</p>",
+                "smithy.api#title": "AWS CloudTrail",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://cloudtrail.amazonaws.com/doc/2013-11-01/"
+                }
+            }
         },
         "com.amazonaws.cloudtrail#CloudWatchLogsDeliveryUnavailableException": {
             "type": "structure",
@@ -893,12 +925,16 @@
                 "IsMultiRegionTrail": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the trail is created in the current region or in all regions. The default is false, which creates a trail only in the region where you are signed in. As a best practice, consider\n      creating trails that log events in all regions.</p>"
                     }
                 },
                 "EnableLogFileValidation": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether log file integrity validation is enabled. The default is false.</p>\n         <note>\n            <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail does \n            not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. \n            For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable \n            it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on \n            January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p>\n         </note>"
                     }
                 },
@@ -923,6 +959,8 @@
                 "IsOrganizationTrail": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account. \n         The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in \n         Organizations.</p>"
                     }
                 },
@@ -1033,7 +1071,7 @@
                 "Values": {
                     "target": "com.amazonaws.cloudtrail#DataResourceValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p>\n         <ul>\n            <li>\n               <p>To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the \n         prefix as <code>arn:aws:s3:::</code>.</p>\n               <note>\n                  <p>This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a bucket that belongs to another Amazon Web Services account.</p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty\n         object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for\n         all objects in this S3 bucket.</p>\n            </li>\n            <li>\n               <p>To log data events for specific objects, specify the S3 bucket and object prefix such\n         as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for\n         objects in this S3 bucket that match the prefix.</p>\n            </li>\n            <li>\n               <p>To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as\n                  <code>arn:aws:lambda</code>.</p>\n               <note>\n                  <p>This also enables logging of <code>Invoke</code> activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a function that belongs to another Amazon Web Services account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for a specific Lambda function, specify the function ARN.</p>\n               <note>\n                  <p>Lambda function ARNs are exact. For example, if you specify a \n            function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will\n            only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will\n            not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p>\n               </note> \n            </li>\n            <li>\n               <p>To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix\n               as <code>arn:aws:dynamodb</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p>\n         <ul>\n            <li>\n               <p>To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the \n         prefix as <code>arn:aws:s3</code>.</p>\n               <note>\n                  <p>This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a bucket that belongs to another Amazon Web Services account.</p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty\n         object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for\n         all objects in this S3 bucket.</p>\n            </li>\n            <li>\n               <p>To log data events for specific objects, specify the S3 bucket and object prefix such\n         as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for\n         objects in this S3 bucket that match the prefix.</p>\n            </li>\n            <li>\n               <p>To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as\n                  <code>arn:aws:lambda</code>.</p>\n               <note>\n                  <p>This also enables logging of <code>Invoke</code> activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a function that belongs to another Amazon Web Services account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for a specific Lambda function, specify the function ARN.</p>\n               <note>\n                  <p>Lambda function ARNs are exact. For example, if you specify a \n            function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will\n            only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will\n            not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p>\n               </note> \n            </li>\n            <li>\n               <p>To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix\n               as <code>arn:aws:dynamodb</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1067,6 +1105,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreHasOngoingImportException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
@@ -1297,6 +1338,8 @@
                 "includeShadowTrails": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region,\n         or in the case of an organization trail, the replication of an organization trail in member accounts. If you do not include shadow trails, organization trails in a member account\n         and region replication trails will not be returned. The default is true.</p>"
                     }
                 }
@@ -1342,18 +1385,20 @@
             }
         },
         "com.amazonaws.cloudtrail#DestinationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EVENT_DATA_STORE",
-                        "name": "EVENT_DATA_STORE"
-                    },
-                    {
-                        "value": "AWS_SERVICE",
-                        "name": "AWS_SERVICE"
+            "type": "enum",
+            "members": {
+                "EVENT_DATA_STORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT_DATA_STORE"
                     }
-                ]
+                },
+                "AWS_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SERVICE"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#Destinations": {
@@ -1441,14 +1486,14 @@
             }
         },
         "com.amazonaws.cloudtrail#EventCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "insight",
-                        "name": "Insight"
+            "type": "enum",
+            "members": {
+                "Insight": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insight"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.cloudtrail#EventDataStore": {
@@ -1593,6 +1638,26 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
             }
         },
+        "com.amazonaws.cloudtrail#EventDataStoreHasOngoingImportException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "EventDataStoreHasOngoingImport",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when you try to update or delete an event data store that currently has an import in progress.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#EventDataStoreMaxLimitExceededException": {
             "type": "structure",
             "members": {
@@ -1644,22 +1709,26 @@
             }
         },
         "com.amazonaws.cloudtrail#EventDataStoreStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "PENDING_DELETION",
-                        "name": "PENDING_DELETION"
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
                     }
-                ]
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#EventDataStoreTerminationProtectedException": {
@@ -1700,13 +1769,13 @@
                 "IncludeManagementEvents": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify if you want your event selector to include management events for your trail.</p>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events\">Management Events</a> in the <i>CloudTrail User Guide</i>.</p> \n      \n         <p>By default, the value is <code>true</code>.</p>\n         <p>The first copy of management events is free. You are charged for additional copies of management \n         events that you are logging on any subsequent trail in the same region. For more information about \n         CloudTrail pricing, see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a>.</p>"
+                        "smithy.api#documentation": "<p>Specify if you want your event selector to include management events for your trail.</p>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Management Events</a> in the <i>CloudTrail User Guide</i>.</p> \n      \n         <p>By default, the value is <code>true</code>.</p>\n         <p>The first copy of management events is free. You are charged for additional copies of management \n         events that you are logging on any subsequent trail in the same region. For more information about \n         CloudTrail pricing, see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a>.</p>"
                     }
                 },
                 "DataResources": {
                     "target": "com.amazonaws.cloudtrail#DataResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>CloudTrail supports data event logging for Amazon S3 objects, Lambda functions, \n         and Amazon DynamoDB tables \n         with basic event selectors. You can specify up to 250 resources for an individual event\n         selector, but the total number of data resources cannot exceed 250 across all event\n         selectors in a trail. This limit does not apply if you configure resource logging for all\n         data events.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events\">Data Events</a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Limits in CloudTrail</a> \n         in the <i>CloudTrail User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>CloudTrail supports data event logging for Amazon S3 objects, Lambda functions, \n         and Amazon DynamoDB tables \n         with basic event selectors. You can specify up to 250 resources for an individual event\n         selector, but the total number of data resources cannot exceed 250 across all event\n         selectors in a trail. This limit does not apply if you configure resource logging for all\n         data events.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Data Events</a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Limits in CloudTrail</a> \n         in the <i>CloudTrail User Guide</i>.</p>"
                     }
                 },
                 "ExcludeManagementEventSources": {
@@ -1942,7 +2011,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the settings for the event selectors that you configured for your trail.\n         The information returned for your event selectors includes the following:</p>\n         <ul>\n            <li>\n               <p>If your event selector includes read-only events, write-only events, or\n            all events. This applies to both management events and data events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes management events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes data events, the resources on which you are logging data\n               events.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html\">Logging Data and Management Events for Trails\n      </a> in the <i>CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the settings for the event selectors that you configured for your trail.\n         The information returned for your event selectors includes the following:</p>\n         <ul>\n            <li>\n               <p>If your event selector includes read-only events, write-only events, or\n            all events. This applies to both management events and data events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes management events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes data events, the resources on which you are logging data\n               events.</p>\n            </li>\n         </ul>\n         <p>For more information about logging management and data events, see the following topics in the <i>CloudTrail User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events for trails\n            </a> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events for trails\n            </a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1977,6 +2046,103 @@
                     "target": "com.amazonaws.cloudtrail#AdvancedEventSelectors",
                     "traits": {
                         "smithy.api#documentation": "<p>\n         The advanced event selectors that are configured for the trail.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#GetImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#GetImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#GetImportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ImportNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns information for the specified import.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#GetImportRequest": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID for the import.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#GetImportResponse": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the import.\n      </p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.cloudtrail#ImportDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination event data store.\n      </p>"
+                    }
+                },
+                "ImportSource": {
+                    "target": "com.amazonaws.cloudtrail#ImportSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The source S3 bucket.\n      </p>"
+                    }
+                },
+                "StartEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Used with <code>EndEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "EndEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Used with <code>StartEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the import.\n      </p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of the import's creation.\n      </p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of when the import was updated.\n      </p>"
+                    }
+                },
+                "ImportStatistics": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides statistics for the import.\n      </p>"
                     }
                 }
             }
@@ -2350,6 +2516,237 @@
                 "smithy.api#documentation": "<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
             }
         },
+        "com.amazonaws.cloudtrail#ImportDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#EventDataStoreArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportFailureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#ImportFailureListItem"
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportFailureListItem": {
+            "type": "structure",
+            "members": {
+                "Location": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The location of the failure in the S3 bucket.\n      </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudtrail#ImportFailureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the import. \n      </p>"
+                    }
+                },
+                "ErrorType": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The type of import error.\n      </p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides the reason the import failed.\n      </p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         When the import was last updated.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Provides information about an import failure.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportFailureStatus": {
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "RETRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRY"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ImportNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>\n         The specified import was not found.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportSource": {
+            "type": "structure",
+            "members": {
+                "S3": {
+                    "target": "com.amazonaws.cloudtrail#S3ImportSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The source S3 bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The import source.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportStatistics": {
+            "type": "structure",
+            "members": {
+                "PrefixesFound": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The number of S3 prefixes found for the import.\n      </p>"
+                    }
+                },
+                "PrefixesCompleted": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The number of S3 prefixes that completed import.\n      </p>"
+                    }
+                },
+                "FilesCompleted": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of files that completed import.</p>"
+                    }
+                },
+                "EventsCompleted": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The number of trail events imported.\n      </p>"
+                    }
+                },
+                "FailedEntries": {
+                    "target": "com.amazonaws.cloudtrail#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The number of failed entries.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Provides statistics for the specified <code>ImportID</code>.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudtrail#ImportsListItem"
+            }
+        },
+        "com.amazonaws.cloudtrail#ImportsListItem": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the import.\n      </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the import. \n      </p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.cloudtrail#ImportDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination event data store.\n      </p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of the import's creation.\n      </p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of the import's last update.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Contains information about an import that was returned by a lookup request.\n      </p>"
+            }
+        },
         "com.amazonaws.cloudtrail#InactiveEventDataStoreException": {
             "type": "structure",
             "members": {
@@ -2431,18 +2828,20 @@
             }
         },
         "com.amazonaws.cloudtrail#InsightType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ApiCallRateInsight",
-                        "name": "ApiCallRateInsight"
-                    },
-                    {
-                        "value": "ApiErrorRateInsight",
-                        "name": "ApiErrorRateInsight"
+            "type": "enum",
+            "members": {
+                "ApiCallRateInsight": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApiCallRateInsight"
                     }
-                ]
+                },
+                "ApiErrorRateInsight": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApiErrorRateInsight"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException": {
@@ -2526,10 +2925,7 @@
             }
         },
         "com.amazonaws.cloudtrail#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.cloudtrail#InvalidCloudWatchLogsLogGroupArnException": {
             "type": "structure",
@@ -2611,6 +3007,26 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudtrail#InvalidEventDataStoreCategoryException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidEventDataStoreCategory",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the event data store category is not valid for the import.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#InvalidEventDataStoreStatusException": {
             "type": "structure",
             "members": {
@@ -2667,6 +3083,26 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>This exception is thrown when an operation is called on a trail from a region other than the region in which the trail was created.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudtrail#InvalidImportSourceException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidImportSource",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the provided source S3 bucket is not valid for import.\n      </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3084,7 +3520,6 @@
         "com.amazonaws.cloudtrail#ListChannelsMaxResultsCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -3160,7 +3595,6 @@
         "com.amazonaws.cloudtrail#ListEventDataStoresMaxResultsCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -3197,6 +3631,177 @@
                     "target": "com.amazonaws.cloudtrail#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token you can use to get the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportFailures": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#ListImportFailuresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#ListImportFailuresResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns a list of failures for the specified import.\n      </p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Failures",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportFailuresMaxResultsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportFailuresRequest": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the import.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudtrail#ListImportFailuresMaxResultsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The maximum number of failures to display on a single page.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of import failures.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportFailuresResponse": {
+            "type": "structure",
+            "members": {
+                "Failures": {
+                    "target": "com.amazonaws.cloudtrail#ImportFailureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        Contains information about the import failures.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of results.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#ListImportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#ListImportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns information on all imports, or a select set of imports by <code>ImportStatus</code> or <code>Destination</code>.\n      </p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Imports",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportsMaxResultsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.cloudtrail#ListImportsMaxResultsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The maximum number of imports to display on a single page.\n      </p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination event data store.\n      </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the import.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of import results.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#ListImportsResponse": {
+            "type": "structure",
+            "members": {
+                "Imports": {
+                    "target": "com.amazonaws.cloudtrail#ImportsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The list of returned imports.\n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.cloudtrail#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         A token you can use to get the next page of import results.\n      </p>"
                     }
                 }
             }
@@ -3332,7 +3937,6 @@
         "com.amazonaws.cloudtrail#ListQueriesMaxResultsCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -3551,10 +4155,7 @@
             }
         },
         "com.amazonaws.cloudtrail#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.cloudtrail#LookupAttribute": {
             "type": "structure",
@@ -3579,42 +4180,56 @@
             }
         },
         "com.amazonaws.cloudtrail#LookupAttributeKey": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EventId",
-                        "name": "EVENT_ID"
-                    },
-                    {
-                        "value": "EventName",
-                        "name": "EVENT_NAME"
-                    },
-                    {
-                        "value": "ReadOnly",
-                        "name": "READ_ONLY"
-                    },
-                    {
-                        "value": "Username",
-                        "name": "USERNAME"
-                    },
-                    {
-                        "value": "ResourceType",
-                        "name": "RESOURCE_TYPE"
-                    },
-                    {
-                        "value": "ResourceName",
-                        "name": "RESOURCE_NAME"
-                    },
-                    {
-                        "value": "EventSource",
-                        "name": "EVENT_SOURCE"
-                    },
-                    {
-                        "value": "AccessKeyId",
-                        "name": "ACCESS_KEY_ID"
+            "type": "enum",
+            "members": {
+                "EVENT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EventId"
                     }
-                ]
+                },
+                "EVENT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EventName"
+                    }
+                },
+                "READ_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadOnly"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Username"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                },
+                "RESOURCE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceName"
+                    }
+                },
+                "EVENT_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EventSource"
+                    }
+                },
+                "ACCESS_KEY_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessKeyId"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#LookupAttributesList": {
@@ -3695,6 +4310,8 @@
                 "MaxResults": {
                     "target": "com.amazonaws.cloudtrail#MaxResults",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 50,
                         "smithy.api#documentation": "<p>The number of events to return. Possible values are 1 through 50. The default is 50.</p>"
                     }
                 },
@@ -3752,7 +4369,6 @@
         "com.amazonaws.cloudtrail#MaxQueryResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -3762,7 +4378,6 @@
         "com.amazonaws.cloudtrail#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3976,7 +4591,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures an event selector or advanced event selectors for your trail. \n         Use event selectors or advanced event selectors to specify management and data event settings for your trail. By\n         default, trails created without specific event selectors are configured to log all read and \n         write management events, and no data events.</p>\n         <p>When an event occurs in your account, CloudTrail\n         evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches \n         any event selector, the trail processes and logs the event. If the event doesn't match any event\n         selector, the trail doesn't log the event.</p>\n         <p>Example</p>\n         <ol>\n            <li>\n               <p>You create an event selector for a trail and specify that you want\n               write-only events.</p>\n            </li>\n            <li>\n               <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API\n               operations occur in your account.</p>\n            </li>\n            <li>\n               <p>CloudTrail evaluates whether the events match your event\n               selectors.</p>\n            </li>\n            <li>\n               <p>The <code>RunInstances</code> is a write-only event and it matches your\n               event selector. The trail logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>GetConsoleOutput</code> is a read-only event that doesn't\n               match your event selector. The trail doesn't log the event.\n         </p>\n            </li>\n         </ol>\n         <p>The <code>PutEventSelectors</code> operation must be called from the region in which\n         the trail was created; otherwise, an <code>InvalidHomeRegionException</code> exception is\n         thrown.</p>\n         <p>You can configure up to five event selectors for each trail. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html\">Logging data and management events for trails\n      </a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Quotas in CloudTrail</a> \n         in the <i>CloudTrail User Guide</i>.</p>\n         <p>You can add advanced event selectors, and conditions for your advanced \n         event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. \n         You can use either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you apply <code>AdvancedEventSelectors</code> \n         to a trail, any existing <code>EventSelectors</code> are overwritten. For more information about \n         advanced event selectors, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging \n            data events for trails</a> in the <i>CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Configures an event selector or advanced event selectors for your trail. \n         Use event selectors or advanced event selectors to specify management and data event settings for your trail. By\n         default, trails created without specific event selectors are configured to log all read and \n         write management events, and no data events.</p>\n         <p>When an event occurs in your account, CloudTrail\n         evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches \n         any event selector, the trail processes and logs the event. If the event doesn't match any event\n         selector, the trail doesn't log the event.</p>\n         <p>Example</p>\n         <ol>\n            <li>\n               <p>You create an event selector for a trail and specify that you want\n               write-only events.</p>\n            </li>\n            <li>\n               <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API\n               operations occur in your account.</p>\n            </li>\n            <li>\n               <p>CloudTrail evaluates whether the events match your event\n               selectors.</p>\n            </li>\n            <li>\n               <p>The <code>RunInstances</code> is a write-only event and it matches your\n               event selector. The trail logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>GetConsoleOutput</code> is a read-only event that doesn't\n               match your event selector. The trail doesn't log the event.\n         </p>\n            </li>\n         </ol>\n         <p>The <code>PutEventSelectors</code> operation must be called from the region in which\n         the trail was created; otherwise, an <code>InvalidHomeRegionException</code> exception is\n         thrown.</p>\n         <p>You can configure up to five event selectors for each trail. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events for trails\n      </a>, <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events for trails\n      </a>, and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Quotas in CloudTrail</a> \n         in the <i>CloudTrail User Guide</i>.</p>\n         <p>You can add advanced event selectors, and conditions for your advanced \n         event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. \n         You can use either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you apply <code>AdvancedEventSelectors</code> \n         to a trail, any existing <code>EventSelectors</code> are overwritten. For more information about \n         advanced event selectors, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging \n            data events for trails</a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4265,53 +4880,67 @@
             }
         },
         "com.amazonaws.cloudtrail#QueryStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUEUED",
-                        "name": "QUEUED"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "FINISHED",
-                        "name": "FINISHED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "TIMED_OUT",
-                        "name": "TIMED_OUT"
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
                     }
-                ]
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "FINISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINISHED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#ReadWriteType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ReadOnly",
-                        "name": "ReadOnly"
-                    },
-                    {
-                        "value": "WriteOnly",
-                        "name": "WriteOnly"
-                    },
-                    {
-                        "value": "All",
-                        "name": "All"
+            "type": "enum",
+            "members": {
+                "ReadOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadOnly"
                     }
-                ]
+                },
+                "WriteOnly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WriteOnly"
+                    }
+                },
+                "All": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#RemoveTags": {
@@ -4619,7 +5248,6 @@
         "com.amazonaws.cloudtrail#RetentionPeriod": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 7,
                     "max": 2557
@@ -4644,6 +5272,35 @@
                 "smithy.api#documentation": "<p>This exception is thrown when the specified S3 bucket does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudtrail#S3ImportSource": {
+            "type": "structure",
+            "members": {
+                "S3LocationUri": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The URI for the source S3 bucket. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3BucketRegion": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The region associated with the source S3 bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3BucketAccessRoleArn": {
+                    "target": "com.amazonaws.cloudtrail#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The IAM ARN role used to access the source S3 bucket.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The settings for the source S3 bucket.\n      </p>"
             }
         },
         "com.amazonaws.cloudtrail#SelectorField": {
@@ -4694,6 +5351,141 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n         Contains configuration information about the service-linked channel.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#StartImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#StartImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#StartImportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#AccountHasOngoingImportException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#ImportNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreCategoryException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventDataStoreStatusException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidImportSourceException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Starts an import of logged trail events from a source S3 bucket to a destination event data store. \n      </p>\n         <p>\n         When you start a new import, the <code>Destinations</code> and \n         <code>ImportSource</code> parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. \n         For more information about disabling ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling ownership of objects and disabling ACLs for your bucket</a>.\n      </p>\n         <p>\n         When you retry an import, the <code>ImportID</code> parameter is required.\n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#StartImportRequest": {
+            "type": "structure",
+            "members": {
+                "Destinations": {
+                    "target": "com.amazonaws.cloudtrail#ImportDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination event data store. Use this parameter for a new import.\n      </p>"
+                    }
+                },
+                "ImportSource": {
+                    "target": "com.amazonaws.cloudtrail#ImportSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The source S3 bucket for the import. Use this parameter for a new import.\n      </p>"
+                    }
+                },
+                "StartEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Use with <code>EndEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "EndEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Use with <code>StartEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the import. Use this parameter when you are retrying an import.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#StartImportResponse": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the import.\n      </p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.cloudtrail#ImportDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination event data store.\n      </p>"
+                    }
+                },
+                "ImportSource": {
+                    "target": "com.amazonaws.cloudtrail#ImportSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The source S3 bucket.\n      </p>"
+                    }
+                },
+                "StartEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Used with <code>EndEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "EndEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Used with <code>StartEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Shows the status of the import after a <code>StartImport</code> request. An import finishes with a status of <code>COMPLETED</code> if there were no failures, or <code>FAILED</code> \n         if there were failures.\n      </p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp for the import's creation.\n      </p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of the import's last update, if applicable.\n      </p>"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudtrail#StartLogging": {
@@ -4812,6 +5604,103 @@
                     "target": "com.amazonaws.cloudtrail#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the started query.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#StopImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#StopImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#StopImportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#ImportNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Stops a specified import. \n      </p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#StopImportRequest": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The ID of the import.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#StopImportResponse": {
+            "type": "structure",
+            "members": {
+                "ImportId": {
+                    "target": "com.amazonaws.cloudtrail#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID for the import.\n      </p>"
+                    }
+                },
+                "ImportSource": {
+                    "target": "com.amazonaws.cloudtrail#ImportSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The source S3 bucket.\n      </p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.cloudtrail#ImportDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The destination event data store.\n      </p>"
+                    }
+                },
+                "ImportStatus": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the import. \n      </p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of the import's creation. \n      </p>"
+                    }
+                },
+                "UpdatedTimestamp": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp of the import's last update.\n      </p>"
+                    }
+                },
+                "StartEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Used with <code>EndEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "EndEventTime": {
+                    "target": "com.amazonaws.cloudtrail#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Used with <code>StartEventTime</code> to bound a <code>StartImport</code> request, and limit imported trail events \n         to only those events logged within a specified time period.\n      </p>"
+                    }
+                },
+                "ImportStatistics": {
+                    "target": "com.amazonaws.cloudtrail#ImportStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        Returns information on the stopped import.\n      </p>"
                     }
                 }
             }
@@ -4950,10 +5839,7 @@
             }
         },
         "com.amazonaws.cloudtrail#TerminationProtectionEnabled": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudtrail#Trail": {
             "type": "structure",
@@ -5210,6 +6096,9 @@
                     "target": "com.amazonaws.cloudtrail#EventDataStoreARNInvalidException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreHasOngoingImportException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreNotFoundException"
                 },
                 {
@@ -5261,7 +6150,7 @@
                 "AdvancedEventSelectors": {
                     "target": "com.amazonaws.cloudtrail#AdvancedEventSelectors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The advanced event selectors used to select events for the event data store.</p>"
+                        "smithy.api#documentation": "<p>The advanced event selectors used to select events for the event data store. You can configure up to five advanced event selectors for each event data store.</p>"
                     }
                 },
                 "MultiRegionEnabled": {
@@ -5491,12 +6380,16 @@
                 "IsMultiRegionTrail": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, \n         shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region \n         where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider\n         using trails that log events in all regions.</p>"
                     }
                 },
                 "EnableLogFileValidation": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether log file validation is enabled. The default is false.</p>\n         <note>\n            <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail \n            does not create digest files for log files that were delivered during a period in which log file integrity validation \n            was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on \n            January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon \n            on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p>\n         </note>"
                     }
                 },
@@ -5521,6 +6414,8 @@
                 "IsOrganizationTrail": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account. \n         The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in \n         Organizations. If the trail is not an organization trail and this is set to <code>true</code>, the trail will be created in all Amazon Web Services accounts that belong\n         to the organization. If the trail is an organization trail and this is set to <code>false</code>, the trail will remain in the current Amazon Web Services account but be \n         deleted from all member accounts in the organization.</p>"
                     }
                 }
