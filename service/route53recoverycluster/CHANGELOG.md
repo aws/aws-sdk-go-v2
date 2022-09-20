@@ -1,3 +1,7 @@
+# v1.10.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2022-09-14)
 
 * **Feature**: Fixed a bug in the API client generation which caused some operation parameters to be incorrectly generated as value types instead of pointer types. The service API always required these affected parameters to be nilable. This fixes the SDK client to match the expectations of the the service API.

@@ -1,3 +1,7 @@
+# v1.24.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-09-14)
 
 * **Feature**: This release is for supporting Composite Slot Type feature in AWS Lex V2. Composite Slot Type will help developer to logically group coherent slots and maintain their inter-relationships in runtime conversation.

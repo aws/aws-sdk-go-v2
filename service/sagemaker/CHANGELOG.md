@@ -1,3 +1,7 @@
+# v1.43.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2022-09-15)
 
 * **Feature**: Amazon SageMaker Automatic Model Tuning now supports specifying Hyperband strategy for tuning jobs, which uses a multi-fidelity based tuning strategy to stop underperforming hyperparameter configurations early.

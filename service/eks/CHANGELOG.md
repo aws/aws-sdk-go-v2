@@ -1,3 +1,7 @@
+# v1.22.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-09-14)
 
 * **Feature**: Adding support for local Amazon EKS clusters on Outposts

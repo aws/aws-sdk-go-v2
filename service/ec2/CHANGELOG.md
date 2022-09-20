@@ -1,3 +1,8 @@
+# v1.58.0 (2022-09-20)
+
+* **Feature**: This release adds support for blocked paths to Amazon VPC Reachability Analyzer.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2022-09-19)
 
 * **Feature**: This release adds CapacityAllocations field to DescribeCapacityReservations

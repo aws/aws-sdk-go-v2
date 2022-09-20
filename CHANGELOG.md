@@ -1,3 +1,14 @@
+# Release (2022-09-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.16.16
+  * **Documentation**: added clafirfication on the Credential object to show usage of loadDefaultConfig to load credentials
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.58.0](service/ec2/CHANGELOG.md#v1580-2022-09-20)
+  * **Feature**: This release adds support for blocked paths to Amazon VPC Reachability Analyzer.
+
 # Release (2022-09-19)
 
 ## Module Highlights

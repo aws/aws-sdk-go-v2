@@ -1,3 +1,7 @@
+# v1.8.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2022-09-14)
 
 * **Feature**: Fixed the data type of lagDuration that is returned in Describe Source Server API

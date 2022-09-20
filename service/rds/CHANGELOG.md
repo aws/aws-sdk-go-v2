@@ -1,3 +1,7 @@
+# v1.26.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2022-09-19)
 
 * **Feature**: This release adds support for Amazon RDS Proxy with SQL Server compatibility.

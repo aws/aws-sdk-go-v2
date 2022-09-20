@@ -1,8 +1,0 @@
-{
-    "id": "0bce3cb2-c3d7-4dc7-a87d-4943339d1cec",
-    "type": "documentation",
-    "description": "added clafirfication on the Credential object to show usage of loadDefaultConfig to load credentials",
-    "modules": [
-        "."
-    ]
-}

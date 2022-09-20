@@ -1,3 +1,7 @@
+# v1.13.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-09-16)
 
 * **Feature**: This release adds tag based access control for the UntagResource API.

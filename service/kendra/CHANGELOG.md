@@ -1,3 +1,7 @@
+# v1.34.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2022-09-14)
 
 * **Feature**: This release enables our customer to choose the option of Sharepoint 2019 for the on-premise Sharepoint connector.

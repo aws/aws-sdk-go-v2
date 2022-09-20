@@ -1,3 +1,7 @@
+# v1.19.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-09-14)
 
 * **Feature**: Added isUnstructured in response for Customer Profiles Integration APIs

@@ -1,3 +1,7 @@
+# v1.17.1 (2022-09-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-09-19)
 
 * **Feature**: This change allows the customer to use the SRT Caller protocol as part of their flows
