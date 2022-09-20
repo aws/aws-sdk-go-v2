@@ -50715,6 +50715,19 @@ func awsEc2query_deserializeDocumentAnalysisRouteTableRoute(v **types.AnalysisRo
 				sv.Origin = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("state", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.State = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("transitGatewayId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -64284,6 +64297,32 @@ func awsEc2query_deserializeDocumentExplanation(v **types.Explanation, decoder s
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentAnalysisComponent(&sv.Component, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("componentAccount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ComponentAccount = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("componentRegion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ComponentRegion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("customerGateway", t.Name.Local):
@@ -91687,6 +91726,18 @@ func awsEc2query_deserializeDocumentPathComponent(v **types.PathComponent, decod
 		case strings.EqualFold("destinationVpc", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentAnalysisComponent(&sv.DestinationVpc, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("elasticLoadBalancerListener", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentAnalysisComponent(&sv.ElasticLoadBalancerListener, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("explanationSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentExplanationList(&sv.Explanations, nodeDecoder); err != nil {
 				return err
 			}
 

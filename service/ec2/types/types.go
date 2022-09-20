@@ -444,6 +444,13 @@ type AnalysisRouteTableRoute struct {
 	// EnableVgwRoutePropagation - The route was propagated by route propagation.
 	Origin *string
 
+	// The state. The following are the possible values:
+	//
+	// * active
+	//
+	// * blackhole
+	State *string
+
 	// The ID of a transit gateway.
 	TransitGatewayId *string
 
@@ -3278,6 +3285,12 @@ type Explanation struct {
 
 	// The component.
 	Component *AnalysisComponent
+
+	// The Amazon Web Services account for the component.
+	ComponentAccount *string
+
+	// The Region for the component.
+	ComponentRegion *string
 
 	// The customer gateway.
 	CustomerGateway *AnalysisComponent
@@ -9921,6 +9934,12 @@ type PathComponent struct {
 
 	// The destination VPC.
 	DestinationVpc *AnalysisComponent
+
+	// The load balancer listener.
+	ElasticLoadBalancerListener *AnalysisComponent
+
+	// The explanation codes.
+	Explanations []Explanation
 
 	// The inbound header.
 	InboundHeader *AnalysisPacketHeader
