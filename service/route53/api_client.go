@@ -426,13 +426,13 @@ func addResponseErrorMiddleware(stack *middleware.Stack) error {
 }
 
 func addSanitizeURLMiddleware(stack *middleware.Stack) error {
-	return route53cust.AddSanitizeURLMiddleware(stack, route53cust.AddSanitizeURLMiddlewareOptions{SanitizeHostedZoneIDInput: sanitizeHostedZoneIDInput})
+	return route53cust.AddSanitizeURLMiddleware(stack, route53cust.AddSanitizeURLMiddlewareOptions{SanitizeURLInput: sanitizeURLInput})
 }
 
 // Check for and split apart Route53 resource IDs, setting only the last piece.
 // This allows the output of one operation e.g. foo/1234 to be used as input in
 // another operation (e.g. it expects just '1234')
-func sanitizeHostedZoneIDInput(input interface{}) error {
+func sanitizeURLInput(input interface{}) error {
 	switch i := input.(type) {
 	case *ActivateKeySigningKeyInput:
 		if i.HostedZoneId != nil {
@@ -551,6 +551,13 @@ func sanitizeHostedZoneIDInput(input interface{}) error {
 			idx := strings.LastIndex(*i.HostedZoneId, `/`)
 			v := (*i.HostedZoneId)[idx+1:]
 			i.HostedZoneId = &v
+		}
+
+	case *GetChangeInput:
+		if i.Id != nil {
+			idx := strings.LastIndex(*i.Id, `/`)
+			v := (*i.Id)[idx+1:]
+			i.Id = &v
 		}
 
 	case *GetDNSSECInput:

@@ -124,6 +124,9 @@ func (c *Client) addOperationGetChangeMiddlewares(stack *middleware.Stack, optio
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addSanitizeURLMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
