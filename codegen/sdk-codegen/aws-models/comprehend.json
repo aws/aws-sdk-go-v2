@@ -161,7 +161,7 @@
                 "TextList": {
                     "target": "com.amazonaws.comprehend#CustomerInputStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document should contain at least 20 characters and must contain fewer than\n      5,000 bytes of UTF-8 encoded characters.</p>",
+                        "smithy.api#documentation": "<p>A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25\n      documents. Each document should contain at least 20 characters. The maximum size of each document is 5 KB.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -215,7 +215,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects the text of a batch of documents for named entities and returns information\n      about them. For more information about named entities, see <a>how-entities</a>\n         </p>"
+                "smithy.api#documentation": "<p>Inspects the text of a batch of documents for named entities and returns information\n      about them. For more information about named entities, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html\">Entities</a> in the Comprehend Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.comprehend#BatchDetectEntitiesItemResult": {
@@ -244,7 +244,7 @@
                 "TextList": {
                     "target": "com.amazonaws.comprehend#CustomerInputStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25\n      documents. The maximum size of each document is 5 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -334,7 +334,7 @@
                 "TextList": {
                     "target": "com.amazonaws.comprehend#CustomerInputStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25\n      documents. The maximum size of each document is 5 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -430,7 +430,7 @@
                 "TextList": {
                     "target": "com.amazonaws.comprehend#CustomerInputStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25\n      documents. The maximum size of each document is 5 KB. </p>\n         <note>\n            <p>Amazon Comprehend performs real-time sentiment analysis on the first 500 characters of the input text\n    and ignores any additional text in the input.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -491,7 +491,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects the text of a batch of documents for the syntax and part of speech of the words\n      in the document and returns information about them. For more information, see <a>how-syntax</a>.</p>"
+                "smithy.api#documentation": "<p>Inspects the text of a batch of documents for the syntax and part of speech of the words\n      in the document and returns information about them. For more information, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html\">Syntax</a> in the Comprehend Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.comprehend#BatchDetectSyntaxItemResult": {
@@ -520,7 +520,7 @@
                 "TextList": {
                     "target": "com.amazonaws.comprehend#CustomerInputStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list containing the text of the input documents. The list can contain a maximum of 25\n      documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A list containing the UTF-8 encoded text of the input documents. The list can contain a maximum of 25\n      documents. The maximum size for each document is 5 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -547,6 +547,96 @@
                     "target": "com.amazonaws.comprehend#BatchItemErrorList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list containing one  object for each document that\n      contained an error. The results are sorted in ascending order by the <code>Index</code> field\n      and match the order of the documents in the input list. If there are no errors in the batch,\n      the <code>ErrorList</code> is empty.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.comprehend#BatchDetectTargetedSentiment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#BatchDetectTargetedSentimentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#BatchDetectTargetedSentimentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#BatchSizeLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TextSizeLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#UnsupportedLanguageException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Inspects a batch of documents and returns a sentiment analysis\n      for each entity identified in the documents.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#BatchDetectTargetedSentimentItemResult": {
+            "type": "structure",
+            "members": {
+                "Index": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zero-based index of this result in the input list.</p>"
+                    }
+                },
+                "Entities": {
+                    "target": "com.amazonaws.comprehend#ListOfTargetedSentimentEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of targeted sentiment entities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Analysis results for one of the documents in the batch.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#BatchDetectTargetedSentimentRequest": {
+            "type": "structure",
+            "members": {
+                "TextList": {
+                    "target": "com.amazonaws.comprehend#CustomerInputStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing the UTF-8 encoded text of the input documents.\n      The list can contain a maximum of 25 documents. The maximum size of each document is 5 KB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.comprehend#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only supported language.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#BatchDetectTargetedSentimentResponse": {
+            "type": "structure",
+            "members": {
+                "ResultList": {
+                    "target": "com.amazonaws.comprehend#ListOfDetectTargetedSentimentResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the results of the operation.\n      The results are sorted in ascending order by the <code>Index</code> field and match the order of the documents in the input list.\n      If all of the documents contain an error, the <code>ResultList</code> is empty.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorList": {
+                    "target": "com.amazonaws.comprehend#BatchItemErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of errors that the operation can return.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -849,6 +939,9 @@
                     "target": "com.amazonaws.comprehend#BatchDetectSyntax"
                 },
                 {
+                    "target": "com.amazonaws.comprehend#BatchDetectTargetedSentiment"
+                },
+                {
                     "target": "com.amazonaws.comprehend#ClassifyDocument"
                 },
                 {
@@ -931,6 +1024,9 @@
                 },
                 {
                     "target": "com.amazonaws.comprehend#DetectSyntax"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#DetectTargetedSentiment"
                 },
                 {
                     "target": "com.amazonaws.comprehend#ImportModel"
@@ -1093,7 +1189,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates a new document classification request to analyze a single document in real-time,\n      returning personally identifiable information (PII) entity labels.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string size is 100 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1152,7 +1248,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new document classifier that you can use to categorize documents. To create a\n      classifier, you provide a set of training documents that labeled with the categories that you\n      want to use. After the classifier is trained you can use it to categorize a set of labeled\n      documents into the categories. For more information, see <a>how-document-classification</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a new document classifier that you can use to categorize documents. To create a\n      classifier, you provide a set of training documents that labeled with the categories that you\n      want to use. After the classifier is trained you can use it to categorize a set of labeled\n      documents into the categories. For more information, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html\">Document Classification</a> in the Comprehend Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.comprehend#CreateDocumentClassifierRequest": {
@@ -2254,7 +2350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the properties associated with a targeted sentiment detection job. Use this operation \n      to get the status of the job.</p>"
+                "smithy.api#documentation": "<p>Gets the properties associated with a targeted sentiment detection job. Use this operation\n      to get the status of the job.</p>"
             }
         },
         "com.amazonaws.comprehend#DescribeTargetedSentimentDetectionJobRequest": {
@@ -2358,7 +2454,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 text string. Each string should contain at least 20 characters and must contain\n      fewer that 5,000 bytes of UTF-8 encoded characters.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The string must contain at least 20 characters. The maximum string size is 100 KB.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2404,7 +2500,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects text for named entities, and returns information about them. For more\n      information, about named entities, see <a>how-entities</a>. </p>"
+                "smithy.api#documentation": "<p>Inspects text for named entities, and returns information about them. For more\n      information, about named entities, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html\">Entities</a> in the Comprehend Developer Guide.</p>"
             }
         },
         "com.amazonaws.comprehend#DetectEntitiesRequest": {
@@ -2413,7 +2509,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string size is 100 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2437,7 +2533,7 @@
                 "Entities": {
                     "target": "com.amazonaws.comprehend#ListOfEntities",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of entities identified in the input text. For each entity, the response\n      provides the entity text, entity type, where the entity text begins and ends, and the level of\n      confidence that Amazon Comprehend has in the detection. </p>\n         <p>If your request uses a custom entity recognition model, Amazon Comprehend detects the\n      entities that the model is trained to recognize. Otherwise, it detects the default entity\n      types. For a list of default entity types, see <a>how-entities</a>.</p>"
+                        "smithy.api#documentation": "<p>A collection of entities identified in the input text. For each entity, the response\n      provides the entity text, entity type, where the entity text begins and ends, and the level of\n      confidence that Amazon Comprehend has in the detection. </p>\n         <p>If your request uses a custom entity recognition model, Amazon Comprehend detects the\n      entities that the model is trained to recognize. Otherwise, it detects the default entity\n      types. For a list of default entity types, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html\">Entities</a> in the Comprehend Developer Guide.\n    </p>"
                     }
                 }
             },
@@ -2477,7 +2573,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The string must contain less than 100 KB of UTF-8 encoded\n      characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2536,7 +2632,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string size is 100 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2592,7 +2688,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string size is 5 KB.</p>\n         <note>\n            <p>Amazon Comprehend performs real-time sentiment analysis on the first 500 characters of the input text\n    and ignores any additional text in the input.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2648,7 +2744,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects text for syntax and the part of speech of words in the document. For more\n      information, <a>how-syntax</a>.</p>"
+                "smithy.api#documentation": "<p>Inspects text for syntax and the part of speech of words in the document. For more\n      information, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html\">Syntax</a> in the Comprehend Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.comprehend#DetectSyntaxRequest": {
@@ -2657,7 +2753,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded\n      characters.</p>",
+                        "smithy.api#documentation": "<p>A UTF-8 string. The maximum string size is 5 KB.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2676,7 +2772,66 @@
                 "SyntaxTokens": {
                     "target": "com.amazonaws.comprehend#ListOfSyntaxTokens",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of syntax tokens describing the text. For each token, the response provides\n      the text, the token type, where the text begins and ends, and the level of confidence that\n      Amazon Comprehend has that the token is correct. For a list of token types, see <a>how-syntax</a>.</p>"
+                        "smithy.api#documentation": "<p>A collection of syntax tokens describing the text. For each token, the response provides\n      the text, the token type, where the text begins and ends, and the level of confidence that\n      Amazon Comprehend has that the token is correct. For a list of token types, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html\">Syntax</a> in the Comprehend Developer Guide.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.comprehend#DetectTargetedSentiment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.comprehend#DetectTargetedSentimentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.comprehend#DetectTargetedSentimentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.comprehend#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#TextSizeLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.comprehend#UnsupportedLanguageException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Inspects the input text and returns a sentiment analysis for each entity identified in the text.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#DetectTargetedSentimentRequest": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.comprehend#CustomerInputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string length is 5 KB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.comprehend#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only supported language.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DetectTargetedSentimentResponse": {
+            "type": "structure",
+            "members": {
+                "Entities": {
+                    "target": "com.amazonaws.comprehend#ListOfTargetedSentimentEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Targeted sentiment analysis for each of the entities identified in the input text.</p>"
                     }
                 }
             },
@@ -2919,7 +3074,7 @@
                 "TestS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same AWS Region\n      as the API endpoint that you are calling. The URI can point to a single input file or it can\n      provide the prefix for a collection of input files. </p>"
+                        "smithy.api#documentation": "<p>This specifies the Amazon S3 location where the test annotations for an entity recognizer\n      are located. The URI must be in the same AWS Region as the API endpoint that you are\n      calling. </p>"
                     }
                 },
                 "LabelDelimiter": {
@@ -2936,7 +3091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input properties for training a document classifier. </p>\n         <p>For more information on how the input file is formatted, see <a>prep-classifier-data</a>. </p>"
+                "smithy.api#documentation": "<p>The input properties for training a document classifier. </p>\n         <p>For more information on how the input file is formatted, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html\">Preparing training data</a> in the Comprehend Developer Guide.\n    </p>"
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierMode": {
@@ -3670,13 +3825,13 @@
                 "BeginOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A character offset in the input text that shows where the entity begins (the first\n      character is at position 0). The offset returns the position of each UTF-8 code point in the\n      string. A <i>code point</i> is the abstract character from a particular\n      graphical representation. For example, a multi-byte UTF-8 character maps to a single code\n      point.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the first character in the\n      entity.</p>"
                     }
                 },
                 "EndOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A character offset in the input text that shows where the entity ends. The offset\n      returns the position of each UTF-8 code point in the string. A <i>code point</i>\n      is the abstract character from a particular graphical representation. For example, a\n      multi-byte UTF-8 character maps to a single code point. </p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the last character in the\n      entity.</p>"
                     }
                 }
             },
@@ -3717,7 +3872,7 @@
                 "TestS3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>This specifies the Amazon S3 location where the test annotations for an entity recognizer\n      are located. The URI must be in the same AWS Region as the API endpoint that you are\n      calling.</p>"
+                        "smithy.api#documentation": "<p> Specifies the Amazon S3 location where the test annotations for an entity recognizer are\n      located. The URI must be in the same region as the API endpoint that you are calling.</p>"
                     }
                 }
             },
@@ -3826,7 +3981,7 @@
                 "F1Score": {
                     "target": "com.amazonaws.comprehend#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>A measure of how accurate the recognizer results are for the test data. It is derived from\n      the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the\n      harmonic average of the two scores. For plain text entity recognizer models, the range is 0 to 100, \n      where 100 is the best score. For PDF/Word entity recognizer models, the range is 0 to 1, \n      where 1 is the best score.   \n    </p>"
+                        "smithy.api#documentation": "<p>A measure of how accurate the recognizer results are for the test data. It is derived from\n      the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the\n      harmonic average of the two scores. For plain text entity recognizer models, the range is 0 to 100,\n      where 100 is the best score. For PDF/Word entity recognizer models, the range is 0 to 1,\n      where 1 is the best score.\n    </p>"
                     }
                 }
             },
@@ -4646,13 +4801,13 @@
                 "BeginOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A character offset in the input text that shows where the key phrase begins (the first\n      character is at position 0). The offset returns the position of each UTF-8 code point in the\n      string. A <i>code point</i> is the abstract character from a particular\n      graphical representation. For example, a multi-byte UTF-8 character maps to a single code\n      point.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the first character in the\n      key phrase.</p>"
                     }
                 },
                 "EndOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A character offset in the input text where the key phrase ends. The offset returns the\n      position of each UTF-8 code point in the string. A <code>code point</code> is the abstract\n      character from a particular graphical representation. For example, a multi-byte UTF-8\n      character maps to a single code point.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the last character in the\n      key phrase.</p>"
                     }
                 }
             },
@@ -5562,6 +5717,12 @@
                 "target": "com.amazonaws.comprehend#DocumentClass"
             }
         },
+        "com.amazonaws.comprehend#ListOfDescriptiveMentionIndices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#Integer"
+            }
+        },
         "com.amazonaws.comprehend#ListOfDetectDominantLanguageResult": {
             "type": "list",
             "member": {
@@ -5590,6 +5751,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.comprehend#BatchDetectSyntaxItemResult"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfDetectTargetedSentimentResult": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#BatchDetectTargetedSentimentItemResult"
             }
         },
         "com.amazonaws.comprehend#ListOfDocumentReadFeatureTypes": {
@@ -5634,6 +5801,12 @@
                 "target": "com.amazonaws.comprehend#DocumentLabel"
             }
         },
+        "com.amazonaws.comprehend#ListOfMentions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#TargetedSentimentMention"
+            }
+        },
         "com.amazonaws.comprehend#ListOfPiiEntities": {
             "type": "list",
             "member": {
@@ -5650,6 +5823,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.comprehend#SyntaxToken"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfTargetedSentimentEntities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#TargetedSentimentEntity"
             }
         },
         "com.amazonaws.comprehend#ListPiiEntitiesDetectionJobs": {
@@ -6003,6 +6182,23 @@
                 }
             }
         },
+        "com.amazonaws.comprehend#MentionSentiment": {
+            "type": "structure",
+            "members": {
+                "Sentiment": {
+                    "target": "com.amazonaws.comprehend#SentimentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sentiment of the mention. </p>"
+                    }
+                },
+                "SentimentScore": {
+                    "target": "com.amazonaws.comprehend#SentimentScore"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the sentiment and sentiment score for one mention of an entity.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+            }
+        },
         "com.amazonaws.comprehend#ModelStatus": {
             "type": "string",
             "traits": {
@@ -6054,7 +6250,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you\n      specify the Amazon S3 location where you want to write the output data. The URI must be in the\n      same region as the API endpoint that you are calling. The location is used as the prefix for\n      the actual location of the output file.</p>\n         <p>When the topic detection job is finished, the service creates an output file in a\n      directory specific to the job. The <code>S3Uri</code> field contains the location of the\n      output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the\n      ouput of the operation.</p>\n         <p>\n      For a PII entity detection job, the output file is plain text, not a compressed archive. \n      The output file name is the same as the input file, with <code>.out</code> appended at the end.\n    </p>",
+                        "smithy.api#documentation": "<p>When you use the <code>OutputDataConfig</code> object with asynchronous operations, you\n      specify the Amazon S3 location where you want to write the output data. The URI must be in the\n      same region as the API endpoint that you are calling. The location is used as the prefix for\n      the actual location of the output file.</p>\n         <p>When the topic detection job is finished, the service creates an output file in a\n      directory specific to the job. The <code>S3Uri</code> field contains the location of the\n      output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the\n      ouput of the operation.</p>\n         <p>\n      For a PII entity detection job, the output file is plain text, not a compressed archive.\n      The output file name is the same as the input file, with <code>.out</code> appended at the end.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6086,7 +6282,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Identifies the part of speech represented by the token and gives the confidence that\n      Amazon Comprehend has that the part of speech was correctly identified. For more information\n      about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.</p>"
+                "smithy.api#documentation": "<p>Identifies the part of speech represented by the token and gives the confidence that\n      Amazon Comprehend has that the part of speech was correctly identified. For more information\n      about the parts of speech that Amazon Comprehend can identify, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html\">Syntax</a> in the Comprehend Developer Guide.\n       </p>"
             }
         },
         "com.amazonaws.comprehend#PartOfSpeechTagType": {
@@ -6340,13 +6536,13 @@
                 "BeginOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A character offset in the input text that shows where the PII entity begins (the first\n      character is at position 0). The offset returns the position of each UTF-8 code point in the\n      string. A <i>code point</i> is the abstract character from a particular\n      graphical representation. For example, a multi-byte UTF-8 character maps to a single code\n      point.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the first character in the\n      entity.</p>"
                     }
                 },
                 "EndOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A character offset in the input text that shows where the PII entity ends. The offset\n      returns the position of each UTF-8 code point in the string. A <i>code point</i>\n      is the abstract character from a particular graphical representation. For example, a\n      multi-byte UTF-8 character maps to a single code point.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the last character in the\n      entity.</p>"
                     }
                 }
             },
@@ -6515,7 +6711,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.comprehend#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations,\n      you specify the Amazon S3 location where you want to write the output data. </p>\n         <p>\n      For a PII entity detection job, the output file is plain text, not a compressed archive. \n      The output file name is the same as the input file, with <code>.out</code> appended at the end.\n    </p>",
+                        "smithy.api#documentation": "<p>When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations,\n      you specify the Amazon S3 location where you want to write the output data. </p>\n         <p>\n      For a PII entity detection job, the output file is plain text, not a compressed archive.\n      The output file name is the same as the input file, with <code>.out</code> appended at the end.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7793,7 +7989,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only valid language.</p>",
+                        "smithy.api#documentation": "<p>The language of the input documents. Currently, English is the only supported language.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8498,7 +8694,7 @@
                 "PartOfSpeech": {
                     "target": "com.amazonaws.comprehend#PartOfSpeechTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the part of speech label and the confidence level that Amazon Comprehend has that\n      the part of speech was correctly identified. For more information, see <a>how-syntax</a>.</p>"
+                        "smithy.api#documentation": "<p>Provides the part of speech label and the confidence level that Amazon Comprehend has that\n      the part of speech was correctly identified. For more information, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html\">Syntax</a> in the Comprehend Developer Guide.\n    </p>"
                     }
                 }
             },
@@ -8718,7 +8914,7 @@
                 "VolumeKmsKeyId": {
                     "target": "com.amazonaws.comprehend#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt\n      data on the storage volume attached to the ML compute instance(s) that process the  \n      targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n          <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt\n      data on the storage volume attached to the ML compute instance(s) that process the\n      targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:</p>\n         <ul>\n            <li>\n               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS Key:\n          <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "VpcConfig": {
@@ -8733,6 +8929,151 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.comprehend#TargetedSentimentDetectionJobProperties"
+            }
+        },
+        "com.amazonaws.comprehend#TargetedSentimentEntity": {
+            "type": "structure",
+            "members": {
+                "DescriptiveMentionIndex": {
+                    "target": "com.amazonaws.comprehend#ListOfDescriptiveMentionIndices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more index into the Mentions array that provides the best name for the entity group.</p>"
+                    }
+                },
+                "Mentions": {
+                    "target": "com.amazonaws.comprehend#ListOfMentions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of mentions of the entity in the document. The array represents a co-reference group.\n      See <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-values\">\n        Co-reference group</a> for an example. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about one of the entities found by targeted sentiment analysis.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#TargetedSentimentEntityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PERSON",
+                        "name": "PERSON"
+                    },
+                    {
+                        "value": "LOCATION",
+                        "name": "LOCATION"
+                    },
+                    {
+                        "value": "ORGANIZATION",
+                        "name": "ORGANIZATION"
+                    },
+                    {
+                        "value": "FACILITY",
+                        "name": "FACILITY"
+                    },
+                    {
+                        "value": "BRAND",
+                        "name": "BRAND"
+                    },
+                    {
+                        "value": "COMMERCIAL_ITEM",
+                        "name": "COMMERCIAL_ITEM"
+                    },
+                    {
+                        "value": "MOVIE",
+                        "name": "MOVIE"
+                    },
+                    {
+                        "value": "MUSIC",
+                        "name": "MUSIC"
+                    },
+                    {
+                        "value": "BOOK",
+                        "name": "BOOK"
+                    },
+                    {
+                        "value": "SOFTWARE",
+                        "name": "SOFTWARE"
+                    },
+                    {
+                        "value": "GAME",
+                        "name": "GAME"
+                    },
+                    {
+                        "value": "PERSONAL_TITLE",
+                        "name": "PERSONAL_TITLE"
+                    },
+                    {
+                        "value": "EVENT",
+                        "name": "EVENT"
+                    },
+                    {
+                        "value": "DATE",
+                        "name": "DATE"
+                    },
+                    {
+                        "value": "QUANTITY",
+                        "name": "QUANTITY"
+                    },
+                    {
+                        "value": "ATTRIBUTE",
+                        "name": "ATTRIBUTE"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehend#TargetedSentimentMention": {
+            "type": "structure",
+            "members": {
+                "Score": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model confidence that the entity is relevant. Value range is zero to one, where one is highest confidence.</p>"
+                    }
+                },
+                "GroupScore": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence that all the entities mentioned in the group relate to the same entity.</p>"
+                    }
+                },
+                "Text": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text in the document that identifies the entity.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.comprehend#TargetedSentimentEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the entity. Amazon Comprehend supports a variety of <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-entities\">entity types</a>.</p>"
+                    }
+                },
+                "MentionSentiment": {
+                    "target": "com.amazonaws.comprehend#MentionSentiment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the sentiment and sentiment score for the mention.</p>"
+                    }
+                },
+                "BeginOffset": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset into the document text where the mention begins.</p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset into the document text where the mention ends.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about one mention of an entity. The mention information includes the location of the mention\n      in the text and the sentiment of the mention.</p>\n         <p>For more information about targeted sentiment, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html\">Targeted sentiment</a>.</p>"
             }
         },
         "com.amazonaws.comprehend#TextSizeLimitExceededException": {
@@ -8922,7 +9263,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Comprehend can't process the language of the input text. For custom entity\n      recognition APIs, only English, Spanish, French, Italian, German, or Portuguese are accepted.\n      For a list of supported languages, see <a>supported-languages</a>. </p>",
+                "smithy.api#documentation": "<p>Amazon Comprehend can't process the language of the input text. For custom entity\n      recognition APIs, only English, Spanish, French, Italian, German, or Portuguese are accepted.\n      For a list of supported languages,\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/supported-languages.html\">Supported languages</a> in the Comprehend Developer Guide.\n    </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
