@@ -15211,6 +15211,20 @@ func awsAwsjson11_serializeDocumentBlueGreenUpdatePolicy(v *types.BlueGreenUpdat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TimeSeriesForecastingSettings != nil {
+		ok := object.Key("TimeSeriesForecastingSettings")
+		if err := awsAwsjson11_serializeDocumentTimeSeriesForecastingSettings(v.TimeSeriesForecastingSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCapacitySize(v *types.CapacitySize, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21352,6 +21366,23 @@ func awsAwsjson11_serializeDocumentTensorBoardOutputConfig(v *types.TensorBoardO
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTimeSeriesForecastingSettings(v *types.TimeSeriesForecastingSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AmazonForecastRoleArn != nil {
+		ok := object.Key("AmazonForecastRoleArn")
+		ok.String(*v.AmazonForecastRoleArn)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrafficPattern(v *types.TrafficPattern, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -21885,6 +21916,13 @@ func awsAwsjson11_serializeDocumentUSD(v *types.USD, value smithyjson.Value) err
 func awsAwsjson11_serializeDocumentUserSettings(v *types.UserSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CanvasAppSettings != nil {
+		ok := object.Key("CanvasAppSettings")
+		if err := awsAwsjson11_serializeDocumentCanvasAppSettings(v.CanvasAppSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ExecutionRole != nil {
 		ok := object.Key("ExecutionRole")

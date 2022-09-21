@@ -2325,6 +2325,69 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 	return nil
 }
 
+type awsRestxml_serializeOpGetBucketVersioning struct {
+}
+
+func (*awsRestxml_serializeOpGetBucketVersioning) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpGetBucketVersioning) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetBucketVersioningInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/bucket/{Bucket}/versioning")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsGetBucketVersioningInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsGetBucketVersioningInput(v *GetBucketVersioningInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpGetJobTagging struct {
 }
 
@@ -3704,6 +3767,98 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpPutBucketVersioning struct {
+}
+
+func (*awsRestxml_serializeOpPutBucketVersioning) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpPutBucketVersioning) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutBucketVersioningInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v20180820/bucket/{Bucket}/versioning")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.VersioningConfiguration != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "VersioningConfiguration",
+			},
+			Attr: payloadRootAttr,
+		}
+		payloadRoot.Attr = append(payloadRoot.Attr, smithyxml.NewNamespaceAttribute("", "http://awss3control.amazonaws.com/doc/2018-08-20/"))
+		if err := awsRestxml_serializeDocumentVersioningConfiguration(input.VersioningConfiguration, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(v *PutBucketVersioningInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AccountId != nil && len(*v.AccountId) > 0 {
+		locationName := "X-Amz-Account-Id"
+		encoder.SetHeader(locationName).String(*v.AccountId)
+	}
+
+	if v.Bucket == nil || len(*v.Bucket) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
+	}
+	if v.Bucket != nil {
+		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
+			return err
+		}
+	}
+
+	if v.MFA != nil && len(*v.MFA) > 0 {
+		locationName := "X-Amz-Mfa"
+		encoder.SetHeader(locationName).String(*v.MFA)
 	}
 
 	return nil
@@ -7060,6 +7215,33 @@ func awsRestxml_serializeDocumentTransitionList(v []types.Transition, value smit
 		if err := awsRestxml_serializeDocumentTransition(&v[i], am); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentVersioningConfiguration(v *types.VersioningConfiguration, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.MFADelete) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "MfaDelete",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.MFADelete))
+	}
+	if len(v.Status) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Status",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.Status))
 	}
 	return nil
 }

@@ -80,6 +80,24 @@ func (BucketLocationConstraint) Values() []BucketLocationConstraint {
 	}
 }
 
+type BucketVersioningStatus string
+
+// Enum values for BucketVersioningStatus
+const (
+	BucketVersioningStatusEnabled   BucketVersioningStatus = "Enabled"
+	BucketVersioningStatusSuspended BucketVersioningStatus = "Suspended"
+)
+
+// Values returns all known values for BucketVersioningStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BucketVersioningStatus) Values() []BucketVersioningStatus {
+	return []BucketVersioningStatus{
+		"Enabled",
+		"Suspended",
+	}
+}
+
 type ExpirationStatus string
 
 // Enum values for ExpirationStatus
@@ -243,6 +261,42 @@ func (JobStatus) Values() []JobStatus {
 		"Preparing",
 		"Ready",
 		"Suspended",
+	}
+}
+
+type MFADelete string
+
+// Enum values for MFADelete
+const (
+	MFADeleteEnabled  MFADelete = "Enabled"
+	MFADeleteDisabled MFADelete = "Disabled"
+)
+
+// Values returns all known values for MFADelete. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (MFADelete) Values() []MFADelete {
+	return []MFADelete{
+		"Enabled",
+		"Disabled",
+	}
+}
+
+type MFADeleteStatus string
+
+// Enum values for MFADeleteStatus
+const (
+	MFADeleteStatusEnabled  MFADeleteStatus = "Enabled"
+	MFADeleteStatusDisabled MFADeleteStatus = "Disabled"
+)
+
+// Values returns all known values for MFADeleteStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MFADeleteStatus) Values() []MFADeleteStatus {
+	return []MFADeleteStatus{
+		"Enabled",
+		"Disabled",
 	}
 }
 

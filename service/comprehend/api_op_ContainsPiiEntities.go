@@ -37,8 +37,7 @@ type ContainsPiiEntitiesInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// Creates a new document classification request to analyze a single document in
-	// real-time, returning personally identifiable information (PII) entity labels.
+	// A UTF-8 text string. The maximum string size is 100 KB.
 	//
 	// This member is required.
 	Text *string

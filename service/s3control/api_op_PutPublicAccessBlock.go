@@ -17,7 +17,7 @@ import (
 
 // Creates or modifies the PublicAccessBlock configuration for an Amazon Web
 // Services account. For this operation, users must have the
-// s3:PutBucketPublicAccessBlock permission. For more information, see  Using
+// s3:PutAccountPublicAccessBlock permission. For more information, see  Using
 // Amazon S3 block public access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
 // Related actions include:

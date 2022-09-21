@@ -1,0 +1,8 @@
+{
+    "id": "31b8f3b6-2a37-43bb-8d8b-826f810fc4af",
+    "type": "feature",
+    "description": "Amazon Comprehend now supports synchronous mode for targeted sentiment API operations.",
+    "modules": [
+        "service/comprehend"
+    ]
+}

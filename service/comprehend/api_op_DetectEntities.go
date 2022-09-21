@@ -12,7 +12,9 @@ import (
 )
 
 // Inspects text for named entities, and returns information about them. For more
-// information, about named entities, see how-entities.
+// information, about named entities, see Entities
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html) in the
+// Comprehend Developer Guide.
 func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput, optFns ...func(*Options)) (*DetectEntitiesOutput, error) {
 	if params == nil {
 		params = &DetectEntitiesInput{}
@@ -30,8 +32,7 @@ func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput
 
 type DetectEntitiesInput struct {
 
-	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
-	// encoded characters.
+	// A UTF-8 text string. The maximum string size is 100 KB.
 	//
 	// This member is required.
 	Text *string
@@ -63,7 +64,8 @@ type DetectEntitiesOutput struct {
 	// If your request uses a custom entity recognition model, Amazon Comprehend
 	// detects the entities that the model is trained to recognize. Otherwise, it
 	// detects the default entity types. For a list of default entity types, see
-	// how-entities.
+	// Entities (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html) in
+	// the Comprehend Developer Guide.
 	Entities []types.Entity
 
 	// Metadata pertaining to the operation's result.

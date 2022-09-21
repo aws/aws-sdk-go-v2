@@ -1545,12 +1545,22 @@ type AutoMLCandidate struct {
 type AutoMLCandidateGenerationConfig struct {
 
 	// A URL to the Amazon S3 data source containing selected features from the input
-	// data source to run an Autopilot job (optional). This file should be in json
-	// format as shown below: { "FeatureAttributeNames":["col1", "col2", ...] }. The
-	// key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2",
-	// ...] is case sensitive and should be a list of strings containing unique values
-	// that are a subset of the column names in the input data. The list of columns
-	// provided must not include the target column.
+	// data source to run an Autopilot job. You can input FeatureAttributeNames
+	// (optional) in JSON format as shown below: { "FeatureAttributeNames":["col1",
+	// "col2", ...] }. You can also specify the data type of the feature (optional) in
+	// the format shown below: { "FeatureDataTypes":{"col1":"numeric",
+	// "col2":"categorical" ... } } These column keys may not include the target
+	// column. In ensembling mode, Autopilot will only support the following data
+	// types: numeric, categorical, text and datetime. In HPO mode, Autopilot can
+	// support numeric, categorical, text, datetime and sequence. If only
+	// FeatureDataTypes is provided, the column keys (col1, col2,..) should be a subset
+	// of the column names in the input data. If both FeatureDataTypes and
+	// FeatureAttributeNames are provided, then the column keys should be a subset of
+	// the column names provided in FeatureAttributeNames. The key name
+	// FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] is
+	// case sensitive and should be a list of strings containing unique values that are
+	// a subset of the column names in the input data. The list of columns provided
+	// must not include the target column.
 	FeatureSpecificationS3Uri *string
 
 	noSmithyDocumentSerde
@@ -2078,6 +2088,15 @@ type CandidateProperties struct {
 
 	// Information about the candidate metrics for an AutoML job.
 	CandidateMetrics []MetricDatum
+
+	noSmithyDocumentSerde
+}
+
+// The SageMaker Canvas app settings.
+type CanvasAppSettings struct {
+
+	// Time series forecast settings for the Canvas app.
+	TimeSeriesForecastingSettings *TimeSeriesForecastingSettings
 
 	noSmithyDocumentSerde
 }
@@ -6324,8 +6343,9 @@ type HyperParameterTuningJobObjective struct {
 	noSmithyDocumentSerde
 }
 
-// An entity having characteristics over which a user can search for a
-// hyperparameter tuning job.
+// An entity returned by the SearchRecord
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_SearchRecord.html)
+// API containing the properties of a hyperparameter tuning job.
 type HyperParameterTuningJobSearchEntity struct {
 
 	// The container for the summary information about a training job.
@@ -12413,6 +12433,27 @@ type TensorBoardOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Time series forecast settings for the SageMaker Canvas app.
+type TimeSeriesForecastingSettings struct {
+
+	// The IAM role that Canvas passes to Amazon Forecast for time series forecasting.
+	// By default, Canvas uses the execution role specified in the UserProfile that
+	// launches the Canvas app. If an execution role is not specified in the
+	// UserProfile, Canvas uses the execution role specified in the Domain that owns
+	// the UserProfile. To allow time series forecasting, this IAM role should have the
+	// AmazonSageMakerCanvasForecastAccess
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-canvas.html#security-iam-awsmanpol-AmazonSageMakerCanvasForecastAccess)
+	// policy attached and forecast.amazonaws.com added in the trust relationship as a
+	// service principal.
+	AmazonForecastRoleArn *string
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas
+	// app.
+	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
 // Defines the traffic pattern of the load test.
 type TrafficPattern struct {
 
@@ -13812,6 +13853,9 @@ type UserProfileDetails struct {
 // the values specified in CreateUserProfile take precedence over those specified
 // in CreateDomain.
 type UserSettings struct {
+
+	// The Canvas app settings.
+	CanvasAppSettings *CanvasAppSettings
 
 	// The execution role for the user.
 	ExecutionRole *string

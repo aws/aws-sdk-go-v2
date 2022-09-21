@@ -31940,6 +31940,42 @@ func awsAwsjson11_deserializeDocumentCandidateSteps(v *[]types.AutoMLCandidateSt
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCanvasAppSettings(v **types.CanvasAppSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CanvasAppSettings
+	if *v == nil {
+		sv = &types.CanvasAppSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TimeSeriesForecastingSettings":
+			if err := awsAwsjson11_deserializeDocumentTimeSeriesForecastingSettings(&sv.TimeSeriesForecastingSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCapacitySize(v **types.CapacitySize, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -57043,6 +57079,55 @@ func awsAwsjson11_deserializeDocumentTensorBoardOutputConfig(v **types.TensorBoa
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTimeSeriesForecastingSettings(v **types.TimeSeriesForecastingSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeSeriesForecastingSettings
+	if *v == nil {
+		sv = &types.TimeSeriesForecastingSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AmazonForecastRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.AmazonForecastRoleArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FeatureStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.FeatureStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrafficPattern(v **types.TrafficPattern, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -60704,6 +60789,11 @@ func awsAwsjson11_deserializeDocumentUserSettings(v **types.UserSettings, value 
 
 	for key, value := range shape {
 		switch key {
+		case "CanvasAppSettings":
+			if err := awsAwsjson11_deserializeDocumentCanvasAppSettings(&sv.CanvasAppSettings, value); err != nil {
+				return err
+			}
+
 		case "ExecutionRole":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -130,6 +130,18 @@ type BatchDetectSyntaxItemResult struct {
 	noSmithyDocumentSerde
 }
 
+// Analysis results for one of the documents in the batch.
+type BatchDetectTargetedSentimentItemResult struct {
+
+	// An array of targeted sentiment entities.
+	Entities []TargetedSentimentEntity
+
+	// The zero-based index of this result in the input list.
+	Index *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes an error that occurred while processing a document in a batch. The
 // operation returns on BatchItemError object for each document that contained an
 // error.
@@ -350,7 +362,9 @@ type DocumentClassifierFilter struct {
 }
 
 // The input properties for training a document classifier. For more information on
-// how the input file is formatted, see prep-classifier-data.
+// how the input file is formatted, see Preparing training data
+// (https://docs.aws.amazon.com/comprehend/latest/dg/prep-classifier-data.html) in
+// the Comprehend Developer Guide.
 type DocumentClassifierInputDataConfig struct {
 
 	// A list of augmented manifest files that provide training data for your custom
@@ -393,9 +407,9 @@ type DocumentClassifierInputDataConfig struct {
 	// if you set DataFormat to COMPREHEND_CSV.
 	S3Uri *string
 
-	// The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same
-	// AWS Region as the API endpoint that you are calling. The URI can point to a
-	// single input file or it can provide the prefix for a collection of input files.
+	// This specifies the Amazon S3 location where the test annotations for an entity
+	// recognizer are located. The URI must be in the same AWS Region as the API
+	// endpoint that you are calling.
 	TestS3Uri *string
 
 	noSmithyDocumentSerde
@@ -864,17 +878,12 @@ type EntitiesDetectionJobProperties struct {
 // Provides information about an entity.
 type Entity struct {
 
-	// A character offset in the input text that shows where the entity begins (the
-	// first character is at position 0). The offset returns the position of each UTF-8
-	// code point in the string. A code point is the abstract character from a
-	// particular graphical representation. For example, a multi-byte UTF-8 character
-	// maps to a single code point.
+	// The zero-based offset from the beginning of the source text to the first
+	// character in the entity.
 	BeginOffset *int32
 
-	// A character offset in the input text that shows where the entity ends. The
-	// offset returns the position of each UTF-8 code point in the string. A code point
-	// is the abstract character from a particular graphical representation. For
-	// example, a multi-byte UTF-8 character maps to a single code point.
+	// The zero-based offset from the beginning of the source text to the last
+	// character in the entity.
 	EndOffset *int32
 
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
@@ -914,9 +923,9 @@ type EntityRecognizerAnnotations struct {
 	// This member is required.
 	S3Uri *string
 
-	// This specifies the Amazon S3 location where the test annotations for an entity
-	// recognizer are located. The URI must be in the same AWS Region as the API
-	// endpoint that you are calling.
+	// Specifies the Amazon S3 location where the test annotations for an entity
+	// recognizer are located. The URI must be in the same region as the API endpoint
+	// that you are calling.
 	TestS3Uri *string
 
 	noSmithyDocumentSerde
@@ -1345,17 +1354,12 @@ type InputDataConfig struct {
 // Describes a key noun phrase.
 type KeyPhrase struct {
 
-	// A character offset in the input text that shows where the key phrase begins (the
-	// first character is at position 0). The offset returns the position of each UTF-8
-	// code point in the string. A code point is the abstract character from a
-	// particular graphical representation. For example, a multi-byte UTF-8 character
-	// maps to a single code point.
+	// The zero-based offset from the beginning of the source text to the first
+	// character in the key phrase.
 	BeginOffset *int32
 
-	// A character offset in the input text where the key phrase ends. The offset
-	// returns the position of each UTF-8 code point in the string. A code point is the
-	// abstract character from a particular graphical representation. For example, a
-	// multi-byte UTF-8 character maps to a single code point.
+	// The zero-based offset from the beginning of the source text to the last
+	// character in the key phrase.
 	EndOffset *int32
 
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
@@ -1458,6 +1462,21 @@ type KeyPhrasesDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the sentiment and sentiment score for one mention of an entity. For
+// more information about targeted sentiment, see Targeted sentiment
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+type MentionSentiment struct {
+
+	// The sentiment of the mention.
+	Sentiment SentimentType
+
+	// Describes the level of confidence that Amazon Comprehend has in the accuracy of
+	// its detection of sentiments.
+	SentimentScore *SentimentScore
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration parameters for the output of inference jobs.
 type OutputDataConfig struct {
 
@@ -1498,7 +1517,8 @@ type OutputDataConfig struct {
 // Identifies the part of speech represented by the token and gives the confidence
 // that Amazon Comprehend has that the part of speech was correctly identified. For
 // more information about the parts of speech that Amazon Comprehend can identify,
-// see how-syntax.
+// see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html) in
+// the Comprehend Developer Guide.
 type PartOfSpeechTag struct {
 
 	// The confidence that Amazon Comprehend has that the part of speech was correctly
@@ -1593,17 +1613,12 @@ type PiiEntitiesDetectionJobProperties struct {
 // Provides information about a PII entity.
 type PiiEntity struct {
 
-	// A character offset in the input text that shows where the PII entity begins (the
-	// first character is at position 0). The offset returns the position of each UTF-8
-	// code point in the string. A code point is the abstract character from a
-	// particular graphical representation. For example, a multi-byte UTF-8 character
-	// maps to a single code point.
+	// The zero-based offset from the beginning of the source text to the first
+	// character in the entity.
 	BeginOffset *int32
 
-	// A character offset in the input text that shows where the PII entity ends. The
-	// offset returns the position of each UTF-8 code point in the string. A code point
-	// is the abstract character from a particular graphical representation. For
-	// example, a multi-byte UTF-8 character maps to a single code point.
+	// The zero-based offset from the beginning of the source text to the last
+	// character in the entity.
 	EndOffset *int32
 
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
@@ -1778,7 +1793,9 @@ type SyntaxToken struct {
 
 	// Provides the part of speech label and the confidence level that Amazon
 	// Comprehend has that the part of speech was correctly identified. For more
-	// information, see how-syntax.
+	// information, see Syntax
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html) in the
+	// Comprehend Developer Guide.
 	PartOfSpeech *PartOfSpeechTag
 
 	// The word that was recognized in the source text.
@@ -1897,6 +1914,57 @@ type TargetedSentimentDetectionJobProperties struct {
 	// Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Information about one of the entities found by targeted sentiment analysis. For
+// more information about targeted sentiment, see Targeted sentiment
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+type TargetedSentimentEntity struct {
+
+	// One or more index into the Mentions array that provides the best name for the
+	// entity group.
+	DescriptiveMentionIndex []int32
+
+	// An array of mentions of the entity in the document. The array represents a
+	// co-reference group. See  Co-reference group
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-values)
+	// for an example.
+	Mentions []TargetedSentimentMention
+
+	noSmithyDocumentSerde
+}
+
+// Information about one mention of an entity. The mention information includes the
+// location of the mention in the text and the sentiment of the mention. For more
+// information about targeted sentiment, see Targeted sentiment
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+type TargetedSentimentMention struct {
+
+	// The offset into the document text where the mention begins.
+	BeginOffset *int32
+
+	// The offset into the document text where the mention ends.
+	EndOffset *int32
+
+	// The confidence that all the entities mentioned in the group relate to the same
+	// entity.
+	GroupScore *float32
+
+	// Contains the sentiment and sentiment score for the mention.
+	MentionSentiment *MentionSentiment
+
+	// Model confidence that the entity is relevant. Value range is zero to one, where
+	// one is highest confidence.
+	Score *float32
+
+	// The text in the document that identifies the entity.
+	Text *string
+
+	// The type of the entity. Amazon Comprehend supports a variety of entity types
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html#how-targeted-sentiment-entities).
+	Type TargetedSentimentEntityType
 
 	noSmithyDocumentSerde
 }

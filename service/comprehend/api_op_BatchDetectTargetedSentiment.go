@@ -11,38 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Inspects the text of a batch of documents for the syntax and part of speech of
-// the words in the document and returns information about them. For more
-// information, see Syntax
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html) in the
-// Comprehend Developer Guide.
-func (c *Client) BatchDetectSyntax(ctx context.Context, params *BatchDetectSyntaxInput, optFns ...func(*Options)) (*BatchDetectSyntaxOutput, error) {
+// Inspects a batch of documents and returns a sentiment analysis for each entity
+// identified in the documents. For more information about targeted sentiment, see
+// Targeted sentiment
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+func (c *Client) BatchDetectTargetedSentiment(ctx context.Context, params *BatchDetectTargetedSentimentInput, optFns ...func(*Options)) (*BatchDetectTargetedSentimentOutput, error) {
 	if params == nil {
-		params = &BatchDetectSyntaxInput{}
+		params = &BatchDetectTargetedSentimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchDetectSyntax", params, optFns, c.addOperationBatchDetectSyntaxMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchDetectTargetedSentiment", params, optFns, c.addOperationBatchDetectTargetedSentimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*BatchDetectSyntaxOutput)
+	out := result.(*BatchDetectTargetedSentimentOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type BatchDetectSyntaxInput struct {
+type BatchDetectTargetedSentimentInput struct {
 
-	// The language of the input documents. You can specify any of the following
-	// languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish
-	// ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must
-	// be in the same language.
+	// The language of the input documents. Currently, English is the only supported
+	// language.
 	//
 	// This member is required.
-	LanguageCode types.SyntaxLanguageCode
+	LanguageCode types.LanguageCode
 
 	// A list containing the UTF-8 encoded text of the input documents. The list can
-	// contain a maximum of 25 documents. The maximum size for each document is 5 KB.
+	// contain a maximum of 25 documents. The maximum size of each document is 5 KB.
 	//
 	// This member is required.
 	TextList []string
@@ -50,12 +47,9 @@ type BatchDetectSyntaxInput struct {
 	noSmithyDocumentSerde
 }
 
-type BatchDetectSyntaxOutput struct {
+type BatchDetectTargetedSentimentOutput struct {
 
-	// A list containing one object for each document that contained an error. The
-	// results are sorted in ascending order by the Index field and match the order of
-	// the documents in the input list. If there are no errors in the batch, the
-	// ErrorList is empty.
+	// List of errors that the operation can return.
 	//
 	// This member is required.
 	ErrorList []types.BatchItemError
@@ -66,7 +60,7 @@ type BatchDetectSyntaxOutput struct {
 	// ResultList is empty.
 	//
 	// This member is required.
-	ResultList []types.BatchDetectSyntaxItemResult
+	ResultList []types.BatchDetectTargetedSentimentItemResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,12 +68,12 @@ type BatchDetectSyntaxOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectSyntax{}, middleware.After)
+func (c *Client) addOperationBatchDetectTargetedSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectTargetedSentiment{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectSyntax{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectTargetedSentiment{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -119,10 +113,10 @@ func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpBatchDetectSyntaxValidationMiddleware(stack); err != nil {
+	if err = addOpBatchDetectTargetedSentimentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectSyntax(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectTargetedSentiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,11 +131,11 @@ func (c *Client) addOperationBatchDetectSyntaxMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opBatchDetectSyntax(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchDetectTargetedSentiment(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "comprehend",
-		OperationName: "BatchDetectSyntax",
+		OperationName: "BatchDetectTargetedSentiment",
 	}
 }

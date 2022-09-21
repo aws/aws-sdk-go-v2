@@ -113,7 +113,7 @@ type CreateBucketInput struct {
 	// is not supported by Amazon S3 on Outposts buckets.
 	ObjectLockEnabledForBucket bool
 
-	// The ID of the Outposts where the bucket is being created. This is required by
+	// The ID of the Outposts where the bucket is being created. This ID is required by
 	// Amazon S3 on Outposts buckets.
 	OutpostId *string
 

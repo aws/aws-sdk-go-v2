@@ -110,6 +110,26 @@ func (m *validateOpBatchDetectSyntax) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDetectTargetedSentiment struct {
+}
+
+func (*validateOpBatchDetectTargetedSentiment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDetectTargetedSentiment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDetectTargetedSentimentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDetectTargetedSentimentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpClassifyDocument struct {
 }
 
@@ -670,6 +690,26 @@ func (m *validateOpDetectSyntax) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDetectTargetedSentiment struct {
+}
+
+func (*validateOpDetectTargetedSentiment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetectTargetedSentiment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetectTargetedSentimentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetectTargetedSentimentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportModel struct {
 }
 
@@ -1170,6 +1210,10 @@ func addOpBatchDetectSyntaxValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDetectSyntax{}, middleware.After)
 }
 
+func addOpBatchDetectTargetedSentimentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDetectTargetedSentiment{}, middleware.After)
+}
+
 func addOpClassifyDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpClassifyDocument{}, middleware.After)
 }
@@ -1280,6 +1324,10 @@ func addOpDetectSentimentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDetectSyntaxValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetectSyntax{}, middleware.After)
+}
+
+func addOpDetectTargetedSentimentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetectTargetedSentiment{}, middleware.After)
 }
 
 func addOpImportModelValidationMiddleware(stack *middleware.Stack) error {
@@ -1737,6 +1785,24 @@ func validateOpBatchDetectSyntaxInput(v *BatchDetectSyntaxInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "BatchDetectSyntaxInput"}
+	if v.TextList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextList"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDetectTargetedSentimentInput(v *BatchDetectTargetedSentimentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDetectTargetedSentimentInput"}
 	if v.TextList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TextList"))
 	}
@@ -2232,6 +2298,24 @@ func validateOpDetectSyntaxInput(v *DetectSyntaxInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DetectSyntaxInput"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetectTargetedSentimentInput(v *DetectTargetedSentimentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetectTargetedSentimentInput"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}

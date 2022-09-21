@@ -82,7 +82,7 @@ type AsyncErrorDetails struct {
 	// A string that uniquely identifies the error condition.
 	Code *string
 
-	// A generic descritpion of the error condition in English.
+	// A generic description of the error condition in English.
 	Message *string
 
 	// The ID of the request associated with the error.
@@ -828,7 +828,7 @@ type MultiRegionAccessPointReport struct {
 	Regions []RegionReport
 
 	// The current status of the Multi-Region Access Point. CREATING and DELETING are
-	// temporary states that exist while the request is propogating and being
+	// temporary states that exist while the request is propagating and being
 	// completed. If a Multi-Region Access Point has a status of PARTIALLY_CREATED, you
 	// can retry creation or send a request to delete the Multi-Region Access Point. If
 	// a Multi-Region Access Point has a status of PARTIALLY_DELETED, you can retry a
@@ -1587,8 +1587,8 @@ type SSEKMS struct {
 type SSEKMSEncryption struct {
 
 	// Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
-	// Services KMS) symmetric customer managed key to use for encrypting generated
-	// manifest objects.
+	// Services KMS) symmetric encryption customer managed key to use for encrypting
+	// generated manifest objects.
 	//
 	// This member is required.
 	KeyId *string
@@ -1731,6 +1731,21 @@ type Transition struct {
 
 	// The storage class to which you want the object to transition.
 	StorageClass TransitionStorageClass
+
+	noSmithyDocumentSerde
+}
+
+// Describes the versioning state of an Amazon S3 on Outposts bucket. For more
+// information, see PutBucketVersioning
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html).
+type VersioningConfiguration struct {
+
+	// Specifies whether MFA delete is enabled or disabled in the bucket versioning
+	// configuration for the S3 on Outposts bucket.
+	MFADelete MFADelete
+
+	// Sets the versioning state of the S3 on Outposts bucket.
+	Status BucketVersioningStatus
 
 	noSmithyDocumentSerde
 }

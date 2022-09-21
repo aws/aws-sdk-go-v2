@@ -1431,6 +1431,24 @@ func (FeatureGroupStatus) Values() []FeatureGroupStatus {
 	}
 }
 
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled  FeatureStatus = "ENABLED"
+	FeatureStatusDisabled FeatureStatus = "DISABLED"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type FeatureType string
 
 // Enum values for FeatureType

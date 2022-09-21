@@ -37,8 +37,9 @@ type DetectSentimentInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
-	// encoded characters.
+	// A UTF-8 text string. The maximum string size is 5 KB. Amazon Comprehend performs
+	// real-time sentiment analysis on the first 500 characters of the input text and
+	// ignores any additional text in the input.
 	//
 	// This member is required.
 	Text *string

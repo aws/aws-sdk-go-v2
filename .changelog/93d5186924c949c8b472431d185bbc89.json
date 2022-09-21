@@ -1,0 +1,8 @@
+{
+    "id": "93d51869-24c9-49c8-b472-431d185bbc89",
+    "type": "feature",
+    "description": "SageMaker now allows customization on Canvas Application settings, including enabling/disabling time-series forecasting and specifying an Amazon Forecast execution role at both the Domain and UserProfile levels.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

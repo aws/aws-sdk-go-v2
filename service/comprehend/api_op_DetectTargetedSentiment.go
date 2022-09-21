@@ -11,28 +11,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Determines the dominant language of the input text. For a list of languages that
-// Amazon Comprehend can detect, see Amazon Comprehend Supported Languages
-// (https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html).
-func (c *Client) DetectDominantLanguage(ctx context.Context, params *DetectDominantLanguageInput, optFns ...func(*Options)) (*DetectDominantLanguageOutput, error) {
+// Inspects the input text and returns a sentiment analysis for each entity
+// identified in the text. For more information about targeted sentiment, see
+// Targeted sentiment
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-targeted-sentiment.html).
+func (c *Client) DetectTargetedSentiment(ctx context.Context, params *DetectTargetedSentimentInput, optFns ...func(*Options)) (*DetectTargetedSentimentOutput, error) {
 	if params == nil {
-		params = &DetectDominantLanguageInput{}
+		params = &DetectTargetedSentimentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetectDominantLanguage", params, optFns, c.addOperationDetectDominantLanguageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetectTargetedSentiment", params, optFns, c.addOperationDetectTargetedSentimentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DetectDominantLanguageOutput)
+	out := result.(*DetectTargetedSentimentOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DetectDominantLanguageInput struct {
+type DetectTargetedSentimentInput struct {
 
-	// A UTF-8 text string. The string must contain at least 20 characters. The maximum
-	// string size is 100 KB.
+	// The language of the input documents. Currently, English is the only supported
+	// language.
+	//
+	// This member is required.
+	LanguageCode types.LanguageCode
+
+	// A UTF-8 text string. The maximum string length is 5 KB.
 	//
 	// This member is required.
 	Text *string
@@ -40,14 +46,11 @@ type DetectDominantLanguageInput struct {
 	noSmithyDocumentSerde
 }
 
-type DetectDominantLanguageOutput struct {
+type DetectTargetedSentimentOutput struct {
 
-	// The languages that Amazon Comprehend detected in the input text. For each
-	// language, the response returns the RFC 5646 language code and the level of
-	// confidence that Amazon Comprehend has in the accuracy of its inference. For more
-	// information about RFC 5646, see Tags for Identifying Languages
-	// (https://tools.ietf.org/html/rfc5646) on the IETF Tools web site.
-	Languages []types.DominantLanguage
+	// Targeted sentiment analysis for each of the entities identified in the input
+	// text.
+	Entities []types.TargetedSentimentEntity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,12 +58,12 @@ type DetectDominantLanguageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectDominantLanguage{}, middleware.After)
+func (c *Client) addOperationDetectTargetedSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectTargetedSentiment{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectDominantLanguage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectTargetedSentiment{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -100,10 +103,10 @@ func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDetectDominantLanguageValidationMiddleware(stack); err != nil {
+	if err = addOpDetectTargetedSentimentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectDominantLanguage(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectTargetedSentiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -118,11 +121,11 @@ func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDetectDominantLanguage(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDetectTargetedSentiment(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "comprehend",
-		OperationName: "DetectDominantLanguage",
+		OperationName: "DetectTargetedSentiment",
 	}
 }

@@ -44,7 +44,7 @@ type StartTargetedSentimentDetectionJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. Currently, English is the only valid
+	// The language of the input documents. Currently, English is the only supported
 	// language.
 	//
 	// This member is required.

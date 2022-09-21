@@ -15,10 +15,10 @@ import (
 // and is the main way to reference a "person" for the purposes of sharing,
 // reporting, and other user-oriented features. This entity is created when a user
 // onboards to Amazon SageMaker Studio. If an administrator invites a person by
-// email or imports them from Amazon Web Services SSO, a user profile is
-// automatically created. A user profile is the primary holder of settings for an
-// individual user and has a reference to the user's private Amazon Elastic File
-// System (EFS) home directory.
+// email or imports them from IAM Identity Center, a user profile is automatically
+// created. A user profile is the primary holder of settings for an individual user
+// and has a reference to the user's private Amazon Elastic File System (EFS) home
+// directory.
 func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfileInput, optFns ...func(*Options)) (*CreateUserProfileOutput, error) {
 	if params == nil {
 		params = &CreateUserProfileInput{}
@@ -47,16 +47,15 @@ type CreateUserProfileInput struct {
 	UserProfileName *string
 
 	// A specifier for the type of value specified in SingleSignOnUserValue. Currently,
-	// the only supported value is "UserName". If the Domain's AuthMode is Amazon Web
-	// Services SSO, this field is required. If the Domain's AuthMode is not Amazon Web
-	// Services SSO, this field cannot be specified.
+	// the only supported value is "UserName". If the Domain's AuthMode is IAM Identity
+	// Center, this field is required. If the Domain's AuthMode is not IAM Identity
+	// Center, this field cannot be specified.
 	SingleSignOnUserIdentifier *string
 
 	// The username of the associated Amazon Web Services Single Sign-On User for this
-	// UserProfile. If the Domain's AuthMode is Amazon Web Services SSO, this field is
+	// UserProfile. If the Domain's AuthMode is IAM Identity Center, this field is
 	// required, and must match a valid username of a user in your directory. If the
-	// Domain's AuthMode is not Amazon Web Services SSO, this field cannot be
-	// specified.
+	// Domain's AuthMode is not IAM Identity Center, this field cannot be specified.
 	SingleSignOnUserValue *string
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per

@@ -52,7 +52,8 @@ type ListRegionalBucketsInput struct {
 	//
 	NextToken *string
 
-	// The ID of the Outposts. This is required by Amazon S3 on Outposts buckets.
+	// The ID of the Outposts resource. This ID is required by Amazon S3 on Outposts
+	// buckets.
 	OutpostId *string
 
 	noSmithyDocumentSerde

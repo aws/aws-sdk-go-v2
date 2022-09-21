@@ -630,6 +630,26 @@ func (m *validateOpGetBucketTagging) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBucketVersioning struct {
+}
+
+func (*validateOpGetBucketVersioning) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketVersioning) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketVersioningInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketVersioningInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetJobTagging struct {
 }
 
@@ -1010,6 +1030,26 @@ func (m *validateOpPutBucketTagging) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutBucketVersioning struct {
+}
+
+func (*validateOpPutBucketVersioning) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBucketVersioning) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBucketVersioningInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBucketVersioningInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutJobTagging struct {
 }
 
@@ -1274,6 +1314,10 @@ func addOpGetBucketTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBucketTagging{}, middleware.After)
 }
 
+func addOpGetBucketVersioningValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketVersioning{}, middleware.After)
+}
+
 func addOpGetJobTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobTagging{}, middleware.After)
 }
@@ -1348,6 +1392,10 @@ func addOpPutBucketPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutBucketTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutBucketTagging{}, middleware.After)
+}
+
+func addOpPutBucketVersioningValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBucketVersioning{}, middleware.After)
 }
 
 func addOpPutJobTaggingValidationMiddleware(stack *middleware.Stack) error {
@@ -2900,6 +2948,24 @@ func validateOpGetBucketTaggingInput(v *GetBucketTaggingInput) error {
 	}
 }
 
+func validateOpGetBucketVersioningInput(v *GetBucketVersioningInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketVersioningInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetJobTaggingInput(v *GetJobTaggingInput) error {
 	if v == nil {
 		return nil
@@ -3241,6 +3307,27 @@ func validateOpPutBucketTaggingInput(v *PutBucketTaggingInput) error {
 		if err := validateTagging(v.Tagging); err != nil {
 			invalidParams.AddNested("Tagging", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutBucketVersioningInput(v *PutBucketVersioningInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBucketVersioningInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.VersioningConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersioningConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

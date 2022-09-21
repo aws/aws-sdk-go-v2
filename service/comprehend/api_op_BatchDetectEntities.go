@@ -12,8 +12,9 @@ import (
 )
 
 // Inspects the text of a batch of documents for named entities and returns
-// information about them. For more information about named entities, see
-// how-entities
+// information about them. For more information about named entities, see Entities
+// (https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html) in the
+// Comprehend Developer Guide.
 func (c *Client) BatchDetectEntities(ctx context.Context, params *BatchDetectEntitiesInput, optFns ...func(*Options)) (*BatchDetectEntitiesOutput, error) {
 	if params == nil {
 		params = &BatchDetectEntitiesInput{}
@@ -38,9 +39,8 @@ type BatchDetectEntitiesInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// A list containing the text of the input documents. The list can contain a
-	// maximum of 25 documents. Each document must contain fewer than 5,000 bytes of
-	// UTF-8 encoded characters.
+	// A list containing the UTF-8 encoded text of the input documents. The list can
+	// contain a maximum of 25 documents. The maximum size of each document is 5 KB.
 	//
 	// This member is required.
 	TextList []string

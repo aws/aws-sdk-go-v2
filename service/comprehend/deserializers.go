@@ -632,6 +632,129 @@ func awsAwsjson11_deserializeOpErrorBatchDetectSyntax(response *smithyhttp.Respo
 	}
 }
 
+type awsAwsjson11_deserializeOpBatchDetectTargetedSentiment struct {
+}
+
+func (*awsAwsjson11_deserializeOpBatchDetectTargetedSentiment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpBatchDetectTargetedSentiment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorBatchDetectTargetedSentiment(response, &metadata)
+	}
+	output := &BatchDetectTargetedSentimentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentBatchDetectTargetedSentimentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorBatchDetectTargetedSentiment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BatchSizeLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorBatchSizeLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("TextSizeLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorTextSizeLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedLanguageException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedLanguageException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpClassifyDocument struct {
 }
 
@@ -3975,6 +4098,126 @@ func (m *awsAwsjson11_deserializeOpDetectSyntax) HandleDeserialize(ctx context.C
 }
 
 func awsAwsjson11_deserializeOpErrorDetectSyntax(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
+
+	case strings.EqualFold("TextSizeLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorTextSizeLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedLanguageException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedLanguageException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDetectTargetedSentiment struct {
+}
+
+func (*awsAwsjson11_deserializeOpDetectTargetedSentiment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDetectTargetedSentiment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDetectTargetedSentiment(response, &metadata)
+	}
+	output := &DetectTargetedSentimentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDetectTargetedSentimentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDetectTargetedSentiment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -9561,6 +9804,55 @@ func awsAwsjson11_deserializeDocumentBatchDetectSyntaxItemResult(v **types.Batch
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBatchDetectTargetedSentimentItemResult(v **types.BatchDetectTargetedSentimentItemResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchDetectTargetedSentimentItemResult
+	if *v == nil {
+		sv = &types.BatchDetectTargetedSentimentItemResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Entities":
+			if err := awsAwsjson11_deserializeDocumentListOfTargetedSentimentEntities(&sv.Entities, value); err != nil {
+				return err
+			}
+
+		case "Index":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Index = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchItemError(v **types.BatchItemError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13665,6 +13957,46 @@ func awsAwsjson11_deserializeDocumentListOfClasses(v *[]types.DocumentClass, val
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentListOfDescriptiveMentionIndices(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentListOfDetectDominantLanguageResult(v *[]types.BatchDetectDominantLanguageItemResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13825,6 +14157,40 @@ func awsAwsjson11_deserializeDocumentListOfDetectSyntaxResult(v *[]types.BatchDe
 		var col types.BatchDetectSyntaxItemResult
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentBatchDetectSyntaxItemResult(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentListOfDetectTargetedSentimentResult(v *[]types.BatchDetectTargetedSentimentItemResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchDetectTargetedSentimentItemResult
+	if *v == nil {
+		cv = []types.BatchDetectTargetedSentimentItemResult{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchDetectTargetedSentimentItemResult
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentBatchDetectTargetedSentimentItemResult(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -14041,6 +14407,40 @@ func awsAwsjson11_deserializeDocumentListOfLabels(v *[]types.DocumentLabel, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentListOfMentions(v *[]types.TargetedSentimentMention, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TargetedSentimentMention
+	if *v == nil {
+		cv = []types.TargetedSentimentMention{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TargetedSentimentMention
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTargetedSentimentMention(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentListOfPiiEntities(v *[]types.PiiEntity, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14142,6 +14542,85 @@ func awsAwsjson11_deserializeDocumentListOfSyntaxTokens(v *[]types.SyntaxToken, 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentListOfTargetedSentimentEntities(v *[]types.TargetedSentimentEntity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TargetedSentimentEntity
+	if *v == nil {
+		cv = []types.TargetedSentimentEntity{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TargetedSentimentEntity
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTargetedSentimentEntity(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMentionSentiment(v **types.MentionSentiment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MentionSentiment
+	if *v == nil {
+		sv = &types.MentionSentiment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Sentiment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SentimentType to be of type string, got %T instead", value)
+				}
+				sv.Sentiment = types.SentimentType(jtv)
+			}
+
+		case "SentimentScore":
+			if err := awsAwsjson11_deserializeDocumentSentimentScore(&sv.SentimentScore, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -15589,6 +16068,195 @@ func awsAwsjson11_deserializeDocumentTargetedSentimentDetectionJobPropertiesList
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTargetedSentimentEntity(v **types.TargetedSentimentEntity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetedSentimentEntity
+	if *v == nil {
+		sv = &types.TargetedSentimentEntity{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DescriptiveMentionIndex":
+			if err := awsAwsjson11_deserializeDocumentListOfDescriptiveMentionIndices(&sv.DescriptiveMentionIndex, value); err != nil {
+				return err
+			}
+
+		case "Mentions":
+			if err := awsAwsjson11_deserializeDocumentListOfMentions(&sv.Mentions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTargetedSentimentMention(v **types.TargetedSentimentMention, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TargetedSentimentMention
+	if *v == nil {
+		sv = &types.TargetedSentimentMention{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BeginOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BeginOffset = ptr.Int32(int32(i64))
+			}
+
+		case "EndOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndOffset = ptr.Int32(int32(i64))
+			}
+
+		case "GroupScore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.GroupScore = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.GroupScore = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "MentionSentiment":
+			if err := awsAwsjson11_deserializeDocumentMentionSentiment(&sv.MentionSentiment, value); err != nil {
+				return err
+			}
+
+		case "Score":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Score = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Score = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Text":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Text = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetedSentimentEntityType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TargetedSentimentEntityType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTargetEventTypes(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16247,6 +16915,47 @@ func awsAwsjson11_deserializeOpDocumentBatchDetectSyntaxOutput(v **BatchDetectSy
 
 		case "ResultList":
 			if err := awsAwsjson11_deserializeDocumentListOfDetectSyntaxResult(&sv.ResultList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentBatchDetectTargetedSentimentOutput(v **BatchDetectTargetedSentimentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchDetectTargetedSentimentOutput
+	if *v == nil {
+		sv = &BatchDetectTargetedSentimentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorList":
+			if err := awsAwsjson11_deserializeDocumentBatchItemErrorList(&sv.ErrorList, value); err != nil {
+				return err
+			}
+
+		case "ResultList":
+			if err := awsAwsjson11_deserializeDocumentListOfDetectTargetedSentimentResult(&sv.ResultList, value); err != nil {
 				return err
 			}
 
@@ -17306,6 +18015,42 @@ func awsAwsjson11_deserializeOpDocumentDetectSyntaxOutput(v **DetectSyntaxOutput
 		switch key {
 		case "SyntaxTokens":
 			if err := awsAwsjson11_deserializeDocumentListOfSyntaxTokens(&sv.SyntaxTokens, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDetectTargetedSentimentOutput(v **DetectTargetedSentimentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DetectTargetedSentimentOutput
+	if *v == nil {
+		sv = &DetectTargetedSentimentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Entities":
+			if err := awsAwsjson11_deserializeDocumentListOfTargetedSentimentEntities(&sv.Entities, value); err != nil {
 				return err
 			}
 

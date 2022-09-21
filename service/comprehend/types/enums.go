@@ -534,3 +534,51 @@ func (SyntaxLanguageCode) Values() []SyntaxLanguageCode {
 		"pt",
 	}
 }
+
+type TargetedSentimentEntityType string
+
+// Enum values for TargetedSentimentEntityType
+const (
+	TargetedSentimentEntityTypePerson         TargetedSentimentEntityType = "PERSON"
+	TargetedSentimentEntityTypeLocation       TargetedSentimentEntityType = "LOCATION"
+	TargetedSentimentEntityTypeOrganization   TargetedSentimentEntityType = "ORGANIZATION"
+	TargetedSentimentEntityTypeFacility       TargetedSentimentEntityType = "FACILITY"
+	TargetedSentimentEntityTypeBrand          TargetedSentimentEntityType = "BRAND"
+	TargetedSentimentEntityTypeCommercialItem TargetedSentimentEntityType = "COMMERCIAL_ITEM"
+	TargetedSentimentEntityTypeMovie          TargetedSentimentEntityType = "MOVIE"
+	TargetedSentimentEntityTypeMusic          TargetedSentimentEntityType = "MUSIC"
+	TargetedSentimentEntityTypeBook           TargetedSentimentEntityType = "BOOK"
+	TargetedSentimentEntityTypeSoftware       TargetedSentimentEntityType = "SOFTWARE"
+	TargetedSentimentEntityTypeGame           TargetedSentimentEntityType = "GAME"
+	TargetedSentimentEntityTypePersonalTitle  TargetedSentimentEntityType = "PERSONAL_TITLE"
+	TargetedSentimentEntityTypeEvent          TargetedSentimentEntityType = "EVENT"
+	TargetedSentimentEntityTypeDate           TargetedSentimentEntityType = "DATE"
+	TargetedSentimentEntityTypeQuantity       TargetedSentimentEntityType = "QUANTITY"
+	TargetedSentimentEntityTypeAttribute      TargetedSentimentEntityType = "ATTRIBUTE"
+	TargetedSentimentEntityTypeOther          TargetedSentimentEntityType = "OTHER"
+)
+
+// Values returns all known values for TargetedSentimentEntityType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetedSentimentEntityType) Values() []TargetedSentimentEntityType {
+	return []TargetedSentimentEntityType{
+		"PERSON",
+		"LOCATION",
+		"ORGANIZATION",
+		"FACILITY",
+		"BRAND",
+		"COMMERCIAL_ITEM",
+		"MOVIE",
+		"MUSIC",
+		"BOOK",
+		"SOFTWARE",
+		"GAME",
+		"PERSONAL_TITLE",
+		"EVENT",
+		"DATE",
+		"QUANTITY",
+		"ATTRIBUTE",
+		"OTHER",
+	}
+}
