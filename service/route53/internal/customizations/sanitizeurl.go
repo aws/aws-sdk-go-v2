@@ -18,13 +18,13 @@ type AddSanitizeURLMiddlewareOptions struct {
 	// the hosted zone id input member.
 	//
 	// returns an error if any.
-	SanitizeHostedZoneIDInput func(interface{}) error
+	SanitizeURLInput func(interface{}) error
 }
 
 // AddSanitizeURLMiddleware add the middleware necessary to modify Route53 input before op serialization.
 func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMiddlewareOptions) error {
 	return stack.Serialize.Insert(&sanitizeURL{
-		sanitizeHostedZoneIDInput: options.SanitizeHostedZoneIDInput,
+		sanitizeURLInput: options.SanitizeURLInput,
 	}, "OperationSerializer", middleware.Before)
 }
 
@@ -34,7 +34,7 @@ func AddSanitizeURLMiddleware(stack *middleware.Stack, options AddSanitizeURLMid
 // the hosted zone id input member. That excess prefix is there because some route53 apis return
 // the id in that format, so this middleware enables round-tripping those values.
 type sanitizeURL struct {
-	sanitizeHostedZoneIDInput func(interface{}) error
+	sanitizeURLInput func(interface{}) error
 }
 
 // ID returns the id for the middleware.
@@ -55,7 +55,7 @@ func (m *sanitizeURL) HandleSerialize(
 		}
 	}
 
-	if err := m.sanitizeHostedZoneIDInput(in.Parameters); err != nil {
+	if err := m.sanitizeURLInput(in.Parameters); err != nil {
 		return out, metadata, err
 	}
 

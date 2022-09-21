@@ -25,7 +25,7 @@ public class Route53Customizations implements GoIntegration {
     private static final String ADD_ERROR_HANDLER_INTERNAL = "HandleCustomErrorDeserialization";
     private static final String URL_SANITIZE_ADDER = "addSanitizeURLMiddleware";
     private static final String URL_SANITIZE_INTERNAL_ADDER= "AddSanitizeURLMiddleware";
-    private static final String SANITIZE_HOSTED_ZONE_ID_INPUT = "sanitizeHostedZoneIDInput";
+    private static final String SANITIZE_URL_INPUT = "sanitizeURLInput";
 
     @Override
     public byte getOrder() {
@@ -45,7 +45,7 @@ public class Route53Customizations implements GoIntegration {
                                 .build())
                         .build(),
                 RuntimeClientPlugin.builder()
-                        .operationPredicate(Route53Customizations::supportsHostedZoneIDValue)
+                        .operationPredicate(Route53Customizations::supportsSanitizeURLValue)
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(URL_SANITIZE_ADDER).build())
                                 .build())
@@ -68,24 +68,24 @@ public class Route53Customizations implements GoIntegration {
         goDelegator.useShapeWriter(service, this::writeMiddlewareHelper);
 
         goDelegator.useShapeWriter(service, writer -> {
-                writeHostedZoneIDInputSanitizer(writer, model, symbolProvider, service);
+                writeURLInputSanitizer(writer, model, symbolProvider, service);
             });
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
         writer.openBlock("func $L(stack *middleware.Stack) error {", "}", URL_SANITIZE_ADDER, () -> {
-            writer.write("return $T(stack, $T{SanitizeHostedZoneIDInput: $L})",
+            writer.write("return $T(stack, $T{SanitizeURLInput: $L})",
                     SymbolUtils.createValueSymbolBuilder(URL_SANITIZE_INTERNAL_ADDER,
                             AwsCustomGoDependency.ROUTE53_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(URL_SANITIZE_INTERNAL_ADDER + "Options",
                             AwsCustomGoDependency.ROUTE53_CUSTOMIZATION).build(),
-                    SANITIZE_HOSTED_ZONE_ID_INPUT
+                    SANITIZE_URL_INPUT
             );
         });
         writer.insertTrailingNewline();
     }
 
-    private void writeHostedZoneIDInputSanitizer(
+    private void writeURLInputSanitizer(
             GoWriter writer,
             Model model,
             SymbolProvider symbolProvider,
@@ -96,19 +96,16 @@ public class Route53Customizations implements GoIntegration {
                 "This allows the output of one operation e.g. foo/1234 to be used as input in another operation " +
                 "(e.g. it expects just '1234')");
 
-        writer.openBlock("func sanitizeHostedZoneIDInput(input interface{}) error {", "}", () -> {
+        writer.openBlock("func sanitizeURLInput(input interface{}) error {", "}", () -> {
             writer.openBlock("switch i:= input.(type) {", "}", () -> {
                 TopDownIndex.of(model).getContainedOperations(service).forEach((operation)-> {
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
-                    List<MemberShape> hostedZoneIDMembers = input.getAllMembers().values().stream()
-                            .filter(m -> m.getTarget().getName(service).equalsIgnoreCase("ResourceId")
-                                    || m.getTarget().getName(service).equalsIgnoreCase("DelegationSetId"))
-                            .collect(Collectors.toList());
+                    List<MemberShape> resourceMembers = getResourceMembers(service, input);
 
-                    if (!hostedZoneIDMembers.isEmpty()){
+                    if (!resourceMembers.isEmpty()){
                         writer.openBlock("case $P :", "", symbolProvider.toSymbol(input), () -> {
                             writer.addUseImports(SmithyGoDependency.STRINGS);
-                            for (MemberShape member : hostedZoneIDMembers) {
+                            for (MemberShape member : resourceMembers) {
                                 String memberName = member.getMemberName();
                                writer.openBlock("if i.$L != nil {", "}", memberName, () -> {
                                 writer.write("idx := strings.LastIndex(*i.$L, `/`)", memberName);
@@ -125,6 +122,14 @@ public class Route53Customizations implements GoIntegration {
         });
     }
 
+    private static List<MemberShape> getResourceMembers(ServiceShape service, StructureShape input) {
+        return input.getAllMembers().values().stream()
+                .filter(m -> m.getTarget().getName(service).equalsIgnoreCase("ResourceId")
+                        || m.getTarget().getName(service).equalsIgnoreCase("DelegationSetId")
+                        || m.getTarget().getName(service).equalsIgnoreCase("ChangeId"))
+                .collect(Collectors.toList());
+    }
+
     // returns true if the operation supports custom route53 error response
     private static boolean supportsCustomError(Model model, ServiceShape service, OperationShape operation) {
         if (!isRoute53Service(model, service)) {
@@ -134,19 +139,16 @@ public class Route53Customizations implements GoIntegration {
         return operation.getId().getName(service).equalsIgnoreCase("ChangeResourceRecordSets");
     }
 
-    // return true if the operation takes input that supports Hosted zone ID.
+    // return true if the operation takes input that supports resource sanitization.
     //
-    // For Route53, HostedZoneID is supported by member shapes targeting `ResourceId` or `DelegationSetId`.
-    private static boolean supportsHostedZoneIDValue(Model model, ServiceShape service, OperationShape operation) {
+    // For Route53, HostedZoneID, and changeID is supported by member shapes targeting `ResourceId` or `DelegationSetId`.
+    private static boolean supportsSanitizeURLValue(Model model, ServiceShape service, OperationShape operation) {
         if (!isRoute53Service(model, service)) {
             return false;
         }
 
         StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
-        List<MemberShape> targetMembers = input.getAllMembers().values().stream().filter(
-                memberShape -> memberShape.getTarget().getName(service).equalsIgnoreCase("ResourceId") ||
-                        memberShape.getTarget().getName(service).equalsIgnoreCase("DelegationSetId")
-        ).collect(Collectors.toList());
+        List<MemberShape> targetMembers = getResourceMembers(service, input);
 
         if (targetMembers.size() >1 ){
             throw new CodegenException(String.format("Route53 service has ResourceId, DelegationSetId members " +
