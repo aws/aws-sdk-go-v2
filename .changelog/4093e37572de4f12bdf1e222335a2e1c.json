@@ -1,7 +1,7 @@
 {
     "id": "4093e375-72de-4f12-bdf1-e222335a2e1c",
     "type": "bugfix",
-    "description": "updated getChange to sanitize /change/ prefix of the changeId returned from the service",
+    "description": "Updated GetChange to sanitize /change/ prefix of the changeId returned from the service.",
     "modules": [
         "service/route53"
     ]
