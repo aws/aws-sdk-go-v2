@@ -1,3 +1,7 @@
+# v1.22.2 (2022-09-21)
+
+* **Bug Fix**: Updated GetChange to sanitize /change/ prefix of the changeId returned from the service.
+
 # v1.22.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

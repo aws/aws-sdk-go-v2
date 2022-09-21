@@ -1,3 +1,15 @@
+# Release (2022-09-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.19.0](service/comprehend/CHANGELOG.md#v1190-2022-09-21)
+  * **Feature**: Amazon Comprehend now supports synchronous mode for targeted sentiment API operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.22.2](service/route53/CHANGELOG.md#v1222-2022-09-21)
+  * **Bug Fix**: Updated GetChange to sanitize /change/ prefix of the changeId returned from the service.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.23.0](service/s3control/CHANGELOG.md#v1230-2022-09-21)
+  * **Feature**: S3 on Outposts launches support for object versioning for Outposts buckets. With S3 Versioning, you can preserve, retrieve, and restore every version of every object stored in your buckets. You can recover from both unintended user actions and application failures.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.44.0](service/sagemaker/CHANGELOG.md#v1440-2022-09-21)
+  * **Feature**: SageMaker now allows customization on Canvas Application settings, including enabling/disabling time-series forecasting and specifying an Amazon Forecast execution role at both the Domain and UserProfile levels.
+
 # Release (2022-09-20)
 
 ## General Highlights

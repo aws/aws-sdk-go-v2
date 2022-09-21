@@ -1,3 +1,7 @@
+# v1.23.0 (2022-09-21)
+
+* **Feature**: S3 on Outposts launches support for object versioning for Outposts buckets. With S3 Versioning, you can preserve, retrieve, and restore every version of every object stored in your buckets. You can recover from both unintended user actions and application failures.
+
 # v1.22.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

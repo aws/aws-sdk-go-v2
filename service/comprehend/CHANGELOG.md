@@ -1,3 +1,7 @@
+# v1.19.0 (2022-09-21)
+
+* **Feature**: Amazon Comprehend now supports synchronous mode for targeted sentiment API operations.
+
 # v1.18.12 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

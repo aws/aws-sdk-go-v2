@@ -63,11 +63,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rds v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.10
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.20.5
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.22.1
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.17
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.18
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.11
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.22.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.16.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.17
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.18
