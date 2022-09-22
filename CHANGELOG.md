@@ -1,3 +1,17 @@
+# Release (2022-09-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.7.0](service/backupgateway/CHANGELOG.md#v170-2022-09-22)
+  * **Feature**: Changes include: new GetVirtualMachineApi to fetch a single user's VM, improving ListVirtualMachines to fetch filtered VMs as well as all VMs, and improving GetGatewayApi to now also return the gateway's MaintenanceStartTime.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.14.0](service/devicefarm/CHANGELOG.md#v1140-2022-09-22)
+  * **Feature**: This release adds the support for VPC-ENI based connectivity for private devices on AWS Device Farm.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.59.0](service/ec2/CHANGELOG.md#v1590-2022-09-22)
+  * **Feature**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.32.0](service/glue/CHANGELOG.md#v1320-2022-09-22)
+  * **Feature**: Added support for S3 Event Notifications for Catalog Target Crawlers.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.15.5](service/identitystore/CHANGELOG.md#v1155-2022-09-22)
+  * **Documentation**: Documentation updates for the Identity Store CLI Reference.
+
 # Release (2022-09-21)
 
 ## Module Highlights

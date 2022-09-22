@@ -1,8 +1,0 @@
-{
-    "id": "4cd0046a-77f9-48e9-abb8-e457760df609",
-    "type": "documentation",
-    "description": "Documentation updates for the Identity Store CLI Reference.",
-    "modules": [
-        "service/identitystore"
-    ]
-}

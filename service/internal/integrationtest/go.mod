@@ -26,12 +26,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.17
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.12
-	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.13.17
+	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.18
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.58.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.59.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.18
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.22
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.15
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.19
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.17
-	github.com/aws/aws-sdk-go-v2/service/glue v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.20
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.19
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.17

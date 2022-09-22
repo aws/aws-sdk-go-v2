@@ -1,3 +1,7 @@
+# v1.59.0 (2022-09-22)
+
+* **Feature**: Documentation updates for Amazon EC2.
+
 # v1.58.0 (2022-09-20)
 
 * **Feature**: This release adds support for blocked paths to Amazon VPC Reachability Analyzer.

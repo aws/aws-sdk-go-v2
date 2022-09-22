@@ -1,3 +1,7 @@
+# v1.32.0 (2022-09-22)
+
+* **Feature**: Added support for S3 Event Notifications for Catalog Target Crawlers.
+
 # v1.31.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
