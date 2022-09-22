@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -80,13 +80,15 @@
                 "defaultJobTimeoutMinutes": {
                     "target": "com.amazonaws.devicefarm#JobTimeoutMinutes",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 150,
                         "smithy.api#documentation": "<p>The default number of minutes (at the account level) a test run executes before it times out. The\n            default value is 150 minutes.</p>"
                     }
                 },
                 "skipAppResign": {
                     "target": "com.amazonaws.devicefarm#SkipAppResign",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"https://aws.amazon.com/device-farm/faq/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
+                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"http://aws.amazon.com/device-farm/faqs/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
                     }
                 }
             },
@@ -95,10 +97,7 @@
             }
         },
         "com.amazonaws.devicefarm#AccountsCleanup": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.devicefarm#AmazonResourceName": {
             "type": "string",
@@ -123,10 +122,7 @@
             }
         },
         "com.amazonaws.devicefarm#AppPackagesCleanup": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.devicefarm#ArgumentException": {
             "type": "structure",
@@ -182,141 +178,199 @@
             }
         },
         "com.amazonaws.devicefarm#ArtifactCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SCREENSHOT",
-                        "name": "SCREENSHOT"
-                    },
-                    {
-                        "value": "FILE",
-                        "name": "FILE"
-                    },
-                    {
-                        "value": "LOG",
-                        "name": "LOG"
+            "type": "enum",
+            "members": {
+                "SCREENSHOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCREENSHOT"
                     }
-                ]
+                },
+                "FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE"
+                    }
+                },
+                "LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#ArtifactType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
-                    },
-                    {
-                        "value": "SCREENSHOT",
-                        "name": "SCREENSHOT"
-                    },
-                    {
-                        "value": "DEVICE_LOG",
-                        "name": "DEVICE_LOG"
-                    },
-                    {
-                        "value": "MESSAGE_LOG",
-                        "name": "MESSAGE_LOG"
-                    },
-                    {
-                        "value": "VIDEO_LOG",
-                        "name": "VIDEO_LOG"
-                    },
-                    {
-                        "value": "RESULT_LOG",
-                        "name": "RESULT_LOG"
-                    },
-                    {
-                        "value": "SERVICE_LOG",
-                        "name": "SERVICE_LOG"
-                    },
-                    {
-                        "value": "WEBKIT_LOG",
-                        "name": "WEBKIT_LOG"
-                    },
-                    {
-                        "value": "INSTRUMENTATION_OUTPUT",
-                        "name": "INSTRUMENTATION_OUTPUT"
-                    },
-                    {
-                        "value": "EXERCISER_MONKEY_OUTPUT",
-                        "name": "EXERCISER_MONKEY_OUTPUT"
-                    },
-                    {
-                        "value": "CALABASH_JSON_OUTPUT",
-                        "name": "CALABASH_JSON_OUTPUT"
-                    },
-                    {
-                        "value": "CALABASH_PRETTY_OUTPUT",
-                        "name": "CALABASH_PRETTY_OUTPUT"
-                    },
-                    {
-                        "value": "CALABASH_STANDARD_OUTPUT",
-                        "name": "CALABASH_STANDARD_OUTPUT"
-                    },
-                    {
-                        "value": "CALABASH_JAVA_XML_OUTPUT",
-                        "name": "CALABASH_JAVA_XML_OUTPUT"
-                    },
-                    {
-                        "value": "AUTOMATION_OUTPUT",
-                        "name": "AUTOMATION_OUTPUT"
-                    },
-                    {
-                        "value": "APPIUM_SERVER_OUTPUT",
-                        "name": "APPIUM_SERVER_OUTPUT"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_OUTPUT",
-                        "name": "APPIUM_JAVA_OUTPUT"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_XML_OUTPUT",
-                        "name": "APPIUM_JAVA_XML_OUTPUT"
-                    },
-                    {
-                        "value": "APPIUM_PYTHON_OUTPUT",
-                        "name": "APPIUM_PYTHON_OUTPUT"
-                    },
-                    {
-                        "value": "APPIUM_PYTHON_XML_OUTPUT",
-                        "name": "APPIUM_PYTHON_XML_OUTPUT"
-                    },
-                    {
-                        "value": "EXPLORER_EVENT_LOG",
-                        "name": "EXPLORER_EVENT_LOG"
-                    },
-                    {
-                        "value": "EXPLORER_SUMMARY_LOG",
-                        "name": "EXPLORER_SUMMARY_LOG"
-                    },
-                    {
-                        "value": "APPLICATION_CRASH_REPORT",
-                        "name": "APPLICATION_CRASH_REPORT"
-                    },
-                    {
-                        "value": "XCTEST_LOG",
-                        "name": "XCTEST_LOG"
-                    },
-                    {
-                        "value": "VIDEO",
-                        "name": "VIDEO"
-                    },
-                    {
-                        "value": "CUSTOMER_ARTIFACT",
-                        "name": "CUSTOMER_ARTIFACT"
-                    },
-                    {
-                        "value": "CUSTOMER_ARTIFACT_LOG",
-                        "name": "CUSTOMER_ARTIFACT_LOG"
-                    },
-                    {
-                        "value": "TESTSPEC_OUTPUT",
-                        "name": "TESTSPEC_OUTPUT"
+            "type": "enum",
+            "members": {
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
                     }
-                ]
+                },
+                "SCREENSHOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCREENSHOT"
+                    }
+                },
+                "DEVICE_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE_LOG"
+                    }
+                },
+                "MESSAGE_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_LOG"
+                    }
+                },
+                "VIDEO_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_LOG"
+                    }
+                },
+                "RESULT_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESULT_LOG"
+                    }
+                },
+                "SERVICE_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_LOG"
+                    }
+                },
+                "WEBKIT_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBKIT_LOG"
+                    }
+                },
+                "INSTRUMENTATION_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTRUMENTATION_OUTPUT"
+                    }
+                },
+                "EXERCISER_MONKEY_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXERCISER_MONKEY_OUTPUT"
+                    }
+                },
+                "CALABASH_JSON_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALABASH_JSON_OUTPUT"
+                    }
+                },
+                "CALABASH_PRETTY_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALABASH_PRETTY_OUTPUT"
+                    }
+                },
+                "CALABASH_STANDARD_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALABASH_STANDARD_OUTPUT"
+                    }
+                },
+                "CALABASH_JAVA_XML_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALABASH_JAVA_XML_OUTPUT"
+                    }
+                },
+                "AUTOMATION_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATION_OUTPUT"
+                    }
+                },
+                "APPIUM_SERVER_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_SERVER_OUTPUT"
+                    }
+                },
+                "APPIUM_JAVA_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_OUTPUT"
+                    }
+                },
+                "APPIUM_JAVA_XML_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_XML_OUTPUT"
+                    }
+                },
+                "APPIUM_PYTHON_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_PYTHON_OUTPUT"
+                    }
+                },
+                "APPIUM_PYTHON_XML_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_PYTHON_XML_OUTPUT"
+                    }
+                },
+                "EXPLORER_EVENT_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPLORER_EVENT_LOG"
+                    }
+                },
+                "EXPLORER_SUMMARY_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPLORER_SUMMARY_LOG"
+                    }
+                },
+                "APPLICATION_CRASH_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_CRASH_REPORT"
+                    }
+                },
+                "XCTEST_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XCTEST_LOG"
+                    }
+                },
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
+                    }
+                },
+                "CUSTOMER_ARTIFACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_ARTIFACT"
+                    }
+                },
+                "CUSTOMER_ARTIFACT_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_ARTIFACT_LOG"
+                    }
+                },
+                "TESTSPEC_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TESTSPEC_OUTPUT"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Artifacts": {
@@ -326,25 +380,24 @@
             }
         },
         "com.amazonaws.devicefarm#BillingMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "METERED",
-                        "name": "METERED"
-                    },
-                    {
-                        "value": "UNMETERED",
-                        "name": "UNMETERED"
+            "type": "enum",
+            "members": {
+                "METERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METERED"
                     }
-                ]
+                },
+                "UNMETERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNMETERED"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.devicefarm#CPU": {
             "type": "structure",
@@ -579,6 +632,8 @@
                 "packageCleanup": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to <code>true</code>, Device Farm removes app packages after a test run. The default value is\n                <code>false</code> for private devices.</p>"
                     }
                 },
@@ -591,6 +646,8 @@
                 "rebootAfterUse": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>When set to <code>true</code>, Device Farm reboots the instance after a test run. The default value is\n                <code>true</code>.</p>"
                     }
                 }
@@ -701,12 +758,14 @@
                 "uplinkLossPercent": {
                     "target": "com.amazonaws.devicefarm#PercentInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Proportion of transmitted packets that fail to arrive from 0 to 100\n            percent.</p>"
                     }
                 },
                 "downlinkLossPercent": {
                     "target": "com.amazonaws.devicefarm#PercentInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
                     }
                 }
@@ -767,6 +826,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the execution timeout value (in minutes) for a project. All test runs in this project use the\n            specified execution timeout value unless overridden when scheduling a run.</p>"
                     }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
+                    }
                 }
             },
             "traits": {
@@ -819,6 +884,8 @@
                 "billingMethod": {
                     "target": "com.amazonaws.devicefarm#BillingMethod",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "METERED",
                         "smithy.api#documentation": "<p>The billing method for the remote access session.</p>"
                     }
                 },
@@ -859,13 +926,13 @@
                 "sshPublicKey": {
                     "target": "com.amazonaws.devicefarm#SshPublicKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Ignored. The public key of the <code>ssh</code> key pair you want to use for connecting to remote\n            devices in your remote debugging session. This key is required only if <code>remoteDebugEnabled</code> is\n            set to <code>true</code>.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>Ignored. The public key of the <code>ssh</code> key pair you want to use for connecting to remote\n            devices in your remote debugging session. This key is required only if <code>remoteDebugEnabled</code> is\n            set to <code>true</code>.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "remoteDebugEnabled": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> if you want to access devices remotely for debugging in\n            your remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> if you want to access devices remotely for debugging in\n            your remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "remoteRecordEnabled": {
@@ -889,7 +956,7 @@
                 "clientId": {
                     "target": "com.amazonaws.devicefarm#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier for the client. If you want access to multiple devices on the same client, you should\n            pass the same <code>clientId</code> value in each call to <code>CreateRemoteAccessSession</code>. This\n            identifier is required only if <code>remoteDebugEnabled</code> is set to <code>true</code>.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique identifier for the client. If you want access to multiple devices on the same client, you should\n            pass the same <code>clientId</code> value in each call to <code>CreateRemoteAccessSession</code>. This\n            identifier is required only if <code>remoteDebugEnabled</code> is set to <code>true</code>.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "configuration": {
@@ -907,7 +974,7 @@
                 "skipAppResign": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information on how Device Farm modifies your uploads during tests, see <a href=\"https://aws.amazon.com/device-farm/faq/\">Do you modify my app?</a>\n         </p>"
+                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information on how Device Farm modifies your uploads during tests, see <a href=\"http://aws.amazon.com/device-farm/faqs/\">Do you modify my app?</a>\n         </p>"
                     }
                 }
             },
@@ -1188,14 +1255,14 @@
             }
         },
         "com.amazonaws.devicefarm#CurrencyCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USD",
-                        "name": "USD"
+            "type": "enum",
+            "members": {
+                "USD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USD"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.devicefarm#CustomerArtifactPaths": {
@@ -1737,7 +1804,7 @@
                 "remoteDebugEnabled": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This flag is set to <code>true</code> if remote debugging is enabled for the\n            device.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>This flag is set to <code>true</code> if remote debugging is enabled for the\n            device.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "fleetType": {
@@ -1770,85 +1837,115 @@
             }
         },
         "com.amazonaws.devicefarm#DeviceAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ARN",
-                        "name": "ARN"
-                    },
-                    {
-                        "value": "PLATFORM",
-                        "name": "PLATFORM"
-                    },
-                    {
-                        "value": "FORM_FACTOR",
-                        "name": "FORM_FACTOR"
-                    },
-                    {
-                        "value": "MANUFACTURER",
-                        "name": "MANUFACTURER"
-                    },
-                    {
-                        "value": "REMOTE_ACCESS_ENABLED",
-                        "name": "REMOTE_ACCESS_ENABLED"
-                    },
-                    {
-                        "value": "REMOTE_DEBUG_ENABLED",
-                        "name": "REMOTE_DEBUG_ENABLED"
-                    },
-                    {
-                        "value": "APPIUM_VERSION",
-                        "name": "APPIUM_VERSION"
-                    },
-                    {
-                        "value": "INSTANCE_ARN",
-                        "name": "INSTANCE_ARN"
-                    },
-                    {
-                        "value": "INSTANCE_LABELS",
-                        "name": "INSTANCE_LABELS"
-                    },
-                    {
-                        "value": "FLEET_TYPE",
-                        "name": "FLEET_TYPE"
-                    },
-                    {
-                        "value": "OS_VERSION",
-                        "name": "OS_VERSION"
-                    },
-                    {
-                        "value": "MODEL",
-                        "name": "MODEL"
-                    },
-                    {
-                        "value": "AVAILABILITY",
-                        "name": "AVAILABILITY"
+            "type": "enum",
+            "members": {
+                "ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARN"
                     }
-                ]
+                },
+                "PLATFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLATFORM"
+                    }
+                },
+                "FORM_FACTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM_FACTOR"
+                    }
+                },
+                "MANUFACTURER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUFACTURER"
+                    }
+                },
+                "REMOTE_ACCESS_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_ACCESS_ENABLED"
+                    }
+                },
+                "REMOTE_DEBUG_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_DEBUG_ENABLED"
+                    }
+                },
+                "APPIUM_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_VERSION"
+                    }
+                },
+                "INSTANCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_ARN"
+                    }
+                },
+                "INSTANCE_LABELS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_LABELS"
+                    }
+                },
+                "FLEET_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET_TYPE"
+                    }
+                },
+                "OS_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OS_VERSION"
+                    }
+                },
+                "MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODEL"
+                    }
+                },
+                "AVAILABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABILITY"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#DeviceAvailability": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TEMPORARY_NOT_AVAILABLE",
-                        "name": "TEMPORARY_NOT_AVAILABLE"
-                    },
-                    {
-                        "value": "BUSY",
-                        "name": "BUSY"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "HIGHLY_AVAILABLE",
-                        "name": "HIGHLY_AVAILABLE"
+            "type": "enum",
+            "members": {
+                "TEMPORARY_NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEMPORARY_NOT_AVAILABLE"
                     }
-                ]
+                },
+                "BUSY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSY"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "HIGHLY_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGHLY_AVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#DeviceFarmArn": {
@@ -2122,7 +2219,7 @@
                 "attribute": {
                     "target": "com.amazonaws.devicefarm#DeviceFilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aspect of a device such as platform or model used as the selection criteria in a\n            device filter.</p>\n        <p>The supported operators for each attribute are provided in the following list.</p>\n        <dl>\n            <dt>ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device (for example,\n                            <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>PLATFORM</dt>\n            <dd>\n                    <p>The device platform. Valid values are ANDROID or IOS.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>OS_VERSION</dt>\n            <dd>\n                    <p>The operating system version (for example, 10.3.2).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>GREATER_THAN</code>,\n                            <code>GREATER_THAN_OR_EQUALS</code>, <code>IN</code>,\n                            <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>MODEL</dt>\n            <dd>\n                    <p>The device model (for example, iPad 5th Gen).</p>\n                    <p>Supported operators: <code>CONTAINS</code>, <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>AVAILABILITY</dt>\n            <dd>\n                    <p>The current availability of the device. Valid values are AVAILABLE,\n                        HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FORM_FACTOR</dt>\n            <dd>\n                    <p>The device form factor. Valid values are PHONE or TABLET.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>MANUFACTURER</dt>\n            <dd>\n                    <p>The device manufacturer (for example, Apple).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>REMOTE_ACCESS_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote access. Valid values are TRUE or\n                        FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>REMOTE_DEBUG_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote debugging. Valid values are TRUE or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                    <p>Because remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no longer\n                            supported</a>, this filter is ignored.</p>\n                </dd>\n            <dt>INSTANCE_ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device instance.</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_LABELS</dt>\n            <dd>\n                    <p>The label of the device instance.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>FLEET_TYPE</dt>\n            <dd>\n                    <p>The fleet type. Valid values are PUBLIC or PRIVATE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The aspect of a device such as platform or model used as the selection criteria in a\n            device filter.</p>\n        <p>The supported operators for each attribute are provided in the following list.</p>\n        <dl>\n            <dt>ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device (for example,\n                            <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>PLATFORM</dt>\n            <dd>\n                    <p>The device platform. Valid values are ANDROID or IOS.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>OS_VERSION</dt>\n            <dd>\n                    <p>The operating system version (for example, 10.3.2).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>GREATER_THAN</code>,\n                            <code>GREATER_THAN_OR_EQUALS</code>, <code>IN</code>,\n                            <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>MODEL</dt>\n            <dd>\n                    <p>The device model (for example, iPad 5th Gen).</p>\n                    <p>Supported operators: <code>CONTAINS</code>, <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>AVAILABILITY</dt>\n            <dd>\n                    <p>The current availability of the device. Valid values are AVAILABLE,\n                        HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FORM_FACTOR</dt>\n            <dd>\n                    <p>The device form factor. Valid values are PHONE or TABLET.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>MANUFACTURER</dt>\n            <dd>\n                    <p>The device manufacturer (for example, Apple).</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>REMOTE_ACCESS_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote access. Valid values are TRUE or\n                        FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>REMOTE_DEBUG_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote debugging. Valid values are TRUE or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                    <p>Because remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                        longer supported</a>, this filter is ignored.</p>\n                </dd>\n            <dt>INSTANCE_ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device instance.</p>\n                    <p>Supported operators: <code>EQUALS</code>, <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_LABELS</dt>\n            <dd>\n                    <p>The label of the device instance.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>FLEET_TYPE</dt>\n            <dd>\n                    <p>The fleet type. Valid values are PUBLIC or PRIVATE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2146,58 +2243,80 @@
             }
         },
         "com.amazonaws.devicefarm#DeviceFilterAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ARN",
-                        "name": "ARN"
-                    },
-                    {
-                        "value": "PLATFORM",
-                        "name": "PLATFORM"
-                    },
-                    {
-                        "value": "OS_VERSION",
-                        "name": "OS_VERSION"
-                    },
-                    {
-                        "value": "MODEL",
-                        "name": "MODEL"
-                    },
-                    {
-                        "value": "AVAILABILITY",
-                        "name": "AVAILABILITY"
-                    },
-                    {
-                        "value": "FORM_FACTOR",
-                        "name": "FORM_FACTOR"
-                    },
-                    {
-                        "value": "MANUFACTURER",
-                        "name": "MANUFACTURER"
-                    },
-                    {
-                        "value": "REMOTE_ACCESS_ENABLED",
-                        "name": "REMOTE_ACCESS_ENABLED"
-                    },
-                    {
-                        "value": "REMOTE_DEBUG_ENABLED",
-                        "name": "REMOTE_DEBUG_ENABLED"
-                    },
-                    {
-                        "value": "INSTANCE_ARN",
-                        "name": "INSTANCE_ARN"
-                    },
-                    {
-                        "value": "INSTANCE_LABELS",
-                        "name": "INSTANCE_LABELS"
-                    },
-                    {
-                        "value": "FLEET_TYPE",
-                        "name": "FLEET_TYPE"
+            "type": "enum",
+            "members": {
+                "ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARN"
                     }
-                ]
+                },
+                "PLATFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLATFORM"
+                    }
+                },
+                "OS_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OS_VERSION"
+                    }
+                },
+                "MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODEL"
+                    }
+                },
+                "AVAILABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABILITY"
+                    }
+                },
+                "FORM_FACTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM_FACTOR"
+                    }
+                },
+                "MANUFACTURER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUFACTURER"
+                    }
+                },
+                "REMOTE_ACCESS_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_ACCESS_ENABLED"
+                    }
+                },
+                "REMOTE_DEBUG_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_DEBUG_ENABLED"
+                    }
+                },
+                "INSTANCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_ARN"
+                    }
+                },
+                "INSTANCE_LABELS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_LABELS"
+                    }
+                },
+                "FLEET_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#DeviceFilterValues": {
@@ -2213,18 +2332,20 @@
             }
         },
         "com.amazonaws.devicefarm#DeviceFormFactor": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PHONE",
-                        "name": "PHONE"
-                    },
-                    {
-                        "value": "TABLET",
-                        "name": "TABLET"
+            "type": "enum",
+            "members": {
+                "PHONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE"
                     }
-                ]
+                },
+                "TABLET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLET"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#DeviceHostPaths": {
@@ -2310,18 +2431,20 @@
             }
         },
         "com.amazonaws.devicefarm#DevicePlatform": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ANDROID",
-                        "name": "ANDROID"
-                    },
-                    {
-                        "value": "IOS",
-                        "name": "IOS"
+            "type": "enum",
+            "members": {
+                "ANDROID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANDROID"
                     }
-                ]
+                },
+                "IOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOS"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#DevicePool": {
@@ -2401,18 +2524,20 @@
             }
         },
         "com.amazonaws.devicefarm#DevicePoolType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CURATED",
-                        "name": "CURATED"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "CURATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURATED"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#DevicePools": {
@@ -2476,10 +2601,7 @@
             }
         },
         "com.amazonaws.devicefarm#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.devicefarm#ExceptionMessage": {
             "type": "string"
@@ -2508,13 +2630,15 @@
                 "videoCapture": {
                     "target": "com.amazonaws.devicefarm#VideoCapture",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Set to true to enable video capture. Otherwise, set to false. The default is true.</p>"
                     }
                 },
                 "skipAppResign": {
                     "target": "com.amazonaws.devicefarm#SkipAppResign",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"https://aws.amazon.com/device-farm/faq/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
+                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"http://aws.amazon.com/device-farm/faqs/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
                     }
                 }
             },
@@ -2523,96 +2647,126 @@
             }
         },
         "com.amazonaws.devicefarm#ExecutionResult": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "PASSED",
-                        "name": "PASSED"
-                    },
-                    {
-                        "value": "WARNED",
-                        "name": "WARNED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "SKIPPED",
-                        "name": "SKIPPED"
-                    },
-                    {
-                        "value": "ERRORED",
-                        "name": "ERRORED"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSED"
+                    }
+                },
+                "WARNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARNED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                },
+                "ERRORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERRORED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#ExecutionResultCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PARSING_FAILED",
-                        "name": "PARSING_FAILED"
-                    },
-                    {
-                        "value": "VPC_ENDPOINT_SETUP_FAILED",
-                        "name": "VPC_ENDPOINT_SETUP_FAILED"
+            "type": "enum",
+            "members": {
+                "PARSING_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARSING_FAILED"
                     }
-                ]
+                },
+                "VPC_ENDPOINT_SETUP_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_ENDPOINT_SETUP_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#ExecutionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "PENDING_CONCURRENCY",
-                        "name": "PENDING_CONCURRNECY"
-                    },
-                    {
-                        "value": "PENDING_DEVICE",
-                        "name": "PENDING_DEVICE"
-                    },
-                    {
-                        "value": "PROCESSING",
-                        "name": "PROCESSING"
-                    },
-                    {
-                        "value": "SCHEDULING",
-                        "name": "SCHEDULING"
-                    },
-                    {
-                        "value": "PREPARING",
-                        "name": "PREPARING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "PENDING_CONCURRNECY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CONCURRENCY"
+                    }
+                },
+                "PENDING_DEVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DEVICE"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "SCHEDULING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULING"
+                    }
+                },
+                "PREPARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPARING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Filter": {
@@ -3750,6 +3904,8 @@
                 "packageCleanup": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to <code>true</code>, Device Farm removes app packages after a test run. The default value is\n                <code>false</code> for private devices.</p>"
                     }
                 },
@@ -3762,6 +3918,8 @@
                 "rebootAfterUse": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>When set to <code>true</code>, Device Farm reboots the instance after a test run. The default value is\n                <code>true</code>.</p>"
                     }
                 },
@@ -3789,51 +3947,60 @@
             }
         },
         "com.amazonaws.devicefarm#InstanceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_USE",
-                        "name": "IN_USE"
-                    },
-                    {
-                        "value": "PREPARING",
-                        "name": "PREPARING"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "NOT_AVAILABLE",
-                        "name": "NOT_AVAILABLE"
+            "type": "enum",
+            "members": {
+                "IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_USE"
                     }
-                ]
+                },
+                "PREPARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPARING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_AVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.devicefarm#InteractionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERACTIVE",
-                        "name": "INTERACTIVE"
-                    },
-                    {
-                        "value": "NO_VIDEO",
-                        "name": "NO_VIDEO"
-                    },
-                    {
-                        "value": "VIDEO_ONLY",
-                        "name": "VIDEO_ONLY"
+            "type": "enum",
+            "members": {
+                "INTERACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERACTIVE"
                     }
-                ],
+                },
+                "NO_VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_VIDEO"
+                    }
+                },
+                "VIDEO_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_ONLY"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 64
@@ -3970,10 +4137,7 @@
             }
         },
         "com.amazonaws.devicefarm#JobTimeoutMinutes": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.devicefarm#Jobs": {
             "type": "list",
@@ -5683,15 +5847,11 @@
             }
         },
         "com.amazonaws.devicefarm#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.devicefarm#MaxPageSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -5820,12 +5980,14 @@
                 "uplinkLossPercent": {
                     "target": "com.amazonaws.devicefarm#PercentInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Proportion of transmitted packets that fail to arrive from 0 to 100\n            percent.</p>"
                     }
                 },
                 "downlinkLossPercent": {
                     "target": "com.amazonaws.devicefarm#PercentInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
                     }
                 }
@@ -5835,18 +5997,20 @@
             }
         },
         "com.amazonaws.devicefarm#NetworkProfileType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CURATED",
-                        "name": "CURATED"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "CURATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURATED"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#NetworkProfiles": {
@@ -6055,22 +6219,26 @@
             }
         },
         "com.amazonaws.devicefarm#OfferingTransactionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PURCHASE",
-                        "name": "PURCHASE"
-                    },
-                    {
-                        "value": "RENEW",
-                        "name": "RENEW"
-                    },
-                    {
-                        "value": "SYSTEM",
-                        "name": "SYSTEM"
+            "type": "enum",
+            "members": {
+                "PURCHASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PURCHASE"
                     }
-                ]
+                },
+                "RENEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RENEW"
+                    }
+                },
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#OfferingTransactions": {
@@ -6080,14 +6248,14 @@
             }
         },
         "com.amazonaws.devicefarm#OfferingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RECURRING",
-                        "name": "RECURRING"
+            "type": "enum",
+            "members": {
+                "RECURRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECURRING"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.devicefarm#Offerings": {
@@ -6114,6 +6282,7 @@
         "com.amazonaws.devicefarm#PercentInteger": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -6214,6 +6383,8 @@
                 "defaultJobTimeoutMinutes": {
                     "target": "com.amazonaws.devicefarm#JobTimeoutMinutes",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 150,
                         "smithy.api#documentation": "<p>The default number of minutes (at the project level) a test run executes before it times out. The\n            default value is 150 minutes.</p>"
                     }
                 },
@@ -6221,6 +6392,12 @@
                     "target": "com.amazonaws.devicefarm#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>When the project was created.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
             },
@@ -6367,14 +6544,14 @@
             }
         },
         "com.amazonaws.devicefarm#RecurringChargeFrequency": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MONTHLY",
-                        "name": "MONTHLY"
+            "type": "enum",
+            "members": {
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.devicefarm#RecurringCharges": {
@@ -6449,7 +6626,7 @@
                 "remoteDebugEnabled": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This flag is set to <code>true</code> if remote debugging is enabled for the remote\n            access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>This flag is set to <code>true</code> if remote debugging is enabled for the remote\n            access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "remoteRecordEnabled": {
@@ -6467,18 +6644,20 @@
                 "hostAddress": {
                     "target": "com.amazonaws.devicefarm#HostAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>IP address of the EC2 host where you need to connect to remotely debug devices.\n            Only returned if remote debugging is enabled for the remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>IP address of the EC2 host where you need to connect to remotely debug devices.\n            Only returned if remote debugging is enabled for the remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "clientId": {
                     "target": "com.amazonaws.devicefarm#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique identifier of your client for the remote access session. Only returned if\n            remote debugging is enabled for the remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique identifier of your client for the remote access session. Only returned if\n            remote debugging is enabled for the remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "billingMethod": {
                     "target": "com.amazonaws.devicefarm#BillingMethod",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "METERED",
                         "smithy.api#documentation": "<p>The billing method of the remote access session. Possible values include <code>METERED</code> or\n                <code>UNMETERED</code>. For more information about metered devices, see <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology\">AWS Device Farm\n                terminology</a>.</p>"
                     }
                 },
@@ -6497,7 +6676,7 @@
                 "deviceUdid": {
                     "target": "com.amazonaws.devicefarm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique device identifier for the remote device. Only returned if remote debugging\n            is enabled for the remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                longer supported</a>.</p>"
+                        "smithy.api#documentation": "<p>Unique device identifier for the remote device. Only returned if remote debugging\n            is enabled for the remote access session.</p>\n        <p>Remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n            longer supported</a>.</p>"
                     }
                 },
                 "interactionMode": {
@@ -6509,7 +6688,13 @@
                 "skipAppResign": {
                     "target": "com.amazonaws.devicefarm#SkipAppResign",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"https://aws.amazon.com/device-farm/faq/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
+                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"http://aws.amazon.com/device-farm/faqs/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
             },
@@ -6644,7 +6829,7 @@
                 "attribute": {
                     "target": "com.amazonaws.devicefarm#DeviceAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rule's stringified attribute. For example, specify the value as\n                <code>\"\\\"abc\\\"\"</code>.</p>\n        <p>The supported operators for each attribute are provided in the following\n            list.</p>\n        <dl>\n            <dt>APPIUM_VERSION</dt>\n            <dd>\n                    <p>The Appium version for the test.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device (for example,\n                        <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>.</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>AVAILABILITY</dt>\n            <dd>\n                    <p>The current availability of the device. Valid values are AVAILABLE,\n                        HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FLEET_TYPE</dt>\n            <dd>\n                    <p>The fleet type. Valid values are PUBLIC or PRIVATE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FORM_FACTOR</dt>\n            <dd>\n                    <p>The device form factor. Valid values are PHONE or TABLET.</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device instance.</p>\n                    <p>Supported operators: <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_LABELS</dt>\n            <dd>\n                    <p>The label of the device instance.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>MANUFACTURER</dt>\n            <dd>\n                    <p>The device manufacturer (for example, Apple).</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>MODEL</dt>\n            <dd>\n                    <p>The device model, such as Apple iPad Air 2 or Google Pixel.</p>\n                    <p>Supported operators: <code>CONTAINS</code>,\n                            <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>OS_VERSION</dt>\n            <dd>\n                    <p>The operating system version (for example, 10.3.2).</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUALS</code>,\n                            <code>IN</code>, <code>LESS_THAN</code>,\n                            <code>LESS_THAN_OR_EQUALS</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>PLATFORM</dt>\n            <dd>\n                    <p>The device platform. Valid values are ANDROID or IOS.</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>REMOTE_ACCESS_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote access. Valid values are TRUE\n                        or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>REMOTE_DEBUG_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote debugging. Valid values are\n                        TRUE or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                    <p>Because remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no longer\n                            supported</a>, this filter is ignored.</p>\n                </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The rule's stringified attribute. For example, specify the value as\n                <code>\"\\\"abc\\\"\"</code>.</p>\n        <p>The supported operators for each attribute are provided in the following\n            list.</p>\n        <dl>\n            <dt>APPIUM_VERSION</dt>\n            <dd>\n                    <p>The Appium version for the test.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device (for example,\n                        <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>.</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>AVAILABILITY</dt>\n            <dd>\n                    <p>The current availability of the device. Valid values are AVAILABLE,\n                        HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FLEET_TYPE</dt>\n            <dd>\n                    <p>The fleet type. Valid values are PUBLIC or PRIVATE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>FORM_FACTOR</dt>\n            <dd>\n                    <p>The device form factor. Valid values are PHONE or TABLET.</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_ARN</dt>\n            <dd>\n                    <p>The Amazon Resource Name (ARN) of the device instance.</p>\n                    <p>Supported operators: <code>IN</code>,\n                            <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>INSTANCE_LABELS</dt>\n            <dd>\n                    <p>The label of the device instance.</p>\n                    <p>Supported operators: <code>CONTAINS</code>\n               </p>\n                </dd>\n            <dt>MANUFACTURER</dt>\n            <dd>\n                    <p>The device manufacturer (for example, Apple).</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>MODEL</dt>\n            <dd>\n                    <p>The device model, such as Apple iPad Air 2 or Google Pixel.</p>\n                    <p>Supported operators: <code>CONTAINS</code>,\n                            <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>OS_VERSION</dt>\n            <dd>\n                    <p>The operating system version (for example, 10.3.2).</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUALS</code>,\n                            <code>IN</code>, <code>LESS_THAN</code>,\n                            <code>LESS_THAN_OR_EQUALS</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>PLATFORM</dt>\n            <dd>\n                    <p>The device platform. Valid values are ANDROID or IOS.</p>\n                    <p>Supported operators: <code>EQUALS</code>,\n                            <code>IN</code>, <code>NOT_IN</code>\n               </p>\n                </dd>\n            <dt>REMOTE_ACCESS_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote access. Valid values are TRUE\n                        or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                </dd>\n            <dt>REMOTE_DEBUG_ENABLED</dt>\n            <dd>\n                    <p>Whether the device is enabled for remote debugging. Valid values are\n                        TRUE or FALSE.</p>\n                    <p>Supported operators: <code>EQUALS</code>\n               </p>\n                    <p>Because remote debugging is <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html\">no\n                        longer supported</a>, this filter is ignored.</p>\n                </dd>\n         </dl>"
                     }
                 },
                 "operator": {
@@ -6665,42 +6850,56 @@
             }
         },
         "com.amazonaws.devicefarm#RuleOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EQUALS",
-                        "name": "EQUALS"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUALS",
-                        "name": "LESS_THAN_OR_EQUALS"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUALS",
-                        "name": "GREATER_THAN_OR_EQUALS"
-                    },
-                    {
-                        "value": "IN",
-                        "name": "IN"
-                    },
-                    {
-                        "value": "NOT_IN",
-                        "name": "NOT_IN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "LESS_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUALS"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUALS"
+                    }
+                },
+                "IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN"
+                    }
+                },
+                "NOT_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_IN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Rules": {
@@ -6793,6 +6992,8 @@
                 "billingMethod": {
                     "target": "com.amazonaws.devicefarm#BillingMethod",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "METERED",
                         "smithy.api#documentation": "<p>Specifies the billing method for a test run: <code>metered</code> or\n                <code>unmetered</code>. If the parameter is not specified, the default value is\n                <code>metered</code>.</p>\n        <note>\n            <p>If you have unmetered device slots, you must set this to <code>unmetered</code> to use them.\n                Otherwise, the run is counted toward metered device minutes.</p>\n        </note>"
                     }
                 },
@@ -6883,7 +7084,7 @@
                 "skipAppResign": {
                     "target": "com.amazonaws.devicefarm#SkipAppResign",
                     "traits": {
-                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"https://aws.amazon.com/device-farm/faq/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
+                        "smithy.api#documentation": "<p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public\n            devices, Device Farm always signs your apps again.</p>\n        <p>For more information about how Device Farm re-signs your apps, see <a href=\"http://aws.amazon.com/device-farm/faqs/\">Do you modify my app?</a> in the <i>AWS Device\n                Farm FAQs</i>.</p>"
                     }
                 },
                 "testSpecArn": {
@@ -6896,6 +7097,12 @@
                     "target": "com.amazonaws.devicefarm#DeviceSelectionResult",
                     "traits": {
                         "smithy.api#documentation": "<p>The results of a device filter used to select the devices for a test run.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
             },
@@ -6936,78 +7143,110 @@
             }
         },
         "com.amazonaws.devicefarm#SampleType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CPU",
-                        "name": "CPU"
-                    },
-                    {
-                        "value": "MEMORY",
-                        "name": "MEMORY"
-                    },
-                    {
-                        "value": "THREADS",
-                        "name": "THREADS"
-                    },
-                    {
-                        "value": "RX_RATE",
-                        "name": "RX_RATE"
-                    },
-                    {
-                        "value": "TX_RATE",
-                        "name": "TX_RATE"
-                    },
-                    {
-                        "value": "RX",
-                        "name": "RX"
-                    },
-                    {
-                        "value": "TX",
-                        "name": "TX"
-                    },
-                    {
-                        "value": "NATIVE_FRAMES",
-                        "name": "NATIVE_FRAMES"
-                    },
-                    {
-                        "value": "NATIVE_FPS",
-                        "name": "NATIVE_FPS"
-                    },
-                    {
-                        "value": "NATIVE_MIN_DRAWTIME",
-                        "name": "NATIVE_MIN_DRAWTIME"
-                    },
-                    {
-                        "value": "NATIVE_AVG_DRAWTIME",
-                        "name": "NATIVE_AVG_DRAWTIME"
-                    },
-                    {
-                        "value": "NATIVE_MAX_DRAWTIME",
-                        "name": "NATIVE_MAX_DRAWTIME"
-                    },
-                    {
-                        "value": "OPENGL_FRAMES",
-                        "name": "OPENGL_FRAMES"
-                    },
-                    {
-                        "value": "OPENGL_FPS",
-                        "name": "OPENGL_FPS"
-                    },
-                    {
-                        "value": "OPENGL_MIN_DRAWTIME",
-                        "name": "OPENGL_MIN_DRAWTIME"
-                    },
-                    {
-                        "value": "OPENGL_AVG_DRAWTIME",
-                        "name": "OPENGL_AVG_DRAWTIME"
-                    },
-                    {
-                        "value": "OPENGL_MAX_DRAWTIME",
-                        "name": "OPENGL_MAX_DRAWTIME"
+            "type": "enum",
+            "members": {
+                "CPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPU"
                     }
-                ]
+                },
+                "MEMORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMORY"
+                    }
+                },
+                "THREADS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THREADS"
+                    }
+                },
+                "RX_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RX_RATE"
+                    }
+                },
+                "TX_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TX_RATE"
+                    }
+                },
+                "RX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RX"
+                    }
+                },
+                "TX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TX"
+                    }
+                },
+                "NATIVE_FRAMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE_FRAMES"
+                    }
+                },
+                "NATIVE_FPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE_FPS"
+                    }
+                },
+                "NATIVE_MIN_DRAWTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE_MIN_DRAWTIME"
+                    }
+                },
+                "NATIVE_AVG_DRAWTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE_AVG_DRAWTIME"
+                    }
+                },
+                "NATIVE_MAX_DRAWTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE_MAX_DRAWTIME"
+                    }
+                },
+                "OPENGL_FRAMES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENGL_FRAMES"
+                    }
+                },
+                "OPENGL_FPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENGL_FPS"
+                    }
+                },
+                "OPENGL_MIN_DRAWTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENGL_MIN_DRAWTIME"
+                    }
+                },
+                "OPENGL_AVG_DRAWTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENGL_AVG_DRAWTIME"
+                    }
+                },
+                "OPENGL_MAX_DRAWTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENGL_MAX_DRAWTIME"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Samples": {
@@ -7099,6 +7338,8 @@
                 "billingMethod": {
                     "target": "com.amazonaws.devicefarm#BillingMethod",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "METERED",
                         "smithy.api#documentation": "<p>Specifies the billing method for a test run: <code>metered</code> or\n                <code>unmetered</code>. If the parameter is not specified, the default value is\n                <code>metered</code>.</p>\n        <note>\n            <p>If you have purchased unmetered device slots, you must set this parameter to <code>unmetered</code> to\n                make use of them. Otherwise, your run counts against your metered time.</p>\n        </note>"
                     }
                 }
@@ -7218,6 +7459,16 @@
                 "smithy.api#documentation": "<p>Represents test settings. This data structure is passed in as the test parameter to ScheduleRun. For an\n            example of the JSON request syntax, see <a>ScheduleRun</a>.</p>"
             }
         },
+        "com.amazonaws.devicefarm#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^sg-[0-9a-fA-F]{8,}$"
+            }
+        },
         "com.amazonaws.devicefarm#SecurityGroupIds": {
             "type": "list",
             "member": {
@@ -7271,10 +7522,7 @@
             }
         },
         "com.amazonaws.devicefarm#SkipAppResign": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.devicefarm#SshPublicKey": {
             "type": "string",
@@ -7446,6 +7694,16 @@
         },
         "com.amazonaws.devicefarm#String": {
             "type": "string"
+        },
+        "com.amazonaws.devicefarm#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^subnet-[0-9a-fA-F]{8,}$"
+            }
         },
         "com.amazonaws.devicefarm#SubnetIds": {
             "type": "list",
@@ -7920,37 +8178,43 @@
             }
         },
         "com.amazonaws.devicefarm#TestGridSessionArtifactCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VIDEO",
-                        "name": "VIDEO"
-                    },
-                    {
-                        "value": "LOG",
-                        "name": "LOG"
+            "type": "enum",
+            "members": {
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
                     }
-                ]
+                },
+                "LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#TestGridSessionArtifactType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
-                    },
-                    {
-                        "value": "VIDEO",
-                        "name": "VIDEO"
-                    },
-                    {
-                        "value": "SELENIUM_LOG",
-                        "name": "SELENIUM_LOG"
+            "type": "enum",
+            "members": {
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
                     }
-                ]
+                },
+                "VIDEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO"
+                    }
+                },
+                "SELENIUM_LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELENIUM_LOG"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#TestGridSessionArtifacts": {
@@ -7960,22 +8224,26 @@
             }
         },
         "com.amazonaws.devicefarm#TestGridSessionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "CLOSED",
-                        "name": "CLOSED"
-                    },
-                    {
-                        "value": "ERRORED",
-                        "name": "ERRORED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOSED"
+                    }
+                },
+                "ERRORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERRORED"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#TestGridSessions": {
@@ -7987,7 +8255,6 @@
         "com.amazonaws.devicefarm#TestGridUrlExpiresInSecondsInput": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 60,
                     "max": 86400
@@ -8033,94 +8300,134 @@
             }
         },
         "com.amazonaws.devicefarm#TestType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BUILTIN_FUZZ",
-                        "name": "BUILTIN_FUZZ"
-                    },
-                    {
-                        "value": "BUILTIN_EXPLORER",
-                        "name": "BUILTIN_EXPLORER"
-                    },
-                    {
-                        "value": "WEB_PERFORMANCE_PROFILE",
-                        "name": "WEB_PERFORMANCE_PROFILE"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_JUNIT",
-                        "name": "APPIUM_JAVA_JUNIT"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_TESTNG",
-                        "name": "APPIUM_JAVA_TESTNG"
-                    },
-                    {
-                        "value": "APPIUM_PYTHON",
-                        "name": "APPIUM_PYTHON"
-                    },
-                    {
-                        "value": "APPIUM_NODE",
-                        "name": "APPIUM_NODE"
-                    },
-                    {
-                        "value": "APPIUM_RUBY",
-                        "name": "APPIUM_RUBY"
-                    },
-                    {
-                        "value": "APPIUM_WEB_JAVA_JUNIT",
-                        "name": "APPIUM_WEB_JAVA_JUNIT"
-                    },
-                    {
-                        "value": "APPIUM_WEB_JAVA_TESTNG",
-                        "name": "APPIUM_WEB_JAVA_TESTNG"
-                    },
-                    {
-                        "value": "APPIUM_WEB_PYTHON",
-                        "name": "APPIUM_WEB_PYTHON"
-                    },
-                    {
-                        "value": "APPIUM_WEB_NODE",
-                        "name": "APPIUM_WEB_NODE"
-                    },
-                    {
-                        "value": "APPIUM_WEB_RUBY",
-                        "name": "APPIUM_WEB_RUBY"
-                    },
-                    {
-                        "value": "CALABASH",
-                        "name": "CALABASH"
-                    },
-                    {
-                        "value": "INSTRUMENTATION",
-                        "name": "INSTRUMENTATION"
-                    },
-                    {
-                        "value": "UIAUTOMATION",
-                        "name": "UIAUTOMATION"
-                    },
-                    {
-                        "value": "UIAUTOMATOR",
-                        "name": "UIAUTOMATOR"
-                    },
-                    {
-                        "value": "XCTEST",
-                        "name": "XCTEST"
-                    },
-                    {
-                        "value": "XCTEST_UI",
-                        "name": "XCTEST_UI"
-                    },
-                    {
-                        "value": "REMOTE_ACCESS_RECORD",
-                        "name": "REMOTE_ACCESS_RECORD"
-                    },
-                    {
-                        "value": "REMOTE_ACCESS_REPLAY",
-                        "name": "REMOTE_ACCESS_REPLAY"
+            "type": "enum",
+            "members": {
+                "BUILTIN_FUZZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILTIN_FUZZ"
                     }
-                ]
+                },
+                "BUILTIN_EXPLORER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUILTIN_EXPLORER"
+                    }
+                },
+                "WEB_PERFORMANCE_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_PERFORMANCE_PROFILE"
+                    }
+                },
+                "APPIUM_JAVA_JUNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_JUNIT"
+                    }
+                },
+                "APPIUM_JAVA_TESTNG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_TESTNG"
+                    }
+                },
+                "APPIUM_PYTHON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_PYTHON"
+                    }
+                },
+                "APPIUM_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_NODE"
+                    }
+                },
+                "APPIUM_RUBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_RUBY"
+                    }
+                },
+                "APPIUM_WEB_JAVA_JUNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_JAVA_JUNIT"
+                    }
+                },
+                "APPIUM_WEB_JAVA_TESTNG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_JAVA_TESTNG"
+                    }
+                },
+                "APPIUM_WEB_PYTHON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_PYTHON"
+                    }
+                },
+                "APPIUM_WEB_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_NODE"
+                    }
+                },
+                "APPIUM_WEB_RUBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_RUBY"
+                    }
+                },
+                "CALABASH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALABASH"
+                    }
+                },
+                "INSTRUMENTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTRUMENTATION"
+                    }
+                },
+                "UIAUTOMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UIAUTOMATION"
+                    }
+                },
+                "UIAUTOMATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UIAUTOMATOR"
+                    }
+                },
+                "XCTEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XCTEST"
+                    }
+                },
+                "XCTEST_UI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XCTEST_UI"
+                    }
+                },
+                "REMOTE_ACCESS_RECORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_ACCESS_RECORD"
+                    }
+                },
+                "REMOTE_ACCESS_REPLAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOTE_ACCESS_REPLAY"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Tests": {
@@ -8460,6 +8767,8 @@
                 "packageCleanup": {
                     "target": "com.amazonaws.devicefarm#Boolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The updated choice for whether you want to specify package cleanup. The default value\n            is <code>false</code> for private devices.</p>"
                     }
                 },
@@ -8581,12 +8890,14 @@
                 "uplinkLossPercent": {
                     "target": "com.amazonaws.devicefarm#PercentInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Proportion of transmitted packets that fail to arrive from 0 to 100\n            percent.</p>"
                     }
                 },
                 "downlinkLossPercent": {
                     "target": "com.amazonaws.devicefarm#PercentInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Proportion of received packets that fail to arrive from 0 to 100 percent.</p>"
                     }
                 }
@@ -8649,6 +8960,12 @@
                     "target": "com.amazonaws.devicefarm#JobTimeoutMinutes",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of minutes a test run in the project executes before it times out.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.devicefarm#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to a project.</p>"
                     }
                 }
             },
@@ -8946,176 +9263,246 @@
             }
         },
         "com.amazonaws.devicefarm#UploadCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CURATED",
-                        "name": "CURATED"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "CURATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURATED"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#UploadStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INITIALIZED",
-                        "name": "INITIALIZED"
-                    },
-                    {
-                        "value": "PROCESSING",
-                        "name": "PROCESSING"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
                     }
-                ]
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#UploadType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ANDROID_APP",
-                        "name": "ANDROID_APP"
-                    },
-                    {
-                        "value": "IOS_APP",
-                        "name": "IOS_APP"
-                    },
-                    {
-                        "value": "WEB_APP",
-                        "name": "WEB_APP"
-                    },
-                    {
-                        "value": "EXTERNAL_DATA",
-                        "name": "EXTERNAL_DATA"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_JUNIT_TEST_PACKAGE",
-                        "name": "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_TESTNG_TEST_PACKAGE",
-                        "name": "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_PYTHON_TEST_PACKAGE",
-                        "name": "APPIUM_PYTHON_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_NODE_TEST_PACKAGE",
-                        "name": "APPIUM_NODE_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_RUBY_TEST_PACKAGE",
-                        "name": "APPIUM_RUBY_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE",
-                        "name": "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE",
-                        "name": "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_WEB_PYTHON_TEST_PACKAGE",
-                        "name": "APPIUM_WEB_PYTHON_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_WEB_NODE_TEST_PACKAGE",
-                        "name": "APPIUM_WEB_NODE_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_WEB_RUBY_TEST_PACKAGE",
-                        "name": "APPIUM_WEB_RUBY_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "CALABASH_TEST_PACKAGE",
-                        "name": "CALABASH_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "INSTRUMENTATION_TEST_PACKAGE",
-                        "name": "INSTRUMENTATION_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "UIAUTOMATION_TEST_PACKAGE",
-                        "name": "UIAUTOMATION_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "UIAUTOMATOR_TEST_PACKAGE",
-                        "name": "UIAUTOMATOR_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "XCTEST_TEST_PACKAGE",
-                        "name": "XCTEST_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "XCTEST_UI_TEST_PACKAGE",
-                        "name": "XCTEST_UI_TEST_PACKAGE"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_JUNIT_TEST_SPEC",
-                        "name": "APPIUM_JAVA_JUNIT_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_JAVA_TESTNG_TEST_SPEC",
-                        "name": "APPIUM_JAVA_TESTNG_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_PYTHON_TEST_SPEC",
-                        "name": "APPIUM_PYTHON_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_NODE_TEST_SPEC",
-                        "name": "APPIUM_NODE_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_RUBY_TEST_SPEC",
-                        "name": "APPIUM_RUBY_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC",
-                        "name": "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC",
-                        "name": "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_WEB_PYTHON_TEST_SPEC",
-                        "name": "APPIUM_WEB_PYTHON_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_WEB_NODE_TEST_SPEC",
-                        "name": "APPIUM_WEB_NODE_TEST_SPEC"
-                    },
-                    {
-                        "value": "APPIUM_WEB_RUBY_TEST_SPEC",
-                        "name": "APPIUM_WEB_RUBY_TEST_SPEC"
-                    },
-                    {
-                        "value": "INSTRUMENTATION_TEST_SPEC",
-                        "name": "INSTRUMENTATION_TEST_SPEC"
-                    },
-                    {
-                        "value": "XCTEST_UI_TEST_SPEC",
-                        "name": "XCTEST_UI_TEST_SPEC"
+            "type": "enum",
+            "members": {
+                "ANDROID_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANDROID_APP"
                     }
-                ]
+                },
+                "IOS_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOS_APP"
+                    }
+                },
+                "WEB_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_APP"
+                    }
+                },
+                "EXTERNAL_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_DATA"
+                    }
+                },
+                "APPIUM_JAVA_JUNIT_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_JAVA_TESTNG_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_PYTHON_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_PYTHON_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_NODE_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_NODE_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_RUBY_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_RUBY_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_WEB_PYTHON_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_PYTHON_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_WEB_NODE_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_NODE_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_WEB_RUBY_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_RUBY_TEST_PACKAGE"
+                    }
+                },
+                "CALABASH_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALABASH_TEST_PACKAGE"
+                    }
+                },
+                "INSTRUMENTATION_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTRUMENTATION_TEST_PACKAGE"
+                    }
+                },
+                "UIAUTOMATION_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UIAUTOMATION_TEST_PACKAGE"
+                    }
+                },
+                "UIAUTOMATOR_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UIAUTOMATOR_TEST_PACKAGE"
+                    }
+                },
+                "XCTEST_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XCTEST_TEST_PACKAGE"
+                    }
+                },
+                "XCTEST_UI_TEST_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XCTEST_UI_TEST_PACKAGE"
+                    }
+                },
+                "APPIUM_JAVA_JUNIT_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_JUNIT_TEST_SPEC"
+                    }
+                },
+                "APPIUM_JAVA_TESTNG_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_JAVA_TESTNG_TEST_SPEC"
+                    }
+                },
+                "APPIUM_PYTHON_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_PYTHON_TEST_SPEC"
+                    }
+                },
+                "APPIUM_NODE_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_NODE_TEST_SPEC"
+                    }
+                },
+                "APPIUM_RUBY_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_RUBY_TEST_SPEC"
+                    }
+                },
+                "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"
+                    }
+                },
+                "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"
+                    }
+                },
+                "APPIUM_WEB_PYTHON_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_PYTHON_TEST_SPEC"
+                    }
+                },
+                "APPIUM_WEB_NODE_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_NODE_TEST_SPEC"
+                    }
+                },
+                "APPIUM_WEB_RUBY_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPIUM_WEB_RUBY_TEST_SPEC"
+                    }
+                },
+                "INSTRUMENTATION_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTRUMENTATION_TEST_SPEC"
+                    }
+                },
+                "XCTEST_UI_TEST_SPEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XCTEST_UI_TEST_SPEC"
+                    }
+                }
             }
         },
         "com.amazonaws.devicefarm#Uploads": {
@@ -9196,9 +9583,59 @@
             }
         },
         "com.amazonaws.devicefarm#VideoCapture": {
-            "type": "boolean",
+            "type": "boolean"
+        },
+        "com.amazonaws.devicefarm#VpcConfig": {
+            "type": "structure",
+            "members": {
+                "securityGroupIds": {
+                    "target": "com.amazonaws.devicefarm#VpcSecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of one or more security groups IDs in your Amazon VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.devicefarm#VpcSubnetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of one or more subnet IDs in your Amazon VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.devicefarm#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#documentation": "<p>Contains the VPC configuration data necessary to interface with AWS Device Farm's services.</p>"
+            }
+        },
+        "com.amazonaws.devicefarm#VpcSecurityGroupIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devicefarm#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.devicefarm#VpcSubnetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devicefarm#SubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8
+                }
             }
         }
     }
