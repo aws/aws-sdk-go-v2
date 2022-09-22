@@ -30,6 +30,10 @@ func (c *Client) ListVirtualMachines(ctx context.Context, params *ListVirtualMac
 
 type ListVirtualMachinesInput struct {
 
+	// The Amazon Resource Name (ARN) of the hypervisor connected to your virtual
+	// machine.
+	HypervisorArn *string
+
 	// The maximum number of virtual machines to list.
 	MaxResults *int32
 

@@ -12959,6 +12959,11 @@ func awsAwsjson11_deserializeDocumentProject(v **types.Project, value interface{
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "vpcConfig":
+			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13410,6 +13415,11 @@ func awsAwsjson11_deserializeDocumentRemoteAccessSession(v **types.RemoteAccessS
 					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "vpcConfig":
+			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13907,6 +13917,11 @@ func awsAwsjson11_deserializeDocumentRun(v **types.Run, value interface{}) error
 					return fmt.Errorf("expected TestType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.TestType(jtv)
+			}
+
+		case "vpcConfig":
+			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
 			}
 
 		case "webUrl":
@@ -15657,6 +15672,56 @@ func awsAwsjson11_deserializeDocumentUploads(v *[]types.Upload, value interface{
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentVpcConfig(v **types.VpcConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcConfig
+	if *v == nil {
+		sv = &types.VpcConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "securityGroupIds":
+			if err := awsAwsjson11_deserializeDocumentVpcSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
+				return err
+			}
+
+		case "subnetIds":
+			if err := awsAwsjson11_deserializeDocumentVpcSubnetIds(&sv.SubnetIds, value); err != nil {
+				return err
+			}
+
+		case "vpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentVPCEConfiguration(v **types.VPCEConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15760,6 +15825,78 @@ func awsAwsjson11_deserializeDocumentVPCEConfigurations(v *[]types.VPCEConfigura
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVpcSecurityGroupIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SecurityGroupId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVpcSubnetIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

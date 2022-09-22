@@ -10769,6 +10769,16 @@ func awsAwsjson11_serializeDocumentCatalogTarget(v *types.CatalogTarget, value s
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.DlqEventQueueArn != nil {
+		ok := object.Key("DlqEventQueueArn")
+		ok.String(*v.DlqEventQueueArn)
+	}
+
+	if v.EventQueueArn != nil {
+		ok := object.Key("EventQueueArn")
+		ok.String(*v.EventQueueArn)
+	}
+
 	if v.Tables != nil {
 		ok := object.Key("Tables")
 		if err := awsAwsjson11_serializeDocumentCatalogTablesList(v.Tables, ok); err != nil {

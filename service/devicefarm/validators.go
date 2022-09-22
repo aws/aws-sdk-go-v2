@@ -1760,6 +1760,27 @@ func validateTestGridVpcConfig(v *types.TestGridVpcConfig) error {
 	}
 }
 
+func validateVpcConfig(v *types.VpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcConfig"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDevicePoolInput(v *CreateDevicePoolInput) error {
 	if v == nil {
 		return nil
@@ -1821,6 +1842,11 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2780,6 +2806,11 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProjectInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

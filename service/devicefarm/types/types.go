@@ -28,7 +28,7 @@ type AccountSettings struct {
 	// When set to true, for private devices, Device Farm does not sign your app again.
 	// For public devices, Device Farm always signs your apps again. For more
 	// information about how Device Farm re-signs your apps, see Do you modify my app?
-	// (https://aws.amazon.com/device-farm/faq/) in the AWS Device Farm FAQs.
+	// (http://aws.amazon.com/device-farm/faqs/) in the AWS Device Farm FAQs.
 	SkipAppResign *bool
 
 	// Information about an AWS account's usage of free trial device minutes.
@@ -587,7 +587,7 @@ type ExecutionConfiguration struct {
 	// When set to true, for private devices, Device Farm does not sign your app again.
 	// For public devices, Device Farm always signs your apps again. For more
 	// information about how Device Farm re-signs your apps, see Do you modify my app?
-	// (https://aws.amazon.com/device-farm/faq/) in the AWS Device Farm FAQs.
+	// (http://aws.amazon.com/device-farm/faqs/) in the AWS Device Farm FAQs.
 	SkipAppResign *bool
 
 	// Set to true to enable video capture. Otherwise, set to false. The default is
@@ -998,6 +998,9 @@ type Project struct {
 	// The project's name.
 	Name *string
 
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *VpcConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -1133,7 +1136,7 @@ type RemoteAccessSession struct {
 	// When set to true, for private devices, Device Farm does not sign your app again.
 	// For public devices, Device Farm always signs your apps again. For more
 	// information about how Device Farm re-signs your apps, see Do you modify my app?
-	// (https://aws.amazon.com/device-farm/faq/) in the AWS Device Farm FAQs.
+	// (http://aws.amazon.com/device-farm/faqs/) in the AWS Device Farm FAQs.
 	SkipAppResign *bool
 
 	// The date and time the remote access session was started.
@@ -1164,6 +1167,9 @@ type RemoteAccessSession struct {
 
 	// The date and time the remote access session was stopped.
 	Stopped *time.Time
+
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
@@ -1324,7 +1330,7 @@ type Run struct {
 	// When set to true, for private devices, Device Farm does not sign your app again.
 	// For public devices, Device Farm always signs your apps again. For more
 	// information about how Device Farm re-signs your apps, see Do you modify my app?
-	// (https://aws.amazon.com/device-farm/faq/) in the AWS Device Farm FAQs.
+	// (http://aws.amazon.com/device-farm/faqs/) in the AWS Device Farm FAQs.
 	SkipAppResign *bool
 
 	// The run's start time.
@@ -1406,6 +1412,9 @@ type Run struct {
 	//
 	// * XCTEST_UI
 	Type TestType
+
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *VpcConfig
 
 	// The Device Farm console URL for the recording of the run.
 	WebUrl *string
@@ -2178,6 +2187,28 @@ type Upload struct {
 
 	// The presigned Amazon S3 URL that was used to store a file using a PUT request.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the VPC configuration data necessary to interface with AWS Device
+// Farm's services.
+type VpcConfig struct {
+
+	// An array of one or more security groups IDs in your Amazon VPC.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// An array of one or more subnet IDs in your Amazon VPC.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The ID of the Amazon VPC.
+	//
+	// This member is required.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

@@ -5705,7 +5705,7 @@ type InstanceNetworkInterface struct {
 	// The description.
 	Description *string
 
-	// One or more security groups.
+	// The security groups.
 	Groups []GroupIdentifier
 
 	// The type of network interface. Valid values: interface | efa | trunk
@@ -5714,7 +5714,7 @@ type InstanceNetworkInterface struct {
 	// The IPv4 delegated prefixes that are assigned to the network interface.
 	Ipv4Prefixes []InstanceIpv4Prefix
 
-	// One or more IPv6 addresses associated with the network interface.
+	// The IPv6 addresses associated with the network interface.
 	Ipv6Addresses []InstanceIpv6Address
 
 	// The IPv6 delegated prefixes that are assigned to the network interface.
@@ -5735,7 +5735,7 @@ type InstanceNetworkInterface struct {
 	// The IPv4 address of the network interface within the subnet.
 	PrivateIpAddress *string
 
-	// One or more private IPv4 addresses associated with the network interface.
+	// The private IPv4 addresses associated with the network interface.
 	PrivateIpAddresses []InstancePrivateIpAddress
 
 	// Indicates whether source/destination checking is enabled.
@@ -5842,8 +5842,8 @@ type InstanceNetworkInterfaceSpecification struct {
 	// network interface. You cannot use this option if you use the Ipv4Prefix option.
 	Ipv4PrefixCount *int32
 
-	// One or more IPv4 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv4PrefixCount option.
+	// The IPv4 delegated prefixes to be assigned to the network interface. You cannot
+	// use this option if you use the Ipv4PrefixCount option.
 	Ipv4Prefixes []Ipv4PrefixSpecificationRequest
 
 	// A number of IPv6 addresses to assign to the network interface. Amazon EC2
@@ -5853,18 +5853,18 @@ type InstanceNetworkInterfaceSpecification struct {
 	// launch.
 	Ipv6AddressCount *int32
 
-	// One or more IPv6 addresses to assign to the network interface. You cannot
-	// specify this option and the option to assign a number of IPv6 addresses in the
-	// same request. You cannot specify this option if you've specified a minimum
-	// number of instances to launch.
+	// The IPv6 addresses to assign to the network interface. You cannot specify this
+	// option and the option to assign a number of IPv6 addresses in the same request.
+	// You cannot specify this option if you've specified a minimum number of instances
+	// to launch.
 	Ipv6Addresses []InstanceIpv6Address
 
 	// The number of IPv6 delegated prefixes to be automatically assigned to the
 	// network interface. You cannot use this option if you use the Ipv6Prefix option.
 	Ipv6PrefixCount *int32
 
-	// One or more IPv6 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv6PrefixCount option.
+	// The IPv6 delegated prefixes to be assigned to the network interface. You cannot
+	// use this option if you use the Ipv6PrefixCount option.
 	Ipv6Prefixes []Ipv6PrefixSpecificationRequest
 
 	// The index of the network card. Some instance types support multiple network
@@ -5889,9 +5889,9 @@ type InstanceNetworkInterfaceSpecification struct {
 	// request.
 	PrivateIpAddress *string
 
-	// One or more private IPv4 addresses to assign to the network interface. Only one
-	// private IPv4 address can be designated as primary. You cannot specify this
-	// option if you're launching more than one instance in a RunInstances
+	// The private IPv4 addresses to assign to the network interface. Only one private
+	// IPv4 address can be designated as primary. You cannot specify this option if
+	// you're launching more than one instance in a RunInstances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
 	// request.
 	PrivateIpAddresses []PrivateIpAddressSpecification
@@ -5990,7 +5990,7 @@ type InstanceRequirements struct {
 	// * For instance types with Xilinx VU9P FPGAs,
 	// specify vu9p.
 	//
-	// * For instance types with Amazon Web Services Inferentia GPUs,
+	// * For instance types with Amazon Web Services Inferentia chips,
 	// specify inferentia.
 	//
 	// * For instance types with NVIDIA GRID K520 GPUs, specify
@@ -6245,7 +6245,7 @@ type InstanceRequirementsRequest struct {
 	// * For instance types with Xilinx VU9P FPGAs,
 	// specify  vu9p.
 	//
-	// * For instance types with Amazon Web Services Inferentia GPUs,
+	// * For instance types with Amazon Web Services Inferentia chips,
 	// specify inferentia.
 	//
 	// * For instance types with NVIDIA GRID K520 GPUs, specify
@@ -6449,6 +6449,10 @@ type InstanceSpecification struct {
 	// Excludes the root volume from being snapshotted.
 	ExcludeBootVolume *bool
 
+	// The IDs of the data (non-root) volumes to exclude from the multi-volume snapshot
+	// set. If you specify the ID of the root volume, the request fails. To exclude the
+	// root volume, use ExcludeBootVolume. You can specify up to 40 volume IDs per
+	// request.
 	ExcludeDataVolumeIds []string
 
 	// The instance to specify which volumes should be snapshotted.
@@ -7319,7 +7323,7 @@ type Ipv4PrefixSpecificationRequest struct {
 // Information about the IPv4 delegated prefixes assigned to a network interface.
 type Ipv4PrefixSpecificationResponse struct {
 
-	// One or more IPv4 delegated prefixes assigned to the network interface.
+	// The IPv4 delegated prefixes assigned to the network interface.
 	Ipv4Prefix *string
 
 	noSmithyDocumentSerde
@@ -7385,7 +7389,7 @@ type Ipv6PrefixSpecificationRequest struct {
 // Information about the IPv6 delegated prefixes assigned to a network interface.
 type Ipv6PrefixSpecificationResponse struct {
 
-	// One or more IPv6 delegated prefixes assigned to the network interface.
+	// The IPv6 delegated prefixes assigned to the network interface.
 	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
@@ -8931,7 +8935,9 @@ type ModifyTransitGatewayOptions struct {
 
 	// A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
 	// The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for
-	// 32-bit ASNs.
+	// 32-bit ASNs. The modify ASN operation is not allowed on a transit gateway with
+	// active BGP sessions. You must first delete all transit gateway attachments that
+	// have BGP configured prior to modifying the ASN on the transit gateway.
 	AmazonSideAsn *int64
 
 	// The ID of the default association route table.
@@ -9104,9 +9110,9 @@ type Monitoring struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the status of a moving Elastic IP address. We are retiring EC2-Classic
-// on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For
-// more information, see Migrate from EC2-Classic to a VPC
+// Describes the status of a moving Elastic IP address. We are retiring
+// EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more
+// information, see Migrate from EC2-Classic to a VPC
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
 // Amazon Elastic Compute Cloud User Guide.
 type MovingAddressStatus struct {
@@ -10542,7 +10548,7 @@ type PrivateIpAddressSpecification struct {
 	// Only one IPv4 address can be designated as primary.
 	Primary *bool
 
-	// The private IPv4 addresses.
+	// The private IPv4 address.
 	PrivateIpAddress *string
 
 	noSmithyDocumentSerde
@@ -10958,7 +10964,7 @@ type RequestLaunchTemplateData struct {
 
 	// The instance type. For more information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
-	// Amazon Elastic Compute Cloud User Guide. If you specify InstanceTypes, you can't
+	// Amazon Elastic Compute Cloud User Guide. If you specify InstanceType, you can't
 	// specify InstanceRequirements.
 	InstanceType InstanceType
 
@@ -15455,10 +15461,10 @@ type UserData struct {
 }
 
 // Describes a security group and Amazon Web Services account ID pair. We are
-// retiring EC2-Classic on August 15, 2022. We recommend that you migrate from
-// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC.
+// For more information, see Migrate from EC2-Classic to a VPC
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
+// Amazon Elastic Compute Cloud User Guide.
 type UserIdGroupPair struct {
 
 	// A description for the security group rule that references this user ID group

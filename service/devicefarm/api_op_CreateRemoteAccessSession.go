@@ -89,7 +89,7 @@ type CreateRemoteAccessSessionInput struct {
 	// When set to true, for private devices, Device Farm does not sign your app again.
 	// For public devices, Device Farm always signs your apps again. For more
 	// information on how Device Farm modifies your uploads during tests, see Do you
-	// modify my app? (https://aws.amazon.com/device-farm/faq/)
+	// modify my app? (http://aws.amazon.com/device-farm/faqs/)
 	SkipAppResign *bool
 
 	// Ignored. The public key of the ssh key pair you want to use for connecting to

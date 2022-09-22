@@ -92,6 +92,28 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// TPS has been limited to protect against intentional or unintentional high
+// request volumes.
+type ThrottlingException struct {
+	Message *string
+
+	ErrorCode_ *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The operation did not succeed because a validation error occurred.
 type ValidationException struct {
 	Message *string

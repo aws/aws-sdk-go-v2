@@ -25406,6 +25406,24 @@ func awsAwsjson11_deserializeDocumentCatalogTarget(v **types.CatalogTarget, valu
 				sv.DatabaseName = ptr.String(jtv)
 			}
 
+		case "DlqEventQueueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventQueueArn to be of type string, got %T instead", value)
+				}
+				sv.DlqEventQueueArn = ptr.String(jtv)
+			}
+
+		case "EventQueueArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventQueueArn to be of type string, got %T instead", value)
+				}
+				sv.EventQueueArn = ptr.String(jtv)
+			}
+
 		case "Tables":
 			if err := awsAwsjson11_deserializeDocumentCatalogTablesList(&sv.Tables, value); err != nil {
 				return err

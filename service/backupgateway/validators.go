@@ -130,6 +130,26 @@ func (m *validateOpGetGateway) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVirtualMachine struct {
+}
+
+func (*validateOpGetVirtualMachine) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVirtualMachine) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVirtualMachineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportHypervisorConfiguration struct {
 }
 
@@ -334,6 +354,10 @@ func addOpGetGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGateway{}, middleware.After)
 }
 
+func addOpGetVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVirtualMachine{}, middleware.After)
+}
+
 func addOpImportHypervisorConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportHypervisorConfiguration{}, middleware.After)
 }
@@ -501,6 +525,21 @@ func validateOpGetGatewayInput(v *GetGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetGatewayInput"}
 	if v.GatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVirtualMachineInput(v *GetVirtualMachineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVirtualMachineInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

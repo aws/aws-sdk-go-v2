@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the attribute name and value of the user that you specified in the search.
-// We only support UserName as a valid filter attribute path currently, and filter
-// is required. This API returns minimum attributes, including UserId and UserName
-// in the response.
+// Lists all users in the identity store. Returns a paginated list of complete User
+// objects. Filtering for a User by the UserName attribute is deprecated. Instead,
+// use the GetUserId API action.
 func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
 		params = &ListUsersInput{}

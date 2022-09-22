@@ -1,0 +1,8 @@
+{
+    "id": "6b0ad73c-11a2-4cb0-ad19-9155c6842151",
+    "type": "feature",
+    "description": "Added support for S3 Event Notifications for Catalog Target Crawlers.",
+    "modules": [
+        "service/glue"
+    ]
+}

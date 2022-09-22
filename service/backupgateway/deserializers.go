@@ -123,6 +123,9 @@ func awsAwsjson10_deserializeOpErrorAssociateGatewayToServer(response *smithyhtt
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -236,6 +239,9 @@ func awsAwsjson10_deserializeOpErrorCreateGateway(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -353,6 +359,9 @@ func awsAwsjson10_deserializeOpErrorDeleteGateway(response *smithyhttp.Response,
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -474,6 +483,9 @@ func awsAwsjson10_deserializeOpErrorDeleteHypervisor(response *smithyhttp.Respon
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -594,6 +606,9 @@ func awsAwsjson10_deserializeOpErrorDisassociateGatewayFromServer(response *smit
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -710,6 +725,129 @@ func awsAwsjson10_deserializeOpErrorGetGateway(response *smithyhttp.Response, me
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpGetVirtualMachine struct {
+}
+
+func (*awsAwsjson10_deserializeOpGetVirtualMachine) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpGetVirtualMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetVirtualMachine(response, &metadata)
+	}
+	output := &GetVirtualMachineOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentGetVirtualMachineOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorGetVirtualMachine(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -828,6 +966,9 @@ func awsAwsjson10_deserializeOpErrorImportHypervisorConfiguration(response *smit
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -942,6 +1083,9 @@ func awsAwsjson10_deserializeOpErrorListGateways(response *smithyhttp.Response, 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -1055,6 +1199,9 @@ func awsAwsjson10_deserializeOpErrorListHypervisors(response *smithyhttp.Respons
 	switch {
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -1173,6 +1320,9 @@ func awsAwsjson10_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -1286,6 +1436,9 @@ func awsAwsjson10_deserializeOpErrorListVirtualMachines(response *smithyhttp.Res
 	switch {
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -1407,6 +1560,9 @@ func awsAwsjson10_deserializeOpErrorPutMaintenanceStartTime(response *smithyhttp
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -1523,6 +1679,9 @@ func awsAwsjson10_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -1644,6 +1803,9 @@ func awsAwsjson10_deserializeOpErrorTestHypervisorConfiguration(response *smithy
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -1760,6 +1922,9 @@ func awsAwsjson10_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -1881,6 +2046,9 @@ func awsAwsjson10_deserializeOpErrorUpdateGatewayInformation(response *smithyhtt
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -1997,6 +2165,9 @@ func awsAwsjson10_deserializeOpErrorUpdateGatewaySoftwareNow(response *smithyhtt
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -2117,6 +2288,9 @@ func awsAwsjson10_deserializeOpErrorUpdateHypervisor(response *smithyhttp.Respon
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
@@ -2256,6 +2430,41 @@ func awsAwsjson10_deserializeErrorResourceNotFoundException(response *smithyhttp
 
 	output := &types.ResourceNotFoundException{}
 	err := awsAwsjson10_deserializeDocumentResourceNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson10_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ThrottlingException{}
+	err := awsAwsjson10_deserializeDocumentThrottlingException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -2561,6 +2770,11 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 				}
 			}
 
+		case "MaintenanceStartTime":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceStartTime(&sv.MaintenanceStartTime, value); err != nil {
+				return err
+			}
+
 		case "NextUpdateAvailabilityTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2788,6 +3002,89 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentMaintenanceStartTime(v **types.MaintenanceStartTime, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MaintenanceStartTime
+	if *v == nil {
+		sv = &types.MaintenanceStartTime{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DayOfMonth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DayOfMonth to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DayOfMonth = ptr.Int32(int32(i64))
+			}
+
+		case "DayOfWeek":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DayOfWeek to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DayOfWeek = ptr.Int32(int32(i64))
+			}
+
+		case "HourOfDay":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected HourOfDay to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HourOfDay = ptr.Int32(int32(i64))
+			}
+
+		case "MinuteOfHour":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MinuteOfHour to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinuteOfHour = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2920,6 +3217,55 @@ func awsAwsjson10_deserializeDocumentTags(v *[]types.Tag, value interface{}) err
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ThrottlingException
+	if *v == nil {
+		sv = &types.ThrottlingException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode_ = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2985,6 +3331,98 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 	var sv *types.VirtualMachine
 	if *v == nil {
 		sv = &types.VirtualMachine{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HostName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.HostName = ptr.String(jtv)
+			}
+
+		case "HypervisorId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.HypervisorId = ptr.String(jtv)
+			}
+
+		case "LastBackupDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastBackupDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMachineDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualMachineDetails
+	if *v == nil {
+		sv = &types.VirtualMachineDetails{}
 	} else {
 		sv = *v
 	}
@@ -3319,6 +3757,42 @@ func awsAwsjson10_deserializeOpDocumentGetGatewayOutput(v **GetGatewayOutput, va
 		switch key {
 		case "Gateway":
 			if err := awsAwsjson10_deserializeDocumentGatewayDetails(&sv.Gateway, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentGetVirtualMachineOutput(v **GetVirtualMachineOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetVirtualMachineOutput
+	if *v == nil {
+		sv = &GetVirtualMachineOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "VirtualMachine":
+			if err := awsAwsjson10_deserializeDocumentVirtualMachineDetails(&sv.VirtualMachine, value); err != nil {
 				return err
 			}
 

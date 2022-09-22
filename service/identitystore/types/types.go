@@ -38,10 +38,10 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
-// A unique identifier for a user or group that is not the its primary identifier.
-// This value can be an identifier from an external identity provider (IdP) that is
-// associated with the group or a unique attribute. For example, a unique
-// GroupDisplayName.
+// A unique identifier for a user or group that is not the primary identifier. This
+// value can be an identifier from an external identity provider (IdP) that is
+// associated with the user, the group, or a unique attribute. For example, a
+// unique GroupDisplayName.
 //
 // The following types satisfy this interface:
 //
@@ -157,9 +157,9 @@ type Group struct {
 
 	// The group’s display name value. The length limit is 1,024 characters. This value
 	// can consist of letters, accented characters, symbols, numbers, punctuation, tab,
-	// new line, carriage return, space, and nonbreaking space in this attribute. The
-	// characters <>;:% are excluded. This value is specified at the time the group is
-	// created and stored as an attribute of the group object in the identity store.
+	// new line, carriage return, space, and nonbreaking space in this attribute. This
+	// value is specified at the time the group is created and stored as an attribute
+	// of the group object in the identity store.
 	DisplayName *string
 
 	// A list of ExternalId objects that contains the identifiers issued to this

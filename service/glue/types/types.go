@@ -592,6 +592,13 @@ type CatalogTarget struct {
 	// Connection type.
 	ConnectionName *string
 
+	// A valid Amazon dead-letter SQS ARN. For example,
+	// arn:aws:sqs:region:account:deadLetterQueue.
+	DlqEventQueueArn *string
+
+	// A valid Amazon SQS ARN. For example, arn:aws:sqs:region:account:sqs.
+	EventQueueArn *string
+
 	noSmithyDocumentSerde
 }
 

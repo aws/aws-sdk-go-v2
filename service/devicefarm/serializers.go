@@ -4764,6 +4764,54 @@ func awsAwsjson11_serializeDocumentTestParameters(v map[string]string, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("securityGroupIds")
+		if err := awsAwsjson11_serializeDocumentVpcSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsAwsjson11_serializeDocumentVpcSubnetIds(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("vpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVpcSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVpcSubnetIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateDevicePoolInput(v *CreateDevicePoolInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4911,6 +4959,13 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsAwsjson11_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -6264,6 +6319,13 @@ func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsAwsjson11_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -14,6 +14,7 @@
         "api_op_DeleteHypervisor.go",
         "api_op_DisassociateGatewayFromServer.go",
         "api_op_GetGateway.go",
+        "api_op_GetVirtualMachine.go",
         "api_op_ImportHypervisorConfiguration.go",
         "api_op_ListGateways.go",
         "api_op_ListHypervisors.go",

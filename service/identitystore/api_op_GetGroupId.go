@@ -29,10 +29,10 @@ func (c *Client) GetGroupId(ctx context.Context, params *GetGroupIdInput, optFns
 
 type GetGroupIdInput struct {
 
-	// A unique identifier for an identity resource that is not the primary identifier.
-	// This value can be an identifier from an external identity provider (IdP) that is
-	// associated with the group or a unique attribute. For example, a unique
-	// GroupDisplayName.
+	// A unique identifier for a user or group that is not the primary identifier. This
+	// value can be an identifier from an external identity provider (IdP) that is
+	// associated with the user, the group, or a unique attribute. For example, a
+	// unique GroupDisplayName.
 	//
 	// This member is required.
 	AlternateIdentifier types.AlternateIdentifier

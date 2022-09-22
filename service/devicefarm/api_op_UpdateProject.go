@@ -41,6 +41,9 @@ type UpdateProjectInput struct {
 	// A string that represents the new name of the project that you are updating.
 	Name *string
 
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *types.VpcConfig
+
 	noSmithyDocumentSerde
 }
 

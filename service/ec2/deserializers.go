@@ -62039,7 +62039,7 @@ func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, dec
 				sv.Iops = ptr.Int32(int32(i64))
 			}
 
-		case strings.EqualFold("KmsKeyId", t.Name.Local):
+		case strings.EqualFold("kmsKeyId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
 				return err
