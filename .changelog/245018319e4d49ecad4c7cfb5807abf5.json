@@ -1,8 +1,0 @@
-{
-    "id": "24501831-9e4d-49ec-ad4c-7cfb5807abf5",
-    "type": "feature",
-    "description": "Amazon Nimble Studio adds support for on-demand Amazon Elastic Compute Cloud (EC2) G3 and G5 instances, allowing customers to utilize additional GPU instance types for their creative projects.",
-    "modules": [
-        "service/nimble"
-    ]
-}

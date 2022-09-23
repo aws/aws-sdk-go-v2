@@ -1,8 +1,0 @@
-{
-    "id": "d0699821-44ad-497d-aa8f-67df730a96d2",
-    "type": "feature",
-    "description": "This release introduces additional optional parameters promptAttemptsSpecification to PromptSpecification, which enables the users to configure interrupt setting and Audio, DTMF and Text input configuration for the initial and retry prompt played by the Bot",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

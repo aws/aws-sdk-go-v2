@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.59.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.18
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.22
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.15
@@ -54,7 +54,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.19
 	github.com/aws/aws-sdk-go-v2/service/kms v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.24.6
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.22.12
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.17
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.17
@@ -77,14 +77,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.18
 	github.com/aws/aws-sdk-go-v2/service/sns v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.10
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.28.1
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.17
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.19
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.17
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.18
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.22.8
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.22.9
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.22.9
 	github.com/aws/smithy-go v1.13.3
 	github.com/google/go-cmp v0.5.8

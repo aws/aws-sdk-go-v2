@@ -1,3 +1,7 @@
+# v1.60.0 (2022-09-23)
+
+* **Feature**: Letting external AWS customers provide ImageId as a Launch Template override in FleetLaunchTemplateOverridesRequest
+
 # v1.59.0 (2022-09-22)
 
 * **Feature**: Documentation updates for Amazon EC2.

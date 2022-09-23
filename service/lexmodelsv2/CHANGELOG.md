@@ -1,3 +1,7 @@
+# v1.25.0 (2022-09-23)
+
+* **Feature**: This release introduces additional optional parameters promptAttemptsSpecification to PromptSpecification, which enables the users to configure interrupt setting and Audio, DTMF and Text input configuration for the initial and retry prompt played by the Bot
+
 # v1.24.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

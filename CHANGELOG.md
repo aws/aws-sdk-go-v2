@@ -1,3 +1,21 @@
+# Release (2022-09-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.13.0](service/apprunner/CHANGELOG.md#v1130-2022-09-23)
+  * **Feature**: AWS App Runner adds a Node.js 16 runtime.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.60.0](service/ec2/CHANGELOG.md#v1600-2022-09-23)
+  * **Feature**: Letting external AWS customers provide ImageId as a Launch Template override in FleetLaunchTemplateOverridesRequest
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.25.0](service/lexmodelsv2/CHANGELOG.md#v1250-2022-09-23)
+  * **Feature**: This release introduces additional optional parameters promptAttemptsSpecification to PromptSpecification, which enables the users to configure interrupt setting and Audio, DTMF and Text input configuration for the initial and retry prompt played by the Bot
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.23.0](service/lightsail/CHANGELOG.md#v1230-2022-09-23)
+  * **Feature**: This release adds Instance Metadata Service (IMDS) support for Lightsail instances.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.14.0](service/nimble/CHANGELOG.md#v1140-2022-09-23)
+  * **Feature**: Amazon Nimble Studio adds support for on-demand Amazon Elastic Compute Cloud (EC2) G3 and G5 instances, allowing customers to utilize additional GPU instance types for their creative projects.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.29.0](service/ssm/CHANGELOG.md#v1290-2022-09-23)
+  * **Feature**: This release adds new SSM document types ConformancePackTemplate and CloudFormation
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.22.9](service/wafv2/CHANGELOG.md#v1229-2022-09-23)
+  * **Documentation**: Add the default specification for ResourceType in ListResourcesForWebACL.
+
 # Release (2022-09-22)
 
 ## Module Highlights

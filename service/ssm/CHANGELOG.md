@@ -1,3 +1,7 @@
+# v1.29.0 (2022-09-23)
+
+* **Feature**: This release adds new SSM document types ConformancePackTemplate and CloudFormation
+
 # v1.28.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "61be4798-2aa3-478a-ac27-d88773eb03bc",
-    "type": "feature",
-    "description": "This release adds new SSM document types ConformancePackTemplate and CloudFormation",
-    "modules": [
-        "service/ssm"
-    ]
-}

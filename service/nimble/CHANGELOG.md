@@ -1,3 +1,7 @@
+# v1.14.0 (2022-09-23)
+
+* **Feature**: Amazon Nimble Studio adds support for on-demand Amazon Elastic Compute Cloud (EC2) G3 and G5 instances, allowing customers to utilize additional GPU instance types for their creative projects.
+
 # v1.13.9 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
