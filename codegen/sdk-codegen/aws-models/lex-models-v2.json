@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -73,29 +73,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Utterance",
-                        "name": "Utterance"
+            "type": "enum",
+            "members": {
+                "Utterance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Utterance"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#AggregatedUtterancesFilters": {
@@ -111,18 +113,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#AggregatedUtterancesSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HitCount",
-                        "name": "HitCount"
-                    },
-                    {
-                        "value": "MissedCount",
-                        "name": "MissedCount"
+            "type": "enum",
+            "members": {
+                "HitCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HitCount"
                     }
-                ]
+                },
+                "MissedCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissedCount"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#AggregatedUtterancesSortBy": {
@@ -197,6 +201,28 @@
                 "target": "com.amazonaws.lexmodelsv2#AggregatedUtterancesSummary"
             }
         },
+        "com.amazonaws.lexmodelsv2#AllowedInputTypes": {
+            "type": "structure",
+            "members": {
+                "allowAudioInput": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether audio input is allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "allowDTMFInput": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether DTMF input is allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the allowed input types.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -243,18 +269,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IntentId",
-                        "name": "IntentId"
-                    },
-                    {
-                        "value": "SlotTypeId",
-                        "name": "SlotTypeId"
+            "type": "enum",
+            "members": {
+                "IntentId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentId"
                     }
-                ]
+                },
+                "SlotTypeId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SlotTypeId"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#AssociatedTranscriptFilters": {
@@ -293,6 +321,33 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#AudioAndDTMFInputSpecification": {
+            "type": "structure",
+            "members": {
+                "startTimeoutMs": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeInMilliSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time for which a bot waits before assuming that the customer isn't going to speak or press \n         a key. This timeout is shared between Audio and DTMF inputs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "audioSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the settings on audio input.</p>"
+                    }
+                },
+                "dtmfSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#DTMFSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the settings on DTMF input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the audio and DTMF input specification.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#AudioLogDestination": {
             "type": "structure",
             "members": {
@@ -314,6 +369,7 @@
                 "enabled": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether audio logging in enabled for the bot.</p>",
                         "smithy.api#required": {}
                     }
@@ -342,18 +398,43 @@
             }
         },
         "com.amazonaws.lexmodelsv2#AudioRecognitionStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UseSlotValuesAsCustomVocabulary",
-                        "name": "UseSlotValuesAsCustomVocabulary"
+            "type": "enum",
+            "members": {
+                "UseSlotValuesAsCustomVocabulary": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UseSlotValuesAsCustomVocabulary"
                     }
-                ]
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AudioSpecification": {
+            "type": "structure",
+            "members": {
+                "maxLengthMs": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeInMilliSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time for how long Amazon Lex waits before speech input is truncated and the speech \n         is returned to application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTimeoutMs": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeInMilliSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time for which a bot waits after the customer stops speaking to assume the \n         utterance is finished.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the audio input specifications.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.lexmodelsv2#BotAliasHistoryEvent": {
             "type": "structure",
@@ -403,6 +484,7 @@
                 "enabled": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the locale is enabled for the bot. If the value\n         is <code>false</code>, the locale isn't available for use.</p>",
                         "smithy.api#required": {}
                     }
@@ -433,26 +515,32 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotAliasStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Creating",
-                        "name": "Creating"
-                    },
-                    {
-                        "value": "Available",
-                        "name": "Available"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
+            "type": "enum",
+            "members": {
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
                     }
-                ]
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotAliasSummary": {
@@ -563,29 +651,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BotName",
-                        "name": "BotName"
+            "type": "enum",
+            "members": {
+                "BotName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotName"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotFilters": {
@@ -705,29 +795,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BotLocaleName",
-                        "name": "BotLocaleName"
+            "type": "enum",
+            "members": {
+                "BotLocaleName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotLocaleName"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleFilters": {
@@ -812,14 +904,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BotLocaleName",
-                        "name": "BotLocaleName"
+            "type": "enum",
+            "members": {
+                "BotLocaleName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotLocaleName"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleSortBy": {
@@ -845,46 +937,62 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Creating",
-                        "name": "Creating"
-                    },
-                    {
-                        "value": "Building",
-                        "name": "Building"
-                    },
-                    {
-                        "value": "Built",
-                        "name": "Built"
-                    },
-                    {
-                        "value": "ReadyExpressTesting",
-                        "name": "ReadyExpressTesting"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "NotBuilt",
-                        "name": "NotBuilt"
-                    },
-                    {
-                        "value": "Importing",
-                        "name": "Importing"
-                    },
-                    {
-                        "value": "Processing",
-                        "name": "Processing"
+            "type": "enum",
+            "members": {
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
                     }
-                ]
+                },
+                "Building": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Building"
+                    }
+                },
+                "Built": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Built"
+                    }
+                },
+                "ReadyExpressTesting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadyExpressTesting"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "NotBuilt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotBuilt"
+                    }
+                },
+                "Importing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Importing"
+                    }
+                },
+                "Processing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Processing"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleSummary": {
@@ -984,46 +1092,62 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotRecommendationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Processing",
-                        "name": "Processing"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "Deleted",
-                        "name": "Deleted"
-                    },
-                    {
-                        "value": "Downloading",
-                        "name": "Downloading"
-                    },
-                    {
-                        "value": "Updating",
-                        "name": "Updating"
-                    },
-                    {
-                        "value": "Available",
-                        "name": "Available"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Stopping",
-                        "name": "Stopping"
-                    },
-                    {
-                        "value": "Stopped",
-                        "name": "Stopped"
+            "type": "enum",
+            "members": {
+                "Processing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Processing"
                     }
-                ]
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleted"
+                    }
+                },
+                "Downloading": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Downloading"
+                    }
+                },
+                "Updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Updating"
+                    }
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Stopping": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopping"
+                    }
+                },
+                "Stopped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Stopped"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotRecommendationSummary": {
@@ -1067,14 +1191,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BotName",
-                        "name": "BotName"
+            "type": "enum",
+            "members": {
+                "BotName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotName"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotSortBy": {
@@ -1100,38 +1224,50 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Creating",
-                        "name": "Creating"
-                    },
-                    {
-                        "value": "Available",
-                        "name": "Available"
-                    },
-                    {
-                        "value": "Inactive",
-                        "name": "Inactive"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Versioning",
-                        "name": "Versioning"
-                    },
-                    {
-                        "value": "Importing",
-                        "name": "Importing"
+            "type": "enum",
+            "members": {
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
                     }
-                ]
+                },
+                "Available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "Inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Versioning": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Versioning"
+                    }
+                },
+                "Importing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Importing"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotSummary": {
@@ -1224,14 +1360,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BotVersionSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BotVersion",
-                        "name": "BotVersion"
+            "type": "enum",
+            "members": {
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotVersionSortBy": {
@@ -1301,10 +1437,7 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BoxedBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.lexmodelsv2#BuildBotLocale": {
             "type": "operation",
@@ -1408,14 +1541,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInIntentSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IntentSignature",
-                        "name": "IntentSignature"
+            "type": "enum",
+            "members": {
+                "IntentSignature": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentSignature"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInIntentSortBy": {
@@ -1477,14 +1610,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInSlotTypeSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SlotTypeSignature",
-                        "name": "SlotTypeSignature"
+            "type": "enum",
+            "members": {
+                "SlotTypeSignature": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SlotTypeSignature"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BuiltInSlotTypeSortBy": {
@@ -1538,7 +1671,6 @@
         "com.amazonaws.lexmodelsv2#BuiltInsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 20,
                     "max": 20
@@ -1598,7 +1730,10 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ChildDirected": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.lexmodelsv2#CloudWatchLogGroupArn": {
             "type": "string",
@@ -1825,7 +1960,6 @@
         "com.amazonaws.lexmodelsv2#ConfidenceThreshold": {
             "type": "double",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1
@@ -1848,7 +1982,6 @@
         "com.amazonaws.lexmodelsv2#ContextTimeToLiveInSeconds": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 86400
@@ -1858,7 +1991,6 @@
         "com.amazonaws.lexmodelsv2#ContextTurnsToLive": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
@@ -1886,10 +2018,7 @@
             }
         },
         "com.amazonaws.lexmodelsv2#Count": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.lexmodelsv2#CreateBot": {
             "type": "operation",
@@ -3502,30 +3631,80 @@
             }
         },
         "com.amazonaws.lexmodelsv2#CustomVocabularyStatus": {
+            "type": "enum",
+            "members": {
+                "Ready": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ready"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "Exporting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Exporting"
+                    }
+                },
+                "Importing": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Importing"
+                    }
+                },
+                "Creating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Creating"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DTMFCharacter": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Ready",
-                        "name": "Ready"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
-                    },
-                    {
-                        "value": "Exporting",
-                        "name": "Exporting"
-                    },
-                    {
-                        "value": "Importing",
-                        "name": "Importing"
-                    },
-                    {
-                        "value": "Creating",
-                        "name": "Creating"
+                "smithy.api#pattern": "^[A-D0-9#*]{1}$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DTMFSpecification": {
+            "type": "structure",
+            "members": {
+                "maxLength": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxUtteranceDigits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of DTMF digits allowed in an utterance.</p>",
+                        "smithy.api#required": {}
                     }
-                ]
+                },
+                "endTimeoutMs": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeInMilliSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long the bot should wait after the last DTMF character input before assuming \n         that the input has concluded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionCharacter": {
+                    "target": "com.amazonaws.lexmodelsv2#DTMFCharacter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DTMF character that clears the accumulated DTMF digits and immediately ends \n         the input.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endCharacter": {
+                    "target": "com.amazonaws.lexmodelsv2#DTMFCharacter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DTMF character that immediately ends input. If the user does not press this \n         character, the input ends after the end timeout.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the DTMF input specifications.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#DataPrivacy": {
@@ -3534,6 +3713,7 @@
                 "childDirected": {
                     "target": "com.amazonaws.lexmodelsv2#ChildDirected",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>For each Amazon Lex bot created with the Amazon Lex Model Building Service,\n         you must specify whether your use of Amazon Lex is related to a website,\n         program, or other application that is directed or targeted, in whole or\n         in part, to children under age 13 and subject to the Children's Online\n         Privacy Protection Act (COPPA) by specifying <code>true</code> or\n            <code>false</code> in the <code>childDirected</code> field. By\n         specifying <code>true</code> in the <code>childDirected</code> field,\n         you confirm that your use of Amazon Lex <b>is</b>\n         related to a website, program, or other application that is directed or\n         targeted, in whole or in part, to children under age 13 and subject to\n         COPPA. By specifying <code>false</code> in the\n            <code>childDirected</code> field, you confirm that your use of Amazon Lex\n            <b>is not</b> related to a website,\n         program, or other application that is directed or targeted, in whole or\n         in part, to children under age 13 and subject to COPPA. You may not\n         specify a default value for the <code>childDirected</code> field that\n         does not accurately reflect whether your use of Amazon Lex is related to a\n         website, program, or other application that is directed or targeted, in\n         whole or in part, to children under age 13 and subject to COPPA. If\n         your use of Amazon Lex relates to a website, program, or other application\n         that is directed in whole or in part, to children under age 13, you\n         must obtain any required verifiable parental consent under COPPA. For\n         information regarding the use of Amazon Lex in connection with websites,\n         programs, or other applications that are directed or targeted, in whole\n         or in part, to children under age 13, see the <a href=\"https://aws.amazon.com/lex/faqs#data-security\">Amazon Lex\n            FAQ</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -3678,6 +3858,7 @@
                 "skipResourceInUseCheck": {
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When this parameter is true, Amazon Lex doesn't check to see if any other\n         resource is using the alias before it is deleted.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
@@ -3816,6 +3997,7 @@
                 "skipResourceInUseCheck": {
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When <code>true</code>, Amazon Lex doesn't check to see if another\n         resource, such as an alias, is using the bot before it is\n         deleted.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
@@ -3898,6 +4080,7 @@
                 "skipResourceInUseCheck": {
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default, the <code>DeleteBotVersion</code> operations throws a\n            <code>ResourceInUseException</code> exception if you try to delete a\n         bot version that has an alias pointing at it. Set the\n            <code>skipResourceInUseCheck</code> parameter to <code>true</code>\n         to skip this check and remove the version even if an alias points to\n         it.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
@@ -4525,6 +4708,7 @@
                 "skipResourceInUseCheck": {
                     "target": "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>By default, the <code>DeleteSlotType</code> operations throws a\n            <code>ResourceInUseException</code> exception if you try to delete a\n         slot type used by a slot. Set the <code>skipResourceInUseCheck</code>\n         parameter to <code>true</code> to skip this check and remove the slot\n         type even if a slot uses it.</p>",
                         "smithy.api#httpQuery": "skipResourceInUseCheck"
                     }
@@ -6528,46 +6712,62 @@
             }
         },
         "com.amazonaws.lexmodelsv2#DialogActionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ElicitIntent",
-                        "name": "ElicitIntent"
-                    },
-                    {
-                        "value": "StartIntent",
-                        "name": "StartIntent"
-                    },
-                    {
-                        "value": "ElicitSlot",
-                        "name": "ElicitSlot"
-                    },
-                    {
-                        "value": "EvaluateConditional",
-                        "name": "EvaluateConditional"
-                    },
-                    {
-                        "value": "InvokeDialogCodeHook",
-                        "name": "InvokeDialogCodeHook"
-                    },
-                    {
-                        "value": "ConfirmIntent",
-                        "name": "ConfirmIntent"
-                    },
-                    {
-                        "value": "FulfillIntent",
-                        "name": "FulfillIntent"
-                    },
-                    {
-                        "value": "CloseIntent",
-                        "name": "CloseIntent"
-                    },
-                    {
-                        "value": "EndConversation",
-                        "name": "EndConversation"
+            "type": "enum",
+            "members": {
+                "ElicitIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElicitIntent"
                     }
-                ]
+                },
+                "StartIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartIntent"
+                    }
+                },
+                "ElicitSlot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElicitSlot"
+                    }
+                },
+                "EvaluateConditional": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EvaluateConditional"
+                    }
+                },
+                "InvokeDialogCodeHook": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvokeDialogCodeHook"
+                    }
+                },
+                "ConfirmIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfirmIntent"
+                    }
+                },
+                "FulfillIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FulfillIntent"
+                    }
+                },
+                "CloseIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CloseIntent"
+                    }
+                },
+                "EndConversation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EndConversation"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#DialogCodeHookInvocationSetting": {
@@ -6611,6 +6811,7 @@
                 "enabled": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables the dialog code hook so that it processes user\n         requests.</p>",
                         "smithy.api#required": {}
                     }
@@ -6651,18 +6852,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#Effect": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Allow",
-                        "name": "Allow"
-                    },
-                    {
-                        "value": "Deny",
-                        "name": "Deny"
+            "type": "enum",
+            "members": {
+                "Allow": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Allow"
                     }
-                ]
+                },
+                "Deny": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deny"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ElicitationCodeHookInvocationSetting": {
@@ -6745,29 +6948,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ExportFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ExportResourceType",
-                        "name": "ExportResourceType"
+            "type": "enum",
+            "members": {
+                "ExportResourceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExportResourceType"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ExportFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ExportFilters": {
@@ -6809,14 +7014,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ExportSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LastUpdatedDateTime",
-                        "name": "LastUpdatedDateTime"
+            "type": "enum",
+            "members": {
+                "LastUpdatedDateTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedDateTime"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ExportSortBy": {
@@ -6842,26 +7047,32 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ExportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InProgress",
-                        "name": "InProgress"
-                    },
-                    {
-                        "value": "Completed",
-                        "name": "Completed"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
+            "type": "enum",
+            "members": {
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
                     }
-                ]
+                },
+                "Completed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ExportSummary": {
@@ -6975,6 +7186,7 @@
                 "enabled": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a Lambda function should be invoked to fulfill a\n         specific intent.</p>",
                         "smithy.api#required": {}
                     }
@@ -7005,7 +7217,6 @@
         "com.amazonaws.lexmodelsv2#FulfillmentStartResponseDelay": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 900
@@ -7043,7 +7254,6 @@
         "com.amazonaws.lexmodelsv2#FulfillmentTimeout": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 900
@@ -7053,7 +7263,6 @@
         "com.amazonaws.lexmodelsv2#FulfillmentUpdateResponseFrequency": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 900
@@ -7164,10 +7373,7 @@
             }
         },
         "com.amazonaws.lexmodelsv2#HitCount": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.lexmodelsv2#Id": {
             "type": "string",
@@ -7213,18 +7419,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ImportExportFileFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LexJson",
-                        "name": "LexJson"
-                    },
-                    {
-                        "value": "TSV",
-                        "name": "TSV"
+            "type": "enum",
+            "members": {
+                "LexJson": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LexJson"
                     }
-                ]
+                },
+                "TSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TSV"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ImportExportFilePassword": {
@@ -7267,29 +7475,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ImportFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ImportResourceType",
-                        "name": "ImportResourceType"
+            "type": "enum",
+            "members": {
+                "ImportResourceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImportResourceType"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ImportFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ImportFilters": {
@@ -7328,33 +7538,37 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ImportResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Bot",
-                        "name": "Bot"
-                    },
-                    {
-                        "value": "BotLocale",
-                        "name": "BotLocale"
-                    },
-                    {
-                        "value": "CustomVocabulary",
-                        "name": "CustomVocabulary"
+            "type": "enum",
+            "members": {
+                "Bot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bot"
                     }
-                ]
+                },
+                "BotLocale": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotLocale"
+                    }
+                },
+                "CustomVocabulary": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CustomVocabulary"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ImportSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LastUpdatedDateTime",
-                        "name": "LastUpdatedDateTime"
+            "type": "enum",
+            "members": {
+                "LastUpdatedDateTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedDateTime"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ImportSortBy": {
@@ -7380,26 +7594,32 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ImportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InProgress",
-                        "name": "InProgress"
-                    },
-                    {
-                        "value": "Completed",
-                        "name": "Completed"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "Deleting"
+            "type": "enum",
+            "members": {
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
                     }
-                ]
+                },
+                "Completed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ImportSummary": {
@@ -7536,6 +7756,8 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether an intent's closing response is used. When this\n         field is false, the closing response isn't sent to the user. If the\n            <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 },
@@ -7575,6 +7797,8 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether the intent's confirmation is sent to the user.\n         When this field is false, confirmation and declination responses aren't\n         sent. If the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 },
@@ -7664,29 +7888,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#IntentFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IntentName",
-                        "name": "IntentName"
+            "type": "enum",
+            "members": {
+                "IntentName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentName"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#IntentFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#IntentFilters": {
@@ -7725,18 +7951,20 @@
             "type": "string"
         },
         "com.amazonaws.lexmodelsv2#IntentSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IntentName",
-                        "name": "IntentName"
-                    },
-                    {
-                        "value": "LastUpdatedDateTime",
-                        "name": "LastUpdatedDateTime"
+            "type": "enum",
+            "members": {
+                "IntentName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentName"
                     }
-                ]
+                },
+                "LastUpdatedDateTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedDateTime"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#IntentSortBy": {
@@ -7857,6 +8085,7 @@
                 "queryFilterStringEnabled": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the AMAZON.KendraSearchIntent intent uses a\n         custom query string to query the Amazon Kendra index.</p>"
                     }
                 },
@@ -7925,21 +8154,6 @@
         },
         "com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Lex Models V2",
-                    "arnNamespace": "lex",
-                    "cloudFormationName": "LexModelsV2",
-                    "cloudTrailEventSource": "lexmodelsv2.amazonaws.com",
-                    "endpointPrefix": "models-v2-lex"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lex"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p></p>",
-                "smithy.api#title": "Amazon Lex Model Building V2"
-            },
             "version": "2020-08-07",
             "operations": [
                 {
@@ -8143,7 +8357,22 @@
                 {
                     "target": "com.amazonaws.lexmodelsv2#UpdateSlotType"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lex Models V2",
+                    "arnNamespace": "lex",
+                    "cloudFormationName": "LexModelsV2",
+                    "cloudTrailEventSource": "lexmodelsv2.amazonaws.com",
+                    "endpointPrefix": "models-v2-lex"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lex"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "Amazon Lex Model Building V2"
+            }
         },
         "com.amazonaws.lexmodelsv2#LexTranscriptFilter": {
             "type": "structure",
@@ -9799,30 +10028,42 @@
         "com.amazonaws.lexmodelsv2#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
                 }
             }
         },
-        "com.amazonaws.lexmodelsv2#MergeStrategy": {
-            "type": "string",
+        "com.amazonaws.lexmodelsv2#MaxUtteranceDigits": {
+            "type": "integer",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Overwrite",
-                        "name": "Overwrite"
-                    },
-                    {
-                        "value": "FailOnConflict",
-                        "name": "FailOnConflict"
-                    },
-                    {
-                        "value": "Append",
-                        "name": "Append"
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#MergeStrategy": {
+            "type": "enum",
+            "members": {
+                "Overwrite": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Overwrite"
                     }
-                ]
+                },
+                "FailOnConflict": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FailOnConflict"
+                    }
+                },
+                "Append": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Append"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#Message": {
@@ -9891,18 +10132,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#MessageSelectionStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Random",
-                        "name": "Random"
-                    },
-                    {
-                        "value": "Ordered",
-                        "name": "Ordered"
+            "type": "enum",
+            "members": {
+                "Random": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Random"
                     }
-                ]
+                },
+                "Ordered": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ordered"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#MessageVariationsList": {
@@ -9918,10 +10161,7 @@
             }
         },
         "com.amazonaws.lexmodelsv2#MissedCount": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.lexmodelsv2#MultipleValuesSetting": {
             "type": "structure",
@@ -9929,6 +10169,7 @@
                 "allowMultipleValues": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a slot can return multiple values. When\n            <code>true</code>, the slot may return more than one value in a\n         response. When <code>false</code>, the slot returns only a single\n         value.</p>\n         <p>Multi-value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>.</p>\n         <p>If the <code>allowMutlipleValues</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
                 }
@@ -9950,7 +10191,6 @@
         "com.amazonaws.lexmodelsv2#NextIndex": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 10000000
@@ -9994,18 +10234,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ObfuscationSettingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "None",
-                        "name": "None"
-                    },
-                    {
-                        "value": "DefaultObfuscation",
-                        "name": "DefaultObfuscation"
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
                     }
-                ]
+                },
+                "DefaultObfuscation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DefaultObfuscation"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ObjectPrefix": {
@@ -10299,17 +10541,101 @@
         "com.amazonaws.lexmodelsv2#PriorityValue": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#PromptAttempt": {
+            "type": "enum",
+            "members": {
+                "Initial": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Initial"
+                    }
+                },
+                "Retry1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retry1"
+                    }
+                },
+                "Retry2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retry2"
+                    }
+                },
+                "Retry3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retry3"
+                    }
+                },
+                "Retry4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retry4"
+                    }
+                },
+                "Retry5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retry5"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attempt name of attempts of a prompt.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#PromptAttemptSpecification": {
+            "type": "structure",
+            "members": {
+                "allowInterrupt": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the user can interrupt a speech prompt attempt from the bot.</p>"
+                    }
+                },
+                "allowedInputTypes": {
+                    "target": "com.amazonaws.lexmodelsv2#AllowedInputTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the allowed input types of the prompt attempt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "audioAndDTMFInputSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioAndDTMFInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the settings on audio and DTMF input.</p>"
+                    }
+                },
+                "textInputSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#TextInputSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the settings on text input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the settings on a prompt attempt.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#PromptAttemptsSpecificationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexmodelsv2#PromptAttempt"
+            },
+            "value": {
+                "target": "com.amazonaws.lexmodelsv2#PromptAttemptSpecification"
+            }
+        },
         "com.amazonaws.lexmodelsv2#PromptMaxRetries": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 5
@@ -10343,6 +10669,12 @@
                     "target": "com.amazonaws.lexmodelsv2#MessageSelectionStrategy",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates how a message is selected from a message group among retries.</p>"
+                    }
+                },
+                "promptAttemptsSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#PromptAttemptsSpecificationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the advanced settings on each attempt of the prompt.</p>"
                     }
                 }
             },
@@ -10422,6 +10754,7 @@
                 "timeValue": {
                     "target": "com.amazonaws.lexmodelsv2#TimeValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period of the time window to gather statistics for. The valid\n         value depends on the setting of the <code>timeDimension</code>\n         field.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Hours</code> - 1/3/6/12/24</p>\n            </li>\n            <li>\n               <p>\n                  <code>Days</code> - 3</p>\n            </li>\n            <li>\n               <p>\n                  <code>Weeks</code> - 1/2</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
@@ -10432,10 +10765,7 @@
             }
         },
         "com.amazonaws.lexmodelsv2#ResourceCount": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.lexmodelsv2#ResourceNotFoundException": {
             "type": "structure",
@@ -10472,7 +10802,10 @@
             }
         },
         "com.amazonaws.lexmodelsv2#RetryAfterSeconds": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.lexmodelsv2#RevisionId": {
             "type": "string",
@@ -10632,10 +10965,7 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SampleUtterancesCount": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.lexmodelsv2#SampleUtterancesList": {
             "type": "list",
@@ -10730,6 +11060,8 @@
                 "searchOrder": {
                     "target": "com.amazonaws.lexmodelsv2#SearchOrder",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "Descending",
                         "smithy.api#documentation": "<p>How SearchResults are ordered. Valid values are Ascending or\n         Descending. The default is Descending.</p>"
                     }
                 },
@@ -10802,18 +11134,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SearchOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Ascending",
-                        "name": "Ascending"
-                    },
-                    {
-                        "value": "Descending",
-                        "name": "Descending"
+            "type": "enum",
+            "members": {
+                "Ascending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ascending"
                     }
-                ]
+                },
+                "Descending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Descending"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SentimentAnalysisSettings": {
@@ -10822,6 +11156,7 @@
                 "detectSentiment": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Sets whether Amazon Lex uses Amazon Comprehend to detect the sentiment of user\n         utterances.</p>",
                         "smithy.api#required": {}
                     }
@@ -10867,7 +11202,6 @@
         "com.amazonaws.lexmodelsv2#SessionTTL": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 60,
                     "max": 86400
@@ -10875,7 +11209,10 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SkipResourceInUseCheck": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.lexmodelsv2#SlotCaptureSetting": {
             "type": "structure",
@@ -10928,18 +11265,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SlotConstraint": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Required",
-                        "name": "Required"
-                    },
-                    {
-                        "value": "Optional",
-                        "name": "Optional"
+            "type": "enum",
+            "members": {
+                "Required": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Required"
                     }
-                ]
+                },
+                "Optional": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Optional"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotDefaultValue": {
@@ -11023,29 +11362,31 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SlotFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SlotName",
-                        "name": "SlotName"
+            "type": "enum",
+            "members": {
+                "SlotName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SlotName"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotFilters": {
@@ -11089,33 +11430,37 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SlotShape": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Scalar",
-                        "name": "Scalar"
-                    },
-                    {
-                        "value": "List",
-                        "name": "List"
+            "type": "enum",
+            "members": {
+                "Scalar": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scalar"
                     }
-                ]
+                },
+                "List": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "List"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SlotName",
-                        "name": "SlotName"
-                    },
-                    {
-                        "value": "LastUpdatedDateTime",
-                        "name": "LastUpdatedDateTime"
+            "type": "enum",
+            "members": {
+                "SlotName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SlotName"
                     }
-                ]
+                },
+                "LastUpdatedDateTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedDateTime"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotSortBy": {
@@ -11197,26 +11542,32 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SlotTypeCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Custom",
-                        "name": "Custom"
-                    },
-                    {
-                        "value": "Extended",
-                        "name": "Extended"
-                    },
-                    {
-                        "value": "ExternalGrammar",
-                        "name": "ExternalGrammar"
-                    },
-                    {
-                        "value": "Composite",
-                        "name": "Composite"
+            "type": "enum",
+            "members": {
+                "Custom": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Custom"
                     }
-                ]
+                },
+                "Extended": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Extended"
+                    }
+                },
+                "ExternalGrammar": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExternalGrammar"
+                    }
+                },
+                "Composite": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Composite"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotTypeFilter": {
@@ -11249,33 +11600,37 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SlotTypeFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SlotTypeName",
-                        "name": "SlotTypeName"
-                    },
-                    {
-                        "value": "ExternalSourceType",
-                        "name": "ExternalSourceType"
+            "type": "enum",
+            "members": {
+                "SlotTypeName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SlotTypeName"
                     }
-                ]
+                },
+                "ExternalSourceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExternalSourceType"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotTypeFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CO",
-                        "name": "Contains"
-                    },
-                    {
-                        "value": "EQ",
-                        "name": "Equals"
+            "type": "enum",
+            "members": {
+                "Contains": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
                     }
-                ]
+                },
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotTypeFilters": {
@@ -11294,18 +11649,20 @@
             "type": "string"
         },
         "com.amazonaws.lexmodelsv2#SlotTypeSortAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SlotTypeName",
-                        "name": "SlotTypeName"
-                    },
-                    {
-                        "value": "LastUpdatedDateTime",
-                        "name": "LastUpdatedDateTime"
+            "type": "enum",
+            "members": {
+                "SlotTypeName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SlotTypeName"
                     }
-                ]
+                },
+                "LastUpdatedDateTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUpdatedDateTime"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotTypeSortBy": {
@@ -11533,22 +11890,26 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SlotValueResolutionStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OriginalValue",
-                        "name": "OriginalValue"
-                    },
-                    {
-                        "value": "TopResolution",
-                        "name": "TopResolution"
-                    },
-                    {
-                        "value": "Concatenation",
-                        "name": "Concatenation"
+            "type": "enum",
+            "members": {
+                "OriginalValue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OriginalValue"
                     }
-                ]
+                },
+                "TopResolution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TopResolution"
+                    }
+                },
+                "Concatenation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Concatenation"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#SlotValueSelectionSetting": {
@@ -11557,6 +11918,8 @@
                 "resolutionStrategy": {
                     "target": "com.amazonaws.lexmodelsv2#SlotValueResolutionStrategy",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "OriginalValue",
                         "smithy.api#documentation": "<p>Determines the slot resolution strategy that Amazon Lex uses to\n         return slot type values. The field can be set to one of the following\n         values:</p>\n\n         <ul>\n            <li>\n               <p>OriginalValue - Returns the value entered by the user, if the\n               user value is similar to the slot value.</p>\n            </li>\n            <li>\n               <p>TopResolution - If there is a resolution list for the slot,\n               return the first value in the resolution list as the slot type\n               value. If there is no resolution list, null is returned.</p>\n            </li>\n         </ul>\n\n         <p>If you don't specify the valueSelectionStrategy, the default is\n         OriginalValue. </p>",
                         "smithy.api#required": {}
                     }
@@ -11585,18 +11948,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#SortOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Ascending",
-                        "name": "Ascending"
-                    },
-                    {
-                        "value": "Descending",
-                        "name": "Descending"
+            "type": "enum",
+            "members": {
+                "Ascending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ascending"
                     }
-                ]
+                },
+                "Descending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Descending"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#Specifications": {
@@ -11863,7 +12228,6 @@
         "com.amazonaws.lexmodelsv2#StillWaitingResponseFrequency": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 300
@@ -11908,7 +12272,6 @@
         "com.amazonaws.lexmodelsv2#StillWaitingResponseTimeout": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 900
@@ -12046,7 +12409,7 @@
                     "min": 0,
                     "max": 640
                 },
-                "smithy.api#pattern": "^[0-9A-Za-z_\\s\\(\\)]+$"
+                "smithy.api#pattern": "^[0-9A-Za-z_\\-\\s\\(\\)]+$"
             }
         },
         "com.amazonaws.lexmodelsv2#SubSlotSetting": {
@@ -12256,6 +12619,21 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#TextInputSpecification": {
+            "type": "structure",
+            "members": {
+                "startTimeoutMs": {
+                    "target": "com.amazonaws.lexmodelsv2#TimeInMilliSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time for which a bot waits before re-prompting a customer for text input.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the text input specifications.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#TextLogDestination": {
             "type": "structure",
             "members": {
@@ -12277,6 +12655,7 @@
                 "enabled": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether conversation logs should be stored for an\n         alias.</p>",
                         "smithy.api#required": {}
                     }
@@ -12310,6 +12689,7 @@
                 "retryAfterSeconds": {
                     "target": "com.amazonaws.lexmodelsv2#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 },
@@ -12324,27 +12704,40 @@
             }
         },
         "com.amazonaws.lexmodelsv2#TimeDimension": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Hours",
-                        "name": "Hours"
-                    },
-                    {
-                        "value": "Days",
-                        "name": "Days"
-                    },
-                    {
-                        "value": "Weeks",
-                        "name": "Weeks"
+            "type": "enum",
+            "members": {
+                "Hours": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hours"
                     }
-                ]
+                },
+                "Days": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Days"
+                    }
+                },
+                "Weeks": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Weeks"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#TimeInMilliSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#TimeValue": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 24
@@ -12379,14 +12772,14 @@
             }
         },
         "com.amazonaws.lexmodelsv2#TranscriptFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Lex",
-                        "name": "Lex"
+            "type": "enum",
+            "members": {
+                "Lex": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lex"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#TranscriptSourceSetting": {
@@ -13967,18 +14360,20 @@
             }
         },
         "com.amazonaws.lexmodelsv2#VoiceEngine": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "standard",
-                        "name": "Standard"
-                    },
-                    {
-                        "value": "neural",
-                        "name": "Neural"
+            "type": "enum",
+            "members": {
+                "Standard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
                     }
-                ]
+                },
+                "Neural": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "neural"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#VoiceId": {
@@ -13997,6 +14392,8 @@
                 "engine": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "standard",
                         "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more\n         information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the\n               <code>SynthesizeSpeech</code> operation</a> in the\n               <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is\n         <code>standard</code>.</p>"
                     }
                 }
@@ -14031,6 +14428,8 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether the bot will wait for a user to respond. When this\n         field is false, wait and continue responses for a slot aren't used. If\n         the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }

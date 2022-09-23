@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,24 +31,6 @@
     "shapes": {
         "com.amazonaws.wafv2#AWSWAF_20190729": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WAFV2",
-                    "arnNamespace": "wafv2",
-                    "cloudFormationName": "WAFv2",
-                    "cloudTrailEventSource": "wafv2.amazonaws.com",
-                    "endpointPrefix": "wafv2"
-                },
-                "aws.auth#sigv4": {
-                    "name": "wafv2"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync\n         GraphQL API, or an Amazon Cognito user pool. WAF also lets you control access to your content. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, the AppSync GraphQL\n         API, or the Amazon Cognito user pool responds to requests either with the requested content or with an HTTP 403 status code\n         (Forbidden). You also can configure CloudFront to return a custom error page when a request is\n         blocked.</p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and an overview of\n         how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "AWS WAFV2",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
-                }
-            },
             "version": "2019-07-29",
             "operations": [
                 {
@@ -195,7 +177,25 @@
                 {
                     "target": "com.amazonaws.wafv2#UpdateWebACL"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WAFV2",
+                    "arnNamespace": "wafv2",
+                    "cloudFormationName": "WAFv2",
+                    "cloudTrailEventSource": "wafv2.amazonaws.com",
+                    "endpointPrefix": "wafv2"
+                },
+                "aws.auth#sigv4": {
+                    "name": "wafv2"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>WAF</fullname>\n         <note>\n            <p>This is the latest version of the <b>WAF</b> API,\n            released in November, 2019. The names of the entities that you use to access this API,\n            like endpoints and namespaces, all have the versioning information added, like \"V2\" or\n            \"v2\", to distinguish from the prior version. We recommend migrating your resources to\n            this version, because it has a number of significant improvements.</p>\n            <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any\n            WAF resources that you created before. You can access your old rules, web ACLs, and\n            other WAF resources only through the WAF Classic APIs. The WAF Classic APIs\n            have retained the prior names, endpoints, and namespaces. </p>\n            <p>For information, including how to migrate your WAF resources to this version,\n            see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p>\n         </note>\n         <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS\n         requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, an AppSync\n         GraphQL API, or an Amazon Cognito user pool. WAF also lets you control access to your content. Based on conditions that\n         you specify, such as the IP addresses that requests originate from or the values of query\n         strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, the AppSync GraphQL\n         API, or the Amazon Cognito user pool responds to requests either with the requested content or with an HTTP 403 status code\n         (Forbidden). You also can configure CloudFront to return a custom error page when a request is\n         blocked.</p>\n         <p>This API guide is for developers who need detailed information about WAF API actions,\n         data types, and errors. For detailed information about WAF features and an overview of\n         how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer\n         Guide</a>.</p>\n         <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p>\n         <ul>\n            <li>\n               <p>For regional applications, you can use any of the endpoints in the list.\n               A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. </p>\n            </li>\n            <li>\n               <p>For Amazon CloudFront applications, you must use the API endpoint listed for\n               US East (N. Virginia): us-east-1.</p>\n            </li>\n         </ul>\n         <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the\n         programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>We currently provide two versions of the WAF API: this API and the prior versions,\n         the classic WAF APIs. This new API provides the same functionality as the older versions,\n         with the following major improvements:</p>\n         <ul>\n            <li>\n               <p>You use one API for both global and regional applications. Where you need to\n               distinguish the scope, you specify a <code>Scope</code> parameter and set it to\n                  <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p>\n            </li>\n            <li>\n               <p>You can define a web ACL or rule group with a single call, and update it with a\n               single call. You define all rule specifications in JSON format, and pass them to your\n               rule group or web ACL calls.</p>\n            </li>\n            <li>\n               <p>The limits WAF places on the use of rules more closely reflects the cost of\n               running each type of rule. Rule groups include capacity settings, so you know the\n               maximum cost of a rule group when you use it.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS WAFV2",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://waf.amazonaws.com/doc/2019-07-29/"
+                }
+            }
         },
         "com.amazonaws.wafv2#Action": {
             "type": "string"
@@ -216,30 +216,38 @@
             }
         },
         "com.amazonaws.wafv2#ActionValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOW",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "BLOCK",
-                        "name": "BLOCK"
-                    },
-                    {
-                        "value": "COUNT",
-                        "name": "COUNT"
-                    },
-                    {
-                        "value": "CAPTCHA",
-                        "name": "CAPTCHA"
-                    },
-                    {
-                        "value": "EXCLUDED_AS_COUNT",
-                        "name": "EXCLUDED_AS_COUNT"
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
                     }
-                ]
+                },
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK"
+                    }
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "CAPTCHA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAPTCHA"
+                    }
+                },
+                "EXCLUDED_AS_COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDED_AS_COUNT"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#All": {
@@ -366,26 +374,33 @@
             }
         },
         "com.amazonaws.wafv2#BodyParsingFallbackBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MATCH",
-                        "name": "MATCH"
-                    },
-                    {
-                        "value": "NO_MATCH",
-                        "name": "NO_MATCH"
-                    },
-                    {
-                        "value": "EVALUATE_AS_STRING",
-                        "name": "EVALUATE_AS_STRING"
+            "type": "enum",
+            "members": {
+                "MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATCH"
                     }
-                ]
+                },
+                "NO_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_MATCH"
+                    }
+                },
+                "EVALUATE_AS_STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVALUATE_AS_STRING"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.wafv2#ByteMatchStatement": {
             "type": "structure",
@@ -426,6 +441,7 @@
         "com.amazonaws.wafv2#CapacityUnit": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -551,40 +567,51 @@
                 "Capacity": {
                     "target": "com.amazonaws.wafv2#ConsumedCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The capacity required by the rules and scope.</p>"
                     }
                 }
             }
         },
         "com.amazonaws.wafv2#ComparisonOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EQ",
-                        "name": "EQ"
-                    },
-                    {
-                        "value": "NE",
-                        "name": "NE"
-                    },
-                    {
-                        "value": "LE",
-                        "name": "LE"
-                    },
-                    {
-                        "value": "LT",
-                        "name": "LT"
-                    },
-                    {
-                        "value": "GE",
-                        "name": "GE"
-                    },
-                    {
-                        "value": "GT",
-                        "name": "GT"
+            "type": "enum",
+            "members": {
+                "EQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
                     }
-                ]
+                },
+                "NE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NE"
+                    }
+                },
+                "LE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LE"
+                    }
+                },
+                "LT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LT"
+                    }
+                },
+                "GE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GE"
+                    }
+                },
+                "GT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GT"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#Condition": {
@@ -621,6 +648,7 @@
         "com.amazonaws.wafv2#ConsumedCapacity": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -711,1010 +739,1508 @@
             "type": "string"
         },
         "com.amazonaws.wafv2#CountryCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AF",
-                        "name": "AF"
-                    },
-                    {
-                        "value": "AX",
-                        "name": "AX"
-                    },
-                    {
-                        "value": "AL",
-                        "name": "AL"
-                    },
-                    {
-                        "value": "DZ",
-                        "name": "DZ"
-                    },
-                    {
-                        "value": "AS",
-                        "name": "AS"
-                    },
-                    {
-                        "value": "AD",
-                        "name": "AD"
-                    },
-                    {
-                        "value": "AO",
-                        "name": "AO"
-                    },
-                    {
-                        "value": "AI",
-                        "name": "AI"
-                    },
-                    {
-                        "value": "AQ",
-                        "name": "AQ"
-                    },
-                    {
-                        "value": "AG",
-                        "name": "AG"
-                    },
-                    {
-                        "value": "AR",
-                        "name": "AR"
-                    },
-                    {
-                        "value": "AM",
-                        "name": "AM"
-                    },
-                    {
-                        "value": "AW",
-                        "name": "AW"
-                    },
-                    {
-                        "value": "AU",
-                        "name": "AU"
-                    },
-                    {
-                        "value": "AT",
-                        "name": "AT"
-                    },
-                    {
-                        "value": "AZ",
-                        "name": "AZ"
-                    },
-                    {
-                        "value": "BS",
-                        "name": "BS"
-                    },
-                    {
-                        "value": "BH",
-                        "name": "BH"
-                    },
-                    {
-                        "value": "BD",
-                        "name": "BD"
-                    },
-                    {
-                        "value": "BB",
-                        "name": "BB"
-                    },
-                    {
-                        "value": "BY",
-                        "name": "BY"
-                    },
-                    {
-                        "value": "BE",
-                        "name": "BE"
-                    },
-                    {
-                        "value": "BZ",
-                        "name": "BZ"
-                    },
-                    {
-                        "value": "BJ",
-                        "name": "BJ"
-                    },
-                    {
-                        "value": "BM",
-                        "name": "BM"
-                    },
-                    {
-                        "value": "BT",
-                        "name": "BT"
-                    },
-                    {
-                        "value": "BO",
-                        "name": "BO"
-                    },
-                    {
-                        "value": "BQ",
-                        "name": "BQ"
-                    },
-                    {
-                        "value": "BA",
-                        "name": "BA"
-                    },
-                    {
-                        "value": "BW",
-                        "name": "BW"
-                    },
-                    {
-                        "value": "BV",
-                        "name": "BV"
-                    },
-                    {
-                        "value": "BR",
-                        "name": "BR"
-                    },
-                    {
-                        "value": "IO",
-                        "name": "IO"
-                    },
-                    {
-                        "value": "BN",
-                        "name": "BN"
-                    },
-                    {
-                        "value": "BG",
-                        "name": "BG"
-                    },
-                    {
-                        "value": "BF",
-                        "name": "BF"
-                    },
-                    {
-                        "value": "BI",
-                        "name": "BI"
-                    },
-                    {
-                        "value": "KH",
-                        "name": "KH"
-                    },
-                    {
-                        "value": "CM",
-                        "name": "CM"
-                    },
-                    {
-                        "value": "CA",
-                        "name": "CA"
-                    },
-                    {
-                        "value": "CV",
-                        "name": "CV"
-                    },
-                    {
-                        "value": "KY",
-                        "name": "KY"
-                    },
-                    {
-                        "value": "CF",
-                        "name": "CF"
-                    },
-                    {
-                        "value": "TD",
-                        "name": "TD"
-                    },
-                    {
-                        "value": "CL",
-                        "name": "CL"
-                    },
-                    {
-                        "value": "CN",
-                        "name": "CN"
-                    },
-                    {
-                        "value": "CX",
-                        "name": "CX"
-                    },
-                    {
-                        "value": "CC",
-                        "name": "CC"
-                    },
-                    {
-                        "value": "CO",
-                        "name": "CO"
-                    },
-                    {
-                        "value": "KM",
-                        "name": "KM"
-                    },
-                    {
-                        "value": "CG",
-                        "name": "CG"
-                    },
-                    {
-                        "value": "CD",
-                        "name": "CD"
-                    },
-                    {
-                        "value": "CK",
-                        "name": "CK"
-                    },
-                    {
-                        "value": "CR",
-                        "name": "CR"
-                    },
-                    {
-                        "value": "CI",
-                        "name": "CI"
-                    },
-                    {
-                        "value": "HR",
-                        "name": "HR"
-                    },
-                    {
-                        "value": "CU",
-                        "name": "CU"
-                    },
-                    {
-                        "value": "CW",
-                        "name": "CW"
-                    },
-                    {
-                        "value": "CY",
-                        "name": "CY"
-                    },
-                    {
-                        "value": "CZ",
-                        "name": "CZ"
-                    },
-                    {
-                        "value": "DK",
-                        "name": "DK"
-                    },
-                    {
-                        "value": "DJ",
-                        "name": "DJ"
-                    },
-                    {
-                        "value": "DM",
-                        "name": "DM"
-                    },
-                    {
-                        "value": "DO",
-                        "name": "DO"
-                    },
-                    {
-                        "value": "EC",
-                        "name": "EC"
-                    },
-                    {
-                        "value": "EG",
-                        "name": "EG"
-                    },
-                    {
-                        "value": "SV",
-                        "name": "SV"
-                    },
-                    {
-                        "value": "GQ",
-                        "name": "GQ"
-                    },
-                    {
-                        "value": "ER",
-                        "name": "ER"
-                    },
-                    {
-                        "value": "EE",
-                        "name": "EE"
-                    },
-                    {
-                        "value": "ET",
-                        "name": "ET"
-                    },
-                    {
-                        "value": "FK",
-                        "name": "FK"
-                    },
-                    {
-                        "value": "FO",
-                        "name": "FO"
-                    },
-                    {
-                        "value": "FJ",
-                        "name": "FJ"
-                    },
-                    {
-                        "value": "FI",
-                        "name": "FI"
-                    },
-                    {
-                        "value": "FR",
-                        "name": "FR"
-                    },
-                    {
-                        "value": "GF",
-                        "name": "GF"
-                    },
-                    {
-                        "value": "PF",
-                        "name": "PF"
-                    },
-                    {
-                        "value": "TF",
-                        "name": "TF"
-                    },
-                    {
-                        "value": "GA",
-                        "name": "GA"
-                    },
-                    {
-                        "value": "GM",
-                        "name": "GM"
-                    },
-                    {
-                        "value": "GE",
-                        "name": "GE"
-                    },
-                    {
-                        "value": "DE",
-                        "name": "DE"
-                    },
-                    {
-                        "value": "GH",
-                        "name": "GH"
-                    },
-                    {
-                        "value": "GI",
-                        "name": "GI"
-                    },
-                    {
-                        "value": "GR",
-                        "name": "GR"
-                    },
-                    {
-                        "value": "GL",
-                        "name": "GL"
-                    },
-                    {
-                        "value": "GD",
-                        "name": "GD"
-                    },
-                    {
-                        "value": "GP",
-                        "name": "GP"
-                    },
-                    {
-                        "value": "GU",
-                        "name": "GU"
-                    },
-                    {
-                        "value": "GT",
-                        "name": "GT"
-                    },
-                    {
-                        "value": "GG",
-                        "name": "GG"
-                    },
-                    {
-                        "value": "GN",
-                        "name": "GN"
-                    },
-                    {
-                        "value": "GW",
-                        "name": "GW"
-                    },
-                    {
-                        "value": "GY",
-                        "name": "GY"
-                    },
-                    {
-                        "value": "HT",
-                        "name": "HT"
-                    },
-                    {
-                        "value": "HM",
-                        "name": "HM"
-                    },
-                    {
-                        "value": "VA",
-                        "name": "VA"
-                    },
-                    {
-                        "value": "HN",
-                        "name": "HN"
-                    },
-                    {
-                        "value": "HK",
-                        "name": "HK"
-                    },
-                    {
-                        "value": "HU",
-                        "name": "HU"
-                    },
-                    {
-                        "value": "IS",
-                        "name": "IS"
-                    },
-                    {
-                        "value": "IN",
-                        "name": "IN"
-                    },
-                    {
-                        "value": "ID",
-                        "name": "ID"
-                    },
-                    {
-                        "value": "IR",
-                        "name": "IR"
-                    },
-                    {
-                        "value": "IQ",
-                        "name": "IQ"
-                    },
-                    {
-                        "value": "IE",
-                        "name": "IE"
-                    },
-                    {
-                        "value": "IM",
-                        "name": "IM"
-                    },
-                    {
-                        "value": "IL",
-                        "name": "IL"
-                    },
-                    {
-                        "value": "IT",
-                        "name": "IT"
-                    },
-                    {
-                        "value": "JM",
-                        "name": "JM"
-                    },
-                    {
-                        "value": "JP",
-                        "name": "JP"
-                    },
-                    {
-                        "value": "JE",
-                        "name": "JE"
-                    },
-                    {
-                        "value": "JO",
-                        "name": "JO"
-                    },
-                    {
-                        "value": "KZ",
-                        "name": "KZ"
-                    },
-                    {
-                        "value": "KE",
-                        "name": "KE"
-                    },
-                    {
-                        "value": "KI",
-                        "name": "KI"
-                    },
-                    {
-                        "value": "KP",
-                        "name": "KP"
-                    },
-                    {
-                        "value": "KR",
-                        "name": "KR"
-                    },
-                    {
-                        "value": "KW",
-                        "name": "KW"
-                    },
-                    {
-                        "value": "KG",
-                        "name": "KG"
-                    },
-                    {
-                        "value": "LA",
-                        "name": "LA"
-                    },
-                    {
-                        "value": "LV",
-                        "name": "LV"
-                    },
-                    {
-                        "value": "LB",
-                        "name": "LB"
-                    },
-                    {
-                        "value": "LS",
-                        "name": "LS"
-                    },
-                    {
-                        "value": "LR",
-                        "name": "LR"
-                    },
-                    {
-                        "value": "LY",
-                        "name": "LY"
-                    },
-                    {
-                        "value": "LI",
-                        "name": "LI"
-                    },
-                    {
-                        "value": "LT",
-                        "name": "LT"
-                    },
-                    {
-                        "value": "LU",
-                        "name": "LU"
-                    },
-                    {
-                        "value": "MO",
-                        "name": "MO"
-                    },
-                    {
-                        "value": "MK",
-                        "name": "MK"
-                    },
-                    {
-                        "value": "MG",
-                        "name": "MG"
-                    },
-                    {
-                        "value": "MW",
-                        "name": "MW"
-                    },
-                    {
-                        "value": "MY",
-                        "name": "MY"
-                    },
-                    {
-                        "value": "MV",
-                        "name": "MV"
-                    },
-                    {
-                        "value": "ML",
-                        "name": "ML"
-                    },
-                    {
-                        "value": "MT",
-                        "name": "MT"
-                    },
-                    {
-                        "value": "MH",
-                        "name": "MH"
-                    },
-                    {
-                        "value": "MQ",
-                        "name": "MQ"
-                    },
-                    {
-                        "value": "MR",
-                        "name": "MR"
-                    },
-                    {
-                        "value": "MU",
-                        "name": "MU"
-                    },
-                    {
-                        "value": "YT",
-                        "name": "YT"
-                    },
-                    {
-                        "value": "MX",
-                        "name": "MX"
-                    },
-                    {
-                        "value": "FM",
-                        "name": "FM"
-                    },
-                    {
-                        "value": "MD",
-                        "name": "MD"
-                    },
-                    {
-                        "value": "MC",
-                        "name": "MC"
-                    },
-                    {
-                        "value": "MN",
-                        "name": "MN"
-                    },
-                    {
-                        "value": "ME",
-                        "name": "ME"
-                    },
-                    {
-                        "value": "MS",
-                        "name": "MS"
-                    },
-                    {
-                        "value": "MA",
-                        "name": "MA"
-                    },
-                    {
-                        "value": "MZ",
-                        "name": "MZ"
-                    },
-                    {
-                        "value": "MM",
-                        "name": "MM"
-                    },
-                    {
-                        "value": "NA",
-                        "name": "NA"
-                    },
-                    {
-                        "value": "NR",
-                        "name": "NR"
-                    },
-                    {
-                        "value": "NP",
-                        "name": "NP"
-                    },
-                    {
-                        "value": "NL",
-                        "name": "NL"
-                    },
-                    {
-                        "value": "NC",
-                        "name": "NC"
-                    },
-                    {
-                        "value": "NZ",
-                        "name": "NZ"
-                    },
-                    {
-                        "value": "NI",
-                        "name": "NI"
-                    },
-                    {
-                        "value": "NE",
-                        "name": "NE"
-                    },
-                    {
-                        "value": "NG",
-                        "name": "NG"
-                    },
-                    {
-                        "value": "NU",
-                        "name": "NU"
-                    },
-                    {
-                        "value": "NF",
-                        "name": "NF"
-                    },
-                    {
-                        "value": "MP",
-                        "name": "MP"
-                    },
-                    {
-                        "value": "NO",
-                        "name": "NO"
-                    },
-                    {
-                        "value": "OM",
-                        "name": "OM"
-                    },
-                    {
-                        "value": "PK",
-                        "name": "PK"
-                    },
-                    {
-                        "value": "PW",
-                        "name": "PW"
-                    },
-                    {
-                        "value": "PS",
-                        "name": "PS"
-                    },
-                    {
-                        "value": "PA",
-                        "name": "PA"
-                    },
-                    {
-                        "value": "PG",
-                        "name": "PG"
-                    },
-                    {
-                        "value": "PY",
-                        "name": "PY"
-                    },
-                    {
-                        "value": "PE",
-                        "name": "PE"
-                    },
-                    {
-                        "value": "PH",
-                        "name": "PH"
-                    },
-                    {
-                        "value": "PN",
-                        "name": "PN"
-                    },
-                    {
-                        "value": "PL",
-                        "name": "PL"
-                    },
-                    {
-                        "value": "PT",
-                        "name": "PT"
-                    },
-                    {
-                        "value": "PR",
-                        "name": "PR"
-                    },
-                    {
-                        "value": "QA",
-                        "name": "QA"
-                    },
-                    {
-                        "value": "RE",
-                        "name": "RE"
-                    },
-                    {
-                        "value": "RO",
-                        "name": "RO"
-                    },
-                    {
-                        "value": "RU",
-                        "name": "RU"
-                    },
-                    {
-                        "value": "RW",
-                        "name": "RW"
-                    },
-                    {
-                        "value": "BL",
-                        "name": "BL"
-                    },
-                    {
-                        "value": "SH",
-                        "name": "SH"
-                    },
-                    {
-                        "value": "KN",
-                        "name": "KN"
-                    },
-                    {
-                        "value": "LC",
-                        "name": "LC"
-                    },
-                    {
-                        "value": "MF",
-                        "name": "MF"
-                    },
-                    {
-                        "value": "PM",
-                        "name": "PM"
-                    },
-                    {
-                        "value": "VC",
-                        "name": "VC"
-                    },
-                    {
-                        "value": "WS",
-                        "name": "WS"
-                    },
-                    {
-                        "value": "SM",
-                        "name": "SM"
-                    },
-                    {
-                        "value": "ST",
-                        "name": "ST"
-                    },
-                    {
-                        "value": "SA",
-                        "name": "SA"
-                    },
-                    {
-                        "value": "SN",
-                        "name": "SN"
-                    },
-                    {
-                        "value": "RS",
-                        "name": "RS"
-                    },
-                    {
-                        "value": "SC",
-                        "name": "SC"
-                    },
-                    {
-                        "value": "SL",
-                        "name": "SL"
-                    },
-                    {
-                        "value": "SG",
-                        "name": "SG"
-                    },
-                    {
-                        "value": "SX",
-                        "name": "SX"
-                    },
-                    {
-                        "value": "SK",
-                        "name": "SK"
-                    },
-                    {
-                        "value": "SI",
-                        "name": "SI"
-                    },
-                    {
-                        "value": "SB",
-                        "name": "SB"
-                    },
-                    {
-                        "value": "SO",
-                        "name": "SO"
-                    },
-                    {
-                        "value": "ZA",
-                        "name": "ZA"
-                    },
-                    {
-                        "value": "GS",
-                        "name": "GS"
-                    },
-                    {
-                        "value": "SS",
-                        "name": "SS"
-                    },
-                    {
-                        "value": "ES",
-                        "name": "ES"
-                    },
-                    {
-                        "value": "LK",
-                        "name": "LK"
-                    },
-                    {
-                        "value": "SD",
-                        "name": "SD"
-                    },
-                    {
-                        "value": "SR",
-                        "name": "SR"
-                    },
-                    {
-                        "value": "SJ",
-                        "name": "SJ"
-                    },
-                    {
-                        "value": "SZ",
-                        "name": "SZ"
-                    },
-                    {
-                        "value": "SE",
-                        "name": "SE"
-                    },
-                    {
-                        "value": "CH",
-                        "name": "CH"
-                    },
-                    {
-                        "value": "SY",
-                        "name": "SY"
-                    },
-                    {
-                        "value": "TW",
-                        "name": "TW"
-                    },
-                    {
-                        "value": "TJ",
-                        "name": "TJ"
-                    },
-                    {
-                        "value": "TZ",
-                        "name": "TZ"
-                    },
-                    {
-                        "value": "TH",
-                        "name": "TH"
-                    },
-                    {
-                        "value": "TL",
-                        "name": "TL"
-                    },
-                    {
-                        "value": "TG",
-                        "name": "TG"
-                    },
-                    {
-                        "value": "TK",
-                        "name": "TK"
-                    },
-                    {
-                        "value": "TO",
-                        "name": "TO"
-                    },
-                    {
-                        "value": "TT",
-                        "name": "TT"
-                    },
-                    {
-                        "value": "TN",
-                        "name": "TN"
-                    },
-                    {
-                        "value": "TR",
-                        "name": "TR"
-                    },
-                    {
-                        "value": "TM",
-                        "name": "TM"
-                    },
-                    {
-                        "value": "TC",
-                        "name": "TC"
-                    },
-                    {
-                        "value": "TV",
-                        "name": "TV"
-                    },
-                    {
-                        "value": "UG",
-                        "name": "UG"
-                    },
-                    {
-                        "value": "UA",
-                        "name": "UA"
-                    },
-                    {
-                        "value": "AE",
-                        "name": "AE"
-                    },
-                    {
-                        "value": "GB",
-                        "name": "GB"
-                    },
-                    {
-                        "value": "US",
-                        "name": "US"
-                    },
-                    {
-                        "value": "UM",
-                        "name": "UM"
-                    },
-                    {
-                        "value": "UY",
-                        "name": "UY"
-                    },
-                    {
-                        "value": "UZ",
-                        "name": "UZ"
-                    },
-                    {
-                        "value": "VU",
-                        "name": "VU"
-                    },
-                    {
-                        "value": "VE",
-                        "name": "VE"
-                    },
-                    {
-                        "value": "VN",
-                        "name": "VN"
-                    },
-                    {
-                        "value": "VG",
-                        "name": "VG"
-                    },
-                    {
-                        "value": "VI",
-                        "name": "VI"
-                    },
-                    {
-                        "value": "WF",
-                        "name": "WF"
-                    },
-                    {
-                        "value": "EH",
-                        "name": "EH"
-                    },
-                    {
-                        "value": "YE",
-                        "name": "YE"
-                    },
-                    {
-                        "value": "ZM",
-                        "name": "ZM"
-                    },
-                    {
-                        "value": "ZW",
-                        "name": "ZW"
-                    },
-                    {
-                        "value": "XK",
-                        "name": "XK"
+            "type": "enum",
+            "members": {
+                "AF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AF"
                     }
-                ]
+                },
+                "AX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AX"
+                    }
+                },
+                "AL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AL"
+                    }
+                },
+                "DZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DZ"
+                    }
+                },
+                "AS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AS"
+                    }
+                },
+                "AD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AD"
+                    }
+                },
+                "AO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AO"
+                    }
+                },
+                "AI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AI"
+                    }
+                },
+                "AQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AQ"
+                    }
+                },
+                "AG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AG"
+                    }
+                },
+                "AR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AR"
+                    }
+                },
+                "AM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AM"
+                    }
+                },
+                "AW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AW"
+                    }
+                },
+                "AU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AU"
+                    }
+                },
+                "AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AT"
+                    }
+                },
+                "AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ"
+                    }
+                },
+                "BS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BS"
+                    }
+                },
+                "BH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BH"
+                    }
+                },
+                "BD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BD"
+                    }
+                },
+                "BB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BB"
+                    }
+                },
+                "BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BY"
+                    }
+                },
+                "BE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BE"
+                    }
+                },
+                "BZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BZ"
+                    }
+                },
+                "BJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BJ"
+                    }
+                },
+                "BM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BM"
+                    }
+                },
+                "BT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BT"
+                    }
+                },
+                "BO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BO"
+                    }
+                },
+                "BQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BQ"
+                    }
+                },
+                "BA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BA"
+                    }
+                },
+                "BW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BW"
+                    }
+                },
+                "BV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BV"
+                    }
+                },
+                "BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BR"
+                    }
+                },
+                "IO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IO"
+                    }
+                },
+                "BN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BN"
+                    }
+                },
+                "BG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BG"
+                    }
+                },
+                "BF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BF"
+                    }
+                },
+                "BI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BI"
+                    }
+                },
+                "KH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KH"
+                    }
+                },
+                "CM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CM"
+                    }
+                },
+                "CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA"
+                    }
+                },
+                "CV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CV"
+                    }
+                },
+                "KY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KY"
+                    }
+                },
+                "CF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CF"
+                    }
+                },
+                "TD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TD"
+                    }
+                },
+                "CL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CL"
+                    }
+                },
+                "CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CN"
+                    }
+                },
+                "CX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CX"
+                    }
+                },
+                "CC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CC"
+                    }
+                },
+                "CO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CO"
+                    }
+                },
+                "KM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KM"
+                    }
+                },
+                "CG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CG"
+                    }
+                },
+                "CD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CD"
+                    }
+                },
+                "CK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CK"
+                    }
+                },
+                "CR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CR"
+                    }
+                },
+                "CI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CI"
+                    }
+                },
+                "HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HR"
+                    }
+                },
+                "CU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CU"
+                    }
+                },
+                "CW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CW"
+                    }
+                },
+                "CY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CY"
+                    }
+                },
+                "CZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CZ"
+                    }
+                },
+                "DK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DK"
+                    }
+                },
+                "DJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DJ"
+                    }
+                },
+                "DM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DM"
+                    }
+                },
+                "DO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DO"
+                    }
+                },
+                "EC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC"
+                    }
+                },
+                "EG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EG"
+                    }
+                },
+                "SV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SV"
+                    }
+                },
+                "GQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GQ"
+                    }
+                },
+                "ER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ER"
+                    }
+                },
+                "EE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EE"
+                    }
+                },
+                "ET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ET"
+                    }
+                },
+                "FK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FK"
+                    }
+                },
+                "FO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FO"
+                    }
+                },
+                "FJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FJ"
+                    }
+                },
+                "FI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FI"
+                    }
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FR"
+                    }
+                },
+                "GF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GF"
+                    }
+                },
+                "PF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PF"
+                    }
+                },
+                "TF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TF"
+                    }
+                },
+                "GA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GA"
+                    }
+                },
+                "GM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GM"
+                    }
+                },
+                "GE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GE"
+                    }
+                },
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DE"
+                    }
+                },
+                "GH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GH"
+                    }
+                },
+                "GI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GI"
+                    }
+                },
+                "GR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GR"
+                    }
+                },
+                "GL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GL"
+                    }
+                },
+                "GD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GD"
+                    }
+                },
+                "GP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GP"
+                    }
+                },
+                "GU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GU"
+                    }
+                },
+                "GT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GT"
+                    }
+                },
+                "GG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GG"
+                    }
+                },
+                "GN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GN"
+                    }
+                },
+                "GW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GW"
+                    }
+                },
+                "GY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GY"
+                    }
+                },
+                "HT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HT"
+                    }
+                },
+                "HM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HM"
+                    }
+                },
+                "VA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VA"
+                    }
+                },
+                "HN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HN"
+                    }
+                },
+                "HK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HK"
+                    }
+                },
+                "HU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HU"
+                    }
+                },
+                "IS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IS"
+                    }
+                },
+                "IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN"
+                    }
+                },
+                "ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID"
+                    }
+                },
+                "IR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IR"
+                    }
+                },
+                "IQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IQ"
+                    }
+                },
+                "IE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IE"
+                    }
+                },
+                "IM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IM"
+                    }
+                },
+                "IL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IL"
+                    }
+                },
+                "IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IT"
+                    }
+                },
+                "JM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JM"
+                    }
+                },
+                "JP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JP"
+                    }
+                },
+                "JE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JE"
+                    }
+                },
+                "JO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JO"
+                    }
+                },
+                "KZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KZ"
+                    }
+                },
+                "KE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KE"
+                    }
+                },
+                "KI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KI"
+                    }
+                },
+                "KP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KP"
+                    }
+                },
+                "KR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KR"
+                    }
+                },
+                "KW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KW"
+                    }
+                },
+                "KG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KG"
+                    }
+                },
+                "LA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LA"
+                    }
+                },
+                "LV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LV"
+                    }
+                },
+                "LB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LB"
+                    }
+                },
+                "LS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LS"
+                    }
+                },
+                "LR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LR"
+                    }
+                },
+                "LY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LY"
+                    }
+                },
+                "LI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LI"
+                    }
+                },
+                "LT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LT"
+                    }
+                },
+                "LU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LU"
+                    }
+                },
+                "MO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MO"
+                    }
+                },
+                "MK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MK"
+                    }
+                },
+                "MG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MG"
+                    }
+                },
+                "MW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MW"
+                    }
+                },
+                "MY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MY"
+                    }
+                },
+                "MV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MV"
+                    }
+                },
+                "ML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ML"
+                    }
+                },
+                "MT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MT"
+                    }
+                },
+                "MH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MH"
+                    }
+                },
+                "MQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQ"
+                    }
+                },
+                "MR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MR"
+                    }
+                },
+                "MU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MU"
+                    }
+                },
+                "YT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YT"
+                    }
+                },
+                "MX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MX"
+                    }
+                },
+                "FM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FM"
+                    }
+                },
+                "MD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MD"
+                    }
+                },
+                "MC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MC"
+                    }
+                },
+                "MN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MN"
+                    }
+                },
+                "ME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ME"
+                    }
+                },
+                "MS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MS"
+                    }
+                },
+                "MA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MA"
+                    }
+                },
+                "MZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MZ"
+                    }
+                },
+                "MM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MM"
+                    }
+                },
+                "NA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NA"
+                    }
+                },
+                "NR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NR"
+                    }
+                },
+                "NP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NP"
+                    }
+                },
+                "NL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NL"
+                    }
+                },
+                "NC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NC"
+                    }
+                },
+                "NZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NZ"
+                    }
+                },
+                "NI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NI"
+                    }
+                },
+                "NE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NE"
+                    }
+                },
+                "NG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NG"
+                    }
+                },
+                "NU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NU"
+                    }
+                },
+                "NF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NF"
+                    }
+                },
+                "MP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MP"
+                    }
+                },
+                "NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO"
+                    }
+                },
+                "OM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OM"
+                    }
+                },
+                "PK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PK"
+                    }
+                },
+                "PW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PW"
+                    }
+                },
+                "PS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PS"
+                    }
+                },
+                "PA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PA"
+                    }
+                },
+                "PG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PG"
+                    }
+                },
+                "PY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PY"
+                    }
+                },
+                "PE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PE"
+                    }
+                },
+                "PH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PH"
+                    }
+                },
+                "PN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PN"
+                    }
+                },
+                "PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PL"
+                    }
+                },
+                "PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT"
+                    }
+                },
+                "PR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PR"
+                    }
+                },
+                "QA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QA"
+                    }
+                },
+                "RE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RE"
+                    }
+                },
+                "RO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RO"
+                    }
+                },
+                "RU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RU"
+                    }
+                },
+                "RW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RW"
+                    }
+                },
+                "BL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BL"
+                    }
+                },
+                "SH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SH"
+                    }
+                },
+                "KN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KN"
+                    }
+                },
+                "LC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LC"
+                    }
+                },
+                "MF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MF"
+                    }
+                },
+                "PM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PM"
+                    }
+                },
+                "VC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VC"
+                    }
+                },
+                "WS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WS"
+                    }
+                },
+                "SM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SM"
+                    }
+                },
+                "ST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ST"
+                    }
+                },
+                "SA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SA"
+                    }
+                },
+                "SN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SN"
+                    }
+                },
+                "RS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RS"
+                    }
+                },
+                "SC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SC"
+                    }
+                },
+                "SL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SL"
+                    }
+                },
+                "SG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SG"
+                    }
+                },
+                "SX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SX"
+                    }
+                },
+                "SK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SK"
+                    }
+                },
+                "SI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SI"
+                    }
+                },
+                "SB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SB"
+                    }
+                },
+                "SO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SO"
+                    }
+                },
+                "ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZA"
+                    }
+                },
+                "GS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GS"
+                    }
+                },
+                "SS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SS"
+                    }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ES"
+                    }
+                },
+                "LK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LK"
+                    }
+                },
+                "SD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SD"
+                    }
+                },
+                "SR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SR"
+                    }
+                },
+                "SJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SJ"
+                    }
+                },
+                "SZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SZ"
+                    }
+                },
+                "SE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SE"
+                    }
+                },
+                "CH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CH"
+                    }
+                },
+                "SY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SY"
+                    }
+                },
+                "TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TW"
+                    }
+                },
+                "TJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TJ"
+                    }
+                },
+                "TZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TZ"
+                    }
+                },
+                "TH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TH"
+                    }
+                },
+                "TL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TL"
+                    }
+                },
+                "TG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TG"
+                    }
+                },
+                "TK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TK"
+                    }
+                },
+                "TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TO"
+                    }
+                },
+                "TT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TT"
+                    }
+                },
+                "TN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TN"
+                    }
+                },
+                "TR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TR"
+                    }
+                },
+                "TM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TM"
+                    }
+                },
+                "TC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TC"
+                    }
+                },
+                "TV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TV"
+                    }
+                },
+                "UG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UG"
+                    }
+                },
+                "UA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UA"
+                    }
+                },
+                "AE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AE"
+                    }
+                },
+                "GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GB"
+                    }
+                },
+                "US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US"
+                    }
+                },
+                "UM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UM"
+                    }
+                },
+                "UY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UY"
+                    }
+                },
+                "UZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UZ"
+                    }
+                },
+                "VU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VU"
+                    }
+                },
+                "VE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VE"
+                    }
+                },
+                "VN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VN"
+                    }
+                },
+                "VG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VG"
+                    }
+                },
+                "VI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VI"
+                    }
+                },
+                "WF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WF"
+                    }
+                },
+                "EH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EH"
+                    }
+                },
+                "YE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YE"
+                    }
+                },
+                "ZM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZM"
+                    }
+                },
+                "ZW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZW"
+                    }
+                },
+                "XK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XK"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#CountryCodes": {
@@ -1799,7 +2325,7 @@
                 "Addresses": {
                     "target": "com.amazonaws.wafv2#IPAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses. All addresses must be specified using Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for <code>/0</code>. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1976,6 +2502,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.wafv2#CapacityUnit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The web ACL capacity units (WCUs) required for this rule group.</p> \n          <p>When you create your own rule group, you define this, and you cannot change it after creation. \n          When you add or modify the rules in a rule group, WAF enforces this limit. You can check the capacity \n          for a set of rules using <a>CheckCapacity</a>.</p> \n          <p>WAF uses WCUs to calculate and control the operating\n         resources that are used to run your rules, rule groups, and web ACLs. WAF\n         calculates capacity differently for each rule type, to reflect the relative cost of each rule. \n         Simple rules that cost little to run use fewer WCUs than more complex rules\n\t\t\t\tthat use more processing power. \n\t\t\t\tRule group capacity is fixed at creation, which helps users plan their  \n         web ACL WCU usage when they use a rule group. \n         The WCU limit for web ACLs is 1,500.  </p>",
                         "smithy.api#required": {}
                     }
@@ -2299,7 +2826,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>In a <a>WebACL</a>, this is the action that you want WAF to perform\n         when a web request doesn't match any of the rules in the <code>WebACL</code>. The default\n         action must be a terminating action, so you can't use count.</p>"
+                "smithy.api#documentation": "<p>In a <a>WebACL</a>, this is the action that you want WAF to perform\n         when a web request doesn't match any of the rules in the <code>WebACL</code>. The default\n         action must be a terminating action.</p>"
             }
         },
         "com.amazonaws.wafv2#DeleteFirewallManagerRuleGroups": {
@@ -2827,6 +3354,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.wafv2#CapacityUnit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The web ACL capacity units (WCUs) required for this rule group. WAF uses web ACL\n         capacity units (WCU) to calculate and control the operating resources that are used to run\n         your rules, rule groups, and web ACLs. WAF calculates capacity differently for each rule\n         type, to reflect each rule's relative cost. Rule group capacity is fixed at creation, so\n         users can plan their web ACL WCU usage when they use a rule group. The WCU limit for web\n         ACLs is 1,500. </p>"
                     }
                 },
@@ -2965,33 +3493,37 @@
             }
         },
         "com.amazonaws.wafv2#FailureReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TOKEN_MISSING",
-                        "name": "TOKEN_MISSING"
-                    },
-                    {
-                        "value": "TOKEN_EXPIRED",
-                        "name": "TOKEN_EXPIRED"
+            "type": "enum",
+            "members": {
+                "TOKEN_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN_MISSING"
                     }
-                ]
+                },
+                "TOKEN_EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN_EXPIRED"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#FallbackBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MATCH",
-                        "name": "MATCH"
-                    },
-                    {
-                        "value": "NO_MATCH",
-                        "name": "NO_MATCH"
+            "type": "enum",
+            "members": {
+                "MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATCH"
                     }
-                ]
+                },
+                "NO_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_MATCH"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#FieldIdentifier": {
@@ -3112,33 +3644,37 @@
             }
         },
         "com.amazonaws.wafv2#FilterBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KEEP",
-                        "name": "KEEP"
-                    },
-                    {
-                        "value": "DROP",
-                        "name": "DROP"
+            "type": "enum",
+            "members": {
+                "KEEP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEEP"
                     }
-                ]
+                },
+                "DROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DROP"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#FilterRequirement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MEETS_ALL",
-                        "name": "MEETS_ALL"
-                    },
-                    {
-                        "value": "MEETS_ANY",
-                        "name": "MEETS_ANY"
+            "type": "enum",
+            "members": {
+                "MEETS_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEETS_ALL"
                     }
-                ]
+                },
+                "MEETS_ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEETS_ANY"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#Filters": {
@@ -3165,6 +3701,7 @@
                 "Priority": {
                     "target": "com.amazonaws.wafv2#RulePriority",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If you define more than one rule group in the first or last Firewall Manager rule groups, WAF\n         evaluates each request against the rule groups in order, starting from the lowest priority\n         setting. The priorities don't need to be consecutive, but they must all be\n         different.</p>",
                         "smithy.api#required": {}
                     }
@@ -3207,7 +3744,7 @@
                 "ManagedRuleGroupStatement": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p> \n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code> or the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "RuleGroupReferenceStatement": {
@@ -3254,22 +3791,26 @@
             }
         },
         "com.amazonaws.wafv2#ForwardedIPPosition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIRST",
-                        "name": "FIRST"
-                    },
-                    {
-                        "value": "LAST",
-                        "name": "LAST"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
+            "type": "enum",
+            "members": {
+                "FIRST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST"
                     }
-                ]
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#GenerateMobileSdkReleaseUrl": {
@@ -3917,6 +4458,7 @@
                 "MaxItems": {
                     "target": "com.amazonaws.wafv2#ListMaxItems",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of requests that you want WAF to return from among the first 5,000\n         requests that your Amazon Web Services resource received during the time range. If your resource received\n         fewer requests than the value of <code>MaxItems</code>, <code>GetSampledRequests</code>\n         returns information about all of them. </p>",
                         "smithy.api#required": {}
                     }
@@ -3935,6 +4477,7 @@
                 "PopulationSize": {
                     "target": "com.amazonaws.wafv2#PopulationSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of requests from which <code>GetSampledRequests</code> got a sample of\n            <code>MaxItems</code> requests. If <code>PopulationSize</code> is less than\n            <code>MaxItems</code>, the sample includes every request that your Amazon Web Services resource\n         received during the specified time range.</p>"
                     }
                 },
@@ -4233,18 +4776,20 @@
             }
         },
         "com.amazonaws.wafv2#IPAddressVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IPV4",
-                        "name": "IPV4"
-                    },
-                    {
-                        "value": "IPV6",
-                        "name": "IPV6"
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV4"
                     }
-                ]
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPV6"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#IPAddresses": {
@@ -4293,7 +4838,7 @@
                 "Addresses": {
                     "target": "com.amazonaws.wafv2#IPAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses. All addresses must be specified using Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for <code>/0</code>. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4469,22 +5014,26 @@
             }
         },
         "com.amazonaws.wafv2#JsonMatchScope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "KEY",
-                        "name": "KEY"
-                    },
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#JsonPointerPath": {
@@ -4534,18 +5083,20 @@
             }
         },
         "com.amazonaws.wafv2#LabelMatchScope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LABEL",
-                        "name": "LABEL"
-                    },
-                    {
-                        "value": "NAMESPACE",
-                        "name": "NAMESPACE"
+            "type": "enum",
+            "members": {
+                "LABEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LABEL"
                     }
-                ]
+                },
+                "NAMESPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAMESPACE"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#LabelMatchStatement": {
@@ -4967,6 +5518,7 @@
         "com.amazonaws.wafv2#ListMaxItems": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -5140,7 +5692,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.wafv2#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used for web ACLs that are scoped for regional applications.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. </p>"
+                        "smithy.api#documentation": "<p>Used for web ACLs that are scoped for regional applications.\n         A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an Amazon Cognito user pool. </p>\n         <note>\n            <p>If you don't provide a resource type, the call uses the resource type <code>APPLICATION_LOAD_BALANCER</code>. </p>\n         </note>\n         <p>Default: <code>APPLICATION_LOAD_BALANCER</code>\n         </p>"
                     }
                 }
             }
@@ -5405,6 +5957,7 @@
                 "ManagedByFirewallManager": {
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the logging configuration was created by Firewall Manager, as part of an\n         WAF policy configuration. If true, only Firewall Manager can modify or delete the\n         configuration. </p>"
                     }
                 },
@@ -5543,7 +6096,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p> \n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code> or the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupSummaries": {
@@ -5570,6 +6123,7 @@
                 "VersioningSupported": {
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the managed rule group is versioned. If it is, you can retrieve the\n         versions list by calling <a>ListAvailableManagedRuleGroupVersions</a>. </p>"
                     }
                 },
@@ -5725,6 +6279,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.wafv2#CapacityUnit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The web ACL capacity units (WCUs) required for this rule group.</p> \n          <p>WAF uses WCUs to calculate and control the operating\n         resources that are used to run your rules, rule groups, and web ACLs. WAF\n         calculates capacity differently for each rule type, to reflect the relative cost of each rule. \n         Simple rules that cost little to run use fewer WCUs than more complex rules\n\t\t\t\tthat use more processing power. \n\t\t\t\tRule group capacity is fixed at creation, which helps users plan their  \n         web ACL WCU usage when they use a rule group. \n         The WCU limit for web ACLs is 1,500.  </p>"
                     }
                 },
@@ -5758,22 +6313,26 @@
             }
         },
         "com.amazonaws.wafv2#MapMatchScope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "KEY",
-                        "name": "KEY"
-                    },
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#Method": {
@@ -5896,28 +6455,31 @@
             }
         },
         "com.amazonaws.wafv2#OversizeHandling": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONTINUE",
-                        "name": "CONTINUE"
-                    },
-                    {
-                        "value": "MATCH",
-                        "name": "MATCH"
-                    },
-                    {
-                        "value": "NO_MATCH",
-                        "name": "NO_MATCH"
+            "type": "enum",
+            "members": {
+                "CONTINUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUE"
                     }
-                ]
+                },
+                "MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATCH"
+                    }
+                },
+                "NO_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_MATCH"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#PaginationLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -5925,262 +6487,386 @@
             }
         },
         "com.amazonaws.wafv2#ParameterExceptionField": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WEB_ACL",
-                        "name": "WEB_ACL"
-                    },
-                    {
-                        "value": "RULE_GROUP",
-                        "name": "RULE_GROUP"
-                    },
-                    {
-                        "value": "REGEX_PATTERN_SET",
-                        "name": "REGEX_PATTERN_SET"
-                    },
-                    {
-                        "value": "IP_SET",
-                        "name": "IP_SET"
-                    },
-                    {
-                        "value": "MANAGED_RULE_SET",
-                        "name": "MANAGED_RULE_SET"
-                    },
-                    {
-                        "value": "RULE",
-                        "name": "RULE"
-                    },
-                    {
-                        "value": "EXCLUDED_RULE",
-                        "name": "EXCLUDED_RULE"
-                    },
-                    {
-                        "value": "STATEMENT",
-                        "name": "STATEMENT"
-                    },
-                    {
-                        "value": "BYTE_MATCH_STATEMENT",
-                        "name": "BYTE_MATCH_STATEMENT"
-                    },
-                    {
-                        "value": "SQLI_MATCH_STATEMENT",
-                        "name": "SQLI_MATCH_STATEMENT"
-                    },
-                    {
-                        "value": "XSS_MATCH_STATEMENT",
-                        "name": "XSS_MATCH_STATEMENT"
-                    },
-                    {
-                        "value": "SIZE_CONSTRAINT_STATEMENT",
-                        "name": "SIZE_CONSTRAINT_STATEMENT"
-                    },
-                    {
-                        "value": "GEO_MATCH_STATEMENT",
-                        "name": "GEO_MATCH_STATEMENT"
-                    },
-                    {
-                        "value": "RATE_BASED_STATEMENT",
-                        "name": "RATE_BASED_STATEMENT"
-                    },
-                    {
-                        "value": "RULE_GROUP_REFERENCE_STATEMENT",
-                        "name": "RULE_GROUP_REFERENCE_STATEMENT"
-                    },
-                    {
-                        "value": "REGEX_PATTERN_REFERENCE_STATEMENT",
-                        "name": "REGEX_PATTERN_REFERENCE_STATEMENT"
-                    },
-                    {
-                        "value": "IP_SET_REFERENCE_STATEMENT",
-                        "name": "IP_SET_REFERENCE_STATEMENT"
-                    },
-                    {
-                        "value": "MANAGED_RULE_SET_STATEMENT",
-                        "name": "MANAGED_RULE_SET_STATEMENT"
-                    },
-                    {
-                        "value": "LABEL_MATCH_STATEMENT",
-                        "name": "LABEL_MATCH_STATEMENT"
-                    },
-                    {
-                        "value": "AND_STATEMENT",
-                        "name": "AND_STATEMENT"
-                    },
-                    {
-                        "value": "OR_STATEMENT",
-                        "name": "OR_STATEMENT"
-                    },
-                    {
-                        "value": "NOT_STATEMENT",
-                        "name": "NOT_STATEMENT"
-                    },
-                    {
-                        "value": "IP_ADDRESS",
-                        "name": "IP_ADDRESS"
-                    },
-                    {
-                        "value": "IP_ADDRESS_VERSION",
-                        "name": "IP_ADDRESS_VERSION"
-                    },
-                    {
-                        "value": "FIELD_TO_MATCH",
-                        "name": "FIELD_TO_MATCH"
-                    },
-                    {
-                        "value": "TEXT_TRANSFORMATION",
-                        "name": "TEXT_TRANSFORMATION"
-                    },
-                    {
-                        "value": "SINGLE_QUERY_ARGUMENT",
-                        "name": "SINGLE_QUERY_ARGUMENT"
-                    },
-                    {
-                        "value": "SINGLE_HEADER",
-                        "name": "SINGLE_HEADER"
-                    },
-                    {
-                        "value": "DEFAULT_ACTION",
-                        "name": "DEFAULT_ACTION"
-                    },
-                    {
-                        "value": "RULE_ACTION",
-                        "name": "RULE_ACTION"
-                    },
-                    {
-                        "value": "ENTITY_LIMIT",
-                        "name": "ENTITY_LIMIT"
-                    },
-                    {
-                        "value": "OVERRIDE_ACTION",
-                        "name": "OVERRIDE_ACTION"
-                    },
-                    {
-                        "value": "SCOPE_VALUE",
-                        "name": "SCOPE_VALUE"
-                    },
-                    {
-                        "value": "RESOURCE_ARN",
-                        "name": "RESOURCE_ARN"
-                    },
-                    {
-                        "value": "RESOURCE_TYPE",
-                        "name": "RESOURCE_TYPE"
-                    },
-                    {
-                        "value": "TAGS",
-                        "name": "TAGS"
-                    },
-                    {
-                        "value": "TAG_KEYS",
-                        "name": "TAG_KEYS"
-                    },
-                    {
-                        "value": "METRIC_NAME",
-                        "name": "METRIC_NAME"
-                    },
-                    {
-                        "value": "FIREWALL_MANAGER_STATEMENT",
-                        "name": "FIREWALL_MANAGER_STATEMENT"
-                    },
-                    {
-                        "value": "FALLBACK_BEHAVIOR",
-                        "name": "FALLBACK_BEHAVIOR"
-                    },
-                    {
-                        "value": "POSITION",
-                        "name": "POSITION"
-                    },
-                    {
-                        "value": "FORWARDED_IP_CONFIG",
-                        "name": "FORWARDED_IP_CONFIG"
-                    },
-                    {
-                        "value": "IP_SET_FORWARDED_IP_CONFIG",
-                        "name": "IP_SET_FORWARDED_IP_CONFIG"
-                    },
-                    {
-                        "value": "HEADER_NAME",
-                        "name": "HEADER_NAME"
-                    },
-                    {
-                        "value": "CUSTOM_REQUEST_HANDLING",
-                        "name": "CUSTOM_REQUEST_HANDLING"
-                    },
-                    {
-                        "value": "RESPONSE_CONTENT_TYPE",
-                        "name": "RESPONSE_CONTENT_TYPE"
-                    },
-                    {
-                        "value": "CUSTOM_RESPONSE",
-                        "name": "CUSTOM_RESPONSE"
-                    },
-                    {
-                        "value": "CUSTOM_RESPONSE_BODY",
-                        "name": "CUSTOM_RESPONSE_BODY"
-                    },
-                    {
-                        "value": "JSON_MATCH_PATTERN",
-                        "name": "JSON_MATCH_PATTERN"
-                    },
-                    {
-                        "value": "JSON_MATCH_SCOPE",
-                        "name": "JSON_MATCH_SCOPE"
-                    },
-                    {
-                        "value": "BODY_PARSING_FALLBACK_BEHAVIOR",
-                        "name": "BODY_PARSING_FALLBACK_BEHAVIOR"
-                    },
-                    {
-                        "value": "LOGGING_FILTER",
-                        "name": "LOGGING_FILTER"
-                    },
-                    {
-                        "value": "FILTER_CONDITION",
-                        "name": "FILTER_CONDITION"
-                    },
-                    {
-                        "value": "EXPIRE_TIMESTAMP",
-                        "name": "EXPIRE_TIMESTAMP"
-                    },
-                    {
-                        "value": "CHANGE_PROPAGATION_STATUS",
-                        "name": "CHANGE_PROPAGATION_STATUS"
-                    },
-                    {
-                        "value": "ASSOCIABLE_RESOURCE",
-                        "name": "ASSOCIABLE_RESOURCE"
-                    },
-                    {
-                        "value": "LOG_DESTINATION",
-                        "name": "LOG_DESTINATION"
-                    },
-                    {
-                        "value": "MANAGED_RULE_GROUP_CONFIG",
-                        "name": "MANAGED_RULE_GROUP_CONFIG"
-                    },
-                    {
-                        "value": "PAYLOAD_TYPE",
-                        "name": "PAYLOAD_TYPE"
-                    },
-                    {
-                        "value": "HEADER_MATCH_PATTERN",
-                        "name": "HEADER_MATCH_PATTERN"
-                    },
-                    {
-                        "value": "COOKIE_MATCH_PATTERN",
-                        "name": "COOKIE_MATCH_PATTERN"
-                    },
-                    {
-                        "value": "MAP_MATCH_SCOPE",
-                        "name": "MAP_MATCH_SCOPE"
-                    },
-                    {
-                        "value": "OVERSIZE_HANDLING",
-                        "name": "OVERSIZE_HANDLING"
+            "type": "enum",
+            "members": {
+                "WEB_ACL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_ACL"
                     }
-                ]
+                },
+                "RULE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULE_GROUP"
+                    }
+                },
+                "REGEX_PATTERN_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGEX_PATTERN_SET"
+                    }
+                },
+                "IP_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_SET"
+                    }
+                },
+                "MANAGED_RULE_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_RULE_SET"
+                    }
+                },
+                "RULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULE"
+                    }
+                },
+                "EXCLUDED_RULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDED_RULE"
+                    }
+                },
+                "STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATEMENT"
+                    }
+                },
+                "BYTE_MATCH_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTE_MATCH_STATEMENT"
+                    }
+                },
+                "SQLI_MATCH_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQLI_MATCH_STATEMENT"
+                    }
+                },
+                "XSS_MATCH_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XSS_MATCH_STATEMENT"
+                    }
+                },
+                "SIZE_CONSTRAINT_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIZE_CONSTRAINT_STATEMENT"
+                    }
+                },
+                "GEO_MATCH_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GEO_MATCH_STATEMENT"
+                    }
+                },
+                "RATE_BASED_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RATE_BASED_STATEMENT"
+                    }
+                },
+                "RULE_GROUP_REFERENCE_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULE_GROUP_REFERENCE_STATEMENT"
+                    }
+                },
+                "REGEX_PATTERN_REFERENCE_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGEX_PATTERN_REFERENCE_STATEMENT"
+                    }
+                },
+                "IP_SET_REFERENCE_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_SET_REFERENCE_STATEMENT"
+                    }
+                },
+                "MANAGED_RULE_SET_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_RULE_SET_STATEMENT"
+                    }
+                },
+                "LABEL_MATCH_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LABEL_MATCH_STATEMENT"
+                    }
+                },
+                "AND_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AND_STATEMENT"
+                    }
+                },
+                "OR_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OR_STATEMENT"
+                    }
+                },
+                "NOT_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STATEMENT"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "IP_ADDRESS_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS_VERSION"
+                    }
+                },
+                "FIELD_TO_MATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_TO_MATCH"
+                    }
+                },
+                "TEXT_TRANSFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_TRANSFORMATION"
+                    }
+                },
+                "SINGLE_QUERY_ARGUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_QUERY_ARGUMENT"
+                    }
+                },
+                "SINGLE_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_HEADER"
+                    }
+                },
+                "DEFAULT_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT_ACTION"
+                    }
+                },
+                "RULE_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULE_ACTION"
+                    }
+                },
+                "ENTITY_LIMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTITY_LIMIT"
+                    }
+                },
+                "OVERRIDE_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDE_ACTION"
+                    }
+                },
+                "SCOPE_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCOPE_VALUE"
+                    }
+                },
+                "RESOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ARN"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_TYPE"
+                    }
+                },
+                "TAGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAGS"
+                    }
+                },
+                "TAG_KEYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG_KEYS"
+                    }
+                },
+                "METRIC_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METRIC_NAME"
+                    }
+                },
+                "FIREWALL_MANAGER_STATEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIREWALL_MANAGER_STATEMENT"
+                    }
+                },
+                "FALLBACK_BEHAVIOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FALLBACK_BEHAVIOR"
+                    }
+                },
+                "POSITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSITION"
+                    }
+                },
+                "FORWARDED_IP_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORWARDED_IP_CONFIG"
+                    }
+                },
+                "IP_SET_FORWARDED_IP_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_SET_FORWARDED_IP_CONFIG"
+                    }
+                },
+                "HEADER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEADER_NAME"
+                    }
+                },
+                "CUSTOM_REQUEST_HANDLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_REQUEST_HANDLING"
+                    }
+                },
+                "RESPONSE_CONTENT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE_CONTENT_TYPE"
+                    }
+                },
+                "CUSTOM_RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_RESPONSE"
+                    }
+                },
+                "CUSTOM_RESPONSE_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_RESPONSE_BODY"
+                    }
+                },
+                "JSON_MATCH_PATTERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON_MATCH_PATTERN"
+                    }
+                },
+                "JSON_MATCH_SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON_MATCH_SCOPE"
+                    }
+                },
+                "BODY_PARSING_FALLBACK_BEHAVIOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BODY_PARSING_FALLBACK_BEHAVIOR"
+                    }
+                },
+                "LOGGING_FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOGGING_FILTER"
+                    }
+                },
+                "FILTER_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILTER_CONDITION"
+                    }
+                },
+                "EXPIRE_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRE_TIMESTAMP"
+                    }
+                },
+                "CHANGE_PROPAGATION_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHANGE_PROPAGATION_STATUS"
+                    }
+                },
+                "ASSOCIABLE_RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIABLE_RESOURCE"
+                    }
+                },
+                "LOG_DESTINATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOG_DESTINATION"
+                    }
+                },
+                "MANAGED_RULE_GROUP_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_RULE_GROUP_CONFIG"
+                    }
+                },
+                "PAYLOAD_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYLOAD_TYPE"
+                    }
+                },
+                "HEADER_MATCH_PATTERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEADER_MATCH_PATTERN"
+                    }
+                },
+                "COOKIE_MATCH_PATTERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COOKIE_MATCH_PATTERN"
+                    }
+                },
+                "MAP_MATCH_SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAP_MATCH_SCOPE"
+                    }
+                },
+                "OVERSIZE_HANDLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERSIZE_HANDLING"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#ParameterExceptionParameter": {
@@ -6207,33 +6893,37 @@
             }
         },
         "com.amazonaws.wafv2#PayloadType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "FORM_ENCODED",
-                        "name": "FORM_ENCODED"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
                     }
-                ]
+                },
+                "FORM_ENCODED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM_ENCODED"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#Platform": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IOS",
-                        "name": "IOS"
-                    },
-                    {
-                        "value": "ANDROID",
-                        "name": "ANDROID"
+            "type": "enum",
+            "members": {
+                "IOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOS"
                     }
-                ]
+                },
+                "ANDROID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANDROID"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#PolicyString": {
@@ -6247,33 +6937,44 @@
             }
         },
         "com.amazonaws.wafv2#PopulationSize": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.wafv2#PositionalConstraint": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EXACTLY",
-                        "name": "EXACTLY"
-                    },
-                    {
-                        "value": "STARTS_WITH",
-                        "name": "STARTS_WITH"
-                    },
-                    {
-                        "value": "ENDS_WITH",
-                        "name": "ENDS_WITH"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "CONTAINS_WORD",
-                        "name": "CONTAINS_WORD"
+            "type": "enum",
+            "members": {
+                "EXACTLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXACTLY"
                     }
-                ]
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "CONTAINS_WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS_WORD"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#PublishedVersions": {
@@ -6493,6 +7194,7 @@
                 "Limit": {
                     "target": "com.amazonaws.wafv2#RateLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The limit on requests per 5-minute period for a single originating IP address. If the\n         statement includes a <code>ScopeDownStatement</code>, this limit is applied only to the\n         requests that match the statement.</p>",
                         "smithy.api#required": {}
                     }
@@ -6522,18 +7224,20 @@
             }
         },
         "com.amazonaws.wafv2#RateBasedStatementAggregateKeyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IP",
-                        "name": "IP"
-                    },
-                    {
-                        "value": "FORWARDED_IP",
-                        "name": "FORWARDED_IP"
+            "type": "enum",
+            "members": {
+                "IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP"
                     }
-                ]
+                },
+                "FORWARDED_IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORWARDED_IP"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#RateBasedStatementManagedKeysIPSet": {
@@ -6559,6 +7263,7 @@
         "com.amazonaws.wafv2#RateLimit": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 100,
                     "max": 2000000000
@@ -6793,33 +7498,36 @@
             }
         },
         "com.amazonaws.wafv2#ResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "APPLICATION_LOAD_BALANCER",
-                        "name": "APPLICATION_LOAD_BALANCER"
-                    },
-                    {
-                        "value": "API_GATEWAY",
-                        "name": "API_GATEWAY"
-                    },
-                    {
-                        "value": "APPSYNC",
-                        "name": "APPSYNC"
-                    },
-                    {
-                        "value": "COGNITO_USER_POOL",
-                        "name": "COGNITIO_USER_POOL"
+            "type": "enum",
+            "members": {
+                "APPLICATION_LOAD_BALANCER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_LOAD_BALANCER"
                     }
-                ]
+                },
+                "API_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_GATEWAY"
+                    }
+                },
+                "APPSYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPSYNC"
+                    }
+                },
+                "COGNITIO_USER_POOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COGNITO_USER_POOL"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#ResponseCode": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.wafv2#ResponseContent": {
             "type": "string",
@@ -6832,28 +7540,31 @@
             }
         },
         "com.amazonaws.wafv2#ResponseContentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TEXT_PLAIN",
-                        "name": "TEXT_PLAIN"
-                    },
-                    {
-                        "value": "TEXT_HTML",
-                        "name": "TEXT_HTML"
-                    },
-                    {
-                        "value": "APPLICATION_JSON",
-                        "name": "APPLICATION_JSON"
+            "type": "enum",
+            "members": {
+                "TEXT_PLAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_PLAIN"
                     }
-                ]
+                },
+                "TEXT_HTML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_HTML"
+                    }
+                },
+                "APPLICATION_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#ResponseStatusCode": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 200,
                     "max": 599
@@ -6873,6 +7584,7 @@
                 "Priority": {
                     "target": "com.amazonaws.wafv2#RulePriority",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If you define more than one <code>Rule</code> in a <code>WebACL</code>, WAF\n         evaluates each request against the <code>Rules</code> in order based on the value of\n            <code>Priority</code>. WAF processes rules with lower priority first. The priorities\n         don't need to be consecutive, but they must all be different.</p>",
                         "smithy.api#required": {}
                     }
@@ -6938,7 +7650,7 @@
                 "Count": {
                     "target": "com.amazonaws.wafv2#CountAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Instructs WAF to count the web request and allow it.</p>"
+                        "smithy.api#documentation": "<p>Instructs WAF to count the web request and then continue evaluating the request using the remaining rules in the web ACL.</p>"
                     }
                 },
                 "Captcha": {
@@ -6972,6 +7684,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.wafv2#CapacityUnit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The web ACL capacity units (WCUs) required for this rule group.</p> \n          <p>When you create your own rule group, you define this, and you cannot change it after creation. \n          When you add or modify the rules in a rule group, WAF enforces this limit. You can check the capacity \n          for a set of rules using <a>CheckCapacity</a>.</p> \n          <p>WAF uses WCUs to calculate and control the operating\n         resources that are used to run your rules, rule groups, and web ACLs. WAF\n         calculates capacity differently for each rule type, to reflect the relative cost of each rule. \n         Simple rules that cost little to run use fewer WCUs than more complex rules\n\t\t\t\tthat use more processing power. \n\t\t\t\tRule group capacity is fixed at creation, which helps users plan their  \n         web ACL WCU usage when they use a rule group. \n         The WCU limit for web ACLs is 1,500.  </p>",
                         "smithy.api#required": {}
                     }
@@ -7099,6 +7812,7 @@
         "com.amazonaws.wafv2#RulePriority": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -7139,6 +7853,7 @@
         "com.amazonaws.wafv2#SampleWeight": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -7157,6 +7872,7 @@
                 "Weight": {
                     "target": "com.amazonaws.wafv2#SampleWeight",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A value that indicates how one result in the response relates proportionally to other\n         results in the response. For example, a result that has a weight of <code>2</code>\n         represents roughly twice as many web requests as a result that has a weight of\n            <code>1</code>.</p>",
                         "smithy.api#required": {}
                     }
@@ -7215,36 +7931,40 @@
             }
         },
         "com.amazonaws.wafv2#Scope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLOUDFRONT",
-                        "name": "CLOUDFRONT"
-                    },
-                    {
-                        "value": "REGIONAL",
-                        "name": "REGIONAL"
+            "type": "enum",
+            "members": {
+                "CLOUDFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFRONT"
                     }
-                ]
+                },
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#SearchString": {
             "type": "blob"
         },
         "com.amazonaws.wafv2#SensitivityLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LOW",
-                        "name": "LOW"
-                    },
-                    {
-                        "value": "HIGH",
-                        "name": "HIGH"
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
                     }
-                ]
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#SingleCookieName": {
@@ -7290,6 +8010,7 @@
         "com.amazonaws.wafv2#Size": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 21474836480
@@ -7316,6 +8037,7 @@
                 "Size": {
                     "target": "com.amazonaws.wafv2#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size, in byte, to compare to the request part, after any transformations.</p>",
                         "smithy.api#required": {}
                     }
@@ -7333,10 +8055,7 @@
             }
         },
         "com.amazonaws.wafv2#SolveTimestamp": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.wafv2#SqliMatchStatement": {
             "type": "structure",
@@ -7444,7 +8163,7 @@
                 "ManagedRuleGroupStatement": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p> \n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code> or the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "LabelMatchStatement": {
@@ -7618,6 +8337,7 @@
                 "Priority": {
                     "target": "com.amazonaws.wafv2#TextTransformationPriority",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Sets the relative processing order for multiple transformations that are defined for a\n         rule statement. WAF processes all transformations, from lowest priority to highest,\n         before inspecting the transformed content. The priorities don't need to be consecutive, but\n         they must all be different. </p>",
                         "smithy.api#required": {}
                     }
@@ -7637,100 +8357,141 @@
         "com.amazonaws.wafv2#TextTransformationPriority": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
             }
         },
         "com.amazonaws.wafv2#TextTransformationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "COMPRESS_WHITE_SPACE",
-                        "name": "COMPRESS_WHITE_SPACE"
-                    },
-                    {
-                        "value": "HTML_ENTITY_DECODE",
-                        "name": "HTML_ENTITY_DECODE"
-                    },
-                    {
-                        "value": "LOWERCASE",
-                        "name": "LOWERCASE"
-                    },
-                    {
-                        "value": "CMD_LINE",
-                        "name": "CMD_LINE"
-                    },
-                    {
-                        "value": "URL_DECODE",
-                        "name": "URL_DECODE"
-                    },
-                    {
-                        "value": "BASE64_DECODE",
-                        "name": "BASE64_DECODE"
-                    },
-                    {
-                        "value": "HEX_DECODE",
-                        "name": "HEX_DECODE"
-                    },
-                    {
-                        "value": "MD5",
-                        "name": "MD5"
-                    },
-                    {
-                        "value": "REPLACE_COMMENTS",
-                        "name": "REPLACE_COMMENTS"
-                    },
-                    {
-                        "value": "ESCAPE_SEQ_DECODE",
-                        "name": "ESCAPE_SEQ_DECODE"
-                    },
-                    {
-                        "value": "SQL_HEX_DECODE",
-                        "name": "SQL_HEX_DECODE"
-                    },
-                    {
-                        "value": "CSS_DECODE",
-                        "name": "CSS_DECODE"
-                    },
-                    {
-                        "value": "JS_DECODE",
-                        "name": "JS_DECODE"
-                    },
-                    {
-                        "value": "NORMALIZE_PATH",
-                        "name": "NORMALIZE_PATH"
-                    },
-                    {
-                        "value": "NORMALIZE_PATH_WIN",
-                        "name": "NORMALIZE_PATH_WIN"
-                    },
-                    {
-                        "value": "REMOVE_NULLS",
-                        "name": "REMOVE_NULLS"
-                    },
-                    {
-                        "value": "REPLACE_NULLS",
-                        "name": "REPLACE_NULLS"
-                    },
-                    {
-                        "value": "BASE64_DECODE_EXT",
-                        "name": "BASE64_DECODE_EXT"
-                    },
-                    {
-                        "value": "URL_DECODE_UNI",
-                        "name": "URL_DECODE_UNI"
-                    },
-                    {
-                        "value": "UTF8_TO_UNICODE",
-                        "name": "UTF8_TO_UNICODE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "COMPRESS_WHITE_SPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPRESS_WHITE_SPACE"
+                    }
+                },
+                "HTML_ENTITY_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTML_ENTITY_DECODE"
+                    }
+                },
+                "LOWERCASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOWERCASE"
+                    }
+                },
+                "CMD_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CMD_LINE"
+                    }
+                },
+                "URL_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL_DECODE"
+                    }
+                },
+                "BASE64_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE64_DECODE"
+                    }
+                },
+                "HEX_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEX_DECODE"
+                    }
+                },
+                "MD5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MD5"
+                    }
+                },
+                "REPLACE_COMMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE_COMMENTS"
+                    }
+                },
+                "ESCAPE_SEQ_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESCAPE_SEQ_DECODE"
+                    }
+                },
+                "SQL_HEX_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_HEX_DECODE"
+                    }
+                },
+                "CSS_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSS_DECODE"
+                    }
+                },
+                "JS_DECODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JS_DECODE"
+                    }
+                },
+                "NORMALIZE_PATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMALIZE_PATH"
+                    }
+                },
+                "NORMALIZE_PATH_WIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMALIZE_PATH_WIN"
+                    }
+                },
+                "REMOVE_NULLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE_NULLS"
+                    }
+                },
+                "REPLACE_NULLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE_NULLS"
+                    }
+                },
+                "BASE64_DECODE_EXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE64_DECODE_EXT"
+                    }
+                },
+                "URL_DECODE_UNI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL_DECODE_UNI"
+                    }
+                },
+                "UTF8_TO_UNICODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTF8_TO_UNICODE"
+                    }
+                }
             }
         },
         "com.amazonaws.wafv2#TextTransformations": {
@@ -7769,7 +8530,6 @@
         "com.amazonaws.wafv2#TimeWindowDay": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -7778,7 +8538,6 @@
         "com.amazonaws.wafv2#TimeWindowSecond": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 60,
                     "max": 259200
@@ -7914,7 +8673,7 @@
                 "Addresses": {
                     "target": "com.amazonaws.wafv2#IPAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses. All addresses must be specified using Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for <code>/0</code>. </p>\n         <p>Example address strings: </p>\n         <ul>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 192.0.2.44, specify <code>192.0.2.44/32</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify \n               <code>192.0.2.0/24</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify <code>1111:0000:0000:0000:0000:0000:0000:0111/128</code>.</p>\n            </li>\n            <li>\n               <p>To configure WAF to allow, block, or count requests that originated from IP addresses 1111:0000:0000:0000:0000:0000:0000:0000 to 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify <code>1111:0000:0000:0000:0000:0000:0000:0000/64</code>.</p>\n            </li>\n         </ul>\n         <p>For more information about CIDR notation, see the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>.</p> \n         <p>Example JSON <code>Addresses</code> specifications: </p>\n         <ul>\n            <li>\n               <p>Empty array: <code>\"Addresses\": []</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with one address: <code>\"Addresses\": [\"192.0.2.44/32\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>Array with three addresses: <code>\"Addresses\": [\"192.0.2.44/32\", \"192.0.2.0/24\", \"192.0.0.0/16\"]</code> \n               </p>\n            </li>\n            <li>\n               <p>INVALID specification: <code>\"Addresses\": [\"\"]</code> INVALID </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8451,6 +9210,7 @@
                 "SampledRequestsEnabled": {
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean indicating whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>",
                         "smithy.api#required": {}
                     }
@@ -8458,6 +9218,7 @@
                 "CloudWatchMetricsEnabled": {
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the\n         list of available metrics, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics\">WAF\n            Metrics</a>.</p>",
                         "smithy.api#required": {}
                     }
@@ -8632,7 +9393,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>WAF couldn’t perform the operation because your resource doesn’t exist. </p>",
+                "smithy.api#documentation": "<p>WAF couldn’t perform the operation because your resource doesn't exist. \n       If you've just created a resource that you're using in this operation, you might \n       just need to wait a few minutes. It can take from a few seconds to a number of minutes \n       for changes to propagate. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8704,7 +9465,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>WAF couldn’t retrieve a resource that you specified for this operation. Verify the\n         resources that you are specifying in your request parameters and then retry the\n         operation.</p>",
+                "smithy.api#documentation": "<p>WAF couldn’t retrieve a resource that you specified for this operation. \n       If you've just created a resource that you're using in this operation, you might \n       just need to wait a few minutes. It can take from a few seconds to a number of minutes \n       for changes to propagate. Verify the resources that you are specifying in your request \n       parameters and then retry the operation.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -8761,6 +9522,7 @@
                 "Capacity": {
                     "target": "com.amazonaws.wafv2#ConsumedCapacity",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The web ACL capacity units (WCUs) currently being used by this web ACL. </p>\n         <p>WAF uses WCUs to calculate and control the operating\n         resources that are used to run your rules, rule groups, and web ACLs. WAF\n         calculates capacity differently for each rule type, to reflect the relative cost of each rule. \n         Simple rules that cost little to run use fewer WCUs than more complex rules\n\t\t\t\tthat use more processing power. \n\t\t\t\tRule group capacity is fixed at creation, which helps users plan their  \n         web ACL WCU usage when they use a rule group. \n         The WCU limit for web ACLs is 1,500.  </p>"
                     }
                 },
@@ -8779,6 +9541,7 @@
                 "ManagedByFirewallManager": {
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this web ACL is managed by Firewall Manager. If true, then only Firewall Manager can\n         delete the web ACL or any Firewall Manager rule groups in the web ACL. </p>"
                     }
                 },
