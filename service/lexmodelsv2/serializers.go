@@ -6355,6 +6355,23 @@ func awsRestjson1_serializeDocumentAggregatedUtterancesSortBy(v *types.Aggregate
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedInputTypes(v *types.AllowedInputTypes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowAudioInput != nil {
+		ok := object.Key("allowAudioInput")
+		ok.Boolean(*v.AllowAudioInput)
+	}
+
+	if v.AllowDTMFInput != nil {
+		ok := object.Key("allowDTMFInput")
+		ok.Boolean(*v.AllowDTMFInput)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAssociatedTranscriptFilter(v *types.AssociatedTranscriptFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6384,6 +6401,32 @@ func awsRestjson1_serializeDocumentAssociatedTranscriptFilters(v []types.Associa
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioAndDTMFInputSpecification(v *types.AudioAndDTMFInputSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AudioSpecification != nil {
+		ok := object.Key("audioSpecification")
+		if err := awsRestjson1_serializeDocumentAudioSpecification(v.AudioSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DtmfSpecification != nil {
+		ok := object.Key("dtmfSpecification")
+		if err := awsRestjson1_serializeDocumentDTMFSpecification(v.DtmfSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartTimeoutMs != nil {
+		ok := object.Key("startTimeoutMs")
+		ok.Integer(*v.StartTimeoutMs)
+	}
+
 	return nil
 }
 
@@ -6430,6 +6473,23 @@ func awsRestjson1_serializeDocumentAudioLogSettingsList(v []types.AudioLogSettin
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudioSpecification(v *types.AudioSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTimeoutMs != nil {
+		ok := object.Key("endTimeoutMs")
+		ok.Integer(*v.EndTimeoutMs)
+	}
+
+	if v.MaxLengthMs != nil {
+		ok := object.Key("maxLengthMs")
+		ok.Integer(*v.MaxLengthMs)
+	}
+
 	return nil
 }
 
@@ -7179,6 +7239,33 @@ func awsRestjson1_serializeDocumentDialogState(v *types.DialogState, value smith
 		if err := awsRestjson1_serializeDocumentStringMap(v.SessionAttributes, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDTMFSpecification(v *types.DTMFSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeletionCharacter != nil {
+		ok := object.Key("deletionCharacter")
+		ok.String(*v.DeletionCharacter)
+	}
+
+	if v.EndCharacter != nil {
+		ok := object.Key("endCharacter")
+		ok.String(*v.EndCharacter)
+	}
+
+	if v.EndTimeoutMs != nil {
+		ok := object.Key("endTimeoutMs")
+		ok.Integer(*v.EndTimeoutMs)
+	}
+
+	if v.MaxLength != nil {
+		ok := object.Key("maxLength")
+		ok.Integer(*v.MaxLength)
 	}
 
 	return nil
@@ -8261,6 +8348,53 @@ func awsRestjson1_serializeDocumentPrincipalList(v []types.Principal, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPromptAttemptSpecification(v *types.PromptAttemptSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedInputTypes != nil {
+		ok := object.Key("allowedInputTypes")
+		if err := awsRestjson1_serializeDocumentAllowedInputTypes(v.AllowedInputTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowInterrupt != nil {
+		ok := object.Key("allowInterrupt")
+		ok.Boolean(*v.AllowInterrupt)
+	}
+
+	if v.AudioAndDTMFInputSpecification != nil {
+		ok := object.Key("audioAndDTMFInputSpecification")
+		if err := awsRestjson1_serializeDocumentAudioAndDTMFInputSpecification(v.AudioAndDTMFInputSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TextInputSpecification != nil {
+		ok := object.Key("textInputSpecification")
+		if err := awsRestjson1_serializeDocumentTextInputSpecification(v.TextInputSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptAttemptsSpecificationMap(v map[string]types.PromptAttemptSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentPromptAttemptSpecification(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPromptSpecification(v *types.PromptSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8285,6 +8419,13 @@ func awsRestjson1_serializeDocumentPromptSpecification(v *types.PromptSpecificat
 	if len(v.MessageSelectionStrategy) > 0 {
 		ok := object.Key("messageSelectionStrategy")
 		ok.String(string(v.MessageSelectionStrategy))
+	}
+
+	if v.PromptAttemptsSpecification != nil {
+		ok := object.Key("promptAttemptsSpecification")
+		if err := awsRestjson1_serializeDocumentPromptAttemptsSpecificationMap(v.PromptAttemptsSpecification, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -9047,6 +9188,18 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTextInputSpecification(v *types.TextInputSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StartTimeoutMs != nil {
+		ok := object.Key("startTimeoutMs")
+		ok.Integer(*v.StartTimeoutMs)
+	}
+
 	return nil
 }
 

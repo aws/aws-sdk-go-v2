@@ -450,7 +450,7 @@ type CustomResponseBody struct {
 
 // In a WebACL, this is the action that you want WAF to perform when a web request
 // doesn't match any of the rules in the WebACL. The default action must be a
-// terminating action, so you can't use count.
+// terminating action.
 type DefaultAction struct {
 
 	// Specifies that WAF should allow requests by default.
@@ -626,7 +626,11 @@ type FirewallManagerStatement struct {
 	// statement. You can retrieve the required names by calling
 	// ListAvailableManagedRuleGroups. You cannot nest a ManagedRuleGroupStatement, for
 	// example for use inside a NotStatement or OrStatement. It can only be referenced
-	// as a top-level statement within a rule.
+	// as a top-level statement within a rule. You are charged additional fees when you
+	// use the WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet or
+	// the WAF Fraud Control account takeover prevention (ATP) managed rule group
+	// AWSManagedRulesATPRuleSet. For more information, see WAF Pricing
+	// (http://aws.amazon.com/waf/pricing/).
 	ManagedRuleGroupStatement *ManagedRuleGroupStatement
 
 	// A rule statement used to run the rules that are defined in a RuleGroup. To use
@@ -836,20 +840,20 @@ type IPSet struct {
 	ARN *string
 
 	// Contains an array of strings that specifies zero or more IP addresses or blocks
-	// of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports
-	// all IPv4 and IPv6 CIDR ranges except for /0. Example address strings:
-	//
-	// * To
-	// configure WAF to allow, block, or count requests that originated from the IP
-	// address 192.0.2.44, specify 192.0.2.44/32.
-	//
-	// * To configure WAF to allow, block,
-	// or count requests that originated from IP addresses from 192.0.2.0 to
-	// 192.0.2.255, specify 192.0.2.0/24.
+	// of IP addresses. All addresses must be specified using Classless Inter-Domain
+	// Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for
+	// /0. Example address strings:
 	//
 	// * To configure WAF to allow, block, or count
-	// requests that originated from the IP address
-	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
+	// requests that originated from the IP address 192.0.2.44, specify
+	// 192.0.2.44/32.
+	//
+	// * To configure WAF to allow, block, or count requests that
+	// originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
+	// 192.0.2.0/24.
+	//
+	// * To configure WAF to allow, block, or count requests that
+	// originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
 	//
 	// * To configure WAF to allow,
@@ -1302,7 +1306,11 @@ type ManagedRuleGroupConfig struct {
 // statement. You can retrieve the required names by calling
 // ListAvailableManagedRuleGroups. You cannot nest a ManagedRuleGroupStatement, for
 // example for use inside a NotStatement or OrStatement. It can only be referenced
-// as a top-level statement within a rule.
+// as a top-level statement within a rule. You are charged additional fees when you
+// use the WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet or
+// the WAF Fraud Control account takeover prevention (ATP) managed rule group
+// AWSManagedRulesATPRuleSet. For more information, see WAF Pricing
+// (http://aws.amazon.com/waf/pricing/).
 type ManagedRuleGroupStatement struct {
 
 	// The name of the managed rule group. You use this, along with the vendor name, to
@@ -1970,7 +1978,8 @@ type RuleAction struct {
 	// Instructs WAF to run a CAPTCHA check against the web request.
 	Captcha *CaptchaAction
 
-	// Instructs WAF to count the web request and allow it.
+	// Instructs WAF to count the web request and then continue evaluating the request
+	// using the remaining rules in the web ACL.
 	Count *CountAction
 
 	noSmithyDocumentSerde
@@ -2333,7 +2342,11 @@ type Statement struct {
 	// statement. You can retrieve the required names by calling
 	// ListAvailableManagedRuleGroups. You cannot nest a ManagedRuleGroupStatement, for
 	// example for use inside a NotStatement or OrStatement. It can only be referenced
-	// as a top-level statement within a rule.
+	// as a top-level statement within a rule. You are charged additional fees when you
+	// use the WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet or
+	// the WAF Fraud Control account takeover prevention (ATP) managed rule group
+	// AWSManagedRulesATPRuleSet. For more information, see WAF Pricing
+	// (http://aws.amazon.com/waf/pricing/).
 	ManagedRuleGroupStatement *ManagedRuleGroupStatement
 
 	// A logical rule statement used to negate the results of another rule statement.

@@ -30,7 +30,7 @@ func (c *Client) AcceptEulas(ctx context.Context, params *AcceptEulasInput, optF
 
 type AcceptEulasInput struct {
 
-	// A collection of EULA IDs.
+	// The studio ID.
 	//
 	// This member is required.
 	StudioId *string

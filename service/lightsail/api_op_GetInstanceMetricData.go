@@ -111,6 +111,14 @@ type GetInstanceMetricDataInput struct {
 	// metric data is available in 1-minute (60 seconds) granularity. Statistics: The
 	// most useful statistic is Sum. Unit: The published unit is Count.
 	//
+	// *
+	// MetadataNoToken - Reports the number of times that the instance metadata service
+	// was successfully accessed without a token. This metric determines if there are
+	// any processes accessing instance metadata by using Instance Metadata Service
+	// Version 1, which doesn't use a token. If all requests use token-backed sessions,
+	// such as Instance Metadata Service Version 2, then the value is 0. Statistics:
+	// The most useful statistic is Sum. Unit: The published unit is Count.
+	//
 	// This member is required.
 	MetricName types.InstanceMetricName
 

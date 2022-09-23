@@ -83,6 +83,8 @@ const (
 	LaunchProfileStatusCodeEncryptionKeyAccessDenied                 LaunchProfileStatusCode = "ENCRYPTION_KEY_ACCESS_DENIED"
 	LaunchProfileStatusCodeEncryptionKeyNotFound                     LaunchProfileStatusCode = "ENCRYPTION_KEY_NOT_FOUND"
 	LaunchProfileStatusCodeInvalidSubnetsProvided                    LaunchProfileStatusCode = "INVALID_SUBNETS_PROVIDED"
+	LaunchProfileStatusCodeInvalidInstanceTypesProvided              LaunchProfileStatusCode = "INVALID_INSTANCE_TYPES_PROVIDED"
+	LaunchProfileStatusCodeInvalidSubnetsCombination                 LaunchProfileStatusCode = "INVALID_SUBNETS_COMBINATION"
 )
 
 // Values returns all known values for LaunchProfileStatusCode. Note that this can
@@ -103,6 +105,8 @@ func (LaunchProfileStatusCode) Values() []LaunchProfileStatusCode {
 		"ENCRYPTION_KEY_ACCESS_DENIED",
 		"ENCRYPTION_KEY_NOT_FOUND",
 		"INVALID_SUBNETS_PROVIDED",
+		"INVALID_INSTANCE_TYPES_PROVIDED",
+		"INVALID_SUBNETS_COMBINATION",
 	}
 }
 
@@ -288,6 +292,13 @@ const (
 	StreamingInstanceTypeG4dn8xlarge  StreamingInstanceType = "g4dn.8xlarge"
 	StreamingInstanceTypeG4dn12xlarge StreamingInstanceType = "g4dn.12xlarge"
 	StreamingInstanceTypeG4dn16xlarge StreamingInstanceType = "g4dn.16xlarge"
+	StreamingInstanceTypeG34xlarge    StreamingInstanceType = "g3.4xlarge"
+	StreamingInstanceTypeG3sXlarge    StreamingInstanceType = "g3s.xlarge"
+	StreamingInstanceTypeG5Xlarge     StreamingInstanceType = "g5.xlarge"
+	StreamingInstanceTypeG52xlarge    StreamingInstanceType = "g5.2xlarge"
+	StreamingInstanceTypeG54xlarge    StreamingInstanceType = "g5.4xlarge"
+	StreamingInstanceTypeG58xlarge    StreamingInstanceType = "g5.8xlarge"
+	StreamingInstanceTypeG516xlarge   StreamingInstanceType = "g5.16xlarge"
 )
 
 // Values returns all known values for StreamingInstanceType. Note that this can be
@@ -301,6 +312,13 @@ func (StreamingInstanceType) Values() []StreamingInstanceType {
 		"g4dn.8xlarge",
 		"g4dn.12xlarge",
 		"g4dn.16xlarge",
+		"g3.4xlarge",
+		"g3s.xlarge",
+		"g5.xlarge",
+		"g5.2xlarge",
+		"g5.4xlarge",
+		"g5.8xlarge",
+		"g5.16xlarge",
 	}
 }
 

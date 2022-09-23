@@ -621,6 +621,60 @@ func (HeaderEnum) Values() []HeaderEnum {
 	}
 }
 
+type HttpEndpoint string
+
+// Enum values for HttpEndpoint
+const (
+	HttpEndpointDisabled HttpEndpoint = "disabled"
+	HttpEndpointEnabled  HttpEndpoint = "enabled"
+)
+
+// Values returns all known values for HttpEndpoint. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HttpEndpoint) Values() []HttpEndpoint {
+	return []HttpEndpoint{
+		"disabled",
+		"enabled",
+	}
+}
+
+type HttpProtocolIpv6 string
+
+// Enum values for HttpProtocolIpv6
+const (
+	HttpProtocolIpv6Disabled HttpProtocolIpv6 = "disabled"
+	HttpProtocolIpv6Enabled  HttpProtocolIpv6 = "enabled"
+)
+
+// Values returns all known values for HttpProtocolIpv6. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HttpProtocolIpv6) Values() []HttpProtocolIpv6 {
+	return []HttpProtocolIpv6{
+		"disabled",
+		"enabled",
+	}
+}
+
+type HttpTokens string
+
+// Enum values for HttpTokens
+const (
+	HttpTokensOptional HttpTokens = "optional"
+	HttpTokensRequired HttpTokens = "required"
+)
+
+// Values returns all known values for HttpTokens. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HttpTokens) Values() []HttpTokens {
+	return []HttpTokens{
+		"optional",
+		"required",
+	}
+}
+
 type InstanceAccessProtocol string
 
 // Enum values for InstanceAccessProtocol
@@ -701,6 +755,24 @@ func (InstanceHealthState) Values() []InstanceHealthState {
 	}
 }
 
+type InstanceMetadataState string
+
+// Enum values for InstanceMetadataState
+const (
+	InstanceMetadataStatePending InstanceMetadataState = "pending"
+	InstanceMetadataStateApplied InstanceMetadataState = "applied"
+)
+
+// Values returns all known values for InstanceMetadataState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceMetadataState) Values() []InstanceMetadataState {
+	return []InstanceMetadataState{
+		"pending",
+		"applied",
+	}
+}
+
 type InstanceMetricName string
 
 // Enum values for InstanceMetricName
@@ -713,6 +785,7 @@ const (
 	InstanceMetricNameStatusCheckFailedSystem   InstanceMetricName = "StatusCheckFailed_System"
 	InstanceMetricNameBurstCapacityTime         InstanceMetricName = "BurstCapacityTime"
 	InstanceMetricNameBurstCapacityPercentage   InstanceMetricName = "BurstCapacityPercentage"
+	InstanceMetricNameMetadataNoToken           InstanceMetricName = "MetadataNoToken"
 )
 
 // Values returns all known values for InstanceMetricName. Note that this can be
@@ -728,6 +801,7 @@ func (InstanceMetricName) Values() []InstanceMetricName {
 		"StatusCheckFailed_System",
 		"BurstCapacityTime",
 		"BurstCapacityPercentage",
+		"MetadataNoToken",
 	}
 }
 
@@ -1311,6 +1385,7 @@ const (
 	OperationTypeUpdateBucketBundle                   OperationType = "UpdateBucketBundle"
 	OperationTypeUpdateBucket                         OperationType = "UpdateBucket"
 	OperationTypeSetResourceAccessForBucket           OperationType = "SetResourceAccessForBucket"
+	OperationTypeUpdateInstanceMetadataOptions        OperationType = "UpdateInstanceMetadataOptions"
 )
 
 // Values returns all known values for OperationType. Note that this can be
@@ -1397,6 +1472,7 @@ func (OperationType) Values() []OperationType {
 		"UpdateBucketBundle",
 		"UpdateBucket",
 		"SetResourceAccessForBucket",
+		"UpdateInstanceMetadataOptions",
 	}
 }
 

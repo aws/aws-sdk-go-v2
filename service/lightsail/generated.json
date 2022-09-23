@@ -159,6 +159,7 @@
         "api_op_UpdateDistribution.go",
         "api_op_UpdateDistributionBundle.go",
         "api_op_UpdateDomainEntry.go",
+        "api_op_UpdateInstanceMetadataOptions.go",
         "api_op_UpdateLoadBalancerAttribute.go",
         "api_op_UpdateRelationalDatabase.go",
         "api_op_UpdateRelationalDatabaseParameters.go",

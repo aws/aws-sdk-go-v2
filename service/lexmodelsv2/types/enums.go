@@ -718,6 +718,32 @@ func (ObfuscationSettingType) Values() []ObfuscationSettingType {
 	}
 }
 
+type PromptAttempt string
+
+// Enum values for PromptAttempt
+const (
+	PromptAttemptInitial PromptAttempt = "Initial"
+	PromptAttemptRetry1  PromptAttempt = "Retry1"
+	PromptAttemptRetry2  PromptAttempt = "Retry2"
+	PromptAttemptRetry3  PromptAttempt = "Retry3"
+	PromptAttemptRetry4  PromptAttempt = "Retry4"
+	PromptAttemptRetry5  PromptAttempt = "Retry5"
+)
+
+// Values returns all known values for PromptAttempt. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PromptAttempt) Values() []PromptAttempt {
+	return []PromptAttempt{
+		"Initial",
+		"Retry1",
+		"Retry2",
+		"Retry3",
+		"Retry4",
+		"Retry5",
+	}
+}
+
 type SearchOrder string
 
 // Enum values for SearchOrder

@@ -1,0 +1,8 @@
+{
+    "id": "171da03a-08d2-4fd1-b6d2-4cebd620cef3",
+    "type": "documentation",
+    "description": "Add the default specification for ResourceType in ListResourcesForWebACL.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

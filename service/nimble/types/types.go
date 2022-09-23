@@ -664,12 +664,12 @@ type StreamingSessionStream struct {
 // created. All other resources you create and manage in Nimble Studio are
 // contained within a studio. When creating a studio, you must provides two IAM
 // roles for use with the Nimble Studio portal. These roles are assumed by your
-// users when they log in to the Nimble Studio portal via Amazon Web Services SSO
-// and your identity source. The user role must have the
-// AmazonNimbleStudio-StudioUser managed policy attached for the portal to function
-// properly. The admin role must have the AmazonNimbleStudio-StudioAdmin managed
-// policy attached for the portal to function properly. Your studio roles must
-// trust the identity.nimble.amazonaws.com service principal to function properly.
+// users when they log in to the Nimble Studio portal via IAM Identity Center and
+// your identity source. The user role must have the AmazonNimbleStudio-StudioUser
+// managed policy attached for the portal to function properly. The admin role must
+// have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal
+// to function properly. Your studio roles must trust the
+// identity.nimble.amazonaws.com service principal to function properly.
 type Studio struct {
 
 	// The IAM role that studio admins assume when logging in to the Nimble Studio
@@ -689,9 +689,9 @@ type Studio struct {
 	// The Amazon Web Services Region where the studio resource is located.
 	HomeRegion *string
 
-	// The Amazon Web Services SSO application client ID used to integrate with Amazon
-	// Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble
-	// Studio portal.
+	// The IAM Identity Center application client ID used to integrate with IAM
+	// Identity Center to enable IAM Identity Center users to log in to Nimble Studio
+	// portal.
 	SsoClientId *string
 
 	// The current state of the studio resource.
@@ -899,12 +899,12 @@ type StudioEncryptionConfiguration struct {
 // A studio member is an association of a user from your studio identity source to
 // elevated permissions that they are granted in the studio. When you add a user to
 // your studio using the Nimble Studio console, they are given access to the
-// studio's AWS SSO application and are given access to log in to the Nimble Studio
-// portal. These users have the permissions provided by the studio's user IAM role
-// and do not appear in the studio membership collection. Only studio admins appear
-// in studio membership. When you add a user to studio membership with the persona
-// ADMIN, upon logging in to the Nimble Studio portal, they are granted permissions
-// specified by the Studio's Admin IAM role.
+// studio's IAM Identity Center application and are given access to log in to the
+// Nimble Studio portal. These users have the permissions provided by the studio's
+// user IAM role and do not appear in the studio membership collection. Only studio
+// admins appear in studio membership. When you add a user to studio membership
+// with the persona ADMIN, upon logging in to the Nimble Studio portal, they are
+// granted permissions specified by the Studio's Admin IAM role.
 type StudioMembership struct {
 
 	// The ID of the identity store.

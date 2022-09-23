@@ -3867,6 +3867,10 @@ type FleetLaunchTemplateOverrides struct {
 	// The Availability Zone in which to launch the instances.
 	AvailabilityZone *string
 
+	// The ID of the AMI. An AMI is required to launch an instance. The AMI ID must be
+	// specified here or in the launch template.
+	ImageId *string
+
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes. If you specify
 	// InstanceRequirements, you can't specify InstanceType.
@@ -3912,6 +3916,10 @@ type FleetLaunchTemplateOverridesRequest struct {
 
 	// The Availability Zone in which to launch the instances.
 	AvailabilityZone *string
+
+	// The ID of the AMI. An AMI is required to launch an instance. The AMI ID must be
+	// specified here or in the launch template.
+	ImageId *string
 
 	// The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with those attributes. If you specify

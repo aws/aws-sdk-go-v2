@@ -40,7 +40,7 @@ type UpdateLaunchProfileMemberInput struct {
 	// This member is required.
 	Persona types.LaunchProfilePersona
 
-	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
+	// The principal ID. This currently supports a IAM Identity Center UserId.
 	//
 	// This member is required.
 	PrincipalId *string

@@ -45,20 +45,20 @@ func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optF
 type UpdateIPSetInput struct {
 
 	// Contains an array of strings that specifies zero or more IP addresses or blocks
-	// of IP addresses in Classless Inter-Domain Routing (CIDR) notation. WAF supports
-	// all IPv4 and IPv6 CIDR ranges except for /0. Example address strings:
-	//
-	// * To
-	// configure WAF to allow, block, or count requests that originated from the IP
-	// address 192.0.2.44, specify 192.0.2.44/32.
-	//
-	// * To configure WAF to allow, block,
-	// or count requests that originated from IP addresses from 192.0.2.0 to
-	// 192.0.2.255, specify 192.0.2.0/24.
+	// of IP addresses. All addresses must be specified using Classless Inter-Domain
+	// Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for
+	// /0. Example address strings:
 	//
 	// * To configure WAF to allow, block, or count
-	// requests that originated from the IP address
-	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
+	// requests that originated from the IP address 192.0.2.44, specify
+	// 192.0.2.44/32.
+	//
+	// * To configure WAF to allow, block, or count requests that
+	// originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
+	// 192.0.2.0/24.
+	//
+	// * To configure WAF to allow, block, or count requests that
+	// originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
 	//
 	// * To configure WAF to allow,

@@ -1650,6 +1650,24 @@ func validateAggregatedUtterancesSortBy(v *types.AggregatedUtterancesSortBy) err
 	}
 }
 
+func validateAllowedInputTypes(v *types.AllowedInputTypes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedInputTypes"}
+	if v.AllowAudioInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowAudioInput"))
+	}
+	if v.AllowDTMFInput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowDTMFInput"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssociatedTranscriptFilter(v *types.AssociatedTranscriptFilter) error {
 	if v == nil {
 		return nil
@@ -1676,6 +1694,31 @@ func validateAssociatedTranscriptFilters(v []types.AssociatedTranscriptFilter) e
 	for i := range v {
 		if err := validateAssociatedTranscriptFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioAndDTMFInputSpecification(v *types.AudioAndDTMFInputSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioAndDTMFInputSpecification"}
+	if v.StartTimeoutMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeoutMs"))
+	}
+	if v.AudioSpecification != nil {
+		if err := validateAudioSpecification(v.AudioSpecification); err != nil {
+			invalidParams.AddNested("AudioSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DtmfSpecification != nil {
+		if err := validateDTMFSpecification(v.DtmfSpecification); err != nil {
+			invalidParams.AddNested("DtmfSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1732,6 +1775,24 @@ func validateAudioLogSettingsList(v []types.AudioLogSetting) error {
 		if err := validateAudioLogSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAudioSpecification(v *types.AudioSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioSpecification"}
+	if v.MaxLengthMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxLengthMs"))
+	}
+	if v.EndTimeoutMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimeoutMs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2440,6 +2501,30 @@ func validateDialogState(v *types.DialogState) error {
 		if err := validateDialogAction(v.DialogAction); err != nil {
 			invalidParams.AddNested("DialogAction", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDTMFSpecification(v *types.DTMFSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DTMFSpecification"}
+	if v.MaxLength == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxLength"))
+	}
+	if v.EndTimeoutMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimeoutMs"))
+	}
+	if v.DeletionCharacter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeletionCharacter"))
+	}
+	if v.EndCharacter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndCharacter"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3335,6 +3420,53 @@ func validatePostFulfillmentStatusSpecification(v *types.PostFulfillmentStatusSp
 	}
 }
 
+func validatePromptAttemptSpecification(v *types.PromptAttemptSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptAttemptSpecification"}
+	if v.AllowedInputTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedInputTypes"))
+	} else if v.AllowedInputTypes != nil {
+		if err := validateAllowedInputTypes(v.AllowedInputTypes); err != nil {
+			invalidParams.AddNested("AllowedInputTypes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AudioAndDTMFInputSpecification != nil {
+		if err := validateAudioAndDTMFInputSpecification(v.AudioAndDTMFInputSpecification); err != nil {
+			invalidParams.AddNested("AudioAndDTMFInputSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TextInputSpecification != nil {
+		if err := validateTextInputSpecification(v.TextInputSpecification); err != nil {
+			invalidParams.AddNested("TextInputSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptAttemptsSpecificationMap(v map[string]types.PromptAttemptSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptAttemptsSpecificationMap"}
+	for key := range v {
+		value := v[key]
+		if err := validatePromptAttemptSpecification(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePromptSpecification(v *types.PromptSpecification) error {
 	if v == nil {
 		return nil
@@ -3349,6 +3481,11 @@ func validatePromptSpecification(v *types.PromptSpecification) error {
 	}
 	if v.MaxRetries == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxRetries"))
+	}
+	if v.PromptAttemptsSpecification != nil {
+		if err := validatePromptAttemptsSpecificationMap(v.PromptAttemptsSpecification); err != nil {
+			invalidParams.AddNested("PromptAttemptsSpecification", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4030,6 +4167,21 @@ func validateSynonymList(v []types.SampleValue) error {
 		if err := validateSampleValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextInputSpecification(v *types.TextInputSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextInputSpecification"}
+	if v.StartTimeoutMs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeoutMs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

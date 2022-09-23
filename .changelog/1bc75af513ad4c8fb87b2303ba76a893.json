@@ -1,0 +1,8 @@
+{
+    "id": "1bc75af5-13ad-4c8f-b87b-2303ba76a893",
+    "type": "feature",
+    "description": "AWS App Runner adds a Node.js 16 runtime.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

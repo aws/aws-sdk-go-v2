@@ -41,7 +41,7 @@ type ListLaunchProfilesInput struct {
 	// The token to request the next page of results.
 	NextToken *string
 
-	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
+	// The principal ID. This currently supports a IAM Identity Center UserId.
 	PrincipalId *string
 
 	// Filter this request to launch profiles in any of the given states.

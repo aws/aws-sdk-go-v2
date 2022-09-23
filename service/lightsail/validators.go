@@ -2250,6 +2250,26 @@ func (m *validateOpUpdateDomainEntry) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateInstanceMetadataOptions struct {
+}
+
+func (*validateOpUpdateInstanceMetadataOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateInstanceMetadataOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateInstanceMetadataOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateInstanceMetadataOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLoadBalancerAttribute struct {
 }
 
@@ -2756,6 +2776,10 @@ func addOpUpdateDistributionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateDomainEntryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomainEntry{}, middleware.After)
+}
+
+func addOpUpdateInstanceMetadataOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateInstanceMetadataOptions{}, middleware.After)
 }
 
 func addOpUpdateLoadBalancerAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -4884,6 +4908,21 @@ func validateOpUpdateDomainEntryInput(v *UpdateDomainEntryInput) error {
 	}
 	if v.DomainEntry == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainEntry"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateInstanceMetadataOptionsInput(v *UpdateInstanceMetadataOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateInstanceMetadataOptionsInput"}
+	if v.InstanceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

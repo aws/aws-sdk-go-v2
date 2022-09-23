@@ -34,7 +34,7 @@ type GetLaunchProfileMemberInput struct {
 	// This member is required.
 	LaunchProfileId *string
 
-	// The principal ID. This currently supports a Amazon Web Services SSO UserId.
+	// The principal ID. This currently supports a IAM Identity Center UserId.
 	//
 	// This member is required.
 	PrincipalId *string

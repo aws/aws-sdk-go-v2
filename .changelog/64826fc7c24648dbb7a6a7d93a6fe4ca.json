@@ -1,0 +1,8 @@
+{
+    "id": "64826fc7-c246-48db-b7a6-a7d93a6fe4ca",
+    "type": "feature",
+    "description": "Letting external AWS customers provide ImageId as a Launch Template override in FleetLaunchTemplateOverridesRequest",
+    "modules": [
+        "service/ec2"
+    ]
+}

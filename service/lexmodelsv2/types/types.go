@@ -93,6 +93,22 @@ type AggregatedUtterancesSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the allowed input types.
+type AllowedInputTypes struct {
+
+	// Indicates whether audio input is allowed.
+	//
+	// This member is required.
+	AllowAudioInput *bool
+
+	// Indicates whether DTMF input is allowed.
+	//
+	// This member is required.
+	AllowDTMFInput *bool
+
+	noSmithyDocumentSerde
+}
+
 // The object containing information that associates the recommended intent/slot
 // type with a conversation.
 type AssociatedTranscript struct {
@@ -118,6 +134,24 @@ type AssociatedTranscriptFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the audio and DTMF input specification.
+type AudioAndDTMFInputSpecification struct {
+
+	// Time for which a bot waits before assuming that the customer isn't going to
+	// speak or press a key. This timeout is shared between Audio and DTMF inputs.
+	//
+	// This member is required.
+	StartTimeoutMs *int32
+
+	// Specifies the settings on audio input.
+	AudioSpecification *AudioSpecification
+
+	// Specifies the settings on DTMF input.
+	DtmfSpecification *DTMFSpecification
 
 	noSmithyDocumentSerde
 }
@@ -152,6 +186,24 @@ type AudioLogSetting struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the audio input specifications.
+type AudioSpecification struct {
+
+	// Time for which a bot waits after the customer stops speaking to assume the
+	// utterance is finished.
+	//
+	// This member is required.
+	EndTimeoutMs *int32
+
+	// Time for how long Amazon Lex waits before speech input is truncated and the
+	// speech is returned to application.
+	//
+	// This member is required.
+	MaxLengthMs *int32
 
 	noSmithyDocumentSerde
 }
@@ -992,6 +1044,35 @@ type DialogState struct {
 	// contains application information passed between Amazon Lex and a client
 	// application.
 	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the DTMF input specifications.
+type DTMFSpecification struct {
+
+	// The DTMF character that clears the accumulated DTMF digits and immediately ends
+	// the input.
+	//
+	// This member is required.
+	DeletionCharacter *string
+
+	// The DTMF character that immediately ends input. If the user does not press this
+	// character, the input ends after the end timeout.
+	//
+	// This member is required.
+	EndCharacter *string
+
+	// How long the bot should wait after the last DTMF character input before assuming
+	// that the input has concluded.
+	//
+	// This member is required.
+	EndTimeoutMs *int32
+
+	// The maximum number of DTMF digits allowed in an utterance.
+	//
+	// This member is required.
+	MaxLength *int32
 
 	noSmithyDocumentSerde
 }
@@ -1857,6 +1938,26 @@ type Principal struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the settings on a prompt attempt.
+type PromptAttemptSpecification struct {
+
+	// Indicates the allowed input types of the prompt attempt.
+	//
+	// This member is required.
+	AllowedInputTypes *AllowedInputTypes
+
+	// Indicates whether the user can interrupt a speech prompt attempt from the bot.
+	AllowInterrupt *bool
+
+	// Specifies the settings on audio and DTMF input.
+	AudioAndDTMFInputSpecification *AudioAndDTMFInputSpecification
+
+	// Specifies the settings on text input.
+	TextInputSpecification *TextInputSpecification
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a list of message groups that Amazon Lex sends to a user to elicit a
 // response.
 type PromptSpecification struct {
@@ -1878,6 +1979,9 @@ type PromptSpecification struct {
 
 	// Indicates how a message is selected from a message group among retries.
 	MessageSelectionStrategy MessageSelectionStrategy
+
+	// Specifies the advanced settings on each attempt of the prompt.
+	PromptAttemptsSpecification map[string]PromptAttemptSpecification
 
 	noSmithyDocumentSerde
 }
@@ -2527,6 +2631,17 @@ type SubSlotValueElicitationSetting struct {
 	// Specifies the prompts that Amazon Lex uses while a bot is waiting for customer
 	// input.
 	WaitAndContinueSpecification *WaitAndContinueSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the text input specifications.
+type TextInputSpecification struct {
+
+	// Time for which a bot waits before re-prompting a customer for text input.
+	//
+	// This member is required.
+	StartTimeoutMs *int32
 
 	noSmithyDocumentSerde
 }

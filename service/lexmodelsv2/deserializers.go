@@ -14410,6 +14410,55 @@ func awsRestjson1_deserializeDocumentAggregatedUtterancesSummaryList(v *[]types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAllowedInputTypes(v **types.AllowedInputTypes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AllowedInputTypes
+	if *v == nil {
+		sv = &types.AllowedInputTypes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowAudioInput":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowAudioInput = ptr.Bool(jtv)
+			}
+
+		case "allowDTMFInput":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowDTMFInput = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssociatedTranscript(v **types.AssociatedTranscript, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14481,6 +14530,60 @@ func awsRestjson1_deserializeDocumentAssociatedTranscriptList(v *[]types.Associa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioAndDTMFInputSpecification(v **types.AudioAndDTMFInputSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioAndDTMFInputSpecification
+	if *v == nil {
+		sv = &types.AudioAndDTMFInputSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioSpecification":
+			if err := awsRestjson1_deserializeDocumentAudioSpecification(&sv.AudioSpecification, value); err != nil {
+				return err
+			}
+
+		case "dtmfSpecification":
+			if err := awsRestjson1_deserializeDocumentDTMFSpecification(&sv.DtmfSpecification, value); err != nil {
+				return err
+			}
+
+		case "startTimeoutMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeInMilliSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimeoutMs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14596,6 +14699,63 @@ func awsRestjson1_deserializeDocumentAudioLogSettingsList(v *[]types.AudioLogSet
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudioSpecification(v **types.AudioSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioSpecification
+	if *v == nil {
+		sv = &types.AudioSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTimeoutMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeInMilliSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndTimeoutMs = ptr.Int32(int32(i64))
+			}
+
+		case "maxLengthMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeInMilliSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLengthMs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -17096,6 +17256,81 @@ func awsRestjson1_deserializeDocumentDialogState(v **types.DialogState, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDTMFSpecification(v **types.DTMFSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DTMFSpecification
+	if *v == nil {
+		sv = &types.DTMFSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deletionCharacter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DTMFCharacter to be of type string, got %T instead", value)
+				}
+				sv.DeletionCharacter = ptr.String(jtv)
+			}
+
+		case "endCharacter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DTMFCharacter to be of type string, got %T instead", value)
+				}
+				sv.EndCharacter = ptr.String(jtv)
+			}
+
+		case "endTimeoutMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeInMilliSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndTimeoutMs = ptr.Int32(int32(i64))
+			}
+
+		case "maxLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxUtteranceDigits to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxLength = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentElicitationCodeHookInvocationSetting(v **types.ElicitationCodeHookInvocationSetting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19365,6 +19600,96 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPromptAttemptSpecification(v **types.PromptAttemptSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PromptAttemptSpecification
+	if *v == nil {
+		sv = &types.PromptAttemptSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowedInputTypes":
+			if err := awsRestjson1_deserializeDocumentAllowedInputTypes(&sv.AllowedInputTypes, value); err != nil {
+				return err
+			}
+
+		case "allowInterrupt":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowInterrupt = ptr.Bool(jtv)
+			}
+
+		case "audioAndDTMFInputSpecification":
+			if err := awsRestjson1_deserializeDocumentAudioAndDTMFInputSpecification(&sv.AudioAndDTMFInputSpecification, value); err != nil {
+				return err
+			}
+
+		case "textInputSpecification":
+			if err := awsRestjson1_deserializeDocumentTextInputSpecification(&sv.TextInputSpecification, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPromptAttemptsSpecificationMap(v *map[string]types.PromptAttemptSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.PromptAttemptSpecification
+	if *v == nil {
+		mv = map[string]types.PromptAttemptSpecification{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.PromptAttemptSpecification
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentPromptAttemptSpecification(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPromptSpecification(v **types.PromptSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19421,6 +19746,11 @@ func awsRestjson1_deserializeDocumentPromptSpecification(v **types.PromptSpecifi
 					return fmt.Errorf("expected MessageSelectionStrategy to be of type string, got %T instead", value)
 				}
 				sv.MessageSelectionStrategy = types.MessageSelectionStrategy(jtv)
+			}
+
+		case "promptAttemptsSpecification":
+			if err := awsRestjson1_deserializeDocumentPromptAttemptsSpecificationMap(&sv.PromptAttemptsSpecification, value); err != nil {
+				return err
 			}
 
 		default:
@@ -21453,6 +21783,50 @@ func awsRestjson1_deserializeDocumentTagMap(v *map[string]string, value interfac
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTextInputSpecification(v **types.TextInputSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TextInputSpecification
+	if *v == nil {
+		sv = &types.TextInputSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "startTimeoutMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TimeInMilliSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimeoutMs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

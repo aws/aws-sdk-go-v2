@@ -261,6 +261,7 @@ const (
 	RuntimeNodejs14   Runtime = "NODEJS_14"
 	RuntimeCorretto8  Runtime = "CORRETTO_8"
 	RuntimeCorretto11 Runtime = "CORRETTO_11"
+	RuntimeNodejs16   Runtime = "NODEJS_16"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -273,6 +274,7 @@ func (Runtime) Values() []Runtime {
 		"NODEJS_14",
 		"CORRETTO_8",
 		"CORRETTO_11",
+		"NODEJS_16",
 	}
 }
 

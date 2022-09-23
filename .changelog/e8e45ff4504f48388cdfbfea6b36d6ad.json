@@ -1,0 +1,8 @@
+{
+    "id": "e8e45ff4-504f-4838-8cdf-bfea6b36d6ad",
+    "type": "feature",
+    "description": "This release adds Instance Metadata Service (IMDS) support for Lightsail instances.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

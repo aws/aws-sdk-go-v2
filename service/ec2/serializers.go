@@ -36399,6 +36399,11 @@ func awsEc2query_serializeDocumentFleetLaunchTemplateOverridesRequest(v *types.F
 		objectKey.String(*v.AvailabilityZone)
 	}
 
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
+
 	if v.InstanceRequirements != nil {
 		objectKey := object.Key("InstanceRequirements")
 		if err := awsEc2query_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, objectKey); err != nil {
