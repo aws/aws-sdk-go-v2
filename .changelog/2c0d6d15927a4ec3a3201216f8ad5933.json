@@ -1,8 +1,0 @@
-{
-    "id": "2c0d6d15-927a-4ec3-a320-1216f8ad5933",
-    "type": "feature",
-    "description": "General availability (GA) for AWS IoT Fleetwise. It adds AWS IoT Fleetwise to AWS SDK. For more information, see https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/Welcome.html.",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

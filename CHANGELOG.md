@@ -1,3 +1,21 @@
+# Release (2022-09-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.10.0](feature/dynamodb/attributevalue/CHANGELOG.md#v1100-2022-09-26)
+  * **Feature**: Adds a String method to UnixTime, so that when structs with this field get logged it prints a human readable time.
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue`: [v1.10.0](feature/dynamodbstreams/attributevalue/CHANGELOG.md#v1100-2022-09-26)
+  * **Feature**: Adds a String method to UnixTime, so that when structs with this field get logged it prints a human readable time.
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.14.0](service/costandusagereportservice/CHANGELOG.md#v1140-2022-09-26)
+  * **Feature**: This release adds two new support regions(me-central-1/eu-south-2) for OSG.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.0.0](service/iotfleetwise/CHANGELOG.md#v100-2022-09-26)
+  * **Release**: New AWS service client module
+  * **Feature**: General availability (GA) for AWS IoT Fleetwise. It adds AWS IoT Fleetwise to AWS SDK. For more information, see https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/Welcome.html.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.30.0](service/ssm/CHANGELOG.md#v1300-2022-09-26)
+  * **Feature**: This release includes support for applying a CloudWatch alarm to Systems Manager capabilities like Automation, Run Command, State Manager, and Maintenance Windows.
+
 # Release (2022-09-23)
 
 ## Module Highlights

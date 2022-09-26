@@ -1,3 +1,7 @@
+# v1.30.0 (2022-09-26)
+
+* **Feature**: This release includes support for applying a CloudWatch alarm to Systems Manager capabilities like Automation, Run Command, State Manager, and Maintenance Windows.
+
 # v1.29.0 (2022-09-23)
 
 * **Feature**: This release adds new SSM document types ConformancePackTemplate and CloudFormation

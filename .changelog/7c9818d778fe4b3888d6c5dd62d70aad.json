@@ -1,8 +1,0 @@
-{
-    "id": "7c9818d7-78fe-4b38-88d6-c5dd62d70aad",
-    "type": "feature",
-    "description": "This release includes support for applying a CloudWatch alarm to Systems Manager capabilities like Automation, Run Command, State Manager, and Maintenance Windows.",
-    "modules": [
-        "service/ssm"
-    ]
-}

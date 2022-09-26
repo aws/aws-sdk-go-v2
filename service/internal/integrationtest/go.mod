@@ -24,7 +24,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.12.1
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.26.1
-	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.13.17
+	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.21.12
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.18
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.18
 	github.com/aws/aws-sdk-go-v2/service/sns v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.10
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.17
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.1
