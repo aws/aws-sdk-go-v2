@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -63,123 +63,193 @@
             }
         },
         "com.amazonaws.costandusagereportservice#AWSRegion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The region of the S3 bucket that AWS delivers the report into.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "af-south-1",
-                        "name": "CAPE_TOWN"
-                    },
-                    {
-                        "value": "ap-east-1",
-                        "name": "HONG_KONG"
-                    },
-                    {
-                        "value": "ap-south-1",
-                        "name": "MUMBAI"
-                    },
-                    {
-                        "value": "ap-southeast-1",
-                        "name": "SINGAPORE"
-                    },
-                    {
-                        "value": "ap-southeast-2",
-                        "name": "SYDNEY"
-                    },
-                    {
-                        "value": "ap-northeast-1",
-                        "name": "TOKYO"
-                    },
-                    {
-                        "value": "ap-northeast-2",
-                        "name": "SEOUL"
-                    },
-                    {
-                        "value": "ap-northeast-3",
-                        "name": "OSAKA"
-                    },
-                    {
-                        "value": "ca-central-1",
-                        "name": "CANADA_CENTRAL"
-                    },
-                    {
-                        "value": "eu-central-1",
-                        "name": "FRANKFURT"
-                    },
-                    {
-                        "value": "eu-west-1",
-                        "name": "IRELAND"
-                    },
-                    {
-                        "value": "eu-west-2",
-                        "name": "LONDON"
-                    },
-                    {
-                        "value": "eu-west-3",
-                        "name": "PARIS"
-                    },
-                    {
-                        "value": "eu-north-1",
-                        "name": "STOCKHOLM"
-                    },
-                    {
-                        "value": "eu-south-1",
-                        "name": "MILANO"
-                    },
-                    {
-                        "value": "me-south-1",
-                        "name": "BAHRAIN"
-                    },
-                    {
-                        "value": "sa-east-1",
-                        "name": "SAO_PAULO"
-                    },
-                    {
-                        "value": "us-east-1",
-                        "name": "US_STANDARD"
-                    },
-                    {
-                        "value": "us-east-2",
-                        "name": "OHIO"
-                    },
-                    {
-                        "value": "us-west-1",
-                        "name": "NORTHERN_CALIFORNIA"
-                    },
-                    {
-                        "value": "us-west-2",
-                        "name": "OREGON"
-                    },
-                    {
-                        "value": "cn-north-1",
-                        "name": "BEIJING"
-                    },
-                    {
-                        "value": "cn-northwest-1",
-                        "name": "NINGXIA"
+            "type": "enum",
+            "members": {
+                "CAPE_TOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "af-south-1"
                     }
-                ]
+                },
+                "HONG_KONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-east-1"
+                    }
+                },
+                "MUMBAI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-south-1"
+                    }
+                },
+                "SINGAPORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-1"
+                    }
+                },
+                "SYDNEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-2"
+                    }
+                },
+                "JAKARTA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-3"
+                    }
+                },
+                "TOKYO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-1"
+                    }
+                },
+                "SEOUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-2"
+                    }
+                },
+                "OSAKA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-northeast-3"
+                    }
+                },
+                "CANADA_CENTRAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-central-1"
+                    }
+                },
+                "FRANKFURT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-central-1"
+                    }
+                },
+                "IRELAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-1"
+                    }
+                },
+                "LONDON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-2"
+                    }
+                },
+                "PARIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-west-3"
+                    }
+                },
+                "STOCKHOLM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-north-1"
+                    }
+                },
+                "MILANO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-1"
+                    }
+                },
+                "SPAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-2"
+                    }
+                },
+                "UAE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "me-central-1"
+                    }
+                },
+                "BAHRAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "me-south-1"
+                    }
+                },
+                "SAO_PAULO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sa-east-1"
+                    }
+                },
+                "US_STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-east-1"
+                    }
+                },
+                "OHIO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-east-2"
+                    }
+                },
+                "NORTHERN_CALIFORNIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-west-1"
+                    }
+                },
+                "OREGON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "us-west-2"
+                    }
+                },
+                "BEIJING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cn-north-1"
+                    }
+                },
+                "NINGXIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cn-northwest-1"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The region of the S3 bucket that AWS delivers the report into.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#AdditionalArtifact": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The types of manifest that you want AWS to create for this report.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "REDSHIFT",
-                        "name": "REDSHIFT"
-                    },
-                    {
-                        "value": "QUICKSIGHT",
-                        "name": "QUICKSIGHT"
-                    },
-                    {
-                        "value": "ATHENA",
-                        "name": "ATHENA"
+            "type": "enum",
+            "members": {
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT"
                     }
-                ]
+                },
+                "QUICKSIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT"
+                    }
+                },
+                "ATHENA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATHENA"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The types of manifest that you want AWS to create for this report.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#AdditionalArtifactList": {
@@ -198,27 +268,33 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}"
+                "smithy.api#pattern": "^(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}$"
             }
         },
         "com.amazonaws.costandusagereportservice#CompressionFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The compression format that AWS uses for the report.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ZIP",
-                        "name": "ZIP"
-                    },
-                    {
-                        "value": "GZIP",
-                        "name": "GZIP"
-                    },
-                    {
-                        "value": "Parquet",
-                        "name": "Parquet"
+            "type": "enum",
+            "members": {
+                "ZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZIP"
                     }
-                ]
+                },
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                },
+                "Parquet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Parquet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compression format that AWS uses for the report.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#DeleteReportDefinition": {
@@ -351,7 +427,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[A-Za-z0-9_\\.\\-=]*"
+                "smithy.api#pattern": "^[A-Za-z0-9_\\.\\-=]*$"
             }
         },
         "com.amazonaws.costandusagereportservice#InternalErrorException": {
@@ -369,7 +445,6 @@
         "com.amazonaws.costandusagereportservice#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#documentation": "<p>The maximum number of results that AWS returns for the operation.</p>",
                 "smithy.api#range": {
                     "min": 5,
@@ -467,10 +542,7 @@
             }
         },
         "com.amazonaws.costandusagereportservice#RefreshClosedReports": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.costandusagereportservice#ReportDefinition": {
             "type": "structure",
@@ -563,19 +635,23 @@
             }
         },
         "com.amazonaws.costandusagereportservice#ReportFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The format that AWS saves the report in.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "textORcsv",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "Parquet",
-                        "name": "Parquet"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "textORcsv"
                     }
-                ]
+                },
+                "Parquet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Parquet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The format that AWS saves the report in.</p>"
             }
         },
         "com.amazonaws.costandusagereportservice#ReportLimitReachedException": {
@@ -598,22 +674,24 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[0-9A-Za-z!\\-_.*\\'()]+"
+                "smithy.api#pattern": "^[0-9A-Za-z!\\-_.*\\'()]+$"
             }
         },
         "com.amazonaws.costandusagereportservice#ReportVersioning": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATE_NEW_REPORT",
-                        "name": "CREATE_NEW_REPORT"
-                    },
-                    {
-                        "value": "OVERWRITE_REPORT",
-                        "name": "OVERWRITE_REPORT"
+            "type": "enum",
+            "members": {
+                "CREATE_NEW_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_NEW_REPORT"
                     }
-                ]
+                },
+                "OVERWRITE_REPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERWRITE_REPORT"
+                    }
+                }
             }
         },
         "com.amazonaws.costandusagereportservice#S3Bucket": {
@@ -624,7 +702,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[A-Za-z0-9_\\.\\-]+"
+                "smithy.api#pattern": "^[A-Za-z0-9_\\.\\-]+$"
             }
         },
         "com.amazonaws.costandusagereportservice#S3Prefix": {
@@ -635,19 +713,21 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[0-9A-Za-z!\\-_.*\\'()/]*"
+                "smithy.api#pattern": "^[0-9A-Za-z!\\-_.*\\'()/]*$"
             }
         },
         "com.amazonaws.costandusagereportservice#SchemaElement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Whether or not AWS includes resource IDs in the report. </p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "RESOURCES",
-                        "name": "RESOURCES"
+            "type": "enum",
+            "members": {
+                "RESOURCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCES"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Whether or not AWS includes resource IDs in the report. </p>"
             }
         },
         "com.amazonaws.costandusagereportservice#SchemaElementList": {
@@ -660,23 +740,29 @@
             }
         },
         "com.amazonaws.costandusagereportservice#TimeUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The length of time covered by the report. </p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "HOURLY",
-                        "name": "HOURLY"
-                    },
-                    {
-                        "value": "DAILY",
-                        "name": "DAILY"
-                    },
-                    {
-                        "value": "MONTHLY",
-                        "name": "MONTHLY"
+            "type": "enum",
+            "members": {
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
                     }
-                ]
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The length of time covered by the report. </p>"
             }
         },
         "com.amazonaws.costandusagereportservice#ValidationException": {
