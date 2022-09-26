@@ -1,0 +1,9 @@
+{
+    "id": "650c97d6-b9d0-49a7-999a-f194864ec9f4",
+    "type": "feature",
+    "description": "Adds a String method to UnixTime, so that when structs with this field get logged it prints a human readable time.",
+    "modules": [
+        "feature/dynamodb/attributevalue",
+        "feature/dynamodbstreams/attributevalue"
+    ]
+}
