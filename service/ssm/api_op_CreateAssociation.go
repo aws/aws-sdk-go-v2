@@ -55,6 +55,10 @@ type CreateAssociationInput struct {
 	// This member is required.
 	Name *string
 
+	// The details for the CloudWatch alarm you want to apply to an automation or
+	// command.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// By default, when you create a new association, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
 	// this option if you don't want an association to run immediately after you create
@@ -155,11 +159,10 @@ type CreateAssociationInput struct {
 	// associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
-	// Adds or overwrites one or more tags for a State Manager association. Tags are
-	// metadata that you can assign to your Amazon Web Services resources. Tags enable
-	// you to categorize your resources in different ways, for example, by purpose,
-	// owner, or environment. Each tag consists of a key and an optional value, both of
-	// which you define.
+	// Optional metadata that you assign to a resource. Tags enable you to categorize a
+	// resource in different ways, such as by purpose, owner, or environment. For
+	// example, you might want to tag an association to identify the type of resource
+	// to which it applies, the environment, or the purpose of the association.
 	Tags []types.Tag
 
 	// A location is a combination of Amazon Web Services Regions and Amazon Web

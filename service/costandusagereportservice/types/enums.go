@@ -31,6 +31,7 @@ const (
 	AWSRegionMumbai             AWSRegion = "ap-south-1"
 	AWSRegionSingapore          AWSRegion = "ap-southeast-1"
 	AWSRegionSydney             AWSRegion = "ap-southeast-2"
+	AWSRegionJakarta            AWSRegion = "ap-southeast-3"
 	AWSRegionTokyo              AWSRegion = "ap-northeast-1"
 	AWSRegionSeoul              AWSRegion = "ap-northeast-2"
 	AWSRegionOsaka              AWSRegion = "ap-northeast-3"
@@ -41,6 +42,8 @@ const (
 	AWSRegionParis              AWSRegion = "eu-west-3"
 	AWSRegionStockholm          AWSRegion = "eu-north-1"
 	AWSRegionMilano             AWSRegion = "eu-south-1"
+	AWSRegionSpain              AWSRegion = "eu-south-2"
+	AWSRegionUae                AWSRegion = "me-central-1"
 	AWSRegionBahrain            AWSRegion = "me-south-1"
 	AWSRegionSaoPaulo           AWSRegion = "sa-east-1"
 	AWSRegionUsStandard         AWSRegion = "us-east-1"
@@ -61,6 +64,7 @@ func (AWSRegion) Values() []AWSRegion {
 		"ap-south-1",
 		"ap-southeast-1",
 		"ap-southeast-2",
+		"ap-southeast-3",
 		"ap-northeast-1",
 		"ap-northeast-2",
 		"ap-northeast-3",
@@ -71,6 +75,8 @@ func (AWSRegion) Values() []AWSRegion {
 		"eu-west-3",
 		"eu-north-1",
 		"eu-south-1",
+		"eu-south-2",
+		"me-central-1",
 		"me-south-1",
 		"sa-east-1",
 		"us-east-1",

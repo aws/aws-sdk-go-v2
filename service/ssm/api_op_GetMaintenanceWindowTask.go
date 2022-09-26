@@ -49,6 +49,10 @@ type GetMaintenanceWindowTaskInput struct {
 
 type GetMaintenanceWindowTaskOutput struct {
 
+	// The details for the CloudWatch alarm you applied to your maintenance window
+	// task.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// The action to take on tasks when the maintenance window cutoff time is reached.
 	// CONTINUE_TASK means that tasks continue to run. For Automation, Lambda, Step
 	// Functions tasks, CANCEL_TASK means that currently running task invocations

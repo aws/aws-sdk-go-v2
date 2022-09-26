@@ -51,6 +51,10 @@ type UpdateAssociationInput struct {
 	// This member is required.
 	AssociationId *string
 
+	// The details for the CloudWatch alarm you want to apply to an automation or
+	// command.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// By default, when you update an association, the system runs it immediately after
 	// it is updated and then according to the schedule you specified. Specify this
 	// option if you don't want an association to run immediately after you update it.

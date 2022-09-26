@@ -7462,6 +7462,50 @@ func awsAwsjson11_serializeDocumentAccounts(v []string, value smithyjson.Value) 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAlarm(v *types.Alarm, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAlarmConfiguration(v *types.AlarmConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Alarms != nil {
+		ok := object.Key("Alarms")
+		if err := awsAwsjson11_serializeDocumentAlarmList(v.Alarms, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IgnorePollAlarmFailure {
+		ok := object.Key("IgnorePollAlarmFailure")
+		ok.Boolean(v.IgnorePollAlarmFailure)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAlarmList(v []types.Alarm, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAlarm(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAssociationExecutionFilter(v *types.AssociationExecutionFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7999,6 +8043,13 @@ func awsAwsjson11_serializeDocumentCreateAssociationBatchRequestEntries(v []type
 func awsAwsjson11_serializeDocumentCreateAssociationBatchRequestEntry(v *types.CreateAssociationBatchRequestEntry, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ApplyOnlyAtCronInterval {
 		ok := object.Key("ApplyOnlyAtCronInterval")
@@ -10499,6 +10550,13 @@ func awsAwsjson11_serializeOpDocumentCreateAssociationBatchInput(v *CreateAssoci
 func awsAwsjson11_serializeOpDocumentCreateAssociationInput(v *CreateAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ApplyOnlyAtCronInterval {
 		ok := object.Key("ApplyOnlyAtCronInterval")
@@ -13297,6 +13355,13 @@ func awsAwsjson11_serializeOpDocumentRegisterTaskWithMaintenanceWindowInput(v *R
 	object := value.Object()
 	defer object.Close()
 
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
@@ -13459,6 +13524,13 @@ func awsAwsjson11_serializeOpDocumentSendCommandInput(v *SendCommandInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CloudWatchOutputConfig != nil {
 		ok := object.Key("CloudWatchOutputConfig")
 		if err := awsAwsjson11_serializeDocumentCloudWatchOutputConfig(v.CloudWatchOutputConfig, ok); err != nil {
@@ -13574,6 +13646,13 @@ func awsAwsjson11_serializeOpDocumentStartAssociationsOnceInput(v *StartAssociat
 func awsAwsjson11_serializeOpDocumentStartAutomationExecutionInput(v *StartAutomationExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
@@ -13801,6 +13880,13 @@ func awsAwsjson11_serializeOpDocumentUnlabelParameterVersionInput(v *UnlabelPara
 func awsAwsjson11_serializeOpDocumentUpdateAssociationInput(v *UpdateAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ApplyOnlyAtCronInterval {
 		ok := object.Key("ApplyOnlyAtCronInterval")
@@ -14145,6 +14231,13 @@ func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowTargetInput(v *Updat
 func awsAwsjson11_serializeOpDocumentUpdateMaintenanceWindowTaskInput(v *UpdateMaintenanceWindowTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AlarmConfiguration != nil {
+		ok := object.Key("AlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.AlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.CutoffBehavior) > 0 {
 		ok := object.Key("CutoffBehavior")

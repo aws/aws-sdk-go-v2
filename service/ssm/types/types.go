@@ -60,6 +60,50 @@ type Activation struct {
 	noSmithyDocumentSerde
 }
 
+// A CloudWatch alarm you apply to an automation or command.
+type Alarm struct {
+
+	// The name of your CloudWatch alarm.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for the CloudWatch alarm you want to apply to an automation or
+// command.
+type AlarmConfiguration struct {
+
+	// The name of the CloudWatch alarm specified in the configuration.
+	//
+	// This member is required.
+	Alarms []Alarm
+
+	// If you specify true for this value, your automation or command continue to run
+	// even if we can't gather information about the state of your CloudWatch alarm.
+	// The default value is false.
+	IgnorePollAlarmFailure bool
+
+	noSmithyDocumentSerde
+}
+
+// The details about the state of your CloudWatch alarm.
+type AlarmStateInformation struct {
+
+	// The name of your CloudWatch alarm.
+	//
+	// This member is required.
+	Name *string
+
+	// The state of your CloudWatch alarm.
+	//
+	// This member is required.
+	State ExternalAlarmState
+
+	noSmithyDocumentSerde
+}
+
 // Describes an association of a Amazon Web Services Systems Manager document (SSM
 // document) and a managed node.
 type Association struct {
@@ -118,6 +162,10 @@ type Association struct {
 
 // Describes the parameters for a document.
 type AssociationDescription struct {
+
+	// The details for the CloudWatch alarm you want to apply to an automation or
+	// command.
+	AlarmConfiguration *AlarmConfiguration
 
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
@@ -235,11 +283,18 @@ type AssociationDescription struct {
 	// The managed nodes targeted by the request.
 	Targets []Target
 
+	// The CloudWatch alarm that was invoked during the association.
+	TriggeredAlarms []AlarmStateInformation
+
 	noSmithyDocumentSerde
 }
 
 // Includes information about the specified association.
 type AssociationExecution struct {
+
+	// The details for the CloudWatch alarm you want to apply to an automation or
+	// command.
+	AlarmConfiguration *AlarmConfiguration
 
 	// The association ID.
 	AssociationId *string
@@ -264,6 +319,9 @@ type AssociationExecution struct {
 
 	// The status of the association execution.
 	Status *string
+
+	// The CloudWatch alarms that were invoked by the association.
+	TriggeredAlarms []AlarmStateInformation
 
 	noSmithyDocumentSerde
 }
@@ -569,6 +627,9 @@ type AttachmentsSource struct {
 // execution.
 type AutomationExecution struct {
 
+	// The details for the CloudWatch alarm applied to your automation.
+	AlarmConfiguration *AlarmConfiguration
+
 	// The ID of a State Manager association used in the Automation operation.
 	AssociationId *string
 
@@ -674,6 +735,9 @@ type AutomationExecution struct {
 	// The specified targets.
 	Targets []Target
 
+	// The CloudWatch alarm that was invoked by the automation.
+	TriggeredAlarms []AlarmStateInformation
+
 	noSmithyDocumentSerde
 }
 
@@ -697,6 +761,9 @@ type AutomationExecutionFilter struct {
 
 // Details about a specific Automation execution.
 type AutomationExecutionMetadata struct {
+
+	// The details for the CloudWatch alarm applied to your automation.
+	AlarmConfiguration *AlarmConfiguration
 
 	// The ID of a State Manager association used in the Automation operation.
 	AssociationId *string
@@ -794,6 +861,9 @@ type AutomationExecutionMetadata struct {
 	// The targets defined by the user when starting the automation.
 	Targets []Target
 
+	// The CloudWatch alarm that was invoked by the automation.
+	TriggeredAlarms []AlarmStateInformation
+
 	noSmithyDocumentSerde
 }
 
@@ -863,6 +933,9 @@ type CloudWatchOutputConfig struct {
 
 // Describes a command request.
 type Command struct {
+
+	// The details for the CloudWatch alarm applied to your command.
+	AlarmConfiguration *AlarmConfiguration
 
 	// Amazon CloudWatch Logs information where you want Amazon Web Services Systems
 	// Manager to send the command output.
@@ -1007,6 +1080,9 @@ type Command struct {
 
 	// The TimeoutSeconds value specified for a command.
 	TimeoutSeconds int32
+
+	// The CloudWatch alarm that was invoked by the command.
+	TriggeredAlarms []AlarmStateInformation
 
 	noSmithyDocumentSerde
 }
@@ -1502,6 +1578,10 @@ type CreateAssociationBatchRequestEntry struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The details for the CloudWatch alarm you want to apply to an automation or
+	// command.
+	AlarmConfiguration *AlarmConfiguration
 
 	// By default, when you create a new associations, the system runs it immediately
 	// after it is created and then according to the schedule you specified. Specify
@@ -2833,6 +2913,9 @@ type MaintenanceWindowExecution struct {
 // execution.
 type MaintenanceWindowExecutionTaskIdentity struct {
 
+	// The details for the CloudWatch alarm applied to your maintenance window task.
+	AlarmConfiguration *AlarmConfiguration
+
 	// The time the task execution finished.
 	EndTime *time.Time
 
@@ -2854,6 +2937,9 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 
 	// The type of task that ran.
 	TaskType MaintenanceWindowTaskType
+
+	// The CloudWatch alarm that was invoked by the maintenance window task.
+	TriggeredAlarms []AlarmStateInformation
 
 	// The ID of the maintenance window execution that ran the task.
 	WindowExecutionId *string
@@ -3155,6 +3241,9 @@ type MaintenanceWindowTarget struct {
 
 // Information about a task defined for a maintenance window.
 type MaintenanceWindowTask struct {
+
+	// The details for the CloudWatch alarm applied to your maintenance window task.
+	AlarmConfiguration *AlarmConfiguration
 
 	// The specification for whether tasks should continue to run after the cutoff time
 	// specified in the maintenance windows is reached.

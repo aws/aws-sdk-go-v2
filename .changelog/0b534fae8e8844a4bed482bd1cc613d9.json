@@ -1,0 +1,8 @@
+{
+    "id": "0b534fae-8e88-44a4-bed4-82bd1cc613d9",
+    "type": "feature",
+    "description": "This release adds two new support regions(me-central-1/eu-south-2) for OSG.",
+    "modules": [
+        "service/costandusagereportservice"
+    ]
+}

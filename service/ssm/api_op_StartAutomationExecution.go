@@ -39,6 +39,9 @@ type StartAutomationExecutionInput struct {
 	// This member is required.
 	DocumentName *string
 
+	// The CloudWatch alarm you want to apply to your automation.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// User-provided idempotency token. The token must be unique, is case insensitive,
 	// enforces the UUID format, and can't be reused.
 	ClientToken *string

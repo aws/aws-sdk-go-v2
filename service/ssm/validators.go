@@ -2890,6 +2890,57 @@ func addOpUpdateServiceSettingValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateServiceSetting{}, middleware.After)
 }
 
+func validateAlarm(v *types.Alarm) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Alarm"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmConfiguration(v *types.AlarmConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmConfiguration"}
+	if v.Alarms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Alarms"))
+	} else if v.Alarms != nil {
+		if err := validateAlarmList(v.Alarms); err != nil {
+			invalidParams.AddNested("Alarms", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAlarmList(v []types.Alarm) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AlarmList"}
+	for i := range v {
+		if err := validateAlarm(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssociationExecutionFilter(v *types.AssociationExecutionFilter) error {
 	if v == nil {
 		return nil
@@ -3190,6 +3241,11 @@ func validateCreateAssociationBatchRequestEntry(v *types.CreateAssociationBatchR
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAssociationBatchRequestEntry"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4455,6 +4511,11 @@ func validateOpCreateAssociationInput(v *CreateAssociationInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6045,6 +6106,11 @@ func validateOpRegisterTaskWithMaintenanceWindowInput(v *RegisterTaskWithMainten
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6129,6 +6195,11 @@ func validateOpSendCommandInput(v *SendCommandInput) error {
 	if v.DocumentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
 	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6162,6 +6233,11 @@ func validateOpStartAutomationExecutionInput(v *StartAutomationExecutionInput) e
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6271,6 +6347,11 @@ func validateOpUpdateAssociationInput(v *UpdateAssociationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssociationInput"}
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6409,6 +6490,11 @@ func validateOpUpdateMaintenanceWindowTaskInput(v *UpdateMaintenanceWindowTaskIn
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
+			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

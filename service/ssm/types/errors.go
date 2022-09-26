@@ -1531,7 +1531,7 @@ func (e *InvalidSchedule) ErrorMessage() string {
 func (e *InvalidSchedule) ErrorCode() string             { return "InvalidSchedule" }
 func (e *InvalidSchedule) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified tag key or value is not valid.
+// The tag key or value isn't valid.
 type InvalidTag struct {
 	Message *string
 

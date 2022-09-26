@@ -47,6 +47,10 @@ type GetMaintenanceWindowExecutionTaskInput struct {
 
 type GetMaintenanceWindowExecutionTaskOutput struct {
 
+	// The details for the CloudWatch alarm you applied to your maintenance window
+	// task.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// The time the task execution completed.
 	EndTime *time.Time
 
@@ -91,6 +95,9 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// * Value: an
 	// array of strings, each between 1 and 255 characters
 	TaskParameters []map[string]types.MaintenanceWindowTaskParameterValueExpression
+
+	// The CloudWatch alarms that were invoked by the maintenance window task.
+	TriggeredAlarms []types.AlarmStateInformation
 
 	// The type of task that was run.
 	Type types.MaintenanceWindowTaskType

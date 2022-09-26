@@ -45,6 +45,9 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// This member is required.
 	WindowId *string
 
+	// The CloudWatch alarm you want to apply to your maintenance window task.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// User-provided idempotency token.
 	ClientToken *string
 

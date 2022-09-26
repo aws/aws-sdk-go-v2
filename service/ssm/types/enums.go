@@ -799,6 +799,24 @@ func (ExecutionMode) Values() []ExecutionMode {
 	}
 }
 
+type ExternalAlarmState string
+
+// Enum values for ExternalAlarmState
+const (
+	ExternalAlarmStateUnknown ExternalAlarmState = "UNKNOWN"
+	ExternalAlarmStateAlarm   ExternalAlarmState = "ALARM"
+)
+
+// Values returns all known values for ExternalAlarmState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalAlarmState) Values() []ExternalAlarmState {
+	return []ExternalAlarmState{
+		"UNKNOWN",
+		"ALARM",
+	}
+}
+
 type Fault string
 
 // Enum values for Fault

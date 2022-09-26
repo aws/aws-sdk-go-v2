@@ -75,6 +75,9 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// This member is required.
 	WindowTaskId *string
 
+	// The CloudWatch alarm you want to apply to your maintenance window task.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// Indicates whether tasks should continue to run after the cutoff time specified
 	// in the maintenance windows is reached.
 	//
@@ -199,6 +202,10 @@ type UpdateMaintenanceWindowTaskInput struct {
 }
 
 type UpdateMaintenanceWindowTaskOutput struct {
+
+	// The details for the CloudWatch alarm you applied to your maintenance window
+	// task.
+	AlarmConfiguration *types.AlarmConfiguration
 
 	// The specification for whether tasks should continue to run after the cutoff time
 	// specified in the maintenance windows is reached.

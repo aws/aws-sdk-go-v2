@@ -42,6 +42,9 @@ type SendCommandInput struct {
 	// This member is required.
 	DocumentName *string
 
+	// The CloudWatch alarm you want to apply to your command.
+	AlarmConfiguration *types.AlarmConfiguration
+
 	// Enables Amazon Web Services Systems Manager to send Run Command output to Amazon
 	// CloudWatch Logs. Run Command is a capability of Amazon Web Services Systems
 	// Manager.

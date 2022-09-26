@@ -20771,6 +20771,208 @@ func awsAwsjson11_deserializeDocumentActivationList(v *[]types.Activation, value
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAlarm(v **types.Alarm, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Alarm
+	if *v == nil {
+		sv = &types.Alarm{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AlarmName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAlarmConfiguration(v **types.AlarmConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AlarmConfiguration
+	if *v == nil {
+		sv = &types.AlarmConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Alarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmList(&sv.Alarms, value); err != nil {
+				return err
+			}
+
+		case "IgnorePollAlarmFailure":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IgnorePollAlarmFailure = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAlarmList(v *[]types.Alarm, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Alarm
+	if *v == nil {
+		cv = []types.Alarm{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Alarm
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAlarm(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAlarmStateInformation(v **types.AlarmStateInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AlarmStateInformation
+	if *v == nil {
+		sv = &types.AlarmStateInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AlarmName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalAlarmState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ExternalAlarmState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAlarmStateInformationList(v *[]types.AlarmStateInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AlarmStateInformation
+	if *v == nil {
+		cv = []types.AlarmStateInformation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AlarmStateInformation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAlarmStateInformation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAlreadyExistsException(v **types.AlreadyExistsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21033,6 +21235,11 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ApplyOnlyAtCronInterval":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -21267,6 +21474,11 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 				return err
 			}
 
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21372,6 +21584,11 @@ func awsAwsjson11_deserializeDocumentAssociationExecution(v **types.AssociationE
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "AssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21456,6 +21673,11 @@ func awsAwsjson11_deserializeDocumentAssociationExecution(v **types.AssociationE
 					return fmt.Errorf("expected StatusName to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
+				return err
 			}
 
 		default:
@@ -22516,6 +22738,11 @@ func awsAwsjson11_deserializeDocumentAutomationExecution(v **types.AutomationExe
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "AssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22780,6 +23007,11 @@ func awsAwsjson11_deserializeDocumentAutomationExecution(v **types.AutomationExe
 				return err
 			}
 
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22851,6 +23083,11 @@ func awsAwsjson11_deserializeDocumentAutomationExecutionMetadata(v **types.Autom
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "AssociationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23101,6 +23338,11 @@ func awsAwsjson11_deserializeDocumentAutomationExecutionMetadata(v **types.Autom
 
 		case "Targets":
 			if err := awsAwsjson11_deserializeDocumentTargets(&sv.Targets, value); err != nil {
+				return err
+			}
+
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
 				return err
 			}
 
@@ -23476,6 +23718,11 @@ func awsAwsjson11_deserializeDocumentCommand(v **types.Command, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CloudWatchOutputConfig":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchOutputConfig(&sv.CloudWatchOutputConfig, value); err != nil {
 				return err
@@ -23704,6 +23951,11 @@ func awsAwsjson11_deserializeDocumentCommand(v **types.Command, value interface{
 					return err
 				}
 				sv.TimeoutSeconds = int32(i64)
+			}
+
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
+				return err
 			}
 
 		default:
@@ -24578,6 +24830,11 @@ func awsAwsjson11_deserializeDocumentCreateAssociationBatchRequestEntry(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "ApplyOnlyAtCronInterval":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -30788,6 +31045,11 @@ func awsAwsjson11_deserializeDocumentMaintenanceWindowExecutionTaskIdentity(v **
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -30863,6 +31125,11 @@ func awsAwsjson11_deserializeDocumentMaintenanceWindowExecutionTaskIdentity(v **
 					return fmt.Errorf("expected MaintenanceWindowTaskType to be of type string, got %T instead", value)
 				}
 				sv.TaskType = types.MaintenanceWindowTaskType(jtv)
+			}
+
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
+				return err
 			}
 
 		case "WindowExecutionId":
@@ -31787,6 +32054,11 @@ func awsAwsjson11_deserializeDocumentMaintenanceWindowTask(v **types.Maintenance
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CutoffBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -43781,6 +44053,11 @@ func awsAwsjson11_deserializeOpDocumentGetMaintenanceWindowExecutionTaskOutput(v
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -43891,6 +44168,11 @@ func awsAwsjson11_deserializeOpDocumentGetMaintenanceWindowExecutionTaskOutput(v
 
 		case "TaskParameters":
 			if err := awsAwsjson11_deserializeDocumentMaintenanceWindowTaskParametersList(&sv.TaskParameters, value); err != nil {
+				return err
+			}
+
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
 				return err
 			}
 
@@ -44135,6 +44417,11 @@ func awsAwsjson11_deserializeOpDocumentGetMaintenanceWindowTaskOutput(v **GetMai
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CutoffBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46868,6 +47155,11 @@ func awsAwsjson11_deserializeOpDocumentUpdateMaintenanceWindowTaskOutput(v **Upd
 
 	for key, value := range shape {
 		switch key {
+		case "AlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.AlarmConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CutoffBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
