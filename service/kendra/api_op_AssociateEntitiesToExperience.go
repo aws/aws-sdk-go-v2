@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants users or groups in your Amazon Web Services SSO identity source access to
+// Grants users or groups in your IAM Identity Center identity source access to
 // your Amazon Kendra experience. You can create an Amazon Kendra experience such
 // as a search application. For more information on creating a search application
 // experience, see Building a search experience with no code
@@ -33,7 +33,7 @@ func (c *Client) AssociateEntitiesToExperience(ctx context.Context, params *Asso
 
 type AssociateEntitiesToExperienceInput struct {
 
-	// Lists users or groups in your Amazon Web Services SSO identity source.
+	// Lists users or groups in your IAM Identity Center identity source.
 	//
 	// This member is required.
 	EntityList []types.EntityConfiguration
@@ -53,7 +53,7 @@ type AssociateEntitiesToExperienceInput struct {
 
 type AssociateEntitiesToExperienceOutput struct {
 
-	// Lists the users or groups in your Amazon Web Services SSO identity source that
+	// Lists the users or groups in your IAM Identity Center identity source that
 	// failed to properly configure with your Amazon Kendra experience.
 	FailedEntityList []types.FailedEntity
 

@@ -1425,12 +1425,12 @@ type DocumentsMetadataConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for users or groups in your Amazon Web
-// Services SSO identity source to grant access your Amazon Kendra experience.
+// Provides the configuration information for users or groups in your IAM Identity
+// Center identity source to grant access your Amazon Kendra experience.
 type EntityConfiguration struct {
 
-	// The identifier of a user or group in your Amazon Web Services SSO identity
-	// source. For example, a user ID could be an email.
+	// The identifier of a user or group in your IAM Identity Center identity source.
+	// For example, a user ID could be an email.
 	//
 	// This member is required.
 	EntityId *string
@@ -1464,22 +1464,22 @@ type EntityDisplayData struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information for users or groups in your Amazon Web
-// Services SSO identity source for access to your Amazon Kendra experience.
-// Specific permissions are defined for each user or group once they are granted
-// access to your Amazon Kendra experience.
+// Provides the configuration information for users or groups in your IAM Identity
+// Center identity source for access to your Amazon Kendra experience. Specific
+// permissions are defined for each user or group once they are granted access to
+// your Amazon Kendra experience.
 type EntityPersonaConfiguration struct {
 
-	// The identifier of a user or group in your Amazon Web Services SSO identity
-	// source. For example, a user ID could be an email.
+	// The identifier of a user or group in your IAM Identity Center identity source.
+	// For example, a user ID could be an email.
 	//
 	// This member is required.
 	EntityId *string
 
 	// The persona that defines the specific permissions of the user or group in your
-	// Amazon Web Services SSO identity source. The available personas or access roles
-	// are Owner and Viewer. For more information on these personas, see Providing
-	// access to your search page
+	// IAM Identity Center identity source. The available personas or access roles are
+	// Owner and Viewer. For more information on these personas, see Providing access
+	// to your search page
 	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
 	//
 	// This member is required.
@@ -1498,8 +1498,8 @@ type ExperienceConfiguration struct {
 	// want to use for your Amazon Kendra experience.
 	ContentSourceConfiguration *ContentSourceConfiguration
 
-	// The Amazon Web Services SSO field name that contains the identifiers of your
-	// users, such as their emails.
+	// The IAM Identity Center field name that contains the identifiers of your users,
+	// such as their emails.
 	UserIdentityConfiguration *UserIdentityConfiguration
 
 	noSmithyDocumentSerde
@@ -1520,7 +1520,7 @@ type ExperienceEndpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information for users or groups in your Amazon Web Services SSO identity
+// Summary information for users or groups in your IAM Identity Center identity
 // source with granted access to your Amazon Kendra experience. You can create an
 // Amazon Kendra experience such as a search application. For more information on
 // creating a search application experience, see Building a search experience with
@@ -1531,8 +1531,8 @@ type ExperienceEntitiesSummary struct {
 	// Information about the user entity.
 	DisplayData *EntityDisplayData
 
-	// The identifier of a user or group in your Amazon Web Services SSO identity
-	// source. For example, a user ID could be an email.
+	// The identifier of a user or group in your IAM Identity Center identity source.
+	// For example, a user ID could be an email.
 	EntityId *string
 
 	// Shows the type as User or Group.
@@ -1614,16 +1614,16 @@ type FacetResult struct {
 	noSmithyDocumentSerde
 }
 
-// Information on the users or groups in your Amazon Web Services SSO identity
-// source that failed to properly configure with your Amazon Kendra experience.
+// Information on the users or groups in your IAM Identity Center identity source
+// that failed to properly configure with your Amazon Kendra experience.
 type FailedEntity struct {
 
-	// The identifier of the user or group in your Amazon Web Services SSO identity
-	// source. For example, a user ID could be an email.
+	// The identifier of the user or group in your IAM Identity Center identity source.
+	// For example, a user ID could be an email.
 	EntityId *string
 
-	// The reason the user or group in your Amazon Web Services SSO identity source
-	// failed to properly configure with your Amazon Kendra experience.
+	// The reason the user or group in your IAM Identity Center identity source failed
+	// to properly configure with your Amazon Kendra experience.
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
@@ -2467,7 +2467,7 @@ type OnPremiseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information for users or groups in your Amazon Web Services SSO identity
+// Summary information for users or groups in your IAM Identity Center identity
 // source. This applies to users and groups with specific permissions that define
 // their level of access to your Amazon Kendra experience. You can create an Amazon
 // Kendra experience such as a search application. For more information on creating
@@ -2478,14 +2478,14 @@ type PersonasSummary struct {
 	// The date-time the summary information was created.
 	CreatedAt *time.Time
 
-	// The identifier of a user or group in your Amazon Web Services SSO identity
-	// source. For example, a user ID could be an email.
+	// The identifier of a user or group in your IAM Identity Center identity source.
+	// For example, a user ID could be an email.
 	EntityId *string
 
 	// The persona that defines the specific permissions of the user or group in your
-	// Amazon Web Services SSO identity source. The available personas or access roles
-	// are Owner and Viewer. For more information on these personas, see Providing
-	// access to your search page
+	// IAM Identity Center identity source. The available personas or access roles are
+	// Owner and Viewer. For more information on these personas, see Providing access
+	// to your search page
 	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
 	Persona Persona
 
@@ -3697,12 +3697,9 @@ type Tag struct {
 // source.
 type TemplateConfiguration struct {
 
-	// The template schema used for the data source. The following links to the
-	// template schema for data sources where templates are supported:
-	//
-	// * Zendesk
-	// template schema
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-zendesk.html#zendesk-template-schema)
+	// The template schema used for the data source, where templates schemas are
+	// supported. See Data source template schemas
+	// (https://docs.aws.amazon.com/kendra/latest/dg/ds-schemas.html).
 	Template document.Interface
 
 	noSmithyDocumentSerde
@@ -3830,28 +3827,29 @@ type UserContext struct {
 }
 
 // Provides the configuration information to fetch access levels of groups and
-// users from an Amazon Web Services Single Sign On identity source. This is useful
-// for user context filtering, where search results are filtered based on the user
-// or their group access to documents. You can also use the PutPrincipalMapping
+// users from an IAM Identity Center (successor to Single Sign-On) identity source.
+// This is useful for user context filtering, where search results are filtered
+// based on the user or their group access to documents. You can also use the
+// PutPrincipalMapping
 // (https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html) API
 // to map users to their groups so that you only need to provide the user ID when
-// you issue the query. To set up an Amazon Web Services SSO identity source in the
-// console to use with Amazon Kendra, see Getting started with an Amazon Web
-// Services SSO identity source
+// you issue the query. To set up an IAM Identity Center identity source in the
+// console to use with Amazon Kendra, see Getting started with an IAM Identity
+// Center identity source
 // (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html). You
-// must also grant the required permissions to use Amazon Web Services SSO with
-// Amazon Kendra. For more information, see IAM roles for Amazon Web Services SSO
+// must also grant the required permissions to use IAM Identity Center with Amazon
+// Kendra. For more information, see IAM roles for IAM Identity Center
 // (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-aws-sso).
 // Amazon Kendra currently does not support using UserGroupResolutionConfiguration
-// with an Amazon Web Services organization member account for your Amazon Web
-// Services SSO identify source. You must create your index in the management
-// account for the organization in order to use UserGroupResolutionConfiguration.
+// with an Amazon Web Services organization member account for your IAM Identity
+// Center identify source. You must create your index in the management account for
+// the organization in order to use UserGroupResolutionConfiguration.
 type UserGroupResolutionConfiguration struct {
 
 	// The identity store provider (mode) you want to use to fetch access levels of
-	// groups and users. Amazon Web Services Single Sign On is currently the only
-	// available mode. Your users and groups must exist in an Amazon Web Services SSO
-	// identity source in order to use this mode.
+	// groups and users. IAM Identity Center (successor to Single Sign-On) is currently
+	// the only available mode. Your users and groups must exist in an IAM Identity
+	// Center identity source in order to use this mode.
 	//
 	// This member is required.
 	UserGroupResolutionMode UserGroupResolutionMode
@@ -3862,13 +3860,13 @@ type UserGroupResolutionConfiguration struct {
 // Provides the configuration information for the identifiers of your users.
 type UserIdentityConfiguration struct {
 
-	// The Amazon Web Services SSO field name that contains the identifiers of your
-	// users, such as their emails. This is used for user context filtering
+	// The IAM Identity Center field name that contains the identifiers of your users,
+	// such as their emails. This is used for user context filtering
 	// (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html) and for
-	// granting access to your Amazon Kendra experience. You must set up Amazon Web
-	// Services SSO with Amazon Kendra. You must include your users and groups in your
-	// Access Control List when you ingest documents into your index. For more
-	// information, see Getting started with an Amazon Web Services SSO identity source
+	// granting access to your Amazon Kendra experience. You must set up IAM Identity
+	// Center with Amazon Kendra. You must include your users and groups in your Access
+	// Control List when you ingest documents into your index. For more information,
+	// see Getting started with an IAM Identity Center identity source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/getting-started-aws-sso.html).
 	IdentityAttributeName *string
 

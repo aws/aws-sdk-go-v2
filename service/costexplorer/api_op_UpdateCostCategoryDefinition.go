@@ -51,6 +51,12 @@ type UpdateCostCategoryDefinitionInput struct {
 	// The default value for the cost category.
 	DefaultValue *string
 
+	// The Cost Category's effective start date. It can only be a billing start date
+	// (first day of the month). If the date isn't provided, it's the first day of the
+	// current month. Dates can't be before the previous twelve months, or in the
+	// future.
+	EffectiveStart *string
+
 	// The split charge rules used to allocate your charges between your Cost Category
 	// values.
 	SplitChargeRules []types.CostCategorySplitChargeRule
@@ -63,7 +69,8 @@ type UpdateCostCategoryDefinitionOutput struct {
 	// The unique identifier for your Cost Category.
 	CostCategoryArn *string
 
-	// The Cost Category's effective start date.
+	// The Cost Category's effective start date. It can only be a billing start date
+	// (first day of the month).
 	EffectiveStart *string
 
 	// Metadata pertaining to the operation's result.

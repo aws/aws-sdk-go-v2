@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Prevents users or groups in your Amazon Web Services SSO identity source from
+// Prevents users or groups in your IAM Identity Center identity source from
 // accessing your Amazon Kendra experience. You can create an Amazon Kendra
 // experience such as a search application. For more information on creating a
 // search application experience, see Building a search experience with no code
@@ -33,7 +33,7 @@ func (c *Client) DisassociateEntitiesFromExperience(ctx context.Context, params 
 
 type DisassociateEntitiesFromExperienceInput struct {
 
-	// Lists users or groups in your Amazon Web Services SSO identity source.
+	// Lists users or groups in your IAM Identity Center identity source.
 	//
 	// This member is required.
 	EntityList []types.EntityConfiguration
@@ -53,7 +53,7 @@ type DisassociateEntitiesFromExperienceInput struct {
 
 type DisassociateEntitiesFromExperienceOutput struct {
 
-	// Lists the users or groups in your Amazon Web Services SSO identity source that
+	// Lists the users or groups in your IAM Identity Center identity source that
 	// failed to properly remove access to your Amazon Kendra experience.
 	FailedEntityList []types.FailedEntity
 

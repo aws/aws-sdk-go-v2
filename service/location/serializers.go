@@ -2501,6 +2501,77 @@ func awsRestjson1_serializeOpHttpBindingsGetMapTileInput(v *GetMapTileInput, enc
 	return nil
 }
 
+type awsRestjson1_serializeOpGetPlace struct {
+}
+
+func (*awsRestjson1_serializeOpGetPlace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetPlace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPlaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/places/v0/indexes/{IndexName}/places/{PlaceId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetPlaceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetPlaceInput(v *GetPlaceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IndexName == nil || len(*v.IndexName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member IndexName must not be empty")}
+	}
+	if v.IndexName != nil {
+		if err := encoder.SetURI("IndexName").String(*v.IndexName); err != nil {
+			return err
+		}
+	}
+
+	if v.Language != nil {
+		encoder.SetQuery("language").String(*v.Language)
+	}
+
+	if v.PlaceId == nil || len(*v.PlaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PlaceId must not be empty")}
+	}
+	if v.PlaceId != nil {
+		if err := encoder.SetURI("PlaceId").String(*v.PlaceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListDevicePositions struct {
 }
 

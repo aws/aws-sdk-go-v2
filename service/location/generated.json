@@ -40,6 +40,7 @@
         "api_op_GetMapSprites.go",
         "api_op_GetMapStyleDescriptor.go",
         "api_op_GetMapTile.go",
+        "api_op_GetPlace.go",
         "api_op_ListDevicePositions.go",
         "api_op_ListGeofenceCollections.go",
         "api_op_ListGeofences.go",

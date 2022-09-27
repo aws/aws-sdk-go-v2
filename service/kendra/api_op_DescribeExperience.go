@@ -77,7 +77,7 @@ type DescribeExperienceOutput struct {
 	Name *string
 
 	// Shows the Amazon Resource Name (ARN) of a role with permission to access Query
-	// API, QuerySuggestions API, SubmitFeedback API, and Amazon Web Services SSO that
+	// API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that
 	// stores your user and group information.
 	RoleArn *string
 

@@ -31,7 +31,9 @@ func (c *Client) GetDimensionValues(ctx context.Context, params *GetDimensionVal
 type GetDimensionValuesInput struct {
 
 	// The name of the dimension. Each Dimension is available for a different Context.
-	// For more information, see Context.
+	// For more information, see Context. LINK_ACCOUNT_NAME and SERVICE_CODE can only
+	// be used in CostCategoryRule
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html).
 	//
 	// This member is required.
 	Dimension types.Dimension
@@ -327,45 +329,46 @@ type GetDimensionValuesOutput struct {
 	//
 	// * RESOURCE_ID - The unique identifier of the resource.
 	// ResourceId is an opt-in feature only available for last 14 days for EC2-Compute
-	// Service.
+	// Service. You can opt-in by enabling Hourly and Resource Level Data in Cost
+	// Management Console preferences.
 	//
-	// If you set the context to RESERVATIONS, you can use the following
-	// dimensions for searching:
+	// If you set the context to RESERVATIONS, you can
+	// use the following dimensions for searching:
 	//
-	// * AZ - The Availability Zone. An example is
-	// us-east-1a.
+	// * AZ - The Availability Zone. An
+	// example is us-east-1a.
 	//
-	// * CACHE_ENGINE - The Amazon ElastiCache operating system. Examples
-	// are Windows or Linux.
+	// * CACHE_ENGINE - The Amazon ElastiCache operating
+	// system. Examples are Windows or Linux.
 	//
-	// * DEPLOYMENT_OPTION - The scope of Amazon Relational
-	// Database Service deployments. Valid values are SingleAZ and MultiAZ.
+	// * DEPLOYMENT_OPTION - The scope of
+	// Amazon Relational Database Service deployments. Valid values are SingleAZ and
+	// MultiAZ.
 	//
-	// *
-	// INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.
+	// * INSTANCE_TYPE - The type of Amazon EC2 instance. An example is
+	// m4.xlarge.
 	//
-	// *
-	// LINKED_ACCOUNT - The description in the attribute map that includes the full
-	// name of the member account. The value field contains the Amazon Web Services ID
-	// of the member account.
+	// * LINKED_ACCOUNT - The description in the attribute map that
+	// includes the full name of the member account. The value field contains the
+	// Amazon Web Services ID of the member account.
 	//
-	// * PLATFORM - The Amazon EC2 operating system. Examples
-	// are Windows or Linux.
+	// * PLATFORM - The Amazon EC2
+	// operating system. Examples are Windows or Linux.
 	//
-	// * REGION - The Amazon Web Services Region.
+	// * REGION - The Amazon Web
+	// Services Region.
 	//
-	// * SCOPE
-	// (Utilization only) - The scope of a Reserved Instance (RI). Values are regional
-	// or a single Availability Zone.
+	// * SCOPE (Utilization only) - The scope of a Reserved Instance
+	// (RI). Values are regional or a single Availability Zone.
 	//
-	// * TAG (Coverage only) - The tags that are
-	// associated with a Reserved Instance (RI).
+	// * TAG (Coverage only)
+	// - The tags that are associated with a Reserved Instance (RI).
 	//
-	// * TENANCY - The tenancy of a
-	// resource. Examples are shared or dedicated.
+	// * TENANCY - The
+	// tenancy of a resource. Examples are shared or dedicated.
 	//
-	// If you set the context to
-	// SAVINGS_PLANS, you can use the following dimensions for searching:
+	// If you set the context
+	// to SAVINGS_PLANS, you can use the following dimensions for searching:
 	//
 	// *
 	// SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)

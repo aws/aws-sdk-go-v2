@@ -1,0 +1,8 @@
+{
+    "id": "f6010421-58be-4ccd-af9d-744982fd947d",
+    "type": "feature",
+    "description": "This release is to support retroactive Cost Categories. The new field will enable you to retroactively apply new and existing cost category rules to previous months.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

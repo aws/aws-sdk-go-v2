@@ -2760,6 +2760,11 @@ func awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(v *Create
 		ok.String(*v.DefaultValue)
 	}
 
+	if v.EffectiveStart != nil {
+		ok := object.Key("EffectiveStart")
+		ok.String(*v.EffectiveStart)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -3860,6 +3865,11 @@ func awsAwsjson11_serializeOpDocumentUpdateCostCategoryDefinitionInput(v *Update
 	if v.DefaultValue != nil {
 		ok := object.Key("DefaultValue")
 		ok.String(*v.DefaultValue)
+	}
+
+	if v.EffectiveStart != nil {
+		ok := object.Key("EffectiveStart")
+		ok.String(*v.EffectiveStart)
 	}
 
 	if v.Rules != nil {

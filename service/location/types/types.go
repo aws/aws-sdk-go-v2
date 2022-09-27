@@ -960,6 +960,14 @@ type Place struct {
 	// the selected partner.
 	TimeZone *TimeZone
 
+	// For addresses with multiple units, the unit identifier. Can include numbers and
+	// letters, for example 3B or Unit 123. Returned only for a place index that uses
+	// Esri as a data provider. Is not returned for SearchPlaceIndexForPosition.
+	UnitNumber *string
+
+	// For addresses with a UnitNumber, the type of unit. For example, Apartment.
+	UnitType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1059,6 +1067,11 @@ type SearchForPositionResult struct {
 	// This member is required.
 	Place *Place
 
+	// The unique identifier of the place. You can use this with the GetPlace operation
+	// to find the place again later. For SearchPlaceIndexForPosition operations, the
+	// PlaceId is returned only by place indexes that use HERE as a data provider.
+	PlaceId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1070,6 +1083,12 @@ type SearchForSuggestionsResult struct {
 	//
 	// This member is required.
 	Text *string
+
+	// The unique identifier of the place. You can use this with the GetPlace operation
+	// to find the place again later. For SearchPlaceIndexForSuggestions operations,
+	// the PlaceId is returned by place indexes that use HERE or Esri as data
+	// providers.
+	PlaceId *string
 
 	noSmithyDocumentSerde
 }
@@ -1088,6 +1107,11 @@ type SearchForTextResult struct {
 	// in the query. A great-circle arc is the shortest path on a sphere, in this case
 	// the Earth. This returns the shortest distance between two locations.
 	Distance *float64
+
+	// The unique identifier of the place. You can use this with the GetPlace operation
+	// to find the place again later. For SearchPlaceIndexForText operations, the
+	// PlaceId is returned only by place indexes that use HERE as a data provider.
+	PlaceId *string
 
 	// The relative confidence in the match for a result among the results returned.
 	// For example, if more fields for an address match (including house number,

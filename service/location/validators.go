@@ -650,6 +650,26 @@ func (m *validateOpGetMapTile) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPlace struct {
+}
+
+func (*validateOpGetPlace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPlace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPlaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPlaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDevicePositions struct {
 }
 
@@ -1076,6 +1096,10 @@ func addOpGetMapStyleDescriptorValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetMapTileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMapTile{}, middleware.After)
+}
+
+func addOpGetPlaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPlace{}, middleware.After)
 }
 
 func addOpListDevicePositionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1845,6 +1869,24 @@ func validateOpGetMapTileInput(v *GetMapTileInput) error {
 	}
 	if v.Y == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Y"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPlaceInput(v *GetPlaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPlaceInput"}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.PlaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

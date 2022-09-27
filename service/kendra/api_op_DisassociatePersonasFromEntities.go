@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specific permissions of users or groups in your Amazon Web Services
-// SSO identity source with access to your Amazon Kendra experience. You can create
-// an Amazon Kendra experience such as a search application. For more information
-// on creating a search application experience, see Building a search experience
-// with no code
+// Removes the specific permissions of users or groups in your IAM Identity Center
+// identity source with access to your Amazon Kendra experience. You can create an
+// Amazon Kendra experience such as a search application. For more information on
+// creating a search application experience, see Building a search experience with
+// no code
 // (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
 func (c *Client) DisassociatePersonasFromEntities(ctx context.Context, params *DisassociatePersonasFromEntitiesInput, optFns ...func(*Options)) (*DisassociatePersonasFromEntitiesOutput, error) {
 	if params == nil {
@@ -34,8 +34,8 @@ func (c *Client) DisassociatePersonasFromEntities(ctx context.Context, params *D
 
 type DisassociatePersonasFromEntitiesInput struct {
 
-	// The identifiers of users or groups in your Amazon Web Services SSO identity
-	// source. For example, user IDs could be user emails.
+	// The identifiers of users or groups in your IAM Identity Center identity source.
+	// For example, user IDs could be user emails.
 	//
 	// This member is required.
 	EntityIds []string
@@ -55,7 +55,7 @@ type DisassociatePersonasFromEntitiesInput struct {
 
 type DisassociatePersonasFromEntitiesOutput struct {
 
-	// Lists the users or groups in your Amazon Web Services SSO identity source that
+	// Lists the users or groups in your IAM Identity Center identity source that
 	// failed to properly remove access to your Amazon Kendra experience.
 	FailedEntityList []types.FailedEntity
 

@@ -39,12 +39,12 @@ type GetMapSpritesInput struct {
 	// * sprites@2x.png for high pixel density displays
 	//
 	// For the JSON
-	// document contain image offsets. Use the following ﬁle names:
-	//
-	// * sprites.json
+	// document containing image offsets. Use the following ﬁle names:
 	//
 	// *
-	// sprites@2x.json for high pixel density displays
+	// sprites.json
+	//
+	// * sprites@2x.json for high pixel density displays
 	//
 	// This member is required.
 	FileName *string

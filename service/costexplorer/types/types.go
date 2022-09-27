@@ -241,7 +241,7 @@ type CostCategory struct {
 	// This member is required.
 	CostCategoryArn *string
 
-	// The effective state data of your Cost Category.
+	// The effective start date of your Cost Category.
 	//
 	// This member is required.
 	EffectiveStart *string
@@ -266,7 +266,7 @@ type CostCategory struct {
 	// The default value for the cost category.
 	DefaultValue *string
 
-	// The effective end data of your Cost Category.
+	// The effective end date of your Cost Category.
 	EffectiveEnd *string
 
 	// The list of processing statuses for Cost Management products for a specific cost
@@ -609,7 +609,9 @@ type DateInterval struct {
 type DimensionValues struct {
 
 	// The names of the metadata types that you can use to filter and group your
-	// results. For example, AZ returns a list of Availability Zones.
+	// results. For example, AZ returns a list of Availability Zones. LINK_ACCOUNT_NAME
+	// and SERVICE_CODE can only be used in CostCategoryRule
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html).
 	Key Dimension
 
 	// The match options that you can use to filter your results. MatchOptions is only
@@ -1861,7 +1863,7 @@ type Subscriber struct {
 
 // The values that are available for a tag. If Values and Key aren't specified, the
 // ABSENTMatchOption is applied to all tags. That is, it's filtered on resources
-// with no tags. If Values is provided and Key isn't specified, the
+// with no tags. If Key is provided and Values isn't specified, the
 // ABSENTMatchOption is applied to the tag Key only. That is, it's filtered on
 // resources without the given tag key.
 type TagValues struct {

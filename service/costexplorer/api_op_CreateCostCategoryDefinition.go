@@ -49,6 +49,12 @@ type CreateCostCategoryDefinitionInput struct {
 	// The default value for the cost category.
 	DefaultValue *string
 
+	// The Cost Category's effective start date. It can only be a billing start date
+	// (first day of the month). If the date isn't provided, it's the first day of the
+	// current month. Dates can't be before the previous twelve months, or in the
+	// future.
+	EffectiveStart *string
+
 	// An optional list of tags to associate with the specified CostCategory
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html).
 	// You can use resource tags to control access to your cost category using IAM
@@ -90,7 +96,8 @@ type CreateCostCategoryDefinitionOutput struct {
 	// The unique identifier for your newly created Cost Category.
 	CostCategoryArn *string
 
-	// The Cost Category's effective start date.
+	// The Cost Category's effective start date. It can only be a billing start date
+	// (first day of the month).
 	EffectiveStart *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines the specific permissions of users or groups in your Amazon Web Services
-// SSO identity source with access to your Amazon Kendra experience. You can create
-// an Amazon Kendra experience such as a search application. For more information
-// on creating a search application experience, see Building a search experience
-// with no code
+// Defines the specific permissions of users or groups in your IAM Identity Center
+// identity source with access to your Amazon Kendra experience. You can create an
+// Amazon Kendra experience such as a search application. For more information on
+// creating a search application experience, see Building a search experience with
+// no code
 // (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html).
 func (c *Client) AssociatePersonasToEntities(ctx context.Context, params *AssociatePersonasToEntitiesInput, optFns ...func(*Options)) (*AssociatePersonasToEntitiesOutput, error) {
 	if params == nil {
@@ -44,10 +44,10 @@ type AssociatePersonasToEntitiesInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The personas that define the specific permissions of users or groups in your
-	// Amazon Web Services SSO identity source. The available personas or access roles
-	// are Owner and Viewer. For more information on these personas, see Providing
-	// access to your search page
+	// The personas that define the specific permissions of users or groups in your IAM
+	// Identity Center identity source. The available personas or access roles are
+	// Owner and Viewer. For more information on these personas, see Providing access
+	// to your search page
 	// (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html#access-search-experience).
 	//
 	// This member is required.
@@ -58,7 +58,7 @@ type AssociatePersonasToEntitiesInput struct {
 
 type AssociatePersonasToEntitiesOutput struct {
 
-	// Lists the users or groups in your Amazon Web Services SSO identity source that
+	// Lists the users or groups in your IAM Identity Center identity source that
 	// failed to properly configure with your Amazon Kendra experience.
 	FailedEntityList []types.FailedEntity
 
