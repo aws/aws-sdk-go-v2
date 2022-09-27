@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.location#AccessDeniedException": {
             "type": "structure",
@@ -1553,7 +1553,7 @@
                     }
                 },
                 "MapArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across\n            all AWS.</p>\n        <ul>\n            <li>\n                <p>Format example:\n                    <code>arn:aws:geo:region:account-id:maps/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -2371,7 +2371,7 @@
                     }
                 },
                 "MapArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across\n            all AWS.</p>\n        <ul>\n            <li>\n                <p>Format example:\n                    <code>arn:aws:geo:region:account-id:maps/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -3003,7 +3003,18 @@
                 }
             ],
             "traits": {
+                "aws.api#controlPlane": {},
                 "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.location#GeoArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {},
+                "smithy.api#length": {
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$"
             }
         },
         "com.amazonaws.location#GeofenceCollectionResource": {
@@ -3527,7 +3538,7 @@
                 "FileName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>sprites.png</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sprites@2x.png</code> for high pixel density displays</p>\n            </li>\n         </ul>\n        <p>For the JSON document contain image offsets. Use the following ﬁle names:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>sprites.json</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sprites@2x.json</code> for high pixel density displays</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>sprites.png</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sprites@2x.png</code> for high pixel density displays</p>\n            </li>\n         </ul>\n        <p>For the JSON document containing image offsets. Use the following ﬁle names:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>sprites.json</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sprites@2x.json</code> for high pixel density displays</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#pattern": "^sprites(@2x)?\\.(png|json)$",
                         "smithy.api#required": {}
@@ -3718,6 +3729,83 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The map tile's content type. For example,\n                <code>application/vnd.mapbox-vector-tile</code>.</p>",
                         "smithy.api#httpHeader": "Content-Type"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#GetPlace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.location#GetPlaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.location#GetPlaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.location#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.location#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.location#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Finds a place by its unique ID. A <code>PlaceId</code> is returned by other search\n            operations.</p>\n        <note>\n            <p>A PlaceId is valid only if all of the following are the same in the original\n                search request and the call to <code>GetPlace</code>.</p>\n            <ul>\n               <li>\n                    <p>Customer AWS account</p>\n                </li>\n               <li>\n                    <p>AWS Region</p>\n                </li>\n               <li>\n                    <p>Data provider specified in the place index resource</p>\n                </li>\n            </ul>\n        </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "places."
+                },
+                "smithy.api#http": {
+                    "uri": "/places/v0/indexes/{IndexName}/places/{PlaceId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.location#GetPlaceRequest": {
+            "type": "structure",
+            "members": {
+                "IndexName": {
+                    "target": "com.amazonaws.location#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the place index resource that you want to use for the search.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PlaceId": {
+                    "target": "com.amazonaws.location#PlaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the place to find.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Language": {
+                    "target": "com.amazonaws.location#LanguageTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preferred language used to return results. The value must be a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a> language tag, for example,\n                <code>en</code> for English.</p>\n        <p>This setting affects the languages used in the results, but not the results\n            themselves. If no language is specified, or not supported for a particular result, the\n            partner automatically chooses a language for the result.</p>\n        <p>For an example, we'll use the Greek language. You search for a location around Athens,\n            Greece, with the <code>language</code> parameter set to <code>en</code>. The\n                <code>city</code> in the results will most likely be returned as\n            <code>Athens</code>.</p>\n        <p>If you set the <code>language</code> parameter to <code>el</code>, for Greek, then the\n                <code>city</code> in the results will more likely be returned as\n            <code>Αθήνα</code>.</p>\n        <p>If the data provider does not have a value for Greek, the result will be in a language\n            that the provider does support.</p>",
+                        "smithy.api#httpQuery": "language"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.location#GetPlaceResponse": {
+            "type": "structure",
+            "members": {
+                "Place": {
+                    "target": "com.amazonaws.location#Place",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the result, such as its address and position.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -5025,18 +5113,6 @@
         },
         "com.amazonaws.location#LocationService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Location",
-                    "arnNamespace": "geo"
-                },
-                "aws.auth#sigv4": {
-                    "name": "geo"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>\"Suite of geospatial services including Maps, Places, Routes, Tracking, and Geofencing\"</p>",
-                "smithy.api#title": "Amazon Location Service"
-            },
             "version": "2020-11-19",
             "resources": [
                 {
@@ -5057,7 +5133,19 @@
                 {
                     "target": "com.amazonaws.location#TrackerResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Location",
+                    "arnNamespace": "geo"
+                },
+                "aws.auth#sigv4": {
+                    "name": "geo"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>\"Suite of geospatial services including Maps, Places, Routes, Tracking, and Geofencing\"</p>",
+                "smithy.api#title": "Amazon Location Service"
+            }
         },
         "com.amazonaws.location#MapConfiguration": {
             "type": "structure",
@@ -5201,10 +5289,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time zone in which the <code>Place</code> is located. Returned only when using\n            Here as the selected partner.</p>"
                     }
+                },
+                "UnitType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For addresses with a <code>UnitNumber</code>, the type of unit. For example,\n                <code>Apartment</code>.</p>"
+                    }
+                },
+                "UnitNumber": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For addresses with multiple units, the unit identifier. Can include numbers and\n            letters, for example <code>3B</code> or <code>Unit 123</code>.</p>\n        <note>\n            <p>Returned only for a place index that uses Esri as a data provider. Is not returned\n                for <code>SearchPlaceIndexForPosition</code>.</p>\n        </note>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about addresses or points of interest that match the search\n            criteria.</p>\n        <p>Not all details are included with all responses. Some details may only be returned \n            by specific data partners.</p>"
+                "smithy.api#documentation": "<p>Contains details about addresses or points of interest that match the search\n            criteria.</p>\n        <p>Not all details are included with all responses. Some details may only be returned by\n            specific data partners.</p>"
             }
         },
         "com.amazonaws.location#PlaceGeometry": {
@@ -5220,6 +5320,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Places uses a point geometry to specify a location or a Place.</p>"
             }
+        },
+        "com.amazonaws.location#PlaceId": {
+            "type": "string"
         },
         "com.amazonaws.location#PlaceIndexResource": {
             "type": "resource",
@@ -5245,6 +5348,9 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.location#GetPlace"
+                },
+                {
                     "target": "com.amazonaws.location#SearchPlaceIndexForPosition"
                 },
                 {
@@ -5264,6 +5370,7 @@
         "com.amazonaws.location#PlaceIndexSearchResultLimit": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -5652,6 +5759,12 @@
                         },
                         "smithy.api#required": {}
                     }
+                },
+                "PlaceId": {
+                    "target": "com.amazonaws.location#PlaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the place. You can use this with the <code>GetPlace</code>\n            operation to find the place again later.</p>\n        <note>\n            <p>For <code>SearchPlaceIndexForPosition</code> operations, the <code>PlaceId</code>\n                is returned only by place indexes that use HERE as a data provider.</p>\n        </note>"
+                    }
                 }
             },
             "traits": {
@@ -5672,6 +5785,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The text of the place suggestion, typically formatted as an address string.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PlaceId": {
+                    "target": "com.amazonaws.location#PlaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the place. You can use this with the <code>GetPlace</code>\n            operation to find the place again later.</p>\n        <note>\n            <p>For <code>SearchPlaceIndexForSuggestions</code> operations, the\n                    <code>PlaceId</code> is\n                returned\n                by place indexes that use HERE or Esri as data providers.</p>\n        </note>"
                     }
                 }
             },
@@ -5712,6 +5831,12 @@
                             "min": 0,
                             "max": 1
                         }
+                    }
+                },
+                "PlaceId": {
+                    "target": "com.amazonaws.location#PlaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the place. You can use this with the <code>GetPlace</code>\n            operation to find the place again later.</p>\n        <note>\n            <p>For <code>SearchPlaceIndexForText</code> operations, the <code>PlaceId</code> is\n                returned only by place indexes that use HERE as a data provider.</p>\n        </note>"
                     }
                 }
             },
@@ -5783,6 +5908,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>An optional parameter. The maximum number of results returned per request.</p>\n        <p>Default value: <code>50</code>\n         </p>"
                     }
                 },
@@ -5826,6 +5952,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Contains the optional result count limit that is specified in the request.</p>\n        <p>Default value: <code>50</code>\n         </p>"
                     }
                 },
@@ -6093,6 +6220,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>An optional parameter. The maximum number of results returned per request. </p>\n        <p>The default: <code>50</code>\n         </p>"
                     }
                 },
@@ -6117,7 +6245,7 @@
                 "Results": {
                     "target": "com.amazonaws.location#SearchForTextResultList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Places matching the input text. Each result contains additional information\n            about the specific point of interest. </p>\n        <p>Not all response properties are included with all responses. Some properties may \n            only be returned by specific data partners.</p>",
+                        "smithy.api#documentation": "<p>A list of Places matching the input text. Each result contains additional information\n            about the specific point of interest. </p>\n        <p>Not all response properties are included with all responses. Some properties may only\n            be returned by specific data partners.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6154,6 +6282,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.location#PlaceIndexSearchResultLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Contains the optional result count limit specified in the request.</p>"
                     }
                 },
@@ -6804,7 +6933,7 @@
                     }
                 },
                 "MapArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated map resource. Used to specify a resource\n            across AWS.</p>\n        <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:maps/ExampleMap</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}

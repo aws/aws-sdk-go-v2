@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.costexplorer#AWSInsightsIndexService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Cost Explorer",
-                    "arnNamespace": "ce",
-                    "cloudFormationName": "CostExplorer",
-                    "cloudTrailEventSource": "costexplorer.amazonaws.com",
-                    "endpointPrefix": "ce"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ce"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>You can use the Cost Explorer API to programmatically query your cost and usage data. You\n      can query for aggregated data such as total monthly costs or total daily usage. You can also\n      query for granular data. This might include the number of daily write operations for Amazon\n      DynamoDB database tables in your production environment. </p>\n\t\t       <p>Service Endpoint</p>\n\t\t       <p>The Cost Explorer API provides the following endpoint:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>https://ce.us-east-1.amazonaws.com</code>\n               </p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>For information about the costs that are associated with the Cost Explorer API, see\n        <a href=\"http://aws.amazon.com/aws-cost-management/pricing/\">Amazon Web Services Cost\n        Management Pricing</a>.</p>",
-                "smithy.api#title": "AWS Cost Explorer Service"
-            },
             "version": "2017-10-25",
             "operations": [
                 {
@@ -153,21 +138,38 @@
                 {
                     "target": "com.amazonaws.costexplorer#UpdateCostCategoryDefinition"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Cost Explorer",
+                    "arnNamespace": "ce",
+                    "cloudFormationName": "CostExplorer",
+                    "cloudTrailEventSource": "costexplorer.amazonaws.com",
+                    "endpointPrefix": "ce"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ce"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>You can use the Cost Explorer API to programmatically query your cost and usage data. You\n      can query for aggregated data such as total monthly costs or total daily usage. You can also\n      query for granular data. This might include the number of daily write operations for Amazon\n      DynamoDB database tables in your production environment. </p>\n\t\t       <p>Service Endpoint</p>\n\t\t       <p>The Cost Explorer API provides the following endpoint:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>https://ce.us-east-1.amazonaws.com</code>\n               </p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>For information about the costs that are associated with the Cost Explorer API, see\n        <a href=\"http://aws.amazon.com/aws-cost-management/pricing/\">Amazon Web Services Cost\n        Management Pricing</a>.</p>",
+                "smithy.api#title": "AWS Cost Explorer Service"
+            }
         },
         "com.amazonaws.costexplorer#AccountScope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PAYER",
-                        "name": "PAYER"
-                    },
-                    {
-                        "value": "LINKED",
-                        "name": "LINKED"
+            "type": "enum",
+            "members": {
+                "PAYER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYER"
                     }
-                ]
+                },
+                "LINKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#AmortizedRecurringFee": {
@@ -270,22 +272,26 @@
             }
         },
         "com.amazonaws.costexplorer#AnomalyFeedbackType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "YES",
-                        "name": "YES"
-                    },
-                    {
-                        "value": "NO",
-                        "name": "NO"
-                    },
-                    {
-                        "value": "PLANNED_ACTIVITY",
-                        "name": "PLANNED_ACTIVITY"
+            "type": "enum",
+            "members": {
+                "YES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YES"
                     }
-                ]
+                },
+                "NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO"
+                    }
+                },
+                "PLANNED_ACTIVITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLANNED_ACTIVITY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#AnomalyMonitor": {
@@ -341,6 +347,7 @@
                 "DimensionalValueCount": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for evaluated dimensions. </p>"
                     }
                 }
@@ -361,6 +368,7 @@
                 "MaxScore": {
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum score that's observed during the <code>AnomalyDateInterval</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -368,6 +376,7 @@
                 "CurrentScore": {
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The last observed score. </p>",
                         "smithy.api#required": {}
                     }
@@ -433,22 +442,26 @@
             }
         },
         "com.amazonaws.costexplorer#AnomalySubscriptionFrequency": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAILY",
-                        "name": "DAILY"
-                    },
-                    {
-                        "value": "IMMEDIATE",
-                        "name": "IMMEDIATE"
-                    },
-                    {
-                        "value": "WEEKLY",
-                        "name": "WEEKLY"
+            "type": "enum",
+            "members": {
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
                     }
-                ]
+                },
+                "IMMEDIATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMMEDIATE"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#AnomalySubscriptions": {
@@ -495,22 +508,26 @@
             }
         },
         "com.amazonaws.costexplorer#Context": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COST_AND_USAGE",
-                        "name": "COST_AND_USAGE"
-                    },
-                    {
-                        "value": "RESERVATIONS",
-                        "name": "RESERVATIONS"
-                    },
-                    {
-                        "value": "SAVINGS_PLANS",
-                        "name": "SAVINGS_PLANS"
+            "type": "enum",
+            "members": {
+                "COST_AND_USAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_AND_USAGE"
                     }
-                ]
+                },
+                "RESERVATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVATIONS"
+                    }
+                },
+                "SAVINGS_PLANS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS_PLANS"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTag": {
@@ -567,18 +584,20 @@
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTagStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "Inactive",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTagStatusEntry": {
@@ -616,23 +635,26 @@
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTagType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AWSGenerated",
-                        "name": "AWS_GENERATED"
-                    },
-                    {
-                        "value": "UserDefined",
-                        "name": "USER_DEFINED"
+            "type": "enum",
+            "members": {
+                "AWS_GENERATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSGenerated"
                     }
-                ]
+                },
+                "USER_DEFINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UserDefined"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTagsMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -652,14 +674,14 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective state data of your Cost Category.</p>",
+                        "smithy.api#documentation": "<p>The effective start date of your Cost Category.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EffectiveEnd": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effective end data of your Cost Category.</p>"
+                        "smithy.api#documentation": "<p>The effective end date of your Cost Category.</p>"
                     }
                 },
                 "Name": {
@@ -722,23 +744,26 @@
             }
         },
         "com.amazonaws.costexplorer#CostCategoryInheritedValueDimensionName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LINKED_ACCOUNT_NAME",
-                        "name": "LINKED_ACCOUNT_NAME"
-                    },
-                    {
-                        "value": "TAG",
-                        "name": "TAG"
+            "type": "enum",
+            "members": {
+                "LINKED_ACCOUNT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT_NAME"
                     }
-                ]
+                },
+                "TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostCategoryMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -815,6 +840,7 @@
                 "NumberOfRules": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of rules that are associated with a specific Cost Category. </p>"
                     }
                 },
@@ -874,30 +900,34 @@
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRuleType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REGULAR",
-                        "name": "REGULAR"
-                    },
-                    {
-                        "value": "INHERITED_VALUE",
-                        "name": "INHERITED_VALUE"
+            "type": "enum",
+            "members": {
+                "REGULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGULAR"
                     }
-                ]
+                },
+                "INHERITED_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERITED_VALUE"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRuleVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The rule schema version in this particular Cost Category.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "CostCategoryExpression.v1",
-                        "name": "CostCategoryExpressionV1"
+            "type": "enum",
+            "members": {
+                "CostCategoryExpressionV1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CostCategoryExpression.v1"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rule schema version in this particular Cost Category.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRulesList": {
@@ -913,22 +943,26 @@
             }
         },
         "com.amazonaws.costexplorer#CostCategorySplitChargeMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIXED",
-                        "name": "FIXED"
-                    },
-                    {
-                        "value": "PROPORTIONAL",
-                        "name": "PROPORTIONAL"
-                    },
-                    {
-                        "value": "EVEN",
-                        "name": "EVEN"
+            "type": "enum",
+            "members": {
+                "FIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIXED"
                     }
-                ]
+                },
+                "PROPORTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROPORTIONAL"
+                    }
+                },
+                "EVEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVEN"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostCategorySplitChargeRule": {
@@ -989,14 +1023,14 @@
             }
         },
         "com.amazonaws.costexplorer#CostCategorySplitChargeRuleParameterType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOCATION_PERCENTAGES",
-                        "name": "ALLOCATION_PERCENTAGES"
+            "type": "enum",
+            "members": {
+                "ALLOCATION_PERCENTAGES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOCATION_PERCENTAGES"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.costexplorer#CostCategorySplitChargeRuleParameterValuesList": {
@@ -1048,29 +1082,31 @@
             }
         },
         "com.amazonaws.costexplorer#CostCategoryStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROCESSING",
-                        "name": "PROCESSING"
-                    },
-                    {
-                        "value": "APPLIED",
-                        "name": "APPLIED"
+            "type": "enum",
+            "members": {
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
                     }
-                ]
+                },
+                "APPLIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLIED"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostCategoryStatusComponent": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COST_EXPLORER",
-                        "name": "COST_EXPLORER"
+            "type": "enum",
+            "members": {
+                "COST_EXPLORER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_EXPLORER"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.costexplorer#CostCategoryValue": {
@@ -1381,6 +1417,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EffectiveStart": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
+                    }
+                },
                 "RuleVersion": {
                     "target": "com.amazonaws.costexplorer#CostCategoryRuleVersion",
                     "traits": {
@@ -1423,7 +1465,7 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. </p>"
+                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
             }
@@ -1704,138 +1746,200 @@
             }
         },
         "com.amazonaws.costexplorer#Dimension": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AZ",
-                        "name": "AZ"
-                    },
-                    {
-                        "value": "INSTANCE_TYPE",
-                        "name": "INSTANCE_TYPE"
-                    },
-                    {
-                        "value": "LINKED_ACCOUNT",
-                        "name": "LINKED_ACCOUNT"
-                    },
-                    {
-                        "value": "LINKED_ACCOUNT_NAME",
-                        "name": "LINKED_ACCOUNT_NAME"
-                    },
-                    {
-                        "value": "OPERATION",
-                        "name": "OPERATION"
-                    },
-                    {
-                        "value": "PURCHASE_TYPE",
-                        "name": "PURCHASE_TYPE"
-                    },
-                    {
-                        "value": "REGION",
-                        "name": "REGION"
-                    },
-                    {
-                        "value": "SERVICE",
-                        "name": "SERVICE"
-                    },
-                    {
-                        "value": "SERVICE_CODE",
-                        "name": "SERVICE_CODE"
-                    },
-                    {
-                        "value": "USAGE_TYPE",
-                        "name": "USAGE_TYPE"
-                    },
-                    {
-                        "value": "USAGE_TYPE_GROUP",
-                        "name": "USAGE_TYPE_GROUP"
-                    },
-                    {
-                        "value": "RECORD_TYPE",
-                        "name": "RECORD_TYPE"
-                    },
-                    {
-                        "value": "OPERATING_SYSTEM",
-                        "name": "OPERATING_SYSTEM"
-                    },
-                    {
-                        "value": "TENANCY",
-                        "name": "TENANCY"
-                    },
-                    {
-                        "value": "SCOPE",
-                        "name": "SCOPE"
-                    },
-                    {
-                        "value": "PLATFORM",
-                        "name": "PLATFORM"
-                    },
-                    {
-                        "value": "SUBSCRIPTION_ID",
-                        "name": "SUBSCRIPTION_ID"
-                    },
-                    {
-                        "value": "LEGAL_ENTITY_NAME",
-                        "name": "LEGAL_ENTITY_NAME"
-                    },
-                    {
-                        "value": "DEPLOYMENT_OPTION",
-                        "name": "DEPLOYMENT_OPTION"
-                    },
-                    {
-                        "value": "DATABASE_ENGINE",
-                        "name": "DATABASE_ENGINE"
-                    },
-                    {
-                        "value": "CACHE_ENGINE",
-                        "name": "CACHE_ENGINE"
-                    },
-                    {
-                        "value": "INSTANCE_TYPE_FAMILY",
-                        "name": "INSTANCE_TYPE_FAMILY"
-                    },
-                    {
-                        "value": "BILLING_ENTITY",
-                        "name": "BILLING_ENTITY"
-                    },
-                    {
-                        "value": "RESERVATION_ID",
-                        "name": "RESERVATION_ID"
-                    },
-                    {
-                        "value": "RESOURCE_ID",
-                        "name": "RESOURCE_ID"
-                    },
-                    {
-                        "value": "RIGHTSIZING_TYPE",
-                        "name": "RIGHTSIZING_TYPE"
-                    },
-                    {
-                        "value": "SAVINGS_PLANS_TYPE",
-                        "name": "SAVINGS_PLANS_TYPE"
-                    },
-                    {
-                        "value": "SAVINGS_PLAN_ARN",
-                        "name": "SAVINGS_PLAN_ARN"
-                    },
-                    {
-                        "value": "PAYMENT_OPTION",
-                        "name": "PAYMENT_OPTION"
-                    },
-                    {
-                        "value": "AGREEMENT_END_DATE_TIME_AFTER",
-                        "name": "AGREEMENT_END_DATE_TIME_AFTER"
-                    },
-                    {
-                        "value": "AGREEMENT_END_DATE_TIME_BEFORE",
-                        "name": "AGREEMENT_END_DATE_TIME_BEFORE"
-                    },
-                    {
-                        "value": "INVOICING_ENTITY",
-                        "name": "INVOICING_ENTITY"
+            "type": "enum",
+            "members": {
+                "AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ"
                     }
-                ]
+                },
+                "INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_TYPE"
+                    }
+                },
+                "LINKED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT"
+                    }
+                },
+                "LINKED_ACCOUNT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED_ACCOUNT_NAME"
+                    }
+                },
+                "OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATION"
+                    }
+                },
+                "PURCHASE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PURCHASE_TYPE"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGION"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "SERVICE_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_CODE"
+                    }
+                },
+                "USAGE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_TYPE"
+                    }
+                },
+                "USAGE_TYPE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_TYPE_GROUP"
+                    }
+                },
+                "RECORD_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECORD_TYPE"
+                    }
+                },
+                "OPERATING_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATING_SYSTEM"
+                    }
+                },
+                "TENANCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANCY"
+                    }
+                },
+                "SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCOPE"
+                    }
+                },
+                "PLATFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLATFORM"
+                    }
+                },
+                "SUBSCRIPTION_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBSCRIPTION_ID"
+                    }
+                },
+                "LEGAL_ENTITY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEGAL_ENTITY_NAME"
+                    }
+                },
+                "DEPLOYMENT_OPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYMENT_OPTION"
+                    }
+                },
+                "DATABASE_ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABASE_ENGINE"
+                    }
+                },
+                "CACHE_ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CACHE_ENGINE"
+                    }
+                },
+                "INSTANCE_TYPE_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_TYPE_FAMILY"
+                    }
+                },
+                "BILLING_ENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BILLING_ENTITY"
+                    }
+                },
+                "RESERVATION_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESERVATION_ID"
+                    }
+                },
+                "RESOURCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ID"
+                    }
+                },
+                "RIGHTSIZING_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIGHTSIZING_TYPE"
+                    }
+                },
+                "SAVINGS_PLANS_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS_PLANS_TYPE"
+                    }
+                },
+                "SAVINGS_PLAN_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS_PLAN_ARN"
+                    }
+                },
+                "PAYMENT_OPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAYMENT_OPTION"
+                    }
+                },
+                "AGREEMENT_END_DATE_TIME_AFTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGREEMENT_END_DATE_TIME_AFTER"
+                    }
+                },
+                "AGREEMENT_END_DATE_TIME_BEFORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGREEMENT_END_DATE_TIME_BEFORE"
+                    }
+                },
+                "INVOICING_ENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVOICING_ENTITY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#DimensionValues": {
@@ -1844,7 +1948,7 @@
                 "Key": {
                     "target": "com.amazonaws.costexplorer#Dimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the metadata types that you can use to filter and group your results. For\n            example, <code>AZ</code> returns a list of Availability Zones.</p>"
+                        "smithy.api#documentation": "<p>The names of the metadata types that you can use to filter and group your results. For\n            example, <code>AZ</code> returns a list of Availability Zones. <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html\">CostCategoryRule</a>.</p>"
                     }
                 },
                 "Values": {
@@ -1996,12 +2100,14 @@
                 "CurrentGeneration": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommendation is for a current-generation instance. </p>"
                     }
                 },
                 "SizeFlexEligible": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
                     }
                 }
@@ -2154,12 +2260,14 @@
                 "CurrentGeneration": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommendation is for a current-generation instance.</p>"
                     }
                 },
                 "SizeFlexEligible": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
                     }
                 }
@@ -2198,12 +2306,14 @@
                 "CurrentGeneration": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommendation is for a current generation instance.</p>"
                     }
                 },
                 "SizeFlexEligible": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
                     }
                 }
@@ -2219,7 +2329,10 @@
             "type": "string"
         },
         "com.amazonaws.costexplorer#Estimated": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.costexplorer#Expression": {
             "type": "structure",
@@ -2272,74 +2385,104 @@
             }
         },
         "com.amazonaws.costexplorer#FindingReasonCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CPU_OVER_PROVISIONED",
-                        "name": "CPU_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "CPU_UNDER_PROVISIONED",
-                        "name": "CPU_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "MEMORY_OVER_PROVISIONED",
-                        "name": "MEMORY_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "MEMORY_UNDER_PROVISIONED",
-                        "name": "MEMORY_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "EBS_THROUGHPUT_OVER_PROVISIONED",
-                        "name": "EBS_THROUGHPUT_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "EBS_THROUGHPUT_UNDER_PROVISIONED",
-                        "name": "EBS_THROUGHPUT_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "EBS_IOPS_OVER_PROVISIONED",
-                        "name": "EBS_IOPS_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "EBS_IOPS_UNDER_PROVISIONED",
-                        "name": "EBS_IOPS_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "NETWORK_BANDWIDTH_OVER_PROVISIONED",
-                        "name": "NETWORK_BANDWIDTH_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "NETWORK_BANDWIDTH_UNDER_PROVISIONED",
-                        "name": "NETWORK_BANDWIDTH_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "NETWORK_PPS_OVER_PROVISIONED",
-                        "name": "NETWORK_PPS_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "NETWORK_PPS_UNDER_PROVISIONED",
-                        "name": "NETWORK_PPS_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "DISK_IOPS_OVER_PROVISIONED",
-                        "name": "DISK_IOPS_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "DISK_IOPS_UNDER_PROVISIONED",
-                        "name": "DISK_IOPS_UNDER_PROVISIONED"
-                    },
-                    {
-                        "value": "DISK_THROUGHPUT_OVER_PROVISIONED",
-                        "name": "DISK_THROUGHPUT_OVER_PROVISIONED"
-                    },
-                    {
-                        "value": "DISK_THROUGHPUT_UNDER_PROVISIONED",
-                        "name": "DISK_THROUGHPUT_UNDER_PROVISIONED"
+            "type": "enum",
+            "members": {
+                "CPU_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPU_OVER_PROVISIONED"
                     }
-                ]
+                },
+                "CPU_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPU_UNDER_PROVISIONED"
+                    }
+                },
+                "MEMORY_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMORY_OVER_PROVISIONED"
+                    }
+                },
+                "MEMORY_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEMORY_UNDER_PROVISIONED"
+                    }
+                },
+                "EBS_THROUGHPUT_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_THROUGHPUT_OVER_PROVISIONED"
+                    }
+                },
+                "EBS_THROUGHPUT_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_THROUGHPUT_UNDER_PROVISIONED"
+                    }
+                },
+                "EBS_IOPS_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_IOPS_OVER_PROVISIONED"
+                    }
+                },
+                "EBS_IOPS_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_IOPS_UNDER_PROVISIONED"
+                    }
+                },
+                "NETWORK_BANDWIDTH_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_BANDWIDTH_OVER_PROVISIONED"
+                    }
+                },
+                "NETWORK_BANDWIDTH_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_BANDWIDTH_UNDER_PROVISIONED"
+                    }
+                },
+                "NETWORK_PPS_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_PPS_OVER_PROVISIONED"
+                    }
+                },
+                "NETWORK_PPS_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_PPS_UNDER_PROVISIONED"
+                    }
+                },
+                "DISK_IOPS_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISK_IOPS_OVER_PROVISIONED"
+                    }
+                },
+                "DISK_IOPS_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISK_IOPS_UNDER_PROVISIONED"
+                    }
+                },
+                "DISK_THROUGHPUT_OVER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISK_THROUGHPUT_OVER_PROVISIONED"
+                    }
+                },
+                "DISK_THROUGHPUT_UNDER_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISK_THROUGHPUT_UNDER_PROVISIONED"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#FindingReasonCodes": {
@@ -2387,10 +2530,16 @@
             }
         },
         "com.amazonaws.costexplorer#GenericBoolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.costexplorer#GenericDouble": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.costexplorer#GenericString": {
             "type": "string",
@@ -2879,6 +3028,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This field is only used when the <code>SortBy</code> value is provided in the\n      request.</p>\n         <p>The maximum number of objects that are returned for this request. If\n        <code>MaxResults</code> isn't specified with the <code>SortBy</code> value, the request\n      returns 1000 results as the default value for this parameter.</p>\n         <p>For <code>GetCostCategories</code>, MaxResults has an upper quota of 1000.</p>"
                     }
                 },
@@ -3050,14 +3200,16 @@
                 "Dimension": {
                     "target": "com.amazonaws.costexplorer#Dimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the dimension. Each <code>Dimension</code> is available for a different <code>Context</code>. \n\t\t\tFor more information, see <code>Context</code>. \n\t\t\t\n\t\t</p>",
+                        "smithy.api#documentation": "<p>The name of the dimension. Each <code>Dimension</code> is available for a different <code>Context</code>. \n\t\t  For more information, see <code>Context</code>. <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html\">CostCategoryRule</a>.\n\t\t</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Context": {
                     "target": "com.amazonaws.costexplorer#Context",
                     "traits": {
-                        "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. \n\t\t\tThe default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values \n\t\t\tcan be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, \n\t\t\tthe resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p>\n\t\t       <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following \n           dimensions for searching:</p>\n           <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible values are the following:</p>\n               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services.</p>\n               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an\n          acting reseller for Amazon Web Services in India.</p>\n               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are\n          built on Amazon Web Services by third-party software providers.</p>\n             </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use cases.\n          Examples are <code>Compute Optimized</code> (for example, <code>C4</code>,\n          <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory Optimization</code>\n          (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>, and\n          <code>R6g</code>).</p>\n            </li>\n            <li>\n               <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services\n          invoice.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.\n          Examples include On-Demand Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation Instance.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation\n           includes a unit attribute. Examples include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this \n               operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as\n          Reserved\n          Instance (RI) fees, usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following \n           dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All\n          Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n         </ul>"
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "COST_AND_USAGE",
+                        "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. \n\t\t\tThe default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values \n\t\t\tcan be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, \n\t\t\tthe resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p>\n\t\t       <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following \n           dimensions for searching:</p>\n           <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible values are the following:</p>\n               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services.</p>\n               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that's an\n          acting reseller for Amazon Web Services in India.</p>\n               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions that are\n          built on Amazon Web Services by third-party software providers.</p>\n             </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use cases.\n          Examples are <code>Compute Optimized</code> (for example, <code>C4</code>,\n          <code>C5</code>, <code>C6g</code>, and <code>C7g</code>), <code>Memory Optimization</code>\n          (for example, <code>R4</code>, <code>R5n</code>, <code>R5b</code>, and\n          <code>R6g</code>).</p>\n            </li>\n            <li>\n               <p>INVOICING_ENTITY - The name of the entity that issues the Amazon Web Services\n          invoice.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase that this usage is related to.\n          Examples include On-Demand Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation Instance.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation\n           includes a unit attribute. Examples include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this \n               operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as Reserved Instance (RI) fees, usage\n          costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following \n           dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - The payment option for the given Savings Plans (for example, All\n          Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filter": {
@@ -3072,6 +3224,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of\n      objects that are returned for this request. If MaxResults isn't specified with SortBy, the\n      request returns 1000 results as the default value for this parameter.</p>\n         <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>"
                     }
                 },
@@ -3089,7 +3242,7 @@
                 "DimensionValues": {
                     "target": "com.amazonaws.costexplorer#DimensionValuesWithAttributesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters that you used to filter your request. Some dimensions are available only for a specific context.</p>\n\t\t       <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following \n           dimensions for searching:</p>\n           <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand \n               Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation\n           includes a unit attribute. Examples include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this \n               operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following \n           dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid\n          values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters that you used to filter your request. Some dimensions are available only for a specific context.</p>\n\t\t       <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following \n           dimensions for searching:</p>\n           <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand \n               Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation\n           includes a unit attribute. Examples include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this \n               operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service. You can opt-in by enabling <code>Hourly</code> and <code>Resource Level Data</code> in Cost Management Console preferences.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following \n           dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid\n          values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the Amazon Web Services ID of the member account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3187,7 +3340,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are\n      available, in the response, Amazon Web Services provides a NextPageToken value that you can use\n      in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
@@ -3295,6 +3448,7 @@
                 "PageSize": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
                     }
                 },
@@ -3371,6 +3525,8 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "DAILY",
                         "smithy.api#documentation": "<p>If <code>GroupBy</code> is set, <code>Granularity</code> can't be set. If <code>Granularity</code> isn't set, \n\t\t\tthe response object doesn't include <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>. \n\t\t\tIf both <code>GroupBy</code> and <code>Granularity</code> aren't set, <code>GetReservationUtilization</code> defaults to <code>DAILY</code>.</p>\n\t\t       <p>The <code>GetReservationUtilization</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>"
                     }
                 },
@@ -3395,7 +3551,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are\n      available, in the response, Amazon Web Services provides a NextPageToken value that you can use\n      in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
@@ -3467,6 +3623,7 @@
                 "PageSize": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
                     }
                 },
@@ -3584,7 +3741,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a minimum value of <code>1</code>.</p>"
                     }
                 },
@@ -3673,6 +3830,7 @@
                 "PageSize": {
                     "target": "com.amazonaws.costexplorer#NonNegativeInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommendations that you want returned in a single response object.</p>"
                     }
                 },
@@ -3793,7 +3951,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a minimum value of <code>1</code>.</p>"
                     }
                 },
@@ -3946,6 +4104,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of\n      objects that are returned for this request. If MaxResults isn't specified with SortBy, the\n      request returns 1000 results as the default value for this parameter.</p>\n         <p>For <code>GetTags</code>, MaxResults has an upper quota of 1000.</p>"
                     }
                 },
@@ -4068,22 +4227,26 @@
             }
         },
         "com.amazonaws.costexplorer#Granularity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAILY",
-                        "name": "DAILY"
-                    },
-                    {
-                        "value": "MONTHLY",
-                        "name": "MONTHLY"
-                    },
-                    {
-                        "value": "HOURLY",
-                        "name": "HOURLY"
+            "type": "enum",
+            "members": {
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
                     }
-                ]
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                },
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#Group": {
@@ -4137,22 +4300,26 @@
             }
         },
         "com.amazonaws.costexplorer#GroupDefinitionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DIMENSION",
-                        "name": "DIMENSION"
-                    },
-                    {
-                        "value": "TAG",
-                        "name": "TAG"
-                    },
-                    {
-                        "value": "COST_CATEGORY",
-                        "name": "COST_CATEGORY"
+            "type": "enum",
+            "members": {
+                "DIMENSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIMENSION"
                     }
-                ]
+                },
+                "TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TAG"
+                    }
+                },
+                "COST_CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COST_CATEGORY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#GroupDefinitions": {
@@ -4173,6 +4340,7 @@
                 "MaxImpact": {
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum dollar value that's observed for an anomaly. </p>",
                         "smithy.api#required": {}
                     }
@@ -4180,6 +4348,7 @@
                 "TotalImpact": {
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The cumulative dollar value that's observed for an anomaly. </p>"
                     }
                 }
@@ -4314,7 +4483,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#CostAllocationTagsMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of objects that are returned for this request. By default, the request\n      returns 100 results. </p>"
                     }
                 }
@@ -4377,7 +4546,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.costexplorer#CostCategoryMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of entries a paginated response contains. </p>"
                     }
                 }
@@ -4444,57 +4613,73 @@
             }
         },
         "com.amazonaws.costexplorer#LookbackPeriodInDays": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SEVEN_DAYS",
-                        "name": "SEVEN_DAYS"
-                    },
-                    {
-                        "value": "THIRTY_DAYS",
-                        "name": "THIRTY_DAYS"
-                    },
-                    {
-                        "value": "SIXTY_DAYS",
-                        "name": "SIXTY_DAYS"
+            "type": "enum",
+            "members": {
+                "SEVEN_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEVEN_DAYS"
                     }
-                ]
+                },
+                "THIRTY_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRTY_DAYS"
+                    }
+                },
+                "SIXTY_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIXTY_DAYS"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#MatchOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EQUALS",
-                        "name": "EQUALS"
-                    },
-                    {
-                        "value": "ABSENT",
-                        "name": "ABSENT"
-                    },
-                    {
-                        "value": "STARTS_WITH",
-                        "name": "STARTS_WITH"
-                    },
-                    {
-                        "value": "ENDS_WITH",
-                        "name": "ENDS_WITH"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "CASE_SENSITIVE",
-                        "name": "CASE_SENSITIVE"
-                    },
-                    {
-                        "value": "CASE_INSENSITIVE",
-                        "name": "CASE_INSENSITIVE"
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
                     }
-                ]
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSENT"
+                    }
+                },
+                "STARTS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTS_WITH"
+                    }
+                },
+                "ENDS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENDS_WITH"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "CASE_SENSITIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE_SENSITIVE"
+                    }
+                },
+                "CASE_INSENSITIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE_INSENSITIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#MatchOptions": {
@@ -4506,44 +4691,57 @@
         "com.amazonaws.costexplorer#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
             }
         },
         "com.amazonaws.costexplorer#Metric": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BLENDED_COST",
-                        "name": "BLENDED_COST"
-                    },
-                    {
-                        "value": "UNBLENDED_COST",
-                        "name": "UNBLENDED_COST"
-                    },
-                    {
-                        "value": "AMORTIZED_COST",
-                        "name": "AMORTIZED_COST"
-                    },
-                    {
-                        "value": "NET_UNBLENDED_COST",
-                        "name": "NET_UNBLENDED_COST"
-                    },
-                    {
-                        "value": "NET_AMORTIZED_COST",
-                        "name": "NET_AMORTIZED_COST"
-                    },
-                    {
-                        "value": "USAGE_QUANTITY",
-                        "name": "USAGE_QUANTITY"
-                    },
-                    {
-                        "value": "NORMALIZED_USAGE_AMOUNT",
-                        "name": "NORMALIZED_USAGE_AMOUNT"
+            "type": "enum",
+            "members": {
+                "BLENDED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLENDED_COST"
                     }
-                ]
+                },
+                "UNBLENDED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNBLENDED_COST"
+                    }
+                },
+                "AMORTIZED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMORTIZED_COST"
+                    }
+                },
+                "NET_UNBLENDED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NET_UNBLENDED_COST"
+                    }
+                },
+                "NET_AMORTIZED_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NET_AMORTIZED_COST"
+                    }
+                },
+                "USAGE_QUANTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE_QUANTITY"
+                    }
+                },
+                "NORMALIZED_USAGE_AMOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMALIZED_USAGE_AMOUNT"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#MetricAmount": {
@@ -4618,29 +4816,31 @@
             }
         },
         "com.amazonaws.costexplorer#MonitorDimension": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVICE",
-                        "name": "SERVICE"
+            "type": "enum",
+            "members": {
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.costexplorer#MonitorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DIMENSIONAL",
-                        "name": "DIMENSIONAL"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
+            "type": "enum",
+            "members": {
+                "DIMENSIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIMENSIONAL"
                     }
-                ]
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#NetRISavings": {
@@ -4691,6 +4891,7 @@
         "com.amazonaws.costexplorer#NonNegativeInteger": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -4699,56 +4900,67 @@
         "com.amazonaws.costexplorer#NullableNonNegativeDouble": {
             "type": "double",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0.0
                 }
             }
         },
         "com.amazonaws.costexplorer#NumericOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EQUAL",
-                        "name": "EQUAL"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL",
-                        "name": "GREATER_THAN_OR_EQUAL"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL",
-                        "name": "LESS_THAN_OR_EQUAL"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
+            "type": "enum",
+            "members": {
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
                     }
-                ]
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#OfferingClass": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "CONVERTIBLE",
-                        "name": "CONVERTIBLE"
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
                     }
-                ]
+                },
+                "CONVERTIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONVERTIBLE"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#OnDemandCost": {
@@ -4764,67 +4976,82 @@
             "type": "string"
         },
         "com.amazonaws.costexplorer#PageSize": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.costexplorer#PaymentOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NO_UPFRONT",
-                        "name": "NO_UPFRONT"
-                    },
-                    {
-                        "value": "PARTIAL_UPFRONT",
-                        "name": "PARTIAL_UPFRONT"
-                    },
-                    {
-                        "value": "ALL_UPFRONT",
-                        "name": "ALL_UPFRONT"
-                    },
-                    {
-                        "value": "LIGHT_UTILIZATION",
-                        "name": "LIGHT_UTILIZATION"
-                    },
-                    {
-                        "value": "MEDIUM_UTILIZATION",
-                        "name": "MEDIUM_UTILIZATION"
-                    },
-                    {
-                        "value": "HEAVY_UTILIZATION",
-                        "name": "HEAVY_UTILIZATION"
+            "type": "enum",
+            "members": {
+                "NO_UPFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_UPFRONT"
                     }
-                ]
+                },
+                "PARTIAL_UPFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIAL_UPFRONT"
+                    }
+                },
+                "ALL_UPFRONT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_UPFRONT"
+                    }
+                },
+                "LIGHT_UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIGHT_UTILIZATION"
+                    }
+                },
+                "MEDIUM_UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM_UTILIZATION"
+                    }
+                },
+                "HEAVY_UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEAVY_UTILIZATION"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#PlatformDifference": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HYPERVISOR",
-                        "name": "HYPERVISOR"
-                    },
-                    {
-                        "value": "NETWORK_INTERFACE",
-                        "name": "NETWORK_INTERFACE"
-                    },
-                    {
-                        "value": "STORAGE_INTERFACE",
-                        "name": "STORAGE_INTERFACE"
-                    },
-                    {
-                        "value": "INSTANCE_STORE_AVAILABILITY",
-                        "name": "INSTANCE_STORE_AVAILABILITY"
-                    },
-                    {
-                        "value": "VIRTUALIZATION_TYPE",
-                        "name": "VIRTUALIZATION_TYPE"
+            "type": "enum",
+            "members": {
+                "HYPERVISOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYPERVISOR"
                     }
-                ]
+                },
+                "NETWORK_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_INTERFACE"
+                    }
+                },
+                "STORAGE_INTERFACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_INTERFACE"
+                    }
+                },
+                "INSTANCE_STORE_AVAILABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE_STORE_AVAILABILITY"
+                    }
+                },
+                "VIRTUALIZATION_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIRTUALIZATION_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#PlatformDifferences": {
@@ -4836,7 +5063,6 @@
         "com.amazonaws.costexplorer#PredictionIntervalLevel": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 51,
                     "max": 99
@@ -4945,12 +5171,14 @@
                 "CurrentGeneration": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommendation is for a current-generation instance. </p>"
                     }
                 },
                 "SizeFlexEligible": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
                     }
                 }
@@ -4966,18 +5194,20 @@
             "type": "string"
         },
         "com.amazonaws.costexplorer#RecommendationTarget": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SAME_INSTANCE_FAMILY",
-                        "name": "SAME_INSTANCE_FAMILY"
-                    },
-                    {
-                        "value": "CROSS_INSTANCE_FAMILY",
-                        "name": "CROSS_INSTANCE_FAMILY"
+            "type": "enum",
+            "members": {
+                "SAME_INSTANCE_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAME_INSTANCE_FAMILY"
                     }
-                ]
+                },
+                "CROSS_INSTANCE_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CROSS_INSTANCE_FAMILY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#RedshiftInstanceDetails": {
@@ -5004,12 +5234,14 @@
                 "CurrentGeneration": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommendation is for a current-generation instance.</p>"
                     }
                 },
                 "SizeFlexEligible": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the recommended reservation is size flexible.</p>"
                     }
                 }
@@ -5580,6 +5812,7 @@
                 "Estimated": {
                     "target": "com.amazonaws.costexplorer#Estimated",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the result is estimated.</p>"
                     }
                 }
@@ -5644,6 +5877,8 @@
                 "RecommendationTarget": {
                     "target": "com.amazonaws.costexplorer#RecommendationTarget",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "SAME_INSTANCE_FAMILY",
                         "smithy.api#documentation": "<p>The option to see recommendations within the same instance family or recommendations\n            for instances across other families. The default value is\n                <code>SAME_INSTANCE_FAMILY</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -5651,6 +5886,7 @@
                 "BenefitsConsidered": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The option to consider RI or Savings Plans discount benefits in your savings\n            calculation. The default value is <code>TRUE</code>. </p>",
                         "smithy.api#required": {}
                     }
@@ -5731,18 +5967,20 @@
             }
         },
         "com.amazonaws.costexplorer#RightsizingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TERMINATE",
-                        "name": "TERMINATE"
-                    },
-                    {
-                        "value": "MODIFY",
-                        "name": "MODIFY"
+            "type": "enum",
+            "members": {
+                "TERMINATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATE"
                     }
-                ]
+                },
+                "MODIFY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODIFY"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#RootCause": {
@@ -5874,26 +6112,32 @@
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ATTRIBUTES",
-                        "name": "ATTRIBUTES"
-                    },
-                    {
-                        "value": "UTILIZATION",
-                        "name": "UTILIZATION"
-                    },
-                    {
-                        "value": "AMORTIZED_COMMITMENT",
-                        "name": "AMORTIZED_COMMITMENT"
-                    },
-                    {
-                        "value": "SAVINGS",
-                        "name": "SAVINGS"
+            "type": "enum",
+            "members": {
+                "ATTRIBUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTRIBUTES"
                     }
-                ]
+                },
+                "UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTILIZATION"
+                    }
+                },
+                "AMORTIZED_COMMITMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMORTIZED_COMMITMENT"
+                    }
+                },
+                "SAVINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAVINGS"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansDataTypes": {
@@ -6425,18 +6669,20 @@
             }
         },
         "com.amazonaws.costexplorer#SortOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASCENDING",
-                        "name": "ASCENDING"
-                    },
-                    {
-                        "value": "DESCENDING",
-                        "name": "DESCENDING"
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
                     }
-                ]
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#Subscriber": {
@@ -6476,33 +6722,37 @@
             }
         },
         "com.amazonaws.costexplorer#SubscriberStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONFIRMED",
-                        "name": "CONFIRMED"
-                    },
-                    {
-                        "value": "DECLINED",
-                        "name": "DECLINED"
+            "type": "enum",
+            "members": {
+                "CONFIRMED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIRMED"
                     }
-                ]
+                },
+                "DECLINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECLINED"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#SubscriberType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "SNS",
-                        "name": "SNS"
+            "type": "enum",
+            "members": {
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
                     }
-                ]
+                },
+                "SNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNS"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#Subscribers": {
@@ -6512,22 +6762,26 @@
             }
         },
         "com.amazonaws.costexplorer#SupportedSavingsPlansType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COMPUTE_SP",
-                        "name": "COMPUTE_SP"
-                    },
-                    {
-                        "value": "EC2_INSTANCE_SP",
-                        "name": "EC2_INSTANCE_SP"
-                    },
-                    {
-                        "value": "SAGEMAKER_SP",
-                        "name": "SAGEMAKER_SP"
+            "type": "enum",
+            "members": {
+                "COMPUTE_SP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPUTE_SP"
                     }
-                ]
+                },
+                "EC2_INSTANCE_SP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_INSTANCE_SP"
+                    }
+                },
+                "SAGEMAKER_SP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAGEMAKER_SP"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#TagKey": {
@@ -6615,7 +6869,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The values that are available for a tag.</p>\n        <p>If <code>Values</code> and <code>Key</code> aren't specified, the <code>ABSENT</code>\n            <code>MatchOption</code> is applied to all tags. That is, it's filtered on resources\n            with no tags.</p>\n        <p>If <code>Values</code> is provided and <code>Key</code> isn't specified, the\n                <code>ABSENT</code>\n            <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, it's\n            filtered on resources without the given tag key.</p>"
+                "smithy.api#documentation": "<p>The values that are available for a tag.</p>\n        <p>If <code>Values</code> and <code>Key</code> aren't specified, the <code>ABSENT</code>\n            <code>MatchOption</code> is applied to all tags. That is, it's filtered on resources\n            with no tags.</p>\n        <p>If <code>Key</code> is provided and <code>Values</code> isn't specified, the\n                <code>ABSENT</code>\n            <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, it's\n            filtered on resources without the given tag key.</p>"
             }
         },
         "com.amazonaws.costexplorer#TagValuesList": {
@@ -6648,6 +6902,7 @@
                 "DefaultTargetInstance": {
                     "target": "com.amazonaws.costexplorer#GenericBoolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether this recommendation is the defaulted Amazon Web Services\n            recommendation.</p>"
                     }
                 },
@@ -6681,18 +6936,20 @@
             }
         },
         "com.amazonaws.costexplorer#TermInYears": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONE_YEAR",
-                        "name": "ONE_YEAR"
-                    },
-                    {
-                        "value": "THREE_YEARS",
-                        "name": "THREE_YEARS"
+            "type": "enum",
+            "members": {
+                "ONE_YEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_YEAR"
                     }
-                ]
+                },
+                "THREE_YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THREE_YEARS"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#TerminateRecommendationDetail": {
@@ -6753,6 +7010,7 @@
                 "StartValue": {
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The lower bound dollar value that's used in the filter. </p>",
                         "smithy.api#required": {}
                     }
@@ -6760,6 +7018,7 @@
                 "EndValue": {
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The upper bound dollar value that's used in the filter. </p>"
                     }
                 }
@@ -7105,6 +7364,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EffectiveStart": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month). If the date isn't provided, it's the first day of the current month. Dates can't be before the previous twelve months, or in the future.</p>"
+                    }
+                },
                 "RuleVersion": {
                     "target": "com.amazonaws.costexplorer#CostCategoryRuleVersion",
                     "traits": {
@@ -7141,7 +7406,7 @@
                 "EffectiveStart": {
                     "target": "com.amazonaws.costexplorer#ZonedDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Cost Category's effective start date. </p>"
+                        "smithy.api#documentation": "<p>The Cost Category's effective start date. It can only be a billing start date (first day of the month).</p>"
                     }
                 }
             }
