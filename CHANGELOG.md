@@ -1,3 +1,13 @@
+# Release (2022-09-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.21.0](service/costexplorer/CHANGELOG.md#v1210-2022-09-27)
+  * **Feature**: This release is to support retroactive Cost Categories. The new field will enable you to retroactively apply new and existing cost category rules to previous months.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.35.0](service/kendra/CHANGELOG.md#v1350-2022-09-27)
+  * **Feature**: My AWS Service (placeholder) - Amazon Kendra now provides a data source connector for DropBox. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-dropbox.html
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.19.0](service/location/CHANGELOG.md#v1190-2022-09-27)
+  * **Feature**: This release adds place IDs, which are unique identifiers of places, along with a new GetPlace operation, which can be used with place IDs to find a place again later. UnitNumber and UnitType are also added as new properties of places.
+
 # Release (2022-09-26)
 
 ## General Highlights
