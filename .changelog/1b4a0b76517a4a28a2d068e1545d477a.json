@@ -1,8 +1,0 @@
-{
-    "id": "1b4a0b76-517a-4a28-a2d0-68e1545d477a",
-    "type": "feature",
-    "description": "This release adds an option to delete pipeline provisioning repositories using the UpdateAccountSettings API",
-    "modules": [
-        "service/proton"
-    ]
-}

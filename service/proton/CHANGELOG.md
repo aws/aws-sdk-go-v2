@@ -1,3 +1,7 @@
+# v1.15.0 (2022-09-29)
+
+* **Feature**: This release adds an option to delete pipeline provisioning repositories using the UpdateAccountSettings API
+
 # v1.14.12 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

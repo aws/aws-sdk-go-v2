@@ -1,8 +1,0 @@
-{
-    "id": "d6a82638-7f98-4426-899d-ce497f548160",
-    "type": "feature",
-    "description": "This release adds API support to debug Amazon EMR Serverless jobs in real-time with live application UIs",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

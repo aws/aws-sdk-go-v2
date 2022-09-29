@@ -1,3 +1,7 @@
+# v1.15.0 (2022-09-29)
+
+* **Feature**: This update returns additional certificate details such as certificate SANs and allows sorting in the ListCertificates API.
+
 # v1.14.18 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

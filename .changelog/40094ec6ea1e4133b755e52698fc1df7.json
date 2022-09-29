@@ -1,8 +1,0 @@
-{
-    "id": "40094ec6-ea1e-4133-b755-e52698fc1df7",
-    "type": "feature",
-    "description": "SageMaker Training Managed Warm Pools let you retain provisioned infrastructure to reduce latency for repetitive training workloads.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

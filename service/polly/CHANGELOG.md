@@ -1,3 +1,7 @@
+# v1.18.0 (2022-09-29)
+
+* **Feature**: Added support for the new Cantonese voice - Hiujin. Hiujin is available as a Neural voice only.
+
 # v1.17.9 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

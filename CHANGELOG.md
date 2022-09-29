@@ -1,3 +1,30 @@
+# Release (2022-09-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.15.0](service/acm/CHANGELOG.md#v1150-2022-09-29)
+  * **Feature**: This update returns additional certificate details such as certificate SANs and allows sorting in the ListCertificates API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.61.0](service/ec2/CHANGELOG.md#v1610-2022-09-29)
+  * **Feature**: u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.3.0](service/emrserverless/CHANGELOG.md#v130-2022-09-29)
+  * **Feature**: This release adds API support to debug Amazon EMR Serverless jobs in real-time with live application UIs
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.25.0](service/fsx/CHANGELOG.md#v1250-2022-09-29)
+  * **Feature**: This release adds support for Amazon File Cache.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.0.0](service/migrationhuborchestrator/CHANGELOG.md#v100-2022-09-29)
+  * **Release**: New AWS service client module
+  * **Feature**: Introducing AWS MigrationHubOrchestrator. This is the first public release of AWS MigrationHubOrchestrator.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.18.0](service/polly/CHANGELOG.md#v1180-2022-09-29)
+  * **Feature**: Added support for the new Cantonese voice - Hiujin. Hiujin is available as a Neural voice only.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.15.0](service/proton/CHANGELOG.md#v1150-2022-09-29)
+  * **Feature**: This release adds an option to delete pipeline provisioning repositories using the UpdateAccountSettings API
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.45.0](service/sagemaker/CHANGELOG.md#v1450-2022-09-29)
+  * **Feature**: SageMaker Training Managed Warm Pools let you retain provisioned infrastructure to reduce latency for repetitive training workloads.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.16.2](service/secretsmanager/CHANGELOG.md#v1162-2022-09-29)
+  * **Documentation**: Documentation updates for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.15.0](service/translate/CHANGELOG.md#v1150-2022-09-29)
+  * **Feature**: This release enables customers to access control rights on Translate resources like Parallel Data and Custom Terminology using Tag Based Authorization.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.23.0](service/workspaces/CHANGELOG.md#v1230-2022-09-29)
+  * **Feature**: This release includes diagnostic log uploading feature. If it is enabled, the log files of WorkSpaces Windows client will be sent to Amazon WorkSpaces automatically for troubleshooting. You can use modifyClientProperty api to enable/disable this feature.
+
 # Release (2022-09-27)
 
 ## Module Highlights

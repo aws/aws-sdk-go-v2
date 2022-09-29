@@ -1,3 +1,7 @@
+# v1.3.0 (2022-09-29)
+
+* **Feature**: This release adds API support to debug Amazon EMR Serverless jobs in real-time with live application UIs
+
 # v1.2.4 (2022-09-27)
 
 * No change notes available for this release.

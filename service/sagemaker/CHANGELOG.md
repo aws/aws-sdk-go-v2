@@ -1,3 +1,7 @@
+# v1.45.0 (2022-09-29)
+
+* **Feature**: SageMaker Training Managed Warm Pools let you retain provisioned infrastructure to reduce latency for repetitive training workloads.
+
 # v1.44.0 (2022-09-21)
 
 * **Feature**: SageMaker now allows customization on Canvas Application settings, including enabling/disabling time-series forecasting and specifying an Amazon Forecast execution role at both the Domain and UserProfile levels.

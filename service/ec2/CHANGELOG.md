@@ -1,3 +1,7 @@
+# v1.61.0 (2022-09-29)
+
+* **Feature**: u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases.
+
 # v1.60.0 (2022-09-23)
 
 * **Feature**: Letting external AWS customers provide ImageId as a Launch Template override in FleetLaunchTemplateOverridesRequest

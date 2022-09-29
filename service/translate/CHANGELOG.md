@@ -1,3 +1,7 @@
+# v1.15.0 (2022-09-29)
+
+* **Feature**: This release enables customers to access control rights on Translate resources like Parallel Data and Custom Terminology using Tag Based Authorization.
+
 # v1.14.10 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

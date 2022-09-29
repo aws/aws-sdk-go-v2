@@ -1,3 +1,7 @@
+# v1.25.0 (2022-09-29)
+
+* **Feature**: This release adds support for Amazon File Cache.
+
 # v1.24.14 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
