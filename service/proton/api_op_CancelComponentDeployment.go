@@ -14,8 +14,8 @@ import (
 // Attempts to cancel a component deployment (for a component that is in the
 // IN_PROGRESS deployment status). For more information about components, see
 // Proton components
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+// Proton User Guide.
 func (c *Client) CancelComponentDeployment(ctx context.Context, params *CancelComponentDeploymentInput, optFns ...func(*Options)) (*CancelComponentDeploymentOutput, error) {
 	if params == nil {
 		params = &CancelComponentDeploymentInput{}

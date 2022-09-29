@@ -29,7 +29,7 @@ func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryI
 
 type DeleteRepositoryInput struct {
 
-	// The name of the repository.
+	// The repository name.
 	//
 	// This member is required.
 	Name *string
@@ -44,7 +44,7 @@ type DeleteRepositoryInput struct {
 
 type DeleteRepositoryOutput struct {
 
-	// The repository detail data that's returned by Proton.
+	// The deleted repository link's detail data that's returned by Proton.
 	Repository *types.Repository
 
 	// Metadata pertaining to the operation's result.

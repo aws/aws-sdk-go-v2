@@ -1,0 +1,8 @@
+{
+    "id": "1c4b50be-907e-4ca5-b748-01c0a4cd0752",
+    "type": "feature",
+    "description": "This release adds support for Amazon File Cache.",
+    "modules": [
+        "service/fsx"
+    ]
+}

@@ -11572,6 +11572,10 @@ type ResourceConfig struct {
 	// The ML compute instance type.
 	InstanceType TrainingInstanceType
 
+	// The duration of time in seconds to retain configured resources in a warm pool
+	// for subsequent training jobs.
+	KeepAlivePeriodInSeconds *int32
+
 	// The Amazon Web Services KMS key that SageMaker uses to encrypt data on the
 	// storage volume attached to the ML compute instance(s) that run the training job.
 	// Certain Nitro-based instances include local storage, dependent on the instance
@@ -11592,6 +11596,18 @@ type ResourceConfig struct {
 	// Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The ResourceConfig to update KeepAlivePeriodInSeconds. Other fields in the
+// ResourceConfig cannot be updated.
+type ResourceConfigForUpdate struct {
+
+	// The KeepAlivePeriodInSeconds value specified in the ResourceConfig to update.
+	//
+	// This member is required.
+	KeepAlivePeriodInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -12862,6 +12878,9 @@ type TrainingJobSummary struct {
 	// Stopped).
 	TrainingEndTime *time.Time
 
+	// The status of the warm pool associated with the training job.
+	WarmPoolStatus *WarmPoolStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -13955,6 +13974,40 @@ type VpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// Status and billing information about the warm pool.
+type WarmPoolStatus struct {
+
+	// The status of the warm pool.
+	//
+	// * InUse: The warm pool is in use for the training
+	// job.
+	//
+	// * Available: The warm pool is available to reuse for a matching training
+	// job.
+	//
+	// * Reused: The warm pool moved to a matching training job for reuse.
+	//
+	// *
+	// Terminated: The warm pool is no longer available. Warm pools are unavailable if
+	// they are terminated by a user, terminated for a patch update, or terminated for
+	// exceeding the specified KeepAlivePeriodInSeconds.
+	//
+	// This member is required.
+	Status WarmPoolResourceStatus
+
+	// The billable time in seconds used by the warm pool. Billable time refers to the
+	// absolute wall-clock time. Multiply ResourceRetainedBillableTimeInSeconds by the
+	// number of instances (InstanceCount) in your training cluster to get the total
+	// compute time SageMaker bills you if you run warm pool training. The formula is
+	// as follows: ResourceRetainedBillableTimeInSeconds * InstanceCount.
+	ResourceRetainedBillableTimeInSeconds *int32
+
+	// The name of the matching training job that reused the warm pool.
+	ReusedByJob *string
 
 	noSmithyDocumentSerde
 }

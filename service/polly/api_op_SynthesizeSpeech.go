@@ -107,6 +107,8 @@ type SynthesizeSpeechInput struct {
 type SynthesizeSpeechOutput struct {
 
 	// Stream containing the synthesized speech.
+	//
+	// This member is required.
 	AudioStream io.ReadCloser
 
 	// Specifies the type audio stream. This should reflect the OutputFormat parameter

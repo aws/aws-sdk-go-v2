@@ -60,8 +60,8 @@ type UpdateServiceTemplateVersionInput struct {
 	// change to supportedComponentSources doesn't impact existing component
 	// attachments to instances based on this template version. A change only affects
 	// later associations. For more information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+	// Proton User Guide.
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	noSmithyDocumentSerde

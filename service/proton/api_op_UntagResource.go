@@ -12,9 +12,8 @@ import (
 
 // Remove a customer tag from a resource. A tag is a key-value pair of metadata
 // associated with an Proton resource. For more information, see Proton resources
-// and tagging in the Proton Administrator Guide
-// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+// and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+// in the Proton User Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

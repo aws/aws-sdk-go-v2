@@ -1,0 +1,8 @@
+{
+    "id": "5b78343a-6c44-43cd-8593-922db7dd05c8",
+    "type": "feature",
+    "description": "This release enables customers to access control rights on Translate resources like Parallel Data and Custom Terminology using Tag Based Authorization.",
+    "modules": [
+        "service/translate"
+    ]
+}

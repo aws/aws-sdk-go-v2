@@ -130,6 +130,26 @@ func (m *validateOpCreateDataRepositoryTask) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFileCache struct {
+}
+
+func (*validateOpCreateFileCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFileCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFileCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFileCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFileSystemFromBackup struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpDeleteDataRepositoryAssociation) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDataRepositoryAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFileCache struct {
+}
+
+func (*validateOpDeleteFileCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFileCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFileCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFileCacheInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +570,26 @@ func (m *validateOpUpdateDataRepositoryAssociation) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFileCache struct {
+}
+
+func (*validateOpUpdateFileCache) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFileCache) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFileCacheInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFileCacheInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFileSystem struct {
 }
 
@@ -634,6 +694,10 @@ func addOpCreateDataRepositoryTaskValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateDataRepositoryTask{}, middleware.After)
 }
 
+func addOpCreateFileCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFileCache{}, middleware.After)
+}
+
 func addOpCreateFileSystemFromBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFileSystemFromBackup{}, middleware.After)
 }
@@ -664,6 +728,10 @@ func addOpDeleteBackupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataRepositoryAssociation{}, middleware.After)
+}
+
+func addOpDeleteFileCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFileCache{}, middleware.After)
 }
 
 func addOpDeleteFileSystemValidationMiddleware(stack *middleware.Stack) error {
@@ -714,6 +782,10 @@ func addOpUpdateDataRepositoryAssociationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpUpdateDataRepositoryAssociation{}, middleware.After)
 }
 
+func addOpUpdateFileCacheValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFileCache{}, middleware.After)
+}
+
 func addOpUpdateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFileSystem{}, middleware.After)
 }
@@ -737,6 +809,48 @@ func validateCompletionReport(v *types.CompletionReport) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CompletionReport"}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateFileCacheDataRepositoryAssociations(v []types.FileCacheDataRepositoryAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileCacheDataRepositoryAssociations"}
+	for i := range v {
+		if err := validateFileCacheDataRepositoryAssociation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateFileCacheLustreConfiguration(v *types.CreateFileCacheLustreConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileCacheLustreConfiguration"}
+	if v.PerUnitStorageThroughput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PerUnitStorageThroughput"))
+	}
+	if len(v.DeploymentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if v.MetadataConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataConfiguration"))
+	} else if v.MetadataConfiguration != nil {
+		if err := validateFileCacheLustreMetadataConfiguration(v.MetadataConfiguration); err != nil {
+			invalidParams.AddNested("MetadataConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,6 +1094,59 @@ func validateDeleteVolumeOntapConfiguration(v *types.DeleteVolumeOntapConfigurat
 		if err := validateTags(v.FinalBackupTags); err != nil {
 			invalidParams.AddNested("FinalBackupTags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFileCacheDataRepositoryAssociation(v *types.FileCacheDataRepositoryAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileCacheDataRepositoryAssociation"}
+	if v.FileCachePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileCachePath"))
+	}
+	if v.DataRepositoryPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataRepositoryPath"))
+	}
+	if v.NFS != nil {
+		if err := validateFileCacheNFSConfiguration(v.NFS); err != nil {
+			invalidParams.AddNested("NFS", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFileCacheLustreMetadataConfiguration(v *types.FileCacheLustreMetadataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileCacheLustreMetadataConfiguration"}
+	if v.StorageCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFileCacheNFSConfiguration(v *types.FileCacheNFSConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileCacheNFSConfiguration"}
+	if len(v.Version) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1345,9 +1512,6 @@ func validateOpCreateDataRepositoryAssociationInput(v *CreateDataRepositoryAssoc
 	if v.FileSystemId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
-	if v.FileSystemPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemPath"))
-	}
 	if v.DataRepositoryPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataRepositoryPath"))
 	}
@@ -1384,6 +1548,45 @@ func validateOpCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput) e
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFileCacheInput(v *CreateFileCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileCacheInput"}
+	if len(v.FileCacheType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileCacheType"))
+	}
+	if v.FileCacheTypeVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileCacheTypeVersion"))
+	}
+	if v.StorageCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageCapacity"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LustreConfiguration != nil {
+		if err := validateCreateFileCacheLustreConfiguration(v.LustreConfiguration); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataRepositoryAssociations != nil {
+		if err := validateCreateFileCacheDataRepositoryAssociations(v.DataRepositoryAssociations); err != nil {
+			invalidParams.AddNested("DataRepositoryAssociations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1612,8 +1815,20 @@ func validateOpDeleteDataRepositoryAssociationInput(v *DeleteDataRepositoryAssoc
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
 	}
-	if v.DeleteDataInFileSystem == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeleteDataInFileSystem"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFileCacheInput(v *DeleteFileCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileCacheInput"}
+	if v.FileCacheId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileCacheId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1830,6 +2045,21 @@ func validateOpUpdateDataRepositoryAssociationInput(v *UpdateDataRepositoryAssoc
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataRepositoryAssociationInput"}
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFileCacheInput(v *UpdateFileCacheInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFileCacheInput"}
+	if v.FileCacheId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileCacheId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

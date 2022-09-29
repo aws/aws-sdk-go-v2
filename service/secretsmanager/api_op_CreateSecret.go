@@ -36,9 +36,14 @@ import (
 // significant delay in returning the result. If the secret is in a different
 // Amazon Web Services account from the credentials calling the API, then you can't
 // use aws/secretsmanager to encrypt the secret, and you must create and use a
-// customer managed KMS key. Required permissions: secretsmanager:CreateSecret. If
-// you include tags in the secret, you also need secretsmanager:TagResource. For
-// more information, see  IAM policy actions for Secrets Manager
+// customer managed KMS key. Secrets Manager generates a CloudTrail log entry when
+// you call this action. Do not include sensitive information in request parameters
+// except SecretBinary or SecretString because it might be logged. For more
+// information, see Logging Secrets Manager events with CloudTrail
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
+// Required permissions: secretsmanager:CreateSecret. If you include tags in the
+// secret, you also need secretsmanager:TagResource. For more information, see  IAM
+// policy actions for Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).

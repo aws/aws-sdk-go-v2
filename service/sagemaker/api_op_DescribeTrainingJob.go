@@ -318,6 +318,9 @@ type DescribeTrainingJobOutput struct {
 	// Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *types.VpcConfig
 
+	// The status of the warm pool associated with the training job.
+	WarmPoolStatus *types.WarmPoolStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

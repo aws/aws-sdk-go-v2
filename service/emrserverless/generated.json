@@ -12,6 +12,7 @@
         "api_op_CreateApplication.go",
         "api_op_DeleteApplication.go",
         "api_op_GetApplication.go",
+        "api_op_GetDashboardForJobRun.go",
         "api_op_GetJobRun.go",
         "api_op_ListApplications.go",
         "api_op_ListJobRuns.go",

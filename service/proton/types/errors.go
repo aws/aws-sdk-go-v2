@@ -84,8 +84,8 @@ func (e *ResourceNotFoundException) ErrorCode() string             { return "Res
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A quota was exceeded. For more information, see Proton Quotas
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-limits.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-limits.html) in the
+// Proton User Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 

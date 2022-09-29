@@ -197,6 +197,7 @@ const (
 	DataRepositoryTaskFilterNameFileSystemId          DataRepositoryTaskFilterName = "file-system-id"
 	DataRepositoryTaskFilterNameTaskLifecycle         DataRepositoryTaskFilterName = "task-lifecycle"
 	DataRepositoryTaskFilterNameDataRepoAssociationId DataRepositoryTaskFilterName = "data-repository-association-id"
+	DataRepositoryTaskFilterNameFileCacheId           DataRepositoryTaskFilterName = "file-cache-id"
 )
 
 // Values returns all known values for DataRepositoryTaskFilterName. Note that this
@@ -207,6 +208,7 @@ func (DataRepositoryTaskFilterName) Values() []DataRepositoryTaskFilterName {
 		"file-system-id",
 		"task-lifecycle",
 		"data-repository-association-id",
+		"file-cache-id",
 	}
 }
 
@@ -240,8 +242,10 @@ type DataRepositoryTaskType string
 
 // Enum values for DataRepositoryTaskType
 const (
-	DataRepositoryTaskTypeExport DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"
-	DataRepositoryTaskTypeImport DataRepositoryTaskType = "IMPORT_METADATA_FROM_REPOSITORY"
+	DataRepositoryTaskTypeExport                DataRepositoryTaskType = "EXPORT_TO_REPOSITORY"
+	DataRepositoryTaskTypeImport                DataRepositoryTaskType = "IMPORT_METADATA_FROM_REPOSITORY"
+	DataRepositoryTaskTypeEviction              DataRepositoryTaskType = "RELEASE_DATA_FROM_FILESYSTEM"
+	DataRepositoryTaskTypeAutoTriggeredEviction DataRepositoryTaskType = "AUTO_RELEASE_DATA"
 )
 
 // Values returns all known values for DataRepositoryTaskType. Note that this can
@@ -251,6 +255,8 @@ func (DataRepositoryTaskType) Values() []DataRepositoryTaskType {
 	return []DataRepositoryTaskType{
 		"EXPORT_TO_REPOSITORY",
 		"IMPORT_METADATA_FROM_REPOSITORY",
+		"RELEASE_DATA_FROM_FILESYSTEM",
+		"AUTO_RELEASE_DATA",
 	}
 }
 
@@ -343,6 +349,63 @@ func (EventType) Values() []EventType {
 	}
 }
 
+type FileCacheLifecycle string
+
+// Enum values for FileCacheLifecycle
+const (
+	FileCacheLifecycleAvailable FileCacheLifecycle = "AVAILABLE"
+	FileCacheLifecycleCreating  FileCacheLifecycle = "CREATING"
+	FileCacheLifecycleDeleting  FileCacheLifecycle = "DELETING"
+	FileCacheLifecycleUpdating  FileCacheLifecycle = "UPDATING"
+	FileCacheLifecycleFailed    FileCacheLifecycle = "FAILED"
+)
+
+// Values returns all known values for FileCacheLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileCacheLifecycle) Values() []FileCacheLifecycle {
+	return []FileCacheLifecycle{
+		"AVAILABLE",
+		"CREATING",
+		"DELETING",
+		"UPDATING",
+		"FAILED",
+	}
+}
+
+type FileCacheLustreDeploymentType string
+
+// Enum values for FileCacheLustreDeploymentType
+const (
+	FileCacheLustreDeploymentTypeCache1 FileCacheLustreDeploymentType = "CACHE_1"
+)
+
+// Values returns all known values for FileCacheLustreDeploymentType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FileCacheLustreDeploymentType) Values() []FileCacheLustreDeploymentType {
+	return []FileCacheLustreDeploymentType{
+		"CACHE_1",
+	}
+}
+
+type FileCacheType string
+
+// Enum values for FileCacheType
+const (
+	FileCacheTypeLustre FileCacheType = "LUSTRE"
+)
+
+// Values returns all known values for FileCacheType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileCacheType) Values() []FileCacheType {
+	return []FileCacheType{
+		"LUSTRE",
+	}
+}
+
 type FileSystemLifecycle string
 
 // Enum values for FileSystemLifecycle
@@ -421,6 +484,8 @@ const (
 	FilterNameFileSystemType     FilterName = "file-system-type"
 	FilterNameVolumeId           FilterName = "volume-id"
 	FilterNameDataRepositoryType FilterName = "data-repository-type"
+	FilterNameFileCacheId        FilterName = "file-cache-id"
+	FilterNameFileCacheType      FilterName = "file-cache-type"
 )
 
 // Values returns all known values for FilterName. Note that this can be expanded
@@ -433,6 +498,8 @@ func (FilterName) Values() []FilterName {
 		"file-system-type",
 		"volume-id",
 		"data-repository-type",
+		"file-cache-id",
+		"file-cache-type",
 	}
 }
 
@@ -497,6 +564,22 @@ func (LustreDeploymentType) Values() []LustreDeploymentType {
 		"SCRATCH_2",
 		"PERSISTENT_1",
 		"PERSISTENT_2",
+	}
+}
+
+type NfsVersion string
+
+// Enum values for NfsVersion
+const (
+	NfsVersionNfs3 NfsVersion = "NFS3"
+)
+
+// Values returns all known values for NfsVersion. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (NfsVersion) Values() []NfsVersion {
+	return []NfsVersion{
+		"NFS3",
 	}
 }
 
@@ -711,6 +794,7 @@ const (
 	ServiceLimitStorageVirtualMachinesPerFileSystem ServiceLimit = "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM"
 	ServiceLimitVolumesPerFileSystem                ServiceLimit = "VOLUMES_PER_FILE_SYSTEM"
 	ServiceLimitTotalSsdIops                        ServiceLimit = "TOTAL_SSD_IOPS"
+	ServiceLimitFileCacheCount                      ServiceLimit = "FILE_CACHE_COUNT"
 )
 
 // Values returns all known values for ServiceLimit. Note that this can be expanded
@@ -727,6 +811,7 @@ func (ServiceLimit) Values() []ServiceLimit {
 		"STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM",
 		"VOLUMES_PER_FILE_SYSTEM",
 		"TOTAL_SSD_IOPS",
+		"FILE_CACHE_COUNT",
 	}
 }
 

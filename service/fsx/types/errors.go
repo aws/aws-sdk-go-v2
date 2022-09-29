@@ -209,6 +209,25 @@ func (e *DataRepositoryTaskNotFound) ErrorMessage() string {
 func (e *DataRepositoryTaskNotFound) ErrorCode() string             { return "DataRepositoryTaskNotFound" }
 func (e *DataRepositoryTaskNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No caches were found based upon supplied parameters.
+type FileCacheNotFound struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FileCacheNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FileCacheNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FileCacheNotFound) ErrorCode() string             { return "FileCacheNotFound" }
+func (e *FileCacheNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // No Amazon FSx file systems were found based upon supplied parameters.
 type FileSystemNotFound struct {
 	Message *string
@@ -449,6 +468,25 @@ func (e *InvalidSourceKmsKey) ErrorMessage() string {
 }
 func (e *InvalidSourceKmsKey) ErrorCode() string             { return "InvalidSourceKmsKey" }
 func (e *InvalidSourceKmsKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A cache configuration is required for this operation.
+type MissingFileCacheConfiguration struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MissingFileCacheConfiguration) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MissingFileCacheConfiguration) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MissingFileCacheConfiguration) ErrorCode() string             { return "MissingFileCacheConfiguration" }
+func (e *MissingFileCacheConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A file system configuration is required for this operation.
 type MissingFileSystemConfiguration struct {

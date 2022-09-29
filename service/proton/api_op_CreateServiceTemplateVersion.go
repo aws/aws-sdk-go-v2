@@ -66,15 +66,15 @@ type CreateServiceTemplateVersionInput struct {
 	// An array of supported component sources. Components with supported sources can
 	// be attached to service instances based on this service template version. For
 	// more information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+	// Proton User Guide.
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	// An optional list of metadata items that you can associate with the Proton
 	// service template version. A tag is a key-value pair. For more information, see
-	// Proton resources and tagging in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// Proton resources and tagging
+	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
+	// Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

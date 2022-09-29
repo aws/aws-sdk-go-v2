@@ -90,6 +90,26 @@ func (m *validateOpGetApplication) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDashboardForJobRun struct {
+}
+
+func (*validateOpGetDashboardForJobRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDashboardForJobRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDashboardForJobRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDashboardForJobRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetJobRun struct {
 }
 
@@ -284,6 +304,10 @@ func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetApplication{}, middleware.After)
+}
+
+func addOpGetDashboardForJobRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDashboardForJobRun{}, middleware.After)
 }
 
 func addOpGetJobRunValidationMiddleware(stack *middleware.Stack) error {
@@ -572,6 +596,24 @@ func validateOpGetApplicationInput(v *GetApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDashboardForJobRunInput(v *GetDashboardForJobRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDashboardForJobRunInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.JobRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobRunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

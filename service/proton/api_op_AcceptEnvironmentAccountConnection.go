@@ -16,8 +16,8 @@ import (
 // associated IAM role to provision environment infrastructure resources in the
 // associated environment account. For more information, see Environment account
 // connections
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the Proton Administrator guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// in the Proton User guide.
 func (c *Client) AcceptEnvironmentAccountConnection(ctx context.Context, params *AcceptEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*AcceptEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &AcceptEnvironmentAccountConnectionInput{}

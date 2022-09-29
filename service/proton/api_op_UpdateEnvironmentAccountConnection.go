@@ -13,8 +13,8 @@ import (
 
 // In an environment account, update an environment account connection to use a new
 // IAM role. For more information, see Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the Proton Administrator guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// in the Proton User guide.
 func (c *Client) UpdateEnvironmentAccountConnection(ctx context.Context, params *UpdateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*UpdateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentAccountConnectionInput{}
@@ -43,8 +43,8 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	// account. The environment account connection must have a componentRoleArn to
 	// allow directly defined components to be associated with any environments running
 	// in the account. For more information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+	// Proton User Guide.
 	ComponentRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM service role that's associated with

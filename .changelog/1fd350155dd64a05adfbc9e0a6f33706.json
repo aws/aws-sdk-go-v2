@@ -1,0 +1,8 @@
+{
+    "id": "1fd35015-5dd6-4a05-adfb-c9e0a6f33706",
+    "type": "feature",
+    "description": "u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases.",
+    "modules": [
+        "service/ec2"
+    ]
+}

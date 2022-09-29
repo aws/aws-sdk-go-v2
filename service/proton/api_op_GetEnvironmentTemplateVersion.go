@@ -45,7 +45,7 @@ type GetEnvironmentTemplateVersionInput struct {
 	MinorVersion *string
 
 	// The name of the environment template a version of which you want to get detailed
-	// data for..
+	// data for.
 	//
 	// This member is required.
 	TemplateName *string

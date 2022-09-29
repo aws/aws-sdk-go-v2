@@ -134,6 +134,16 @@ type CreateFileSystemFromBackupInput struct {
 	// requests.
 	SecurityGroupIds []string
 
+	// Sets the storage capacity of the OpenZFS file system that you're creating from a
+	// backup, in gibibytes (GiB). Valid values are from 64 GiB up to 524,288 GiB (512
+	// TiB). However, the value that you specify must be equal to or greater than the
+	// backup's storage capacity value. If you don't use the StorageCapacity parameter,
+	// the default is the backup's StorageCapacity value. If used to create a file
+	// system other than OpenZFS, you must provide a value that matches the backup's
+	// StorageCapacity value. If you provide any other value, Amazon FSx responds with
+	// a 400 Bad Request.
+	StorageCapacity *int32
+
 	// Sets the storage type for the Windows or OpenZFS file system that you're
 	// creating from a backup. Valid values are SSD and HDD.
 	//

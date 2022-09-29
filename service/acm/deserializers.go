@@ -2607,6 +2607,22 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				sv.CertificateArn = ptr.String(jtv)
 			}
 
+		case "CreatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2614,6 +2630,164 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 					return fmt.Errorf("expected DomainNameString to be of type string, got %T instead", value)
 				}
 				sv.DomainName = ptr.String(jtv)
+			}
+
+		case "Exported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Exported = ptr.Bool(jtv)
+			}
+
+		case "ExtendedKeyUsages":
+			if err := awsAwsjson11_deserializeDocumentExtendedKeyUsageNames(&sv.ExtendedKeyUsages, value); err != nil {
+				return err
+			}
+
+		case "HasAdditionalSubjectAlternativeNames":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.HasAdditionalSubjectAlternativeNames = ptr.Bool(jtv)
+			}
+
+		case "ImportedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ImportedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "InUse":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.InUse = ptr.Bool(jtv)
+			}
+
+		case "IssuedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.IssuedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "KeyAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.KeyAlgorithm = types.KeyAlgorithm(jtv)
+			}
+
+		case "KeyUsages":
+			if err := awsAwsjson11_deserializeDocumentKeyUsageNames(&sv.KeyUsages, value); err != nil {
+				return err
+			}
+
+		case "NotAfter":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.NotAfter = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "NotBefore":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.NotBefore = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "RenewalEligibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RenewalEligibility to be of type string, got %T instead", value)
+				}
+				sv.RenewalEligibility = types.RenewalEligibility(jtv)
+			}
+
+		case "RevokedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RevokedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected TStamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.CertificateStatus(jtv)
+			}
+
+		case "SubjectAlternativeNameSummaries":
+			if err := awsAwsjson11_deserializeDocumentDomainList(&sv.SubjectAlternativeNameSummaries, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CertificateType(jtv)
 			}
 
 		default:
@@ -2973,6 +3147,42 @@ func awsAwsjson11_deserializeDocumentExtendedKeyUsageList(v *[]types.ExtendedKey
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentExtendedKeyUsageNames(v *[]types.ExtendedKeyUsageName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ExtendedKeyUsageName
+	if *v == nil {
+		cv = []types.ExtendedKeyUsageName{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ExtendedKeyUsageName
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ExtendedKeyUsageName to be of type string, got %T instead", value)
+			}
+			col = types.ExtendedKeyUsageName(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInUseList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3316,6 +3526,42 @@ func awsAwsjson11_deserializeDocumentKeyUsageList(v *[]types.KeyUsage, value int
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentKeyUsageNames(v *[]types.KeyUsageName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.KeyUsageName
+	if *v == nil {
+		cv = []types.KeyUsageName{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.KeyUsageName
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected KeyUsageName to be of type string, got %T instead", value)
+			}
+			col = types.KeyUsageName(jtv)
+		}
 		cv = append(cv, col)
 
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "69f342da-2faa-4247-957a-b71bff36077b",
+    "type": "feature",
+    "description": "Introducing AWS MigrationHubOrchestrator. This is the first public release of AWS MigrationHubOrchestrator.",
+    "modules": [
+        "service/migrationhuborchestrator"
+    ]
+}

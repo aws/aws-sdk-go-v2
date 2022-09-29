@@ -40,16 +40,14 @@ type DeleteDataRepositoryAssociationInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// Set to true to delete the data in the file system that corresponds to the data
-	// repository association.
-	//
-	// This member is required.
-	DeleteDataInFileSystem *bool
-
 	// (Optional) An idempotency token for resource creation, in a string of up to 64
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
+
+	// Set to true to delete the data in the file system that corresponds to the data
+	// repository association.
+	DeleteDataInFileSystem *bool
 
 	noSmithyDocumentSerde
 }

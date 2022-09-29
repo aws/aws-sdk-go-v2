@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Set up a template to create new template versions automatically. When a commit
-// is pushed to your registered repository
-// (https://docs.aws.amazon.com/proton/latest/APIReference/API_Repository.html),
-// Proton checks for changes to your repository template bundles. If it detects a
-// template bundle change, a new major or minor version of its template is created,
-// if the version doesn’t already exist. For more information, see Template sync
-// configurations
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html)
-// in the Proton Administrator Guide.
+// Set up a template to create new template versions automatically by tracking a
+// linked repository. A linked repository is a repository that has been registered
+// with Proton. For more information, see CreateRepository. When a commit is pushed
+// to your linked repository, Proton checks for changes to your repository template
+// bundles. If it detects a template bundle change, a new major or minor version of
+// its template is created, if the version doesn’t already exist. For more
+// information, see Template sync configurations
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html)
+// in the Proton User Guide.
 func (c *Client) CreateTemplateSyncConfig(ctx context.Context, params *CreateTemplateSyncConfigInput, optFns ...func(*Options)) (*CreateTemplateSyncConfigOutput, error) {
 	if params == nil {
 		params = &CreateTemplateSyncConfigInput{}
@@ -37,12 +37,12 @@ func (c *Client) CreateTemplateSyncConfig(ctx context.Context, params *CreateTem
 
 type CreateTemplateSyncConfigInput struct {
 
-	// The branch of the registered repository for your template.
+	// The repository branch for your template.
 	//
 	// This member is required.
 	Branch *string
 
-	// The name of your repository (for example, myrepos/myrepo).
+	// The repository name (for example, myrepos/myrepo).
 	//
 	// This member is required.
 	RepositoryName *string

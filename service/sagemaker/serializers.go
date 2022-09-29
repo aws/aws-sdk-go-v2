@@ -20763,6 +20763,11 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 		ok.String(string(v.InstanceType))
 	}
 
+	if v.KeepAlivePeriodInSeconds != nil {
+		ok := object.Key("KeepAlivePeriodInSeconds")
+		ok.Integer(*v.KeepAlivePeriodInSeconds)
+	}
+
 	if v.VolumeKmsKeyId != nil {
 		ok := object.Key("VolumeKmsKeyId")
 		ok.String(*v.VolumeKmsKeyId)
@@ -20771,6 +20776,18 @@ func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value
 	{
 		ok := object.Key("VolumeSizeInGB")
 		ok.Integer(v.VolumeSizeInGB)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResourceConfigForUpdate(v *types.ResourceConfigForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeepAlivePeriodInSeconds != nil {
+		ok := object.Key("KeepAlivePeriodInSeconds")
+		ok.Integer(*v.KeepAlivePeriodInSeconds)
 	}
 
 	return nil
@@ -28393,6 +28410,11 @@ func awsAwsjson11_serializeOpDocumentListTrainingJobsInput(v *ListTrainingJobsIn
 		ok.String(string(v.StatusEquals))
 	}
 
+	if len(v.WarmPoolStatusEquals) > 0 {
+		ok := object.Key("WarmPoolStatusEquals")
+		ok.String(string(v.WarmPoolStatusEquals))
+	}
+
 	return nil
 }
 
@@ -29807,6 +29829,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTrainingJobInput(v *UpdateTrainingJob
 	if v.ProfilerRuleConfigurations != nil {
 		ok := object.Key("ProfilerRuleConfigurations")
 		if err := awsAwsjson11_serializeDocumentProfilerRuleConfigurations(v.ProfilerRuleConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceConfig != nil {
+		ok := object.Key("ResourceConfig")
+		if err := awsAwsjson11_serializeDocumentResourceConfigForUpdate(v.ResourceConfig, ok); err != nil {
 			return err
 		}
 	}

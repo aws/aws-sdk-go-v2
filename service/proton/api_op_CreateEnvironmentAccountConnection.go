@@ -18,8 +18,8 @@ import (
 // bi-directional connection between a management account and an environment
 // account that maintains authorization and permissions. For more information, see
 // Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the Proton Administrator guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+// in the Proton User guide.
 func (c *Client) CreateEnvironmentAccountConnection(ctx context.Context, params *CreateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*CreateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentAccountConnectionInput{}
@@ -70,15 +70,15 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// account. You must specify componentRoleArn to allow directly defined components
 	// to be associated with any environments running in this account. For more
 	// information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+	// Proton User Guide.
 	ComponentRoleArn *string
 
 	// An optional list of metadata items that you can associate with the Proton
 	// environment account connection. A tag is a key-value pair. For more information,
 	// see Proton resources and tagging
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
+	// Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -77,6 +77,9 @@ type ListTrainingJobsInput struct {
 	// A filter that retrieves only training jobs with a specific status.
 	StatusEquals types.TrainingJobStatus
 
+	// A filter that retrieves only training jobs with a specific warm pool status.
+	WarmPoolStatusEquals types.WarmPoolResourceStatus
+
 	noSmithyDocumentSerde
 }
 

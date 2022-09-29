@@ -13,8 +13,8 @@ import (
 
 // Create an Proton component. A component is an infrastructure extension for a
 // service instance. For more information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+// Proton User Guide.
 func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInput, optFns ...func(*Options)) (*CreateComponentOutput, error) {
 	if params == nil {
 		params = &CreateComponentInput{}
@@ -81,9 +81,8 @@ type CreateComponentInput struct {
 
 	// An optional list of metadata items that you can associate with the Proton
 	// component. A tag is a key-value pair. For more information, see Proton resources
-	// and tagging in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+	// in the Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

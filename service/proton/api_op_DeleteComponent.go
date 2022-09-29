@@ -13,8 +13,8 @@ import (
 
 // Delete an Proton component resource. For more information about components, see
 // Proton components
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+// Proton User Guide.
 func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInput, optFns ...func(*Options)) (*DeleteComponentOutput, error) {
 	if params == nil {
 		params = &DeleteComponentInput{}

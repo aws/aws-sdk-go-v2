@@ -17,8 +17,8 @@ type CertificateDetail struct {
 	// the Amazon Web Services General Reference.
 	CertificateArn *string
 
-	// The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA)
-	// that issued the certificate. This has the following format:
+	// The Amazon Resource Name (ARN) of the private certificate authority (CA) that
+	// issued the certificate. This has the following format:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
 
@@ -43,11 +43,11 @@ type CertificateDetail struct {
 	// certificate status is FAILED. For more information, see Certificate Request
 	// Failed
 	// (https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
-	// in the Amazon Web Services Certificate Manager User Guide.
+	// in the Certificate Manager User Guide.
 	FailureReason FailureReason
 
-	// The date and time at which the certificate was imported. This value exists only
-	// when the certificate type is IMPORTED.
+	// The date and time when the certificate was imported. This value exists only when
+	// the certificate type is IMPORTED.
 	ImportedAt *time.Time
 
 	// A list of ARNs for the Amazon Web Services resources that are using the
@@ -107,7 +107,17 @@ type CertificateDetail struct {
 	// The algorithm that was used to sign the certificate.
 	SignatureAlgorithm *string
 
-	// The status of the certificate.
+	// The status of the certificate. A certificate enters status PENDING_VALIDATION
+	// upon being requested, unless it fails for any of the reasons given in the
+	// troubleshooting topic Certificate request fails
+	// (https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html).
+	// ACM makes repeated attempts to validate a certificate for 72 hours and then
+	// times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete
+	// the request, correct the issue with DNS validation
+	// (https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) or Email
+	// validation
+	// (https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html), and
+	// try again. If validation succeeds, the certificate enters status ISSUED.
 	Status CertificateStatus
 
 	// The name of the entity that is associated with the public key contained in the
@@ -128,7 +138,7 @@ type CertificateDetail struct {
 	// certificates. For more information about the differences between certificates
 	// that you import and those that ACM provides, see Importing Certificates
 	// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
-	// the Amazon Web Services Certificate Manager User Guide.
+	// the Certificate Manager User Guide.
 	Type CertificateType
 
 	noSmithyDocumentSerde
@@ -160,9 +170,101 @@ type CertificateSummary struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	CertificateArn *string
 
+	// The time at which the certificate was requested.
+	CreatedAt *time.Time
+
 	// Fully qualified domain name (FQDN), such as www.example.com or example.com, for
 	// the certificate.
 	DomainName *string
+
+	// Indicates whether the certificate has been exported. This value exists only when
+	// the certificate type is PRIVATE.
+	Exported *bool
+
+	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
+	// specifies a purpose for which the certificate public key can be used and
+	// consists of a name and an object identifier (OID).
+	ExtendedKeyUsages []ExtendedKeyUsageName
+
+	// When called by ListCertificates
+	// (https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html),
+	// indicates whether the full list of subject alternative names has been included
+	// in the response. If false, the response includes all of the subject alternative
+	// names included in the certificate. If true, the response only includes the first
+	// 100 subject alternative names included in the certificate. To display the full
+	// list of subject alternative names, use DescribeCertificate
+	// (https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html).
+	HasAdditionalSubjectAlternativeNames *bool
+
+	// The date and time when the certificate was imported. This value exists only when
+	// the certificate type is IMPORTED.
+	ImportedAt *time.Time
+
+	// Indicates whether the certificate is currently in use by any Amazon Web Services
+	// resources.
+	InUse *bool
+
+	// The time at which the certificate was issued. This value exists only when the
+	// certificate type is AMAZON_ISSUED.
+	IssuedAt *time.Time
+
+	// The algorithm that was used to generate the public-private key pair.
+	KeyAlgorithm KeyAlgorithm
+
+	// A list of Key Usage X.509 v3 extension objects. Each object is a string value
+	// that identifies the purpose of the public key contained in the certificate.
+	// Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT,
+	// NON_REPUDIATION, and more.
+	KeyUsages []KeyUsageName
+
+	// The time after which the certificate is not valid.
+	NotAfter *time.Time
+
+	// The time before which the certificate is not valid.
+	NotBefore *time.Time
+
+	// Specifies whether the certificate is eligible for renewal. At this time, only
+	// exported private certificates can be renewed with the RenewCertificate command.
+	RenewalEligibility RenewalEligibility
+
+	// The time at which the certificate was revoked. This value exists only when the
+	// certificate status is REVOKED.
+	RevokedAt *time.Time
+
+	// The status of the certificate. A certificate enters status PENDING_VALIDATION
+	// upon being requested, unless it fails for any of the reasons given in the
+	// troubleshooting topic Certificate request fails
+	// (https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html).
+	// ACM makes repeated attempts to validate a certificate for 72 hours and then
+	// times out. If a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete
+	// the request, correct the issue with DNS validation
+	// (https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) or Email
+	// validation
+	// (https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html), and
+	// try again. If validation succeeds, the certificate enters status ISSUED.
+	Status CertificateStatus
+
+	// One or more domain names (subject alternative names) included in the
+	// certificate. This list contains the domain names that are bound to the public
+	// key that is contained in the certificate. The subject alternative names include
+	// the canonical domain name (CN) of the certificate and additional domain names
+	// that can be used to connect to the website. When called by ListCertificates
+	// (https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html),
+	// this parameter will only return the first 100 subject alternative names included
+	// in the certificate. To display the full list of subject alternative names, use
+	// DescribeCertificate
+	// (https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html).
+	SubjectAlternativeNameSummaries []string
+
+	// The source of the certificate. For certificates provided by ACM, this value is
+	// AMAZON_ISSUED. For certificates that you imported with ImportCertificate, this
+	// value is IMPORTED. ACM does not provide managed renewal
+	// (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html) for imported
+	// certificates. For more information about the differences between certificates
+	// that you import and those that ACM provides, see Importing Certificates
+	// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
+	// the Certificate Manager User Guide.
+	Type CertificateType
 
 	noSmithyDocumentSerde
 }
@@ -304,7 +406,7 @@ type Filters struct {
 	// Specify one or more algorithms that can be used to generate key pairs. Default
 	// filtering returns only RSA_1024 and RSA_2048 certificates that have at least one
 	// domain. To return other certificate types, provide the desired type signatures
-	// in a comma-separated list. For example, "keyTypes": ["RSA_2048,RSA_4096"]
+	// in a comma-separated list. For example, "keyTypes": ["RSA_2048","RSA_4096"]
 	// returns both RSA_2048 and RSA_4096 certificates.
 	KeyTypes []KeyAlgorithm
 

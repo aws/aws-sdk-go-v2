@@ -3516,6 +3516,11 @@ func awsAwsjson11_serializeDocumentClientProperties(v *types.ClientProperties, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.LogUploadEnabled) > 0 {
+		ok := object.Key("LogUploadEnabled")
+		ok.String(string(v.LogUploadEnabled))
+	}
+
 	if len(v.ReconnectEnabled) > 0 {
 		ok := object.Key("ReconnectEnabled")
 		ok.String(string(v.ReconnectEnabled))

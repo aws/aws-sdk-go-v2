@@ -55130,6 +55130,19 @@ func awsAwsjson11_deserializeDocumentResourceConfig(v **types.ResourceConfig, va
 				sv.InstanceType = types.TrainingInstanceType(jtv)
 			}
 
+		case "KeepAlivePeriodInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected KeepAlivePeriodInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.KeepAlivePeriodInSeconds = ptr.Int32(int32(i64))
+			}
+
 		case "VolumeKmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57962,6 +57975,11 @@ func awsAwsjson11_deserializeDocumentTrainingJobSummary(v **types.TrainingJobSum
 					return fmt.Errorf("expected TrainingJobStatus to be of type string, got %T instead", value)
 				}
 				sv.TrainingJobStatus = types.TrainingJobStatus(jtv)
+			}
+
+		case "WarmPoolStatus":
+			if err := awsAwsjson11_deserializeDocumentWarmPoolStatus(&sv.WarmPoolStatus, value); err != nil {
+				return err
 			}
 
 		default:
@@ -61013,6 +61031,68 @@ func awsAwsjson11_deserializeDocumentVpcSecurityGroupIds(v *[]string, value inte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWarmPoolStatus(v **types.WarmPoolStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WarmPoolStatus
+	if *v == nil {
+		sv = &types.WarmPoolStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResourceRetainedBillableTimeInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResourceRetainedBillableTimeInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResourceRetainedBillableTimeInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "ReusedByJob":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingJobName to be of type string, got %T instead", value)
+				}
+				sv.ReusedByJob = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WarmPoolResourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.WarmPoolResourceStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -70167,6 +70247,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 
 		case "VpcConfig":
 			if err := awsAwsjson11_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
+			}
+
+		case "WarmPoolStatus":
+			if err := awsAwsjson11_deserializeDocumentWarmPoolStatus(&sv.WarmPoolStatus, value); err != nil {
 				return err
 			}
 

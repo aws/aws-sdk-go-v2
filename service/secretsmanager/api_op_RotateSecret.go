@@ -42,9 +42,13 @@ import (
 // the same version as the AWSCURRENT version, or it might not be attached to any
 // version. If the AWSPENDING staging label is present but not attached to the same
 // version as AWSCURRENT, then any later invocation of RotateSecret assumes that a
-// previous rotation request is still in progress and returns an error. Required
-// permissions: secretsmanager:RotateSecret. For more information, see  IAM policy
-// actions for Secrets Manager
+// previous rotation request is still in progress and returns an error. Secrets
+// Manager generates a CloudTrail log entry when you call this action. Do not
+// include sensitive information in request parameters because it might be logged.
+// For more information, see Logging Secrets Manager events with CloudTrail
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
+// Required permissions: secretsmanager:RotateSecret. For more information, see
+// IAM policy actions for Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).

@@ -22,11 +22,12 @@ import (
 // email validation
 // (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 // We recommend that you use DNS validation. ACM issues public certificates after
-// receiving approval from the domain owner. ACM behavior differs from the
-// https://tools.ietf.org/html/rfc6125#appendix-B.2
-// (https://tools.ietf.org/html/rfc6125#appendix-B.2)RFC 6125 specification of the
-// certificate validation process. first checks for a subject alternative name,
-// and, if it finds one, ignores the common name (CN)
+// receiving approval from the domain owner. ACM behavior differs from the RFC 6125
+// (https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2) specification of
+// the certificate validation process. ACM first checks for a Subject Alternative
+// Name, and, if it finds one, ignores the common name (CN). After successful
+// completion of the RequestCertificate action, there is a delay of several seconds
+// before you can retrieve information about the new certificate.
 func (c *Client) RequestCertificate(ctx context.Context, params *RequestCertificateInput, optFns ...func(*Options)) (*RequestCertificateOutput, error) {
 	if params == nil {
 		params = &RequestCertificateInput{}
@@ -48,9 +49,11 @@ type RequestCertificateInput struct {
 	// secure with an ACM certificate. Use an asterisk (*) to create a wildcard
 	// certificate that protects several sites in the same domain. For example,
 	// *.example.com protects www.example.com, site.example.com, and
-	// images.example.com. The first domain name you enter cannot exceed 64 octets,
-	// including periods. Each subsequent Subject Alternative Name (SAN), however, can
-	// be up to 253 octets in length.
+	// images.example.com. In compliance with RFC 5280
+	// (https://datatracker.ietf.org/doc/html/rfc5280), the length of the domain name
+	// (technically, the Common Name) that you provide cannot exceed 64 octets
+	// (characters), including periods. To add a longer domain name, specify it in the
+	// Subject Alternative Name field, which supports names up to 253 octets in length.
 	//
 	// This member is required.
 	DomainName *string
@@ -58,8 +61,8 @@ type RequestCertificateInput struct {
 	// The Amazon Resource Name (ARN) of the private certificate authority (CA) that
 	// will be used to issue the certificate. If you do not provide an ARN and you are
 	// trying to request a private certificate, ACM will attempt to issue a public
-	// certificate. For more information about private CAs, see the Amazon Web Services
-	// Certificate Manager Private Certificate Authority (PCA)
+	// certificate. For more information about private CAs, see the Certificate Manager
+	// Private Certificate Authority
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html) user
 	// guide. The ARN must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012

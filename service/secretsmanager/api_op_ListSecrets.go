@@ -21,6 +21,10 @@ import (
 // SecretString or SecretBinary, call GetSecretValue. For information about finding
 // secrets in the console, see Find secrets in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html).
+// Secrets Manager generates a CloudTrail log entry when you call this action. Do
+// not include sensitive information in request parameters because it might be
+// logged. For more information, see Logging Secrets Manager events with CloudTrail
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
 // Required permissions: secretsmanager:ListSecrets. For more information, see  IAM
 // policy actions for Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)

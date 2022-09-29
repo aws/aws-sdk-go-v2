@@ -252,6 +252,24 @@ func (ImageType) Values() []ImageType {
 	}
 }
 
+type LogUploadEnum string
+
+// Enum values for LogUploadEnum
+const (
+	LogUploadEnumEnabled  LogUploadEnum = "ENABLED"
+	LogUploadEnumDisabled LogUploadEnum = "DISABLED"
+)
+
+// Values returns all known values for LogUploadEnum. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LogUploadEnum) Values() []LogUploadEnum {
+	return []LogUploadEnum{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ModificationResourceEnum string
 
 // Enum values for ModificationResourceEnum

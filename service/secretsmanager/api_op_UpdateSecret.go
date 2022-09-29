@@ -21,13 +21,19 @@ import (
 // ago. If you update the secret value more than once every 10 minutes, you create
 // more versions than Secrets Manager removes, and you will reach the quota for
 // secret versions. If you include SecretString or SecretBinary to create a new
-// secret version, Secrets Manager automatically attaches the staging label
-// AWSCURRENT to the new version. If you call this operation with a
+// secret version, Secrets Manager automatically moves the staging label AWSCURRENT
+// to the new version. Then it attaches the label AWSPREVIOUS to the version that
+// AWSCURRENT was removed from. If you call this operation with a
 // ClientRequestToken that matches an existing version's VersionId, the operation
 // results in an error. You can't modify an existing version, you can only create a
 // new version. To remove a version, remove all staging labels from it. See
-// UpdateSecretVersionStage. Required permissions: secretsmanager:UpdateSecret. For
-// more information, see  IAM policy actions for Secrets Manager
+// UpdateSecretVersionStage. Secrets Manager generates a CloudTrail log entry when
+// you call this action. Do not include sensitive information in request parameters
+// except SecretBinary or SecretString because it might be logged. For more
+// information, see Logging Secrets Manager events with CloudTrail
+// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
+// Required permissions: secretsmanager:UpdateSecret. For more information, see
+// IAM policy actions for Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions)
 // and Authentication and access control in Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html).

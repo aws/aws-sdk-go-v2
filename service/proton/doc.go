@@ -23,11 +23,7 @@
 // Proton deploys their applications. To monitor their applications that are
 // running on Proton, developers need permissions to the service create, list,
 // update and delete API operations and the service instance list and update API
-// operations. To learn more about Proton administration, see the Proton
-// Administrator Guide
-// (https://docs.aws.amazon.com/proton/latest/adminguide/Welcome.html). To learn
-// more about deploying serverless and containerized applications on Proton, see
-// the Proton User Guide
+// operations. To learn more about Proton, see the Proton User Guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/Welcome.html). Ensuring
 // Idempotency When you make a mutating API request, the request typically returns
 // a result before the asynchronous workflows of the operation are complete.

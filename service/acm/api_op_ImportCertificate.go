@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports a certificate into Amazon Web Services Certificate Manager (ACM) to use
-// with services that are integrated with ACM. Note that integrated services
+// Imports a certificate into Certificate Manager (ACM) to use with services that
+// are integrated with ACM. Note that integrated services
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html) allow only
 // certificate types and keys they support to be associated with their resources.
 // Further, their support differs depending on whether the certificate is imported
@@ -20,8 +20,7 @@ import (
 // service. For more information about importing certificates into ACM, see
 // Importing Certificates
 // (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
-// the Amazon Web Services Certificate Manager User Guide. ACM does not provide
-// managed renewal
+// the Certificate Manager User Guide. ACM does not provide managed renewal
 // (https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html) for
 // certificates that you import. Note the following guidelines when importing third
 // party certificates:

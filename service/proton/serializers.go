@@ -5767,6 +5767,11 @@ func awsAwsjson10_serializeOpDocumentUpdateAccountSettingsInput(v *UpdateAccount
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeletePipelineProvisioningRepository != nil {
+		ok := object.Key("deletePipelineProvisioningRepository")
+		ok.Boolean(*v.DeletePipelineProvisioningRepository)
+	}
+
 	if v.PipelineProvisioningRepository != nil {
 		ok := object.Key("pipelineProvisioningRepository")
 		if err := awsAwsjson10_serializeDocumentRepositoryBranchInput(v.PipelineProvisioningRepository, ok); err != nil {

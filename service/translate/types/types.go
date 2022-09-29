@@ -250,6 +250,17 @@ type ParallelDataProperties struct {
 	noSmithyDocumentSerde
 }
 
+type Tag struct {
+
+	// This member is required.
+	Key *string
+
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The term being translated by the custom terminology.
 type Term struct {
 

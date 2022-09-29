@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the Proton service pipeline role or repository settings.
+// Update Proton settings that are used for multiple services in the Amazon Web
+// Services account.
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -29,13 +30,23 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// A repository for pipeline provisioning. Specify it if you have environments
-	// configured for self-managed provisioning with services that include pipelines.
+	// Set to true to remove a configured pipeline repository from the account
+	// settings. Don't set this field if you are updating the configured pipeline
+	// repository.
+	DeletePipelineProvisioningRepository *bool
+
+	// A linked repository for pipeline provisioning. Specify it if you have
+	// environments configured for self-managed provisioning with services that include
+	// pipelines. A linked repository is a repository that has been registered with
+	// Proton. For more information, see CreateRepository. To remove a previously
+	// configured repository, set deletePipelineProvisioningRepository to true, and
+	// don't set pipelineProvisioningRepository.
 	PipelineProvisioningRepository *types.RepositoryBranchInput
 
 	// The Amazon Resource Name (ARN) of the service role you want to use for
 	// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
-	// provisioning, and by customer-owned automation for self-managed provisioning.
+	// provisioning, and by customer-owned automation for self-managed provisioning. To
+	// remove a previously configured ARN, specify an empty string.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde

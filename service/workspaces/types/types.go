@@ -37,6 +37,12 @@ type AccountModification struct {
 // Describes an Amazon WorkSpaces client.
 type ClientProperties struct {
 
+	// Specifies whether users can upload diagnostic log files of Amazon WorkSpaces
+	// client directly to WorkSpaces to troubleshoot issues when using the WorkSpaces
+	// client. When enabled, the log files will be sent to WorkSpaces automatically and
+	// will be applied to all users in the specified directory.
+	LogUploadEnabled LogUploadEnum
+
 	// Specifies whether users can cache their credentials on the Amazon WorkSpaces
 	// client. When enabled, users can choose to reconnect to their WorkSpaces without
 	// re-entering their credentials.

@@ -15,8 +15,8 @@ import (
 // deploymentType field defines the mode. You can't update a component while its
 // deployment status, or the deployment status of a service instance attached to
 // it, is IN_PROGRESS. For more information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+// Proton User Guide.
 func (c *Client) UpdateComponent(ctx context.Context, params *UpdateComponentInput, optFns ...func(*Options)) (*UpdateComponentOutput, error) {
 	if params == nil {
 		params = &UpdateComponentInput{}

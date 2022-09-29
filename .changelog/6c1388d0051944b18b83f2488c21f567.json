@@ -1,0 +1,8 @@
+{
+    "id": "6c1388d0-0519-44b1-8b83-f2488c21f567",
+    "type": "feature",
+    "description": "This update returns additional certificate details such as certificate SANs and allows sorting in the ListCertificates API.",
+    "modules": [
+        "service/acm"
+    ]
+}

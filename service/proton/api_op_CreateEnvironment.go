@@ -24,10 +24,10 @@ import (
 // engine uses to provision resources.
 //
 // For more information, see Environments
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html) and
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html) and
 // Provisioning methods
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html)
-// in the Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html)
+// in the Proton User Guide.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -52,8 +52,8 @@ type CreateEnvironmentInput struct {
 
 	// A YAML formatted string that provides inputs as defined in the environment
 	// template bundle schema file. For more information, see Environments
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html) in
-	// the Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html) in
+	// the Proton User Guide.
 	//
 	// This value conforms to the media type: application/yaml
 	//
@@ -67,8 +67,8 @@ type CreateEnvironmentInput struct {
 
 	// The name of the environment template. For more information, see Environment
 	// Templates
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html) in the
+	// Proton User Guide.
 	//
 	// This member is required.
 	TemplateName *string
@@ -78,8 +78,8 @@ type CreateEnvironmentInput struct {
 	// scope of infrastructure that a component can provision. You must specify
 	// componentRoleArn to allow directly defined components to be associated with this
 	// environment. For more information about components, see Proton components
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-	// Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+	// Proton User Guide.
 	ComponentRoleArn *string
 
 	// A description of the environment that's being created and deployed.
@@ -88,11 +88,10 @@ type CreateEnvironmentInput struct {
 	// The ID of the environment account connection that you provide if you're
 	// provisioning your environment infrastructure resources to an environment
 	// account. For more information, see Environment account connections
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-	// in the Proton Administrator guide. To use Amazon Web Services-managed
-	// provisioning for the environment, specify either the
-	// environmentAccountConnectionId or protonServiceRoleArn parameter and omit the
-	// provisioningRepository parameter.
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+	// in the Proton User guide. To use Amazon Web Services-managed provisioning for
+	// the environment, specify either the environmentAccountConnectionId or
+	// protonServiceRoleArn parameter and omit the provisioningRepository parameter.
 	EnvironmentAccountConnectionId *string
 
 	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
@@ -102,17 +101,19 @@ type CreateEnvironmentInput struct {
 	// provisioningRepository parameter.
 	ProtonServiceRoleArn *string
 
-	// The infrastructure repository that you use to host your rendered infrastructure
-	// templates for self-managed provisioning. To use self-managed provisioning for
-	// the environment, specify this parameter and omit the
-	// environmentAccountConnectionId and protonServiceRoleArn parameters.
+	// The linked repository that you use to host your rendered infrastructure
+	// templates for self-managed provisioning. A linked repository is a repository
+	// that has been registered with Proton. For more information, see
+	// CreateRepository. To use self-managed provisioning for the environment, specify
+	// this parameter and omit the environmentAccountConnectionId and
+	// protonServiceRoleArn parameters.
 	ProvisioningRepository *types.RepositoryBranchInput
 
 	// An optional list of metadata items that you can associate with the Proton
 	// environment. A tag is a key-value pair. For more information, see Proton
-	// resources and tagging in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// resources and tagging
+	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
+	// Proton User Guide.
 	Tags []types.Tag
 
 	// The minor version of the environment template.

@@ -70,7 +70,7 @@ type CreateWorkspaceImageOutput struct {
 	// The operating system that the image is running.
 	OperatingSystem *types.OperatingSystem
 
-	// The identifier of the AWS account that owns the image.
+	// The identifier of the Amazon Web Services account that owns the image.
 	OwnerAccountId *string
 
 	// Specifies whether the image is running on dedicated hardware. When Bring Your

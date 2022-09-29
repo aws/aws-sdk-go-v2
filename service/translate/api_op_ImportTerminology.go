@@ -59,6 +59,8 @@ type ImportTerminologyInput struct {
 	// The encryption key for the custom terminology being imported.
 	EncryptionKey *types.EncryptionKey
 
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

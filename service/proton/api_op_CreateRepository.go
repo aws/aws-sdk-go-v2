@@ -11,17 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create and register a link to a repository that can be used with self-managed
-// provisioning (infrastructure or pipelines) or for template sync configurations.
-// When you create a repository link, Proton creates a service-linked role
-// (https://docs.aws.amazon.com/proton/latest/adminguide/using-service-linked-roles.html)
+// Create and register a link to a repository. Proton uses the link to repeatedly
+// access the repository, to either push to it (self-managed provisioning) or pull
+// from it (template sync). You can share a linked repository across multiple
+// resources (like environments using self-managed provisioning, or synced
+// templates). When you create a repository link, Proton creates a service-linked
+// role
+// (https://docs.aws.amazon.com/proton/latest/userguide/using-service-linked-roles.html)
 // for you. For more information, see Self-managed provisioning
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html#ag-works-prov-methods-self),
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self),
 // Template bundles
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html),
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles),
 // and Template sync configurations
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html)
-// in the Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html)
+// in the Proton User Guide.
 func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryInput, optFns ...func(*Options)) (*CreateRepositoryOutput, error) {
 	if params == nil {
 		params = &CreateRepositoryInput{}
@@ -39,10 +42,11 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 type CreateRepositoryInput struct {
 
-	// The Amazon Resource Name (ARN) of your Amazon Web Services CodeStar connection.
-	// For more information, see Setting up for Proton
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html)
-	// in the Proton Administrator Guide.
+	// The Amazon Resource Name (ARN) of your AWS CodeStar connection that connects
+	// Proton to your repository provider account. For more information, see Setting up
+	// for Proton
+	// (https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html)
+	// in the Proton User Guide.
 	//
 	// This member is required.
 	ConnectionArn *string
@@ -63,9 +67,9 @@ type CreateRepositoryInput struct {
 
 	// An optional list of metadata items that you can associate with the Proton
 	// repository. A tag is a key-value pair. For more information, see Proton
-	// resources and tagging in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// resources and tagging
+	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
+	// Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -73,7 +77,7 @@ type CreateRepositoryInput struct {
 
 type CreateRepositoryOutput struct {
 
-	// The repository detail data that's returned by Proton.
+	// The repository link's detail data that's returned by Proton.
 	//
 	// This member is required.
 	Repository *types.Repository

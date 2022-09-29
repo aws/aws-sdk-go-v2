@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get detail data for a repository.
+// Get detail data for a linked repository.
 func (c *Client) GetRepository(ctx context.Context, params *GetRepositoryInput, optFns ...func(*Options)) (*GetRepositoryOutput, error) {
 	if params == nil {
 		params = &GetRepositoryInput{}
@@ -44,7 +44,7 @@ type GetRepositoryInput struct {
 
 type GetRepositoryOutput struct {
 
-	// The repository detail data that's returned by Proton.
+	// The repository link's detail data that's returned by Proton.
 	//
 	// This member is required.
 	Repository *types.Repository

@@ -14,9 +14,7 @@ import (
 // Create an Proton service. An Proton service is an instantiation of a service
 // template and often includes several service instances and pipeline. For more
 // information, see Services
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-services.html) in the
-// Proton Administrator Guide and Services
-// (https://docs.aws.amazon.com/proton/latest/userguide/ug-service.html) in the
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-services.html) in the
 // Proton User Guide.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
@@ -44,9 +42,7 @@ type CreateServiceInput struct {
 	// bundle schema file. The spec file is in YAML format. Don’t include pipeline
 	// inputs in the spec if your service template doesn’t include a service pipeline.
 	// For more information, see Create a service
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html)
-	// in the Proton Administrator Guide and Create a service
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html) in the
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-create-svc.html) in the
 	// Proton User Guide.
 	//
 	// This value conforms to the media type: application/yaml
@@ -73,10 +69,8 @@ type CreateServiceInput struct {
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the repository connection. For more
-	// information, see Set up repository connection
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol)
-	// in the Proton Administrator Guide and Setting up with Proton
-	// (https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection)
+	// information, see Setting up an AWS CodeStar connection
+	// (https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html#setting-up-vcontrol)
 	// in the Proton User Guide. Don't include this parameter if your service template
 	// doesn't include a service pipeline.
 	RepositoryConnectionArn *string
@@ -87,9 +81,8 @@ type CreateServiceInput struct {
 
 	// An optional list of metadata items that you can associate with the Proton
 	// service. A tag is a key-value pair. For more information, see Proton resources
-	// and tagging in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
+	// in the Proton User Guide.
 	Tags []types.Tag
 
 	// The minor version of the service template that was used to create the service.

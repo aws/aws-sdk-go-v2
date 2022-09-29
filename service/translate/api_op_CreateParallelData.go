@@ -56,6 +56,8 @@ type CreateParallelDataInput struct {
 	// The encryption key used to encrypt this object.
 	EncryptionKey *types.EncryptionKey
 
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

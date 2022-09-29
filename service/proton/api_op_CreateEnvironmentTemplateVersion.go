@@ -58,9 +58,9 @@ type CreateEnvironmentTemplateVersionInput struct {
 
 	// An optional list of metadata items that you can associate with the Proton
 	// environment template version. A tag is a key-value pair. For more information,
-	// see Proton resources and tagging in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or Proton
-	// User Guide (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
+	// see Proton resources and tagging
+	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html) in the
+	// Proton User Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

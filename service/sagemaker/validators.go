@@ -8926,6 +8926,21 @@ func validateResourceConfig(v *types.ResourceConfig) error {
 	}
 }
 
+func validateResourceConfigForUpdate(v *types.ResourceConfigForUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceConfigForUpdate"}
+	if v.KeepAlivePeriodInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeepAlivePeriodInSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceLimits(v *types.ResourceLimits) error {
 	if v == nil {
 		return nil
@@ -13910,6 +13925,11 @@ func validateOpUpdateTrainingJobInput(v *UpdateTrainingJobInput) error {
 	if v.ProfilerRuleConfigurations != nil {
 		if err := validateProfilerRuleConfigurations(v.ProfilerRuleConfigurations); err != nil {
 			invalidParams.AddNested("ProfilerRuleConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceConfig != nil {
+		if err := validateResourceConfigForUpdate(v.ResourceConfig); err != nil {
+			invalidParams.AddNested("ResourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

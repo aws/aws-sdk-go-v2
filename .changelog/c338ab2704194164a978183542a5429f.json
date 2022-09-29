@@ -1,0 +1,8 @@
+{
+    "id": "c338ab27-0419-4164-a978-183542a5429f",
+    "type": "feature",
+    "description": "Added support for the new Cantonese voice - Hiujin. Hiujin is available as a Neural voice only.",
+    "modules": [
+        "service/polly"
+    ]
+}

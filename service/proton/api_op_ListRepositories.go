@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List repositories with detail data.
+// List linked repositories with detail data.
 func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesInput, optFns ...func(*Options)) (*ListRepositoriesOutput, error) {
 	if params == nil {
 		params = &ListRepositoriesInput{}
@@ -42,7 +42,7 @@ type ListRepositoriesInput struct {
 
 type ListRepositoriesOutput struct {
 
-	// An array of repositories.
+	// An array of repository links.
 	//
 	// This member is required.
 	Repositories []types.RepositorySummary

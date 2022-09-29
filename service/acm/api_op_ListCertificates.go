@@ -50,6 +50,14 @@ type ListCertificatesInput struct {
 	// NextToken from the response you just received.
 	NextToken *string
 
+	// Specifies the field to sort results by. If you specify SortBy, you must also
+	// specify SortOrder.
+	SortBy types.SortBy
+
+	// Specifies the order of sorted results. If you specify SortOrder, you must also
+	// specify SortBy.
+	SortOrder types.SortOrder
+
 	noSmithyDocumentSerde
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "5f3ab57c-c0ee-45c9-af72-be74a41b2a2c",
+    "type": "feature",
+    "description": "This release includes diagnostic log uploading feature. If it is enabled, the log files of WorkSpaces Windows client will be sent to Amazon WorkSpaces automatically for troubleshooting. You can use modifyClientProperty api to enable/disable this feature.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

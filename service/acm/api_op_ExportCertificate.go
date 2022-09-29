@@ -42,10 +42,12 @@ type ExportCertificateInput struct {
 	// This member is required.
 	CertificateArn *string
 
-	// Passphrase to associate with the encrypted exported private key. If you want to
-	// later decrypt the private key, you must have the passphrase. You can use the
-	// following OpenSSL command to decrypt a private key: openssl rsa -in
-	// encrypted_key.pem -out decrypted_key.pem
+	// Passphrase to associate with the encrypted exported private key. When creating
+	// your passphrase, you can use any ASCII character except #, $, or %. If you want
+	// to later decrypt the private key, you must have the passphrase. You can use the
+	// following OpenSSL command to decrypt a private key. After entering the command,
+	// you are prompted for the passphrase. openssl rsa -in encrypted_key.pem -out
+	// decrypted_key.pem
 	//
 	// This member is required.
 	Passphrase []byte

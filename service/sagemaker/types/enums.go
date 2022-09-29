@@ -4757,6 +4757,28 @@ func (VariantStatus) Values() []VariantStatus {
 	}
 }
 
+type WarmPoolResourceStatus string
+
+// Enum values for WarmPoolResourceStatus
+const (
+	WarmPoolResourceStatusAvailable  WarmPoolResourceStatus = "Available"
+	WarmPoolResourceStatusTerminated WarmPoolResourceStatus = "Terminated"
+	WarmPoolResourceStatusReused     WarmPoolResourceStatus = "Reused"
+	WarmPoolResourceStatusInuse      WarmPoolResourceStatus = "InUse"
+)
+
+// Values returns all known values for WarmPoolResourceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WarmPoolResourceStatus) Values() []WarmPoolResourceStatus {
+	return []WarmPoolResourceStatus{
+		"Available",
+		"Terminated",
+		"Reused",
+		"InUse",
+	}
+}
+
 type WorkforceStatus string
 
 // Enum values for WorkforceStatus

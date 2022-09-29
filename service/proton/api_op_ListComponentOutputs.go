@@ -14,8 +14,8 @@ import (
 
 // Get a list of component Infrastructure as Code (IaC) outputs. For more
 // information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+// Proton User Guide.
 func (c *Client) ListComponentOutputs(ctx context.Context, params *ListComponentOutputsInput, optFns ...func(*Options)) (*ListComponentOutputsOutput, error) {
 	if params == nil {
 		params = &ListComponentOutputsInput{}

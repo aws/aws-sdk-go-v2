@@ -17,8 +17,8 @@ import (
 // description. Edit the spec parameter to add or delete instances. You can't
 // delete a service instance (remove it from the spec) if it has an attached
 // component. For more information about components, see Proton components
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-components.html) in the
-// Proton Administrator Guide.
+// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
+// Proton User Guide.
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInput{}
@@ -47,10 +47,8 @@ type UpdateServiceInput struct {
 	// Lists the service instances to add and the existing service instances to remain.
 	// Omit the existing service instances to delete from the list. Don't include edits
 	// to the existing service instances or pipeline. For more information, see Edit a
-	// service in the Proton Administrator Guide
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-update.html) or the
-	// Proton User Guide
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-update.html).
+	// service (https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-update.html)
+	// in the Proton User Guide.
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string

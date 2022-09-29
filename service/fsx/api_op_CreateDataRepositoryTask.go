@@ -60,6 +60,10 @@ type CreateDataRepositoryTaskInput struct {
 	// This member is required.
 	Type types.DataRepositoryTaskType
 
+	// Specifies the amount of data to release, in GiB, by an Amazon File Cache
+	// AUTO_RELEASE_DATA task that automatically releases files from the cache.
+	CapacityToRelease *int64
+
 	// (Optional) An idempotency token for resource creation, in a string of up to 64
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
