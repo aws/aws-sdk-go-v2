@@ -1,0 +1,4529 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.migrationhuborchestrator#AWSMigrationHubOrchestrator": {
+            "type": "service",
+            "version": "2021-08-28",
+            "operations": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflow"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowTemplate"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#Plugin"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateStep"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateStepGroup"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateStepGroups"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStep"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepGroup"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MigrationHubOrchestrator",
+                    "arnNamespace": "migrationhub-orchestrator",
+                    "endpointPrefix": "migrationhub-orchestrator",
+                    "cloudTrailEventSource": "migrationhub-orchestrator.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "migrationhub-orchestrator"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amzn-requestid",
+                        "x-amz-apigw-id",
+                        "date"
+                    ]
+                },
+                "smithy.api#documentation": "<p>This API reference provides descriptions, syntax, and other details about each of the\n            actions and data types for AWS Migration Hub Orchestrator. he topic for each action shows the API\n            request parameters and the response. Alternatively, you can use one of the AWS SDKs to\n            access an API that is tailored to the programming language or platform that you're\n            using.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#title": "AWS Migration Hub Orchestrator"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ApplicationConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateMigrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the migration workflow.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 500
+                        },
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+, ]*$"
+                    }
+                },
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID of the application configured in Application Discovery Service.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputParameters": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input parameters required to create a migration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepTargets": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add on a migration workflow.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateMigrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the migration workflow.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "adsApplicationConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID of the application configured in Application Discovery Service.</p>"
+                    }
+                },
+                "workflowInputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inputs for creating a migration workflow.</p>"
+                    }
+                },
+                "stepTargets": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was created.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add on a migration workflow.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateMigrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateMigrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a workflow to orchestrate your migrations.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/migrationworkflow/",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflowStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a step in the migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workflowstep",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a step group in a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workflowstepgroups",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepGroupRequest": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow that will contain the step group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step group.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepGroupResponse": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow that contains the step group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step group.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group is created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepActionType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the step. You must run and update the status of a manual step for\n            the workflow to continue after the completion of the step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step.</p>"
+                    }
+                },
+                "workflowStepAutomationConfiguration": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepAutomationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom script to run tests on source or target environments.</p>"
+                    }
+                },
+                "stepTarget": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key value pairs added for the expected output.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "stepGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STRING",
+                        "name": "STRING"
+                    },
+                    {
+                        "value": "INTEGER",
+                        "name": "INTEGER"
+                    },
+                    {
+                        "value": "STRINGLIST",
+                        "name": "STRINGLIST"
+                    },
+                    {
+                        "value": "STRINGMAP",
+                        "name": "STRINGMAP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteMigrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteMigrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteMigrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteMigrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a migration workflow. You must pause a running workflow in Migration Hub Orchestrator console to\n            delete it.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/migrationworkflow/{id}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a step in a migration workflow. Pause the workflow to delete a running\n            step.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/workflowstep/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a step group in a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/workflowstepgroup/{id}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepGroupRequest": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group that contains the step you want to delete.</p>",
+                        "smithy.api#httpQuery": "stepGroupId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the migration workflow.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "adsApplicationConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration ID of the application configured in Application Discovery Service.</p>"
+                    }
+                },
+                "adsApplicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application configured in Application Discovery Service.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the migration workflow.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was created.</p>"
+                    }
+                },
+                "lastStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was last started.</p>"
+                    }
+                },
+                "lastStopTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was last stopped.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was last modified.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow ended.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+                    }
+                },
+                "totalSteps": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of steps in the migration workflow.</p>"
+                    }
+                },
+                "completedSteps": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Get a list of completed steps in the migration workflow.</p>"
+                    }
+                },
+                "workflowInputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inputs required for creating the migration workflow.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to the migration workflow.</p>"
+                    }
+                },
+                "workflowBucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the migration logs are stored.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the template was last created.</p>"
+                    }
+                },
+                "inputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inputs provided for the creation of the migration workflow.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the template.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the template was last created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the template you want to use for creating a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/migrationworkflowtemplate/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplateStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplateStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplateStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a specific step in a template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/templatestep/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplateStepGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplateStepGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplateStepGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a step group in a template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/templates/{templateId}/stepgroups/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplateStepGroupRequest": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplateStepGroupResponse": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step group.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step group.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group was created.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group was last modified.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplateStepRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#httpQuery": "templateId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpQuery": "stepGroupId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetTemplateStepResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step.</p>"
+                    }
+                },
+                "stepActionType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the step. You must run and update the status of a manual step for\n            the workflow to continue after the completion of the step.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step was created.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step.</p>"
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The outputs of the step.</p>"
+                    }
+                },
+                "stepAutomationConfiguration": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepAutomationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom script to run tests on source or target environments.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetMigrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/migrationworkflow/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflowStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflowStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflowStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a step in the migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workflowstep/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflowStepGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflowStepGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflowStepGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the step group of a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workflowstepgroup/{id}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflowStepGroupRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflowStepGroupResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step group.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step group.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.migrationhuborchestrator#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the step group.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group was created.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group was last modified.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group ended.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflowStepRequest": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>desThe ID of the step group.</p>",
+                        "smithy.api#httpQuery": "stepGroupId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#GetWorkflowStepResponse": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "stepGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "stepId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step.</p>"
+                    }
+                },
+                "stepActionType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the step. You must run and update the status of a manual step for\n            the workflow to continue after the completion of the step.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.migrationhuborchestrator#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the step.</p>"
+                    }
+                },
+                "workflowStepAutomationConfiguration": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepAutomationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom script to run tests on source or target environments.</p>"
+                    }
+                },
+                "stepTarget": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The outputs of the step.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 5
+                        }
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the migration workflow.</p>"
+                    }
+                },
+                "scriptOutputLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output location of the script.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step was created.</p>"
+                    }
+                },
+                "lastStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the workflow was last started.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step ended.</p>"
+                    }
+                },
+                "noOfSrvCompleted": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of servers that have been migrated.</p>"
+                    }
+                },
+                "noOfSrvFailed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of servers that have failed to migrate.</p>"
+                    }
+                },
+                "totalNoOfSrv": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of servers that have been migrated.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#IPAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal error has occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "templateSummary": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#httpQuery": "templateId"
+                    }
+                },
+                "adsApplicationConfigurationName": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ApplicationConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application configured in Application Discovery Service.</p>",
+                        "smithy.api#httpQuery": "adsApplicationConfigurationName"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "migrationWorkflowSummary": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the migration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListPlugins": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListPluginsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListPluginsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List AWS Migration Hub Orchestrator plugins.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/plugins",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "plugins"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListPluginsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of plugins that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListPluginsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "plugins": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PluginSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Migration Hub Orchestrator plugins.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the tags added to a resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to a resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplateStepGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplateStepGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplateStepGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the step groups in a template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/templatestepgroups/{templateId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "templateStepGroupSummary"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplateStepGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplateStepGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "templateStepGroupSummary": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateStepGroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the step group in the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplateSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplateStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplateStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the steps in a template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/templatesteps",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "templateStepSummaryList"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplateStepsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>",
+                        "smithy.api#httpQuery": "templateId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpQuery": "stepGroupId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplateStepsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "templateStepSummaryList": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateStepSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of summaries of steps in a template.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the templates available in Migration Hub Orchestrator to create a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/migrationworkflowtemplates",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "templateSummary"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflowStepGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflowStepGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflowStepGroupsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the step groups in a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workflowstepgroups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "workflowStepGroupsSummary"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflowStepGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflowStepGroupsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "workflowStepGroupsSummary": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepGroupsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of step groups in a migration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflowSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflowStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflowStepsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the steps in a workflow.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/workflow/{workflowId}/workflowstepgroups/{stepGroupId}/workflowsteps",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "workflowStepsSummary"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflowStepsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflowStepsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token.</p>"
+                    }
+                },
+                "workflowStepsSummary": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of steps in a migration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ListWorkflows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListMigrationWorkflowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the migration workflows.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/migrationworkflows",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "migrationWorkflowSummary"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflow": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflow"
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflow"
+            },
+            "update": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflow"
+            },
+            "delete": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflow"
+            },
+            "list": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflows"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#StartWorkflow"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#StopWorkflow"
+                }
+            ]
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+, ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "NOT_STARTED",
+                        "name": "NOT_STARTED"
+                    },
+                    {
+                        "value": "CREATION_FAILED",
+                        "name": "CREATION_FAILED"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "WORKFLOW_FAILED",
+                        "name": "WORKFLOW_FAILED"
+                    },
+                    {
+                        "value": "PAUSED",
+                        "name": "PAUSED"
+                    },
+                    {
+                        "value": "PAUSING",
+                        "name": "PAUSING"
+                    },
+                    {
+                        "value": "PAUSING_FAILED",
+                        "name": "PAUSING_FAILED"
+                    },
+                    {
+                        "value": "USER_ATTENTION_REQUIRED",
+                        "name": "USER_ATTENTION_REQUIRED"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETION_FAILED",
+                        "name": "DELETION_FAILED"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "adsApplicationConfigurationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application configured in Application Discovery Service.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was created.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow ended.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the migration workflow.</p>"
+                    }
+                },
+                "completedSteps": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The steps completed in the migration workflow.</p>"
+                    }
+                },
+                "totalSteps": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All the steps in a migration workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of a migration workflow.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowSummary"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MigrationWorkflowTemplate": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplate"
+            },
+            "list": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplates"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#Owner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_MANAGED",
+                        "name": "AWSManaged"
+                    },
+                    {
+                        "value": "CUSTOM",
+                        "name": "CUSTOM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PlatformCommand": {
+            "type": "structure",
+            "members": {
+                "linux": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Command for Linux.</p>"
+                    }
+                },
+                "windows": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Command for Windows.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Command to be run on a particular operating system.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PlatformScriptKey": {
+            "type": "structure",
+            "members": {
+                "linux": {
+                    "target": "com.amazonaws.migrationhuborchestrator#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The script location for Linux.</p>"
+                    }
+                },
+                "windows": {
+                    "target": "com.amazonaws.migrationhuborchestrator#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The script location for Windows.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The script location for a particular operating system.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#Plugin": {
+            "type": "resource",
+            "identifiers": {
+                "pluginId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PluginId"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListPlugins"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PluginHealth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HEALTHY",
+                        "name": "PLUGIN_HEALTHY"
+                    },
+                    {
+                        "value": "UNHEALTHY",
+                        "name": "PLUGIN_UNHEALTHY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PluginId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 60
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PluginSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#PluginSummary"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PluginSummary": {
+            "type": "structure",
+            "members": {
+                "pluginId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PluginId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the plugin.</p>"
+                    }
+                },
+                "hostname": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the host.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PluginHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the plugin.</p>"
+                    }
+                },
+                "ipAddress": {
+                    "target": "com.amazonaws.migrationhuborchestrator#IPAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address at which the plugin is located.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PluginVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the plugin.</p>"
+                    }
+                },
+                "registeredTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the plugin was registered.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the Migration Hub Orchestrator plugin.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#PluginVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:workflow/[.]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource is not available.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#RetryWorkflowStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#RetryWorkflowStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#RetryWorkflowStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retry a failed step in a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/retryworkflowstep/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#RetryWorkflowStepRequest": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpQuery": "stepGroupId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#RetryWorkflowStepResponse": {
+            "type": "structure",
+            "members": {
+                "stepGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#RunEnvironment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS",
+                        "name": "AWS"
+                    },
+                    {
+                        "value": "ONPREMISE",
+                        "name": "ONPREMISE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[0-9a-z]+[0-9a-z\\.\\-]*[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#S3Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StartMigrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StartMigrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the migration workflow.</p>"
+                    }
+                },
+                "lastStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was last started.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StartWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#StartMigrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#StartMigrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Start a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/migrationworkflow/{id}/start",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MANUAL",
+                        "name": "MANUAL"
+                    },
+                    {
+                        "value": "AUTOMATED",
+                        "name": "AUTOMATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepAutomationConfiguration": {
+            "type": "structure",
+            "members": {
+                "scriptLocationS3Bucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the script is located.</p>"
+                    }
+                },
+                "scriptLocationS3Key": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PlatformScriptKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 key for the script location.</p>"
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PlatformCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command to run the script.</p>"
+                    }
+                },
+                "runEnvironment": {
+                    "target": "com.amazonaws.migrationhuborchestrator#RunEnvironment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source or target environment.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which to run the script.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom script to run tests on source or target environments.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+, ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepGroupDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+, ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepGroupStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWAITING_DEPENDENCIES",
+                        "name": "AWAITING_DEPENDENCIES"
+                    },
+                    {
+                        "value": "READY",
+                        "name": "READY"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "PAUSED",
+                        "name": "PAUSED"
+                    },
+                    {
+                        "value": "PAUSING",
+                        "name": "PAUSING"
+                    },
+                    {
+                        "value": "USER_ATTENTION_REQUIRED",
+                        "name": "USER_ATTENTION_REQUIRED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepInput": {
+            "type": "union",
+            "members": {
+                "integerValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the integer.</p>"
+                    }
+                },
+                "stringValue": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String value.</p>"
+                    }
+                },
+                "listOfStringsValue": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of string values.</p>"
+                    }
+                },
+                "mapOfStringValue": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map of string values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of key value pairs that is generated when you create a migration workflow. The\n            key value pairs will differ based on your selection of the template.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepInputParameters": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.migrationhuborchestrator#StepInputParametersKey"
+            },
+            "value": {
+                "target": "com.amazonaws.migrationhuborchestrator#StepInput"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepInputParametersKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_ ()]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepOutput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#DataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the step output.</p>"
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determine if an output is required from a step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output of the step.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#StepOutput"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StepStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWAITING_DEPENDENCIES",
+                        "name": "AWAITING_DEPENDENCIES"
+                    },
+                    {
+                        "value": "READY",
+                        "name": "READY"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "PAUSED",
+                        "name": "PAUSED"
+                    },
+                    {
+                        "value": "USER_ATTENTION_REQUIRED",
+                        "name": "USER_ATTENTION_REQUIRED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StopMigrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StopMigrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the migration workflow.</p>"
+                    }
+                },
+                "lastStopTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was stopped.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StopWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#StopMigrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#StopMigrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stop an ongoing migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/migrationworkflow/{id}/stop",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#StringListMember"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StringListMember": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.migrationhuborchestrator#StringMapKey"
+            },
+            "value": {
+                "target": "com.amazonaws.migrationhuborchestrator#StringMapValue"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StringMapKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_ ()]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StringMapValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#StringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.migrationhuborchestrator#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.migrationhuborchestrator#TagValue"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tag a resource by specifying its Amazon Resource Name (ARN).</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which you want to add tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of labels, in the form of key:value pairs, that apply to this\n            resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.migrationhuborchestrator#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TargetType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SINGLE",
+                        "name": "SINGLE"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateInput": {
+            "type": "structure",
+            "members": {
+                "inputName": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateInputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#DataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the template input.</p>"
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determine if an input is required from the template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input parameters of a template.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#TemplateInput"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateInputName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStep": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplateStep"
+            },
+            "list": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplateSteps"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStepGroup": {
+            "type": "resource",
+            "identifiers": {
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId"
+                },
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetTemplateStepGroup"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStepGroupSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the step group in the template.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStepGroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#TemplateStepGroupSummary"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStepGroups": {
+            "type": "resource",
+            "identifiers": {
+                "templateId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListTemplateStepGroups"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStepSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "stepGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "stepActionType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the step. You must run and update the status of a manual step for\n            the workflow to continue after the completion of the step.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which to run the script.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.migrationhuborchestrator#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the step.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the step.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateStepSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#TemplateStepSummary"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the template.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#TemplateSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#TemplateSummary"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#Tool": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an AWS service. </p>"
+                    }
+                },
+                "url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an AWS service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ToolsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#Tool"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the tags for a resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want to remove\n            tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tag keys. Specify only the tag keys, not the tag values.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateMigrationWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the migration workflow.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 500
+                        },
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+, ]*$"
+                    }
+                },
+                "inputParameters": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input parameters required to update a migration workflow.</p>"
+                    }
+                },
+                "stepTargets": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateMigrationWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the migration workflow.</p>"
+                    }
+                },
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the template.</p>"
+                    }
+                },
+                "adsApplicationConfigurationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application configured in Application Discovery Service.</p>"
+                    }
+                },
+                "workflowInputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inputs required to update a migration workflow.</p>"
+                    }
+                },
+                "stepTargets": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the migration workflow.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was created.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the migration workflow was last modified.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to the migration workflow.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateMigrationWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateMigrationWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/migrationworkflow/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStep": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a step in a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workflowstep/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepGroupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the step group in a migration workflow.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workflowstepgroup/{id}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepGroupRequest": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#httpQuery": "workflowId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step group.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepGroupResponse": {
+            "type": "structure",
+            "members": {
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step group.</p>"
+                    }
+                },
+                "tools": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ToolsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the step group was last modified.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "stepGroupId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step.</p>"
+                    }
+                },
+                "stepActionType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the step. You must run and update the status of a manual step for\n            the workflow to continue after the completion of the step.</p>"
+                    }
+                },
+                "workflowStepAutomationConfiguration": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepAutomationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom script to run tests on the source and target environments.</p>"
+                    }
+                },
+                "stepTarget": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which a step will be run.</p>"
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The outputs of a step.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "stepGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "workflowId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStep": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflowStep"
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflowStep"
+            },
+            "update": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStep"
+            },
+            "delete": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStep"
+            },
+            "list": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflowSteps"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#RetryWorkflowStep"
+                }
+            ]
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepAutomationConfiguration": {
+            "type": "structure",
+            "members": {
+                "scriptLocationS3Bucket": {
+                    "target": "com.amazonaws.migrationhuborchestrator#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the script is located.</p>"
+                    }
+                },
+                "scriptLocationS3Key": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PlatformScriptKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 key for the script location.</p>"
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.migrationhuborchestrator#PlatformCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command required to run the script.</p>"
+                    }
+                },
+                "runEnvironment": {
+                    "target": "com.amazonaws.migrationhuborchestrator#RunEnvironment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source or target environment.</p>"
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The servers on which to run the script.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom script to run tests on source or target environments.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepGroup": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateWorkflowStepGroup"
+            },
+            "read": {
+                "target": "com.amazonaws.migrationhuborchestrator#GetWorkflowStepGroup"
+            },
+            "update": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateWorkflowStepGroup"
+            },
+            "delete": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteWorkflowStepGroup"
+            },
+            "list": {
+                "target": "com.amazonaws.migrationhuborchestrator#ListWorkflowStepGroups"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepGroupSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step group.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.migrationhuborchestrator#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the step group.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepGroupStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step group.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step group.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of a step group in a workflow.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepGroupsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepGroupSummary"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepOutput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#DataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the output.</p>"
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determine if an output is required from a step.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output of a step.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepOutput"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepOutputUnion": {
+            "type": "union",
+            "members": {
+                "integerValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The integer value. </p>"
+                    }
+                },
+                "stringValue": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string value.</p>"
+                    }
+                },
+                "listOfStringValue": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of string value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure to hold multiple values of an output.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepSummary": {
+            "type": "structure",
+            "members": {
+                "stepId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the step.</p>"
+                    }
+                },
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step.</p>"
+                    }
+                },
+                "stepActionType": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type of the step. You must run and update the status of a manual step for\n            the workflow to continue after the completion of the step.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "com.amazonaws.migrationhuborchestrator#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the step.</p>"
+                    }
+                },
+                "previous": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The previous step.</p>"
+                    }
+                },
+                "next": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the step.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the migration workflow.</p>"
+                    }
+                },
+                "noOfSrvCompleted": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of servers that have been migrated.</p>"
+                    }
+                },
+                "noOfSrvFailed": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of servers that have failed to migrate.</p>"
+                    }
+                },
+                "totalNoOfSrv": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of servers that have been migrated.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the step.</p>"
+                    }
+                },
+                "scriptLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the script.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the step in a migration workflow.</p>"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#WorkflowStepsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#WorkflowStepSummary"
+            }
+        }
+    }
+}

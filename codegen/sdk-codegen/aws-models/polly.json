@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -131,6 +131,7 @@
                 "IncludeAdditionalLanguageCodes": {
                     "target": "com.amazonaws.polly#IncludeAdditionalLanguageCodes",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value indicating whether to return any bilingual voices that\n      use the specified language as an additional language. For instance, if you\n      request all languages that use US English (es-US), and there is an Italian\n      voice that speaks both Italian (it-IT) and US English, that voice will be\n      included if you specify <code>yes</code> but not if you specify\n        <code>no</code>.</p>",
                         "smithy.api#httpQuery": "IncludeAdditionalLanguageCodes"
                     }
@@ -162,18 +163,20 @@
             }
         },
         "com.amazonaws.polly#Engine": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "standard",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "neural",
-                        "name": "NEURAL"
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
                     }
-                ]
+                },
+                "NEURAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "neural"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#EngineList": {
@@ -199,18 +202,20 @@
             "type": "string"
         },
         "com.amazonaws.polly#Gender": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Female",
-                        "name": "Female"
-                    },
-                    {
-                        "value": "Male",
-                        "name": "Male"
+            "type": "enum",
+            "members": {
+                "Female": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Female"
                     }
-                ]
+                },
+                "Male": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Male"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#GetLexicon": {
@@ -321,7 +326,10 @@
             }
         },
         "com.amazonaws.polly#IncludeAdditionalLanguageCodes": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.polly#InvalidLexiconException": {
             "type": "structure",
@@ -428,142 +436,212 @@
             }
         },
         "com.amazonaws.polly#LanguageCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "arb",
-                        "name": "arb"
-                    },
-                    {
-                        "value": "cmn-CN",
-                        "name": "cmn_CN"
-                    },
-                    {
-                        "value": "cy-GB",
-                        "name": "cy_GB"
-                    },
-                    {
-                        "value": "da-DK",
-                        "name": "da_DK"
-                    },
-                    {
-                        "value": "de-DE",
-                        "name": "de_DE"
-                    },
-                    {
-                        "value": "en-AU",
-                        "name": "en_AU"
-                    },
-                    {
-                        "value": "en-GB",
-                        "name": "en_GB"
-                    },
-                    {
-                        "value": "en-GB-WLS",
-                        "name": "en_GB_WLS"
-                    },
-                    {
-                        "value": "en-IN",
-                        "name": "en_IN"
-                    },
-                    {
-                        "value": "en-US",
-                        "name": "en_US"
-                    },
-                    {
-                        "value": "es-ES",
-                        "name": "es_ES"
-                    },
-                    {
-                        "value": "es-MX",
-                        "name": "es_MX"
-                    },
-                    {
-                        "value": "es-US",
-                        "name": "es_US"
-                    },
-                    {
-                        "value": "fr-CA",
-                        "name": "fr_CA"
-                    },
-                    {
-                        "value": "fr-FR",
-                        "name": "fr_FR"
-                    },
-                    {
-                        "value": "is-IS",
-                        "name": "is_IS"
-                    },
-                    {
-                        "value": "it-IT",
-                        "name": "it_IT"
-                    },
-                    {
-                        "value": "ja-JP",
-                        "name": "ja_JP"
-                    },
-                    {
-                        "value": "hi-IN",
-                        "name": "hi_IN"
-                    },
-                    {
-                        "value": "ko-KR",
-                        "name": "ko_KR"
-                    },
-                    {
-                        "value": "nb-NO",
-                        "name": "nb_NO"
-                    },
-                    {
-                        "value": "nl-NL",
-                        "name": "nl_NL"
-                    },
-                    {
-                        "value": "pl-PL",
-                        "name": "pl_PL"
-                    },
-                    {
-                        "value": "pt-BR",
-                        "name": "pt_BR"
-                    },
-                    {
-                        "value": "pt-PT",
-                        "name": "pt_PT"
-                    },
-                    {
-                        "value": "ro-RO",
-                        "name": "ro_RO"
-                    },
-                    {
-                        "value": "ru-RU",
-                        "name": "ru_RU"
-                    },
-                    {
-                        "value": "sv-SE",
-                        "name": "sv_SE"
-                    },
-                    {
-                        "value": "tr-TR",
-                        "name": "tr_TR"
-                    },
-                    {
-                        "value": "en-NZ",
-                        "name": "en_NZ"
-                    },
-                    {
-                        "value": "en-ZA",
-                        "name": "en_ZA"
-                    },
-                    {
-                        "value": "ca-ES",
-                        "name": "ca_ES"
-                    },
-                    {
-                        "value": "de-AT",
-                        "name": "de_AT"
+            "type": "enum",
+            "members": {
+                "arb": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "arb"
                     }
-                ]
+                },
+                "cmn_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cmn-CN"
+                    }
+                },
+                "cy_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cy-GB"
+                    }
+                },
+                "da_DK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "da-DK"
+                    }
+                },
+                "de_DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-DE"
+                    }
+                },
+                "en_AU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-AU"
+                    }
+                },
+                "en_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-GB"
+                    }
+                },
+                "en_GB_WLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-GB-WLS"
+                    }
+                },
+                "en_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-IN"
+                    }
+                },
+                "en_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-US"
+                    }
+                },
+                "es_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-ES"
+                    }
+                },
+                "es_MX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-MX"
+                    }
+                },
+                "es_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-US"
+                    }
+                },
+                "fr_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-CA"
+                    }
+                },
+                "fr_FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr-FR"
+                    }
+                },
+                "is_IS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "is-IS"
+                    }
+                },
+                "it_IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it-IT"
+                    }
+                },
+                "ja_JP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja-JP"
+                    }
+                },
+                "hi_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hi-IN"
+                    }
+                },
+                "ko_KR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko-KR"
+                    }
+                },
+                "nb_NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nb-NO"
+                    }
+                },
+                "nl_NL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nl-NL"
+                    }
+                },
+                "pl_PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pl-PL"
+                    }
+                },
+                "pt_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-BR"
+                    }
+                },
+                "pt_PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-PT"
+                    }
+                },
+                "ro_RO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ro-RO"
+                    }
+                },
+                "ru_RU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ru-RU"
+                    }
+                },
+                "sv_SE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sv-SE"
+                    }
+                },
+                "tr_TR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tr-TR"
+                    }
+                },
+                "en_NZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-NZ"
+                    }
+                },
+                "en_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-ZA"
+                    }
+                },
+                "ca_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-ES"
+                    }
+                },
+                "de_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-AT"
+                    }
+                },
+                "yue_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "yue-CN"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#LanguageCodeList": {
@@ -592,7 +670,10 @@
             "type": "timestamp"
         },
         "com.amazonaws.polly#LexemesCount": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.polly#Lexicon": {
             "type": "structure",
@@ -647,12 +728,14 @@
                 "LexemesCount": {
                     "target": "com.amazonaws.polly#LexemesCount",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of lexemes in the lexicon.</p>"
                     }
                 },
                 "Size": {
                     "target": "com.amazonaws.polly#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total size of the lexicon, in characters.</p>"
                     }
                 }
@@ -906,7 +989,6 @@
         "com.amazonaws.polly#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -923,26 +1005,32 @@
             }
         },
         "com.amazonaws.polly#OutputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "json",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "mp3",
-                        "name": "MP3"
-                    },
-                    {
-                        "value": "ogg_vorbis",
-                        "name": "OGG_VORBIS"
-                    },
-                    {
-                        "value": "pcm",
-                        "name": "PCM"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json"
                     }
-                ]
+                },
+                "MP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp3"
+                    }
+                },
+                "OGG_VORBIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ogg_vorbis"
+                    }
+                },
+                "PCM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pcm"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#OutputS3BucketName": {
@@ -962,24 +1050,6 @@
         },
         "com.amazonaws.polly#Parrot_v1": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Polly",
-                    "arnNamespace": "polly",
-                    "cloudFormationName": "Polly",
-                    "cloudTrailEventSource": "polly.amazonaws.com",
-                    "endpointPrefix": "polly"
-                },
-                "aws.auth#sigv4": {
-                    "name": "polly"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>",
-                "smithy.api#title": "Amazon Polly",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://polly.amazonaws.com/doc/v1"
-                }
-            },
             "version": "2016-06-10",
             "operations": [
                 {
@@ -1009,7 +1079,25 @@
                 {
                     "target": "com.amazonaws.polly#SynthesizeSpeech"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Polly",
+                    "arnNamespace": "polly",
+                    "cloudFormationName": "Polly",
+                    "cloudTrailEventSource": "polly.amazonaws.com",
+                    "endpointPrefix": "polly"
+                },
+                "aws.auth#sigv4": {
+                    "name": "polly"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon Polly is a web service that makes it easy to synthesize speech from\n      text.</p>\n         <p>The Amazon Polly service provides API operations for synthesizing\n      high-quality speech from plain text and Speech Synthesis Markup Language\n      (SSML), along with managing pronunciations lexicons that enable you to get\n      the best results for your application domain.</p>",
+                "smithy.api#title": "Amazon Polly",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://polly.amazonaws.com/doc/v1"
+                }
+            }
         },
         "com.amazonaws.polly#PutLexicon": {
             "type": "operation",
@@ -1076,7 +1164,10 @@
             "members": {}
         },
         "com.amazonaws.polly#RequestCharacters": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.polly#SampleRate": {
             "type": "string"
@@ -1095,7 +1186,10 @@
             }
         },
         "com.amazonaws.polly#Size": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.polly#SnsTopicArn": {
             "type": "string",
@@ -1104,26 +1198,32 @@
             }
         },
         "com.amazonaws.polly#SpeechMarkType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "sentence",
-                        "name": "SENTENCE"
-                    },
-                    {
-                        "value": "ssml",
-                        "name": "SSML"
-                    },
-                    {
-                        "value": "viseme",
-                        "name": "VISEME"
-                    },
-                    {
-                        "value": "word",
-                        "name": "WORD"
+            "type": "enum",
+            "members": {
+                "SENTENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sentence"
                     }
-                ]
+                },
+                "SSML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ssml"
+                    }
+                },
+                "VISEME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "viseme"
+                    }
+                },
+                "WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "word"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#SpeechMarkTypeList": {
@@ -1340,6 +1440,7 @@
                 "RequestCharacters": {
                     "target": "com.amazonaws.polly#RequestCharacters",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of billable characters synthesized.</p>"
                     }
                 },
@@ -1511,6 +1612,8 @@
                 "TextType": {
                     "target": "com.amazonaws.polly#TextType",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "text",
                         "smithy.api#documentation": "<p> Specifies whether the input text is plain text or SSML. The\n      default value is plain text. For more information, see <a href=\"https://docs.aws.amazon.com/polly/latest/dg/ssml.html\">Using\n        SSML</a>.</p>"
                     }
                 },
@@ -1530,7 +1633,8 @@
                     "target": "com.amazonaws.polly#AudioStream",
                     "traits": {
                         "smithy.api#documentation": "<p> Stream containing the synthesized speech. </p>",
-                        "smithy.api#httpPayload": {}
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
                     }
                 },
                 "ContentType": {
@@ -1543,6 +1647,7 @@
                 "RequestCharacters": {
                     "target": "com.amazonaws.polly#RequestCharacters",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of characters synthesized.</p>",
                         "smithy.api#httpHeader": "x-amzn-RequestCharacters"
                     }
@@ -1556,26 +1661,32 @@
             }
         },
         "com.amazonaws.polly#TaskStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "scheduled",
-                        "name": "SCHEDULED"
-                    },
-                    {
-                        "value": "inProgress",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "completed",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "failed",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scheduled"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inProgress"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "completed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#TaskStatusReason": {
@@ -1598,18 +1709,20 @@
             }
         },
         "com.amazonaws.polly#TextType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ssml",
-                        "name": "SSML"
-                    },
-                    {
-                        "value": "text",
-                        "name": "TEXT"
+            "type": "enum",
+            "members": {
+                "SSML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ssml"
                     }
-                ]
+                },
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "text"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#UnsupportedPlsAlphabetException": {
@@ -1689,298 +1802,446 @@
             }
         },
         "com.amazonaws.polly#VoiceId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Aditi",
-                        "name": "Aditi"
-                    },
-                    {
-                        "value": "Amy",
-                        "name": "Amy"
-                    },
-                    {
-                        "value": "Astrid",
-                        "name": "Astrid"
-                    },
-                    {
-                        "value": "Bianca",
-                        "name": "Bianca"
-                    },
-                    {
-                        "value": "Brian",
-                        "name": "Brian"
-                    },
-                    {
-                        "value": "Camila",
-                        "name": "Camila"
-                    },
-                    {
-                        "value": "Carla",
-                        "name": "Carla"
-                    },
-                    {
-                        "value": "Carmen",
-                        "name": "Carmen"
-                    },
-                    {
-                        "value": "Celine",
-                        "name": "Celine"
-                    },
-                    {
-                        "value": "Chantal",
-                        "name": "Chantal"
-                    },
-                    {
-                        "value": "Conchita",
-                        "name": "Conchita"
-                    },
-                    {
-                        "value": "Cristiano",
-                        "name": "Cristiano"
-                    },
-                    {
-                        "value": "Dora",
-                        "name": "Dora"
-                    },
-                    {
-                        "value": "Emma",
-                        "name": "Emma"
-                    },
-                    {
-                        "value": "Enrique",
-                        "name": "Enrique"
-                    },
-                    {
-                        "value": "Ewa",
-                        "name": "Ewa"
-                    },
-                    {
-                        "value": "Filiz",
-                        "name": "Filiz"
-                    },
-                    {
-                        "value": "Gabrielle",
-                        "name": "Gabrielle"
-                    },
-                    {
-                        "value": "Geraint",
-                        "name": "Geraint"
-                    },
-                    {
-                        "value": "Giorgio",
-                        "name": "Giorgio"
-                    },
-                    {
-                        "value": "Gwyneth",
-                        "name": "Gwyneth"
-                    },
-                    {
-                        "value": "Hans",
-                        "name": "Hans"
-                    },
-                    {
-                        "value": "Ines",
-                        "name": "Ines"
-                    },
-                    {
-                        "value": "Ivy",
-                        "name": "Ivy"
-                    },
-                    {
-                        "value": "Jacek",
-                        "name": "Jacek"
-                    },
-                    {
-                        "value": "Jan",
-                        "name": "Jan"
-                    },
-                    {
-                        "value": "Joanna",
-                        "name": "Joanna"
-                    },
-                    {
-                        "value": "Joey",
-                        "name": "Joey"
-                    },
-                    {
-                        "value": "Justin",
-                        "name": "Justin"
-                    },
-                    {
-                        "value": "Karl",
-                        "name": "Karl"
-                    },
-                    {
-                        "value": "Kendra",
-                        "name": "Kendra"
-                    },
-                    {
-                        "value": "Kevin",
-                        "name": "Kevin"
-                    },
-                    {
-                        "value": "Kimberly",
-                        "name": "Kimberly"
-                    },
-                    {
-                        "value": "Lea",
-                        "name": "Lea"
-                    },
-                    {
-                        "value": "Liv",
-                        "name": "Liv"
-                    },
-                    {
-                        "value": "Lotte",
-                        "name": "Lotte"
-                    },
-                    {
-                        "value": "Lucia",
-                        "name": "Lucia"
-                    },
-                    {
-                        "value": "Lupe",
-                        "name": "Lupe"
-                    },
-                    {
-                        "value": "Mads",
-                        "name": "Mads"
-                    },
-                    {
-                        "value": "Maja",
-                        "name": "Maja"
-                    },
-                    {
-                        "value": "Marlene",
-                        "name": "Marlene"
-                    },
-                    {
-                        "value": "Mathieu",
-                        "name": "Mathieu"
-                    },
-                    {
-                        "value": "Matthew",
-                        "name": "Matthew"
-                    },
-                    {
-                        "value": "Maxim",
-                        "name": "Maxim"
-                    },
-                    {
-                        "value": "Mia",
-                        "name": "Mia"
-                    },
-                    {
-                        "value": "Miguel",
-                        "name": "Miguel"
-                    },
-                    {
-                        "value": "Mizuki",
-                        "name": "Mizuki"
-                    },
-                    {
-                        "value": "Naja",
-                        "name": "Naja"
-                    },
-                    {
-                        "value": "Nicole",
-                        "name": "Nicole"
-                    },
-                    {
-                        "value": "Olivia",
-                        "name": "Olivia"
-                    },
-                    {
-                        "value": "Penelope",
-                        "name": "Penelope"
-                    },
-                    {
-                        "value": "Raveena",
-                        "name": "Raveena"
-                    },
-                    {
-                        "value": "Ricardo",
-                        "name": "Ricardo"
-                    },
-                    {
-                        "value": "Ruben",
-                        "name": "Ruben"
-                    },
-                    {
-                        "value": "Russell",
-                        "name": "Russell"
-                    },
-                    {
-                        "value": "Salli",
-                        "name": "Salli"
-                    },
-                    {
-                        "value": "Seoyeon",
-                        "name": "Seoyeon"
-                    },
-                    {
-                        "value": "Takumi",
-                        "name": "Takumi"
-                    },
-                    {
-                        "value": "Tatyana",
-                        "name": "Tatyana"
-                    },
-                    {
-                        "value": "Vicki",
-                        "name": "Vicki"
-                    },
-                    {
-                        "value": "Vitoria",
-                        "name": "Vitoria"
-                    },
-                    {
-                        "value": "Zeina",
-                        "name": "Zeina"
-                    },
-                    {
-                        "value": "Zhiyu",
-                        "name": "Zhiyu"
-                    },
-                    {
-                        "value": "Aria",
-                        "name": "Aria"
-                    },
-                    {
-                        "value": "Ayanda",
-                        "name": "Ayanda"
-                    },
-                    {
-                        "value": "Arlet",
-                        "name": "Arlet"
-                    },
-                    {
-                        "value": "Hannah",
-                        "name": "Hannah"
-                    },
-                    {
-                        "value": "Arthur",
-                        "name": "Arthur"
-                    },
-                    {
-                        "value": "Daniel",
-                        "name": "Daniel"
-                    },
-                    {
-                        "value": "Liam",
-                        "name": "Liam"
-                    },
-                    {
-                        "value": "Pedro",
-                        "name": "Pedro"
-                    },
-                    {
-                        "value": "Kajal",
-                        "name": "Kajal"
+            "type": "enum",
+            "members": {
+                "Aditi": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Aditi"
                     }
-                ]
+                },
+                "Amy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Amy"
+                    }
+                },
+                "Astrid": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Astrid"
+                    }
+                },
+                "Bianca": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bianca"
+                    }
+                },
+                "Brian": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Brian"
+                    }
+                },
+                "Camila": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Camila"
+                    }
+                },
+                "Carla": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Carla"
+                    }
+                },
+                "Carmen": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Carmen"
+                    }
+                },
+                "Celine": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Celine"
+                    }
+                },
+                "Chantal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Chantal"
+                    }
+                },
+                "Conchita": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Conchita"
+                    }
+                },
+                "Cristiano": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cristiano"
+                    }
+                },
+                "Dora": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dora"
+                    }
+                },
+                "Emma": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Emma"
+                    }
+                },
+                "Enrique": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enrique"
+                    }
+                },
+                "Ewa": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ewa"
+                    }
+                },
+                "Filiz": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Filiz"
+                    }
+                },
+                "Gabrielle": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gabrielle"
+                    }
+                },
+                "Geraint": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Geraint"
+                    }
+                },
+                "Giorgio": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Giorgio"
+                    }
+                },
+                "Gwyneth": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gwyneth"
+                    }
+                },
+                "Hans": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hans"
+                    }
+                },
+                "Ines": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ines"
+                    }
+                },
+                "Ivy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ivy"
+                    }
+                },
+                "Jacek": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jacek"
+                    }
+                },
+                "Jan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Jan"
+                    }
+                },
+                "Joanna": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Joanna"
+                    }
+                },
+                "Joey": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Joey"
+                    }
+                },
+                "Justin": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Justin"
+                    }
+                },
+                "Karl": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Karl"
+                    }
+                },
+                "Kendra": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kendra"
+                    }
+                },
+                "Kevin": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kevin"
+                    }
+                },
+                "Kimberly": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kimberly"
+                    }
+                },
+                "Lea": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lea"
+                    }
+                },
+                "Liv": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Liv"
+                    }
+                },
+                "Lotte": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lotte"
+                    }
+                },
+                "Lucia": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lucia"
+                    }
+                },
+                "Lupe": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Lupe"
+                    }
+                },
+                "Mads": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mads"
+                    }
+                },
+                "Maja": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Maja"
+                    }
+                },
+                "Marlene": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Marlene"
+                    }
+                },
+                "Mathieu": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mathieu"
+                    }
+                },
+                "Matthew": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Matthew"
+                    }
+                },
+                "Maxim": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Maxim"
+                    }
+                },
+                "Mia": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mia"
+                    }
+                },
+                "Miguel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Miguel"
+                    }
+                },
+                "Mizuki": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mizuki"
+                    }
+                },
+                "Naja": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Naja"
+                    }
+                },
+                "Nicole": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Nicole"
+                    }
+                },
+                "Olivia": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Olivia"
+                    }
+                },
+                "Penelope": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Penelope"
+                    }
+                },
+                "Raveena": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Raveena"
+                    }
+                },
+                "Ricardo": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ricardo"
+                    }
+                },
+                "Ruben": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ruben"
+                    }
+                },
+                "Russell": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Russell"
+                    }
+                },
+                "Salli": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Salli"
+                    }
+                },
+                "Seoyeon": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Seoyeon"
+                    }
+                },
+                "Takumi": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Takumi"
+                    }
+                },
+                "Tatyana": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Tatyana"
+                    }
+                },
+                "Vicki": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Vicki"
+                    }
+                },
+                "Vitoria": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Vitoria"
+                    }
+                },
+                "Zeina": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Zeina"
+                    }
+                },
+                "Zhiyu": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Zhiyu"
+                    }
+                },
+                "Aria": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Aria"
+                    }
+                },
+                "Ayanda": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ayanda"
+                    }
+                },
+                "Arlet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arlet"
+                    }
+                },
+                "Hannah": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hannah"
+                    }
+                },
+                "Arthur": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arthur"
+                    }
+                },
+                "Daniel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Daniel"
+                    }
+                },
+                "Liam": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Liam"
+                    }
+                },
+                "Pedro": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pedro"
+                    }
+                },
+                "Kajal": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kajal"
+                    }
+                },
+                "Hiujin": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hiujin"
+                    }
+                }
             }
         },
         "com.amazonaws.polly#VoiceList": {

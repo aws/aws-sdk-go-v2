@@ -15986,6 +15986,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>"
                     }
+                },
+                "WarmPoolStatus": {
+                    "target": "com.amazonaws.sagemaker#WarmPoolStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the warm pool associated with the training job.</p>"
+                    }
                 }
             }
         },
@@ -23131,6 +23137,15 @@
                 "smithy.api#documentation": "<p>The JupyterServer app settings.</p>"
             }
         },
+        "com.amazonaws.sagemaker#KeepAlivePeriodInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3600
+                }
+            }
+        },
         "com.amazonaws.sagemaker#KernelDisplayName": {
             "type": "string",
             "traits": {
@@ -28823,6 +28838,12 @@
                     "target": "com.amazonaws.sagemaker#SortOrder",
                     "traits": {
                         "smithy.api#documentation": "<p>The sort order for results. The default is <code>Ascending</code>.</p>"
+                    }
+                },
+                "WarmPoolStatusEquals": {
+                    "target": "com.amazonaws.sagemaker#WarmPoolResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that retrieves only training jobs with a specific warm pool status.</p>"
                     }
                 }
             }
@@ -37916,10 +37937,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of a heterogeneous cluster in JSON format.</p>"
                     }
+                },
+                "KeepAlivePeriodInSeconds": {
+                    "target": "com.amazonaws.sagemaker#KeepAlivePeriodInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of time in seconds to retain configured resources in a warm pool for subsequent training jobs.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the resources, including ML compute instances and ML storage volumes, to\n            use for model training. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceConfigForUpdate": {
+            "type": "structure",
+            "members": {
+                "KeepAlivePeriodInSeconds": {
+                    "target": "com.amazonaws.sagemaker#KeepAlivePeriodInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeepAlivePeriodInSeconds</code> value specified in the <code>ResourceConfig</code> to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>ResourceConfig</code> to update <code>KeepAlivePeriodInSeconds</code>. Other fields in the <code>ResourceConfig</code> cannot be updated.</p>"
             }
         },
         "com.amazonaws.sagemaker#ResourceId": {
@@ -38009,6 +38051,14 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceRetainedBillableTimeInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.sagemaker#ResourceSpec": {
@@ -42906,6 +42956,12 @@
                         "smithy.api#documentation": "<p>The status of the training job.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "WarmPoolStatus": {
+                    "target": "com.amazonaws.sagemaker#WarmPoolStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the warm pool associated with the training job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -45717,7 +45773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a model training job to request a new Debugger profiling configuration.</p>"
+                "smithy.api#documentation": "<p>Update a model training job to request a new Debugger profiling configuration or to change warm pool retention length.</p>"
             }
         },
         "com.amazonaws.sagemaker#UpdateTrainingJobRequest": {
@@ -45740,6 +45796,12 @@
                     "target": "com.amazonaws.sagemaker#ProfilerRuleConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information for Debugger rules for profiling system and framework\n            metrics.</p>"
+                    }
+                },
+                "ResourceConfig": {
+                    "target": "com.amazonaws.sagemaker#ResourceConfigForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The training job <code>ResourceConfig</code> to update warm pool retention length.</p>"
                     }
                 }
             }
@@ -46544,6 +46606,62 @@
                     "min": 0,
                     "max": 3600
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#WarmPoolResourceStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Available"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terminated"
+                    }
+                },
+                "REUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Reused"
+                    }
+                },
+                "INUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InUse"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#WarmPoolStatus": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#WarmPoolResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the warm pool.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>InUse</code>: The warm pool is in use for the training job.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Available</code>: The warm pool is available to reuse for a matching training job.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Reused</code>: The warm pool moved to a matching training job for reuse.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Terminated</code>: The warm pool is no longer available. Warm pools are unavailable if they are terminated by a user, terminated for a patch update, or terminated for exceeding the specified <code>KeepAlivePeriodInSeconds</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceRetainedBillableTimeInSeconds": {
+                    "target": "com.amazonaws.sagemaker#ResourceRetainedBillableTimeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The billable time in seconds used by the warm pool. Billable time refers to the absolute wall-clock\n            time.</p>\n        <p>Multiply <code>ResourceRetainedBillableTimeInSeconds</code> by the number of instances\n            (<code>InstanceCount</code>) in your training cluster to get the total compute time\n            SageMaker bills you if you run warm pool training. The formula is as follows:\n            <code>ResourceRetainedBillableTimeInSeconds * InstanceCount</code>.</p>"
+                    }
+                },
+                "ReusedByJob": {
+                    "target": "com.amazonaws.sagemaker#TrainingJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the matching training job that reused the warm pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Status and billing information about the warm pool.</p>"
             }
         },
         "com.amazonaws.sagemaker#Workforce": {

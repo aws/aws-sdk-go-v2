@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -48,18 +48,20 @@
             }
         },
         "com.amazonaws.workspaces#AccessPropertyValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOW",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "DENY",
-                        "name": "DENY"
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
                     }
-                ]
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#AccountModification": {
@@ -146,18 +148,20 @@
             }
         },
         "com.amazonaws.workspaces#Application": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Microsoft_Office_2016",
-                        "name": "Microsoft_Office_2016"
-                    },
-                    {
-                        "value": "Microsoft_Office_2019",
-                        "name": "Microsoft_Office_2019"
+            "type": "enum",
+            "members": {
+                "Microsoft_Office_2016": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Microsoft_Office_2016"
                     }
-                ]
+                },
+                "Microsoft_Office_2019": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Microsoft_Office_2019"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ApplicationList": {
@@ -290,30 +294,38 @@
             "members": {}
         },
         "com.amazonaws.workspaces#AssociationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_ASSOCIATED",
-                        "name": "NOT_ASSOCIATED"
-                    },
-                    {
-                        "value": "ASSOCIATED_WITH_OWNER_ACCOUNT",
-                        "name": "ASSOCIATED_WITH_OWNER_ACCOUNT"
-                    },
-                    {
-                        "value": "ASSOCIATED_WITH_SHARED_ACCOUNT",
-                        "name": "ASSOCIATED_WITH_SHARED_ACCOUNT"
-                    },
-                    {
-                        "value": "PENDING_ASSOCIATION",
-                        "name": "PENDING_ASSOCIATION"
-                    },
-                    {
-                        "value": "PENDING_DISASSOCIATION",
-                        "name": "PENDING_DISASSOCIATION"
+            "type": "enum",
+            "members": {
+                "NOT_ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_ASSOCIATED"
                     }
-                ]
+                },
+                "ASSOCIATED_WITH_OWNER_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED_WITH_OWNER_ACCOUNT"
+                    }
+                },
+                "ASSOCIATED_WITH_SHARED_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED_WITH_SHARED_ACCOUNT"
+                    }
+                },
+                "PENDING_ASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ASSOCIATION"
+                    }
+                },
+                "PENDING_DISASSOCIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DISASSOCIATION"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#AuthorizeIpRules": {
@@ -375,10 +387,7 @@
             }
         },
         "com.amazonaws.workspaces#BooleanObject": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.workspaces#BundleId": {
             "type": "string",
@@ -408,34 +417,44 @@
             "type": "string"
         },
         "com.amazonaws.workspaces#ClientDeviceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DeviceTypeWindows",
-                        "name": "DEVICE_TYPE_WINDOWS"
-                    },
-                    {
-                        "value": "DeviceTypeOsx",
-                        "name": "DEVICE_TYPE_OSX"
-                    },
-                    {
-                        "value": "DeviceTypeAndroid",
-                        "name": "DEVICE_TYPE_ANDROID"
-                    },
-                    {
-                        "value": "DeviceTypeIos",
-                        "name": "DEVICE_TYPE_IOS"
-                    },
-                    {
-                        "value": "DeviceTypeLinux",
-                        "name": "DEVICE_TYPE_LINUX"
-                    },
-                    {
-                        "value": "DeviceTypeWeb",
-                        "name": "DEVICE_TYPE_WEB"
+            "type": "enum",
+            "members": {
+                "DEVICE_TYPE_WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceTypeWindows"
                     }
-                ]
+                },
+                "DEVICE_TYPE_OSX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceTypeOsx"
+                    }
+                },
+                "DEVICE_TYPE_ANDROID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceTypeAndroid"
+                    }
+                },
+                "DEVICE_TYPE_IOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceTypeIos"
+                    }
+                },
+                "DEVICE_TYPE_LINUX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceTypeLinux"
+                    }
+                },
+                "DEVICE_TYPE_WEB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeviceTypeWeb"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ClientDeviceTypeList": {
@@ -488,6 +507,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether users can cache their credentials on the Amazon WorkSpaces client.\n         When enabled, users can choose to reconnect to their WorkSpaces without re-entering their\n         credentials. </p>"
                     }
+                },
+                "LogUploadEnabled": {
+                    "target": "com.amazonaws.workspaces#LogUploadEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether users can upload diagnostic log files of Amazon WorkSpaces client directly to \n         WorkSpaces to troubleshoot issues when using the WorkSpaces client. \n         When enabled, the log files will be sent to WorkSpaces automatically and will be applied to all \n         users in the specified directory.</p>"
+                    }
                 }
             },
             "traits": {
@@ -531,46 +556,62 @@
             }
         },
         "com.amazonaws.workspaces#Compute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
-                    },
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "PERFORMANCE",
-                        "name": "PERFORMANCE"
-                    },
-                    {
-                        "value": "POWER",
-                        "name": "POWER"
-                    },
-                    {
-                        "value": "GRAPHICS",
-                        "name": "GRAPHICS"
-                    },
-                    {
-                        "value": "POWERPRO",
-                        "name": "POWERPRO"
-                    },
-                    {
-                        "value": "GRAPHICSPRO",
-                        "name": "GRAPHICSPRO"
-                    },
-                    {
-                        "value": "GRAPHICS_G4DN",
-                        "name": "GRAPHICS_G4DN"
-                    },
-                    {
-                        "value": "GRAPHICSPRO_G4DN",
-                        "name": "GRAPHICSPRO_G4DN"
+            "type": "enum",
+            "members": {
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
                     }
-                ]
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "PERFORMANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERFORMANCE"
+                    }
+                },
+                "POWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POWER"
+                    }
+                },
+                "GRAPHICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS"
+                    }
+                },
+                "POWERPRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POWERPRO"
+                    }
+                },
+                "GRAPHICSPRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICSPRO"
+                    }
+                },
+                "GRAPHICS_G4DN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICS_G4DN"
+                    }
+                },
+                "GRAPHICSPRO_G4DN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRAPHICSPRO_G4DN"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ComputeType": {
@@ -779,22 +820,26 @@
             }
         },
         "com.amazonaws.workspaces#ConnectionAliasState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ConnectionIdentifier": {
@@ -808,22 +853,26 @@
             }
         },
         "com.amazonaws.workspaces#ConnectionState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECTED",
-                        "name": "CONNECTED"
-                    },
-                    {
-                        "value": "DISCONNECTED",
-                        "name": "DISCONNECTED"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
                     }
-                ]
+                },
+                "DISCONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECTED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ConnectionString": {
@@ -1443,7 +1492,7 @@
                 "OwnerAccountId": {
                     "target": "com.amazonaws.workspaces#AwsAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the AWS account that owns the image.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that owns the image.</p>"
                     }
                 }
             }
@@ -1510,48 +1559,54 @@
             }
         },
         "com.amazonaws.workspaces#DedicatedTenancyModificationStateEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#DedicatedTenancySupportEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.workspaces#DedicatedTenancySupportResultEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#DefaultClientBrandingAttributes": {
@@ -1693,18 +1748,20 @@
             }
         },
         "com.amazonaws.workspaces#DeletableSamlProperty": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SAML_PROPERTIES_USER_ACCESS_URL",
-                        "name": "SAML_PROPERTIES_USER_ACCESS_URL"
-                    },
-                    {
-                        "value": "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME",
-                        "name": "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
+            "type": "enum",
+            "members": {
+                "SAML_PROPERTIES_USER_ACCESS_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAML_PROPERTIES_USER_ACCESS_URL"
                     }
-                ]
+                },
+                "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#DeleteClientBranding": {
@@ -3270,18 +3327,20 @@
             }
         },
         "com.amazonaws.workspaces#ImageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OWNED",
-                        "name": "OWNED"
-                    },
-                    {
-                        "value": "SHARED",
-                        "name": "SHARED"
+            "type": "enum",
+            "members": {
+                "OWNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OWNED"
                     }
-                ]
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ImportClientBranding": {
@@ -3703,7 +3762,6 @@
         "com.amazonaws.workspaces#Limit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25
@@ -3771,6 +3829,23 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#LogUploadEnum": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#LoginMessage": {
             "type": "map",
             "key": {
@@ -3789,7 +3864,6 @@
         "com.amazonaws.workspaces#ManagementCidrRangeMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -3865,22 +3939,26 @@
             }
         },
         "com.amazonaws.workspaces#ModificationResourceEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ROOT_VOLUME",
-                        "name": "ROOT_VOLUME"
-                    },
-                    {
-                        "value": "USER_VOLUME",
-                        "name": "USER_VOLUME"
-                    },
-                    {
-                        "value": "COMPUTE_TYPE",
-                        "name": "COMPUTE_TYPE"
+            "type": "enum",
+            "members": {
+                "ROOT_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROOT_VOLUME"
                     }
-                ]
+                },
+                "USER_VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_VOLUME"
+                    }
+                },
+                "COMPUTE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPUTE_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ModificationState": {
@@ -3904,18 +3982,20 @@
             }
         },
         "com.amazonaws.workspaces#ModificationStateEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UPDATE_INITIATED",
-                        "name": "UPDATE_INITIATED"
-                    },
-                    {
-                        "value": "UPDATE_IN_PROGRESS",
-                        "name": "UPDATE_IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "UPDATE_INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_INITIATED"
                     }
-                ]
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#ModificationStateList": {
@@ -4339,18 +4419,20 @@
             }
         },
         "com.amazonaws.workspaces#OperatingSystemType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WINDOWS",
-                        "name": "WINDOWS"
-                    },
-                    {
-                        "value": "LINUX",
-                        "name": "LINUX"
+            "type": "enum",
+            "members": {
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS"
                     }
-                ]
+                },
+                "LINUX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINUX"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#OperationInProgressException": {
@@ -4520,18 +4602,20 @@
             }
         },
         "com.amazonaws.workspaces#ReconnectEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#Region": {
@@ -4846,31 +4930,27 @@
             }
         },
         "com.amazonaws.workspaces#RootVolumeSizeGib": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.workspaces#RunningMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUTO_STOP",
-                        "name": "AUTO_STOP"
-                    },
-                    {
-                        "value": "ALWAYS_ON",
-                        "name": "ALWAYS_ON"
+            "type": "enum",
+            "members": {
+                "AUTO_STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_STOP"
                     }
-                ]
+                },
+                "ALWAYS_ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALWAYS_ON"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#RunningModeAutoStopTimeoutInMinutes": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.workspaces#SamlProperties": {
             "type": "structure",
@@ -4899,22 +4979,26 @@
             }
         },
         "com.amazonaws.workspaces#SamlStatusEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK",
-                        "name": "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#SamlUserAccessUrl": {
@@ -5191,33 +5275,37 @@
             }
         },
         "com.amazonaws.workspaces#TargetWorkspaceState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "ADMIN_MAINTENANCE",
-                        "name": "ADMIN_MAINTENANCE"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "ADMIN_MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN_MAINTENANCE"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#Tenancy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEDICATED",
-                        "name": "DEDICATED"
-                    },
-                    {
-                        "value": "SHARED",
-                        "name": "SHARED"
+            "type": "enum",
+            "members": {
+                "DEDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEDICATED"
                     }
-                ]
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#TerminateRequest": {
@@ -5637,10 +5725,7 @@
             }
         },
         "com.amazonaws.workspaces#UserVolumeSizeGib": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.workspaces#VolumeEncryptionKey": {
             "type": "string"
@@ -6080,45 +6165,55 @@
             }
         },
         "com.amazonaws.workspaces#WorkspaceDirectoryState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REGISTERING",
-                        "name": "REGISTERING"
-                    },
-                    {
-                        "value": "REGISTERED",
-                        "name": "REGISTERED"
-                    },
-                    {
-                        "value": "DEREGISTERING",
-                        "name": "DEREGISTERING"
-                    },
-                    {
-                        "value": "DEREGISTERED",
-                        "name": "DEREGISTERED"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "REGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERING"
                     }
-                ]
+                },
+                "REGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERED"
+                    }
+                },
+                "DEREGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERING"
+                    }
+                },
+                "DEREGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceDirectoryType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SIMPLE_AD",
-                        "name": "SIMPLE_AD"
-                    },
-                    {
-                        "value": "AD_CONNECTOR",
-                        "name": "AD_CONNECTOR"
+            "type": "enum",
+            "members": {
+                "SIMPLE_AD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIMPLE_AD"
                     }
-                ]
+                },
+                "AD_CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AD_CONNECTOR"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceErrorCode": {
@@ -6248,30 +6343,38 @@
             }
         },
         "com.amazonaws.workspaces#WorkspaceImageIngestionProcess": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BYOL_REGULAR",
-                        "name": "BYOL_REGULAR"
-                    },
-                    {
-                        "value": "BYOL_GRAPHICS",
-                        "name": "BYOL_GRAPHICS"
-                    },
-                    {
-                        "value": "BYOL_GRAPHICSPRO",
-                        "name": "BYOL_GRAPHICSPRO"
-                    },
-                    {
-                        "value": "BYOL_GRAPHICS_G4DN",
-                        "name": "BYOL_GRAPHICS_G4DN"
-                    },
-                    {
-                        "value": "BYOL_REGULAR_WSP",
-                        "name": "BYOL_REGULAR_WSP"
+            "type": "enum",
+            "members": {
+                "BYOL_REGULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL_REGULAR"
                     }
-                ]
+                },
+                "BYOL_GRAPHICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL_GRAPHICS"
+                    }
+                },
+                "BYOL_GRAPHICSPRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL_GRAPHICSPRO"
+                    }
+                },
+                "BYOL_GRAPHICS_G4DN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL_GRAPHICS_G4DN"
+                    }
+                },
+                "BYOL_REGULAR_WSP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL_REGULAR_WSP"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceImageList": {
@@ -6291,37 +6394,43 @@
             }
         },
         "com.amazonaws.workspaces#WorkspaceImageRequiredTenancy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEFAULT",
-                        "name": "DEFAULT"
-                    },
-                    {
-                        "value": "DEDICATED",
-                        "name": "DEDICATED"
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
                     }
-                ]
+                },
+                "DEDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEDICATED"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceImageState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceList": {
@@ -6440,78 +6549,110 @@
             }
         },
         "com.amazonaws.workspaces#WorkspaceState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "IMPAIRED",
-                        "name": "IMPAIRED"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "REBOOTING",
-                        "name": "REBOOTING"
-                    },
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "REBUILDING",
-                        "name": "REBUILDING"
-                    },
-                    {
-                        "value": "RESTORING",
-                        "name": "RESTORING"
-                    },
-                    {
-                        "value": "MAINTENANCE",
-                        "name": "MAINTENANCE"
-                    },
-                    {
-                        "value": "ADMIN_MAINTENANCE",
-                        "name": "ADMIN_MAINTENANCE"
-                    },
-                    {
-                        "value": "TERMINATING",
-                        "name": "TERMINATING"
-                    },
-                    {
-                        "value": "TERMINATED",
-                        "name": "TERMINATED"
-                    },
-                    {
-                        "value": "SUSPENDED",
-                        "name": "SUSPENDED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPAIRED"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "REBOOTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBOOTING"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "REBUILDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBUILDING"
+                    }
+                },
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
+                },
+                "MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAINTENANCE"
+                    }
+                },
+                "ADMIN_MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN_MAINTENANCE"
+                    }
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUSPENDED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspacesDefaultRoleNotFoundException": {
@@ -6566,24 +6707,6 @@
         },
         "com.amazonaws.workspaces#WorkspacesService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WorkSpaces",
-                    "arnNamespace": "workspaces",
-                    "cloudFormationName": "WorkSpaces",
-                    "cloudTrailEventSource": "workspaces.amazonaws.com",
-                    "endpointPrefix": "workspaces"
-                },
-                "aws.auth#sigv4": {
-                    "name": "workspaces"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon WorkSpaces Service</fullname>\n         <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows\n         or Amazon Linux desktops for your users, known as <i>WorkSpaces</i>.\n            WorkSpaces eliminates the need to procure and deploy hardware or install complex\n         software. You can quickly add or remove users as your needs change. Users can access their\n         virtual desktops from multiple devices or web browsers.</p>\n         <p>This API Reference provides detailed information about the actions, data types,\n         parameters, and errors of the WorkSpaces service. For more information about the\n         supported Amazon Web Services Regions, endpoints, and service quotas of the Amazon WorkSpaces service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/wsp.html\">WorkSpaces endpoints and quotas</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n         <p>You can also manage your WorkSpaces resources using the WorkSpaces\n         console, Command Line Interface (CLI), and SDKs. For more information about\n         administering WorkSpaces, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/\">Amazon WorkSpaces Administration Guide</a>.\n         For more information about using the Amazon WorkSpaces client application or web\n         browser to access provisioned WorkSpaces, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/userguide/\">Amazon WorkSpaces User Guide</a>. For more\n         information about using the CLI to manage your WorkSpaces resources,\n         see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html\">WorkSpaces section of the CLI Reference</a>.</p>",
-                "smithy.api#title": "Amazon WorkSpaces",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://workspaces.amazonaws.com/api/v1"
-                }
-            },
             "version": "2015-04-08",
             "operations": [
                 {
@@ -6775,7 +6898,25 @@
                 {
                     "target": "com.amazonaws.workspaces#UpdateWorkspaceImagePermission"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WorkSpaces",
+                    "arnNamespace": "workspaces",
+                    "cloudFormationName": "WorkSpaces",
+                    "cloudTrailEventSource": "workspaces.amazonaws.com",
+                    "endpointPrefix": "workspaces"
+                },
+                "aws.auth#sigv4": {
+                    "name": "workspaces"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon WorkSpaces Service</fullname>\n         <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows\n         or Amazon Linux desktops for your users, known as <i>WorkSpaces</i>.\n            WorkSpaces eliminates the need to procure and deploy hardware or install complex\n         software. You can quickly add or remove users as your needs change. Users can access their\n         virtual desktops from multiple devices or web browsers.</p>\n         <p>This API Reference provides detailed information about the actions, data types,\n         parameters, and errors of the WorkSpaces service. For more information about the\n         supported Amazon Web Services Regions, endpoints, and service quotas of the Amazon WorkSpaces service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/wsp.html\">WorkSpaces endpoints and quotas</a> in the <i>Amazon Web Services\n            General Reference</i>.</p>\n         <p>You can also manage your WorkSpaces resources using the WorkSpaces\n         console, Command Line Interface (CLI), and SDKs. For more information about\n         administering WorkSpaces, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/\">Amazon WorkSpaces Administration Guide</a>.\n         For more information about using the Amazon WorkSpaces client application or web\n         browser to access provisioned WorkSpaces, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/userguide/\">Amazon WorkSpaces User Guide</a>. For more\n         information about using the CLI to manage your WorkSpaces resources,\n         see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html\">WorkSpaces section of the CLI Reference</a>.</p>",
+                "smithy.api#title": "Amazon WorkSpaces",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://workspaces.amazonaws.com/api/v1"
+                }
+            }
         }
     }
 }

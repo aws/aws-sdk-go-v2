@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -41,7 +41,7 @@
                     "code": "AccessDenied",
                     "httpResponseCode": 403
                 },
-                "smithy.api#documentation": "<p>You do not have access\n      required to perform this action.</p>",
+                "smithy.api#documentation": "<p>You do not have access required to perform this action.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -50,6 +50,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acm#AddTagsToCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -75,7 +78,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to\n      identify and organize your Amazon Web Services resources. Each tag consists of a <code>key</code> and an\n      optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name\n      (ARN). You specify the tag by using a key-value pair. </p>\n\n         <p>You can apply a tag to just one certificate if you want to identify a specific\n      characteristic of that certificate, or you can apply the same tag to multiple certificates if\n      you want to filter for a common relationship among those certificates. Similarly, you can\n      apply the same tag to multiple resources if you want to specify a relationship among those\n      resources. For example, you can add the same tag to an ACM certificate and an Elastic Load\n      Balancing load balancer to indicate that they are both used by the same website. For more\n      information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM\n        certificates</a>. </p>\n\n         <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To\n      view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
+                "smithy.api#documentation": "<p>Adds one or more tags to an ACM certificate. Tags are labels that you can use to\n      identify and organize your Amazon Web Services resources. Each tag consists of a <code>key</code> and an\n      optional <code>value</code>. You specify the certificate on input by its Amazon Resource Name\n      (ARN). You specify the tag by using a key-value pair. </p>\n         <p>You can apply a tag to just one certificate if you want to identify a specific\n      characteristic of that certificate, or you can apply the same tag to multiple certificates if\n      you want to filter for a common relationship among those certificates. Similarly, you can\n      apply the same tag to multiple resources if you want to specify a relationship among those\n      resources. For example, you can add the same tag to an ACM certificate and an Elastic Load\n      Balancing load balancer to indicate that they are both used by the same website. For more\n      information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/tags.html\">Tagging ACM\n        certificates</a>. </p>\n         <p>To remove one or more tags, use the <a>RemoveTagsFromCertificate</a> action. To\n      view all of the tags that have been applied to the certificate, use the <a>ListTagsForCertificate</a> action. </p>"
             }
         },
         "com.amazonaws.acm#AddTagsToCertificateRequest": {
@@ -84,7 +87,7 @@
                 "CertificateArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>String that contains the ARN of the ACM certificate to which the tag is to be applied.\n      This must be of the form:</p>\n\n         <p>\n            <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>\n\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>",
+                        "smithy.api#documentation": "<p>String that contains the ARN of the ACM certificate to which the tag is to be applied.\n      This must be of the form:</p>\n         <p>\n            <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -166,7 +169,7 @@
                 "SubjectAlternativeNames": {
                     "target": "com.amazonaws.acm#DomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more domain names (subject alternative names) included in the certificate. This\n      list contains the domain names that are bound to the public key that is contained in the\n      certificate. The subject alternative names include the canonical domain name (CN) of the\n      certificate and additional domain names that can be used to connect to the website. </p>"
+                        "smithy.api#documentation": "<p>One or more domain names (subject alternative names) \n      included in the certificate. This\n      list contains the domain names that are bound to the public key that is contained in the\n      certificate. The subject alternative names include the canonical domain name (CN) of the\n      certificate and additional domain names that can be used to connect to the website. </p>"
                     }
                 },
                 "DomainValidationOptions": {
@@ -208,13 +211,13 @@
                 "ImportedAt": {
                     "target": "com.amazonaws.acm#TStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time at which the certificate was imported. This value exists only when the\n      certificate type is <code>IMPORTED</code>. </p>"
+                        "smithy.api#documentation": "<p>The date and time when the certificate was imported. This value exists only when the\n      certificate type is <code>IMPORTED</code>. </p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.acm#CertificateStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the certificate.</p>"
+                        "smithy.api#documentation": "<p>The status of the certificate.</p>\n         <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for\n      any of the reasons given in the troubleshooting topic <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html\">Certificate request fails</a>. ACM makes\n      repeated attempts to validate a certificate for 72 hours and then times out. If a certificate\n      shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html\">Email validation</a>, and\n      try again. If validation succeeds, the certificate enters status ISSUED. </p>"
                     }
                 },
                 "RevokedAt": {
@@ -262,13 +265,13 @@
                 "FailureReason": {
                     "target": "com.amazonaws.acm#FailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason the certificate request failed. This value exists only when the certificate\n      status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request\n        Failed</a> in the <i>Amazon Web Services Certificate Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The reason the certificate request failed. This value exists only when the certificate\n      status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request\n        Failed</a> in the <i>Certificate Manager User Guide</i>. </p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.acm#CertificateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is\n        <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide\n        <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for\n      imported certificates. For more information about the differences between certificates that\n      you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the\n        <i>Amazon Web Services Certificate Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is\n        <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide\n        <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for\n      imported certificates. For more information about the differences between certificates that\n      you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the\n        <i>Certificate Manager User Guide</i>. </p>"
                     }
                 },
                 "RenewalSummary": {
@@ -292,7 +295,7 @@
                 "CertificateAuthorityArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ACM PCA private certificate authority (CA) that issued\n      the certificate. This has the following format: </p>\n         <p>\n            <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that issued the\n      certificate. This has the following format: </p>\n         <p>\n            <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "RenewalEligibility": {
@@ -374,7 +377,7 @@
                     "name": "acm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon Web Services Certificate Manager</fullname>\n         <p>You can use Amazon Web Services Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites\n      and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Amazon Web Services Certificate Manager User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Certificate Manager</fullname>\n         <p>You can use Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites\n      and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Certificate Manager User Guide</a>.</p>",
                 "smithy.api#title": "AWS Certificate Manager"
             }
         },
@@ -393,38 +396,50 @@
             }
         },
         "com.amazonaws.acm#CertificateStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING_VALIDATION",
-                        "name": "PENDING_VALIDATION"
-                    },
-                    {
-                        "value": "ISSUED",
-                        "name": "ISSUED"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "EXPIRED",
-                        "name": "EXPIRED"
-                    },
-                    {
-                        "value": "VALIDATION_TIMED_OUT",
-                        "name": "VALIDATION_TIMED_OUT"
-                    },
-                    {
-                        "value": "REVOKED",
-                        "name": "REVOKED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_VALIDATION"
                     }
-                ]
+                },
+                "ISSUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISSUED"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "VALIDATION_TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_TIMED_OUT"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#CertificateStatuses": {
@@ -439,13 +454,109 @@
                 "CertificateArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p>\n\n         <p>\n            <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>\n\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the certificate. This is of the form:</p>\n         <p>\n            <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>"
                     }
                 },
                 "DomainName": {
                     "target": "com.amazonaws.acm#DomainNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>Fully qualified domain name (FQDN), such as www.example.com or example.com, for the\n      certificate.</p>"
+                    }
+                },
+                "SubjectAlternativeNameSummaries": {
+                    "target": "com.amazonaws.acm#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more domain names (subject alternative names) \n      included in the certificate. This\n      list contains the domain names that are bound to the public key that is contained in the\n      certificate. The subject alternative names include the canonical domain name (CN) of the\n      certificate and additional domain names that can be used to connect to the website. </p>\n         <p>When called by <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html\">ListCertificates</a>, this parameter will only return the first 100 subject alternative\n      names included in the certificate. To display the full list of subject alternative names, use\n        <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html\">DescribeCertificate</a>.</p>"
+                    }
+                },
+                "HasAdditionalSubjectAlternativeNames": {
+                    "target": "com.amazonaws.acm#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When called by <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html\">ListCertificates</a>, indicates whether the full list of subject alternative names has\n      been included in the response. If false, the response includes all of the subject alternative\n      names included in the certificate. If true, the response only includes the first 100 subject\n      alternative names included in the certificate. To display the full list of subject alternative\n      names, use <a href=\"https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html\">DescribeCertificate</a>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.acm#CertificateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate.</p>\n         <p>A certificate enters status PENDING_VALIDATION upon being requested, unless it fails for\n      any of the reasons given in the troubleshooting topic <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html\">Certificate request fails</a>. ACM makes\n      repeated attempts to validate a certificate for 72 hours and then times out. If a certificate\n      shows status FAILED or VALIDATION_TIMED_OUT, delete the request, correct the issue with <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html\">Email validation</a>, and\n      try again. If validation succeeds, the certificate enters status ISSUED. </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.acm#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the certificate. For certificates provided by ACM, this value is\n        <code>AMAZON_ISSUED</code>. For certificates that you imported with <a>ImportCertificate</a>, this value is <code>IMPORTED</code>. ACM does not provide\n        <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for\n      imported certificates. For more information about the differences between certificates that\n      you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the\n        <i>Certificate Manager User Guide</i>. </p>"
+                    }
+                },
+                "KeyAlgorithm": {
+                    "target": "com.amazonaws.acm#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm that was used to generate the public-private key pair.</p>"
+                    }
+                },
+                "KeyUsages": {
+                    "target": "com.amazonaws.acm#KeyUsageNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Key Usage X.509 v3 extension objects. Each object is a string value that\n      identifies the purpose of the public key contained in the certificate. Possible extension\n      values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION, and more.</p>"
+                    }
+                },
+                "ExtendedKeyUsages": {
+                    "target": "com.amazonaws.acm#ExtendedKeyUsageNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a\n      purpose for which the certificate public key can be used and consists of a name and an object\n      identifier (OID). </p>"
+                    }
+                },
+                "InUse": {
+                    "target": "com.amazonaws.acm#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the certificate is currently in use by any Amazon Web Services resources.</p>"
+                    }
+                },
+                "Exported": {
+                    "target": "com.amazonaws.acm#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the certificate has been exported. This value exists only when the\n      certificate type is <code>PRIVATE</code>.</p>"
+                    }
+                },
+                "RenewalEligibility": {
+                    "target": "com.amazonaws.acm#RenewalEligibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the certificate is eligible for renewal. At this time, only exported\n      private certificates can be renewed with the <a>RenewCertificate</a>\n      command.</p>"
+                    }
+                },
+                "NotBefore": {
+                    "target": "com.amazonaws.acm#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time before which the certificate is not valid.</p>"
+                    }
+                },
+                "NotAfter": {
+                    "target": "com.amazonaws.acm#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time after which the certificate is not valid.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.acm#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the certificate was requested.</p>"
+                    }
+                },
+                "IssuedAt": {
+                    "target": "com.amazonaws.acm#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the certificate was issued. This value exists only when the certificate\n      type is <code>AMAZON_ISSUED</code>. </p>"
+                    }
+                },
+                "ImportedAt": {
+                    "target": "com.amazonaws.acm#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the certificate was imported. This value exists only when the\n      certificate type is <code>IMPORTED</code>. </p>"
+                    }
+                },
+                "RevokedAt": {
+                    "target": "com.amazonaws.acm#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the certificate was revoked. This value exists only when the certificate\n      status is <code>REVOKED</code>. </p>"
                     }
                 }
             },
@@ -460,37 +571,43 @@
             }
         },
         "com.amazonaws.acm#CertificateTransparencyLoggingPreference": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#CertificateType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IMPORTED",
-                        "name": "IMPORTED"
-                    },
-                    {
-                        "value": "AMAZON_ISSUED",
-                        "name": "AMAZON_ISSUED"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "IMPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORTED"
                     }
-                ]
+                },
+                "AMAZON_ISSUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_ISSUED"
+                    }
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#ConflictException": {
@@ -501,7 +618,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You are trying to\n      update a resource or configuration that is already being created or updated. Wait for the\n      previous operation to finish and try again.</p>",
+                "smithy.api#documentation": "<p>You are trying to update a resource or configuration that is already being created or\n      updated. Wait for the previous operation to finish and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -509,6 +626,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acm#DeleteCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -554,7 +674,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed metadata about the specified ACM certificate.</p>",
+                "smithy.api#documentation": "<p>Returns detailed metadata about the specified ACM certificate.</p>\n         <p>If you have just created a certificate using the <code>RequestCertificate</code> action,\n      there is a delay of several seconds before you can retrieve information about it.</p>",
                 "smithy.waiters#waitable": {
                     "CertificateValidated": {
                         "acceptors": [
@@ -646,22 +766,26 @@
             }
         },
         "com.amazonaws.acm#DomainStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING_VALIDATION",
-                        "name": "PENDING_VALIDATION"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_VALIDATION"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#DomainValidation": {
@@ -689,7 +813,7 @@
                 "ValidationStatus": {
                     "target": "com.amazonaws.acm#DomainStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The validation status of the domain name. This can be one of the following values:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING_VALIDATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code></code>SUCCESS</p>\n            </li>\n            <li>\n               <p>\n                  <code></code>FAILED</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The validation status of the domain name. This can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING_VALIDATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code></code>SUCCESS</p>\n            </li>\n            <li>\n               <p>\n                  <code></code>FAILED</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResourceRecord": {
@@ -766,7 +890,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object containing\n      expiration events options associated with an Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Object containing expiration events options associated with an Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.acm#ExportCertificate": {
@@ -805,7 +929,7 @@
                 "Passphrase": {
                     "target": "com.amazonaws.acm#PassphraseBlob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Passphrase to associate with the encrypted exported private key. If you want to later\n      decrypt the private key, you must have the passphrase. You can use the following OpenSSL\n      command to decrypt a private key: </p>\n         <p>\n            <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Passphrase to associate with the encrypted exported private key. </p>\n         <note>\n            <p>When creating your passphrase, you can use any ASCII character except #, $, or %.</p>\n         </note>\n         <p>If you want to later decrypt the private key, you must have the passphrase. You can use\n      the following OpenSSL command to decrypt a private key. After entering the command, you are\n      prompted for the passphrase.</p>\n         <p>\n            <code>openssl rsa -in encrypted_key.pem -out decrypted_key.pem</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -846,7 +970,7 @@
                 "OID": {
                     "target": "com.amazonaws.acm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object identifier (OID) for the extension value. OIDs are strings of numbers separated\n      by periods. The following OIDs are defined in RFC 3280 and RFC 5280. </p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.3 (CODE_SIGNING)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.8 (TIME_STAMPING)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.7 (IPSEC_USER)</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An object identifier (OID) for the extension value. OIDs are strings of numbers separated\n      by periods. The following OIDs are defined in RFC 3280 and RFC 5280. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.3 (CODE_SIGNING)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.8 (TIME_STAMPING)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>1.3.6.1.5.5.7.3.7 (IPSEC_USER)</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -867,133 +991,193 @@
             }
         },
         "com.amazonaws.acm#ExtendedKeyUsageName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TLS_WEB_SERVER_AUTHENTICATION",
-                        "name": "TLS_WEB_SERVER_AUTHENTICATION"
-                    },
-                    {
-                        "value": "TLS_WEB_CLIENT_AUTHENTICATION",
-                        "name": "TLS_WEB_CLIENT_AUTHENTICATION"
-                    },
-                    {
-                        "value": "CODE_SIGNING",
-                        "name": "CODE_SIGNING"
-                    },
-                    {
-                        "value": "EMAIL_PROTECTION",
-                        "name": "EMAIL_PROTECTION"
-                    },
-                    {
-                        "value": "TIME_STAMPING",
-                        "name": "TIME_STAMPING"
-                    },
-                    {
-                        "value": "OCSP_SIGNING",
-                        "name": "OCSP_SIGNING"
-                    },
-                    {
-                        "value": "IPSEC_END_SYSTEM",
-                        "name": "IPSEC_END_SYSTEM"
-                    },
-                    {
-                        "value": "IPSEC_TUNNEL",
-                        "name": "IPSEC_TUNNEL"
-                    },
-                    {
-                        "value": "IPSEC_USER",
-                        "name": "IPSEC_USER"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
+            "type": "enum",
+            "members": {
+                "TLS_WEB_SERVER_AUTHENTICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_WEB_SERVER_AUTHENTICATION"
                     }
-                ]
+                },
+                "TLS_WEB_CLIENT_AUTHENTICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_WEB_CLIENT_AUTHENTICATION"
+                    }
+                },
+                "CODE_SIGNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODE_SIGNING"
+                    }
+                },
+                "EMAIL_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_PROTECTION"
+                    }
+                },
+                "TIME_STAMPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_STAMPING"
+                    }
+                },
+                "OCSP_SIGNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OCSP_SIGNING"
+                    }
+                },
+                "IPSEC_END_SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPSEC_END_SYSTEM"
+                    }
+                },
+                "IPSEC_TUNNEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPSEC_TUNNEL"
+                    }
+                },
+                "IPSEC_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPSEC_USER"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.acm#ExtendedKeyUsageNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.acm#ExtendedKeyUsageName"
             }
         },
         "com.amazonaws.acm#FailureReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NO_AVAILABLE_CONTACTS",
-                        "name": "NO_AVAILABLE_CONTACTS"
-                    },
-                    {
-                        "value": "ADDITIONAL_VERIFICATION_REQUIRED",
-                        "name": "ADDITIONAL_VERIFICATION_REQUIRED"
-                    },
-                    {
-                        "value": "DOMAIN_NOT_ALLOWED",
-                        "name": "DOMAIN_NOT_ALLOWED"
-                    },
-                    {
-                        "value": "INVALID_PUBLIC_DOMAIN",
-                        "name": "INVALID_PUBLIC_DOMAIN"
-                    },
-                    {
-                        "value": "DOMAIN_VALIDATION_DENIED",
-                        "name": "DOMAIN_VALIDATION_DENIED"
-                    },
-                    {
-                        "value": "CAA_ERROR",
-                        "name": "CAA_ERROR"
-                    },
-                    {
-                        "value": "PCA_LIMIT_EXCEEDED",
-                        "name": "PCA_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "PCA_INVALID_ARN",
-                        "name": "PCA_INVALID_ARN"
-                    },
-                    {
-                        "value": "PCA_INVALID_STATE",
-                        "name": "PCA_INVALID_STATE"
-                    },
-                    {
-                        "value": "PCA_REQUEST_FAILED",
-                        "name": "PCA_REQUEST_FAILED"
-                    },
-                    {
-                        "value": "PCA_NAME_CONSTRAINTS_VALIDATION",
-                        "name": "PCA_NAME_CONSTRAINTS_VALIDATION"
-                    },
-                    {
-                        "value": "PCA_RESOURCE_NOT_FOUND",
-                        "name": "PCA_RESOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "PCA_INVALID_ARGS",
-                        "name": "PCA_INVALID_ARGS"
-                    },
-                    {
-                        "value": "PCA_INVALID_DURATION",
-                        "name": "PCA_INVALID_DURATION"
-                    },
-                    {
-                        "value": "PCA_ACCESS_DENIED",
-                        "name": "PCA_ACCESS_DENIED"
-                    },
-                    {
-                        "value": "SLR_NOT_FOUND",
-                        "name": "SLR_NOT_FOUND"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "NO_AVAILABLE_CONTACTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_AVAILABLE_CONTACTS"
                     }
-                ]
+                },
+                "ADDITIONAL_VERIFICATION_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITIONAL_VERIFICATION_REQUIRED"
+                    }
+                },
+                "DOMAIN_NOT_ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_NOT_ALLOWED"
+                    }
+                },
+                "INVALID_PUBLIC_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PUBLIC_DOMAIN"
+                    }
+                },
+                "DOMAIN_VALIDATION_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_VALIDATION_DENIED"
+                    }
+                },
+                "CAA_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAA_ERROR"
+                    }
+                },
+                "PCA_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_LIMIT_EXCEEDED"
+                    }
+                },
+                "PCA_INVALID_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_INVALID_ARN"
+                    }
+                },
+                "PCA_INVALID_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_INVALID_STATE"
+                    }
+                },
+                "PCA_REQUEST_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_REQUEST_FAILED"
+                    }
+                },
+                "PCA_NAME_CONSTRAINTS_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_NAME_CONSTRAINTS_VALIDATION"
+                    }
+                },
+                "PCA_RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_RESOURCE_NOT_FOUND"
+                    }
+                },
+                "PCA_INVALID_ARGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_INVALID_ARGS"
+                    }
+                },
+                "PCA_INVALID_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_INVALID_DURATION"
+                    }
+                },
+                "PCA_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCA_ACCESS_DENIED"
+                    }
+                },
+                "SLR_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLR_NOT_FOUND"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#Filters": {
@@ -1014,7 +1198,7 @@
                 "keyTypes": {
                     "target": "com.amazonaws.acm#KeyAlgorithmList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify one or more algorithms that can be used to generate key pairs.</p>\n         <p>Default filtering returns only <code>RSA_1024</code> and <code>RSA_2048</code>\n      certificates that have at least one domain. To return other certificate types, provide the\n      desired type signatures in a comma-separated list. For example, <code>\"keyTypes\":\n        [\"RSA_2048,RSA_4096\"]</code> returns both <code>RSA_2048</code> and <code>RSA_4096</code>\n      certificates.</p>"
+                        "smithy.api#documentation": "<p>Specify one or more algorithms that can be used to generate key pairs.</p>\n         <p>Default filtering returns only <code>RSA_1024</code> and <code>RSA_2048</code>\n      certificates that have at least one domain. To return other certificate types, provide the\n      desired type signatures in a comma-separated list. For example, <code>\"keyTypes\":\n        [\"RSA_2048\",\"RSA_4096\"]</code> returns both <code>RSA_2048</code> and <code>RSA_4096</code>\n      certificates.</p>"
                     }
                 }
             },
@@ -1024,6 +1208,9 @@
         },
         "com.amazonaws.acm#GetAccountConfiguration": {
             "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
             "output": {
                 "target": "com.amazonaws.acm#GetAccountConfigurationResponse"
             },
@@ -1036,7 +1223,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the account\n      configuration options associated with an Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Returns the account configuration options associated with an Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.acm#GetAccountConfigurationResponse": {
@@ -1045,7 +1232,7 @@
                 "ExpiryEvents": {
                     "target": "com.amazonaws.acm#ExpiryEventsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Expiration events\n      configuration options associated with the Amazon Web Services account.</p>"
+                        "smithy.api#documentation": "<p>Expiration events configuration options associated with the Amazon Web Services account.</p>"
                     }
                 }
             }
@@ -1144,7 +1331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports a certificate into Amazon Web Services Certificate Manager (ACM) to use with services that are integrated with\n      ACM. Note that <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html\">integrated\n        services</a> allow only certificate types and keys they support to be associated with\n      their resources. Further, their support differs depending on whether the certificate is\n      imported into IAM or into ACM. For more information, see the documentation for each\n      service. For more information about importing certificates into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing\n        Certificates</a> in the <i>Amazon Web Services Certificate Manager User Guide</i>. </p>\n\n         <note>\n            <p>ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for certificates that you import.</p>\n         </note>\n\n         <p>Note the following guidelines when importing third party certificates:</p>\n\n\n         <ul>\n            <li>\n               <p>You must enter the private key that matches the certificate you are importing.</p>\n            </li>\n            <li>\n               <p>The private key must be unencrypted. You cannot import a private key that is protected\n          by a password or a passphrase.</p>\n            </li>\n            <li>\n               <p>The private key must be no larger than 5 KB (5,120 bytes).</p>\n            </li>\n            <li>\n               <p>If the certificate you are importing is not self-signed, you must enter its\n          certificate chain.</p>\n            </li>\n            <li>\n               <p>If a certificate chain is included, the issuer must be the subject of one of the\n          certificates in the chain.</p>\n            </li>\n            <li>\n               <p>The certificate, private key, and certificate chain must be PEM-encoded.</p>\n            </li>\n            <li>\n               <p>The current time must be between the <code>Not Before</code> and <code>Not\n            After</code> certificate fields.</p>\n            </li>\n            <li>\n               <p>The <code>Issuer</code> field must not be empty.</p>\n            </li>\n            <li>\n               <p>The OCSP authority URL, if present, must not exceed 1000 characters.</p>\n            </li>\n            <li>\n               <p>To import a new certificate, omit the <code>CertificateArn</code> argument. Include\n          this argument only when you want to replace a previously imported certificate.</p>\n            </li>\n            <li>\n               <p>When you import a certificate by using the CLI, you must specify the certificate, the\n          certificate chain, and the private key by their file names preceded by\n            <code>fileb://</code>. For example, you can specify a certificate saved in the\n            <code>C:\\temp</code> folder as <code>fileb://C:\\temp\\certificate_to_import.pem</code>.\n          If you are making an HTTP or HTTPS Query request, include these arguments as BLOBs.\n        </p>\n            </li>\n            <li>\n               <p>When you import a certificate by using an SDK, you must specify the certificate, the\n          certificate chain, and the private key files in the manner required by the programming\n          language you're using. </p>\n            </li>\n            <li>\n               <p>The cryptographic algorithm of an imported certificate must match the algorithm of the\n          signing CA. For example, if the signing CA key type is RSA, then the certificate key type\n          must also be RSA.</p>\n            </li>\n         </ul>\n\n         <p>This operation returns the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n        Resource Name (ARN)</a> of the imported certificate.</p>"
+                "smithy.api#documentation": "<p>Imports a certificate into Certificate Manager (ACM) to use with services that are integrated with\n      ACM. Note that <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html\">integrated\n        services</a> allow only certificate types and keys they support to be associated with\n      their resources. Further, their support differs depending on whether the certificate is\n      imported into IAM or into ACM. For more information, see the documentation for each\n      service. For more information about importing certificates into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing\n        Certificates</a> in the <i>Certificate Manager User Guide</i>. </p>\n         <note>\n            <p>ACM does not provide <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for certificates that you import.</p>\n         </note>\n         <p>Note the following guidelines when importing third party certificates:</p>\n         <ul>\n            <li>\n               <p>You must enter the private key that matches the certificate you are importing.</p>\n            </li>\n            <li>\n               <p>The private key must be unencrypted. You cannot import a private key that is protected\n          by a password or a passphrase.</p>\n            </li>\n            <li>\n               <p>The private key must be no larger than 5 KB (5,120 bytes).</p>\n            </li>\n            <li>\n               <p>If the certificate you are importing is not self-signed, you must enter its\n          certificate chain.</p>\n            </li>\n            <li>\n               <p>If a certificate chain is included, the issuer must be the subject of one of the\n          certificates in the chain.</p>\n            </li>\n            <li>\n               <p>The certificate, private key, and certificate chain must be PEM-encoded.</p>\n            </li>\n            <li>\n               <p>The current time must be between the <code>Not Before</code> and <code>Not\n            After</code> certificate fields.</p>\n            </li>\n            <li>\n               <p>The <code>Issuer</code> field must not be empty.</p>\n            </li>\n            <li>\n               <p>The OCSP authority URL, if present, must not exceed 1000 characters.</p>\n            </li>\n            <li>\n               <p>To import a new certificate, omit the <code>CertificateArn</code> argument. Include\n          this argument only when you want to replace a previously imported certificate.</p>\n            </li>\n            <li>\n               <p>When you import a certificate by using the CLI, you must specify the certificate, the\n          certificate chain, and the private key by their file names preceded by\n            <code>fileb://</code>. For example, you can specify a certificate saved in the\n            <code>C:\\temp</code> folder as <code>fileb://C:\\temp\\certificate_to_import.pem</code>.\n          If you are making an HTTP or HTTPS Query request, include these arguments as BLOBs.\n        </p>\n            </li>\n            <li>\n               <p>When you import a certificate by using an SDK, you must specify the certificate, the\n          certificate chain, and the private key files in the manner required by the programming\n          language you're using. </p>\n            </li>\n            <li>\n               <p>The cryptographic algorithm of an imported certificate must match the algorithm of the\n          signing CA. For example, if the signing CA key type is RSA, then the certificate key type\n          must also be RSA.</p>\n            </li>\n         </ul>\n         <p>This operation returns the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon\n        Resource Name (ARN)</a> of the imported certificate.</p>"
             }
         },
         "com.amazonaws.acm#ImportCertificateRequest": {
@@ -1274,38 +1461,50 @@
             }
         },
         "com.amazonaws.acm#KeyAlgorithm": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RSA_1024",
-                        "name": "RSA_1024"
-                    },
-                    {
-                        "value": "RSA_2048",
-                        "name": "RSA_2048"
-                    },
-                    {
-                        "value": "RSA_3072",
-                        "name": "RSA_3072"
-                    },
-                    {
-                        "value": "RSA_4096",
-                        "name": "RSA_4096"
-                    },
-                    {
-                        "value": "EC_prime256v1",
-                        "name": "EC_prime256v1"
-                    },
-                    {
-                        "value": "EC_secp384r1",
-                        "name": "EC_secp384r1"
-                    },
-                    {
-                        "value": "EC_secp521r1",
-                        "name": "EC_secp521r1"
+            "type": "enum",
+            "members": {
+                "RSA_1024": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSA_1024"
                     }
-                ]
+                },
+                "RSA_2048": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSA_2048"
+                    }
+                },
+                "RSA_3072": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSA_3072"
+                    }
+                },
+                "RSA_4096": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSA_4096"
+                    }
+                },
+                "EC_prime256v1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC_prime256v1"
+                    }
+                },
+                "EC_secp384r1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC_secp384r1"
+                    }
+                },
+                "EC_secp521r1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC_secp521r1"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#KeyAlgorithmList": {
@@ -1341,54 +1540,80 @@
             }
         },
         "com.amazonaws.acm#KeyUsageName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DIGITAL_SIGNATURE",
-                        "name": "DIGITAL_SIGNATURE"
-                    },
-                    {
-                        "value": "NON_REPUDIATION",
-                        "name": "NON_REPUDATION"
-                    },
-                    {
-                        "value": "KEY_ENCIPHERMENT",
-                        "name": "KEY_ENCIPHERMENT"
-                    },
-                    {
-                        "value": "DATA_ENCIPHERMENT",
-                        "name": "DATA_ENCIPHERMENT"
-                    },
-                    {
-                        "value": "KEY_AGREEMENT",
-                        "name": "KEY_AGREEMENT"
-                    },
-                    {
-                        "value": "CERTIFICATE_SIGNING",
-                        "name": "CERTIFICATE_SIGNING"
-                    },
-                    {
-                        "value": "CRL_SIGNING",
-                        "name": "CRL_SIGNING"
-                    },
-                    {
-                        "value": "ENCIPHER_ONLY",
-                        "name": "ENCHIPER_ONLY"
-                    },
-                    {
-                        "value": "DECIPHER_ONLY",
-                        "name": "DECIPHER_ONLY"
-                    },
-                    {
-                        "value": "ANY",
-                        "name": "ANY"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
+            "type": "enum",
+            "members": {
+                "DIGITAL_SIGNATURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIGITAL_SIGNATURE"
                     }
-                ]
+                },
+                "NON_REPUDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_REPUDIATION"
+                    }
+                },
+                "KEY_ENCIPHERMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY_ENCIPHERMENT"
+                    }
+                },
+                "DATA_ENCIPHERMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_ENCIPHERMENT"
+                    }
+                },
+                "KEY_AGREEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY_AGREEMENT"
+                    }
+                },
+                "CERTIFICATE_SIGNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERTIFICATE_SIGNING"
+                    }
+                },
+                "CRL_SIGNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CRL_SIGNING"
+                    }
+                },
+                "ENCHIPER_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENCIPHER_ONLY"
+                    }
+                },
+                "DECIPHER_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECIPHER_ONLY"
+                    }
+                },
+                "ANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.acm#KeyUsageNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.acm#KeyUsageName"
             }
         },
         "com.amazonaws.acm#LimitExceededException": {
@@ -1451,6 +1676,18 @@
                     "target": "com.amazonaws.acm#MaxItems",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter when paginating results to specify the maximum number of items to\n      return in the response. If additional items exist beyond the number you specify, the\n        <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code>\n      value in a subsequent request to retrieve additional items.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.acm#SortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the field to sort results by. If you specify <code>SortBy</code>, you must also\n      specify <code>SortOrder</code>.</p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.acm#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the order of sorted results. If you specify <code>SortOrder</code>, you must\n      also specify <code>SortBy</code>.</p>"
                     }
                 }
             }
@@ -1518,7 +1755,6 @@
         "com.amazonaws.acm#MaxItems": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -1535,6 +1771,9 @@
                 "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]*$"
             }
         },
+        "com.amazonaws.acm#NullableBoolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.acm#PassphraseBlob": {
             "type": "blob",
             "traits": {
@@ -1548,7 +1787,6 @@
         "com.amazonaws.acm#PositiveInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -1580,6 +1818,9 @@
             "input": {
                 "target": "com.amazonaws.acm#PutAccountConfigurationRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acm#AccessDeniedException"
@@ -1595,7 +1836,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or modifies\n      account-level configurations in ACM.\n      </p>\n         <p>The\n      supported configuration option is <code>DaysBeforeExpiry</code>. This option specifies the\n      number of days prior to certificate expiration when ACM starts generating\n        <code>EventBridge</code> events. ACM sends one event per day per certificate until the\n      certificate expires. By default, accounts receive events starting 45 days before certificate\n      expiration.</p>"
+                "smithy.api#documentation": "<p>Adds or modifies account-level configurations in ACM. </p>\n         <p>The supported configuration option is <code>DaysBeforeExpiry</code>. This option specifies\n      the number of days prior to certificate expiration when ACM starts generating\n        <code>EventBridge</code> events. ACM sends one event per day per certificate until the\n      certificate expires. By default, accounts receive events starting 45 days before certificate\n      expiration.</p>"
             }
         },
         "com.amazonaws.acm#PutAccountConfigurationRequest": {
@@ -1604,33 +1845,36 @@
                 "ExpiryEvents": {
                     "target": "com.amazonaws.acm#ExpiryEventsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies expiration\n      events associated with an account.</p>"
+                        "smithy.api#documentation": "<p>Specifies expiration events associated with an account.</p>"
                     }
                 },
                 "IdempotencyToken": {
                     "target": "com.amazonaws.acm#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customer-chosen string\n      used to distinguish between calls to <code>PutAccountConfiguration</code>. Idempotency tokens\n      time out after one hour. If you call <code>PutAccountConfiguration</code> multiple times with\n      the same unexpired idempotency token, ACM treats it as the same request and returns the\n      original result. If you change the idempotency token for each call, ACM treats each call as\n      a new request.</p>",
+                        "smithy.api#documentation": "<p>Customer-chosen string used to distinguish between calls to\n        <code>PutAccountConfiguration</code>. Idempotency tokens time out after one hour. If you\n      call <code>PutAccountConfiguration</code> multiple times with the same unexpired idempotency\n      token, ACM treats it as the same request and returns the original result. If you change the\n      idempotency token for each call, ACM treats each call as a new request.</p>",
                         "smithy.api#required": {}
                     }
                 }
             }
         },
         "com.amazonaws.acm#RecordType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CNAME",
-                        "name": "CNAME"
+            "type": "enum",
+            "members": {
+                "CNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CNAME"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.acm#RemoveTagsFromCertificate": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acm#RemoveTagsFromCertificateRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1653,7 +1897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove one or more tags from an ACM certificate. A tag consists of a key-value pair. If\n      you do not specify the value portion of the tag when calling this function, the tag will be\n      removed regardless of value. If you specify a value, the tag is removed only if it is\n      associated with the specified value. </p>\n\n         <p>To add tags to a certificate, use the <a>AddTagsToCertificate</a> action. To\n      view all of the tags that have been applied to a specific ACM certificate, use the <a>ListTagsForCertificate</a> action. </p>"
+                "smithy.api#documentation": "<p>Remove one or more tags from an ACM certificate. A tag consists of a key-value pair. If\n      you do not specify the value portion of the tag when calling this function, the tag will be\n      removed regardless of value. If you specify a value, the tag is removed only if it is\n      associated with the specified value. </p>\n         <p>To add tags to a certificate, use the <a>AddTagsToCertificate</a> action. To\n      view all of the tags that have been applied to a specific ACM certificate, use the <a>ListTagsForCertificate</a> action. </p>"
             }
         },
         "com.amazonaws.acm#RemoveTagsFromCertificateRequest": {
@@ -1662,7 +1906,7 @@
                 "CertificateArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>String that contains the ARN of the ACM Certificate with one or more tags that you want\n      to remove. This must be of the form:</p>\n\n         <p>\n            <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>\n\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>",
+                        "smithy.api#documentation": "<p>String that contains the ARN of the ACM Certificate with one or more tags that you want\n      to remove. This must be of the form:</p>\n         <p>\n            <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>\n         <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1680,6 +1924,9 @@
             "input": {
                 "target": "com.amazonaws.acm#RenewCertificateRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acm#InvalidArnException"
@@ -1689,7 +1936,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Renews an eligible ACM certificate. At this time, only exported private certificates can\n      be renewed with this operation. In order to renew your ACM PCA certificates with ACM, you must\n      first <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html\">grant the ACM\n        service principal permission to do so</a>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html\">Testing Managed Renewal</a>\n      in the ACM User Guide.</p>"
+                "smithy.api#documentation": "<p>Renews an eligible ACM certificate. At this time, only exported private certificates can\n      be renewed with this operation. In order to renew your ACM Private CA certificates with ACM, you\n      must first <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html\">grant the ACM\n        service principal permission to do so</a>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html\">Testing Managed Renewal</a>\n      in the ACM User Guide.</p>"
             }
         },
         "com.amazonaws.acm#RenewCertificateRequest": {
@@ -1705,41 +1952,49 @@
             }
         },
         "com.amazonaws.acm#RenewalEligibility": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ELIGIBLE",
-                        "name": "ELIGIBLE"
-                    },
-                    {
-                        "value": "INELIGIBLE",
-                        "name": "INELIGIBLE"
+            "type": "enum",
+            "members": {
+                "ELIGIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELIGIBLE"
                     }
-                ]
+                },
+                "INELIGIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INELIGIBLE"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#RenewalStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING_AUTO_RENEWAL",
-                        "name": "PENDING_AUTO_RENEWAL"
-                    },
-                    {
-                        "value": "PENDING_VALIDATION",
-                        "name": "PENDING_VALIDATION"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING_AUTO_RENEWAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_AUTO_RENEWAL"
                     }
-                ]
+                },
+                "PENDING_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_VALIDATION"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#RenewalSummary": {
@@ -1809,7 +2064,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Requests an ACM certificate for use with other Amazon Web Services services. To request an ACM\n      certificate, you must specify a fully qualified domain name (FQDN) in the\n        <code>DomainName</code> parameter. You can also specify additional FQDNs in the\n        <code>SubjectAlternativeNames</code> parameter. </p>\n         <p>If you are requesting a private certificate, domain validation is not required. If you are\n      requesting a public certificate, each domain name that you specify must be validated to verify\n      that you own or control the domain. You can use <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html\">email validation</a>.\n      We recommend that you use DNS validation. ACM issues public certificates after receiving\n      approval from the domain owner. </p>\n    \n         <note>\n            <p>ACM behavior differs from the <a href=\"https://tools.ietf.org/html/rfc6125#appendix-B.2\">https://tools.ietf.org/html/rfc6125#appendix-B.2</a>RFC 6125 specification of the\n        certificate validation process. first checks for a subject alternative name, and, if it\n        finds one, ignores the common name (CN)</p>\n         </note>"
+                "smithy.api#documentation": "<p>Requests an ACM certificate for use with other Amazon Web Services services. To request an ACM\n      certificate, you must specify a fully qualified domain name (FQDN) in the\n        <code>DomainName</code> parameter. You can also specify additional FQDNs in the\n        <code>SubjectAlternativeNames</code> parameter. </p>\n         <p>If you are requesting a private certificate, domain validation is not required. If you are\n      requesting a public certificate, each domain name that you specify must be validated to verify\n      that you own or control the domain. You can use <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html\">DNS validation</a> or <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html\">email validation</a>.\n      We recommend that you use DNS validation. ACM issues public certificates after receiving\n      approval from the domain owner. </p>\n         <note>\n            <p>ACM behavior differs from the <a href=\"https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2\">RFC 6125</a>\n        specification of the certificate validation process. ACM first checks for a Subject\n        Alternative Name, and, if it finds one, ignores the common name (CN).</p>\n         </note>\n         <p>After successful completion of the <code>RequestCertificate</code> action, there is a\n      delay of several seconds before you can retrieve information about the new certificate.</p>"
             }
         },
         "com.amazonaws.acm#RequestCertificateRequest": {
@@ -1818,7 +2073,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.acm#DomainNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p> Fully qualified domain name (FQDN), such as www.example.com, that you want to secure with\n      an ACM certificate. Use an asterisk (*) to create a wildcard certificate that protects\n      several sites in the same domain. For example, *.example.com protects www.example.com,\n      site.example.com, and images.example.com. </p>\n\n         <p> The first domain name you enter cannot exceed 64 octets, including periods. Each\n      subsequent Subject Alternative Name (SAN), however, can be up to 253 octets in length. </p>",
+                        "smithy.api#documentation": "<p>Fully qualified domain name (FQDN), such as www.example.com, that you want to secure with\n      an ACM certificate. Use an asterisk (*) to create a wildcard certificate that protects\n      several sites in the same domain. For example, *.example.com protects www.example.com,\n      site.example.com, and images.example.com. </p>\n         <p>In compliance with <a href=\"https://datatracker.ietf.org/doc/html/rfc5280\">RFC\n        5280</a>, the length of the domain name (technically, the Common Name) that you provide\n      cannot exceed 64 octets (characters), including periods. To add a longer domain name, specify it in the Subject Alternative\n      Name field, which supports names up to 253 octets in length. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1831,7 +2086,7 @@
                 "SubjectAlternativeNames": {
                     "target": "com.amazonaws.acm#DomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional FQDNs to be included in the Subject Alternative Name extension of the ACM\n      certificate. For example, add the name www.example.net to a certificate for which the\n        <code>DomainName</code> field is www.example.com if users can reach your site by using\n      either name. The maximum number of domain names that you can add to an ACM certificate is\n      100. However, the initial quota is 10 domain names. If you need more than 10 names, you must\n      request a quota increase. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html\">Quotas</a>.</p>\n\n         <p> The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple\n      labels separated by periods. No label can be longer than 63 octets. Consider the following\n      examples: </p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>(63 octets).(63 octets).(63 octets).(61 octets)</code> is legal because the\n          total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>(64 octets).(63 octets).(63 octets).(61 octets)</code> is not legal because the\n          total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds 63\n          octets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>(63 octets).(63 octets).(63 octets).(62 octets)</code> is not legal because the\n          total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Additional FQDNs to be included in the Subject Alternative Name extension of the ACM\n      certificate. For example, add the name www.example.net to a certificate for which the\n        <code>DomainName</code> field is www.example.com if users can reach your site by using\n      either name. The maximum number of domain names that you can add to an ACM certificate is\n      100. However, the initial quota is 10 domain names. If you need more than 10 names, you must\n      request a quota increase. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html\">Quotas</a>.</p>\n         <p> The maximum length of a SAN DNS name is 253 octets. The name is made up of multiple\n      labels separated by periods. No label can be longer than 63 octets. Consider the following\n      examples: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>(63 octets).(63 octets).(63 octets).(61 octets)</code> is legal because the\n          total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>(64 octets).(63 octets).(63 octets).(61 octets)</code> is not legal because the\n          total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds 63\n          octets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>(63 octets).(63 octets).(63 octets).(62 octets)</code> is not legal because the\n          total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IdempotencyToken": {
@@ -1855,7 +2110,7 @@
                 "CertificateAuthorityArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used\n      to issue the certificate. If you do not provide an ARN and you are trying to request a private\n      certificate, ACM will attempt to issue a public certificate. For more information about\n      private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">Amazon Web Services Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p>\n\n         <p>\n            <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used\n      to issue the certificate. If you do not provide an ARN and you are trying to request a private\n      certificate, ACM will attempt to issue a public certificate. For more information about\n      private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">Certificate Manager Private Certificate Authority</a> user guide. The ARN must have the following form: </p>\n         <p>\n            <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "Tags": {
@@ -1894,6 +2149,9 @@
             "input": {
                 "target": "com.amazonaws.acm#ResendValidationEmailRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.acm#InvalidArnException"
@@ -1918,7 +2176,7 @@
                 "CertificateArn": {
                     "target": "com.amazonaws.acm#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>String that contains the ARN of the requested certificate. The certificate ARN is\n      generated and returned by the <a>RequestCertificate</a> action as soon as the\n      request is made. By default, using this parameter causes email to be sent to all top-level\n      domains you specified in the certificate request. The ARN must be of the form: </p>\n\n         <p>\n            <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>",
+                        "smithy.api#documentation": "<p>String that contains the ARN of the requested certificate. The certificate ARN is\n      generated and returned by the <a>RequestCertificate</a> action as soon as the\n      request is made. By default, using this parameter causes email to be sent to all top-level\n      domains you specified in the certificate request. The ARN must be of the form: </p>\n         <p>\n            <code>arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1988,58 +2246,104 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a DNS record value that you can use to validate ownership or control\n      of a domain. This is used by the <a>DescribeCertificate</a> action. </p>"
+                "smithy.api#documentation": "<p>Contains a DNS record value that you can use to validate ownership or control of a domain.\n      This is used by the <a>DescribeCertificate</a> action. </p>"
             }
         },
         "com.amazonaws.acm#RevocationReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNSPECIFIED",
-                        "name": "UNSPECIFIED"
-                    },
-                    {
-                        "value": "KEY_COMPROMISE",
-                        "name": "KEY_COMPROMISE"
-                    },
-                    {
-                        "value": "CA_COMPROMISE",
-                        "name": "CA_COMPROMISE"
-                    },
-                    {
-                        "value": "AFFILIATION_CHANGED",
-                        "name": "AFFILIATION_CHANGED"
-                    },
-                    {
-                        "value": "SUPERCEDED",
-                        "name": "SUPERCEDED"
-                    },
-                    {
-                        "value": "CESSATION_OF_OPERATION",
-                        "name": "CESSATION_OF_OPERATION"
-                    },
-                    {
-                        "value": "CERTIFICATE_HOLD",
-                        "name": "CERTIFICATE_HOLD"
-                    },
-                    {
-                        "value": "REMOVE_FROM_CRL",
-                        "name": "REMOVE_FROM_CRL"
-                    },
-                    {
-                        "value": "PRIVILEGE_WITHDRAWN",
-                        "name": "PRIVILEGE_WITHDRAWN"
-                    },
-                    {
-                        "value": "A_A_COMPROMISE",
-                        "name": "A_A_COMPROMISE"
+            "type": "enum",
+            "members": {
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSPECIFIED"
                     }
-                ]
+                },
+                "KEY_COMPROMISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY_COMPROMISE"
+                    }
+                },
+                "CA_COMPROMISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_COMPROMISE"
+                    }
+                },
+                "AFFILIATION_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AFFILIATION_CHANGED"
+                    }
+                },
+                "SUPERCEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPERCEDED"
+                    }
+                },
+                "CESSATION_OF_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CESSATION_OF_OPERATION"
+                    }
+                },
+                "CERTIFICATE_HOLD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERTIFICATE_HOLD"
+                    }
+                },
+                "REMOVE_FROM_CRL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE_FROM_CRL"
+                    }
+                },
+                "PRIVILEGE_WITHDRAWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVILEGE_WITHDRAWN"
+                    }
+                },
+                "A_A_COMPROMISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "A_A_COMPROMISE"
+                    }
+                }
             }
         },
         "com.amazonaws.acm#ServiceErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.acm#SortBy": {
+            "type": "enum",
+            "members": {
+                "CREATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED_AT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.acm#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
+            }
         },
         "com.amazonaws.acm#String": {
             "type": "string"
@@ -2124,7 +2428,7 @@
                     "code": "Throttling",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was denied\n      because it exceeded a quota.</p>",
+                "smithy.api#documentation": "<p>The request was denied because it exceeded a quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2145,6 +2449,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.acm#UpdateCertificateOptionsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2201,7 +2508,7 @@
                     "code": "ValidationError",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The supplied input\n      failed to satisfy constraints of an Amazon Web Services service.</p>",
+                "smithy.api#documentation": "<p>The supplied input failed to satisfy constraints of an Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2210,18 +2517,20 @@
             "type": "string"
         },
         "com.amazonaws.acm#ValidationMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "DNS",
-                        "name": "DNS"
+            "type": "enum",
+            "members": {
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
                     }
-                ]
+                },
+                "DNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS"
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.translate#AWSShineFrontendService_20170701": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Translate",
-                    "arnNamespace": "translate",
-                    "cloudFormationName": "Translate",
-                    "cloudTrailEventSource": "translate.amazonaws.com",
-                    "endpointPrefix": "translate"
-                },
-                "aws.auth#sigv4": {
-                    "name": "translate"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Provides translation between one source language and another of the same set of\n      languages.</p>",
-                "smithy.api#title": "Amazon Translate"
-            },
             "version": "2017-07-01",
             "operations": [
                 {
@@ -76,6 +61,9 @@
                     "target": "com.amazonaws.translate#ListParallelData"
                 },
                 {
+                    "target": "com.amazonaws.translate#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.translate#ListTerminologies"
                 },
                 {
@@ -88,12 +76,33 @@
                     "target": "com.amazonaws.translate#StopTextTranslationJob"
                 },
                 {
+                    "target": "com.amazonaws.translate#TagResource"
+                },
+                {
                     "target": "com.amazonaws.translate#TranslateText"
+                },
+                {
+                    "target": "com.amazonaws.translate#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.translate#UpdateParallelData"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Translate",
+                    "arnNamespace": "translate",
+                    "cloudFormationName": "Translate",
+                    "cloudTrailEventSource": "translate.amazonaws.com",
+                    "endpointPrefix": "translate"
+                },
+                "aws.auth#sigv4": {
+                    "name": "translate"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Provides translation between one source language and another of the same set of\n      languages.</p>",
+                "smithy.api#title": "Amazon Translate"
+            }
         },
         "com.amazonaws.translate#AppliedTerminology": {
             "type": "structure",
@@ -187,6 +196,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.translate#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.translate#ConflictException"
                 },
                 {
@@ -203,6 +215,9 @@
                 },
                 {
                     "target": "com.amazonaws.translate#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.translate#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -242,6 +257,9 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.translate#TagList"
                 }
             }
         },
@@ -431,65 +449,85 @@
             }
         },
         "com.amazonaws.translate#Directionality": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNI",
-                        "name": "UNI"
-                    },
-                    {
-                        "value": "MULTI",
-                        "name": "MULTI"
+            "type": "enum",
+            "members": {
+                "UNI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNI"
                     }
-                ]
+                },
+                "MULTI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#DisplayLanguageCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "de",
-                        "name": "DE"
-                    },
-                    {
-                        "value": "en",
-                        "name": "EN"
-                    },
-                    {
-                        "value": "es",
-                        "name": "ES"
-                    },
-                    {
-                        "value": "fr",
-                        "name": "FR"
-                    },
-                    {
-                        "value": "it",
-                        "name": "IT"
-                    },
-                    {
-                        "value": "ja",
-                        "name": "JA"
-                    },
-                    {
-                        "value": "ko",
-                        "name": "KO"
-                    },
-                    {
-                        "value": "pt",
-                        "name": "PT"
-                    },
-                    {
-                        "value": "zh",
-                        "name": "ZH"
-                    },
-                    {
-                        "value": "zh-TW",
-                        "name": "ZH_TW"
+            "type": "enum",
+            "members": {
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de"
                     }
-                ]
+                },
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
+                    }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es"
+                    }
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr"
+                    }
+                },
+                "IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it"
+                    }
+                },
+                "JA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja"
+                    }
+                },
+                "KO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko"
+                    }
+                },
+                "PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt"
+                    }
+                },
+                "ZH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-TW"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#EncryptionKey": {
@@ -525,29 +563,31 @@
             }
         },
         "com.amazonaws.translate#EncryptionKeyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KMS",
-                        "name": "KMS"
+            "type": "enum",
+            "members": {
+                "KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.translate#Formality": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FORMAL",
-                        "name": "FORMAL"
-                    },
-                    {
-                        "value": "INFORMAL",
-                        "name": "INFORMAL"
+            "type": "enum",
+            "members": {
+                "FORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORMAL"
                     }
-                ]
+                },
+                "INFORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMAL"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#GetParallelData": {
@@ -704,6 +744,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.translate#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.translate#InternalServerException"
                 },
                 {
@@ -714,6 +757,9 @@
                 },
                 {
                     "target": "com.amazonaws.translate#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.translate#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -755,6 +801,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption key for the custom terminology being imported.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.translate#TagList"
                 }
             }
         },
@@ -798,10 +847,7 @@
             }
         },
         "com.amazonaws.translate#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.translate#InternalServerException": {
             "type": "structure",
@@ -902,38 +948,50 @@
             }
         },
         "com.amazonaws.translate#JobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "COMPLETED_WITH_ERROR",
-                        "name": "COMPLETED_WITH_ERROR"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "STOP_REQUESTED",
-                        "name": "STOP_REQUESTED"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "COMPLETED_WITH_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED_WITH_ERROR"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#Language": {
@@ -1131,6 +1189,45 @@
                 }
             }
         },
+        "com.amazonaws.translate#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.translate#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.translate#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.translate#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.translate#ResourceNotFoundException"
+                }
+            ]
+        },
+        "com.amazonaws.translate#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.translate#ResourceArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.translate#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.translate#TagList"
+                }
+            }
+        },
         "com.amazonaws.translate#ListTerminologies": {
             "type": "operation",
             "input": {
@@ -1274,15 +1371,11 @@
             }
         },
         "com.amazonaws.translate#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.translate#MaxResultsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -1290,14 +1383,14 @@
             }
         },
         "com.amazonaws.translate#MergeStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OVERWRITE",
-                        "name": "OVERWRITE"
+            "type": "enum",
+            "members": {
+                "OVERWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERWRITE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.translate#NextToken": {
@@ -1382,22 +1475,26 @@
             }
         },
         "com.amazonaws.translate#ParallelDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TSV",
-                        "name": "TSV"
-                    },
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "TMX",
-                        "name": "TMX"
+            "type": "enum",
+            "members": {
+                "TSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TSV"
                     }
-                ]
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                },
+                "TMX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TMX"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#ParallelDataProperties": {
@@ -1514,41 +1611,58 @@
             }
         },
         "com.amazonaws.translate#ParallelDataStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#Profanity": {
+            "type": "enum",
+            "members": {
+                "MASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.translate#ResourceArn": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MASK",
-                        "name": "MASK"
-                    }
-                ]
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
             }
         },
         "com.amazonaws.translate#ResourceName": {
@@ -1786,6 +1900,112 @@
                 "smithy.api#pattern": "^[\\P{M}\\p{M}]{0,10000}$"
             }
         },
+        "com.amazonaws.translate#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.translate#TagKey",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.translate#TagValue",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.translate#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.translate#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.translate#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.translate#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.translate#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.translate#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.translate#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.translate#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.translate#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.translate#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.translate#TooManyTagsException"
+                }
+            ]
+        },
+        "com.amazonaws.translate#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.translate#ResourceArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.translate#TagList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.translate#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.translate#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.translate#TargetLanguageCodeStringList": {
             "type": "list",
             "member": {
@@ -1793,8 +2013,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 1
+                    "min": 1
                 }
             }
         },
@@ -1862,22 +2081,26 @@
             }
         },
         "com.amazonaws.translate#TerminologyDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "TMX",
-                        "name": "TMX"
-                    },
-                    {
-                        "value": "TSV",
-                        "name": "TSV"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "TMX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TMX"
+                    }
+                },
+                "TSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TSV"
+                    }
+                }
             }
         },
         "com.amazonaws.translate#TerminologyDataLocation": {
@@ -2175,6 +2398,21 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.translate#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.translate#String"
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.translate#ResourceArn"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.translate#TranslateText": {
             "type": "operation",
             "input": {
@@ -2355,6 +2593,50 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
+        },
+        "com.amazonaws.translate#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.translate#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.translate#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.translate#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.translate#ResourceNotFoundException"
+                }
+            ]
+        },
+        "com.amazonaws.translate#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.translate#ResourceArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.translate#TagKeyList",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.translate#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.translate#UpdateParallelData": {
             "type": "operation",
