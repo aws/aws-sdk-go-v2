@@ -3925,6 +3925,768 @@
                 "smithy.api#documentation": "<p>The container for the metadata for the ClarifyCheck step. For more information, \n            see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check\">ClarifyCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>.\n        </p>"
             }
         },
+        "com.amazonaws.sagemaker#ClarifyContentTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyEnableExplanations": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyExplainerConfig": {
+            "type": "structure",
+            "members": {
+                "EnableExplanations": {
+                    "target": "com.amazonaws.sagemaker#ClarifyEnableExplanations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JMESPath boolean expression used to filter which records to explain. Explanations\n            are activated by default. See <a href=\"https://docs.aws.amazon.com/sagemaker-dg/src/AWSIronmanApiDoc/build/server-root/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable\">\n                <code>EnableExplanations</code>\n            </a>for additional information.</p>"
+                    }
+                },
+                "InferenceConfig": {
+                    "target": "com.amazonaws.sagemaker#ClarifyInferenceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inference configuration parameter for the model container.</p>"
+                    }
+                },
+                "ShapConfig": {
+                    "target": "com.amazonaws.sagemaker#ClarifyShapConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for SHAP analysis.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration parameters for the SageMaker Clarify explainer.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyFeatureHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClarifyHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyFeatureType": {
+            "type": "enum",
+            "members": {
+                "NUMERICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "numerical"
+                    }
+                },
+                "CATEGORICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "categorical"
+                    }
+                },
+                "TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "text"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyFeatureTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClarifyFeatureType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyFeaturesAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyInferenceConfig": {
+            "type": "structure",
+            "members": {
+                "FeaturesAttribute": {
+                    "target": "com.amazonaws.sagemaker#ClarifyFeaturesAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the JMESPath expression to extract the features from a model container input\n            in JSON Lines format. For example, if <code>FeaturesAttribute</code> is the JMESPath\n            expression <code>'myfeatures'</code>, it extracts a list of features\n                <code>[1,2,3]</code> from request data <code>'{\"myfeatures\":[1,2,3}'</code>.</p>"
+                    }
+                },
+                "ContentTemplate": {
+                    "target": "com.amazonaws.sagemaker#ClarifyContentTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A template string used to format a JSON record into an acceptable model container\n            input. For example, a <code>ContentTemplate</code> string\n                <code>'{\"myfeatures\":$features}'</code> will format a list of features\n                <code>[1,2,3]</code> into the record string <code>'{\"myfeatures\":[1,2,3]}'</code>.\n            Required only when the model container input is in JSON Lines format.</p>"
+                    }
+                },
+                "MaxRecordCount": {
+                    "target": "com.amazonaws.sagemaker#ClarifyMaxRecordCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records in a request that the model container can process when\n            querying the model container for the predictions of a <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-synthetic\">synthetic dataset</a>. A record is a unit of input data that inference can be\n            made on, for example, a single line in CSV data. If <code>MaxRecordCount</code> is\n                <code>1</code>, the model container expects one record per request. A value of 2 or\n            greater means that the model expects batch requests, which can reduce overhead and speed\n            up the inferencing process. If this parameter is not provided, the explainer will tune\n            the record count per request according to the model container's capacity at\n            runtime.</p>"
+                    }
+                },
+                "MaxPayloadInMB": {
+                    "target": "com.amazonaws.sagemaker#ClarifyMaxPayloadInMB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum payload size (MB) allowed of a request from the explainer to the model\n            container. Defaults to <code>6</code> MB.</p>"
+                    }
+                },
+                "ProbabilityIndex": {
+                    "target": "com.amazonaws.sagemaker#ClarifyProbabilityIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A zero-based index used to extract a probability value (score) or list from model\n            container output in CSV format. If this value is not provided, the entire model\n            container output will be treated as a probability value (score) or list.</p>\n        <p>\n            <b>Example for a single class model:</b> If the model\n            container output consists of a string-formatted prediction label followed by its\n            probability: <code>'1,0.6'</code>, set <code>ProbabilityIndex</code> to <code>1</code>\n            to select the probability value <code>0.6</code>.</p>\n        <p>\n            <b>Example for a multiclass model:</b> If the model\n            container output consists of a string-formatted prediction label followed by its\n            probability: <code>'\"[\\'cat\\',\\'dog\\',\\'fish\\']\",\"[0.1,0.6,0.3]\"'</code>, set\n                <code>ProbabilityIndex</code> to <code>1</code> to select the probability values\n                <code>[0.1,0.6,0.3]</code>.</p>"
+                    }
+                },
+                "LabelIndex": {
+                    "target": "com.amazonaws.sagemaker#ClarifyLabelIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A zero-based index used to extract a label header or list of label headers from model\n            container output in CSV format.</p>\n        <p>\n            <b>Example for a multiclass model:</b> If the model\n            container output consists of label headers followed by probabilities:\n                <code>'\"[\\'cat\\',\\'dog\\',\\'fish\\']\",\"[0.1,0.6,0.3]\"'</code>, set\n                <code>LabelIndex</code> to <code>0</code> to select the label headers\n                <code>['cat','dog','fish']</code>.</p>"
+                    }
+                },
+                "ProbabilityAttribute": {
+                    "target": "com.amazonaws.sagemaker#ClarifyProbabilityAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JMESPath expression used to extract the probability (or score) from the model\n            container output if the model container is in JSON Lines format.</p>\n        <p>\n            <b>Example</b>: If the model container output of a single\n            request is <code>'{\"predicted_label\":1,\"probability\":0.6}'</code>, then set\n                <code>ProbabilityAttribute</code> to <code>'probability'</code>.</p>"
+                    }
+                },
+                "LabelAttribute": {
+                    "target": "com.amazonaws.sagemaker#ClarifyLabelAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JMESPath expression used to locate the list of label headers in the model container\n            output.</p>\n        <p>\n            <b>Example</b>: If the model container output of a batch\n            request is <code>'{\"labels\":[\"cat\",\"dog\",\"fish\"],\"probability\":[0.6,0.3,0.1]}'</code>,\n            then set <code>LabelAttribute</code> to <code>'labels'</code> to extract the list of\n            label headers <code>[\"cat\",\"dog\",\"fish\"]</code>\n         </p>"
+                    }
+                },
+                "LabelHeaders": {
+                    "target": "com.amazonaws.sagemaker#ClarifyLabelHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For multiclass classification problems, the label headers are the names of the\n            classes. Otherwise, the label header is the name of the predicted label. These are used\n            to help readability for the output of the <code>InvokeEndpoint</code> API. See the\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response\">response</a> section under <b>Invoke the endpoint</b>\n            in the Developer Guide for more information. If there are no label headers in the model\n            container output, provide them manually using this parameter.</p>"
+                    }
+                },
+                "FeatureHeaders": {
+                    "target": "com.amazonaws.sagemaker#ClarifyFeatureHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the features. If provided, these are included in the endpoint response\n            payload to help readability of the <code>InvokeEndpoint</code> output. See the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response\">Response</a> section under <b>Invoke the endpoint</b>\n            in the Developer Guide for more information.</p>"
+                    }
+                },
+                "FeatureTypes": {
+                    "target": "com.amazonaws.sagemaker#ClarifyFeatureTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of data types of the features (optional). Applicable only to NLP\n            explainability. If provided, <code>FeatureTypes</code> must have at least one\n                <code>'text'</code> string (for example, <code>['text']</code>). If\n                <code>FeatureTypes</code> is not provided, the explainer infers the feature types\n            based on the baseline data. The feature types are included in the endpoint response\n            payload. For additional information see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response\">response</a> section under <b>Invoke the endpoint</b>\n            in the Developer Guide for more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The inference configuration parameter for the model container.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyLabelAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyLabelHeaders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClarifyHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyLabelIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyMaxPayloadInMB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyMaxRecordCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyMimeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*\\/[a-zA-Z0-9](-*[a-zA-Z0-9+.])*$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyProbabilityAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyProbabilityIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyShapBaseline": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyShapBaselineConfig": {
+            "type": "structure",
+            "members": {
+                "MimeType": {
+                    "target": "com.amazonaws.sagemaker#ClarifyMimeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the baseline data. Choose from <code>'text/csv'</code> or\n                <code>'application/jsonlines'</code>. Defaults to <code>'text/csv'</code>.</p>"
+                    }
+                },
+                "ShapBaseline": {
+                    "target": "com.amazonaws.sagemaker#ClarifyShapBaseline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inline SHAP baseline data in string format. <code>ShapBaseline</code> can have one\n            or multiple records to be used as the baseline dataset. The format of the SHAP baseline\n            file should be the same format as the training dataset. For example, if the training\n            dataset is in CSV format and each record contains four features, and all features are\n            numerical, then the format of the baseline data should also share these characteristics.\n            For natural language processing (NLP) of text columns, the baseline value should be the\n            value used to replace the unit of text specified by the <code>Granularity</code> of the\n                <code>TextConfig</code> parameter. The size limit for <code>ShapBasline</code> is 4\n            KB. Use the <code>ShapBaselineUri</code> parameter if you want to provide more than 4 KB\n            of baseline data.</p>"
+                    }
+                },
+                "ShapBaselineUri": {
+                    "target": "com.amazonaws.sagemaker#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uniform resource identifier (URI) of the S3 bucket where the SHAP baseline file is\n            stored. The format of the SHAP baseline file should be the same format as the format of\n            the training dataset. For example, if the training dataset is in CSV format, and each\n            record in the training dataset has four features, and all features are numerical, then\n            the baseline file should also have this same format. Each record should contain only the\n            features. If you are using a virtual private cloud (VPC), the\n                <code>ShapBaselineUri</code> should be accessible to the VPC. For more information\n            about setting up endpoints with Amazon Virtual Private Cloud, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html\">Give SageMaker access to\n                Resources in your Amazon Virtual Private Cloud</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-feature-attribute-shap-baselines.html\">SHAP\n                baseline</a> (also called the background or reference dataset) of the Kernal\n            SHAP algorithm.</p>\n        <note>\n            <ul>\n               <li>\n                    <p>The number of records in the baseline data determines the size of the\n                        synthetic dataset, which has an impact on latency of explainability\n                        requests. For more information, see the <b>Synthetic\n                            data</b> of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html\">Configure and create an endpoint</a>.</p>\n                </li>\n               <li>\n                    <p>\n                     <code>ShapBaseline</code> and <code>ShapBaselineUri</code> are mutually\n                        exclusive parameters. One or the either is required to configure a SHAP\n                        baseline. </p>\n                </li>\n            </ul>\n        </note>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyShapConfig": {
+            "type": "structure",
+            "members": {
+                "ShapBaselineConfig": {
+                    "target": "com.amazonaws.sagemaker#ClarifyShapBaselineConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the SHAP baseline of the Kernal SHAP algorithm.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberOfSamples": {
+                    "target": "com.amazonaws.sagemaker#ClarifyShapNumberOfSamples",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of samples to be used for analysis by the Kernal SHAP algorithm. </p>\n        <note>\n            <p>The number of samples determines the size of the synthetic dataset, which has an\n                impact on latency of explainability requests. For more information, see the\n                    <b>Synthetic data</b> of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html\">Configure and create an endpoint</a>.</p>\n        </note>"
+                    }
+                },
+                "UseLogit": {
+                    "target": "com.amazonaws.sagemaker#ClarifyShapUseLogit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean toggle to indicate if you want to use the logit function (true) or log-odds\n            units (false) for model predictions. Defaults to false.</p>"
+                    }
+                },
+                "Seed": {
+                    "target": "com.amazonaws.sagemaker#ClarifyShapSeed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting value used to initialize the random number generator in the explainer.\n            Provide a value for this parameter to obtain a deterministic SHAP result.</p>"
+                    }
+                },
+                "TextConfig": {
+                    "target": "com.amazonaws.sagemaker#ClarifyTextConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A parameter that indicates if text features are treated as text and explanations are\n            provided for individual units of text. Required for natural language processing (NLP)\n            explainability only.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for SHAP analysis using SageMaker Clarify Explainer.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyShapNumberOfSamples": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyShapSeed": {
+            "type": "integer"
+        },
+        "com.amazonaws.sagemaker#ClarifyShapUseLogit": {
+            "type": "boolean"
+        },
+        "com.amazonaws.sagemaker#ClarifyTextConfig": {
+            "type": "structure",
+            "members": {
+                "Language": {
+                    "target": "com.amazonaws.sagemaker#ClarifyTextLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the language of the text features in <a href=\" https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes\">ISO 639-1</a> or\n                <a href=\"https://en.wikipedia.org/wiki/ISO_639-3\">ISO 639-3</a> code of a\n            supported language. </p>\n        <note>\n            <p>For a mix of multiple languages, use code <code>'xx'</code>.</p>\n        </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Granularity": {
+                    "target": "com.amazonaws.sagemaker#ClarifyTextGranularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of granularity for the analysis of text features. For example, if the unit is\n                <code>'token'</code>, then each token (like a word in English) of the text is\n            treated as a feature. SHAP values are computed for each unit/feature.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter used to configure the SageMaker Clarify explainer to treat text features as text so\n            that explanations are provided for individual units of text. Required only for natural\n            language processing (NLP) explainability. </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyTextGranularity": {
+            "type": "enum",
+            "members": {
+                "TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "token"
+                    }
+                },
+                "SENTENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sentence"
+                    }
+                },
+                "PARAGRAPH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "paragraph"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ClarifyTextLanguage": {
+            "type": "enum",
+            "members": {
+                "AFRIKAANS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "af"
+                    }
+                },
+                "ALBANIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sq"
+                    }
+                },
+                "ARABIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ar"
+                    }
+                },
+                "ARMENIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hy"
+                    }
+                },
+                "BASQUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu"
+                    }
+                },
+                "BENGALI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bn"
+                    }
+                },
+                "BULGARIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bg"
+                    }
+                },
+                "CATALAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca"
+                    }
+                },
+                "CHINESE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh"
+                    }
+                },
+                "CROATIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hr"
+                    }
+                },
+                "CZECH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cs"
+                    }
+                },
+                "DANISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "da"
+                    }
+                },
+                "DUTCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nl"
+                    }
+                },
+                "ENGLISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
+                    }
+                },
+                "ESTONIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "et"
+                    }
+                },
+                "FINNISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fi"
+                    }
+                },
+                "FRENCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr"
+                    }
+                },
+                "GERMAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de"
+                    }
+                },
+                "GREEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "el"
+                    }
+                },
+                "GUJARATI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gu"
+                    }
+                },
+                "HEBREW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "he"
+                    }
+                },
+                "HINDI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hi"
+                    }
+                },
+                "HUNGARIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hu"
+                    }
+                },
+                "ICELANDIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "is"
+                    }
+                },
+                "INDONESIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "id"
+                    }
+                },
+                "IRISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ga"
+                    }
+                },
+                "ITALIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it"
+                    }
+                },
+                "KANNADA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "kn"
+                    }
+                },
+                "KYRGYZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ky"
+                    }
+                },
+                "LATVIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lv"
+                    }
+                },
+                "LITHUANIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lt"
+                    }
+                },
+                "LUXEMBOURGISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lb"
+                    }
+                },
+                "MACEDONIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mk"
+                    }
+                },
+                "MALAYALAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml"
+                    }
+                },
+                "MARATHI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mr"
+                    }
+                },
+                "NEPALI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ne"
+                    }
+                },
+                "NORWEGIAN_BOKMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nb"
+                    }
+                },
+                "PERSIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fa"
+                    }
+                },
+                "POLISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pl"
+                    }
+                },
+                "PORTUGUESE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt"
+                    }
+                },
+                "ROMANIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ro"
+                    }
+                },
+                "RUSSIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ru"
+                    }
+                },
+                "SANSKRIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sa"
+                    }
+                },
+                "SERBIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sr"
+                    }
+                },
+                "SETSWANA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tn"
+                    }
+                },
+                "SINHALA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "si"
+                    }
+                },
+                "SLOVAK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sk"
+                    }
+                },
+                "SLOVENIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sl"
+                    }
+                },
+                "SPANISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es"
+                    }
+                },
+                "SWEDISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sv"
+                    }
+                },
+                "TAGALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tl"
+                    }
+                },
+                "TAMIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ta"
+                    }
+                },
+                "TATAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tt"
+                    }
+                },
+                "TELUGU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "te"
+                    }
+                },
+                "TURKISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tr"
+                    }
+                },
+                "UKRAINIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uk"
+                    }
+                },
+                "URDU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ur"
+                    }
+                },
+                "YORUBA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "yo"
+                    }
+                },
+                "LIGURIAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lij"
+                    }
+                },
+                "MULTI_LANGUAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "xx"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClientId": {
             "type": "string",
             "traits": {
@@ -5998,6 +6760,12 @@
                     "target": "com.amazonaws.sagemaker#AsyncInferenceConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference. This is a\n            required field in order for your Endpoint to be invoked using <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html\">InvokeEndpointAsync</a>.</p>"
+                    }
+                },
+                "ExplainerConfig": {
+                    "target": "com.amazonaws.sagemaker#ExplainerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A member of <code>CreateEndpointConfig</code> that enables explainers.</p>"
                     }
                 }
             }
@@ -12552,6 +13320,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the description of an endpoint configuration created using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">\n               <code>CreateEndpointConfig</code>\n            </a> API.</p>"
                     }
+                },
+                "ExplainerConfig": {
+                    "target": "com.amazonaws.sagemaker#ExplainerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters for an explainer.</p>"
+                    }
                 }
             }
         },
@@ -12643,6 +13417,12 @@
                     "target": "com.amazonaws.sagemaker#PendingDeploymentSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the summary of an in-progress deployment. This field is only returned when the\n            endpoint is creating or updating with a new endpoint configuration.</p>"
+                    }
+                },
+                "ExplainerConfig": {
+                    "target": "com.amazonaws.sagemaker#ExplainerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration parameters for an explainer.</p>"
                     }
                 }
             }
@@ -19104,6 +19884,20 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ExplainerConfig": {
+            "type": "structure",
+            "members": {
+                "ClarifyExplainerConfig": {
+                    "target": "com.amazonaws.sagemaker#ClarifyExplainerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A member of <code>ExplainerConfig</code> that contains configuration parameters for\n            the SageMaker Clarify explainer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter to activate explainers.</p>"
             }
         },
         "com.amazonaws.sagemaker#FailStepMetadata": {

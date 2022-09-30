@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -73,6 +73,36 @@
                 "smithy.api#pattern": "^[0-9A-Za-z _-]+$"
             }
         },
+        "com.amazonaws.dlm#ArchiveRetainRule": {
+            "type": "structure",
+            "members": {
+                "RetentionArchiveTier": {
+                    "target": "com.amazonaws.dlm#RetentionArchiveTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about retention period in the Amazon EBS Snapshots Archive. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/snapshot-archive.html\">Archive Amazon \n\t\t\t\tEBS snapshots</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies information about the archive storage tier retention period.</p>"
+            }
+        },
+        "com.amazonaws.dlm#ArchiveRule": {
+            "type": "structure",
+            "members": {
+                "RetainRule": {
+                    "target": "com.amazonaws.dlm#ArchiveRetainRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention period for the snapshot archiving rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies a snapshot archiving rule for a schedule.</p>"
+            }
+        },
         "com.amazonaws.dlm#AvailabilityZone": {
             "type": "string",
             "traits": {
@@ -116,17 +146,18 @@
             }
         },
         "com.amazonaws.dlm#CopyTags": {
-            "type": "boolean"
-        },
-        "com.amazonaws.dlm#CopyTagsNullable": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
+        },
+        "com.amazonaws.dlm#CopyTagsNullable": {
+            "type": "boolean"
         },
         "com.amazonaws.dlm#Count": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -223,7 +254,8 @@
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and\n\t\t\t24.</p>"
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.</p>"
                     }
                 },
                 "IntervalUnit": {
@@ -235,7 +267,7 @@
                 "Times": {
                     "target": "com.amazonaws.dlm#TimesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p>\n\t\t       <p>The operation occurs within a one-hour window following the specified time. If you do\n\t\t\tnot specify a time, Amazon DLM selects a time within the next 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p>\n\t\t       <p>The operation occurs within a one-hour window following the specified time. If you do\n\t\t\tnot specify a time, Amazon Data Lifecycle Manager selects a time within the next 24 hours.</p>"
                     }
                 },
                 "CronExpression": {
@@ -246,7 +278,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n\t\t       <important>\n\t\t\t         <p>You must specify either a Cron expression or an interval, interval unit, and start\n\t\t\ttime. You cannot specify both.</p>\n\t\t       </important>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies when the policy should create snapshots or AMIs.</p>\n\t\t       <note>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>You must specify either <b>CronExpression</b>, or \n\t\t\t\t\t\t<b>Interval</b>, <b>IntervalUnit</b>, \n\t\t\t\t\t\tand <b>Times</b>.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>If you need to specify an <a>ArchiveRule</a> for the schedule, then you must\n\t\t\t\t\t\tspecify a creation frequency of at least 28 days.</p>\n\t\t\t\t           </li>\n            </ul>\t\t\t\n\t\t       </note>"
             }
         },
         "com.amazonaws.dlm#CronExpression": {
@@ -302,6 +334,7 @@
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period after which to deprecate the cross-Region AMI copies. The period must be less than or \n\t\t\tequal to the cross-Region AMI copy retention period, and it can't be greater than 10 years. This is \n\t\t\tequivalent to 120 months, 520 weeks, or 3650 days.</p>"
                     }
                 },
@@ -322,6 +355,7 @@
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to retain a cross-Region snapshot or AMI copy. The maximum is 100 years. \n\t\t\tThis is equivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
                     }
                 },
@@ -419,7 +453,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified lifecycle policy and halts the automated operations that the\n\t\t\tpolicy specified.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified lifecycle policy and halts the automated operations that the\n\t\t\tpolicy specified.</p>\n\t\t       <p>For more information about deleting a policy, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete\">Delete lifecycle \n\t\t\tpolicies</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/policies/{PolicyId}",
@@ -450,12 +484,14 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#Count",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If the schedule has a count-based retention rule, this parameter specifies the number of oldest \n\t\t\tAMIs to deprecate. The count must be less than or equal to the schedule's retention count, and it \n\t\t\tcan't be greater than 1000.</p>"
                     }
                 },
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>If the schedule has an age-based retention rule, this parameter specifies the period after which \n\t\t\tto deprecate AMIs created by the schedule. The period must be less than or equal to the schedule's \n\t\t\tretention period, and it can't be greater than 10 years. This is equivalent to 120 months, 520 \n\t\t\tweeks, or 3650 days.</p>"
                     }
                 },
@@ -481,10 +517,7 @@
             }
         },
         "com.amazonaws.dlm#Encrypted": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.dlm#EncryptionConfiguration": {
             "type": "structure",
@@ -564,32 +597,29 @@
             }
         },
         "com.amazonaws.dlm#EventSourceValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MANAGED_CWE",
-                        "name": "MANAGED_CWE"
+            "type": "enum",
+            "members": {
+                "MANAGED_CWE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_CWE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.dlm#EventTypeValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "shareSnapshot",
-                        "name": "SHARE_SNAPSHOT"
+            "type": "enum",
+            "members": {
+                "SHARE_SNAPSHOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shareSnapshot"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.dlm#ExcludeBootVolume": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.dlm#ExcludeDataVolumeTagList": {
             "type": "list",
@@ -619,12 +649,14 @@
                 "Count": {
                     "target": "com.amazonaws.dlm#Count",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of snapshots to be enabled with fast snapshot restore.</p>"
                     }
                 },
                 "Interval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to enable fast snapshot restore. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
                     }
                 },
@@ -643,7 +675,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies a rule for enabling fast snapshot restore for snapshots created by \n\t\t\tsnaspshot policies. You can enable fast snapshot restore based on either a count or a time \n\t\t\tinterval.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Specifies a rule for enabling fast snapshot restore for snapshots created by\n\t\t\tsnapshot policies. You can enable fast snapshot restore based on either a count or a\n\t\t\ttime interval.</p>"
             }
         },
         "com.amazonaws.dlm#GetLifecyclePolicies": {
@@ -781,22 +813,26 @@
             }
         },
         "com.amazonaws.dlm#GettablePolicyStateValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#InternalServerException": {
@@ -818,20 +854,21 @@
         "com.amazonaws.dlm#Interval": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
             }
         },
         "com.amazonaws.dlm#IntervalUnitValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HOURS",
-                        "name": "HOURS"
+            "type": "enum",
+            "members": {
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.dlm#InvalidRequestException": {
@@ -1049,25 +1086,24 @@
             }
         },
         "com.amazonaws.dlm#LocationValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLOUD",
-                        "name": "CLOUD"
-                    },
-                    {
-                        "value": "OUTPOST_LOCAL",
-                        "name": "OUTPOST_LOCAL"
+            "type": "enum",
+            "members": {
+                "CLOUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUD"
                     }
-                ]
+                },
+                "OUTPOST_LOCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST_LOCAL"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#NoReboot": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.dlm#Parameter": {
             "type": "string"
@@ -1084,12 +1120,16 @@
                 "ExcludeBootVolume": {
                     "target": "com.amazonaws.dlm#ExcludeBootVolume",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target instances only]</b> Indicates whether to exclude the root volume from multi-volume \n\t\t\tsnapshot sets. The default is <code>false</code>. If you specify <code>true</code>, \n\t\t\tthen the root volumes attached to targeted instances will be excluded from the multi-volume \n\t\t\tsnapshot sets created by the policy.</p>"
                     }
                 },
                 "NoReboot": {
                     "target": "com.amazonaws.dlm#NoReboot",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> Indicates whether targeted instances are rebooted when the lifecycle policy \n\t\t\truns. <code>true</code> indicates that targeted instances are not rebooted when the policy \n\t\t\truns. <code>false</code> indicates that target instances are rebooted when the policy runs. \n\t\t\tThe default is <code>true</code> (instances are not rebooted).</p>"
                     }
                 },
@@ -1101,7 +1141,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies optional parameters for snapshot and AMI policies. The \n\t\t\tset of valid parameters depends on the combination of policy type and target resource \n\t\t\ttype.</p>\n\t\t       <p>If you choose to exclude boot volumes and you specify tags that consequently exclude \n\t\t\tall of the additional data volumes attached to an instance, then Amazon DLM will not create \n\t\t\tany snapshots for the affected instance, and it will emit a <code>SnapshotsCreateFailed</code> \n\t\t\tAmazon CloudWatch metric. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html\">Monitor your policies \n\t\t\t\tusing Amazon CloudWatch</a>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies optional parameters for snapshot and AMI policies. The \n\t\t\tset of valid parameters depends on the combination of policy type and target resource \n\t\t\ttype.</p>\n\t\t       <p>If you choose to exclude boot volumes and you specify tags that consequently exclude \n\t\t\tall of the additional data volumes attached to an instance, then Amazon Data Lifecycle Manager will not create \n\t\t\tany snapshots for the affected instance, and it will emit a <code>SnapshotsCreateFailed</code> \n\t\t\tAmazon CloudWatch metric. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html\">Monitor your policies \n\t\t\t\tusing Amazon CloudWatch</a>.</p>"
             }
         },
         "com.amazonaws.dlm#PolicyArn": {
@@ -1130,6 +1170,8 @@
                 "PolicyType": {
                     "target": "com.amazonaws.dlm#PolicyTypeValues",
                     "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "EBS_SNAPSHOT_MANAGEMENT",
                         "smithy.api#documentation": "<p>\n            <b>[All policy types]</b> The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n\t\t       <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
                     }
                 },
@@ -1197,22 +1239,26 @@
             }
         },
         "com.amazonaws.dlm#PolicyTypeValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EBS_SNAPSHOT_MANAGEMENT",
-                        "name": "EBS_SNAPSHOT_MANAGEMENT"
-                    },
-                    {
-                        "value": "IMAGE_MANAGEMENT",
-                        "name": "IMAGE_MANAGEMENT"
-                    },
-                    {
-                        "value": "EVENT_BASED_POLICY",
-                        "name": "EVENT_BASED_POLICY"
+            "type": "enum",
+            "members": {
+                "EBS_SNAPSHOT_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_SNAPSHOT_MANAGEMENT"
                     }
-                ]
+                },
+                "IMAGE_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_MANAGEMENT"
+                    }
+                },
+                "EVENT_BASED_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT_BASED_POLICY"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#ResourceLocationList": {
@@ -1228,18 +1274,20 @@
             }
         },
         "com.amazonaws.dlm#ResourceLocationValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLOUD",
-                        "name": "CLOUD"
-                    },
-                    {
-                        "value": "OUTPOST",
-                        "name": "OUTPOST"
+            "type": "enum",
+            "members": {
+                "CLOUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUD"
                     }
-                ]
+                },
+                "OUTPOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOST"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#ResourceNotFoundException": {
@@ -1271,18 +1319,20 @@
             }
         },
         "com.amazonaws.dlm#ResourceTypeValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VOLUME",
-                        "name": "VOLUME"
-                    },
-                    {
-                        "value": "INSTANCE",
-                        "name": "INSTANCE"
+            "type": "enum",
+            "members": {
+                "VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME"
                     }
-                ]
+                },
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANCE"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#ResourceTypeValuesList": {
@@ -1301,49 +1351,85 @@
             "type": "structure",
             "members": {
                 "Count": {
-                    "target": "com.amazonaws.dlm#Count",
+                    "target": "com.amazonaws.dlm#StandardTierRetainRuleCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000.</p>"
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of snapshots to retain for each volume, up to a maximum of 1000. For example if you want to \n\t\t\tretain a maximum of three snapshots, specify <code>3</code>. When the fourth snapshot is created, the \n\t\t\toldest retained snapshot is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a>ArchiveRule</a>.</p>"
                     }
                 },
                 "Interval": {
-                    "target": "com.amazonaws.dlm#Interval",
+                    "target": "com.amazonaws.dlm#StandardTierRetainRuleInterval",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to retain each snapshot. The maximum is 100 years. This is\n\t\t\tequivalent to 1200 months, 5200 weeks, or 36500 days.</p>"
                     }
                 },
                 "IntervalUnit": {
                     "target": "com.amazonaws.dlm#RetentionIntervalUnitValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of time for time-based retention.</p>"
+                        "smithy.api#documentation": "<p>The unit of time for time-based retention. For example, to retain snapshots for 3 months, specify \n\t\t\t<code>Interval=3</code> and <code>IntervalUnit=MONTHS</code>. Once the snapshot has been retained for \n\t\t\t3 months, it is deleted, or it is moved to the archive tier if you have specified an \n\t\t\t<a>ArchiveRule</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies \n\t\t\tor for AMIs created by AMI policies. You can retain snapshots based on either a count or a time interval.</p>\n\t\t       <p>You must specify either <b>Count</b>, or <b>Interval</b> \n\t\t\tand <b>IntervalUnit</b>.</p>"
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot and AMI policies only]</b> Specifies a retention rule for snapshots created by snapshot policies, or for AMIs \n\t\t\tcreated by AMI policies.</p>\n\t\t\n\t\t       <note>\t\t\t\n\t\t\t         <p>For snapshot policies that have an <a>ArchiveRule</a>, this retention rule\n\t\t\t\tapplies to standard tier retention. When the retention threshold is met, snapshots\n\t\t\t\tare moved from the standard to the archive tier.</p>\n\t\t\t         <p>For snapshot policies that do not have an <b>ArchiveRule</b>, snapshots \n\t\t\t\tare permanently deleted when this retention threshold is met.</p>\n\t\t       </note>\n\t\t\n\t\t       <p>You can retain snapshots based on either a count or a time interval.</p>\t\t\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Count-based retention</b>\n               </p>\n\t\t\t\t           <p>You must specify <b>Count</b>. \n\t\t\t\t\tIf you specify an <a>ArchiveRule</a> for the schedule, then you can specify a retention count of \n\t\t\t\t\t<code>0</code> to archive snapshots immediately after creation. If you specify a <a>FastRestoreRule</a>, \n\t\t\t\t\t<a>ShareRule</a>, or a <a>CrossRegionCopyRule</a>, then you must specify a retention count \n\t\t\t\t\tof <code>1</code> or more.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Age-based retention</b>\n               </p>\n\t\t\t\t           <p>You must specify <b>Interval</b> \n\t\t\t\t\tand <b>IntervalUnit</b>. If you specify an <a>ArchiveRule</a> for the \n\t\t\t\t\tschedule, then you can specify a retention interval of <code>0</code> days to archive snapshots immediately \n\t\t\t\t\tafter creation. If you specify a <a>FastRestoreRule</a>, <a>ShareRule</a>, or a \n\t\t\t\t\t<a>CrossRegionCopyRule</a>, then you must specify a retention interval of <code>1</code> day or \n\t\t\t\t\tmore.</p>\n\t\t\t         </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.dlm#RetentionArchiveTier": {
+            "type": "structure",
+            "members": {
+                "Count": {
+                    "target": "com.amazonaws.dlm#Count",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of snapshots to retain in the archive storage tier for each volume. \n\t\t\tThe count must ensure that each snapshot remains in the archive tier for at least \n\t\t90 days. For example, if the schedule creates snapshots every 30 days, you must specify a \n\t\tcount of 3 or more to ensure that each snapshot is archived for at least 90 days.</p>"
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.dlm#Interval",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Specifies the period of time to retain snapshots in the archive tier. After this period \n\t\t\texpires, the snapshot is permanently deleted.</p>"
+                    }
+                },
+                "IntervalUnit": {
+                    "target": "com.amazonaws.dlm#RetentionIntervalUnitValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time in which to measure the <b>Interval</b>. For \n\t\t\texample, to retain a snapshots in the archive tier for 6 months, specify <code>Interval=6</code> \n\t\t\tand <code>IntervalUnit=MONTHS</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>[Snapshot policies only]</b> Describes the retention rule for archived snapshots. Once the archive \n\t\t\tretention threshold is met, the snapshots are permanently deleted from the archive tier.</p> \n\t\t       <note>\n\t\t\t         <p>The archive retention rule must retain snapshots in the archive tier for a minimum \n\t\t\t\tof 90 days.</p>\n\t\t       </note>\n\t\t\t\n\t\t       <p>For <b>count-based schedules</b>, you must specify <b>Count</b>. For <b>age-based\n\t\t\t\tschedules</b>, you must specify <b>Interval</b> and\n\t\t\t\t<b> IntervalUnit</b>.</p>\n\t\t       <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\tsnapshot lifecycle policies</a>.</p>"
             }
         },
         "com.amazonaws.dlm#RetentionIntervalUnitValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAYS",
-                        "name": "DAYS"
-                    },
-                    {
-                        "value": "WEEKS",
-                        "name": "WEEKS"
-                    },
-                    {
-                        "value": "MONTHS",
-                        "name": "MONTHS"
-                    },
-                    {
-                        "value": "YEARS",
-                        "name": "YEARS"
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
                     }
-                ]
+                },
+                "WEEKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKS"
+                    }
+                },
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                },
+                "YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEARS"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#Schedule": {
@@ -1358,6 +1444,7 @@
                 "CopyTags": {
                     "target": "com.amazonaws.dlm#CopyTags",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Copy all user-defined tags on a source volume to snapshots of the volume created by\n\t\t\tthis policy.</p>"
                     }
                 },
@@ -1408,6 +1495,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <b>[AMI policies only]</b> The AMI deprecation rule for the schedule.</p>"
                     }
+                },
+                "ArchiveRule": {
+                    "target": "com.amazonaws.dlm#ArchiveRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <b>[Snapshot policies that target volumes only]</b> The snapshot archiving rule for the schedule. When you specify an archiving \n\t\t\trule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's \n\t\t\tretention threshold is met. Snapshots are then retained in the archive tier for the archive retention \n\t\t\tperiod that you specify. </p>\n\t\t       <p>For more information about using snapshot archiving, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive\">Considerations for \n\t\t\t\tsnapshot lifecycle policies</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1437,18 +1530,20 @@
             }
         },
         "com.amazonaws.dlm#SettablePolicyStateValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.dlm#ShareRule": {
@@ -1464,6 +1559,7 @@
                 "UnshareInterval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The period after which snapshots that are shared with other Amazon Web Services accounts are automatically unshared.</p>"
                     }
                 },
@@ -1510,6 +1606,25 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.dlm#StandardTierRetainRuleCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.dlm#StandardTierRetainRuleInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -1833,7 +1948,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified lifecycle policy.</p>",
+                "smithy.api#documentation": "<p>Updates the specified lifecycle policy.</p>\n\t\t       <p>For more information about updating a policy, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#modify\">Modify lifecycle \n\t\t\tpolicies</a>.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/policies/{PolicyId}",
@@ -1896,21 +2011,6 @@
         },
         "com.amazonaws.dlm#dlm_20180112": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "DLM",
-                    "arnNamespace": "dlm",
-                    "cloudFormationName": "DLM",
-                    "cloudTrailEventSource": "dlm.amazonaws.com",
-                    "endpointPrefix": "dlm"
-                },
-                "aws.auth#sigv4": {
-                    "name": "dlm"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n\t\t       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n\t\t       <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">Automating the Amazon EBS\n\t\t\t\tSnapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>",
-                "smithy.api#title": "Amazon Data Lifecycle Manager"
-            },
             "version": "2018-01-12",
             "operations": [
                 {
@@ -1937,7 +2037,22 @@
                 {
                     "target": "com.amazonaws.dlm#UpdateLifecyclePolicy"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DLM",
+                    "arnNamespace": "dlm",
+                    "cloudFormationName": "DLM",
+                    "cloudTrailEventSource": "dlm.amazonaws.com",
+                    "endpointPrefix": "dlm"
+                },
+                "aws.auth#sigv4": {
+                    "name": "dlm"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n\t\t       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n\t\t       <p>Amazon Data Lifecycle Manager supports Amazon EBS volumes and snapshots. For information about using Amazon Data Lifecycle Manager\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">\n\t\t\t\tAmazon Data Lifecycle Manager</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#title": "Amazon Data Lifecycle Manager"
+            }
         }
     }
 }
