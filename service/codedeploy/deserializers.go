@@ -1335,6 +1335,9 @@ func awsAwsjson11_deserializeOpErrorCreateDeployment(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("AlarmsLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorAlarmsLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ApplicationDoesNotExistException", errorCode):
 		return awsAwsjson11_deserializeErrorApplicationDoesNotExistException(response, errorBody)
 
@@ -1355,6 +1358,9 @@ func awsAwsjson11_deserializeOpErrorCreateDeployment(response *smithyhttp.Respon
 
 	case strings.EqualFold("DescriptionTooLongException", errorCode):
 		return awsAwsjson11_deserializeErrorDescriptionTooLongException(response, errorBody)
+
+	case strings.EqualFold("InvalidAlarmConfigException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidAlarmConfigException(response, errorBody)
 
 	case strings.EqualFold("InvalidApplicationNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidApplicationNameException(response, errorBody)
@@ -11798,6 +11804,11 @@ func awsAwsjson11_deserializeDocumentDeploymentInfo(v **types.DeploymentInfo, va
 
 		case "loadBalancerInfo":
 			if err := awsAwsjson11_deserializeDocumentLoadBalancerInfo(&sv.LoadBalancerInfo, value); err != nil {
+				return err
+			}
+
+		case "overrideAlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.OverrideAlarmConfiguration, value); err != nil {
 				return err
 			}
 

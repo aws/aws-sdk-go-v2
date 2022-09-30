@@ -23,9 +23,39 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// [Snapshot policies only] Specifies information about the archive storage tier
+// retention period.
+type ArchiveRetainRule struct {
+
+	// Information about retention period in the Amazon EBS Snapshots Archive. For more
+	// information, see Archive Amazon EBS snapshots
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/snapshot-archive.html).
+	//
+	// This member is required.
+	RetentionArchiveTier *RetentionArchiveTier
+
+	noSmithyDocumentSerde
+}
+
+// [Snapshot policies only] Specifies a snapshot archiving rule for a schedule.
+type ArchiveRule struct {
+
+	// Information about the retention period for the snapshot archiving rule.
+	//
+	// This member is required.
+	RetainRule *ArchiveRetainRule
+
+	noSmithyDocumentSerde
+}
+
 // [Snapshot and AMI policies only] Specifies when the policy should create
-// snapshots or AMIs. You must specify either a Cron expression or an interval,
-// interval unit, and start time. You cannot specify both.
+// snapshots or AMIs.
+//
+// * You must specify either CronExpression, or Interval,
+// IntervalUnit, and Times.
+//
+// * If you need to specify an ArchiveRule for the
+// schedule, then you must specify a creation frequency of at least 28 days.
 type CreateRule struct {
 
 	// The schedule, as a Cron expression. The schedule interval must be between 1 hour
@@ -53,7 +83,8 @@ type CreateRule struct {
 
 	// The time, in UTC, to start the operation. The supported format is hh:mm. The
 	// operation occurs within a one-hour window following the specified time. If you
-	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
+	// do not specify a time, Amazon Data Lifecycle Manager selects a time within the
+	// next 24 hours.
 	Times []string
 
 	noSmithyDocumentSerde
@@ -246,7 +277,7 @@ type EventSource struct {
 }
 
 // [Snapshot policies only] Specifies a rule for enabling fast snapshot restore for
-// snapshots created by snaspshot policies. You can enable fast snapshot restore
+// snapshots created by snapshot policies. You can enable fast snapshot restore
 // based on either a count or a time interval.
 type FastRestoreRule struct {
 
@@ -335,9 +366,10 @@ type LifecyclePolicySummary struct {
 // AMI policies. The set of valid parameters depends on the combination of policy
 // type and target resource type. If you choose to exclude boot volumes and you
 // specify tags that consequently exclude all of the additional data volumes
-// attached to an instance, then Amazon DLM will not create any snapshots for the
-// affected instance, and it will emit a SnapshotsCreateFailed Amazon CloudWatch
-// metric. For more information, see Monitor your policies using Amazon CloudWatch
+// attached to an instance, then Amazon Data Lifecycle Manager will not create any
+// snapshots for the affected instance, and it will emit a SnapshotsCreateFailed
+// Amazon CloudWatch metric. For more information, see Monitor your policies using
+// Amazon CloudWatch
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-dlm-cw-metrics.html).
 type Parameters struct {
 
@@ -417,19 +449,70 @@ type PolicyDetails struct {
 }
 
 // [Snapshot and AMI policies only] Specifies a retention rule for snapshots
-// created by snapshot policies or for AMIs created by AMI policies. You can retain
-// snapshots based on either a count or a time interval. You must specify either
-// Count, or Interval and IntervalUnit.
+// created by snapshot policies, or for AMIs created by AMI policies. For snapshot
+// policies that have an ArchiveRule, this retention rule applies to standard tier
+// retention. When the retention threshold is met, snapshots are moved from the
+// standard to the archive tier. For snapshot policies that do not have an
+// ArchiveRule, snapshots are permanently deleted when this retention threshold is
+// met. You can retain snapshots based on either a count or a time interval.
+//
+// *
+// Count-based retention You must specify Count. If you specify an ArchiveRule for
+// the schedule, then you can specify a retention count of 0 to archive snapshots
+// immediately after creation. If you specify a FastRestoreRule, ShareRule, or a
+// CrossRegionCopyRule, then you must specify a retention count of 1 or more.
+//
+// *
+// Age-based retention You must specify Interval and IntervalUnit. If you specify
+// an ArchiveRule for the schedule, then you can specify a retention interval of 0
+// days to archive snapshots immediately after creation. If you specify a
+// FastRestoreRule, ShareRule, or a CrossRegionCopyRule, then you must specify a
+// retention interval of 1 day or more.
 type RetainRule struct {
 
-	// The number of snapshots to retain for each volume, up to a maximum of 1000.
+	// The number of snapshots to retain for each volume, up to a maximum of 1000. For
+	// example if you want to retain a maximum of three snapshots, specify 3. When the
+	// fourth snapshot is created, the oldest retained snapshot is deleted, or it is
+	// moved to the archive tier if you have specified an ArchiveRule.
 	Count int32
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
 	Interval int32
 
-	// The unit of time for time-based retention.
+	// The unit of time for time-based retention. For example, to retain snapshots for
+	// 3 months, specify Interval=3 and IntervalUnit=MONTHS. Once the snapshot has been
+	// retained for 3 months, it is deleted, or it is moved to the archive tier if you
+	// have specified an ArchiveRule.
+	IntervalUnit RetentionIntervalUnitValues
+
+	noSmithyDocumentSerde
+}
+
+// [Snapshot policies only] Describes the retention rule for archived snapshots.
+// Once the archive retention threshold is met, the snapshots are permanently
+// deleted from the archive tier. The archive retention rule must retain snapshots
+// in the archive tier for a minimum of 90 days. For count-based schedules, you
+// must specify Count. For age-based schedules, you must specify Interval and
+// IntervalUnit. For more information about using snapshot archiving, see
+// Considerations for snapshot lifecycle policies
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive).
+type RetentionArchiveTier struct {
+
+	// The maximum number of snapshots to retain in the archive storage tier for each
+	// volume. The count must ensure that each snapshot remains in the archive tier for
+	// at least 90 days. For example, if the schedule creates snapshots every 30 days,
+	// you must specify a count of 3 or more to ensure that each snapshot is archived
+	// for at least 90 days.
+	Count int32
+
+	// Specifies the period of time to retain snapshots in the archive tier. After this
+	// period expires, the snapshot is permanently deleted.
+	Interval int32
+
+	// The unit of time in which to measure the Interval. For example, to retain a
+	// snapshots in the archive tier for 6 months, specify Interval=6 and
+	// IntervalUnit=MONTHS.
 	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
@@ -438,6 +521,15 @@ type RetainRule struct {
 // [Snapshot and AMI policies only] Specifies a schedule for a snapshot or AMI
 // lifecycle policy.
 type Schedule struct {
+
+	// [Snapshot policies that target volumes only] The snapshot archiving rule for the
+	// schedule. When you specify an archiving rule, snapshots are automatically moved
+	// from the standard tier to the archive tier once the schedule's retention
+	// threshold is met. Snapshots are then retained in the archive tier for the
+	// archive retention period that you specify. For more information about using
+	// snapshot archiving, see Considerations for snapshot lifecycle policies
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-ami-policy.html#dlm-archive).
+	ArchiveRule *ArchiveRule
 
 	// Copy all user-defined tags on a source volume to snapshots of the volume created
 	// by this policy.

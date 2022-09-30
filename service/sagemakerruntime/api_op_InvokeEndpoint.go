@@ -83,6 +83,12 @@ type InvokeEndpointInput struct {
 	// SDK.
 	CustomAttributes *string
 
+	// An optional JMESPath expression used to override the EnableExplanations
+	// parameter of the ClarifyExplainerConfig API. See the EnableExplanations
+	// (https://docs.aws.amazon.com/clarify-online-explainability-create-endpoint.html#clarify-online-exaplainability-create-endpoint-enable)
+	// section in the developer guide for more information.
+	EnableExplanations *string
+
 	// If you provide a value, it is added to the captured data when you enable data
 	// capture on the endpoint. For information about data capture, see Capture Data
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
@@ -110,7 +116,11 @@ type InvokeEndpointOutput struct {
 
 	// Includes the inference provided by the model. For information about the format
 	// of the response body, see Common Data Formats-Inference
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html). If the
+	// explainer is activated, the body includes the explanations provided by the
+	// model. For more information, see the Response section under Invoke the Endpoint
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-invoke-endpoint.html#clarify-online-explainability-response)
+	// in the Developer Guide.
 	//
 	// This member is required.
 	Body []byte

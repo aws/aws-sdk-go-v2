@@ -30,8 +30,8 @@ func (c *Client) GetDeploymentConfig(ctx context.Context, params *GetDeploymentC
 // Represents the input of a GetDeploymentConfig operation.
 type GetDeploymentConfigInput struct {
 
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
+	// The name of a deployment configuration associated with the IAM user or Amazon
+	// Web Services account.
 	//
 	// This member is required.
 	DeploymentConfigName *string

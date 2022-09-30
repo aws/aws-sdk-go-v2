@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers with AWS CodeDeploy a revision for the specified application.
+// Registers with CodeDeploy a revision for the specified application.
 func (c *Client) RegisterApplicationRevision(ctx context.Context, params *RegisterApplicationRevisionInput, optFns ...func(*Options)) (*RegisterApplicationRevisionOutput, error) {
 	if params == nil {
 		params = &RegisterApplicationRevisionInput{}
@@ -30,8 +30,8 @@ func (c *Client) RegisterApplicationRevision(ctx context.Context, params *Regist
 // Represents the input of a RegisterApplicationRevision operation.
 type RegisterApplicationRevisionInput struct {
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
-	// account.
+	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string

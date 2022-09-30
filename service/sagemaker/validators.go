@@ -5713,6 +5713,63 @@ func validateCheckpointConfig(v *types.CheckpointConfig) error {
 	}
 }
 
+func validateClarifyExplainerConfig(v *types.ClarifyExplainerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClarifyExplainerConfig"}
+	if v.ShapConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShapConfig"))
+	} else if v.ShapConfig != nil {
+		if err := validateClarifyShapConfig(v.ShapConfig); err != nil {
+			invalidParams.AddNested("ShapConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClarifyShapConfig(v *types.ClarifyShapConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClarifyShapConfig"}
+	if v.ShapBaselineConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ShapBaselineConfig"))
+	}
+	if v.TextConfig != nil {
+		if err := validateClarifyTextConfig(v.TextConfig); err != nil {
+			invalidParams.AddNested("TextConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClarifyTextConfig(v *types.ClarifyTextConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClarifyTextConfig"}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCognitoConfig(v *types.CognitoConfig) error {
 	if v == nil {
 		return nil
@@ -6512,6 +6569,23 @@ func validateExplainability(v *types.Explainability) error {
 	if v.Report != nil {
 		if err := validateMetricsSource(v.Report); err != nil {
 			invalidParams.AddNested("Report", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExplainerConfig(v *types.ExplainerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExplainerConfig"}
+	if v.ClarifyExplainerConfig != nil {
+		if err := validateClarifyExplainerConfig(v.ClarifyExplainerConfig); err != nil {
+			invalidParams.AddNested("ClarifyExplainerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10267,6 +10341,11 @@ func validateOpCreateEndpointConfigInput(v *CreateEndpointConfigInput) error {
 	if v.AsyncInferenceConfig != nil {
 		if err := validateAsyncInferenceConfig(v.AsyncInferenceConfig); err != nil {
 			invalidParams.AddNested("AsyncInferenceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExplainerConfig != nil {
+		if err := validateExplainerConfig(v.ExplainerConfig); err != nil {
+			invalidParams.AddNested("ExplainerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -49,8 +49,18 @@ type UpdateDeploymentGroupInput struct {
 	AutoRollbackConfiguration *types.AutoRollbackConfiguration
 
 	// The replacement list of Auto Scaling groups to be included in the deployment
-	// group, if you want to change them. To keep the Auto Scaling groups, enter their
-	// names. To remove Auto Scaling groups, do not enter any Auto Scaling group names.
+	// group, if you want to change them.
+	//
+	// * To keep the Auto Scaling groups, enter
+	// their names or do not specify this parameter.
+	//
+	// * To remove Auto Scaling groups,
+	// specify a non-null empty list of Auto Scaling group names to detach all
+	// CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see Amazon EC2
+	// instances in an Amazon EC2 Auto Scaling group fail to launch and receive the
+	// error "Heartbeat Timeout"
+	// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat)
+	// in the CodeDeploy User Guide.
 	AutoScalingGroups []string
 
 	// Information about blue/green deployment options for a deployment group.
@@ -69,7 +79,8 @@ type UpdateDeploymentGroupInput struct {
 	Ec2TagFilters []types.EC2TagFilter
 
 	// Information about groups of tags applied to on-premises instances. The
-	// deployment group includes only EC2 instances identified by all the tag groups.
+	// deployment group includes only Amazon EC2 instances identified by all the tag
+	// groups.
 	Ec2TagSet *types.EC2TagSet
 
 	// The target Amazon ECS services in the deployment group. This applies only to
@@ -93,13 +104,13 @@ type UpdateDeploymentGroupInput struct {
 	// only on-premises instances identified by all the tag groups.
 	OnPremisesTagSet *types.OnPremisesTagSet
 
-	// Indicates what happens when new EC2 instances are launched mid-deployment and do
-	// not receive the deployed application revision. If this option is set to UPDATE
-	// or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
-	// instances' deployments to apply the deployed application revision to the new EC2
-	// instances. If this option is set to IGNORE, CodeDeploy does not initiate a
-	// deployment to update the new EC2 instances. This may result in instances having
-	// different revisions.
+	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
+	// and do not receive the deployed application revision. If this option is set to
+	// UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
+	// instances' deployments to apply the deployed application revision to the new
+	// Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not
+	// initiate a deployment to update the new Amazon EC2 instances. This may result in
+	// instances having different revisions.
 	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
 
 	// A replacement ARN for the service role, if you want to change it.
@@ -108,7 +119,7 @@ type UpdateDeploymentGroupInput struct {
 	// Information about triggers to change when the deployment group is updated. For
 	// examples, see Edit a Trigger in a CodeDeploy Deployment Group
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
-	// in the AWS CodeDeploy User Guide.
+	// in the CodeDeploy User Guide.
 	TriggerConfigurations []types.TriggerConfig
 
 	noSmithyDocumentSerde
@@ -118,10 +129,10 @@ type UpdateDeploymentGroupInput struct {
 type UpdateDeploymentGroupOutput struct {
 
 	// If the output contains no data, and the corresponding deployment group contained
-	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
-	// corresponding Auto Scaling lifecycle event hooks from the AWS account. If the
-	// output contains data, AWS CodeDeploy could not remove some Auto Scaling
-	// lifecycle event hooks from the AWS account.
+	// at least one Auto Scaling group, CodeDeploy successfully removed all
+	// corresponding Auto Scaling lifecycle event hooks from the Amazon Web Services
+	// account. If the output contains data, CodeDeploy could not remove some Auto
+	// Scaling lifecycle event hooks from the Amazon Web Services account.
 	HooksNotCleanedUp []types.AutoScalingGroup
 
 	// Metadata pertaining to the operation's result.

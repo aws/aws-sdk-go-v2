@@ -117,6 +117,9 @@ type DescribeEndpointOutput struct {
 	// The currently active data capture configuration used by your Endpoint.
 	DataCaptureConfig *types.DataCaptureConfigSummary
 
+	// The configuration parameters for an explainer.
+	ExplainerConfig *types.ExplainerConfig
+
 	// If the status of the endpoint is Failed, the reason why it failed.
 	FailureReason *string
 

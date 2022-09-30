@@ -38,7 +38,8 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 // Represents the input of a GetDeployment operation.
 type GetDeploymentInput struct {
 
-	// The unique ID of a deployment associated with the IAM user or AWS account.
+	// The unique ID of a deployment associated with the IAM user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	DeploymentId *string

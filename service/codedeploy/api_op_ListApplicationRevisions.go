@@ -31,8 +31,8 @@ func (c *Client) ListApplicationRevisions(ctx context.Context, params *ListAppli
 // Represents the input of a ListApplicationRevisions operation.
 type ListApplicationRevisionsInput struct {
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
-	// account.
+	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string
@@ -63,16 +63,16 @@ type ListApplicationRevisionsInput struct {
 	// The column name to use to sort the list results:
 	//
 	// * registerTime: Sort by the
-	// time the revisions were registered with AWS CodeDeploy.
+	// time the revisions were registered with CodeDeploy.
 	//
-	// * firstUsedTime: Sort
-	// by the time the revisions were first used in a deployment.
+	// * firstUsedTime: Sort by
+	// the time the revisions were first used in a deployment.
 	//
-	// * lastUsedTime: Sort
-	// by the time the revisions were last used in a deployment.
+	// * lastUsedTime: Sort by
+	// the time the revisions were last used in a deployment.
 	//
-	// If not specified or
-	// set to null, the results are returned in an arbitrary order.
+	// If not specified or set
+	// to null, the results are returned in an arbitrary order.
 	SortBy types.ApplicationRevisionSortBy
 
 	// The order in which to sort the list results:

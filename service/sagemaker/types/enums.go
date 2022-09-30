@@ -865,6 +865,180 @@ func (CaptureStatus) Values() []CaptureStatus {
 	}
 }
 
+type ClarifyFeatureType string
+
+// Enum values for ClarifyFeatureType
+const (
+	ClarifyFeatureTypeNumerical   ClarifyFeatureType = "numerical"
+	ClarifyFeatureTypeCategorical ClarifyFeatureType = "categorical"
+	ClarifyFeatureTypeText        ClarifyFeatureType = "text"
+)
+
+// Values returns all known values for ClarifyFeatureType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClarifyFeatureType) Values() []ClarifyFeatureType {
+	return []ClarifyFeatureType{
+		"numerical",
+		"categorical",
+		"text",
+	}
+}
+
+type ClarifyTextGranularity string
+
+// Enum values for ClarifyTextGranularity
+const (
+	ClarifyTextGranularityToken     ClarifyTextGranularity = "token"
+	ClarifyTextGranularitySentence  ClarifyTextGranularity = "sentence"
+	ClarifyTextGranularityParagraph ClarifyTextGranularity = "paragraph"
+)
+
+// Values returns all known values for ClarifyTextGranularity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClarifyTextGranularity) Values() []ClarifyTextGranularity {
+	return []ClarifyTextGranularity{
+		"token",
+		"sentence",
+		"paragraph",
+	}
+}
+
+type ClarifyTextLanguage string
+
+// Enum values for ClarifyTextLanguage
+const (
+	ClarifyTextLanguageAfrikaans       ClarifyTextLanguage = "af"
+	ClarifyTextLanguageAlbanian        ClarifyTextLanguage = "sq"
+	ClarifyTextLanguageArabic          ClarifyTextLanguage = "ar"
+	ClarifyTextLanguageArmenian        ClarifyTextLanguage = "hy"
+	ClarifyTextLanguageBasque          ClarifyTextLanguage = "eu"
+	ClarifyTextLanguageBengali         ClarifyTextLanguage = "bn"
+	ClarifyTextLanguageBulgarian       ClarifyTextLanguage = "bg"
+	ClarifyTextLanguageCatalan         ClarifyTextLanguage = "ca"
+	ClarifyTextLanguageChinese         ClarifyTextLanguage = "zh"
+	ClarifyTextLanguageCroatian        ClarifyTextLanguage = "hr"
+	ClarifyTextLanguageCzech           ClarifyTextLanguage = "cs"
+	ClarifyTextLanguageDanish          ClarifyTextLanguage = "da"
+	ClarifyTextLanguageDutch           ClarifyTextLanguage = "nl"
+	ClarifyTextLanguageEnglish         ClarifyTextLanguage = "en"
+	ClarifyTextLanguageEstonian        ClarifyTextLanguage = "et"
+	ClarifyTextLanguageFinnish         ClarifyTextLanguage = "fi"
+	ClarifyTextLanguageFrench          ClarifyTextLanguage = "fr"
+	ClarifyTextLanguageGerman          ClarifyTextLanguage = "de"
+	ClarifyTextLanguageGreek           ClarifyTextLanguage = "el"
+	ClarifyTextLanguageGujarati        ClarifyTextLanguage = "gu"
+	ClarifyTextLanguageHebrew          ClarifyTextLanguage = "he"
+	ClarifyTextLanguageHindi           ClarifyTextLanguage = "hi"
+	ClarifyTextLanguageHungarian       ClarifyTextLanguage = "hu"
+	ClarifyTextLanguageIcelandic       ClarifyTextLanguage = "is"
+	ClarifyTextLanguageIndonesian      ClarifyTextLanguage = "id"
+	ClarifyTextLanguageIrish           ClarifyTextLanguage = "ga"
+	ClarifyTextLanguageItalian         ClarifyTextLanguage = "it"
+	ClarifyTextLanguageKannada         ClarifyTextLanguage = "kn"
+	ClarifyTextLanguageKyrgyz          ClarifyTextLanguage = "ky"
+	ClarifyTextLanguageLatvian         ClarifyTextLanguage = "lv"
+	ClarifyTextLanguageLithuanian      ClarifyTextLanguage = "lt"
+	ClarifyTextLanguageLuxembourgish   ClarifyTextLanguage = "lb"
+	ClarifyTextLanguageMacedonian      ClarifyTextLanguage = "mk"
+	ClarifyTextLanguageMalayalam       ClarifyTextLanguage = "ml"
+	ClarifyTextLanguageMarathi         ClarifyTextLanguage = "mr"
+	ClarifyTextLanguageNepali          ClarifyTextLanguage = "ne"
+	ClarifyTextLanguageNorwegianBokmal ClarifyTextLanguage = "nb"
+	ClarifyTextLanguagePersian         ClarifyTextLanguage = "fa"
+	ClarifyTextLanguagePolish          ClarifyTextLanguage = "pl"
+	ClarifyTextLanguagePortuguese      ClarifyTextLanguage = "pt"
+	ClarifyTextLanguageRomanian        ClarifyTextLanguage = "ro"
+	ClarifyTextLanguageRussian         ClarifyTextLanguage = "ru"
+	ClarifyTextLanguageSanskrit        ClarifyTextLanguage = "sa"
+	ClarifyTextLanguageSerbian         ClarifyTextLanguage = "sr"
+	ClarifyTextLanguageSetswana        ClarifyTextLanguage = "tn"
+	ClarifyTextLanguageSinhala         ClarifyTextLanguage = "si"
+	ClarifyTextLanguageSlovak          ClarifyTextLanguage = "sk"
+	ClarifyTextLanguageSlovenian       ClarifyTextLanguage = "sl"
+	ClarifyTextLanguageSpanish         ClarifyTextLanguage = "es"
+	ClarifyTextLanguageSwedish         ClarifyTextLanguage = "sv"
+	ClarifyTextLanguageTagalog         ClarifyTextLanguage = "tl"
+	ClarifyTextLanguageTamil           ClarifyTextLanguage = "ta"
+	ClarifyTextLanguageTatar           ClarifyTextLanguage = "tt"
+	ClarifyTextLanguageTelugu          ClarifyTextLanguage = "te"
+	ClarifyTextLanguageTurkish         ClarifyTextLanguage = "tr"
+	ClarifyTextLanguageUkrainian       ClarifyTextLanguage = "uk"
+	ClarifyTextLanguageUrdu            ClarifyTextLanguage = "ur"
+	ClarifyTextLanguageYoruba          ClarifyTextLanguage = "yo"
+	ClarifyTextLanguageLigurian        ClarifyTextLanguage = "lij"
+	ClarifyTextLanguageMultiLanguage   ClarifyTextLanguage = "xx"
+)
+
+// Values returns all known values for ClarifyTextLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClarifyTextLanguage) Values() []ClarifyTextLanguage {
+	return []ClarifyTextLanguage{
+		"af",
+		"sq",
+		"ar",
+		"hy",
+		"eu",
+		"bn",
+		"bg",
+		"ca",
+		"zh",
+		"hr",
+		"cs",
+		"da",
+		"nl",
+		"en",
+		"et",
+		"fi",
+		"fr",
+		"de",
+		"el",
+		"gu",
+		"he",
+		"hi",
+		"hu",
+		"is",
+		"id",
+		"ga",
+		"it",
+		"kn",
+		"ky",
+		"lv",
+		"lt",
+		"lb",
+		"mk",
+		"ml",
+		"mr",
+		"ne",
+		"nb",
+		"fa",
+		"pl",
+		"pt",
+		"ro",
+		"ru",
+		"sa",
+		"sr",
+		"tn",
+		"si",
+		"sk",
+		"sl",
+		"es",
+		"sv",
+		"tl",
+		"ta",
+		"tt",
+		"te",
+		"tr",
+		"uk",
+		"ur",
+		"yo",
+		"lij",
+		"xx",
+	}
+}
+
 type CodeRepositorySortBy string
 
 // Enum values for CodeRepositorySortBy

@@ -17,11 +17,11 @@ type Alarm struct {
 	noSmithyDocumentSerde
 }
 
-// Information about alarms associated with the deployment group.
+// Information about alarms associated with a deployment or deployment group.
 type AlarmConfiguration struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can
-	// be added to a deployment group.
+	// A list of alarms configured for the deployment or deployment group. A maximum of
+	// 10 alarms can be added.
 	Alarms []Alarm
 
 	// Indicates whether the alarm configuration is enabled.
@@ -67,21 +67,20 @@ type ApplicationInfo struct {
 	noSmithyDocumentSerde
 }
 
-// A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted
-// or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the
-// revision is the same as the AppSpec file. This method replaces the deprecated
-// RawString data type.
+// A revision for an Lambda or Amazon ECS deployment that is a YAML-formatted or
+// JSON-formatted string. For Lambda and Amazon ECS deployments, the revision is
+// the same as the AppSpec file. This method replaces the deprecated RawString data
+// type.
 type AppSpecContent struct {
 
-	// The YAML-formatted or JSON-formatted revision string. For an AWS Lambda
-	// deployment, the content includes a Lambda function name, the alias for its
-	// original version, and the alias for its replacement version. The deployment
-	// shifts traffic from the original version of the Lambda function to the
-	// replacement version. For an Amazon ECS deployment, the content includes the task
-	// name, information about the load balancer that serves traffic to the container,
-	// and more. For both types of deployments, the content can specify Lambda
-	// functions that run at specified hooks, such as BeforeInstall, during a
-	// deployment.
+	// The YAML-formatted or JSON-formatted revision string. For an Lambda deployment,
+	// the content includes a Lambda function name, the alias for its original version,
+	// and the alias for its replacement version. The deployment shifts traffic from
+	// the original version of the Lambda function to the replacement version. For an
+	// Amazon ECS deployment, the content includes the task name, information about the
+	// load balancer that serves traffic to the container, and more. For both types of
+	// deployments, the content can specify Lambda functions that run at specified
+	// hooks, such as BeforeInstall, during a deployment.
 	Content *string
 
 	// The SHA256 hash value of the revision content.
@@ -161,32 +160,32 @@ type BlueInstanceTerminationOption struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the target to be updated by an AWS CloudFormation blue/green
+// Information about the target to be updated by an CloudFormation blue/green
 // deployment. This target type is used for all deployments initiated by a
 // CloudFormation stack update.
 type CloudFormationTarget struct {
 
-	// The unique ID of an AWS CloudFormation blue/green deployment.
+	// The unique ID of an CloudFormation blue/green deployment.
 	DeploymentId *string
 
-	// The date and time when the target application was updated by an AWS
-	// CloudFormation blue/green deployment.
+	// The date and time when the target application was updated by an CloudFormation
+	// blue/green deployment.
 	LastUpdatedAt *time.Time
 
-	// The lifecycle events of the AWS CloudFormation blue/green deployment to this
-	// target application.
+	// The lifecycle events of the CloudFormation blue/green deployment to this target
+	// application.
 	LifecycleEvents []LifecycleEvent
 
-	// The resource type for the AWS CloudFormation blue/green deployment.
+	// The resource type for the CloudFormation blue/green deployment.
 	ResourceType *string
 
-	// The status of an AWS CloudFormation blue/green deployment's target application.
+	// The status of an CloudFormation blue/green deployment's target application.
 	Status TargetStatus
 
 	// The unique ID of a deployment target that has a type of CloudFormationTarget.
 	TargetId *string
 
-	// The percentage of production traffic that the target version of an AWS
+	// The percentage of production traffic that the target version of an
 	// CloudFormation blue/green deployment receives.
 	TargetVersionWeight float64
 
@@ -212,7 +211,7 @@ type DeploymentConfigInfo struct {
 	MinimumHealthyHosts *MinimumHealthyHosts
 
 	// The configuration that specifies how the deployment traffic is routed. Used for
-	// deployments with a Lambda or ECS compute platform only.
+	// deployments with a Lambda or Amazon ECS compute platform only.
 	TrafficRoutingConfig *TrafficRoutingConfig
 
 	noSmithyDocumentSerde
@@ -257,9 +256,9 @@ type DeploymentGroupInfo struct {
 	// instances with any of the specified tags.
 	Ec2TagFilters []EC2TagFilter
 
-	// Information about groups of tags applied to an EC2 instance. The deployment
-	// group includes only EC2 instances identified by all of the tag groups. Cannot be
-	// used in the same call as ec2TagFilters.
+	// Information about groups of tags applied to an Amazon EC2 instance. The
+	// deployment group includes only Amazon EC2 instances identified by all of the tag
+	// groups. Cannot be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet
 
 	// The target Amazon ECS services in the deployment group. This applies only to
@@ -286,20 +285,20 @@ type DeploymentGroupInfo struct {
 	// groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *OnPremisesTagSet
 
-	// Indicates what happens when new EC2 instances are launched mid-deployment and do
-	// not receive the deployed application revision. If this option is set to UPDATE
-	// or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
-	// instances' deployments to apply the deployed application revision to the new EC2
-	// instances. If this option is set to IGNORE, CodeDeploy does not initiate a
-	// deployment to update the new EC2 instances. This may result in instances having
-	// different revisions.
+	// Indicates what happens when new Amazon EC2 instances are launched mid-deployment
+	// and do not receive the deployed application revision. If this option is set to
+	// UPDATE or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
+	// instances' deployments to apply the deployed application revision to the new
+	// Amazon EC2 instances. If this option is set to IGNORE, CodeDeploy does not
+	// initiate a deployment to update the new Amazon EC2 instances. This may result in
+	// instances having different revisions.
 	OutdatedInstancesStrategy OutdatedInstancesStrategy
 
 	// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to
-	// make calls to AWS services on your behalf. For more information, see Create a
-	// Service Role for AWS CodeDeploy
+	// make calls to Amazon Web Services services on your behalf. For more information,
+	// see Create a Service Role for CodeDeploy
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html)
-	// in the AWS CodeDeploy User Guide.
+	// in the CodeDeploy User Guide.
 	ServiceRoleArn *string
 
 	// Information about the deployment group's target revision, including type and
@@ -319,7 +318,8 @@ type DeploymentInfo struct {
 	// instances in the original environment in a blue/green deployment were not
 	// terminated.
 	//
-	// Deprecated: This member has been deprecated.
+	// Deprecated: AdditionalDeploymentStatusInfo is deprecated, use
+	// DeploymentStatusMessageList instead.
 	AdditionalDeploymentStatusInfo *string
 
 	// The application name.
@@ -353,7 +353,7 @@ type DeploymentInfo struct {
 	//
 	// *
 	// CodeDeployAutoUpdate: An auto-update process created the deployment when it
-	// detected outdated EC2 instances.
+	// detected outdated Amazon EC2 instances.
 	Creator DeploymentCreator
 
 	// The deployment configuration name.
@@ -385,7 +385,7 @@ type DeploymentInfo struct {
 	// that is linked to this deployment.
 	ExternalId *string
 
-	// Information about how AWS CodeDeploy handles files that already exist in a
+	// Information about how CodeDeploy handles files that already exist in a
 	// deployment target location but weren't part of the previous successful
 	// deployment.
 	//
@@ -409,7 +409,7 @@ type DeploymentInfo struct {
 	// lifecycle event fails during a deployment to an instance, that deployment fails.
 	// If deployment to that instance is part of an overall deployment and the number
 	// of healthy hosts is not less than the minimum number of healthy hosts, then a
-	// deployment to the next instance is attempted. During a deployment, the AWS
+	// deployment to the next instance is attempted. During a deployment, the
 	// CodeDeploy agent runs the scripts specified for ApplicationStop,
 	// BeforeBlockTraffic, and AfterBlockTraffic in the AppSpec file from the previous
 	// successful deployment. (All other scripts are run from the AppSpec file in the
@@ -428,6 +428,9 @@ type DeploymentInfo struct {
 
 	// Information about the load balancer used in the deployment.
 	LoadBalancerInfo *LoadBalancerInfo
+
+	// Information about alarms associated with a deployment or deployment group.
+	OverrideAlarmConfiguration *AlarmConfiguration
 
 	// Information about the application revision that was deployed to the deployment
 	// group before the most recent successful deployment.
@@ -531,7 +534,7 @@ type DeploymentStyle struct {
 // Information about the deployment target.
 type DeploymentTarget struct {
 
-	// Information about the target to be updated by an AWS CloudFormation blue/green
+	// Information about the target to be updated by an CloudFormation blue/green
 	// deployment. This target type is used for all deployments initiated by a
 	// CloudFormation stack update.
 	CloudFormationTarget *CloudFormationTarget
@@ -548,7 +551,7 @@ type DeploymentTarget struct {
 	// compute platform.
 	InstanceTarget *InstanceTarget
 
-	// Information about the target for a deployment that uses the AWS Lambda compute
+	// Information about the target for a deployment that uses the Lambda compute
 	// platform.
 	LambdaTarget *LambdaTarget
 
@@ -579,8 +582,8 @@ type Diagnostics struct {
 	// reason.
 	ErrorCode LifecycleErrorCode
 
-	// The last portion of the diagnostic log. If available, AWS CodeDeploy returns up
-	// to the last 4 KB of the diagnostic log.
+	// The last portion of the diagnostic log. If available, CodeDeploy returns up to
+	// the last 4 KB of the diagnostic log.
 	LogTail *string
 
 	// The message associated with the error.
@@ -614,12 +617,12 @@ type EC2TagFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Information about groups of EC2 instance tags.
+// Information about groups of Amazon EC2 instance tags.
 type EC2TagSet struct {
 
-	// A list that contains other lists of EC2 instance tag groups. For an instance to
-	// be included in the deployment group, it must be identified by all of the tag
-	// groups in the list.
+	// A list that contains other lists of Amazon EC2 instance tag groups. For an
+	// instance to be included in the deployment group, it must be identified by all of
+	// the tag groups in the list.
 	Ec2TagSetList [][]EC2TagFilter
 
 	noSmithyDocumentSerde
@@ -666,10 +669,10 @@ type ECSTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An
+// Information about a set of Amazon ECS tasks in an CodeDeploy deployment. An
 // Amazon ECS task set includes details such as the desired number of tasks, how
 // many tasks are running, and whether the task set serves production traffic. An
-// AWS CodeDeploy application that uses the Amazon ECS compute platform deploys a
+// CodeDeploy application that uses the Amazon ECS compute platform deploys a
 // containerized application in an Amazon ECS service as a task set.
 type ECSTaskSet struct {
 
@@ -705,7 +708,7 @@ type ECSTaskSet struct {
 	// deregistered from their target group.
 	Status *string
 
-	// The target group associated with the task set. The target group is used by AWS
+	// The target group associated with the task set. The target group is used by
 	// CodeDeploy to manage traffic to a task set.
 	TargetGroup *TargetGroupInfo
 
@@ -737,9 +740,9 @@ type ELBInfo struct {
 // Information about a deployment error.
 type ErrorInformation struct {
 
-	// For more information, see Error Codes for AWS CodeDeploy
+	// For more information, see Error Codes for CodeDeploy
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html) in
-	// the AWS CodeDeploy User Guide
+	// the CodeDeploy User Guide
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide). The error code:
 	//
 	// *
@@ -777,14 +780,15 @@ type ErrorInformation struct {
 	// number of instances was exceeded.
 	//
 	// * THROTTLED: The operation was throttled
-	// because the calling account exceeded the throttling limits of one or more AWS
-	// services.
+	// because the calling account exceeded the throttling limits of one or more Amazon
+	// Web Services services.
 	//
 	// * TIMEOUT: The deployment has timed out.
 	//
-	// * REVISION_MISSING: The
-	// revision ID was missing. This error code is most likely raised if the revision
-	// is deleted after the deployment is created, but before it is started.
+	// *
+	// REVISION_MISSING: The revision ID was missing. This error code is most likely
+	// raised if the revision is deleted after the deployment is created, but before it
+	// is started.
 	Code ErrorCode
 
 	// An accompanying error message.
@@ -802,13 +806,13 @@ type GenericRevisionInfo struct {
 	// A comment about the revision.
 	Description *string
 
-	// When the revision was first used by AWS CodeDeploy.
+	// When the revision was first used by CodeDeploy.
 	FirstUsedTime *time.Time
 
-	// When the revision was last used by AWS CodeDeploy.
+	// When the revision was last used by CodeDeploy.
 	LastUsedTime *time.Time
 
-	// When the revision was registered with AWS CodeDeploy.
+	// When the revision was registered with CodeDeploy.
 	RegisterTime *time.Time
 
 	noSmithyDocumentSerde
@@ -958,9 +962,9 @@ type LambdaFunctionInfo struct {
 	// The version of a Lambda function that production traffic points to.
 	CurrentVersion *string
 
-	// The alias of a Lambda function. For more information, see AWS Lambda Function
+	// The alias of a Lambda function. For more information, see Lambda Function
 	// Aliases (https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html) in the
-	// AWS Lambda Developer Guide.
+	// Lambda Developer Guide.
 	FunctionAlias *string
 
 	// The name of a Lambda function.
@@ -977,8 +981,7 @@ type LambdaFunctionInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the target AWS Lambda function during an AWS Lambda
-// deployment.
+// Information about the target Lambda function during an Lambda deployment.
 type LambdaTarget struct {
 
 	// The unique ID of a deployment.
@@ -993,7 +996,7 @@ type LambdaTarget struct {
 	// The lifecycle events of the deployment to this target Lambda function.
 	LifecycleEvents []LifecycleEvent
 
-	// The status an AWS Lambda deployment's target Lambda function.
+	// The status an Lambda deployment's target Lambda function.
 	Status TargetStatus
 
 	// The Amazon Resource Name (ARN) of the target.
@@ -1110,13 +1113,13 @@ type MinimumHealthyHosts struct {
 	// instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to
 	// only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only
 	// to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime,
-	// AWS CodeDeploy attempts to ensure that all instances but one are kept in a
-	// healthy state during the deployment. Although this allows one instance at a time
-	// to be taken offline for a new deployment, it also means that if the deployment
-	// to the last instance fails, the overall deployment is still successful. For more
-	// information, see AWS CodeDeploy Instance Health
+	// CodeDeploy attempts to ensure that all instances but one are kept in a healthy
+	// state during the deployment. Although this allows one instance at a time to be
+	// taken offline for a new deployment, it also means that if the deployment to the
+	// last instance fails, the overall deployment is still successful. For more
+	// information, see CodeDeploy Instance Health
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
-	// in the AWS CodeDeploy User Guide.
+	// in the CodeDeploy User Guide.
 	Type MinimumHealthyHostsType
 
 	// The minimum healthy instance value.
@@ -1136,9 +1139,8 @@ type OnPremisesTagSet struct {
 	noSmithyDocumentSerde
 }
 
-// A revision for an AWS Lambda deployment that is a YAML-formatted or
-// JSON-formatted string. For AWS Lambda deployments, the revision is the same as
-// the AppSpec file.
+// A revision for an Lambda deployment that is a YAML-formatted or JSON-formatted
+// string. For Lambda deployments, the revision is the same as the AppSpec file.
 type RawString struct {
 
 	// The YAML-formatted or JSON-formatted revision string. It includes information
@@ -1181,7 +1183,7 @@ type RevisionInfo struct {
 // Information about the location of an application revision.
 type RevisionLocation struct {
 
-	// The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The
+	// The content of an AppSpec file for an Lambda or Amazon ECS deployment. The
 	// content is formatted as JSON or YAML and stored as a RawString.
 	AppSpecContent *AppSpecContent
 
@@ -1196,18 +1198,18 @@ type RevisionLocation struct {
 	// * GitHub: An application revision stored in GitHub (EC2/On-premises
 	// deployments only).
 	//
-	// * String: A YAML-formatted or JSON-formatted string (AWS
-	// Lambda deployments only).
+	// * String: A YAML-formatted or JSON-formatted string (Lambda
+	// deployments only).
 	//
-	// * AppSpecContent: An AppSpecContent object that
-	// contains the contents of an AppSpec file for an AWS Lambda or Amazon ECS
-	// deployment. The content is formatted as JSON or YAML stored as a RawString.
+	// * AppSpecContent: An AppSpecContent object that contains the
+	// contents of an AppSpec file for an Lambda or Amazon ECS deployment. The content
+	// is formatted as JSON or YAML stored as a RawString.
 	RevisionType RevisionLocationType
 
 	// Information about the location of a revision stored in Amazon S3.
 	S3Location *S3Location
 
-	// Information about the location of an AWS Lambda deployment revision stored as a
+	// Information about the location of an Lambda deployment revision stored as a
 	// RawString.
 	//
 	// Deprecated: RawString and String revision type are deprecated, use
@@ -1348,9 +1350,9 @@ type TargetInstances struct {
 	// environment for a blue/green deployment.
 	AutoScalingGroups []string
 
-	// Information about the groups of EC2 instance tags that an instance must be
-	// identified by in order for it to be included in the replacement environment for
-	// a blue/green deployment. Cannot be used in the same call as tagFilters.
+	// Information about the groups of Amazon EC2 instance tags that an instance must
+	// be identified by in order for it to be included in the replacement environment
+	// for a blue/green deployment. Cannot be used in the same call as tagFilters.
 	Ec2TagSet *EC2TagSet
 
 	// The tag filter key, type, and value used to identify Amazon EC2 instances in a
@@ -1361,9 +1363,10 @@ type TargetInstances struct {
 	noSmithyDocumentSerde
 }
 
-// A configuration that shifts traffic from one version of a Lambda function or ECS
-// task set to another in two increments. The original and target Lambda function
-// versions or ECS task sets are specified in the deployment's AppSpec file.
+// A configuration that shifts traffic from one version of a Lambda function or
+// Amazon ECS task set to another in two increments. The original and target Lambda
+// function versions or ECS task sets are specified in the deployment's AppSpec
+// file.
 type TimeBasedCanary struct {
 
 	// The number of minutes between the first and second traffic shifts of a
@@ -1420,7 +1423,7 @@ type TrafficRoute struct {
 }
 
 // The configuration that specifies how traffic is shifted from one version of a
-// Lambda function to another version during an AWS Lambda deployment, or from one
+// Lambda function to another version during an Lambda deployment, or from one
 // Amazon ECS task set to another during an Amazon ECS deployment.
 type TrafficRoutingConfig struct {
 
@@ -1429,10 +1432,10 @@ type TrafficRoutingConfig struct {
 	// versions or ECS task sets are specified in the deployment's AppSpec file.
 	TimeBasedCanary *TimeBasedCanary
 
-	// A configuration that shifts traffic from one version of a Lambda function or ECS
-	// task set to another in equal increments, with an equal number of minutes between
-	// each increment. The original and target Lambda function versions or ECS task
-	// sets are specified in the deployment's AppSpec file.
+	// A configuration that shifts traffic from one version of a Lambda function or
+	// Amazon ECS task set to another in equal increments, with an equal number of
+	// minutes between each increment. The original and target Lambda function versions
+	// or Amazon ECS task sets are specified in the deployment's AppSpec file.
 	TimeBasedLinear *TimeBasedLinear
 
 	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a

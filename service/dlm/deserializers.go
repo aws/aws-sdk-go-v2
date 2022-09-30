@@ -1220,6 +1220,78 @@ func awsRestjson1_deserializeDocumentActionList(v *[]types.Action, value interfa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentArchiveRetainRule(v **types.ArchiveRetainRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ArchiveRetainRule
+	if *v == nil {
+		sv = &types.ArchiveRetainRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RetentionArchiveTier":
+			if err := awsRestjson1_deserializeDocumentRetentionArchiveTier(&sv.RetentionArchiveTier, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentArchiveRule(v **types.ArchiveRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ArchiveRule
+	if *v == nil {
+		sv = &types.ArchiveRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RetainRule":
+			if err := awsRestjson1_deserializeDocumentArchiveRetainRule(&sv.RetainRule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAvailabilityZoneList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2722,6 +2794,72 @@ func awsRestjson1_deserializeDocumentRetainRule(v **types.RetainRule, value inte
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
+					return fmt.Errorf("expected StandardTierRetainRuleCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = int32(i64)
+			}
+
+		case "Interval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StandardTierRetainRuleInterval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Interval = int32(i64)
+			}
+
+		case "IntervalUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetentionIntervalUnitValues to be of type string, got %T instead", value)
+				}
+				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetentionArchiveTier(v **types.RetentionArchiveTier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetentionArchiveTier
+	if *v == nil {
+		sv = &types.RetentionArchiveTier{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
 					return fmt.Errorf("expected Count to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
@@ -2784,6 +2922,11 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "ArchiveRule":
+			if err := awsRestjson1_deserializeDocumentArchiveRule(&sv.ArchiveRule, value); err != nil {
+				return err
+			}
+
 		case "CopyTags":
 			if value != nil {
 				jtv, ok := value.(bool)

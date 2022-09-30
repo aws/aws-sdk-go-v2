@@ -352,6 +352,30 @@ func (LogAnomalyType) Values() []LogAnomalyType {
 	}
 }
 
+type NotificationMessageType string
+
+// Enum values for NotificationMessageType
+const (
+	NotificationMessageTypeNewInsight        NotificationMessageType = "NEW_INSIGHT"
+	NotificationMessageTypeClosedInsight     NotificationMessageType = "CLOSED_INSIGHT"
+	NotificationMessageTypeNewAssociation    NotificationMessageType = "NEW_ASSOCIATION"
+	NotificationMessageTypeSeverityUpgraded  NotificationMessageType = "SEVERITY_UPGRADED"
+	NotificationMessageTypeNewRecommendation NotificationMessageType = "NEW_RECOMMENDATION"
+)
+
+// Values returns all known values for NotificationMessageType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationMessageType) Values() []NotificationMessageType {
+	return []NotificationMessageType{
+		"NEW_INSIGHT",
+		"CLOSED_INSIGHT",
+		"NEW_ASSOCIATION",
+		"SEVERITY_UPGRADED",
+		"NEW_RECOMMENDATION",
+	}
+}
+
 type OptInStatus string
 
 // Enum values for OptInStatus

@@ -3933,6 +3933,13 @@ func awsAwsjson11_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentIn
 		ok.Boolean(v.IgnoreApplicationStopFailures)
 	}
 
+	if v.OverrideAlarmConfiguration != nil {
+		ok := object.Key("overrideAlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.OverrideAlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Revision != nil {
 		ok := object.Key("revision")
 		if err := awsAwsjson11_serializeDocumentRevisionLocation(v.Revision, ok); err != nil {

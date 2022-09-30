@@ -31,8 +31,7 @@ func (c *Client) BatchGetApplicationRevisions(ctx context.Context, params *Batch
 // Represents the input of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsInput struct {
 
-	// The name of an AWS CodeDeploy application about which to get revision
-	// information.
+	// The name of an CodeDeploy application about which to get revision information.
 	//
 	// This member is required.
 	ApplicationName *string

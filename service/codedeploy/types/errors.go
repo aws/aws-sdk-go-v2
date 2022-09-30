@@ -26,8 +26,8 @@ func (e *AlarmsLimitExceededException) ErrorMessage() string {
 func (e *AlarmsLimitExceededException) ErrorCode() string             { return "AlarmsLimitExceededException" }
 func (e *AlarmsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An application with the specified name with the IAM user or AWS account already
-// exists.
+// An application with the specified name with the IAM user or Amazon Web Services
+// account already exists.
 type ApplicationAlreadyExistsException struct {
 	Message *string
 
@@ -48,7 +48,7 @@ func (e *ApplicationAlreadyExistsException) ErrorCode() string {
 }
 func (e *ApplicationAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The application does not exist with the IAM user or AWS account.
+// The application does not exist with the IAM user or Amazon Web Services account.
 type ApplicationDoesNotExistException struct {
 	Message *string
 
@@ -194,8 +194,8 @@ func (e *DeploymentAlreadyCompletedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A deployment configuration with the specified name with the IAM user or AWS
-// account already exists.
+// A deployment configuration with the specified name with the IAM user or Amazon
+// Web Services account already exists.
 type DeploymentConfigAlreadyExistsException struct {
 	Message *string
 
@@ -218,7 +218,8 @@ func (e *DeploymentConfigAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// The deployment configuration does not exist with the IAM user or AWS account.
+// The deployment configuration does not exist with the IAM user or Amazon Web
+// Services account.
 type DeploymentConfigDoesNotExistException struct {
 	Message *string
 
@@ -306,7 +307,7 @@ func (e *DeploymentConfigNameRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The deployment with the IAM user or AWS account does not exist.
+// The deployment with the IAM user or Amazon Web Services account does not exist.
 type DeploymentDoesNotExistException struct {
 	Message *string
 
@@ -327,8 +328,8 @@ func (e *DeploymentDoesNotExistException) ErrorCode() string {
 }
 func (e *DeploymentDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A deployment group with the specified name with the IAM user or AWS account
-// already exists.
+// A deployment group with the specified name with the IAM user or Amazon Web
+// Services account already exists.
 type DeploymentGroupAlreadyExistsException struct {
 	Message *string
 
@@ -351,7 +352,8 @@ func (e *DeploymentGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The named deployment group with the IAM user or AWS account does not exist.
+// The named deployment group with the IAM user or Amazon Web Services account does
+// not exist.
 type DeploymentGroupDoesNotExistException struct {
 	Message *string
 
@@ -548,7 +550,7 @@ func (e *DeploymentTargetIdRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The maximum number of targets that can be associated with an Amazon ECS or AWS
+// The maximum number of targets that can be associated with an Amazon ECS or
 // Lambda deployment was exceeded. The target list of both types of deployments
 // must have exactly one item. This exception does not apply to EC2/On-premises
 // deployments.
@@ -1336,10 +1338,10 @@ func (e *InvalidExternalIdException) ErrorMessage() string {
 func (e *InvalidExternalIdException) ErrorCode() string             { return "InvalidExternalIdException" }
 func (e *InvalidExternalIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An invalid fileExistsBehavior option was specified to determine how AWS
-// CodeDeploy handles files or directories that already exist in a deployment
-// target location, but weren't part of the previous successful deployment. Valid
-// values include "DISALLOW," "OVERWRITE," and "RETAIN."
+// An invalid fileExistsBehavior option was specified to determine how CodeDeploy
+// handles files or directories that already exist in a deployment target location,
+// but weren't part of the previous successful deployment. Valid values include
+// "DISALLOW," "OVERWRITE," and "RETAIN."
 type InvalidFileExistsBehaviorException struct {
 	Message *string
 
@@ -1446,7 +1448,7 @@ func (e *InvalidIamUserArnException) ErrorMessage() string {
 func (e *InvalidIamUserArnException) ErrorCode() string             { return "InvalidIamUserArnException" }
 func (e *InvalidIamUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The IgnoreApplicationStopFailures value is invalid. For AWS Lambda deployments,
+// The IgnoreApplicationStopFailures value is invalid. For Lambda deployments,
 // false is expected. For EC2/On-premises deployments, true or false is expected.
 type InvalidIgnoreApplicationStopFailuresValueException struct {
 	Message *string
@@ -2019,8 +2021,8 @@ func (e *InvalidTriggerConfigException) ErrorMessage() string {
 func (e *InvalidTriggerConfigException) ErrorCode() string             { return "InvalidTriggerConfigException" }
 func (e *InvalidTriggerConfigException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda deployments,
-// false is expected. For EC2/On-premises deployments, true or false is expected.
+// The UpdateOutdatedInstancesOnly value is invalid. For Lambda deployments, false
+// is expected. For EC2/On-premises deployments, true or false is expected.
 type InvalidUpdateOutdatedInstancesOnlyValueException struct {
 	Message *string
 
@@ -2169,7 +2171,8 @@ func (e *ResourceValidationException) ErrorMessage() string {
 func (e *ResourceValidationException) ErrorCode() string             { return "ResourceValidationException" }
 func (e *ResourceValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The named revision does not exist with the IAM user or AWS account.
+// The named revision does not exist with the IAM user or Amazon Web Services
+// account.
 type RevisionDoesNotExistException struct {
 	Message *string
 

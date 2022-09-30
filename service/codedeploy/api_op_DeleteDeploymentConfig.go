@@ -30,8 +30,8 @@ func (c *Client) DeleteDeploymentConfig(ctx context.Context, params *DeleteDeplo
 // Represents the input of a DeleteDeploymentConfig operation.
 type DeleteDeploymentConfigInput struct {
 
-	// The name of a deployment configuration associated with the IAM user or AWS
-	// account.
+	// The name of a deployment configuration associated with the IAM user or Amazon
+	// Web Services account.
 	//
 	// This member is required.
 	DeploymentConfigName *string

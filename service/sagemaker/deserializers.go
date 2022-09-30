@@ -32755,6 +32755,481 @@ func awsAwsjson11_deserializeDocumentClarifyCheckStepMetadata(v **types.ClarifyC
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClarifyExplainerConfig(v **types.ClarifyExplainerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClarifyExplainerConfig
+	if *v == nil {
+		sv = &types.ClarifyExplainerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnableExplanations":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyEnableExplanations to be of type string, got %T instead", value)
+				}
+				sv.EnableExplanations = ptr.String(jtv)
+			}
+
+		case "InferenceConfig":
+			if err := awsAwsjson11_deserializeDocumentClarifyInferenceConfig(&sv.InferenceConfig, value); err != nil {
+				return err
+			}
+
+		case "ShapConfig":
+			if err := awsAwsjson11_deserializeDocumentClarifyShapConfig(&sv.ShapConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyFeatureHeaders(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClarifyHeader to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyFeatureTypes(v *[]types.ClarifyFeatureType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ClarifyFeatureType
+	if *v == nil {
+		cv = []types.ClarifyFeatureType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ClarifyFeatureType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClarifyFeatureType to be of type string, got %T instead", value)
+			}
+			col = types.ClarifyFeatureType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyInferenceConfig(v **types.ClarifyInferenceConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClarifyInferenceConfig
+	if *v == nil {
+		sv = &types.ClarifyInferenceConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContentTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyContentTemplate to be of type string, got %T instead", value)
+				}
+				sv.ContentTemplate = ptr.String(jtv)
+			}
+
+		case "FeatureHeaders":
+			if err := awsAwsjson11_deserializeDocumentClarifyFeatureHeaders(&sv.FeatureHeaders, value); err != nil {
+				return err
+			}
+
+		case "FeaturesAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyFeaturesAttribute to be of type string, got %T instead", value)
+				}
+				sv.FeaturesAttribute = ptr.String(jtv)
+			}
+
+		case "FeatureTypes":
+			if err := awsAwsjson11_deserializeDocumentClarifyFeatureTypes(&sv.FeatureTypes, value); err != nil {
+				return err
+			}
+
+		case "LabelAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyLabelAttribute to be of type string, got %T instead", value)
+				}
+				sv.LabelAttribute = ptr.String(jtv)
+			}
+
+		case "LabelHeaders":
+			if err := awsAwsjson11_deserializeDocumentClarifyLabelHeaders(&sv.LabelHeaders, value); err != nil {
+				return err
+			}
+
+		case "LabelIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClarifyLabelIndex to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LabelIndex = ptr.Int32(int32(i64))
+			}
+
+		case "MaxPayloadInMB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClarifyMaxPayloadInMB to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPayloadInMB = ptr.Int32(int32(i64))
+			}
+
+		case "MaxRecordCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClarifyMaxRecordCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRecordCount = ptr.Int32(int32(i64))
+			}
+
+		case "ProbabilityAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyProbabilityAttribute to be of type string, got %T instead", value)
+				}
+				sv.ProbabilityAttribute = ptr.String(jtv)
+			}
+
+		case "ProbabilityIndex":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClarifyProbabilityIndex to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ProbabilityIndex = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyLabelHeaders(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClarifyHeader to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyShapBaselineConfig(v **types.ClarifyShapBaselineConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClarifyShapBaselineConfig
+	if *v == nil {
+		sv = &types.ClarifyShapBaselineConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MimeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyMimeType to be of type string, got %T instead", value)
+				}
+				sv.MimeType = ptr.String(jtv)
+			}
+
+		case "ShapBaseline":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyShapBaseline to be of type string, got %T instead", value)
+				}
+				sv.ShapBaseline = ptr.String(jtv)
+			}
+
+		case "ShapBaselineUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.ShapBaselineUri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyShapConfig(v **types.ClarifyShapConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClarifyShapConfig
+	if *v == nil {
+		sv = &types.ClarifyShapConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NumberOfSamples":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClarifyShapNumberOfSamples to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfSamples = ptr.Int32(int32(i64))
+			}
+
+		case "Seed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClarifyShapSeed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Seed = ptr.Int32(int32(i64))
+			}
+
+		case "ShapBaselineConfig":
+			if err := awsAwsjson11_deserializeDocumentClarifyShapBaselineConfig(&sv.ShapBaselineConfig, value); err != nil {
+				return err
+			}
+
+		case "TextConfig":
+			if err := awsAwsjson11_deserializeDocumentClarifyTextConfig(&sv.TextConfig, value); err != nil {
+				return err
+			}
+
+		case "UseLogit":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ClarifyShapUseLogit to be of type *bool, got %T instead", value)
+				}
+				sv.UseLogit = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClarifyTextConfig(v **types.ClarifyTextConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClarifyTextConfig
+	if *v == nil {
+		sv = &types.ClarifyTextConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Granularity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyTextGranularity to be of type string, got %T instead", value)
+				}
+				sv.Granularity = types.ClarifyTextGranularity(jtv)
+			}
+
+		case "Language":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClarifyTextLanguage to be of type string, got %T instead", value)
+				}
+				sv.Language = types.ClarifyTextLanguage(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCodeRepositorySummary(v **types.CodeRepositorySummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38682,6 +39157,42 @@ func awsAwsjson11_deserializeDocumentExplainability(v **types.Explainability, va
 		switch key {
 		case "Report":
 			if err := awsAwsjson11_deserializeDocumentMetricsSource(&sv.Report, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExplainerConfig(v **types.ExplainerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExplainerConfig
+	if *v == nil {
+		sv = &types.ExplainerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClarifyExplainerConfig":
+			if err := awsAwsjson11_deserializeDocumentClarifyExplainerConfig(&sv.ClarifyExplainerConfig, value); err != nil {
 				return err
 			}
 
@@ -66282,6 +66793,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeEndpointConfigOutput(v **Describe
 				sv.EndpointConfigName = ptr.String(jtv)
 			}
 
+		case "ExplainerConfig":
+			if err := awsAwsjson11_deserializeDocumentExplainerConfig(&sv.ExplainerConfig, value); err != nil {
+				return err
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -66387,6 +66903,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeEndpointOutput(v **DescribeEndpoi
 					return fmt.Errorf("expected EndpointStatus to be of type string, got %T instead", value)
 				}
 				sv.EndpointStatus = types.EndpointStatus(jtv)
+			}
+
+		case "ExplainerConfig":
+			if err := awsAwsjson11_deserializeDocumentExplainerConfig(&sv.ExplainerConfig, value); err != nil {
+				return err
 			}
 
 		case "FailureReason":

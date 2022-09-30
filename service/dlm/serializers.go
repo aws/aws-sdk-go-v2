@@ -634,6 +634,34 @@ func awsRestjson1_serializeDocumentActionList(v []types.Action, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentArchiveRetainRule(v *types.ArchiveRetainRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RetentionArchiveTier != nil {
+		ok := object.Key("RetentionArchiveTier")
+		if err := awsRestjson1_serializeDocumentRetentionArchiveTier(v.RetentionArchiveTier, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentArchiveRule(v *types.ArchiveRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RetainRule != nil {
+		ok := object.Key("RetainRule")
+		if err := awsRestjson1_serializeDocumentArchiveRetainRule(v.RetainRule, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailabilityZoneList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1064,9 +1092,38 @@ func awsRestjson1_serializeDocumentRetainRule(v *types.RetainRule, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRetentionArchiveTier(v *types.RetentionArchiveTier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Count != 0 {
+		ok := object.Key("Count")
+		ok.Integer(v.Count)
+	}
+
+	if v.Interval != 0 {
+		ok := object.Key("Interval")
+		ok.Integer(v.Interval)
+	}
+
+	if len(v.IntervalUnit) > 0 {
+		ok := object.Key("IntervalUnit")
+		ok.String(string(v.IntervalUnit))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ArchiveRule != nil {
+		ok := object.Key("ArchiveRule")
+		if err := awsRestjson1_serializeDocumentArchiveRule(v.ArchiveRule, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CopyTags {
 		ok := object.Key("CopyTags")

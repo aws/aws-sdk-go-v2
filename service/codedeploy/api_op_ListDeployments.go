@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the deployments in a deployment group for an application registered with
-// the IAM user or AWS account.
+// the IAM user or Amazon Web Services account.
 func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInput, optFns ...func(*Options)) (*ListDeploymentsOutput, error) {
 	if params == nil {
 		params = &ListDeploymentsInput{}
@@ -32,9 +32,9 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 // Represents the input of a ListDeployments operation.
 type ListDeploymentsInput struct {
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
-	// account. If applicationName is specified, then deploymentGroupName must be
-	// specified. If it is not specified, then deploymentGroupName must not be
+	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
+	// Services account. If applicationName is specified, then deploymentGroupName must
+	// be specified. If it is not specified, then deploymentGroupName must not be
 	// specified.
 	ApplicationName *string
 

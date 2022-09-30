@@ -30,8 +30,8 @@ func (c *Client) DeleteDeploymentGroup(ctx context.Context, params *DeleteDeploy
 // Represents the input of a DeleteDeploymentGroup operation.
 type DeleteDeploymentGroupInput struct {
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
-	// account.
+	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string
@@ -48,9 +48,9 @@ type DeleteDeploymentGroupInput struct {
 type DeleteDeploymentGroupOutput struct {
 
 	// If the output contains no data, and the corresponding deployment group contained
-	// at least one Auto Scaling group, AWS CodeDeploy successfully removed all
+	// at least one Auto Scaling group, CodeDeploy successfully removed all
 	// corresponding Auto Scaling lifecycle event hooks from the Amazon EC2 instances
-	// in the Auto Scaling group. If the output contains data, AWS CodeDeploy could not
+	// in the Auto Scaling group. If the output contains data, CodeDeploy could not
 	// remove some Auto Scaling lifecycle event hooks from the Amazon EC2 instances in
 	// the Auto Scaling group.
 	HooksNotCleanedUp []types.AutoScalingGroup

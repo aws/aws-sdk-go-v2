@@ -30,8 +30,8 @@ func (c *Client) GetDeploymentGroup(ctx context.Context, params *GetDeploymentGr
 // Represents the input of a GetDeploymentGroup operation.
 type GetDeploymentGroupInput struct {
 
-	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
-	// account.
+	// The name of an CodeDeploy application associated with the IAM user or Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string

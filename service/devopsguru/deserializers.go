@@ -6945,6 +6945,42 @@ func awsRestjson1_deserializeDocumentInsightHealth(v **types.InsightHealth, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInsightSeverities(v *[]types.InsightSeverity, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InsightSeverity
+	if *v == nil {
+		cv = []types.InsightSeverity{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InsightSeverity
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InsightSeverity to be of type string, got %T instead", value)
+			}
+			col = types.InsightSeverity(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInsightTimeRange(v **types.InsightTimeRange, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7469,6 +7505,11 @@ func awsRestjson1_deserializeDocumentNotificationChannelConfig(v **types.Notific
 
 	for key, value := range shape {
 		switch key {
+		case "Filters":
+			if err := awsRestjson1_deserializeDocumentNotificationFilterConfig(&sv.Filters, value); err != nil {
+				return err
+			}
+
 		case "Sns":
 			if err := awsRestjson1_deserializeDocumentSnsChannelConfig(&sv.Sns, value); err != nil {
 				return err
@@ -7480,6 +7521,83 @@ func awsRestjson1_deserializeDocumentNotificationChannelConfig(v **types.Notific
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNotificationFilterConfig(v **types.NotificationFilterConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NotificationFilterConfig
+	if *v == nil {
+		sv = &types.NotificationFilterConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MessageTypes":
+			if err := awsRestjson1_deserializeDocumentNotificationMessageTypes(&sv.MessageTypes, value); err != nil {
+				return err
+			}
+
+		case "Severities":
+			if err := awsRestjson1_deserializeDocumentInsightSeverities(&sv.Severities, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNotificationMessageTypes(v *[]types.NotificationMessageType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NotificationMessageType
+	if *v == nil {
+		cv = []types.NotificationMessageType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NotificationMessageType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NotificationMessageType to be of type string, got %T instead", value)
+			}
+			col = types.NotificationMessageType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

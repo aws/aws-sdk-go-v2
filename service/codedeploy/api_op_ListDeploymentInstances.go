@@ -14,8 +14,8 @@ import (
 
 // The newer BatchGetDeploymentTargets should be used instead because it works with
 // all compute types. ListDeploymentInstances throws an exception if it is used
-// with a compute platform other than EC2/On-premises or AWS Lambda. Lists the
-// instance for a deployment associated with the IAM user or AWS account.
+// with a compute platform other than EC2/On-premises or Lambda. Lists the instance
+// for a deployment associated with the IAM user or Amazon Web Services account.
 //
 // Deprecated: This operation is deprecated, use ListDeploymentTargets instead.
 func (c *Client) ListDeploymentInstances(ctx context.Context, params *ListDeploymentInstancesInput, optFns ...func(*Options)) (*ListDeploymentInstancesOutput, error) {

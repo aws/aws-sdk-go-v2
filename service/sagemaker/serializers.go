@@ -15507,6 +15507,208 @@ func awsAwsjson11_serializeDocumentCidrs(v []string, value smithyjson.Value) err
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClarifyExplainerConfig(v *types.ClarifyExplainerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableExplanations != nil {
+		ok := object.Key("EnableExplanations")
+		ok.String(*v.EnableExplanations)
+	}
+
+	if v.InferenceConfig != nil {
+		ok := object.Key("InferenceConfig")
+		if err := awsAwsjson11_serializeDocumentClarifyInferenceConfig(v.InferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ShapConfig != nil {
+		ok := object.Key("ShapConfig")
+		if err := awsAwsjson11_serializeDocumentClarifyShapConfig(v.ShapConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyFeatureHeaders(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyFeatureTypes(v []types.ClarifyFeatureType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyInferenceConfig(v *types.ClarifyInferenceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContentTemplate != nil {
+		ok := object.Key("ContentTemplate")
+		ok.String(*v.ContentTemplate)
+	}
+
+	if v.FeatureHeaders != nil {
+		ok := object.Key("FeatureHeaders")
+		if err := awsAwsjson11_serializeDocumentClarifyFeatureHeaders(v.FeatureHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FeaturesAttribute != nil {
+		ok := object.Key("FeaturesAttribute")
+		ok.String(*v.FeaturesAttribute)
+	}
+
+	if v.FeatureTypes != nil {
+		ok := object.Key("FeatureTypes")
+		if err := awsAwsjson11_serializeDocumentClarifyFeatureTypes(v.FeatureTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelAttribute != nil {
+		ok := object.Key("LabelAttribute")
+		ok.String(*v.LabelAttribute)
+	}
+
+	if v.LabelHeaders != nil {
+		ok := object.Key("LabelHeaders")
+		if err := awsAwsjson11_serializeDocumentClarifyLabelHeaders(v.LabelHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelIndex != nil {
+		ok := object.Key("LabelIndex")
+		ok.Integer(*v.LabelIndex)
+	}
+
+	if v.MaxPayloadInMB != nil {
+		ok := object.Key("MaxPayloadInMB")
+		ok.Integer(*v.MaxPayloadInMB)
+	}
+
+	if v.MaxRecordCount != nil {
+		ok := object.Key("MaxRecordCount")
+		ok.Integer(*v.MaxRecordCount)
+	}
+
+	if v.ProbabilityAttribute != nil {
+		ok := object.Key("ProbabilityAttribute")
+		ok.String(*v.ProbabilityAttribute)
+	}
+
+	if v.ProbabilityIndex != nil {
+		ok := object.Key("ProbabilityIndex")
+		ok.Integer(*v.ProbabilityIndex)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyLabelHeaders(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyShapBaselineConfig(v *types.ClarifyShapBaselineConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MimeType != nil {
+		ok := object.Key("MimeType")
+		ok.String(*v.MimeType)
+	}
+
+	if v.ShapBaseline != nil {
+		ok := object.Key("ShapBaseline")
+		ok.String(*v.ShapBaseline)
+	}
+
+	if v.ShapBaselineUri != nil {
+		ok := object.Key("ShapBaselineUri")
+		ok.String(*v.ShapBaselineUri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyShapConfig(v *types.ClarifyShapConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NumberOfSamples != nil {
+		ok := object.Key("NumberOfSamples")
+		ok.Integer(*v.NumberOfSamples)
+	}
+
+	if v.Seed != nil {
+		ok := object.Key("Seed")
+		ok.Integer(*v.Seed)
+	}
+
+	if v.ShapBaselineConfig != nil {
+		ok := object.Key("ShapBaselineConfig")
+		if err := awsAwsjson11_serializeDocumentClarifyShapBaselineConfig(v.ShapBaselineConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TextConfig != nil {
+		ok := object.Key("TextConfig")
+		if err := awsAwsjson11_serializeDocumentClarifyTextConfig(v.TextConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UseLogit != nil {
+		ok := object.Key("UseLogit")
+		ok.Boolean(*v.UseLogit)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClarifyTextConfig(v *types.ClarifyTextConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Granularity) > 0 {
+		ok := object.Key("Granularity")
+		ok.String(string(v.Granularity))
+	}
+
+	if len(v.Language) > 0 {
+		ok := object.Key("Language")
+		ok.String(string(v.Language))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCognitoConfig(v *types.CognitoConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16770,6 +16972,20 @@ func awsAwsjson11_serializeDocumentExplainability(v *types.Explainability, value
 	if v.Report != nil {
 		ok := object.Key("Report")
 		if err := awsAwsjson11_serializeDocumentMetricsSource(v.Report, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExplainerConfig(v *types.ExplainerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClarifyExplainerConfig != nil {
+		ok := object.Key("ClarifyExplainerConfig")
+		if err := awsAwsjson11_serializeDocumentClarifyExplainerConfig(v.ClarifyExplainerConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -22900,6 +23116,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointConfigInput(v *CreateEndpoint
 	if v.EndpointConfigName != nil {
 		ok := object.Key("EndpointConfigName")
 		ok.String(*v.EndpointConfigName)
+	}
+
+	if v.ExplainerConfig != nil {
+		ok := object.Key("ExplainerConfig")
+		if err := awsAwsjson11_serializeDocumentExplainerConfig(v.ExplainerConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KmsKeyId != nil {

@@ -72,6 +72,9 @@ type CreateEndpointConfigInput struct {
 	// Configuration to control how SageMaker captures inference data.
 	DataCaptureConfig *types.DataCaptureConfig
 
+	// A member of CreateEndpointConfig that enables explainers.
+	ExplainerConfig *types.ExplainerConfig
+
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
 	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
 	// compute instance that hosts the endpoint. The KmsKeyId can be any of the

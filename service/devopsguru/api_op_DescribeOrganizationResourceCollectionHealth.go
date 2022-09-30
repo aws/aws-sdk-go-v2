@@ -97,11 +97,13 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	// Together
 	// these are known as key-value pairs. The string used for a key in a tag that you
 	// use to define your resource coverage must begin with the prefix Devops-guru-.
-	// The tag key might be Devops-guru-deployment-application or
-	// Devops-guru-rds-application. While keys are case-sensitive, the case of key
-	// characters don't matter to DevOps Guru. For example, DevOps Guru works with a
-	// key named devops-guru-rds and a key named DevOps-Guru-RDS. Possible key/value
-	// pairs in your application might be Devops-Guru-production-application/RDS or
+	// The tag key might be DevOps-Guru-deployment-application or
+	// devops-guru-rds-application. When you create a key, the case of characters in
+	// the key can be whatever you choose. After you create a key, it is
+	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
+	// and a key named DevOps-Guru-RDS, and these act as two different keys. Possible
+	// key/value pairs in your application might be
+	// Devops-Guru-production-application/RDS or
 	// Devops-Guru-production-application/containers.
 	Tags []types.TagHealth
 

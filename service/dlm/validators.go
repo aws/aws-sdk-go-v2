@@ -217,6 +217,40 @@ func validateActionList(v []types.Action) error {
 	}
 }
 
+func validateArchiveRetainRule(v *types.ArchiveRetainRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArchiveRetainRule"}
+	if v.RetentionArchiveTier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionArchiveTier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateArchiveRule(v *types.ArchiveRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArchiveRule"}
+	if v.RetainRule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetainRule"))
+	} else if v.RetainRule != nil {
+		if err := validateArchiveRetainRule(v.RetainRule); err != nil {
+			invalidParams.AddNested("RetainRule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCrossRegionCopyAction(v *types.CrossRegionCopyAction) error {
 	if v == nil {
 		return nil
@@ -458,6 +492,11 @@ func validateSchedule(v *types.Schedule) error {
 	if v.ShareRules != nil {
 		if err := validateShareRules(v.ShareRules); err != nil {
 			invalidParams.AddNested("ShareRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ArchiveRule != nil {
+		if err := validateArchiveRule(v.ArchiveRule); err != nil {
+			invalidParams.AddNested("ArchiveRule", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

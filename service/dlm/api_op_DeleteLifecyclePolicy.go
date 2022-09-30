@@ -11,7 +11,9 @@ import (
 )
 
 // Deletes the specified lifecycle policy and halts the automated operations that
-// the policy specified.
+// the policy specified. For more information about deleting a policy, see Delete
+// lifecycle policies
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/view-modify-delete.html#delete).
 func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecyclePolicyInput, optFns ...func(*Options)) (*DeleteLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteLifecyclePolicyInput{}

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the deployment configurations with the IAM user or AWS account.
+// Lists the deployment configurations with the IAM user or Amazon Web Services
+// account.
 func (c *Client) ListDeploymentConfigs(ctx context.Context, params *ListDeploymentConfigsInput, optFns ...func(*Options)) (*ListDeploymentConfigsOutput, error) {
 	if params == nil {
 		params = &ListDeploymentConfigsInput{}
