@@ -1,8 +1,0 @@
-{
-    "id": "8f30204b-67e6-4893-a9f3-4cc15f94fc94",
-    "type": "feature",
-    "description": "A new parameter called EnableExplanations is added to InvokeEndpoint API to enable on-demand SageMaker Clarify online explainability requests.",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

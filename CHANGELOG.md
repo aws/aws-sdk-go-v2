@@ -1,3 +1,22 @@
+# Release (2022-09-30)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.15.0](service/codedeploy/CHANGELOG.md#v1150-2022-09-30)
+  * **Feature**: This release allows you to override the alarm configurations when creating a deployment.
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.19.0](service/devopsguru/CHANGELOG.md#v1190-2022-09-30)
+  * **Feature**: This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.13.0](service/dlm/CHANGELOG.md#v1130-2022-09-30)
+  * **Feature**: This release adds support for archival of single-volume snapshots created by Amazon Data Lifecycle Manager policies
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.46.0](service/sagemaker/CHANGELOG.md#v1460-2022-09-30)
+  * **Feature**: A new parameter called ExplainerConfig is added to CreateEndpointConfig API to enable SageMaker Clarify online explainability feature.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.16.0](service/sagemakerruntime/CHANGELOG.md#v1160-2022-09-30)
+  * **Feature**: A new parameter called EnableExplanations is added to InvokeEndpoint API to enable on-demand SageMaker Clarify online explainability requests.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.13.6](service/ssooidc/CHANGELOG.md#v1136-2022-09-30)
+  * **Documentation**: Documentation updates for the IAM Identity Center OIDC CLI Reference.
+
 # Release (2022-09-29)
 
 ## Module Highlights

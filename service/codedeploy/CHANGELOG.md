@@ -1,3 +1,7 @@
+# v1.15.0 (2022-09-30)
+
+* **Feature**: This release allows you to override the alarm configurations when creating a deployment.
+
 # v1.14.18 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "62da77ce-02a8-4aa9-9233-30ebc65b3d9a",
-    "type": "feature",
-    "description": "This release adds support for archival of single-volume snapshots created by Amazon Data Lifecycle Manager policies",
-    "modules": [
-        "service/dlm"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "ed0d82a3-8a4e-44b9-a755-cd6445bcbdb3",
-    "type": "documentation",
-    "description": "Documentation updates for the IAM Identity Center OIDC CLI Reference.",
-    "modules": [
-        "service/ssooidc"
-    ]
-}

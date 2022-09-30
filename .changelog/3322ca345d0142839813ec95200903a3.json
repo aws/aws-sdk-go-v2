@@ -1,8 +1,0 @@
-{
-    "id": "3322ca34-5d01-4283-9813-ec95200903a3",
-    "type": "feature",
-    "description": "This release allows you to override the alarm configurations when creating a deployment.",
-    "modules": [
-        "service/codedeploy"
-    ]
-}

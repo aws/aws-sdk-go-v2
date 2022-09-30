@@ -1,8 +1,0 @@
-{
-    "id": "0e94e007-aa03-42f1-b509-a921f3b1a223",
-    "type": "feature",
-    "description": "This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes",
-    "modules": [
-        "service/devopsguru"
-    ]
-}

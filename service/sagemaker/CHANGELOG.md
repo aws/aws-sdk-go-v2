@@ -1,3 +1,7 @@
+# v1.46.0 (2022-09-30)
+
+* **Feature**: A new parameter called ExplainerConfig is added to CreateEndpointConfig API to enable SageMaker Clarify online explainability feature.
+
 # v1.45.0 (2022-09-29)
 
 * **Feature**: SageMaker Training Managed Warm Pools let you retain provisioned infrastructure to reduce latency for repetitive training workloads.

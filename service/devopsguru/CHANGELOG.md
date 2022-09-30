@@ -1,3 +1,7 @@
+# v1.19.0 (2022-09-30)
+
+* **Feature**: This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes
+
 # v1.18.10 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

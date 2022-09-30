@@ -1,8 +1,0 @@
-{
-    "id": "1d3da048-77dc-4616-b52d-023e2aa2b7df",
-    "type": "feature",
-    "description": "A new parameter called ExplainerConfig is added to CreateEndpointConfig API to enable SageMaker Clarify online explainability feature.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
