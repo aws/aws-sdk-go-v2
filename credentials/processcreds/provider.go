@@ -86,21 +86,13 @@ type DefaultNewCommandBuilder struct {
 // Args. The command is also initialized current process environment variables,
 // stderr, and stdin pipes.
 func (b DefaultNewCommandBuilder) NewCommand(ctx context.Context) (*exec.Cmd, error) {
-	var cmdArgs []string
-	if runtime.GOOS == "windows" {
-		cmdArgs = []string{"cmd.exe", "/C"}
-	} else {
-		cmdArgs = []string{"sh", "-c"}
-	}
-
 	if len(b.Args) == 0 {
 		return nil, &ProviderError{
 			Err: fmt.Errorf("failed to prepare command: command must not be empty"),
 		}
 	}
 
-	cmdArgs = append(cmdArgs, b.Args...)
-	cmd := exec.CommandContext(ctx, cmdArgs[0], cmdArgs[1:]...)
+	cmd := exec.CommandContext(ctx, b.Args[0], b.Args[1:]...)
 	cmd.Env = os.Environ()
 
 	cmd.Stderr = os.Stderr // display stderr on console for MFA
