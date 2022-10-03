@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.snowball#AWSIESnowballJobManagementService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Snowball",
-                    "arnNamespace": "snowball",
-                    "cloudFormationName": "Snowball",
-                    "cloudTrailEventSource": "snowball.amazonaws.com",
-                    "endpointPrefix": "snowball"
-                },
-                "aws.auth#sigv4": {
-                    "name": "snowball"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>The Amazon Web Services Snow Family provides a petabyte-scale data transport solution that uses\n      secure devices to transfer large amounts of data between your on-premises data centers and\n      Amazon Simple Storage Service (Amazon S3). The Snow Family commands described here provide access to the same\n      functionality that is available in the Amazon Web Services Snow Family Management Console, which enables you to create\n      and manage jobs for a Snow Family device. To transfer data locally with a Snow Family device,\n      you'll need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or OpsHub for Snow Family. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>",
-                "smithy.api#title": "Amazon Import/Export Snowball"
-            },
             "version": "2016-06-30",
             "operations": [
                 {
@@ -123,7 +108,22 @@
                 {
                     "target": "com.amazonaws.snowball#UpdateLongTermPricing"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Snowball",
+                    "arnNamespace": "snowball",
+                    "cloudFormationName": "Snowball",
+                    "cloudTrailEventSource": "snowball.amazonaws.com",
+                    "endpointPrefix": "snowball"
+                },
+                "aws.auth#sigv4": {
+                    "name": "snowball"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>The Amazon Web Services Snow Family provides a petabyte-scale data transport solution that uses\n      secure devices to transfer large amounts of data between your on-premises data centers and\n      Amazon Simple Storage Service (Amazon S3). The Snow Family commands described here provide access to the same\n      functionality that is available in the Amazon Web Services Snow Family Management Console, which enables you to create\n      and manage jobs for a Snow Family device. To transfer data locally with a Snow Family device,\n      you'll need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or OpsHub for Snow Family. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>",
+                "smithy.api#title": "Amazon Import/Export Snowball"
+            }
         },
         "com.amazonaws.snowball#Address": {
             "type": "structure",
@@ -209,6 +209,7 @@
                 "IsRestricted": {
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If the address you are creating is a primary address, then set this option to\n      true. This field is not supported in most regions.</p>"
                     }
                 }
@@ -244,7 +245,10 @@
             }
         },
         "com.amazonaws.snowball#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.snowball#CancelCluster": {
             "type": "operation",
@@ -483,30 +487,38 @@
             }
         },
         "com.amazonaws.snowball#ClusterState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AwaitingQuorum",
-                        "name": "AWAITING_QUORUM"
-                    },
-                    {
-                        "value": "Pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "InUse",
-                        "name": "IN_USE"
-                    },
-                    {
-                        "value": "Complete",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "Cancelled",
-                        "name": "CANCELLED"
+            "type": "enum",
+            "members": {
+                "AWAITING_QUORUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwaitingQuorum"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InUse"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cancelled"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#CompatibleImage": {
@@ -674,7 +686,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snow Family Devices to use for this cluster. </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for this cluster. </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -748,7 +760,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n\n         <p></p>\n\n         <p class=\"title\">\n            <b>Snow Family Devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Snow Family device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n\n\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your Amazon Web Services account must have the right trust policies and permissions in\n      place to create a job for a Snow device. If you're creating a job for a node in a cluster, you\n      only need to provide the <code>clusterId</code> value; the other job attributes are inherited\n      from the cluster. </p>\n         <note>\n            <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p>\n            <p>The device capacity is optional.</p>\n            <p>Availability of device types differ by Amazon Web Services Region. For more information\n        about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4\">Amazon Web Services Regional Services</a>.</p>\n         </note>\n\n         <p></p>\n\n         <p class=\"title\">\n            <b>Snow Family devices and their capacities.</b>\n         </p>\n         <ul>\n            <li>\n               <p>Snow Family device type: <b>SNC1_SSD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T14</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n\n               <p></p>\n            </li>\n            <li>\n               <p>Snow Family device type: <b>SNC1_HDD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T8</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowcone </p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_S</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T98</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized for data transfer only </p>\n                  </li>\n               </ul>\n\n\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_CG</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized with GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE_C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T42</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>EDGE</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T100</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>V3_5C</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T32</p>\n                  </li>\n                  <li>\n                     <p>Description: Snowball Edge Compute Optimized without GPU</p>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T50</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region\n              </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n            <li>\n               <p>Device type: <b>STANDARD</b>\n               </p>\n               <ul>\n                  <li>\n                     <p>Capacity: T80</p>\n                  </li>\n                  <li>\n                     <p>Description: Original Snowball device</p>\n                     <note>\n                        <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p>\n                     </note>\n                  </li>\n               </ul>\n               <p></p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.snowball#CreateJobRequest": {
@@ -823,7 +835,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snow Family Devices to use for this job.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of Amazon Web Services Snow device to use for this job. Currently, the only\n      supported device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n        Options</a> in the Snowball Edge Developer Guide.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for this job.\n      </p>\n         <note>\n            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the\n          <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of Amazon Web Services Snow device to use for this job. Currently, the only\n      supported device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n        Options</a> in the Snowball Edge Developer Guide.</p>\n    \n         <p>For more information, see\n      \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i> or\n      \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow\n      Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
                     }
                 },
                 "ForwardingAddressId": {
@@ -899,13 +911,13 @@
                 "IsLongTermPricingAutoRenew": {
                     "target": "com.amazonaws.snowball#JavaBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the current long-term pricing type for the device should be\n      renewed.</p>"
+                        "smithy.api#documentation": "<p>snowballty</p>\n         <p>Specifies whether the current long-term pricing type for the device should be\n      renewed.</p>"
                     }
                 },
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snow Family Devices to use for the long-term pricing job.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family devices to use for the long-term pricing job.</p>"
                     }
                 }
             }
@@ -985,24 +997,28 @@
                 "BytesTransferred": {
                     "target": "com.amazonaws.snowball#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of bytes transferred between a Snow device and Amazon S3.</p>"
                     }
                 },
                 "ObjectsTransferred": {
                     "target": "com.amazonaws.snowball#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects transferred between a Snow device and Amazon S3.</p>"
                     }
                 },
                 "TotalBytes": {
                     "target": "com.amazonaws.snowball#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total bytes of data for a transfer between a Snow device and Amazon S3. This value\n      is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
                     }
                 },
                 "TotalObjects": {
                     "target": "com.amazonaws.snowball#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects for a transfer between a Snow device and Amazon S3. This\n      value is set to 0 (zero) until all the keys that will be transferred have been\n      listed.</p>"
                     }
                 }
@@ -1270,18 +1286,20 @@
             }
         },
         "com.amazonaws.snowball#DeviceServiceName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NFS_ON_DEVICE_SERVICE",
-                        "name": "NFS_ON_DEVICE_SERVICE"
-                    },
-                    {
-                        "value": "S3_ON_DEVICE_SERVICE",
-                        "name": "S3_ON_DEVICE_SERVICE"
+            "type": "enum",
+            "members": {
+                "NFS_ON_DEVICE_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS_ON_DEVICE_SERVICE"
                     }
-                ]
+                },
+                "S3_ON_DEVICE_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_ON_DEVICE_SERVICE"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#Ec2AmiResource": {
@@ -1370,7 +1388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time.</p>\n\n\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n\n\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
+                "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. This is the only valid status for calling this API as the\n      manifest and <code>UnlockCode</code> code value are used for securing your device and should\n      only be used when you have the device.  The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snow device through the\n      Snowball client when the client is started for the first time. </p>\n\n\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>\n\n\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 360\n      days after the job is created.</p>"
             }
         },
         "com.amazonaws.snowball#GetJobManifestRequest": {
@@ -1413,7 +1431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time.</p>\n\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>"
+                "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 360 days after the associated job\n      has been created.</p>\n\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snow device through the Snowball client when the client is\n      started for the first time. The only valid status for calling this API is\n        <code>WithCustomer</code> as the manifest and <code>Unlock</code> code values are used for\n      securing your device and should only be used when you have the device.</p>\n\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snow device\n      associated with that job.</p>"
             }
         },
         "com.amazonaws.snowball#GetJobUnlockCodeRequest": {
@@ -1530,10 +1548,7 @@
             }
         },
         "com.amazonaws.snowball#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.snowball#InvalidAddressException": {
             "type": "structure",
@@ -1602,10 +1617,7 @@
             }
         },
         "com.amazonaws.snowball#JavaBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.snowball#JobId": {
             "type": "string",
@@ -1635,6 +1647,7 @@
                 "IsMaster": {
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates that this job is a main job. A main job represents a successful\n      request to create an export job. Main jobs aren't associated with any Snowballs. Instead, each\n      main job will have at least one job part, and each job part is associated with a Snowball. It\n      might take some time before the job parts associated with a particular main job are listed,\n      because they are created after the main job is created.</p>"
                     }
                 },
@@ -1869,62 +1882,86 @@
             }
         },
         "com.amazonaws.snowball#JobState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "New",
-                        "name": "NEW"
-                    },
-                    {
-                        "value": "PreparingAppliance",
-                        "name": "PREPARING_APPLIANCE"
-                    },
-                    {
-                        "value": "PreparingShipment",
-                        "name": "PREPARING_SHIPMENT"
-                    },
-                    {
-                        "value": "InTransitToCustomer",
-                        "name": "IN_TRANSIT_TO_CUSTOMER"
-                    },
-                    {
-                        "value": "WithCustomer",
-                        "name": "WITH_CUSTOMER"
-                    },
-                    {
-                        "value": "InTransitToAWS",
-                        "name": "IN_TRANSIT_TO_AWS"
-                    },
-                    {
-                        "value": "WithAWSSortingFacility",
-                        "name": "WITH_AWS_SORTING_FACILITY"
-                    },
-                    {
-                        "value": "WithAWS",
-                        "name": "WITH_AWS"
-                    },
-                    {
-                        "value": "InProgress",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "Complete",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "Cancelled",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "Listing",
-                        "name": "LISTING"
-                    },
-                    {
-                        "value": "Pending",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "NEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "New"
                     }
-                ]
+                },
+                "PREPARING_APPLIANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PreparingAppliance"
+                    }
+                },
+                "PREPARING_SHIPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PreparingShipment"
+                    }
+                },
+                "IN_TRANSIT_TO_CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InTransitToCustomer"
+                    }
+                },
+                "WITH_CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WithCustomer"
+                    }
+                },
+                "IN_TRANSIT_TO_AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InTransitToAWS"
+                    }
+                },
+                "WITH_AWS_SORTING_FACILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WithAWSSortingFacility"
+                    }
+                },
+                "WITH_AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WithAWS"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cancelled"
+                    }
+                },
+                "LISTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Listing"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#JobStateList": {
@@ -1934,22 +1971,26 @@
             }
         },
         "com.amazonaws.snowball#JobType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IMPORT",
-                        "name": "IMPORT"
-                    },
-                    {
-                        "value": "EXPORT",
-                        "name": "EXPORT"
-                    },
-                    {
-                        "value": "LOCAL_USE",
-                        "name": "LOCAL_USE"
+            "type": "enum",
+            "members": {
+                "IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT"
                     }
-                ]
+                },
+                "EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPORT"
+                    }
+                },
+                "LOCAL_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL_USE"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#KMSRequestFailedException": {
@@ -2037,7 +2078,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of <code>JobListEntry</code> objects of the specified length. Each\n        <code>JobListEntry</code> object is for a job in the specified cluster and contains a job's\n      state, a job's ID, and other information.</p>"
+                "smithy.api#documentation": "<p>Returns an array of <code>JobListEntry</code> objects of the specified length. Each\n        <code>JobListEntry</code> object is for a job in the specified cluster and contains a job's\n      state, a job's ID, and other information.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "JobListEntries",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.snowball#ListClusterJobsRequest": {
@@ -2095,7 +2142,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of <code>ClusterListEntry</code> objects of the specified length. Each\n        <code>ClusterListEntry</code> object contains a cluster's state, a cluster's ID, and other\n      important status information.</p>"
+                "smithy.api#documentation": "<p>Returns an array of <code>ClusterListEntry</code> objects of the specified length. Each\n        <code>ClusterListEntry</code> object contains a cluster's state, a cluster's ID, and other\n      important status information.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ClusterListEntries",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.snowball#ListClustersRequest": {
@@ -2149,7 +2202,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs)\n      that are owned by your Amazon Web Services accountthat would be supported for use on a Snow\n      device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM,\n      Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the\n        Amazon Web Services Marketplace.</p>"
+                "smithy.api#documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs)\n      that are owned by your Amazon Web Services accountthat would be supported for use on a Snow\n      device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM,\n      Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the\n        Amazon Web Services Marketplace.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CompatibleImages",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.snowball#ListCompatibleImagesRequest": {
@@ -2246,7 +2305,6 @@
         "com.amazonaws.snowball#ListLimit": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -2270,7 +2328,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all long-term pricing types.</p>"
+                "smithy.api#documentation": "<p>Lists all long-term pricing types.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "LongTermPricingEntries",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.snowball#ListLongTermPricingRequest": {
@@ -2308,7 +2372,10 @@
             }
         },
         "com.amazonaws.snowball#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.snowball#LongTermPricingAssociatedJobIdList": {
             "type": "list",
@@ -2386,7 +2453,7 @@
                 "SnowballType": {
                     "target": "com.amazonaws.snowball#SnowballType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Snow Family Devices associated with this long-term pricing job.</p>"
+                        "smithy.api#documentation": "<p>The type of Snow Family devices associated with this long-term pricing job.</p>"
                     }
                 },
                 "JobIds": {
@@ -2401,18 +2468,20 @@
             }
         },
         "com.amazonaws.snowball#LongTermPricingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OneYear",
-                        "name": "ONE_YEAR"
-                    },
-                    {
-                        "value": "ThreeYear",
-                        "name": "THREE_YEAR"
+            "type": "enum",
+            "members": {
+                "ONE_YEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OneYear"
                     }
-                ]
+                },
+                "THREE_YEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThreeYear"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#NFSOnDeviceServiceConfiguration": {
@@ -2421,6 +2490,7 @@
                 "StorageLimit": {
                     "target": "com.amazonaws.snowball#StorageLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum NFS storage for one Snow Family device.</p>"
                     }
                 },
@@ -2453,6 +2523,7 @@
                 "NotifyAll": {
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Any change in job state will trigger a notification for this job.</p>"
                     }
                 }
@@ -2482,18 +2553,20 @@
             }
         },
         "com.amazonaws.snowball#RemoteManagement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INSTALLED_ONLY",
-                        "name": "INSTALLED_ONLY"
-                    },
-                    {
-                        "value": "INSTALLED_AUTOSTART",
-                        "name": "INSTALLED_AUTOSTART"
+            "type": "enum",
+            "members": {
+                "INSTALLED_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTALLED_ONLY"
                     }
-                ]
+                },
+                "INSTALLED_AUTOSTART": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTALLED_AUTOSTART"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#ResourceARN": {
@@ -2581,18 +2654,20 @@
             }
         },
         "com.amazonaws.snowball#ShipmentState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RECEIVED",
-                        "name": "RECEIVED"
-                    },
-                    {
-                        "value": "RETURNED",
-                        "name": "RETURNED"
+            "type": "enum",
+            "members": {
+                "RECEIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECEIVED"
                     }
-                ]
+                },
+                "RETURNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETURNED"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#ShippingDetails": {
@@ -2622,123 +2697,173 @@
             }
         },
         "com.amazonaws.snowball#ShippingLabelStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InProgress",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "TimedOut",
-                        "name": "TIMED_OUT"
-                    },
-                    {
-                        "value": "Succeeded",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
                     }
-                ]
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimedOut"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Succeeded"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#ShippingOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SECOND_DAY",
-                        "name": "SECOND_DAY"
-                    },
-                    {
-                        "value": "NEXT_DAY",
-                        "name": "NEXT_DAY"
-                    },
-                    {
-                        "value": "EXPRESS",
-                        "name": "EXPRESS"
-                    },
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
+            "type": "enum",
+            "members": {
+                "SECOND_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECOND_DAY"
                     }
-                ]
+                },
+                "NEXT_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEXT_DAY"
+                    }
+                },
+                "EXPRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPRESS"
+                    }
+                },
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#SnowballCapacity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "T50",
-                        "name": "T50"
-                    },
-                    {
-                        "value": "T80",
-                        "name": "T80"
-                    },
-                    {
-                        "value": "T100",
-                        "name": "T100"
-                    },
-                    {
-                        "value": "T42",
-                        "name": "T42"
-                    },
-                    {
-                        "value": "T98",
-                        "name": "T98"
-                    },
-                    {
-                        "value": "T8",
-                        "name": "T8"
-                    },
-                    {
-                        "value": "T14",
-                        "name": "T14"
-                    },
-                    {
-                        "value": "NoPreference",
-                        "name": "NO_PREFERENCE"
+            "type": "enum",
+            "members": {
+                "T50": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T50"
                     }
-                ]
+                },
+                "T80": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T80"
+                    }
+                },
+                "T100": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T100"
+                    }
+                },
+                "T42": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T42"
+                    }
+                },
+                "T98": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T98"
+                    }
+                },
+                "T8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T8"
+                    }
+                },
+                "T14": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T14"
+                    }
+                },
+                "NO_PREFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoPreference"
+                    }
+                },
+                "T32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "T32"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#SnowballType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "EDGE",
-                        "name": "EDGE"
-                    },
-                    {
-                        "value": "EDGE_C",
-                        "name": "EDGE_C"
-                    },
-                    {
-                        "value": "EDGE_CG",
-                        "name": "EDGE_CG"
-                    },
-                    {
-                        "value": "EDGE_S",
-                        "name": "EDGE_S"
-                    },
-                    {
-                        "value": "SNC1_HDD",
-                        "name": "SNC1_HDD"
-                    },
-                    {
-                        "value": "SNC1_SSD",
-                        "name": "SNC1_SSD"
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
                     }
-                ]
+                },
+                "EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE"
+                    }
+                },
+                "EDGE_C": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE_C"
+                    }
+                },
+                "EDGE_CG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE_CG"
+                    }
+                },
+                "EDGE_S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE_S"
+                    }
+                },
+                "SNC1_HDD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNC1_HDD"
+                    }
+                },
+                "SNC1_SSD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNC1_SSD"
+                    }
+                },
+                "V3_5C": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "V3_5C"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#SnowconeDeviceConfiguration": {
@@ -2768,20 +2893,21 @@
         "com.amazonaws.snowball#StorageLimit": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
             }
         },
         "com.amazonaws.snowball#StorageUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TB",
-                        "name": "TB"
+            "type": "enum",
+            "members": {
+                "TB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TB"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.snowball#String": {
@@ -2800,6 +2926,7 @@
                 "StorageLimit": {
                     "target": "com.amazonaws.snowball#StorageLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of virtual tapes to store on one Snow Family device. Due to physical\n      resource limitations, this value must be set to 80 for Snowball Edge.</p>"
                     }
                 },
@@ -2855,22 +2982,26 @@
             "type": "timestamp"
         },
         "com.amazonaws.snowball#TransferOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IMPORT",
-                        "name": "IMPORT"
-                    },
-                    {
-                        "value": "EXPORT",
-                        "name": "EXPORT"
-                    },
-                    {
-                        "value": "LOCAL_USE",
-                        "name": "LOCAL_USE"
+            "type": "enum",
+            "members": {
+                "IMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT"
                     }
-                ]
+                },
+                "EXPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPORT"
+                    }
+                },
+                "LOCAL_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCAL_USE"
+                    }
+                }
             }
         },
         "com.amazonaws.snowball#UnsupportedAddressException": {
@@ -3174,6 +3305,7 @@
                 "IsWifiEnabled": {
                     "target": "com.amazonaws.snowball#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables the Wi-Fi adapter on an Snowcone device.</p>"
                     }
                 }

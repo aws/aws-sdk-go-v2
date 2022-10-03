@@ -1,29 +1,8 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.accessanalyzer#AccessAnalyzer": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AccessAnalyzer",
-                    "arnNamespace": "access-analyzer",
-                    "cloudFormationName": "AccessAnalyzer",
-                    "cloudTrailEventSource": "access-analyzer.amazonaws.com",
-                    "endpointPrefix": "access-analyzer"
-                },
-                "aws.auth#sigv4": {
-                    "name": "access-analyzer"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to\n         identify any policies that grant access to an external principal. It does this by using\n         logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An\n         external principal can be another Amazon Web Services account, a root user, an IAM user or role, a\n         federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to\n         preview and validate public and cross-account access to your resources before deploying\n         permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can\n         call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>",
-                "smithy.api#paginated": {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults"
-                },
-                "smithy.api#title": "Access Analyzer"
-            },
             "version": "2019-11-01",
             "operations": [
                 {
@@ -88,7 +67,26 @@
                 {
                     "target": "com.amazonaws.accessanalyzer#Analyzer"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AccessAnalyzer",
+                    "arnNamespace": "access-analyzer",
+                    "cloudTrailEventSource": "access-analyzer.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "access-analyzer"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to\n         identify any policies that grant access to an external principal. It does this by using\n         logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An\n         external principal can be another Amazon Web Services account, a root user, an IAM user or role, a\n         federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to\n         preview and validate public and cross-account access to your resources before deploying\n         permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can\n         call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#title": "Access Analyzer"
+            }
         },
         "com.amazonaws.accessanalyzer#AccessDeniedException": {
             "type": "structure",
@@ -578,10 +576,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "analyzer/{analyzerName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "analyzer/{analyzerName}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -693,6 +688,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#ApplyArchiveRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -713,8 +711,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retroactively applies the archive rule to existing findings that meet the archive rule\n         criteria.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/archive-rule",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -776,10 +774,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "analyzer/{analyzerName}/archive-rule/{ruleName}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "analyzer/{analyzerName}/archive-rule/{ruleName}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -851,8 +846,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Cancels the requested policy generation.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/policy/generation/{jobId}",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -1068,8 +1063,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an access preview that allows you to preview IAM Access Analyzer findings for your\n         resource before deploying resource permissions.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/access-preview",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -1144,8 +1139,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an analyzer for your account.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/analyzer",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -1211,6 +1206,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#CreateArchiveRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -1237,8 +1235,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive\n         new findings that meet the criteria you define when you create the rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/analyzer/{analyzerName}/archive-rule",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -1318,6 +1316,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#DeleteAnalyzerRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -1338,8 +1339,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified analyzer. When you delete an analyzer, IAM Access Analyzer is disabled\n         for the account or organization in the current or specific Region. All findings that were\n         generated by the analyzer are deleted. You cannot undo this action.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/analyzer/{analyzerName}",
+                    "method": "DELETE",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -1374,6 +1375,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#DeleteArchiveRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -1394,8 +1398,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the specified archive rule.</p>",
                 "smithy.api#http": {
-                    "method": "DELETE",
                     "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+                    "method": "DELETE",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -1867,8 +1871,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about an access preview for the specified analyzer.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/access-preview/{accessPreviewId}",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -1935,8 +1939,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about a resource that was analyzed.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/analyzed-resource",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -2008,8 +2012,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about the specified analyzer.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/analyzer/{analyzerName}",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -2074,8 +2078,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about an archive rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -2147,8 +2151,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves information about the specified finding.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/finding/{id}",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -2217,8 +2221,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the policy that was generated using <code>StartPolicyGeneration</code>.\n      </p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/policy/generation/{jobId}",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#readonly": {}
@@ -2423,20 +2427,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "AUTHORIZATION_ERROR",
-                        "name": "AUTHORIZATION_ERROR"
+                        "name": "AUTHORIZATION_ERROR",
+                        "value": "AUTHORIZATION_ERROR"
                     },
                     {
-                        "value": "RESOURCE_NOT_FOUND_ERROR",
-                        "name": "RESOURCE_NOT_FOUND_ERROR"
+                        "name": "RESOURCE_NOT_FOUND_ERROR",
+                        "value": "RESOURCE_NOT_FOUND_ERROR"
                     },
                     {
-                        "value": "SERVICE_QUOTA_EXCEEDED_ERROR",
-                        "name": "SERVICE_QUOTA_EXCEEDED_ERROR"
+                        "name": "SERVICE_QUOTA_EXCEEDED_ERROR",
+                        "value": "SERVICE_QUOTA_EXCEEDED_ERROR"
                     },
                     {
-                        "value": "SERVICE_ERROR",
-                        "name": "SERVICE_ERROR"
+                        "name": "SERVICE_ERROR",
+                        "value": "SERVICE_ERROR"
                     }
                 ]
             }
@@ -2449,20 +2453,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "CANCELED",
-                        "name": "CANCELED"
+                        "name": "CANCELED",
+                        "value": "CANCELED"
                     }
                 ]
             }
@@ -2684,14 +2688,17 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of access preview findings generated by the specified access\n         preview.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/access-preview/{accessPreviewId}",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "items": "findings"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#ListAccessPreviewFindingsRequest": {
@@ -2778,8 +2785,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of access previews for the specified analyzer.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/access-preview",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -2861,14 +2868,17 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of resources of the specified type that have been analyzed by the\n         specified analyzer..</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/analyzed-resource",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "items": "analyzedResources"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#ListAnalyzedResourcesRequest": {
@@ -2950,8 +2960,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of analyzers.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/analyzer",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -3035,8 +3045,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of archive rules created for the specified analyzer.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/analyzer/{analyzerName}/archive-rule",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -3124,14 +3134,17 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>\n         <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/finding",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "items": "findings"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#ListFindingsRequest": {
@@ -3219,8 +3232,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all of the policy generations requested in the last seven days.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
                     "uri": "/policy/generation",
+                    "method": "GET",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -3305,8 +3318,7 @@
                 "smithy.api#documentation": "<p>Retrieves a list of tags applied to the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -3760,7 +3772,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an Amazon S3 access point or multi-region access point for the bucket.\n         You can propose up to 10 access points or multi-region access points per bucket. If the\n         proposed Amazon S3 access point configuration is for an existing bucket, the access preview uses\n         the proposed access point configuration in place of the existing access points. To propose\n         an access point without a policy, you can provide an empty string as the access point\n         policy. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access points</a>. For more information about access point policy limits,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html\">Access points\n            restrictions and limitations</a>.</p>"
+                "smithy.api#documentation": "<p>The configuration for an Amazon S3 access point or multi-region access point for the bucket.\n         You can propose up to 10 access points or multi-region access points per bucket. If the\n         proposed Amazon S3 access point configuration is for an existing bucket, the access preview uses\n         the proposed access point configuration in place of the existing access points. To propose\n         an access point without a policy, you can provide an empty string as the access point\n         policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access points</a>.\n         For more information about access point policy limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html\">Access points\n            restrictions and limitations</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#S3AccessPointConfigurationsMap": {
@@ -4009,8 +4021,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Starts the policy generation request.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/policy/generation",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -4058,6 +4070,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#StartResourceScanRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -4078,8 +4093,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Immediately starts a scan of the policies applied to the specified resource.</p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/resource/scan",
+                    "method": "POST",
                     "code": 200
                 }
             }
@@ -4178,8 +4193,7 @@
                 "smithy.api#documentation": "<p>Adds a tag to the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4368,8 +4382,7 @@
                 "smithy.api#documentation": "<p>Removes a tag from the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
-                    "code": 200
+                    "uri": "/tags/{resourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -4410,6 +4423,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#UpdateArchiveRuleRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -4430,8 +4446,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the criteria and values for the specified archive rule.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -4480,6 +4496,9 @@
             "input": {
                 "target": "com.amazonaws.accessanalyzer#UpdateFindingsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
@@ -4500,8 +4519,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the status for the specified findings.</p>",
                 "smithy.api#http": {
-                    "method": "PUT",
                     "uri": "/finding",
+                    "method": "PUT",
                     "code": 200
                 },
                 "smithy.api#idempotent": {}
@@ -4573,14 +4592,17 @@
             "traits": {
                 "smithy.api#documentation": "<p>Requests the validation of a policy and returns a list of findings. The findings help\n         you identify issues and provide actionable recommendations to resolve the issue and enable\n         you to author functional policies that meet security best practices. </p>",
                 "smithy.api#http": {
-                    "method": "POST",
                     "uri": "/policy/validation",
+                    "method": "POST",
                     "code": 200
                 },
                 "smithy.api#paginated": {
                     "items": "findings"
                 },
-                "smithy.api#readonly": {}
+                "smithy.api#readonly": {},
+                "smithy.api#suppress": [
+                    "HttpMethodSemantics"
+                ]
             }
         },
         "com.amazonaws.accessanalyzer#ValidatePolicyFinding": {
@@ -4719,6 +4741,10 @@
                     {
                         "value": "AWS::S3ObjectLambda::AccessPoint",
                         "name": "S3_OBJECT_LAMBDA_ACCESS_POINT"
+                    },
+                    {
+                        "value": "AWS::IAM::AssumeRolePolicyDocument",
+                        "name": "ROLE_TRUST"
                     }
                 ]
             }
