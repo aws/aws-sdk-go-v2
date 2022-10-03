@@ -59007,6 +59007,11 @@ func awsEc2query_serializeOpDocumentRegisterImageInput(v *RegisterImageInput, va
 		objectKey.String(*v.ImageLocation)
 	}
 
+	if len(v.ImdsSupport) > 0 {
+		objectKey := object.Key("ImdsSupport")
+		objectKey.String(string(v.ImdsSupport))
+	}
+
 	if v.KernelId != nil {
 		objectKey := object.Key("KernelId")
 		objectKey.String(*v.KernelId)

@@ -97,7 +97,7 @@ type CreateClusterInput struct {
 	// This member is required.
 	ShippingOption types.ShippingOption
 
-	// The type of Snow Family Devices to use for this cluster. For cluster jobs,
+	// The type of Snow Family devices to use for this cluster. For cluster jobs,
 	// Amazon Web Services Snow Family currently supports only the EDGE device type.
 	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"

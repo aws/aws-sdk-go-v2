@@ -493,7 +493,7 @@ type LongTermPricingListEntry struct {
 	// A new device that replaces a device that is ordered with long-term pricing.
 	ReplacementJob *string
 
-	// The type of Snow Family Devices associated with this long-term pricing job.
+	// The type of Snow Family devices associated with this long-term pricing job.
 	SnowballType SnowballType
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "aca5ee28-a439-4551-971a-694aca35d7f4",
+    "type": "feature",
+    "description": "Adds support for V3_5C. This is a refreshed AWS Snowball Edge Compute Optimized device type with 28TB SSD, 104 vCPU and 416GB memory (customer usable).",
+    "modules": [
+        "service/snowball"
+    ]
+}

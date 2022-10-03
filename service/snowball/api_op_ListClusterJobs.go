@@ -4,6 +4,7 @@ package snowball
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
@@ -126,6 +127,96 @@ func (c *Client) addOperationListClusterJobsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
+}
+
+// ListClusterJobsAPIClient is a client that implements the ListClusterJobs
+// operation.
+type ListClusterJobsAPIClient interface {
+	ListClusterJobs(context.Context, *ListClusterJobsInput, ...func(*Options)) (*ListClusterJobsOutput, error)
+}
+
+var _ ListClusterJobsAPIClient = (*Client)(nil)
+
+// ListClusterJobsPaginatorOptions is the paginator options for ListClusterJobs
+type ListClusterJobsPaginatorOptions struct {
+	// The number of JobListEntry objects to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListClusterJobsPaginator is a paginator for ListClusterJobs
+type ListClusterJobsPaginator struct {
+	options   ListClusterJobsPaginatorOptions
+	client    ListClusterJobsAPIClient
+	params    *ListClusterJobsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListClusterJobsPaginator returns a new ListClusterJobsPaginator
+func NewListClusterJobsPaginator(client ListClusterJobsAPIClient, params *ListClusterJobsInput, optFns ...func(*ListClusterJobsPaginatorOptions)) *ListClusterJobsPaginator {
+	if params == nil {
+		params = &ListClusterJobsInput{}
+	}
+
+	options := ListClusterJobsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListClusterJobsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListClusterJobsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListClusterJobs page.
+func (p *ListClusterJobsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListClusterJobsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListClusterJobs(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListClusterJobs(region string) *awsmiddleware.RegisterServiceMetadata {

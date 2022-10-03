@@ -2252,6 +2252,7 @@ const (
 	ImageAttributeNameTpmSupport         ImageAttributeName = "tpmSupport"
 	ImageAttributeNameUefiData           ImageAttributeName = "uefiData"
 	ImageAttributeNameLastLaunchedTime   ImageAttributeName = "lastLaunchedTime"
+	ImageAttributeNameImdsSupport        ImageAttributeName = "imdsSupport"
 )
 
 // Values returns all known values for ImageAttributeName. Note that this can be
@@ -2270,6 +2271,7 @@ func (ImageAttributeName) Values() []ImageAttributeName {
 		"tpmSupport",
 		"uefiData",
 		"lastLaunchedTime",
+		"imdsSupport",
 	}
 }
 
@@ -2318,6 +2320,22 @@ func (ImageTypeValues) Values() []ImageTypeValues {
 		"machine",
 		"kernel",
 		"ramdisk",
+	}
+}
+
+type ImdsSupportValues string
+
+// Enum values for ImdsSupportValues
+const (
+	ImdsSupportValuesV20 ImdsSupportValues = "v2.0"
+)
+
+// Values returns all known values for ImdsSupportValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImdsSupportValues) Values() []ImdsSupportValues {
+	return []ImdsSupportValues{
+		"v2.0",
 	}
 }
 

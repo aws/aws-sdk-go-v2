@@ -214,6 +214,7 @@ const (
 	SnowballCapacityT8           SnowballCapacity = "T8"
 	SnowballCapacityT14          SnowballCapacity = "T14"
 	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
+	SnowballCapacityT32          SnowballCapacity = "T32"
 )
 
 // Values returns all known values for SnowballCapacity. Note that this can be
@@ -229,6 +230,7 @@ func (SnowballCapacity) Values() []SnowballCapacity {
 		"T8",
 		"T14",
 		"NoPreference",
+		"T32",
 	}
 }
 
@@ -243,6 +245,7 @@ const (
 	SnowballTypeEdgeS    SnowballType = "EDGE_S"
 	SnowballTypeSnc1Hdd  SnowballType = "SNC1_HDD"
 	SnowballTypeSnc1Ssd  SnowballType = "SNC1_SSD"
+	SnowballTypeV35c     SnowballType = "V3_5C"
 )
 
 // Values returns all known values for SnowballType. Note that this can be expanded
@@ -257,6 +260,7 @@ func (SnowballType) Values() []SnowballType {
 		"EDGE_S",
 		"SNC1_HDD",
 		"SNC1_SSD",
+		"V3_5C",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "d3a9e95b-8d73-4599-9870-5f8c057ba248",
+    "type": "feature",
+    "description": "Adding an imdsSupport attribute to EC2 AMIs",
+    "modules": [
+        "service/ec2"
+    ]
+}

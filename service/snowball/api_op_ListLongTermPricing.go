@@ -4,6 +4,7 @@ package snowball
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
@@ -113,6 +114,97 @@ func (c *Client) addOperationListLongTermPricingMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// ListLongTermPricingAPIClient is a client that implements the ListLongTermPricing
+// operation.
+type ListLongTermPricingAPIClient interface {
+	ListLongTermPricing(context.Context, *ListLongTermPricingInput, ...func(*Options)) (*ListLongTermPricingOutput, error)
+}
+
+var _ ListLongTermPricingAPIClient = (*Client)(nil)
+
+// ListLongTermPricingPaginatorOptions is the paginator options for
+// ListLongTermPricing
+type ListLongTermPricingPaginatorOptions struct {
+	// The maximum number of ListLongTermPricing objects to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLongTermPricingPaginator is a paginator for ListLongTermPricing
+type ListLongTermPricingPaginator struct {
+	options   ListLongTermPricingPaginatorOptions
+	client    ListLongTermPricingAPIClient
+	params    *ListLongTermPricingInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLongTermPricingPaginator returns a new ListLongTermPricingPaginator
+func NewListLongTermPricingPaginator(client ListLongTermPricingAPIClient, params *ListLongTermPricingInput, optFns ...func(*ListLongTermPricingPaginatorOptions)) *ListLongTermPricingPaginator {
+	if params == nil {
+		params = &ListLongTermPricingInput{}
+	}
+
+	options := ListLongTermPricingPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListLongTermPricingPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLongTermPricingPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListLongTermPricing page.
+func (p *ListLongTermPricingPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLongTermPricingOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListLongTermPricing(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLongTermPricing(region string) *awsmiddleware.RegisterServiceMetadata {

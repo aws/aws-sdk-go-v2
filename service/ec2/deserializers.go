@@ -70559,6 +70559,19 @@ func awsEc2query_deserializeDocumentImage(v **types.Image, decoder smithyxml.Nod
 				sv.ImageType = types.ImageTypeValues(xtv)
 			}
 
+		case strings.EqualFold("imdsSupport", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImdsSupport = types.ImdsSupportValues(xtv)
+			}
+
 		case strings.EqualFold("kernelId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -133031,6 +133044,12 @@ func awsEc2query_deserializeOpDocumentDescribeImageAttributeOutput(v **DescribeI
 			{
 				xtv := string(val)
 				sv.ImageId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("imdsSupport", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentAttributeValue(&sv.ImdsSupport, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("kernel", t.Name.Local):

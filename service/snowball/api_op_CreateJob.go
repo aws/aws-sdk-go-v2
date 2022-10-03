@@ -21,7 +21,7 @@ import (
 // more information about Region availability, see Amazon Web Services Regional
 // Services
 // (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4).
-// Snow Family Devices and their capacities.
+// Snow Family devices and their capacities.
 //
 // * Snow Family device type:
 // SNC1_SSD
@@ -67,21 +67,29 @@ import (
 // * Description: Snowball Edge Storage Optimized with EC2
 // Compute
 //
+// * Device type: V3_5C
+//
+// * Capacity: T32
+//
+// * Description: Snowball Edge
+// Compute Optimized without GPU
+//
 // * Device type: STANDARD
 //
 // * Capacity: T50
 //
-// * Description: Original
-// Snowball device This device is only available in the Ningxia, Beijing, and
-// Singapore Amazon Web Services Region
+// *
+// Description: Original Snowball device This device is only available in the
+// Ningxia, Beijing, and Singapore Amazon Web Services Region
 //
-// * Device type: STANDARD
+// * Device type:
+// STANDARD
 //
-// * Capacity:
-// T80
+// * Capacity: T80
 //
-// * Description: Original Snowball device This device is only available in
-// the Ningxia, Beijing, and Singapore Amazon Web Services Region.
+// * Description: Original Snowball device This device
+// is only available in the Ningxia, Beijing, and Singapore Amazon Web Services
+// Region.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -194,7 +202,7 @@ type CreateJobInput struct {
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference types.SnowballCapacity
 
-	// The type of Snow Family Devices to use for this job. For cluster jobs, Amazon
+	// The type of Snow Family devices to use for this job. For cluster jobs, Amazon
 	// Web Services Snow Family currently supports only the EDGE device type. The type
 	// of Amazon Web Services Snow device to use for this job. Currently, the only
 	// supported device type for cluster jobs is EDGE. For more information, see

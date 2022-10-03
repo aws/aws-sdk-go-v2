@@ -1081,7 +1081,7 @@ type Position struct {
 // in place of the existing access points. To propose an access point without a
 // policy, you can provide an empty string as the access point policy. For more
 // information, see Creating access points
-// (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
 // For more information about access point policy limits, see Access points
 // restrictions and limitations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html).

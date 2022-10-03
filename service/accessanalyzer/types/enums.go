@@ -421,6 +421,7 @@ const (
 	ValidatePolicyResourceTypeS3AccessPoint             ValidatePolicyResourceType = "AWS::S3::AccessPoint"
 	ValidatePolicyResourceTypeS3MultiRegionAccessPoint  ValidatePolicyResourceType = "AWS::S3::MultiRegionAccessPoint"
 	ValidatePolicyResourceTypeS3ObjectLambdaAccessPoint ValidatePolicyResourceType = "AWS::S3ObjectLambda::AccessPoint"
+	ValidatePolicyResourceTypeRoleTrust                 ValidatePolicyResourceType = "AWS::IAM::AssumeRolePolicyDocument"
 )
 
 // Values returns all known values for ValidatePolicyResourceType. Note that this
@@ -432,6 +433,7 @@ func (ValidatePolicyResourceType) Values() []ValidatePolicyResourceType {
 		"AWS::S3::AccessPoint",
 		"AWS::S3::MultiRegionAccessPoint",
 		"AWS::S3ObjectLambda::AccessPoint",
+		"AWS::IAM::AssumeRolePolicyDocument",
 	}
 }
 

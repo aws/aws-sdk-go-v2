@@ -4,6 +4,7 @@ package snowball
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
@@ -119,6 +120,98 @@ func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// ListCompatibleImagesAPIClient is a client that implements the
+// ListCompatibleImages operation.
+type ListCompatibleImagesAPIClient interface {
+	ListCompatibleImages(context.Context, *ListCompatibleImagesInput, ...func(*Options)) (*ListCompatibleImagesOutput, error)
+}
+
+var _ ListCompatibleImagesAPIClient = (*Client)(nil)
+
+// ListCompatibleImagesPaginatorOptions is the paginator options for
+// ListCompatibleImages
+type ListCompatibleImagesPaginatorOptions struct {
+	// The maximum number of results for the list of compatible images. Currently, a
+	// Snowball Edge device can store 10 AMIs.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListCompatibleImagesPaginator is a paginator for ListCompatibleImages
+type ListCompatibleImagesPaginator struct {
+	options   ListCompatibleImagesPaginatorOptions
+	client    ListCompatibleImagesAPIClient
+	params    *ListCompatibleImagesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListCompatibleImagesPaginator returns a new ListCompatibleImagesPaginator
+func NewListCompatibleImagesPaginator(client ListCompatibleImagesAPIClient, params *ListCompatibleImagesInput, optFns ...func(*ListCompatibleImagesPaginatorOptions)) *ListCompatibleImagesPaginator {
+	if params == nil {
+		params = &ListCompatibleImagesInput{}
+	}
+
+	options := ListCompatibleImagesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListCompatibleImagesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListCompatibleImagesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListCompatibleImages page.
+func (p *ListCompatibleImagesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListCompatibleImagesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListCompatibleImages(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListCompatibleImages(region string) *awsmiddleware.RegisterServiceMetadata {

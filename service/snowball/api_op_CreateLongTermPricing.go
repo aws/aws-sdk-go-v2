@@ -37,11 +37,11 @@ type CreateLongTermPricingInput struct {
 	// This member is required.
 	LongTermPricingType types.LongTermPricingType
 
-	// Specifies whether the current long-term pricing type for the device should be
-	// renewed.
+	// snowballty Specifies whether the current long-term pricing type for the device
+	// should be renewed.
 	IsLongTermPricingAutoRenew *bool
 
-	// The type of Snow Family Devices to use for the long-term pricing job.
+	// The type of Snow Family devices to use for the long-term pricing job.
 	SnowballType types.SnowballType
 
 	noSmithyDocumentSerde
