@@ -1,3 +1,13 @@
+# Release (2022-10-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.16.0](service/accessanalyzer/CHANGELOG.md#v1160-2022-10-03)
+  * **Feature**: AWS IAM Access Analyzer policy validation introduces new checks for role trust policies. As customers author a policy, IAM Access Analyzer policy validation evaluates the policy for any issues to make it easier for customers to author secure policies.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.62.0](service/ec2/CHANGELOG.md#v1620-2022-10-03)
+  * **Feature**: Adding an imdsSupport attribute to EC2 AMIs
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.16.0](service/snowball/CHANGELOG.md#v1160-2022-10-03)
+  * **Feature**: Adds support for V3_5C. This is a refreshed AWS Snowball Edge Compute Optimized device type with 28TB SSD, 104 vCPU and 416GB memory (customer usable).
+
 # Release (2022-09-30)
 
 ## General Highlights

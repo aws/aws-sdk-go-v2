@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.61.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.62.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.18
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.22
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.15
@@ -65,7 +65,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.20.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.17
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.18
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.19
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.11
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.16.2
@@ -74,7 +74,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.14.1
 	github.com/aws/aws-sdk-go-v2/service/shield v1.17.9
 	github.com/aws/aws-sdk-go-v2/service/sms v1.12.18
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.15.18
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.10
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.30.0

@@ -1,3 +1,7 @@
+# v1.16.0 (2022-10-03)
+
+* **Feature**: AWS IAM Access Analyzer policy validation introduces new checks for role trust policies. As customers author a policy, IAM Access Analyzer policy validation evaluates the policy for any issues to make it easier for customers to author secure policies.
+
 # v1.15.18 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

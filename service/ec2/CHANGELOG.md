@@ -1,3 +1,7 @@
+# v1.62.0 (2022-10-03)
+
+* **Feature**: Adding an imdsSupport attribute to EC2 AMIs
+
 # v1.61.0 (2022-09-29)
 
 * **Feature**: u-3tb1 instances are powered by Intel Xeon Platinum 8176M (Skylake) processors and are purpose-built to run large in-memory databases.

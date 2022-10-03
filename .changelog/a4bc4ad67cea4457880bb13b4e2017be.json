@@ -1,8 +1,0 @@
-{
-    "id": "a4bc4ad6-7cea-4457-880b-b13b4e2017be",
-    "type": "feature",
-    "description": "AWS IAM Access Analyzer policy validation introduces new checks for role trust policies. As customers author a policy, IAM Access Analyzer policy validation evaluates the policy for any issues to make it easier for customers to author secure policies.",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

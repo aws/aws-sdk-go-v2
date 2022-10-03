@@ -1,3 +1,7 @@
+# v1.16.0 (2022-10-03)
+
+* **Feature**: Adds support for V3_5C. This is a refreshed AWS Snowball Edge Compute Optimized device type with 28TB SSD, 104 vCPU and 416GB memory (customer usable).
+
 # v1.15.18 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
