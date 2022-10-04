@@ -36,7 +36,7 @@ func (c *Client) TestAvailabilityConfiguration(ctx context.Context, params *Test
 
 type TestAvailabilityConfigurationInput struct {
 
-	// The Amazon WorkMail organization where the availability provider will be tested.
+	// The WorkMail organization where the availability provider will be tested.
 	//
 	// This member is required.
 	OrganizationId *string

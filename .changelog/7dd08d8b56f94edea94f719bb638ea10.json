@@ -1,0 +1,8 @@
+{
+    "id": "7dd08d8b-56f9-4ede-a94f-719bb638ea10",
+    "type": "feature",
+    "description": "Added EnableNetworkAddressUsageMetrics flag for ModifyVpcAttribute, DescribeVpcAttribute APIs.",
+    "modules": [
+        "service/ec2"
+    ]
+}

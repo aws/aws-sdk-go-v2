@@ -12,7 +12,9 @@ import (
 )
 
 // Gets the effects of an organization's access control rules as they apply to a
-// specified IPv4 address, access protocol action, or user ID.
+// specified IPv4 address, access protocol action, and user ID or impersonation
+// role ID. You must provide either the user ID or impersonation role ID.
+// Impersonation role ID can only be used with Action EWS.
 func (c *Client) GetAccessControlEffect(ctx context.Context, params *GetAccessControlEffectInput, optFns ...func(*Options)) (*GetAccessControlEffectOutput, error) {
 	if params == nil {
 		params = &GetAccessControlEffectInput{}
@@ -46,9 +48,10 @@ type GetAccessControlEffectInput struct {
 	// This member is required.
 	OrganizationId *string
 
+	// The impersonation role ID.
+	ImpersonationRoleId *string
+
 	// The user ID.
-	//
-	// This member is required.
 	UserId *string
 
 	noSmithyDocumentSerde

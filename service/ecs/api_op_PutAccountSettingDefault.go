@@ -38,7 +38,12 @@ type PutAccountSettingDefaultInput struct {
 	// the ARN and resource ID for your Amazon ECS container instances is affected. If
 	// awsvpcTrunking is specified, the ENI limit for your Amazon ECS container
 	// instances is affected. If containerInsights is specified, the default setting
-	// for CloudWatch Container Insights for your clusters is affected.
+	// for CloudWatch Container Insights for your clusters is affected. Fargate is
+	// transitioning from task count-based quotas to vCPU-based quotas. You can set the
+	// name to fargateVCPULimit to opt in or opt out of the vCPU-based quotas. For
+	// information about the opt in timeline, see Fargate vCPU-based quotas timeline
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline)
+	// in the Amazon ECS Developer Guide.
 	//
 	// This member is required.
 	Name types.SettingName

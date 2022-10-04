@@ -53,8 +53,7 @@ type DescribeOrganizationOutput struct {
 	// The default mail domain associated with the organization.
 	DefaultMailDomain *string
 
-	// The identifier for the directory associated with an Amazon WorkMail
-	// organization.
+	// The identifier for the directory associated with an WorkMail organization.
 	DirectoryId *string
 
 	// The type of directory associated with the WorkMail organization.

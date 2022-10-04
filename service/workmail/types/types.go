@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// A rule that controls access to an Amazon WorkMail organization.
+// A rule that controls access to an WorkMail organization.
 type AccessControlRule struct {
 
 	// Access protocol actions to include in the rule. Valid values include ActiveSync,
@@ -26,6 +26,9 @@ type AccessControlRule struct {
 	// The rule effect.
 	Effect AccessControlRuleEffect
 
+	// Impersonation role IDs to include in the rule.
+	ImpersonationRoleIds []string
+
 	// IPv4 CIDR ranges to include in the rule.
 	IpRanges []string
 
@@ -35,6 +38,9 @@ type AccessControlRule struct {
 	// Access protocol actions to exclude from the rule. Valid values include
 	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
 	NotActions []string
+
+	// Impersonation role IDs to exclude from the rule.
+	NotImpersonationRoleIds []string
 
 	// IPv4 CIDR ranges to exclude from the rule.
 	NotIpRanges []string
@@ -61,7 +67,7 @@ type AvailabilityConfiguration struct {
 	DomainName *string
 
 	// If ProviderType is EWS, then this field contains
-	// RedactedEwsAvailabilityProvider. Otherwise, it is not requried.
+	// RedactedEwsAvailabilityProvider. Otherwise, it is not required.
 	EwsProvider *RedactedEwsAvailabilityProvider
 
 	// If ProviderType is LAMBDA then this field contains LambdaAvailabilityProvider.
@@ -123,11 +129,11 @@ type DnsRecord struct {
 	noSmithyDocumentSerde
 }
 
-// The domain to associate with an Amazon WorkMail organization. When you configure
-// a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are
+// The domain to associate with an WorkMail organization. When you configure a
+// domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are
 // added to the organization when you create it. For more information, see Adding a
 // domain (https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html)
-// in the Amazon WorkMail Administrator Guide.
+// in the WorkMail Administrator Guide.
 type Domain struct {
 
 	// The fully qualified domain name.
@@ -182,16 +188,16 @@ type FolderConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The representation of an Amazon WorkMail group.
+// The representation of an WorkMail group.
 type Group struct {
 
-	// The date indicating when the group was disabled from Amazon WorkMail use.
+	// The date indicating when the group was disabled from WorkMail use.
 	DisabledDate *time.Time
 
 	// The email of the group.
 	Email *string
 
-	// The date indicating when the group was enabled for Amazon WorkMail use.
+	// The date indicating when the group was enabled for WorkMail use.
 	EnabledDate *time.Time
 
 	// The identifier of the group.
@@ -202,6 +208,68 @@ type Group struct {
 
 	// The state of the group, which can be ENABLED, DISABLED, or DELETED.
 	State EntityState
+
+	noSmithyDocumentSerde
+}
+
+// The impersonation rule that matched the input.
+type ImpersonationMatchedRule struct {
+
+	// The ID of the rule that matched the input
+	ImpersonationRuleId *string
+
+	// The name of the rule that matched the input.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// An impersonation role for the given WorkMail organization.
+type ImpersonationRole struct {
+
+	// The date when the impersonation role was created.
+	DateCreated *time.Time
+
+	// The date when the impersonation role was last modified.
+	DateModified *time.Time
+
+	// The identifier of the impersonation role.
+	ImpersonationRoleId *string
+
+	// The impersonation role name.
+	Name *string
+
+	// The impersonation role type.
+	Type ImpersonationRoleType
+
+	noSmithyDocumentSerde
+}
+
+// The rules for the given impersonation role.
+type ImpersonationRule struct {
+
+	// The effect of the rule when it matches the input. Allowed effect values are
+	// ALLOW or DENY.
+	//
+	// This member is required.
+	Effect AccessEffect
+
+	// The identifier of the rule.
+	//
+	// This member is required.
+	ImpersonationRuleId *string
+
+	// The rule description.
+	Description *string
+
+	// The rule name.
+	Name *string
+
+	// A list of user IDs that don't match the rule.
+	NotTargetUsers []string
+
+	// A list of user IDs that match the rule.
+	TargetUsers []string
 
 	noSmithyDocumentSerde
 }
@@ -268,10 +336,10 @@ type MailDomainSummary struct {
 // The representation of a user or group.
 type Member struct {
 
-	// The date indicating when the member was disabled from Amazon WorkMail use.
+	// The date indicating when the member was disabled from WorkMail use.
 	DisabledDate *time.Time
 
-	// The date indicating when the member was enabled for Amazon WorkMail use.
+	// The date indicating when the member was enabled for WorkMail use.
 	EnabledDate *time.Time
 
 	// The identifier of the member.
@@ -325,7 +393,7 @@ type MobileDeviceAccessOverride struct {
 	noSmithyDocumentSerde
 }
 
-// A rule that controls access to mobile devices for an Amazon WorkMail group.
+// A rule that controls access to mobile devices for an WorkMail group.
 type MobileDeviceAccessRule struct {
 
 	// The date and time at which an access rule was created.
@@ -442,13 +510,13 @@ type RedactedEwsAvailabilityProvider struct {
 // The representation of a resource.
 type Resource struct {
 
-	// The date indicating when the resource was disabled from Amazon WorkMail use.
+	// The date indicating when the resource was disabled from WorkMail use.
 	DisabledDate *time.Time
 
 	// The email of the resource.
 	Email *string
 
-	// The date indicating when the resource was enabled for Amazon WorkMail use.
+	// The date indicating when the resource was enabled for WorkMail use.
 	EnabledDate *time.Time
 
 	// The identifier of the resource.
@@ -482,10 +550,10 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The representation of an Amazon WorkMail user.
+// The representation of an WorkMail user.
 type User struct {
 
-	// The date indicating when the user was disabled from Amazon WorkMail use.
+	// The date indicating when the user was disabled from WorkMail use.
 	DisabledDate *time.Time
 
 	// The display name of the user.
@@ -494,7 +562,7 @@ type User struct {
 	// The email of the user.
 	Email *string
 
-	// The date indicating when the user was enabled for Amazon WorkMail use.
+	// The date indicating when the user was enabled for WorkMail use.
 	EnabledDate *time.Time
 
 	// The identifier of the user.

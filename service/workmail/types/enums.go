@@ -20,6 +20,24 @@ func (AccessControlRuleEffect) Values() []AccessControlRuleEffect {
 	}
 }
 
+type AccessEffect string
+
+// Enum values for AccessEffect
+const (
+	AccessEffectAllow AccessEffect = "ALLOW"
+	AccessEffectDeny  AccessEffect = "DENY"
+)
+
+// Values returns all known values for AccessEffect. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AccessEffect) Values() []AccessEffect {
+	return []AccessEffect{
+		"ALLOW",
+		"DENY",
+	}
+}
+
 type AvailabilityProviderType string
 
 // Enum values for AvailabilityProviderType
@@ -99,6 +117,24 @@ func (FolderName) Values() []FolderName {
 		"SENT_ITEMS",
 		"DRAFTS",
 		"JUNK_EMAIL",
+	}
+}
+
+type ImpersonationRoleType string
+
+// Enum values for ImpersonationRoleType
+const (
+	ImpersonationRoleTypeFullAccess ImpersonationRoleType = "FULL_ACCESS"
+	ImpersonationRoleTypeReadOnly   ImpersonationRoleType = "READ_ONLY"
+)
+
+// Values returns all known values for ImpersonationRoleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImpersonationRoleType) Values() []ImpersonationRoleType {
+	return []ImpersonationRoleType{
+		"FULL_ACCESS",
+		"READ_ONLY",
 	}
 }
 

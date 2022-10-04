@@ -113,8 +113,6 @@ type RegisterTaskDefinitionInput struct {
 	//
 	// * Linux platform
 	// version 1.4.0 or later.
-	//
-	// * Windows platform version 1.0.0 or later.
 	EphemeralStorage *types.EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon

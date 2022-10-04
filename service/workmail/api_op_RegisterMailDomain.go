@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a new domain in Amazon WorkMail and SES, and configures it for use by
+// Registers a new domain in WorkMail and SES, and configures it for use by
 // WorkMail. Emails received by SES for this domain are routed to the specified
 // WorkMail organization, and WorkMail has permanent permission to use the
 // specified domain for sending your users' emails.
@@ -32,12 +32,12 @@ func (c *Client) RegisterMailDomain(ctx context.Context, params *RegisterMailDom
 
 type RegisterMailDomainInput struct {
 
-	// The name of the mail domain to create in Amazon WorkMail and SES.
+	// The name of the mail domain to create in WorkMail and SES.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The Amazon WorkMail organization under which you're creating the domain.
+	// The WorkMail organization under which you're creating the domain.
 	//
 	// This member is required.
 	OrganizationId *string

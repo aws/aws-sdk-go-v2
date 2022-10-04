@@ -348,8 +348,10 @@ type ObjectLambdaAllowedFeature string
 
 // Enum values for ObjectLambdaAllowedFeature
 const (
-	ObjectLambdaAllowedFeatureGetObjectRange      ObjectLambdaAllowedFeature = "GetObject-Range"
-	ObjectLambdaAllowedFeatureGetObjectPartNumber ObjectLambdaAllowedFeature = "GetObject-PartNumber"
+	ObjectLambdaAllowedFeatureGetObjectRange       ObjectLambdaAllowedFeature = "GetObject-Range"
+	ObjectLambdaAllowedFeatureGetObjectPartNumber  ObjectLambdaAllowedFeature = "GetObject-PartNumber"
+	ObjectLambdaAllowedFeatureHeadObjectRange      ObjectLambdaAllowedFeature = "HeadObject-Range"
+	ObjectLambdaAllowedFeatureHeadObjectPartNumber ObjectLambdaAllowedFeature = "HeadObject-PartNumber"
 )
 
 // Values returns all known values for ObjectLambdaAllowedFeature. Note that this
@@ -359,6 +361,8 @@ func (ObjectLambdaAllowedFeature) Values() []ObjectLambdaAllowedFeature {
 	return []ObjectLambdaAllowedFeature{
 		"GetObject-Range",
 		"GetObject-PartNumber",
+		"HeadObject-Range",
+		"HeadObject-PartNumber",
 	}
 }
 
@@ -366,7 +370,10 @@ type ObjectLambdaTransformationConfigurationAction string
 
 // Enum values for ObjectLambdaTransformationConfigurationAction
 const (
-	ObjectLambdaTransformationConfigurationActionGetObject ObjectLambdaTransformationConfigurationAction = "GetObject"
+	ObjectLambdaTransformationConfigurationActionGetObject     ObjectLambdaTransformationConfigurationAction = "GetObject"
+	ObjectLambdaTransformationConfigurationActionHeadObject    ObjectLambdaTransformationConfigurationAction = "HeadObject"
+	ObjectLambdaTransformationConfigurationActionListObjects   ObjectLambdaTransformationConfigurationAction = "ListObjects"
+	ObjectLambdaTransformationConfigurationActionListObjectsV2 ObjectLambdaTransformationConfigurationAction = "ListObjectsV2"
 )
 
 // Values returns all known values for
@@ -376,6 +383,9 @@ const (
 func (ObjectLambdaTransformationConfigurationAction) Values() []ObjectLambdaTransformationConfigurationAction {
 	return []ObjectLambdaTransformationConfigurationAction{
 		"GetObject",
+		"HeadObject",
+		"ListObjects",
+		"ListObjectsV2",
 	}
 }
 

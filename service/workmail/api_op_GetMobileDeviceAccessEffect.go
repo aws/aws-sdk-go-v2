@@ -13,8 +13,8 @@ import (
 
 // Simulates the effect of the mobile device access rules for the given attributes
 // of a sample access event. Use this method to test the effects of the current set
-// of mobile device access rules for the Amazon WorkMail organization for a
-// particular user's attributes.
+// of mobile device access rules for the WorkMail organization for a particular
+// user's attributes.
 func (c *Client) GetMobileDeviceAccessEffect(ctx context.Context, params *GetMobileDeviceAccessEffectInput, optFns ...func(*Options)) (*GetMobileDeviceAccessEffectOutput, error) {
 	if params == nil {
 		params = &GetMobileDeviceAccessEffectInput{}
@@ -32,7 +32,7 @@ func (c *Client) GetMobileDeviceAccessEffect(ctx context.Context, params *GetMob
 
 type GetMobileDeviceAccessEffectInput struct {
 
-	// The Amazon WorkMail organization to simulate the access effect for.
+	// The WorkMail organization to simulate the access effect for.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -55,7 +55,7 @@ type GetMobileDeviceAccessEffectInput struct {
 type GetMobileDeviceAccessEffectOutput struct {
 
 	// The effect of the simulated access, ALLOW or DENY, after evaluating mobile
-	// device access rules in the Amazon WorkMail organization for the simulated user
+	// device access rules in the WorkMail organization for the simulated user
 	// parameters.
 	Effect types.MobileDeviceAccessRuleEffect
 

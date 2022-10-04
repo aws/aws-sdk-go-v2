@@ -172,9 +172,9 @@ func (e *InvalidConfigurationException) ErrorMessage() string {
 func (e *InvalidConfigurationException) ErrorCode() string             { return "InvalidConfigurationException" }
 func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You SES configuration has customizations that Amazon WorkMail cannot save. The
-// error message lists the invalid setting. For examples of invalid settings, refer
-// to CreateReceiptRule
+// You SES configuration has customizations that WorkMail cannot save. The error
+// message lists the invalid setting. For examples of invalid settings, refer to
+// CreateReceiptRule
 // (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
 type InvalidCustomSesConfigurationException struct {
 	Message *string
@@ -315,7 +315,7 @@ func (e *MailDomainStateException) ErrorMessage() string {
 func (e *MailDomainStateException) ErrorCode() string             { return "MailDomainStateException" }
 func (e *MailDomainStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The user, group, or resource name isn't unique in Amazon WorkMail.
+// The user, group, or resource name isn't unique in WorkMail.
 type NameAvailabilityException struct {
 	Message *string
 
@@ -374,7 +374,7 @@ func (e *OrganizationStateException) ErrorMessage() string {
 func (e *OrganizationStateException) ErrorCode() string             { return "OrganizationStateException" }
 func (e *OrganizationStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This user, group, or resource name is not allowed in Amazon WorkMail.
+// This user, group, or resource name is not allowed in WorkMail.
 type ReservedNameException struct {
 	Message *string
 

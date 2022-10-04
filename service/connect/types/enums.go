@@ -513,6 +513,7 @@ const (
 	IntegrationTypePinpointApp         IntegrationType = "PINPOINT_APP"
 	IntegrationTypeWisdomAssistant     IntegrationType = "WISDOM_ASSISTANT"
 	IntegrationTypeWisdomKnowledgeBase IntegrationType = "WISDOM_KNOWLEDGE_BASE"
+	IntegrationTypeCasesDomain         IntegrationType = "CASES_DOMAIN"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -525,6 +526,7 @@ func (IntegrationType) Values() []IntegrationType {
 		"PINPOINT_APP",
 		"WISDOM_ASSISTANT",
 		"WISDOM_KNOWLEDGE_BASE",
+		"CASES_DOMAIN",
 	}
 }
 

@@ -50,6 +50,26 @@ func (m *validateOpAssociateMemberToGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssumeImpersonationRole struct {
+}
+
+func (*validateOpAssumeImpersonationRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssumeImpersonationRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssumeImpersonationRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssumeImpersonationRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelMailboxExportJob struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpCreateGroup) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateImpersonationRole struct {
+}
+
+func (*validateOpCreateImpersonationRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateImpersonationRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateImpersonationRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateImpersonationRoleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -305,6 +345,26 @@ func (m *validateOpDeleteGroup) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteImpersonationRole struct {
+}
+
+func (*validateOpDeleteImpersonationRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteImpersonationRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteImpersonationRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteImpersonationRoleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +770,46 @@ func (m *validateOpGetDefaultRetentionPolicy) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetImpersonationRoleEffect struct {
+}
+
+func (*validateOpGetImpersonationRoleEffect) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImpersonationRoleEffect) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImpersonationRoleEffectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImpersonationRoleEffectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetImpersonationRole struct {
+}
+
+func (*validateOpGetImpersonationRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImpersonationRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImpersonationRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImpersonationRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMailboxDetails struct {
 }
 
@@ -885,6 +985,26 @@ func (m *validateOpListGroups) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListImpersonationRoles struct {
+}
+
+func (*validateOpListImpersonationRoles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListImpersonationRoles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListImpersonationRolesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListImpersonationRolesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1370,6 +1490,26 @@ func (m *validateOpUpdateDefaultMailDomain) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateImpersonationRole struct {
+}
+
+func (*validateOpUpdateImpersonationRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateImpersonationRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateImpersonationRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateImpersonationRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMailboxQuota struct {
 }
 
@@ -1458,6 +1598,10 @@ func addOpAssociateMemberToGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpAssociateMemberToGroup{}, middleware.After)
 }
 
+func addOpAssumeImpersonationRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssumeImpersonationRole{}, middleware.After)
+}
+
 func addOpCancelMailboxExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelMailboxExportJob{}, middleware.After)
 }
@@ -1472,6 +1616,10 @@ func addOpCreateAvailabilityConfigurationValidationMiddleware(stack *middleware.
 
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
+}
+
+func addOpCreateImpersonationRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateImpersonationRole{}, middleware.After)
 }
 
 func addOpCreateMobileDeviceAccessRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -1508,6 +1656,10 @@ func addOpDeleteEmailMonitoringConfigurationValidationMiddleware(stack *middlewa
 
 func addOpDeleteGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGroup{}, middleware.After)
+}
+
+func addOpDeleteImpersonationRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteImpersonationRole{}, middleware.After)
 }
 
 func addOpDeleteMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1590,6 +1742,14 @@ func addOpGetDefaultRetentionPolicyValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetDefaultRetentionPolicy{}, middleware.After)
 }
 
+func addOpGetImpersonationRoleEffectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImpersonationRoleEffect{}, middleware.After)
+}
+
+func addOpGetImpersonationRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImpersonationRole{}, middleware.After)
+}
+
 func addOpGetMailboxDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMailboxDetails{}, middleware.After)
 }
@@ -1624,6 +1784,10 @@ func addOpListGroupMembersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGroups{}, middleware.After)
+}
+
+func addOpListImpersonationRolesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListImpersonationRoles{}, middleware.After)
 }
 
 func addOpListMailboxExportJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -1722,6 +1886,10 @@ func addOpUpdateDefaultMailDomainValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateDefaultMailDomain{}, middleware.After)
 }
 
+func addOpUpdateImpersonationRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateImpersonationRole{}, middleware.After)
+}
+
 func addOpUpdateMailboxQuotaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMailboxQuota{}, middleware.After)
 }
@@ -1784,6 +1952,41 @@ func validateFolderConfigurations(v []types.FolderConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FolderConfigurations"}
 	for i := range v {
 		if err := validateFolderConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImpersonationRule(v *types.ImpersonationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImpersonationRule"}
+	if v.ImpersonationRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImpersonationRuleId"))
+	}
+	if len(v.Effect) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImpersonationRuleList(v []types.ImpersonationRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImpersonationRuleList"}
+	for i := range v {
+		if err := validateImpersonationRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1886,6 +2089,24 @@ func validateOpAssociateMemberToGroupInput(v *AssociateMemberToGroupInput) error
 	}
 }
 
+func validateOpAssumeImpersonationRoleInput(v *AssumeImpersonationRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssumeImpersonationRoleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ImpersonationRoleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImpersonationRoleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelMailboxExportJobInput(v *CancelMailboxExportJobInput) error {
 	if v == nil {
 		return nil
@@ -1966,6 +2187,34 @@ func validateOpCreateGroupInput(v *CreateGroupInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateImpersonationRoleInput(v *CreateImpersonationRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateImpersonationRoleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateImpersonationRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2137,6 +2386,24 @@ func validateOpDeleteGroupInput(v *DeleteGroupInput) error {
 	}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteImpersonationRoleInput(v *DeleteImpersonationRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteImpersonationRoleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ImpersonationRoleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImpersonationRoleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2483,9 +2750,6 @@ func validateOpGetAccessControlEffectInput(v *GetAccessControlEffectInput) error
 	if v.Action == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2500,6 +2764,45 @@ func validateOpGetDefaultRetentionPolicyInput(v *GetDefaultRetentionPolicyInput)
 	invalidParams := smithy.InvalidParamsError{Context: "GetDefaultRetentionPolicyInput"}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetImpersonationRoleEffectInput(v *GetImpersonationRoleEffectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImpersonationRoleEffectInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ImpersonationRoleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImpersonationRoleId"))
+	}
+	if v.TargetUser == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetUser"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetImpersonationRoleInput(v *GetImpersonationRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImpersonationRoleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ImpersonationRoleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImpersonationRoleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2651,6 +2954,21 @@ func validateOpListGroupsInput(v *ListGroupsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListGroupsInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListImpersonationRolesInput(v *ListImpersonationRolesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListImpersonationRolesInput"}
 	if v.OrganizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
@@ -3134,6 +3452,37 @@ func validateOpUpdateDefaultMailDomainInput(v *UpdateDefaultMailDomainInput) err
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateImpersonationRoleInput(v *UpdateImpersonationRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateImpersonationRoleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.ImpersonationRoleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImpersonationRoleId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateImpersonationRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

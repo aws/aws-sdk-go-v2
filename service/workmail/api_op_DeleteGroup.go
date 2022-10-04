@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a group from Amazon WorkMail.
+// Deletes a group from WorkMail.
 func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGroupInput{}

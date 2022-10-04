@@ -62,7 +62,7 @@ type DescribeGroupOutput struct {
 	// The name of the described group.
 	Name *string
 
-	// The state of the user: enabled (registered to Amazon WorkMail) or disabled
+	// The state of the user: enabled (registered to WorkMail) or disabled
 	// (deregistered or never registered to WorkMail).
 	State types.EntityState
 

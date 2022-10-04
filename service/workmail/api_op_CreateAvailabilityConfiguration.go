@@ -36,7 +36,7 @@ type CreateAvailabilityConfigurationInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The Amazon WorkMail organization for which the AvailabilityConfiguration will be
+	// The WorkMail organization for which the AvailabilityConfiguration will be
 	// created.
 	//
 	// This member is required.

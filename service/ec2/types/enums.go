@@ -7050,8 +7050,9 @@ type VpcAttributeName string
 
 // Enum values for VpcAttributeName
 const (
-	VpcAttributeNameEnableDnsSupport   VpcAttributeName = "enableDnsSupport"
-	VpcAttributeNameEnableDnsHostnames VpcAttributeName = "enableDnsHostnames"
+	VpcAttributeNameEnableDnsSupport                 VpcAttributeName = "enableDnsSupport"
+	VpcAttributeNameEnableDnsHostnames               VpcAttributeName = "enableDnsHostnames"
+	VpcAttributeNameEnableNetworkAddressUsageMetrics VpcAttributeName = "enableNetworkAddressUsageMetrics"
 )
 
 // Values returns all known values for VpcAttributeName. Note that this can be
@@ -7061,6 +7062,7 @@ func (VpcAttributeName) Values() []VpcAttributeName {
 	return []VpcAttributeName{
 		"enableDnsSupport",
 		"enableDnsHostnames",
+		"enableNetworkAddressUsageMetrics",
 	}
 }
 

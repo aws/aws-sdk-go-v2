@@ -35,7 +35,7 @@ type UpdateDefaultMailDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The Amazon WorkMail organization for which to list domains.
+	// The WorkMail organization for which to list domains.
 	//
 	// This member is required.
 	OrganizationId *string

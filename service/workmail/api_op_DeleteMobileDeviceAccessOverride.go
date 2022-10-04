@@ -37,7 +37,7 @@ type DeleteMobileDeviceAccessOverrideInput struct {
 	// This member is required.
 	DeviceId *string
 
-	// The Amazon WorkMail organization for which the access override will be deleted.
+	// The WorkMail organization for which the access override will be deleted.
 	//
 	// This member is required.
 	OrganizationId *string

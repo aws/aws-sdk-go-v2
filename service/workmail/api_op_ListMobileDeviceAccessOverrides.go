@@ -31,8 +31,7 @@ func (c *Client) ListMobileDeviceAccessOverrides(ctx context.Context, params *Li
 
 type ListMobileDeviceAccessOverridesInput struct {
 
-	// The Amazon WorkMail organization under which to list mobile device access
-	// overrides.
+	// The WorkMail organization under which to list mobile device access overrides.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -69,8 +68,8 @@ type ListMobileDeviceAccessOverridesOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// The list of mobile device access overrides that exist for the specified Amazon
-	// WorkMail organization and user.
+	// The list of mobile device access overrides that exist for the specified WorkMail
+	// organization and user.
 	Overrides []types.MobileDeviceAccessOverride
 
 	// Metadata pertaining to the operation's result.

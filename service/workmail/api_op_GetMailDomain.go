@@ -35,7 +35,7 @@ type GetMailDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The Amazon WorkMail organization for which the domain is retrieved.
+	// The WorkMail organization for which the domain is retrieved.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -58,10 +58,10 @@ type GetMailDomainOutput struct {
 	// Indicates the status of the domain ownership verification.
 	OwnershipVerificationStatus types.DnsRecordVerificationStatus
 
-	// A list of the DNS records that Amazon WorkMail recommends adding in your DNS
-	// provider for the best user experience. The records configure your domain with
-	// DMARC, SPF, DKIM, and direct incoming email traffic to SES. See admin guide for
-	// more details.
+	// A list of the DNS records that WorkMail recommends adding in your DNS provider
+	// for the best user experience. The records configure your domain with DMARC, SPF,
+	// DKIM, and direct incoming email traffic to SES. See admin guide for more
+	// details.
 	Records []types.DnsRecord
 
 	// Metadata pertaining to the operation's result.

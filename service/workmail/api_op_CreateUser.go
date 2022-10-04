@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a user who can be used in Amazon WorkMail by calling the
-// RegisterToWorkMail operation.
+// Creates a user who can be used in WorkMail by calling the RegisterToWorkMail
+// operation.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

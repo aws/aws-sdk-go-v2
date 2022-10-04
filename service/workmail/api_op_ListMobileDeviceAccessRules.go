@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the mobile device access rules for the specified Amazon WorkMail
-// organization.
+// Lists the mobile device access rules for the specified WorkMail organization.
 func (c *Client) ListMobileDeviceAccessRules(ctx context.Context, params *ListMobileDeviceAccessRulesInput, optFns ...func(*Options)) (*ListMobileDeviceAccessRulesOutput, error) {
 	if params == nil {
 		params = &ListMobileDeviceAccessRulesInput{}
@@ -30,7 +29,7 @@ func (c *Client) ListMobileDeviceAccessRules(ctx context.Context, params *ListMo
 
 type ListMobileDeviceAccessRulesInput struct {
 
-	// The Amazon WorkMail organization for which to list the rules.
+	// The WorkMail organization for which to list the rules.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -40,8 +39,8 @@ type ListMobileDeviceAccessRulesInput struct {
 
 type ListMobileDeviceAccessRulesOutput struct {
 
-	// The list of mobile device access rules that exist under the specified Amazon
-	// WorkMail organization.
+	// The list of mobile device access rules that exist under the specified WorkMail
+	// organization.
 	Rules []types.MobileDeviceAccessRule
 
 	// Metadata pertaining to the operation's result.

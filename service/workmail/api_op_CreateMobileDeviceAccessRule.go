@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new mobile device access rule for the specified Amazon WorkMail
-// organization.
+// Creates a new mobile device access rule for the specified WorkMail organization.
 func (c *Client) CreateMobileDeviceAccessRule(ctx context.Context, params *CreateMobileDeviceAccessRuleInput, optFns ...func(*Options)) (*CreateMobileDeviceAccessRuleOutput, error) {
 	if params == nil {
 		params = &CreateMobileDeviceAccessRuleInput{}
@@ -41,7 +40,7 @@ type CreateMobileDeviceAccessRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon WorkMail organization under which the rule will be created.
+	// The WorkMail organization under which the rule will be created.
 	//
 	// This member is required.
 	OrganizationId *string

@@ -30,8 +30,8 @@ func (c *Client) ListAvailabilityConfigurations(ctx context.Context, params *Lis
 
 type ListAvailabilityConfigurationsInput struct {
 
-	// The Amazon WorkMail organization for which the AvailabilityConfiguration's will
-	// be listed.
+	// The WorkMail organization for which the AvailabilityConfiguration's will be
+	// listed.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -48,8 +48,8 @@ type ListAvailabilityConfigurationsInput struct {
 
 type ListAvailabilityConfigurationsOutput struct {
 
-	// The list of AvailabilityConfiguration's that exist for the specified Amazon
-	// WorkMail organization.
+	// The list of AvailabilityConfiguration's that exist for the specified WorkMail
+	// organization.
 	AvailabilityConfigurations []types.AvailabilityConfiguration
 
 	// The token to use to retrieve the next page of results. The value is null when

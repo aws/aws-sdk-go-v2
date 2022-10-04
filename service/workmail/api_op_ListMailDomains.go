@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the mail domains in a given Amazon WorkMail organization.
+// Lists the mail domains in a given WorkMail organization.
 func (c *Client) ListMailDomains(ctx context.Context, params *ListMailDomainsInput, optFns ...func(*Options)) (*ListMailDomainsOutput, error) {
 	if params == nil {
 		params = &ListMailDomainsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListMailDomains(ctx context.Context, params *ListMailDomainsInp
 
 type ListMailDomainsInput struct {
 
-	// The Amazon WorkMail organization for which to list domains.
+	// The WorkMail organization for which to list domains.
 	//
 	// This member is required.
 	OrganizationId *string
@@ -48,8 +48,8 @@ type ListMailDomainsInput struct {
 type ListMailDomainsOutput struct {
 
 	// The list of mail domain summaries, specifying domains that exist in the
-	// specified Amazon WorkMail organization, along with the information about whether
-	// the domain is or isn't the default.
+	// specified WorkMail organization, along with the information about whether the
+	// domain is or isn't the default.
 	MailDomains []types.MailDomainSummary
 
 	// The token to use to retrieve the next page of results. The value becomes null

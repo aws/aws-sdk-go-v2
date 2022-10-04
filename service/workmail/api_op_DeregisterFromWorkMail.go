@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Mark a user, group, or resource as no longer used in Amazon WorkMail. This
-// action disassociates the mailbox and schedules it for clean-up. WorkMail keeps
+// Mark a user, group, or resource as no longer used in WorkMail. This action
+// disassociates the mailbox and schedules it for clean-up. WorkMail keeps
 // mailboxes for 30 days before they are permanently removed. The functionality in
 // the console is Disable.
 func (c *Client) DeregisterFromWorkMail(ctx context.Context, params *DeregisterFromWorkMailInput, optFns ...func(*Options)) (*DeregisterFromWorkMailOutput, error) {
@@ -36,8 +36,7 @@ type DeregisterFromWorkMailInput struct {
 	// This member is required.
 	EntityId *string
 
-	// The identifier for the organization under which the Amazon WorkMail entity
-	// exists.
+	// The identifier for the organization under which the WorkMail entity exists.
 	//
 	// This member is required.
 	OrganizationId *string

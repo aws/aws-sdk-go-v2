@@ -58253,6 +58253,13 @@ func awsEc2query_serializeOpDocumentModifyVpcAttributeInput(v *ModifyVpcAttribut
 		}
 	}
 
+	if v.EnableNetworkAddressUsageMetrics != nil {
+		objectKey := object.Key("EnableNetworkAddressUsageMetrics")
+		if err := awsEc2query_serializeDocumentAttributeBooleanValue(v.EnableNetworkAddressUsageMetrics, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcId != nil {
 		objectKey := object.Key("VpcId")
 		objectKey.String(*v.VpcId)

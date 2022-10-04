@@ -2608,16 +2608,14 @@ type PortMapping struct {
 	// the default ephemeral port range from 49153 through 65535 is used. Do not
 	// attempt to specify a host port in the ephemeral port range as these are reserved
 	// for automatic assignment. In general, ports below 32768 are outside of the
-	// ephemeral port range. The default ephemeral port range from 49153 through 65535
-	// is always used for Docker versions before 1.6.0. The default reserved ports are
-	// 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS container agent
-	// ports 51678-51680. Any host port that was previously specified in a running task
-	// is also reserved while the task is running. That is, after a task stops, the
-	// host port is released. The current reserved ports are displayed in the
-	// remainingResources of DescribeContainerInstances output. A container instance
-	// can have up to 100 reserved ports at a time. This number includes the default
-	// reserved ports. Automatically assigned ports aren't included in the 100 reserved
-	// ports quota.
+	// ephemeral port range. The default reserved ports are 22 for SSH, the Docker
+	// ports 2375 and 2376, and the Amazon ECS container agent ports 51678-51680. Any
+	// host port that was previously specified in a running task is also reserved while
+	// the task is running. That is, after a task stops, the host port is released. The
+	// current reserved ports are displayed in the remainingResources of
+	// DescribeContainerInstances output. A container instance can have up to 100
+	// reserved ports at a time. This number includes the default reserved ports.
+	// Automatically assigned ports aren't included in the 100 reserved ports quota.
 	HostPort *int32
 
 	// The protocol used for the port mapping. Valid values are tcp and udp. The

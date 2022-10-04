@@ -41,7 +41,7 @@ type PutMobileDeviceAccessOverrideInput struct {
 	// This member is required.
 	Effect types.MobileDeviceAccessRuleEffect
 
-	// Identifies the Amazon WorkMail organization for which you create the override.
+	// Identifies the WorkMail organization for which you create the override.
 	//
 	// This member is required.
 	OrganizationId *string

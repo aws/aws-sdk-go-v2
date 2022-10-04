@@ -66,7 +66,7 @@ type DescribeResourceOutput struct {
 	// The identifier of the described resource.
 	ResourceId *string
 
-	// The state of the resource: enabled (registered to Amazon WorkMail), disabled
+	// The state of the resource: enabled (registered to WorkMail), disabled
 	// (deregistered or never registered to WorkMail), or deleted.
 	State types.EntityState
 

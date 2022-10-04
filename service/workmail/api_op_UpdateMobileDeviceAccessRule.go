@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a mobile device access rule for the specified Amazon WorkMail
-// organization.
+// Updates a mobile device access rule for the specified WorkMail organization.
 func (c *Client) UpdateMobileDeviceAccessRule(ctx context.Context, params *UpdateMobileDeviceAccessRuleInput, optFns ...func(*Options)) (*UpdateMobileDeviceAccessRuleOutput, error) {
 	if params == nil {
 		params = &UpdateMobileDeviceAccessRuleInput{}
@@ -45,7 +44,7 @@ type UpdateMobileDeviceAccessRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon WorkMail organization under which the rule will be updated.
+	// The WorkMail organization under which the rule will be updated.
 	//
 	// This member is required.
 	OrganizationId *string

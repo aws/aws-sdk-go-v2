@@ -36,7 +36,7 @@ type GetMobileDeviceAccessOverrideInput struct {
 	// This member is required.
 	DeviceId *string
 
-	// The Amazon WorkMail organization to which you want to apply the override.
+	// The WorkMail organization to which you want to apply the override.
 	//
 	// This member is required.
 	OrganizationId *string

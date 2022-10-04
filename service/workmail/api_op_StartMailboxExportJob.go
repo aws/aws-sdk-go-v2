@@ -15,7 +15,7 @@ import (
 // items from the specified mailbox to the specified Amazon Simple Storage Service
 // (Amazon S3) bucket. For more information, see Exporting mailbox content
 // (https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html) in the
-// Amazon WorkMail Administrator Guide.
+// WorkMail Administrator Guide.
 func (c *Client) StartMailboxExportJob(ctx context.Context, params *StartMailboxExportJobInput, optFns ...func(*Options)) (*StartMailboxExportJobOutput, error) {
 	if params == nil {
 		params = &StartMailboxExportJobInput{}

@@ -35,7 +35,7 @@ type UpdateAvailabilityConfigurationInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The Amazon WorkMail organization for which the AvailabilityConfiguration will be
+	// The WorkMail organization for which the AvailabilityConfiguration will be
 	// updated.
 	//
 	// This member is required.

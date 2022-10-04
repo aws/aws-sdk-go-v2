@@ -1,0 +1,8 @@
+{
+    "id": "06705787-df21-488d-9512-3bbd838bc7d1",
+    "type": "documentation",
+    "description": "Documentation updates to address various Amazon ECS tickets.",
+    "modules": [
+        "service/ecs"
+    ]
+}

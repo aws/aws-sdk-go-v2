@@ -13,8 +13,8 @@ import (
 
 // Adds a new access control rule for the specified organization. The rule allows
 // or denies access to the organization for the specified IPv4 addresses, access
-// protocol actions, and user IDs. Adding a new rule with the same name as an
-// existing rule replaces the older rule.
+// protocol actions, user IDs and impersonation IDs. Adding a new rule with the
+// same name as an existing rule replaces the older rule.
 func (c *Client) PutAccessControlRule(ctx context.Context, params *PutAccessControlRuleInput, optFns ...func(*Options)) (*PutAccessControlRuleOutput, error) {
 	if params == nil {
 		params = &PutAccessControlRuleInput{}
@@ -56,12 +56,18 @@ type PutAccessControlRuleInput struct {
 	// AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
 	Actions []string
 
+	// Impersonation role IDs to include in the rule.
+	ImpersonationRoleIds []string
+
 	// IPv4 CIDR ranges to include in the rule.
 	IpRanges []string
 
 	// Access protocol actions to exclude from the rule. Valid values include
 	// ActiveSync, AutoDiscover, EWS, IMAP, SMTP, WindowsOutlook, and WebMail.
 	NotActions []string
+
+	// Impersonation role IDs to exclude from the rule.
+	NotImpersonationRoleIds []string
 
 	// IPv4 CIDR ranges to exclude from the rule.
 	NotIpRanges []string

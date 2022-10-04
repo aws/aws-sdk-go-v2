@@ -3,7 +3,7 @@
 // Package workmail provides the API client, operations, and parameter types for
 // Amazon WorkMail.
 //
-// Amazon WorkMail is a secure, managed business email and calendaring service with
+// WorkMail is a secure, managed business email and calendaring service with
 // support for existing desktop and mobile email clients. You can access your
 // email, contacts, and calendars using Microsoft Outlook, your browser, or other
 // native iOS and Android email applications. You can integrate WorkMail with your

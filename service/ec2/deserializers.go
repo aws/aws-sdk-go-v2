@@ -137776,6 +137776,12 @@ func awsEc2query_deserializeOpDocumentDescribeVpcAttributeOutput(v **DescribeVpc
 				return err
 			}
 
+		case strings.EqualFold("enableNetworkAddressUsageMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentAttributeBooleanValue(&sv.EnableNetworkAddressUsageMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("vpcId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
