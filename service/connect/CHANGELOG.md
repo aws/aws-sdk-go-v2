@@ -1,3 +1,7 @@
+# v1.31.0 (2022-10-04)
+
+* **Feature**: Updated the CreateIntegrationAssociation API to support the CASES_DOMAIN IntegrationType.
+
 # v1.30.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

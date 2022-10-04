@@ -1,8 +1,0 @@
-{
-    "id": "137516a5-2553-4825-9d9e-b91abfe61d1e",
-    "type": "feature",
-    "description": "This release adds support for impersonation roles in Amazon WorkMail.",
-    "modules": [
-        "service/workmail"
-    ]
-}

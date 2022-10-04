@@ -1,3 +1,7 @@
+# v1.18.23 (2022-10-04)
+
+* **Documentation**: Documentation updates to address various Amazon ECS tickets.
+
 # v1.18.22 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

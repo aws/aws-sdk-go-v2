@@ -31,9 +31,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.62.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.63.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.18
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.22
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.15
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.22.10
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.18
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.17
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.19
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.27.11
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.16.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.17
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.18

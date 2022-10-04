@@ -1,3 +1,7 @@
+# v1.24.0 (2022-10-04)
+
+* **Feature**: S3 Object Lambda adds support to allow customers to intercept HeadObject and ListObjects requests and introduce their own compute. These requests were previously proxied to S3.
+
 # v1.23.0 (2022-09-21)
 
 * **Feature**: S3 on Outposts launches support for object versioning for Outposts buckets. With S3 Versioning, you can preserve, retrieve, and restore every version of every object stored in your buckets. You can recover from both unintended user actions and application failures.

@@ -1,3 +1,20 @@
+# Release (2022-10-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.31.0](service/connect/CHANGELOG.md#v1310-2022-10-04)
+  * **Feature**: Updated the CreateIntegrationAssociation API to support the CASES_DOMAIN IntegrationType.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.0.0](service/connectcases/CHANGELOG.md#v100-2022-10-04)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds APIs for Amazon Connect Cases. Cases allows your agents to quickly track and manage customer issues that require multiple interactions, follow-up tasks, and teams in your contact center.  For more information, see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.63.0](service/ec2/CHANGELOG.md#v1630-2022-10-04)
+  * **Feature**: Added EnableNetworkAddressUsageMetrics flag for ModifyVpcAttribute, DescribeVpcAttribute APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.23](service/ecs/CHANGELOG.md#v11823-2022-10-04)
+  * **Documentation**: Documentation updates to address various Amazon ECS tickets.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.24.0](service/s3control/CHANGELOG.md#v1240-2022-10-04)
+  * **Feature**: S3 Object Lambda adds support to allow customers to intercept HeadObject and ListObjects requests and introduce their own compute. These requests were previously proxied to S3.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.17.0](service/workmail/CHANGELOG.md#v1170-2022-10-04)
+  * **Feature**: This release adds support for impersonation roles in Amazon WorkMail.
+
 # Release (2022-10-03)
 
 ## Module Highlights

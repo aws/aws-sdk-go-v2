@@ -1,8 +1,0 @@
-{
-    "id": "94699c91-8494-4994-9796-640b8cf01b28",
-    "type": "feature",
-    "description": "S3 Object Lambda adds support to allow customers to intercept HeadObject and ListObjects requests and introduce their own compute. These requests were previously proxied to S3.",
-    "modules": [
-        "service/s3control"
-    ]
-}

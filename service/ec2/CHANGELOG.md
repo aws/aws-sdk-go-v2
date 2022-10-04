@@ -1,3 +1,7 @@
+# v1.63.0 (2022-10-04)
+
+* **Feature**: Added EnableNetworkAddressUsageMetrics flag for ModifyVpcAttribute, DescribeVpcAttribute APIs.
+
 # v1.62.0 (2022-10-03)
 
 * **Feature**: Adding an imdsSupport attribute to EC2 AMIs
