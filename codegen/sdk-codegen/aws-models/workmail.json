@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -97,10 +97,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date that the rule was modified.</p>"
                     }
+                },
+                "ImpersonationRoleIds": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Impersonation role IDs to include in the rule.</p>"
+                    }
+                },
+                "NotImpersonationRoleIds": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Impersonation role IDs to exclude from the rule.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule that controls access to an Amazon WorkMail organization.</p>"
+                "smithy.api#documentation": "<p>A rule that controls access to an WorkMail organization.</p>"
             }
         },
         "com.amazonaws.workmail#AccessControlRuleAction": {
@@ -124,18 +136,20 @@
             }
         },
         "com.amazonaws.workmail#AccessControlRuleEffect": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOW",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "DENY",
-                        "name": "DENY"
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
                     }
-                ]
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#AccessControlRuleName": {
@@ -169,6 +183,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#AccessEffect": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
                 }
             }
         },
@@ -328,6 +359,68 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.workmail#AssumeImpersonationRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#AssumeImpersonationRoleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#AssumeImpersonationRoleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assumes an impersonation role for the given WorkMail organization. This method returns an\n         authentication token you can use to make impersonated calls.</p>"
+            }
+        },
+        "com.amazonaws.workmail#AssumeImpersonationRoleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization under which the impersonation role will be assumed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role ID to assume.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#AssumeImpersonationRoleResponse": {
+            "type": "structure",
+            "members": {
+                "Token": {
+                    "target": "com.amazonaws.workmail#ImpersonationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token for the impersonation role.</p>"
+                    }
+                },
+                "ExpiresIn": {
+                    "target": "com.amazonaws.workmail#ExpiresIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token's validity, in seconds.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workmail#AvailabilityConfiguration": {
             "type": "structure",
             "members": {
@@ -346,7 +439,7 @@
                 "EwsProvider": {
                     "target": "com.amazonaws.workmail#RedactedEwsAvailabilityProvider",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>ProviderType</code> is <code>EWS</code>, then this field contains\n            <code>RedactedEwsAvailabilityProvider</code>. Otherwise, it is not requried.</p>"
+                        "smithy.api#documentation": "<p>If <code>ProviderType</code> is <code>EWS</code>, then this field contains\n            <code>RedactedEwsAvailabilityProvider</code>. Otherwise, it is not required.</p>"
                     }
                 },
                 "LambdaProvider": {
@@ -379,18 +472,20 @@
             }
         },
         "com.amazonaws.workmail#AvailabilityProviderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EWS",
-                        "name": "EWS"
-                    },
-                    {
-                        "value": "LAMBDA",
-                        "name": "LAMBDA"
+            "type": "enum",
+            "members": {
+                "EWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EWS"
                     }
-                ]
+                },
+                "LAMBDA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAMBDA"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#BookingOptions": {
@@ -399,18 +494,21 @@
                 "AutoAcceptRequests": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The resource's ability to automatically reply to requests. If disabled, delegates\n         must be associated to the resource.</p>"
                     }
                 },
                 "AutoDeclineRecurringRequests": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The resource's ability to automatically decline any recurring requests.</p>"
                     }
                 },
                 "AutoDeclineConflictingRequests": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The resource's ability to automatically decline any conflicting requests.</p>"
                     }
                 }
@@ -420,13 +518,13 @@
             }
         },
         "com.amazonaws.workmail#Boolean": {
-            "type": "boolean"
-        },
-        "com.amazonaws.workmail#BooleanObject": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
+        },
+        "com.amazonaws.workmail#BooleanObject": {
+            "type": "boolean"
         },
         "com.amazonaws.workmail#CancelMailboxExportJob": {
             "type": "operation",
@@ -524,7 +622,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an alias to the set of a given member (user or group) of Amazon WorkMail.</p>",
+                "smithy.api#documentation": "<p>Adds an alias to the set of a given member (user or group) of WorkMail.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -601,7 +699,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the <code>AvailabilityConfiguration</code> will be created.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the <code>AvailabilityConfiguration</code> will be created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -665,7 +763,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.</p>",
+                "smithy.api#documentation": "<p>Creates a group that can be used in WorkMail by calling the <a>RegisterToWorkMail</a> operation.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -699,6 +797,95 @@
                 }
             }
         },
+        "com.amazonaws.workmail#CreateImpersonationRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#CreateImpersonationRoleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#CreateImpersonationRoleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an impersonation role for the given WorkMail organization.</p>\n         <p>\n            <i>Idempotency</i> ensures that an API request completes no more than one\n         time. With an idempotent request, if the original request completes successfully, any\n         subsequent retries also complete successfully without performing any further\n         actions.</p>"
+            }
+        },
+        "com.amazonaws.workmail#CreateImpersonationRoleRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.workmail#IdempotencyClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token for the client request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization to create the new impersonation role within.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new impersonation role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role's type. The available impersonation role types are\n            <code>READ_ONLY</code> or <code>FULL_ACCESS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the new impersonation role.</p>"
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of rules for the impersonation role.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#CreateImpersonationRoleResponse": {
+            "type": "structure",
+            "members": {
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new impersonation role ID.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workmail#CreateMobileDeviceAccessRule": {
             "type": "operation",
             "input": {
@@ -722,7 +909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new mobile device access rule for the specified Amazon WorkMail organization.</p>"
+                "smithy.api#documentation": "<p>Creates a new mobile device access rule for the specified WorkMail organization.</p>"
             }
         },
         "com.amazonaws.workmail#CreateMobileDeviceAccessRuleRequest": {
@@ -731,7 +918,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which the rule will be created.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization under which the rule will be created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -849,7 +1036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html\">Adding an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>\n         <p>You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html\">Adding a domain</a> and <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html\">Choosing the default domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>\n         <p>Optionally, you can use a customer managed master key from AWS Key Management Service\n         (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a\n         default AWS managed master key for you.</p>",
+                "smithy.api#documentation": "<p>Creates a new WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new WorkMail directory for you. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html\">Adding an organization</a> in the <i>WorkMail Administrator Guide</i>.</p>\n         <p>You can associate multiple email domains with an organization, then choose your\n         default email domain from the WorkMail console. You can also associate a domain that is managed\n         in an Amazon Route 53 public hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html\">Adding a\n            domain</a> and <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html\">Choosing the default domain</a>\n         in the <i>WorkMail Administrator Guide</i>.</p>\n         <p>Optionally, you can use a customer managed key from AWS Key Management Service (AWS\n         KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, WorkMail\n         creates a default, AWS managed key for you.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -885,13 +1072,14 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.workmail#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a customer managed master key from AWS\n         KMS.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a customer managed key from AWS KMS.</p>"
                     }
                 },
                 "EnableInteroperability": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When <code>true</code>, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to <code>true</code> if an AD Connector directory ID is included in the request.</p>"
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When <code>true</code>, allows organization interoperability between WorkMail and\n         Microsoft Exchange. If <code>true</code>, you must include a AD Connector directory ID in\n         the request.</p>"
                     }
                 }
             }
@@ -939,7 +1127,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon WorkMail resource. </p>",
+                "smithy.api#documentation": "<p>Creates a new WorkMail resource.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1018,7 +1206,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a user who can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.</p>",
+                "smithy.api#documentation": "<p>Creates a user who can be used in WorkMail by calling the <a>RegisterToWorkMail</a> operation.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1218,7 +1406,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the <code>AvailabilityConfiguration</code> will be deleted.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the <code>AvailabilityConfiguration</code> will be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1307,7 +1495,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a group from Amazon WorkMail.</p>",
+                "smithy.api#documentation": "<p>Deletes a group from WorkMail.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1331,6 +1519,52 @@
             }
         },
         "com.amazonaws.workmail#DeleteGroupResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.workmail#DeleteImpersonationRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DeleteImpersonationRoleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DeleteImpersonationRoleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an impersonation role for the given WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#DeleteImpersonationRoleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization from which to delete the impersonation role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the impersonation role to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#DeleteImpersonationRoleResponse": {
             "type": "structure",
             "members": {}
         },
@@ -1426,14 +1660,14 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the access override will be deleted.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the access override will be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserId": {
                     "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The WorkMail user for which you want to delete the override. Accepts the following types of user identities:</p>\n         <ul>\n            <li>\n               <p>User ID:  <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> \n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The WorkMail user for which you want to delete the override. Accepts the following types of user identities:</p>\n         <ul>\n            <li>\n               <p>User ID:  <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code>\n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1470,7 +1704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p>\n         <note>\n            <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a mobile device access rule for the specified WorkMail organization.</p>\n         <note>\n            <p>Deleting already deleted and non-existing rules does not produce an error. In those cases, the service sends back an HTTP 200 response with an empty HTTP body.</p>\n         </note>"
             }
         },
         "com.amazonaws.workmail#DeleteMobileDeviceAccessRuleRequest": {
@@ -1479,7 +1713,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which the rule will be deleted.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization under which the rule will be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1516,7 +1750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html\">Removing an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes an WorkMail organization and all underlying AWS resources managed by WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html\">Removing an organization</a> in the <i>WorkMail Administrator Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1540,6 +1774,7 @@
                 "DeleteDirectory": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, deletes the AWS Directory Service directory associated with the organization.</p>",
                         "smithy.api#required": {}
                     }
@@ -1586,7 +1821,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified resource. </p>",
+                "smithy.api#documentation": "<p>Deletes the specified resource.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1692,7 +1927,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a\n         user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a>\n         action to confirm the user state.</p>\n         <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for\n         30 days before they are permanently removed.</p>",
+                "smithy.api#documentation": "<p>Deletes a user from WorkMail and all subsequent systems. Before you can delete a\n         user, the user state must be <code>DISABLED</code>. Use the <a>DescribeUser</a>\n         action to confirm the user state.</p>\n         <p>Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for\n         30 days before they are permanently removed.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1745,7 +1980,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Mark a user, group, or resource as no longer used in Amazon WorkMail. This action\n         disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days\n         before they are permanently removed. The functionality in the console is\n            <i>Disable</i>.</p>",
+                "smithy.api#documentation": "<p>Mark a user, group, or resource as no longer used in WorkMail. This action\n         disassociates the mailbox and schedules it for clean-up. WorkMail keeps mailboxes for 30 days\n         before they are permanently removed. The functionality in the console is\n            <i>Disable</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1755,7 +1990,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the organization under which the Amazon WorkMail entity exists.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the organization under which the WorkMail entity exists.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1798,7 +2033,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a domain from Amazon WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first \n         remove any email address used by WorkMail entities before you remove the domain.</p>",
+                "smithy.api#documentation": "<p>Removes a domain from WorkMail, stops email routing to WorkMail, and removes the authorization allowing WorkMail use. SES keeps the domain because other applications may use it. You must first \n         remove any email address used by WorkMail entities before you remove the domain.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1808,14 +2043,14 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the domain will be deregistered.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the domain will be deregistered.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DomainName": {
                     "target": "com.amazonaws.workmail#WorkMailDomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain to deregister in WorkMail and SES. </p>",
+                        "smithy.api#documentation": "<p>The domain to deregister in WorkMail and SES.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1951,7 +2186,7 @@
                 "State": {
                     "target": "com.amazonaws.workmail#EntityState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the user: enabled (registered to Amazon WorkMail) or disabled (deregistered or\n         never registered to WorkMail).</p>"
+                        "smithy.api#documentation": "<p>The state of the user: enabled (registered to WorkMail) or disabled (deregistered or\n         never registered to WorkMail).</p>"
                     }
                 },
                 "EnabledDate": {
@@ -2007,6 +2242,7 @@
                 "Enforced": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Lists the enforcement setting of the applied policy.</p>"
                     }
                 }
@@ -2106,6 +2342,7 @@
                 "EstimatedProgress": {
                     "target": "com.amazonaws.workmail#Percentage",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The estimated progress of the mailbox export job, in percentage points.</p>"
                     }
                 },
@@ -2192,7 +2429,7 @@
                 "DirectoryId": {
                     "target": "com.amazonaws.workmail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the directory associated with an Amazon WorkMail organization.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the directory associated with an WorkMail organization.</p>"
                     }
                 },
                 "DirectoryType": {
@@ -2309,7 +2546,7 @@
                 "State": {
                     "target": "com.amazonaws.workmail#EntityState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the resource: enabled (registered to Amazon WorkMail), disabled (deregistered\n         or never registered to WorkMail), or deleted.</p>"
+                        "smithy.api#documentation": "<p>The state of the resource: enabled (registered to WorkMail), disabled (deregistered\n         or never registered to WorkMail), or deleted.</p>"
                     }
                 },
                 "EnabledDate": {
@@ -2402,25 +2639,25 @@
                 "State": {
                     "target": "com.amazonaws.workmail#EntityState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of a user: enabled (registered to Amazon WorkMail) or disabled (deregistered or\n         never registered to WorkMail).</p>"
+                        "smithy.api#documentation": "<p>The state of a user: enabled (registered to WorkMail) or disabled (deregistered or\n         never registered to WorkMail).</p>"
                     }
                 },
                 "UserRole": {
                     "target": "com.amazonaws.workmail#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>In certain cases, other entities are modeled as users. If interoperability is\n         enabled, resources are imported into Amazon WorkMail as users. Because different WorkMail\n         organizations rely on different directory types, administrators can distinguish between an\n         unregistered user (account is disabled and has a user role) and the directory\n         administrators. The values are USER, RESOURCE, and SYSTEM_USER.</p>"
+                        "smithy.api#documentation": "<p>In certain cases, other entities are modeled as users. If interoperability is\n         enabled, resources are imported into WorkMail as users. Because different WorkMail\n         organizations rely on different directory types, administrators can distinguish between an\n         unregistered user (account is disabled and has a user role) and the directory\n         administrators. The values are USER, RESOURCE, and SYSTEM_USER.</p>"
                     }
                 },
                 "EnabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time at which the user was enabled for Amazon WorkMail usage, in UNIX epoch\n         time format.</p>"
+                        "smithy.api#documentation": "<p>The date and time at which the user was enabled for WorkMailusage, in UNIX epoch\n         time format.</p>"
                     }
                 },
                 "DisabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch\n         time format.</p>"
+                        "smithy.api#documentation": "<p>The date and time at which the user was disabled for WorkMail usage, in UNIX epoch\n         time format.</p>"
                     }
                 }
             }
@@ -2735,22 +2972,26 @@
             }
         },
         "com.amazonaws.workmail#DnsRecordVerificationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "VERIFIED",
-                        "name": "VERIFIED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "VERIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFIED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#DnsRecords": {
@@ -2776,7 +3017,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The domain to associate with an Amazon WorkMail organization.</p>\n         <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html\">Adding a domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The domain to associate with an WorkMail organization.</p>\n         <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html\">Adding a domain</a> in the <i>WorkMail Administrator Guide</i>.</p>"
             }
         },
         "com.amazonaws.workmail#DomainName": {
@@ -2858,22 +3099,26 @@
             }
         },
         "com.amazonaws.workmail#EntityState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#EntityStateException": {
@@ -2916,6 +3161,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Describes an EWS based availability provider. This is only used as input to the service.</p>"
             }
+        },
+        "com.amazonaws.workmail#ExpiresIn": {
+            "type": "long"
         },
         "com.amazonaws.workmail#ExternalUserName": {
             "type": "string",
@@ -2962,30 +3210,38 @@
             }
         },
         "com.amazonaws.workmail#FolderName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INBOX",
-                        "name": "INBOX"
-                    },
-                    {
-                        "value": "DELETED_ITEMS",
-                        "name": "DELETED_ITEMS"
-                    },
-                    {
-                        "value": "SENT_ITEMS",
-                        "name": "SENT_ITEMS"
-                    },
-                    {
-                        "value": "DRAFTS",
-                        "name": "DRAFTS"
-                    },
-                    {
-                        "value": "JUNK_EMAIL",
-                        "name": "JUNK_EMAIL"
+            "type": "enum",
+            "members": {
+                "INBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOX"
                     }
-                ]
+                },
+                "DELETED_ITEMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED_ITEMS"
+                    }
+                },
+                "SENT_ITEMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENT_ITEMS"
+                    }
+                },
+                "DRAFTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFTS"
+                    }
+                },
+                "JUNK_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JUNK_EMAIL"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#GetAccessControlEffect": {
@@ -3008,10 +3264,13 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the effects of an organization's access control rules as they apply to a\n         specified IPv4 address, access protocol action, or user ID. </p>"
+                "smithy.api#documentation": "<p>Gets the effects of an organization's access control rules as they apply to a\n         specified IPv4 address, access protocol action, and  user ID or impersonation role ID. You must provide either the user ID or impersonation role ID. Impersonation role ID can only be used with Action EWS.</p>"
             }
         },
         "com.amazonaws.workmail#GetAccessControlEffectRequest": {
@@ -3041,8 +3300,13 @@
                 "UserId": {
                     "target": "com.amazonaws.workmail#WorkMailIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The user ID.</p>"
+                    }
+                },
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role ID.</p>"
                     }
                 }
             }
@@ -3132,6 +3396,179 @@
                 }
             }
         },
+        "com.amazonaws.workmail#GetImpersonationRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#GetImpersonationRoleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#GetImpersonationRoleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the impersonation role details for the given WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#GetImpersonationRoleEffect": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#GetImpersonationRoleEffectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#GetImpersonationRoleEffectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tests whether the given impersonation role can impersonate a target user.</p>"
+            }
+        },
+        "com.amazonaws.workmail#GetImpersonationRoleEffectRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization where the impersonation role is defined.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role ID to test.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetUser": {
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization user chosen to test the impersonation role. The following identity\n         formats are available:</p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code>\n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#GetImpersonationRoleEffectResponse": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role type.</p>"
+                    }
+                },
+                "Effect": {
+                    "target": "com.amazonaws.workmail#AccessEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code></code>Effect of the impersonation role on the target user based on its rules. Available\n         effects are <code>ALLOW</code> or <code>DENY</code>.</p>"
+                    }
+                },
+                "MatchedRules": {
+                    "target": "com.amazonaws.workmail#ImpersonationMatchedRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the rules that match the input and produce the configured effect.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#GetImpersonationRoleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization from which to retrieve the impersonation role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role ID to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#GetImpersonationRoleResponse": {
+            "type": "structure",
+            "members": {
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role ID.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role name.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role type.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role description.</p>"
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of rules for the given impersonation role.</p>"
+                    }
+                },
+                "DateCreated": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the impersonation role was created.</p>"
+                    }
+                },
+                "DateModified": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the impersonation role was last modified.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workmail#GetMailDomain": {
             "type": "operation",
             "input": {
@@ -3165,7 +3602,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the domain is retrieved.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the domain is retrieved.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3184,18 +3621,20 @@
                 "Records": {
                     "target": "com.amazonaws.workmail#DnsRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the DNS records that Amazon WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming \n         email traffic to SES. See admin guide for more details.</p>"
+                        "smithy.api#documentation": "<p>A list of the DNS records that WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming \n         email traffic to SES. See admin guide for more details.</p>"
                     }
                 },
                 "IsTestDomain": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.</p>"
                     }
                 },
                 "IsDefault": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the domain is the default domain for your organization.</p>"
                     }
                 },
@@ -3268,6 +3707,7 @@
                 "MailboxSize": {
                     "target": "com.amazonaws.workmail#MailboxSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current mailbox size, in MB, for the specified user.</p>"
                     }
                 }
@@ -3293,7 +3733,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access \n         rules for the Amazon WorkMail organization for a particular user's attributes.</p>"
+                "smithy.api#documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access \n         rules for the WorkMail organization for a particular user's attributes.</p>"
             }
         },
         "com.amazonaws.workmail#GetMobileDeviceAccessEffectRequest": {
@@ -3302,7 +3742,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization to simulate the access effect for.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization to simulate the access effect for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3338,7 +3778,7 @@
                 "Effect": {
                     "target": "com.amazonaws.workmail#MobileDeviceAccessRuleEffect",
                     "traits": {
-                        "smithy.api#documentation": "<p>The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated \n         user parameters.</p>"
+                        "smithy.api#documentation": "<p>The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the WorkMail organization for the simulated \n         user parameters.</p>"
                     }
                 },
                 "MatchedRules": {
@@ -3384,14 +3824,14 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization to which you want to apply the override.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization to which you want to apply the override.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserId": {
                     "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the WorkMail user for the override. Accepts the following types of user identities: </p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> \n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Identifies the WorkMail user for the override. Accepts the following types of user identities: </p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code>\n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3475,18 +3915,18 @@
                 "EnabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the group was enabled for Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the group was enabled for WorkMail use.</p>"
                     }
                 },
                 "DisabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the group was disabled from Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the group was disabled from WorkMail use.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The representation of an Amazon WorkMail group.</p>"
+                "smithy.api#documentation": "<p>The representation of an WorkMail group.</p>"
             }
         },
         "com.amazonaws.workmail#GroupName": {
@@ -3525,6 +3965,245 @@
                 "smithy.api#pattern": "^[\\x21-\\x7e]+$"
             }
         },
+        "com.amazonaws.workmail#ImpersonationMatchedRule": {
+            "type": "structure",
+            "members": {
+                "ImpersonationRuleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule that matched the input</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule that matched the input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The impersonation rule that matched the input.</p>"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationMatchedRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#ImpersonationMatchedRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRole": {
+            "type": "structure",
+            "members": {
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the impersonation role.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role name.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impersonation role type.</p>"
+                    }
+                },
+                "DateCreated": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the impersonation role was created.</p>"
+                    }
+                },
+                "DateModified": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the impersonation role was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An impersonation role for the given WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRoleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F\\x3C\\x3E\\x5C]+$"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRoleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRoleIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#ImpersonationRoleId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRoleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#ImpersonationRole"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRoleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F\\x3C\\x3E\\x5C]+$"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRoleType": {
+            "type": "enum",
+            "members": {
+                "FULL_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_ACCESS"
+                    }
+                },
+                "READ_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ_ONLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRule": {
+            "type": "structure",
+            "members": {
+                "ImpersonationRuleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule name.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule description.</p>"
+                    }
+                },
+                "Effect": {
+                    "target": "com.amazonaws.workmail#AccessEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the rule when it matches the input. Allowed effect values are\n            <code>ALLOW</code> or <code>DENY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetUsers": {
+                    "target": "com.amazonaws.workmail#TargetUsers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of user IDs that match the rule.</p>"
+                    }
+                },
+                "NotTargetUsers": {
+                    "target": "com.amazonaws.workmail#TargetUsers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of user IDs that don't match the rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rules for the given impersonation role.</p>"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRuleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F\\x3C\\x3E\\x5C]+$"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#ImpersonationRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationRuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F\\x3C\\x3E\\x5C]+$"
+            }
+        },
+        "com.amazonaws.workmail#ImpersonationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\x21-\\x7e]+$"
+            }
+        },
         "com.amazonaws.workmail#InvalidConfigurationException": {
             "type": "structure",
             "members": {
@@ -3545,7 +4224,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You SES configuration has customizations that Amazon WorkMail cannot save. The error message lists the invalid setting. For examples of invalid settings, refer to \n         <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html\">CreateReceiptRule</a>.</p>",
+                "smithy.api#documentation": "<p>You SES configuration has customizations that WorkMail cannot save. The error message lists the invalid setting. For examples of invalid settings, refer to \n         <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html\">CreateReceiptRule</a>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3816,7 +4495,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the <code>AvailabilityConfiguration</code>'s will be\n         listed.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the <code>AvailabilityConfiguration</code>'s will be\n         listed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3840,7 +4519,7 @@
                 "AvailabilityConfigurations": {
                     "target": "com.amazonaws.workmail#AvailabilityConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of <code>AvailabilityConfiguration</code>'s that exist for the specified Amazon WorkMail organization.</p>"
+                        "smithy.api#documentation": "<p>The list of <code>AvailabilityConfiguration</code>'s that exist for the specified WorkMail organization.</p>"
                     }
                 },
                 "NextToken": {
@@ -4007,6 +4686,75 @@
                 }
             }
         },
+        "com.amazonaws.workmail#ListImpersonationRoles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#ListImpersonationRolesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#ListImpersonationRolesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the impersonation roles for the given WorkMail organization.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.workmail#ListImpersonationRolesRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization to which the listed impersonation roles belong.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workmail#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of results. The first call doesn't require a\n         token.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.workmail#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned in a single call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#ListImpersonationRolesResponse": {
+            "type": "structure",
+            "members": {
+                "Roles": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of impersonation roles under the given WorkMail organization.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workmail#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results. The value is <code>null</code> when\n         there are no results to return.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workmail#ListMailDomains": {
             "type": "operation",
             "input": {
@@ -4027,7 +4775,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the mail domains in a given Amazon WorkMail organization.</p>",
+                "smithy.api#documentation": "<p>Lists the mail domains in a given WorkMail organization.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -4042,7 +4790,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which to list domains.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which to list domains.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4066,7 +4814,7 @@
                 "MailDomains": {
                     "target": "com.amazonaws.workmail#MailDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of mail domain summaries, specifying domains that exist in the specified Amazon WorkMail  organization, along with the information about whether the domain is or isn't the default.</p>"
+                        "smithy.api#documentation": "<p>The list of mail domain summaries, specifying domains that exist in the specified WorkMail organization, along with the information about whether the domain is or isn't the default.</p>"
                     }
                 },
                 "NextToken": {
@@ -4264,14 +5012,14 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which to list mobile device access overrides.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization under which to list mobile device access overrides.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserId": {
                     "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:</p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> \n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:</p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code>\n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "DeviceId": {
@@ -4300,7 +5048,7 @@
                 "Overrides": {
                     "target": "com.amazonaws.workmail#MobileDeviceAccessOverridesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of mobile device access overrides that exist for the specified Amazon WorkMail organization and user.</p>"
+                        "smithy.api#documentation": "<p>The list of mobile device access overrides that exist for the specified WorkMail organization and user.</p>"
                     }
                 },
                 "NextToken": {
@@ -4331,7 +5079,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the mobile device access rules for the specified Amazon WorkMail organization.</p>"
+                "smithy.api#documentation": "<p>Lists the mobile device access rules for the specified WorkMail organization.</p>"
             }
         },
         "com.amazonaws.workmail#ListMobileDeviceAccessRulesRequest": {
@@ -4340,7 +5088,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which to list the rules.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which to list the rules.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4352,7 +5100,7 @@
                 "Rules": {
                     "target": "com.amazonaws.workmail#MobileDeviceAccessRulesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of mobile device access rules that exist under the specified Amazon WorkMail organization.</p>"
+                        "smithy.api#documentation": "<p>The list of mobile device access rules that exist under the specified WorkMail organization.</p>"
                     }
                 }
             }
@@ -4492,7 +5240,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.workmail#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used to paginate through the delegates associated with a resource. While\n         results are still available, it has an associated value. When the last page is reached, the\n         token is empty. </p>"
+                        "smithy.api#documentation": "<p>The token used to paginate through the delegates associated with a resource. While\n         results are still available, it has an associated value. When the last page is reached, the\n         token is empty.</p>"
                     }
                 }
             }
@@ -4581,7 +5329,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags applied to an Amazon WorkMail organization resource.</p>"
+                "smithy.api#documentation": "<p>Lists the tags applied to an WorkMail organization resource.</p>"
             }
         },
         "com.amazonaws.workmail#ListTagsForResourceRequest": {
@@ -4735,6 +5483,7 @@
                 "DefaultDomain": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the domain is default or not.</p>"
                     }
                 }
@@ -4795,6 +5544,7 @@
                 "EstimatedProgress": {
                     "target": "com.amazonaws.workmail#Percentage",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The estimated progress of the mailbox export job, in percentage points.</p>"
                     }
                 },
@@ -4832,32 +5582,37 @@
             }
         },
         "com.amazonaws.workmail#MailboxExportJobState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#MailboxQuota": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4866,6 +5621,7 @@
         "com.amazonaws.workmail#MailboxSize": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -4874,7 +5630,6 @@
         "com.amazonaws.workmail#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4911,13 +5666,13 @@
                 "EnabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the member was enabled for Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the member was enabled for WorkMail use.</p>"
                     }
                 },
                 "DisabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the member was disabled from Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the member was disabled from WorkMail use.</p>"
                     }
                 }
             },
@@ -4926,18 +5681,20 @@
             }
         },
         "com.amazonaws.workmail#MemberType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GROUP",
-                        "name": "GROUP"
-                    },
-                    {
-                        "value": "USER",
-                        "name": "USER"
+            "type": "enum",
+            "members": {
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
                     }
-                ]
+                },
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#Members": {
@@ -5034,7 +5791,7 @@
                 "MobileDeviceAccessRuleId": {
                     "target": "com.amazonaws.workmail#MobileDeviceAccessRuleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID assigned to a mobile access rule. </p>"
+                        "smithy.api#documentation": "<p>The ID assigned to a mobile access rule.</p>"
                     }
                 },
                 "Name": {
@@ -5058,7 +5815,7 @@
                 "DeviceTypes": {
                     "target": "com.amazonaws.workmail#DeviceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Device types that a rule will match. </p>"
+                        "smithy.api#documentation": "<p>Device types that a rule will match.</p>"
                     }
                 },
                 "NotDeviceTypes": {
@@ -5117,7 +5874,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule that controls access to mobile devices for an Amazon WorkMail group.</p>"
+                "smithy.api#documentation": "<p>A rule that controls access to mobile devices for an WorkMail group.</p>"
             }
         },
         "com.amazonaws.workmail#MobileDeviceAccessRuleDescription": {
@@ -5131,18 +5888,20 @@
             }
         },
         "com.amazonaws.workmail#MobileDeviceAccessRuleEffect": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALLOW",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "DENY",
-                        "name": "DENY"
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
                     }
-                ]
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#MobileDeviceAccessRuleId": {
@@ -5185,7 +5944,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The user, group, or resource name isn't unique in Amazon WorkMail.</p>",
+                "smithy.api#documentation": "<p>The user, group, or resource name isn't unique in WorkMail.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5301,6 +6060,7 @@
         "com.amazonaws.workmail#Percentage": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -5337,22 +6097,26 @@
             }
         },
         "com.amazonaws.workmail#PermissionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FULL_ACCESS",
-                        "name": "FULL_ACCESS"
-                    },
-                    {
-                        "value": "SEND_AS",
-                        "name": "SEND_AS"
-                    },
-                    {
-                        "value": "SEND_ON_BEHALF",
-                        "name": "SEND_ON_BEHALF"
+            "type": "enum",
+            "members": {
+                "FULL_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_ACCESS"
                     }
-                ]
+                },
+                "SEND_AS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND_AS"
+                    }
+                },
+                "SEND_ON_BEHALF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND_ON_BEHALF"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#PermissionValues": {
@@ -5401,10 +6165,13 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a new access control rule for the specified organization. The rule allows or\n         denies access to the organization for the specified IPv4 addresses, access protocol\n         actions, and user IDs. Adding a new rule with the same name as an existing rule replaces\n         the older rule.</p>"
+                "smithy.api#documentation": "<p>Adds a new access control rule for the specified organization. The rule allows or\n         denies access to the organization for the specified IPv4 addresses, access protocol\n         actions, user IDs and impersonation IDs. Adding a new rule with the same name as an existing rule replaces\n         the older rule.</p>"
             }
         },
         "com.amazonaws.workmail#PutAccessControlRuleRequest": {
@@ -5472,6 +6239,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the organization.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ImpersonationRoleIds": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Impersonation role IDs to include in the rule.</p>"
+                    }
+                },
+                "NotImpersonationRoleIds": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Impersonation role IDs to exclude from the rule.</p>"
                     }
                 }
             }
@@ -5564,7 +6343,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the organization that you are applying the DMARC policy to. </p>",
+                        "smithy.api#documentation": "<p>The ID of the organization that you are applying the DMARC policy to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5683,14 +6462,14 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the Amazon WorkMail organization for which you create the override.</p>",
+                        "smithy.api#documentation": "<p>Identifies the WorkMail organization for which you create the override.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserId": {
                     "target": "com.amazonaws.workmail#EntityIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The WorkMail user for which you create the override. Accepts the following types of user identities:</p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> \n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The WorkMail user for which you create the override. Accepts the following types of user identities:</p>\n         <ul>\n            <li>\n               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code>\n               </p>\n            </li>\n            <li>\n               <p>Email address: <code>user@domain.tld</code>\n               </p>\n            </li>\n            <li>\n               <p>User name: <code>user</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5835,7 +6614,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a new domain in Amazon WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has \n         permanent permission to use the specified domain for sending your users' emails.</p>",
+                "smithy.api#documentation": "<p>Registers a new domain in WorkMail and SES, and configures it for use by WorkMail. Emails received by SES for this domain are routed to the specified WorkMail organization, and WorkMail has \n         permanent permission to use the specified domain for sending your users' emails.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5852,14 +6631,14 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which you're creating the domain.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization under which you're creating the domain.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DomainName": {
                     "target": "com.amazonaws.workmail#WorkMailDomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the mail domain to create in Amazon WorkMail and SES.</p>",
+                        "smithy.api#documentation": "<p>The name of the mail domain to create in WorkMail and SES.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5913,7 +6692,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers an existing and disabled user, group, or resource for Amazon WorkMail use by\n         associating a mailbox and calendaring capabilities. It performs no change if the user,\n         group, or resource is enabled and fails if the user, group, or resource is deleted. This\n         operation results in the accumulation of costs. For more information, see <a href=\"https://aws.amazon.com/workmail/pricing\">Pricing</a>. The equivalent console\n         functionality for this operation is <i>Enable</i>. </p>\n         <p>Users can either be created by calling the <a>CreateUser</a> API operation\n         or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>",
+                "smithy.api#documentation": "<p>Registers an existing and disabled user, group, or resource for WorkMail use by\n         associating a mailbox and calendaring capabilities. It performs no change if the user,\n         group, or resource is enabled and fails if the user, group, or resource is deleted. This\n         operation results in the accumulation of costs. For more information, see <a href=\"https://aws.amazon.com/workmail/pricing\">Pricing</a>. The equivalent console\n         functionality for this operation is <i>Enable</i>.</p>\n         <p>Users can either be created by calling the <a>CreateUser</a> API operation\n         or they can be synchronized from your directory. For more information, see <a>DeregisterFromWorkMail</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5955,7 +6734,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This user, group, or resource name is not allowed in Amazon WorkMail.</p>",
+                "smithy.api#documentation": "<p>This user, group, or resource name is not allowed in WorkMail.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -6067,13 +6846,13 @@
                 "EnabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the resource was enabled for Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the resource was enabled for WorkMail use.</p>"
                     }
                 },
                 "DisabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the resource was disabled from Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the resource was disabled from WorkMail use.</p>"
                     }
                 }
             },
@@ -6121,18 +6900,20 @@
             }
         },
         "com.amazonaws.workmail#ResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ROOM",
-                        "name": "ROOM"
-                    },
-                    {
-                        "value": "EQUIPMENT",
-                        "name": "EQUIPMENT"
+            "type": "enum",
+            "members": {
+                "ROOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROOM"
                     }
-                ]
+                },
+                "EQUIPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUIPMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#Resources": {
@@ -6142,28 +6923,31 @@
             }
         },
         "com.amazonaws.workmail#RetentionAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "DELETE",
-                        "name": "DELETE"
-                    },
-                    {
-                        "value": "PERMANENTLY_DELETE",
-                        "name": "PERMANENTLY_DELETE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "PERMANENTLY_DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENTLY_DELETE"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#RetentionPeriod": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 730
@@ -6235,7 +7019,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a mailbox export job to export MIME-format email messages and calendar items\n         from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3)\n         bucket. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html\">Exporting mailbox content</a> in\n         the <i>Amazon WorkMail Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Starts a mailbox export job to export MIME-format email messages and calendar items\n         from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3)\n         bucket. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html\">Exporting mailbox content</a> in\n         the <i>WorkMail Administrator Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6395,7 +7179,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies the specified tags to the specified Amazon WorkMail organization\n         resource.</p>"
+                "smithy.api#documentation": "<p>Applies the specified tags to the specified WorkMailorganization\n         resource.</p>"
             }
         },
         "com.amazonaws.workmail#TagResourceRequest": {
@@ -6430,6 +7214,18 @@
                 }
             }
         },
+        "com.amazonaws.workmail#TargetUsers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#EntityIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.workmail#TestAvailabilityConfiguration": {
             "type": "operation",
             "input": {
@@ -6453,7 +7249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Performs a test on an availability provider to ensure that access is allowed. For EWS, it verifies the provided credentials can be used to successfully log in. For Lambda, it verifies that the Lambda function can be invoked and that the resource access\n         policy was configured to deny anonymous access. An anonymous invocation is one done without providing either a <code>SourceArn</code> or <code>SourceAccount</code> header.</p>  \n         <note>\n            <p>The request must contain either one provider definition (<code>EwsProvider</code> or\n               <code>LambdaProvider</code>) or the <code>DomainName</code> parameter. If the\n               <code>DomainName</code> parameter is provided, the configuration stored under the\n               <code>DomainName</code> will be tested. </p>\n         </note>"
+                "smithy.api#documentation": "<p>Performs a test on an availability provider to ensure that access is allowed. For EWS, it verifies the provided credentials can be used to successfully log in. For Lambda, it verifies that the Lambda function can be invoked and that the resource access\n         policy was configured to deny anonymous access. An anonymous invocation is one done without providing either a <code>SourceArn</code> or <code>SourceAccount</code> header.</p>  \n         <note>\n            <p>The request must contain either one provider definition (<code>EwsProvider</code> or\n               <code>LambdaProvider</code>) or the <code>DomainName</code> parameter. If the\n               <code>DomainName</code> parameter is provided, the configuration stored under the\n               <code>DomainName</code> will be tested.</p>\n         </note>"
             }
         },
         "com.amazonaws.workmail#TestAvailabilityConfigurationRequest": {
@@ -6462,7 +7258,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization where the availability provider will be tested.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization where the availability provider will be tested.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6486,6 +7282,7 @@
                 "TestPassed": {
                     "target": "com.amazonaws.workmail#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean indicating whether the test passed or failed.</p>"
                     }
                 },
@@ -6539,7 +7336,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Untags the specified tags from the specified Amazon WorkMail organization\n         resource.</p>"
+                "smithy.api#documentation": "<p>Untags the specified tags from the specified WorkMail organization\n         resource.</p>"
             }
         },
         "com.amazonaws.workmail#UntagResourceRequest": {
@@ -6598,7 +7395,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which the <code>AvailabilityConfiguration</code> will be\n         updated.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which the <code>AvailabilityConfiguration</code> will be\n         updated.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6663,7 +7460,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which to list domains.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization for which to list domains.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6677,6 +7474,91 @@
             }
         },
         "com.amazonaws.workmail#UpdateDefaultMailDomainResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.workmail#UpdateImpersonationRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#UpdateImpersonationRoleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#UpdateImpersonationRoleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an impersonation role for the given WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#UpdateImpersonationRoleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkMail organization that contains the impersonation role to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImpersonationRoleId": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the impersonation role to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated impersonation role name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated impersonation role type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#ImpersonationRoleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated impersonation role description.</p>"
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.workmail#ImpersonationRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated list of rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#UpdateImpersonationRoleResponse": {
             "type": "structure",
             "members": {}
         },
@@ -6763,7 +7645,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+                "smithy.api#documentation": "<p>Updates a mobile device access rule for the specified WorkMail organization.</p>"
             }
         },
         "com.amazonaws.workmail#UpdateMobileDeviceAccessRuleRequest": {
@@ -6772,7 +7654,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.workmail#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which the rule will be updated.</p>",
+                        "smithy.api#documentation": "<p>The WorkMail organization under which the rule will be updated.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7067,18 +7949,18 @@
                 "EnabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the user was enabled for Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the user was enabled for WorkMail use.</p>"
                     }
                 },
                 "DisabledDate": {
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date indicating when the user was disabled from Amazon WorkMail use.</p>"
+                        "smithy.api#documentation": "<p>The date indicating when the user was disabled from WorkMail use.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The representation of an Amazon WorkMail user.</p>"
+                "smithy.api#documentation": "<p>The representation of an WorkMail user.</p>"
             }
         },
         "com.amazonaws.workmail#UserIdList": {
@@ -7104,22 +7986,26 @@
             }
         },
         "com.amazonaws.workmail#UserRole": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "RESOURCE",
-                        "name": "RESOURCE"
-                    },
-                    {
-                        "value": "SYSTEM_USER",
-                        "name": "SYSTEM_USER"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
                     }
-                ]
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                },
+                "SYSTEM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_USER"
+                    }
+                }
             }
         },
         "com.amazonaws.workmail#Users": {
@@ -7149,21 +8035,6 @@
         },
         "com.amazonaws.workmail#WorkMailService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WorkMail",
-                    "arnNamespace": "workmail",
-                    "cloudFormationName": "WorkMail",
-                    "cloudTrailEventSource": "workmail.amazonaws.com",
-                    "endpointPrefix": "workmail"
-                },
-                "aws.auth#sigv4": {
-                    "name": "workmail"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon WorkMail is a secure, managed business email and calendaring service with support for\n         existing desktop and mobile email clients. You can access your email, contacts, and\n         calendars using Microsoft Outlook, your browser, or other native iOS and Android email\n         applications. You can integrate WorkMail with your existing corporate directory and control\n         both the keys that encrypt your data and the location in which your data is\n         stored.</p>\n         <p>The WorkMail API is designed for the following scenarios:</p>\n         <ul>\n            <li>\n               <p>Listing and describing organizations</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing users</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing groups</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing resources</p>\n            </li>\n         </ul>\n         <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not\n         only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management\n         users and roles to help facilitate access, trust, and permission policies. By creating a\n         role and allowing an IAM user to access the WorkMail site, the IAM user gains full\n         administrative visibility into the entire WorkMail organization (or as set in the IAM\n         policy). This includes, but is not limited to, the ability to create, update, and delete\n         users, groups, and resources. This allows developers to perform the scenarios listed above,\n         as well as give users the ability to grant access on a selective basis using the IAM\n         model.</p>",
-                "smithy.api#title": "Amazon WorkMail"
-            },
             "version": "2017-10-01",
             "operations": [
                 {
@@ -7171,6 +8042,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#AssociateMemberToGroup"
+                },
+                {
+                    "target": "com.amazonaws.workmail#AssumeImpersonationRole"
                 },
                 {
                     "target": "com.amazonaws.workmail#CancelMailboxExportJob"
@@ -7183,6 +8057,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#CreateGroup"
+                },
+                {
+                    "target": "com.amazonaws.workmail#CreateImpersonationRole"
                 },
                 {
                     "target": "com.amazonaws.workmail#CreateMobileDeviceAccessRule"
@@ -7210,6 +8087,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#DeleteGroup"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DeleteImpersonationRole"
                 },
                 {
                     "target": "com.amazonaws.workmail#DeleteMailboxPermissions"
@@ -7272,6 +8152,12 @@
                     "target": "com.amazonaws.workmail#GetDefaultRetentionPolicy"
                 },
                 {
+                    "target": "com.amazonaws.workmail#GetImpersonationRole"
+                },
+                {
+                    "target": "com.amazonaws.workmail#GetImpersonationRoleEffect"
+                },
+                {
                     "target": "com.amazonaws.workmail#GetMailboxDetails"
                 },
                 {
@@ -7297,6 +8183,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#ListGroups"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ListImpersonationRoles"
                 },
                 {
                     "target": "com.amazonaws.workmail#ListMailboxExportJobs"
@@ -7374,6 +8263,9 @@
                     "target": "com.amazonaws.workmail#UpdateDefaultMailDomain"
                 },
                 {
+                    "target": "com.amazonaws.workmail#UpdateImpersonationRole"
+                },
+                {
                     "target": "com.amazonaws.workmail#UpdateMailboxQuota"
                 },
                 {
@@ -7385,7 +8277,22 @@
                 {
                     "target": "com.amazonaws.workmail#UpdateResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WorkMail",
+                    "arnNamespace": "workmail",
+                    "cloudFormationName": "WorkMail",
+                    "cloudTrailEventSource": "workmail.amazonaws.com",
+                    "endpointPrefix": "workmail"
+                },
+                "aws.auth#sigv4": {
+                    "name": "workmail"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>WorkMail is a secure, managed business email and calendaring service with support for\n         existing desktop and mobile email clients. You can access your email, contacts, and\n         calendars using Microsoft Outlook, your browser, or other native iOS and Android email\n         applications. You can integrate WorkMail with your existing corporate directory and control\n         both the keys that encrypt your data and the location in which your data is\n         stored.</p>\n         <p>The WorkMail API is designed for the following scenarios:</p>\n         <ul>\n            <li>\n               <p>Listing and describing organizations</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing users</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing groups</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>Managing resources</p>\n            </li>\n         </ul>\n         <p>All WorkMail API operations are Amazon-authenticated and certificate-signed. They not\n         only require the use of the AWS SDK, but also allow for the exclusive use of AWS Identity and Access Management\n         users and roles to help facilitate access, trust, and permission policies. By creating a\n         role and allowing an IAM user to access the WorkMail site, the IAM user gains full\n         administrative visibility into the entire WorkMail organization (or as set in the IAM\n         policy). This includes, but is not limited to, the ability to create, update, and delete\n         users, groups, and resources. This allows developers to perform the scenarios listed above,\n         as well as give users the ability to grant access on a selective basis using the IAM\n         model.</p>",
+                "smithy.api#title": "Amazon WorkMail"
+            }
         }
     }
 }

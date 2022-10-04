@@ -5220,6 +5220,18 @@
                     "traits": {
                         "smithy.api#enumValue": "GetObject-PartNumber"
                     }
+                },
+                "HeadObjectRange": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HeadObject-Range"
+                    }
+                },
+                "HeadObjectPartNumber": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HeadObject-PartNumber"
+                    }
                 }
             }
         },
@@ -5323,6 +5335,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GetObject"
+                    }
+                },
+                "HeadObject": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HeadObject"
+                    }
+                },
+                "ListObjects": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ListObjects"
+                    }
+                },
+                "ListObjectsV2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ListObjectsV2"
                     }
                 }
             }

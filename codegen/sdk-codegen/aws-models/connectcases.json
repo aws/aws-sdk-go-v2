@@ -1,0 +1,4279 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.connectcases#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.connectcases#AmazonConnectCases": {
+            "type": "service",
+            "version": "2022-10-03",
+            "operations": [
+                {
+                    "target": "com.amazonaws.connectcases#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.connectcases#Case"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#Domain"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#Field"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#Layout"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#Template"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ConnectCases",
+                    "arnNamespace": "cases",
+                    "cloudTrailEventSource": "event-source-placeholder",
+                    "endpointPrefix": "cases"
+                },
+                "aws.auth#sigv4": {
+                    "name": "cases"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>Welcome to the Amazon Connect Cases API Reference. This guide provides information about the\n      Amazon Connect Cases API, which you can use to create, update, get, and list Cases domains,\n      fields, field options, layouts, templates, cases, related items, and tags.</p>\n\n         <p>For more information about Amazon Connect Cases, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cases.html\">Amazon Connect Cases</a> in the\n          <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#title": "Amazon Connect Cases"
+            }
+        },
+        "com.amazonaws.connectcases#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#AssociationTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.connectcases#BasicLayout": {
+            "type": "structure",
+            "members": {
+                "topPanel": {
+                    "target": "com.amazonaws.connectcases#LayoutSections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This represents sections in a panel of the page layout.</p>"
+                    }
+                },
+                "moreInfo": {
+                    "target": "com.amazonaws.connectcases#LayoutSections",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This represents sections in a tab of the page layout.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Content specific to <code>BasicLayout</code> type. It configures fields in the top panel\n      and More Info tab of agent application. </p>"
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetField": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#BatchGetFieldRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#BatchGetFieldResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the description for the list of fields in the request parameters. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields-batch",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetFieldErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldError"
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetFieldIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#GetFieldResponse"
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetFieldRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#BatchGetFieldIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique field identifiers. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#BatchGetFieldResponse": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#BatchGetFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of detailed field information. </p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.connectcases#BatchGetFieldErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of field errors. </p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#BatchPutFieldOptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#BatchPutFieldOptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#BatchPutFieldOptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates and updates a set of field options for a single select field in a Cases\n      domain.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields/{fieldId}/options",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#BatchPutFieldOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a field.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.connectcases#FieldOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>FieldOption</code> objects.</p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#BatchPutFieldOptionsResponse": {
+            "type": "structure",
+            "members": {
+                "errors": {
+                    "target": "com.amazonaws.connectcases#FieldOptionErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of field errors. </p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#Case": {
+            "type": "resource",
+            "identifiers": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId"
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.connectcases#CreateCase"
+            },
+            "read": {
+                "target": "com.amazonaws.connectcases#GetCase"
+            },
+            "update": {
+                "target": "com.amazonaws.connectcases#UpdateCase"
+            },
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.connectcases#ListCasesForContact"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#SearchCases"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.connectcases#RelatedItem"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "domain/{domainId}/case/{caseId}"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CaseArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CaseEventIncludedData": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of field identifiers.</p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of what case data is published through the case event stream.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CaseFilter": {
+            "type": "union",
+            "members": {
+                "field": {
+                    "target": "com.amazonaws.connectcases#FieldFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fields to filter on.</p>"
+                    }
+                },
+                "not": {
+                    "target": "com.amazonaws.connectcases#CaseFilter"
+                },
+                "andAll": {
+                    "target": "com.amazonaws.connectcases#CaseFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides \"and all\" filtering.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for cases. Only one value can be provided.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CaseFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#CaseFilter"
+            }
+        },
+        "com.amazonaws.connectcases#CaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CaseSummary": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Case summary information.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CaseSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#CaseSummary"
+            }
+        },
+        "com.amazonaws.connectcases#Channel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ChannelList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#Channel"
+            }
+        },
+        "com.amazonaws.connectcases#CommentBody": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CommentBodyTextType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Text/Plain",
+                        "name": "PLAINTEXT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#CommentContent": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "com.amazonaws.connectcases#CommentBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text in the body of a <code>Comment</code> on a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.connectcases#CommentBodyTextType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the text in the box of a <code>Comment</code> on a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of a <code>Comment</code> to be returned to agents.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CommentFilter": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for related items of type <code>Comment</code>.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service\n      resource associated with the request. Resolve the conflict before retrying this request. See\n      the accompanying error message for details.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.connectcases#ConnectedToSystemTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.connectcases#Contact": {
+            "type": "structure",
+            "members": {
+                "contactArn": {
+                    "target": "com.amazonaws.connectcases#ContactArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents an Amazon Connect contact object. </p>"
+            }
+        },
+        "com.amazonaws.connectcases#ContactArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ContactContent": {
+            "type": "structure",
+            "members": {
+                "contactArn": {
+                    "target": "com.amazonaws.connectcases#ContactArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.connectcases#Channel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of channels to filter on for related items of type <code>Contact</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectedToSystemTime": {
+                    "target": "com.amazonaws.connectcases#ConnectedToSystemTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The difference between the <code>InitiationTimestamp</code> and the\n        <code>DisconnectTimestamp</code> of the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents a content of an Amazon Connect contact object.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#ContactFilter": {
+            "type": "structure",
+            "members": {
+                "channel": {
+                    "target": "com.amazonaws.connectcases#ChannelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of channels to filter on for related items of type <code>Contact</code>.</p>",
+                        "smithy.api#length": {
+                            "max": 3
+                        }
+                    }
+                },
+                "contactArn": {
+                    "target": "com.amazonaws.connectcases#ContactArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for related items of type <code>Contact</code>.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#CreateCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#CreateCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#CreateCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a case in the specified Cases domain. Case system and custom fields are taken\n      as an array id/value pairs with a declared data types.</p>\n         <note>\n            <p>\n               <code>customer_id</code> is a required field when creating a case.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#CreateCaseRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects with field ID (matching ListFields/DescribeField) and value union\n      data.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "max": 64
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateCaseResponse": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseArn": {
+                    "target": "com.amazonaws.connectcases#CaseArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#CreateDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#CreateDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all case data, such as cases, fields, templates\n      and layouts. Each Amazon Connect instance can be associated with only one Cases\n      domain.</p>\n         <important>\n            <p>This will not associate your connect instance to Cases domain. Instead, use the\n          Amazon Connect\n        <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateIntegrationAssociation.html\">CreateIntegrationAssociation</a> API.</p>\n         </important>",
+                "smithy.api#http": {
+                    "uri": "/domains",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#CreateDomainRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.connectcases#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for your Cases domain. It must be unique for your Amazon Web Services\n      account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateDomainResponse": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainArn": {
+                    "target": "com.amazonaws.connectcases#DomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Cases domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainStatus": {
+                    "target": "com.amazonaws.connectcases#DomainStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateField": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#CreateFieldRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#CreateFieldResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a field in the Cases domain. This field is used to define the case object\n      model (that is, defines what data can be captured on cases) in a Cases domain. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#CreateFieldRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#FieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the data type, some system constraints, and default display of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.connectcases#FieldDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the field.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateFieldResponse": {
+            "type": "structure",
+            "members": {
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldArn": {
+                    "target": "com.amazonaws.connectcases#FieldArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateLayout": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#CreateLayoutRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#CreateLayoutResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a layout in the Cases domain. Layouts define the following configuration in\n      the top section and More Info tab of the Cases user interface:</p>\n         <ul>\n            <li>\n               <p>Fields to display to the users</p>\n            </li>\n            <li>\n               <p>Field ordering</p>\n            </li>\n         </ul>\n         <note>\n            <p>Title and Status fields cannot be part of layouts since they are not\n        configurable.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/layouts",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateLayoutRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#LayoutName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the layout. It must be unique for the Cases domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#LayoutContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about which fields will be present in the layout, and information about the\n      order of the fields.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateLayoutResponse": {
+            "type": "structure",
+            "members": {
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "layoutArn": {
+                    "target": "com.amazonaws.connectcases#LayoutArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateRelatedItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#CreateRelatedItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#CreateRelatedItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a related item (comments, tasks, and contacts) and associates it with a\n      case.</p>\n         <note>\n            <p>A Related Item is a resource that is associated with a case. It may or may not have an\n        external identifier linking it to an external resource (for example, a\n          <code>contactArn</code>). All Related Items have their own internal identifier, the\n          <code>relatedItemArn</code>. Examples of related items include <code>comments</code> and\n          <code>contacts</code>.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases/{caseId}/related-items/",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#CreateRelatedItemRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#RelatedItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemInputContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of a related item to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateRelatedItemResponse": {
+            "type": "structure",
+            "members": {
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemArn": {
+                    "target": "com.amazonaws.connectcases#RelatedItemArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#CreateTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#CreateTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a template in the Cases domain. This template is used to define the case\n      object model (that is, define what data can be captured on cases) in a Cases domain. A\n      template must have a unique name within a domain, and it must reference existing field IDs and layout\n      IDs. Additionally, multiple fields with same IDs are not allowed within the same Template.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/templates",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#CreateTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the template. It must be unique per domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.connectcases#TemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the template.</p>"
+                    }
+                },
+                "layoutConfiguration": {
+                    "target": "com.amazonaws.connectcases#LayoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of layouts associated to the template.</p>"
+                    }
+                },
+                "requiredFields": {
+                    "target": "com.amazonaws.connectcases#RequiredFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this\n      template.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreateTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateArn": {
+                    "target": "com.amazonaws.connectcases#TemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#CreatedTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.connectcases#Domain": {
+            "type": "resource",
+            "identifiers": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.connectcases#CreateDomain"
+            },
+            "read": {
+                "target": "com.amazonaws.connectcases#GetDomain"
+            },
+            "list": {
+                "target": "com.amazonaws.connectcases#ListDomains"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.connectcases#GetCaseEventConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#PutCaseEventConfiguration"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "domain/{domainId}"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#DomainArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#DomainId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#DomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#DomainStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "CreationInProgress",
+                        "name": "CREATION_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CreationFailed",
+                        "name": "CREATION_FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#DomainSummary": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainArn": {
+                    "target": "com.amazonaws.connectcases#DomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for the summarized details of the domain.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#DomainSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#DomainSummary"
+            }
+        },
+        "com.amazonaws.connectcases#EventBridgeConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the to broadcast case event data to the customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "includedData": {
+                    "target": "com.amazonaws.connectcases#EventIncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of what case and related item data is published through the case event\n      stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration to enable EventBridge case event delivery and determine what data is\n      delivered.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#EventIncludedData": {
+            "type": "structure",
+            "members": {
+                "caseData": {
+                    "target": "com.amazonaws.connectcases#CaseEventIncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of what case data is published through the case event stream.</p>"
+                    }
+                },
+                "relatedItemData": {
+                    "target": "com.amazonaws.connectcases#RelatedItemEventIncludedData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of what related item data is published through the case event stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of what case and related item data is published through the case event\n      stream.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#Field": {
+            "type": "resource",
+            "identifiers": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId"
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.connectcases#CreateField"
+            },
+            "update": {
+                "target": "com.amazonaws.connectcases#UpdateField"
+            },
+            "list": {
+                "target": "com.amazonaws.connectcases#ListFields"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.connectcases#BatchPutFieldOptions"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ListFieldOptions"
+                }
+            ],
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.connectcases#BatchGetField"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "domain/{domainId}/field/{fieldId}"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#FieldArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#FieldDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.connectcases#FieldError": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field identifier that caused the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code from getting a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message from getting a field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for errors on fields.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldFilter": {
+            "type": "union",
+            "members": {
+                "equalTo": {
+                    "target": "com.amazonaws.connectcases#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing field identifier and value information.</p>"
+                    }
+                },
+                "contains": {
+                    "target": "com.amazonaws.connectcases#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing field identifier and value information.</p>"
+                    }
+                },
+                "greaterThan": {
+                    "target": "com.amazonaws.connectcases#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing field identifier and value information.</p>"
+                    }
+                },
+                "greaterThanOrEqualTo": {
+                    "target": "com.amazonaws.connectcases#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing field identifier and value information.</p>"
+                    }
+                },
+                "lessThan": {
+                    "target": "com.amazonaws.connectcases#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing field identifier and value information.</p>"
+                    }
+                },
+                "lessThanOrEqualTo": {
+                    "target": "com.amazonaws.connectcases#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object containing field identifier and value information. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for fields. Only one value can be provided.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldGroup": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the field group.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        }
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents an ordered list containing field related information.</p>",
+                        "smithy.api#length": {
+                            "max": 30
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for a group of fields and associated properties.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#FieldIdentifier": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for unique identifier of a field.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldIdentifier"
+            }
+        },
+        "com.amazonaws.connectcases#FieldItem": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for field related information.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldItem"
+            }
+        },
+        "com.amazonaws.connectcases#FieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#FieldNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "System",
+                        "name": "SYSTEM"
+                    },
+                    {
+                        "value": "Custom",
+                        "name": "CUSTOM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#FieldOption": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.connectcases#FieldOptionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>FieldOptionName</code> has max length 100 and disallows trailing spaces.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connectcases#FieldOptionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>FieldOptionValue</code> has max length 100 and must be alphanumeric with hyphens and\n      underscores.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "active": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether the <code>FieldOption</code> is active (displayed) or inactive.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for field Options information.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldOptionError": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error message from creating or updating field option.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error code from creating or updating field option.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connectcases#FieldOptionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field option value that caused the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for field Options errors.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldOptionErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldOptionError"
+            }
+        },
+        "com.amazonaws.connectcases#FieldOptionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#FieldOptionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#FieldOptionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldOption"
+            }
+        },
+        "com.amazonaws.connectcases#FieldSummary": {
+            "type": "structure",
+            "members": {
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldArn": {
+                    "target": "com.amazonaws.connectcases#FieldArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#FieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.connectcases#FieldNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for the summarized details of the field.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldSummary"
+            }
+        },
+        "com.amazonaws.connectcases#FieldType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Text",
+                        "name": "TEXT"
+                    },
+                    {
+                        "value": "Number",
+                        "name": "NUMBER"
+                    },
+                    {
+                        "value": "Boolean",
+                        "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "DateTime",
+                        "name": "DATE_TIME"
+                    },
+                    {
+                        "value": "SingleSelect",
+                        "name": "SINGLE_SELECT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#FieldValue": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connectcases#FieldValueUnion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Union of potential field value types.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for case field values.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FieldValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#FieldValue"
+            }
+        },
+        "com.amazonaws.connectcases#FieldValueUnion": {
+            "type": "union",
+            "members": {
+                "stringValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>String value type.</p>",
+                        "smithy.api#length": {
+                            "max": 500
+                        }
+                    }
+                },
+                "doubleValue": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Can be either null, or have a Double number value type. Only one value can be\n      provided.</p>"
+                    }
+                },
+                "booleanValue": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Can be either null, or have a Boolean value type. Only one value can be provided.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to store union of Field values.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#GetCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#GetCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#GetCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific case if it exists. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases/{caseId}",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#GetCaseEventConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#GetCaseEventConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#GetCaseEventConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the case event publishing configuration.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/case-event-configuration",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#GetCaseEventConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetCaseEventConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "eventBridge": {
+                    "target": "com.amazonaws.connectcases#EventBridgeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration to enable EventBridge case event delivery and determine what data is\n      delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetCaseRequest": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique field identifiers. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetCaseResponse": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of detailed field information. </p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#GetDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#GetDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific domain if it exists. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#GetDomainRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetDomainResponse": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainArn": {
+                    "target": "com.amazonaws.connectcases#DomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Cases domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Cases domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.connectcases#CreatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the Cases domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainStatus": {
+                    "target": "com.amazonaws.connectcases#DomainStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Cases domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetFieldResponse": {
+            "type": "structure",
+            "members": {
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldArn": {
+                    "target": "com.amazonaws.connectcases#FieldArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.connectcases#FieldDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the field.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#FieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.connectcases#FieldNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Namespace of the field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to store detailed field information.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#GetLayout": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#GetLayoutRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#GetLayoutResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details for the requested layout.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/layouts/{layoutId}",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#GetLayoutRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the layout.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetLayoutResponse": {
+            "type": "structure",
+            "members": {
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "layoutArn": {
+                    "target": "com.amazonaws.connectcases#LayoutArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#LayoutName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the layout. It must be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#LayoutContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about which fields will be present in the layout, the order of the fields, and\n      read-only attribute of the field. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#GetTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#GetTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details for the requested template. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/templates/{templateId}",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#GetTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#GetTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateArn": {
+                    "target": "com.amazonaws.connectcases#TemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.connectcases#TemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the template.</p>"
+                    }
+                },
+                "layoutConfiguration": {
+                    "target": "com.amazonaws.connectcases#LayoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of layouts associated to the template.</p>"
+                    }
+                },
+                "requiredFields": {
+                    "target": "com.amazonaws.connectcases#RequiredFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this\n      template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Advice to clients on when the call can be safely retried.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>We couldn't process your request because of an issue with the server. Try again\n      later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.connectcases#Layout": {
+            "type": "resource",
+            "identifiers": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId"
+                },
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.connectcases#CreateLayout"
+            },
+            "read": {
+                "target": "com.amazonaws.connectcases#GetLayout"
+            },
+            "update": {
+                "target": "com.amazonaws.connectcases#UpdateLayout"
+            },
+            "list": {
+                "target": "com.amazonaws.connectcases#ListLayouts"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "domain/{domainId}/layout/{layoutId}"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#LayoutArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#LayoutConfiguration": {
+            "type": "structure",
+            "members": {
+                "defaultLayout": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Unique identifier of a layout. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to store configuration of layouts associated to the template.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#LayoutContent": {
+            "type": "union",
+            "members": {
+                "basic": {
+                    "target": "com.amazonaws.connectcases#BasicLayout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content specific to <code>BasicLayout</code> type. It configures fields in the top panel\n      and More Info tab of Cases user interface.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object to store union of different versions of layout content.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#LayoutId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#LayoutName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#LayoutSections": {
+            "type": "structure",
+            "members": {
+                "sections": {
+                    "target": "com.amazonaws.connectcases#SectionsList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Ordered list containing different kinds of sections that can be added. A LayoutSections object can only contain one section.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#LayoutSummary": {
+            "type": "structure",
+            "members": {
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for of the layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "layoutArn": {
+                    "target": "com.amazonaws.connectcases#LayoutArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#LayoutName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the layout.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object for the summarized details of the layout.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#LayoutSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#LayoutSummary"
+            }
+        },
+        "com.amazonaws.connectcases#ListCasesForContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListCasesForContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListCasesForContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists cases for a given contact.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/list-cases-for-contact",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListCasesForContactRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contactArn": {
+                    "target": "com.amazonaws.connectcases#ContactArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a contact in Amazon Connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListCasesForContactResponse": {
+            "type": "structure",
+            "members": {
+                "cases": {
+                    "target": "com.amazonaws.connectcases#CaseSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Case summary information.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListDomains": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListDomainsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListDomainsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all cases domains in the Amazon Web Services account. Each list item is a condensed\n      summary object of the domain.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains-list",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListDomainsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.connectcases#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListDomainsResponse": {
+            "type": "structure",
+            "members": {
+                "domains": {
+                    "target": "com.amazonaws.connectcases#DomainSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cases domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListFieldOptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListFieldOptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListFieldOptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the field options for a field identifier in the domain. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields/{fieldId}/options-list",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListFieldOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a field.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.connectcases#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.connectcases#ValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>FieldOption</code> values to filter on for\n      <code>ListFieldOptions</code>.</p>",
+                        "smithy.api#httpQuery": "values"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListFieldOptionsResponse": {
+            "type": "structure",
+            "members": {
+                "options": {
+                    "target": "com.amazonaws.connectcases#FieldOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>FieldOption</code> objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListFields": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListFieldsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListFieldsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all fields in a Cases domain.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields-list",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListFieldsRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.connectcases#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListFieldsResponse": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of detailed field information.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListLayouts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListLayoutsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListLayoutsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all layouts in the given cases domain. Each list item is a condensed summary object\n      of the layout.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/layouts-list",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListLayoutsRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.connectcases#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListLayoutsResponse": {
+            "type": "structure",
+            "members": {
+                "layouts": {
+                    "target": "com.amazonaws.connectcases#LayoutSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layouts for the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists tags for a resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{arn}",
+                    "method": "GET"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connectcases#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN)</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#ListTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#ListTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the templates in a Cases domain. Each list item is a condensed summary\n      object of the template. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/templates-list",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#ListTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.connectcases#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ListTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "templates": {
+                    "target": "com.amazonaws.connectcases#TemplateSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of template summary objects.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcases#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 9000
+                }
+            }
+        },
+        "com.amazonaws.connectcases#Order": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Asc",
+                        "name": "ASCENDING"
+                    },
+                    {
+                        "value": "Desc",
+                        "name": "DESCENDING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#PutCaseEventConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#PutCaseEventConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#PutCaseEventConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>API for adding case event publishing configuration</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/case-event-configuration",
+                    "method": "PUT"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#PutCaseEventConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventBridge": {
+                    "target": "com.amazonaws.connectcases#EventBridgeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration to enable EventBridge case event delivery and determine what data is\n      delivered.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#PutCaseEventConfigurationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.connectcases#RelatedItem": {
+            "type": "resource",
+            "identifiers": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId"
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId"
+                },
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.connectcases#CreateRelatedItem"
+            },
+            "list": {
+                "target": "com.amazonaws.connectcases#SearchRelatedItems"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "domain/{domainId}/case/{caseId}/related-item/{relatedItemId}"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemContent": {
+            "type": "union",
+            "members": {
+                "contact": {
+                    "target": "com.amazonaws.connectcases#ContactContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of a contact to be returned to agents.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.connectcases#CommentContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of a comment to be returned to agents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of a particular type of related item.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemEventIncludedData": {
+            "type": "structure",
+            "members": {
+                "includeContent": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of what related item data is published through the case event stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of what related item data is published through the case event stream.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#RelatedItemTypeFilter"
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemInputContent": {
+            "type": "union",
+            "members": {
+                "contact": {
+                    "target": "com.amazonaws.connectcases#Contact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object representing a contact in Amazon Connect as an API request field.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.connectcases#CommentContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of a comment to be returned to agents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the content of a related item to be created.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Contact",
+                        "name": "CONTACT"
+                    },
+                    {
+                        "value": "Comment",
+                        "name": "COMMENT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connectcases#RelatedItemTypeFilter": {
+            "type": "union",
+            "members": {
+                "contact": {
+                    "target": "com.amazonaws.connectcases#ContactFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for related items of type <code>Contact</code>.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.connectcases#CommentFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for related items of type <code>Comment</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of types of related items and their parameters to use for filtering.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#RequiredField": {
+            "type": "structure",
+            "members": {
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of fields that must have a value provided to create a case.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#RequiredFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#RequiredField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the resource affected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the resource affected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>We couldn't find the requested resource. Check that your resources exists and were created\n      in the same Amazon Web Services Region as your request, and try your request again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.connectcases#SearchCases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#SearchCasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#SearchCasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for cases within their associated Cases domain. Search results are returned\n      as a paginated list of abridged case documents.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases-search",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "cases"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchCasesRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of cases to return. The current maximum supported value is 25. This is\n      also the default value when no other value is provided.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 25
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "searchTerm": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A word or phrase used to perform a quick search.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 255
+                        }
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.connectcases#CaseFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of filter objects.</p>"
+                    }
+                },
+                "sorts": {
+                    "target": "com.amazonaws.connectcases#SortList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of sorts where each sort specifies a field and their sort order to be applied to\n      the results. </p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 2
+                        }
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of field identifiers to be returned as part of the response.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 10
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#SearchCasesResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                },
+                "cases": {
+                    "target": "com.amazonaws.connectcases#SearchCasesResponseItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of case documents where each case contains the properties <code>CaseId</code> and\n        <code>Fields</code> where each field is a complex union structure. </p>",
+                        "smithy.api#length": {
+                            "max": 25
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#SearchCasesResponseItem": {
+            "type": "structure",
+            "members": {
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of case field values.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of items that represent cases.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SearchCasesResponseItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#SearchCasesResponseItem"
+            },
+            "traits": {
+                "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchRelatedItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#SearchRelatedItemsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#SearchRelatedItemsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for related items that are associated with a case.</p>\n         <note>\n            <p>If no filters are provided, this returns all related items associated with a\n        case.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases/{caseId}/related-items-search",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "relatedItems"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.connectcases#SearchRelatedItemsRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 25
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.connectcases#RelatedItemFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of types of related items and their parameters to use for filtering.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 10
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#SearchRelatedItemsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.connectcases#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. This is null if there are no more results to return.</p>"
+                    }
+                },
+                "relatedItems": {
+                    "target": "com.amazonaws.connectcases#SearchRelatedItemsResponseItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items related to a case. </p>",
+                        "smithy.api#length": {
+                            "max": 25
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#SearchRelatedItemsResponseItem": {
+            "type": "structure",
+            "members": {
+                "relatedItemId": {
+                    "target": "com.amazonaws.connectcases#RelatedItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.connectcases#RelatedItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of a related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "associationTime": {
+                    "target": "com.amazonaws.connectcases#AssociationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time at which a related item was associated with a case.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#RelatedItemContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of a particular type of related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of items that represent RelatedItems.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SearchRelatedItemsResponseItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#SearchRelatedItemsResponseItem"
+            },
+            "traits": {
+                "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.connectcases#Section": {
+            "type": "union",
+            "members": {
+                "fieldGroup": {
+                    "target": "com.amazonaws.connectcases#FieldGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Consists of a group of fields and associated properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This represents a sections within a panel or tab of the page layout.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SectionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#Section"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Ordered list containing different kinds of sections that can be added.</p>",
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service quota has been exceeded. For a list of service quotas, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.connectcases#Sort": {
+            "type": "structure",
+            "members": {
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of a field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.connectcases#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structured set of sort terms</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structured set of sort terms.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#SortList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#Sort"
+            },
+            "traits": {
+                "smithy.api#documentation": "/@documentation(\"The templateId\")"
+            }
+        },
+        "com.amazonaws.connectcases#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.connectcases#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#TagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds tags to a resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{arn}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connectcases#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN)</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.connectcases#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#Tags": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.connectcases#Template": {
+            "type": "resource",
+            "identifiers": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId"
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.connectcases#CreateTemplate"
+            },
+            "read": {
+                "target": "com.amazonaws.connectcases#GetTemplate"
+            },
+            "update": {
+                "target": "com.amazonaws.connectcases#UpdateTemplate"
+            },
+            "list": {
+                "target": "com.amazonaws.connectcases#ListTemplates"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "domain/{domainId}/template/{templateId}"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TemplateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TemplateDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#TemplateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^.*[\\S]$"
+            }
+        },
+        "com.amazonaws.connectcases#TemplateSummary": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateArn": {
+                    "target": "com.amazonaws.connectcases#TemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN)  of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Template summary information.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#TemplateSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#TemplateSummary"
+            }
+        },
+        "com.amazonaws.connectcases#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rate has been exceeded for this API. Please try again after a few minutes.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.connectcases#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Untags a resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{arn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.connectcases#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN)</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.connectcases#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of tag keys.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UpdateCase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UpdateCaseRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#UpdateCaseResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the values of fields on a case. Fields to be updated are\n      received as an array of id/value pairs identical to the <code>CreateCase</code> input .</p>\n         <p>If the action is successful, the service sends back an HTTP 200 response with an empty\n      HTTP body.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/cases/{caseId}",
+                    "method": "PUT"
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UpdateCaseRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "caseId": {
+                    "target": "com.amazonaws.connectcases#CaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the case.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.connectcases#FieldValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects with <code>fieldId</code> (matching ListFields/DescribeField) and\n      value union data, structured identical to <code>CreateCase</code>.</p>",
+                        "smithy.api#length": {
+                            "max": 100
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UpdateCaseResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.connectcases#UpdateField": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UpdateFieldRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#UpdateFieldResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of an existing field. </p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields/{fieldId}",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateFieldRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a field.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.connectcases#FieldDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a field.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UpdateFieldResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.connectcases#UpdateLayout": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UpdateLayoutRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#UpdateLayoutResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the attributes of an existing layout.</p>\n         <p>If the action is successful, the service sends back an HTTP 200 response with an empty\n      HTTP body.</p>\n         <p>A <code>ValidationException</code> is returned when you add non-existent\n        <code>fieldIds</code> to a layout.</p>\n         <note>\n            <p>Title and Status fields cannot be part of layouts because they are not\n        configurable.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/layouts/{layoutId}",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateLayoutRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the layout.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#LayoutName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the layout. It must be unique per domain.</p>"
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.connectcases#LayoutContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about which fields will be present in the layout, the order of the fields, and\n      a read-only attribute of the field. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UpdateLayoutResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.connectcases#UpdateTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#UpdateTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#UpdateTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the attributes of an existing template. The template attributes that can be\n      modified include <code>name</code>, <code>description</code>, <code>layouts</code>,\n        and <code>requiredFields</code>. At least one of these\n      attributes must not be null. If a null value is provided for a given attribute, that attribute\n      is ignored and its current value is preserved.</p>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/templates/{templateId}",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#UpdateTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.connectcases#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template. It must be unique per domain.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.connectcases#TemplateDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief description of the template.</p>"
+                    }
+                },
+                "layoutConfiguration": {
+                    "target": "com.amazonaws.connectcases#LayoutConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of layouts associated to the template.</p>"
+                    }
+                },
+                "requiredFields": {
+                    "target": "com.amazonaws.connectcases#RequiredFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fields that must contain a value for a case to be successfully created with this\n      template.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcases#UpdateTemplateResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.connectcases#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request isn't valid. Check the syntax and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.connectcases#Value": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connectcases#ValuesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcases#Value"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        }
+    }
+}

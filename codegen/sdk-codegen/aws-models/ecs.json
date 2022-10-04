@@ -421,8 +421,6 @@
                 "managedTerminationProtection": {
                     "target": "com.amazonaws.ecs#ManagedTerminationProtection",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "DISABLED",
                         "smithy.api#documentation": "<p>The managed termination protection setting to use for the Auto Scaling group capacity\n\t\t\tprovider. This determines whether the Auto Scaling group has managed termination\n\t\t\tprotection. The default is disabled.</p>\n\t\t       <important>\n\t\t\t         <p>When using managed termination protection, managed scaling must also be used\n\t\t\t\totherwise managed termination protection doesn't work.</p>\n\t\t       </important>\n\t\t       <p>When managed termination protection is enabled, Amazon ECS prevents the Amazon EC2 instances in\n\t\t\tan Auto Scaling group that contain tasks from being terminated during a scale-in action.\n\t\t\tThe Auto Scaling group and each instance in the Auto Scaling group must have instance\n\t\t\tprotection from scale-in actions enabled as well. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance Protection</a> in the <i>Auto Scaling User Guide</i>.</p>\n\t\t       <p>When managed termination protection is disabled, your Amazon EC2 instances aren't protected\n\t\t\tfrom termination when the Auto Scaling group scales in.</p>"
                     }
                 }
@@ -1271,8 +1269,6 @@
                 "stopTimeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 30,
                         "smithy.api#documentation": "<p>Time duration (in seconds) to wait before the container is forcefully killed if it\n\t\t\tdoesn't exit normally on its own.</p>\n\t\t       <p>For tasks using the Fargate launch type, the task or service requires\n\t\t\tthe following platforms:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Linux platform version <code>1.3.0</code> or later.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Windows platform version <code>1.0.0</code> or later.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>The max stop timeout value is 120 seconds and if the parameter is not specified, the\n\t\t\tdefault value of 30 seconds is used.</p>\n\t\t       <p>For tasks that use the EC2 launch type, if the <code>stopTimeout</code>\n\t\t\tparameter isn't specified, the value set for the Amazon ECS container agent configuration\n\t\t\tvariable <code>ECS_CONTAINER_STOP_TIMEOUT</code> is used. If neither the\n\t\t\t\t<code>stopTimeout</code> parameter or the <code>ECS_CONTAINER_STOP_TIMEOUT</code>\n\t\t\tagent configuration variable are set, then the default values of 30 seconds for Linux\n\t\t\tcontainers and 30 seconds on Windows containers are used. Your container instances\n\t\t\trequire at least version 1.26.0 of the container agent to use a container stop timeout\n\t\t\tvalue. However, we recommend using the latest container agent version. For information\n\t\t\tabout checking your agent version and updating to the latest version, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS Container Agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI, your\n\t\t\tinstance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If your\n\t\t\tcontainer instances are launched from version <code>20190301</code> or later, then they\n\t\t\tcontain the required versions of the container agent and <code>ecs-init</code>. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
@@ -2750,8 +2746,6 @@
                 "type": {
                     "target": "com.amazonaws.ecs#DeploymentControllerType",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "ECS",
                         "smithy.api#documentation": "<p>The deployment controller type to use.</p>\n\t\t       <p>There are three deployment controller types available:</p>\n\t\t       <dl>\n            <dt>ECS</dt>\n            <dd>\n\t\t\t\t\t          <p>The rolling update (<code>ECS</code>) deployment type involves replacing\n\t\t\t\t\t\tthe current running version of the container with the latest version. The\n\t\t\t\t\t\tnumber of containers Amazon ECS adds or removes from the service during a rolling\n\t\t\t\t\t\tupdate is controlled by adjusting the minimum and maximum number of healthy\n\t\t\t\t\t\ttasks allowed during a service deployment, as specified in the <a>DeploymentConfiguration</a>.</p>\n\t\t\t\t        </dd>\n            <dt>CODE_DEPLOY</dt>\n            <dd>\n\t\t\t\t\t          <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the\n\t\t\t\t\t\tblue/green deployment model powered by CodeDeploy, which allows you to verify a\n\t\t\t\t\t\tnew deployment of a service before sending production traffic to it.</p>\n\t\t\t\t        </dd>\n            <dt>EXTERNAL</dt>\n            <dd>\n\t\t\t\t\t          <p>The external (<code>EXTERNAL</code>) deployment type enables you to use\n\t\t\t\t\t\tany third-party deployment controller for full control over the deployment\n\t\t\t\t\t\tprocess for an Amazon ECS service.</p>\n\t\t\t\t        </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
@@ -3725,8 +3719,6 @@
                 "iam": {
                     "target": "com.amazonaws.ecs#EFSAuthorizationConfigIAM",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "DISABLED",
                         "smithy.api#documentation": "<p>Determines whether to use the Amazon ECS task IAM role defined in a task definition when\n\t\t\tmounting the Amazon EFS file system. If enabled, transit encryption must be enabled in the\n\t\t\t\t<code>EFSVolumeConfiguration</code>. If this parameter is omitted, the default value\n\t\t\tof <code>DISABLED</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints\">Using\n\t\t\t\tAmazon EFS access points</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 }
@@ -3788,8 +3780,6 @@
                 "transitEncryption": {
                     "target": "com.amazonaws.ecs#EFSTransitEncryption",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "DISABLED",
                         "smithy.api#documentation": "<p>Determines whether to use encryption for Amazon EFS data in transit between the Amazon ECS host\n\t\t\tand the Amazon EFS server. Transit encryption must be enabled if Amazon EFS IAM authorization is\n\t\t\tused. If this parameter is omitted, the default value of <code>DISABLED</code> is used.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html\">Encrypting data in transit</a> in\n\t\t\tthe <i>Amazon Elastic File System User Guide</i>.</p>"
                     }
                 },
@@ -3915,8 +3905,6 @@
                 "logging": {
                     "target": "com.amazonaws.ecs#ExecuteCommandLogging",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "DEFAULT",
                         "smithy.api#documentation": "<p>The log setting to use for redirecting logs for your execute command results. The\n\t\t\tfollowing log settings are available.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>NONE</code>: The execute command session is not logged.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>DEFAULT</code>: The <code>awslogs</code> configuration in the task\n\t\t\t\t\tdefinition is used. If no logging parameter is specified, it defaults to this\n\t\t\t\t\tvalue. If no <code>awslogs</code> log driver is configured in the task\n\t\t\t\t\tdefinition, the output won't be logged.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>OVERRIDE</code>: Specify the logging details as a part of\n\t\t\t\t\t\t<code>logConfiguration</code>. If the <code>OVERRIDE</code> logging option\n\t\t\t\t\tis specified, the <code>logConfiguration</code> is required.</p>\n\t\t\t         </li>\n         </ul>"
                     }
                 },
@@ -4224,24 +4212,18 @@
                 "interval": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 30,
                         "smithy.api#documentation": "<p>The time period in seconds between each health check execution. You may specify\n\t\t\tbetween 5 and 300 seconds. The default value is 30 seconds.</p>"
                     }
                 },
                 "timeout": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 5,
                         "smithy.api#documentation": "<p>The time period in seconds to wait for a health check to succeed before it is\n\t\t\tconsidered a failure. You may specify between 2 and 60 seconds. The default value is\n\t\t\t5.</p>"
                     }
                 },
                 "retries": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 3,
                         "smithy.api#documentation": "<p>The number of times to retry a failed health check before the container is considered\n\t\t\tunhealthy. You may specify between 1 and 10 retries. The default value is 3.</p>"
                     }
                 },
@@ -4611,8 +4593,6 @@
                 "swappiness": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 60,
                         "smithy.api#documentation": "<p>This allows you to tune a container's memory swappiness behavior. A\n\t\t\t\t<code>swappiness</code> value of <code>0</code> will cause swapping to not happen\n\t\t\tunless absolutely necessary. A <code>swappiness</code> value of <code>100</code> will\n\t\t\tcause pages to be swapped very aggressively. Accepted values are whole numbers between\n\t\t\t\t<code>0</code> and <code>100</code>. If the <code>swappiness</code> parameter is not\n\t\t\tspecified, a default value of <code>60</code> is used. If a value is not specified for\n\t\t\t\t<code>maxSwap</code> then this parameter is ignored. This parameter maps to the\n\t\t\t\t<code>--memory-swappiness</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p>\n\t\t       <note>\n\t\t\t         <p>If you're using tasks that use the Fargate launch type, the\n\t\t\t\t\t<code>swappiness</code> parameter isn't supported.</p>\n\t\t       </note>"
                     }
                 }
@@ -5583,24 +5563,18 @@
                 "minimumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 1,
                         "smithy.api#documentation": "<p>The minimum number of container instances that Amazon ECS scales in or scales out at one\n\t\t\ttime. If this parameter is omitted, the default value of <code>1</code> is used.</p>"
                     }
                 },
                 "maximumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10000,
                         "smithy.api#documentation": "<p>The maximum number of container instances that Amazon ECS scales in or scales out at one\n\t\t\ttime. If this parameter is omitted, the default value of <code>10000</code> is\n\t\t\tused.</p>"
                     }
                 },
                 "instanceWarmupPeriod": {
                     "target": "com.amazonaws.ecs#ManagedScalingInstanceWarmupPeriod",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 300,
                         "smithy.api#documentation": "<p>The period of time, in seconds, after a newly launched Amazon EC2 instance can contribute\n\t\t\tto CloudWatch metrics for Auto Scaling group. If this parameter is omitted, the default value\n\t\t\tof <code>300</code> seconds is used.</p>"
                     }
                 }
@@ -5700,8 +5674,6 @@
                 "readOnly": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this value is <code>true</code>, the container has read-only access to the volume.\n\t\t\tIf this value is <code>false</code>, then the container can write to the volume. The\n\t\t\tdefault value is <code>false</code>.</p>"
                     }
                 }
@@ -6078,14 +6050,12 @@
                 "hostPort": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n\t\t       <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n\t\t       <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n\t\t       <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n\t\t       <note>\n\t\t\t         <p>The default ephemeral port range from 49153 through 65535 is always used for\n\t\t\t\tDocker versions before 1.6.0.</p>\n\t\t       </note>\n\t\t       <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t\t<code>remainingResources</code> of <a>DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
+                        "smithy.api#documentation": "<p>The port number on the container instance to reserve for your container.</p>\n\t\t       <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, the <code>hostPort</code> can either be left blank or set to the same\n\t\t\tvalue as the <code>containerPort</code>.</p>\n\t\t       <p>If you use containers in a task with the <code>bridge</code> network mode, you can\n\t\t\tspecify a non-reserved host port for your container port mapping, or you can omit the\n\t\t\t\t<code>hostPort</code> (or set it to <code>0</code>) while specifying a\n\t\t\t\t<code>containerPort</code> and your container automatically receives a port in the\n\t\t\tephemeral port range for your container instance operating system and Docker\n\t\t\tversion.</p>\n\t\t       <p>The default ephemeral port range for Docker version 1.6.0 and later is listed on the\n\t\t\tinstance under <code>/proc/sys/net/ipv4/ip_local_port_range</code>. If this kernel\n\t\t\tparameter is unavailable, the default ephemeral port range from 49153 through 65535 is\n\t\t\tused. Do not attempt to specify a host port in the ephemeral port range as these are\n\t\t\treserved for automatic assignment. In general, ports below 32768 are outside of the\n\t\t\tephemeral port range.</p>\n\t\t       <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the\n\t\t\tAmazon ECS container agent ports 51678-51680. Any host port that was previously specified in\n\t\t\ta running task is also reserved while the task is running. That is, after a task stops,\n\t\t\tthe host port is released. The current reserved ports are displayed in the\n\t\t\t\t<code>remainingResources</code> of <a>DescribeContainerInstances</a>\n\t\t\toutput. A container instance can have up to 100 reserved ports at a time. This number\n\t\t\tincludes the default reserved ports. Automatically assigned ports aren't included in the\n\t\t\t100 reserved ports quota.</p>"
                     }
                 },
                 "protocol": {
                     "target": "com.amazonaws.ecs#TransportProtocol",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "tcp",
                         "smithy.api#documentation": "<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and\n\t\t\t\t<code>udp</code>. The default is <code>tcp</code>.</p>"
                     }
                 }
@@ -6219,7 +6189,7 @@
                 "name": {
                     "target": "com.amazonaws.ecs#SettingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource name for which to modify the account setting. If\n\t\t\t\t<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is\n\t\t\taffected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for\n\t\t\tyour Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is\n\t\t\tspecified, the ARN and resource ID for your Amazon ECS container instances is affected. If\n\t\t\t\t<code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container\n\t\t\tinstances is affected. If <code>containerInsights</code> is specified, the default\n\t\t\tsetting for CloudWatch Container Insights for your clusters is affected.</p>",
+                        "smithy.api#documentation": "<p>The resource name for which to modify the account setting. If\n\t\t\t\t<code>serviceLongArnFormat</code> is specified, the ARN for your Amazon ECS services is\n\t\t\taffected. If <code>taskLongArnFormat</code> is specified, the ARN and resource ID for\n\t\t\tyour Amazon ECS tasks is affected. If <code>containerInstanceLongArnFormat</code> is\n\t\t\tspecified, the ARN and resource ID for your Amazon ECS container instances is affected. If\n\t\t\t\t<code>awsvpcTrunking</code> is specified, the ENI limit for your Amazon ECS container\n\t\t\tinstances is affected. If <code>containerInsights</code> is specified, the default\n\t\t\tsetting for CloudWatch Container Insights for your clusters is affected.</p>\n\t\t       <p>Fargate is transitioning from task count-based quotas to vCPU-based quotas. You can set\n\t\t\tthe name to <code>fargateVCPULimit</code> to opt in or opt out of the vCPU-based quotas.\n\t\t\tFor information about the opt in timeline, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#fargate-quota-timeline\">Fargate vCPU-based quotas timeline</a> in the\n\t\t\t\t<i>Amazon ECS Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6544,8 +6514,6 @@
                 "networkMode": {
                     "target": "com.amazonaws.ecs#NetworkMode",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "bridge",
                         "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n            <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n        <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n            <important>\n                        <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n                    </important>\n        <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a>NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n        <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>\n        <p>For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#network-settings\">Network\n                settings</a> in the <i>Docker run reference</i>.</p>"
                     }
                 },
@@ -6619,7 +6587,7 @@
                 "ephemeralStorage": {
                     "target": "com.amazonaws.ecs#EphemeralStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using\n\t\t\t\tthe following platform versions:</p>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>Linux platform version <code>1.4.0</code> or later.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>Windows platform version <code>1.0.0</code> or later.</p>\n\t\t\t\t           </li>\n            </ul>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on Fargate using\n\t\t\t\tthe following platform versions:</p>\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>Linux platform version <code>1.4.0</code> or later.</p>\n\t\t\t\t           </li>\n            </ul>\n\t\t       </note>"
                     }
                 },
                 "runtimePlatform": {
@@ -8419,8 +8387,6 @@
                 "networkMode": {
                     "target": "com.amazonaws.ecs#NetworkMode",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "bridge",
                         "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n            <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n        <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n            <important>\n                        <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n                    </important>\n        <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a>NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n        <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>\n        <p>For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#network-settings\">Network\n                settings</a> in the <i>Docker run reference</i>.</p>"
                     }
                 },
@@ -8434,7 +8400,7 @@
                 "volumes": {
                     "target": "com.amazonaws.ecs#VolumeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of data volume definitions for the task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html\">Using data volumes in tasks</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <note>\n\t\t\t         <p>The <code>host</code> and <code>sourcePath</code> parameters aren't supported for\n\t\t\t\ttasks run on Fargate.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The list of data volume definitions for the task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html\">Using data volumes in tasks</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <note>\n\t\t\t         <p>The <code>host</code> and <code>sourcePath</code> parameters aren't supported for\n\t\t\t\ttasks run on Fargate. </p>\n\t\t       </note>"
                     }
                 },
                 "status": {
@@ -9883,8 +9849,6 @@
                 "readOnly": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this value is <code>true</code>, the container has read-only access to the volume.\n\t\t\tIf this value is <code>false</code>, then the container can write to the volume. The\n\t\t\tdefault value is <code>false</code>.</p>"
                     }
                 }
