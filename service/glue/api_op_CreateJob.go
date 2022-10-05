@@ -140,6 +140,10 @@ type CreateJobInput struct {
 	// The name of the SecurityConfiguration structure to be used with this job.
 	SecurityConfiguration *string
 
+	// The details for a source control configuration for a job, allowing
+	// synchronization of job artifacts to or from a remote repository.
+	SourceControlDetails *types.SourceControlDetails
+
 	// The tags to use with this job. You may use tags to limit access to the job. For
 	// more information about tags in Glue, see Amazon Web Services Tags in Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer

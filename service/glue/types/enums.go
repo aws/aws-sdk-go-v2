@@ -1401,6 +1401,42 @@ func (SortDirectionType) Values() []SortDirectionType {
 	}
 }
 
+type SourceControlAuthStrategy string
+
+// Enum values for SourceControlAuthStrategy
+const (
+	SourceControlAuthStrategyPersonalAccessToken SourceControlAuthStrategy = "PERSONAL_ACCESS_TOKEN"
+	SourceControlAuthStrategyAwsSecretsManager   SourceControlAuthStrategy = "AWS_SECRETS_MANAGER"
+)
+
+// Values returns all known values for SourceControlAuthStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceControlAuthStrategy) Values() []SourceControlAuthStrategy {
+	return []SourceControlAuthStrategy{
+		"PERSONAL_ACCESS_TOKEN",
+		"AWS_SECRETS_MANAGER",
+	}
+}
+
+type SourceControlProvider string
+
+// Enum values for SourceControlProvider
+const (
+	SourceControlProviderGithub        SourceControlProvider = "GITHUB"
+	SourceControlProviderAwsCodeCommit SourceControlProvider = "AWS_CODE_COMMIT"
+)
+
+// Values returns all known values for SourceControlProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceControlProvider) Values() []SourceControlProvider {
+	return []SourceControlProvider{
+		"GITHUB",
+		"AWS_CODE_COMMIT",
+	}
+}
+
 type StartingPosition string
 
 // Enum values for StartingPosition

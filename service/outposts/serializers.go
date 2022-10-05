@@ -966,6 +966,12 @@ func awsRestjson1_serializeOpHttpBindingsListAssetsInput(v *ListAssetsInput, enc
 		}
 	}
 
+	if v.StatusFilter != nil {
+		for i := range v.StatusFilter {
+			encoder.AddQuery("StatusFilter").String(string(v.StatusFilter[i]))
+		}
+	}
+
 	return nil
 }
 

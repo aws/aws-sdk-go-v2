@@ -12,10 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the items in the catalog. Add filters to your request to return a more
-// specific list of results. Use filters to match an item class, storage option, or
-// EC2 family. If you specify multiple filters, the filters are joined with an AND,
-// and the request returns only results that match all of the specified filters.
+// Lists the items in the catalog. Use filters to return specific results. If you
+// specify multiple filters, the results include only the resources that match all
+// of the specified filters. For a filter where you can specify multiple values,
+// the results include items that match any of the values that you specify for the
+// filter.
 func (c *Client) ListCatalogItems(ctx context.Context, params *ListCatalogItemsInput, optFns ...func(*Options)) (*ListCatalogItemsOutput, error) {
 	if params == nil {
 		params = &ListCatalogItemsInput{}
@@ -33,16 +34,10 @@ func (c *Client) ListCatalogItems(ctx context.Context, params *ListCatalogItemsI
 
 type ListCatalogItemsInput struct {
 
-	// A filter for EC2 family options for items in the catalog. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
+	// Filters the results by EC2 family (for example, M5).
 	EC2FamilyFilter []string
 
-	// A filter for the class of items in the catalog. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
+	// Filters the results by item class.
 	ItemClassFilter []types.CatalogItemClass
 
 	// The maximum page size.
@@ -51,10 +46,7 @@ type ListCatalogItemsInput struct {
 	// The pagination token.
 	NextToken *string
 
-	// A filter for the storage options of items in the catalog. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
+	// Filters the results by storage option.
 	SupportedStorageFilter []types.SupportedStorageEnum
 
 	noSmithyDocumentSerde

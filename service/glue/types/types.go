@@ -3067,6 +3067,10 @@ type Job struct {
 	// The name of the SecurityConfiguration structure to be used with this job.
 	SecurityConfiguration *string
 
+	// The details for a source control configuration for a job, allowing
+	// synchronization of job artifacts to or from a remote repository.
+	SourceControlDetails *SourceControlDetails
+
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default is
 	// 2,880 minutes (48 hours).
@@ -3420,6 +3424,10 @@ type JobUpdate struct {
 
 	// The name of the SecurityConfiguration structure to be used with this job.
 	SecurityConfiguration *string
+
+	// The details for a source control configuration for a job, allowing
+	// synchronization of job artifacts to or from a remote repository.
+	SourceControlDetails *SourceControlDetails
 
 	// The job timeout in minutes. This is the maximum time that a job run can consume
 	// resources before it is terminated and enters TIMEOUT status. The default is
@@ -5579,6 +5587,38 @@ type SortCriterion struct {
 
 	// An ascending or descending sort.
 	Sort Sort
+
+	noSmithyDocumentSerde
+}
+
+// The details for a source control configuration for a job, allowing
+// synchronization of job artifacts to or from a remote repository.
+type SourceControlDetails struct {
+
+	// The type of authentication, which can be an authentication token stored in
+	// Amazon Web Services Secrets Manager, or a personal access token.
+	AuthStrategy SourceControlAuthStrategy
+
+	// The value of an authorization token.
+	AuthToken *string
+
+	// An optional branch in the remote repository.
+	Branch *string
+
+	// An optional folder in the remote repository.
+	Folder *string
+
+	// The last commit ID for a commit in the remote repository.
+	LastCommitId *string
+
+	// The owner of the remote repository that contains the job artifacts.
+	Owner *string
+
+	// The provider for the remote repository.
+	Provider SourceControlProvider
+
+	// The name of the remote repository that contains the job artifacts.
+	Repository *string
 
 	noSmithyDocumentSerde
 }

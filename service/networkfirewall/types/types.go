@@ -216,7 +216,7 @@ type Firewall struct {
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
 	// create a firewall, the operation initializes this flag to TRUE.
-	DeleteProtection bool
+	DeleteProtection *bool
 
 	// A description of the firewall.
 	Description *string
@@ -236,13 +236,13 @@ type Firewall struct {
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	FirewallPolicyChangeProtection bool
+	FirewallPolicyChangeProtection *bool
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	SubnetChangeProtection bool
+	SubnetChangeProtection *bool
 
 	//
 	Tags []Tag
@@ -936,7 +936,7 @@ type RulesSource struct {
 	// a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
 	// information about the Suricata Rules format, see Rules Format
-	// (https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#).
+	// (https://suricata.readthedocs.io/rules/intro.html#).
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -1030,6 +1030,24 @@ type StatefulEngineOptions struct {
 	// in the Network Firewall Developer Guide.
 	RuleOrder RuleOrder
 
+	// Configures how Network Firewall processes traffic when a network connection
+	// breaks midstream. Network connections can break due to disruptions in external
+	// networks or within the firewall itself.
+	//
+	// * DROP - Network Firewall fails closed
+	// and drops all subsequent traffic going to the firewall. This is the default
+	// behavior.
+	//
+	// * CONTINUE - Network Firewall continues to apply rules to the
+	// subsequent traffic without context from traffic before the break. This impacts
+	// the behavior of rules that depend on this context. For example, if you have a
+	// stateful rule to drop http traffic, Network Firewall won't match the traffic for
+	// this rule because the service won't have the context from session initialization
+	// defining the application layer protocol as HTTP. However, this behavior is rule
+	// dependent—a TCP-layer rule using a flow:stateless rule would still match, as
+	// would the aws:drop_strict default action.
+	StreamExceptionPolicy StreamExceptionPolicy
+
 	noSmithyDocumentSerde
 }
 
@@ -1037,7 +1055,7 @@ type StatefulEngineOptions struct {
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
 // Suricata Rules format, see Rules Format
-// (https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#).
+// (https://suricata.readthedocs.io/rules/intro.html#).
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when

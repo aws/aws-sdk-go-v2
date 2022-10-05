@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an order.
+// Gets information about the specified order.
 func (c *Client) GetOrder(ctx context.Context, params *GetOrderInput, optFns ...func(*Options)) (*GetOrderOutput, error) {
 	if params == nil {
 		params = &GetOrderInput{}

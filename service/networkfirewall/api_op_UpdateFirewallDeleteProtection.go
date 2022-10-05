@@ -37,7 +37,7 @@ type UpdateFirewallDeleteProtectionInput struct {
 	// create a firewall, the operation initializes this flag to TRUE.
 	//
 	// This member is required.
-	DeleteProtection bool
+	DeleteProtection *bool
 
 	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
 	// name, and you can specify both.
@@ -71,7 +71,7 @@ type UpdateFirewallDeleteProtectionOutput struct {
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
 	// create a firewall, the operation initializes this flag to TRUE.
-	DeleteProtection bool
+	DeleteProtection *bool
 
 	// The Amazon Resource Name (ARN) of the firewall.
 	FirewallArn *string

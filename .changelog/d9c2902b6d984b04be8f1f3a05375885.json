@@ -1,0 +1,8 @@
+{
+    "id": "d9c2902b-6d98-4b04-be8f-1f3a05375885",
+    "type": "feature",
+    "description": "StreamExceptionPolicy configures how AWS Network Firewall processes traffic when a network connection breaks midstream",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

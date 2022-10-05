@@ -39,12 +39,12 @@ type CreateOrderInput struct {
 	// This member is required.
 	OutpostIdentifier *string
 
-	// The payment option for the order.
+	// The payment option.
 	//
 	// This member is required.
 	PaymentOption types.PaymentOption
 
-	// The payment terms for the order.
+	// The payment terms.
 	PaymentTerm types.PaymentTerm
 
 	noSmithyDocumentSerde

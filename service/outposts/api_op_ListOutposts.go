@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Outposts for your Amazon Web Services account. Add filters to your
-// request to return a more specific list of results. Use filters to match an
-// Outpost lifecycle status, Availability Zone (us-east-1a), and AZ ID (use1-az1).
-// If you specify multiple filters, the filters are joined with an AND, and the
-// request returns only results that match all of the specified filters.
+// Lists the Outposts for your Amazon Web Services account. Use filters to return
+// specific results. If you specify multiple filters, the results include only the
+// resources that match all of the specified filters. For a filter where you can
+// specify multiple values, the results include items that match any of the values
+// that you specify for the filter.
 func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, optFns ...func(*Options)) (*ListOutpostsOutput, error) {
 	if params == nil {
 		params = &ListOutpostsInput{}
@@ -34,22 +34,13 @@ func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, op
 
 type ListOutpostsInput struct {
 
-	// A filter for the Availability Zone (us-east-1a) of the Outpost. Filter values
-	// are case sensitive. If you specify multiple values for a filter, the values are
-	// joined with an OR, and the request returns all results that match any of the
-	// specified values.
+	// Filters the results by Availability Zone (for example, us-east-1a).
 	AvailabilityZoneFilter []string
 
-	// A filter for the AZ IDs (use1-az1) of the Outpost. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
+	// Filters the results by AZ ID (for example, use1-az1).
 	AvailabilityZoneIdFilter []string
 
-	// A filter for the lifecycle status of the Outpost. Filter values are case
-	// sensitive. If you specify multiple values for a filter, the values are joined
-	// with an OR, and the request returns all results that match any of the specified
-	// values.
+	// Filters the results by the lifecycle status.
 	LifeCycleStatusFilter []string
 
 	// The maximum page size.

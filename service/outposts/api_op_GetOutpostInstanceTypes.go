@@ -30,11 +30,7 @@ func (c *Client) GetOutpostInstanceTypes(ctx context.Context, params *GetOutpost
 
 type GetOutpostInstanceTypesInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the Outpost. In requests, Amazon Web
-	// Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts
-	// and sites throughout the Outposts Query API. To address backwards compatibility,
-	// the parameter names OutpostID or SiteID remain in use. Despite the parameter
-	// name, you can make the request with an ARN.
+	// The ID or the Amazon Resource Name (ARN) of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string
@@ -59,11 +55,7 @@ type GetOutpostInstanceTypesOutput struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The ID of the Outpost. In requests, Amazon Web Services Outposts accepts the
-	// Amazon Resource Name (ARN) or an ID for Outposts and sites throughout the
-	// Outposts Query API. To address backwards compatibility, the parameter names
-	// OutpostID or SiteID remain in use. Despite the parameter name, you can make the
-	// request with an ARN.
+	// The ID of the Outpost.
 	OutpostId *string
 
 	// Metadata pertaining to the operation's result.

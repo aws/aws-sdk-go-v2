@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the site address. To update a site address with an order IN_PROGRESS,
-// you must wait for the order to complete or cancel the order. You can update the
-// operating address before you place an order at the site, or after all Outposts
-// that belong to the site have been deactivated.
+// Updates the address of the specified site. You can't update a site address if
+// there is an order in progress. You must wait for the order to complete or cancel
+// the order. You can update the operating address before you place an order at the
+// site, or after all Outposts that belong to the site have been deactivated.
 func (c *Client) UpdateSiteAddress(ctx context.Context, params *UpdateSiteAddressInput, optFns ...func(*Options)) (*UpdateSiteAddressOutput, error) {
 	if params == nil {
 		params = &UpdateSiteAddressInput{}
@@ -42,11 +42,7 @@ type UpdateSiteAddressInput struct {
 	// This member is required.
 	AddressType types.AddressType
 
-	// The ID or the Amazon Resource Name (ARN) of the site. In requests, Amazon Web
-	// Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts
-	// and sites throughout the Outposts Query API. To address backwards compatibility,
-	// the parameter names OutpostID or SiteID remain in use. Despite the parameter
-	// name, you can make the request with an ARN.
+	// The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

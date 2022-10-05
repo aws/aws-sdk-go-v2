@@ -1,0 +1,8 @@
+{
+    "id": "59d89b3b-2f83-4bb4-9b29-2ac91e774d9c",
+    "type": "feature",
+    "description": "This SDK release adds support to sync glue jobs with source control provider. Additionally, a new parameter called SourceControlDetails will be added to Job model.",
+    "modules": [
+        "service/glue"
+    ]
+}

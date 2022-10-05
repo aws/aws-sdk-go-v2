@@ -37,7 +37,7 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	// firewall, the operation initializes this setting to TRUE.
 	//
 	// This member is required.
-	FirewallPolicyChangeProtection bool
+	FirewallPolicyChangeProtection *bool
 
 	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
 	// name, and you can specify both.
@@ -78,7 +78,7 @@ type UpdateFirewallPolicyChangeProtectionOutput struct {
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	FirewallPolicyChangeProtection bool
+	FirewallPolicyChangeProtection *bool
 
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the

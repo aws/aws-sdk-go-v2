@@ -12,10 +12,10 @@ import (
 )
 
 // Amazon Web Services uses this action to install Outpost servers. Gets
-// information about a specified connection. Use CloudTrail to monitor this action
-// or Amazon Web Services managed policy for Amazon Web Services Outposts to secure
-// it. For more information, see  Amazon Web Services managed policies for Amazon
-// Web Services Outposts
+// information about the specified connection. Use CloudTrail to monitor this
+// action or Amazon Web Services managed policy for Amazon Web Services Outposts to
+// secure it. For more information, see  Amazon Web Services managed policies for
+// Amazon Web Services Outposts
 // (https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html)
 // and  Logging Amazon Web Services Outposts API calls with Amazon Web Services
 // CloudTrail
@@ -38,7 +38,7 @@ func (c *Client) GetConnection(ctx context.Context, params *GetConnectionInput, 
 
 type GetConnectionInput struct {
 
-	// The ID of the connection you request.
+	// The ID of the connection.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -48,10 +48,10 @@ type GetConnectionInput struct {
 
 type GetConnectionOutput struct {
 
-	// Information about a connection.
+	// Information about the connection.
 	ConnectionDetails *types.ConnectionDetails
 
-	// The ID of the connection you receive.
+	// The ID of the connection.
 	ConnectionId *string
 
 	// Metadata pertaining to the operation's result.

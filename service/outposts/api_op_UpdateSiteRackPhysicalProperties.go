@@ -35,26 +35,20 @@ func (c *Client) UpdateSiteRackPhysicalProperties(ctx context.Context, params *U
 
 type UpdateSiteRackPhysicalPropertiesInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the site. In requests, Amazon Web
-	// Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts
-	// and sites throughout the Outposts Query API. To address backwards compatibility,
-	// the parameter names OutpostID or SiteID remain in use. Despite the parameter
-	// name, you can make the request with an ARN.
+	// The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string
 
-	// Specify the type of fiber that you will use to attach the Outpost to your
-	// network.
+	// The type of fiber that you will use to attach the Outpost to your network.
 	FiberOpticCableType types.FiberOpticCableType
 
-	// Specify the maximum rack weight that this site can support. NO_LIMIT is over
-	// 2000lbs.
+	// The maximum rack weight that this site can support. NO_LIMIT is over 2000lbs.
 	MaximumSupportedWeightLbs types.MaximumSupportedWeightLbs
 
-	// Specify the type of optical standard that you will use to attach the Outpost to
-	// your network. This field is dependent on uplink speed, fiber type, and distance
-	// to the upstream device. For more information about networking requirements for
+	// The type of optical standard that you will use to attach the Outpost to your
+	// network. This field is dependent on uplink speed, fiber type, and distance to
+	// the upstream device. For more information about networking requirements for
 	// racks, see Network
 	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#facility-networking)
 	// in the Amazon Web Services Outposts User Guide.
@@ -92,7 +86,7 @@ type UpdateSiteRackPhysicalPropertiesInput struct {
 	// * OPTIC_1000BASE_SX : 1000Base-SX
 	OpticalStandard types.OpticalStandard
 
-	// Specify the power connector that Amazon Web Services should plan to provide for
+	// The power connector that Amazon Web Services should plan to provide for
 	// connections to the hardware. Note the correlation between PowerPhase and
 	// PowerConnector.
 	//
@@ -112,20 +106,20 @@ type UpdateSiteRackPhysicalPropertiesInput struct {
 	// 3P+N+E, 6hr; 32A; three phase
 	PowerConnector types.PowerConnector
 
-	// Specify in kVA the power draw available at the hardware placement position for
-	// the rack.
+	// The power draw, in kVA, available at the hardware placement position for the
+	// rack.
 	PowerDrawKva types.PowerDrawKva
 
-	// Specify whether the power feed comes above or below the rack.
+	// Indicates whether the power feed comes above or below the rack.
 	PowerFeedDrop types.PowerFeedDrop
 
-	// Specify the power option that you can provide for hardware.
+	// The power option that you can provide for hardware.
 	//
-	// * Single-phase AC
-	// feed: 200 V to 277 V, 50 Hz or 60 Hz
+	// * Single-phase AC feed: 200
+	// V to 277 V, 50 Hz or 60 Hz
 	//
-	// * Three-phase AC feed: 346 V to 480 V, 50
-	// Hz or 60 Hz
+	// * Three-phase AC feed: 346 V to 480 V, 50 Hz or 60
+	// Hz
 	PowerPhase types.PowerPhase
 
 	// Racks come with two Outpost network devices. Depending on the supported uplink
@@ -143,8 +137,7 @@ type UpdateSiteRackPhysicalPropertiesInput struct {
 	// available: 1, 2, 4
 	UplinkCount types.UplinkCount
 
-	// Specify the uplink speed the rack should support for the connection to the
-	// Region.
+	// The uplink speed the rack should support for the connection to the Region.
 	UplinkGbps types.UplinkGbps
 
 	noSmithyDocumentSerde

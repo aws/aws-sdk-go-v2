@@ -12,9 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the hardware assets in an Outpost. If you are using Dedicated Hosts on
-// Amazon Web Services Outposts, you can filter your request by host ID to return a
-// list of hardware assets that allocate resources for Dedicated Hosts.
+// Lists the hardware assets for the specified Outpost. Use filters to return
+// specific results. If you specify multiple filters, the results include only the
+// resources that match all of the specified filters. For a filter where you can
+// specify multiple values, the results include items that match any of the values
+// that you specify for the filter.
 func (c *Client) ListAssets(ctx context.Context, params *ListAssetsInput, optFns ...func(*Options)) (*ListAssetsOutput, error) {
 	if params == nil {
 		params = &ListAssetsInput{}
@@ -37,10 +39,7 @@ type ListAssetsInput struct {
 	// This member is required.
 	OutpostIdentifier *string
 
-	// A filter for the host ID of Dedicated Hosts on the Outpost. Filter values are
-	// case sensitive. If you specify multiple values for a filter, the values are
-	// joined with an OR, and the request returns all results that match any of the
-	// specified values.
+	// Filters the results by the host ID of a Dedicated Host.
 	HostIdFilter []string
 
 	// The maximum page size.
@@ -49,12 +48,15 @@ type ListAssetsInput struct {
 	// The pagination token.
 	NextToken *string
 
+	// Filters the results by state.
+	StatusFilter []types.AssetState
+
 	noSmithyDocumentSerde
 }
 
 type ListAssetsOutput struct {
 
-	// Information about hardware assets.
+	// Information about the hardware assets.
 	Assets []types.AssetInfo
 
 	// The pagination token.

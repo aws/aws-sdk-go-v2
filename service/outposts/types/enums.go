@@ -20,6 +20,24 @@ func (AddressType) Values() []AddressType {
 	}
 }
 
+type AssetState string
+
+// Enum values for AssetState
+const (
+	AssetStateActive   AssetState = "ACTIVE"
+	AssetStateRetiring AssetState = "RETIRING"
+)
+
+// Values returns all known values for AssetState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AssetState) Values() []AssetState {
+	return []AssetState{
+		"ACTIVE",
+		"RETIRING",
+	}
+}
+
 type AssetType string
 
 // Enum values for AssetType
@@ -69,6 +87,26 @@ func (CatalogItemStatus) Values() []CatalogItemStatus {
 	return []CatalogItemStatus{
 		"AVAILABLE",
 		"DISCONTINUED",
+	}
+}
+
+type ComputeAssetState string
+
+// Enum values for ComputeAssetState
+const (
+	ComputeAssetStateActive   ComputeAssetState = "ACTIVE"
+	ComputeAssetStateIsolated ComputeAssetState = "ISOLATED"
+	ComputeAssetStateRetiring ComputeAssetState = "RETIRING"
+)
+
+// Values returns all known values for ComputeAssetState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeAssetState) Values() []ComputeAssetState {
+	return []ComputeAssetState{
+		"ACTIVE",
+		"ISOLATED",
+		"RETIRING",
 	}
 }
 
@@ -261,6 +299,7 @@ type PaymentTerm string
 // Enum values for PaymentTerm
 const (
 	PaymentTermThreeYears PaymentTerm = "THREE_YEARS"
+	PaymentTermOneYear    PaymentTerm = "ONE_YEAR"
 )
 
 // Values returns all known values for PaymentTerm. Note that this can be expanded
@@ -269,6 +308,7 @@ const (
 func (PaymentTerm) Values() []PaymentTerm {
 	return []PaymentTerm{
 		"THREE_YEARS",
+		"ONE_YEAR",
 	}
 }
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Outpost.
+// Deletes the specified Outpost.
 func (c *Client) DeleteOutpost(ctx context.Context, params *DeleteOutpostInput, optFns ...func(*Options)) (*DeleteOutpostOutput, error) {
 	if params == nil {
 		params = &DeleteOutpostInput{}
@@ -28,11 +28,7 @@ func (c *Client) DeleteOutpost(ctx context.Context, params *DeleteOutpostInput, 
 
 type DeleteOutpostInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the Outpost. In requests, Amazon Web
-	// Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts
-	// and sites throughout the Outposts Query API. To address backwards compatibility,
-	// the parameter names OutpostID or SiteID remain in use. Despite the parameter
-	// name, you can make the request with an ARN.
+	// The ID or the Amazon Resource Name (ARN) of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string

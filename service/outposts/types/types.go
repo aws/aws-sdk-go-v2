@@ -116,8 +116,23 @@ type CatalogItem struct {
 // Information about compute hardware assets.
 type ComputeAttributes struct {
 
-	// The host ID of any Dedicated Hosts on the asset.
+	// The host ID of the Dedicated Host on the asset.
 	HostId *string
+
+	// The state.
+	//
+	// * ACTIVE - The asset is available and can provide capacity for new
+	// compute resources.
+	//
+	// * ISOLATED - The asset is undergoing maintenance and can't
+	// provide capacity for new compute resources. Existing compute resources on the
+	// asset are not affected.
+	//
+	// * RETIRING - The underlying hardware for the asset is
+	// degraded. Capacity for new compute resources is reduced. Amazon Web Services
+	// sends notifications for resources that must be stopped before the asset can be
+	// replaced.
+	State ComputeAssetState
 
 	noSmithyDocumentSerde
 }
@@ -200,7 +215,7 @@ type LineItemAssetInformation struct {
 	// The ID of the asset.
 	AssetId *string
 
-	// MAC addresses of the asset.
+	// The MAC addresses of the asset.
 	MacAddressList []string
 
 	noSmithyDocumentSerde
@@ -245,17 +260,18 @@ type Order struct {
 	//
 	// *
 	// IN_PROGRESS - Order is either being built, shipped, or installed. To get more
-	// details, see the LineItem status.
+	// details, see the line item status.
 	//
 	// * COMPLETED - Order is complete.
 	//
-	// * CANCELLED
-	// - Order is cancelled.
+	// *
+	// CANCELLED - Order is cancelled.
 	//
 	// * ERROR - Customer should contact support.
 	//
-	// The following
-	// status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and FULFILLED.
+	// The
+	// following status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and
+	// FULFILLED.
 	Status OrderStatus
 
 	noSmithyDocumentSerde
@@ -267,13 +283,13 @@ type OrderSummary struct {
 	// The status of all line items in the order.
 	LineItemCountsByStatus map[string]int32
 
-	// Fulfilment date for the order.
+	// The fulfilment date for the order.
 	OrderFulfilledDate *time.Time
 
 	// The ID of the order.
 	OrderId *string
 
-	// Submission date for the order.
+	// The submission date for the order.
 	OrderSubmissionDate *time.Time
 
 	// The type of order.

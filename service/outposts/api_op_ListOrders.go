@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Outpost orders for your Amazon Web Services account. You can filter
-// your request by Outpost to return a more specific list of results.
+// Lists the Outpost orders for your Amazon Web Services account.
 func (c *Client) ListOrders(ctx context.Context, params *ListOrdersInput, optFns ...func(*Options)) (*ListOrdersOutput, error) {
 	if params == nil {
 		params = &ListOrdersInput{}

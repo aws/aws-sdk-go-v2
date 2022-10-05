@@ -4742,7 +4742,7 @@ func awsAwsjson10_deserializeDocumentFirewall(v **types.Firewall, value interfac
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DeleteProtection = jtv
+				sv.DeleteProtection = ptr.Bool(jtv)
 			}
 
 		case "Description":
@@ -4801,7 +4801,7 @@ func awsAwsjson10_deserializeDocumentFirewall(v **types.Firewall, value interfac
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.FirewallPolicyChangeProtection = jtv
+				sv.FirewallPolicyChangeProtection = ptr.Bool(jtv)
 			}
 
 		case "SubnetChangeProtection":
@@ -4810,7 +4810,7 @@ func awsAwsjson10_deserializeDocumentFirewall(v **types.Firewall, value interfac
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SubnetChangeProtection = jtv
+				sv.SubnetChangeProtection = ptr.Bool(jtv)
 			}
 
 		case "SubnetMappings":
@@ -7315,6 +7315,15 @@ func awsAwsjson10_deserializeDocumentStatefulEngineOptions(v **types.StatefulEng
 				sv.RuleOrder = types.RuleOrder(jtv)
 			}
 
+		case "StreamExceptionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamExceptionPolicy to be of type string, got %T instead", value)
+				}
+				sv.StreamExceptionPolicy = types.StreamExceptionPolicy(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9427,7 +9436,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateFirewallDeleteProtectionOutput(v **
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.DeleteProtection = jtv
+				sv.DeleteProtection = ptr.Bool(jtv)
 			}
 
 		case "FirewallArn":
@@ -9642,7 +9651,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateFirewallPolicyChangeProtectionOutpu
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.FirewallPolicyChangeProtection = jtv
+				sv.FirewallPolicyChangeProtection = ptr.Bool(jtv)
 			}
 
 		case "UpdateToken":
@@ -9853,7 +9862,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateSubnetChangeProtectionOutput(v **Up
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SubnetChangeProtection = jtv
+				sv.SubnetChangeProtection = ptr.Bool(jtv)
 			}
 
 		case "UpdateToken":

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
+// Creates an Outpost. You can specify either an Availability one or an AZ ID.
 func (c *Client) CreateOutpost(ctx context.Context, params *CreateOutpostInput, optFns ...func(*Options)) (*CreateOutpostOutput, error) {
 	if params == nil {
 		params = &CreateOutpostInput{}
@@ -34,11 +34,7 @@ type CreateOutpostInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID or the Amazon Resource Name (ARN) of the site. In requests, Amazon Web
-	// Services Outposts accepts the Amazon Resource Name (ARN) or an ID for Outposts
-	// and sites throughout the Outposts Query API. To address backwards compatibility,
-	// the parameter names OutpostID or SiteID remain in use. Despite the parameter
-	// name, you can make the request with an ARN.
+	// The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a catalog item.
+// Gets information about the specified catalog item.
 func (c *Client) GetCatalogItem(ctx context.Context, params *GetCatalogItemInput, optFns ...func(*Options)) (*GetCatalogItemOutput, error) {
 	if params == nil {
 		params = &GetCatalogItemInput{}

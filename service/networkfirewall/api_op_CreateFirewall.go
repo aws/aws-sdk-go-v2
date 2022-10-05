@@ -69,7 +69,7 @@ type CreateFirewallInput struct {
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
 	// create a firewall, the operation initializes this flag to TRUE.
-	DeleteProtection bool
+	DeleteProtection *bool
 
 	// A description of the firewall.
 	Description *string
@@ -81,13 +81,13 @@ type CreateFirewallInput struct {
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	FirewallPolicyChangeProtection bool
+	FirewallPolicyChangeProtection *bool
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	SubnetChangeProtection bool
+	SubnetChangeProtection *bool
 
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels an order for an Outpost.
+// Cancels the specified order for an Outpost.
 func (c *Client) CancelOrder(ctx context.Context, params *CancelOrderInput, optFns ...func(*Options)) (*CancelOrderOutput, error) {
 	if params == nil {
 		params = &CancelOrderInput{}
@@ -28,7 +28,7 @@ func (c *Client) CancelOrder(ctx context.Context, params *CancelOrderInput, optF
 
 type CancelOrderInput struct {
 
-	// The ID of the order to cancel.
+	// The ID of the order.
 	//
 	// This member is required.
 	OrderId *string
