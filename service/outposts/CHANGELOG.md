@@ -1,3 +1,7 @@
+# v1.23.0 (2022-10-05)
+
+* **Feature**: This release adds the Asset state information to the ListAssets response. The ListAssets request supports filtering on Asset state.
+
 # v1.22.10 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

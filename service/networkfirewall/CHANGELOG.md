@@ -1,3 +1,7 @@
+# v1.20.0 (2022-10-05)
+
+* **Feature**: StreamExceptionPolicy configures how AWS Network Firewall processes traffic when a network connection breaks midstream
+
 # v1.19.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

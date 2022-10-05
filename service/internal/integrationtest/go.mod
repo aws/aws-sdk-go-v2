@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.19
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.17
-	github.com/aws/aws-sdk-go-v2/service/glue v1.32.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.20
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.19
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.17

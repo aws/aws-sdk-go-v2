@@ -1,3 +1,7 @@
+# v1.33.0 (2022-10-05)
+
+* **Feature**: This SDK release adds support to sync glue jobs with source control provider. Additionally, a new parameter called SourceControlDetails will be added to Job model.
+
 # v1.32.0 (2022-09-22)
 
 * **Feature**: Added support for S3 Event Notifications for Catalog Target Crawlers.

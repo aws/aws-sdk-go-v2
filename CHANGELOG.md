@@ -1,3 +1,13 @@
+# Release (2022-10-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.33.0](service/glue/CHANGELOG.md#v1330-2022-10-05)
+  * **Feature**: This SDK release adds support to sync glue jobs with source control provider. Additionally, a new parameter called SourceControlDetails will be added to Job model.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.20.0](service/networkfirewall/CHANGELOG.md#v1200-2022-10-05)
+  * **Feature**: StreamExceptionPolicy configures how AWS Network Firewall processes traffic when a network connection breaks midstream
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.23.0](service/outposts/CHANGELOG.md#v1230-2022-10-05)
+  * **Feature**: This release adds the Asset state information to the ListAssets response. The ListAssets request supports filtering on Asset state.
+
 # Release (2022-10-04)
 
 ## Module Highlights
