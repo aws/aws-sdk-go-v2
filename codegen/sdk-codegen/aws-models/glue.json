@@ -562,6 +562,9 @@
                     "target": "com.amazonaws.glue#UpdateJob"
                 },
                 {
+                    "target": "com.amazonaws.glue#UpdateJobFromSourceControl"
+                },
+                {
                     "target": "com.amazonaws.glue#UpdateMLTransform"
                 },
                 {
@@ -572,6 +575,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateSchema"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateSourceControlFromJob"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateTable"
@@ -1003,6 +1009,16 @@
                     "min": 0,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.glue#AuthTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
         "com.amazonaws.glue#BackfillError": {
@@ -3979,6 +3995,16 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
+        "com.amazonaws.glue#CommitIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
         "com.amazonaws.glue#Comparator": {
             "type": "enum",
             "members": {
@@ -5584,8 +5610,6 @@
                 "DisableValueTrimming": {
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>"
                     }
                 },
@@ -5829,8 +5853,6 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>\n \n         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>\n\t  \n\t        <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p>  \n\t\n\t        <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
                     }
                 },
@@ -6143,8 +6165,6 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 2880,
                         "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status. The default is 2,880 minutes (48 hours).</p>"
                     }
                 },
@@ -6200,6 +6220,12 @@
                     "target": "com.amazonaws.glue#ExecutionClass",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
+                    }
+                },
+                "SourceControlDetails": {
+                    "target": "com.amazonaws.glue#SourceControlDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.</p>"
                     }
                 }
             }
@@ -6312,16 +6338,12 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.glue#NullableDouble",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10,
                         "smithy.api#documentation": "<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of\n      processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more\n      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing\n        page</a>. </p>\n\t\t\n\t\t\t      <p>\n            <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p>\n        <ul>\n            <li>\n               <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p>\n            </li>\n            <li>\n               <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p>\n            </li>\n            <li>\n               <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p>\n            </li>\n         </ul>\n\t\t\n\t        <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>\t  \n   \n\t\t\n         <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
                     }
                 },
@@ -6340,8 +6362,6 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 2880,
                         "smithy.api#documentation": "<p>The timeout of the task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
                     }
                 },
@@ -9417,8 +9437,6 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>\n \n         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>\n\t  \n\t        <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p>  \n\t\n\t        <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>"
                     }
                 },
@@ -9848,8 +9866,6 @@
                 "scanAll": {
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.</p>\n\t\n\t        <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>"
                     }
                 },
@@ -12499,16 +12515,12 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.glue#NullableDouble",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10,
                         "smithy.api#documentation": "<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of\n      processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more\n      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing\n        page</a>. </p>\n\t\t\n         <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
                     }
                 },
@@ -12527,8 +12539,6 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 2880,
                         "smithy.api#documentation": "<p>The timeout for a task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
                     }
                 },
@@ -16199,8 +16209,6 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 2880,
                         "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status. The default is 2,880 minutes (48 hours).</p>"
                     }
                 },
@@ -16250,6 +16258,12 @@
                     "target": "com.amazonaws.glue#ExecutionClass",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
+                    }
+                },
+                "SourceControlDetails": {
+                    "target": "com.amazonaws.glue#SourceControlDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.</p>"
                     }
                 }
             },
@@ -16696,8 +16710,6 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 2880,
                         "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status. The default is 2,880 minutes (48 hours).</p>"
                     }
                 },
@@ -16747,6 +16759,12 @@
                     "target": "com.amazonaws.glue#ExecutionClass",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the job is run with a standard or flexible execution class. The standard execution-class is ideal for time-sensitive workloads that require fast job startup and dedicated resources.</p>\n\n         <p>The flexible execution class is appropriate for time-insensitive jobs whose start and completion times may vary. </p>\n\t\n\t        <p>Only jobs with Glue version 3.0 and above and command type <code>glueetl</code> will be allowed to set <code>ExecutionClass</code> to <code>FLEX</code>. The flexible execution class is available for Spark jobs.</p>"
+                    }
+                },
+                "SourceControlDetails": {
+                    "target": "com.amazonaws.glue#SourceControlDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.</p>"
                     }
                 }
             },
@@ -16966,8 +16984,6 @@
                 "StartingOffsets": {
                     "target": "com.amazonaws.glue#EnclosedInStringProperty",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "latest",
                         "smithy.api#documentation": "<p>The starting position in the Kafka topic to read data from. The possible values are <code>\"earliest\"</code> or <code>\"latest\"</code>. The default value is <code>\"latest\"</code>.</p>"
                     }
                 },
@@ -16980,24 +16996,18 @@
                 "PollTimeoutMs": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 512,
                         "smithy.api#documentation": "<p>The timeout in milliseconds to poll data from Kafka in Spark job executors. The default value is <code>512</code>.</p>"
                     }
                 },
                 "NumRetries": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeInt",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 3,
                         "smithy.api#documentation": "<p>The number of times to retry before failing to fetch Kafka offsets. The default value is <code>3</code>.</p>"
                     }
                 },
                 "RetryIntervalMs": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10,
                         "smithy.api#documentation": "<p>The time in milliseconds to wait before retrying to fetch Kafka offsets. The default value is <code>10</code>.</p>"
                     }
                 },
@@ -17102,88 +17112,66 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.glue#StartingPosition",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "latest",
                         "smithy.api#documentation": "<p>The starting position in the Kinesis data stream to read data from. The possible values are <code>\"latest\"</code>, <code>\"trim_horizon\"</code>, or <code>\"earliest\"</code>. The default value is <code>\"latest\"</code>.</p>"
                     }
                 },
                 "MaxFetchTimeInMs": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 1000,
                         "smithy.api#documentation": "<p>The maximum time spent in the job executor to fetch a record from the Kinesis data stream per shard, specified in milliseconds (ms). The default value is <code>1000</code>.</p>"
                     }
                 },
                 "MaxFetchRecordsPerShard": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 100000,
                         "smithy.api#documentation": "<p>The maximum number of records to fetch per shard in the Kinesis data stream. The default value is <code>100000</code>.</p>"
                     }
                 },
                 "MaxRecordPerRead": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10000,
                         "smithy.api#documentation": "<p>The maximum number of records to fetch from the Kinesis data stream in each getRecords operation. The default value is <code>10000</code>.</p>"
                     }
                 },
                 "AddIdleTimeBetweenReads": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Adds a time delay between two consecutive getRecords operations. The default value is <code>\"False\"</code>. This option is only configurable for Glue version 2.0 and above.</p>"
                     }
                 },
                 "IdleTimeBetweenReadsInMs": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 1000,
                         "smithy.api#documentation": "<p>The minimum time delay between two consecutive getRecords operations, specified in ms. The default value is <code>1000</code>. This option is only configurable for Glue version 2.0 and above.</p>"
                     }
                 },
                 "DescribeShardInterval": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 1,
                         "smithy.api#documentation": "<p>The minimum time interval between two ListShards API calls for your script to consider resharding. The default value is <code>1s</code>.</p>"
                     }
                 },
                 "NumRetries": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeInt",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 3,
                         "smithy.api#documentation": "<p>The maximum number of retries for Kinesis Data Streams API requests. The default value is <code>3</code>.</p>"
                     }
                 },
                 "RetryIntervalMs": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 1000,
                         "smithy.api#documentation": "<p>The cool-off time period (specified in ms) before retrying the Kinesis Data Streams API call. The default value is <code>1000</code>.</p>"
                     }
                 },
                 "MaxRetryIntervalMs": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeLong",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10000,
                         "smithy.api#documentation": "<p>The maximum cool-off time period (specified in ms) between two retries of a Kinesis Data Streams API call. The default value is <code>10000</code>.</p>"
                     }
                 },
                 "AvoidEmptyBatches": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Avoids creating an empty microbatch job by checking for unread data in the Kinesis data stream before the batch is started. The default value is <code>\"False\"</code>.</p>"
                     }
                 },
@@ -17576,8 +17564,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.glue#PageSize",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 20,
                         "smithy.api#documentation": "<p>The maximum number of results to return. The default is 20, and maximum is 100.</p>"
                     }
                 },
@@ -18631,16 +18617,12 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.glue#NullableDouble",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10,
                         "smithy.api#documentation": "<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of\n      processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more\n      information, see the <a href=\"http://aws.amazon.com/glue/pricing/\">Glue pricing\n        page</a>. </p>\n\t\t\n\t\t       <p>\n            <code>MaxCapacity</code> is a mutually exclusive option with <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p>\n        <ul>\n            <li>\n               <p>If either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then <code>MaxCapacity</code> cannot be set.</p>\n            </li>\n            <li>\n               <p>If <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or <code>WorkerType</code> can be set.</p>\n            </li>\n            <li>\n               <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must both be at least 1.</p>\n            </li>\n         </ul>\n\t\t\n\t        <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
                     }
                 },
@@ -19120,8 +19102,6 @@
                 "ScanAll": {
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.</p>\n\t\n\t        <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>"
                     }
                 }
@@ -21860,8 +21840,6 @@
                 "MaxBand": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeInt",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 900000,
                         "smithy.api#documentation": "<p>This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.</p>"
                     }
                 },
@@ -21880,8 +21858,6 @@
                 "Separator": {
                     "target": "com.amazonaws.glue#Separator",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "comma",
                         "smithy.api#documentation": "<p>Specifies the delimiter character. The default is a comma: \",\", but any other character can be specified.</p>",
                         "smithy.api#required": {}
                     }
@@ -21889,16 +21865,12 @@
                 "Escaper": {
                     "target": "com.amazonaws.glue#EnclosedInStringPropertyWithQuote",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "none",
                         "smithy.api#documentation": "<p>Specifies a character to use for escaping. This option is used only when reading CSV files. The default value is <code>none</code>. If enabled, the character which immediately follows is used as-is, except for a small set of well-known escapes (<code>\\n</code>, <code>\\r</code>, <code>\\t</code>, and <code>\\0</code>).</p>"
                     }
                 },
                 "QuoteChar": {
                     "target": "com.amazonaws.glue#QuoteChar",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "quote",
                         "smithy.api#documentation": "<p>Specifies the character to use for quoting. The default is a double quote: <code>'\"'</code>. Set this to <code>-1</code> to turn off quoting entirely.</p>",
                         "smithy.api#required": {}
                     }
@@ -21906,32 +21878,24 @@
                 "Multiline": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether a single record can span multiple lines. This can occur when a field contains a quoted new-line character. You must set this option to True if any record spans multiple lines. The default value is <code>False</code>, which allows for more aggressive file-splitting during parsing.</p>"
                     }
                 },
                 "WithHeader": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether to treat the first line as a header. The default value is <code>False</code>.</p>"
                     }
                 },
                 "WriteHeader": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether to write the header to output. The default value is <code>True</code>. </p>"
                     }
                 },
                 "SkipFirst": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether to skip the first data line. The default value is <code>False</code>.</p>"
                     }
                 },
@@ -22185,8 +22149,6 @@
                 "MaxBand": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeInt",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 900000,
                         "smithy.api#documentation": "<p>This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.</p>"
                     }
                 },
@@ -22211,8 +22173,6 @@
                 "Multiline": {
                     "target": "com.amazonaws.glue#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether a single record can span multiple lines. This can occur when a field contains a quoted new-line character. You must set this option to True if any record spans multiple lines. The default value is <code>False</code>, which allows for more aggressive file-splitting during parsing.</p>"
                     }
                 },
@@ -22277,8 +22237,6 @@
                 "MaxBand": {
                     "target": "com.amazonaws.glue#BoxedNonNegativeInt",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 900000,
                         "smithy.api#documentation": "<p>This option controls the duration in milliseconds after which the s3 listing is likely to be consistent. Files with modification timestamps falling within the last maxBand milliseconds are tracked specially when using JobBookmarks to account for Amazon S3 eventual consistency. Most users don't need to set this option. The default is 900000 milliseconds, or 15 minutes.</p>"
                     }
                 },
@@ -23380,6 +23338,96 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ASCENDING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#SourceControlAuthStrategy": {
+            "type": "enum",
+            "members": {
+                "PERSONAL_ACCESS_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERSONAL_ACCESS_TOKEN"
+                    }
+                },
+                "AWS_SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SECRETS_MANAGER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#SourceControlDetails": {
+            "type": "structure",
+            "members": {
+                "Provider": {
+                    "target": "com.amazonaws.glue#SourceControlProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider for the remote repository.</p>"
+                    }
+                },
+                "Repository": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the remote repository that contains the job artifacts.</p>"
+                    }
+                },
+                "Branch": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional branch in the remote repository.</p>"
+                    }
+                },
+                "Folder": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional folder in the remote repository.</p>"
+                    }
+                },
+                "LastCommitId": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last commit ID for a commit in the remote repository.</p>"
+                    }
+                },
+                "AuthStrategy": {
+                    "target": "com.amazonaws.glue#SourceControlAuthStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token.</p>"
+                    }
+                },
+                "AuthToken": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of an authorization token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.</p>"
+            }
+        },
+        "com.amazonaws.glue#SourceControlProvider": {
+            "type": "enum",
+            "members": {
+                "GITHUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB"
+                    }
+                },
+                "AWS_CODE_COMMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_CODE_COMMIT"
                     }
                 }
             }
@@ -25710,8 +25758,6 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
                     }
                 },
@@ -26846,8 +26892,6 @@
                 "DisableValueTrimming": {
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>"
                     }
                 },
@@ -27073,6 +27117,111 @@
                 "smithy.api#documentation": "<p>Updates an existing job definition. The previous job definition is completely overwritten by this information.</p>"
             }
         },
+        "com.amazonaws.glue#UpdateJobFromSourceControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateJobFromSourceControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateJobFromSourceControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Synchronizes a job from the source control repository. This operation takes the job artifacts that are located in the remote repository and updates the Glue internal stores with these artifacts.</p>\n\t\n\t        <p>This API supports optional parameters which take in the repository information.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateJobFromSourceControlRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue job to be synchronized to or from the remote repository.</p>"
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.glue#SourceControlProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider for the remote repository.</p>"
+                    }
+                },
+                "RepositoryName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts.</p>"
+                    }
+                },
+                "RepositoryOwner": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the remote repository that contains the job artifacts.</p>"
+                    }
+                },
+                "BranchName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional branch in the remote repository.</p>"
+                    }
+                },
+                "Folder": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional folder in the remote repository.</p>"
+                    }
+                },
+                "CommitId": {
+                    "target": "com.amazonaws.glue#CommitIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A commit ID for a commit in the remote repository.</p>"
+                    }
+                },
+                "AuthStrategy": {
+                    "target": "com.amazonaws.glue#SourceControlAuthStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token.</p>"
+                    }
+                },
+                "AuthToken": {
+                    "target": "com.amazonaws.glue#AuthTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the authorization token.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateJobFromSourceControlResponse": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue job.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#UpdateJobRequest": {
             "type": "structure",
             "members": {
@@ -27190,16 +27339,12 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "0.9",
                         "smithy.api#documentation": "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.glue#NullableDouble",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 10,
                         "smithy.api#documentation": "<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of\n      processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more\n      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing\n        page</a>. </p>\n\t\t\n         <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>"
                     }
                 },
@@ -27218,8 +27363,6 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": 2880,
                         "smithy.api#documentation": "<p>The timeout for a task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>"
                     }
                 },
@@ -27457,6 +27600,111 @@
                     "target": "com.amazonaws.glue#SchemaRegistryNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the registry that contains the schema.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateSourceControlFromJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateSourceControlFromJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateSourceControlFromJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Synchronizes a job to the source control repository. This operation takes the job artifacts from the Glue internal stores and makes a commit to the remote repository that is configured on the job.</p>\n\n\t        <p>This API supports optional parameters which take in the repository information.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateSourceControlFromJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue job to be synchronized to or from the remote repository.</p>"
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.glue#SourceControlProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provider for the remote repository.</p>"
+                    }
+                },
+                "RepositoryName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the remote repository that contains the job artifacts.</p>"
+                    }
+                },
+                "RepositoryOwner": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the remote repository that contains the job artifacts.</p>"
+                    }
+                },
+                "BranchName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional branch in the remote repository.</p>"
+                    }
+                },
+                "Folder": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional folder in the remote repository.</p>"
+                    }
+                },
+                "CommitId": {
+                    "target": "com.amazonaws.glue#CommitIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A commit ID for a commit in the remote repository.</p>"
+                    }
+                },
+                "AuthStrategy": {
+                    "target": "com.amazonaws.glue#SourceControlAuthStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication, which can be an authentication token stored in Amazon Web Services Secrets Manager, or a personal access token.</p>"
+                    }
+                },
+                "AuthToken": {
+                    "target": "com.amazonaws.glue#AuthTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the authorization token.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateSourceControlFromJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Glue job.</p>"
                     }
                 }
             }
