@@ -160,7 +160,7 @@ used to convert a `string` to a `*string` type for input parameters that require
 [aws.ToString]({{% apiref "aws#ToString" %}}) can be used to transform a `*string` to a `string` while providing
 protection from dereferencing a nil pointer. The `To<Type>` functions are helpful when handling service responses.
 
-Let's look at an example of how we can use a {{% alias service=S3 %}} client to call the `GetObject` API, and construct
+Let's look at an example of how we can use an {{% alias service=S3 %}} client to call the `GetObject` API, and construct
 our input using the `types` package, and `aws.<Type>` helpers.
 
 ```go
