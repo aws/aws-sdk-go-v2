@@ -107,7 +107,7 @@ This SDK implements AWS service APIs. For general issues regarding the AWS servi
 
 If you encounter a bug with the AWS SDK for Go we would like to hear about it.
 Search the [existing issues][Issues] and see
-if others are also experiencing the issue before opening a new issue. Please
+if others are also experiencing the same issue before opening a new issue. Please
 include the version of AWS SDK for Go, Go language, and OS you’re using. Please
 also include reproduction case when appropriate.
 
