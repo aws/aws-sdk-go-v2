@@ -134,6 +134,53 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "ap-northeast-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ingest-fips-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "ingest.timestream-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ingest-fips-us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "ingest.timestream-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ingest-fips-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "ingest.timestream-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-east-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-west-2",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",
