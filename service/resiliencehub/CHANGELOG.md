@@ -1,3 +1,7 @@
+# v1.6.15 (2022-10-06)
+
+* **Documentation**: Documentation change for AWS Resilience Hub. Doc-only update to fix Documentation layout
+
 # v1.6.14 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

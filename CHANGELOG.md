@@ -1,3 +1,9 @@
+# Release (2022-10-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.6.15](service/resiliencehub/CHANGELOG.md#v1615-2022-10-06)
+  * **Documentation**: Documentation change for AWS Resilience Hub. Doc-only update to fix Documentation layout
+
 # Release (2022-10-05)
 
 ## Module Highlights

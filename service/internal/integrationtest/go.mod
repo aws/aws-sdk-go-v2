@@ -13,7 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/batch v1.18.16
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.22.10
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.20.5
-	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.18
+	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.17
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.21.6
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.63.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.63.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.18
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.15
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.17
-	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.1
+	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.6.19
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.17
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.18
