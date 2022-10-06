@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.resiliencehub#AccessDeniedException": {
             "type": "structure",
@@ -258,6 +258,7 @@
                 "resiliencyScore": {
                     "target": "com.amazonaws.resiliencehub#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current resiliency score for the application.</p>"
                     }
                 },
@@ -480,6 +481,7 @@
                 "resiliencyScore": {
                     "target": "com.amazonaws.resiliencehub#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current resiliency score for the application.</p>"
                     }
                 }
@@ -643,6 +645,7 @@
                 "resiliencyScore": {
                     "target": "com.amazonaws.resiliencehub#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current resiliency score for the application.</p>"
                     }
                 },
@@ -773,25 +776,6 @@
         },
         "com.amazonaws.resiliencehub#AwsResilienceHub": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "resiliencehub",
-                    "arnNamespace": "resiliencehub",
-                    "cloudFormationName": "Resiliencehub",
-                    "endpointPrefix": "resiliencehub"
-                },
-                "aws.auth#sigv4": {
-                    "name": "resiliencehub"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
-                    ]
-                },
-                "smithy.api#documentation": "<p>AWS Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from\n      disruptions. Resilience Hub offers continuous resiliency assessment and validation that integrates\n      into your software development lifecycle. This enables you to uncover resiliency weaknesses,\n      ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your\n      applications are met, and resolve issues before they are released into production. </p>",
-                "smithy.api#title": "AWS Resilience Hub"
-            },
             "version": "2020-04-30",
             "operations": [
                 {
@@ -911,13 +895,29 @@
                 {
                     "target": "com.amazonaws.resiliencehub#UpdateResiliencyPolicy"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "resiliencehub",
+                    "arnNamespace": "resiliencehub",
+                    "cloudFormationName": "Resiliencehub",
+                    "endpointPrefix": "resiliencehub"
+                },
+                "aws.auth#sigv4": {
+                    "name": "resiliencehub"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
+                    ]
+                },
+                "smithy.api#documentation": "<p>AWS Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from\n      disruptions. Resilience Hub offers continuous resiliency assessment and validation that integrates\n      into your software development lifecycle. This enables you to uncover resiliency weaknesses,\n      ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your\n      applications are met, and resolve issues before they are released into production. </p>",
+                "smithy.api#title": "AWS Resilience Hub"
+            }
         },
         "com.amazonaws.resiliencehub#BooleanOptional": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.resiliencehub#ClientToken": {
             "type": "string",
@@ -1120,6 +1120,7 @@
                 "amount": {
                     "target": "com.amazonaws.resiliencehub#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The cost amount.</p>",
                         "smithy.api#required": {}
                     }
@@ -1198,7 +1199,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Resilience Hub application. A Resilience Hub application is a collection of Amazon Web Services\n      resources structured to prevent and recover Amazon Web Services application disruptions. To describe a\n      Resilience Hub application, you provide an application name, resources from one or more–up to\n      five–CloudFormation stacks, and an appropriate resiliency policy.</p>\n\n         <p>After you create a Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
+                "smithy.api#documentation": "<p>Creates a Resilience Hub application. A Resilience Hub application is a collection of Amazon Web Services\n      resources structured to prevent and recover Amazon Web Services application disruptions. To describe a\n      Resilience Hub application, you provide an application name, resources from one or more–up to\n      five–CloudFormation stacks, and an appropriate resiliency policy.</p>\n         <p>After you create a Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-app",
@@ -2227,12 +2228,14 @@
                 "achievableRtoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The Recovery Time Objective (RTO) that is achievable, in seconds</p>"
                     }
                 },
                 "currentRtoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current RTO, in seconds.</p>"
                     }
                 },
@@ -2251,6 +2254,7 @@
                 "currentRpoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current RPO, in seconds.</p>"
                     }
                 },
@@ -2276,6 +2280,7 @@
                 "achievableRpoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The Recovery Point Objective (RPO) that is achievable, in seconds.</p>"
                     }
                 },
@@ -2341,7 +2346,10 @@
             }
         },
         "com.amazonaws.resiliencehub#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.resiliencehub#EntityDescription": {
             "type": "string",
@@ -2414,6 +2422,7 @@
                 "rtoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The Recovery Time Objective (RTO), in seconds.</p>",
                         "smithy.api#required": {}
                     }
@@ -2421,6 +2430,7 @@
                 "rpoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The Recovery Point Objective (RPO), in seconds.</p>",
                         "smithy.api#required": {}
                     }
@@ -3926,7 +3936,6 @@
         "com.amazonaws.resiliencehub#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4216,6 +4225,7 @@
                 "expectedRtoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The expected RTO after applying the recommended configuration change.</p>"
                     }
                 },
@@ -4228,6 +4238,7 @@
                 "expectedRpoInSecs": {
                     "target": "com.amazonaws.resiliencehub#Seconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The expected RPO after applying the recommended configuration change.</p>"
                     }
                 },
@@ -4659,6 +4670,7 @@
                 "score": {
                     "target": "com.amazonaws.resiliencehub#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The outage score for a valid key.</p>",
                         "smithy.api#required": {}
                     }
@@ -4985,10 +4997,7 @@
             }
         },
         "com.amazonaws.resiliencehub#RetryAfterSeconds": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.resiliencehub#S3Location": {
             "type": "structure",
@@ -5022,6 +5031,7 @@
         "com.amazonaws.resiliencehub#Seconds": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -5787,7 +5797,7 @@
                 "policy": {
                     "target": "com.amazonaws.resiliencehub#DisruptionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resiliency policy to be created, including the recovery time objective (RTO)\n      and recovery point objective (RPO) in seconds.</p>"
+                        "smithy.api#documentation": "<p>The type of resiliency policy to be created, including the recovery time objective (RTO)\n      and recovery point objective (RPO) in seconds.</p>\n         <note>\n            <p>If you do not want to specify regional targets for a regional policy, you must set the\n        values of <code>rpoInSecs</code> and <code>rtoInSecs</code> to <code>-1</code>.</p>\n         </note>"
                     }
                 }
             }
