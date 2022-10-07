@@ -1,3 +1,7 @@
+# v1.18.20 (2022-10-07)
+
+* **Documentation**: Gateway Load Balancer adds a new feature (target_failover) for customers to rebalance existing flows to a healthy target after marked unhealthy or deregistered. This allows graceful patching/upgrades of target appliances during maintenance windows, and helps reduce unhealthy target failover time.
+
 # v1.18.19 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

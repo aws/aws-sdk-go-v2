@@ -1,3 +1,15 @@
+# Release (2022-10-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.16.15](service/codegurureviewer/CHANGELOG.md#v11615-2022-10-07)
+  * **Documentation**: Documentation update to replace broken link.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.18.20](service/elasticloadbalancingv2/CHANGELOG.md#v11820-2022-10-07)
+  * **Documentation**: Gateway Load Balancer adds a new feature (target_failover) for customers to rebalance existing flows to a healthy target after marked unhealthy or deregistered. This allows graceful patching/upgrades of target appliances during maintenance windows, and helps reduce unhealthy target failover time.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.19.0](service/greengrassv2/CHANGELOG.md#v1190-2022-10-07)
+  * **Feature**: This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.26.0](service/quicksight/CHANGELOG.md#v1260-2022-10-07)
+  * **Feature**: Amazon QuickSight now supports SecretsManager Secret ARN in place of CredentialPair for DataSource creation and update. This release also has some minor documentation updates and removes CountryCode as a required parameter in GeoSpatialColumnGroup
+
 # Release (2022-10-06)
 
 ## Module Highlights

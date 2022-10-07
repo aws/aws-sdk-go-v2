@@ -1,8 +1,0 @@
-{
-    "id": "45fca679-d333-4811-aba1-565c0ecc1228",
-    "type": "documentation",
-    "description": "Gateway Load Balancer adds a new feature (target_failover) for customers to rebalance existing flows to a healthy target after marked unhealthy or deregistered. This allows graceful patching/upgrades of target appliances during maintenance windows, and helps reduce unhealthy target failover time.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

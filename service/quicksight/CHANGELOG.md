@@ -1,3 +1,7 @@
+# v1.26.0 (2022-10-07)
+
+* **Feature**: Amazon QuickSight now supports SecretsManager Secret ARN in place of CredentialPair for DataSource creation and update. This release also has some minor documentation updates and removes CountryCode as a required parameter in GeoSpatialColumnGroup
+
 # v1.25.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
