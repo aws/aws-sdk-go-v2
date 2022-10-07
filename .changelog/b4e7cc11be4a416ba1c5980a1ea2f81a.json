@@ -1,0 +1,8 @@
+{
+    "id": "b4e7cc11-be4a-416b-a1c5-980a1ea2f81a",
+    "type": "documentation",
+    "description": "Documentation update to replace broken link.",
+    "modules": [
+        "service/codegurureviewer"
+    ]
+}

@@ -27660,6 +27660,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "SecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
 		case "SslProperties":
 			if err := awsRestjson1_deserializeDocumentSslProperties(&sv.SslProperties, value); err != nil {
 				return err

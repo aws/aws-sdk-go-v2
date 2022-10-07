@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the type of IP addresses used by the subnets of the specified Application
-// Load Balancer or Network Load Balancer.
+// Sets the type of IP addresses used by the subnets of the specified load
+// balancer.
 func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeInput, optFns ...func(*Options)) (*SetIpAddressTypeOutput, error) {
 	if params == nil {
 		params = &SetIpAddressTypeInput{}

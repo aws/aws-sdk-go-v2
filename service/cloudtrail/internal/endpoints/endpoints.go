@@ -377,7 +377,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "cloudtrail-fips.{region}.amazonaws.com",
+				Hostname:          "cloudtrail.us-gov-west-1.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

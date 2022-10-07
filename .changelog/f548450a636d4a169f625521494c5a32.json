@@ -1,0 +1,8 @@
+{
+    "id": "f548450a-636d-4a16-9f62-5521494c5a32",
+    "type": "feature",
+    "description": "This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation.",
+    "modules": [
+        "service/greengrassv2"
+    ]
+}

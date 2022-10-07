@@ -1054,12 +1054,12 @@ type TargetGroupAttribute struct {
 	// of stickiness. The possible values are:
 	//
 	// * lb_cookie and app_cookie for
-	// Application Load Balancers
+	// Application Load Balancers.
 	//
-	// * source_ip for Network Load Balancers
+	// * source_ip for Network Load Balancers.
 	//
 	// *
-	// source_ip_dest_ip and source_ip_dest_ip_proto for Gateway Load Balancers
+	// source_ip_dest_ip and source_ip_dest_ip_proto for Gateway Load Balancers.
 	//
 	// The
 	// following attributes are supported only if the load balancer is an Application
@@ -1122,6 +1122,23 @@ type TargetGroupAttribute struct {
 	// *
 	// proxy_protocol_v2.enabled - Indicates whether Proxy Protocol version 2 is
 	// enabled. The value is true or false. The default is false.
+	//
+	// The following
+	// attributes are supported only by Gateway Load Balancers:
+	//
+	// *
+	// target_failover.on_deregistration - Indicates how the Gateway Load Balancer
+	// handles existing flows when a target is deregistered. The possible values are
+	// rebalance and no_rebalance. The default is no_rebalance. The two attributes
+	// (target_failover.on_deregistration and target_failover.on_unhealthy) can't be
+	// set independently. The value you set for both attributes must be the same.
+	//
+	// *
+	// target_failover.on_unhealthy - Indicates how the Gateway Load Balancer handles
+	// existing flows when a target is unhealthy. The possible values are rebalance and
+	// no_rebalance. The default is no_rebalance. The two attributes
+	// (target_failover.on_deregistration and target_failover.on_unhealthy) cannot be
+	// set independently. The value you set for both attributes must be the same.
 	Key *string
 
 	// The value of the attribute.

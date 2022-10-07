@@ -1,0 +1,8 @@
+{
+    "id": "3a4670ca-2ae2-45d0-8540-a8385203dfac",
+    "type": "feature",
+    "description": "Amazon QuickSight now supports SecretsManager Secret ARN in place of CredentialPair for DataSource creation and update. This release also has some minor documentation updates and removes CountryCode as a required parameter in GeoSpatialColumnGroup",
+    "modules": [
+        "service/quicksight"
+    ]
+}

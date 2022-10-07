@@ -991,6 +991,10 @@ type DataSource struct {
 	// A display name for the data source.
 	Name *string
 
+	// The Amazon Resource Name (ARN) of the secret associated with the data source in
+	// Amazon Secrets Manager.
+	SecretArn *string
+
 	// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
 	// to your underlying source.
 	SslProperties *SslProperties
@@ -1023,6 +1027,10 @@ type DataSourceCredentials struct {
 	// Credential pair. For more information, see CredentialPair
 	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CredentialPair.html).
 	CredentialPair *CredentialPair
+
+	// The Amazon Resource Name (ARN) of the secret associated with the data source in
+	// Amazon Secrets Manager.
+	SecretArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1453,15 +1461,13 @@ type GeoSpatialColumnGroup struct {
 	// This member is required.
 	Columns []string
 
-	// Country code.
-	//
-	// This member is required.
-	CountryCode GeoSpatialCountryCode
-
 	// A display name for the hierarchy.
 	//
 	// This member is required.
 	Name *string
+
+	// Country code.
+	CountryCode GeoSpatialCountryCode
 
 	noSmithyDocumentSerde
 }
@@ -3226,8 +3232,10 @@ type User struct {
 	// RESTRICTED_AUTHOR: This role isn't currently available for use.
 	Role UserRole
 
-	// The user's user name. In the output, the value for UserName is N/A when the
-	// value for IdentityType is IAM and the corresponding IAM user is deleted.
+	// The user's user name. This value is required if you are registering a user that
+	// will be managed in Amazon QuickSight. In the output, the value for UserName is
+	// N/A when the value for IdentityType is IAM and the corresponding IAM user is
+	// deleted.
 	UserName *string
 
 	noSmithyDocumentSerde

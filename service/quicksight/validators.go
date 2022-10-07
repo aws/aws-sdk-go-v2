@@ -3612,9 +3612,6 @@ func validateGeoSpatialColumnGroup(v *types.GeoSpatialColumnGroup) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if len(v.CountryCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
-	}
 	if v.Columns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Columns"))
 	}

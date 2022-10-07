@@ -85,10 +85,12 @@ type ListInstalledComponentsInput struct {
 
 type ListInstalledComponentsOutput struct {
 
-	// A list that summarizes each component on the core device. Accuracy of the
-	// lastStatusChangeTimestamp response depends on Greengrass nucleus v2.7.0. It
-	// performs best on Greengrass nucleus v2.7.0 and can be inaccurate on earlier
-	// versions.
+	// A list that summarizes each component on the core device. Greengrass nucleus
+	// v2.7.0 or later is required to get an accurate lastStatusChangeTimestamp
+	// response. This response can be inaccurate in earlier Greengrass nucleus
+	// versions. Greengrass nucleus v2.8.0 or later is required to get an accurate
+	// lastInstallationSource and lastReportedTimestamp response. This response can be
+	// inaccurate or null in earlier Greengrass nucleus versions.
 	InstalledComponents []types.InstalledComponent
 
 	// The token for the next set of results, or null if there are no additional

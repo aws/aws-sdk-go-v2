@@ -566,6 +566,31 @@ type EffectiveDeployment struct {
 	// The reason code for the update, if the job was updated.
 	Reason *string
 
+	// The status details that explain why a deployment has an error. This response
+	// will be null if the deployment is in a success state.
+	StatusDetails *EffectiveDeploymentStatusDetails
+
+	noSmithyDocumentSerde
+}
+
+// Contains all error-related information for the deployment record. The status
+// details will be null if the deployment is in a success state. Greengrass nucleus
+// v2.8.0 or later is required to get an accurate errorStack and errorTypes
+// response. This field will not be returned for earlier Greengrass nucleus
+// versions.
+type EffectiveDeploymentStatusDetails struct {
+
+	// Contains an ordered list of short error codes that range from the most generic
+	// error to the most specific one. The error codes describe the reason for failure
+	// whenever the coreDeviceExecutionStatus is in a failed state. The response will
+	// be an empty list if there is no error.
+	ErrorStack []string
+
+	// Contains tags which describe the error. You can use the error types to classify
+	// errors to assist with remediating the failure. The response will be an empty
+	// list if there is no error.
+	ErrorTypes []string
+
 	noSmithyDocumentSerde
 }
 
@@ -581,6 +606,16 @@ type InstalledComponent struct {
 	// Whether or not the component is a root component.
 	IsRoot bool
 
+	// The most recent deployment source that brought the component to the Greengrass
+	// core device. For a thing group deployment or thing deployment, the source will
+	// be the The ID of the deployment. and for local deployments it will be LOCAL.
+	LastInstallationSource *string
+
+	// The last time the Greengrass core device sent a message containing a certain
+	// component to the Amazon Web Services Cloud. A component does not need to see a
+	// state change for this field to update.
+	LastReportedTimestamp *time.Time
+
 	// The status of how current the data is. This response is based off of component
 	// state changes. The status reflects component disruptions and deployments. If a
 	// component only sees a configuration update during a deployment, it might not
@@ -590,8 +625,15 @@ type InstalledComponent struct {
 	// The lifecycle state of the component.
 	LifecycleState InstalledComponentLifecycleState
 
-	// The details about the lifecycle state of the component.
+	// A detailed response about the lifecycle state of the component that explains the
+	// reason why a component has an error or is broken.
 	LifecycleStateDetails *string
+
+	// The status codes that indicate the reason for failure whenever the
+	// lifecycleState has an error or is in a broken state. Greengrass nucleus v2.8.0
+	// or later is required to get an accurate lifecycleStatusCodes response. This
+	// response can be inaccurate in earlier Greengrass nucleus versions.
+	LifecycleStatusCodes []string
 
 	noSmithyDocumentSerde
 }

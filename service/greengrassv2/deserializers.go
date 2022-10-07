@@ -6708,6 +6708,11 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				sv.Reason = ptr.String(jtv)
 			}
 
+		case "statusDetails":
+			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentStatusDetails(&sv.StatusDetails, value); err != nil {
+				return err
+			}
+
 		case "targetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6723,6 +6728,78 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEffectiveDeploymentErrorStack(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EffectiveDeploymentErrorCode to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEffectiveDeploymentErrorTypeList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EffectiveDeploymentErrorType to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6757,6 +6834,47 @@ func awsRestjson1_deserializeDocumentEffectiveDeploymentsList(v *[]types.Effecti
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEffectiveDeploymentStatusDetails(v **types.EffectiveDeploymentStatusDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EffectiveDeploymentStatusDetails
+	if *v == nil {
+		sv = &types.EffectiveDeploymentStatusDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorStack":
+			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentErrorStack(&sv.ErrorStack, value); err != nil {
+				return err
+			}
+
+		case "errorTypes":
+			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentErrorTypeList(&sv.ErrorTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6809,6 +6927,31 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				sv.IsRoot = jtv
 			}
 
+		case "lastInstallationSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastInstallationSource = ptr.String(jtv)
+			}
+
+		case "lastReportedTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastReportedTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "lastStatusChangeTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6843,12 +6986,53 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				sv.LifecycleStateDetails = ptr.String(jtv)
 			}
 
+		case "lifecycleStatusCodes":
+			if err := awsRestjson1_deserializeDocumentInstalledComponentLifecycleStatusCodeList(&sv.LifecycleStatusCodes, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInstalledComponentLifecycleStatusCodeList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InstalledComponentLifecycleStatusCode to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

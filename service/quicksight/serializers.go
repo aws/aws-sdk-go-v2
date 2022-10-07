@@ -11063,6 +11063,11 @@ func awsRestjson1_serializeDocumentDataSourceCredentials(v *types.DataSourceCred
 		}
 	}
 
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
 	return nil
 }
 
