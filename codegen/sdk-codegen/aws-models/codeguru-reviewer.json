@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.codegurureviewer#AWSGuruFrontendService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CodeGuru Reviewer",
-                    "arnNamespace": "codeguru-reviewer",
-                    "cloudFormationName": "CodeGuruReviewer",
-                    "cloudTrailEventSource": "codegurureviewer.amazonaws.com",
-                    "endpointPrefix": "codeguru-reviewer"
-                },
-                "aws.auth#sigv4": {
-                    "name": "codeguru-reviewer"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a\n         service that uses program analysis and machine learning to detect potential defects that\n         are difficult for developers to find and recommends fixes in your Java and Python\n         code.</p>\n\n         <p>By proactively detecting and providing recommendations for addressing code defects and\n         implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of\n         your code base during the code review stage. For more information about CodeGuru Reviewer, see the\n               <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n\n         <p>To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection\n         between your VPC and CodeGuru Reviewer by creating an <i>interface VPC endpoint</i>. For\n         more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface VPC\n            endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User\n         Guide</i>.</p>",
-                "smithy.api#title": "Amazon CodeGuru Reviewer"
-            },
             "version": "2019-09-19",
             "operations": [
                 {
@@ -90,7 +75,22 @@
                 {
                     "target": "com.amazonaws.codegurureviewer#UntagResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CodeGuru Reviewer",
+                    "arnNamespace": "codeguru-reviewer",
+                    "cloudFormationName": "CodeGuruReviewer",
+                    "cloudTrailEventSource": "codegurureviewer.amazonaws.com",
+                    "endpointPrefix": "codeguru-reviewer"
+                },
+                "aws.auth#sigv4": {
+                    "name": "codeguru-reviewer"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a\n         service that uses program analysis and machine learning to detect potential defects that\n         are difficult for developers to find and recommends fixes in your Java and Python\n         code.</p>\n\n         <p>By proactively detecting and providing recommendations for addressing code defects and\n         implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of\n         your code base during the code review stage. For more information about CodeGuru Reviewer, see the\n               <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n\n         <p>To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection\n         between your VPC and CodeGuru Reviewer by creating an <i>interface VPC endpoint</i>. For\n         more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface VPC\n            endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User\n         Guide</i>.</p>",
+                "smithy.api#title": "Amazon CodeGuru Reviewer"
+            }
         },
         "com.amazonaws.codegurureviewer#AccessDeniedException": {
             "type": "structure",
@@ -106,18 +106,20 @@
             }
         },
         "com.amazonaws.codegurureviewer#AnalysisType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Security",
-                        "name": "SECURITY"
-                    },
-                    {
-                        "value": "CodeQuality",
-                        "name": "CODE_QUALITY"
+            "type": "enum",
+            "members": {
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Security"
                     }
-                ]
+                },
+                "CODE_QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeQuality"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#AnalysisTypes": {
@@ -301,7 +303,7 @@
                 "BuildArtifactsObjectKey": {
                     "target": "com.amazonaws.codegurureviewer#BuildArtifactsObjectKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 object key for a build artifacts .zip file that contains .jar or .class files.\n         This is required for a code review with security analysis. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/code-review-security.html\">Create\n            code reviews with security analysis</a> in the <i>Amazon CodeGuru Reviewer User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The S3 object key for a build artifacts .zip file that contains .jar or .class files.\n         This is required for a code review with security analysis. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/working-with-cicd.html\">Create\n            code reviews with GitHub Actions</a> in the <i>Amazon CodeGuru Reviewer User\n            Guide</i>.</p>"
                     }
                 }
             },
@@ -578,22 +580,26 @@
             }
         },
         "com.amazonaws.codegurureviewer#ConfigFileState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Present",
-                        "name": "PRESENT"
-                    },
-                    {
-                        "value": "Absent",
-                        "name": "ABSENT"
-                    },
-                    {
-                        "value": "PresentWithErrors",
-                        "name": "PRESENT_WITH_ERRORS"
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Present"
                     }
-                ]
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Absent"
+                    }
+                },
+                "PRESENT_WITH_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PresentWithErrors"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#ConflictException": {
@@ -1036,18 +1042,20 @@
             }
         },
         "com.amazonaws.codegurureviewer#EncryptionOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AWS_OWNED_CMK",
-                        "name": "AoCmk"
-                    },
-                    {
-                        "value": "CUSTOMER_MANAGED_CMK",
-                        "name": "CmCmk"
+            "type": "enum",
+            "members": {
+                "AoCmk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_CMK"
                     }
-                ]
+                },
+                "CmCmk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_CMK"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#ErrorMessage": {
@@ -1103,10 +1111,7 @@
             }
         },
         "com.amazonaws.codegurureviewer#FindingsCount": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.codegurureviewer#InternalServerException": {
             "type": "structure",
@@ -1122,26 +1127,32 @@
             }
         },
         "com.amazonaws.codegurureviewer#JobState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Completed",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "Pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Completed"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#JobStates": {
@@ -1187,16 +1198,10 @@
             }
         },
         "com.amazonaws.codegurureviewer#LineNumber": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.codegurureviewer#LinesOfCodeCount": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.codegurureviewer#ListCodeReviews": {
             "type": "operation",
@@ -1237,7 +1242,6 @@
         "com.amazonaws.codegurureviewer#ListCodeReviewsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1448,7 +1452,6 @@
         "com.amazonaws.codegurureviewer#ListRecommendationsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 300
@@ -1662,7 +1665,6 @@
         "com.amazonaws.codegurureviewer#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1788,30 +1790,38 @@
             }
         },
         "com.amazonaws.codegurureviewer#ProviderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CodeCommit",
-                        "name": "CODE_COMMIT"
-                    },
-                    {
-                        "value": "GitHub",
-                        "name": "GIT_HUB"
-                    },
-                    {
-                        "value": "Bitbucket",
-                        "name": "BITBUCKET"
-                    },
-                    {
-                        "value": "GitHubEnterpriseServer",
-                        "name": "GIT_HUB_ENTERPRISE_SERVER"
-                    },
-                    {
-                        "value": "S3Bucket",
-                        "name": "S3_BUCKET"
+            "type": "enum",
+            "members": {
+                "CODE_COMMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeCommit"
                     }
-                ]
+                },
+                "GIT_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GitHub"
+                    }
+                },
+                "BITBUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bitbucket"
+                    }
+                },
+                "GIT_HUB_ENTERPRISE_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GitHubEnterpriseServer"
+                    }
+                },
+                "S3_BUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3Bucket"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#ProviderTypes": {
@@ -1900,18 +1910,20 @@
             "members": {}
         },
         "com.amazonaws.codegurureviewer#Reaction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ThumbsUp",
-                        "name": "THUMBS_UP"
-                    },
-                    {
-                        "value": "ThumbsDown",
-                        "name": "THUMBS_DOWN"
+            "type": "enum",
+            "members": {
+                "THUMBS_UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThumbsUp"
                     }
-                ]
+                },
+                "THUMBS_DOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThumbsDown"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#Reactions": {
@@ -1927,54 +1939,74 @@
             }
         },
         "com.amazonaws.codegurureviewer#RecommendationCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AWSBestPractices",
-                        "name": "AWS_BEST_PRACTICES"
-                    },
-                    {
-                        "value": "AWSCloudFormationIssues",
-                        "name": "AWS_CLOUDFORMATION_ISSUES"
-                    },
-                    {
-                        "value": "DuplicateCode",
-                        "name": "DUPLICATE_CODE"
-                    },
-                    {
-                        "value": "CodeMaintenanceIssues",
-                        "name": "CODE_MAINTENANCE_ISSUES"
-                    },
-                    {
-                        "value": "ConcurrencyIssues",
-                        "name": "CONCURRENCY_ISSUES"
-                    },
-                    {
-                        "value": "InputValidations",
-                        "name": "INPUT_VALIDATIONS"
-                    },
-                    {
-                        "value": "PythonBestPractices",
-                        "name": "PYTHON_BEST_PRACTICES"
-                    },
-                    {
-                        "value": "JavaBestPractices",
-                        "name": "JAVA_BEST_PRACTICES"
-                    },
-                    {
-                        "value": "ResourceLeaks",
-                        "name": "RESOURCE_LEAKS"
-                    },
-                    {
-                        "value": "SecurityIssues",
-                        "name": "SECURITY_ISSUES"
-                    },
-                    {
-                        "value": "CodeInconsistencies",
-                        "name": "CODE_INCONSISTENCIES"
+            "type": "enum",
+            "members": {
+                "AWS_BEST_PRACTICES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSBestPractices"
                     }
-                ]
+                },
+                "AWS_CLOUDFORMATION_ISSUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSCloudFormationIssues"
+                    }
+                },
+                "DUPLICATE_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DuplicateCode"
+                    }
+                },
+                "CODE_MAINTENANCE_ISSUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeMaintenanceIssues"
+                    }
+                },
+                "CONCURRENCY_ISSUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConcurrencyIssues"
+                    }
+                },
+                "INPUT_VALIDATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InputValidations"
+                    }
+                },
+                "PYTHON_BEST_PRACTICES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PythonBestPractices"
+                    }
+                },
+                "JAVA_BEST_PRACTICES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JavaBestPractices"
+                    }
+                },
+                "RESOURCE_LEAKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceLeaks"
+                    }
+                },
+                "SECURITY_ISSUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityIssues"
+                    }
+                },
+                "CODE_INCONSISTENCIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CodeInconsistencies"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#RecommendationFeedback": {
@@ -2260,30 +2292,38 @@
             }
         },
         "com.amazonaws.codegurureviewer#RepositoryAssociationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Associated",
-                        "name": "ASSOCIATED"
-                    },
-                    {
-                        "value": "Associating",
-                        "name": "ASSOCIATING"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "Disassociating",
-                        "name": "DISASSOCIATING"
-                    },
-                    {
-                        "value": "Disassociated",
-                        "name": "DISASSOCIATED"
+            "type": "enum",
+            "members": {
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Associated"
                     }
-                ]
+                },
+                "ASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Associating"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disassociating"
+                    }
+                },
+                "DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disassociated"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#RepositoryAssociationStates": {
@@ -2605,30 +2645,38 @@
             }
         },
         "com.amazonaws.codegurureviewer#Severity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Info",
-                        "name": "INFO"
-                    },
-                    {
-                        "value": "Low",
-                        "name": "LOW"
-                    },
-                    {
-                        "value": "Medium",
-                        "name": "MEDIUM"
-                    },
-                    {
-                        "value": "High",
-                        "name": "HIGH"
-                    },
-                    {
-                        "value": "Critical",
-                        "name": "CRITICAL"
+            "type": "enum",
+            "members": {
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Info"
                     }
-                ]
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#ShortDescription": {
@@ -2847,18 +2895,20 @@
             "type": "timestamp"
         },
         "com.amazonaws.codegurureviewer#Type": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PullRequest",
-                        "name": "PULL_REQUEST"
-                    },
-                    {
-                        "value": "RepositoryAnalysis",
-                        "name": "REPOSITORY_ANALYSIS"
+            "type": "enum",
+            "members": {
+                "PULL_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PullRequest"
                     }
-                ]
+                },
+                "REPOSITORY_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RepositoryAnalysis"
+                    }
+                }
             }
         },
         "com.amazonaws.codegurureviewer#UntagResource": {
@@ -2949,22 +2999,26 @@
             }
         },
         "com.amazonaws.codegurureviewer#VendorName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GitHub",
-                        "name": "GITHUB"
-                    },
-                    {
-                        "value": "GitLab",
-                        "name": "GITLAB"
-                    },
-                    {
-                        "value": "NativeS3",
-                        "name": "NATIVE_S3"
+            "type": "enum",
+            "members": {
+                "GITHUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GitHub"
                     }
-                ]
+                },
+                "GITLAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GitLab"
+                    }
+                },
+                "NATIVE_S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NativeS3"
+                    }
+                }
             }
         }
     }

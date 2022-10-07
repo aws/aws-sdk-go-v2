@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -136,6 +136,7 @@
                 "PublicSharingEnabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account. For more information about turning on public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
                     }
                 }
@@ -348,61 +349,79 @@
             }
         },
         "com.amazonaws.quicksight#AnalysisErrorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "SOURCE_NOT_FOUND",
-                        "name": "SOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "DATA_SET_NOT_FOUND",
-                        "name": "DATA_SET_NOT_FOUND"
-                    },
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "PARAMETER_VALUE_INCOMPATIBLE",
-                        "name": "PARAMETER_VALUE_INCOMPATIBLE"
-                    },
-                    {
-                        "value": "PARAMETER_TYPE_INVALID",
-                        "name": "PARAMETER_TYPE_INVALID"
-                    },
-                    {
-                        "value": "PARAMETER_NOT_FOUND",
-                        "name": "PARAMETER_NOT_FOUND"
-                    },
-                    {
-                        "value": "COLUMN_TYPE_MISMATCH",
-                        "name": "COLUMN_TYPE_MISMATCH"
-                    },
-                    {
-                        "value": "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-                        "name": "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
-                    },
-                    {
-                        "value": "COLUMN_REPLACEMENT_MISSING",
-                        "name": "COLUMN_REPLACEMENT_MISSING"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
                     }
-                ]
+                },
+                "SOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_NOT_FOUND"
+                    }
+                },
+                "DATA_SET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET_NOT_FOUND"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                },
+                "PARAMETER_VALUE_INCOMPATIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARAMETER_VALUE_INCOMPATIBLE"
+                    }
+                },
+                "PARAMETER_TYPE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARAMETER_TYPE_INVALID"
+                    }
+                },
+                "PARAMETER_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARAMETER_NOT_FOUND"
+                    }
+                },
+                "COLUMN_TYPE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_TYPE_MISMATCH"
+                    }
+                },
+                "COLUMN_GEOGRAPHIC_ROLE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
+                    }
+                },
+                "COLUMN_REPLACEMENT_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_REPLACEMENT_MISSING"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#AnalysisFilterAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUICKSIGHT_USER",
-                        "name": "QUICKSIGHT_USER"
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_USER"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#AnalysisName": {
@@ -604,22 +623,26 @@
             }
         },
         "com.amazonaws.quicksight#AssignmentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#AthenaParameters": {
@@ -649,6 +672,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -678,6 +702,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
                         "smithy.api#required": {}
                     }
@@ -695,22 +720,26 @@
             }
         },
         "com.amazonaws.quicksight#AuthenticationMethodOption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IAM_AND_QUICKSIGHT",
-                        "name": "IAM_AND_QUICKSIGHT"
-                    },
-                    {
-                        "value": "IAM_ONLY",
-                        "name": "IAM_ONLY"
-                    },
-                    {
-                        "value": "ACTIVE_DIRECTORY",
-                        "name": "ACTIVE_DIRECTORY"
+            "type": "enum",
+            "members": {
+                "IAM_AND_QUICKSIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_AND_QUICKSIGHT"
                     }
-                ]
+                },
+                "IAM_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ONLY"
+                    }
+                },
+                "ACTIVE_DIRECTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE_DIRECTORY"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#AwsAccountId": {
@@ -745,7 +774,10 @@
             }
         },
         "com.amazonaws.quicksight#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.quicksight#BorderStyle": {
             "type": "structure",
@@ -753,7 +785,7 @@
                 "Show": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The option to enable display of borders for visuals.</p>"
                     }
                 }
@@ -899,6 +931,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -964,26 +997,32 @@
             }
         },
         "com.amazonaws.quicksight#ColumnDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "INTEGER",
-                        "name": "INTEGER"
-                    },
-                    {
-                        "value": "DECIMAL",
-                        "name": "DECIMAL"
-                    },
-                    {
-                        "value": "DATETIME",
-                        "name": "DATETIME"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                },
+                "DECIMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECIMAL"
+                    }
+                },
+                "DATETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATETIME"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#ColumnDescription": {
@@ -1245,18 +1284,20 @@
             }
         },
         "com.amazonaws.quicksight#ColumnTagName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COLUMN_GEOGRAPHIC_ROLE",
-                        "name": "COLUMN_GEOGRAPHIC_ROLE"
-                    },
-                    {
-                        "value": "COLUMN_DESCRIPTION",
-                        "name": "COLUMN_DESCRIPTION"
+            "type": "enum",
+            "members": {
+                "COLUMN_GEOGRAPHIC_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_GEOGRAPHIC_ROLE"
                     }
-                ]
+                },
+                "COLUMN_DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_DESCRIPTION"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#ColumnTagNames": {
@@ -1418,6 +1459,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -1583,6 +1625,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -1718,6 +1761,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -1886,6 +1930,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2072,6 +2117,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2221,6 +2267,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2359,6 +2406,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
@@ -2433,6 +2481,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2598,6 +2647,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2659,6 +2709,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2797,6 +2848,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -2908,6 +2960,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -3038,6 +3091,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -3178,6 +3232,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -3272,6 +3327,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -3418,6 +3474,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -3520,6 +3577,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -3655,18 +3713,20 @@
             }
         },
         "com.amazonaws.quicksight#DashboardBehavior": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DashboardError": {
@@ -3701,61 +3761,79 @@
             }
         },
         "com.amazonaws.quicksight#DashboardErrorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "SOURCE_NOT_FOUND",
-                        "name": "SOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "DATA_SET_NOT_FOUND",
-                        "name": "DATA_SET_NOT_FOUND"
-                    },
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "PARAMETER_VALUE_INCOMPATIBLE",
-                        "name": "PARAMETER_VALUE_INCOMPATIBLE"
-                    },
-                    {
-                        "value": "PARAMETER_TYPE_INVALID",
-                        "name": "PARAMETER_TYPE_INVALID"
-                    },
-                    {
-                        "value": "PARAMETER_NOT_FOUND",
-                        "name": "PARAMETER_NOT_FOUND"
-                    },
-                    {
-                        "value": "COLUMN_TYPE_MISMATCH",
-                        "name": "COLUMN_TYPE_MISMATCH"
-                    },
-                    {
-                        "value": "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-                        "name": "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
-                    },
-                    {
-                        "value": "COLUMN_REPLACEMENT_MISSING",
-                        "name": "COLUMN_REPLACEMENT_MISSING"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
                     }
-                ]
+                },
+                "SOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_NOT_FOUND"
+                    }
+                },
+                "DATA_SET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET_NOT_FOUND"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                },
+                "PARAMETER_VALUE_INCOMPATIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARAMETER_VALUE_INCOMPATIBLE"
+                    }
+                },
+                "PARAMETER_TYPE_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARAMETER_TYPE_INVALID"
+                    }
+                },
+                "PARAMETER_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARAMETER_NOT_FOUND"
+                    }
+                },
+                "COLUMN_TYPE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_TYPE_MISMATCH"
+                    }
+                },
+                "COLUMN_GEOGRAPHIC_ROLE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
+                    }
+                },
+                "COLUMN_REPLACEMENT_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_REPLACEMENT_MISSING"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DashboardFilterAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUICKSIGHT_USER",
-                        "name": "QUICKSIGHT_USER"
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_USER"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#DashboardName": {
@@ -3931,18 +4009,20 @@
             }
         },
         "com.amazonaws.quicksight#DashboardUIState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EXPANDED",
-                        "name": "EXPANDED"
-                    },
-                    {
-                        "value": "COLLAPSED",
-                        "name": "COLLAPSED"
+            "type": "enum",
+            "members": {
+                "EXPANDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPANDED"
                     }
-                ]
+                },
+                "COLLAPSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLLAPSED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DashboardVersion": {
@@ -4184,6 +4264,7 @@
                 "ConsumedSpiceCapacityInBytes": {
                     "target": "com.amazonaws.quicksight#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of SPICE capacity used by this dataset. This is 0 if the dataset isn't\n            imported into SPICE.</p>"
                     }
                 },
@@ -4279,18 +4360,20 @@
             }
         },
         "com.amazonaws.quicksight#DataSetImportMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SPICE",
-                        "name": "SPICE"
-                    },
-                    {
-                        "value": "DIRECT_QUERY",
-                        "name": "DIRECT_QUERY"
+            "type": "enum",
+            "members": {
+                "SPICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPICE"
                     }
-                ]
+                },
+                "DIRECT_QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUERY"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DataSetName": {
@@ -4397,12 +4480,14 @@
                 "RowLevelPermissionTagConfigurationApplied": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not the row level permission tags are applied.</p>"
                     }
                 },
                 "ColumnLevelPermissionRulesApplied": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates if the dataset has column level permission configured.</p>"
                     }
                 }
@@ -4423,12 +4508,14 @@
                 "DisableUseAsDirectQuerySource": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>An option that controls whether a child dataset of a direct query can use this dataset as a source.</p>"
                     }
                 },
                 "DisableUseAsImportedSource": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.</p>"
                     }
                 }
@@ -4511,6 +4598,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Error information from the last update or the creation of the data source.</p>"
                     }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.quicksight#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4530,6 +4623,12 @@
                     "target": "com.amazonaws.quicksight#CopySourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.quicksight#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>"
                     }
                 }
             },
@@ -4559,42 +4658,56 @@
             }
         },
         "com.amazonaws.quicksight#DataSourceErrorInfoType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "COPY_SOURCE_NOT_FOUND",
-                        "name": "COPY_SOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "TIMEOUT",
-                        "name": "TIMEOUT"
-                    },
-                    {
-                        "value": "ENGINE_VERSION_NOT_SUPPORTED",
-                        "name": "ENGINE_VERSION_NOT_SUPPORTED"
-                    },
-                    {
-                        "value": "UNKNOWN_HOST",
-                        "name": "UNKNOWN_HOST"
-                    },
-                    {
-                        "value": "GENERIC_SQL_FAILURE",
-                        "name": "GENERIC_SQL_FAILURE"
-                    },
-                    {
-                        "value": "CONFLICT",
-                        "name": "CONFLICT"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
                     }
-                ]
+                },
+                "COPY_SOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPY_SOURCE_NOT_FOUND"
+                    }
+                },
+                "TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMEOUT"
+                    }
+                },
+                "ENGINE_VERSION_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENGINE_VERSION_NOT_SUPPORTED"
+                    }
+                },
+                "UNKNOWN_HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_HOST"
+                    }
+                },
+                "GENERIC_SQL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERIC_SQL_FAILURE"
+                    }
+                },
+                "CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFLICT"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#DataSourceList": {
@@ -4756,110 +4869,158 @@
             }
         },
         "com.amazonaws.quicksight#DataSourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADOBE_ANALYTICS",
-                        "name": "ADOBE_ANALYTICS"
-                    },
-                    {
-                        "value": "AMAZON_ELASTICSEARCH",
-                        "name": "AMAZON_ELASTICSEARCH"
-                    },
-                    {
-                        "value": "ATHENA",
-                        "name": "ATHENA"
-                    },
-                    {
-                        "value": "AURORA",
-                        "name": "AURORA"
-                    },
-                    {
-                        "value": "AURORA_POSTGRESQL",
-                        "name": "AURORA_POSTGRESQL"
-                    },
-                    {
-                        "value": "AWS_IOT_ANALYTICS",
-                        "name": "AWS_IOT_ANALYTICS"
-                    },
-                    {
-                        "value": "GITHUB",
-                        "name": "GITHUB"
-                    },
-                    {
-                        "value": "JIRA",
-                        "name": "JIRA"
-                    },
-                    {
-                        "value": "MARIADB",
-                        "name": "MARIADB"
-                    },
-                    {
-                        "value": "MYSQL",
-                        "name": "MYSQL"
-                    },
-                    {
-                        "value": "ORACLE",
-                        "name": "ORACLE"
-                    },
-                    {
-                        "value": "POSTGRESQL",
-                        "name": "POSTGRESQL"
-                    },
-                    {
-                        "value": "PRESTO",
-                        "name": "PRESTO"
-                    },
-                    {
-                        "value": "REDSHIFT",
-                        "name": "REDSHIFT"
-                    },
-                    {
-                        "value": "S3",
-                        "name": "S3"
-                    },
-                    {
-                        "value": "SALESFORCE",
-                        "name": "SALESFORCE"
-                    },
-                    {
-                        "value": "SERVICENOW",
-                        "name": "SERVICENOW"
-                    },
-                    {
-                        "value": "SNOWFLAKE",
-                        "name": "SNOWFLAKE"
-                    },
-                    {
-                        "value": "SPARK",
-                        "name": "SPARK"
-                    },
-                    {
-                        "value": "SQLSERVER",
-                        "name": "SQLSERVER"
-                    },
-                    {
-                        "value": "TERADATA",
-                        "name": "TERADATA"
-                    },
-                    {
-                        "value": "TWITTER",
-                        "name": "TWITTER"
-                    },
-                    {
-                        "value": "TIMESTREAM",
-                        "name": "TIMESTREAM"
-                    },
-                    {
-                        "value": "AMAZON_OPENSEARCH",
-                        "name": "AMAZON_OPENSEARCH"
-                    },
-                    {
-                        "value": "EXASOL",
-                        "name": "EXASOL"
+            "type": "enum",
+            "members": {
+                "ADOBE_ANALYTICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADOBE_ANALYTICS"
                     }
-                ]
+                },
+                "AMAZON_ELASTICSEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_ELASTICSEARCH"
+                    }
+                },
+                "ATHENA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATHENA"
+                    }
+                },
+                "AURORA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AURORA"
+                    }
+                },
+                "AURORA_POSTGRESQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AURORA_POSTGRESQL"
+                    }
+                },
+                "AWS_IOT_ANALYTICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_IOT_ANALYTICS"
+                    }
+                },
+                "GITHUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB"
+                    }
+                },
+                "JIRA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JIRA"
+                    }
+                },
+                "MARIADB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MARIADB"
+                    }
+                },
+                "MYSQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MYSQL"
+                    }
+                },
+                "ORACLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORACLE"
+                    }
+                },
+                "POSTGRESQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTGRESQL"
+                    }
+                },
+                "PRESTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESTO"
+                    }
+                },
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDSHIFT"
+                    }
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "SALESFORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SALESFORCE"
+                    }
+                },
+                "SERVICENOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICENOW"
+                    }
+                },
+                "SNOWFLAKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNOWFLAKE"
+                    }
+                },
+                "SPARK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPARK"
+                    }
+                },
+                "SQLSERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQLSERVER"
+                    }
+                },
+                "TERADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERADATA"
+                    }
+                },
+                "TWITTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TWITTER"
+                    }
+                },
+                "TIMESTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTREAM"
+                    }
+                },
+                "AMAZON_OPENSEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_OPENSEARCH"
+                    }
+                },
+                "EXASOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXASOL"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#Database": {
@@ -5011,6 +5172,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5083,6 +5245,7 @@
                 "ForceDeleteWithoutRecovery": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This option defaults to the value <code>NoForceDeleteWithoutRecovery</code>. To\n            immediately delete the analysis, add the <code>ForceDeleteWithoutRecovery</code> option.\n            You can't restore an analysis after it's deleted. </p>",
                         "smithy.api#httpQuery": "force-delete-without-recovery"
                     }
@@ -5095,6 +5258,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5196,6 +5360,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5299,6 +5464,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5384,6 +5550,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5513,6 +5680,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
@@ -5551,6 +5719,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5704,6 +5873,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5751,6 +5921,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5844,6 +6015,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -5923,6 +6095,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6038,6 +6211,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6120,6 +6294,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6256,6 +6431,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6314,6 +6490,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6450,6 +6627,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6497,6 +6675,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6570,6 +6749,7 @@
                 "Resolved": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The <code>Resolved</code> flag works with the other parameters to determine which view\n            of Amazon QuickSight customizations is returned. You can add this flag to your command to use\n            the same view that Amazon QuickSight uses to identify which customizations to apply to the\n            console. Omit this flag, or set it to <code>no-resolved</code>, to reveal customizations\n            that are configured at different levels. </p>",
                         "smithy.api#httpQuery": "resolved"
                     }
@@ -6612,6 +6792,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6686,6 +6867,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6754,6 +6936,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6882,6 +7065,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -6927,6 +7111,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7055,6 +7240,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7120,6 +7306,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of this request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7251,6 +7438,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7296,6 +7484,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7421,6 +7610,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7466,6 +7656,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7573,6 +7764,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7688,6 +7880,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7724,6 +7917,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7874,6 +8068,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -7927,6 +8122,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8017,6 +8213,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8107,6 +8304,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8190,6 +8388,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request. </p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8272,6 +8471,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8393,6 +8593,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8493,6 +8694,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8546,6 +8748,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8676,6 +8879,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8776,6 +8980,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8829,6 +9034,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8928,6 +9134,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -8963,7 +9170,10 @@
             }
         },
         "com.amazonaws.quicksight#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.quicksight#DoubleList": {
             "type": "list",
@@ -8972,41 +9182,49 @@
             }
         },
         "com.amazonaws.quicksight#Edition": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "ENTERPRISE",
-                        "name": "ENTERPRISE"
-                    },
-                    {
-                        "value": "ENTERPRISE_AND_Q",
-                        "name": "ENTERPRISE_AND_Q"
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
                     }
-                ]
+                },
+                "ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTERPRISE"
+                    }
+                },
+                "ENTERPRISE_AND_Q": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTERPRISE_AND_Q"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#EmbeddingIdentityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IAM",
-                        "name": "IAM"
-                    },
-                    {
-                        "value": "QUICKSIGHT",
-                        "name": "QUICKSIGHT"
-                    },
-                    {
-                        "value": "ANONYMOUS",
-                        "name": "ANONYMOUS"
+            "type": "enum",
+            "members": {
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
                     }
-                ]
+                },
+                "QUICKSIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT"
+                    }
+                },
+                "ANONYMOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANONYMOUS"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#EmbeddingUrl": {
@@ -9066,6 +9284,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port for the Exasol data source.</p>",
                         "smithy.api#required": {}
                     }
@@ -9076,46 +9295,62 @@
             }
         },
         "com.amazonaws.quicksight#ExceptionResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "GROUP",
-                        "name": "GROUP"
-                    },
-                    {
-                        "value": "NAMESPACE",
-                        "name": "NAMESPACE"
-                    },
-                    {
-                        "value": "ACCOUNT_SETTINGS",
-                        "name": "ACCOUNT_SETTINGS"
-                    },
-                    {
-                        "value": "IAMPOLICY_ASSIGNMENT",
-                        "name": "IAMPOLICY_ASSIGNMENT"
-                    },
-                    {
-                        "value": "DATA_SOURCE",
-                        "name": "DATA_SOURCE"
-                    },
-                    {
-                        "value": "DATA_SET",
-                        "name": "DATA_SET"
-                    },
-                    {
-                        "value": "VPC_CONNECTION",
-                        "name": "VPC_CONNECTION"
-                    },
-                    {
-                        "value": "INGESTION",
-                        "name": "INGESTION"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
                     }
-                ]
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                },
+                "NAMESPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAMESPACE"
+                    }
+                },
+                "ACCOUNT_SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_SETTINGS"
+                    }
+                },
+                "IAMPOLICY_ASSIGNMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAMPOLICY_ASSIGNMENT"
+                    }
+                },
+                "DATA_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SOURCE"
+                    }
+                },
+                "DATA_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET"
+                    }
+                },
+                "VPC_CONNECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_CONNECTION"
+                    }
+                },
+                "INGESTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTION"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#ExportToCSVOption": {
@@ -9189,34 +9424,44 @@
             }
         },
         "com.amazonaws.quicksight#FileFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "TSV",
-                        "name": "TSV"
-                    },
-                    {
-                        "value": "CLF",
-                        "name": "CLF"
-                    },
-                    {
-                        "value": "ELF",
-                        "name": "ELF"
-                    },
-                    {
-                        "value": "XLSX",
-                        "name": "XLSX"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "TSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TSV"
+                    }
+                },
+                "CLF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLF"
+                    }
+                },
+                "ELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELF"
+                    }
+                },
+                "XLSX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XLSX"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#FilterOperation": {
@@ -9235,14 +9480,14 @@
             }
         },
         "com.amazonaws.quicksight#FilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "StringEquals",
-                        "name": "StringEquals"
+            "type": "enum",
+            "members": {
+                "StringEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEquals"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#Folder": {
@@ -9308,14 +9553,14 @@
             }
         },
         "com.amazonaws.quicksight#FolderFilterAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PARENT_FOLDER_ARN",
-                        "name": "PARENT_FOLDER_ARN"
+            "type": "enum",
+            "members": {
+                "PARENT_FOLDER_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARENT_FOLDER_ARN"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#FolderMember": {
@@ -9454,14 +9699,14 @@
             }
         },
         "com.amazonaws.quicksight#FolderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SHARED",
-                        "name": "SHARED"
+            "type": "enum",
+            "members": {
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#GenerateEmbedUrlForAnonymousUser": {
@@ -9572,6 +9817,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {},
                         "smithy.api#required": {}
@@ -9684,6 +9930,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {},
                         "smithy.api#required": {}
@@ -9711,8 +9958,7 @@
                 "CountryCode": {
                     "target": "com.amazonaws.quicksight#GeoSpatialCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Country code.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Country code.</p>"
                     }
                 },
                 "Columns": {
@@ -9728,49 +9974,61 @@
             }
         },
         "com.amazonaws.quicksight#GeoSpatialCountryCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "US",
-                        "name": "US"
+            "type": "enum",
+            "members": {
+                "US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#GeoSpatialDataRole": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COUNTRY",
-                        "name": "COUNTRY"
-                    },
-                    {
-                        "value": "STATE",
-                        "name": "STATE"
-                    },
-                    {
-                        "value": "COUNTY",
-                        "name": "COUNTY"
-                    },
-                    {
-                        "value": "CITY",
-                        "name": "CITY"
-                    },
-                    {
-                        "value": "POSTCODE",
-                        "name": "POSTCODE"
-                    },
-                    {
-                        "value": "LONGITUDE",
-                        "name": "LONGITUDE"
-                    },
-                    {
-                        "value": "LATITUDE",
-                        "name": "LATITUDE"
+            "type": "enum",
+            "members": {
+                "COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNTRY"
                     }
-                ]
+                },
+                "STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATE"
+                    }
+                },
+                "COUNTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNTY"
+                    }
+                },
+                "CITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CITY"
+                    }
+                },
+                "POSTCODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTCODE"
+                    }
+                },
+                "LONGITUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LONGITUDE"
+                    }
+                },
+                "LATITUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATITUDE"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#GetDashboardEmbedUrl": {
@@ -9865,6 +10123,7 @@
                 "UndoRedoDisabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Remove the undo/redo button on the embedded dashboard. The default is FALSE, which enables\n\t\t\tthe undo/redo button.</p>",
                         "smithy.api#httpQuery": "undo-redo-disabled"
                     }
@@ -9872,6 +10131,7 @@
                 "ResetDisabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Remove the reset button on the embedded dashboard. The default is FALSE, which enables the\n\t\t\treset button.</p>",
                         "smithy.api#httpQuery": "reset-disabled"
                     }
@@ -9879,6 +10139,7 @@
                 "StatePersistenceEnabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Adds persistence of state for the user session in an embedded dashboard. Persistence\n            applies to the sheet and the parameter settings. These are control settings that the\n            dashboard subscriber (Amazon QuickSight reader) chooses while viewing the dashboard. If this is\n            set to <code>TRUE</code>, the settings are the same when the subscriber reopens the same\n            dashboard URL. The state is stored in Amazon QuickSight, not in a browser cookie. If this is\n            set to FALSE, the state of the user session is not persisted. The default is\n                <code>FALSE</code>.</p>",
                         "smithy.api#httpQuery": "state-persistence-enabled"
                     }
@@ -9918,6 +10179,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -10025,6 +10287,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -10079,25 +10342,25 @@
             }
         },
         "com.amazonaws.quicksight#GroupFilterAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GROUP_NAME",
-                        "name": "GROUP_NAME"
+            "type": "enum",
+            "members": {
+                "GROUP_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP_NAME"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#GroupFilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "StartsWith",
-                        "name": "StartsWith"
+            "type": "enum",
+            "members": {
+                "StartsWith": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartsWith"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#GroupList": {
@@ -10204,7 +10467,7 @@
                 "Show": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>"
                     }
                 }
@@ -10332,29 +10595,31 @@
             }
         },
         "com.amazonaws.quicksight#IdentityStore": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUICKSIGHT",
-                        "name": "QUICKSIGHT"
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#IdentityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IAM",
-                        "name": "IAM"
-                    },
-                    {
-                        "value": "QUICKSIGHT",
-                        "name": "QUICKSIGHT"
+            "type": "enum",
+            "members": {
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
                     }
-                ]
+                },
+                "QUICKSIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#IdentityTypeNotSupportedException": {
@@ -10421,14 +10686,14 @@
                 "IngestionTimeInSeconds": {
                     "target": "com.amazonaws.quicksight#Long",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The time that this ingestion took, measured in seconds.</p>"
                     }
                 },
                 "IngestionSizeInBytes": {
                     "target": "com.amazonaws.quicksight#Long",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The size of the data ingested, in bytes.</p>"
                     }
                 },
@@ -10450,186 +10715,272 @@
             }
         },
         "com.amazonaws.quicksight#IngestionErrorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FAILURE_TO_ASSUME_ROLE",
-                        "name": "FAILURE_TO_ASSUME_ROLE"
-                    },
-                    {
-                        "value": "INGESTION_SUPERSEDED",
-                        "name": "INGESTION_SUPERSEDED"
-                    },
-                    {
-                        "value": "INGESTION_CANCELED",
-                        "name": "INGESTION_CANCELED"
-                    },
-                    {
-                        "value": "DATA_SET_DELETED",
-                        "name": "DATA_SET_DELETED"
-                    },
-                    {
-                        "value": "DATA_SET_NOT_SPICE",
-                        "name": "DATA_SET_NOT_SPICE"
-                    },
-                    {
-                        "value": "S3_UPLOADED_FILE_DELETED",
-                        "name": "S3_UPLOADED_FILE_DELETED"
-                    },
-                    {
-                        "value": "S3_MANIFEST_ERROR",
-                        "name": "S3_MANIFEST_ERROR"
-                    },
-                    {
-                        "value": "DATA_TOLERANCE_EXCEPTION",
-                        "name": "DATA_TOLERANCE_EXCEPTION"
-                    },
-                    {
-                        "value": "SPICE_TABLE_NOT_FOUND",
-                        "name": "SPICE_TABLE_NOT_FOUND"
-                    },
-                    {
-                        "value": "DATA_SET_SIZE_LIMIT_EXCEEDED",
-                        "name": "DATA_SET_SIZE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "ROW_SIZE_LIMIT_EXCEEDED",
-                        "name": "ROW_SIZE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "ACCOUNT_CAPACITY_LIMIT_EXCEEDED",
-                        "name": "ACCOUNT_CAPACITY_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "CUSTOMER_ERROR",
-                        "name": "CUSTOMER_ERROR"
-                    },
-                    {
-                        "value": "DATA_SOURCE_NOT_FOUND",
-                        "name": "DATA_SOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "IAM_ROLE_NOT_AVAILABLE",
-                        "name": "IAM_ROLE_NOT_AVAILABLE"
-                    },
-                    {
-                        "value": "CONNECTION_FAILURE",
-                        "name": "CONNECTION_FAILURE"
-                    },
-                    {
-                        "value": "SQL_TABLE_NOT_FOUND",
-                        "name": "SQL_TABLE_NOT_FOUND"
-                    },
-                    {
-                        "value": "PERMISSION_DENIED",
-                        "name": "PERMISSION_DENIED"
-                    },
-                    {
-                        "value": "SSL_CERTIFICATE_VALIDATION_FAILURE",
-                        "name": "SSL_CERTIFICATE_VALIDATION_FAILURE"
-                    },
-                    {
-                        "value": "OAUTH_TOKEN_FAILURE",
-                        "name": "OAUTH_TOKEN_FAILURE"
-                    },
-                    {
-                        "value": "SOURCE_API_LIMIT_EXCEEDED_FAILURE",
-                        "name": "SOURCE_API_LIMIT_EXCEEDED_FAILURE"
-                    },
-                    {
-                        "value": "PASSWORD_AUTHENTICATION_FAILURE",
-                        "name": "PASSWORD_AUTHENTICATION_FAILURE"
-                    },
-                    {
-                        "value": "SQL_SCHEMA_MISMATCH_ERROR",
-                        "name": "SQL_SCHEMA_MISMATCH_ERROR"
-                    },
-                    {
-                        "value": "INVALID_DATE_FORMAT",
-                        "name": "INVALID_DATE_FORMAT"
-                    },
-                    {
-                        "value": "INVALID_DATAPREP_SYNTAX",
-                        "name": "INVALID_DATAPREP_SYNTAX"
-                    },
-                    {
-                        "value": "SOURCE_RESOURCE_LIMIT_EXCEEDED",
-                        "name": "SOURCE_RESOURCE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "SQL_INVALID_PARAMETER_VALUE",
-                        "name": "SQL_INVALID_PARAMETER_VALUE"
-                    },
-                    {
-                        "value": "QUERY_TIMEOUT",
-                        "name": "QUERY_TIMEOUT"
-                    },
-                    {
-                        "value": "SQL_NUMERIC_OVERFLOW",
-                        "name": "SQL_NUMERIC_OVERFLOW"
-                    },
-                    {
-                        "value": "UNRESOLVABLE_HOST",
-                        "name": "UNRESOLVABLE_HOST"
-                    },
-                    {
-                        "value": "UNROUTABLE_HOST",
-                        "name": "UNROUTABLE_HOST"
-                    },
-                    {
-                        "value": "SQL_EXCEPTION",
-                        "name": "SQL_EXCEPTION"
-                    },
-                    {
-                        "value": "S3_FILE_INACCESSIBLE",
-                        "name": "S3_FILE_INACCESSIBLE"
-                    },
-                    {
-                        "value": "IOT_FILE_NOT_FOUND",
-                        "name": "IOT_FILE_NOT_FOUND"
-                    },
-                    {
-                        "value": "IOT_DATA_SET_FILE_EMPTY",
-                        "name": "IOT_DATA_SET_FILE_EMPTY"
-                    },
-                    {
-                        "value": "INVALID_DATA_SOURCE_CONFIG",
-                        "name": "INVALID_DATA_SOURCE_CONFIG"
-                    },
-                    {
-                        "value": "DATA_SOURCE_AUTH_FAILED",
-                        "name": "DATA_SOURCE_AUTH_FAILED"
-                    },
-                    {
-                        "value": "DATA_SOURCE_CONNECTION_FAILED",
-                        "name": "DATA_SOURCE_CONNECTION_FAILED"
-                    },
-                    {
-                        "value": "FAILURE_TO_PROCESS_JSON_FILE",
-                        "name": "FAILURE_TO_PROCESS_JSON_FILE"
-                    },
-                    {
-                        "value": "INTERNAL_SERVICE_ERROR",
-                        "name": "INTERNAL_SERVICE_ERROR"
-                    },
-                    {
-                        "value": "REFRESH_SUPPRESSED_BY_EDIT",
-                        "name": "REFRESH_SUPPRESSED_BY_EDIT"
-                    },
-                    {
-                        "value": "PERMISSION_NOT_FOUND",
-                        "name": "PERMISSION_NOT_FOUND"
-                    },
-                    {
-                        "value": "ELASTICSEARCH_CURSOR_NOT_ENABLED",
-                        "name": "ELASTICSEARCH_CURSOR_NOT_ENABLED"
-                    },
-                    {
-                        "value": "CURSOR_NOT_ENABLED",
-                        "name": "CURSOR_NOT_ENABLED"
+            "type": "enum",
+            "members": {
+                "FAILURE_TO_ASSUME_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE_TO_ASSUME_ROLE"
                     }
-                ]
+                },
+                "INGESTION_SUPERSEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTION_SUPERSEDED"
+                    }
+                },
+                "INGESTION_CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTION_CANCELED"
+                    }
+                },
+                "DATA_SET_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET_DELETED"
+                    }
+                },
+                "DATA_SET_NOT_SPICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET_NOT_SPICE"
+                    }
+                },
+                "S3_UPLOADED_FILE_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_UPLOADED_FILE_DELETED"
+                    }
+                },
+                "S3_MANIFEST_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_MANIFEST_ERROR"
+                    }
+                },
+                "DATA_TOLERANCE_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_TOLERANCE_EXCEPTION"
+                    }
+                },
+                "SPICE_TABLE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPICE_TABLE_NOT_FOUND"
+                    }
+                },
+                "DATA_SET_SIZE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET_SIZE_LIMIT_EXCEEDED"
+                    }
+                },
+                "ROW_SIZE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROW_SIZE_LIMIT_EXCEEDED"
+                    }
+                },
+                "ACCOUNT_CAPACITY_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_CAPACITY_LIMIT_EXCEEDED"
+                    }
+                },
+                "CUSTOMER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_ERROR"
+                    }
+                },
+                "DATA_SOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SOURCE_NOT_FOUND"
+                    }
+                },
+                "IAM_ROLE_NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ROLE_NOT_AVAILABLE"
+                    }
+                },
+                "CONNECTION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_FAILURE"
+                    }
+                },
+                "SQL_TABLE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_TABLE_NOT_FOUND"
+                    }
+                },
+                "PERMISSION_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMISSION_DENIED"
+                    }
+                },
+                "SSL_CERTIFICATE_VALIDATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSL_CERTIFICATE_VALIDATION_FAILURE"
+                    }
+                },
+                "OAUTH_TOKEN_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OAUTH_TOKEN_FAILURE"
+                    }
+                },
+                "SOURCE_API_LIMIT_EXCEEDED_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_API_LIMIT_EXCEEDED_FAILURE"
+                    }
+                },
+                "PASSWORD_AUTHENTICATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD_AUTHENTICATION_FAILURE"
+                    }
+                },
+                "SQL_SCHEMA_MISMATCH_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_SCHEMA_MISMATCH_ERROR"
+                    }
+                },
+                "INVALID_DATE_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DATE_FORMAT"
+                    }
+                },
+                "INVALID_DATAPREP_SYNTAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DATAPREP_SYNTAX"
+                    }
+                },
+                "SOURCE_RESOURCE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_RESOURCE_LIMIT_EXCEEDED"
+                    }
+                },
+                "SQL_INVALID_PARAMETER_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_INVALID_PARAMETER_VALUE"
+                    }
+                },
+                "QUERY_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_TIMEOUT"
+                    }
+                },
+                "SQL_NUMERIC_OVERFLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_NUMERIC_OVERFLOW"
+                    }
+                },
+                "UNRESOLVABLE_HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNRESOLVABLE_HOST"
+                    }
+                },
+                "UNROUTABLE_HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNROUTABLE_HOST"
+                    }
+                },
+                "SQL_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL_EXCEPTION"
+                    }
+                },
+                "S3_FILE_INACCESSIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_FILE_INACCESSIBLE"
+                    }
+                },
+                "IOT_FILE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOT_FILE_NOT_FOUND"
+                    }
+                },
+                "IOT_DATA_SET_FILE_EMPTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOT_DATA_SET_FILE_EMPTY"
+                    }
+                },
+                "INVALID_DATA_SOURCE_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DATA_SOURCE_CONFIG"
+                    }
+                },
+                "DATA_SOURCE_AUTH_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SOURCE_AUTH_FAILED"
+                    }
+                },
+                "DATA_SOURCE_CONNECTION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SOURCE_CONNECTION_FAILED"
+                    }
+                },
+                "FAILURE_TO_PROCESS_JSON_FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE_TO_PROCESS_JSON_FILE"
+                    }
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_ERROR"
+                    }
+                },
+                "REFRESH_SUPPRESSED_BY_EDIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFRESH_SUPPRESSED_BY_EDIT"
+                    }
+                },
+                "PERMISSION_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMISSION_NOT_FOUND"
+                    }
+                },
+                "ELASTICSEARCH_CURSOR_NOT_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELASTICSEARCH_CURSOR_NOT_ENABLED"
+                    }
+                },
+                "CURSOR_NOT_ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURSOR_NOT_ENABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#IngestionId": {
@@ -10645,6 +10996,7 @@
         "com.amazonaws.quicksight#IngestionMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -10652,89 +11004,113 @@
             }
         },
         "com.amazonaws.quicksight#IngestionRequestSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MANUAL",
-                        "name": "MANUAL"
-                    },
-                    {
-                        "value": "SCHEDULED",
-                        "name": "SCHEDULED"
+            "type": "enum",
+            "members": {
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
                     }
-                ]
+                },
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#IngestionRequestType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "This defines the type of ingestion request. This is returned as part of create ingestion response.",
-                "smithy.api#enum": [
-                    {
-                        "value": "INITIAL_INGESTION",
-                        "name": "INITIAL_INGESTION"
-                    },
-                    {
-                        "value": "EDIT",
-                        "name": "EDIT"
-                    },
-                    {
-                        "value": "INCREMENTAL_REFRESH",
-                        "name": "INCREMENTAL_REFRESH"
-                    },
-                    {
-                        "value": "FULL_REFRESH",
-                        "name": "FULL_REFRESH"
+            "type": "enum",
+            "members": {
+                "INITIAL_INGESTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIAL_INGESTION"
                     }
-                ]
+                },
+                "EDIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDIT"
+                    }
+                },
+                "INCREMENTAL_REFRESH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL_REFRESH"
+                    }
+                },
+                "FULL_REFRESH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_REFRESH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This defines the type of ingestion request. This is returned as part of create ingestion response."
             }
         },
         "com.amazonaws.quicksight#IngestionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INITIALIZED",
-                        "name": "INITIALIZED"
-                    },
-                    {
-                        "value": "QUEUED",
-                        "name": "QUEUED"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
+            "type": "enum",
+            "members": {
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
                     }
-                ]
+                },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#IngestionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "This defines the type of ingestion user wants to trigger. This is part of create ingestion request.",
-                "smithy.api#enum": [
-                    {
-                        "value": "INCREMENTAL_REFRESH",
-                        "name": "INCREMENTAL_REFRESH"
-                    },
-                    {
-                        "value": "FULL_REFRESH",
-                        "name": "FULL_REFRESH"
+            "type": "enum",
+            "members": {
+                "INCREMENTAL_REFRESH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL_REFRESH"
                     }
-                ]
+                },
+                "FULL_REFRESH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_REFRESH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "This defines the type of ingestion user wants to trigger. This is part of create ingestion request."
             }
         },
         "com.amazonaws.quicksight#Ingestions": {
@@ -10766,38 +11142,50 @@
             }
         },
         "com.amazonaws.quicksight#InputColumnDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "INTEGER",
-                        "name": "INTEGER"
-                    },
-                    {
-                        "value": "DECIMAL",
-                        "name": "DECIMAL"
-                    },
-                    {
-                        "value": "DATETIME",
-                        "name": "DATETIME"
-                    },
-                    {
-                        "value": "BIT",
-                        "name": "BIT"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                },
+                "DECIMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECIMAL"
+                    }
+                },
+                "DATETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATETIME"
+                    }
+                },
+                "BIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BIT"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#InputColumnList": {
@@ -10999,7 +11387,7 @@
                 "UniqueKey": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>A value that indicates that a row in a table is uniquely identified by the columns in\n            a join key. This is used by Amazon QuickSight to optimize query performance.</p>"
                     }
                 }
@@ -11009,26 +11397,32 @@
             }
         },
         "com.amazonaws.quicksight#JoinType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INNER",
-                        "name": "INNER"
-                    },
-                    {
-                        "value": "OUTER",
-                        "name": "OUTER"
-                    },
-                    {
-                        "value": "LEFT",
-                        "name": "LEFT"
-                    },
-                    {
-                        "value": "RIGHT",
-                        "name": "RIGHT"
+            "type": "enum",
+            "members": {
+                "INNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INNER"
                     }
-                ]
+                },
+                "OUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTER"
+                    }
+                },
+                "LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEFT"
+                    }
+                },
+                "RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RIGHT"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#LimitExceededException": {
@@ -11128,7 +11522,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11153,6 +11547,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11237,7 +11632,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11262,6 +11657,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11332,7 +11728,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11357,6 +11753,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11430,7 +11827,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11461,6 +11858,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11528,7 +11926,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11559,6 +11957,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11634,7 +12033,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11647,6 +12046,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11732,7 +12132,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11745,6 +12145,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11833,7 +12234,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11880,6 +12281,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -11950,7 +12352,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -11989,6 +12391,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12101,7 +12504,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -12140,6 +12543,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12181,7 +12585,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -12212,6 +12616,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12293,7 +12698,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#IngestionMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -12324,6 +12729,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12400,7 +12806,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -12431,6 +12837,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12502,6 +12909,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12577,7 +12985,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-result"
                     }
@@ -12596,6 +13004,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12686,7 +13095,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -12711,6 +13120,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12787,7 +13197,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-result"
                     }
@@ -12812,6 +13222,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -12893,7 +13304,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-result"
                     }
@@ -12912,6 +13323,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -13005,7 +13417,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -13030,6 +13442,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -13109,7 +13522,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -13141,6 +13554,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -13230,7 +13644,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -13261,6 +13675,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -13331,7 +13746,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -13370,6 +13785,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -13465,7 +13881,10 @@
             }
         },
         "com.amazonaws.quicksight#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.quicksight#LongList": {
             "type": "list",
@@ -13501,7 +13920,7 @@
                 "Show": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>This Boolean value controls whether to display sheet margins.</p>"
                     }
                 }
@@ -13523,6 +13942,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -13542,6 +13962,7 @@
         "com.amazonaws.quicksight#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -13569,22 +13990,26 @@
             }
         },
         "com.amazonaws.quicksight#MemberType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DASHBOARD",
-                        "name": "DASHBOARD"
-                    },
-                    {
-                        "value": "ANALYSIS",
-                        "name": "ANALYSIS"
-                    },
-                    {
-                        "value": "DATASET",
-                        "name": "DATASET"
+            "type": "enum",
+            "members": {
+                "DASHBOARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DASHBOARD"
                     }
-                ]
+                },
+                "ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANALYSIS"
+                    }
+                },
+                "DATASET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASET"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#MySqlParameters": {
@@ -13600,6 +14025,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -13647,18 +14073,20 @@
             }
         },
         "com.amazonaws.quicksight#NamespaceErrorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PERMISSION_DENIED",
-                        "name": "PERMISSION_DENIED"
-                    },
-                    {
-                        "value": "INTERNAL_SERVICE_ERROR",
-                        "name": "INTERNAL_SERVICE_ERROR"
+            "type": "enum",
+            "members": {
+                "PERMISSION_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMISSION_DENIED"
                     }
-                ]
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#NamespaceInfoV2": {
@@ -13706,30 +14134,38 @@
             }
         },
         "com.amazonaws.quicksight#NamespaceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "RETRYABLE_FAILURE",
-                        "name": "RETRYABLE_FAILURE"
-                    },
-                    {
-                        "value": "NON_RETRYABLE_FAILURE",
-                        "name": "NON_RETRYABLE_FAILURE"
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
                     }
-                ]
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "RETRYABLE_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRYABLE_FAILURE"
+                    }
+                },
+                "NON_RETRYABLE_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_RETRYABLE_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#Namespaces": {
@@ -13745,10 +14181,7 @@
             }
         },
         "com.amazonaws.quicksight#NullableBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.quicksight#OnClause": {
             "type": "string",
@@ -13762,6 +14195,7 @@
         "com.amazonaws.quicksight#OptionalPort": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 65535
@@ -13781,6 +14215,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -13936,6 +14371,7 @@
         "com.amazonaws.quicksight#Port": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -13945,6 +14381,7 @@
         "com.amazonaws.quicksight#PositiveInteger": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -13963,6 +14400,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -14011,6 +14449,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -14127,21 +14566,6 @@
         },
         "com.amazonaws.quicksight#QuickSight_20180401": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "QuickSight",
-                    "arnNamespace": "quicksight",
-                    "cloudFormationName": "QuickSight",
-                    "cloudTrailEventSource": "quicksight.amazonaws.com",
-                    "endpointPrefix": "quicksight"
-                },
-                "aws.auth#sigv4": {
-                    "name": "quicksight"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
-                "smithy.api#title": "Amazon QuickSight"
-            },
             "version": "2018-04-01",
             "operations": [
                 {
@@ -14504,7 +14928,22 @@
                 {
                     "target": "com.amazonaws.quicksight#UpdateUser"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "QuickSight",
+                    "arnNamespace": "quicksight",
+                    "cloudFormationName": "QuickSight",
+                    "cloudTrailEventSource": "quicksight.amazonaws.com",
+                    "endpointPrefix": "quicksight"
+                },
+                "aws.auth#sigv4": {
+                    "name": "quicksight"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
+                "smithy.api#title": "Amazon QuickSight"
+            }
         },
         "com.amazonaws.quicksight#RdsParameters": {
             "type": "structure",
@@ -14531,7 +14970,6 @@
         "com.amazonaws.quicksight#RecoveryWindowInDays": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 7,
                     "max": 30
@@ -14550,6 +14988,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#OptionalPort",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>"
                     }
                 },
@@ -14725,6 +15164,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -15008,38 +15448,50 @@
             }
         },
         "com.amazonaws.quicksight#ResourceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATION_IN_PROGRESS",
-                        "name": "CREATION_IN_PROGRESS"
-                    },
-                    {
-                        "value": "CREATION_SUCCESSFUL",
-                        "name": "CREATION_SUCCESSFUL"
-                    },
-                    {
-                        "value": "CREATION_FAILED",
-                        "name": "CREATION_FAILED"
-                    },
-                    {
-                        "value": "UPDATE_IN_PROGRESS",
-                        "name": "UPDATE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "UPDATE_SUCCESSFUL",
-                        "name": "UPDATE_SUCCESSFUL"
-                    },
-                    {
-                        "value": "UPDATE_FAILED",
-                        "name": "UPDATE_FAILED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "CREATION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_IN_PROGRESS"
                     }
-                ]
+                },
+                "CREATION_SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_SUCCESSFUL"
+                    }
+                },
+                "CREATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATION_FAILED"
+                    }
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_SUCCESSFUL"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#ResourceUnavailableException": {
@@ -15131,6 +15583,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -15191,21 +15644,21 @@
                 "RowsIngested": {
                     "target": "com.amazonaws.quicksight#Long",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of rows that were ingested.</p>"
                     }
                 },
                 "RowsDropped": {
                     "target": "com.amazonaws.quicksight#Long",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of rows that were not ingested.</p>"
                     }
                 },
                 "TotalRowsInDataset": {
                     "target": "com.amazonaws.quicksight#Long",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The total number of rows in the dataset.</p>"
                     }
                 }
@@ -15255,33 +15708,37 @@
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionFormatVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VERSION_1",
-                        "name": "VERSION_1"
-                    },
-                    {
-                        "value": "VERSION_2",
-                        "name": "VERSION_2"
+            "type": "enum",
+            "members": {
+                "VERSION_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERSION_1"
                     }
-                ]
+                },
+                "VERSION_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERSION_2"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionPolicy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GRANT_ACCESS",
-                        "name": "GRANT_ACCESS"
-                    },
-                    {
-                        "value": "DENY_ACCESS",
-                        "name": "DENY_ACCESS"
+            "type": "enum",
+            "members": {
+                "GRANT_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_ACCESS"
                     }
-                ]
+                },
+                "DENY_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY_ACCESS"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionTagConfiguration": {
@@ -15491,7 +15948,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
                     }
                 }
@@ -15515,6 +15972,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -15597,7 +16055,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
@@ -15621,6 +16079,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -15700,7 +16159,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
                     }
                 }
@@ -15712,6 +16171,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -15800,7 +16260,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.quicksight#MaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return from this request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
@@ -15846,10 +16306,21 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#SecretArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+$"
             }
         },
         "com.amazonaws.quicksight#ServiceNowParameters": {
@@ -15870,7 +16341,6 @@
         "com.amazonaws.quicksight#SessionLifetimeInMinutes": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 15,
                     "max": 600
@@ -16021,6 +16491,7 @@
                 "IAMUser": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean that is <code>TRUE</code> if the Amazon QuickSight uses IAM as an\n            authentication method.</p>"
                     }
                 },
@@ -16098,6 +16569,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -16129,6 +16601,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -16151,6 +16624,7 @@
                 "DisableSsl": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean option to control whether SSL should be disabled.</p>"
                     }
                 }
@@ -16160,22 +16634,27 @@
             }
         },
         "com.amazonaws.quicksight#Status": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#StatusCode": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.quicksight#String": {
             "type": "string"
@@ -16366,6 +16845,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -16495,26 +16975,32 @@
             }
         },
         "com.amazonaws.quicksight#TemplateErrorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SOURCE_NOT_FOUND",
-                        "name": "SOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "DATA_SET_NOT_FOUND",
-                        "name": "DATA_SET_NOT_FOUND"
-                    },
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
+            "type": "enum",
+            "members": {
+                "SOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_NOT_FOUND"
                     }
-                ]
+                },
+                "DATA_SET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET_NOT_FOUND"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#TemplateName": {
@@ -16764,6 +17250,7 @@
                 "Port": {
                     "target": "com.amazonaws.quicksight#Port",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Port.</p>",
                         "smithy.api#required": {}
                     }
@@ -16781,18 +17268,20 @@
             }
         },
         "com.amazonaws.quicksight#TextQualifier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DOUBLE_QUOTE",
-                        "name": "DOUBLE_QUOTE"
-                    },
-                    {
-                        "value": "SINGLE_QUOTE",
-                        "name": "SINGLE_QUOTE"
+            "type": "enum",
+            "members": {
+                "DOUBLE_QUOTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE_QUOTE"
                     }
-                ]
+                },
+                "SINGLE_QUOTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_QUOTE"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#Theme": {
@@ -16938,14 +17427,14 @@
             }
         },
         "com.amazonaws.quicksight#ThemeErrorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
+            "type": "enum",
+            "members": {
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.quicksight#ThemeName": {
@@ -17014,22 +17503,26 @@
             }
         },
         "com.amazonaws.quicksight#ThemeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUICKSIGHT",
-                        "name": "QUICKSIGHT"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT"
                     }
-                ]
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#ThemeVersion": {
@@ -17272,6 +17765,7 @@
                 "MaxRows": {
                     "target": "com.amazonaws.quicksight#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of rows to query Twitter.</p>",
                         "smithy.api#required": {}
                     }
@@ -17521,6 +18015,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -17630,6 +18125,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -17711,6 +18207,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -17857,6 +18354,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -17934,6 +18432,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18098,6 +18597,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18194,6 +18694,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18295,6 +18796,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
@@ -18341,7 +18843,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a dataset. This operation doesn't support datasets that include uploaded files as a source.</p>",
+                "smithy.api#documentation": "<p>Updates a dataset. This operation doesn't support datasets that include uploaded files as a source. Partial updates are not supported by this operation.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}",
@@ -18443,6 +18945,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18566,6 +19069,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18703,6 +19207,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18791,6 +19296,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -18919,6 +19425,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>"
                     }
                 },
@@ -18982,6 +19489,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19099,6 +19607,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19234,6 +19743,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19320,6 +19830,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request. </p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19389,6 +19900,7 @@
                 "PublicSharingEnabled": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account.</p>"
                     }
                 }
@@ -19406,6 +19918,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19549,6 +20062,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19661,6 +20175,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19737,6 +20252,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19880,6 +20396,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -19992,6 +20509,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -20074,6 +20592,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -20176,6 +20695,7 @@
                 "UnapplyCustomPermissions": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that you use to indicate that you want to remove all custom permissions\n            from this user. Using this parameter resets the user to the state\n            it was in before a custom permissions profile was applied. This parameter defaults to\n            NULL and it doesn't accept any other value.</p>"
                     }
                 },
@@ -20217,6 +20737,7 @@
                 "Status": {
                     "target": "com.amazonaws.quicksight#StatusCode",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
                     }
@@ -20235,14 +20756,14 @@
                 "StartFromRow": {
                     "target": "com.amazonaws.quicksight#PositiveInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>A row number to start reading data from.</p>"
                     }
                 },
                 "ContainsHeader": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether the file has a header row, or the files each have a header row.</p>"
                     }
                 },
@@ -20275,7 +20796,7 @@
                 "UserName": {
                     "target": "com.amazonaws.quicksight#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user's user name. In the output, the value for <code>UserName</code> is\n                <code>N/A</code> when the value for <code>IdentityType</code> is <code>IAM</code>\n            and the corresponding IAM user is deleted.</p>"
+                        "smithy.api#documentation": "<p>The user's user name. This value is required if you are registering a user that will be managed in Amazon QuickSight. In the output, the value for <code>UserName</code> is\n                <code>N/A</code> when the value for <code>IdentityType</code> is <code>IAM</code>\n            and the corresponding IAM user is deleted.</p>"
                     }
                 },
                 "Email": {
@@ -20299,6 +20820,7 @@
                 "Active": {
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The active status of user. When you create an Amazon QuickSight user that’s not an IAM\n            user or an Active Directory user, that user is inactive until they sign in and provide a\n            password.</p>"
                     }
                 },
@@ -20362,30 +20884,38 @@
             }
         },
         "com.amazonaws.quicksight#UserRole": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADMIN",
-                        "name": "ADMIN"
-                    },
-                    {
-                        "value": "AUTHOR",
-                        "name": "AUTHOR"
-                    },
-                    {
-                        "value": "READER",
-                        "name": "READER"
-                    },
-                    {
-                        "value": "RESTRICTED_AUTHOR",
-                        "name": "RESTRICTED_AUTHOR"
-                    },
-                    {
-                        "value": "RESTRICTED_READER",
-                        "name": "RESTRICTED_READER"
+            "type": "enum",
+            "members": {
+                "ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN"
                     }
-                ]
+                },
+                "AUTHOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHOR"
+                    }
+                },
+                "READER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READER"
+                    }
+                },
+                "RESTRICTED_AUTHOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTRICTED_AUTHOR"
+                    }
+                },
+                "RESTRICTED_READER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTRICTED_READER"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#VersionDescription": {
@@ -20400,7 +20930,6 @@
         "com.amazonaws.quicksight#VersionNumber": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }

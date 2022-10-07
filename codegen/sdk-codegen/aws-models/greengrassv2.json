@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -323,6 +323,7 @@
         "com.amazonaws.greengrassv2#CPU": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -400,30 +401,38 @@
             }
         },
         "com.amazonaws.greengrassv2#CloudComponentState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REQUESTED",
-                        "name": "REQUESTED"
-                    },
-                    {
-                        "value": "INITIATED",
-                        "name": "INITIATED"
-                    },
-                    {
-                        "value": "DEPLOYABLE",
-                        "name": "DEPLOYABLE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "DEPRECATED",
-                        "name": "DEPRECATED"
+            "type": "enum",
+            "members": {
+                "REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUESTED"
                     }
-                ]
+                },
+                "INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIATED"
+                    }
+                },
+                "DEPLOYABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPLOYABLE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#CloudComponentStatus": {
@@ -602,18 +611,20 @@
             }
         },
         "com.amazonaws.greengrassv2#ComponentDependencyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HARD",
-                        "name": "HARD"
-                    },
-                    {
-                        "value": "SOFT",
-                        "name": "SOFT"
+            "type": "enum",
+            "members": {
+                "HARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARD"
                     }
-                ]
+                },
+                "SOFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOFT"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#ComponentDeploymentSpecification": {
@@ -819,18 +830,20 @@
             }
         },
         "com.amazonaws.greengrassv2#ComponentVisibilityScope": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
-                    },
-                    {
-                        "value": "PUBLIC",
-                        "name": "PUBLIC"
+            "type": "enum",
+            "members": {
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
                     }
-                ]
+                },
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#ConflictException": {
@@ -883,6 +896,7 @@
                 "portNumber": {
                     "target": "com.amazonaws.greengrassv2#PortNumberInt",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port where the MQTT broker operates on the core device. This port is typically 8883,\n      which is the default port for the MQTT broker component that runs on core devices.</p>",
                         "smithy.api#jsonName": "PortNumber"
                     }
@@ -944,18 +958,20 @@
             }
         },
         "com.amazonaws.greengrassv2#CoreDeviceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HEALTHY",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "UNHEALTHY",
-                        "name": "UNHEALTHY"
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
                     }
-                ]
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#CoreDeviceThingName": {
@@ -1197,6 +1213,7 @@
         "com.amazonaws.greengrassv2#DefaultMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1395,6 +1412,7 @@
                 "isLatestForTarget": {
                     "target": "com.amazonaws.greengrassv2#IsLatestForTarget",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not the deployment is the latest revision for its target.</p>"
                     }
                 }
@@ -1409,7 +1427,7 @@
                 "timeoutInSeconds": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The amount of time in seconds that each component on a device has to report that it's safe\n      to update. If the component waits for longer than this timeout, then the deployment proceeds\n      on the device.</p>\n         <p>Default: <code>60</code>\n         </p>"
                     }
                 },
@@ -1425,18 +1443,20 @@
             }
         },
         "com.amazonaws.greengrassv2#DeploymentComponentUpdatePolicyAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOTIFY_COMPONENTS",
-                        "name": "NOTIFY_COMPONENTS"
-                    },
-                    {
-                        "value": "SKIP_NOTIFY_COMPONENTS",
-                        "name": "SKIP_NOTIFY_COMPONENTS"
+            "type": "enum",
+            "members": {
+                "NOTIFY_COMPONENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOTIFY_COMPONENTS"
                     }
-                ]
+                },
+                "SKIP_NOTIFY_COMPONENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIP_NOTIFY_COMPONENTS"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#DeploymentConfigurationValidationPolicy": {
@@ -1445,7 +1465,7 @@
                 "timeoutInSeconds": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The amount of time in seconds that a component can validate its configuration updates. If\n      the validation time exceeds this timeout, then the deployment proceeds for the device.</p>\n         <p>Default: <code>30</code>\n         </p>"
                     }
                 }
@@ -1455,33 +1475,37 @@
             }
         },
         "com.amazonaws.greengrassv2#DeploymentFailureHandlingPolicy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ROLLBACK",
-                        "name": "ROLLBACK"
-                    },
-                    {
-                        "value": "DO_NOTHING",
-                        "name": "DO_NOTHING"
+            "type": "enum",
+            "members": {
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
                     }
-                ]
+                },
+                "DO_NOTHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DO_NOTHING"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#DeploymentHistoryFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "LATEST_ONLY",
-                        "name": "LATEST_ONLY"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "LATEST_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST_ONLY"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#DeploymentID": {
@@ -1558,30 +1582,38 @@
             }
         },
         "com.amazonaws.greengrassv2#DeploymentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "CANCELED",
-                        "name": "CANCELED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#DescribeComponent": {
@@ -1873,45 +1905,113 @@
                         "smithy.api#documentation": "<p>The time at which the deployment job was last modified, expressed in ISO 8601\n      format.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "statusDetails": {
+                    "target": "com.amazonaws.greengrassv2#EffectiveDeploymentStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status details that explain why a deployment has an error. This response will be null\n      if the deployment is in a success state.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.</p>"
             }
         },
-        "com.amazonaws.greengrassv2#EffectiveDeploymentExecutionStatus": {
+        "com.amazonaws.greengrassv2#EffectiveDeploymentErrorCode": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "QUEUED",
-                        "name": "QUEUED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "TIMED_OUT",
-                        "name": "TIMED_OUT"
-                    },
-                    {
-                        "value": "CANCELED",
-                        "name": "CANCELED"
-                    },
-                    {
-                        "value": "REJECTED",
-                        "name": "REJECTED"
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#EffectiveDeploymentErrorStack": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#EffectiveDeploymentErrorCode"
+            }
+        },
+        "com.amazonaws.greengrassv2#EffectiveDeploymentErrorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#EffectiveDeploymentErrorTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#EffectiveDeploymentErrorType"
+            }
+        },
+        "com.amazonaws.greengrassv2#EffectiveDeploymentExecutionStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#EffectiveDeploymentStatusDetails": {
+            "type": "structure",
+            "members": {
+                "errorStack": {
+                    "target": "com.amazonaws.greengrassv2#EffectiveDeploymentErrorStack",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an ordered list of short error codes that range from the most generic error to\n      the most specific one. The error codes describe the reason for failure whenever the\n        <code>coreDeviceExecutionStatus</code> is in a failed state. The response will be an empty\n      list if there is no error.</p>"
+                    }
+                },
+                "errorTypes": {
+                    "target": "com.amazonaws.greengrassv2#EffectiveDeploymentErrorTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains tags which describe the error. You can use the error types to classify errors to\n      assist with remediating the failure. The response will be an empty list if there is no\n      error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains all error-related information for the deployment record. The status details will\n      be null if the deployment is in a success state.</p>\n         <note>\n            <p>Greengrass nucleus v2.8.0 or later is required to get an accurate <code>errorStack</code> and\n          <code>errorTypes</code> response. This field will not be returned for earlier Greengrass nucleus\n        versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.greengrassv2#EffectiveDeploymentsList": {
@@ -2354,6 +2454,7 @@
                 "isLatestForTarget": {
                     "target": "com.amazonaws.greengrassv2#IsLatestForTarget",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not the deployment is the latest revision for its target.</p>"
                     }
                 },
@@ -2412,21 +2513,6 @@
         },
         "com.amazonaws.greengrassv2#GreengrassV2": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "GreengrassV2",
-                    "arnNamespace": "greengrass",
-                    "cloudFormationName": "GreengrassV2",
-                    "cloudTrailEventSource": "greengrassv2.amazonaws.com",
-                    "endpointPrefix": "greengrass"
-                },
-                "aws.auth#sigv4": {
-                    "name": "greengrass"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities\n      to edge devices. This enables devices to collect and analyze data closer to the source of\n      information, react autonomously to local events, and communicate securely with each other on\n      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data\n      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and\n      deploy applications to fleets of edge devices for local operation.</p>\n         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.\n      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,\n      manage deployments, and core devices.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in\n      the <i>IoT Greengrass V2 Developer Guide</i>.</p>",
-                "smithy.api#title": "AWS IoT Greengrass V2"
-            },
             "version": "2020-11-30",
             "operations": [
                 {
@@ -2516,7 +2602,22 @@
                 {
                     "target": "com.amazonaws.greengrassv2#UpdateConnectivityInfo"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "GreengrassV2",
+                    "arnNamespace": "greengrass",
+                    "cloudFormationName": "GreengrassV2",
+                    "cloudTrailEventSource": "greengrassv2.amazonaws.com",
+                    "endpointPrefix": "greengrass"
+                },
+                "aws.auth#sigv4": {
+                    "name": "greengrass"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities\n      to edge devices. This enables devices to collect and analyze data closer to the source of\n      information, react autonomously to local events, and communicate securely with each other on\n      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data\n      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and\n      deploy applications to fleets of edge devices for local operation.</p>\n         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.\n      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,\n      manage deployments, and core devices.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in\n      the <i>IoT Greengrass V2 Developer Guide</i>.</p>",
+                "smithy.api#title": "AWS IoT Greengrass V2"
+            }
         },
         "com.amazonaws.greengrassv2#InstalledComponent": {
             "type": "structure",
@@ -2542,12 +2643,13 @@
                 "lifecycleStateDetails": {
                     "target": "com.amazonaws.greengrassv2#LifecycleStateDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details about the lifecycle state of the component.</p>"
+                        "smithy.api#documentation": "<p>A detailed response about the lifecycle state of the component that explains the reason\n      why a component has an error or is broken.</p>"
                     }
                 },
                 "isRoot": {
                     "target": "com.amazonaws.greengrassv2#IsRoot",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether or not the component is a root component.</p>"
                     }
                 },
@@ -2556,6 +2658,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of how current the data is.</p>\n         <p>This response is based off of component state changes. The status reflects component\n      disruptions and deployments. If a component only sees a configuration update during a\n      deployment, it might not undergo a state change and this status would not be updated.</p>"
                     }
+                },
+                "lastReportedTimestamp": {
+                    "target": "com.amazonaws.greengrassv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the Greengrass core device sent a message containing a certain component to the\n      Amazon Web Services Cloud.</p>\n         <p>A component does not need to see a state change for this field to update.</p>"
+                    }
+                },
+                "lastInstallationSource": {
+                    "target": "com.amazonaws.greengrassv2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent deployment source that brought the component to the Greengrass core device. For\n      a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for\n      local deployments it will be <code>LOCAL</code>.</p>"
+                    }
+                },
+                "lifecycleStatusCodes": {
+                    "target": "com.amazonaws.greengrassv2#InstalledComponentLifecycleStatusCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status codes that indicate the reason for failure whenever the\n        <code>lifecycleState</code> has an error or is in a broken state.</p>\n         <note>\n            <p>Greengrass nucleus v2.8.0 or later is required to get an accurate\n          <code>lifecycleStatusCodes</code> response. This response can be inaccurate in earlier\n        Greengrass nucleus versions.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -2563,42 +2683,71 @@
             }
         },
         "com.amazonaws.greengrassv2#InstalledComponentLifecycleState": {
+            "type": "enum",
+            "members": {
+                "NEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW"
+                    }
+                },
+                "INSTALLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTALLED"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "ERRORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERRORED"
+                    }
+                },
+                "BROKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BROKEN"
+                    }
+                },
+                "FINISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINISHED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#InstalledComponentLifecycleStatusCode": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NEW",
-                        "name": "NEW"
-                    },
-                    {
-                        "value": "INSTALLED",
-                        "name": "INSTALLED"
-                    },
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "ERRORED",
-                        "name": "ERRORED"
-                    },
-                    {
-                        "value": "BROKEN",
-                        "name": "BROKEN"
-                    },
-                    {
-                        "value": "FINISHED",
-                        "name": "FINISHED"
-                    }
-                ]
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#InstalledComponentLifecycleStatusCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.greengrassv2#InstalledComponentLifecycleStatusCode"
             }
         },
         "com.amazonaws.greengrassv2#InstalledComponentList": {
@@ -2608,18 +2757,20 @@
             }
         },
         "com.amazonaws.greengrassv2#InstalledComponentTopologyFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ROOT",
-                        "name": "ROOT"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ROOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROOT"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#InternalServerException": {
@@ -2634,6 +2785,7 @@
                 "retryAfterSeconds": {
                     "target": "com.amazonaws.greengrassv2#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to wait before you retry the request.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -2652,14 +2804,14 @@
             }
         },
         "com.amazonaws.greengrassv2#IoTJobAbortAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CANCEL",
-                        "name": "CANCEL"
+            "type": "enum",
+            "members": {
+                "CANCEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCEL"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.greengrassv2#IoTJobAbortConfig": {
@@ -2697,6 +2849,7 @@
                 "thresholdPercentage": {
                     "target": "com.amazonaws.greengrassv2#IoTJobAbortThresholdPercentage",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum percentage of <code>failureType</code> failures that occur before the job can\n      cancel.</p>\n         <p>This parameter supports up to two digits after the decimal (for example, you can specify\n      <code>10.9</code> or <code>10.99</code>, but not <code>10.999</code>).</p>",
                         "smithy.api#required": {}
                     }
@@ -2704,6 +2857,7 @@
                 "minNumberOfExecutedThings": {
                     "target": "com.amazonaws.greengrassv2#IoTJobMinimumNumberOfExecutedThings",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of things that receive the configuration before the job can\n      cancel.</p>",
                         "smithy.api#required": {}
                     }
@@ -2727,32 +2881,39 @@
         "com.amazonaws.greengrassv2#IoTJobAbortThresholdPercentage": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "max": 100
                 }
             }
         },
         "com.amazonaws.greengrassv2#IoTJobExecutionFailureType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "REJECTED",
-                        "name": "REJECTED"
-                    },
-                    {
-                        "value": "TIMED_OUT",
-                        "name": "TIMED_OUT"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
                     }
-                ]
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#IoTJobExecutionsRolloutConfig": {
@@ -2767,7 +2928,7 @@
                 "maximumPerMinute": {
                     "target": "com.amazonaws.greengrassv2#IoTJobMaxExecutionsPerMin",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of devices that receive a pending job notification, per minute.</p>"
                     }
                 }
@@ -2782,6 +2943,7 @@
                 "baseRatePerMinute": {
                     "target": "com.amazonaws.greengrassv2#IoTJobRolloutBaseRatePerMinute",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of devices that receive a pending job notification, per minute, when\n      the job starts. This parameter defines the initial rollout rate of the job.</p>",
                         "smithy.api#required": {}
                     }
@@ -2789,6 +2951,7 @@
                 "incrementFactor": {
                     "target": "com.amazonaws.greengrassv2#IoTJobRolloutIncrementFactor",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The exponential factor to increase the rollout rate for the job.</p>\n         <p>This parameter supports up to one digit after the decimal (for example, you can specify\n      <code>1.5</code>, but not <code>1.55</code>).</p>",
                         "smithy.api#required": {}
                     }
@@ -2815,11 +2978,15 @@
             }
         },
         "com.amazonaws.greengrassv2#IoTJobInProgressTimeoutInMinutes": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.greengrassv2#IoTJobMaxExecutionsPerMin": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -2829,6 +2996,7 @@
         "com.amazonaws.greengrassv2#IoTJobMinimumNumberOfExecutedThings": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -2837,6 +3005,7 @@
         "com.amazonaws.greengrassv2#IoTJobNumberOfThings": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -2848,14 +3017,14 @@
                 "numberOfNotifiedThings": {
                     "target": "com.amazonaws.greengrassv2#IoTJobNumberOfThings",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of devices to receive the job notification before the rollout rate\n      increases.</p>"
                     }
                 },
                 "numberOfSucceededThings": {
                     "target": "com.amazonaws.greengrassv2#IoTJobNumberOfThings",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The number of devices to successfully run the configuration job before the rollout rate\n      increases.</p>"
                     }
                 }
@@ -2867,6 +3036,7 @@
         "com.amazonaws.greengrassv2#IoTJobRolloutBaseRatePerMinute": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -2876,6 +3046,7 @@
         "com.amazonaws.greengrassv2#IoTJobRolloutIncrementFactor": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -2888,7 +3059,7 @@
                 "inProgressTimeoutInMinutes": {
                     "target": "com.amazonaws.greengrassv2#IoTJobInProgressTimeoutInMinutes",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The amount of time, in minutes, that devices have to complete the job. The timer starts\n      when the job status is set to <code>IN_PROGRESS</code>. If the job status doesn't change to a\n      terminal state before the time expires, then the job status is set to\n      <code>TIMED_OUT</code>.</p>\n         <p>The timeout interval must be between 1 minute and 7 days (10080 minutes).</p>"
                     }
                 }
@@ -2907,10 +3078,16 @@
             }
         },
         "com.amazonaws.greengrassv2#IsLatestForTarget": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.greengrassv2#IsRoot": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.greengrassv2#LambdaContainerParams": {
             "type": "structure",
@@ -2918,14 +3095,14 @@
                 "memorySizeInKB": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The memory size of the container, expressed in kilobytes.</p>\n         <p>Default: <code>16384</code> (16 MB)</p>"
                     }
                 },
                 "mountROSysfs": {
                     "target": "com.amazonaws.greengrassv2#OptionalBoolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether or not the container can read information from the device's <code>/sys</code>\n      folder.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 },
@@ -2971,7 +3148,7 @@
                 "addGroupOwner": {
                     "target": "com.amazonaws.greengrassv2#OptionalBoolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether or not to add the component's system user as an owner of the device.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 }
@@ -3018,18 +3195,20 @@
             }
         },
         "com.amazonaws.greengrassv2#LambdaEventSourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUB_SUB",
-                        "name": "PUB_SUB"
-                    },
-                    {
-                        "value": "IOT_CORE",
-                        "name": "IOT_CORE"
+            "type": "enum",
+            "members": {
+                "PUB_SUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUB_SUB"
                     }
-                ]
+                },
+                "IOT_CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IOT_CORE"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#LambdaExecArg": {
@@ -3053,42 +3232,42 @@
                 "maxQueueSize": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum size of the message queue for the Lambda function component. The IoT Greengrass core\n      stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to\n      consume each message.</p>"
                     }
                 },
                 "maxInstancesCount": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of instances that a non-pinned Lambda function can run at the same\n      time.</p>"
                     }
                 },
                 "maxIdleTimeInSeconds": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum amount of time in seconds that a non-pinned Lambda function can idle before the\n      IoT Greengrass Core software stops its process.</p>"
                     }
                 },
                 "timeoutInSeconds": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum amount of time in seconds that the Lambda function can process a work\n      item.</p>"
                     }
                 },
                 "statusTimeoutInSeconds": {
                     "target": "com.amazonaws.greengrassv2#OptionalInteger",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The interval in seconds at which a pinned (also known as long-lived) Lambda function\n      component sends status updates to the Lambda manager component.</p>"
                     }
                 },
                 "pinned": {
                     "target": "com.amazonaws.greengrassv2#OptionalBoolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether or not the Lambda function is pinned, or long-lived.</p>\n         <ul>\n            <li>\n               <p>A pinned Lambda function starts\n          when IoT Greengrass starts and keeps running in its own container.</p>\n            </li>\n            <li>\n               <p>A non-pinned Lambda function starts only when it receives a work item and exists after\n          it idles for <code>maxIdleTimeInSeconds</code>. If the function has multiple work items,\n          the IoT Greengrass Core software creates multiple instances of the function.</p>\n            </li>\n         </ul>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
@@ -3122,18 +3301,20 @@
             }
         },
         "com.amazonaws.greengrassv2#LambdaFilesystemPermission": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ro",
-                        "name": "RO"
-                    },
-                    {
-                        "value": "rw",
-                        "name": "RW"
+            "type": "enum",
+            "members": {
+                "RO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ro"
                     }
-                ]
+                },
+                "RW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rw"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#LambdaFunctionRecipeSource": {
@@ -3182,33 +3363,37 @@
             }
         },
         "com.amazonaws.greengrassv2#LambdaInputPayloadEncodingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "json",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "binary",
-                        "name": "BINARY"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json"
                     }
-                ]
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "binary"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#LambdaIsolationMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GreengrassContainer",
-                        "name": "GREENGRASS_CONTAINER"
-                    },
-                    {
-                        "value": "NoContainer",
-                        "name": "NO_CONTAINER"
+            "type": "enum",
+            "members": {
+                "GREENGRASS_CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreengrassContainer"
                     }
-                ]
+                },
+                "NO_CONTAINER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoContainer"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#LambdaLinuxProcessParams": {
@@ -3263,7 +3448,7 @@
                 "addGroupOwner": {
                     "target": "com.amazonaws.greengrassv2#OptionalBoolean",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Whether or not to add the IoT Greengrass user group as an owner of the volume.</p>\n         <p>Default: <code>false</code>\n         </p>"
                     }
                 }
@@ -3335,7 +3520,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3420,7 +3605,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3504,7 +3689,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3592,7 +3777,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3680,7 +3865,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3765,7 +3950,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3850,7 +4035,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3877,7 +4062,7 @@
                 "installedComponents": {
                     "target": "com.amazonaws.greengrassv2#InstalledComponentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that summarizes each component on the core device.</p>\n         <note>\n            <p>Accuracy of the <code>lastStatusChangeTimestamp</code> response depends on Greengrass nucleus\n        v2.7.0. It performs best on Greengrass nucleus v2.7.0 and can be inaccurate on earlier\n        versions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A list that summarizes each component on the core device.</p>\n         <note>\n            <p>Greengrass nucleus v2.7.0 or later is required to get an accurate\n          <code>lastStatusChangeTimestamp</code> response. This response can be inaccurate in\n        earlier Greengrass nucleus versions.</p>\n         </note>\n         <note>\n            <p>Greengrass nucleus v2.8.0 or later is required to get an accurate\n          <code>lastInstallationSource</code> and <code>lastReportedTimestamp</code> response. This\n        response can be inaccurate or null in earlier Greengrass nucleus versions.</p>\n         </note>"
                     }
                 },
                 "nextToken": {
@@ -3943,6 +4128,7 @@
         "com.amazonaws.greengrassv2#Memory": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 9223372036854771712
@@ -3964,10 +4150,16 @@
             "type": "string"
         },
         "com.amazonaws.greengrassv2#OptionalBoolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.greengrassv2#OptionalInteger": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.greengrassv2#PlatformAttributesMap": {
             "type": "map",
@@ -3981,6 +4173,7 @@
         "com.amazonaws.greengrassv2#PortNumberInt": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 65535
@@ -3997,18 +4190,20 @@
             "type": "blob"
         },
         "com.amazonaws.greengrassv2#RecipeOutputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "YAML",
-                        "name": "YAML"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
                     }
-                ]
+                },
+                "YAML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YAML"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#RequestAlreadyInProgressException": {
@@ -4173,7 +4368,10 @@
             }
         },
         "com.amazonaws.greengrassv2#RetryAfterSeconds": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.greengrassv2#ServiceQuotaExceededException": {
             "type": "structure",
@@ -4235,12 +4433,14 @@
                 "memory": {
                     "target": "com.amazonaws.greengrassv2#Memory",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum amount of RAM, expressed in kilobytes, that a component's processes can use on\n      the core device.</p>"
                     }
                 },
                 "cpus": {
                     "target": "com.amazonaws.greengrassv2#CPU",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum amount of CPU time that a component's processes can use on the core device. A\n      core device's total CPU time is equivalent to the device's number of CPU cores. For example,\n      on a core device with 4 CPU cores, you can set this value to <code>2</code> to limit the\n      component's processes to 50 percent usage of each CPU core. On a device with 1 CPU core, you\n      can set this value to <code>0.25</code> to limit the component's processes to 25 percent usage\n      of the CPU. If you set this value to a number greater than the number of CPU cores, the IoT Greengrass Core\n      software doesn't limit the component's CPU usage.</p>"
                     }
                 }
@@ -4382,6 +4582,7 @@
                 "retryAfterSeconds": {
                     "target": "com.amazonaws.greengrassv2#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time to wait before you retry the request.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -4575,45 +4776,55 @@
             }
         },
         "com.amazonaws.greengrassv2#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNKNOWN_OPERATION",
-                        "name": "UNKNOWN_OPERATION"
-                    },
-                    {
-                        "value": "CANNOT_PARSE",
-                        "name": "CANNOT_PARSE"
-                    },
-                    {
-                        "value": "FIELD_VALIDATION_FAILED",
-                        "name": "FIELD_VALIDATION_FAILED"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_OPERATION"
                     }
-                ]
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANNOT_PARSE"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_VALIDATION_FAILED"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#VendorGuidance": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DISCONTINUED",
-                        "name": "DISCONTINUED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "DISCONTINUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONTINUED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#connectivityInfoList": {

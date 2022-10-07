@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -106,7 +106,6 @@
         "com.amazonaws.elasticloadbalancingv2#ActionOrder": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50000
@@ -114,30 +113,38 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#ActionTypeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "forward",
-                        "name": "FORWARD"
-                    },
-                    {
-                        "value": "authenticate-oidc",
-                        "name": "AUTHENTICATE_OIDC"
-                    },
-                    {
-                        "value": "authenticate-cognito",
-                        "name": "AUTHENTICATE_COGNITO"
-                    },
-                    {
-                        "value": "redirect",
-                        "name": "REDIRECT"
-                    },
-                    {
-                        "value": "fixed-response",
-                        "name": "FIXED_RESPONSE"
+            "type": "enum",
+            "members": {
+                "FORWARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "forward"
                     }
-                ]
+                },
+                "AUTHENTICATE_OIDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "authenticate-oidc"
+                    }
+                },
+                "AUTHENTICATE_COGNITO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "authenticate-cognito"
+                    }
+                },
+                "REDIRECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "redirect"
+                    }
+                },
+                "FIXED_RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fixed-response"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#Actions": {
@@ -299,22 +306,26 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateCognitoActionConditionalBehaviorEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "deny",
-                        "name": "DENY"
-                    },
-                    {
-                        "value": "allow",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "authenticate",
-                        "name": "AUTHENTICATE"
+            "type": "enum",
+            "members": {
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deny"
                     }
-                ]
+                },
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "allow"
+                    }
+                },
+                "AUTHENTICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "authenticate"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateCognitoActionConfig": {
@@ -383,10 +394,7 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateCognitoActionSessionTimeout": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateCognitoActionUserPoolArn": {
             "type": "string"
@@ -422,22 +430,26 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateOidcActionConditionalBehaviorEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "deny",
-                        "name": "DENY"
-                    },
-                    {
-                        "value": "allow",
-                        "name": "ALLOW"
-                    },
-                    {
-                        "value": "authenticate",
-                        "name": "AUTHENTICATE"
+            "type": "enum",
+            "members": {
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deny"
                     }
-                ]
+                },
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "allow"
+                    }
+                },
+                "AUTHENTICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "authenticate"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateOidcActionConfig": {
@@ -535,19 +547,13 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateOidcActionSessionTimeout": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateOidcActionTokenEndpoint": {
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateOidcActionUseExistingClientSecret": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticloadbalancingv2#AuthenticateOidcActionUserInfoEndpoint": {
             "type": "string"
@@ -668,6 +674,7 @@
                 "Priority": {
                     "target": "com.amazonaws.elasticloadbalancingv2#CipherPriority",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The priority of the cipher.</p>"
                     }
                 }
@@ -680,7 +687,10 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#CipherPriority": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.elasticloadbalancingv2#Ciphers": {
             "type": "list",
@@ -1226,10 +1236,7 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#Default": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticloadbalancingv2#DeleteListener": {
             "type": "operation",
@@ -2248,24 +2255,6 @@
         },
         "com.amazonaws.elasticloadbalancingv2#ElasticLoadBalancing_v10": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Elastic Load Balancing v2",
-                    "arnNamespace": "elasticloadbalancing",
-                    "cloudFormationName": "ElasticLoadBalancingV2",
-                    "cloudTrailEventSource": "elasticloadbalancingv2.amazonaws.com",
-                    "endpointPrefix": "elasticloadbalancing"
-                },
-                "aws.auth#sigv4": {
-                    "name": "elasticloadbalancing"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Elastic Load Balancing</fullname>\n\n         <p>A load balancer distributes incoming traffic across targets, such as your EC2 instances.\n      This enables you to increase the availability of your application. The load balancer also\n      monitors the health of its registered targets and ensures that it routes traffic only to\n      healthy targets. You configure your load balancer to accept incoming traffic by specifying one\n      or more listeners, which are configured with a protocol and port number for connections from\n      clients to the load balancer. You configure a target group with a protocol and port number for\n      connections from the load balancer to the targets, and with health check settings to be used\n      when checking the health status of the targets.</p>\n\n         <p>Elastic Load Balancing supports the following types of load balancers: Application Load\n      Balancers, Network Load Balancers, Gateway Load Balancers, and Classic Load Balancers. This\n      reference covers the following load balancer types:</p>\n         <ul>\n            <li>\n               <p>Application Load Balancer - Operates at the application layer (layer 7) and supports\n          HTTP and HTTPS.</p>\n            </li>\n            <li>\n               <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP,\n          TLS, and UDP.</p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>\n            </li>\n         </ul>\n\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/\">Elastic Load Balancing User\n      Guide</a>.</p>\n\n    \n    \n\n    \n    \n\n         <p>All Elastic Load Balancing operations are idempotent, which means that they complete at\n      most one time. If you repeat an operation, it succeeds.</p>",
-                "smithy.api#title": "Elastic Load Balancing",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"
-                }
-            },
             "version": "2015-12-01",
             "operations": [
                 {
@@ -2370,7 +2359,25 @@
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#SetSubnets"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Elastic Load Balancing v2",
+                    "arnNamespace": "elasticloadbalancing",
+                    "cloudFormationName": "ElasticLoadBalancingV2",
+                    "cloudTrailEventSource": "elasticloadbalancingv2.amazonaws.com",
+                    "endpointPrefix": "elasticloadbalancing"
+                },
+                "aws.auth#sigv4": {
+                    "name": "elasticloadbalancing"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Elastic Load Balancing</fullname>\n\n         <p>A load balancer distributes incoming traffic across targets, such as your EC2 instances.\n      This enables you to increase the availability of your application. The load balancer also\n      monitors the health of its registered targets and ensures that it routes traffic only to\n      healthy targets. You configure your load balancer to accept incoming traffic by specifying one\n      or more listeners, which are configured with a protocol and port number for connections from\n      clients to the load balancer. You configure a target group with a protocol and port number for\n      connections from the load balancer to the targets, and with health check settings to be used\n      when checking the health status of the targets.</p>\n\n         <p>Elastic Load Balancing supports the following types of load balancers: Application Load\n      Balancers, Network Load Balancers, Gateway Load Balancers, and Classic Load Balancers. This\n      reference covers the following load balancer types:</p>\n         <ul>\n            <li>\n               <p>Application Load Balancer - Operates at the application layer (layer 7) and supports\n          HTTP and HTTPS.</p>\n            </li>\n            <li>\n               <p>Network Load Balancer - Operates at the transport layer (layer 4) and supports TCP,\n          TLS, and UDP.</p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer - Operates at the network layer (layer 3).</p>\n            </li>\n         </ul>\n\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/\">Elastic Load Balancing User\n      Guide</a>.</p>\n\n    \n    \n\n    \n    \n\n         <p>All Elastic Load Balancing operations are idempotent, which means that they complete at\n      most one time. If you repeat an operation, it succeeds.</p>",
+                "smithy.api#title": "Elastic Load Balancing",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"
+                }
+            }
         },
         "com.amazonaws.elasticloadbalancingv2#ErrorDescription": {
             "type": "string"
@@ -2450,15 +2457,11 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#HealthCheckEnabled": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticloadbalancingv2#HealthCheckIntervalSeconds": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 300
@@ -2471,7 +2474,6 @@
         "com.amazonaws.elasticloadbalancingv2#HealthCheckThresholdCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 2,
                     "max": 10
@@ -2481,7 +2483,6 @@
         "com.amazonaws.elasticloadbalancingv2#HealthCheckTimeoutSeconds": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 2,
                     "max": 120
@@ -2685,22 +2686,27 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#IpAddressType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ipv4",
-                        "name": "IPV4"
-                    },
-                    {
-                        "value": "dualstack",
-                        "name": "DUALSTACK"
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
                     }
-                ]
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#IsDefault": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.elasticloadbalancingv2#Limit": {
             "type": "structure",
@@ -3033,18 +3039,20 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#LoadBalancerSchemeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "internet-facing",
-                        "name": "INTERNET_FACING"
-                    },
-                    {
-                        "value": "internal",
-                        "name": "INTERNAL"
+            "type": "enum",
+            "members": {
+                "INTERNET_FACING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "internet-facing"
                     }
-                ]
+                },
+                "INTERNAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "internal"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#LoadBalancerState": {
@@ -3068,45 +3076,55 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#LoadBalancerStateEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "active",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "provisioning",
-                        "name": "PROVISIONING"
-                    },
-                    {
-                        "value": "active_impaired",
-                        "name": "ACTIVE_IMPAIRED"
-                    },
-                    {
-                        "value": "failed",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
                     }
-                ]
+                },
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provisioning"
+                    }
+                },
+                "ACTIVE_IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active_impaired"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#LoadBalancerTypeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "application",
-                        "name": "APPLICATION"
-                    },
-                    {
-                        "value": "network",
-                        "name": "NETWORK"
-                    },
-                    {
-                        "value": "gateway",
-                        "name": "GATEWAY"
+            "type": "enum",
+            "members": {
+                "APPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "application"
                     }
-                ]
+                },
+                "NETWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "network"
+                    }
+                },
+                "GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gateway"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#LoadBalancers": {
@@ -3570,7 +3588,6 @@
         "com.amazonaws.elasticloadbalancingv2#PageSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 400
@@ -3603,7 +3620,6 @@
         "com.amazonaws.elasticloadbalancingv2#Port": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -3631,38 +3647,50 @@
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#ProtocolEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HTTP",
-                        "name": "HTTP"
-                    },
-                    {
-                        "value": "HTTPS",
-                        "name": "HTTPS"
-                    },
-                    {
-                        "value": "TCP",
-                        "name": "TCP"
-                    },
-                    {
-                        "value": "TLS",
-                        "name": "TLS"
-                    },
-                    {
-                        "value": "UDP",
-                        "name": "UDP"
-                    },
-                    {
-                        "value": "TCP_UDP",
-                        "name": "TCP_UDP"
-                    },
-                    {
-                        "value": "GENEVE",
-                        "name": "GENEVE"
+            "type": "enum",
+            "members": {
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
                     }
-                ]
+                },
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTPS"
+                    }
+                },
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP"
+                    }
+                },
+                "TLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS"
+                    }
+                },
+                "UDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP"
+                    }
+                },
+                "TCP_UDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP_UDP"
+                    }
+                },
+                "GENEVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENEVE"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#ProtocolVersion": {
@@ -3790,18 +3818,20 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#RedirectActionStatusCodeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HTTP_301",
-                        "name": "HTTP_301"
-                    },
-                    {
-                        "value": "HTTP_302",
-                        "name": "HTTP_302"
+            "type": "enum",
+            "members": {
+                "HTTP_301": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_301"
                     }
-                ]
+                },
+                "HTTP_302": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_302"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#RegisterTargets": {
@@ -4004,6 +4034,7 @@
                 "IsDefault": {
                     "target": "com.amazonaws.elasticloadbalancingv2#IsDefault",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this is the default rule.</p>"
                     }
                 }
@@ -4103,7 +4134,6 @@
         "com.amazonaws.elasticloadbalancingv2#RulePriority": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50000
@@ -4188,7 +4218,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the type of IP addresses used by the subnets of the specified Application Load\n      Balancer or Network Load Balancer.</p>"
+                "smithy.api#documentation": "<p>Sets the type of IP addresses used by the subnets of the specified load balancer.</p>"
             }
         },
         "com.amazonaws.elasticloadbalancingv2#SetIpAddressTypeInput": {
@@ -4807,7 +4837,7 @@
                 "Key": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupAttributeKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n\n         <p>The following attribute is supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,\n          for Elastic Load Balancing to wait before changing the state of a deregistering target\n          from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The\n          default value is 300 seconds. If the target is a Lambda function, this attribute is not\n          supported.</p>\n            </li>\n         </ul>\n\n         <p>The following attributes are supported by Application Load Balancers, Network Load\n      Balancers, and Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>stickiness.enabled</code> - Indicates whether target stickiness is enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.type</code> - Indicates the type of stickiness. The possible values\n          are: </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>lb_cookie</code> and <code>app_cookie</code> for Application Load Balancers</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip</code> for Network Load Balancers</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip_dest_ip</code> and <code>source_ip_dest_ip_proto</code> for Gateway Load\n              Balancers</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n         <p>The following attributes are supported only if the load balancer is an Application Load\n      Balancer and the target is an instance or an IP address:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines\n          how the load balancer selects targets when routing requests. The value is\n            <code>round_robin</code> or <code>least_outstanding_requests</code>. The default is\n            <code>round_robin</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a\n          newly registered target receives an increasing share of the traffic to the target group.\n          After this time period ends, the target receives its full share of traffic. The range is\n          30-900 seconds (15 minutes). The default is 0 seconds (disabled).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the\n          application-based cookie. Names that start with the following prefixes are not allowed:\n            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved\n          for use by the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the application-based cookie is considered stale. The range is 1 second to\n          1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the load balancer-generated cookie is considered stale. The range is 1\n          second to 1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n         </ul>\n\n         <p>The following attribute is supported only if the load balancer is an Application Load\n      Balancer and the target is a Lambda function:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and\n          response headers that are exchanged between the load balancer and the Lambda function\n          include arrays of values or strings. The value is <code>true</code> or <code>false</code>.\n          The default is <code>false</code>. If the value is <code>false</code> and the request\n          contains a duplicate header field name or query parameter key, the load balancer uses the\n          last value sent by the client.</p>\n            </li>\n         </ul>\n\n         <p>The following attributes are supported only by Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether\n          the load balancer terminates connections at the end of the deregistration timeout. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>preserve_client_ip.enabled</code> - Indicates whether client IP preservation is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is disabled if\n          the target group type is IP address and the target group protocol is TCP or TLS.\n          Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and\n          TCP_UDP target groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n\n         <p>The following attribute is supported by all load balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.timeout_seconds</code> - The amount of time, in seconds,\n          for Elastic Load Balancing to wait before changing the state of a deregistering target\n          from <code>draining</code> to <code>unused</code>. The range is 0-3600 seconds. The\n          default value is 300 seconds. If the target is a Lambda function, this attribute is not\n          supported.</p>\n            </li>\n         </ul>\n\n         <p>The following attributes are supported by Application Load Balancers, Network Load\n      Balancers, and Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>stickiness.enabled</code> - Indicates whether target stickiness is enabled. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.type</code> - Indicates the type of stickiness. The possible values\n          are: </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>lb_cookie</code> and <code>app_cookie</code> for Application Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip</code> for Network Load Balancers.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>source_ip_dest_ip</code> and <code>source_ip_dest_ip_proto</code> for Gateway Load\n              Balancers.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n         <p>The following attributes are supported only if the load balancer is an Application Load\n      Balancer and the target is an instance or an IP address:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>load_balancing.algorithm.type</code> - The load balancing algorithm determines\n          how the load balancer selects targets when routing requests. The value is\n            <code>round_robin</code> or <code>least_outstanding_requests</code>. The default is\n            <code>round_robin</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>slow_start.duration_seconds</code> - The time period, in seconds, during which a\n          newly registered target receives an increasing share of the traffic to the target group.\n          After this time period ends, the target receives its full share of traffic. The range is\n          30-900 seconds (15 minutes). The default is 0 seconds (disabled).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the\n          application-based cookie. Names that start with the following prefixes are not allowed:\n            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved\n          for use by the load balancer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.app_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the application-based cookie is considered stale. The range is 1 second to\n          1 week (604800 seconds). The default value is 1 day (86400 seconds).</p>\n            </li>\n            <li>\n               <p>\n                  <code>stickiness.lb_cookie.duration_seconds</code> - The time period, in seconds,\n          during which requests from a client should be routed to the same target. After this time\n          period expires, the load balancer-generated cookie is considered stale. The range is 1\n          second to 1 week (604800 seconds). The default value is 1 day (86400 seconds). </p>\n            </li>\n         </ul>\n\n         <p>The following attribute is supported only if the load balancer is an Application Load\n      Balancer and the target is a Lambda function:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>lambda.multi_value_headers.enabled</code> - Indicates whether the request and\n          response headers that are exchanged between the load balancer and the Lambda function\n          include arrays of values or strings. The value is <code>true</code> or <code>false</code>.\n          The default is <code>false</code>. If the value is <code>false</code> and the request\n          contains a duplicate header field name or query parameter key, the load balancer uses the\n          last value sent by the client.</p>\n            </li>\n         </ul>\n\n         <p>The following attributes are supported only by Network Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether\n          the load balancer terminates connections at the end of the deregistration timeout. The\n          value is <code>true</code> or <code>false</code>. The default is\n          <code>false</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>preserve_client_ip.enabled</code> - Indicates whether client IP preservation is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is disabled if\n          the target group type is IP address and the target group protocol is TCP or TLS.\n          Otherwise, the default is enabled. Client IP preservation cannot be disabled for UDP and\n          TCP_UDP target groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>proxy_protocol_v2.enabled</code> - Indicates whether Proxy Protocol version 2 is\n          enabled. The value is <code>true</code> or <code>false</code>. The default is\n            <code>false</code>. </p>\n            </li>\n         </ul>\n         <p>The following attributes are supported only by Gateway Load Balancers:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>target_failover.on_deregistration</code> - Indicates how the Gateway Load\n          Balancer handles existing flows when a target is deregistered. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) can't be set independently. The value you set\n          for both attributes must be the same.  </p>\n            </li>\n            <li>\n               <p>\n                  <code>target_failover.on_unhealthy</code> - Indicates how the Gateway Load Balancer\n          handles existing flows when a target is unhealthy. The possible values are\n            <code>rebalance</code> and <code>no_rebalance</code>. The default is\n            <code>no_rebalance</code>. The two attributes\n            (<code>target_failover.on_deregistration</code> and\n            <code>target_failover.on_unhealthy</code>) cannot be set independently. The value you\n          set for both attributes must be the same.  </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -4841,18 +4871,20 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroupIpAddressTypeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ipv4",
-                        "name": "IPV4"
-                    },
-                    {
-                        "value": "ipv6",
-                        "name": "IPV6"
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
                     }
-                ]
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroupList": {
@@ -4908,16 +4940,10 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroupStickinessDurationSeconds": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroupStickinessEnabled": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroupTuple": {
             "type": "structure",
@@ -4940,10 +4966,7 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroupWeight": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.elasticloadbalancingv2#TargetGroups": {
             "type": "list",
@@ -5010,115 +5033,153 @@
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetHealthReasonEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Elb.RegistrationInProgress",
-                        "name": "REGISTRATION_IN_PROGRESS"
-                    },
-                    {
-                        "value": "Elb.InitialHealthChecking",
-                        "name": "INITIAL_HEALTH_CHECKING"
-                    },
-                    {
-                        "value": "Target.ResponseCodeMismatch",
-                        "name": "RESPONSE_CODE_MISMATCH"
-                    },
-                    {
-                        "value": "Target.Timeout",
-                        "name": "TIMEOUT"
-                    },
-                    {
-                        "value": "Target.FailedHealthChecks",
-                        "name": "FAILED_HEALTH_CHECKS"
-                    },
-                    {
-                        "value": "Target.NotRegistered",
-                        "name": "NOT_REGISTERED"
-                    },
-                    {
-                        "value": "Target.NotInUse",
-                        "name": "NOT_IN_USE"
-                    },
-                    {
-                        "value": "Target.DeregistrationInProgress",
-                        "name": "DEREGISTRATION_IN_PROGRESS"
-                    },
-                    {
-                        "value": "Target.InvalidState",
-                        "name": "INVALID_STATE"
-                    },
-                    {
-                        "value": "Target.IpUnusable",
-                        "name": "IP_UNUSABLE"
-                    },
-                    {
-                        "value": "Target.HealthCheckDisabled",
-                        "name": "HEALTH_CHECK_DISABLED"
-                    },
-                    {
-                        "value": "Elb.InternalError",
-                        "name": "INTERNAL_ERROR"
+            "type": "enum",
+            "members": {
+                "REGISTRATION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Elb.RegistrationInProgress"
                     }
-                ]
+                },
+                "INITIAL_HEALTH_CHECKING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Elb.InitialHealthChecking"
+                    }
+                },
+                "RESPONSE_CODE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.ResponseCodeMismatch"
+                    }
+                },
+                "TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.Timeout"
+                    }
+                },
+                "FAILED_HEALTH_CHECKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.FailedHealthChecks"
+                    }
+                },
+                "NOT_REGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.NotRegistered"
+                    }
+                },
+                "NOT_IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.NotInUse"
+                    }
+                },
+                "DEREGISTRATION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.DeregistrationInProgress"
+                    }
+                },
+                "INVALID_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.InvalidState"
+                    }
+                },
+                "IP_UNUSABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.IpUnusable"
+                    }
+                },
+                "HEALTH_CHECK_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Target.HealthCheckDisabled"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Elb.InternalError"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetHealthStateEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "initial",
-                        "name": "INITIAL"
-                    },
-                    {
-                        "value": "healthy",
-                        "name": "HEALTHY"
-                    },
-                    {
-                        "value": "unhealthy",
-                        "name": "UNHEALTHY"
-                    },
-                    {
-                        "value": "unused",
-                        "name": "UNUSED"
-                    },
-                    {
-                        "value": "draining",
-                        "name": "DRAINING"
-                    },
-                    {
-                        "value": "unavailable",
-                        "name": "UNAVAILABLE"
+            "type": "enum",
+            "members": {
+                "INITIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initial"
                     }
-                ]
+                },
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "healthy"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unhealthy"
+                    }
+                },
+                "UNUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unused"
+                    }
+                },
+                "DRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "draining"
+                    }
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unavailable"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TargetId": {
             "type": "string"
         },
         "com.amazonaws.elasticloadbalancingv2#TargetTypeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "instance",
-                        "name": "INSTANCE"
-                    },
-                    {
-                        "value": "ip",
-                        "name": "IP"
-                    },
-                    {
-                        "value": "lambda",
-                        "name": "LAMBDA"
-                    },
-                    {
-                        "value": "alb",
-                        "name": "ALB"
+            "type": "enum",
+            "members": {
+                "INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instance"
                     }
-                ]
+                },
+                "IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ip"
+                    }
+                },
+                "LAMBDA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lambda"
+                    }
+                },
+                "ALB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "alb"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#TooManyActionsException": {
