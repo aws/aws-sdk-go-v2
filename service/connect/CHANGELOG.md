@@ -1,3 +1,7 @@
+# v1.32.0 (2022-10-13)
+
+* **Feature**: This release adds support for a secondary email and a mobile number for Amazon Connect instance users.
+
 # v1.31.0 (2022-10-04)
 
 * **Feature**: Updated the CreateIntegrationAssociation API to support the CASES_DOMAIN IntegrationType.

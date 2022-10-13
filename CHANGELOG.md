@@ -1,3 +1,41 @@
+# Release (2022-10-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.8.0](service/amplifyuibuilder/CHANGELOG.md#v180-2022-10-13)
+  * **Feature**: We are releasing the ability for fields to be configured as arrays.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.18.0](service/appflow/CHANGELOG.md#v1180-2022-10-13)
+  * **Feature**: With this update, you can choose which Salesforce API is used by Amazon AppFlow to transfer data to or from your Salesforce account. You can choose the Salesforce REST API or Bulk API 2.0. You can also choose for Amazon AppFlow to pick the API automatically.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.32.0](service/connect/CHANGELOG.md#v1320-2022-10-13)
+  * **Feature**: This release adds support for a secondary email and a mobile number for Amazon Connect instance users.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.15.0](service/directoryservice/CHANGELOG.md#v1150-2022-10-13)
+  * **Feature**: This release adds support for describing and updating AWS Managed Microsoft AD set up.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.18.24](service/ecs/CHANGELOG.md#v11824-2022-10-13)
+  * **Documentation**: Documentation update to address tickets.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.16.0](service/guardduty/CHANGELOG.md#v1160-2022-10-13)
+  * **Feature**: Add UnprocessedDataSources to CreateDetectorResponse which specifies the data sources that couldn't be enabled during the CreateDetector request. In addition, update documentations.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.18.20](service/iam/CHANGELOG.md#v11820-2022-10-13)
+  * **Documentation**: Documentation updates for the AWS Identity and Access Management API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.0.1](service/iotfleetwise/CHANGELOG.md#v101-2022-10-13)
+  * **Documentation**: Documentation update for AWS IoT FleetWise
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.24.0](service/medialive/CHANGELOG.md#v1240-2022-10-13)
+  * **Feature**: AWS Elemental MediaLive now supports forwarding SCTE-35 messages through the Event Signaling and Management (ESAM) API, and can read those SCTE-35 messages from an inactive source.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.18.0](service/mediapackagevod/CHANGELOG.md#v1180-2022-10-13)
+  * **Feature**: This release adds SPEKE v2 support for MediaPackage VOD. Speke v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, based on an encryption contract selected by the customer.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.9.0](service/panorama/CHANGELOG.md#v190-2022-10-13)
+  * **Feature**: Pause and resume camera stream processing with SignalApplicationInstanceNodeInstances. Reboot an appliance with CreateJobForDevices. More application state information in DescribeApplicationInstance response.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.12.16](service/rdsdata/CHANGELOG.md#v11216-2022-10-13)
+  * **Documentation**: Doc update to reflect no support for schema parameter on BatchExecuteStatement API
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.31.0](service/ssm/CHANGELOG.md#v1310-2022-10-13)
+  * **Feature**: Support of AmazonLinux2022 by Patch Manager
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.16.0](service/ssmincidents/CHANGELOG.md#v1160-2022-10-13)
+  * **Feature**: Update RelatedItem enum to support Tasks
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.23.0](service/transfer/CHANGELOG.md#v1230-2022-10-13)
+  * **Feature**: This release adds an option for customers to configure workflows that are triggered when files are only partially received from a client due to premature session disconnect.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.15.1](service/translate/CHANGELOG.md#v1151-2022-10-13)
+  * **Documentation**: This release enables customers to specify multiple target languages in asynchronous batch translation requests.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.10.0](service/wisdom/CHANGELOG.md#v1100-2022-10-13)
+  * **Feature**: This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.
+
 # Release (2022-10-07)
 
 ## Module Highlights

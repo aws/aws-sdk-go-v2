@@ -1,3 +1,7 @@
+# v1.31.0 (2022-10-13)
+
+* **Feature**: Support of AmazonLinux2022 by Patch Manager
+
 # v1.30.0 (2022-09-26)
 
 * **Feature**: This release includes support for applying a CloudWatch alarm to Systems Manager capabilities like Automation, Run Command, State Manager, and Maintenance Windows.

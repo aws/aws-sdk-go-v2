@@ -1,8 +1,0 @@
-{
-    "id": "e12b0c1f-0d44-46c5-bf3b-3ce79c301751",
-    "type": "feature",
-    "description": "This release adds SPEKE v2 support for MediaPackage VOD. Speke v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, based on an encryption contract selected by the customer.",
-    "modules": [
-        "service/mediapackagevod"
-    ]
-}

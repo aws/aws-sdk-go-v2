@@ -1,3 +1,7 @@
+# v1.9.0 (2022-10-13)
+
+* **Feature**: Pause and resume camera stream processing with SignalApplicationInstanceNodeInstances. Reboot an appliance with CreateJobForDevices. More application state information in DescribeApplicationInstance response.
+
 # v1.8.5 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

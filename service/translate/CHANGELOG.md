@@ -1,3 +1,7 @@
+# v1.15.1 (2022-10-13)
+
+* **Documentation**: This release enables customers to specify multiple target languages in asynchronous batch translation requests.
+
 # v1.15.0 (2022-09-29)
 
 * **Feature**: This release enables customers to access control rights on Translate resources like Parallel Data and Custom Terminology using Tag Based Authorization.

@@ -1,3 +1,7 @@
+# v1.16.0 (2022-10-13)
+
+* **Feature**: Add UnprocessedDataSources to CreateDetectorResponse which specifies the data sources that couldn't be enabled during the CreateDetector request. In addition, update documentations.
+
 # v1.15.10 (2022-10-07)
 
 * No change notes available for this release.

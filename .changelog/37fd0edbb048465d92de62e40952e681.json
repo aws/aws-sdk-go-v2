@@ -1,8 +1,0 @@
-{
-    "id": "37fd0edb-b048-465d-92de-62e40952e681",
-    "type": "feature",
-    "description": "Update RelatedItem enum to support Tasks",
-    "modules": [
-        "service/ssmincidents"
-    ]
-}

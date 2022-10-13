@@ -1,3 +1,7 @@
+# v1.16.0 (2022-10-13)
+
+* **Feature**: Update RelatedItem enum to support Tasks
+
 # v1.15.9 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

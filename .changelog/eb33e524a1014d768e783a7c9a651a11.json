@@ -1,8 +1,0 @@
-{
-    "id": "eb33e524-a101-4d76-8e78-3a7c9a651a11",
-    "type": "feature",
-    "description": "This release adds an option for customers to configure workflows that are triggered when files are only partially received from a client due to premature session disconnect.",
-    "modules": [
-        "service/transfer"
-    ]
-}

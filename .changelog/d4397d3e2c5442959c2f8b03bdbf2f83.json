@@ -1,8 +1,0 @@
-{
-    "id": "d4397d3e-2c54-4295-9c2f-8b03bdbf2f83",
-    "type": "feature",
-    "description": "Pause and resume camera stream processing with SignalApplicationInstanceNodeInstances. Reboot an appliance with CreateJobForDevices. More application state information in DescribeApplicationInstance response.",
-    "modules": [
-        "service/panorama"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.24.0 (2022-10-13)
+
+* **Feature**: AWS Elemental MediaLive now supports forwarding SCTE-35 messages through the Event Signaling and Management (ESAM) API, and can read those SCTE-35 messages from an inactive source.
+
 # v1.23.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

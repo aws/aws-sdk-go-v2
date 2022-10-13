@@ -1,3 +1,7 @@
+# v1.18.24 (2022-10-13)
+
+* **Documentation**: Documentation update to address tickets.
+
 # v1.18.23 (2022-10-04)
 
 * **Documentation**: Documentation updates to address various Amazon ECS tickets.

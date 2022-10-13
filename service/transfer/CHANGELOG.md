@@ -1,3 +1,7 @@
+# v1.23.0 (2022-10-13)
+
+* **Feature**: This release adds an option for customers to configure workflows that are triggered when files are only partially received from a client due to premature session disconnect.
+
 # v1.22.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

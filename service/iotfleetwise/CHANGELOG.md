@@ -1,3 +1,7 @@
+# v1.0.1 (2022-10-13)
+
+* **Documentation**: Documentation update for AWS IoT FleetWise
+
 # v1.0.0 (2022-09-26)
 
 * **Release**: New AWS service client module

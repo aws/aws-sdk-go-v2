@@ -1,8 +1,0 @@
-{
-    "id": "0442dda1-591d-47f6-89f3-d697023d5000",
-    "type": "documentation",
-    "description": "Documentation updates for the AWS Identity and Access Management API Reference.",
-    "modules": [
-        "service/iam"
-    ]
-}
