@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -30,22 +30,26 @@
     },
     "shapes": {
         "com.amazonaws.mediapackagevod#AdMarkers": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "SCTE35_ENHANCED",
-                        "name": "SCTE35_ENHANCED"
-                    },
-                    {
-                        "value": "PASSTHROUGH",
-                        "name": "PASSTHROUGH"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "SCTE35_ENHANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE35_ENHANCED"
+                    }
+                },
+                "PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSTHROUGH"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#AssetShallow": {
@@ -177,6 +181,7 @@
                 "IncludeEncoderConfigurationInSegments": {
                     "target": "com.amazonaws.mediapackagevod#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
                         "smithy.api#jsonName": "includeEncoderConfigurationInSegments"
                     }
@@ -184,6 +189,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each fragment. Actual fragments will be\nrounded to the nearest multiple of the source fragment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -750,6 +756,7 @@
                 "MinBufferTimeSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
                         "smithy.api#jsonName": "minBufferTimeSeconds"
                     }
@@ -799,6 +806,7 @@
                 "IncludeEncoderConfigurationInSegments": {
                     "target": "com.amazonaws.mediapackagevod#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
                         "smithy.api#jsonName": "includeEncoderConfigurationInSegments"
                     }
@@ -813,6 +821,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -1352,19 +1361,45 @@
                 "smithy.api#documentation": "The endpoint URL used to access an Asset using one PackagingConfiguration."
             }
         },
-        "com.amazonaws.mediapackagevod#EncryptionMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AES_128",
-                        "name": "AES_128"
-                    },
-                    {
-                        "value": "SAMPLE_AES",
-                        "name": "SAMPLE_AES"
+        "com.amazonaws.mediapackagevod#EncryptionContractConfiguration": {
+            "type": "structure",
+            "members": {
+                "PresetSpeke20Audio": {
+                    "target": "com.amazonaws.mediapackagevod#PresetSpeke20Audio",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of audio encryption presets.",
+                        "smithy.api#jsonName": "presetSpeke20Audio",
+                        "smithy.api#required": {}
                     }
-                ]
+                },
+                "PresetSpeke20Video": {
+                    "target": "com.amazonaws.mediapackagevod#PresetSpeke20Video",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of video encryption presets.",
+                        "smithy.api#jsonName": "presetSpeke20Video",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. \nThe encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. \nTo configure the encryption contract, specify which audio and video encryption presets to use.\nNote the following considerations when using encryptionContractConfiguration:\nencryptionContractConfiguration can be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.\nYou must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0."
+            }
+        },
+        "com.amazonaws.mediapackagevod#EncryptionMethod": {
+            "type": "enum",
+            "members": {
+                "AES_128": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AES_128"
+                    }
+                },
+                "SAMPLE_AES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAMPLE_AES"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#ForbiddenException": {
@@ -1425,6 +1460,7 @@
                 "IncludeIframeOnlyStream": {
                     "target": "com.amazonaws.mediapackagevod#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, an I-Frame only stream will be included in the output.",
                         "smithy.api#jsonName": "includeIframeOnlyStream"
                     }
@@ -1439,6 +1475,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag\ninserted into manifests. Additionally, when an interval is specified\nID3Timed Metadata messages will be generated every 5 seconds using the\ningest time of the content.\nIf the interval is not specified, or set to 0, then\nno EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no\nID3Timed Metadata messages will be generated. Note that irrespective\nof this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,\nit will be passed through to HLS output.",
                         "smithy.api#jsonName": "programDateTimeIntervalSeconds"
                     }
@@ -1446,6 +1483,7 @@
                 "RepeatExtXKey": {
                     "target": "com.amazonaws.mediapackagevod#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
                         "smithy.api#jsonName": "repeatExtXKey"
                     }
@@ -1481,6 +1519,7 @@
                 "IncludeDvbSubtitles": {
                     "target": "com.amazonaws.mediapackagevod#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
                         "smithy.api#jsonName": "includeDvbSubtitles"
                     }
@@ -1488,6 +1527,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in seconds) of each fragment. Actual fragments will be\nrounded to the nearest multiple of the source fragment duration.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -1495,6 +1535,7 @@
                 "UseAudioRenditionGroup": {
                     "target": "com.amazonaws.mediapackagevod#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "When enabled, audio streams will be placed in rendition groups in the output.",
                         "smithy.api#jsonName": "useAudioRenditionGroup"
                     }
@@ -1569,6 +1610,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackagevod#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Upper bound on number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1657,6 +1699,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackagevod#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Upper bound on number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1745,6 +1788,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediapackagevod#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Upper bound on number of records to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1820,23 +1864,26 @@
             }
         },
         "com.amazonaws.mediapackagevod#ManifestLayout": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FULL",
-                        "name": "FULL"
-                    },
-                    {
-                        "value": "COMPACT",
-                        "name": "COMPACT"
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
                     }
-                ]
+                },
+                "COMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPACT"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -1845,21 +1892,6 @@
         },
         "com.amazonaws.mediapackagevod#MediaPackageVod": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "MediaPackage Vod",
-                    "arnNamespace": "mediapackage-vod",
-                    "cloudFormationName": "MediaPackageVod",
-                    "cloudTrailEventSource": "mediapackagevod.amazonaws.com",
-                    "endpointPrefix": "mediapackage-vod"
-                },
-                "aws.auth#sigv4": {
-                    "name": "mediapackage-vod"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "AWS Elemental MediaPackage VOD",
-                "smithy.api#title": "AWS Elemental MediaPackage VOD"
-            },
             "version": "2018-11-07",
             "operations": [
                 {
@@ -1913,7 +1945,22 @@
                 {
                     "target": "com.amazonaws.mediapackagevod#UpdatePackagingGroup"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MediaPackage Vod",
+                    "arnNamespace": "mediapackage-vod",
+                    "cloudFormationName": "MediaPackageVod",
+                    "cloudTrailEventSource": "mediapackagevod.amazonaws.com",
+                    "endpointPrefix": "mediapackage-vod"
+                },
+                "aws.auth#sigv4": {
+                    "name": "mediapackage-vod"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "AWS Elemental MediaPackage VOD",
+                "smithy.api#title": "AWS Elemental MediaPackage VOD"
+            }
         },
         "com.amazonaws.mediapackagevod#MssEncryption": {
             "type": "structure",
@@ -1971,6 +2018,7 @@
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The duration (in seconds) of each segment.",
                         "smithy.api#jsonName": "segmentDurationSeconds"
                     }
@@ -2102,53 +2150,161 @@
                 "smithy.api#documentation": "A MediaPackage VOD PackagingGroup resource."
             }
         },
-        "com.amazonaws.mediapackagevod#Profile": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "HBBTV_1_5",
-                        "name": "HBBTV_1_5"
+        "com.amazonaws.mediapackagevod#PresetSpeke20Audio": {
+            "type": "enum",
+            "members": {
+                "PRESET_AUDIO_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-AUDIO-1"
                     }
-                ]
+                },
+                "PRESET_AUDIO_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-AUDIO-2"
+                    }
+                },
+                "PRESET_AUDIO_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-AUDIO-3"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "UNENCRYPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNENCRYPTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagevod#PresetSpeke20Video": {
+            "type": "enum",
+            "members": {
+                "PRESET_VIDEO_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-1"
+                    }
+                },
+                "PRESET_VIDEO_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-2"
+                    }
+                },
+                "PRESET_VIDEO_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-3"
+                    }
+                },
+                "PRESET_VIDEO_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-4"
+                    }
+                },
+                "PRESET_VIDEO_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-5"
+                    }
+                },
+                "PRESET_VIDEO_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-6"
+                    }
+                },
+                "PRESET_VIDEO_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-7"
+                    }
+                },
+                "PRESET_VIDEO_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESET-VIDEO-8"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "UNENCRYPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNENCRYPTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagevod#Profile": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "HBBTV_1_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HBBTV_1_5"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#ScteMarkersSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SEGMENTS",
-                        "name": "SEGMENTS"
-                    },
-                    {
-                        "value": "MANIFEST",
-                        "name": "MANIFEST"
+            "type": "enum",
+            "members": {
+                "SEGMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEGMENTS"
                     }
-                ]
+                },
+                "MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANIFEST"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#SegmentTemplateFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NUMBER_WITH_TIMELINE",
-                        "name": "NUMBER_WITH_TIMELINE"
-                    },
-                    {
-                        "value": "TIME_WITH_TIMELINE",
-                        "name": "TIME_WITH_TIMELINE"
-                    },
-                    {
-                        "value": "NUMBER_WITH_DURATION",
-                        "name": "NUMBER_WITH_DURATION"
+            "type": "enum",
+            "members": {
+                "NUMBER_WITH_TIMELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_WITH_TIMELINE"
                     }
-                ]
+                },
+                "TIME_WITH_TIMELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_WITH_TIMELINE"
+                    }
+                },
+                "NUMBER_WITH_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_WITH_DURATION"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#ServiceUnavailableException": {
@@ -2170,6 +2326,12 @@
         "com.amazonaws.mediapackagevod#SpekeKeyProvider": {
             "type": "structure",
             "members": {
+                "EncryptionContractConfiguration": {
+                    "target": "com.amazonaws.mediapackagevod#EncryptionContractConfiguration",
+                    "traits": {
+                        "smithy.api#jsonName": "encryptionContractConfiguration"
+                    }
+                },
                 "RoleArn": {
                     "target": "com.amazonaws.mediapackagevod#__string",
                     "traits": {
@@ -2200,22 +2362,26 @@
             }
         },
         "com.amazonaws.mediapackagevod#StreamOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ORIGINAL",
-                        "name": "ORIGINAL"
-                    },
-                    {
-                        "value": "VIDEO_BITRATE_ASCENDING",
-                        "name": "VIDEO_BITRATE_ASCENDING"
-                    },
-                    {
-                        "value": "VIDEO_BITRATE_DESCENDING",
-                        "name": "VIDEO_BITRATE_DESCENDING"
+            "type": "enum",
+            "members": {
+                "ORIGINAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORIGINAL"
                     }
-                ]
+                },
+                "VIDEO_BITRATE_ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_BITRATE_ASCENDING"
+                    }
+                },
+                "VIDEO_BITRATE_DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_BITRATE_DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagevod#StreamSelection": {
@@ -2224,6 +2390,7 @@
                 "MaxVideoBitsPerSecond": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum video bitrate (bps) to include in output.",
                         "smithy.api#jsonName": "maxVideoBitsPerSecond"
                     }
@@ -2231,6 +2398,7 @@
                 "MinVideoBitsPerSecond": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum video bitrate (bps) to include in output.",
                         "smithy.api#jsonName": "minVideoBitsPerSecond"
                     }
@@ -2251,6 +2419,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.mediapackagevod#TagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "Adds tags to the specified resource. You can specify one or more tags to add.",
@@ -2330,6 +2501,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.mediapackagevod#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "traits": {
                 "smithy.api#documentation": "Removes tags from the specified resource. You can specify one or more tags to remove.",
@@ -2465,21 +2639,27 @@
             }
         },
         "com.amazonaws.mediapackagevod#__PeriodTriggersElement": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADS",
-                        "name": "ADS"
+            "type": "enum",
+            "members": {
+                "ADS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.mediapackagevod#__boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.mediapackagevod#__integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.mediapackagevod#__listOfAssetShallow": {
             "type": "list",

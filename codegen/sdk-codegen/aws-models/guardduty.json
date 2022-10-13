@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -166,6 +166,7 @@
                 "AllowsPublicReadAccess": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether public read access for the bucket is enabled through an\n      Access Control List (ACL).</p>",
                         "smithy.api#jsonName": "allowsPublicReadAccess"
                     }
@@ -173,6 +174,7 @@
                 "AllowsPublicWriteAccess": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether public write access for the bucket is enabled through an\n      Access Control List (ACL).</p>",
                         "smithy.api#jsonName": "allowsPublicWriteAccess"
                     }
@@ -403,18 +405,22 @@
             }
         },
         "com.amazonaws.guardduty#AdminStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLE_IN_PROGRESS",
-                        "name": "DISABLE_IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ],
+                },
+                "DISABLE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_IN_PROGRESS"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -618,6 +624,7 @@
                 "IgnorePublicAcls": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.</p>",
                         "smithy.api#jsonName": "ignorePublicAcls"
                     }
@@ -625,6 +632,7 @@
                 "RestrictPublicBuckets": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>RestrictPublicBuckets</code>.</p>",
                         "smithy.api#jsonName": "restrictPublicBuckets"
                     }
@@ -632,6 +640,7 @@
                 "BlockPublicAcls": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>BlockPublicAcls</code>.</p>",
                         "smithy.api#jsonName": "blockPublicAcls"
                     }
@@ -639,6 +648,7 @@
                 "BlockPublicPolicy": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if S3 Block Public Access is set to <code>BlockPublicPolicy</code>.</p>",
                         "smithy.api#jsonName": "blockPublicPolicy"
                     }
@@ -649,7 +659,10 @@
             }
         },
         "com.amazonaws.guardduty#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.guardduty#BucketLevelPermissions": {
             "type": "structure",
@@ -686,6 +699,7 @@
                 "AllowsPublicReadAccess": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether public read access for the bucket is enabled through a\n      bucket policy.</p>",
                         "smithy.api#jsonName": "allowsPublicReadAccess"
                     }
@@ -693,6 +707,7 @@
                 "AllowsPublicWriteAccess": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether public write access for the bucket is enabled through a\n      bucket policy.</p>",
                         "smithy.api#jsonName": "allowsPublicWriteAccess"
                     }
@@ -764,6 +779,7 @@
                 "Gt": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Represents a <i>greater than</i> condition to be applied to a single field\n      when querying for findings.</p>",
                         "smithy.api#jsonName": "gt"
@@ -772,6 +788,7 @@
                 "Gte": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Represents a <i>greater than or equal</i> condition to be applied to a\n      single field when querying for findings.</p>",
                         "smithy.api#jsonName": "gte"
@@ -780,6 +797,7 @@
                 "Lt": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for findings.</p>",
                         "smithy.api#jsonName": "lt"
@@ -788,6 +806,7 @@
                 "Lte": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Represents a <i>less than or equal</i> condition to be applied to a single\n      field when querying for findings.</p>",
                         "smithy.api#jsonName": "lte"
@@ -810,6 +829,7 @@
                 "GreaterThan": {
                     "target": "com.amazonaws.guardduty#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents a <i>greater than</i> condition to be applied to a single field\n      when querying for findings.</p>",
                         "smithy.api#jsonName": "greaterThan"
                     }
@@ -817,6 +837,7 @@
                 "GreaterThanOrEqual": {
                     "target": "com.amazonaws.guardduty#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents a <i>greater than or equal</i> condition to be applied to a\n      single field when querying for findings.</p>",
                         "smithy.api#jsonName": "greaterThanOrEqual"
                     }
@@ -824,6 +845,7 @@
                 "LessThan": {
                     "target": "com.amazonaws.guardduty#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for findings.</p>",
                         "smithy.api#jsonName": "lessThan"
                     }
@@ -831,6 +853,7 @@
                 "LessThanOrEqual": {
                     "target": "com.amazonaws.guardduty#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents a <i>less than or equal</i> condition to be applied to a single\n      field when querying for findings.</p>",
                         "smithy.api#jsonName": "lessThanOrEqual"
                     }
@@ -965,6 +988,7 @@
                 "Enable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether the detector is to be enabled.</p>",
                         "smithy.api#jsonName": "enable",
                         "smithy.api#required": {}
@@ -1009,6 +1033,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID of the created detector.</p>",
                         "smithy.api#jsonName": "detectorId"
+                    }
+                },
+                "UnprocessedDataSources": {
+                    "target": "com.amazonaws.guardduty#UnprocessedDataSourcesResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the data sources that couldn't be enabled when GuardDuty was enabled for the \n    first time.</p>",
+                        "smithy.api#jsonName": "unprocessedDataSources"
                     }
                 }
             }
@@ -1075,6 +1106,7 @@
                 "Rank": {
                     "target": "com.amazonaws.guardduty#FilterRank",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the position of the filter in the list of current filters. Also specifies the\n      order in which this filter is applied to the findings.</p>",
                         "smithy.api#jsonName": "rank"
                     }
@@ -1181,6 +1213,7 @@
                 "Activate": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether GuardDuty is to start using the uploaded\n      IPSet.</p>",
                         "smithy.api#jsonName": "activate",
                         "smithy.api#required": {}
@@ -1466,6 +1499,7 @@
                 "Activate": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether GuardDuty is to start using the uploaded\n      ThreatIntelSet.</p>",
                         "smithy.api#jsonName": "activate",
                         "smithy.api#required": {}
@@ -1511,34 +1545,44 @@
             }
         },
         "com.amazonaws.guardduty#CriterionKey": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EC2_INSTANCE_ARN",
-                        "name": "EC2_INSTANCE_ARN"
-                    },
-                    {
-                        "value": "SCAN_ID",
-                        "name": "SCAN_ID"
-                    },
-                    {
-                        "value": "ACCOUNT_ID",
-                        "name": "ACCOUNT_ID"
-                    },
-                    {
-                        "value": "GUARDDUTY_FINDING_ID",
-                        "name": "GUARDDUTY_FINDING_ID"
-                    },
-                    {
-                        "value": "SCAN_START_TIME",
-                        "name": "SCAN_START_TIME"
-                    },
-                    {
-                        "value": "SCAN_STATUS",
-                        "name": "SCAN_STATUS"
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_INSTANCE_ARN"
                     }
-                ]
+                },
+                "SCAN_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_ID"
+                    }
+                },
+                "ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_ID"
+                    }
+                },
+                "GUARDDUTY_FINDING_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GUARDDUTY_FINDING_ID"
+                    }
+                },
+                "SCAN_START_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_START_TIME"
+                    }
+                },
+                "SCAN_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCAN_STATUS"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#DNSLogsConfigurationResult": {
@@ -1558,34 +1602,44 @@
             }
         },
         "com.amazonaws.guardduty#DataSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FLOW_LOGS",
-                        "name": "FLOW_LOGS"
-                    },
-                    {
-                        "value": "CLOUD_TRAIL",
-                        "name": "CLOUD_TRAIL"
-                    },
-                    {
-                        "value": "DNS_LOGS",
-                        "name": "DNS_LOGS"
-                    },
-                    {
-                        "value": "S3_LOGS",
-                        "name": "S3_LOGS"
-                    },
-                    {
-                        "value": "KUBERNETES_AUDIT_LOGS",
-                        "name": "KUBERNETES_AUDIT_LOGS"
-                    },
-                    {
-                        "value": "EC2_MALWARE_SCAN",
-                        "name": "EC2_MALWARE_SCAN"
+            "type": "enum",
+            "members": {
+                "FLOW_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOW_LOGS"
                     }
-                ]
+                },
+                "CLOUD_TRAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUD_TRAIL"
+                    }
+                },
+                "DNS_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_LOGS"
+                    }
+                },
+                "S3_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_LOGS"
+                    }
+                },
+                "KUBERNETES_AUDIT_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KUBERNETES_AUDIT_LOGS"
+                    }
+                },
+                "EC2_MALWARE_SCAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_MALWARE_SCAN"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#DataSourceConfigurations": {
@@ -1677,6 +1731,7 @@
                 "FreeTrialDaysRemaining": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A value that specifies the number of days left to use each enabled data source.</p>",
                         "smithy.api#jsonName": "freeTrialDaysRemaining"
                     }
@@ -1693,18 +1748,22 @@
             }
         },
         "com.amazonaws.guardduty#DataSourceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ],
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -1717,7 +1776,7 @@
                 "CloudTrail": {
                     "target": "com.amazonaws.guardduty#DataSourceFreeTrial",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes whether any AWS CloudTrail management event logs are enabled as data sources.</p>",
+                        "smithy.api#documentation": "<p>Describes whether any Amazon Web Services CloudTrail management event logs are enabled as data sources.</p>",
                         "smithy.api#jsonName": "cloudTrail"
                     }
                 },
@@ -2213,7 +2272,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of malware scans.</p>",
+                "smithy.api#documentation": "<p>Returns a list of malware scans. Each member account can view the malware scans for their \n      own accounts. An administrator can view the malware scans for all the member accounts.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/malware-scans",
@@ -2249,6 +2308,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#IntegerValueWithMax",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -2334,6 +2394,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether GuardDuty is automatically enabled for accounts added to the\n      organization.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -2342,6 +2403,7 @@
                 "MemberAccountLimitReached": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the maximum number of allowed member accounts are already associated\n      with the delegated administrator account for your organization.</p>",
                         "smithy.api#jsonName": "memberAccountLimitReached",
                         "smithy.api#required": {}
@@ -2434,6 +2496,7 @@
                 "PublishingFailureStartTimestamp": {
                     "target": "com.amazonaws.guardduty#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time, in epoch millisecond format, at which GuardDuty was first unable to publish\n      findings to the destination.</p>",
                         "smithy.api#jsonName": "publishingFailureStartTimestamp",
                         "smithy.api#required": {}
@@ -2504,14 +2567,16 @@
             }
         },
         "com.amazonaws.guardduty#DestinationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "S3",
-                        "name": "S3"
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
                     }
-                ],
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -2546,18 +2611,22 @@
             }
         },
         "com.amazonaws.guardduty#DetectorStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ],
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -2722,7 +2791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates GuardDuty member accounts (to the current GuardDuty administrator account)\n      specified by the account IDs.</p>",
+                "smithy.api#documentation": "<p>Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/disassociate",
@@ -2785,6 +2854,7 @@
                 "Blocked": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the targeted port is blocked.</p>",
                         "smithy.api#jsonName": "blocked"
                     }
@@ -2810,21 +2880,26 @@
             }
         },
         "com.amazonaws.guardduty#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.guardduty#EbsSnapshotPreservation": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NO_RETENTION",
-                        "name": "NO_RETENTION"
-                    },
-                    {
-                        "value": "RETENTION_WITH_FINDING",
-                        "name": "RETENTION_WITH_FINDING"
+            "type": "enum",
+            "members": {
+                "NO_RETENTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_RETENTION"
                     }
-                ]
+                },
+                "RETENTION_WITH_FINDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETENTION_WITH_FINDING"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#EbsVolumeDetails": {
@@ -2908,6 +2983,13 @@
                         "smithy.api#documentation": "<p>Describes whether scanning EBS volumes is enabled as a data source.</p>",
                         "smithy.api#jsonName": "status"
                     }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the reason why scanning EBS volumes (Malware Protection) was not enabled as a data source.</p>",
+                        "smithy.api#jsonName": "reason"
+                    }
                 }
             },
             "traits": {
@@ -2941,6 +3023,7 @@
                 "ActiveServicesCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of services that are running on the cluster in an ACTIVE state.</p>",
                         "smithy.api#jsonName": "activeServicesCount"
                     }
@@ -2948,6 +3031,7 @@
                 "RegisteredContainerInstancesCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of container instances registered into the cluster.</p>",
                         "smithy.api#jsonName": "registeredContainerInstancesCount"
                     }
@@ -2955,6 +3039,7 @@
                 "RunningTasksCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tasks in the cluster that are in the RUNNING state.</p>",
                         "smithy.api#jsonName": "runningTasksCount"
                     }
@@ -3185,18 +3270,20 @@
             }
         },
         "com.amazonaws.guardduty#Feedback": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USEFUL",
-                        "name": "USEFUL"
-                    },
-                    {
-                        "value": "NOT_USEFUL",
-                        "name": "NOT_USEFUL"
+            "type": "enum",
+            "members": {
+                "USEFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USEFUL"
                     }
-                ]
+                },
+                "NOT_USEFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_USEFUL"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#FilePaths": {
@@ -3206,18 +3293,22 @@
             }
         },
         "com.amazonaws.guardduty#FilterAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOOP",
-                        "name": "NOOP"
-                    },
-                    {
-                        "value": "ARCHIVE",
-                        "name": "ARCHIVE"
+            "type": "enum",
+            "members": {
+                "NOOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOOP"
                     }
-                ],
+                },
+                "ARCHIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVE"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -3237,6 +3328,7 @@
                 "GreaterThan": {
                     "target": "com.amazonaws.guardduty#LongValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents a <i>greater than</i> condition to be applied to a single field\n      when querying for scan entries.</p>",
                         "smithy.api#jsonName": "greaterThan"
                     }
@@ -3244,6 +3336,7 @@
                 "LessThan": {
                     "target": "com.amazonaws.guardduty#LongValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents a <i>less than</i> condition to be applied to a single field when\n      querying for scan entries.</p>",
                         "smithy.api#jsonName": "lessThan"
                     }
@@ -3287,7 +3380,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a condition that when matched will be added to the response of the operation.</p>"
+                "smithy.api#documentation": "<p>Represents a condition that when matched will be added to the response of the operation. \n      Irrespective of using any filter criteria, an administrator account can view the scan \n      entries for all of its member accounts. \n      However, each member account can view the scan entries only for their own account.</p>"
             }
         },
         "com.amazonaws.guardduty#FilterCriterionList": {
@@ -3335,6 +3428,7 @@
         "com.amazonaws.guardduty#FilterRank": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3363,6 +3457,7 @@
                 "Confidence": {
                     "target": "com.amazonaws.guardduty#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The confidence score for the finding.</p>",
                         "smithy.api#jsonName": "confidence"
                     }
@@ -3429,6 +3524,7 @@
                 "Severity": {
                     "target": "com.amazonaws.guardduty#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The severity of the finding.</p>",
                         "smithy.api#jsonName": "severity",
                         "smithy.api#required": {}
@@ -3499,33 +3595,37 @@
             }
         },
         "com.amazonaws.guardduty#FindingPublishingFrequency": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FIFTEEN_MINUTES",
-                        "name": "FIFTEEN_MINUTES"
-                    },
-                    {
-                        "value": "ONE_HOUR",
-                        "name": "ONE_HOUR"
-                    },
-                    {
-                        "value": "SIX_HOURS",
-                        "name": "SIX_HOURS"
+            "type": "enum",
+            "members": {
+                "FIFTEEN_MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIFTEEN_MINUTES"
                     }
-                ]
+                },
+                "ONE_HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_HOUR"
+                    }
+                },
+                "SIX_HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIX_HOURS"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#FindingStatisticType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COUNT_BY_SEVERITY",
-                        "name": "COUNT_BY_SEVERITY"
+            "type": "enum",
+            "members": {
+                "COUNT_BY_SEVERITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT_BY_SEVERITY"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.guardduty#FindingStatisticTypes": {
@@ -3610,6 +3710,7 @@
                 "Lat": {
                     "target": "com.amazonaws.guardduty#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The latitude information of the remote IP address.</p>",
                         "smithy.api#jsonName": "lat"
                     }
@@ -3617,6 +3718,7 @@
                 "Lon": {
                     "target": "com.amazonaws.guardduty#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The longitude information of the remote IP address.</p>",
                         "smithy.api#jsonName": "lon"
                     }
@@ -3850,6 +3952,7 @@
                 "Rank": {
                     "target": "com.amazonaws.guardduty#FilterRank",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the position of the filter in the list of current filters. Also specifies the\n      order in which this filter is applied to the findings.</p>",
                         "smithy.api#jsonName": "rank"
                     }
@@ -4132,6 +4235,7 @@
                 "InvitationsCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of received invitations.</p>",
                         "smithy.api#jsonName": "invitationsCount"
                     }
@@ -4190,7 +4294,7 @@
                 "EbsSnapshotPreservation": {
                     "target": "com.amazonaws.guardduty#EbsSnapshotPreservation",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enum value representing possible snapshot preservations.</p>",
+                        "smithy.api#documentation": "<p>An enum value representing possible snapshot preservation settings.</p>",
                         "smithy.api#jsonName": "ebsSnapshotPreservation"
                     }
                 }
@@ -4622,6 +4726,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -4662,21 +4767,6 @@
         },
         "com.amazonaws.guardduty#GuardDutyAPIService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "GuardDuty",
-                    "arnNamespace": "guardduty",
-                    "cloudFormationName": "GuardDuty",
-                    "cloudTrailEventSource": "guardduty.amazonaws.com",
-                    "endpointPrefix": "guardduty"
-                },
-                "aws.auth#sigv4": {
-                    "name": "guardduty"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC Flow Logs, AWS CloudTrail management event logs, CloudTrail S3 data event\n      logs, EKS audit logs, and DNS logs.\n      It uses threat intelligence\n      feeds (such as lists of malicious IPs and domains) and machine learning to identify\n      unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services environment.\n      This can include issues like escalations of privileges, uses of exposed credentials, or\n      communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect\n      compromised EC2 instances that serve malware or mine bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise. Some examples\n      of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region\n      that has never been used, or unusual API calls like a password policy change to reduce\n      password strength. </p>\n         <p>GuardDuty informs you of the status of your Amazon Web Services environment by producing security findings\n      that you can view in the GuardDuty console or through Amazon CloudWatch events. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
-                "smithy.api#title": "Amazon GuardDuty"
-            },
             "version": "2017-11-28",
             "operations": [
                 {
@@ -4874,7 +4964,22 @@
                 {
                     "target": "com.amazonaws.guardduty#UpdateThreatIntelSet"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "GuardDuty",
+                    "arnNamespace": "guardduty",
+                    "cloudFormationName": "GuardDuty",
+                    "cloudTrailEventSource": "guardduty.amazonaws.com",
+                    "endpointPrefix": "guardduty"
+                },
+                "aws.auth#sigv4": {
+                    "name": "guardduty"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes\n      the following data sources: VPC flow logs, Amazon Web Services CloudTrail management event logs, CloudTrail S3 data event\n      logs, EKS audit logs, and DNS logs.\n      It uses threat intelligence\n      feeds (such as lists of malicious IPs and domains) and machine learning to identify\n      unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services environment.\n      This can include issues like escalations of privileges, uses of exposed credentials, or\n      communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect\n      compromised EC2 instances that serve malware or mine bitcoin. </p>\n         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise. Some examples\n      of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region\n      that has never been used, or unusual API calls like a password policy change to reduce\n      password strength. </p>\n         <p>GuardDuty informs you of the status of your Amazon Web Services environment by producing security findings\n      that you can view in the GuardDuty console or through Amazon CloudWatch events. For more\n      information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon\n          GuardDuty User Guide</a>\n            </i>. </p>",
+                "smithy.api#title": "Amazon GuardDuty"
+            }
         },
         "com.amazonaws.guardduty#GuardDutyArn": {
             "type": "string",
@@ -4902,6 +5007,7 @@
                 "Count": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of infected files with the highest severity threat detected.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -5054,11 +5160,15 @@
             }
         },
         "com.amazonaws.guardduty#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.guardduty#IntegerValueWithMax": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -5185,6 +5295,7 @@
                 "DisableEmailNotification": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.</p>",
                         "smithy.api#jsonName": "disableEmailNotification"
                     }
@@ -5212,34 +5323,46 @@
             }
         },
         "com.amazonaws.guardduty#IpSetFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TXT",
-                        "name": "TXT"
-                    },
-                    {
-                        "value": "STIX",
-                        "name": "STIX"
-                    },
-                    {
-                        "value": "OTX_CSV",
-                        "name": "OTX_CSV"
-                    },
-                    {
-                        "value": "ALIEN_VAULT",
-                        "name": "ALIEN_VAULT"
-                    },
-                    {
-                        "value": "PROOF_POINT",
-                        "name": "PROOF_POINT"
-                    },
-                    {
-                        "value": "FIRE_EYE",
-                        "name": "FIRE_EYE"
+            "type": "enum",
+            "members": {
+                "TXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TXT"
                     }
-                ],
+                },
+                "STIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STIX"
+                    }
+                },
+                "OTX_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTX_CSV"
+                    }
+                },
+                "ALIEN_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALIEN_VAULT"
+                    }
+                },
+                "PROOF_POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROOF_POINT"
+                    }
+                },
+                "FIRE_EYE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRE_EYE"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -5259,38 +5382,52 @@
             }
         },
         "com.amazonaws.guardduty#IpSetStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "ACTIVATING",
-                        "name": "ACTIVATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DEACTIVATING",
-                        "name": "DEACTIVATING"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "DELETE_PENDING",
-                        "name": "DELETE_PENDING"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
                     }
-                ],
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEACTIVATING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_PENDING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -5343,6 +5480,7 @@
                 "StatusCode": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The resulting HTTP response code of the Kubernetes API call action.</p>",
                         "smithy.api#jsonName": "statusCode"
                     }
@@ -5365,6 +5503,7 @@
                 "Enable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The status of Kubernetes audit logs as a data source.</p>",
                         "smithy.api#jsonName": "enable",
                         "smithy.api#required": {}
@@ -5523,6 +5662,7 @@
                 "HostNetwork": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the hostNetwork flag is enabled for the pods included in the workload.</p>",
                         "smithy.api#jsonName": "hostNetwork"
                     }
@@ -5583,6 +5723,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -5664,6 +5805,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -5759,6 +5901,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -5838,6 +5981,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -5910,6 +6054,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -5990,6 +6135,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -6006,7 +6152,7 @@
                 "OnlyAssociated": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to only return associated members or to return all members (including\n      members who haven't been invited yet or have been disassociated).</p>",
+                        "smithy.api#documentation": "<p>Specifies whether to only return associated members or to return all members (including\n      members who haven't been invited yet or have been disassociated).\n      Member accounts must have been previously associated with the GuardDuty administrator account using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">\n               <code>Create\n        Members</code>\n            </a>.  \n    </p>",
                         "smithy.api#httpQuery": "onlyAssociated",
                         "smithy.api#jsonName": "onlyAssociated"
                     }
@@ -6069,6 +6215,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -6148,6 +6295,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -6280,6 +6428,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.guardduty#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>You can use this parameter to indicate the maximum number of items that you want in the\n      response. The default value is 50. The maximum value is 50.</p>",
                         "smithy.api#httpQuery": "maxResults",
                         "smithy.api#jsonName": "maxResults"
@@ -6336,6 +6485,7 @@
                 "Port": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port number of the local connection.</p>",
                         "smithy.api#jsonName": "port"
                     }
@@ -6362,10 +6512,16 @@
             }
         },
         "com.amazonaws.guardduty#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.guardduty#LongValue": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.guardduty#MalwareProtectionConfiguration": {
             "type": "structure",
@@ -6464,6 +6620,7 @@
         "com.amazonaws.guardduty#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -6608,6 +6765,7 @@
                 "Blocked": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether EC2 blocked the network connection to your instance.</p>",
                         "smithy.api#jsonName": "blocked"
                     }
@@ -6759,18 +6917,20 @@
             }
         },
         "com.amazonaws.guardduty#OrderBy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASC",
-                        "name": "ASC"
-                    },
-                    {
-                        "value": "DESC",
-                        "name": "DESC"
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
                     }
-                ]
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#Organization": {
@@ -6874,6 +7034,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>",
                         "smithy.api#jsonName": "autoEnable"
                     }
@@ -6889,6 +7050,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>An object that contains the status of whether scanning EBS volumes should be auto-enabled for new members joining the organization.</p>",
                         "smithy.api#jsonName": "autoEnable"
                     }
@@ -6904,6 +7066,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that contains information on whether Kubernetes audit logs should be enabled\n      automatically as a data source for the organization.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -6920,6 +7083,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -6998,6 +7162,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that contains information on whether S3 data event logs will be enabled\n      automatically as a data source for the organization.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -7014,6 +7179,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that describes whether S3 data event logs are automatically enabled for new\n      members of the organization.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -7097,6 +7263,7 @@
                 "Blocked": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether EC2 blocked the port probe to the instance, such as with an ACL.</p>",
                         "smithy.api#jsonName": "blocked"
                     }
@@ -7151,6 +7318,7 @@
         "com.amazonaws.guardduty#PositiveLong": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -7235,26 +7403,34 @@
             }
         },
         "com.amazonaws.guardduty#PublishingStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING_VERIFICATION",
-                        "name": "PENDING_VERIFICATION"
-                    },
-                    {
-                        "value": "PUBLISHING",
-                        "name": "PUBLISHING"
-                    },
-                    {
-                        "value": "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY",
-                        "name": "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "PENDING_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_VERIFICATION"
                     }
-                ],
+                },
+                "PUBLISHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHING"
+                    }
+                },
+                "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -7274,6 +7450,7 @@
                 "Affiliated": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment. If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>",
                         "smithy.api#jsonName": "affiliated"
                     }
@@ -7332,6 +7509,7 @@
                 "Port": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The port number of the remote connection.</p>",
                         "smithy.api#jsonName": "port"
                     }
@@ -7515,6 +7693,7 @@
                 "Enable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> The status of S3 data event logs as a data source.</p>",
                         "smithy.api#jsonName": "enable",
                         "smithy.api#required": {}
@@ -7624,6 +7803,7 @@
                 "TotalBytes": {
                     "target": "com.amazonaws.guardduty#PositiveLong",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents total bytes that were scanned.</p>",
                         "smithy.api#jsonName": "totalBytes"
                     }
@@ -7631,6 +7811,7 @@
                 "FileCount": {
                     "target": "com.amazonaws.guardduty#PositiveLong",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Represents the number of files that were scanned.</p>",
                         "smithy.api#jsonName": "fileCount"
                     }
@@ -7699,15 +7880,17 @@
             }
         },
         "com.amazonaws.guardduty#ScanCriterionKey": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>An enum value representing possible resource properties to match with given scan condition.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "EC2_INSTANCE_TAG",
-                        "name": "EC2_INSTANCE_TAG"
+            "type": "enum",
+            "members": {
+                "EC2_INSTANCE_TAG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_INSTANCE_TAG"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An enum value representing possible resource properties to match with given scan condition.</p>"
             }
         },
         "com.amazonaws.guardduty#ScanDetections": {
@@ -7752,6 +7935,7 @@
                 "EbsVolumes": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Describes the configuration for scanning EBS volumes as data source.</p>",
                         "smithy.api#jsonName": "ebsVolumes"
                     }
@@ -7835,18 +8019,20 @@
             }
         },
         "com.amazonaws.guardduty#ScanResult": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLEAN",
-                        "name": "CLEAN"
-                    },
-                    {
-                        "value": "INFECTED",
-                        "name": "INFECTED"
+            "type": "enum",
+            "members": {
+                "CLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLEAN"
                     }
-                ]
+                },
+                "INFECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#ScanResultDetails": {
@@ -7865,22 +8051,26 @@
             }
         },
         "com.amazonaws.guardduty#ScanStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#ScanThreatName": {
@@ -7903,6 +8093,7 @@
                 "ItemCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of files infected with given threat.</p>",
                         "smithy.api#jsonName": "itemCount"
                     }
@@ -7931,6 +8122,7 @@
                 "TotalGb": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total GB of files scanned for malware.</p>",
                         "smithy.api#jsonName": "totalGb"
                     }
@@ -7938,6 +8130,7 @@
                 "Files": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of files scanned.</p>",
                         "smithy.api#jsonName": "files"
                     }
@@ -7945,6 +8138,7 @@
                 "Volumes": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of scanned volumes.</p>",
                         "smithy.api#jsonName": "volumes"
                     }
@@ -7966,6 +8160,7 @@
                 "Privileged": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the container is privileged.</p>",
                         "smithy.api#jsonName": "privileged"
                     }
@@ -8023,6 +8218,7 @@
                 "Archived": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this finding is archived.</p>",
                         "smithy.api#jsonName": "archived"
                     }
@@ -8030,6 +8226,7 @@
                 "Count": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total count of the occurrences of this finding type.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -8412,6 +8609,7 @@
                 "ItemCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of infected files identified.</p>",
                         "smithy.api#jsonName": "itemCount"
                     }
@@ -8419,6 +8617,7 @@
                 "UniqueThreatNameCount": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of unique threats by name identified, as part of the malware scan.</p>",
                         "smithy.api#jsonName": "uniqueThreatNameCount"
                     }
@@ -8426,6 +8625,7 @@
                 "Shortened": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Flag to determine if the finding contains every single infected file-path and/or every threat.</p>",
                         "smithy.api#jsonName": "shortened"
                     }
@@ -8443,34 +8643,46 @@
             }
         },
         "com.amazonaws.guardduty#ThreatIntelSetFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TXT",
-                        "name": "TXT"
-                    },
-                    {
-                        "value": "STIX",
-                        "name": "STIX"
-                    },
-                    {
-                        "value": "OTX_CSV",
-                        "name": "OTX_CSV"
-                    },
-                    {
-                        "value": "ALIEN_VAULT",
-                        "name": "ALIEN_VAULT"
-                    },
-                    {
-                        "value": "PROOF_POINT",
-                        "name": "PROOF_POINT"
-                    },
-                    {
-                        "value": "FIRE_EYE",
-                        "name": "FIRE_EYE"
+            "type": "enum",
+            "members": {
+                "TXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TXT"
                     }
-                ],
+                },
+                "STIX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STIX"
+                    }
+                },
+                "OTX_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTX_CSV"
+                    }
+                },
+                "ALIEN_VAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALIEN_VAULT"
+                    }
+                },
+                "PROOF_POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROOF_POINT"
+                    }
+                },
+                "FIRE_EYE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRE_EYE"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -8490,38 +8702,52 @@
             }
         },
         "com.amazonaws.guardduty#ThreatIntelSetStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "ACTIVATING",
-                        "name": "ACTIVATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DEACTIVATING",
-                        "name": "DEACTIVATING"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "DELETE_PENDING",
-                        "name": "DELETE_PENDING"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
                     }
-                ],
+                },
+                "ACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DEACTIVATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEACTIVATING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "DELETE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_PENDING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 300
@@ -8568,6 +8794,7 @@
                 "Files": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of infected files.</p>",
                         "smithy.api#jsonName": "files"
                     }
@@ -8711,6 +8938,20 @@
                 }
             }
         },
+        "com.amazonaws.guardduty#UnprocessedDataSourcesResult": {
+            "type": "structure",
+            "members": {
+                "MalwareProtection": {
+                    "target": "com.amazonaws.guardduty#MalwareProtectionConfigurationResult",
+                    "traits": {
+                        "smithy.api#jsonName": "malwareProtection"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the names of the data sources that couldn't be enabled.</p>"
+            }
+        },
         "com.amazonaws.guardduty#UntagResource": {
             "type": "operation",
             "input": {
@@ -8803,6 +9044,7 @@
                 "Enable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the detector is enabled or not enabled.</p>",
                         "smithy.api#jsonName": "enable"
                     }
@@ -8890,6 +9132,7 @@
                 "Rank": {
                     "target": "com.amazonaws.guardduty#FilterRank",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the position of the filter in the list of current filters. Also specifies the\n      order in which this filter is applied to the findings.</p>",
                         "smithy.api#jsonName": "rank"
                     }
@@ -9045,6 +9288,7 @@
                 "Activate": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the IPSet is active or not.</p>",
                         "smithy.api#jsonName": "activate"
                     }
@@ -9102,7 +9346,7 @@
                 "EbsSnapshotPreservation": {
                     "target": "com.amazonaws.guardduty#EbsSnapshotPreservation",
                     "traits": {
-                        "smithy.api#documentation": "<p>An enum value representing possible snapshot preservations.</p>",
+                        "smithy.api#documentation": "<p>An enum value representing possible snapshot preservation settings.</p>",
                         "smithy.api#jsonName": "ebsSnapshotPreservation"
                     }
                 }
@@ -9219,6 +9463,7 @@
                 "AutoEnable": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to automatically enable member accounts in the organization.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -9359,6 +9604,7 @@
                 "Activate": {
                     "target": "com.amazonaws.guardduty#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The updated Boolean value that specifies whether the ThreateIntelSet is active or\n      not.</p>",
                         "smithy.api#jsonName": "activate"
                     }
@@ -9484,26 +9730,32 @@
             }
         },
         "com.amazonaws.guardduty#UsageStatisticType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUM_BY_ACCOUNT",
-                        "name": "SUM_BY_ACCOUNT"
-                    },
-                    {
-                        "value": "SUM_BY_DATA_SOURCE",
-                        "name": "SUM_BY_DATA_SOURCE"
-                    },
-                    {
-                        "value": "SUM_BY_RESOURCE",
-                        "name": "SUM_BY_RESOURCE"
-                    },
-                    {
-                        "value": "TOP_RESOURCES",
-                        "name": "TOP_RESOURCES"
+            "type": "enum",
+            "members": {
+                "SUM_BY_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM_BY_ACCOUNT"
                     }
-                ]
+                },
+                "SUM_BY_DATA_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM_BY_DATA_SOURCE"
+                    }
+                },
+                "SUM_BY_RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM_BY_RESOURCE"
+                    }
+                },
+                "TOP_RESOURCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_RESOURCES"
+                    }
+                }
             }
         },
         "com.amazonaws.guardduty#UsageStatistics": {
@@ -9591,6 +9843,7 @@
                 "VolumeSizeInGB": {
                     "target": "com.amazonaws.guardduty#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>EBS volume size in GB.</p>",
                         "smithy.api#jsonName": "volumeSizeInGB"
                     }

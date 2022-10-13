@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.ssmincidents#AccessDeniedException": {
             "type": "structure",
@@ -144,7 +144,7 @@
             }
         },
         "com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet": {
-            "type": "set",
+            "type": "list",
             "member": {
                 "target": "com.amazonaws.ssmincidents#SnsArn",
                 "traits": {
@@ -157,7 +157,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
-                }
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.ssmincidents#ClientToken": {
@@ -878,7 +879,7 @@
             }
         },
         "com.amazonaws.ssmincidents#EngagementSet": {
-            "type": "set",
+            "type": "list",
             "member": {
                 "target": "com.amazonaws.ssmincidents#SsmContactsArn",
                 "traits": {
@@ -890,7 +891,8 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 5
-                }
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.ssmincidents#EventData": {
@@ -1476,7 +1478,6 @@
         "com.amazonaws.ssmincidents#Impact": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -1877,6 +1878,10 @@
                     {
                         "value": "INVOLVED_RESOURCE",
                         "name": "INVOLVED_RESOURCE"
+                    },
+                    {
+                        "value": "TASK",
+                        "name": "TASK"
                     }
                 ]
             }
@@ -2421,7 +2426,6 @@
         "com.amazonaws.ssmincidents#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3002,28 +3006,6 @@
         },
         "com.amazonaws.ssmincidents#SSMIncidents": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SSM Incidents",
-                    "arnNamespace": "ssm-incidents",
-                    "awsProductName": "AWSSystemsManager",
-                    "cloudFormationName": "SSMIncidents"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ssm-incidents"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "content-type",
-                        "x-amz-content-sha256",
-                        "x-amz-user-agent",
-                        "x-amzn-platform-id"
-                    ]
-                },
-                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n      mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An\n      incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder\n      team escalation. </p>",
-                "smithy.api#title": "AWS Systems Manager Incident Manager"
-            },
             "version": "2018-05-10",
             "operations": [
                 {
@@ -3113,7 +3095,29 @@
                 {
                     "target": "com.amazonaws.ssmincidents#UpdateTimelineEvent"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM Incidents",
+                    "arnNamespace": "ssm-incidents",
+                    "awsProductName": "AWSSystemsManager",
+                    "cloudFormationName": "SSMIncidents"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-incidents"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n      mitigate and recover from incidents affecting their Amazon Web Services-hosted applications. An\n      incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder\n      team escalation. </p>",
+                "smithy.api#title": "AWS Systems Manager Incident Manager"
+            }
         },
         "com.amazonaws.ssmincidents#ServiceCode": {
             "type": "string",

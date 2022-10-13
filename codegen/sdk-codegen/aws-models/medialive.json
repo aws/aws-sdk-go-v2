@@ -1323,6 +1323,12 @@
         "com.amazonaws.medialive#AvailSettings": {
             "type": "structure",
             "members": {
+                "Esam": {
+                    "target": "com.amazonaws.medialive#Esam",
+                    "traits": {
+                        "smithy.api#jsonName": "esam"
+                    }
+                },
                 "Scte35SpliceInsert": {
                     "target": "com.amazonaws.medialive#Scte35SpliceInsert",
                     "traits": {
@@ -7714,6 +7720,58 @@
             },
             "traits": {
                 "smithy.api#documentation": "Encoder Settings"
+            }
+        },
+        "com.amazonaws.medialive#Esam": {
+            "type": "structure",
+            "members": {
+                "AcquisitionPointId": {
+                    "target": "com.amazonaws.medialive#__stringMax256",
+                    "traits": {
+                        "smithy.api#documentation": "Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.",
+                        "smithy.api#jsonName": "acquisitionPointId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdAvailOffset": {
+                    "target": "com.amazonaws.medialive#__integerMinNegative1000Max1000",
+                    "traits": {
+                        "smithy.api#documentation": "When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.",
+                        "smithy.api#jsonName": "adAvailOffset"
+                    }
+                },
+                "PasswordParam": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Password if credentials are required to access the POIS endpoint.  This is a reference to an AWS parameter store name from which the password can be retrieved.  AWS Parameter store format: \"ssm://<parameter name>\"",
+                        "smithy.api#jsonName": "passwordParam"
+                    }
+                },
+                "PoisEndpoint": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The URL of the signal conditioner endpoint on the Placement Opportunity Information System (POIS). MediaLive sends SignalProcessingEvents here when SCTE-35 messages are read.",
+                        "smithy.api#jsonName": "poisEndpoint",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Username if credentials are required to access the POIS endpoint.  This can be either a plaintext username, or a reference to an AWS parameter store name from which the username can be retrieved.  AWS Parameter store format: \"ssm://<parameter name>\"",
+                        "smithy.api#jsonName": "username"
+                    }
+                },
+                "ZoneIdentity": {
+                    "target": "com.amazonaws.medialive#__stringMax256",
+                    "traits": {
+                        "smithy.api#documentation": "Optional data sent as zoneIdentity to identify the MediaLive channel to the POIS.",
+                        "smithy.api#jsonName": "zoneIdentity"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for the Esam"
             }
         },
         "com.amazonaws.medialive#FailoverCondition": {
@@ -17527,6 +17585,13 @@
                         "smithy.api#jsonName": "pauseStateSettings"
                     }
                 },
+                "Scte35InputSettings": {
+                    "target": "com.amazonaws.medialive#Scte35InputScheduleActionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Action to specify scte35 input",
+                        "smithy.api#jsonName": "scte35InputSettings"
+                    }
+                },
                 "Scte35ReturnToNetworkSettings": {
                     "target": "com.amazonaws.medialive#Scte35ReturnToNetworkScheduleActionSettings",
                     "traits": {
@@ -17844,6 +17909,45 @@
                         "name": "RESTRICT_GROUP2"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.medialive#Scte35InputMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.",
+                "smithy.api#enum": [
+                    {
+                        "value": "FIXED",
+                        "name": "FIXED"
+                    },
+                    {
+                        "value": "FOLLOW_ACTIVE",
+                        "name": "FOLLOW_ACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#Scte35InputScheduleActionSettings": {
+            "type": "structure",
+            "members": {
+                "InputAttachmentNameReference": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "In fixed mode, enter the name of the input attachment that you want to use as a SCTE-35 input. (Don't enter the ID of the input.)\"",
+                        "smithy.api#jsonName": "inputAttachmentNameReference"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.medialive#Scte35InputMode",
+                    "traits": {
+                        "smithy.api#documentation": "Whether the SCTE-35 input should be the active input or a fixed input.",
+                        "smithy.api#jsonName": "mode",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for the \"scte35 input\" action"
             }
         },
         "com.amazonaws.medialive#Scte35NoRegionalBlackoutFlag": {

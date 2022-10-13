@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.panorama#AccessDeniedException": {
             "type": "structure",
@@ -104,6 +104,12 @@
                     "target": "com.amazonaws.panorama#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The application instance's tags.</p>"
+                    }
+                },
+                "RuntimeContextStates": {
+                    "target": "com.amazonaws.panorama#ReportedRuntimeContextStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application's state.</p>"
                     }
                 }
             },
@@ -226,7 +232,10 @@
             }
         },
         "com.amazonaws.panorama#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.panorama#Bucket": {
             "type": "string"
@@ -463,7 +472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job to run on one or more devices.</p>",
+                "smithy.api#documentation": "<p>Creates a job to run on one or more devices. A job can update a device's software or reboot it.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/jobs",
@@ -484,8 +493,7 @@
                 "DeviceJobConfig": {
                     "target": "com.amazonaws.panorama#DeviceJobConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration settings for the job.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Configuration settings for a software update job.</p>"
                     }
                 },
                 "JobType": {
@@ -897,6 +905,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.panorama#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Delete the package even if it has artifacts stored in its access point. Deletes the package's artifacts from\n      Amazon S3.</p>",
                         "smithy.api#httpQuery": "ForceDelete"
                     }
@@ -1221,6 +1230,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The application instance's tags.</p>"
                     }
+                },
+                "RuntimeContextStates": {
+                    "target": "com.amazonaws.panorama#ReportedRuntimeContextStates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application instance's state.</p>"
+                    }
                 }
             }
         },
@@ -1351,6 +1366,12 @@
                     "target": "com.amazonaws.panorama#UpdateCreatedTime",
                     "traits": {
                         "smithy.api#documentation": "<p>When the job was created.</p>"
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.panorama#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job's type.</p>"
                     }
                 }
             }
@@ -2124,6 +2145,7 @@
                 "IsLatestPatch": {
                     "target": "com.amazonaws.panorama#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the version is the latest available.</p>",
                         "smithy.api#required": {}
                     }
@@ -2157,6 +2179,25 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.panorama#DesiredState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "REMOVED",
+                        "name": "REMOVED"
+                    }
+                ]
             }
         },
         "com.amazonaws.panorama#Device": {
@@ -2284,6 +2325,10 @@
                     {
                         "value": "UPDATE_NEEDED",
                         "name": "UPDATE_NEEDED"
+                    },
+                    {
+                        "value": "REBOOTING",
+                        "name": "REBOOTING"
                     }
                 ]
             }
@@ -2387,6 +2432,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the job was created.</p>"
                     }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.panorama#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job's type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2427,6 +2478,57 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_]+$"
+            }
+        },
+        "com.amazonaws.panorama#DeviceReportedStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "STOP_ERROR",
+                        "name": "STOP_ERROR"
+                    },
+                    {
+                        "value": "REMOVAL_FAILED",
+                        "name": "REMOVAL_FAILED"
+                    },
+                    {
+                        "value": "REMOVAL_IN_PROGRESS",
+                        "name": "REMOVAL_IN_PROGRESS"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "INSTALL_ERROR",
+                        "name": "INSTALL_ERROR"
+                    },
+                    {
+                        "value": "LAUNCHED",
+                        "name": "LAUNCHED"
+                    },
+                    {
+                        "value": "LAUNCH_ERROR",
+                        "name": "LAUNCH_ERROR"
+                    },
+                    {
+                        "value": "INSTALL_IN_PROGRESS",
+                        "name": "INSTALL_IN_PROGRESS"
+                    }
+                ]
             }
         },
         "com.amazonaws.panorama#DeviceSerialNumber": {
@@ -2581,6 +2683,7 @@
                 "RetryAfterSeconds": {
                     "target": "com.amazonaws.panorama#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds a client should wait before retrying the call.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -2703,6 +2806,10 @@
                     {
                         "value": "OTA",
                         "name": "OTA"
+                    },
+                    {
+                        "value": "REBOOT",
+                        "name": "REBOOT"
                     }
                 ]
             }
@@ -2732,6 +2839,12 @@
                     "target": "com.amazonaws.panorama#UpdateProgress",
                     "traits": {
                         "smithy.api#documentation": "<p>Status of the latest device job.</p>"
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.panorama#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job's type.</p>"
                     }
                 }
             },
@@ -2795,6 +2908,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of application instance dependencies to return in one page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2869,6 +2983,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of node instances to return in one page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2949,6 +3064,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of application instances to return in one page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3074,6 +3190,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of device jobs to return in one page of results.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3110,6 +3227,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of devices to return in one page of results.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3234,6 +3352,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of node from template jobs to return in one page of results.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3339,6 +3458,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of nodes to return in one page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3411,6 +3531,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of package import jobs to return in one page of results.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3480,6 +3601,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.panorama#MaxSize25",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of packages to return in one page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3611,7 +3733,10 @@
             }
         },
         "com.amazonaws.panorama#MarkLatestPatch": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.panorama#Mask": {
             "type": "string",
@@ -3624,11 +3749,15 @@
             }
         },
         "com.amazonaws.panorama#MaxConnections": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.panorama#MaxSize25": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 25
@@ -3952,6 +4081,7 @@
                 "MaxConnections": {
                     "target": "com.amazonaws.panorama#MaxConnections",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The input port's max connections.</p>"
                     }
                 }
@@ -4037,6 +4167,10 @@
                     {
                         "value": "NOT_AVAILABLE",
                         "name": "NOT_AVAILABLE"
+                    },
+                    {
+                        "value": "PAUSED",
+                        "name": "PAUSED"
                     }
                 ]
             }
@@ -4154,6 +4288,54 @@
                 "smithy.api#pattern": "^([0-9]+)\\.([0-9]+)$"
             }
         },
+        "com.amazonaws.panorama#NodeSignal": {
+            "type": "structure",
+            "members": {
+                "NodeInstanceId": {
+                    "target": "com.amazonaws.panorama#NodeInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The camera node's name, from the application manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Signal": {
+                    "target": "com.amazonaws.panorama#NodeSignalValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signal value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A signal to a camera node to start or stop processing video.</p>"
+            }
+        },
+        "com.amazonaws.panorama#NodeSignalList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.panorama#NodeSignal"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.panorama#NodeSignalValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PAUSE",
+                        "name": "PAUSE"
+                    },
+                    {
+                        "value": "RESUME",
+                        "name": "RESUME"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.panorama#NodesList": {
             "type": "list",
             "member": {
@@ -4251,20 +4433,6 @@
         },
         "com.amazonaws.panorama#OmniCloudServiceLambda": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Panorama",
-                    "arnNamespace": "panorama",
-                    "awsProductName": "AWSPanorama"
-                },
-                "aws.auth#sigv4": {
-                    "name": "panorama"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>AWS Panorama</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>AWS Panorama API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html\">What is AWS Panorama?</a> in the\n        <i>AWS Panorama Developer Guide</i>.</p>",
-                "smithy.api#title": "AWS Panorama"
-            },
             "version": "2019-07-24",
             "operations": [
                 {
@@ -4358,6 +4526,9 @@
                     "target": "com.amazonaws.panorama#RemoveApplicationInstance"
                 },
                 {
+                    "target": "com.amazonaws.panorama#SignalApplicationInstanceNodeInstances"
+                },
+                {
                     "target": "com.amazonaws.panorama#TagResource"
                 },
                 {
@@ -4366,7 +4537,21 @@
                 {
                     "target": "com.amazonaws.panorama#UpdateDeviceMetadata"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Panorama",
+                    "arnNamespace": "panorama",
+                    "awsProductName": "AWSPanorama"
+                },
+                "aws.auth#sigv4": {
+                    "name": "panorama"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<fullname>AWS Panorama</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the <i>AWS Panorama API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/panorama/latest/dev/panorama-welcome.html\">What is AWS Panorama?</a> in the\n        <i>AWS Panorama Developer Guide</i>.</p>",
+                "smithy.api#title": "AWS Panorama"
+            }
         },
         "com.amazonaws.panorama#OutPutS3Location": {
             "type": "structure",
@@ -4671,6 +4856,7 @@
                 "MarkLatest": {
                     "target": "com.amazonaws.panorama#MarkLatestPatch",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates that the version is recommended for all users.</p>"
                     }
                 }
@@ -4951,6 +5137,7 @@
                 "MarkLatest": {
                     "target": "com.amazonaws.panorama#MarkLatestPatch",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to mark the new version as the latest version.</p>"
                     }
                 }
@@ -5011,6 +5198,48 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.panorama#ReportedRuntimeContextState": {
+            "type": "structure",
+            "members": {
+                "DesiredState": {
+                    "target": "com.amazonaws.panorama#DesiredState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application's desired state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuntimeContextName": {
+                    "target": "com.amazonaws.panorama#RuntimeContextName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device's name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceReportedStatus": {
+                    "target": "com.amazonaws.panorama#DeviceReportedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application's reported status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceReportedTime": {
+                    "target": "com.amazonaws.panorama#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the device reported the application's state.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An application instance's state.</p>"
+            }
+        },
+        "com.amazonaws.panorama#ReportedRuntimeContextStates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.panorama#ReportedRuntimeContextState"
+            }
+        },
         "com.amazonaws.panorama#ResourceArn": {
             "type": "string",
             "traits": {
@@ -5052,7 +5281,20 @@
             }
         },
         "com.amazonaws.panorama#RetryAfterSeconds": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.panorama#RuntimeContextName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^.+$"
+            }
         },
         "com.amazonaws.panorama#RuntimeRoleArn": {
             "type": "string",
@@ -5132,6 +5374,69 @@
                 "smithy.api#documentation": "<p>The request would cause a limit to be exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.panorama#SignalApplicationInstanceNodeInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.panorama#SignalApplicationInstanceNodeInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.panorama#SignalApplicationInstanceNodeInstancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.panorama#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.panorama#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.panorama#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.panorama#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Signal camera nodes to stop or resume.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/application-instances/{ApplicationInstanceId}/node-signals",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.panorama#SignalApplicationInstanceNodeInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationInstanceId": {
+                    "target": "com.amazonaws.panorama#ApplicationInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An application instance ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeSignals": {
+                    "target": "com.amazonaws.panorama#NodeSignalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of signals.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.panorama#SignalApplicationInstanceNodeInstancesResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationInstanceId": {
+                    "target": "com.amazonaws.panorama#ApplicationInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An application instance ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.panorama#SortOrder": {

@@ -5008,7 +5008,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n        different ways, such as by purpose, owner, or environment. For example, you might want to tag an association to identify the type of resource to which it applies, the environment, or the purpose of the association.</p>"
+                        "smithy.api#documentation": "<p>Adds or overwrites one or more tags for a State Manager association. <i>Tags</i>\n   are metadata that you can assign to your Amazon Web Services resources. Tags enable you to categorize your\n   resources in different ways, for example, by purpose, owner, or environment. Each tag consists of\n   a key and an optional value, both of which you define. </p>"
                     }
                 },
                 "AlarmConfiguration": {
@@ -9567,7 +9567,7 @@
                     "code": "DocumentPermissionLimit",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The document can't be shared with more Amazon Web Services user accounts. You can share a document\n   with a maximum of 20 accounts. You can publicly share up to five documents. If you need to\n   increase this limit, contact Amazon Web Services Support.</p>",
+                "smithy.api#documentation": "<p>The document can't be shared with more Amazon Web Services user accounts. You can specify a maximum of 20 accounts per API operation to share a private document.</p>\n\n         <p>By default, you can share a private document with a maximum of 1,000 accounts and publicly share up to five documents.</p>\n   \n         <p>If you need to increase the quota for privately or publicly shared Systems Manager documents, contact Amazon Web Services Support.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -13087,7 +13087,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssm#InstanceInformationStringFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes. For example:</p>\n         <p>\"InstanceIds\" | \"AgentVersion\" | \"PingStatus\" | \"PlatformTypes\" | \"ActivationIds\" |\n   \"IamRole\" | \"ResourceType\" | \"AssociationStatus\" | \"tag-key\" | \"tag:<code>{keyname}</code>\n         </p>\n         <important>\n            <p>\n               <code>Tag Key</code> isn't a valid filter. You must specify either <code>tag-key</code> or\n     <code>tag:{keyname}</code> and a string. Here are some valid examples: <code>tag-key</code>,\n     <code>tag:123</code>, <code>tag:al!</code>, <code>tag:Windows</code>. Here are some\n     <i>invalid</i> examples: <code>tag-keys</code>, <code>Tag Key</code>,\n     <code>tag:</code>, <code>tagKey</code>, <code>abc:keyname</code>.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>\n         <p>Valid filter key values: ActivationIds | AgentVersion | AssociationStatus | IamRole |\n   InstanceIds | PingStatus | PlatformTypes | ResourceType | SourceIds | SourceTypes | \"tag-key\" |\n    \"tag:<code>{keyname}</code>\n         </p>\n         <ul>\n            <li>\n               <p>Valid values for the <code>AssociationStatus</code> filter key: Success | Pending |\n     Failed</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PingStatus</code> filter key: Online | ConnectionLost |\n     Inactive (deprecated)</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>PlatformType</code> filter key: Windows | Linux | MacOS</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>ResourceType</code> filter key: EC2Instance |\n     ManagedInstance</p>\n            </li>\n            <li>\n               <p>Valid values for the <code>SourceType</code> filter key: AWS::EC2::Instance |\n     AWS::SSM::ManagedInstance | AWS::IoT::Thing</p>\n            </li>\n            <li>\n               <p>Valid tag examples: <code>Key=tag-key,Values=Purpose</code> |\n      <code>Key=tag:Purpose,Values=Test</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13260,21 +13260,21 @@
                     "target": "com.amazonaws.ssm#PatchCriticalNonCompliantCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node\n   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches per node that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node\n   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "SecurityNonCompliantCount": {
                     "target": "com.amazonaws.ssm#PatchSecurityNonCompliantCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of managed nodes where patches that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these\n   managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches per node that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these\n   managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "OtherNonCompliantCount": {
                     "target": "com.amazonaws.ssm#PatchOtherNonCompliantCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of managed nodes with patches installed that are specified as other than\n    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The\n   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches per node that are specified as other than\n    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The\n   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 }
             },
@@ -14134,7 +14134,7 @@
                     "code": "InvalidTag",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The tag key or value isn't valid.</p>",
+                "smithy.api#documentation": "<p>The specified tag key or value isn't valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -16328,7 +16328,7 @@
                 "S3BucketName": {
                     "target": "com.amazonaws.ssm#S3BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an S3 bucket where execution logs are stored .</p>",
+                        "smithy.api#documentation": "<p>The name of an S3 bucket where execution logs are stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17854,6 +17854,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AMAZON_LINUX_2"
+                    }
+                },
+                "AmazonLinux2022": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_LINUX_2022"
                     }
                 },
                 "Ubuntu": {
@@ -24880,7 +24886,7 @@
                 "TokenValue": {
                     "target": "com.amazonaws.ssm#TokenValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>An encrypted token value containing session and caller information. This token is used to authenticate the connection to the managed node, and is valid only long enough to ensure the connection is successful. Never share your session's token.</p>"
+                        "smithy.api#documentation": "<p>An encrypted token value containing session and caller information. This token is used to\n   authenticate the connection to the managed node, and is valid only long enough to ensure the\n   connection is successful. Never share your session's token.</p>"
                     }
                 },
                 "StreamUrl": {

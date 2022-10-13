@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.rdsdata#AccessDeniedException": {
             "type": "structure",
@@ -162,7 +162,7 @@
                 "schema": {
                     "target": "com.amazonaws.rdsdata#DbName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database schema.</p>"
+                        "smithy.api#documentation": "<p>The name of the database schema.</p>\n        <note>\n            <p>Currently, the <code>schema</code> parameter isn't supported.</p>\n        </note>"
                     }
                 },
                 "parameterSets": {
@@ -285,7 +285,10 @@
             "type": "blob"
         },
         "com.amazonaws.rdsdata#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.rdsdata#BooleanArray": {
             "type": "list",
@@ -297,34 +300,19 @@
             }
         },
         "com.amazonaws.rdsdata#BoxedBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.rdsdata#BoxedDouble": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.rdsdata#BoxedFloat": {
-            "type": "float",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "float"
         },
         "com.amazonaws.rdsdata#BoxedInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.rdsdata#BoxedLong": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.rdsdata#ColumnMetadata": {
             "type": "structure",
@@ -338,6 +326,7 @@
                 "type": {
                     "target": "com.amazonaws.rdsdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The type of the column.</p>"
                     }
                 },
@@ -368,48 +357,56 @@
                 "isAutoIncrement": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the column increments automatically.</p>"
                     }
                 },
                 "isSigned": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether an integer column is signed.</p>"
                     }
                 },
                 "isCurrency": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the column contains currency values.</p>"
                     }
                 },
                 "isCaseSensitive": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the column is case-sensitive.</p>"
                     }
                 },
                 "nullable": {
                     "target": "com.amazonaws.rdsdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A value that indicates whether the column is nullable.</p>"
                     }
                 },
                 "precision": {
                     "target": "com.amazonaws.rdsdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The precision value of a decimal number column.</p>"
                     }
                 },
                 "scale": {
                     "target": "com.amazonaws.rdsdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The scale value of a decimal number column.</p>"
                     }
                 },
                 "arrayBaseColumnType": {
                     "target": "com.amazonaws.rdsdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The type of the column.</p>"
                     }
                 }
@@ -717,12 +714,14 @@
                 "includeResultMetadata": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to include metadata in the results.</p>"
                     }
                 },
                 "continueAfterTimeout": {
                     "target": "com.amazonaws.rdsdata#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether to continue running the statement after \n            the call times out. By default, the statement stops running when the call \n            times out.</p>\n        <note>\n            <p>For DDL statements, we recommend continuing to run the statement after \n               the call times out. When a DDL statement terminates before it is finished \n               running, it can result in errors and possibly corrupted data structures.</p>\n        </note>"
                     }
                 },
@@ -761,6 +760,7 @@
                 "numberOfRecordsUpdated": {
                     "target": "com.amazonaws.rdsdata#RecordsUpdated",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of records updated by the request.</p>"
                     }
                 },
@@ -865,7 +865,10 @@
             }
         },
         "com.amazonaws.rdsdata#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.rdsdata#InternalServerErrorException": {
             "type": "structure",
@@ -877,7 +880,10 @@
             }
         },
         "com.amazonaws.rdsdata#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.rdsdata#LongArray": {
             "type": "list",
@@ -930,19 +936,6 @@
         },
         "com.amazonaws.rdsdata#RdsDataService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "RDS Data",
-                    "arnNamespace": "rds-data"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rds-data"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>Amazon RDS Data Service</fullname>\n        <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless v1 DB cluster. To run these\n            statements, you work with the Data Service API.</p>\n        <note>\n            <p>The Data Service API isn't supported on Amazon Aurora Serverless v2 DB clusters.</p>\n        </note>\n        <p>For more information about the Data Service API, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>",
-                "smithy.api#title": "AWS RDS DataService"
-            },
             "version": "2018-08-01",
             "operations": [
                 {
@@ -963,7 +956,20 @@
                 {
                     "target": "com.amazonaws.rdsdata#RollbackTransaction"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "RDS Data",
+                    "arnNamespace": "rds-data"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rds-data"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<fullname>Amazon RDS Data Service</fullname>\n        <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless v1 DB cluster. To run these\n            statements, you work with the Data Service API.</p>\n        <note>\n            <p>The Data Service API isn't supported on Amazon Aurora Serverless v2 DB clusters.</p>\n        </note>\n        <p>For more information about the Data Service API, see\n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API</a>\n          in the <i>Amazon Aurora User Guide</i>.</p>",
+                "smithy.api#title": "AWS RDS DataService"
+            }
         },
         "com.amazonaws.rdsdata#Record": {
             "type": "structure",
@@ -1001,7 +1007,10 @@
             }
         },
         "com.amazonaws.rdsdata#RecordsUpdated": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.rdsdata#ResultFrame": {
             "type": "structure",
@@ -1029,6 +1038,7 @@
                 "columnCount": {
                     "target": "com.amazonaws.rdsdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of columns in the result set.</p>"
                     }
                 },
@@ -1225,6 +1235,7 @@
                 "numberOfRecordsUpdated": {
                     "target": "com.amazonaws.rdsdata#RecordsUpdated",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of records updated by a SQL statement.</p>"
                     }
                 }
@@ -1251,6 +1262,7 @@
                 "dbConnectionId": {
                     "target": "com.amazonaws.rdsdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The database connection ID that executed the SQL statement.</p>"
                     }
                 }

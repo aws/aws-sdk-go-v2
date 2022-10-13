@@ -20464,6 +20464,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The email address. If you are using SAML for identity management and include this parameter,\n   an error is returned.</p>"
                     }
+                },
+                "SecondaryEmail": {
+                    "target": "com.amazonaws.connect#Email",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's secondary email address. If you provide a secondary email, the user receives email\n   notifications -- other than password reset notifications -- to this email address instead of to their\n   primary email address.</p>"
+                    }
+                },
+                "Mobile": {
+                    "target": "com.amazonaws.connect#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's mobile number.</p>"
+                    }
                 }
             },
             "traits": {

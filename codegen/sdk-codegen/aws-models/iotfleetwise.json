@@ -857,7 +857,7 @@
                 "dataExtraDimensions": {
                     "target": "com.amazonaws.iotfleetwise#DataExtraDimensionNodePathList",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) A list of vehicle attributes to associate with a campaign. </p>\n        <p>Default: An empty array</p>"
+                        "smithy.api#documentation": "<p> (Optional) A list of vehicle attributes to associate with a campaign. </p>\n        <p>Enrich the data with specified vehicle attributes. For example, add <code>make</code> and <code>model</code> to the campaign, and Amazon Web Services IoT FleetWise will associate the data with those attributes as dimensions in Amazon Timestream. You can then query the data against <code>make</code> and <code>model</code>.</p>\n        <p>Default: An empty array</p>"
                     }
                 },
                 "tags": {
@@ -3497,7 +3497,7 @@
                 },
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<note>\n            <p>Amazon Web Services IoT FleetWise is in preview release and is subject to change. We recommend that you\n                use the service only with test data, and not in production environments.</p>\n            <p>While Amazon Web Services IoT FleetWise is in preview, you must download the preview Amazon Web Services SDK and CLI\n                to use the API operations for this service. These API operations aren't\n                available in the public Amazon Web Services SDK or CLI. For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/preview-sdk-cli.html\">Preview Amazon Web Services SDK\n                    and CLI</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>\n        </note>\n        <p>Amazon Web Services IoT FleetWise is a fully managed service that you can use to collect, model, and transfer\n            vehicle data to the Amazon Web Services cloud at scale. With Amazon Web Services IoT FleetWise, you can standardize all of\n            your vehicle data models, independent of the in-vehicle communication architecture, and\n            define data collection rules to transfer only high-value data to the cloud.\n            </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/\">What is Amazon Web Services IoT FleetWise?</a> in the\n                <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services IoT FleetWise is a fully managed service that you can use to collect, model, and transfer\n            vehicle data to the Amazon Web Services cloud at scale. With Amazon Web Services IoT FleetWise, you can standardize all of\n            your vehicle data models, independent of the in-vehicle communication architecture, and\n            define data collection rules to transfer only high-value data to the cloud.\n            </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/\">What is Amazon Web Services IoT FleetWise?</a> in the\n                <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#title": "AWS IoT FleetWise"
             }
         },

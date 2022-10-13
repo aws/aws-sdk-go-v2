@@ -1927,6 +1927,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value for the field.</p>"
                     }
+                },
+                "isArray": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to render the field as an array. This property is ignored if the <code>dataSourceType</code> for the form is a Data Store.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2228,7 +2234,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the call to action button configuration for the form..</p>"
+                "smithy.api#documentation": "<p>Describes the call to action button configuration for the form.</p>"
             }
         },
         "com.amazonaws.amplifyuibuilder#FormDataSourceType": {

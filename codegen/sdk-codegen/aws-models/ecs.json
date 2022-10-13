@@ -5563,13 +5563,13 @@
                 "minimumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of container instances that Amazon ECS scales in or scales out at one\n\t\t\ttime. If this parameter is omitted, the default value of <code>1</code> is used.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale\n\t\t\tin process is not affected by this parameter If this parameter is omitted, the default\n\t\t\tvalue of <code>1</code> is used.</p>\n\t\t       <p>When additional capacity is required, Amazon ECS will scale up the minimum scaling step\n\t\t\tsize even if the actual demand is less than the minimum scaling step size.</p>\n\t\t       <p>If you use a capacity provider with an Auto Scaling group configured with more than\n\t\t\tone Amazon EC2 instance type or Availability Zone, Amazon ECS will scale up by the exact minimum\n\t\t\tscaling step size value and will ignore both the maximum scaling step size as well as\n\t\t\tthe capacity demand.</p>"
                     }
                 },
                 "maximumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of container instances that Amazon ECS scales in or scales out at one\n\t\t\ttime. If this parameter is omitted, the default value of <code>10000</code> is\n\t\t\tused.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale\n\t\t\tin process is not affected by this parameter. If this parameter is omitted, the default\n\t\t\tvalue of <code>10000</code> is used.</p>"
                     }
                 },
                 "instanceWarmupPeriod": {
@@ -7217,7 +7217,7 @@
                 "deploymentController": {
                     "target": "com.amazonaws.ecs#DeploymentController",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment controller type the service is using. When using the DescribeServices\n\t\t\tAPI, this field is omitted if the service uses the <code>ECS</code> deployment\n\t\t\tcontroller type.</p>"
+                        "smithy.api#documentation": "<p>The deployment controller type the service is using. </p>"
                     }
                 },
                 "tags": {

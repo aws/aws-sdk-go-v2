@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,24 +31,6 @@
     "shapes": {
         "com.amazonaws.iam#AWSIdentityManagementV20100508": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "IAM",
-                    "arnNamespace": "iam",
-                    "cloudFormationName": "IAM",
-                    "cloudTrailEventSource": "iam.amazonaws.com",
-                    "endpointPrefix": "iam"
-                },
-                "aws.auth#sigv4": {
-                    "name": "iam"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<fullname>Identity and Access Management</fullname>\n         <p>Identity and Access Management (IAM) is a web service for securely controlling \n      access to Amazon Web Services services. With IAM, you can centrally manage users, security credentials\n      such as access keys, and permissions that control which Amazon Web Services resources users and \n      applications can access. For more information about IAM, see <a href=\"http://aws.amazon.com/iam/\">Identity and Access Management (IAM)</a> and the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/\">Identity and Access Management User Guide</a>.</p>",
-                "smithy.api#title": "AWS Identity and Access Management",
-                "smithy.api#xmlNamespace": {
-                    "uri": "https://iam.amazonaws.com/doc/2010-05-08/"
-                }
-            },
             "version": "2010-05-08",
             "operations": [
                 {
@@ -525,21 +507,41 @@
                 {
                     "target": "com.amazonaws.iam#UploadSSHPublicKey"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IAM",
+                    "arnNamespace": "iam",
+                    "cloudFormationName": "IAM",
+                    "cloudTrailEventSource": "iam.amazonaws.com",
+                    "endpointPrefix": "iam"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iam"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<fullname>Identity and Access Management</fullname>\n         <p>Identity and Access Management (IAM) is a web service for securely controlling \n      access to Amazon Web Services services. With IAM, you can centrally manage users, security credentials\n      such as access keys, and permissions that control which Amazon Web Services resources users and \n      applications can access. For more information about IAM, see <a href=\"http://aws.amazon.com/iam/\">Identity and Access Management (IAM)</a> and the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/\">Identity and Access Management User Guide</a>.</p>",
+                "smithy.api#title": "AWS Identity and Access Management",
+                "smithy.api#xmlNamespace": {
+                    "uri": "https://iam.amazonaws.com/doc/2010-05-08/"
+                }
+            }
         },
         "com.amazonaws.iam#AccessAdvisorUsageGranularityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVICE_LEVEL",
-                        "name": "SERVICE_LEVEL"
-                    },
-                    {
-                        "value": "ACTION_LEVEL",
-                        "name": "ACTION_LEVEL"
+            "type": "enum",
+            "members": {
+                "SERVICE_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_LEVEL"
                     }
-                ]
+                },
+                "ACTION_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_LEVEL"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#AccessDetail": {
@@ -562,25 +564,25 @@
                 "Region": {
                     "target": "com.amazonaws.iam#stringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region where the last service access attempt occurred.</p>\n         <p>This field is null if no principals in the reported Organizations entity attempted to access the\n         service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The Region where the last service access attempt occurred.</p>\n         <p>This field is null if no principals in the reported Organizations entity attempted to access the\n         service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "EntityPath": {
                     "target": "com.amazonaws.iam#organizationsEntityPathType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path of the Organizations entity (root, organizational unit, or account) from which an\n         authenticated principal last attempted to access the service. Amazon Web Services does not report\n         unauthenticated requests.</p>\n         <p>This field is null if no principals (IAM users, IAM roles, or root users) in the\n         reported Organizations entity attempted to access the service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The path of the Organizations entity (root, organizational unit, or account) from which an\n         authenticated principal last attempted to access the service. Amazon Web Services does not report\n         unauthenticated requests.</p>\n         <p>This field is null if no principals (IAM users, IAM roles, or root users) in the\n         reported Organizations entity attempted to access the service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "LastAuthenticatedTime": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when an authenticated principal most recently attempted to access the\n         service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no principals in the reported Organizations entity attempted to access the\n         service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when an authenticated principal most recently attempted to access the\n         service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no principals in the reported Organizations entity attempted to access the\n         service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "TotalAuthenticatedEntities": {
                     "target": "com.amazonaws.iam#integerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of accounts with authenticated principals (root users, IAM users, and IAM\n         roles) that attempted to access the service in the reporting period.</p>"
+                        "smithy.api#documentation": "<p>The number of accounts with authenticated principals (root users, IAM users, and IAM\n         roles) that attempted to access the service in the tracking period.</p>"
                     }
                 }
             },
@@ -1095,7 +1097,10 @@
             }
         },
         "com.amazonaws.iam#ColumnNumber": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.iam#ConcurrentModificationException": {
             "type": "structure",
@@ -1165,58 +1170,80 @@
             }
         },
         "com.amazonaws.iam#ContextKeyTypeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "string",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "stringList",
-                        "name": "STRING_LIST"
-                    },
-                    {
-                        "value": "numeric",
-                        "name": "NUMERIC"
-                    },
-                    {
-                        "value": "numericList",
-                        "name": "NUMERIC_LIST"
-                    },
-                    {
-                        "value": "boolean",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "booleanList",
-                        "name": "BOOLEAN_LIST"
-                    },
-                    {
-                        "value": "ip",
-                        "name": "IP"
-                    },
-                    {
-                        "value": "ipList",
-                        "name": "IP_LIST"
-                    },
-                    {
-                        "value": "binary",
-                        "name": "BINARY"
-                    },
-                    {
-                        "value": "binaryList",
-                        "name": "BINARY_LIST"
-                    },
-                    {
-                        "value": "date",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "dateList",
-                        "name": "DATE_LIST"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "string"
                     }
-                ]
+                },
+                "STRING_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "stringList"
+                    }
+                },
+                "NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "numeric"
+                    }
+                },
+                "NUMERIC_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "numericList"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "boolean"
+                    }
+                },
+                "BOOLEAN_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "booleanList"
+                    }
+                },
+                "IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ip"
+                    }
+                },
+                "IP_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipList"
+                    }
+                },
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "binary"
+                    }
+                },
+                "BINARY_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "binaryList"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "date"
+                    }
+                },
+                "DATE_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dateList"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#ContextKeyValueListType": {
@@ -1488,6 +1515,7 @@
                 "PasswordResetRequired": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the user is required to set a new password on next sign-in.</p>"
                     }
                 }
@@ -1720,6 +1748,7 @@
                 "SetAsDefault": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to set this version as the policy's default version.</p>\n        <p>When this parameter is <code>true</code>, the new policy version becomes the operative\n            version. That is, it becomes the version that is in effect for the IAM users, groups,\n            and roles that the policy is attached to.</p>\n        <p>For more information about managed policy versions, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for managed\n                policies</a> in the <i>IAM User Guide</i>.</p>"
                     }
                 }
@@ -2520,7 +2549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the password for the specified IAM user, which terminates the user's ability\n            to access Amazon Web Services services through the Amazon Web Services Management Console.</p>\n        <p>You can use the CLI, the Amazon Web Services API, or the <b>Users</b>\n            page in the IAM console to delete a password for any IAM user. You can use <a>ChangePassword</a> to update, but not delete, your own password in the\n                <b>My Security Credentials</b> page in the\n            Amazon Web Services Management Console.</p>\n        <important>\n            <p> Deleting a user's password does not prevent a user from accessing Amazon Web Services through\n                the command line interface or the API. To prevent all user access, you must also\n                either make any access keys inactive or delete them. For more information about\n                making keys inactive or deleting them, see <a>UpdateAccessKey</a> and\n                    <a>DeleteAccessKey</a>. </p>\n        </important>"
+                "smithy.api#documentation": "<p>Deletes the password for the specified IAM user, For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_admin-change-user.html\">Managing\n                passwords for IAM users</a>.</p>\n        <p>You can use the CLI, the Amazon Web Services API, or the <b>Users</b>\n            page in the IAM console to delete a password for any IAM user. You can use <a>ChangePassword</a> to update, but not delete, your own password in the\n                <b>My Security Credentials</b> page in the\n            Amazon Web Services Management Console.</p>\n        <important>\n            <p>Deleting a user's password does not prevent a user from accessing Amazon Web Services through\n                the command line interface or the API. To prevent all user access, you must also\n                either make any access keys inactive or delete them. For more information about\n                making keys inactive or deleting them, see <a>UpdateAccessKey</a> and\n                    <a>DeleteAccessKey</a>.</p>\n        </important>"
             }
         },
         "com.amazonaws.iam#DeleteLoginProfileRequest": {
@@ -3201,26 +3230,32 @@
             }
         },
         "com.amazonaws.iam#DeletionTaskStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#DetachGroupPolicy": {
@@ -3490,7 +3525,7 @@
                 "LastAuthenticated": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when the authenticated entity last attempted to access Amazon Web Services. Amazon Web Services does\n         not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when the authenticated entity last attempted to access Amazon Web Services. Amazon Web Services does\n         not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 }
             },
@@ -3557,30 +3592,38 @@
             }
         },
         "com.amazonaws.iam#EntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "User",
-                        "name": "User"
-                    },
-                    {
-                        "value": "Role",
-                        "name": "Role"
-                    },
-                    {
-                        "value": "Group",
-                        "name": "Group"
-                    },
-                    {
-                        "value": "LocalManagedPolicy",
-                        "name": "LocalManagedPolicy"
-                    },
-                    {
-                        "value": "AWSManagedPolicy",
-                        "name": "AWSManagedPolicy"
+            "type": "enum",
+            "members": {
+                "User": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "User"
                     }
-                ]
+                },
+                "Role": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Role"
+                    }
+                },
+                "Group": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Group"
+                    }
+                },
+                "LocalManagedPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocalManagedPolicy"
+                    }
+                },
+                "AWSManagedPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSManagedPolicy"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#ErrorDetails": {
@@ -3952,6 +3995,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -4303,6 +4347,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -4594,6 +4639,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -5130,6 +5176,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -5232,6 +5279,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -5704,7 +5752,10 @@
             }
         },
         "com.amazonaws.iam#LineNumber": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.iam#ListAccessKeys": {
             "type": "operation",
@@ -5768,6 +5819,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -5835,6 +5887,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -5920,6 +5973,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6005,6 +6059,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6090,6 +6145,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6198,6 +6254,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6275,6 +6332,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6375,6 +6433,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6425,6 +6484,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6496,6 +6556,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6593,6 +6654,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6643,6 +6705,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6717,6 +6780,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6790,6 +6854,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -6864,6 +6929,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7011,6 +7077,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your results were\n            truncated, you can make a subsequent pagination request using the <code>Marker</code>\n            request parameter to retrieve more items. We recommend that you check\n                <code>IsTruncated</code> after every call to ensure that you receive all your\n            results.</p>"
                     }
                 },
@@ -7034,6 +7101,7 @@
                 "OnlyAttached": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag to filter the results to only the attached policies.</p>\n        <p>When <code>OnlyAttached</code> is <code>true</code>, the returned list contains only\n            the policies that are attached to an IAM user, group, or role. When\n                <code>OnlyAttached</code> is <code>false</code>, or when the parameter is not\n            included, all policies are returned.</p>"
                     }
                 },
@@ -7075,6 +7143,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7149,6 +7218,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7225,6 +7295,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7302,6 +7373,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7373,6 +7445,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7443,6 +7516,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7517,6 +7591,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7621,6 +7696,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7692,6 +7768,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7762,6 +7839,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7886,6 +7964,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -7963,6 +8042,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -8040,6 +8120,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -8110,6 +8191,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -8178,6 +8260,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -8212,6 +8295,7 @@
                 "PasswordResetRequired": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the user is required to set a new password on next sign-in.</p>"
                     }
                 }
@@ -8328,6 +8412,7 @@
                 "IsAttachable": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the policy can be attached to an IAM user, group, or role.</p>"
                     }
                 },
@@ -8419,6 +8504,7 @@
                 "AllowedByOrganizations": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the simulated operation is allowed by the Organizations service control\n         policies that impact the simulated user's account.</p>"
                     }
                 }
@@ -8439,36 +8525,42 @@
                 "RequireSymbols": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one of the following\n         symbols:</p>\n         <p>! @ # $ % ^ & * ( ) _ + - = [ ] { } | '</p>"
                     }
                 },
                 "RequireNumbers": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one numeric character (0 to\n         9).</p>"
                     }
                 },
                 "RequireUppercaseCharacters": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one uppercase character (A\n         to Z).</p>"
                     }
                 },
                 "RequireLowercaseCharacters": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one lowercase character (a\n         to z).</p>"
                     }
                 },
                 "AllowUsersToChangePassword": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM users are allowed to change their own password. Gives IAM\n         users permissions to <code>iam:ChangePassword</code> for only their user and to the\n            <code>iam:GetAccountPasswordPolicy</code> action. This option does not attach a\n         permissions policy to each user, rather the permissions are applied at the account-level\n         for all users by IAM.</p>"
                     }
                 },
                 "ExpirePasswords": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether passwords in the account expire. Returns true if\n            <code>MaxPasswordAge</code> contains a value greater than 0. Returns false if\n         MaxPasswordAge is 0 or not present.</p>"
                     }
                 },
@@ -8513,14 +8605,14 @@
             }
         },
         "com.amazonaws.iam#PermissionsBoundaryAttachmentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PermissionsBoundaryPolicy",
-                        "name": "Policy"
+            "type": "enum",
+            "members": {
+                "Policy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PermissionsBoundaryPolicy"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iam#PermissionsBoundaryDecisionDetail": {
@@ -8529,6 +8621,7 @@
                 "AllowedByPermissionsBoundary": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether an action is allowed by a permissions boundary that is applied to an\n         IAM entity (user or role). A value of <code>true</code> means that the permissions\n         boundary does not deny the action. This means that the policy includes an\n            <code>Allow</code> statement that matches the request. In this case, if an\n         identity-based policy also allows the action, the request is allowed. A value of\n            <code>false</code> means that either the requested action is not allowed (implicitly\n         denied) or that the action is explicitly denied by the permissions boundary. In both of\n         these cases, the action is not allowed, regardless of the identity-based policy.</p>"
                     }
                 }
@@ -8582,6 +8675,7 @@
                 "IsAttachable": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the policy can be attached to an IAM user, group, or role.</p>"
                     }
                 },
@@ -8635,22 +8729,26 @@
             }
         },
         "com.amazonaws.iam#PolicyEvaluationDecisionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "allowed",
-                        "name": "ALLOWED"
-                    },
-                    {
-                        "value": "explicitDeny",
-                        "name": "EXPLICIT_DENY"
-                    },
-                    {
-                        "value": "implicitDeny",
-                        "name": "IMPLICIT_DENY"
+            "type": "enum",
+            "members": {
+                "ALLOWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "allowed"
                     }
-                ]
+                },
+                "EXPLICIT_DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "explicitDeny"
+                    }
+                },
+                "IMPLICIT_DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "implicitDeny"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#PolicyEvaluationException": {
@@ -8780,54 +8878,70 @@
             }
         },
         "com.amazonaws.iam#PolicySourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "user",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "group",
-                        "name": "GROUP"
-                    },
-                    {
-                        "value": "role",
-                        "name": "ROLE"
-                    },
-                    {
-                        "value": "aws-managed",
-                        "name": "AWS_MANAGED"
-                    },
-                    {
-                        "value": "user-managed",
-                        "name": "USER_MANAGED"
-                    },
-                    {
-                        "value": "resource",
-                        "name": "RESOURCE"
-                    },
-                    {
-                        "value": "none",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "user"
                     }
-                ]
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "group"
+                    }
+                },
+                "ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "role"
+                    }
+                },
+                "AWS_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws-managed"
+                    }
+                },
+                "USER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "user-managed"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#PolicyUsageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The policy usage type that indicates whether the policy is used as a permissions policy\n         or as the permissions boundary for an entity.</p>\n         <p>For more information about permissions boundaries, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n            identities </a> in the <i>IAM User Guide</i>.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PermissionsPolicy",
-                        "name": "PermissionsPolicy"
-                    },
-                    {
-                        "value": "PermissionsBoundary",
-                        "name": "PermissionsBoundary"
+            "type": "enum",
+            "members": {
+                "PermissionsPolicy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PermissionsPolicy"
                     }
-                ]
+                },
+                "PermissionsBoundary": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PermissionsBoundary"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy usage type that indicates whether the policy is used as a permissions policy\n         or as the permissions boundary for an entity.</p>\n         <p>For more information about permissions boundaries, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html\">Permissions boundaries for IAM\n            identities </a> in the <i>IAM User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iam#PolicyUser": {
@@ -8874,6 +8988,7 @@
                 "IsDefaultVersion": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the policy version is set as the policy's default version.</p>"
                     }
                 },
@@ -8894,12 +9009,14 @@
                 "Line": {
                     "target": "com.amazonaws.iam#LineNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The line containing the specified position in the document.</p>"
                     }
                 },
                 "Column": {
                     "target": "com.amazonaws.iam#ColumnNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The column in the line containing the specified position in the document.</p>"
                     }
                 }
@@ -9311,14 +9428,14 @@
             "type": "blob"
         },
         "com.amazonaws.iam#ReportFormatType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "text/csv",
-                        "name": "text_csv"
+            "type": "enum",
+            "members": {
+                "text_csv": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "text/csv"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iam#ReportGenerationLimitExceededException": {
@@ -9342,22 +9459,26 @@
             "type": "string"
         },
         "com.amazonaws.iam#ReportStateType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STARTED",
-                        "name": "STARTED"
-                    },
-                    {
-                        "value": "INPROGRESS",
-                        "name": "INPROGRESS"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
+            "type": "enum",
+            "members": {
+                "STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTED"
                     }
-                ]
+                },
+                "INPROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#ResetServiceSpecificCredential": {
@@ -9997,7 +10118,7 @@
                 "LastAuthenticated": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when an authenticated entity most recently attempted to access the\n         service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when an authenticated entity most recently attempted to access the\n         service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "ServiceNamespace": {
@@ -10010,25 +10131,25 @@
                 "LastAuthenticatedEntity": {
                     "target": "com.amazonaws.iam#arnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the authenticated entity (user or role) that last attempted to access the\n         service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the authenticated entity (user or role) that last attempted to access the\n         service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "LastAuthenticatedRegion": {
                     "target": "com.amazonaws.iam#stringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region from which the authenticated entity (user or role) last attempted to access\n         the service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The Region from which the authenticated entity (user or role) last attempted to access\n         the service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "TotalAuthenticatedEntities": {
                     "target": "com.amazonaws.iam#integerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of authenticated principals (root user, IAM users, or IAM roles)\n         that have attempted to access the service.</p>\n         <p>This field is null if no principals attempted to access the service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The total number of authenticated principals (root user, IAM users, or IAM roles)\n         that have attempted to access the service.</p>\n         <p>This field is null if no principals attempted to access the service within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "TrackedActionsLastAccessed": {
                     "target": "com.amazonaws.iam#TrackedActionsLastAccessed",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains details about the most recent attempt to access a tracked action\n         within the service.</p>\n         <p>This field is null if there no tracked actions or if the principal did not use the\n         tracked actions within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>. This field is also null if the report was generated at the\n         service level and not the action level. For more information, see the\n            <code>Granularity</code> field in <a>GenerateServiceLastAccessedDetails</a>.</p>"
+                        "smithy.api#documentation": "<p>An object that contains details about the most recent attempt to access a tracked action\n         within the service.</p>\n         <p>This field is null if there no tracked actions or if the principal did not use the\n         tracked actions within the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>. This field is also null if the report was generated at the\n         service level and not the action level. For more information, see the\n            <code>Granularity</code> field in <a>GenerateServiceLastAccessedDetails</a>.</p>"
                     }
                 }
             },
@@ -10399,6 +10520,7 @@
                 "IsTruncated": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A flag that indicates whether there are more items to return. If your \n    results were truncated, you can make a subsequent pagination request using the <code>Marker</code>\n    request parameter to retrieve more items. Note that IAM might return fewer than the \n    <code>MaxItems</code> number of results even when there are more results available. We recommend \n    that you check <code>IsTruncated</code> after every call to ensure that you receive all your \n    results.</p>"
                     }
                 },
@@ -10986,13 +11108,13 @@
                 "LastAccessedTime": {
                     "target": "com.amazonaws.iam#dateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when an authenticated entity most recently attempted to access the\n         tracked service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time\n            format</a>, when an authenticated entity most recently attempted to access the\n         tracked service. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 },
                 "LastAccessedRegion": {
                     "target": "com.amazonaws.iam#stringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region from which the authenticated entity (user or role) last attempted to access\n         the tracked action. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">reporting period</a>.</p>"
+                        "smithy.api#documentation": "<p>The Region from which the authenticated entity (user or role) last attempted to access\n         the tracked action. Amazon Web Services does not report unauthenticated requests.</p>\n         <p>This field is null if no IAM entities attempted to access the service within the\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period\">tracking period</a>.</p>"
                     }
                 }
             },
@@ -11480,30 +11602,35 @@
                 "RequireSymbols": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one of the following\n            non-alphanumeric characters:</p>\n        <p>! @ # $ % ^ & * ( ) _ + - = [ ] { } | '</p>\n        <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that passwords do not require at least one\n            symbol character.</p>"
                     }
                 },
                 "RequireNumbers": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one numeric character (0\n            to 9).</p>\n        <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that passwords do not require at least one\n            numeric character.</p>"
                     }
                 },
                 "RequireUppercaseCharacters": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one uppercase character\n            from the ISO basic Latin alphabet (A to Z).</p>\n        <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that passwords do not require at least one\n            uppercase character.</p>"
                     }
                 },
                 "RequireLowercaseCharacters": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether IAM user passwords must contain at least one lowercase character\n            from the ISO basic Latin alphabet (a to z).</p>\n        <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that passwords do not require at least one\n            lowercase character.</p>"
                     }
                 },
                 "AllowUsersToChangePassword": {
                     "target": "com.amazonaws.iam#booleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Allows all IAM users in your account to use the Amazon Web Services Management Console to change their own\n            passwords. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_enable-user-change.html\">Permitting\n                IAM users to change their own passwords</a> in the\n                <i>IAM User Guide</i>.</p>\n        <p>If you do not specify a value for this parameter, then the operation uses the default\n            value of <code>false</code>. The result is that IAM users in the account do not\n            automatically have permissions to change their own password.</p>"
                     }
                 },
@@ -12574,22 +12701,26 @@
             }
         },
         "com.amazonaws.iam#assignmentStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Assigned",
-                        "name": "Assigned"
-                    },
-                    {
-                        "value": "Unassigned",
-                        "name": "Unassigned"
-                    },
-                    {
-                        "value": "Any",
-                        "name": "Any"
+            "type": "enum",
+            "members": {
+                "Assigned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Assigned"
                     }
-                ]
+                },
+                "Unassigned": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unassigned"
+                    }
+                },
+                "Any": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Any"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#attachedPoliciesListType": {
@@ -12599,10 +12730,7 @@
             }
         },
         "com.amazonaws.iam#attachmentCountType": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.iam#authenticationCodeType": {
             "type": "string",
@@ -12615,13 +12743,13 @@
             }
         },
         "com.amazonaws.iam#booleanObjectType": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.iam#booleanType": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.iam#certificateBodyType": {
             "type": "string",
@@ -12709,18 +12837,20 @@
             "type": "string"
         },
         "com.amazonaws.iam#encodingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SSH",
-                        "name": "SSH"
-                    },
-                    {
-                        "value": "PEM",
-                        "name": "PEM"
+            "type": "enum",
+            "members": {
+                "SSH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSH"
                     }
-                ]
+                },
+                "PEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PEM"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#entityAlreadyExistsMessage": {
@@ -12762,18 +12892,20 @@
             }
         },
         "com.amazonaws.iam#globalEndpointTokenVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "v1Token",
-                        "name": "v1Token"
-                    },
-                    {
-                        "value": "v2Token",
-                        "name": "v2Token"
+            "type": "enum",
+            "members": {
+                "v1Token": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "v1Token"
                     }
-                ]
+                },
+                "v2Token": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "v2Token"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#groupDetailListType": {
@@ -12837,10 +12969,7 @@
             }
         },
         "com.amazonaws.iam#integerType": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.iam#invalidAuthenticationCodeMessage": {
             "type": "string"
@@ -12867,22 +12996,26 @@
             }
         },
         "com.amazonaws.iam#jobStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#keyPairMismatchMessage": {
@@ -12916,7 +13049,6 @@
         "com.amazonaws.iam#maxItemsType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -12926,7 +13058,6 @@
         "com.amazonaws.iam#maxPasswordAgeType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1095
@@ -12945,7 +13076,6 @@
         "com.amazonaws.iam#minimumPasswordLengthType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 6,
                     "max": 128
@@ -12977,7 +13107,6 @@
         "com.amazonaws.iam#passwordReusePreventionType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 24
@@ -13084,22 +13213,26 @@
             "type": "string"
         },
         "com.amazonaws.iam#policyOwnerEntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "ROLE",
-                        "name": "ROLE"
-                    },
-                    {
-                        "value": "GROUP",
-                        "name": "GROUP"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
                     }
-                ]
+                },
+                "ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLE"
+                    }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#policyPathType": {
@@ -13113,37 +13246,43 @@
             }
         },
         "com.amazonaws.iam#policyScopeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "All",
-                        "name": "All"
-                    },
-                    {
-                        "value": "AWS",
-                        "name": "AWS"
-                    },
-                    {
-                        "value": "Local",
-                        "name": "Local"
+            "type": "enum",
+            "members": {
+                "All": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
                     }
-                ]
+                },
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS"
+                    }
+                },
+                "Local": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Local"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#policyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INLINE",
-                        "name": "INLINE"
-                    },
-                    {
-                        "value": "MANAGED",
-                        "name": "MANAGED"
+            "type": "enum",
+            "members": {
+                "INLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INLINE"
                     }
-                ]
+                },
+                "MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#policyVersionIdType": {
@@ -13227,7 +13366,6 @@
         "com.amazonaws.iam#roleMaxSessionDurationType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 3600,
                     "max": 43200
@@ -13331,155 +13469,213 @@
             }
         },
         "com.amazonaws.iam#sortKeyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVICE_NAMESPACE_ASCENDING",
-                        "name": "SERVICE_NAMESPACE_ASCENDING"
-                    },
-                    {
-                        "value": "SERVICE_NAMESPACE_DESCENDING",
-                        "name": "SERVICE_NAMESPACE_DESCENDING"
-                    },
-                    {
-                        "value": "LAST_AUTHENTICATED_TIME_ASCENDING",
-                        "name": "LAST_AUTHENTICATED_TIME_ASCENDING"
-                    },
-                    {
-                        "value": "LAST_AUTHENTICATED_TIME_DESCENDING",
-                        "name": "LAST_AUTHENTICATED_TIME_DESCENDING"
+            "type": "enum",
+            "members": {
+                "SERVICE_NAMESPACE_ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_NAMESPACE_ASCENDING"
                     }
-                ]
+                },
+                "SERVICE_NAMESPACE_DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_NAMESPACE_DESCENDING"
+                    }
+                },
+                "LAST_AUTHENTICATED_TIME_ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_AUTHENTICATED_TIME_ASCENDING"
+                    }
+                },
+                "LAST_AUTHENTICATED_TIME_DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_AUTHENTICATED_TIME_DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#statusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "Active"
-                    },
-                    {
-                        "value": "Inactive",
-                        "name": "Inactive"
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "Inactive": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#stringType": {
             "type": "string"
         },
         "com.amazonaws.iam#summaryKeyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Users",
-                        "name": "Users"
-                    },
-                    {
-                        "value": "UsersQuota",
-                        "name": "UsersQuota"
-                    },
-                    {
-                        "value": "Groups",
-                        "name": "Groups"
-                    },
-                    {
-                        "value": "GroupsQuota",
-                        "name": "GroupsQuota"
-                    },
-                    {
-                        "value": "ServerCertificates",
-                        "name": "ServerCertificates"
-                    },
-                    {
-                        "value": "ServerCertificatesQuota",
-                        "name": "ServerCertificatesQuota"
-                    },
-                    {
-                        "value": "UserPolicySizeQuota",
-                        "name": "UserPolicySizeQuota"
-                    },
-                    {
-                        "value": "GroupPolicySizeQuota",
-                        "name": "GroupPolicySizeQuota"
-                    },
-                    {
-                        "value": "GroupsPerUserQuota",
-                        "name": "GroupsPerUserQuota"
-                    },
-                    {
-                        "value": "SigningCertificatesPerUserQuota",
-                        "name": "SigningCertificatesPerUserQuota"
-                    },
-                    {
-                        "value": "AccessKeysPerUserQuota",
-                        "name": "AccessKeysPerUserQuota"
-                    },
-                    {
-                        "value": "MFADevices",
-                        "name": "MFADevices"
-                    },
-                    {
-                        "value": "MFADevicesInUse",
-                        "name": "MFADevicesInUse"
-                    },
-                    {
-                        "value": "AccountMFAEnabled",
-                        "name": "AccountMFAEnabled"
-                    },
-                    {
-                        "value": "AccountAccessKeysPresent",
-                        "name": "AccountAccessKeysPresent"
-                    },
-                    {
-                        "value": "AccountSigningCertificatesPresent",
-                        "name": "AccountSigningCertificatesPresent"
-                    },
-                    {
-                        "value": "AttachedPoliciesPerGroupQuota",
-                        "name": "AttachedPoliciesPerGroupQuota"
-                    },
-                    {
-                        "value": "AttachedPoliciesPerRoleQuota",
-                        "name": "AttachedPoliciesPerRoleQuota"
-                    },
-                    {
-                        "value": "AttachedPoliciesPerUserQuota",
-                        "name": "AttachedPoliciesPerUserQuota"
-                    },
-                    {
-                        "value": "Policies",
-                        "name": "Policies"
-                    },
-                    {
-                        "value": "PoliciesQuota",
-                        "name": "PoliciesQuota"
-                    },
-                    {
-                        "value": "PolicySizeQuota",
-                        "name": "PolicySizeQuota"
-                    },
-                    {
-                        "value": "PolicyVersionsInUse",
-                        "name": "PolicyVersionsInUse"
-                    },
-                    {
-                        "value": "PolicyVersionsInUseQuota",
-                        "name": "PolicyVersionsInUseQuota"
-                    },
-                    {
-                        "value": "VersionsPerPolicyQuota",
-                        "name": "VersionsPerPolicyQuota"
-                    },
-                    {
-                        "value": "GlobalEndpointTokenVersion",
-                        "name": "GlobalEndpointTokenVersion"
+            "type": "enum",
+            "members": {
+                "Users": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Users"
                     }
-                ]
+                },
+                "UsersQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UsersQuota"
+                    }
+                },
+                "Groups": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Groups"
+                    }
+                },
+                "GroupsQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GroupsQuota"
+                    }
+                },
+                "ServerCertificates": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServerCertificates"
+                    }
+                },
+                "ServerCertificatesQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServerCertificatesQuota"
+                    }
+                },
+                "UserPolicySizeQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UserPolicySizeQuota"
+                    }
+                },
+                "GroupPolicySizeQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GroupPolicySizeQuota"
+                    }
+                },
+                "GroupsPerUserQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GroupsPerUserQuota"
+                    }
+                },
+                "SigningCertificatesPerUserQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SigningCertificatesPerUserQuota"
+                    }
+                },
+                "AccessKeysPerUserQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessKeysPerUserQuota"
+                    }
+                },
+                "MFADevices": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MFADevices"
+                    }
+                },
+                "MFADevicesInUse": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MFADevicesInUse"
+                    }
+                },
+                "AccountMFAEnabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountMFAEnabled"
+                    }
+                },
+                "AccountAccessKeysPresent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountAccessKeysPresent"
+                    }
+                },
+                "AccountSigningCertificatesPresent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccountSigningCertificatesPresent"
+                    }
+                },
+                "AttachedPoliciesPerGroupQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AttachedPoliciesPerGroupQuota"
+                    }
+                },
+                "AttachedPoliciesPerRoleQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AttachedPoliciesPerRoleQuota"
+                    }
+                },
+                "AttachedPoliciesPerUserQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AttachedPoliciesPerUserQuota"
+                    }
+                },
+                "Policies": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Policies"
+                    }
+                },
+                "PoliciesQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PoliciesQuota"
+                    }
+                },
+                "PolicySizeQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicySizeQuota"
+                    }
+                },
+                "PolicyVersionsInUse": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicyVersionsInUse"
+                    }
+                },
+                "PolicyVersionsInUseQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicyVersionsInUseQuota"
+                    }
+                },
+                "VersionsPerPolicyQuota": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VersionsPerPolicyQuota"
+                    }
+                },
+                "GlobalEndpointTokenVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GlobalEndpointTokenVersion"
+                    }
+                }
             }
         },
         "com.amazonaws.iam#summaryMapType": {
@@ -13492,10 +13688,7 @@
             }
         },
         "com.amazonaws.iam#summaryValueType": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.iam#tagKeyListType": {
             "type": "list",

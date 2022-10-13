@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -99,29 +99,31 @@
             }
         },
         "com.amazonaws.appflow#AggregationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "None",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "SingleFile",
-                        "name": "SINGLE_FILE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
                     }
-                ]
+                },
+                "SINGLE_FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SingleFile"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#AmplitudeConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
+            "type": "enum",
+            "members": {
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.appflow#AmplitudeConnectorProfileCredentials": {
@@ -316,6 +318,7 @@
                 "isRequired": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this authentication parameter is required.</p>"
                     }
                 },
@@ -334,6 +337,7 @@
                 "isSensitiveField": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this authentication parameter is a sensitive field.</p>"
                     }
                 },
@@ -360,24 +364,28 @@
                 "isBasicAuthSupported": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether basic authentication is supported by the connector.</p>"
                     }
                 },
                 "isApiKeyAuthSupported": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether API key authentication is supported by the connector</p>"
                     }
                 },
                 "isOAuth2Supported": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether OAuth 2.0 authentication is supported by the connector.</p>"
                     }
                 },
                 "isCustomAuthSupported": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether custom authentication is supported by the connector</p>"
                     }
                 },
@@ -399,26 +407,32 @@
             }
         },
         "com.amazonaws.appflow#AuthenticationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OAUTH2",
-                        "name": "OAUTH2"
-                    },
-                    {
-                        "value": "APIKEY",
-                        "name": "APIKEY"
-                    },
-                    {
-                        "value": "BASIC",
-                        "name": "BASIC"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
+            "type": "enum",
+            "members": {
+                "OAUTH2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OAUTH2"
                     }
-                ]
+                },
+                "APIKEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APIKEY"
+                    }
+                },
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#BasicAuthCredentials": {
@@ -444,7 +458,10 @@
             }
         },
         "com.amazonaws.appflow#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.appflow#BucketName": {
             "type": "string",
@@ -522,18 +539,20 @@
             }
         },
         "com.amazonaws.appflow#ConnectionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Public",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "Private",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Public"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Private"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#ConnectorAuthenticationException": {
@@ -555,12 +574,14 @@
                 "canUseAsSource": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies whether the connector can be used as a source. </p>"
                     }
                 },
                 "canUseAsDestination": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies whether the connector can be used as a destination. </p>"
                     }
                 },
@@ -579,12 +600,14 @@
                 "isPrivateLinkEnabled": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies if PrivateLink is enabled for that connector. </p>"
                     }
                 },
                 "isPrivateLinkEndpointUrlRequired": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies if a PrivateLink endpoint URL is required. </p>"
                     }
                 },
@@ -825,6 +848,7 @@
                 "hasNestedEntities": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies whether the connector entity is a parent or a category and has more entities\n      nested underneath it. If another call is made with <code>entitiesPath =\n        \"the_current_entity_name_with_hasNestedEntities_true\"</code>, then it returns the nested\n      entities underneath it. This provides a way to retrieve all supported entities in a recursive\n      fashion. </p>"
                     }
                 }
@@ -858,6 +882,7 @@
                 "isPrimaryKey": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Booelan value that indicates whether this field can be used as a primary key.</p>"
                     }
                 },
@@ -870,6 +895,7 @@
                 "isDeprecated": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Booelan value that indicates whether this field is deprecated or not.</p>"
                     }
                 },
@@ -1602,15 +1628,17 @@
             }
         },
         "com.amazonaws.appflow#ConnectorProvisioningType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The type of provisioning that the connector supports, such as Lambda.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "LAMBDA",
-                        "name": "LAMBDA"
+            "type": "enum",
+            "members": {
+                "LAMBDA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAMBDA"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of provisioning that the connector supports, such as Lambda.</p>"
             }
         },
         "com.amazonaws.appflow#ConnectorRuntimeSetting": {
@@ -1631,6 +1659,7 @@
                 "isRequired": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this connector runtime setting is required.</p>"
                     }
                 },
@@ -1725,102 +1754,146 @@
             }
         },
         "com.amazonaws.appflow#ConnectorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Salesforce",
-                        "name": "SALESFORCE"
-                    },
-                    {
-                        "value": "Singular",
-                        "name": "SINGULAR"
-                    },
-                    {
-                        "value": "Slack",
-                        "name": "SLACK"
-                    },
-                    {
-                        "value": "Redshift",
-                        "name": "REDSHIFT"
-                    },
-                    {
-                        "value": "S3",
-                        "name": "S3"
-                    },
-                    {
-                        "value": "Marketo",
-                        "name": "MARKETO"
-                    },
-                    {
-                        "value": "Googleanalytics",
-                        "name": "GOOGLEANALYTICS"
-                    },
-                    {
-                        "value": "Zendesk",
-                        "name": "ZENDESK"
-                    },
-                    {
-                        "value": "Servicenow",
-                        "name": "SERVICENOW"
-                    },
-                    {
-                        "value": "Datadog",
-                        "name": "DATADOG"
-                    },
-                    {
-                        "value": "Trendmicro",
-                        "name": "TRENDMICRO"
-                    },
-                    {
-                        "value": "Snowflake",
-                        "name": "SNOWFLAKE"
-                    },
-                    {
-                        "value": "Dynatrace",
-                        "name": "DYNATRACE"
-                    },
-                    {
-                        "value": "Infornexus",
-                        "name": "INFORNEXUS"
-                    },
-                    {
-                        "value": "Amplitude",
-                        "name": "AMPLITUDE"
-                    },
-                    {
-                        "value": "Veeva",
-                        "name": "VEEVA"
-                    },
-                    {
-                        "value": "EventBridge",
-                        "name": "EVENTBRIDGE"
-                    },
-                    {
-                        "value": "LookoutMetrics",
-                        "name": "LOOKOUTMETRICS"
-                    },
-                    {
-                        "value": "Upsolver",
-                        "name": "UPSOLVER"
-                    },
-                    {
-                        "value": "Honeycode",
-                        "name": "HONEYCODE"
-                    },
-                    {
-                        "value": "CustomerProfiles",
-                        "name": "CUSTOMERPROFILES"
-                    },
-                    {
-                        "value": "SAPOData",
-                        "name": "SAPODATA"
-                    },
-                    {
-                        "value": "CustomConnector",
-                        "name": "CUSTOMCONNECTOR"
+            "type": "enum",
+            "members": {
+                "SALESFORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Salesforce"
                     }
-                ]
+                },
+                "SINGULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Singular"
+                    }
+                },
+                "SLACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Slack"
+                    }
+                },
+                "REDSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Redshift"
+                    }
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "MARKETO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Marketo"
+                    }
+                },
+                "GOOGLEANALYTICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Googleanalytics"
+                    }
+                },
+                "ZENDESK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Zendesk"
+                    }
+                },
+                "SERVICENOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Servicenow"
+                    }
+                },
+                "DATADOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Datadog"
+                    }
+                },
+                "TRENDMICRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Trendmicro"
+                    }
+                },
+                "SNOWFLAKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Snowflake"
+                    }
+                },
+                "DYNATRACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dynatrace"
+                    }
+                },
+                "INFORNEXUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Infornexus"
+                    }
+                },
+                "AMPLITUDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Amplitude"
+                    }
+                },
+                "VEEVA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Veeva"
+                    }
+                },
+                "EVENTBRIDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EventBridge"
+                    }
+                },
+                "LOOKOUTMETRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LookoutMetrics"
+                    }
+                },
+                "UPSOLVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Upsolver"
+                    }
+                },
+                "HONEYCODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Honeycode"
+                    }
+                },
+                "CUSTOMERPROFILES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CustomerProfiles"
+                    }
+                },
+                "SAPODATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAPOData"
+                    }
+                },
+                "CUSTOMCONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CustomConnector"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#ConnectorTypeList": {
@@ -2334,18 +2407,20 @@
             }
         },
         "com.amazonaws.appflow#DataPullMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Incremental",
-                        "name": "INCREMENTAL"
-                    },
-                    {
-                        "value": "Complete",
-                        "name": "COMPLETE"
+            "type": "enum",
+            "members": {
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Incremental"
                     }
-                ]
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#DatabaseUrl": {
@@ -2359,70 +2434,98 @@
             }
         },
         "com.amazonaws.appflow#DatadogConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#DatadogConnectorProfileCredentials": {
@@ -2538,6 +2641,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the profile, even if it is currently\n      in use in one or more flows. </p>"
                     }
                 }
@@ -2588,6 +2692,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow should delete the flow, even if it is currently in\n      use. </p>"
                     }
                 }
@@ -3212,30 +3317,35 @@
                 "isCreatable": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies if the destination field can be created by the current user. </p>"
                     }
                 },
                 "isNullable": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies if the destination field can have a null value. </p>"
                     }
                 },
                 "isUpsertable": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies if the flow run can either insert new rows in the destination field if they do\n      not already exist, or update them if they do. </p>"
                     }
                 },
                 "isUpdatable": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies whether the field can be updated during an <code>UPDATE</code> or\n        <code>UPSERT</code> write operation. </p>"
                     }
                 },
                 "isDefaultedOnCreate": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the field can use the default value during a Create operation.</p>"
                     }
                 },
@@ -3311,73 +3421,104 @@
             }
         },
         "com.amazonaws.appflow#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.appflow#DynatraceConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#DynatraceConnectorProfileCredentials": {
@@ -3458,6 +3599,7 @@
                 "failOnFirstDestinationError": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies if the flow should fail after the first instance of a failure when attempting\n      to place data in the destination. </p>"
                     }
                 },
@@ -3662,22 +3804,26 @@
             }
         },
         "com.amazonaws.appflow#ExecutionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InProgress",
-                        "name": "INPROGRESS"
-                    },
-                    {
-                        "value": "Successful",
-                        "name": "SUCCESSFUL"
-                    },
-                    {
-                        "value": "Error",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "INPROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
                     }
-                ]
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Successful"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Error"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#FieldType": {
@@ -3736,22 +3882,26 @@
             }
         },
         "com.amazonaws.appflow#FileType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "PARQUET",
-                        "name": "PARQUET"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#FilterOperatorList": {
@@ -3881,6 +4031,7 @@
         "com.amazonaws.appflow#FlowErrorDeactivationThreshold": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3910,34 +4061,44 @@
             }
         },
         "com.amazonaws.appflow#FlowStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "Deprecated",
-                        "name": "DEPRECATED"
-                    },
-                    {
-                        "value": "Deleted",
-                        "name": "DELETED"
-                    },
-                    {
-                        "value": "Draft",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "Errored",
-                        "name": "ERRORED"
-                    },
-                    {
-                        "value": "Suspended",
-                        "name": "SUSPENDED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deprecated"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleted"
+                    }
+                },
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Draft"
+                    }
+                },
+                "ERRORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Errored"
+                    }
+                },
+                "SUSPENDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Suspended"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#FlowStatusMessage": {
@@ -3951,18 +4112,20 @@
             }
         },
         "com.amazonaws.appflow#GoogleAnalyticsConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#GoogleAnalyticsConnectorProfileCredentials": {
@@ -4150,70 +4313,98 @@
             }
         },
         "com.amazonaws.appflow#InforNexusConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#InforNexusConnectorProfileCredentials": {
@@ -4313,10 +4504,7 @@
             }
         },
         "com.amazonaws.appflow#JavaBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.appflow#KMSArn": {
             "type": "string",
@@ -4639,10 +4827,7 @@
             }
         },
         "com.amazonaws.appflow#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.appflow#LookoutMetricsDestinationProperties": {
             "type": "structure",
@@ -4652,74 +4837,104 @@
             }
         },
         "com.amazonaws.appflow#MarketoConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#MarketoConnectorProfileCredentials": {
@@ -4814,7 +5029,6 @@
         "com.amazonaws.appflow#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4898,6 +5112,7 @@
                 "isRequired": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the custom parameter for OAuth 2.0 authentication is required.</p>"
                     }
                 },
@@ -4916,6 +5131,7 @@
                 "isSensitiveField": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this authentication custom parameter is a sensitive field.</p>"
                     }
                 },
@@ -4937,18 +5153,20 @@
             }
         },
         "com.amazonaws.appflow#OAuth2CustomPropType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TOKEN_URL",
-                        "name": "TOKEN_URL"
-                    },
-                    {
-                        "value": "AUTH_URL",
-                        "name": "AUTH_URL"
+            "type": "enum",
+            "members": {
+                "TOKEN_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN_URL"
                     }
-                ]
+                },
+                "AUTH_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTH_URL"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#OAuth2CustomPropertiesList": {
@@ -4996,18 +5214,20 @@
             }
         },
         "com.amazonaws.appflow#OAuth2GrantType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLIENT_CREDENTIALS",
-                        "name": "CLIENT_CREDENTIALS"
-                    },
-                    {
-                        "value": "AUTHORIZATION_CODE",
-                        "name": "AUTHORIZATION_CODE"
+            "type": "enum",
+            "members": {
+                "CLIENT_CREDENTIALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_CREDENTIALS"
                     }
-                ]
+                },
+                "AUTHORIZATION_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZATION_CODE"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#OAuth2GrantTypeSupportedList": {
@@ -5150,252 +5370,366 @@
             }
         },
         "com.amazonaws.appflow#Operator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#OperatorPropertiesKeys": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
-                    },
-                    {
-                        "value": "VALUES",
-                        "name": "VALUES"
-                    },
-                    {
-                        "value": "DATA_TYPE",
-                        "name": "DATA_TYPE"
-                    },
-                    {
-                        "value": "UPPER_BOUND",
-                        "name": "UPPER_BOUND"
-                    },
-                    {
-                        "value": "LOWER_BOUND",
-                        "name": "LOWER_BOUND"
-                    },
-                    {
-                        "value": "SOURCE_DATA_TYPE",
-                        "name": "SOURCE_DATA_TYPE"
-                    },
-                    {
-                        "value": "DESTINATION_DATA_TYPE",
-                        "name": "DESTINATION_DATA_TYPE"
-                    },
-                    {
-                        "value": "VALIDATION_ACTION",
-                        "name": "VALIDATION_ACTION"
-                    },
-                    {
-                        "value": "MASK_VALUE",
-                        "name": "MASK_VALUE"
-                    },
-                    {
-                        "value": "MASK_LENGTH",
-                        "name": "MASK_LENGTH"
-                    },
-                    {
-                        "value": "TRUNCATE_LENGTH",
-                        "name": "TRUNCATE_LENGTH"
-                    },
-                    {
-                        "value": "MATH_OPERATION_FIELDS_ORDER",
-                        "name": "MATH_OPERATION_FIELDS_ORDER"
-                    },
-                    {
-                        "value": "CONCAT_FORMAT",
-                        "name": "CONCAT_FORMAT"
-                    },
-                    {
-                        "value": "SUBFIELD_CATEGORY_MAP",
-                        "name": "SUBFIELD_CATEGORY_MAP"
-                    },
-                    {
-                        "value": "EXCLUDE_SOURCE_FIELDS_LIST",
-                        "name": "EXCLUDE_SOURCE_FIELDS_LIST"
+            "type": "enum",
+            "members": {
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
                     }
-                ]
+                },
+                "VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUES"
+                    }
+                },
+                "DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_TYPE"
+                    }
+                },
+                "UPPER_BOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPPER_BOUND"
+                    }
+                },
+                "LOWER_BOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOWER_BOUND"
+                    }
+                },
+                "SOURCE_DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_DATA_TYPE"
+                    }
+                },
+                "DESTINATION_DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESTINATION_DATA_TYPE"
+                    }
+                },
+                "VALIDATION_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ACTION"
+                    }
+                },
+                "MASK_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_VALUE"
+                    }
+                },
+                "MASK_LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LENGTH"
+                    }
+                },
+                "TRUNCATE_LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUNCATE_LENGTH"
+                    }
+                },
+                "MATH_OPERATION_FIELDS_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATH_OPERATION_FIELDS_ORDER"
+                    }
+                },
+                "CONCAT_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONCAT_FORMAT"
+                    }
+                },
+                "SUBFIELD_CATEGORY_MAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBFIELD_CATEGORY_MAP"
+                    }
+                },
+                "EXCLUDE_SOURCE_FIELDS_LIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXCLUDE_SOURCE_FIELDS_LIST"
+                    }
+                },
+                "INCLUDE_NEW_FIELDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCLUDE_NEW_FIELDS"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#Operators": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#Password": {
@@ -5412,6 +5746,7 @@
         "com.amazonaws.appflow#PortNumber": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65535
@@ -5439,76 +5774,96 @@
             }
         },
         "com.amazonaws.appflow#PrefixFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "YEAR",
-                        "name": "YEAR"
-                    },
-                    {
-                        "value": "MONTH",
-                        "name": "MONTH"
-                    },
-                    {
-                        "value": "DAY",
-                        "name": "DAY"
-                    },
-                    {
-                        "value": "HOUR",
-                        "name": "HOUR"
-                    },
-                    {
-                        "value": "MINUTE",
-                        "name": "MINUTE"
+            "type": "enum",
+            "members": {
+                "YEAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEAR"
                     }
-                ]
+                },
+                "MONTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTH"
+                    }
+                },
+                "DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY"
+                    }
+                },
+                "HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOUR"
+                    }
+                },
+                "MINUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTE"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#PrefixType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FILENAME",
-                        "name": "FILENAME"
-                    },
-                    {
-                        "value": "PATH",
-                        "name": "PATH"
-                    },
-                    {
-                        "value": "PATH_AND_FILENAME",
-                        "name": "PATH_AND_FILENAME"
+            "type": "enum",
+            "members": {
+                "FILENAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILENAME"
                     }
-                ]
+                },
+                "PATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATH"
+                    }
+                },
+                "PATH_AND_FILENAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATH_AND_FILENAME"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#PrivateConnectionProvisioningFailureCause": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECTOR_AUTHENTICATION",
-                        "name": "CONNECTOR_AUTHENTICATION"
-                    },
-                    {
-                        "value": "CONNECTOR_SERVER",
-                        "name": "CONNECTOR_SERVER"
-                    },
-                    {
-                        "value": "INTERNAL_SERVER",
-                        "name": "INTERNAL_SERVER"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "VALIDATION",
-                        "name": "VALIDATION"
+            "type": "enum",
+            "members": {
+                "CONNECTOR_AUTHENTICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTOR_AUTHENTICATION"
                     }
-                ]
+                },
+                "CONNECTOR_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTOR_SERVER"
+                    }
+                },
+                "INTERNAL_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#PrivateConnectionProvisioningFailureMessage": {
@@ -5548,22 +5903,26 @@
             }
         },
         "com.amazonaws.appflow#PrivateConnectionProvisioningStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
+            "type": "enum",
+            "members": {
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#PrivateLinkServiceName": {
@@ -5627,12 +5986,14 @@
                 "maximum": {
                     "target": "com.amazonaws.appflow#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum value supported by the field.</p>"
                     }
                 },
                 "minimum": {
                     "target": "com.amazonaws.appflow#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Minimum value supported by the field.</p>"
                     }
                 }
@@ -5895,90 +6256,128 @@
             }
         },
         "com.amazonaws.appflow#S3ConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#S3DestinationProperties": {
@@ -6006,18 +6405,20 @@
             }
         },
         "com.amazonaws.appflow#S3InputFileType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#S3InputFormatConfig": {
@@ -6095,94 +6496,134 @@
             }
         },
         "com.amazonaws.appflow#SAPODataConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#SAPODataConnectorProfileCredentials": {
@@ -6225,7 +6666,7 @@
                 "portNumber": {
                     "target": "com.amazonaws.appflow#PortNumber",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p> The port number of the SAPOData instance. </p>",
                         "smithy.api#required": {}
                     }
@@ -6312,94 +6753,134 @@
             }
         },
         "com.amazonaws.appflow#SalesforceConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#SalesforceConnectorProfileCredentials": {
@@ -6446,12 +6927,42 @@
                 "isSandboxEnvironment": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether the connector profile applies to a sandbox or production environment.\n    </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> The connector-specific profile properties required when using Salesforce. </p>"
+            }
+        },
+        "com.amazonaws.appflow#SalesforceDataTransferApi": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "BULKV2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BULKV2"
+                    }
+                },
+                "REST_SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REST_SYNC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appflow#SalesforceDataTransferApiList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appflow#SalesforceDataTransferApi"
             }
         },
         "com.amazonaws.appflow#SalesforceDestinationProperties": {
@@ -6481,6 +6992,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> This specifies the type of write operation to be performed in Salesforce. When the value\n      is <code>UPSERT</code>, then <code>idFieldNames</code> is required. </p>"
                     }
+                },
+                "dataTransferApi": {
+                    "target": "com.amazonaws.appflow#SalesforceDataTransferApi",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers\n      data to Salesforce.</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Amazon AppFlow selects which API to use based on the number of\n            records that your flow transfers to Salesforce. If your flow transfers fewer than 1,000\n            records, Amazon AppFlow uses Salesforce REST API. If your flow transfers 1,000\n            records or more, Amazon AppFlow uses Salesforce Bulk API 2.0.</p>\n               <p>Each of these Salesforce APIs structures data differently. If Amazon AppFlow\n            selects the API automatically, be aware that, for recurring flows, the data output might\n            vary from one flow run to the next. For example, if a flow runs daily, it might use REST\n            API on one day to transfer 900 records, and it might use Bulk API 2.0 on the next day to\n            transfer 1,100 records. For each of these flow runs, the respective Salesforce API\n            formats the data differently. Some of the differences include how dates are formatted\n            and null values are represented. Also, Bulk API 2.0 doesn't transfer Salesforce compound\n            fields.</p>\n               <p>By choosing this option, you optimize flow performance for both small and large data\n            transfers, but the tradeoff is inconsistent formatting in the output.</p>\n            </dd>\n            <dt>BULKV2</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous\n            data transfers, and it's optimal for large sets of data. By choosing this option, you\n            ensure that your flow writes consistent output, but you optimize performance only for\n            large data transfers.</p>\n               <p>Note that Bulk API 2.0 does not transfer Salesforce compound fields.</p>\n            </dd>\n            <dt>REST_SYNC</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce REST API. By choosing this option, you\n            ensure that your flow writes consistent output, but you decrease performance for large\n            data transfers that are better suited for Bulk API 2.0. In some cases, if your flow\n            attempts to transfer a vary large set of data, it might fail with a timed out\n            error.</p>\n            </dd>\n         </dl>"
+                    }
                 }
             },
             "traits": {
@@ -6494,6 +7011,12 @@
                     "target": "com.amazonaws.appflow#OAuthScopeList",
                     "traits": {
                         "smithy.api#documentation": "<p> The desired authorization scope for the Salesforce account. </p>"
+                    }
+                },
+                "dataTransferApis": {
+                    "target": "com.amazonaws.appflow#SalesforceDataTransferApiList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Salesforce APIs that you can have Amazon AppFlow use when your flows transfers\n      data to or from Salesforce.</p>"
                     }
                 }
             },
@@ -6514,13 +7037,21 @@
                 "enableDynamicFieldUpdate": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> The flag that enables dynamic fetching of new (recently added) fields in the Salesforce\n      objects while running a flow. </p>"
                     }
                 },
                 "includeDeletedRecords": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether Amazon AppFlow includes deleted files in the flow run. </p>"
+                    }
+                },
+                "dataTransferApi": {
+                    "target": "com.amazonaws.appflow#SalesforceDataTransferApi",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers\n      data from Salesforce.</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Amazon AppFlow selects which API to use based on the number of\n            records that your flow transfers from Salesforce. If your flow transfers fewer than\n            1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers\n            1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0.</p>\n               <p>Each of these Salesforce APIs structures data differently. If Amazon AppFlow\n            selects the API automatically, be aware that, for recurring flows, the data output might\n            vary from one flow run to the next. For example, if a flow runs daily, it might use REST\n            API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next\n            day to transfer 1,100,000 records. For each of these flow runs, the respective\n            Salesforce API formats the data differently. Some of the differences include how dates\n            are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer\n            Salesforce compound fields.</p>\n               <p>By choosing this option, you optimize flow performance for both small and large data\n            transfers, but the tradeoff is inconsistent formatting in the output.</p>\n            </dd>\n            <dt>BULKV2</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous\n            data transfers, and it's optimal for large sets of data. By choosing this option, you\n            ensure that your flow writes consistent output, but you optimize performance only for\n            large data transfers.</p>\n               <p>Note that Bulk API 2.0 does not transfer Salesforce compound fields.</p>\n            </dd>\n            <dt>REST_SYNC</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce REST API. By choosing this option, you\n            ensure that your flow writes consistent output, but you decrease performance for large\n            data transfers that are better suited for Bulk API 2.0. In some cases, if your flow\n            attempts to transfer a vary large set of data, it might fail with a timed out\n            error.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -6530,21 +7061,6 @@
         },
         "com.amazonaws.appflow#SandstoneConfigurationServiceLambda": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Appflow",
-                    "arnNamespace": "appflow",
-                    "cloudFormationName": "Appflow",
-                    "cloudTrailEventSource": "appflow.amazonaws.com",
-                    "endpointPrefix": "appflow"
-                },
-                "aws.auth#sigv4": {
-                    "name": "appflow"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API\n          operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to\n      the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
-                "smithy.api#title": "Amazon Appflow"
-            },
             "version": "2020-08-23",
             "operations": [
                 {
@@ -6613,7 +7129,22 @@
                 {
                     "target": "com.amazonaws.appflow#UpdateFlow"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Appflow",
+                    "arnNamespace": "appflow",
+                    "cloudFormationName": "Appflow",
+                    "cloudTrailEventSource": "appflow.amazonaws.com",
+                    "endpointPrefix": "appflow"
+                },
+                "aws.auth#sigv4": {
+                    "name": "appflow"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API\n          operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to\n      the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
+                "smithy.api#title": "Amazon Appflow"
+            }
         },
         "com.amazonaws.appflow#ScheduleExpression": {
             "type": "string",
@@ -6626,39 +7157,50 @@
             }
         },
         "com.amazonaws.appflow#ScheduleFrequencyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BYMINUTE",
-                        "name": "BYMINUTE"
-                    },
-                    {
-                        "value": "HOURLY",
-                        "name": "HOURLY"
-                    },
-                    {
-                        "value": "DAILY",
-                        "name": "DAILY"
-                    },
-                    {
-                        "value": "WEEKLY",
-                        "name": "WEEKLY"
-                    },
-                    {
-                        "value": "MONTHLY",
-                        "name": "MONTHLY"
-                    },
-                    {
-                        "value": "ONCE",
-                        "name": "ONCE"
+            "type": "enum",
+            "members": {
+                "BYMINUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYMINUTE"
                     }
-                ]
+                },
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
+                    }
+                },
+                "WEEKLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEKLY"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                },
+                "ONCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONCE"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#ScheduleOffset": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 36000
@@ -6696,13 +7238,13 @@
                 "timezone": {
                     "target": "com.amazonaws.appflow#Timezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time zone used when referring to the dates and times of a scheduled flow,\n      such as <code>America/New_York</code>. This time zone is only a descriptive label. It doesn't affect how\n      Amazon AppFlow interprets the timestamps that you specify to schedule the flow.</p>\n         <p>If you want to schedule a flow by using times in a particular time zone, indicate the time zone as a UTC\n      offset in your timestamps. For example, the UTC offsets for the <code>America/New_York</code> timezone are\n      <code>-04:00</code> EDT and <code>-05:00 EST</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the time zone used when referring to the dates and times of a scheduled flow,\n      such as <code>America/New_York</code>. This time zone is only a descriptive label. It doesn't\n      affect how Amazon AppFlow interprets the timestamps that you specify to schedule the\n      flow.</p>\n         <p>If you want to schedule a flow by using times in a particular time zone, indicate the time\n      zone as a UTC offset in your timestamps. For example, the UTC offsets for the\n        <code>America/New_York</code> timezone are <code>-04:00</code> EDT and <code>-05:00\n        EST</code>.</p>"
                     }
                 },
                 "scheduleOffset": {
                     "target": "com.amazonaws.appflow#ScheduleOffset",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p> Specifies the optional offset that is added to the time interval for a schedule-triggered\n      flow. </p>"
                     }
                 },
@@ -6715,7 +7257,7 @@
                 "flowErrorDeactivationThreshold": {
                     "target": "com.amazonaws.appflow#FlowErrorDeactivationThreshold",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Defines how many times a scheduled flow fails consecutively before Amazon AppFlow\n      deactivates it.</p>"
                     }
                 }
@@ -6742,94 +7284,134 @@
             }
         },
         "com.amazonaws.appflow#ServiceNowConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#ServiceNowConnectorProfileCredentials": {
@@ -6905,66 +7487,92 @@
             }
         },
         "com.amazonaws.appflow#SingularConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#SingularConnectorProfileCredentials": {
@@ -7012,86 +7620,122 @@
             }
         },
         "com.amazonaws.appflow#SlackConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#SlackConnectorProfileCredentials": {
@@ -7399,18 +8043,21 @@
                 "isRetrievable": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates whether the field can be returned in a search result. </p>"
                     }
                 },
                 "isQueryable": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Indicates if the field can be queried. </p>"
                     }
                 },
                 "isTimestampFieldForIncrementalQueries": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if this timestamp field can be used for incremental queries.</p>"
                     }
                 }
@@ -7829,46 +8476,62 @@
             }
         },
         "com.amazonaws.appflow#TaskType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Arithmetic",
-                        "name": "ARITHMETIC"
-                    },
-                    {
-                        "value": "Filter",
-                        "name": "FILTER"
-                    },
-                    {
-                        "value": "Map",
-                        "name": "MAP"
-                    },
-                    {
-                        "value": "Map_all",
-                        "name": "MAP_ALL"
-                    },
-                    {
-                        "value": "Mask",
-                        "name": "MASK"
-                    },
-                    {
-                        "value": "Merge",
-                        "name": "MERGE"
-                    },
-                    {
-                        "value": "Passthrough",
-                        "name": "PASSTHROUGH"
-                    },
-                    {
-                        "value": "Truncate",
-                        "name": "TRUNCATE"
-                    },
-                    {
-                        "value": "Validate",
-                        "name": "VALIDATE"
+            "type": "enum",
+            "members": {
+                "ARITHMETIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arithmetic"
                     }
-                ]
+                },
+                "FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Filter"
+                    }
+                },
+                "MAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Map"
+                    }
+                },
+                "MAP_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Map_all"
+                    }
+                },
+                "MASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mask"
+                    }
+                },
+                "MERGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Merge"
+                    }
+                },
+                "PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Passthrough"
+                    }
+                },
+                "TRUNCATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Truncate"
+                    }
+                },
+                "VALIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Validate"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#Tasks": {
@@ -7932,66 +8595,92 @@
             }
         },
         "com.amazonaws.appflow#TrendmicroConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#TrendmicroConnectorProfileCredentials": {
@@ -8074,22 +8763,26 @@
             }
         },
         "com.amazonaws.appflow#TriggerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Scheduled",
-                        "name": "SCHEDULED"
-                    },
-                    {
-                        "value": "Event",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "OnDemand",
-                        "name": "ONDEMAND"
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
                     }
-                ]
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Event"
+                    }
+                },
+                "ONDEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnDemand"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#TriggerTypeList": {
@@ -8139,6 +8832,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether Amazon AppFlow should unregister the connector, even if it is\n      currently in use in one or more connector profiles. The default value is false.</p>"
                     }
                 }
@@ -8493,94 +9187,134 @@
             }
         },
         "com.amazonaws.appflow#VeevaConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#VeevaConnectorProfileCredentials": {
@@ -8646,18 +9380,21 @@
                 "includeSourceFiles": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value to include source files in Veeva document extract flow.</p>"
                     }
                 },
                 "includeRenditions": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value to include file renditions in Veeva document extract flow.</p>"
                     }
                 },
                 "includeAllVersions": {
                     "target": "com.amazonaws.appflow#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value to include All Versions of files in Veeva document extract flow.</p>"
                     }
                 }
@@ -8677,90 +9414,124 @@
             }
         },
         "com.amazonaws.appflow#WriteOperationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p> The possible write operations in the destination connector. When this value is not\n      provided, this defaults to the <code>INSERT</code> operation. </p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "INSERT",
-                        "name": "INSERT"
-                    },
-                    {
-                        "value": "UPSERT",
-                        "name": "UPSERT"
-                    },
-                    {
-                        "value": "UPDATE",
-                        "name": "UPDATE"
-                    },
-                    {
-                        "value": "DELETE",
-                        "name": "DELETE"
+            "type": "enum",
+            "members": {
+                "INSERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSERT"
                     }
-                ]
+                },
+                "UPSERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPSERT"
+                    }
+                },
+                "UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The possible write operations in the destination connector. When this value is not\n      provided, this defaults to the <code>INSERT</code> operation. </p>"
             }
         },
         "com.amazonaws.appflow#ZendeskConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.appflow#ZendeskConnectorProfileCredentials": {
