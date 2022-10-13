@@ -1451,6 +1451,23 @@ func awsRestjson1_serializeDocumentEgressAccessLogs(v *types.EgressAccessLogs, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEncryptionContractConfiguration(v *types.EncryptionContractConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PresetSpeke20Audio) > 0 {
+		ok := object.Key("presetSpeke20Audio")
+		ok.String(string(v.PresetSpeke20Audio))
+	}
+
+	if len(v.PresetSpeke20Video) > 0 {
+		ok := object.Key("presetSpeke20Video")
+		ok.String(string(v.PresetSpeke20Video))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHlsEncryption(v *types.HlsEncryption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1612,6 +1629,13 @@ func awsRestjson1_serializeDocumentMssPackage(v *types.MssPackage, value smithyj
 func awsRestjson1_serializeDocumentSpekeKeyProvider(v *types.SpekeKeyProvider, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EncryptionContractConfiguration != nil {
+		ok := object.Key("encryptionContractConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionContractConfiguration(v.EncryptionContractConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")

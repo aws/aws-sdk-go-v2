@@ -94,19 +94,21 @@ type UpdateServerInput struct {
 	// EndpointType set to VPC_ENDPOINT.
 	EndpointType types.EndpointType
 
-	// The RSA, ECDSA, or ED25519 private key to use for your server. Use the following
-	// command to generate an RSA 2048 bit key with no passphrase: ssh-keygen -t rsa -b
-	// 2048 -N "" -m PEM -f my-new-server-key. Use a minimum value of 2048 for the -b
-	// option. You can create a stronger key by using 3072 or 4096. Use the following
-	// command to generate an ECDSA 256 bit key with no passphrase: ssh-keygen -t ecdsa
-	// -b 256 -N "" -m PEM -f my-new-server-key. Valid values for the -b option for
-	// ECDSA are 256, 384, and 521. Use the following command to generate an ED25519
-	// key with no passphrase: ssh-keygen -t ed25519 -N "" -f my-new-server-key. For
-	// all of these commands, you can replace my-new-server-key with a string of your
-	// choice. If you aren't planning to migrate existing users from an existing
-	// SFTP-enabled server to a new server, don't update the host key. Accidentally
-	// changing a server's host key can be disruptive. For more information, see Change
-	// the host key for your SFTP-enabled server
+	// The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You
+	// can add multiple host keys, in case you want to rotate keys, or have a set of
+	// active keys that use different algorithms. Use the following command to generate
+	// an RSA 2048 bit key with no passphrase: ssh-keygen -t rsa -b 2048 -N "" -m PEM
+	// -f my-new-server-key. Use a minimum value of 2048 for the -b option. You can
+	// create a stronger key by using 3072 or 4096. Use the following command to
+	// generate an ECDSA 256 bit key with no passphrase: ssh-keygen -t ecdsa -b 256 -N
+	// "" -m PEM -f my-new-server-key. Valid values for the -b option for ECDSA are
+	// 256, 384, and 521. Use the following command to generate an ED25519 key with no
+	// passphrase: ssh-keygen -t ed25519 -N "" -f my-new-server-key. For all of these
+	// commands, you can replace my-new-server-key with a string of your choice. If you
+	// aren't planning to migrate existing users from an existing SFTP-enabled server
+	// to a new server, don't update the host key. Accidentally changing a server's
+	// host key can be disruptive. For more information, see Update host keys for your
+	// SFTP-enabled server
 	// (https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key)
 	// in the Transfer Family User Guide.
 	HostKey *string
@@ -196,10 +198,13 @@ type UpdateServerInput struct {
 	SecurityPolicyName *string
 
 	// Specifies the workflow ID for the workflow to assign and the execution role
-	// that's used for executing the workflow. To remove an associated workflow from a
-	// server, you can provide an empty OnUpload object, as in the following example.
-	// aws transfer update-server --server-id s-01234567890abcdef --workflow-details
-	// '{"OnUpload":[]}'
+	// that's used for executing the workflow. In additon to a workflow to execute when
+	// a file is uploaded completely, WorkflowDeatails can also contain a workflow ID
+	// (and execution role) for a workflow to execute on partial upload. A partial
+	// upload occurs when a file is open when the session disconnects. To remove an
+	// associated workflow from a server, you can provide an empty OnUpload object, as
+	// in the following example. aws transfer update-server --server-id
+	// s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
 	WorkflowDetails *types.WorkflowDetails
 
 	noSmithyDocumentSerde

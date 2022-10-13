@@ -1,0 +1,8 @@
+{
+    "id": "99d0f7b1-05ca-4272-a118-c86e0c2a46c7",
+    "type": "documentation",
+    "description": "This release enables customers to specify multiple target languages in asynchronous batch translation requests.",
+    "modules": [
+        "service/translate"
+    ]
+}

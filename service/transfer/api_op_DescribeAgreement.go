@@ -35,7 +35,7 @@ type DescribeAgreementInput struct {
 	// This member is required.
 	AgreementId *string
 
-	// The server ID that's associated with the agreement.
+	// The server identifier that's associated with the agreement.
 	//
 	// This member is required.
 	ServerId *string

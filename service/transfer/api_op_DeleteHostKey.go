@@ -28,12 +28,12 @@ func (c *Client) DeleteHostKey(ctx context.Context, params *DeleteHostKeyInput, 
 
 type DeleteHostKeyInput struct {
 
-	// The ID of the host key that you are deleting.
+	// The identifier of the host key that you are deleting.
 	//
 	// This member is required.
 	HostKeyId *string
 
-	// Provide the ID of the server that contains the host key that you are deleting.
+	// The identifier of the server that contains the host key that you are deleting.
 	//
 	// This member is required.
 	ServerId *string

@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -133,6 +134,100 @@ func (c *Client) addOperationDescribeClientAuthenticationSettingsMiddlewares(sta
 		return err
 	}
 	return nil
+}
+
+// DescribeClientAuthenticationSettingsAPIClient is a client that implements the
+// DescribeClientAuthenticationSettings operation.
+type DescribeClientAuthenticationSettingsAPIClient interface {
+	DescribeClientAuthenticationSettings(context.Context, *DescribeClientAuthenticationSettingsInput, ...func(*Options)) (*DescribeClientAuthenticationSettingsOutput, error)
+}
+
+var _ DescribeClientAuthenticationSettingsAPIClient = (*Client)(nil)
+
+// DescribeClientAuthenticationSettingsPaginatorOptions is the paginator options
+// for DescribeClientAuthenticationSettings
+type DescribeClientAuthenticationSettingsPaginatorOptions struct {
+	// The maximum number of items to return. If this value is zero, the maximum number
+	// of items is specified by the limitations of the operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClientAuthenticationSettingsPaginator is a paginator for
+// DescribeClientAuthenticationSettings
+type DescribeClientAuthenticationSettingsPaginator struct {
+	options   DescribeClientAuthenticationSettingsPaginatorOptions
+	client    DescribeClientAuthenticationSettingsAPIClient
+	params    *DescribeClientAuthenticationSettingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClientAuthenticationSettingsPaginator returns a new
+// DescribeClientAuthenticationSettingsPaginator
+func NewDescribeClientAuthenticationSettingsPaginator(client DescribeClientAuthenticationSettingsAPIClient, params *DescribeClientAuthenticationSettingsInput, optFns ...func(*DescribeClientAuthenticationSettingsPaginatorOptions)) *DescribeClientAuthenticationSettingsPaginator {
+	if params == nil {
+		params = &DescribeClientAuthenticationSettingsInput{}
+	}
+
+	options := DescribeClientAuthenticationSettingsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeClientAuthenticationSettingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClientAuthenticationSettingsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeClientAuthenticationSettings page.
+func (p *DescribeClientAuthenticationSettingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClientAuthenticationSettingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeClientAuthenticationSettings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClientAuthenticationSettings(region string) *awsmiddleware.RegisterServiceMetadata {

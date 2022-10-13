@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job to run on one or more devices.
+// Creates a job to run on one or more devices. A job can update a device's
+// software or reboot it.
 func (c *Client) CreateJobForDevices(ctx context.Context, params *CreateJobForDevicesInput, optFns ...func(*Options)) (*CreateJobForDevicesOutput, error) {
 	if params == nil {
 		params = &CreateJobForDevicesInput{}
@@ -34,15 +35,13 @@ type CreateJobForDevicesInput struct {
 	// This member is required.
 	DeviceIds []string
 
-	// Configuration settings for the job.
-	//
-	// This member is required.
-	DeviceJobConfig *types.DeviceJobConfig
-
 	// The type of job to run.
 	//
 	// This member is required.
 	JobType types.JobType
+
+	// Configuration settings for a software update job.
+	DeviceJobConfig *types.DeviceJobConfig
 
 	noSmithyDocumentSerde
 }

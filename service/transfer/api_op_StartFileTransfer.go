@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Begins an outbound file transfer. You specify the ConnectorId and the file paths
-// for where to send the files.
+// Begins an outbound file transfer to a remote AS2 server. You specify the
+// ConnectorId and the file paths for where to send the files.
 func (c *Client) StartFileTransfer(ctx context.Context, params *StartFileTransferInput, optFns ...func(*Options)) (*StartFileTransferOutput, error) {
 	if params == nil {
 		params = &StartFileTransferInput{}

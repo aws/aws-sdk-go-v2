@@ -30710,6 +30710,24 @@ func awsRestjson1_deserializeDocumentUserIdentityInfo(v **types.UserIdentityInfo
 				sv.LastName = ptr.String(jtv)
 			}
 
+		case "Mobile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PhoneNumber to be of type string, got %T instead", value)
+				}
+				sv.Mobile = ptr.String(jtv)
+			}
+
+		case "SecondaryEmail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
+				}
+				sv.SecondaryEmail = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

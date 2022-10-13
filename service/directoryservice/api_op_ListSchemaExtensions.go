@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -122,6 +123,97 @@ func (c *Client) addOperationListSchemaExtensionsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// ListSchemaExtensionsAPIClient is a client that implements the
+// ListSchemaExtensions operation.
+type ListSchemaExtensionsAPIClient interface {
+	ListSchemaExtensions(context.Context, *ListSchemaExtensionsInput, ...func(*Options)) (*ListSchemaExtensionsOutput, error)
+}
+
+var _ ListSchemaExtensionsAPIClient = (*Client)(nil)
+
+// ListSchemaExtensionsPaginatorOptions is the paginator options for
+// ListSchemaExtensions
+type ListSchemaExtensionsPaginatorOptions struct {
+	// The maximum number of items to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSchemaExtensionsPaginator is a paginator for ListSchemaExtensions
+type ListSchemaExtensionsPaginator struct {
+	options   ListSchemaExtensionsPaginatorOptions
+	client    ListSchemaExtensionsAPIClient
+	params    *ListSchemaExtensionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSchemaExtensionsPaginator returns a new ListSchemaExtensionsPaginator
+func NewListSchemaExtensionsPaginator(client ListSchemaExtensionsAPIClient, params *ListSchemaExtensionsInput, optFns ...func(*ListSchemaExtensionsPaginatorOptions)) *ListSchemaExtensionsPaginator {
+	if params == nil {
+		params = &ListSchemaExtensionsInput{}
+	}
+
+	options := ListSchemaExtensionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListSchemaExtensionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSchemaExtensionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListSchemaExtensions page.
+func (p *ListSchemaExtensionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSchemaExtensionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListSchemaExtensions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSchemaExtensions(region string) *awsmiddleware.RegisterServiceMetadata {

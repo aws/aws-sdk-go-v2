@@ -410,26 +410,6 @@ func (m *validateOpNotifyRecommendationsReceived) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpPutFeedback struct {
-}
-
-func (*validateOpPutFeedback) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpPutFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*PutFeedbackInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpPutFeedbackInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpQueryAssistant struct {
 }
 
@@ -690,10 +670,6 @@ func addOpNotifyRecommendationsReceivedValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpNotifyRecommendationsReceived{}, middleware.After)
 }
 
-func addOpPutFeedbackValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpPutFeedback{}, middleware.After)
-}
-
 func addOpQueryAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpQueryAssistant{}, middleware.After)
 }
@@ -740,21 +716,6 @@ func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration)
 	}
 	if v.ObjectFields == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectFields"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateFeedbackData(v *types.FeedbackData) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FeedbackData"}
-	if len(v.Relevance) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Relevance"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1184,34 +1145,6 @@ func validateOpNotifyRecommendationsReceivedInput(v *NotifyRecommendationsReceiv
 	}
 	if v.RecommendationIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommendationIds"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpPutFeedbackInput(v *PutFeedbackInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "PutFeedbackInput"}
-	if v.AssistantId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
-	}
-	if v.TargetId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
-	}
-	if len(v.TargetType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetType"))
-	}
-	if v.Feedback == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
-	} else if v.Feedback != nil {
-		if err := validateFeedbackData(v.Feedback); err != nil {
-			invalidParams.AddNested("Feedback", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

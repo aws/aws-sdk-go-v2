@@ -2646,6 +2646,11 @@ func awsRestjson1_serializeDocumentFieldInputConfig(v *types.FieldInputConfig, v
 		ok.String(*v.DescriptiveText)
 	}
 
+	if v.IsArray != nil {
+		ok := object.Key("isArray")
+		ok.Boolean(*v.IsArray)
+	}
+
 	if v.MaxValue != nil {
 		ok := object.Key("maxValue")
 		switch {

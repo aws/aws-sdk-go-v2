@@ -5458,6 +5458,13 @@ func awsRestjson1_serializeDocumentAvailSettings(v *types.AvailSettings, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.Esam != nil {
+		ok := object.Key("esam")
+		if err := awsRestjson1_serializeDocumentEsam(v.Esam, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Scte35SpliceInsert != nil {
 		ok := object.Key("scte35SpliceInsert")
 		if err := awsRestjson1_serializeDocumentScte35SpliceInsert(v.Scte35SpliceInsert, ok); err != nil {
@@ -6556,6 +6563,43 @@ func awsRestjson1_serializeDocumentEncoderSettings(v *types.EncoderSettings, val
 		if err := awsRestjson1_serializeDocument__listOfVideoDescription(v.VideoDescriptions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEsam(v *types.Esam, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcquisitionPointId != nil {
+		ok := object.Key("acquisitionPointId")
+		ok.String(*v.AcquisitionPointId)
+	}
+
+	if v.AdAvailOffset != 0 {
+		ok := object.Key("adAvailOffset")
+		ok.Integer(v.AdAvailOffset)
+	}
+
+	if v.PasswordParam != nil {
+		ok := object.Key("passwordParam")
+		ok.String(*v.PasswordParam)
+	}
+
+	if v.PoisEndpoint != nil {
+		ok := object.Key("poisEndpoint")
+		ok.String(*v.PoisEndpoint)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("username")
+		ok.String(*v.Username)
+	}
+
+	if v.ZoneIdentity != nil {
+		ok := object.Key("zoneIdentity")
+		ok.String(*v.ZoneIdentity)
 	}
 
 	return nil
@@ -9883,6 +9927,13 @@ func awsRestjson1_serializeDocumentScheduleActionSettings(v *types.ScheduleActio
 		}
 	}
 
+	if v.Scte35InputSettings != nil {
+		ok := object.Key("scte35InputSettings")
+		if err := awsRestjson1_serializeDocumentScte35InputScheduleActionSettings(v.Scte35InputSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Scte35ReturnToNetworkSettings != nil {
 		ok := object.Key("scte35ReturnToNetworkSettings")
 		if err := awsRestjson1_serializeDocumentScte35ReturnToNetworkScheduleActionSettings(v.Scte35ReturnToNetworkSettings, ok); err != nil {
@@ -10047,6 +10098,23 @@ func awsRestjson1_serializeDocumentScte35DescriptorSettings(v *types.Scte35Descr
 		if err := awsRestjson1_serializeDocumentScte35SegmentationDescriptor(v.SegmentationDescriptorScte35DescriptorSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScte35InputScheduleActionSettings(v *types.Scte35InputScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InputAttachmentNameReference != nil {
+		ok := object.Key("inputAttachmentNameReference")
+		ok.String(*v.InputAttachmentNameReference)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil

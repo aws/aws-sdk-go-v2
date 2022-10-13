@@ -509,6 +509,9 @@ type AvailConfiguration struct {
 // Avail Settings
 type AvailSettings struct {
 
+	// Settings for the Esam
+	Esam *Esam
+
 	// Scte35 Splice Insert
 	Scte35SpliceInsert *Scte35SpliceInsert
 
@@ -1492,6 +1495,43 @@ type EncoderSettings struct {
 
 	// Nielsen configuration settings.
 	NielsenConfiguration *NielsenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the Esam
+type Esam struct {
+
+	// Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
+	//
+	// This member is required.
+	AcquisitionPointId *string
+
+	// The URL of the signal conditioner endpoint on the Placement Opportunity
+	// Information System (POIS). MediaLive sends SignalProcessingEvents here when
+	// SCTE-35 messages are read.
+	//
+	// This member is required.
+	PoisEndpoint *string
+
+	// When specified, this offset (in milliseconds) is added to the input Ad Avail PTS
+	// time. This only applies to embedded SCTE 104/35 messages and does not apply to
+	// OOB messages.
+	AdAvailOffset int32
+
+	// Password if credentials are required to access the POIS endpoint. This is a
+	// reference to an AWS parameter store name from which the password can be
+	// retrieved. AWS Parameter store format: "ssm://"
+	PasswordParam *string
+
+	// Username if credentials are required to access the POIS endpoint. This can be
+	// either a plaintext username, or a reference to an AWS parameter store name from
+	// which the username can be retrieved. AWS Parameter store format: "ssm://"
+	Username *string
+
+	// Optional data sent as zoneIdentity to identify the MediaLive channel to the
+	// POIS.
+	ZoneIdentity *string
 
 	noSmithyDocumentSerde
 }
@@ -4860,6 +4900,9 @@ type ScheduleActionSettings struct {
 	// Action to pause or unpause one or both channel pipelines
 	PauseStateSettings *PauseStateScheduleActionSettings
 
+	// Action to specify scte35 input
+	Scte35InputSettings *Scte35InputScheduleActionSettings
+
 	// Action to insert SCTE-35 return_to_network message
 	Scte35ReturnToNetworkSettings *Scte35ReturnToNetworkScheduleActionSettings
 
@@ -4993,6 +5036,21 @@ type Scte35DescriptorSettings struct {
 	//
 	// This member is required.
 	SegmentationDescriptorScte35DescriptorSettings *Scte35SegmentationDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the "scte35 input" action
+type Scte35InputScheduleActionSettings struct {
+
+	// Whether the SCTE-35 input should be the active input or a fixed input.
+	//
+	// This member is required.
+	Mode Scte35InputMode
+
+	// In fixed mode, enter the name of the input attachment that you want to use as a
+	// SCTE-35 input. (Don't enter the ID of the input.)"
+	InputAttachmentNameReference *string
 
 	noSmithyDocumentSerde
 }

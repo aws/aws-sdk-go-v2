@@ -1,0 +1,8 @@
+{
+    "id": "2175dc21-31d4-4ee7-9e52-dd37b5dcecbe",
+    "type": "documentation",
+    "description": "Doc update to reflect no support for schema parameter on BatchExecuteStatement API",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

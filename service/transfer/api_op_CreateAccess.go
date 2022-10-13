@@ -121,13 +121,13 @@ type CreateAccessInput struct {
 
 type CreateAccessOutput struct {
 
-	// The external ID of the group whose users have access to your Amazon S3 or Amazon
-	// EFS resources over the enabled protocols using Transfer Family.
+	// The external identifier of the group whose users have access to your Amazon S3
+	// or Amazon EFS resources over the enabled protocols using Transfer Family.
 	//
 	// This member is required.
 	ExternalId *string
 
-	// The ID of the server that the user is attached to.
+	// The identifier of the server that the user is attached to.
 	//
 	// This member is required.
 	ServerId *string

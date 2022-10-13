@@ -2175,6 +2175,14 @@ type UserIdentityInfo struct {
 	// identity management.
 	LastName *string
 
+	// The user's mobile number.
+	Mobile *string
+
+	// The user's secondary email address. If you provide a secondary email, the user
+	// receives email notifications -- other than password reset notifications -- to
+	// this email address instead of to their primary email address.
+	SecondaryEmail *string
+
 	noSmithyDocumentSerde
 }
 

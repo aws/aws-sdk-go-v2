@@ -1,0 +1,8 @@
+{
+    "id": "f372c904-760b-4854-88f4-972011089ba8",
+    "type": "feature",
+    "description": "This release adds support for describing and updating AWS Managed Microsoft AD set up.",
+    "modules": [
+        "service/directoryservice"
+    ]
+}

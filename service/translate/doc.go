@@ -3,6 +3,6 @@
 // Package translate provides the API client, operations, and parameter types for
 // Amazon Translate.
 //
-// Provides translation between one source language and another of the same set of
-// languages.
+// Provides language translation for input text in the source language to the
+// specified target language.
 package translate

@@ -123,7 +123,7 @@ type CreateUserInput struct {
 
 type CreateUserOutput struct {
 
-	// The ID of the server that the user is attached to.
+	// The identifier of the server that the user is attached to.
 	//
 	// This member is required.
 	ServerId *string

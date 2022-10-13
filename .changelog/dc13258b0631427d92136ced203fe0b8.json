@@ -1,0 +1,8 @@
+{
+    "id": "dc13258b-0631-427d-9213-6ced203fe0b8",
+    "type": "feature",
+    "description": "We are releasing the ability for fields to be configured as arrays.",
+    "modules": [
+        "service/amplifyuibuilder"
+    ]
+}

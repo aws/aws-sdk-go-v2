@@ -59,6 +59,10 @@ type ImportTerminologyInput struct {
 	// The encryption key for the custom terminology being imported.
 	EncryptionKey *types.EncryptionKey
 
+	// Tags to be associated with this resource. A tag is a key-value pair that adds
+	// metadata to a resource. Each tag key for the resource must be unique. For more
+	// information, see  Tagging your resources
+	// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

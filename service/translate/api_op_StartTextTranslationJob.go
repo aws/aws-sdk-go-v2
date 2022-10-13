@@ -12,13 +12,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous batch translation job. Batch translation jobs can be used
-// to translate large volumes of text across multiple documents at once. For more
-// information, see async. Batch translation jobs can be described with the
-// DescribeTextTranslationJob operation, listed with the ListTextTranslationJobs
-// operation, and stopped with the StopTextTranslationJob operation. Amazon
-// Translate does not support batch translation of multiple source languages at
-// once.
+// Starts an asynchronous batch translation job. Use batch translation jobs to
+// translate large volumes of text across multiple documents at once. For batch
+// translation, the input documents must share the same source language. You can
+// specify one or more target languages. Batch translation translates each input
+// document into each of the target languages. For more information, see
+// Asynchronous batch processing
+// (https://docs.aws.amazon.com/translate/latest/dg/async.html) Batch translation
+// jobs can be described with the DescribeTextTranslationJob operation, listed with
+// the ListTextTranslationJobs operation, and stopped with the
+// StopTextTranslationJob operation. Amazon Translate does not support batch
+// translation of multiple source languages at once.
 func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextTranslationJobInput, optFns ...func(*Options)) (*StartTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StartTextTranslationJobInput{}
@@ -44,7 +48,8 @@ type StartTextTranslationJobInput struct {
 
 	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
 	// role that grants Amazon Translate read access to your input data. For more
-	// information, see identity-and-access-management.
+	// information, see Identity and access management
+	// (https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html).
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -61,13 +66,18 @@ type StartTextTranslationJobInput struct {
 	OutputDataConfig *types.OutputDataConfig
 
 	// The language code of the input language. For a list of language codes, see
-	// what-is-languages. Amazon Translate does not automatically detect a source
-	// language during batch translation jobs.
+	// Supported languages
+	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html). Amazon
+	// Translate does not automatically detect a source language during batch
+	// translation jobs.
 	//
 	// This member is required.
 	SourceLanguageCode *string
 
-	// The language code of the output language.
+	// The target languages of the translation job. Enter up to 10 language codes. Each
+	// input file is translated into each target language. Each language code is two or
+	// five characters long. For a list of language codes, see Supported languages
+	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
 	//
 	// This member is required.
 	TargetLanguageCodes []string
@@ -77,25 +87,31 @@ type StartTextTranslationJobInput struct {
 
 	// The name of a parallel data resource to add to the translation job. This
 	// resource consists of examples that show how you want segments of text to be
-	// translated. When you add parallel data to a translation job, you create an
-	// Active Custom Translation job. This parameter accepts only one parallel data
-	// resource. Active Custom Translation jobs are priced at a higher rate than other
-	// jobs that don't use parallel data. For more information, see Amazon Translate
-	// pricing (http://aws.amazon.com/translate/pricing/). For a list of available
-	// parallel data resources, use the ListParallelData operation. For more
-	// information, see customizing-translations-parallel-data.
+	// translated. If you specify multiple target languages for the job, the parallel
+	// data file must include translations for all the target languages. When you add
+	// parallel data to a translation job, you create an Active Custom Translation job.
+	// This parameter accepts only one parallel data resource. Active Custom
+	// Translation jobs are priced at a higher rate than other jobs that don't use
+	// parallel data. For more information, see Amazon Translate pricing
+	// (http://aws.amazon.com/translate/pricing/). For a list of available parallel
+	// data resources, use the ListParallelData operation. For more information, see
+	// Customizing your translations with parallel data
+	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html).
 	ParallelDataNames []string
 
-	// Settings to configure your translation output, including the option to mask
-	// profane words and phrases. StartTextTranslationJob does not support the
-	// formality setting.
+	// Settings to configure your translation output, including the option to set the
+	// formality level of the output text and the option to mask profane words and
+	// phrases.
 	Settings *types.TranslationSettings
 
 	// The name of a custom terminology resource to add to the translation job. This
 	// resource lists examples source terms and the desired translation for each term.
-	// This parameter accepts only one custom terminology resource. For a list of
-	// available custom terminology resources, use the ListTerminologies operation. For
-	// more information, see how-custom-terminology.
+	// This parameter accepts only one custom terminology resource. If you specify
+	// multiple target languages for the job, translate uses the designated terminology
+	// for each requested target language that has an entry for the source term in the
+	// terminology file. For a list of available custom terminology resources, use the
+	// ListTerminologies operation. For more information, see Custom terminology
+	// (https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html).
 	TerminologyNames []string
 
 	noSmithyDocumentSerde

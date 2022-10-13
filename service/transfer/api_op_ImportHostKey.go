@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a host key to the server specified by the ServerId parameter.
+// Adds a host key to the server that's specified by the ServerId parameter.
 func (c *Client) ImportHostKey(ctx context.Context, params *ImportHostKeyInput, optFns ...func(*Options)) (*ImportHostKeyOutput, error) {
 	if params == nil {
 		params = &ImportHostKeyInput{}
@@ -35,12 +35,12 @@ type ImportHostKeyInput struct {
 	// This member is required.
 	HostKeyBody *string
 
-	// Provide the ID of the server that contains the host key that you are importing.
+	// The identifier of the server that contains the host key that you are importing.
 	//
 	// This member is required.
 	ServerId *string
 
-	// Enter a text description to identify this host key.
+	// The text description that identifies this host key.
 	Description *string
 
 	// Key-value pairs that can be used to group and search for host keys.
@@ -51,12 +51,12 @@ type ImportHostKeyInput struct {
 
 type ImportHostKeyOutput struct {
 
-	// Returns the host key ID for the imported key.
+	// Returns the host key identifier for the imported key.
 	//
 	// This member is required.
 	HostKeyId *string
 
-	// Returns the server ID that contains the imported key.
+	// Returns the server identifier that contains the imported key.
 	//
 	// This member is required.
 	ServerId *string

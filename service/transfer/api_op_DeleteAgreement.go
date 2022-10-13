@@ -34,7 +34,7 @@ type DeleteAgreementInput struct {
 	// This member is required.
 	AgreementId *string
 
-	// The server ID associated with the agreement that you are deleting.
+	// The server identifier associated with the agreement that you are deleting.
 	//
 	// This member is required.
 	ServerId *string

@@ -257,6 +257,7 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You have added too many tags to this resource. The maximum is 50 tags.
 type TooManyTagsException struct {
 	Message *string
 
@@ -303,8 +304,9 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault
 }
 
 // Amazon Translate does not support translation from the language of the source
-// text into the requested target language. For more information, see
-// how-to-error-msg.
+// text into the requested target language. For more information, see Error
+// messages
+// (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html).
 type UnsupportedLanguagePairException struct {
 	Message *string
 

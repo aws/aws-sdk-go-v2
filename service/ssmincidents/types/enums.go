@@ -32,6 +32,7 @@ const (
 	ItemTypeOther            ItemType = "OTHER"
 	ItemTypeAutomation       ItemType = "AUTOMATION"
 	ItemTypeInvolvedResource ItemType = "INVOLVED_RESOURCE"
+	ItemTypeTask             ItemType = "TASK"
 )
 
 // Values returns all known values for ItemType. Note that this can be expanded in
@@ -47,6 +48,7 @@ func (ItemType) Values() []ItemType {
 		"OTHER",
 		"AUTOMATION",
 		"INVOLVED_RESOURCE",
+		"TASK",
 	}
 }
 

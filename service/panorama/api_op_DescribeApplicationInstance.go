@@ -70,6 +70,9 @@ type DescribeApplicationInstanceOutput struct {
 	// The application instance's name.
 	Name *string
 
+	// The application instance's state.
+	RuntimeContextStates []types.ReportedRuntimeContextState
+
 	// The application instance's runtime role ARN.
 	RuntimeRoleArn *string
 

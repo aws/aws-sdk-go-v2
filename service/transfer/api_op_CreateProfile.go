@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the profile for the AS2 process. The agreement is between the partner
-// and the AS2 process.
+// Creates the local or partner profile to use for AS2 transfers.
 func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, optFns ...func(*Options)) (*CreateProfileOutput, error) {
 	if params == nil {
 		params = &CreateProfileInput{}
@@ -39,9 +38,14 @@ type CreateProfileInput struct {
 	// This member is required.
 	As2Id *string
 
-	// Indicates whether to list only LOCAL type profiles or only PARTNER type
-	// profiles. If not supplied in the request, the command lists all types of
-	// profiles.
+	// Determines the type of profile to create:
+	//
+	// * Specify LOCAL to create a local
+	// profile. A local profile represents the AS2-enabled Transfer Family server
+	// organization or party.
+	//
+	// * Specify PARTNER to create a partner profile. A partner
+	// profile represents a remote organization, external to Transfer Family.
 	//
 	// This member is required.
 	ProfileType types.ProfileType

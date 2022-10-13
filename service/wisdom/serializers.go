@@ -1640,99 +1640,6 @@ func awsRestjson1_serializeOpDocumentNotifyRecommendationsReceivedInput(v *Notif
 	return nil
 }
 
-type awsRestjson1_serializeOpPutFeedback struct {
-}
-
-func (*awsRestjson1_serializeOpPutFeedback) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpPutFeedback) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*PutFeedbackInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/assistants/{assistantId}/feedback")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "PUT"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsPutFeedbackInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentPutFeedbackInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsPutFeedbackInput(v *PutFeedbackInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.AssistantId == nil || len(*v.AssistantId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member assistantId must not be empty")}
-	}
-	if v.AssistantId != nil {
-		if err := encoder.SetURI("assistantId").String(*v.AssistantId); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentPutFeedbackInput(v *PutFeedbackInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Feedback != nil {
-		ok := object.Key("feedback")
-		if err := awsRestjson1_serializeDocumentFeedbackData(v.Feedback, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.TargetId != nil {
-		ok := object.Key("targetId")
-		ok.String(*v.TargetId)
-	}
-
-	if len(v.TargetType) > 0 {
-		ok := object.Key("targetType")
-		ok.String(string(v.TargetType))
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpQueryAssistant struct {
 }
 
@@ -2533,18 +2440,6 @@ func awsRestjson1_serializeDocumentContentMetadata(v map[string]string, value sm
 		om := object.Key(key)
 		om.String(v[key])
 	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentFeedbackData(v *types.FeedbackData, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.Relevance) > 0 {
-		ok := object.Key("relevance")
-		ok.String(string(v.Relevance))
-	}
-
 	return nil
 }
 

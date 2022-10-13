@@ -56,7 +56,7 @@ type DescribeAccessInput struct {
 
 type DescribeAccessOutput struct {
 
-	// The external ID of the server that the access is attached to.
+	// The external identifier of the server that the access is attached to.
 	//
 	// This member is required.
 	Access *types.DescribedAccess

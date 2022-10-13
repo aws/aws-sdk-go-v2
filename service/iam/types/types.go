@@ -37,7 +37,7 @@ type AccessDetail struct {
 	// from which an authenticated principal last attempted to access the service.
 	// Amazon Web Services does not report unauthenticated requests. This field is null
 	// if no principals (IAM users, IAM roles, or root users) in the reported
-	// Organizations entity attempted to access the service within the reporting period
+	// Organizations entity attempted to access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	EntityPath *string
 
@@ -45,18 +45,18 @@ type AccessDetail struct {
 	// (http://www.iso.org/iso/iso8601), when an authenticated principal most recently
 	// attempted to access the service. Amazon Web Services does not report
 	// unauthenticated requests. This field is null if no principals in the reported
-	// Organizations entity attempted to access the service within the reporting period
+	// Organizations entity attempted to access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedTime *time.Time
 
 	// The Region where the last service access attempt occurred. This field is null if
 	// no principals in the reported Organizations entity attempted to access the
-	// service within the reporting period
+	// service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	Region *string
 
 	// The number of accounts with authenticated principals (root users, IAM users, and
-	// IAM roles) that attempted to access the service in the reporting period.
+	// IAM roles) that attempted to access the service in the tracking period.
 	TotalAuthenticatedEntities *int32
 
 	noSmithyDocumentSerde
@@ -273,7 +273,7 @@ type EntityDetails struct {
 	// (http://www.iso.org/iso/iso8601), when the authenticated entity last attempted
 	// to access Amazon Web Services. Amazon Web Services does not report
 	// unauthenticated requests. This field is null if no IAM entities attempted to
-	// access the service within the reporting period
+	// access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticated *time.Time
 
@@ -1359,33 +1359,33 @@ type ServiceLastAccessed struct {
 	// (http://www.iso.org/iso/iso8601), when an authenticated entity most recently
 	// attempted to access the service. Amazon Web Services does not report
 	// unauthenticated requests. This field is null if no IAM entities attempted to
-	// access the service within the reporting period
+	// access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticated *time.Time
 
 	// The ARN of the authenticated entity (user or role) that last attempted to access
 	// the service. Amazon Web Services does not report unauthenticated requests. This
 	// field is null if no IAM entities attempted to access the service within the
-	// reporting period
+	// tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedEntity *string
 
 	// The Region from which the authenticated entity (user or role) last attempted to
 	// access the service. Amazon Web Services does not report unauthenticated
 	// requests. This field is null if no IAM entities attempted to access the service
-	// within the reporting period
+	// within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedRegion *string
 
 	// The total number of authenticated principals (root user, IAM users, or IAM
 	// roles) that have attempted to access the service. This field is null if no
-	// principals attempted to access the service within the reporting period
+	// principals attempted to access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	TotalAuthenticatedEntities *int32
 
 	// An object that contains details about the most recent attempt to access a
 	// tracked action within the service. This field is null if there no tracked
-	// actions or if the principal did not use the tracked actions within the reporting
+	// actions or if the principal did not use the tracked actions within the tracking
 	// period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	// This field is also null if the report was generated at the service level and not
@@ -1649,7 +1649,7 @@ type TrackedActionLastAccessed struct {
 	// The Region from which the authenticated entity (user or role) last attempted to
 	// access the tracked action. Amazon Web Services does not report unauthenticated
 	// requests. This field is null if no IAM entities attempted to access the service
-	// within the reporting period
+	// within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAccessedRegion *string
 
@@ -1657,7 +1657,7 @@ type TrackedActionLastAccessed struct {
 	// (http://www.iso.org/iso/iso8601), when an authenticated entity most recently
 	// attempted to access the tracked service. Amazon Web Services does not report
 	// unauthenticated requests. This field is null if no IAM entities attempted to
-	// access the service within the reporting period
+	// access the service within the tracking period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAccessedTime *time.Time
 

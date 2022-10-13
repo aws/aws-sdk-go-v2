@@ -10574,6 +10574,40 @@ func awsAwsjson11_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOnPartialUploadWorkflowDetails(v *[]types.WorkflowDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.WorkflowDetail
+	if *v == nil {
+		cv = []types.WorkflowDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.WorkflowDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentWorkflowDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOnUploadWorkflowDetails(v *[]types.WorkflowDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11749,6 +11783,11 @@ func awsAwsjson11_deserializeDocumentWorkflowDetails(v **types.WorkflowDetails, 
 
 	for key, value := range shape {
 		switch key {
+		case "OnPartialUpload":
+			if err := awsAwsjson11_deserializeDocumentOnPartialUploadWorkflowDetails(&sv.OnPartialUpload, value); err != nil {
+				return err
+			}
+
 		case "OnUpload":
 			if err := awsAwsjson11_deserializeDocumentOnUploadWorkflowDetails(&sv.OnUpload, value); err != nil {
 				return err

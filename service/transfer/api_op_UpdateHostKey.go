@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the description for the host key specified by the specified by the
-// ServerId and HostKeyId parameters.
+// Updates the description for the host key that's specified by the ServerId and
+// HostKeyId parameters.
 func (c *Client) UpdateHostKey(ctx context.Context, params *UpdateHostKeyInput, optFns ...func(*Options)) (*UpdateHostKeyOutput, error) {
 	if params == nil {
 		params = &UpdateHostKeyInput{}
@@ -29,17 +29,17 @@ func (c *Client) UpdateHostKey(ctx context.Context, params *UpdateHostKeyInput, 
 
 type UpdateHostKeyInput struct {
 
-	// Provide an updated description for the host key.
+	// An updated description for the host key.
 	//
 	// This member is required.
 	Description *string
 
-	// Provide the ID of the host key that you are updating.
+	// The identifier of the host key that you are updating.
 	//
 	// This member is required.
 	HostKeyId *string
 
-	// Provide the ID of the server that contains the host key that you are updating.
+	// The identifier of the server that contains the host key that you are updating.
 	//
 	// This member is required.
 	ServerId *string
@@ -49,12 +49,12 @@ type UpdateHostKeyInput struct {
 
 type UpdateHostKeyOutput struct {
 
-	// Returns the host key ID for the updated host key.
+	// Returns the host key identifier for the updated host key.
 	//
 	// This member is required.
 	HostKeyId *string
 
-	// Returns the server ID for the server that contains the updated host key.
+	// Returns the server identifier for the server that contains the updated host key.
 	//
 	// This member is required.
 	ServerId *string

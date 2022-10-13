@@ -4988,6 +4988,15 @@ func awsRestjson1_deserializeDocumentFieldInputConfig(v **types.FieldInputConfig
 				sv.DescriptiveText = ptr.String(jtv)
 			}
 
+		case "isArray":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsArray = ptr.Bool(jtv)
+			}
+
 		case "maxValue":
 			if value != nil {
 				switch jtv := value.(type) {

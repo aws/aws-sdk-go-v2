@@ -30,12 +30,12 @@ func (c *Client) DescribeHostKey(ctx context.Context, params *DescribeHostKeyInp
 
 type DescribeHostKeyInput struct {
 
-	// Provide the ID of the host key that you want described.
+	// The identifier of the host key that you want described.
 	//
 	// This member is required.
 	HostKeyId *string
 
-	// Provide the ID of the server that contains the host key that you want described.
+	// The identifier of the server that contains the host key that you want described.
 	//
 	// This member is required.
 	ServerId *string

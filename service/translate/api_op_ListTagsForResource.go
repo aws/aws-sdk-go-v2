@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists all tags associated with a given Amazon Translate resource. For more
+// information, see  Tagging your resources
+// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -28,6 +31,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the given Amazon Translate resource you are
+	// querying.
+	//
 	// This member is required.
 	ResourceArn *string
 
@@ -35,6 +41,11 @@ type ListTagsForResourceInput struct {
 }
 
 type ListTagsForResourceOutput struct {
+
+	// Tags associated with the Amazon Translate resource being queried. A tag is a
+	// key-value pair that adds as a metadata to a resource used by Amazon Translate.
+	// For example, a tag with "Sales" as the key might be added to a resource to
+	// indicate its use by the sales department.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

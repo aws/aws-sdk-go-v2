@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of host keys for the server specified by the ServerId paramter.
+// Returns a list of host keys for the server that's specified by the ServerId
+// parameter.
 func (c *Client) ListHostKeys(ctx context.Context, params *ListHostKeysInput, optFns ...func(*Options)) (*ListHostKeysOutput, error) {
 	if params == nil {
 		params = &ListHostKeysInput{}
@@ -29,7 +30,7 @@ func (c *Client) ListHostKeys(ctx context.Context, params *ListHostKeysInput, op
 
 type ListHostKeysInput struct {
 
-	// Provide the ID of the server that contains the host keys that you want to view.
+	// The identifier of the server that contains the host keys that you want to view.
 	//
 	// This member is required.
 	ServerId *string
@@ -52,7 +53,7 @@ type ListHostKeysOutput struct {
 	// This member is required.
 	HostKeys []types.ListedHostKey
 
-	// Returns the server ID that contains the listed host keys.
+	// Returns the server identifier that contains the listed host keys.
 	//
 	// This member is required.
 	ServerId *string

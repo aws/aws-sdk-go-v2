@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Associates a specific tag with a resource. A tag is a key-value pair that adds
+// as a metadata to a resource. For more information, see  Tagging your resources
+// (https://docs.aws.amazon.com/translate/latest/dg/tagging.html).
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -28,9 +31,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the given Amazon Translate resource to which
+	// you want to associate the tags.
+	//
 	// This member is required.
 	ResourceArn *string
 
+	// Tags being associated with a specific Amazon Translate resource. There can be a
+	// maximum of 50 tags (both existing and pending) associated with a specific
+	// resource.
+	//
 	// This member is required.
 	Tags []types.Tag
 

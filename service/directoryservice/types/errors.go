@@ -232,6 +232,29 @@ func (e *DirectoryDoesNotExistException) ErrorMessage() string {
 func (e *DirectoryDoesNotExistException) ErrorCode() string             { return "DirectoryDoesNotExistException" }
 func (e *DirectoryDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The directory is already updated to desired update type settings.
+type DirectoryInDesiredStateException struct {
+	Message *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DirectoryInDesiredStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DirectoryInDesiredStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DirectoryInDesiredStateException) ErrorCode() string {
+	return "DirectoryInDesiredStateException"
+}
+func (e *DirectoryInDesiredStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The maximum number of directories in the region has been reached. You can use
 // the GetDirectoryLimits operation to determine your directory limits in the
 // region.

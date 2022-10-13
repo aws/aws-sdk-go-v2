@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -124,6 +125,98 @@ func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+// DescribeSharedDirectoriesAPIClient is a client that implements the
+// DescribeSharedDirectories operation.
+type DescribeSharedDirectoriesAPIClient interface {
+	DescribeSharedDirectories(context.Context, *DescribeSharedDirectoriesInput, ...func(*Options)) (*DescribeSharedDirectoriesOutput, error)
+}
+
+var _ DescribeSharedDirectoriesAPIClient = (*Client)(nil)
+
+// DescribeSharedDirectoriesPaginatorOptions is the paginator options for
+// DescribeSharedDirectories
+type DescribeSharedDirectoriesPaginatorOptions struct {
+	// The number of shared directories to return in the response object.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeSharedDirectoriesPaginator is a paginator for DescribeSharedDirectories
+type DescribeSharedDirectoriesPaginator struct {
+	options   DescribeSharedDirectoriesPaginatorOptions
+	client    DescribeSharedDirectoriesAPIClient
+	params    *DescribeSharedDirectoriesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeSharedDirectoriesPaginator returns a new
+// DescribeSharedDirectoriesPaginator
+func NewDescribeSharedDirectoriesPaginator(client DescribeSharedDirectoriesAPIClient, params *DescribeSharedDirectoriesInput, optFns ...func(*DescribeSharedDirectoriesPaginatorOptions)) *DescribeSharedDirectoriesPaginator {
+	if params == nil {
+		params = &DescribeSharedDirectoriesInput{}
+	}
+
+	options := DescribeSharedDirectoriesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeSharedDirectoriesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeSharedDirectoriesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeSharedDirectories page.
+func (p *DescribeSharedDirectoriesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeSharedDirectoriesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeSharedDirectories(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeSharedDirectories(region string) *awsmiddleware.RegisterServiceMetadata {

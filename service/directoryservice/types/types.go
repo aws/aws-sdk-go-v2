@@ -244,6 +244,9 @@ type DirectoryDescription struct {
 	// The fully qualified name of the directory.
 	Name *string
 
+	// The operating system (OS) version of the directory.
+	OsVersion OSVersion
+
 	// Describes the Managed Microsoft AD directory in the directory owner account.
 	OwnerDirectoryDescription *OwnerDirectoryDescription
 
@@ -496,6 +499,15 @@ type LogSubscription struct {
 
 	// The date and time that the log subscription was created.
 	SubscriptionCreatedDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// OS version that the directory needs to be updated to.
+type OSUpdateSettings struct {
+
+	// OS version that the directory needs to be updated to.
+	OSVersion OSVersion
 
 	noSmithyDocumentSerde
 }
@@ -868,6 +880,46 @@ type UnshareTarget struct {
 	//
 	// This member is required.
 	Type TargetType
+
+	noSmithyDocumentSerde
+}
+
+// An entry of update information related to a requested update type.
+type UpdateInfoEntry struct {
+
+	// This specifies if the update was initiated by the customer or by the service
+	// team.
+	InitiatedBy *string
+
+	// The last updated date and time of a particular directory setting.
+	LastUpdatedDateTime *time.Time
+
+	// The new value of the target setting.
+	NewValue *UpdateValue
+
+	// The old value of the target setting.
+	PreviousValue *UpdateValue
+
+	// The name of the Region.
+	Region *string
+
+	// The start time of the UpdateDirectorySetup for the particular type.
+	StartTime *time.Time
+
+	// The status of the update performed on the directory.
+	Status UpdateStatus
+
+	// The reason for the current status of the update type activity.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// The value for a given type of UpdateSettings.
+type UpdateValue struct {
+
+	// The OS update related settings.
+	OSUpdateSettings *OSUpdateSettings
 
 	noSmithyDocumentSerde
 }

@@ -544,6 +544,7 @@ const (
 	OperatorPropertiesKeysConcatFormat             OperatorPropertiesKeys = "CONCAT_FORMAT"
 	OperatorPropertiesKeysSubfieldCategoryMap      OperatorPropertiesKeys = "SUBFIELD_CATEGORY_MAP"
 	OperatorPropertiesKeysExcludeSourceFieldsList  OperatorPropertiesKeys = "EXCLUDE_SOURCE_FIELDS_LIST"
+	OperatorPropertiesKeysIncludeNewFields         OperatorPropertiesKeys = "INCLUDE_NEW_FIELDS"
 )
 
 // Values returns all known values for OperatorPropertiesKeys. Note that this can
@@ -566,6 +567,7 @@ func (OperatorPropertiesKeys) Values() []OperatorPropertiesKeys {
 		"CONCAT_FORMAT",
 		"SUBFIELD_CATEGORY_MAP",
 		"EXCLUDE_SOURCE_FIELDS_LIST",
+		"INCLUDE_NEW_FIELDS",
 	}
 }
 
@@ -840,6 +842,26 @@ func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 		"VALIDATE_NON_NEGATIVE",
 		"VALIDATE_NUMERIC",
 		"NO_OP",
+	}
+}
+
+type SalesforceDataTransferApi string
+
+// Enum values for SalesforceDataTransferApi
+const (
+	SalesforceDataTransferApiAutomatic SalesforceDataTransferApi = "AUTOMATIC"
+	SalesforceDataTransferApiBulkv2    SalesforceDataTransferApi = "BULKV2"
+	SalesforceDataTransferApiRestSync  SalesforceDataTransferApi = "REST_SYNC"
+)
+
+// Values returns all known values for SalesforceDataTransferApi. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SalesforceDataTransferApi) Values() []SalesforceDataTransferApi {
+	return []SalesforceDataTransferApi{
+		"AUTOMATIC",
+		"BULKV2",
+		"REST_SYNC",
 	}
 }
 

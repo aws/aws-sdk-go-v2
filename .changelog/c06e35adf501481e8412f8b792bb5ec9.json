@@ -1,0 +1,8 @@
+{
+    "id": "c06e35ad-f501-481e-8412-f8b792bb5ec9",
+    "type": "feature",
+    "description": "This release updates the GetRecommendations API to include a trigger event list for classifying and grouping recommendations.",
+    "modules": [
+        "service/wisdom"
+    ]
+}

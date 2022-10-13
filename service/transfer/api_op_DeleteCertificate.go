@@ -28,7 +28,7 @@ func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificat
 
 type DeleteCertificateInput struct {
 
-	// The ID of the certificate object that you are deleting.
+	// The identifier of the certificate object that you are deleting.
 	//
 	// This member is required.
 	CertificateId *string

@@ -423,6 +423,11 @@ func awsRestjson1_deserializeOpDocumentCreateDetectorOutput(v **CreateDetectorOu
 				sv.DetectorId = ptr.String(jtv)
 			}
 
+		case "unprocessedDataSources":
+			if err := awsRestjson1_deserializeDocumentUnprocessedDataSourcesResult(&sv.UnprocessedDataSources, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10702,6 +10707,15 @@ func awsRestjson1_deserializeDocumentEbsVolumesResult(v **types.EbsVolumesResult
 
 	for key, value := range shape {
 		switch key {
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16287,6 +16301,42 @@ func awsRestjson1_deserializeDocumentUnprocessedAccounts(v *[]types.UnprocessedA
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUnprocessedDataSourcesResult(v **types.UnprocessedDataSourcesResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnprocessedDataSourcesResult
+	if *v == nil {
+		sv = &types.UnprocessedDataSourcesResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "malwareProtection":
+			if err := awsRestjson1_deserializeDocumentMalwareProtectionConfigurationResult(&sv.MalwareProtection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

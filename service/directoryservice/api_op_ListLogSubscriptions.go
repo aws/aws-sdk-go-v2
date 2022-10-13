@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -118,6 +119,97 @@ func (c *Client) addOperationListLogSubscriptionsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// ListLogSubscriptionsAPIClient is a client that implements the
+// ListLogSubscriptions operation.
+type ListLogSubscriptionsAPIClient interface {
+	ListLogSubscriptions(context.Context, *ListLogSubscriptionsInput, ...func(*Options)) (*ListLogSubscriptionsOutput, error)
+}
+
+var _ ListLogSubscriptionsAPIClient = (*Client)(nil)
+
+// ListLogSubscriptionsPaginatorOptions is the paginator options for
+// ListLogSubscriptions
+type ListLogSubscriptionsPaginatorOptions struct {
+	// The maximum number of items returned.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListLogSubscriptionsPaginator is a paginator for ListLogSubscriptions
+type ListLogSubscriptionsPaginator struct {
+	options   ListLogSubscriptionsPaginatorOptions
+	client    ListLogSubscriptionsAPIClient
+	params    *ListLogSubscriptionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListLogSubscriptionsPaginator returns a new ListLogSubscriptionsPaginator
+func NewListLogSubscriptionsPaginator(client ListLogSubscriptionsAPIClient, params *ListLogSubscriptionsInput, optFns ...func(*ListLogSubscriptionsPaginatorOptions)) *ListLogSubscriptionsPaginator {
+	if params == nil {
+		params = &ListLogSubscriptionsInput{}
+	}
+
+	options := ListLogSubscriptionsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListLogSubscriptionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListLogSubscriptionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListLogSubscriptions page.
+func (p *ListLogSubscriptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListLogSubscriptionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListLogSubscriptions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListLogSubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {

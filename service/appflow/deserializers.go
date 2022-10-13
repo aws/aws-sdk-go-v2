@@ -9296,6 +9296,42 @@ func awsRestjson1_deserializeDocumentSalesforceConnectorProfileProperties(v **ty
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSalesforceDataTransferApiList(v *[]types.SalesforceDataTransferApi, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SalesforceDataTransferApi
+	if *v == nil {
+		cv = []types.SalesforceDataTransferApi{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SalesforceDataTransferApi
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SalesforceDataTransferApi to be of type string, got %T instead", value)
+			}
+			col = types.SalesforceDataTransferApi(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSalesforceDestinationProperties(v **types.SalesforceDestinationProperties, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9318,6 +9354,15 @@ func awsRestjson1_deserializeDocumentSalesforceDestinationProperties(v **types.S
 
 	for key, value := range shape {
 		switch key {
+		case "dataTransferApi":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SalesforceDataTransferApi to be of type string, got %T instead", value)
+				}
+				sv.DataTransferApi = types.SalesforceDataTransferApi(jtv)
+			}
+
 		case "errorHandlingConfig":
 			if err := awsRestjson1_deserializeDocumentErrorHandlingConfig(&sv.ErrorHandlingConfig, value); err != nil {
 				return err
@@ -9377,6 +9422,11 @@ func awsRestjson1_deserializeDocumentSalesforceMetadata(v **types.SalesforceMeta
 
 	for key, value := range shape {
 		switch key {
+		case "dataTransferApis":
+			if err := awsRestjson1_deserializeDocumentSalesforceDataTransferApiList(&sv.DataTransferApis, value); err != nil {
+				return err
+			}
+
 		case "oAuthScopes":
 			if err := awsRestjson1_deserializeDocumentOAuthScopeList(&sv.OAuthScopes, value); err != nil {
 				return err
@@ -9413,6 +9463,15 @@ func awsRestjson1_deserializeDocumentSalesforceSourceProperties(v **types.Salesf
 
 	for key, value := range shape {
 		switch key {
+		case "dataTransferApi":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SalesforceDataTransferApi to be of type string, got %T instead", value)
+				}
+				sv.DataTransferApi = types.SalesforceDataTransferApi(jtv)
+			}
+
 		case "enableDynamicFieldUpdate":
 			if value != nil {
 				jtv, ok := value.(bool)

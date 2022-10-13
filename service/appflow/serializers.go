@@ -3330,6 +3330,11 @@ func awsRestjson1_serializeDocumentSalesforceDestinationProperties(v *types.Sale
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DataTransferApi) > 0 {
+		ok := object.Key("dataTransferApi")
+		ok.String(string(v.DataTransferApi))
+	}
+
 	if v.ErrorHandlingConfig != nil {
 		ok := object.Key("errorHandlingConfig")
 		if err := awsRestjson1_serializeDocumentErrorHandlingConfig(v.ErrorHandlingConfig, ok); err != nil {
@@ -3360,6 +3365,11 @@ func awsRestjson1_serializeDocumentSalesforceDestinationProperties(v *types.Sale
 func awsRestjson1_serializeDocumentSalesforceSourceProperties(v *types.SalesforceSourceProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.DataTransferApi) > 0 {
+		ok := object.Key("dataTransferApi")
+		ok.String(string(v.DataTransferApi))
+	}
 
 	if v.EnableDynamicFieldUpdate {
 		ok := object.Key("enableDynamicFieldUpdate")

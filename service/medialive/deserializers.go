@@ -14288,6 +14288,11 @@ func awsRestjson1_deserializeDocumentAvailSettings(v **types.AvailSettings, valu
 
 	for key, value := range shape {
 		switch key {
+		case "esam":
+			if err := awsRestjson1_deserializeDocumentEsam(&sv.Esam, value); err != nil {
+				return err
+			}
+
 		case "scte35SpliceInsert":
 			if err := awsRestjson1_deserializeDocumentScte35SpliceInsert(&sv.Scte35SpliceInsert, value); err != nil {
 				return err
@@ -17127,6 +17132,95 @@ func awsRestjson1_deserializeDocumentEncoderSettings(v **types.EncoderSettings, 
 		case "videoDescriptions":
 			if err := awsRestjson1_deserializeDocument__listOfVideoDescription(&sv.VideoDescriptions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEsam(v **types.Esam, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Esam
+	if *v == nil {
+		sv = &types.Esam{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "acquisitionPointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax256 to be of type string, got %T instead", value)
+				}
+				sv.AcquisitionPointId = ptr.String(jtv)
+			}
+
+		case "adAvailOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMinNegative1000Max1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AdAvailOffset = int32(i64)
+			}
+
+		case "passwordParam":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PasswordParam = ptr.String(jtv)
+			}
+
+		case "poisEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PoisEndpoint = ptr.String(jtv)
+			}
+
+		case "username":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Username = ptr.String(jtv)
+			}
+
+		case "zoneIdentity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax256 to be of type string, got %T instead", value)
+				}
+				sv.ZoneIdentity = ptr.String(jtv)
 			}
 
 		default:
@@ -26685,6 +26779,11 @@ func awsRestjson1_deserializeDocumentScheduleActionSettings(v **types.ScheduleAc
 				return err
 			}
 
+		case "scte35InputSettings":
+			if err := awsRestjson1_deserializeDocumentScte35InputScheduleActionSettings(&sv.Scte35InputSettings, value); err != nil {
+				return err
+			}
+
 		case "scte35ReturnToNetworkSettings":
 			if err := awsRestjson1_deserializeDocumentScte35ReturnToNetworkScheduleActionSettings(&sv.Scte35ReturnToNetworkSettings, value); err != nil {
 				return err
@@ -27061,6 +27160,55 @@ func awsRestjson1_deserializeDocumentScte35DescriptorSettings(v **types.Scte35De
 		case "segmentationDescriptorScte35DescriptorSettings":
 			if err := awsRestjson1_deserializeDocumentScte35SegmentationDescriptor(&sv.SegmentationDescriptorScte35DescriptorSettings, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScte35InputScheduleActionSettings(v **types.Scte35InputScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Scte35InputScheduleActionSettings
+	if *v == nil {
+		sv = &types.Scte35InputScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "inputAttachmentNameReference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.InputAttachmentNameReference = ptr.String(jtv)
+			}
+
+		case "mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Scte35InputMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.Scte35InputMode(jtv)
 			}
 
 		default:

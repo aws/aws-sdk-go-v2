@@ -30,7 +30,6 @@
         "api_op_ListKnowledgeBases.go",
         "api_op_ListTagsForResource.go",
         "api_op_NotifyRecommendationsReceived.go",
-        "api_op_PutFeedback.go",
         "api_op_QueryAssistant.go",
         "api_op_RemoveKnowledgeBaseTemplateUri.go",
         "api_op_SearchContent.go",

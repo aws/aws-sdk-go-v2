@@ -1722,6 +1722,40 @@ func validateAvailBlanking(v *types.AvailBlanking) error {
 	}
 }
 
+func validateAvailConfiguration(v *types.AvailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AvailConfiguration"}
+	if v.AvailSettings != nil {
+		if err := validateAvailSettings(v.AvailSettings); err != nil {
+			invalidParams.AddNested("AvailSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAvailSettings(v *types.AvailSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AvailSettings"}
+	if v.Esam != nil {
+		if err := validateEsam(v.Esam); err != nil {
+			invalidParams.AddNested("Esam", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchScheduleActionCreateRequest(v *types.BatchScheduleActionCreateRequest) error {
 	if v == nil {
 		return nil
@@ -1956,6 +1990,11 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 			invalidParams.AddNested("AvailBlanking", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AvailConfiguration != nil {
+		if err := validateAvailConfiguration(v.AvailConfiguration); err != nil {
+			invalidParams.AddNested("AvailConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.BlackoutSlate != nil {
 		if err := validateBlackoutSlate(v.BlackoutSlate); err != nil {
 			invalidParams.AddNested("BlackoutSlate", err.(smithy.InvalidParamsError))
@@ -1996,6 +2035,24 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 		if err := validate__listOfVideoDescription(v.VideoDescriptions); err != nil {
 			invalidParams.AddNested("VideoDescriptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEsam(v *types.Esam) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Esam"}
+	if v.AcquisitionPointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AcquisitionPointId"))
+	}
+	if v.PoisEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PoisEndpoint"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2821,6 +2878,11 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 			invalidParams.AddNested("PauseStateSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Scte35InputSettings != nil {
+		if err := validateScte35InputScheduleActionSettings(v.Scte35InputSettings); err != nil {
+			invalidParams.AddNested("Scte35InputSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Scte35ReturnToNetworkSettings != nil {
 		if err := validateScte35ReturnToNetworkScheduleActionSettings(v.Scte35ReturnToNetworkSettings); err != nil {
 			invalidParams.AddNested("Scte35ReturnToNetworkSettings", err.(smithy.InvalidParamsError))
@@ -2924,6 +2986,21 @@ func validateScte35DescriptorSettings(v *types.Scte35DescriptorSettings) error {
 		if err := validateScte35SegmentationDescriptor(v.SegmentationDescriptorScte35DescriptorSettings); err != nil {
 			invalidParams.AddNested("SegmentationDescriptorScte35DescriptorSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScte35InputScheduleActionSettings(v *types.Scte35InputScheduleActionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Scte35InputScheduleActionSettings"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -599,6 +599,10 @@ type FieldInputConfig struct {
 	// The text to display to describe the field.
 	DescriptiveText *string
 
+	// Specifies whether to render the field as an array. This property is ignored if
+	// the dataSourceType for the form is a Data Store.
+	IsArray *bool
+
 	// The maximum value to display for the field.
 	MaxValue *float32
 
@@ -783,7 +787,7 @@ type FormButton struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the call to action button configuration for the form..
+// Describes the call to action button configuration for the form.
 type FormCTA struct {
 
 	// Displays a cancel button.

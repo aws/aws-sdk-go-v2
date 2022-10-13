@@ -1,0 +1,8 @@
+{
+    "id": "97de10a3-4034-42e4-9e8e-fb5a08301854",
+    "type": "feature",
+    "description": "Support of AmazonLinux2022 by Patch Manager",
+    "modules": [
+        "service/ssm"
+    ]
+}

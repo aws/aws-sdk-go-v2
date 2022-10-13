@@ -470,6 +470,26 @@ func (m *validateOpRemoveApplicationInstance) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSignalApplicationInstanceNodeInstances struct {
+}
+
+func (*validateOpSignalApplicationInstanceNodeInstances) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSignalApplicationInstanceNodeInstances) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SignalApplicationInstanceNodeInstancesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSignalApplicationInstanceNodeInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -622,6 +642,10 @@ func addOpRemoveApplicationInstanceValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpRemoveApplicationInstance{}, middleware.After)
 }
 
+func addOpSignalApplicationInstanceNodeInstancesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSignalApplicationInstanceNodeInstances{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -724,6 +748,41 @@ func validateNetworkPayload(v *types.NetworkPayload) error {
 	if v.Ntp != nil {
 		if err := validateNtpPayload(v.Ntp); err != nil {
 			invalidParams.AddNested("Ntp", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeSignal(v *types.NodeSignal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeSignal"}
+	if v.NodeInstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeInstanceId"))
+	}
+	if len(v.Signal) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Signal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNodeSignalList(v []types.NodeSignal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NodeSignalList"}
+	for i := range v {
+		if err := validateNodeSignal(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -902,9 +961,7 @@ func validateOpCreateJobForDevicesInput(v *CreateJobForDevicesInput) error {
 	if v.DeviceIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeviceIds"))
 	}
-	if v.DeviceJobConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeviceJobConfig"))
-	} else if v.DeviceJobConfig != nil {
+	if v.DeviceJobConfig != nil {
 		if err := validateDeviceJobConfig(v.DeviceJobConfig); err != nil {
 			invalidParams.AddNested("DeviceJobConfig", err.(smithy.InvalidParamsError))
 		}
@@ -1285,6 +1342,28 @@ func validateOpRemoveApplicationInstanceInput(v *RemoveApplicationInstanceInput)
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveApplicationInstanceInput"}
 	if v.ApplicationInstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationInstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSignalApplicationInstanceNodeInstancesInput(v *SignalApplicationInstanceNodeInstancesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignalApplicationInstanceNodeInstancesInput"}
+	if v.ApplicationInstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationInstanceId"))
+	}
+	if v.NodeSignals == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeSignals"))
+	} else if v.NodeSignals != nil {
+		if err := validateNodeSignalList(v.NodeSignals); err != nil {
+			invalidParams.AddNested("NodeSignals", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

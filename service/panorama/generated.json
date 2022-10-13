@@ -38,6 +38,7 @@
         "api_op_ProvisionDevice.go",
         "api_op_RegisterPackageVersion.go",
         "api_op_RemoveApplicationInstance.go",
+        "api_op_SignalApplicationInstanceNodeInstances.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateDeviceMetadata.go",

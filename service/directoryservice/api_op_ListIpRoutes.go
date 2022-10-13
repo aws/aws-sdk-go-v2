@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -123,6 +124,96 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
+}
+
+// ListIpRoutesAPIClient is a client that implements the ListIpRoutes operation.
+type ListIpRoutesAPIClient interface {
+	ListIpRoutes(context.Context, *ListIpRoutesInput, ...func(*Options)) (*ListIpRoutesOutput, error)
+}
+
+var _ ListIpRoutesAPIClient = (*Client)(nil)
+
+// ListIpRoutesPaginatorOptions is the paginator options for ListIpRoutes
+type ListIpRoutesPaginatorOptions struct {
+	// Maximum number of items to return. If this value is zero, the maximum number of
+	// items is specified by the limitations of the operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListIpRoutesPaginator is a paginator for ListIpRoutes
+type ListIpRoutesPaginator struct {
+	options   ListIpRoutesPaginatorOptions
+	client    ListIpRoutesAPIClient
+	params    *ListIpRoutesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListIpRoutesPaginator returns a new ListIpRoutesPaginator
+func NewListIpRoutesPaginator(client ListIpRoutesAPIClient, params *ListIpRoutesInput, optFns ...func(*ListIpRoutesPaginatorOptions)) *ListIpRoutesPaginator {
+	if params == nil {
+		params = &ListIpRoutesInput{}
+	}
+
+	options := ListIpRoutesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListIpRoutesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListIpRoutesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListIpRoutes page.
+func (p *ListIpRoutesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListIpRoutesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.ListIpRoutes(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListIpRoutes(region string) *awsmiddleware.RegisterServiceMetadata {

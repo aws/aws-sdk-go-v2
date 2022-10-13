@@ -50,7 +50,7 @@ type CreateAgreementInput struct {
 	AccessRole *string
 
 	// The landing directory (folder) for files transferred by using the AS2 protocol.
-	// A BaseDirectory example is /DOC-EXAMPLE-BUCKET/home/mydirectory .
+	// A BaseDirectory example is DOC-EXAMPLE-BUCKET/home/mydirectory.
 	//
 	// This member is required.
 	BaseDirectory *string

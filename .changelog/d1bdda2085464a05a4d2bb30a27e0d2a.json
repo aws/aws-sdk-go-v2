@@ -1,0 +1,8 @@
+{
+    "id": "d1bdda20-8546-4a05-a4d2-bb30a27e0d2a",
+    "type": "documentation",
+    "description": "Documentation update for AWS IoT FleetWise",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

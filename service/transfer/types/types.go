@@ -400,17 +400,17 @@ type DescribedHostKey struct {
 	// Key-value pairs that can be used to group and search for host keys.
 	Tags []Tag
 
-	// The encryption algorithm used for the host key. The Type is one of the following
-	// values:
+	// The encryption algorithm that is used for the host key. The Type parameter is
+	// specified by using one of the following values:
 	//
 	// * ssh-rsa
 	//
 	// * ssh-ed25519
 	//
-	// * ecdsa-sha2-nistp256
-	//
 	// *
-	// ecdsa-sha2-nistp384
+	// ecdsa-sha2-nistp256
+	//
+	// * ecdsa-sha2-nistp384
 	//
 	// * ecdsa-sha2-nistp521
 	Type *string
@@ -418,7 +418,7 @@ type DescribedHostKey struct {
 	noSmithyDocumentSerde
 }
 
-// The details for a local or partner AS2 profile. profile.
+// The details for a local or partner AS2 profile.
 type DescribedProfile struct {
 
 	// The unique Amazon Resource Name (ARN) for the profile.
@@ -638,7 +638,10 @@ type DescribedServer struct {
 	UserCount *int32
 
 	// Specifies the workflow ID for the workflow to assign and the execution role
-	// that's used for executing the workflow.
+	// that's used for executing the workflow. In additon to a workflow to execute when
+	// a file is uploaded completely, WorkflowDeatails can also contain a workflow ID
+	// (and execution role) for a workflow to execute on partial upload. A partial
+	// upload occurs when a file is open when the session disconnects.
 	WorkflowDetails *WorkflowDetails
 
 	noSmithyDocumentSerde
@@ -748,7 +751,7 @@ type DescribedWorkflow struct {
 // Reserved for future use.
 type EfsFileLocation struct {
 
-	// The ID of the file system, assigned by Amazon EFS.
+	// The identifier of the file system, assigned by Amazon EFS.
 	FileSystemId *string
 
 	// The pathname for the folder being used by a workflow.
@@ -790,13 +793,13 @@ type EndpointDetails struct {
 	// This property can only be set when EndpointType is set to VPC.
 	SubnetIds []string
 
-	// The ID of the VPC endpoint. This property can only be set when EndpointType is
-	// set to VPC_ENDPOINT. For more information, see
+	// The identifier of the VPC endpoint. This property can only be set when
+	// EndpointType is set to VPC_ENDPOINT. For more information, see
 	// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 	VpcEndpointId *string
 
-	// The VPC ID of the VPC in which a server's endpoint will be hosted. This property
-	// can only be set when EndpointType is set to VPC.
+	// The VPC identifier of the VPC in which a server's endpoint will be hosted. This
+	// property can only be set when EndpointType is set to VPC.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -892,7 +895,7 @@ type ExecutionStepResult struct {
 // Specifies the Amazon S3 or EFS file details to be used in the step.
 type FileLocation struct {
 
-	// Specifies the Amazon EFS ID and the path for the file being used.
+	// Specifies the Amazon EFS identifier and the path for the file being used.
 	EfsFileLocation *EfsFileLocation
 
 	// Specifies the S3 details for the file being used, such as bucket, ETag, and so
@@ -1092,10 +1095,10 @@ type ListedExecution struct {
 	noSmithyDocumentSerde
 }
 
-// Returns properties of the host key that is specified.
+// Returns properties of the host key that's specified.
 type ListedHostKey struct {
 
-	// Specifies the unique Amazon Resource Name (ARN) of the host key.
+	// The unique Amazon Resource Name (ARN) of the host key.
 	//
 	// This member is required.
 	Arn *string
@@ -1111,20 +1114,20 @@ type ListedHostKey struct {
 	// the longer public key.
 	Fingerprint *string
 
-	//
+	// A unique identifier for the host key.
 	HostKeyId *string
 
-	// The encryption algorithm used for the host key. The Type is one of the following
-	// values:
+	// The encryption algorithm that is used for the host key. The Type parameter is
+	// specified by using one of the following values:
 	//
 	// * ssh-rsa
 	//
 	// * ssh-ed25519
 	//
-	// * ecdsa-sha2-nistp256
-	//
 	// *
-	// ecdsa-sha2-nistp384
+	// ecdsa-sha2-nistp256
+	//
+	// * ecdsa-sha2-nistp384
 	//
 	// * ecdsa-sha2-nistp521
 	Type *string
@@ -1256,8 +1259,8 @@ type ListedUser struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the ID, text description, and Amazon Resource Name (ARN) for the
-// workflow.
+// Contains the identifier, text description, and Amazon Resource Name (ARN) for
+// the workflow.
 type ListedWorkflow struct {
 
 	// Specifies the unique Amazon Resource Name (ARN) for the workflow.
@@ -1319,13 +1322,26 @@ type ProtocolDetails struct {
 
 	// Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address,
 	// such as the public IP address of a firewall, router, or load balancer. For
-	// example:  aws transfer update-server --protocol-details PassiveIp=0.0.0.0
-	// Replace  0.0.0.0  in the example above with the actual IP address you want to
-	// use. If you change the PassiveIp value, you must stop and then restart your
-	// Transfer Family server for the change to take effect. For details on using
-	// passive mode (PASV) in a NAT environment, see Configuring your FTPS server
-	// behind a firewall or NAT with Transfer Family
+	// example: aws transfer update-server --protocol-details PassiveIp=0.0.0.0 Replace
+	// 0.0.0.0 in the example above with the actual IP address you want to use. If you
+	// change the PassiveIp value, you must stop and then restart your Transfer Family
+	// server for the change to take effect. For details on using passive mode (PASV)
+	// in a NAT environment, see Configuring your FTPS server behind a firewall or NAT
+	// with Transfer Family
 	// (http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/).
+	// Special values The AUTO and 0.0.0.0 are special values for the PassiveIp
+	// parameter. The value PassiveIp=AUTO is assigned by default to FTP and FTPS type
+	// servers. In this case, the server automatically responds with one of the
+	// endpoint IPs within the PASV response. PassiveIp=0.0.0.0 has a more unique
+	// application for its usage. For example, if you have a High Availability (HA)
+	// Network Load Balancer (NLB) environment, where you have 3 subnets, you can only
+	// specify a single IP address using the PassiveIp parameter. This reduces the
+	// effectiveness of having High Availability. In this case, you can specify
+	// PassiveIp=0.0.0.0. This tells the client to use the same IP address as the
+	// Control connection and utilize all AZs for their connections. Note, however,
+	// that not all FTP clients support the PassiveIp=0.0.0.0 response. FileZilla and
+	// WinSCP do support it. If you are using other clients, check to see if your
+	// client supports the PassiveIp=0.0.0.0 response.
 	PassiveIp *string
 
 	// Use the SetStatOption to ignore the error that is generated when the client
@@ -1541,7 +1557,10 @@ type UserDetails struct {
 }
 
 // Specifies the workflow ID for the workflow to assign and the execution role
-// that's used for executing the workflow.
+// that's used for executing the workflow. In additon to a workflow to execute when
+// a file is uploaded completely, WorkflowDeatails can also contain a workflow ID
+// (and execution role) for a workflow to execute on partial upload. A partial
+// upload occurs when a file is open when the session disconnects.
 type WorkflowDetail struct {
 
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that
@@ -1563,12 +1582,15 @@ type WorkflowDetail struct {
 // workflow to begin execution.
 type WorkflowDetails struct {
 
+	// A trigger that starts a workflow if a file is only partially uploaded. You can
+	// attach a workflow to a server that executes whenever there is a partial upload.
+	// A partial upload occurs when a file is open when the session disconnects.
+	OnPartialUpload []WorkflowDetail
+
 	// A trigger that starts a workflow: the workflow begins to execute after a file is
 	// uploaded. To remove an associated workflow from a server, you can provide an
 	// empty OnUpload object, as in the following example. aws transfer update-server
 	// --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
-	//
-	// This member is required.
 	OnUpload []WorkflowDetail
 
 	noSmithyDocumentSerde

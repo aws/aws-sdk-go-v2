@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -133,6 +134,98 @@ func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeDirectoriesAPIClient is a client that implements the DescribeDirectories
+// operation.
+type DescribeDirectoriesAPIClient interface {
+	DescribeDirectories(context.Context, *DescribeDirectoriesInput, ...func(*Options)) (*DescribeDirectoriesOutput, error)
+}
+
+var _ DescribeDirectoriesAPIClient = (*Client)(nil)
+
+// DescribeDirectoriesPaginatorOptions is the paginator options for
+// DescribeDirectories
+type DescribeDirectoriesPaginatorOptions struct {
+	// The maximum number of items to return. If this value is zero, the maximum number
+	// of items is specified by the limitations of the operation.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDirectoriesPaginator is a paginator for DescribeDirectories
+type DescribeDirectoriesPaginator struct {
+	options   DescribeDirectoriesPaginatorOptions
+	client    DescribeDirectoriesAPIClient
+	params    *DescribeDirectoriesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDirectoriesPaginator returns a new DescribeDirectoriesPaginator
+func NewDescribeDirectoriesPaginator(client DescribeDirectoriesAPIClient, params *DescribeDirectoriesInput, optFns ...func(*DescribeDirectoriesPaginatorOptions)) *DescribeDirectoriesPaginator {
+	if params == nil {
+		params = &DescribeDirectoriesInput{}
+	}
+
+	options := DescribeDirectoriesPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDirectoriesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDirectoriesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeDirectories page.
+func (p *DescribeDirectoriesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDirectoriesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeDirectories(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDirectories(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -2109,6 +2109,89 @@ func awsRestjson1_serializeOpHttpBindingsRemoveApplicationInstanceInput(v *Remov
 	return nil
 }
 
+type awsRestjson1_serializeOpSignalApplicationInstanceNodeInstances struct {
+}
+
+func (*awsRestjson1_serializeOpSignalApplicationInstanceNodeInstances) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSignalApplicationInstanceNodeInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SignalApplicationInstanceNodeInstancesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/application-instances/{ApplicationInstanceId}/node-signals")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSignalApplicationInstanceNodeInstancesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSignalApplicationInstanceNodeInstancesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSignalApplicationInstanceNodeInstancesInput(v *SignalApplicationInstanceNodeInstancesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationInstanceId == nil || len(*v.ApplicationInstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationInstanceId must not be empty")}
+	}
+	if v.ApplicationInstanceId != nil {
+		if err := encoder.SetURI("ApplicationInstanceId").String(*v.ApplicationInstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSignalApplicationInstanceNodeInstancesInput(v *SignalApplicationInstanceNodeInstancesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NodeSignals != nil {
+		ok := object.Key("NodeSignals")
+		if err := awsRestjson1_serializeDocumentNodeSignalList(v.NodeSignals, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -2481,6 +2564,36 @@ func awsRestjson1_serializeDocumentNetworkPayload(v *types.NetworkPayload, value
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeSignal(v *types.NodeSignal, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NodeInstanceId != nil {
+		ok := object.Key("NodeInstanceId")
+		ok.String(*v.NodeInstanceId)
+	}
+
+	if len(v.Signal) > 0 {
+		ok := object.Key("Signal")
+		ok.String(string(v.Signal))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeSignalList(v []types.NodeSignal, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNodeSignal(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -3502,6 +3502,19 @@ func awsAwsjson11_serializeDocumentInputFileLocation(v *types.InputFileLocation,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOnPartialUploadWorkflowDetails(v []types.WorkflowDetail, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentWorkflowDetail(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOnUploadWorkflowDetails(v []types.WorkflowDetail, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3744,6 +3757,13 @@ func awsAwsjson11_serializeDocumentWorkflowDetail(v *types.WorkflowDetail, value
 func awsAwsjson11_serializeDocumentWorkflowDetails(v *types.WorkflowDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.OnPartialUpload != nil {
+		ok := object.Key("OnPartialUpload")
+		if err := awsAwsjson11_serializeDocumentOnPartialUploadWorkflowDetails(v.OnPartialUpload, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.OnUpload != nil {
 		ok := object.Key("OnUpload")

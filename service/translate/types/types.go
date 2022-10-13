@@ -250,11 +250,18 @@ type ParallelDataProperties struct {
 	noSmithyDocumentSerde
 }
 
+// A key-value pair that adds as a metadata to a resource used by Amazon Translate.
 type Tag struct {
 
+	// The initial part of a key-value pair that forms a tag associated with a given
+	// resource.
+	//
 	// This member is required.
 	Key *string
 
+	// The second part of a key-value pair that forms a tag associated with a given
+	// resource.
+	//
 	// This member is required.
 	Value *string
 
@@ -469,21 +476,22 @@ type TextTranslationJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Settings that configure the translation output.
+// Optional settings that configure the translation output. Use these settings for
+// real time translations and asynchronous translation jobs.
 type TranslationSettings struct {
 
-	// You can optionally specify the desired level of formality for real-time
-	// translations to supported target languages. The formality setting controls the
-	// level of formal language usage (also known as register
+	// You can optionally specify the desired level of formality for translations to
+	// supported target languages. The formality setting controls the level of formal
+	// language usage (also known as register
 	// (https://en.wikipedia.org/wiki/Register_(sociolinguistics))) in the translation
 	// output. You can set the value to informal or formal. If you don't specify a
 	// value for formality, or if the target language doesn't support formality, the
-	// translation will ignore the formality setting. Note that asynchronous
-	// translation jobs don't support formality. If you provide a value for formality,
-	// the StartTextTranslationJob API throws an exception (InvalidRequestException).
-	// For target languages that support formality, see Supported Languages and
-	// Language Codes in the Amazon Translate Developer Guide
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is.html).
+	// translation will ignore the formality setting. If you specify multiple target
+	// languages for the job, translate ignores the formality setting for any
+	// unsupported target language. For a list of target languages that support
+	// formality, see Setting Formality
+	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html)
+	// in the Amazon Translate Developer Guide.
 	Formality Formality
 
 	// Enable the profanity setting if you want Amazon Translate to mask profane words
@@ -491,9 +499,13 @@ type TranslationSettings struct {
 	// Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character
 	// sequence is used for each profane word or phrase, regardless of the length or
 	// number of words. Amazon Translate doesn't detect profanity in all of its
-	// supported languages. For languages that support profanity detection, see
-	// Supported Languages and Language Codes in the Amazon Translate Developer Guide
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is.html).
+	// supported languages. For languages that support profanity detection, see Masking
+	// profanity
+	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html)
+	// in the Amazon Translate Developer Guide. If you specify multiple target
+	// languages for the job, all the target languages must support profanity masking.
+	// If any of the target languages don't support profanity masking, the translation
+	// job won't mask profanity for any target language.
 	Profanity Profanity
 
 	noSmithyDocumentSerde

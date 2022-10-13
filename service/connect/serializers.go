@@ -14086,6 +14086,16 @@ func awsRestjson1_serializeDocumentUserIdentityInfo(v *types.UserIdentityInfo, v
 		ok.String(*v.LastName)
 	}
 
+	if v.Mobile != nil {
+		ok := object.Key("Mobile")
+		ok.String(*v.Mobile)
+	}
+
+	if v.SecondaryEmail != nil {
+		ok := object.Key("SecondaryEmail")
+		ok.String(*v.SecondaryEmail)
+	}
+
 	return nil
 }
 

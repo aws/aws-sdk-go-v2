@@ -74,6 +74,64 @@ func (ManifestLayout) Values() []ManifestLayout {
 	}
 }
 
+type PresetSpeke20Audio string
+
+// Enum values for PresetSpeke20Audio
+const (
+	PresetSpeke20AudioPresetAudio1 PresetSpeke20Audio = "PRESET-AUDIO-1"
+	PresetSpeke20AudioPresetAudio2 PresetSpeke20Audio = "PRESET-AUDIO-2"
+	PresetSpeke20AudioPresetAudio3 PresetSpeke20Audio = "PRESET-AUDIO-3"
+	PresetSpeke20AudioShared       PresetSpeke20Audio = "SHARED"
+	PresetSpeke20AudioUnencrypted  PresetSpeke20Audio = "UNENCRYPTED"
+)
+
+// Values returns all known values for PresetSpeke20Audio. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PresetSpeke20Audio) Values() []PresetSpeke20Audio {
+	return []PresetSpeke20Audio{
+		"PRESET-AUDIO-1",
+		"PRESET-AUDIO-2",
+		"PRESET-AUDIO-3",
+		"SHARED",
+		"UNENCRYPTED",
+	}
+}
+
+type PresetSpeke20Video string
+
+// Enum values for PresetSpeke20Video
+const (
+	PresetSpeke20VideoPresetVideo1 PresetSpeke20Video = "PRESET-VIDEO-1"
+	PresetSpeke20VideoPresetVideo2 PresetSpeke20Video = "PRESET-VIDEO-2"
+	PresetSpeke20VideoPresetVideo3 PresetSpeke20Video = "PRESET-VIDEO-3"
+	PresetSpeke20VideoPresetVideo4 PresetSpeke20Video = "PRESET-VIDEO-4"
+	PresetSpeke20VideoPresetVideo5 PresetSpeke20Video = "PRESET-VIDEO-5"
+	PresetSpeke20VideoPresetVideo6 PresetSpeke20Video = "PRESET-VIDEO-6"
+	PresetSpeke20VideoPresetVideo7 PresetSpeke20Video = "PRESET-VIDEO-7"
+	PresetSpeke20VideoPresetVideo8 PresetSpeke20Video = "PRESET-VIDEO-8"
+	PresetSpeke20VideoShared       PresetSpeke20Video = "SHARED"
+	PresetSpeke20VideoUnencrypted  PresetSpeke20Video = "UNENCRYPTED"
+)
+
+// Values returns all known values for PresetSpeke20Video. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PresetSpeke20Video) Values() []PresetSpeke20Video {
+	return []PresetSpeke20Video{
+		"PRESET-VIDEO-1",
+		"PRESET-VIDEO-2",
+		"PRESET-VIDEO-3",
+		"PRESET-VIDEO-4",
+		"PRESET-VIDEO-5",
+		"PRESET-VIDEO-6",
+		"PRESET-VIDEO-7",
+		"PRESET-VIDEO-8",
+		"SHARED",
+		"UNENCRYPTED",
+	}
+}
+
 type Profile string
 
 // Enum values for Profile

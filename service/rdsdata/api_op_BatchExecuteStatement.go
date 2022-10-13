@@ -79,7 +79,8 @@ type BatchExecuteStatementInput struct {
 	// Array parameters are not supported.
 	ParameterSets [][]types.SqlParameter
 
-	// The name of the database schema.
+	// The name of the database schema. Currently, the schema parameter isn't
+	// supported.
 	Schema *string
 
 	// The identifier of a transaction that was started by using the BeginTransaction

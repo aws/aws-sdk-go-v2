@@ -64,8 +64,11 @@ type CreateCampaignInput struct {
 	// it's not specified, SNAPPY is used. Default: SNAPPY
 	Compression types.Compression
 
-	// (Optional) A list of vehicle attributes to associate with a campaign. Default:
-	// An empty array
+	// (Optional) A list of vehicle attributes to associate with a campaign. Enrich the
+	// data with specified vehicle attributes. For example, add make and model to the
+	// campaign, and Amazon Web Services IoT FleetWise will associate the data with
+	// those attributes as dimensions in Amazon Timestream. You can then query the data
+	// against make and model. Default: An empty array
 	DataExtraDimensions []string
 
 	// An optional description of the campaign to help identify its purpose.

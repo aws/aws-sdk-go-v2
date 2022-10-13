@@ -28,7 +28,7 @@ func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, 
 
 type DeleteProfileInput struct {
 
-	// The ID of the profile that you are deleting.
+	// The identifier of the profile that you are deleting.
 	//
 	// This member is required.
 	ProfileId *string

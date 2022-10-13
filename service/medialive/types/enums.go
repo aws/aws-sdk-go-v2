@@ -4654,6 +4654,24 @@ func (Scte35DeviceRestrictions) Values() []Scte35DeviceRestrictions {
 	}
 }
 
+type Scte35InputMode string
+
+// Enum values for Scte35InputMode
+const (
+	Scte35InputModeFixed        Scte35InputMode = "FIXED"
+	Scte35InputModeFollowActive Scte35InputMode = "FOLLOW_ACTIVE"
+)
+
+// Values returns all known values for Scte35InputMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Scte35InputMode) Values() []Scte35InputMode {
+	return []Scte35InputMode{
+		"FIXED",
+		"FOLLOW_ACTIVE",
+	}
+}
+
 type Scte35NoRegionalBlackoutFlag string
 
 // Enum values for Scte35NoRegionalBlackoutFlag

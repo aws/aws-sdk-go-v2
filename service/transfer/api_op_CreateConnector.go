@@ -12,8 +12,10 @@ import (
 )
 
 // Creates the connector, which captures the parameters for an outbound connection
-// for the AS2 protocol. The connector is required for sending files from a
-// customer's non Amazon Web Services server.
+// for the AS2 protocol. The connector is required for sending files to an
+// externally hosted AS2 server. For more details about connectors, see Create AS2
+// connectors
+// (https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector).
 func (c *Client) CreateConnector(ctx context.Context, params *CreateConnectorInput, optFns ...func(*Options)) (*CreateConnectorOutput, error) {
 	if params == nil {
 		params = &CreateConnectorInput{}

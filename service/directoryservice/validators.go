@@ -590,6 +590,26 @@ func (m *validateOpDescribeSharedDirectories) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeUpdateDirectory struct {
+}
+
+func (*validateOpDescribeUpdateDirectory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeUpdateDirectory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeUpdateDirectoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeUpdateDirectoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableClientAuthentication struct {
 }
 
@@ -1090,6 +1110,26 @@ func (m *validateOpUpdateConditionalForwarder) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDirectorySetup struct {
+}
+
+func (*validateOpUpdateDirectorySetup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDirectorySetup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDirectorySetupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDirectorySetupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNumberOfDomainControllers struct {
 }
 
@@ -1306,6 +1346,10 @@ func addOpDescribeSharedDirectoriesValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDescribeSharedDirectories{}, middleware.After)
 }
 
+func addOpDescribeUpdateDirectoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeUpdateDirectory{}, middleware.After)
+}
+
 func addOpDisableClientAuthenticationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableClientAuthentication{}, middleware.After)
 }
@@ -1404,6 +1448,10 @@ func addOpUnshareDirectoryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConditionalForwarderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConditionalForwarder{}, middleware.After)
+}
+
+func addOpUpdateDirectorySetupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDirectorySetup{}, middleware.After)
 }
 
 func addOpUpdateNumberOfDomainControllersValidationMiddleware(stack *middleware.Stack) error {
@@ -2120,6 +2168,24 @@ func validateOpDescribeSharedDirectoriesInput(v *DescribeSharedDirectoriesInput)
 	}
 }
 
+func validateOpDescribeUpdateDirectoryInput(v *DescribeUpdateDirectoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeUpdateDirectoryInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if len(v.UpdateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableClientAuthenticationInput(v *DisableClientAuthenticationInput) error {
 	if v == nil {
 		return nil
@@ -2549,6 +2615,24 @@ func validateOpUpdateConditionalForwarderInput(v *UpdateConditionalForwarderInpu
 	}
 	if v.DnsIpAddrs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsIpAddrs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDirectorySetupInput(v *UpdateDirectorySetupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDirectorySetupInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if len(v.UpdateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

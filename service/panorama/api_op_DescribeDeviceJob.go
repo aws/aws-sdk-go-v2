@@ -61,6 +61,9 @@ type DescribeDeviceJobOutput struct {
 	// The job's ID.
 	JobId *string
 
+	// The job's type.
+	JobType types.JobType
+
 	// The job's status.
 	Status types.UpdateProgress
 

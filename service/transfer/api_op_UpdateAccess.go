@@ -113,14 +113,14 @@ type UpdateAccessInput struct {
 
 type UpdateAccessOutput struct {
 
-	// The external ID of the group whose users have access to your Amazon S3 or Amazon
-	// EFS resources over the enabled protocols using Amazon Web ServicesTransfer
-	// Family.
+	// The external identifier of the group whose users have access to your Amazon S3
+	// or Amazon EFS resources over the enabled protocols using Amazon Web
+	// ServicesTransfer Family.
 	//
 	// This member is required.
 	ExternalId *string
 
-	// The ID of the server that the user is attached to.
+	// The identifier of the server that the user is attached to.
 	//
 	// This member is required.
 	ServerId *string

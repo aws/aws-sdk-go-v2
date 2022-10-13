@@ -418,17 +418,6 @@ type DocumentText struct {
 	noSmithyDocumentSerde
 }
 
-// The feedback to submit to Wisdom.
-type FeedbackData struct {
-
-	// The relevance of the target this feedback is for.
-	//
-	// This member is required.
-	Relevance Relevance
-
-	noSmithyDocumentSerde
-}
-
 // A search filter.
 type Filter struct {
 

@@ -77,6 +77,26 @@ func (ConnectionType) Values() []ConnectionType {
 	}
 }
 
+type DesiredState string
+
+// Enum values for DesiredState
+const (
+	DesiredStateRunning DesiredState = "RUNNING"
+	DesiredStateStopped DesiredState = "STOPPED"
+	DesiredStateRemoved DesiredState = "REMOVED"
+)
+
+// Values returns all known values for DesiredState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DesiredState) Values() []DesiredState {
+	return []DesiredState{
+		"RUNNING",
+		"STOPPED",
+		"REMOVED",
+	}
+}
+
 type DeviceAggregatedStatus string
 
 // Enum values for DeviceAggregatedStatus
@@ -90,6 +110,7 @@ const (
 	DeviceAggregatedStatusOffline              DeviceAggregatedStatus = "OFFLINE"
 	DeviceAggregatedStatusLeaseExpired         DeviceAggregatedStatus = "LEASE_EXPIRED"
 	DeviceAggregatedStatusUpdateNeeded         DeviceAggregatedStatus = "UPDATE_NEEDED"
+	DeviceAggregatedStatusRebooting            DeviceAggregatedStatus = "REBOOTING"
 )
 
 // Values returns all known values for DeviceAggregatedStatus. Note that this can
@@ -106,6 +127,7 @@ func (DeviceAggregatedStatus) Values() []DeviceAggregatedStatus {
 		"OFFLINE",
 		"LEASE_EXPIRED",
 		"UPDATE_NEEDED",
+		"REBOOTING",
 	}
 }
 
@@ -148,6 +170,42 @@ func (DeviceConnectionStatus) Values() []DeviceConnectionStatus {
 		"AWAITING_CREDENTIALS",
 		"NOT_AVAILABLE",
 		"ERROR",
+	}
+}
+
+type DeviceReportedStatus string
+
+// Enum values for DeviceReportedStatus
+const (
+	DeviceReportedStatusStopping          DeviceReportedStatus = "STOPPING"
+	DeviceReportedStatusStopped           DeviceReportedStatus = "STOPPED"
+	DeviceReportedStatusStopError         DeviceReportedStatus = "STOP_ERROR"
+	DeviceReportedStatusRemovalFailed     DeviceReportedStatus = "REMOVAL_FAILED"
+	DeviceReportedStatusRemovalInProgress DeviceReportedStatus = "REMOVAL_IN_PROGRESS"
+	DeviceReportedStatusStarting          DeviceReportedStatus = "STARTING"
+	DeviceReportedStatusRunning           DeviceReportedStatus = "RUNNING"
+	DeviceReportedStatusInstallError      DeviceReportedStatus = "INSTALL_ERROR"
+	DeviceReportedStatusLaunched          DeviceReportedStatus = "LAUNCHED"
+	DeviceReportedStatusLaunchError       DeviceReportedStatus = "LAUNCH_ERROR"
+	DeviceReportedStatusInstallInProgress DeviceReportedStatus = "INSTALL_IN_PROGRESS"
+)
+
+// Values returns all known values for DeviceReportedStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceReportedStatus) Values() []DeviceReportedStatus {
+	return []DeviceReportedStatus{
+		"STOPPING",
+		"STOPPED",
+		"STOP_ERROR",
+		"REMOVAL_FAILED",
+		"REMOVAL_IN_PROGRESS",
+		"STARTING",
+		"RUNNING",
+		"INSTALL_ERROR",
+		"LAUNCHED",
+		"LAUNCH_ERROR",
+		"INSTALL_IN_PROGRESS",
 	}
 }
 
@@ -215,7 +273,8 @@ type JobType string
 
 // Enum values for JobType
 const (
-	JobTypeOta JobType = "OTA"
+	JobTypeOta    JobType = "OTA"
+	JobTypeReboot JobType = "REBOOT"
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
@@ -224,6 +283,7 @@ const (
 func (JobType) Values() []JobType {
 	return []JobType{
 		"OTA",
+		"REBOOT",
 	}
 }
 
@@ -318,6 +378,7 @@ const (
 	NodeInstanceStatusRunning      NodeInstanceStatus = "RUNNING"
 	NodeInstanceStatusError        NodeInstanceStatus = "ERROR"
 	NodeInstanceStatusNotAvailable NodeInstanceStatus = "NOT_AVAILABLE"
+	NodeInstanceStatusPaused       NodeInstanceStatus = "PAUSED"
 )
 
 // Values returns all known values for NodeInstanceStatus. Note that this can be
@@ -328,6 +389,25 @@ func (NodeInstanceStatus) Values() []NodeInstanceStatus {
 		"RUNNING",
 		"ERROR",
 		"NOT_AVAILABLE",
+		"PAUSED",
+	}
+}
+
+type NodeSignalValue string
+
+// Enum values for NodeSignalValue
+const (
+	NodeSignalValuePause  NodeSignalValue = "PAUSE"
+	NodeSignalValueResume NodeSignalValue = "RESUME"
+)
+
+// Values returns all known values for NodeSignalValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NodeSignalValue) Values() []NodeSignalValue {
+	return []NodeSignalValue{
+		"PAUSE",
+		"RESUME",
 	}
 }
 

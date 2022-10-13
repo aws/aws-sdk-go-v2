@@ -4,6 +4,7 @@ package directoryservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
@@ -124,6 +125,97 @@ func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// DescribeLDAPSSettingsAPIClient is a client that implements the
+// DescribeLDAPSSettings operation.
+type DescribeLDAPSSettingsAPIClient interface {
+	DescribeLDAPSSettings(context.Context, *DescribeLDAPSSettingsInput, ...func(*Options)) (*DescribeLDAPSSettingsOutput, error)
+}
+
+var _ DescribeLDAPSSettingsAPIClient = (*Client)(nil)
+
+// DescribeLDAPSSettingsPaginatorOptions is the paginator options for
+// DescribeLDAPSSettings
+type DescribeLDAPSSettingsPaginatorOptions struct {
+	// Specifies the number of items that should be displayed on one page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeLDAPSSettingsPaginator is a paginator for DescribeLDAPSSettings
+type DescribeLDAPSSettingsPaginator struct {
+	options   DescribeLDAPSSettingsPaginatorOptions
+	client    DescribeLDAPSSettingsAPIClient
+	params    *DescribeLDAPSSettingsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeLDAPSSettingsPaginator returns a new DescribeLDAPSSettingsPaginator
+func NewDescribeLDAPSSettingsPaginator(client DescribeLDAPSSettingsAPIClient, params *DescribeLDAPSSettingsInput, optFns ...func(*DescribeLDAPSSettingsPaginatorOptions)) *DescribeLDAPSSettingsPaginator {
+	if params == nil {
+		params = &DescribeLDAPSSettingsInput{}
+	}
+
+	options := DescribeLDAPSSettingsPaginatorOptions{}
+	if params.Limit != nil {
+		options.Limit = *params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeLDAPSSettingsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeLDAPSSettingsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeLDAPSSettings page.
+func (p *DescribeLDAPSSettingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeLDAPSSettingsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.Limit = limit
+
+	result, err := p.client.DescribeLDAPSSettings(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeLDAPSSettings(region string) *awsmiddleware.RegisterServiceMetadata {

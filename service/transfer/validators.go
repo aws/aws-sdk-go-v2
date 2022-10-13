@@ -1293,6 +1293,23 @@ func validateHomeDirectoryMappings(v []types.HomeDirectoryMapEntry) error {
 	}
 }
 
+func validateOnPartialUploadWorkflowDetails(v []types.WorkflowDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnPartialUploadWorkflowDetails"}
+	for i := range v {
+		if err := validateWorkflowDetail(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOnUploadWorkflowDetails(v []types.WorkflowDetail) error {
 	if v == nil {
 		return nil
@@ -1438,11 +1455,14 @@ func validateWorkflowDetails(v *types.WorkflowDetails) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkflowDetails"}
-	if v.OnUpload == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OnUpload"))
-	} else if v.OnUpload != nil {
+	if v.OnUpload != nil {
 		if err := validateOnUploadWorkflowDetails(v.OnUpload); err != nil {
 			invalidParams.AddNested("OnUpload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnPartialUpload != nil {
+		if err := validateOnPartialUploadWorkflowDetails(v.OnPartialUpload); err != nil {
+			invalidParams.AddNested("OnPartialUpload", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

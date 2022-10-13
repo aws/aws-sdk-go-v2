@@ -1,0 +1,8 @@
+{
+    "id": "126398fd-c7c5-42f1-91eb-19aeb6512e2e",
+    "type": "feature",
+    "description": "Add UnprocessedDataSources to CreateDetectorResponse which specifies the data sources that couldn't be enabled during the CreateDetector request. In addition, update documentations.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

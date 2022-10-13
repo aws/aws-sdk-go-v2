@@ -43,6 +43,9 @@ type ApplicationInstance struct {
 	// The application instance's name.
 	Name *string
 
+	// The application's state.
+	RuntimeContextStates []ReportedRuntimeContextState
+
 	// The application instance's status.
 	Status ApplicationInstanceStatus
 
@@ -133,6 +136,9 @@ type DeviceJob struct {
 	// The job's ID.
 	JobId *string
 
+	// The job's type.
+	JobType JobType
+
 	noSmithyDocumentSerde
 }
 
@@ -207,6 +213,9 @@ type LatestDeviceJob struct {
 
 	// The target version of the device software.
 	ImageVersion *string
+
+	// The job's type.
+	JobType JobType
 
 	// Status of the latest device job.
 	Status UpdateProgress
@@ -450,6 +459,22 @@ type NodeOutputPort struct {
 	noSmithyDocumentSerde
 }
 
+// A signal to a camera node to start or stop processing video.
+type NodeSignal struct {
+
+	// The camera node's name, from the application manifest.
+	//
+	// This member is required.
+	NodeInstanceId *string
+
+	// The signal value.
+	//
+	// This member is required.
+	Signal NodeSignalValue
+
+	noSmithyDocumentSerde
+}
+
 // Network time protocol (NTP) server settings. Use this option to connect to local
 // NTP servers instead of pool.ntp.org.
 type NtpPayload struct {
@@ -640,6 +665,32 @@ type PackageVersionOutputConfig struct {
 
 	// Indicates that the version is recommended for all users.
 	MarkLatest bool
+
+	noSmithyDocumentSerde
+}
+
+// An application instance's state.
+type ReportedRuntimeContextState struct {
+
+	// The application's desired state.
+	//
+	// This member is required.
+	DesiredState DesiredState
+
+	// The application's reported status.
+	//
+	// This member is required.
+	DeviceReportedStatus DeviceReportedStatus
+
+	// When the device reported the application's state.
+	//
+	// This member is required.
+	DeviceReportedTime *time.Time
+
+	// The device's name.
+	//
+	// This member is required.
+	RuntimeContextName *string
 
 	noSmithyDocumentSerde
 }

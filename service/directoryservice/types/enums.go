@@ -292,6 +292,24 @@ func (LDAPSType) Values() []LDAPSType {
 	}
 }
 
+type OSVersion string
+
+// Enum values for OSVersion
+const (
+	OSVersionVersion2012 OSVersion = "SERVER_2012"
+	OSVersionVersion2019 OSVersion = "SERVER_2019"
+)
+
+// Values returns all known values for OSVersion. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OSVersion) Values() []OSVersion {
+	return []OSVersion{
+		"SERVER_2012",
+		"SERVER_2019",
+	}
+}
+
 type RadiusAuthenticationProtocol string
 
 // Enum values for RadiusAuthenticationProtocol
@@ -615,5 +633,41 @@ func (TrustType) Values() []TrustType {
 	return []TrustType{
 		"Forest",
 		"External",
+	}
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusUpdated      UpdateStatus = "Updated"
+	UpdateStatusUpdating     UpdateStatus = "Updating"
+	UpdateStatusUpdateFailed UpdateStatus = "UpdateFailed"
+)
+
+// Values returns all known values for UpdateStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UpdateStatus) Values() []UpdateStatus {
+	return []UpdateStatus{
+		"Updated",
+		"Updating",
+		"UpdateFailed",
+	}
+}
+
+type UpdateType string
+
+// Enum values for UpdateType
+const (
+	UpdateTypeOs UpdateType = "OS"
+)
+
+// Values returns all known values for UpdateType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UpdateType) Values() []UpdateType {
+	return []UpdateType{
+		"OS",
 	}
 }

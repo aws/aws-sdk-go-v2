@@ -59,6 +59,10 @@ type CreateDetectorOutput struct {
 	// The unique ID of the created detector.
 	DetectorId *string
 
+	// Specifies the data sources that couldn't be enabled when GuardDuty was enabled
+	// for the first time.
+	UnprocessedDataSources *types.UnprocessedDataSourcesResult
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
