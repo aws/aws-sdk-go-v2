@@ -1,8 +1,0 @@
-{
-    "id": "cb2f58fe-4353-4849-981b-120db9807f06",
-    "type": "feature",
-    "description": "MediaConvert now supports specifying the minimum percentage of the HRD buffer available at the end of each encoded video segment.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

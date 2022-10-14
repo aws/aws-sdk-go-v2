@@ -1,3 +1,7 @@
+# v1.26.0 (2022-10-14)
+
+* **Feature**: MediaConvert now supports specifying the minimum percentage of the HRD buffer available at the end of each encoded video segment.
+
 # v1.25.12 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

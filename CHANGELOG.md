@@ -1,3 +1,9 @@
+# Release (2022-10-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.26.0](service/mediaconvert/CHANGELOG.md#v1260-2022-10-14)
+  * **Feature**: MediaConvert now supports specifying the minimum percentage of the HRD buffer available at the end of each encoded video segment.
+
 # Release (2022-10-13)
 
 ## Module Highlights
