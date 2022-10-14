@@ -11856,6 +11856,19 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.GopSizeUnits = types.H264GopSizeUnits(jtv)
 			}
 
+		case "hrdBufferFinalFillPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HrdBufferFinalFillPercentage = int32(i64)
+			}
+
 		case "hrdBufferInitialFillPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12404,6 +12417,19 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return fmt.Errorf("expected H265GopSizeUnits to be of type string, got %T instead", value)
 				}
 				sv.GopSizeUnits = types.H265GopSizeUnits(jtv)
+			}
+
+		case "hrdBufferFinalFillPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HrdBufferFinalFillPercentage = int32(i64)
 			}
 
 		case "hrdBufferInitialFillPercentage":
@@ -17154,6 +17180,19 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 					return fmt.Errorf("expected Mpeg2GopSizeUnits to be of type string, got %T instead", value)
 				}
 				sv.GopSizeUnits = types.Mpeg2GopSizeUnits(jtv)
+			}
+
+		case "hrdBufferFinalFillPercentage":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max100 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HrdBufferFinalFillPercentage = int32(i64)
 			}
 
 		case "hrdBufferInitialFillPercentage":

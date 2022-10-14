@@ -3099,6 +3099,12 @@ type H264Settings struct {
 	// setting GOP size (GopSize).
 	GopSizeUnits H264GopSizeUnits
 
+	// If your downstream systems have strict buffer requirements: Specify the minimum
+	// percentage of the HRD buffer that's available at the end of each encoded video
+	// segment. For the best video quality: Set to 0 or leave blank to automatically
+	// determine the final buffer fill percentage.
+	HrdBufferFinalFillPercentage int32
+
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
 	HrdBufferInitialFillPercentage int32
 
@@ -3473,6 +3479,12 @@ type H265Settings struct {
 	// Specified, seconds (SECONDS) and then provide the GOP length in the related
 	// setting GOP size (GopSize).
 	GopSizeUnits H265GopSizeUnits
+
+	// If your downstream systems have strict buffer requirements: Specify the minimum
+	// percentage of the HRD buffer that's available at the end of each encoded video
+	// segment. For the best video quality: Set to 0 or leave blank to automatically
+	// determine the final buffer fill percentage.
+	HrdBufferFinalFillPercentage int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
 	HrdBufferInitialFillPercentage int32
@@ -5822,6 +5834,12 @@ type Mpeg2Settings struct {
 	// Specify the units for GOP size (GopSize). If you don't specify a value here, by
 	// default the encoder measures GOP size in frames.
 	GopSizeUnits Mpeg2GopSizeUnits
+
+	// If your downstream systems have strict buffer requirements: Specify the minimum
+	// percentage of the HRD buffer that's available at the end of each encoded video
+	// segment. For the best video quality: Set to 0 or leave blank to automatically
+	// determine the final buffer fill percentage.
+	HrdBufferFinalFillPercentage int32
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
 	HrdBufferInitialFillPercentage int32

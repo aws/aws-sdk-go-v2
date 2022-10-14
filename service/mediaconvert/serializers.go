@@ -5263,6 +5263,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.String(string(v.GopSizeUnits))
 	}
 
+	if v.HrdBufferFinalFillPercentage != 0 {
+		ok := object.Key("hrdBufferFinalFillPercentage")
+		ok.Integer(v.HrdBufferFinalFillPercentage)
+	}
+
 	if v.HrdBufferInitialFillPercentage != 0 {
 		ok := object.Key("hrdBufferInitialFillPercentage")
 		ok.Integer(v.HrdBufferInitialFillPercentage)
@@ -5513,6 +5518,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if len(v.GopSizeUnits) > 0 {
 		ok := object.Key("gopSizeUnits")
 		ok.String(string(v.GopSizeUnits))
+	}
+
+	if v.HrdBufferFinalFillPercentage != 0 {
+		ok := object.Key("hrdBufferFinalFillPercentage")
+		ok.Integer(v.HrdBufferFinalFillPercentage)
 	}
 
 	if v.HrdBufferInitialFillPercentage != 0 {
@@ -7543,6 +7553,11 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 	if len(v.GopSizeUnits) > 0 {
 		ok := object.Key("gopSizeUnits")
 		ok.String(string(v.GopSizeUnits))
+	}
+
+	if v.HrdBufferFinalFillPercentage != 0 {
+		ok := object.Key("hrdBufferFinalFillPercentage")
+		ok.Integer(v.HrdBufferFinalFillPercentage)
 	}
 
 	if v.HrdBufferInitialFillPercentage != 0 {
