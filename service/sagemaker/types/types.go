@@ -2352,7 +2352,7 @@ type ClarifyExplainerConfig struct {
 
 	// A JMESPath boolean expression used to filter which records to explain.
 	// Explanations are activated by default. See EnableExplanations
-	// (https://docs.aws.amazon.com/sagemaker-dg/src/AWSIronmanApiDoc/build/server-root/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)for
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)for
 	// additional information.
 	EnableExplanations *string
 
@@ -2391,7 +2391,7 @@ type ClarifyInferenceConfig struct {
 	// Provides the JMESPath expression to extract the features from a model container
 	// input in JSON Lines format. For example, if FeaturesAttribute is the JMESPath
 	// expression 'myfeatures', it extracts a list of features [1,2,3] from request
-	// data '{"myfeatures":[1,2,3}'.
+	// data '{"myfeatures":[1,2,3]}'.
 	FeaturesAttribute *string
 
 	// A JMESPath expression used to locate the list of label headers in the model
@@ -7277,9 +7277,9 @@ type InputConfig struct {
 	S3Uri *string
 
 	// Specifies the framework version to use. This API field is only supported for the
-	// PyTorch and TensorFlow frameworks. For information about framework versions
-	// supported for cloud targets and edge devices, see Cloud Supported Instance Types
-	// and Frameworks
+	// MXNet, PyTorch, TensorFlow and TensorFlow Lite frameworks. For information about
+	// framework versions supported for cloud targets and edge devices, see Cloud
+	// Supported Instance Types and Frameworks
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html) and
 	// Edge Supported Frameworks
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html).

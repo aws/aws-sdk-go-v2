@@ -6849,6 +6849,11 @@ func awsRestjson1_serializeDocumentFunctionConfiguration(v *types.FunctionConfig
 		ok.String(*v.Executable)
 	}
 
+	if v.FunctionRuntimeOverride != nil {
+		ok := object.Key("FunctionRuntimeOverride")
+		ok.String(*v.FunctionRuntimeOverride)
+	}
+
 	if v.MemorySize != 0 {
 		ok := object.Key("MemorySize")
 		ok.Integer(v.MemorySize)

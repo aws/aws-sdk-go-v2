@@ -26,27 +26,26 @@ import (
 // estimation of model parameters during training. Hyperparameters can be tuned to
 // optimize this learning process. For a list of hyperparameters for each training
 // algorithm provided by SageMaker, see Algorithms
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). You must not
-// include any security-sensitive information, such as account access IDs, secrets,
-// and tokens, in the dictionary for configuring hyperparameters. SageMaker rejects
-// the training job request and returns an exception error for detected
-// credentials, if such user input is found.
+// (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). Do not include any
+// security-sensitive information including account access IDs, secrets or tokens
+// in any hyperparameter field. If the use of security-sensitive credentials are
+// detected, SageMaker will reject your training job request and return an
+// exception error.
 //
-// * InputDataConfig - Describes the
-// training dataset and the Amazon S3, EFS, or FSx location where it is stored.
+// * InputDataConfig - Describes the training dataset and the
+// Amazon S3, EFS, or FSx location where it is stored.
 //
-// *
-// OutputDataConfig - Identifies the Amazon S3 bucket where you want SageMaker to
-// save the results of model training.
+// * OutputDataConfig -
+// Identifies the Amazon S3 bucket where you want SageMaker to save the results of
+// model training.
 //
-// * ResourceConfig - Identifies the
-// resources, ML compute instances, and ML storage volumes to deploy for model
-// training. In distributed training, you specify more than one instance.
+// * ResourceConfig - Identifies the resources, ML compute
+// instances, and ML storage volumes to deploy for model training. In distributed
+// training, you specify more than one instance.
 //
-// *
-// EnableManagedSpotTraining - Optimize the cost of training machine learning
-// models by up to 80% by using Amazon EC2 Spot instances. For more information,
-// see Managed Spot Training
+// * EnableManagedSpotTraining -
+// Optimize the cost of training machine learning models by up to 80% by using
+// Amazon EC2 Spot instances. For more information, see Managed Spot Training
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
 // *
@@ -203,10 +202,10 @@ type CreateTrainingJobInput struct {
 	// Algorithms (https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). You can
 	// specify a maximum of 100 hyperparameters. Each hyperparameter is a key-value
 	// pair. Each key and value is limited to 256 characters, as specified by the
-	// Length Constraint. You must not include any security-sensitive information, such
-	// as account access IDs, secrets, and tokens, in the dictionary for configuring
-	// hyperparameters. SageMaker rejects the training job request and returns an
-	// exception error for detected credentials, if such user input is found.
+	// Length Constraint. Do not include any security-sensitive information including
+	// account access IDs, secrets or tokens in any hyperparameter field. If the use of
+	// security-sensitive credentials are detected, SageMaker will reject your training
+	// job request and return an exception error.
 	HyperParameters map[string]string
 
 	// An array of Channel objects. Each channel is a named input source.

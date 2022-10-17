@@ -15974,6 +15974,15 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				sv.Executable = ptr.String(jtv)
 			}
 
+		case "FunctionRuntimeOverride":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FunctionRuntimeOverride = ptr.String(jtv)
+			}
+
 		case "MemorySize":
 			if value != nil {
 				jtv, ok := value.(json.Number)

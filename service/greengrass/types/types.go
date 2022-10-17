@@ -295,6 +295,10 @@ type FunctionConfiguration struct {
 	// The name of the function executable.
 	Executable *string
 
+	// The Lambda runtime supported by Greengrass which is to be used instead of the
+	// one specified in the Lambda function.
+	FunctionRuntimeOverride *string
+
 	// The memory size, in KB, which the function requires. This setting is not
 	// applicable and should be cleared when you run the Lambda function without
 	// containerization.

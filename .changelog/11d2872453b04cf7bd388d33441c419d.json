@@ -1,0 +1,8 @@
+{
+    "id": "11d28724-53b0-4cf7-bd38-8d33441c419d",
+    "type": "feature",
+    "description": "This change allows customers to specify FunctionRuntimeOverride in FunctionDefinitionVersion. This configuration can be used if the runtime on the device is different from the AWS Lambda runtime specified for that function.",
+    "modules": [
+        "service/greengrass"
+    ]
+}
