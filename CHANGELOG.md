@@ -1,3 +1,11 @@
+# Release (2022-10-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.14.0](service/greengrass/CHANGELOG.md#v1140-2022-10-17)
+  * **Feature**: This change allows customers to specify FunctionRuntimeOverride in FunctionDefinitionVersion. This configuration can be used if the runtime on the device is different from the AWS Lambda runtime specified for that function.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.47.0](service/sagemaker/CHANGELOG.md#v1470-2022-10-17)
+  * **Feature**: This release adds support for C7g, C6g, C6gd, C6gn, M6g, M6gd, R6g, and R6gn Graviton instance types in Amazon SageMaker Inference.
+
 # Release (2022-10-14)
 
 ## Module Highlights

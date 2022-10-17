@@ -1,8 +1,0 @@
-{
-    "id": "b0173b48-63db-4d39-9e8b-6af179aa1538",
-    "type": "feature",
-    "description": "This release adds support for C7g, C6g, C6gd, C6gn, M6g, M6gd, R6g, and R6gn Graviton instance types in Amazon SageMaker Inference.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
