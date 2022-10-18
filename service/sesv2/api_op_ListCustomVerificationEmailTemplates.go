@@ -14,8 +14,8 @@ import (
 
 // Lists the existing custom verification email templates for your account in the
 // current Amazon Web Services Region. For more information about custom
-// verification email templates, see Using Custom Verification Email Templates
-// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html)
+// verification email templates, see Using custom verification email templates
+// (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
 // in the Amazon SES Developer Guide. You can execute this operation no more than
 // once per second.
 func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error) {

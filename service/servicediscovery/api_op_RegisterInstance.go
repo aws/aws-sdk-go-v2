@@ -71,12 +71,13 @@ type RegisterInstanceInput struct {
 	//
 	// * For each attribute, the applicable value.
 	//
-	// Supported
-	// attribute keys include the following: AWS_ALIAS_DNS_NAME If you want Cloud Map
-	// to create an Amazon Route 53 alias record that routes traffic to an Elastic Load
-	// Balancing load balancer, specify the DNS name that's associated with the load
-	// balancer. For information about how to get the DNS name, see "DNSName" in the
-	// topic AliasTarget
+	// Do not
+	// include sensitive information in the attributes if the namespace is discoverable
+	// by public DNS queries. Supported attribute keys include the following:
+	// AWS_ALIAS_DNS_NAME If you want Cloud Map to create an Amazon Route 53 alias
+	// record that routes traffic to an Elastic Load Balancing load balancer, specify
+	// the DNS name that's associated with the load balancer. For information about how
+	// to get the DNS name, see "DNSName" in the topic AliasTarget
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
 	// in the Route 53 API Reference. Note the following:
 	//
@@ -156,6 +157,11 @@ type RegisterInstanceInput struct {
 	// an existing health check, Cloud Map deletes the old health check and creates a
 	// new one. The health check isn't deleted immediately, so it will still appear for
 	// a while if you submit a ListHealthChecks request, for example.
+	//
+	// Do not include
+	// sensitive information in InstanceId if the namespace is discoverable by public
+	// DNS queries and any Type member of DnsRecord for the service contains SRV
+	// because the InstanceId is discoverable by public DNS queries.
 	//
 	// This member is required.
 	InstanceId *string

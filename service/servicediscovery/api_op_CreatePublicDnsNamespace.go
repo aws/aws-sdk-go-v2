@@ -18,9 +18,10 @@ import (
 // the service is backend.example.com. You can discover instances that were
 // registered with a public DNS namespace by using either a DiscoverInstances
 // request or using DNS. For the current quota on the number of namespaces that you
-// can create using the same account, see Cloud Map quotas
+// can create using the same Amazon Web Services account, see Cloud Map quotas
 // (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
-// Cloud Map Developer Guide.
+// Cloud Map Developer Guide. The CreatePublicDnsNamespace API operation is not
+// supported in the Amazon Web Services GovCloud (US) Regions.
 func (c *Client) CreatePublicDnsNamespace(ctx context.Context, params *CreatePublicDnsNamespaceInput, optFns ...func(*Options)) (*CreatePublicDnsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreatePublicDnsNamespaceInput{}
@@ -38,7 +39,8 @@ func (c *Client) CreatePublicDnsNamespace(ctx context.Context, params *CreatePub
 
 type CreatePublicDnsNamespaceInput struct {
 
-	// The name that you want to assign to this namespace.
+	// The name that you want to assign to this namespace. Do not include sensitive
+	// information in the name. The name is publicly available using DNS queries.
 	//
 	// This member is required.
 	Name *string

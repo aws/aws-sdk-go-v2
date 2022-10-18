@@ -35,8 +35,7 @@ func (c *Client) ListSuppressedDestinations(ctx context.Context, params *ListSup
 type ListSuppressedDestinationsInput struct {
 
 	// Used to filter the list of suppressed email destinations so that it only
-	// includes addresses that were added to the list before a specific date. The date
-	// that you specify should be in Unix time format.
+	// includes addresses that were added to the list before a specific date.
 	EndDate *time.Time
 
 	// A token returned from a previous call to ListSuppressedDestinations to indicate
@@ -53,8 +52,7 @@ type ListSuppressedDestinationsInput struct {
 	Reasons []types.SuppressionListReason
 
 	// Used to filter the list of suppressed email destinations so that it only
-	// includes addresses that were added to the list after a specific date. The date
-	// that you specify should be in Unix time format.
+	// includes addresses that were added to the list after a specific date.
 	StartDate *time.Time
 
 	noSmithyDocumentSerde

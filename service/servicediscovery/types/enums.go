@@ -24,9 +24,10 @@ type FilterCondition string
 
 // Enum values for FilterCondition
 const (
-	FilterConditionEq      FilterCondition = "EQ"
-	FilterConditionIn      FilterCondition = "IN"
-	FilterConditionBetween FilterCondition = "BETWEEN"
+	FilterConditionEq         FilterCondition = "EQ"
+	FilterConditionIn         FilterCondition = "IN"
+	FilterConditionBetween    FilterCondition = "BETWEEN"
+	FilterConditionBeginsWith FilterCondition = "BEGINS_WITH"
 )
 
 // Values returns all known values for FilterCondition. Note that this can be
@@ -37,6 +38,7 @@ func (FilterCondition) Values() []FilterCondition {
 		"EQ",
 		"IN",
 		"BETWEEN",
+		"BEGINS_WITH",
 	}
 }
 
@@ -106,7 +108,9 @@ type NamespaceFilterName string
 
 // Enum values for NamespaceFilterName
 const (
-	NamespaceFilterNameType NamespaceFilterName = "TYPE"
+	NamespaceFilterNameType     NamespaceFilterName = "TYPE"
+	NamespaceFilterNameName     NamespaceFilterName = "NAME"
+	NamespaceFilterNameHttpName NamespaceFilterName = "HTTP_NAME"
 )
 
 // Values returns all known values for NamespaceFilterName. Note that this can be
@@ -115,6 +119,8 @@ const (
 func (NamespaceFilterName) Values() []NamespaceFilterName {
 	return []NamespaceFilterName{
 		"TYPE",
+		"NAME",
+		"HTTP_NAME",
 	}
 }
 

@@ -35,8 +35,11 @@ type CreateBatchImportJobInput struct {
 	EventTypeName *string
 
 	// The ARN of the IAM role created for Amazon S3 bucket that holds your data file.
-	// The IAM role must have read and write permissions to both input and output S3
-	// buckets.
+	// The IAM role must have read permissions to your input S3 bucket and write
+	// permissions to your output S3 bucket. For more information about bucket
+	// permissions, see User policy examples
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html)
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	IamRoleArn *string

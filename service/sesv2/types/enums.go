@@ -391,6 +391,24 @@ func (ReviewStatus) Values() []ReviewStatus {
 	}
 }
 
+type ScalingMode string
+
+// Enum values for ScalingMode
+const (
+	ScalingModeStandard ScalingMode = "STANDARD"
+	ScalingModeManaged  ScalingMode = "MANAGED"
+)
+
+// Values returns all known values for ScalingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ScalingMode) Values() []ScalingMode {
+	return []ScalingMode{
+		"STANDARD",
+		"MANAGED",
+	}
+}
+
 type SubscriptionStatus string
 
 // Enum values for SubscriptionStatus
@@ -460,6 +478,30 @@ func (TlsPolicy) Values() []TlsPolicy {
 	return []TlsPolicy{
 		"REQUIRE",
 		"OPTIONAL",
+	}
+}
+
+type VerificationStatus string
+
+// Enum values for VerificationStatus
+const (
+	VerificationStatusPending          VerificationStatus = "PENDING"
+	VerificationStatusSuccess          VerificationStatus = "SUCCESS"
+	VerificationStatusFailed           VerificationStatus = "FAILED"
+	VerificationStatusTemporaryFailure VerificationStatus = "TEMPORARY_FAILURE"
+	VerificationStatusNotStarted       VerificationStatus = "NOT_STARTED"
+)
+
+// Values returns all known values for VerificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationStatus) Values() []VerificationStatus {
+	return []VerificationStatus{
+		"PENDING",
+		"SUCCESS",
+		"FAILED",
+		"TEMPORARY_FAILURE",
+		"NOT_STARTED",
 	}
 }
 

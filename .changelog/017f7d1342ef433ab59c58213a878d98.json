@@ -1,0 +1,8 @@
+{
+    "id": "017f7d13-42ef-433a-b59c-58213a878d98",
+    "type": "documentation",
+    "description": "Documentation Updates for Amazon Fraud Detector",
+    "modules": [
+        "service/frauddetector"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "92b596e6-dbe5-4594-a432-c831c9bfb8de",
+    "type": "feature",
+    "description": "This change allows customers to enable data capturing while running a batch transform job, and configure monitoring schedule to monitoring the captured data.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

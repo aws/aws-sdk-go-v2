@@ -1,0 +1,8 @@
+{
+    "id": "9ca01dec-42ba-4697-8fa0-e76b04f41650",
+    "type": "feature",
+    "description": "This release allows subscribers to enable Dedicated IPs (managed) to send email via a fully managed dedicated IP experience. It also adds identities' VerificationStatus in the response of GetEmailIdentity and ListEmailIdentities APIs, and ImportJobs counts in the response of ListImportJobs API.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

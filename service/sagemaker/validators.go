@@ -5452,6 +5452,42 @@ func validateAutoMLSecurityConfig(v *types.AutoMLSecurityConfig) error {
 	}
 }
 
+func validateBatchDataCaptureConfig(v *types.BatchDataCaptureConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDataCaptureConfig"}
+	if v.DestinationS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationS3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchTransformInput(v *types.BatchTransformInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchTransformInput"}
+	if v.DataCapturedDestinationS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataCapturedDestinationS3Uri"))
+	}
+	if v.DatasetFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetFormat"))
+	}
+	if v.LocalPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocalPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBias(v *types.Bias) error {
 	if v == nil {
 		return nil
@@ -6015,11 +6051,14 @@ func validateDataQualityJobInput(v *types.DataQualityJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataQualityJobInput"}
-	if v.EndpointInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
-	} else if v.EndpointInput != nil {
+	if v.EndpointInput != nil {
 		if err := validateEndpointInput(v.EndpointInput); err != nil {
 			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchTransformInput != nil {
+		if err := validateBatchTransformInput(v.BatchTransformInput); err != nil {
+			invalidParams.AddNested("BatchTransformInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7610,11 +7649,14 @@ func validateModelBiasJobInput(v *types.ModelBiasJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModelBiasJobInput"}
-	if v.EndpointInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
-	} else if v.EndpointInput != nil {
+	if v.EndpointInput != nil {
 		if err := validateEndpointInput(v.EndpointInput); err != nil {
 			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchTransformInput != nil {
+		if err := validateBatchTransformInput(v.BatchTransformInput); err != nil {
+			invalidParams.AddNested("BatchTransformInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GroundTruthS3Input == nil {
@@ -7672,11 +7714,14 @@ func validateModelExplainabilityJobInput(v *types.ModelExplainabilityJobInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModelExplainabilityJobInput"}
-	if v.EndpointInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
-	} else if v.EndpointInput != nil {
+	if v.EndpointInput != nil {
 		if err := validateEndpointInput(v.EndpointInput); err != nil {
 			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchTransformInput != nil {
+		if err := validateBatchTransformInput(v.BatchTransformInput); err != nil {
+			invalidParams.AddNested("BatchTransformInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7925,11 +7970,14 @@ func validateModelQualityJobInput(v *types.ModelQualityJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ModelQualityJobInput"}
-	if v.EndpointInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
-	} else if v.EndpointInput != nil {
+	if v.EndpointInput != nil {
 		if err := validateEndpointInput(v.EndpointInput); err != nil {
 			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchTransformInput != nil {
+		if err := validateBatchTransformInput(v.BatchTransformInput); err != nil {
+			invalidParams.AddNested("BatchTransformInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.GroundTruthS3Input == nil {
@@ -7983,11 +8031,14 @@ func validateMonitoringInput(v *types.MonitoringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "MonitoringInput"}
-	if v.EndpointInput == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointInput"))
-	} else if v.EndpointInput != nil {
+	if v.EndpointInput != nil {
 		if err := validateEndpointInput(v.EndpointInput); err != nil {
 			invalidParams.AddNested("EndpointInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchTransformInput != nil {
+		if err := validateBatchTransformInput(v.BatchTransformInput); err != nil {
+			invalidParams.AddNested("BatchTransformInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11342,6 +11393,11 @@ func validateOpCreateTransformJobInput(v *CreateTransformJobInput) error {
 	} else if v.TransformOutput != nil {
 		if err := validateTransformOutput(v.TransformOutput); err != nil {
 			invalidParams.AddNested("TransformOutput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataCaptureConfig != nil {
+		if err := validateBatchDataCaptureConfig(v.DataCaptureConfig); err != nil {
+			invalidParams.AddNested("DataCaptureConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TransformResources == nil {

@@ -37,6 +37,7 @@
         "api_op_GetContactList.go",
         "api_op_GetCustomVerificationEmailTemplate.go",
         "api_op_GetDedicatedIp.go",
+        "api_op_GetDedicatedIpPool.go",
         "api_op_GetDedicatedIps.go",
         "api_op_GetDeliverabilityDashboardOptions.go",
         "api_op_GetDeliverabilityTestReport.go",

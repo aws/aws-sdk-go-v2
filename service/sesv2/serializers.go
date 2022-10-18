@@ -556,6 +556,11 @@ func awsRestjson1_serializeOpDocumentCreateDedicatedIpPoolInput(v *CreateDedicat
 		ok.String(*v.PoolName)
 	}
 
+	if len(v.ScalingMode) > 0 {
+		ok := object.Key("ScalingMode")
+		ok.String(string(v.ScalingMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -2039,6 +2044,64 @@ func awsRestjson1_serializeOpHttpBindingsGetDedicatedIpInput(v *GetDedicatedIpIn
 	}
 	if v.Ip != nil {
 		if err := encoder.SetURI("Ip").String(*v.Ip); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetDedicatedIpPool struct {
+}
+
+func (*awsRestjson1_serializeOpGetDedicatedIpPool) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetDedicatedIpPool) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDedicatedIpPoolInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/dedicated-ip-pools/{PoolName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetDedicatedIpPoolInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetDedicatedIpPoolInput(v *GetDedicatedIpPoolInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.PoolName == nil || len(*v.PoolName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member PoolName must not be empty")}
+	}
+	if v.PoolName != nil {
+		if err := encoder.SetURI("PoolName").String(*v.PoolName); err != nil {
 			return err
 		}
 	}

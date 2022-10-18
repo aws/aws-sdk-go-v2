@@ -39,6 +39,9 @@ type CreateDedicatedIpPoolInput struct {
 	// This member is required.
 	PoolName *string
 
+	// The type of scaling mode.
+	ScalingMode types.ScalingMode
+
 	// An object that defines the tags (keys and values) that you want to associate
 	// with the pool.
 	Tags []types.Tag

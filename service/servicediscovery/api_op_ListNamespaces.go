@@ -13,7 +13,7 @@ import (
 )
 
 // Lists summary information about the namespaces that were created by the current
-// account.
+// Amazon Web Services account.
 func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput, optFns ...func(*Options)) (*ListNamespacesOutput, error) {
 	if params == nil {
 		params = &ListNamespacesInput{}

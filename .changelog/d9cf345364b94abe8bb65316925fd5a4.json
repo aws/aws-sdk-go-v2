@@ -1,0 +1,8 @@
+{
+    "id": "d9cf3453-64b9-4abe-8bb6-5316925fd5a4",
+    "type": "feature",
+    "description": "Updated the ListNamespaces API to support the NAME and HTTP_NAME filters, and the BEGINS_WITH filter condition.",
+    "modules": [
+        "service/servicediscovery"
+    ]
+}

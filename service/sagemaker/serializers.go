@@ -15159,6 +15159,105 @@ func awsAwsjson11_serializeDocumentAutoRollbackConfig(v *types.AutoRollbackConfi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBatchDataCaptureConfig(v *types.BatchDataCaptureConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationS3Uri != nil {
+		ok := object.Key("DestinationS3Uri")
+		ok.String(*v.DestinationS3Uri)
+	}
+
+	if v.GenerateInferenceId {
+		ok := object.Key("GenerateInferenceId")
+		ok.Boolean(v.GenerateInferenceId)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentBatchTransformInput(v *types.BatchTransformInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataCapturedDestinationS3Uri != nil {
+		ok := object.Key("DataCapturedDestinationS3Uri")
+		ok.String(*v.DataCapturedDestinationS3Uri)
+	}
+
+	if v.DatasetFormat != nil {
+		ok := object.Key("DatasetFormat")
+		if err := awsAwsjson11_serializeDocumentMonitoringDatasetFormat(v.DatasetFormat, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndTimeOffset != nil {
+		ok := object.Key("EndTimeOffset")
+		ok.String(*v.EndTimeOffset)
+	}
+
+	if v.FeaturesAttribute != nil {
+		ok := object.Key("FeaturesAttribute")
+		ok.String(*v.FeaturesAttribute)
+	}
+
+	if v.InferenceAttribute != nil {
+		ok := object.Key("InferenceAttribute")
+		ok.String(*v.InferenceAttribute)
+	}
+
+	if v.LocalPath != nil {
+		ok := object.Key("LocalPath")
+		ok.String(*v.LocalPath)
+	}
+
+	if v.ProbabilityAttribute != nil {
+		ok := object.Key("ProbabilityAttribute")
+		ok.String(*v.ProbabilityAttribute)
+	}
+
+	if v.ProbabilityThresholdAttribute != nil {
+		ok := object.Key("ProbabilityThresholdAttribute")
+		switch {
+		case math.IsNaN(*v.ProbabilityThresholdAttribute):
+			ok.String("NaN")
+
+		case math.IsInf(*v.ProbabilityThresholdAttribute, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.ProbabilityThresholdAttribute, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.ProbabilityThresholdAttribute)
+
+		}
+	}
+
+	if len(v.S3DataDistributionType) > 0 {
+		ok := object.Key("S3DataDistributionType")
+		ok.String(string(v.S3DataDistributionType))
+	}
+
+	if len(v.S3InputMode) > 0 {
+		ok := object.Key("S3InputMode")
+		ok.String(string(v.S3InputMode))
+	}
+
+	if v.StartTimeOffset != nil {
+		ok := object.Key("StartTimeOffset")
+		ok.String(*v.StartTimeOffset)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBias(v *types.Bias, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16221,6 +16320,13 @@ func awsAwsjson11_serializeDocumentDataQualityBaselineConfig(v *types.DataQualit
 func awsAwsjson11_serializeDocumentDataQualityJobInput(v *types.DataQualityJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BatchTransformInput != nil {
+		ok := object.Key("BatchTransformInput")
+		if err := awsAwsjson11_serializeDocumentBatchTransformInput(v.BatchTransformInput, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndpointInput != nil {
 		ok := object.Key("EndpointInput")
@@ -18595,6 +18701,13 @@ func awsAwsjson11_serializeDocumentModelBiasJobInput(v *types.ModelBiasJobInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchTransformInput != nil {
+		ok := object.Key("BatchTransformInput")
+		if err := awsAwsjson11_serializeDocumentBatchTransformInput(v.BatchTransformInput, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EndpointInput != nil {
 		ok := object.Key("EndpointInput")
 		if err := awsAwsjson11_serializeDocumentEndpointInput(v.EndpointInput, ok); err != nil {
@@ -18713,6 +18826,13 @@ func awsAwsjson11_serializeDocumentModelExplainabilityBaselineConfig(v *types.Mo
 func awsAwsjson11_serializeDocumentModelExplainabilityJobInput(v *types.ModelExplainabilityJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BatchTransformInput != nil {
+		ok := object.Key("BatchTransformInput")
+		if err := awsAwsjson11_serializeDocumentBatchTransformInput(v.BatchTransformInput, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndpointInput != nil {
 		ok := object.Key("EndpointInput")
@@ -19073,6 +19193,13 @@ func awsAwsjson11_serializeDocumentModelQualityJobInput(v *types.ModelQualityJob
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchTransformInput != nil {
+		ok := object.Key("BatchTransformInput")
+		if err := awsAwsjson11_serializeDocumentBatchTransformInput(v.BatchTransformInput, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EndpointInput != nil {
 		ok := object.Key("EndpointInput")
 		if err := awsAwsjson11_serializeDocumentEndpointInput(v.EndpointInput, ok); err != nil {
@@ -19202,6 +19329,46 @@ func awsAwsjson11_serializeDocumentMonitoringContainerArguments(v []string, valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMonitoringCsvDatasetFormat(v *types.MonitoringCsvDatasetFormat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Header {
+		ok := object.Key("Header")
+		ok.Boolean(v.Header)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMonitoringDatasetFormat(v *types.MonitoringDatasetFormat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Csv != nil {
+		ok := object.Key("Csv")
+		if err := awsAwsjson11_serializeDocumentMonitoringCsvDatasetFormat(v.Csv, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Json != nil {
+		ok := object.Key("Json")
+		if err := awsAwsjson11_serializeDocumentMonitoringJsonDatasetFormat(v.Json, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Parquet != nil {
+		ok := object.Key("Parquet")
+		if err := awsAwsjson11_serializeDocumentMonitoringParquetDatasetFormat(v.Parquet, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMonitoringEnvironmentMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19228,6 +19395,13 @@ func awsAwsjson11_serializeDocumentMonitoringGroundTruthS3Input(v *types.Monitor
 func awsAwsjson11_serializeDocumentMonitoringInput(v *types.MonitoringInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BatchTransformInput != nil {
+		ok := object.Key("BatchTransformInput")
+		if err := awsAwsjson11_serializeDocumentBatchTransformInput(v.BatchTransformInput, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndpointInput != nil {
 		ok := object.Key("EndpointInput")
@@ -19320,6 +19494,18 @@ func awsAwsjson11_serializeDocumentMonitoringJobDefinition(v *types.MonitoringJo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMonitoringJsonDatasetFormat(v *types.MonitoringJsonDatasetFormat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Line {
+		ok := object.Key("Line")
+		ok.Boolean(v.Line)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMonitoringNetworkConfig(v *types.MonitoringNetworkConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19387,6 +19573,13 @@ func awsAwsjson11_serializeDocumentMonitoringOutputs(v []types.MonitoringOutput,
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMonitoringParquetDatasetFormat(v *types.MonitoringParquetDatasetFormat, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }
 
@@ -24536,6 +24729,13 @@ func awsAwsjson11_serializeOpDocumentCreateTransformJobInput(v *CreateTransformJ
 	if len(v.BatchStrategy) > 0 {
 		ok := object.Key("BatchStrategy")
 		ok.String(string(v.BatchStrategy))
+	}
+
+	if v.DataCaptureConfig != nil {
+		ok := object.Key("DataCaptureConfig")
+		if err := awsAwsjson11_serializeDocumentBatchDataCaptureConfig(v.DataCaptureConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DataProcessing != nil {

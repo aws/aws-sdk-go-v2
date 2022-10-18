@@ -36,15 +36,13 @@ func (c *Client) ListDomainDeliverabilityCampaigns(ctx context.Context, params *
 // only if you enabled the Deliverability dashboard.
 type ListDomainDeliverabilityCampaignsInput struct {
 
-	// The last day, in Unix time format, that you want to obtain deliverability data
-	// for. This value has to be less than or equal to 30 days after the value of the
-	// StartDate parameter.
+	// The last day that you want to obtain deliverability data for. This value has to
+	// be less than or equal to 30 days after the value of the StartDate parameter.
 	//
 	// This member is required.
 	EndDate *time.Time
 
-	// The first day, in Unix time format, that you want to obtain deliverability data
-	// for.
+	// The first day that you want to obtain deliverability data for.
 	//
 	// This member is required.
 	StartDate *time.Time

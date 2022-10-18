@@ -56,25 +56,26 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 
 type CreateServiceInput struct {
 
-	// The name that you want to assign to the service. If you want Cloud Map to create
-	// an SRV record when you register an instance and you're using a system that
-	// requires a specific SRV format, such as HAProxy (http://www.haproxy.org/),
-	// specify the following for Name:
+	// The name that you want to assign to the service. Do not include sensitive
+	// information in the name if the namespace is discoverable by public DNS queries.
+	// If you want Cloud Map to create an SRV record when you register an instance and
+	// you're using a system that requires a specific SRV format, such as HAProxy
+	// (http://www.haproxy.org/), specify the following for Name:
 	//
-	// * Start the name with an underscore (_), such
-	// as _exampleservice.
+	// * Start the name
+	// with an underscore (_), such as _exampleservice.
 	//
-	// * End the name with ._protocol, such as ._tcp.
+	// * End the name with
+	// ._protocol, such as ._tcp.
 	//
-	// When you
-	// register an instance, Cloud Map creates an SRV record and assigns a name to the
-	// record by concatenating the service name and the namespace name (for example,
-	// _exampleservice._tcp.example.com). For services that are accessible by DNS
-	// queries, you can't create multiple services with names that differ only by case
-	// (such as EXAMPLE and example). Otherwise, these services have the same DNS name
-	// and can't be distinguished. However, if you use a namespace that's only
-	// accessible by API calls, then you can create services that with names that
-	// differ only by case.
+	// When you register an instance, Cloud Map creates an
+	// SRV record and assigns a name to the record by concatenating the service name
+	// and the namespace name (for example, _exampleservice._tcp.example.com). For
+	// services that are accessible by DNS queries, you can't create multiple services
+	// with names that differ only by case (such as EXAMPLE and example). Otherwise,
+	// these services have the same DNS name and can't be distinguished. However, if
+	// you use a namespace that's only accessible by API calls, then you can create
+	// services that with names that differ only by case.
 	//
 	// This member is required.
 	Name *string

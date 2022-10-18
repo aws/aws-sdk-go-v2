@@ -18,7 +18,8 @@ import (
 // the resulting DNS name for the service is backend.example.com. Service instances
 // that are registered using a private DNS namespace can be discovered using either
 // a DiscoverInstances request or using DNS. For the current quota on the number of
-// namespaces that you can create using the same account, see Cloud Map quotas
+// namespaces that you can create using the same Amazon Web Services account, see
+// Cloud Map quotas
 // (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
 // Cloud Map Developer Guide.
 func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePrivateDnsNamespaceInput, optFns ...func(*Options)) (*CreatePrivateDnsNamespaceOutput, error) {

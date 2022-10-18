@@ -93,6 +93,9 @@ type DescribeTransformJobOutput struct {
 	// strategy, you must set SplitType to Line, RecordIO, or TFRecord.
 	BatchStrategy types.BatchStrategy
 
+	// Configuration to control how SageMaker captures inference data.
+	DataCaptureConfig *types.BatchDataCaptureConfig
+
 	// The data structure used to specify the data to be used for inference in a batch
 	// transform job and to associate the data that is relevant to the prediction
 	// results in the output. The input filter provided allows you to exclude input

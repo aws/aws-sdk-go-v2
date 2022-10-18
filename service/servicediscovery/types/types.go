@@ -8,7 +8,9 @@ import (
 )
 
 // A complex type that contains information about the Amazon Route 53 DNS records
-// that you want Cloud Map to create when you register an instance.
+// that you want Cloud Map to create when you register an instance. The record
+// types of a service can only be changed by deleting the service and recreating it
+// with a new Dnsconfig.
 type DnsConfig struct {
 
 	// An array that contains one DnsRecord object for each Route 53 DNS record that
@@ -17,7 +19,9 @@ type DnsConfig struct {
 	// This member is required.
 	DnsRecords []DnsRecord
 
-	// The ID of the namespace to use for DNS configuration.
+	// Use NamespaceId in Service
+	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_Service.html) instead. The
+	// ID of the namespace to use for DNS configuration.
 	//
 	// Deprecated: Top level attribute in request should be used to reference
 	// namespace-id
@@ -424,12 +428,13 @@ type Instance struct {
 	//
 	// * For each attribute, the applicable value.
 	//
-	// Supported
-	// attribute keys include the following: AWS_ALIAS_DNS_NAME If you want Cloud Map
-	// to create a Route 53 alias record that routes traffic to an Elastic Load
-	// Balancing load balancer, specify the DNS name that's associated with the load
-	// balancer. For information about how to get the DNS name, see
-	// AliasTarget->DNSName
+	// Do not
+	// include sensitive information in the attributes if the namespace is discoverable
+	// by public DNS queries. Supported attribute keys include the following:
+	// AWS_ALIAS_DNS_NAME If you want Cloud Map to create a Route 53 alias record that
+	// routes traffic to an Elastic Load Balancing load balancer, specify the DNS name
+	// that's associated with the load balancer. For information about how to get the
+	// DNS name, see AliasTarget->DNSName
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName)
 	// in the Route 53 API Reference. Note the following:
 	//
@@ -577,23 +582,45 @@ type Namespace struct {
 // choose to list public or private namespaces.
 type NamespaceFilter struct {
 
-	// Specify TYPE.
+	// Specify the namespaces that you want to get using one of the following.
+	//
+	// * TYPE:
+	// Gets the namespaces of the specified type.
+	//
+	// * NAME: Gets the namespaces with the
+	// specified name.
+	//
+	// * HTTP_NAME: Gets the namespaces with the specified HTTP name.
 	//
 	// This member is required.
 	Name NamespaceFilterName
 
-	// If you specify EQ for Condition, specify either DNS_PUBLIC or DNS_PRIVATE. If
-	// you specify IN for Condition, you can specify DNS_PUBLIC, DNS_PRIVATE, or both.
+	// Specify the values that are applicable to the value that you specify for
+	// Name.
+	//
+	// * TYPE: Specify HTTP, DNS_PUBLIC, or DNS_PRIVATE.
+	//
+	// * NAME: Specify the
+	// name of the namespace, which is found in Namespace.Name.
+	//
+	// * HTTP_NAME: Specify
+	// the HTTP name of the namespace, which is found in
+	// Namespace.Properties.HttpProperties.HttpName.
 	//
 	// This member is required.
 	Values []string
 
-	// The operator that you want to use to determine whether ListNamespaces returns a
-	// namespace. Valid values for condition include: EQ When you specify EQ for the
-	// condition, you can choose to list only public namespaces or private namespaces,
-	// but not both. EQ is the default condition and can be omitted. IN When you
-	// specify IN for the condition, you can choose to list public namespaces, private
-	// namespaces, or both. BETWEEN Not applicable
+	// Specify the operator that you want to use to determine whether a namespace
+	// matches the specified value. Valid values for Condition are one of the
+	// following.
+	//
+	// * EQ: When you specify EQ for Condition, you can specify only one
+	// value. EQ is supported for TYPE, NAME, and HTTP_NAME. EQ is the default
+	// condition and can be omitted.
+	//
+	// * BEGINS_WITH: When you specify BEGINS_WITH for
+	// Condition, you can specify only one value. BEGINS_WITH is supported for TYPE,
+	// NAME, and HTTP_NAME.
 	Condition FilterCondition
 
 	noSmithyDocumentSerde
@@ -932,7 +959,9 @@ type Service struct {
 	Description *string
 
 	// A complex type that contains information about the Route 53 DNS records that you
-	// want Cloud Map to create when you register an instance.
+	// want Cloud Map to create when you register an instance. The record types of a
+	// service can only be changed by deleting the service and recreating it with a new
+	// Dnsconfig.
 	DnsConfig *DnsConfig
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
@@ -1010,12 +1039,6 @@ type ServiceFilter struct {
 	// * EQ: When you
 	// specify EQ, specify one namespace ID for Values. EQ is the default condition and
 	// can be omitted.
-	//
-	// * IN: When you specify IN, specify a list of the IDs for the
-	// namespaces that you want ListServices to return a list of services for.
-	//
-	// *
-	// BETWEEN: Not applicable.
 	Condition FilterCondition
 
 	noSmithyDocumentSerde

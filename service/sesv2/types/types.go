@@ -49,7 +49,7 @@ type BlacklistEntry struct {
 	// blacklist maintainer.
 	Description *string
 
-	// The time when the blacklisting event occurred, shown in Unix time format.
+	// The time when the blacklisting event occurred.
 	ListingTime *time.Time
 
 	// The name of the blacklist that the IP address appears on.
@@ -202,11 +202,11 @@ type CloudWatchDimensionConfiguration struct {
 	// don't provide the value of the dimension when you send an email. This value has
 	// to meet the following criteria:
 	//
-	// * It can only contain ASCII letters (a–z, A–Z),
-	// numbers (0–9), underscores (_), or dashes (-).
+	// * Can only contain ASCII letters (a–z, A–Z),
+	// numbers (0–9), underscores (_), or dashes (-), at signs (@), and periods (.).
 	//
-	// * It can contain no more than
-	// 256 characters.
+	// *
+	// It can contain no more than 256 characters.
 	//
 	// This member is required.
 	DefaultDimensionValue *string
@@ -388,11 +388,33 @@ type DedicatedIp struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a dedicated IP pool.
+type DedicatedIpPool struct {
+
+	// The name of the dedicated IP pool.
+	//
+	// This member is required.
+	PoolName *string
+
+	// The type of the dedicated IP pool.
+	//
+	// * STANDARD – A dedicated IP pool where the
+	// customer can control which IPs are part of the pool.
+	//
+	// * MANAGED – A dedicated IP
+	// pool where the reputation and number of IPs is automatically managed by Amazon
+	// SES.
+	//
+	// This member is required.
+	ScalingMode ScalingMode
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains metadata related to a predictive inbox placement test.
 type DeliverabilityTestReport struct {
 
-	// The date and time when the predictive inbox placement test was created, in Unix
-	// time format.
+	// The date and time when the predictive inbox placement test was created.
 	CreateDate *time.Time
 
 	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
@@ -574,9 +596,9 @@ type DomainDeliverabilityCampaign struct {
 	// The major email providers who handled the email message.
 	Esps []string
 
-	// The first time, in Unix time format, when the email message was delivered to any
-	// recipient's inbox. This value can help you determine how long it took for a
-	// campaign to deliver an email message.
+	// The first time when the email message was delivered to any recipient's inbox.
+	// This value can help you determine how long it took for a campaign to deliver an
+	// email message.
 	FirstSeenDateTime *time.Time
 
 	// The verified email address that the email message was sent from.
@@ -588,9 +610,9 @@ type DomainDeliverabilityCampaign struct {
 	// The number of email messages that were delivered to recipients’ inboxes.
 	InboxCount *int64
 
-	// The last time, in Unix time format, when the email message was delivered to any
-	// recipient's inbox. This value can help you determine how long it took for a
-	// campaign to deliver an email message.
+	// The last time when the email message was delivered to any recipient's inbox.
+	// This value can help you determine how long it took for a campaign to deliver an
+	// email message.
 	LastSeenDateTime *time.Time
 
 	// The projected number of recipients that the email message was sent to.
@@ -634,8 +656,7 @@ type DomainDeliverabilityTrackingOption struct {
 	// the domain.
 	InboxPlacementTrackingOption *InboxPlacementTrackingOption
 
-	// The date, in Unix time format, when you enabled the Deliverability dashboard for
-	// the domain.
+	// The date when you enabled the Deliverability dashboard for the domain.
 	SubscriptionStartDate *time.Time
 
 	noSmithyDocumentSerde
@@ -860,6 +881,25 @@ type IdentityInfo struct {
 	// authorize Amazon SES to send email from that identity.
 	SendingEnabled bool
 
+	// The verification status of the identity. The status can be one of the
+	// following:
+	//
+	// * PENDING – The verification process was initiated, but Amazon SES
+	// hasn't yet been able to verify the identity.
+	//
+	// * SUCCESS – The verification
+	// process completed successfully.
+	//
+	// * FAILED – The verification process failed.
+	//
+	// *
+	// TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining
+	// the verification status of the identity.
+	//
+	// * NOT_STARTED – The verification
+	// process hasn't been initiated for the identity.
+	VerificationStatus VerificationStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -898,6 +938,10 @@ type ImportJobSummary struct {
 	// The date and time when the import job was created.
 	CreatedTimestamp *time.Time
 
+	// The number of records that failed processing because of invalid input or other
+	// reasons.
+	FailedRecordsCount *int32
+
 	// An object that contains details about the resource destination the import job is
 	// going to target.
 	ImportDestination *ImportDestination
@@ -907,6 +951,9 @@ type ImportJobSummary struct {
 
 	// The status of the import job.
 	JobStatus JobStatus
+
+	// The current number of records processed.
+	ProcessedRecordsCount *int32
 
 	noSmithyDocumentSerde
 }
@@ -991,12 +1038,12 @@ type ListManagementOptions struct {
 type MailFromAttributes struct {
 
 	// The action to take if the required MX record can't be found when you send an
-	// email. When you set this value to UseDefaultValue, the mail is sent using
-	// amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage,
-	// the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't
-	// attempt to deliver the email. These behaviors are taken when the custom MAIL
-	// FROM domain configuration is in the Pending, Failed, and TemporaryFailure
-	// states.
+	// email. When you set this value to USE_DEFAULT_VALUE, the mail is sent using
+	// amazonses.com as the MAIL FROM domain. When you set this value to
+	// REJECT_MESSAGE, the Amazon SES API v2 returns a MailFromDomainNotVerified error,
+	// and doesn't attempt to deliver the email. These behaviors are taken when the
+	// custom MAIL FROM domain configuration is in the Pending, Failed, and
+	// TemporaryFailure states.
 	//
 	// This member is required.
 	BehaviorOnMxFailure BehaviorOnMxFailure
@@ -1250,8 +1297,8 @@ type SendingOptions struct {
 type SendQuota struct {
 
 	// The maximum number of emails that you can send in the current Amazon Web
-	// Services Region over a 24-hour period. This value is also called your sending
-	// quota.
+	// Services Region over a 24-hour period. A value of -1 signifies an unlimited
+	// quota. (This value is also referred to as your sending quota.)
 	Max24HourSend float64
 
 	// The maximum number of emails that you can send per second in the current Amazon

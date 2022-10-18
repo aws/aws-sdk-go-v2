@@ -31420,6 +31420,64 @@ func awsAwsjson11_deserializeDocumentAutoRollbackConfig(v **types.AutoRollbackCo
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentBatchDataCaptureConfig(v **types.BatchDataCaptureConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchDataCaptureConfig
+	if *v == nil {
+		sv = &types.BatchDataCaptureConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.DestinationS3Uri = ptr.String(jtv)
+			}
+
+		case "GenerateInferenceId":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.GenerateInferenceId = jtv
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchDescribeModelPackageError(v **types.BatchDescribeModelPackageError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31603,6 +31661,157 @@ func awsAwsjson11_deserializeDocumentBatchDescribeModelPackageSummary(v **types.
 					return err
 				}
 				sv.ModelPackageVersion = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentBatchTransformInput(v **types.BatchTransformInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchTransformInput
+	if *v == nil {
+		sv = &types.BatchTransformInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataCapturedDestinationS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DestinationS3Uri to be of type string, got %T instead", value)
+				}
+				sv.DataCapturedDestinationS3Uri = ptr.String(jtv)
+			}
+
+		case "DatasetFormat":
+			if err := awsAwsjson11_deserializeDocumentMonitoringDatasetFormat(&sv.DatasetFormat, value); err != nil {
+				return err
+			}
+
+		case "EndTimeOffset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonitoringTimeOffsetString to be of type string, got %T instead", value)
+				}
+				sv.EndTimeOffset = ptr.String(jtv)
+			}
+
+		case "FeaturesAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FeaturesAttribute = ptr.String(jtv)
+			}
+
+		case "InferenceAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.InferenceAttribute = ptr.String(jtv)
+			}
+
+		case "LocalPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProcessingLocalPath to be of type string, got %T instead", value)
+				}
+				sv.LocalPath = ptr.String(jtv)
+			}
+
+		case "ProbabilityAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProbabilityAttribute = ptr.String(jtv)
+			}
+
+		case "ProbabilityThresholdAttribute":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ProbabilityThresholdAttribute = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.ProbabilityThresholdAttribute = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected ProbabilityThresholdAttribute to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "S3DataDistributionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProcessingS3DataDistributionType to be of type string, got %T instead", value)
+				}
+				sv.S3DataDistributionType = types.ProcessingS3DataDistributionType(jtv)
+			}
+
+		case "S3InputMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProcessingS3InputMode to be of type string, got %T instead", value)
+				}
+				sv.S3InputMode = types.ProcessingS3InputMode(jtv)
+			}
+
+		case "StartTimeOffset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MonitoringTimeOffsetString to be of type string, got %T instead", value)
+				}
+				sv.StartTimeOffset = ptr.String(jtv)
 			}
 
 		default:
@@ -35085,6 +35294,11 @@ func awsAwsjson11_deserializeDocumentDataQualityJobInput(v **types.DataQualityJo
 
 	for key, value := range shape {
 		switch key {
+		case "BatchTransformInput":
+			if err := awsAwsjson11_deserializeDocumentBatchTransformInput(&sv.BatchTransformInput, value); err != nil {
+				return err
+			}
+
 		case "EndpointInput":
 			if err := awsAwsjson11_deserializeDocumentEndpointInput(&sv.EndpointInput, value); err != nil {
 				return err
@@ -45660,6 +45874,11 @@ func awsAwsjson11_deserializeDocumentModelBiasJobInput(v **types.ModelBiasJobInp
 
 	for key, value := range shape {
 		switch key {
+		case "BatchTransformInput":
+			if err := awsAwsjson11_deserializeDocumentBatchTransformInput(&sv.BatchTransformInput, value); err != nil {
+				return err
+			}
+
 		case "EndpointInput":
 			if err := awsAwsjson11_deserializeDocumentEndpointInput(&sv.EndpointInput, value); err != nil {
 				return err
@@ -46072,6 +46291,11 @@ func awsAwsjson11_deserializeDocumentModelExplainabilityJobInput(v **types.Model
 
 	for key, value := range shape {
 		switch key {
+		case "BatchTransformInput":
+			if err := awsAwsjson11_deserializeDocumentBatchTransformInput(&sv.BatchTransformInput, value); err != nil {
+				return err
+			}
+
 		case "EndpointInput":
 			if err := awsAwsjson11_deserializeDocumentEndpointInput(&sv.EndpointInput, value); err != nil {
 				return err
@@ -47596,6 +47820,11 @@ func awsAwsjson11_deserializeDocumentModelQualityJobInput(v **types.ModelQuality
 
 	for key, value := range shape {
 		switch key {
+		case "BatchTransformInput":
+			if err := awsAwsjson11_deserializeDocumentBatchTransformInput(&sv.BatchTransformInput, value); err != nil {
+				return err
+			}
+
 		case "EndpointInput":
 			if err := awsAwsjson11_deserializeDocumentEndpointInput(&sv.EndpointInput, value); err != nil {
 				return err
@@ -48023,6 +48252,92 @@ func awsAwsjson11_deserializeDocumentMonitoringContainerArguments(v *[]string, v
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMonitoringCsvDatasetFormat(v **types.MonitoringCsvDatasetFormat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonitoringCsvDatasetFormat
+	if *v == nil {
+		sv = &types.MonitoringCsvDatasetFormat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Header":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Header = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMonitoringDatasetFormat(v **types.MonitoringDatasetFormat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonitoringDatasetFormat
+	if *v == nil {
+		sv = &types.MonitoringDatasetFormat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Csv":
+			if err := awsAwsjson11_deserializeDocumentMonitoringCsvDatasetFormat(&sv.Csv, value); err != nil {
+				return err
+			}
+
+		case "Json":
+			if err := awsAwsjson11_deserializeDocumentMonitoringJsonDatasetFormat(&sv.Json, value); err != nil {
+				return err
+			}
+
+		case "Parquet":
+			if err := awsAwsjson11_deserializeDocumentMonitoringParquetDatasetFormat(&sv.Parquet, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMonitoringEnvironmentMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48297,6 +48612,11 @@ func awsAwsjson11_deserializeDocumentMonitoringInput(v **types.MonitoringInput, 
 
 	for key, value := range shape {
 		switch key {
+		case "BatchTransformInput":
+			if err := awsAwsjson11_deserializeDocumentBatchTransformInput(&sv.BatchTransformInput, value); err != nil {
+				return err
+			}
+
 		case "EndpointInput":
 			if err := awsAwsjson11_deserializeDocumentEndpointInput(&sv.EndpointInput, value); err != nil {
 				return err
@@ -48533,6 +48853,46 @@ func awsAwsjson11_deserializeDocumentMonitoringJobDefinitionSummaryList(v *[]typ
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMonitoringJsonDatasetFormat(v **types.MonitoringJsonDatasetFormat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonitoringJsonDatasetFormat
+	if *v == nil {
+		sv = &types.MonitoringJsonDatasetFormat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Line":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Line = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentMonitoringNetworkConfig(v **types.MonitoringNetworkConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -48699,6 +49059,37 @@ func awsAwsjson11_deserializeDocumentMonitoringOutputs(v *[]types.MonitoringOutp
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMonitoringParquetDatasetFormat(v **types.MonitoringParquetDatasetFormat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonitoringParquetDatasetFormat
+	if *v == nil {
+		sv = &types.MonitoringParquetDatasetFormat{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -70839,6 +71230,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTransformJobOutput(v **DescribeTr
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "DataCaptureConfig":
+			if err := awsAwsjson11_deserializeDocumentBatchDataCaptureConfig(&sv.DataCaptureConfig, value); err != nil {
+				return err
 			}
 
 		case "DataProcessing":

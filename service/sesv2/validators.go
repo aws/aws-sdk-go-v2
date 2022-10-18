@@ -570,6 +570,26 @@ func (m *validateOpGetDedicatedIp) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDedicatedIpPool struct {
+}
+
+func (*validateOpGetDedicatedIpPool) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDedicatedIpPool) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDedicatedIpPoolInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDedicatedIpPoolInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDeliverabilityTestReport struct {
 }
 
@@ -1440,6 +1460,10 @@ func addOpGetCustomVerificationEmailTemplateValidationMiddleware(stack *middlewa
 
 func addOpGetDedicatedIpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDedicatedIp{}, middleware.After)
+}
+
+func addOpGetDedicatedIpPoolValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDedicatedIpPool{}, middleware.After)
 }
 
 func addOpGetDeliverabilityTestReportValidationMiddleware(stack *middleware.Stack) error {
@@ -2613,6 +2637,21 @@ func validateOpGetDedicatedIpInput(v *GetDedicatedIpInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDedicatedIpInput"}
 	if v.Ip == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Ip"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDedicatedIpPoolInput(v *GetDedicatedIpPoolInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDedicatedIpPoolInput"}
+	if v.PoolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PoolName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1942,6 +1942,39 @@ type AutoRollbackConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration to control how SageMaker captures inference data for batch
+// transform jobs.
+type BatchDataCaptureConfig struct {
+
+	// The Amazon S3 location being used to capture the data.
+	//
+	// This member is required.
+	DestinationS3Uri *string
+
+	// Flag that indicates whether to append inference id to the output.
+	GenerateInferenceId bool
+
+	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
+	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
+	// compute instance that hosts the batch transform job. The KmsKeyId can be any of
+	// the following formats:
+	//
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// * Key
+	// ARN:
+	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// *
+	// Alias name: alias/ExampleAlias
+	//
+	// * Alias name ARN:
+	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // The error code and error description associated with the resource.
 type BatchDescribeModelPackageError struct {
 
@@ -1994,6 +2027,62 @@ type BatchDescribeModelPackageSummary struct {
 
 	// The version number of a versioned model.
 	ModelPackageVersion *int32
+
+	noSmithyDocumentSerde
+}
+
+// Input object for the batch transform job.
+type BatchTransformInput struct {
+
+	// The Amazon S3 location being used to capture the data.
+	//
+	// This member is required.
+	DataCapturedDestinationS3Uri *string
+
+	// The dataset format for your batch transform job.
+	//
+	// This member is required.
+	DatasetFormat *MonitoringDatasetFormat
+
+	// Path to the filesystem where the batch transform data is available to the
+	// container.
+	//
+	// This member is required.
+	LocalPath *string
+
+	// If specified, monitoring jobs substract this time from the end time. For
+	// information about using offsets for scheduling monitoring jobs, see Schedule
+	// Model Quality Monitoring Jobs
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
+	EndTimeOffset *string
+
+	// The attributes of the input data that are the input features.
+	FeaturesAttribute *string
+
+	// The attribute of the input data that represents the ground truth label.
+	InferenceAttribute *string
+
+	// In a classification problem, the attribute that represents the class
+	// probability.
+	ProbabilityAttribute *string
+
+	// The threshold for the class probability to be evaluated as a positive result.
+	ProbabilityThresholdAttribute *float64
+
+	// Whether input data distributed in Amazon S3 is fully replicated or sharded by an
+	// S3 key. Defaults to FullyReplicated
+	S3DataDistributionType ProcessingS3DataDistributionType
+
+	// Whether the Pipe or File is used as the input mode for transferring data for the
+	// monitoring job. Pipe mode is recommended for large datasets. File mode is useful
+	// for small files that fit in memory. Defaults to File.
+	S3InputMode ProcessingS3InputMode
+
+	// If specified, monitoring jobs substract this time from the start time. For
+	// information about using offsets for scheduling monitoring jobs, see Schedule
+	// Model Quality Monitoring Jobs
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html).
+	StartTimeOffset *string
 
 	noSmithyDocumentSerde
 }
@@ -3102,9 +3191,10 @@ type DataQualityBaselineConfig struct {
 // for input.
 type DataQualityJobInput struct {
 
+	// Input object for the batch transform job.
+	BatchTransformInput *BatchTransformInput
+
 	// Input object for the endpoint
-	//
-	// This member is required.
 	EndpointInput *EndpointInput
 
 	noSmithyDocumentSerde
@@ -8014,15 +8104,16 @@ type ModelBiasBaselineConfig struct {
 // Inputs for the model bias job.
 type ModelBiasJobInput struct {
 
-	// Input object for the endpoint
-	//
-	// This member is required.
-	EndpointInput *EndpointInput
-
 	// Location of ground truth labels to use in model bias job.
 	//
 	// This member is required.
 	GroundTruthS3Input *MonitoringGroundTruthS3Input
+
+	// Input object for the batch transform job.
+	BatchTransformInput *BatchTransformInput
+
+	// Input object for the endpoint
+	EndpointInput *EndpointInput
 
 	noSmithyDocumentSerde
 }
@@ -8142,9 +8233,10 @@ type ModelExplainabilityBaselineConfig struct {
 // Inputs for the model explainability job.
 type ModelExplainabilityJobInput struct {
 
+	// Input object for the batch transform job.
+	BatchTransformInput *BatchTransformInput
+
 	// Input object for the endpoint
-	//
-	// This member is required.
 	EndpointInput *EndpointInput
 
 	noSmithyDocumentSerde
@@ -8680,15 +8772,16 @@ type ModelQualityBaselineConfig struct {
 // for input for model quality monitoring jobs.
 type ModelQualityJobInput struct {
 
-	// Input object for the endpoint
-	//
-	// This member is required.
-	EndpointInput *EndpointInput
-
 	// The ground truth label provided for the model.
 	//
 	// This member is required.
 	GroundTruthS3Input *MonitoringGroundTruthS3Input
+
+	// Input object for the batch transform job.
+	BatchTransformInput *BatchTransformInput
+
+	// Input object for the endpoint
+	EndpointInput *EndpointInput
 
 	noSmithyDocumentSerde
 }
@@ -8807,6 +8900,30 @@ type MonitoringConstraintsResource struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the CSV dataset format used when running a monitoring job.
+type MonitoringCsvDatasetFormat struct {
+
+	// Indicates if the CSV data has a header.
+	Header bool
+
+	noSmithyDocumentSerde
+}
+
+// Represents the dataset format used when running a monitoring job.
+type MonitoringDatasetFormat struct {
+
+	// The CSV dataset used in the monitoring job.
+	Csv *MonitoringCsvDatasetFormat
+
+	// The JSON dataset used in the monitoring job
+	Json *MonitoringJsonDatasetFormat
+
+	// The Parquet dataset used in the monitoring job
+	Parquet *MonitoringParquetDatasetFormat
+
+	noSmithyDocumentSerde
+}
+
 // Summary of information about the last monitoring job to run.
 type MonitoringExecutionSummary struct {
 
@@ -8865,9 +8982,10 @@ type MonitoringGroundTruthS3Input struct {
 // The inputs for a monitoring job.
 type MonitoringInput struct {
 
+	// Input object for the batch transform job.
+	BatchTransformInput *BatchTransformInput
+
 	// The endpoint for a monitoring job.
-	//
-	// This member is required.
 	EndpointInput *EndpointInput
 
 	noSmithyDocumentSerde
@@ -8948,6 +9066,15 @@ type MonitoringJobDefinitionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the JSON dataset format used when running a monitoring job.
+type MonitoringJsonDatasetFormat struct {
+
+	// Indicates if the file should be read as a json object per line.
+	Line bool
+
+	noSmithyDocumentSerde
+}
+
 // The networking configuration for the monitoring job.
 type MonitoringNetworkConfig struct {
 
@@ -8996,6 +9123,11 @@ type MonitoringOutputConfig struct {
 	// S3 server-side encryption.
 	KmsKeyId *string
 
+	noSmithyDocumentSerde
+}
+
+// Represents the Parquet dataset format used when running a monitoring job.
+type MonitoringParquetDatasetFormat struct {
 	noSmithyDocumentSerde
 }
 

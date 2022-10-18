@@ -74,6 +74,25 @@ type GetEmailIdentityOutput struct {
 	// with the email identity.
 	Tags []types.Tag
 
+	// The verification status of the identity. The status can be one of the
+	// following:
+	//
+	// * PENDING – The verification process was initiated, but Amazon SES
+	// hasn't yet been able to verify the identity.
+	//
+	// * SUCCESS – The verification
+	// process completed successfully.
+	//
+	// * FAILED – The verification process failed.
+	//
+	// *
+	// TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining
+	// the verification status of the identity.
+	//
+	// * NOT_STARTED – The verification
+	// process hasn't been initiated for the identity.
+	VerificationStatus types.VerificationStatus
+
 	// Specifies whether or not the identity is verified. You can only send email from
 	// verified email addresses or domains. For more information about verifying
 	// identities, see the Amazon Pinpoint User Guide
