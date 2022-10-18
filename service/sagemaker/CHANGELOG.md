@@ -1,3 +1,7 @@
+# v1.48.0 (2022-10-18)
+
+* **Feature**: This change allows customers to enable data capturing while running a batch transform job, and configure monitoring schedule to monitoring the captured data.
+
 # v1.47.0 (2022-10-17)
 
 * **Feature**: This release adds support for C7g, C6g, C6gd, C6gn, M6g, M6gd, R6g, and R6gn Graviton instance types in Amazon SageMaker Inference.

@@ -1,3 +1,7 @@
+# v1.18.0 (2022-10-18)
+
+* **Feature**: Updated the ListNamespaces API to support the NAME and HTTP_NAME filters, and the BEGINS_WITH filter condition.
+
 # v1.17.19 (2022-10-14)
 
 * No change notes available for this release.

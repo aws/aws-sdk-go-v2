@@ -1,3 +1,15 @@
+# Release (2022-10-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.20.10](service/frauddetector/CHANGELOG.md#v12010-2022-10-18)
+  * **Documentation**: Documentation Updates for Amazon Fraud Detector
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.48.0](service/sagemaker/CHANGELOG.md#v1480-2022-10-18)
+  * **Feature**: This change allows customers to enable data capturing while running a batch transform job, and configure monitoring schedule to monitoring the captured data.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.18.0](service/servicediscovery/CHANGELOG.md#v1180-2022-10-18)
+  * **Feature**: Updated the ListNamespaces API to support the NAME and HTTP_NAME filters, and the BEGINS_WITH filter condition.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.14.0](service/sesv2/CHANGELOG.md#v1140-2022-10-18)
+  * **Feature**: This release allows subscribers to enable Dedicated IPs (managed) to send email via a fully managed dedicated IP experience. It also adds identities' VerificationStatus in the response of GetEmailIdentity and ListEmailIdentities APIs, and ImportJobs counts in the response of ListImportJobs API.
+
 # Release (2022-10-17)
 
 ## Module Highlights
