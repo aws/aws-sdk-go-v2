@@ -2969,6 +2969,34 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#BatchDataCaptureConfig": {
+            "type": "structure",
+            "members": {
+                "DestinationS3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location being used to capture the data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.sagemaker#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt data on\n            the storage volume attached to the ML compute instance that hosts the batch transform job.</p>\n        <p>The KmsKeyId can be any of the following formats: </p>\n        <ul>\n            <li>\n                <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n                <p>Key ARN:\n                    <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n                <p>Alias name ARN:\n                    <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "GenerateInferenceId": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Flag that indicates whether to append inference id to the output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration to control how SageMaker captures inference data for batch transform jobs.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#BatchDescribeModelPackage": {
             "type": "operation",
             "input": {
@@ -3116,6 +3144,83 @@
                         "smithy.api#enumValue": "SingleRecord"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchTransformInput": {
+            "type": "structure",
+            "members": {
+                "DataCapturedDestinationS3Uri": {
+                    "target": "com.amazonaws.sagemaker#DestinationS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location being used to capture the data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetFormat": {
+                    "target": "com.amazonaws.sagemaker#MonitoringDatasetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset format for your batch transform job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocalPath": {
+                    "target": "com.amazonaws.sagemaker#ProcessingLocalPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Path to the filesystem where the batch transform data is available to the container.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3InputMode": {
+                    "target": "com.amazonaws.sagemaker#ProcessingS3InputMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the <code>Pipe</code> or <code>File</code> is used as the input mode for\n            transferring data for the monitoring job. <code>Pipe</code> mode is recommended for large\n            datasets. <code>File</code> mode is useful for small files that fit in memory. Defaults to\n            <code>File</code>.</p>"
+                    }
+                },
+                "S3DataDistributionType": {
+                    "target": "com.amazonaws.sagemaker#ProcessingS3DataDistributionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key.\n            Defaults to <code>FullyReplicated</code>\n         </p>"
+                    }
+                },
+                "FeaturesAttribute": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes of the input data that are the input features.</p>"
+                    }
+                },
+                "InferenceAttribute": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute of the input data that represents the ground truth label.</p>"
+                    }
+                },
+                "ProbabilityAttribute": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In a classification problem, the attribute that represents the class probability.</p>"
+                    }
+                },
+                "ProbabilityThresholdAttribute": {
+                    "target": "com.amazonaws.sagemaker#ProbabilityThresholdAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold for the class probability to be evaluated as a positive result.</p>"
+                    }
+                },
+                "StartTimeOffset": {
+                    "target": "com.amazonaws.sagemaker#MonitoringTimeOffsetString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, monitoring jobs substract this time from the start time. For information\n            about using offsets for scheduling monitoring jobs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html\">Schedule Model\n                Quality Monitoring Jobs</a>.</p>"
+                    }
+                },
+                "EndTimeOffset": {
+                    "target": "com.amazonaws.sagemaker#MonitoringTimeOffsetString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, monitoring jobs substract this time from the end time. For information\n            about using offsets for scheduling monitoring jobs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html\">Schedule Model\n                Quality Monitoring Jobs</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input object for the batch transform job.</p>"
             }
         },
         "com.amazonaws.sagemaker#Bias": {
@@ -9008,6 +9113,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "DataCaptureConfig": {
+                    "target": "com.amazonaws.sagemaker#BatchDataCaptureConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration to control how SageMaker captures inference data.</p>"
+                    }
+                },
                 "TransformResources": {
                     "target": "com.amazonaws.sagemaker#TransformResources",
                     "traits": {
@@ -9769,9 +9880,12 @@
             "type": "structure",
             "members": {
                 "EndpointInput": {
-                    "target": "com.amazonaws.sagemaker#EndpointInput",
+                    "target": "com.amazonaws.sagemaker#EndpointInput"
+                },
+                "BatchTransformInput": {
+                    "target": "com.amazonaws.sagemaker#BatchTransformInput",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Input object for the batch transform job.</p>"
                     }
                 }
             },
@@ -16928,6 +17042,12 @@
                     "target": "com.amazonaws.sagemaker#TransformOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the Amazon S3 location where you want Amazon SageMaker to save the results from the\n            transform job.</p>"
+                    }
+                },
+                "DataCaptureConfig": {
+                    "target": "com.amazonaws.sagemaker#BatchDataCaptureConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration to control how SageMaker captures inference data.</p>"
                     }
                 },
                 "TransformResources": {
@@ -30754,9 +30874,12 @@
             "type": "structure",
             "members": {
                 "EndpointInput": {
-                    "target": "com.amazonaws.sagemaker#EndpointInput",
+                    "target": "com.amazonaws.sagemaker#EndpointInput"
+                },
+                "BatchTransformInput": {
+                    "target": "com.amazonaws.sagemaker#BatchTransformInput",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Input object for the batch transform job.</p>"
                     }
                 },
                 "GroundTruthS3Input": {
@@ -30946,9 +31069,12 @@
             "type": "structure",
             "members": {
                 "EndpointInput": {
-                    "target": "com.amazonaws.sagemaker#EndpointInput",
+                    "target": "com.amazonaws.sagemaker#EndpointInput"
+                },
+                "BatchTransformInput": {
+                    "target": "com.amazonaws.sagemaker#BatchTransformInput",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Input object for the batch transform job.</p>"
                     }
                 }
             },
@@ -31982,9 +32108,12 @@
             "type": "structure",
             "members": {
                 "EndpointInput": {
-                    "target": "com.amazonaws.sagemaker#EndpointInput",
+                    "target": "com.amazonaws.sagemaker#EndpointInput"
+                },
+                "BatchTransformInput": {
+                    "target": "com.amazonaws.sagemaker#BatchTransformInput",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Input object for the batch transform job.</p>"
                     }
                 },
                 "GroundTruthS3Input": {
@@ -32191,6 +32320,47 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#MonitoringCsvDatasetFormat": {
+            "type": "structure",
+            "members": {
+                "Header": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates if the CSV data has a header.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the CSV dataset format used when running a monitoring job.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#MonitoringDatasetFormat": {
+            "type": "structure",
+            "members": {
+                "Csv": {
+                    "target": "com.amazonaws.sagemaker#MonitoringCsvDatasetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CSV dataset used in the monitoring job.</p>"
+                    }
+                },
+                "Json": {
+                    "target": "com.amazonaws.sagemaker#MonitoringJsonDatasetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON dataset used in the monitoring job</p>"
+                    }
+                },
+                "Parquet": {
+                    "target": "com.amazonaws.sagemaker#MonitoringParquetDatasetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Parquet dataset used in the monitoring job</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the dataset format used when running a monitoring job.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#MonitoringEnvironmentMap": {
             "type": "map",
             "key": {
@@ -32328,8 +32498,13 @@
                 "EndpointInput": {
                     "target": "com.amazonaws.sagemaker#EndpointInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint for a monitoring job.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The endpoint for a monitoring job.</p>"
+                    }
+                },
+                "BatchTransformInput": {
+                    "target": "com.amazonaws.sagemaker#BatchTransformInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input object for the batch transform job.</p>"
                     }
                 }
             },
@@ -32495,6 +32670,21 @@
                 "target": "com.amazonaws.sagemaker#MonitoringJobDefinitionSummary"
             }
         },
+        "com.amazonaws.sagemaker#MonitoringJsonDatasetFormat": {
+            "type": "structure",
+            "members": {
+                "Line": {
+                    "target": "com.amazonaws.sagemaker#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates if the file should be read as a json object per line.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the JSON dataset format used when running a monitoring job.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#MonitoringMaxRuntimeInSeconds": {
             "type": "integer",
             "traits": {
@@ -32576,6 +32766,13 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#MonitoringParquetDatasetFormat": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the Parquet dataset format used when running a monitoring job.</p>"
             }
         },
         "com.amazonaws.sagemaker#MonitoringProblemType": {

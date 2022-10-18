@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -103,24 +103,6 @@
         },
         "com.amazonaws.frauddetector#AWSHawksNestServiceFacade": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "FraudDetector",
-                    "arnNamespace": "frauddetector",
-                    "cloudFormationName": "FraudDetector",
-                    "cloudTrailEventSource": "frauddetector.amazonaws.com",
-                    "endpointPrefix": "frauddetector"
-                },
-                "aws.auth#sigv4": {
-                    "name": "frauddetector"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need\n            detailed information about Amazon Fraud Detector API actions, data types, and errors. For\n            more information about Amazon Fraud Detector features, see the <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/\">Amazon Fraud Detector User Guide</a>.</p>\n        \n        <p>We provide the Query API as well as AWS software development kits (SDK) for Amazon Fraud Detector in Java and Python programming languages.</p>\n        <p>The Amazon Fraud Detector Query API provides HTTPS requests that use the HTTP verb GET or POST and a Query parameter <code>Action</code>. AWS SDK provides libraries, \n            sample code, tutorials, and other resources for software developers who prefer to build applications using language-specific APIs instead of submitting a request over \n            HTTP or HTTPS. These libraries provide basic functions that automatically take care of tasks such as cryptographically signing your requests, retrying requests, and \n            handling error responses, so that it is easier for you to get started. For more information about the AWS SDKs, see <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/tools/\">Tools to build on AWS</a>.\n            </p>",
-                "smithy.api#title": "Amazon Fraud Detector",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://hawksnest.amazonaws.com/doc/2019-11-15"
-                }
-            },
             "version": "2019-11-15",
             "operations": [
                 {
@@ -327,7 +309,695 @@
                 {
                     "target": "com.amazonaws.frauddetector#UpdateVariable"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "FraudDetector",
+                    "arnNamespace": "frauddetector",
+                    "cloudFormationName": "FraudDetector",
+                    "cloudTrailEventSource": "frauddetector.amazonaws.com",
+                    "endpointPrefix": "frauddetector"
+                },
+                "aws.auth#sigv4": {
+                    "name": "frauddetector"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need\n            detailed information about Amazon Fraud Detector API actions, data types, and errors. For\n            more information about Amazon Fraud Detector features, see the <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/\">Amazon Fraud Detector User Guide</a>.</p>\n        \n        <p>We provide the Query API as well as AWS software development kits (SDK) for Amazon Fraud Detector in Java and Python programming languages.</p>\n        <p>The Amazon Fraud Detector Query API provides HTTPS requests that use the HTTP verb GET or POST and a Query parameter <code>Action</code>. AWS SDK provides libraries, \n            sample code, tutorials, and other resources for software developers who prefer to build applications using language-specific APIs instead of submitting a request over \n            HTTP or HTTPS. These libraries provide basic functions that automatically take care of tasks such as cryptographically signing your requests, retrying requests, and \n            handling error responses, so that it is easier for you to get started. For more information about the AWS SDKs, see <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/tools/\">Tools to build on AWS</a>.\n            </p>",
+                "smithy.api#title": "Amazon Fraud Detector",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://hawksnest.amazonaws.com/doc/2019-11-15"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://frauddetector-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://frauddetector-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://frauddetector.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://frauddetector.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://frauddetector.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.frauddetector#AccessDeniedException": {
             "type": "structure",
@@ -408,34 +1078,44 @@
             }
         },
         "com.amazonaws.frauddetector#AsyncJobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS_INITIALIZING",
-                        "name": "IN_PROGRESS_INITIALIZING"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "CANCEL_IN_PROGRESS",
-                        "name": "CANCEL_IN_PROGRESS"
-                    },
-                    {
-                        "value": "CANCELED",
-                        "name": "CANCELED"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS_INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS_INITIALIZING"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "CANCEL_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCEL_IN_PROGRESS"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#BatchCreateVariable": {
@@ -476,6 +1156,7 @@
                 "code": {
                     "target": "com.amazonaws.frauddetector#Integer2",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The error code. </p>"
                     }
                 },
@@ -563,6 +1244,7 @@
                 "code": {
                     "target": "com.amazonaws.frauddetector#Integer2",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The error code. </p>"
                     }
                 },
@@ -809,10 +1491,7 @@
             }
         },
         "com.amazonaws.frauddetector#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.frauddetector#CancelBatchImportJob": {
             "type": "operation",
@@ -983,7 +1662,7 @@
                 "iamRoleArn": {
                     "target": "com.amazonaws.frauddetector#iamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role created for Amazon S3 bucket that holds your data file. \n         The IAM role must have read and write permissions to both input and output S3 buckets.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role created for Amazon S3 bucket that holds your data file.</p> \n         <p>The IAM role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket.\n         For more information about bucket permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html\">User policy examples</a> in the \n         <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1075,7 +1754,7 @@
                 "iamRoleArn": {
                     "target": "com.amazonaws.frauddetector#iamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role to use for this job request.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to use for this job request.</p>\n         <p>The IAM Role must have read permissions to your input S3 bucket and write permissions to your output S3 bucket.\n         For more information about bucket permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html\">User policy examples</a> in the \n         <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1549,45 +2228,55 @@
             }
         },
         "com.amazonaws.frauddetector#DataSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EVENT",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "MODEL_SCORE",
-                        "name": "MODEL_SCORE"
-                    },
-                    {
-                        "value": "EXTERNAL_MODEL_SCORE",
-                        "name": "EXTERNAL_MODEL_SCORE"
+            "type": "enum",
+            "members": {
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
                     }
-                ]
+                },
+                "MODEL_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODEL_SCORE"
+                    }
+                },
+                "EXTERNAL_MODEL_SCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_MODEL_SCORE"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#DataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "INTEGER",
-                        "name": "INTEGER"
-                    },
-                    {
-                        "value": "FLOAT",
-                        "name": "FLOAT"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                },
+                "FLOAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLOAT"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#DataValidationMetrics": {
@@ -1611,10 +2300,7 @@
             }
         },
         "com.amazonaws.frauddetector#DeleteAuditHistory": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.frauddetector#DeleteBatchImportJob": {
             "type": "operation",
@@ -2559,7 +3245,6 @@
         "com.amazonaws.frauddetector#DetectorVersionMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1000,
                     "max": 2500
@@ -2567,22 +3252,26 @@
             }
         },
         "com.amazonaws.frauddetector#DetectorVersionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
+            "type": "enum",
+            "members": {
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#DetectorVersionSummary": {
@@ -2626,7 +3315,6 @@
         "com.amazonaws.frauddetector#DetectorsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 10
@@ -2874,18 +3562,20 @@
             }
         },
         "com.amazonaws.frauddetector#EventIngestion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#EventPredictionSummary": {
@@ -2935,7 +3625,6 @@
         "com.amazonaws.frauddetector#EventPredictionsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 50,
                     "max": 100
@@ -3205,7 +3894,6 @@
         "com.amazonaws.frauddetector#ExternalModelsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 10
@@ -4867,13 +5555,13 @@
             }
         },
         "com.amazonaws.frauddetector#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.frauddetector#Integer2": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.frauddetector#InternalServerException": {
             "type": "structure",
@@ -4983,14 +5671,14 @@
             }
         },
         "com.amazonaws.frauddetector#Language": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DETECTORPL",
-                        "name": "DETECTORPL"
+            "type": "enum",
+            "members": {
+                "DETECTORPL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETECTORPL"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.frauddetector#ListEventPredictions": {
@@ -5268,10 +5956,7 @@
             }
         },
         "com.amazonaws.frauddetector#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.frauddetector#MapOfStrings": {
             "type": "map",
@@ -5388,18 +6073,20 @@
             }
         },
         "com.amazonaws.frauddetector#ModelEndpointStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSOCIATED",
-                        "name": "ASSOCIATED"
-                    },
-                    {
-                        "value": "DISSOCIATED",
-                        "name": "DISSOCIATED"
+            "type": "enum",
+            "members": {
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
                     }
-                ]
+                },
+                "DISSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISSOCIATED"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#ModelInputConfiguration": {
@@ -5442,18 +6129,20 @@
             }
         },
         "com.amazonaws.frauddetector#ModelInputDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TEXT_CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "APPLICATION_JSON",
-                        "name": "JSON"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_CSV"
                     }
-                ]
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_JSON"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#ModelOutputConfiguration": {
@@ -5484,18 +6173,20 @@
             }
         },
         "com.amazonaws.frauddetector#ModelOutputDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TEXT_CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "APPLICATION_JSONLINES",
-                        "name": "JSONLINES"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXT_CSV"
                     }
-                ]
+                },
+                "JSONLINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLICATION_JSONLINES"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#ModelPredictionMap": {
@@ -5528,33 +6219,37 @@
             }
         },
         "com.amazonaws.frauddetector#ModelSource": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SAGEMAKER",
-                        "name": "SAGEMAKER"
+            "type": "enum",
+            "members": {
+                "SAGEMAKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAGEMAKER"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.frauddetector#ModelTypeEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONLINE_FRAUD_INSIGHTS",
-                        "name": "ONLINE_FRAUD_INSIGHTS"
-                    },
-                    {
-                        "value": "TRANSACTION_FRAUD_INSIGHTS",
-                        "name": "TRANSACTION_FRAUD_INSIGHTS"
-                    },
-                    {
-                        "value": "ACCOUNT_TAKEOVER_INSIGHTS",
-                        "name": "ACCOUNT_TAKEOVER_INSIGHTS"
+            "type": "enum",
+            "members": {
+                "ONLINE_FRAUD_INSIGHTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLINE_FRAUD_INSIGHTS"
                     }
-                ]
+                },
+                "TRANSACTION_FRAUD_INSIGHTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSACTION_FRAUD_INSIGHTS"
+                    }
+                },
+                "ACCOUNT_TAKEOVER_INSIGHTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_TAKEOVER_INSIGHTS"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#ModelVersion": {
@@ -5705,22 +6400,26 @@
             }
         },
         "com.amazonaws.frauddetector#ModelVersionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "TRAINING_CANCELLED",
-                        "name": "TRAINING_CANCELLED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "TRAINING_CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINING_CANCELLED"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#NameList": {
@@ -5865,7 +6564,6 @@
         "com.amazonaws.frauddetector#OutcomesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 50,
                     "max": 100
@@ -6242,7 +6940,7 @@
                 "kmsEncryptionKeyArn": {
                     "target": "com.amazonaws.frauddetector#KmsEncryptionKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS encryption key ARN.</p>",
+                        "smithy.api#documentation": "<p>The KMS encryption key ARN.</p>\n         <p>The KMS key must be single-Region key. Amazon Fraud Detector does not support multi-Region KMS key.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6499,18 +7197,20 @@
             }
         },
         "com.amazonaws.frauddetector#RuleExecutionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL_MATCHED",
-                        "name": "ALL_MATCHED"
-                    },
-                    {
-                        "value": "FIRST_MATCHED",
-                        "name": "FIRST_MATCHED"
+            "type": "enum",
+            "members": {
+                "ALL_MATCHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_MATCHED"
                     }
-                ]
+                },
+                "FIRST_MATCHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST_MATCHED"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#RuleList": {
@@ -6542,7 +7242,6 @@
         "com.amazonaws.frauddetector#RulesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 50,
                     "max": 100
@@ -6783,7 +7482,6 @@
         "com.amazonaws.frauddetector#TagsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 50,
                     "max": 50
@@ -6825,18 +7523,20 @@
             }
         },
         "com.amazonaws.frauddetector#TrainingDataSourceEnum": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EXTERNAL_EVENTS",
-                        "name": "EXTERNAL_EVENTS"
-                    },
-                    {
-                        "value": "INGESTED_EVENTS",
-                        "name": "INGESTED_EVENTS"
+            "type": "enum",
+            "members": {
+                "EXTERNAL_EVENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_EVENTS"
                     }
-                ]
+                },
+                "INGESTED_EVENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTED_EVENTS"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#TrainingMetrics": {
@@ -6938,22 +7638,26 @@
             }
         },
         "com.amazonaws.frauddetector#UnlabeledEventsTreatment": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IGNORE",
-                        "name": "IGNORE"
-                    },
-                    {
-                        "value": "FRAUD",
-                        "name": "FRAUD"
-                    },
-                    {
-                        "value": "LEGIT",
-                        "name": "LEGIT"
+            "type": "enum",
+            "members": {
+                "IGNORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORE"
                     }
-                ]
+                },
+                "FRAUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRAUD"
+                    }
+                },
+                "LEGIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEGIT"
+                    }
+                }
             }
         },
         "com.amazonaws.frauddetector#UntagResource": {
@@ -7203,7 +7907,7 @@
                 "status": {
                     "target": "com.amazonaws.frauddetector#DetectorVersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new status.</p>",
+                        "smithy.api#documentation": "<p>The new status.</p>\n         <p>The only supported values are <code>ACTIVE</code> and <code>INACTIVE</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7727,10 +8431,7 @@
             "members": {}
         },
         "com.amazonaws.frauddetector#UseEventVariables": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.frauddetector#ValidationException": {
             "type": "structure",
@@ -7915,7 +8616,6 @@
         "com.amazonaws.frauddetector#VariablesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 50,
                     "max": 100
@@ -7944,7 +8644,6 @@
         "com.amazonaws.frauddetector#batchImportsMaxPageSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -7954,7 +8653,6 @@
         "com.amazonaws.frauddetector#batchPredictionsMaxPageSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -8001,7 +8699,6 @@
         "com.amazonaws.frauddetector#entityTypesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 10
@@ -8017,7 +8714,6 @@
         "com.amazonaws.frauddetector#eventTypesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 5,
                     "max": 10
@@ -8047,10 +8743,7 @@
             }
         },
         "com.amazonaws.frauddetector#float": {
-            "type": "float",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "float"
         },
         "com.amazonaws.frauddetector#floatVersionString": {
             "type": "string",
@@ -8110,7 +8803,6 @@
         "com.amazonaws.frauddetector#labelsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 10,
                     "max": 50
@@ -8169,7 +8861,6 @@
         "com.amazonaws.frauddetector#modelsMaxPageSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 10
