@@ -1,8 +1,0 @@
-{
-    "id": "ad979b42-120e-41bd-a622-50ed98fdd724",
-    "type": "feature",
-    "description": "Adding new Accessor APIs for Amazon Managed Blockchain",
-    "modules": [
-        "service/managedblockchain"
-    ]
-}

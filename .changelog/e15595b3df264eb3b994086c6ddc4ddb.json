@@ -1,8 +1,0 @@
-{
-    "id": "e15595b3-df26-4eb3-b994-086c6ddc4ddb",
-    "type": "feature",
-    "description": "This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

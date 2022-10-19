@@ -1,8 +1,0 @@
-{
-    "id": "5924da0b-65d6-43eb-b316-222e1d5a7a47",
-    "type": "feature",
-    "description": "This release adds resourceType enums for AppConfig, AppSync, DataSync, EC2, EKS, Glue, GuardDuty, SageMaker, ServiceDiscovery, SES, Route53 types.",
-    "modules": [
-        "service/configservice"
-    ]
-}

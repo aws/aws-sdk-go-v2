@@ -1,8 +1,0 @@
-{
-    "id": "0b921ce4-105f-4ef4-a683-030fcaf75d2a",
-    "type": "feature",
-    "description": "Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

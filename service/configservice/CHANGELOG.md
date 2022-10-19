@@ -1,3 +1,7 @@
+# v1.27.0 (2022-10-19)
+
+* **Feature**: This release adds resourceType enums for AppConfig, AppSync, DataSync, EC2, EKS, Glue, GuardDuty, SageMaker, ServiceDiscovery, SES, Route53 types.
+
 # v1.26.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

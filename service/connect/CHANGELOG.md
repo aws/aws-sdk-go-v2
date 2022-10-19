@@ -1,3 +1,7 @@
+# v1.33.0 (2022-10-19)
+
+* **Feature**: This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution.
+
 # v1.32.0 (2022-10-13)
 
 * **Feature**: This release adds support for a secondary email and a mobile number for Amazon Connect instance users.

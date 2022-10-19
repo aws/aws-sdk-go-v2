@@ -1,3 +1,7 @@
+# v1.19.0 (2022-10-19)
+
+* **Feature**: This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket.
+
 # v1.18.2 (2022-10-07)
 
 * No change notes available for this release.

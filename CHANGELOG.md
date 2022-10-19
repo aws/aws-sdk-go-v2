@@ -1,3 +1,26 @@
+# Release (2022-10-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.11.6](service/chimesdkmessaging/CHANGELOG.md#v1116-2022-10-19)
+  * **Documentation**: Documentation updates for Chime Messaging SDK
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.19.0](service/cloudtrail/CHANGELOG.md#v1190-2022-10-19)
+  * **Feature**: This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.27.0](service/configservice/CHANGELOG.md#v1270-2022-10-19)
+  * **Feature**: This release adds resourceType enums for AppConfig, AppSync, DataSync, EC2, EKS, Glue, GuardDuty, SageMaker, ServiceDiscovery, SES, Route53 types.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.33.0](service/connect/CHANGELOG.md#v1330-2022-10-19)
+  * **Feature**: This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.13.0](service/managedblockchain/CHANGELOG.md#v1130-2022-10-19)
+  * **Feature**: Adding new Accessor APIs for Amazon Managed Blockchain
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.28.0](service/s3/CHANGELOG.md#v1280-2022-10-19)
+  * **Feature**: Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.1.0](service/supportapp/CHANGELOG.md#v110-2022-10-19)
+  * **Feature**: This release adds the RegisterSlackWorkspaceForOrganization API. You can use the API to register a Slack workspace for an AWS account that is part of an organization.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.7.0](service/workspacesweb/CHANGELOG.md#v170-2022-10-19)
+  * **Feature**: WorkSpaces Web now supports user access logging for recording session start, stop, and URL navigation.
+
 # Release (2022-10-18)
 
 ## Module Highlights

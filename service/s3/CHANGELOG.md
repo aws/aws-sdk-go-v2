@@ -1,3 +1,7 @@
+# v1.28.0 (2022-10-19)
+
+* **Feature**: Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.
+
 # v1.27.11 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions
