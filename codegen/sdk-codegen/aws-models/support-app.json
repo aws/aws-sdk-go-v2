@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.supportapp#AccessDeniedException": {
             "type": "structure",
@@ -14,6 +14,21 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.supportapp#AccountType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "management",
+                        "name": "MANAGEMENT"
+                    },
+                    {
+                        "value": "member",
+                        "name": "MEMBER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.supportapp#ConflictException": {
             "type": "structure",
             "members": {
@@ -22,7 +37,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your request has a conflict. For example, you might receive this error if you try the\n      following:</p>\n         <ul>\n            <li>\n               <p>Add, update, or delete a Slack channel configuration before you add a Slack workspace\n          to your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>Add a Slack channel configuration that already exists in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>Delete a Slack channel configuration for a live chat channel.</p>\n            </li>\n            <li>\n               <p>Delete a Slack workspace from your Amazon Web Services account that has an active live chat\n          channel.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Your request has a conflict. For example, you might receive this error if you try the\n      following:</p>\n         <ul>\n            <li>\n               <p>Add, update, or delete a Slack channel configuration before you add a Slack workspace\n          to your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>Add a Slack channel configuration that already exists in your Amazon Web Services account.</p>\n            </li>\n            <li>\n               <p>Delete a Slack channel configuration for a live chat channel.</p>\n            </li>\n            <li>\n               <p>Delete a Slack workspace from your Amazon Web Services account that has an active live chat\n          channel.</p>\n            </li>\n            <li>\n               <p>Call the <code>RegisterSlackWorkspaceForOrganization</code> API from an Amazon Web Services account\n          that doesn't belong to an organization.</p>\n            </li>\n            <li>\n               <p>Call the <code>RegisterSlackWorkspaceForOrganization</code> API from a member account,\n          but the management account hasn't registered that workspace yet for the\n          organization.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -67,7 +82,7 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -105,7 +120,7 @@
                 "notifyOnCaseSeverity": {
                     "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n\n         <p>If you specify <code>high</code> or <code>all</code>, you must specify <code>true</code>\n      for at least one of the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>If you specify <code>none</code>, the following parameters must be null or\n        <code>false</code>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n         <note>\n            <p>If you don't specify these parameters in your request, they default to\n          <code>false</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n         <p>If you specify <code>high</code> or <code>all</code>, you must specify <code>true</code>\n      for at least one of the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you specify <code>none</code>, the following parameters must be null or\n        <code>false</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If you don't specify these parameters in your request, they default to\n          <code>false</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -198,7 +213,7 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -255,7 +270,7 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -496,6 +511,75 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.supportapp#RegisterSlackWorkspaceForOrganization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supportapp#RegisterSlackWorkspaceForOrganizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supportapp#RegisterSlackWorkspaceForOrganizationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supportapp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supportapp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a Slack workspace for your Amazon Web Services account. To call this API, your account must be\n      part of an organization in Organizations.</p>\n         <p>If you're the <i>management account</i> and you want to register Slack\n      workspaces for your organization, you must complete the following tasks:</p>\n         <ol>\n            <li>\n               <p>Sign in to the <a href=\"https://console.aws.amazon.com/support/app\">Amazon Web Services Support Center</a> and\n          authorize the Slack workspaces where you want your organization to have access to. See\n            <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html\">Authorize a Slack workspace</a> in the <i>Amazon Web Services Support User\n          Guide</i>.</p>\n            </li>\n            <li>\n               <p>Call the <code>RegisterSlackWorkspaceForOrganization</code> API to authorize each\n          Slack workspace for the organization.</p>\n            </li>\n         </ol>\n         <p>After the management account authorizes the Slack workspace, member accounts can call this\n      API to authorize the same Slack workspace for their individual accounts. Member accounts don't\n      need to authorize the Slack workspace manually through the <a href=\"https://console.aws.amazon.com/support/app\">Amazon Web Services Support Center</a>.</p>\n         <p>To use the Amazon Web Services Support App, each account must then complete the following tasks:</p>\n         <ul>\n            <li>\n               <p>Create an Identity and Access Management (IAM) role with the required permission. For more information,\n          see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to the Amazon Web Services Support App</a>.</p>\n            </li>\n            <li>\n               <p>Configure a Slack channel to use the Amazon Web Services Support App for support cases for that account. For\n          more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/add-your-slack-channel.html\">Configuring a Slack channel</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/control/register-slack-workspace-for-organization",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.supportapp#RegisterSlackWorkspaceForOrganizationRequest": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>. Specify the Slack workspace that you want to use for your organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supportapp#RegisterSlackWorkspaceForOrganizationResult": {
+            "type": "structure",
+            "members": {
+                "teamId": {
+                    "target": "com.amazonaws.supportapp#teamId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>"
+                    }
+                },
+                "teamName": {
+                    "target": "com.amazonaws.supportapp#teamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Slack workspace.</p>"
+                    }
+                },
+                "accountType": {
+                    "target": "com.amazonaws.supportapp#AccountType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the Amazon Web Services account is a management or member account that's part of an organization\n      in Organizations.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.supportapp#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -504,7 +588,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource is missing or doesn't exist, such as an account alias or Slack\n      channel configuration.</p>",
+                "smithy.api#documentation": "<p>The specified resource is missing or doesn't exist, such as an account alias, Slack\n      channel configuration, or Slack workspace configuration.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -528,7 +612,7 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -542,7 +626,7 @@
                 "channelName": {
                     "target": "com.amazonaws.supportapp#channelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Slack channel that you configured with the Amazon Web Services Support App.</p>"
+                        "smithy.api#documentation": "<p>The name of the Slack channel that you configured with the Amazon Web Services Support App for your\n      Amazon Web Services account.</p>"
                     }
                 },
                 "notifyOnCreateOrReopenCase": {
@@ -577,7 +661,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for a Slack channel that you added to an Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>The configuration for a Slack channel that you added for your Amazon Web Services account.</p>"
             }
         },
         "com.amazonaws.supportapp#SlackWorkspaceConfiguration": {
@@ -586,8 +670,20 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "teamName": {
+                    "target": "com.amazonaws.supportapp#teamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Slack workspace.</p>"
+                    }
+                },
+                "allowOrganizationMemberAccount": {
+                    "target": "com.amazonaws.supportapp#booleanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to allow member accounts to authorize Slack workspaces. Member accounts must be\n      part of an organization in Organizations.</p>"
                     }
                 }
             },
@@ -603,19 +699,6 @@
         },
         "com.amazonaws.supportapp#SupportApp": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Support App",
-                    "arnNamespace": "supportapp"
-                },
-                "aws.auth#sigv4": {
-                    "name": "supportapp"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>Amazon Web Services Support App in Slack</fullname>\n         <p>You can use the Amazon Web Services Support App in Slack API to manage your support cases in Slack for your\n      Amazon Web Services account. After you configure your Slack workspace and channel with the Amazon Web Services Support App, you can\n      perform the following tasks directly in your Slack channel:</p>\n         <ul>\n            <li>\n               <p>Create, search, update, and resolve your support cases</p>\n            </li>\n            <li>\n               <p>Request service quota increases for your account</p>\n            </li>\n            <li>\n               <p>Invite Amazon Web Services Support agents to your channel so that you can chat directly about your\n          support cases</p>\n            </li>\n         </ul>\n         <p>For more information about how to perform these actions in Slack, see the following\n      documentation in the <i>Amazon Web Services Support User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/aws-support-app-for-slack.html\">Amazon Web Services Support App in Slack</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/joining-a-live-chat-session.html\">Joining a live chat session with Amazon Web Services Support</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/service-quota-increase.html\">Requesting service quota increases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-commands.html\">Amazon Web Services Support App commands in Slack</a>\n               </p>\n            </li>\n         </ul>\n         <p>You can also use the Amazon Web Services Management Console instead of the Amazon Web Services Support App API to manage your Slack\n      configurations. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html\">Authorize a\n        Slack workspace to enable the Amazon Web Services Support App</a>.</p>\n\n         <note>\n            <ul>\n               <li>\n                  <p>You must have a Business or Enterprise Support plan to use the Amazon Web Services Support App API. </p>\n               </li>\n               <li>\n                  <p>For more information about the Amazon Web Services Support App endpoints, see the <a href=\"https://docs.aws.amazon.com/general/latest/gr/awssupport.html#awssupport_app_region\">Amazon Web Services Support App in Slack endpoints</a> in the <i>Amazon Web Services General\n              Reference</i>.</p>\n               </li>\n            </ul>\n         </note>",
-                "smithy.api#title": "AWS Support App"
-            },
             "version": "2021-08-20",
             "operations": [
                 {
@@ -643,9 +726,399 @@
                     "target": "com.amazonaws.supportapp#PutAccountAlias"
                 },
                 {
+                    "target": "com.amazonaws.supportapp#RegisterSlackWorkspaceForOrganization"
+                },
+                {
                     "target": "com.amazonaws.supportapp#UpdateSlackChannelConfiguration"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Support App",
+                    "arnNamespace": "supportapp"
+                },
+                "aws.auth#sigv4": {
+                    "name": "supportapp"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amz-apigw-id,date"
+                    ],
+                    "maxAge": 86400
+                },
+                "smithy.api#documentation": "<fullname>Amazon Web Services Support App in Slack</fullname>\n         <p>You can use the Amazon Web Services Support App in Slack API to manage your support cases in Slack for your\n      Amazon Web Services account. After you configure your Slack workspace and channel with the Amazon Web Services Support App, you can\n      perform the following tasks directly in your Slack channel:</p>\n         <ul>\n            <li>\n               <p>Create, search, update, and resolve your support cases</p>\n            </li>\n            <li>\n               <p>Request service quota increases for your account</p>\n            </li>\n            <li>\n               <p>Invite Amazon Web Services Support agents to your channel so that you can chat directly about your\n          support cases</p>\n            </li>\n         </ul>\n         <p>For more information about how to perform these actions in Slack, see the following\n      documentation in the <i>Amazon Web Services Support User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/aws-support-app-for-slack.html\">Amazon Web Services Support App in Slack</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/joining-a-live-chat-session.html\">Joining a live chat session with Amazon Web Services Support</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/service-quota-increase.html\">Requesting service quota increases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-commands.html\">Amazon Web Services Support App commands in Slack</a>\n               </p>\n            </li>\n         </ul>\n         <p>You can also use the Amazon Web Services Management Console instead of the Amazon Web Services Support App API to manage your Slack\n      configurations. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/authorize-slack-workspace.html\">Authorize a\n        Slack workspace to enable the Amazon Web Services Support App</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You must have a Business or Enterprise Support plan to use the Amazon Web Services Support App API. </p>\n               </li>\n               <li>\n                  <p>For more information about the Amazon Web Services Support App endpoints, see the <a href=\"https://docs.aws.amazon.com/general/latest/gr/awssupport.html#awssupport_app_region\">Amazon Web Services Support App in Slack endpoints</a> in the <i>Amazon Web Services General\n              Reference</i>.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#title": "AWS Support App",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://support-app-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://support-app-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://support-app.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://support-app.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.supportapp#UpdateSlackChannelConfiguration": {
             "type": "operation",
@@ -687,7 +1160,7 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>",
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -725,7 +1198,7 @@
                 "notifyOnCaseSeverity": {
                     "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n\n         <p>If you specify <code>high</code> or <code>all</code>, at least one of the following\n      parameters must be <code>true</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n\n         <p>If you specify <code>none</code>, any of the following parameters that you specify in your\n      request must be <code>false</code>:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n\n         <note>\n            <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current\n        values by default.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n         <p>If you specify <code>high</code> or <code>all</code>, at least one of the following\n      parameters must be <code>true</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you specify <code>none</code>, any of the following parameters that you specify in your\n      request must be <code>false</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current\n        values by default.</p>\n         </note>"
                     }
                 },
                 "channelRoleArn": {
@@ -742,7 +1215,7 @@
                 "teamId": {
                     "target": "com.amazonaws.supportapp#teamId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace.</p>"
+                        "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>"
                     }
                 },
                 "channelId": {
@@ -813,10 +1286,7 @@
             }
         },
         "com.amazonaws.supportapp#booleanValue": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.supportapp#channelId": {
             "type": "string",
@@ -875,6 +1345,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.supportapp#teamName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^.+$"
             }
         }
     }
