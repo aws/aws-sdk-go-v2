@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all invitations for the current AWS account. Applies only to
-// Hyperledger Fabric.
+// Returns a list of all invitations for the current Amazon Web Services account.
+// Applies only to Hyperledger Fabric.
 func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInput, optFns ...func(*Options)) (*ListInvitationsOutput, error) {
 	if params == nil {
 		params = &ListInvitationsInput{}

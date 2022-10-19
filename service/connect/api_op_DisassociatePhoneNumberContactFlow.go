@@ -11,7 +11,14 @@ import (
 )
 
 // Removes the flow association from a phone number claimed to your Amazon Connect
-// instance, if a flow association exists.
+// instance. If the number is claimed to a traffic distribution group, and you are
+// calling this API using an instance in the Amazon Web Services Region where the
+// traffic distribution group was created, you can use either a full phone number
+// ARN or UUID value for the PhoneNumberId URI request parameter. However, if the
+// number is claimed to a traffic distribution group and you are calling this API
+// using an instance in the alternate Amazon Web Services Region associated with
+// the traffic distribution group, you must provide a full phone number ARN. If a
+// UUID is provided in this scenario, you will receive a ResourceNotFoundException.
 func (c *Client) DisassociatePhoneNumberContactFlow(ctx context.Context, params *DisassociatePhoneNumberContactFlowInput, optFns ...func(*Options)) (*DisassociatePhoneNumberContactFlowOutput, error) {
 	if params == nil {
 		params = &DisassociatePhoneNumberContactFlowInput{}

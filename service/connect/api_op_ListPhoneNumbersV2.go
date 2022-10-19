@@ -12,9 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists phone numbers claimed to your Amazon Connect instance. For more
-// information about phone numbers, see Set Up Phone Numbers for Your Contact
-// Center
+// Lists phone numbers claimed to your Amazon Connect instance or traffic
+// distribution group. If the provided TargetArn is a traffic distribution group,
+// you can call this API in both Amazon Web Services Regions associated with
+// traffic distribution group. For more information about phone numbers, see Set Up
+// Phone Numbers for Your Contact Center
 // (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
 // in the Amazon Connect Administrator Guide.
 func (c *Client) ListPhoneNumbersV2(ctx context.Context, params *ListPhoneNumbersV2Input, optFns ...func(*Options)) (*ListPhoneNumbersV2Output, error) {
@@ -51,9 +53,10 @@ type ListPhoneNumbersV2Input struct {
 	// The type of phone number.
 	PhoneNumberTypes []types.PhoneNumberType
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
-	// are claimed to. If TargetArn input is not provided, this API lists numbers
-	// claimed to all the Amazon Connect instances belonging to your account.
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone numbers are claimed to. If TargetArn input is not
+	// provided, this API lists numbers claimed to all the Amazon Connect instances
+	// belonging to your account in the same Amazon Web Services Region as the request.
 	TargetArn *string
 
 	noSmithyDocumentSerde
@@ -62,7 +65,7 @@ type ListPhoneNumbersV2Input struct {
 type ListPhoneNumbersV2Output struct {
 
 	// Information about phone numbers that have been claimed to your Amazon Connect
-	// instances.
+	// instances or traffic distribution groups.
 	ListPhoneNumbersSummaryList []types.ListPhoneNumbersSummary
 
 	// If there are additional results, this is the token for the next set of results.

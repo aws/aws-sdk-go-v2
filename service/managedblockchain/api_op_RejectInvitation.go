@@ -11,8 +11,8 @@ import (
 )
 
 // Rejects an invitation to join a network. This action can be called by a
-// principal in an AWS account that has received an invitation to create a member
-// and join a network. Applies only to Hyperledger Fabric.
+// principal in an Amazon Web Services account that has received an invitation to
+// create a member and join a network. Applies only to Hyperledger Fabric.
 func (c *Client) RejectInvitation(ctx context.Context, params *RejectInvitationInput, optFns ...func(*Options)) (*RejectInvitationOutput, error) {
 	if params == nil {
 		params = &RejectInvitationInput{}

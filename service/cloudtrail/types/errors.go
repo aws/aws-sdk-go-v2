@@ -29,8 +29,7 @@ func (e *AccountHasOngoingImportException) ErrorCode() string {
 }
 func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified channel ARN is not valid or does not map to a channel in your
-// account.
+// This exception is thrown when the specified value of ChannelARN is not valid.
 type ChannelARNInvalidException struct {
 	Message *string
 
@@ -430,8 +429,8 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorFault() sm
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the policy on the S3 bucket or KMS key is not
-// sufficient.
+// This exception is thrown when the policy on the S3 bucket or KMS key does not
+// have sufficient permissions for the operation.
 type InsufficientEncryptionPolicyException struct {
 	Message *string
 
@@ -591,8 +590,8 @@ func (e *InvalidEventCategoryException) ErrorMessage() string {
 func (e *InvalidEventCategoryException) ErrorCode() string             { return "InvalidEventCategoryException" }
 func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the event data store category is not valid for the
-// import.
+// This exception is thrown when event categories of specified event data stores
+// are not valid.
 type InvalidEventDataStoreCategoryException struct {
 	Message *string
 

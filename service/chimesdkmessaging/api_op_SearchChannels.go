@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows an AppInstanceUser to search the channels that they belong to. The
-// AppInstanceUser can search by membership or external ID. An AppInstanceAdmin can
-// search across all channels within the AppInstance.
+// Allows ChimeBearer to search channels by channel members. AppInstanceUsers can
+// search across the channels that they belong to. AppInstanceAdmins can search
+// across all channels.
 func (c *Client) SearchChannels(ctx context.Context, params *SearchChannelsInput, optFns ...func(*Options)) (*SearchChannelsOutput, error) {
 	if params == nil {
 		params = &SearchChannelsInput{}

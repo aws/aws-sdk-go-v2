@@ -70,6 +70,26 @@ func (m *validateOpAssociateTrustStore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateUserAccessLoggingSettings struct {
+}
+
+func (*validateOpAssociateUserAccessLoggingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateUserAccessLoggingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateUserAccessLoggingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateUserAccessLoggingSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateUserSettings struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpCreateTrustStore) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateTrustStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateUserAccessLoggingSettings struct {
+}
+
+func (*validateOpCreateUserAccessLoggingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUserAccessLoggingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUserAccessLoggingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUserAccessLoggingSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,26 @@ func (m *validateOpDeleteTrustStore) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteUserAccessLoggingSettings struct {
+}
+
+func (*validateOpDeleteUserAccessLoggingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteUserAccessLoggingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteUserAccessLoggingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteUserAccessLoggingSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteUserSettings struct {
 }
 
@@ -385,6 +445,26 @@ func (m *validateOpDisassociateTrustStore) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateTrustStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateUserAccessLoggingSettings struct {
+}
+
+func (*validateOpDisassociateUserAccessLoggingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateUserAccessLoggingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateUserAccessLoggingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateUserAccessLoggingSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -545,6 +625,26 @@ func (m *validateOpGetTrustStore) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTrustStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetUserAccessLoggingSettings struct {
+}
+
+func (*validateOpGetUserAccessLoggingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUserAccessLoggingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUserAccessLoggingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUserAccessLoggingSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -770,6 +870,26 @@ func (m *validateOpUpdateTrustStore) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateUserAccessLoggingSettings struct {
+}
+
+func (*validateOpUpdateUserAccessLoggingSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateUserAccessLoggingSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateUserAccessLoggingSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateUserAccessLoggingSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserSettings struct {
 }
 
@@ -802,6 +922,10 @@ func addOpAssociateTrustStoreValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpAssociateTrustStore{}, middleware.After)
 }
 
+func addOpAssociateUserAccessLoggingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateUserAccessLoggingSettings{}, middleware.After)
+}
+
 func addOpAssociateUserSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateUserSettings{}, middleware.After)
 }
@@ -824,6 +948,10 @@ func addOpCreatePortalValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateTrustStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrustStore{}, middleware.After)
+}
+
+func addOpCreateUserAccessLoggingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUserAccessLoggingSettings{}, middleware.After)
 }
 
 func addOpCreateUserSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -850,6 +978,10 @@ func addOpDeleteTrustStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrustStore{}, middleware.After)
 }
 
+func addOpDeleteUserAccessLoggingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteUserAccessLoggingSettings{}, middleware.After)
+}
+
 func addOpDeleteUserSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUserSettings{}, middleware.After)
 }
@@ -864,6 +996,10 @@ func addOpDisassociateNetworkSettingsValidationMiddleware(stack *middleware.Stac
 
 func addOpDisassociateTrustStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateTrustStore{}, middleware.After)
+}
+
+func addOpDisassociateUserAccessLoggingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateUserAccessLoggingSettings{}, middleware.After)
 }
 
 func addOpDisassociateUserSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -896,6 +1032,10 @@ func addOpGetTrustStoreCertificateValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetTrustStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrustStore{}, middleware.After)
+}
+
+func addOpGetUserAccessLoggingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUserAccessLoggingSettings{}, middleware.After)
 }
 
 func addOpGetUserSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -940,6 +1080,10 @@ func addOpUpdatePortalValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateTrustStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTrustStore{}, middleware.After)
+}
+
+func addOpUpdateUserAccessLoggingSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateUserAccessLoggingSettings{}, middleware.After)
 }
 
 func addOpUpdateUserSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1027,6 +1171,24 @@ func validateOpAssociateTrustStoreInput(v *AssociateTrustStoreInput) error {
 	}
 	if v.TrustStoreArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateUserAccessLoggingSettingsInput(v *AssociateUserAccessLoggingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateUserAccessLoggingSettingsInput"}
+	if v.PortalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
+	}
+	if v.UserAccessLoggingSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserAccessLoggingSettingsArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1160,6 +1322,26 @@ func validateOpCreateTrustStoreInput(v *CreateTrustStoreInput) error {
 	}
 }
 
+func validateOpCreateUserAccessLoggingSettingsInput(v *CreateUserAccessLoggingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUserAccessLoggingSettingsInput"}
+	if v.KinesisStreamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KinesisStreamArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUserSettingsInput(v *CreateUserSettingsInput) error {
 	if v == nil {
 		return nil
@@ -1267,6 +1449,21 @@ func validateOpDeleteTrustStoreInput(v *DeleteTrustStoreInput) error {
 	}
 }
 
+func validateOpDeleteUserAccessLoggingSettingsInput(v *DeleteUserAccessLoggingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteUserAccessLoggingSettingsInput"}
+	if v.UserAccessLoggingSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserAccessLoggingSettingsArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteUserSettingsInput(v *DeleteUserSettingsInput) error {
 	if v == nil {
 		return nil
@@ -1317,6 +1514,21 @@ func validateOpDisassociateTrustStoreInput(v *DisassociateTrustStoreInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTrustStoreInput"}
+	if v.PortalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateUserAccessLoggingSettingsInput(v *DisassociateUserAccessLoggingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateUserAccessLoggingSettingsInput"}
 	if v.PortalArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
 	}
@@ -1442,6 +1654,21 @@ func validateOpGetTrustStoreInput(v *GetTrustStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetTrustStoreInput"}
 	if v.TrustStoreArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUserAccessLoggingSettingsInput(v *GetUserAccessLoggingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUserAccessLoggingSettingsInput"}
+	if v.UserAccessLoggingSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserAccessLoggingSettingsArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1617,6 +1844,21 @@ func validateOpUpdateTrustStoreInput(v *UpdateTrustStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrustStoreInput"}
 	if v.TrustStoreArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrustStoreArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateUserAccessLoggingSettingsInput(v *UpdateUserAccessLoggingSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateUserAccessLoggingSettingsInput"}
+	if v.UserAccessLoggingSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserAccessLoggingSettingsArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -41,7 +41,7 @@ type DisassociateLexBotInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The Region in which the Amazon Lex bot has been created.
+	// The Amazon Web Services Region in which the Amazon Lex bot has been created.
 	//
 	// This member is required.
 	LexRegion *string

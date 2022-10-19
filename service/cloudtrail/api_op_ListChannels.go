@@ -12,7 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all CloudTrail channels.
+// Lists the channels in the current account, and their source names. Amazon Web
+// Services services create service-linked channels get information about
+// CloudTrail events on your behalf. For more information about service-linked
+// channels, see Viewing service-linked channels for CloudTrail by using the CLI
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html).
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}
@@ -33,7 +37,11 @@ type ListChannelsInput struct {
 	// The maximum number of CloudTrail channels to display on a single page.
 	MaxResults *int32
 
-	// A token you can use to get the next page of results.
+	// The token to use to get the next page of results after a previous API call. This
+	// token must be passed in with the same parameters that were specified in the
+	// original call. For example, if the original call specified an AttributeKey of
+	// 'Username' with a value of 'root', the call with NextToken should include those
+	// same parameters.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +49,10 @@ type ListChannelsInput struct {
 
 type ListChannelsOutput struct {
 
-	// The list of CloudTrail channels.
+	// The list of channels in the account.
 	Channels []types.Channel
 
-	// A token used to get the next page of results.
+	// The token to use to get the next page of results after a previous API call.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

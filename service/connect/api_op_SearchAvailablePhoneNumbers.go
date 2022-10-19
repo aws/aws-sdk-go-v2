@@ -13,7 +13,9 @@ import (
 )
 
 // Searches for available phone numbers that you can claim to your Amazon Connect
-// instance.
+// instance or traffic distribution group. If the provided TargetArn is a traffic
+// distribution group, you can call this API in both Amazon Web Services Regions
+// associated with the traffic distribution group.
 func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *SearchAvailablePhoneNumbersInput, optFns ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &SearchAvailablePhoneNumbersInput{}
@@ -41,8 +43,8 @@ type SearchAvailablePhoneNumbersInput struct {
 	// This member is required.
 	PhoneNumberType types.PhoneNumberType
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
-	// are claimed to.
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone numbers are claimed to.
 	//
 	// This member is required.
 	TargetArn *string
@@ -63,8 +65,8 @@ type SearchAvailablePhoneNumbersInput struct {
 
 type SearchAvailablePhoneNumbersOutput struct {
 
-	// A list of available phone numbers that you can claim for your Amazon Connect
-	// instance.
+	// A list of available phone numbers that you can claim to your Amazon Connect
+	// instance or traffic distribution group.
 	AvailableNumbersList []types.AvailableNumberSummary
 
 	// If there are additional results, this is the token for the next set of results.

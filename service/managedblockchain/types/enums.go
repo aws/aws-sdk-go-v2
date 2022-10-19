@@ -2,6 +2,42 @@
 
 package types
 
+type AccessorStatus string
+
+// Enum values for AccessorStatus
+const (
+	AccessorStatusAvailable       AccessorStatus = "AVAILABLE"
+	AccessorStatusPendingDeletion AccessorStatus = "PENDING_DELETION"
+	AccessorStatusDeleted         AccessorStatus = "DELETED"
+)
+
+// Values returns all known values for AccessorStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessorStatus) Values() []AccessorStatus {
+	return []AccessorStatus{
+		"AVAILABLE",
+		"PENDING_DELETION",
+		"DELETED",
+	}
+}
+
+type AccessorType string
+
+// Enum values for AccessorType
+const (
+	AccessorTypeBillingToken AccessorType = "BILLING_TOKEN"
+)
+
+// Values returns all known values for AccessorType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AccessorType) Values() []AccessorType {
+	return []AccessorType{
+		"BILLING_TOKEN",
+	}
+}
+
 type Edition string
 
 // Enum values for Edition

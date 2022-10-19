@@ -197,7 +197,7 @@ type ChatStreamingConfiguration struct {
 }
 
 // Information about a phone number that has been claimed to your Amazon Connect
-// instance.
+// instance or traffic distribution group.
 type ClaimedPhoneNumberSummary struct {
 
 	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
@@ -217,6 +217,36 @@ type ClaimedPhoneNumberSummary struct {
 	PhoneNumberId *string
 
 	// The status of the phone number.
+	//
+	// * CLAIMED means the previous ClaimedPhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+	// or UpdatePhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+	// operation succeeded.
+	//
+	// * IN_PROGRESS means a ClaimedPhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+	// or UpdatePhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+	// operation is still in progress and has not yet completed. You can call
+	// DescribePhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+	// at a later time to verify if the previous operation has completed.
+	//
+	// * FAILED
+	// indicates that the previous ClaimedPhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+	// or UpdatePhoneNumber
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+	// operation has failed. It will include a message indicating the failure reason. A
+	// common reason for a failure may be that the TargetArn value you are claiming or
+	// updating a phone number to has reached its limit of total claimed numbers. If
+	// you received a FAILED status from a ClaimPhoneNumber API call, you have one day
+	// to retry claiming the phone number before the number is released back to the
+	// inventory for other customers to claim.
+	//
+	// You will not be billed for the phone
+	// number during the 1-day period if number claiming fails.
 	PhoneNumberStatus *PhoneNumberStatus
 
 	// The type of phone number.
@@ -226,8 +256,8 @@ type ClaimedPhoneNumberSummary struct {
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
-	// are claimed to.
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone numbers are claimed to.
 	TargetArn *string
 
 	noSmithyDocumentSerde
@@ -535,6 +565,22 @@ type Dimensions struct {
 
 	// Information about the queue for which metrics are returned.
 	Queue *QueueReference
+
+	noSmithyDocumentSerde
+}
+
+// Information about a traffic distribution.
+type Distribution struct {
+
+	// The percentage of the traffic that is distributed, in increments of 10.
+	//
+	// This member is required.
+	Percentage int32
+
+	// The Amazon Web Services Region where the traffic is distributed.
+	//
+	// This member is required.
+	Region *string
 
 	noSmithyDocumentSerde
 }
@@ -1075,7 +1121,7 @@ type KinesisVideoStreamConfig struct {
 // Configuration information of an Amazon Lex bot.
 type LexBot struct {
 
-	// The Region that the Amazon Lex bot was created in.
+	// The Amazon Web Services Region where the Amazon Lex bot was created.
 	LexRegion *string
 
 	// The name of the Amazon Lex bot.
@@ -1106,7 +1152,7 @@ type LexV2Bot struct {
 }
 
 // Information about phone numbers that have been claimed to your Amazon Connect
-// instance.
+// instance or traffic distribution group.
 type ListPhoneNumbersSummary struct {
 
 	// The phone number. Phone numbers are formatted [+] [country code] [subscriber
@@ -1125,8 +1171,8 @@ type ListPhoneNumbersSummary struct {
 	// The type of phone number.
 	PhoneNumberType PhoneNumberType
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
-	// are claimed to.
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone numbers are claimed to.
 	TargetArn *string
 
 	noSmithyDocumentSerde
@@ -1202,6 +1248,33 @@ type PhoneNumberQuickConnectConfig struct {
 }
 
 // The status of the phone number.
+//
+// * CLAIMED means the previous ClaimedPhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+// or UpdatePhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+// operation succeeded.
+//
+// * IN_PROGRESS means a ClaimedPhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+// or UpdatePhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+// operation is still in progress and has not yet completed. You can call
+// DescribePhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+// at a later time to verify if the previous operation has completed.
+//
+// * FAILED
+// indicates that the previous ClaimedPhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
+// or UpdatePhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
+// operation has failed. It will include a message indicating the failure reason. A
+// common reason for a failure may be that the TargetArn value you are claiming or
+// updating a phone number to has reached its limit of total claimed numbers. If
+// you received a FAILED status from a ClaimPhoneNumber API call, you have one day
+// to retry claiming the phone number before the number is released back to the
+// inventory for other customers to claim.
 type PhoneNumberStatus struct {
 
 	// The status message.
@@ -1320,7 +1393,7 @@ type QueueInfo struct {
 	// The timestamp when the contact was added to the queue.
 	EnqueueTimestamp *time.Time
 
-	// The identifier of the agent who accepted the contact.
+	// The unique identifier for the queue.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -1367,8 +1440,8 @@ type QueueSearchCriteria struct {
 	// The type of queue.
 	QueueTypeCondition SearchableQueueType
 
-	// A leaf node condition which can be used to specify a string condition, for
-	// example, username = 'abc'.
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported value for FieldName: name
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -1489,7 +1562,7 @@ type ReadOnlyFieldInfo struct {
 // can have up to 4,096 UTF-8 bytes across all references for a contact.
 type Reference struct {
 
-	// The type of the reference.
+	// The type of the reference. DATE must be of type Epoch timestamp.
 	//
 	// This member is required.
 	Type ReferenceType
@@ -1728,8 +1801,8 @@ type RoutingProfileSearchCriteria struct {
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []RoutingProfileSearchCriteria
 
-	// A leaf node condition which can be used to specify a string condition, for
-	// example, username = 'abc'.
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported value for FieldName: name
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -1835,8 +1908,8 @@ type SecurityProfileSearchCriteria struct {
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []SecurityProfileSearchCriteria
 
-	// A leaf node condition which can be used to specify a string condition, for
-	// example, username = 'abc'.
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported value for FieldName: name
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -1898,8 +1971,8 @@ type SecurityProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A leaf node condition which can be used to specify a string condition, for
-// example, username = 'abc'.
+// A leaf node condition which can be used to specify a string condition. The
+// currently supported value for FieldName: name
 type StringCondition struct {
 
 	// The type of comparison to be made when evaluating the string condition.
@@ -2033,6 +2106,17 @@ type TaskTemplateMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The distribution of traffic between the instance and its replicas.
+type TelephonyConfig struct {
+
+	// Information about traffic distributions.
+	//
+	// This member is required.
+	Distributions []Distribution
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the threshold for service level metrics.
 type Threshold struct {
 
@@ -2041,6 +2125,119 @@ type Threshold struct {
 
 	// The threshold value to compare.
 	ThresholdValue *float64
+
+	noSmithyDocumentSerde
+}
+
+// Information about a traffic distribution group.
+type TrafficDistributionGroup struct {
+
+	// The Amazon Resource Name (ARN) of the traffic distribution group.
+	Arn *string
+
+	// The description of the traffic distribution group.
+	Description *string
+
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
+	Id *string
+
+	// The Amazon Resource Name (ARN).
+	InstanceArn *string
+
+	// The name of the traffic distribution group.
+	Name *string
+
+	// The status of the traffic distribution group.
+	//
+	// * CREATION_IN_PROGRESS means the
+	// previous CreateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
+	// operation is still in progress and has not yet completed.
+	//
+	// * ACTIVE means the
+	// previous CreateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
+	// operation has succeeded.
+	//
+	// * CREATION_FAILED indicates that the previous
+	// CreateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
+	// operation has failed.
+	//
+	// * PENDING_DELETION means the previous
+	// DeleteTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
+	// operation is still in progress and has not yet completed.
+	//
+	// * DELETION_FAILED
+	// means the previous DeleteTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
+	// operation has failed.
+	//
+	// * UPDATE_IN_PROGRESS means the previous
+	// UpdateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html)
+	// operation is still in progress and has not yet completed.
+	Status TrafficDistributionGroupStatus
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Information about traffic distribution groups.
+type TrafficDistributionGroupSummary struct {
+
+	// The Amazon Resource Name (ARN) of the traffic distribution group.
+	Arn *string
+
+	// The identifier of the traffic distribution group. This can be the ID or the ARN
+	// if the API is being called in the Region where the traffic distribution group
+	// was created. The ARN must be provided if the call is from the replicated Region.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the traffic distribution group.
+	InstanceArn *string
+
+	// The name of the traffic distribution group.
+	Name *string
+
+	// The status of the traffic distribution group.
+	//
+	// * CREATION_IN_PROGRESS means the
+	// previous CreateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
+	// operation is still in progress and has not yet completed.
+	//
+	// * ACTIVE means the
+	// previous CreateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
+	// operation has succeeded.
+	//
+	// * CREATION_FAILED indicates that the previous
+	// CreateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
+	// operation has failed.
+	//
+	// * PENDING_DELETION means the previous
+	// DeleteTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
+	// operation is still in progress and has not yet completed.
+	//
+	// * DELETION_FAILED
+	// means the previous DeleteTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
+	// operation has failed.
+	//
+	// * UPDATE_IN_PROGRESS means the previous
+	// UpdateTrafficDistributionGroup
+	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html)
+	// operation is still in progress and has not yet completed.
+	Status TrafficDistributionGroupStatus
 
 	noSmithyDocumentSerde
 }
@@ -2073,7 +2270,7 @@ type UseCase struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a user account for a Amazon Connect instance.
+// Contains information about a user account for an Amazon Connect instance.
 type User struct {
 
 	// The Amazon Resource Name (ARN) of the user account.
@@ -2140,8 +2337,8 @@ type UserData struct {
 	// (CCP), or that the supervisor manually changes in the real-time metrics report.
 	Status *AgentStatusReference
 
-	// Information about the user for the data that is returned. It contains resourceId
-	// and ARN of the user.
+	// Information about the user for the data that is returned. It contains the
+	// resourceId and ARN of the user.
 	User *UserReference
 
 	noSmithyDocumentSerde
@@ -2179,8 +2376,9 @@ type UserIdentityInfo struct {
 	Mobile *string
 
 	// The user's secondary email address. If you provide a secondary email, the user
-	// receives email notifications -- other than password reset notifications -- to
-	// this email address instead of to their primary email address.
+	// receives email notifications - other than password reset notifications - to this
+	// email address instead of to their primary email address. Pattern:
+	// (?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}
 	SecondaryEmail *string
 
 	noSmithyDocumentSerde
@@ -2206,7 +2404,8 @@ type UserPhoneConfig struct {
 	// This member is required.
 	PhoneType PhoneType
 
-	// The After Call Work (ACW) timeout setting, in seconds.
+	// The After Call Work (ACW) timeout setting, in seconds. When returned by a
+	// SearchUsers call, AfterContactWorkTimeLimit is returned in milliseconds.
 	AfterContactWorkTimeLimit int32
 
 	// The Auto accept setting.

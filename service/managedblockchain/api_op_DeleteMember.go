@@ -12,11 +12,12 @@ import (
 
 // Deletes a member. Deleting a member removes the member and all associated
 // resources from the network. DeleteMember can only be called for a specified
-// MemberId if the principal performing the action is associated with the AWS
-// account that owns the member. In all other cases, the DeleteMember action is
-// carried out as the result of an approved proposal to remove a member. If
-// MemberId is the last member in a network specified by the last AWS account, the
-// network is deleted also. Applies only to Hyperledger Fabric.
+// MemberId if the principal performing the action is associated with the Amazon
+// Web Services account that owns the member. In all other cases, the DeleteMember
+// action is carried out as the result of an approved proposal to remove a member.
+// If MemberId is the last member in a network specified by the last Amazon Web
+// Services account, the network is deleted also. Applies only to Hyperledger
+// Fabric.
 func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, optFns ...func(*Options)) (*DeleteMemberOutput, error) {
 	if params == nil {
 		params = &DeleteMemberInput{}

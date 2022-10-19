@@ -347,6 +347,25 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The resource is not ready.
+type ResourceNotReadyException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
+func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The service quota has been exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string

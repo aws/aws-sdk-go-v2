@@ -35,7 +35,8 @@ type UpdateSlackChannelConfigurationInput struct {
 	// This member is required.
 	ChannelId *string
 
-	// The team ID in Slack. This ID uniquely identifies a Slack workspace.
+	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
+	// T012ABCDEFG.
 	//
 	// This member is required.
 	TeamId *string
@@ -116,7 +117,8 @@ type UpdateSlackChannelConfigurationOutput struct {
 	// Whether you want to get notified when a support case is resolved.
 	NotifyOnResolveCase *bool
 
-	// The team ID in Slack. This ID uniquely identifies a Slack workspace.
+	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
+	// T012ABCDEFG.
 	TeamId *string
 
 	// Metadata pertaining to the operation's result.

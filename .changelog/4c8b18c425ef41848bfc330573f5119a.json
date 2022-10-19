@@ -1,0 +1,8 @@
+{
+    "id": "4c8b18c4-25ef-4184-8bfc-330573f5119a",
+    "type": "feature",
+    "description": "This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution.",
+    "modules": [
+        "service/connect"
+    ]
+}

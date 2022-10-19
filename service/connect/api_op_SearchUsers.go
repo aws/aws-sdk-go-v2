@@ -13,6 +13,7 @@ import (
 )
 
 // Searches users in an Amazon Connect instance, with optional filtering.
+// AfterContactWorkTimeLimit is returned in milliseconds.
 func (c *Client) SearchUsers(ctx context.Context, params *SearchUsersInput, optFns ...func(*Options)) (*SearchUsersOutput, error) {
 	if params == nil {
 		params = &SearchUsersInput{}

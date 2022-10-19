@@ -1399,6 +1399,33 @@ func (TaskTemplateStatus) Values() []TaskTemplateStatus {
 	}
 }
 
+type TrafficDistributionGroupStatus string
+
+// Enum values for TrafficDistributionGroupStatus
+const (
+	TrafficDistributionGroupStatusCreationInProgress TrafficDistributionGroupStatus = "CREATION_IN_PROGRESS"
+	TrafficDistributionGroupStatusActive             TrafficDistributionGroupStatus = "ACTIVE"
+	TrafficDistributionGroupStatusCreationFailed     TrafficDistributionGroupStatus = "CREATION_FAILED"
+	TrafficDistributionGroupStatusPendingDeletion    TrafficDistributionGroupStatus = "PENDING_DELETION"
+	TrafficDistributionGroupStatusDeletionFailed     TrafficDistributionGroupStatus = "DELETION_FAILED"
+	TrafficDistributionGroupStatusUpdateInProgress   TrafficDistributionGroupStatus = "UPDATE_IN_PROGRESS"
+)
+
+// Values returns all known values for TrafficDistributionGroupStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TrafficDistributionGroupStatus) Values() []TrafficDistributionGroupStatus {
+	return []TrafficDistributionGroupStatus{
+		"CREATION_IN_PROGRESS",
+		"ACTIVE",
+		"CREATION_FAILED",
+		"PENDING_DELETION",
+		"DELETION_FAILED",
+		"UPDATE_IN_PROGRESS",
+	}
+}
+
 type TrafficType string
 
 // Enum values for TrafficType

@@ -43,7 +43,7 @@ type StopImportOutput struct {
 	// The timestamp of the import's creation.
 	CreatedTimestamp *time.Time
 
-	// The destination event data store.
+	// The ARN of the destination event data store.
 	Destinations []string
 
 	// Used with StartEventTime to bound a StartImport request, and limit imported
@@ -53,7 +53,7 @@ type StopImportOutput struct {
 	// The ID for the import.
 	ImportId *string
 
-	// The source S3 bucket.
+	// The source S3 bucket for the import.
 	ImportSource *types.ImportSource
 
 	// Returns information on the stopped import.

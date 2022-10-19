@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You have specified a template that is not valid or supported.
+// You have specified a template that is invalid or supported.
 type ConformancePackTemplateValidationException struct {
 	Message *string
 
@@ -69,12 +69,13 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 //
 // * For PutConformancePack and
 // PutOrganizationConformancePack, a conformance pack cannot be created because you
-// do not have permissions:
+// do not have the following permissions:
 //
-// * To call IAM GetRole action or create a
-// service-linked role.
+// * You do not have permission to call IAM
+// GetRole action or create a service-linked role.
 //
-// * To read Amazon S3 bucket or call SSM:GetDocument.
+// * You do not have permission to
+// read Amazon S3 bucket or call SSM:GetDocument.
 type InsufficientPermissionsException struct {
 	Message *string
 
@@ -118,7 +119,7 @@ func (e *InvalidConfigurationRecorderNameException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// The specified delivery channel name is not valid.
+// The specified delivery channel name is invalid.
 type InvalidDeliveryChannelNameException struct {
 	Message *string
 
@@ -277,7 +278,7 @@ func (e *InvalidRoleException) ErrorMessage() string {
 func (e *InvalidRoleException) ErrorCode() string             { return "InvalidRoleException" }
 func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon S3 key prefix is not valid.
+// The specified Amazon S3 key prefix is invalid.
 type InvalidS3KeyPrefixException struct {
 	Message *string
 
@@ -296,7 +297,7 @@ func (e *InvalidS3KeyPrefixException) ErrorMessage() string {
 func (e *InvalidS3KeyPrefixException) ErrorCode() string             { return "InvalidS3KeyPrefixException" }
 func (e *InvalidS3KeyPrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified Amazon KMS Key ARN is not valid.
+// The specified Amazon KMS Key ARN is invalid.
 type InvalidS3KmsKeyArnException struct {
 	Message *string
 
@@ -334,7 +335,7 @@ func (e *InvalidSNSTopicARNException) ErrorMessage() string {
 func (e *InvalidSNSTopicARNException) ErrorCode() string             { return "InvalidSNSTopicARNException" }
 func (e *InvalidSNSTopicARNException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified time range is not valid. The earlier time is not chronologically
+// The specified time range is invalid. The earlier time is not chronologically
 // before the later time.
 type InvalidTimeRangeException struct {
 	Message *string
@@ -400,8 +401,9 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the limit (100,000) of active custom resource types in your
-// account. Delete unused resources using DeleteResourceConfig.
+// You have reached the limit of active custom resource types in your account.
+// There is a limit of 100,000. Delete unused resources using DeleteResourceConfig
+// (https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteResourceConfig.html).
 type MaxActiveResourcesExceededException struct {
 	Message *string
 
@@ -472,8 +474,10 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorFault() smithy
 	return smithy.FaultClient
 }
 
-// You have reached the limit (6) of the number of conformance packs in an account
-// (6 conformance pack with 25 Config rules per pack).
+// You have reached the limit of the number of conformance packs you can create in
+// an account. For more information, see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide.
 type MaxNumberOfConformancePacksExceededException struct {
 	Message *string
 
@@ -520,7 +524,9 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorFault() smithy.Error
 }
 
 // You have reached the limit of the number of organization Config rules you can
-// create.
+// create. For more information, see see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide.
 type MaxNumberOfOrganizationConfigRulesExceededException struct {
 	Message *string
 
@@ -543,8 +549,10 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorFault() smith
 	return smithy.FaultClient
 }
 
-// You have reached the limit (6) of the number of organization conformance packs
-// in an account (6 conformance pack with 25 Config rules per pack per account).
+// You have reached the limit of the number of organization conformance packs you
+// can create in an account. For more information, see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide.
 type MaxNumberOfOrganizationConformancePacksExceededException struct {
 	Message *string
 
@@ -701,7 +709,7 @@ func (e *NoSuchBucketException) ErrorMessage() string {
 func (e *NoSuchBucketException) ErrorCode() string             { return "NoSuchBucketException" }
 func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Config rule in the request is not valid. Verify that the rule is an Config
+// The Config rule in the request is invalid. Verify that the rule is an Config
 // Custom Policy rule, that the rule name is correct, and that valid Amazon Resouce
 // Names (ARNs) are used before trying again.
 type NoSuchConfigRuleException struct {
@@ -829,7 +837,7 @@ func (e *NoSuchDeliveryChannelException) ErrorMessage() string {
 func (e *NoSuchDeliveryChannelException) ErrorCode() string             { return "NoSuchDeliveryChannelException" }
 func (e *NoSuchDeliveryChannelException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Config rule in the request is not valid. Verify that the rule is an
+// The Config rule in the request is invalid. Verify that the rule is an
 // organization Config Custom Policy rule, that the rule name is correct, and that
 // valid Amazon Resouce Names (ARNs) are used before trying again.
 type NoSuchOrganizationConfigRuleException struct {
@@ -972,7 +980,8 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 //
 // For all OrganizationConfigRule and
 // OrganizationConformancePack APIs, Config throws an exception if APIs are called
-// from member accounts. All APIs must be called from organization master account.
+// from member accounts. All APIs must be called from organization management
+// account.
 type OrganizationAccessDeniedException struct {
 	Message *string
 
@@ -1017,7 +1026,7 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// You have specified a template that is not valid or supported.
+// You have specified a template that is invalid or supported.
 type OrganizationConformancePackTemplateValidationException struct {
 	Message *string
 
@@ -1190,8 +1199,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the limit of the number of tags you can use. You have more than
-// 50 tags.
+// You have reached the limit of the number of tags you can use. For more
+// information, see  Service Limits
+// (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
+// the Config Developer Guide.
 type TooManyTagsException struct {
 	Message *string
 
@@ -1210,12 +1221,11 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested action is not valid. For PutStoredQuery, you will see this
-// exception if there are missing required fields or if the input value fails the
-// validation, or if you are trying to create more than 300 queries. For
-// GetStoredQuery, ListStoredQuery, and DeleteStoredQuery you will see this
-// exception if there are missing required fields or if the input value fails the
-// validation.
+// The requested action is invalid. For PutStoredQuery, you will see this exception
+// if there are missing required fields or if the input value fails the validation,
+// or if you are trying to create more than 300 queries. For GetStoredQuery,
+// ListStoredQuery, and DeleteStoredQuery you will see this exception if there are
+// missing required fields or if the input value fails the validation.
 type ValidationException struct {
 	Message *string
 

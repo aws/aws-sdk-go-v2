@@ -208,7 +208,7 @@ type AdvancedFieldSelector struct {
 // Contains information about a returned CloudTrail channel.
 type Channel struct {
 
-	// The Amazon Resource Name (ARN) of the channel.
+	// The Amazon Resource Name (ARN) of a channel.
 	ChannelArn *string
 
 	// The name of the CloudTrail channel. For service-linked channels, the name is
@@ -280,7 +280,7 @@ type DataResource struct {
 	// * AWS::DynamoDB::Table
 	//
 	// The following resource types are
-	// also availble through advanced event selectors. Basic event selector resource
+	// also available through advanced event selectors. Basic event selector resource
 	// types are valid in advanced event selectors, but advanced event selector
 	// resource types are not valid in basic event selectors. For more information, see
 	// AdvancedFieldSelector$Field.
@@ -346,13 +346,14 @@ type DataResource struct {
 // Contains information about the service where CloudTrail delivers events.
 type Destination struct {
 
-	// The location of the service. For service-linked channels, this is the name of
-	// the Amazon Web Services service.
+	// For service-linked channels, the value is the name of the Amazon Web Services
+	// service.
 	//
 	// This member is required.
 	Location *string
 
-	// The type of service. For service-linked channels, the value is AWS_SERVICE.
+	// The type of destination for events arriving from a channel. For service-linked
+	// channels, the value is AWS_SERVICE.
 	//
 	// This member is required.
 	Type DestinationType
@@ -539,7 +540,7 @@ type ImportsListItem struct {
 	// The timestamp of the import's creation.
 	CreatedTimestamp *time.Time
 
-	// The destination event data store.
+	// The ARN of the destination event data store.
 	Destinations []string
 
 	// The ID of the import.
@@ -565,16 +566,19 @@ type ImportSource struct {
 	noSmithyDocumentSerde
 }
 
-// Provides statistics for the specified ImportID.
+// Provides statistics for the specified ImportID. CloudTrail does not update
+// import statistics in real-time. Returned values for parameters such as
+// EventsCompleted may be lower than the actual value, because CloudTrail updates
+// statistics incrementally over the course of the import.
 type ImportStatistics struct {
 
-	// The number of trail events imported.
+	// The number of trail events imported into the event data store.
 	EventsCompleted *int64
 
 	// The number of failed entries.
 	FailedEntries *int64
 
-	// The number of files that completed import.
+	// The number of log files that completed import.
 	FilesCompleted *int64
 
 	// The number of S3 prefixes that completed import.
@@ -742,14 +746,13 @@ type S3ImportSource struct {
 	noSmithyDocumentSerde
 }
 
-// Contains configuration information about the service-linked channel.
+// Contains configuration information about the channel.
 type SourceConfig struct {
 
-	// The advanced event selectors configured for the service-linked channel.
+	// The advanced event selectors that are configured for the channel.
 	AdvancedEventSelectors []AdvancedEventSelector
 
-	// Specifies whether the service-linked channel applies to one region or all
-	// regions.
+	// Specifies whether the channel applies to a single region or to all regions.
 	ApplyToAllRegions *bool
 
 	noSmithyDocumentSerde

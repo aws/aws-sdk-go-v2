@@ -47,6 +47,13 @@ type DescribeQueryInput struct {
 
 type DescribeQueryOutput struct {
 
+	// The URI for the S3 bucket where CloudTrail delivered query results, if
+	// applicable.
+	DeliveryS3Uri *string
+
+	// The delivery status.
+	DeliveryStatus types.DeliveryStatus
+
 	// The error message returned if a query failed.
 	ErrorMessage *string
 

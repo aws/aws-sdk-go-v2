@@ -13,14 +13,14 @@ import (
 
 // Creates or updates a conformance pack. A conformance pack is a collection of
 // Config rules that can be easily deployed in an account and a region and across
-// Amazon Web Services Organization. For information on how many conformance packs
-// you can have per account, see  Service Limits
+// an organization. For information on how many conformance packs you can have per
+// account, see  Service Limits
 // (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in
 // the Config Developer Guide. This API creates a service-linked role
 // AWSServiceRoleForConfigConforms in your account. The service-linked role is
-// created only when the role does not exist in your account. You must specify one
-// and only one of theTemplateS3Uri, TemplateBody or TemplateSSMDocumentDetails
-// parameters.
+// created only when the role does not exist in your account. You must specify only
+// one of the follow parameters: TemplateS3Uri, TemplateBody or
+// TemplateSSMDocumentDetails.
 func (c *Client) PutConformancePack(ctx context.Context, params *PutConformancePackInput, optFns ...func(*Options)) (*PutConformancePackOutput, error) {
 	if params == nil {
 		params = &PutConformancePackInput{}
@@ -55,14 +55,14 @@ type PutConformancePackInput struct {
 
 	// A string containing the full conformance pack template body. The structure
 	// containing the template body has a minimum length of 1 byte and a maximum length
-	// of 51,200 bytes. You can only use a YAML template with two resource types:
-	// Config rule (AWS::Config::ConfigRule) and remediation action
+	// of 51,200 bytes. You can use a YAML template with two resource types: Config
+	// rule (AWS::Config::ConfigRule) and remediation action
 	// (AWS::Config::RemediationConfiguration).
 	TemplateBody *string
 
 	// The location of the file containing the template body (s3://bucketname/prefix).
 	// The uri must point to a conformance pack template (max size: 300 KB) that is
-	// located in an Amazon S3 bucket in the same region as the conformance pack. You
+	// located in an Amazon S3 bucket in the same Region as the conformance pack. You
 	// must have access to read Amazon S3 bucket.
 	TemplateS3Uri *string
 

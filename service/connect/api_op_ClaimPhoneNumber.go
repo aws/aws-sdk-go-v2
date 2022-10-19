@@ -11,7 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Claims an available phone number to your Amazon Connect instance.
+// Claims an available phone number to your Amazon Connect instance or traffic
+// distribution group. You can call this API only in the same Amazon Web Services
+// Region where the Amazon Connect instance or traffic distribution group was
+// created. You can call the DescribePhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+// API to verify the status of a previous ClaimPhoneNumber
+// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html)
+// operation.
 func (c *Client) ClaimPhoneNumber(ctx context.Context, params *ClaimPhoneNumberInput, optFns ...func(*Options)) (*ClaimPhoneNumberOutput, error) {
 	if params == nil {
 		params = &ClaimPhoneNumberInput{}
@@ -35,14 +42,17 @@ type ClaimPhoneNumberInput struct {
 	// This member is required.
 	PhoneNumber *string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers
-	// are claimed to.
+	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// distribution groups that phone numbers are claimed to.
 	//
 	// This member is required.
 	TargetArn *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
 	// The description of the phone number.

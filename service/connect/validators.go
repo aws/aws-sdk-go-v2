@@ -450,6 +450,26 @@ func (m *validateOpCreateTaskTemplate) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateTrafficDistributionGroup struct {
+}
+
+func (*validateOpCreateTrafficDistributionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTrafficDistributionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTrafficDistributionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTrafficDistributionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUseCase struct {
 }
 
@@ -685,6 +705,26 @@ func (m *validateOpDeleteTaskTemplate) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTaskTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTrafficDistributionGroup struct {
+}
+
+func (*validateOpDeleteTrafficDistributionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTrafficDistributionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTrafficDistributionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTrafficDistributionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1025,6 +1065,26 @@ func (m *validateOpDescribeSecurityProfile) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSecurityProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeTrafficDistributionGroup struct {
+}
+
+func (*validateOpDescribeTrafficDistributionGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrafficDistributionGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrafficDistributionGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrafficDistributionGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1405,6 +1465,26 @@ func (m *validateOpGetTaskTemplate) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTaskTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrafficDistribution struct {
+}
+
+func (*validateOpGetTrafficDistribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrafficDistribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrafficDistributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrafficDistributionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2005,6 +2085,26 @@ func (m *validateOpReleasePhoneNumber) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpReleasePhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpReplicateInstance struct {
+}
+
+func (*validateOpReplicateInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReplicateInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReplicateInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReplicateInstanceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2890,6 +2990,26 @@ func (m *validateOpUpdateTaskTemplate) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTrafficDistribution struct {
+}
+
+func (*validateOpUpdateTrafficDistribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTrafficDistribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTrafficDistributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTrafficDistributionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateUserHierarchyGroupName struct {
 }
 
@@ -3118,6 +3238,10 @@ func addOpCreateTaskTemplateValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateTaskTemplate{}, middleware.After)
 }
 
+func addOpCreateTrafficDistributionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTrafficDistributionGroup{}, middleware.After)
+}
+
 func addOpCreateUseCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUseCase{}, middleware.After)
 }
@@ -3164,6 +3288,10 @@ func addOpDeleteSecurityProfileValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTaskTemplate{}, middleware.After)
+}
+
+func addOpDeleteTrafficDistributionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTrafficDistributionGroup{}, middleware.After)
 }
 
 func addOpDeleteUseCaseValidationMiddleware(stack *middleware.Stack) error {
@@ -3232,6 +3360,10 @@ func addOpDescribeRoutingProfileValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDescribeSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSecurityProfile{}, middleware.After)
+}
+
+func addOpDescribeTrafficDistributionGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrafficDistributionGroup{}, middleware.After)
 }
 
 func addOpDescribeUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -3308,6 +3440,10 @@ func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTaskTemplate{}, middleware.After)
+}
+
+func addOpGetTrafficDistributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrafficDistribution{}, middleware.After)
 }
 
 func addOpListAgentStatusesValidationMiddleware(stack *middleware.Stack) error {
@@ -3428,6 +3564,10 @@ func addOpPutUserStatusValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpReleasePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReleasePhoneNumber{}, middleware.After)
+}
+
+func addOpReplicateInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReplicateInstance{}, middleware.After)
 }
 
 func addOpResumeContactRecordingValidationMiddleware(stack *middleware.Stack) error {
@@ -3606,6 +3746,10 @@ func addOpUpdateTaskTemplateValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateTaskTemplate{}, middleware.After)
 }
 
+func addOpUpdateTrafficDistributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTrafficDistribution{}, middleware.After)
+}
+
 func addOpUpdateUserHierarchyGroupNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserHierarchyGroupName{}, middleware.After)
 }
@@ -3676,6 +3820,38 @@ func validateContactReferences(v map[string]types.Reference) error {
 		value := v[key]
 		if err := validateReference(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDistribution(v *types.Distribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Distribution"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDistributionList(v []types.Distribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DistributionList"}
+	for i := range v {
+		if err := validateDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4157,6 +4333,25 @@ func validateTaskTemplateFields(v []types.TaskTemplateField) error {
 	for i := range v {
 		if err := validateTaskTemplateField(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTelephonyConfig(v *types.TelephonyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TelephonyConfig"}
+	if v.Distributions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Distributions"))
+	} else if v.Distributions != nil {
+		if err := validateDistributionList(v.Distributions); err != nil {
+			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4675,6 +4870,24 @@ func validateOpCreateTaskTemplateInput(v *CreateTaskTemplateInput) error {
 	}
 }
 
+func validateOpCreateTrafficDistributionGroupInput(v *CreateTrafficDistributionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTrafficDistributionGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateUseCaseInput(v *CreateUseCaseInput) error {
 	if v == nil {
 		return nil
@@ -4902,6 +5115,21 @@ func validateOpDeleteTaskTemplateInput(v *DeleteTaskTemplateInput) error {
 	}
 	if v.TaskTemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTrafficDistributionGroupInput(v *DeleteTrafficDistributionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTrafficDistributionGroupInput"}
+	if v.TrafficDistributionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficDistributionGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5208,6 +5436,21 @@ func validateOpDescribeSecurityProfileInput(v *DescribeSecurityProfileInput) err
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeTrafficDistributionGroupInput(v *DescribeTrafficDistributionGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrafficDistributionGroupInput"}
+	if v.TrafficDistributionGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficDistributionGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5569,6 +5812,21 @@ func validateOpGetTaskTemplateInput(v *GetTaskTemplateInput) error {
 	}
 	if v.TaskTemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrafficDistributionInput(v *GetTrafficDistributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrafficDistributionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6049,6 +6307,27 @@ func validateOpReleasePhoneNumberInput(v *ReleasePhoneNumberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ReleasePhoneNumberInput"}
 	if v.PhoneNumberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpReplicateInstanceInput(v *ReplicateInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicateInstanceInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ReplicaRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaRegion"))
+	}
+	if v.ReplicaAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicaAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6955,6 +7234,26 @@ func validateOpUpdateTaskTemplateInput(v *UpdateTaskTemplateInput) error {
 	if v.Fields != nil {
 		if err := validateTaskTemplateFields(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTrafficDistributionInput(v *UpdateTrafficDistributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTrafficDistributionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.TelephonyConfig != nil {
+		if err := validateTelephonyConfig(v.TelephonyConfig); err != nil {
+			invalidParams.AddNested("TelephonyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

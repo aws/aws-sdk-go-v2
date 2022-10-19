@@ -45,7 +45,8 @@ type SearchSecurityProfilesInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return security profiles.
+	// The search criteria to be used to return security profiles. The currently
+	// supported value for FieldName: name
 	SearchCriteria *types.SecurityProfileSearchCriteria
 
 	// Filters to be applied to search results.

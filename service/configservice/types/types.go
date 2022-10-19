@@ -931,8 +931,8 @@ type ConformancePackComplianceFilters struct {
 // A compliance score is the percentage of the number of compliant rule-resource
 // combinations in a conformance pack compared to the number of total possible
 // rule-resource combinations in the conformance pack. This metric provides you
-// with a high-level view of the compliance state of your conformance packs, and
-// can be used to identify, investigate, and understand the level of compliance in
+// with a high-level view of the compliance state of your conformance packs. You
+// can use it to identify, investigate, and understand the level of compliance in
 // your conformance packs.
 type ConformancePackComplianceScore struct {
 
@@ -1485,40 +1485,41 @@ type MemberAccountStatus struct {
 	// This member is required.
 	ConfigRuleName *string
 
-	// Indicates deployment status for Config rule in the member account. When master
-	// account calls PutOrganizationConfigRule action for the first time, Config rule
-	// status is created in the member account. When master account calls
-	// PutOrganizationConfigRule action for the second time, Config rule status is
-	// updated in the member account. Config rule status is deleted when the master
-	// account deletes OrganizationConfigRule and disables service access for
-	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
+	// Indicates deployment status for Config rule in the member account. When
+	// management account calls PutOrganizationConfigRule action for the first time,
+	// Config rule status is created in the member account. When management account
+	// calls PutOrganizationConfigRule action for the second time, Config rule status
+	// is updated in the member account. Config rule status is deleted when the
+	// management account deletes OrganizationConfigRule and disables service access
+	// for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule
+	// to:
 	//
-	// *
-	// CREATE_SUCCESSFUL when Config rule has been created in the member account.
+	// * CREATE_SUCCESSFUL when Config rule has been created in the member
+	// account.
 	//
-	// *
-	// CREATE_IN_PROGRESS when Config rule is being created in the member account.
+	// * CREATE_IN_PROGRESS when Config rule is being created in the member
+	// account.
 	//
-	// *
-	// CREATE_FAILED when Config rule creation has failed in the member account.
+	// * CREATE_FAILED when Config rule creation has failed in the member
+	// account.
 	//
-	// *
-	// DELETE_FAILED when Config rule deletion has failed in the member account.
+	// * DELETE_FAILED when Config rule deletion has failed in the member
+	// account.
 	//
-	// *
-	// DELETE_IN_PROGRESS when Config rule is being deleted in the member account.
+	// * DELETE_IN_PROGRESS when Config rule is being deleted in the member
+	// account.
 	//
-	// *
-	// DELETE_SUCCESSFUL when Config rule has been deleted in the member account.
+	// * DELETE_SUCCESSFUL when Config rule has been deleted in the member
+	// account.
 	//
-	// *
-	// UPDATE_SUCCESSFUL when Config rule has been updated in the member account.
+	// * UPDATE_SUCCESSFUL when Config rule has been updated in the member
+	// account.
 	//
-	// *
-	// UPDATE_IN_PROGRESS when Config rule is being updated in the member account.
+	// * UPDATE_IN_PROGRESS when Config rule is being updated in the member
+	// account.
 	//
-	// *
-	// UPDATE_FAILED when Config rule deletion has failed in the member account.
+	// * UPDATE_FAILED when Config rule deletion has failed in the member
+	// account.
 	//
 	// This member is required.
 	MemberAccountRuleStatus MemberAccountRuleStatus
@@ -1600,14 +1601,14 @@ type OrganizationConfigRuleStatus struct {
 	// This member is required.
 	OrganizationConfigRuleName *string
 
-	// Indicates deployment status of an organization Config rule. When master account
-	// calls PutOrganizationConfigRule action for the first time, Config rule status is
-	// created in all the member accounts. When master account calls
+	// Indicates deployment status of an organization Config rule. When management
+	// account calls PutOrganizationConfigRule action for the first time, Config rule
+	// status is created in all the member accounts. When management account calls
 	// PutOrganizationConfigRule action for the second time, Config rule status is
 	// updated in all the member accounts. Additionally, Config rule status is updated
 	// when one or more member accounts join or leave an organization. Config rule
-	// status is deleted when the master account deletes OrganizationConfigRule in all
-	// the member accounts and disables service access for
+	// status is deleted when the management account deletes OrganizationConfigRule in
+	// all the member accounts and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
 	// *
@@ -1710,41 +1711,41 @@ type OrganizationConformancePackDetailedStatus struct {
 	ConformancePackName *string
 
 	// Indicates deployment status for conformance pack in a member account. When
-	// master account calls PutOrganizationConformancePack action for the first time,
-	// conformance pack status is created in the member account. When master account
-	// calls PutOrganizationConformancePack action for the second time, conformance
-	// pack status is updated in the member account. Conformance pack status is deleted
-	// when the master account deletes OrganizationConformancePack and disables service
-	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
-	// conformance pack to:
+	// management account calls PutOrganizationConformancePack action for the first
+	// time, conformance pack status is created in the member account. When management
+	// account calls PutOrganizationConformancePack action for the second time,
+	// conformance pack status is updated in the member account. Conformance pack
+	// status is deleted when the management account deletes
+	// OrganizationConformancePack and disables service access for
+	// config-multiaccountsetup.amazonaws.com. Config sets the state of the conformance
+	// pack to:
 	//
-	// * CREATE_SUCCESSFUL when conformance pack has been created
-	// in the member account.
-	//
-	// * CREATE_IN_PROGRESS when conformance pack is being
-	// created in the member account.
-	//
-	// * CREATE_FAILED when conformance pack creation
-	// has failed in the member account.
-	//
-	// * DELETE_FAILED when conformance pack
-	// deletion has failed in the member account.
-	//
-	// * DELETE_IN_PROGRESS when
-	// conformance pack is being deleted in the member account.
-	//
-	// * DELETE_SUCCESSFUL
-	// when conformance pack has been deleted in the member account.
-	//
-	// *
-	// UPDATE_SUCCESSFUL when conformance pack has been updated in the member
-	// account.
-	//
-	// * UPDATE_IN_PROGRESS when conformance pack is being updated in the
+	// * CREATE_SUCCESSFUL when conformance pack has been created in the
 	// member account.
 	//
-	// * UPDATE_FAILED when conformance pack deletion has failed in
+	// * CREATE_IN_PROGRESS when conformance pack is being created in
 	// the member account.
+	//
+	// * CREATE_FAILED when conformance pack creation has failed
+	// in the member account.
+	//
+	// * DELETE_FAILED when conformance pack deletion has
+	// failed in the member account.
+	//
+	// * DELETE_IN_PROGRESS when conformance pack is
+	// being deleted in the member account.
+	//
+	// * DELETE_SUCCESSFUL when conformance pack
+	// has been deleted in the member account.
+	//
+	// * UPDATE_SUCCESSFUL when conformance
+	// pack has been updated in the member account.
+	//
+	// * UPDATE_IN_PROGRESS when
+	// conformance pack is being updated in the member account.
+	//
+	// * UPDATE_FAILED when
+	// conformance pack deletion has failed in the member account.
 	//
 	// This member is required.
 	Status OrganizationResourceDetailedStatus
@@ -1771,13 +1772,13 @@ type OrganizationConformancePackStatus struct {
 	// This member is required.
 	OrganizationConformancePackName *string
 
-	// Indicates deployment status of an organization conformance pack. When master
+	// Indicates deployment status of an organization conformance pack. When management
 	// account calls PutOrganizationConformancePack for the first time, conformance
-	// pack status is created in all the member accounts. When master account calls
+	// pack status is created in all the member accounts. When management account calls
 	// PutOrganizationConformancePack for the second time, conformance pack status is
 	// updated in all the member accounts. Additionally, conformance pack status is
 	// updated when one or more member accounts join or leave an organization.
-	// Conformance pack status is deleted when the master account deletes
+	// Conformance pack status is deleted when the management account deletes
 	// OrganizationConformancePack in all the member accounts and disables service
 	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
 	// conformance pack to:
@@ -2076,41 +2077,41 @@ type OrganizationResourceDetailedStatusFilters struct {
 	AccountId *string
 
 	// Indicates deployment status for conformance pack in a member account. When
-	// master account calls PutOrganizationConformancePack action for the first time,
-	// conformance pack status is created in the member account. When master account
-	// calls PutOrganizationConformancePack action for the second time, conformance
-	// pack status is updated in the member account. Conformance pack status is deleted
-	// when the master account deletes OrganizationConformancePack and disables service
-	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
-	// conformance pack to:
+	// management account calls PutOrganizationConformancePack action for the first
+	// time, conformance pack status is created in the member account. When management
+	// account calls PutOrganizationConformancePack action for the second time,
+	// conformance pack status is updated in the member account. Conformance pack
+	// status is deleted when the management account deletes
+	// OrganizationConformancePack and disables service access for
+	// config-multiaccountsetup.amazonaws.com. Config sets the state of the conformance
+	// pack to:
 	//
-	// * CREATE_SUCCESSFUL when conformance pack has been created
-	// in the member account.
-	//
-	// * CREATE_IN_PROGRESS when conformance pack is being
-	// created in the member account.
-	//
-	// * CREATE_FAILED when conformance pack creation
-	// has failed in the member account.
-	//
-	// * DELETE_FAILED when conformance pack
-	// deletion has failed in the member account.
-	//
-	// * DELETE_IN_PROGRESS when
-	// conformance pack is being deleted in the member account.
-	//
-	// * DELETE_SUCCESSFUL
-	// when conformance pack has been deleted in the member account.
-	//
-	// *
-	// UPDATE_SUCCESSFUL when conformance pack has been updated in the member
-	// account.
-	//
-	// * UPDATE_IN_PROGRESS when conformance pack is being updated in the
+	// * CREATE_SUCCESSFUL when conformance pack has been created in the
 	// member account.
 	//
-	// * UPDATE_FAILED when conformance pack deletion has failed in
+	// * CREATE_IN_PROGRESS when conformance pack is being created in
 	// the member account.
+	//
+	// * CREATE_FAILED when conformance pack creation has failed
+	// in the member account.
+	//
+	// * DELETE_FAILED when conformance pack deletion has
+	// failed in the member account.
+	//
+	// * DELETE_IN_PROGRESS when conformance pack is
+	// being deleted in the member account.
+	//
+	// * DELETE_SUCCESSFUL when conformance pack
+	// has been deleted in the member account.
+	//
+	// * UPDATE_SUCCESSFUL when conformance
+	// pack has been updated in the member account.
+	//
+	// * UPDATE_IN_PROGRESS when
+	// conformance pack is being updated in the member account.
+	//
+	// * UPDATE_FAILED when
+	// conformance pack deletion has failed in the member account.
 	Status OrganizationResourceDetailedStatus
 
 	noSmithyDocumentSerde
@@ -2640,40 +2641,41 @@ type StatusDetailFilters struct {
 	// The 12-digit account ID of the member account within an organization.
 	AccountId *string
 
-	// Indicates deployment status for Config rule in the member account. When master
-	// account calls PutOrganizationConfigRule action for the first time, Config rule
-	// status is created in the member account. When master account calls
-	// PutOrganizationConfigRule action for the second time, Config rule status is
-	// updated in the member account. Config rule status is deleted when the master
-	// account deletes OrganizationConfigRule and disables service access for
-	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
+	// Indicates deployment status for Config rule in the member account. When
+	// management account calls PutOrganizationConfigRule action for the first time,
+	// Config rule status is created in the member account. When management account
+	// calls PutOrganizationConfigRule action for the second time, Config rule status
+	// is updated in the member account. Config rule status is deleted when the
+	// management account deletes OrganizationConfigRule and disables service access
+	// for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule
+	// to:
 	//
-	// *
-	// CREATE_SUCCESSFUL when Config rule has been created in the member account.
+	// * CREATE_SUCCESSFUL when Config rule has been created in the member
+	// account.
 	//
-	// *
-	// CREATE_IN_PROGRESS when Config rule is being created in the member account.
+	// * CREATE_IN_PROGRESS when Config rule is being created in the member
+	// account.
 	//
-	// *
-	// CREATE_FAILED when Config rule creation has failed in the member account.
+	// * CREATE_FAILED when Config rule creation has failed in the member
+	// account.
 	//
-	// *
-	// DELETE_FAILED when Config rule deletion has failed in the member account.
+	// * DELETE_FAILED when Config rule deletion has failed in the member
+	// account.
 	//
-	// *
-	// DELETE_IN_PROGRESS when Config rule is being deleted in the member account.
+	// * DELETE_IN_PROGRESS when Config rule is being deleted in the member
+	// account.
 	//
-	// *
-	// DELETE_SUCCESSFUL when Config rule has been deleted in the member account.
+	// * DELETE_SUCCESSFUL when Config rule has been deleted in the member
+	// account.
 	//
-	// *
-	// UPDATE_SUCCESSFUL when Config rule has been updated in the member account.
+	// * UPDATE_SUCCESSFUL when Config rule has been updated in the member
+	// account.
 	//
-	// *
-	// UPDATE_IN_PROGRESS when Config rule is being updated in the member account.
+	// * UPDATE_IN_PROGRESS when Config rule is being updated in the member
+	// account.
 	//
-	// *
-	// UPDATE_FAILED when Config rule deletion has failed in the member account.
+	// * UPDATE_FAILED when Config rule deletion has failed in the member
+	// account.
 	MemberAccountRuleStatus MemberAccountRuleStatus
 
 	noSmithyDocumentSerde
@@ -2750,18 +2752,17 @@ type Tag struct {
 
 // This API allows you to create a conformance pack template with an Amazon Web
 // Services Systems Manager document (SSM document). To deploy a conformance pack
-// using an SSM document, you first create an SSM document with conformance pack
-// content, and then provide the DocumentName (and optionally DocumentVersion) in
-// the PutConformancePack API
+// using an SSM document, first create an SSM document with conformance pack
+// content, and then provide the DocumentName in the PutConformancePack API
 // (https://docs.aws.amazon.com/config/latest/APIReference/API_PutConformancePack.html).
-// The TemplateSSMDocumentDetails object contains the name of the SSM document and
-// the version of the SSM document.
+// You can also provide the DocumentVersion. The TemplateSSMDocumentDetails object
+// contains the name of the SSM document and the version of the SSM document.
 type TemplateSSMDocumentDetails struct {
 
 	// The name or Amazon Resource Name (ARN) of the SSM document to use to create a
-	// conformance pack. If you use the Document Name, Config checks only your account
-	// and region for the SSM document. If you want to use an SSM document from another
-	// region or account, you must provide the ARN.
+	// conformance pack. If you use the document name, Config checks only your account
+	// and Amazon Web Services Region for the SSM document. If you want to use an SSM
+	// document from another Region or account, you must provide the ARN.
 	//
 	// This member is required.
 	DocumentName *string

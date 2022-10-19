@@ -16,6 +16,7 @@
         "api_op_ListSlackChannelConfigurations.go",
         "api_op_ListSlackWorkspaceConfigurations.go",
         "api_op_PutAccountAlias.go",
+        "api_op_RegisterSlackWorkspaceForOrganization.go",
         "api_op_UpdateSlackChannelConfiguration.go",
         "deserializers.go",
         "doc.go",

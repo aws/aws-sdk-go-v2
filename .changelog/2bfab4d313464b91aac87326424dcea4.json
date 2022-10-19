@@ -1,0 +1,8 @@
+{
+    "id": "2bfab4d3-1346-4b91-aac8-7326424dcea4",
+    "type": "feature",
+    "description": "Updates internal logic for constructing API endpoints. We have added rule-based endpoints and internal model parameters.",
+    "modules": [
+        "service/s3control"
+    ]
+}

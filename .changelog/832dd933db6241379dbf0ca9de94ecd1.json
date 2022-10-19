@@ -1,0 +1,8 @@
+{
+    "id": "832dd933-db62-4137-9dbf-0ca9de94ecd1",
+    "type": "feature",
+    "description": "WorkSpaces Web now supports user access logging for recording session start, stop, and URL navigation.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

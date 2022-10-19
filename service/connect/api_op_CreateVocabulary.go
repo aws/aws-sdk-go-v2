@@ -62,9 +62,13 @@ type CreateVocabularyInput struct {
 	VocabularyName *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. If a create request is received more than once with same client
-	// token, subsequent requests return the previous response without creating a
-	// vocabulary again.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// If a create request is received more than once with same client token,
+	// subsequent requests return the previous response without creating a vocabulary
+	// again.
 	ClientToken *string
 
 	// The tags used to organize, track, or control access for this resource. For

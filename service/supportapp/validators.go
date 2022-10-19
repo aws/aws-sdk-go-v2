@@ -89,6 +89,26 @@ func (m *validateOpPutAccountAlias) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterSlackWorkspaceForOrganization struct {
+}
+
+func (*validateOpRegisterSlackWorkspaceForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterSlackWorkspaceForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterSlackWorkspaceForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterSlackWorkspaceForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSlackChannelConfiguration struct {
 }
 
@@ -123,6 +143,10 @@ func addOpDeleteSlackWorkspaceConfigurationValidationMiddleware(stack *middlewar
 
 func addOpPutAccountAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccountAlias{}, middleware.After)
+}
+
+func addOpRegisterSlackWorkspaceForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterSlackWorkspaceForOrganization{}, middleware.After)
 }
 
 func addOpUpdateSlackChannelConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -193,6 +217,21 @@ func validateOpPutAccountAliasInput(v *PutAccountAliasInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutAccountAliasInput"}
 	if v.AccountAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterSlackWorkspaceForOrganizationInput(v *RegisterSlackWorkspaceForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterSlackWorkspaceForOrganizationInput"}
+	if v.TeamId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TeamId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

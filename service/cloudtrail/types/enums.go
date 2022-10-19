@@ -2,6 +2,38 @@
 
 package types
 
+type DeliveryStatus string
+
+// Enum values for DeliveryStatus
+const (
+	DeliveryStatusSuccess                 DeliveryStatus = "SUCCESS"
+	DeliveryStatusFailed                  DeliveryStatus = "FAILED"
+	DeliveryStatusFailedSigningFile       DeliveryStatus = "FAILED_SIGNING_FILE"
+	DeliveryStatusPending                 DeliveryStatus = "PENDING"
+	DeliveryStatusResourceNotFound        DeliveryStatus = "RESOURCE_NOT_FOUND"
+	DeliveryStatusAccessDenied            DeliveryStatus = "ACCESS_DENIED"
+	DeliveryStatusAccessDeniedSigningFile DeliveryStatus = "ACCESS_DENIED_SIGNING_FILE"
+	DeliveryStatusCancelled               DeliveryStatus = "CANCELLED"
+	DeliveryStatusUnknown                 DeliveryStatus = "UNKNOWN"
+)
+
+// Values returns all known values for DeliveryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeliveryStatus) Values() []DeliveryStatus {
+	return []DeliveryStatus{
+		"SUCCESS",
+		"FAILED",
+		"FAILED_SIGNING_FILE",
+		"PENDING",
+		"RESOURCE_NOT_FOUND",
+		"ACCESS_DENIED",
+		"ACCESS_DENIED_SIGNING_FILE",
+		"CANCELLED",
+		"UNKNOWN",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType

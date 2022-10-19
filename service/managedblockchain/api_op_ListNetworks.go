@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the networks in which the current AWS account
-// participates. Applies to Hyperledger Fabric and Ethereum.
+// Returns information about the networks in which the current Amazon Web Services
+// account participates. Applies to Hyperledger Fabric and Ethereum.
 func (c *Client) ListNetworks(ctx context.Context, params *ListNetworksInput, optFns ...func(*Options)) (*ListNetworksOutput, error) {
 	if params == nil {
 		params = &ListNetworksInput{}

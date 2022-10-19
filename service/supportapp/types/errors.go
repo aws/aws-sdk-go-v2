@@ -41,6 +41,14 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // *
 // Delete a Slack workspace from your Amazon Web Services account that has an
 // active live chat channel.
+//
+// * Call the RegisterSlackWorkspaceForOrganization API
+// from an Amazon Web Services account that doesn't belong to an organization.
+//
+// *
+// Call the RegisterSlackWorkspaceForOrganization API from a member account, but
+// the management account hasn't registered that workspace yet for the
+// organization.
 type ConflictException struct {
 	Message *string
 
@@ -79,8 +87,8 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The specified resource is missing or doesn't exist, such as an account alias or
-// Slack channel configuration.
+// The specified resource is missing or doesn't exist, such as an account alias,
+// Slack channel configuration, or Slack workspace configuration.
 type ResourceNotFoundException struct {
 	Message *string
 

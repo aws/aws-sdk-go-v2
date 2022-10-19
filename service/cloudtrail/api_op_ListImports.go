@@ -31,7 +31,7 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 
 type ListImportsInput struct {
 
-	// The destination event data store.
+	// The ARN of the destination event data store.
 	Destination *string
 
 	// The status of the import.

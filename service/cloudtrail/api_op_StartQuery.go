@@ -11,7 +11,8 @@ import (
 )
 
 // Starts a CloudTrail Lake query. The required QueryStatement parameter provides
-// your SQL query, enclosed in single quotation marks.
+// your SQL query, enclosed in single quotation marks. Use the optional
+// DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -33,6 +34,9 @@ type StartQueryInput struct {
 	//
 	// This member is required.
 	QueryStatement *string
+
+	// The URI for the S3 bucket where CloudTrail delivers the query results.
+	DeliveryS3Uri *string
 
 	noSmithyDocumentSerde
 }

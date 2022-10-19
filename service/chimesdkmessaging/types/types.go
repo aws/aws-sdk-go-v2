@@ -411,7 +411,7 @@ type ChannelSummary struct {
 	// The ARN of the channel.
 	ChannelArn *string
 
-	// The time at which the last message in a channel was sent.
+	// The time at which the last persistent message in a channel was sent.
 	LastMessageTimestamp *time.Time
 
 	// The metadata of the channel.

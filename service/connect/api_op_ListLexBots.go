@@ -52,8 +52,8 @@ type ListLexBotsInput struct {
 
 type ListLexBotsOutput struct {
 
-	// The names and Regions of the Amazon Lex bots associated with the specified
-	// instance.
+	// The names and Amazon Web Services Regions of the Amazon Lex bots associated with
+	// the specified instance.
 	LexBots []types.LexBot
 
 	// If there are additional results, this is the token for the next set of results.

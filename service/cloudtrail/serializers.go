@@ -3019,6 +3019,11 @@ func awsAwsjson11_serializeOpDocumentStartQueryInput(v *StartQueryInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeliveryS3Uri != nil {
+		ok := object.Key("DeliveryS3Uri")
+		ok.String(*v.DeliveryS3Uri)
+	}
+
 	if v.QueryStatement != nil {
 		ok := object.Key("QueryStatement")
 		ok.String(*v.QueryStatement)

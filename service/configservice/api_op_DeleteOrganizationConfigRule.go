@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the specified organization Config rule and all of its evaluation results
-// from all member accounts in that organization. Only a master account and a
+// from all member accounts in that organization. Only a management account and a
 // delegated administrator account can delete an organization Config rule. When
 // calling this API with a delegated administrator, you must ensure Organizations
 // ListDelegatedAdministrator permissions are added. Config sets the state of a

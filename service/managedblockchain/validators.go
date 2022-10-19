@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAccessor struct {
+}
+
+func (*validateOpCreateAccessor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMember struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpCreateProposal) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAccessor struct {
+}
+
+func (*validateOpDeleteAccessor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccessor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMember struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpDeleteNode) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNodeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccessor struct {
+}
+
+func (*validateOpGetAccessor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +490,10 @@ func (m *validateOpVoteOnProposal) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAccessorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessor{}, middleware.After)
+}
+
 func addOpCreateMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMember{}, middleware.After)
 }
@@ -446,12 +510,20 @@ func addOpCreateProposalValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProposal{}, middleware.After)
 }
 
+func addOpDeleteAccessorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccessor{}, middleware.After)
+}
+
 func addOpDeleteMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMember{}, middleware.After)
 }
 
 func addOpDeleteNodeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNode{}, middleware.After)
+}
+
+func addOpGetAccessorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessor{}, middleware.After)
 }
 
 func addOpGetMemberValidationMiddleware(stack *middleware.Stack) error {
@@ -704,6 +776,24 @@ func validateRemoveActionList(v []types.RemoveAction) error {
 	}
 }
 
+func validateOpCreateAccessorInput(v *CreateAccessorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessorInput"}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if len(v.AccessorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMemberInput(v *CreateMemberInput) error {
 	if v == nil {
 		return nil
@@ -824,6 +914,21 @@ func validateOpCreateProposalInput(v *CreateProposalInput) error {
 	}
 }
 
+func validateOpDeleteAccessorInput(v *DeleteAccessorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessorInput"}
+	if v.AccessorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMemberInput(v *DeleteMemberInput) error {
 	if v == nil {
 		return nil
@@ -852,6 +957,21 @@ func validateOpDeleteNodeInput(v *DeleteNodeInput) error {
 	}
 	if v.NodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccessorInput(v *GetAccessorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessorInput"}
+	if v.AccessorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns information for the specified import.
+// Returns information about a specific import.
 func (c *Client) GetImport(ctx context.Context, params *GetImportInput, optFns ...func(*Options)) (*GetImportOutput, error) {
 	if params == nil {
 		params = &GetImportInput{}
@@ -43,7 +43,7 @@ type GetImportOutput struct {
 	// The timestamp of the import's creation.
 	CreatedTimestamp *time.Time
 
-	// The destination event data store.
+	// The ARN of the destination event data store.
 	Destinations []string
 
 	// Used with StartEventTime to bound a StartImport request, and limit imported
@@ -56,7 +56,10 @@ type GetImportOutput struct {
 	// The source S3 bucket.
 	ImportSource *types.ImportSource
 
-	// Provides statistics for the import.
+	// Provides statistics for the import. CloudTrail does not update import statistics
+	// in real-time. Returned values for parameters such as EventsCompleted may be
+	// lower than the actual value, because CloudTrail updates statistics incrementally
+	// over the course of the import.
 	ImportStatistics *types.ImportStatistics
 
 	// The status of the import.

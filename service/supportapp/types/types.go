@@ -6,8 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// The configuration for a Slack channel that you added to an Amazon Web Services
-// account.
+// The configuration for a Slack channel that you added for your Amazon Web
+// Services account.
 type SlackChannelConfiguration struct {
 
 	// The channel ID in Slack. This ID identifies a channel within a Slack workspace.
@@ -15,13 +15,14 @@ type SlackChannelConfiguration struct {
 	// This member is required.
 	ChannelId *string
 
-	// The team ID in Slack. This ID uniquely identifies a Slack workspace.
+	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
+	// T012ABCDEFG.
 	//
 	// This member is required.
 	TeamId *string
 
 	// The name of the Slack channel that you configured with the Amazon Web Services
-	// Support App.
+	// Support App for your Amazon Web Services account.
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
@@ -50,10 +51,18 @@ type SlackChannelConfiguration struct {
 // account.
 type SlackWorkspaceConfiguration struct {
 
-	// The team ID in Slack. This ID uniquely identifies a Slack workspace.
+	// The team ID in Slack. This ID uniquely identifies a Slack workspace, such as
+	// T012ABCDEFG.
 	//
 	// This member is required.
 	TeamId *string
+
+	// Whether to allow member accounts to authorize Slack workspaces. Member accounts
+	// must be part of an organization in Organizations.
+	AllowOrganizationMemberAccount *bool
+
+	// The name of the Slack workspace.
+	TeamName *string
 
 	noSmithyDocumentSerde
 }

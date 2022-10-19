@@ -260,7 +260,11 @@ type Portal struct {
 	// The ARN of the trust store that is associated with the web portal.
 	TrustStoreArn *string
 
-	// The ARN of the trust store that is associated with the web portal.
+	// The ARN of the user access logging settings that is associated with the web
+	// portal.
+	UserAccessLoggingSettingsArn *string
+
+	// The ARN of the user settings that is associated with the web portal.
 	UserSettingsArn *string
 
 	noSmithyDocumentSerde
@@ -299,6 +303,10 @@ type PortalSummary struct {
 
 	// The ARN of the trust that is associated with this web portal.
 	TrustStoreArn *string
+
+	// The ARN of the user access logging settings that is associated with the web
+	// portal.
+	UserAccessLoggingSettingsArn *string
 
 	// The ARN of the user settings that is associated with the web portal.
 	UserSettingsArn *string
@@ -344,6 +352,37 @@ type TrustStoreSummary struct {
 
 	// The ARN of the trust store.
 	TrustStoreArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A user access logging settings resource that can be associated with a web
+// portal.
+type UserAccessLoggingSettings struct {
+
+	// The ARN of the user access logging settings.
+	//
+	// This member is required.
+	UserAccessLoggingSettingsArn *string
+
+	// A list of web portal ARNs that this user access logging settings is associated
+	// with.
+	AssociatedPortalArns []string
+
+	// The ARN of the Kinesis stream.
+	KinesisStreamArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of user access logging settings.
+type UserAccessLoggingSettingsSummary struct {
+
+	// The ARN of the Kinesis stream.
+	KinesisStreamArn *string
+
+	// The ARN of the user access logging settings.
+	UserAccessLoggingSettingsArn *string
 
 	noSmithyDocumentSerde
 }

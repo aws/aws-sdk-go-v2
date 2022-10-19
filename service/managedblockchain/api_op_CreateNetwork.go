@@ -31,10 +31,11 @@ func (c *Client) CreateNetwork(ctx context.Context, params *CreateNetworkInput, 
 
 type CreateNetworkInput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the operation. An idempotent operation completes no more than one time. This
-	// identifier is required only if you make a service request directly using an HTTP
-	// client. It is generated automatically if you use an AWS SDK or the AWS CLI.
+	// This is a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the operation. An idempotent operation completes no more than
+	// once. This identifier is required only if you make a service request directly
+	// using an HTTP client. It is generated automatically if you use an Amazon Web
+	// Services SDK or the Amazon Web Services CLI.
 	//
 	// This member is required.
 	ClientRequestToken *string

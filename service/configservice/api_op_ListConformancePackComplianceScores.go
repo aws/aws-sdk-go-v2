@@ -16,7 +16,7 @@ import (
 // percentage of the number of compliant rule-resource combinations in a
 // conformance pack compared to the number of total possible rule-resource
 // combinations in the conformance pack. This metric provides you with a high-level
-// view of the compliance state of your conformance packs, and can be used to
+// view of the compliance state of your conformance packs. You can use it to
 // identify, investigate, and understand the level of compliance in your
 // conformance packs. Conformance packs with no evaluation results will have a
 // compliance score of INSUFFICIENT_DATA.
@@ -49,15 +49,20 @@ type ListConformancePackComplianceScoresInput struct {
 
 	// Sorts your conformance pack compliance scores in either ascending or descending
 	// order, depending on SortOrder. By default, conformance pack compliance scores
-	// are sorted in ascending order by compliance score and alphabetically by name of
-	// the conformance pack if there is more than one conformance pack with the same
+	// are sorted in alphabetical order by name of the conformance pack. Enter SCORE,
+	// to sort conformance pack compliance scores by the numerical value of the
 	// compliance score.
 	SortBy types.SortBy
 
 	// Determines the order in which conformance pack compliance scores are sorted.
-	// Either in ascending or descending order. Conformance packs with a compliance
-	// score of INSUFFICIENT_DATA will be first when sorting by ascending order and
-	// last when sorting by descending order.
+	// Either in ascending or descending order. By default, conformance pack compliance
+	// scores are sorted in alphabetical order by name of the conformance pack.
+	// Conformance pack compliance scores are sorted in reverse alphabetical order if
+	// you enter DESCENDING. You can sort conformance pack compliance scores by the
+	// numerical value of the compliance score by entering SCORE in the SortBy action.
+	// When compliance scores are sorted by SCORE, conformance packs with a compliance
+	// score of INSUFFICIENT_DATA will be last when sorting by ascending order and
+	// first when sorting by descending order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde

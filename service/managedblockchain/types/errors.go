@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You do not have sufficient access to perform this action.
+// You don't have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -124,8 +124,8 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A requested resource does not exist. It may have been deleted or referenced
-// inaccurately.
+// A requested resource doesn't exist. It may have been deleted or referenced
+// incorrectly.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -146,7 +146,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The requested resource exists but is not in a status that can complete the
+// The requested resource exists but isn't in a status that can complete the
 // operation.
 type ResourceNotReadyException struct {
 	Message *string
@@ -166,10 +166,10 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request or operation could not be performed because a service is throttling
-// requests. The most common source of throttling errors is launching EC2 instances
-// such that your service limit for EC2 instances is exceeded. Request a limit
-// increase or delete unused resources if possible.
+// The request or operation couldn't be performed because a service is throttling
+// requests. The most common source of throttling errors is creating resources that
+// exceed your service limit for this resource type. Request a limit increase or
+// delete unused resources if possible.
 type ThrottlingException struct {
 	Message *string
 

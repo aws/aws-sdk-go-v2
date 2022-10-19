@@ -4177,17 +4177,29 @@ func awsAwsjson11_deserializeOpErrorStartQuery(response *smithyhttp.Response, me
 	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
 		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
 
+	case strings.EqualFold("InsufficientS3BucketPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientS3BucketPolicyException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("InvalidQueryStatementException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidQueryStatementException(response, errorBody)
 
+	case strings.EqualFold("InvalidS3BucketNameException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidS3BucketNameException(response, errorBody)
+
+	case strings.EqualFold("InvalidS3PrefixException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidS3PrefixException(response, errorBody)
+
 	case strings.EqualFold("MaxConcurrentQueriesException", errorCode):
 		return awsAwsjson11_deserializeErrorMaxConcurrentQueriesException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("S3BucketDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorS3BucketDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -12676,6 +12688,24 @@ func awsAwsjson11_deserializeOpDocumentDescribeQueryOutput(v **DescribeQueryOutp
 
 	for key, value := range shape {
 		switch key {
+		case "DeliveryS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeliveryS3Uri to be of type string, got %T instead", value)
+				}
+				sv.DeliveryS3Uri = ptr.String(jtv)
+			}
+
+		case "DeliveryStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeliveryStatus to be of type string, got %T instead", value)
+				}
+				sv.DeliveryStatus = types.DeliveryStatus(jtv)
+			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
