@@ -459,7 +459,33 @@ type ResourceTypeFilter string
 
 // Enum values for ResourceTypeFilter
 const (
-	ResourceTypeFilterLogGroups ResourceTypeFilter = "LOG_GROUPS"
+	ResourceTypeFilterLogGroups                          ResourceTypeFilter = "LOG_GROUPS"
+	ResourceTypeFilterCloudfrontDistribution             ResourceTypeFilter = "CLOUDFRONT_DISTRIBUTION"
+	ResourceTypeFilterDynamodbTable                      ResourceTypeFilter = "DYNAMODB_TABLE"
+	ResourceTypeFilterEc2NatGateway                      ResourceTypeFilter = "EC2_NAT_GATEWAY"
+	ResourceTypeFilterEcsCluster                         ResourceTypeFilter = "ECS_CLUSTER"
+	ResourceTypeFilterEcsService                         ResourceTypeFilter = "ECS_SERVICE"
+	ResourceTypeFilterEksCluster                         ResourceTypeFilter = "EKS_CLUSTER"
+	ResourceTypeFilterElasticBeanstalkEnvironment        ResourceTypeFilter = "ELASTIC_BEANSTALK_ENVIRONMENT"
+	ResourceTypeFilterElasticLoadBalancerLoadBalancer    ResourceTypeFilter = "ELASTIC_LOAD_BALANCER_LOAD_BALANCER"
+	ResourceTypeFilterElasticLoadBalancingV2LoadBalancer ResourceTypeFilter = "ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER"
+	ResourceTypeFilterElasticLoadBalancingV2TargetGroup  ResourceTypeFilter = "ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP"
+	ResourceTypeFilterElasticacheCacheCluster            ResourceTypeFilter = "ELASTICACHE_CACHE_CLUSTER"
+	ResourceTypeFilterElasticsearchDomain                ResourceTypeFilter = "ELASTICSEARCH_DOMAIN"
+	ResourceTypeFilterKinesisStream                      ResourceTypeFilter = "KINESIS_STREAM"
+	ResourceTypeFilterLambdaFunction                     ResourceTypeFilter = "LAMBDA_FUNCTION"
+	ResourceTypeFilterOpenSearchServiceDomain            ResourceTypeFilter = "OPEN_SEARCH_SERVICE_DOMAIN"
+	ResourceTypeFilterRdsDbInstance                      ResourceTypeFilter = "RDS_DB_INSTANCE"
+	ResourceTypeFilterRdsDbCluster                       ResourceTypeFilter = "RDS_DB_CLUSTER"
+	ResourceTypeFilterRedshiftCluster                    ResourceTypeFilter = "REDSHIFT_CLUSTER"
+	ResourceTypeFilterRoute53HostedZone                  ResourceTypeFilter = "ROUTE53_HOSTED_ZONE"
+	ResourceTypeFilterRoute53HealthCheck                 ResourceTypeFilter = "ROUTE53_HEALTH_CHECK"
+	ResourceTypeFilterS3Bucket                           ResourceTypeFilter = "S3_BUCKET"
+	ResourceTypeFilterSagemakerEndpoint                  ResourceTypeFilter = "SAGEMAKER_ENDPOINT"
+	ResourceTypeFilterSnsTopic                           ResourceTypeFilter = "SNS_TOPIC"
+	ResourceTypeFilterSqsQueue                           ResourceTypeFilter = "SQS_QUEUE"
+	ResourceTypeFilterStepFunctionsActivity              ResourceTypeFilter = "STEP_FUNCTIONS_ACTIVITY"
+	ResourceTypeFilterStepFunctionsStateMachine          ResourceTypeFilter = "STEP_FUNCTIONS_STATE_MACHINE"
 )
 
 // Values returns all known values for ResourceTypeFilter. Note that this can be
@@ -468,6 +494,32 @@ const (
 func (ResourceTypeFilter) Values() []ResourceTypeFilter {
 	return []ResourceTypeFilter{
 		"LOG_GROUPS",
+		"CLOUDFRONT_DISTRIBUTION",
+		"DYNAMODB_TABLE",
+		"EC2_NAT_GATEWAY",
+		"ECS_CLUSTER",
+		"ECS_SERVICE",
+		"EKS_CLUSTER",
+		"ELASTIC_BEANSTALK_ENVIRONMENT",
+		"ELASTIC_LOAD_BALANCER_LOAD_BALANCER",
+		"ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER",
+		"ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP",
+		"ELASTICACHE_CACHE_CLUSTER",
+		"ELASTICSEARCH_DOMAIN",
+		"KINESIS_STREAM",
+		"LAMBDA_FUNCTION",
+		"OPEN_SEARCH_SERVICE_DOMAIN",
+		"RDS_DB_INSTANCE",
+		"RDS_DB_CLUSTER",
+		"REDSHIFT_CLUSTER",
+		"ROUTE53_HOSTED_ZONE",
+		"ROUTE53_HEALTH_CHECK",
+		"S3_BUCKET",
+		"SAGEMAKER_ENDPOINT",
+		"SNS_TOPIC",
+		"SQS_QUEUE",
+		"STEP_FUNCTIONS_ACTIVITY",
+		"STEP_FUNCTIONS_STATE_MACHINE",
 	}
 }
 

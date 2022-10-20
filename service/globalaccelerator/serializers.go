@@ -71,6 +71,61 @@ func (m *awsAwsjson11_serializeOpAddCustomRoutingEndpoints) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpAddEndpoints struct {
+}
+
+func (*awsAwsjson11_serializeOpAddEndpoints) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpAddEndpoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddEndpointsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GlobalAccelerator_V20180706.AddEndpoints")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentAddEndpointsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpAdvertiseByoipCidr struct {
 }
 
@@ -2051,6 +2106,61 @@ func (m *awsAwsjson11_serializeOpRemoveCustomRoutingEndpoints) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRemoveEndpoints struct {
+}
+
+func (*awsAwsjson11_serializeOpRemoveEndpoints) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRemoveEndpoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveEndpointsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GlobalAccelerator_V20180706.RemoveEndpoints")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRemoveEndpointsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpTagResource struct {
 }
 
@@ -2747,6 +2857,36 @@ func awsAwsjson11_serializeDocumentEndpointConfigurations(v []types.EndpointConf
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEndpointIdentifier(v *types.EndpointIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientIPPreservationEnabled != nil {
+		ok := object.Key("ClientIPPreservationEnabled")
+		ok.Boolean(*v.ClientIPPreservationEnabled)
+	}
+
+	if v.EndpointId != nil {
+		ok := object.Key("EndpointId")
+		ok.String(*v.EndpointId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEndpointIdentifiers(v []types.EndpointIdentifier, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentEndpointIdentifier(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEndpointIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2877,6 +3017,25 @@ func awsAwsjson11_serializeOpDocumentAddCustomRoutingEndpointsInput(v *AddCustom
 	if v.EndpointConfigurations != nil {
 		ok := object.Key("EndpointConfigurations")
 		if err := awsAwsjson11_serializeDocumentCustomRoutingEndpointConfigurations(v.EndpointConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndpointGroupArn != nil {
+		ok := object.Key("EndpointGroupArn")
+		ok.String(*v.EndpointGroupArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentAddEndpointsInput(v *AddEndpointsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndpointConfigurations != nil {
+		ok := object.Key("EndpointConfigurations")
+		if err := awsAwsjson11_serializeDocumentEndpointConfigurations(v.EndpointConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -3637,6 +3796,25 @@ func awsAwsjson11_serializeOpDocumentRemoveCustomRoutingEndpointsInput(v *Remove
 	if v.EndpointIds != nil {
 		ok := object.Key("EndpointIds")
 		if err := awsAwsjson11_serializeDocumentEndpointIds(v.EndpointIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRemoveEndpointsInput(v *RemoveEndpointsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndpointGroupArn != nil {
+		ok := object.Key("EndpointGroupArn")
+		ok.String(*v.EndpointGroupArn)
+	}
+
+	if v.EndpointIdentifiers != nil {
+		ok := object.Key("EndpointIdentifiers")
+		if err := awsAwsjson11_serializeDocumentEndpointIdentifiers(v.EndpointIdentifiers, ok); err != nil {
 			return err
 		}
 	}

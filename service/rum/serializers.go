@@ -16,6 +16,245 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpBatchCreateRumMetricDefinitions struct {
+}
+
+func (*awsRestjson1_serializeOpBatchCreateRumMetricDefinitions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchCreateRumMetricDefinitions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchCreateRumMetricDefinitionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchCreateRumMetricDefinitionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchCreateRumMetricDefinitionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchCreateRumMetricDefinitionsInput(v *BatchCreateRumMetricDefinitionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchCreateRumMetricDefinitionsInput(v *BatchCreateRumMetricDefinitionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Destination) > 0 {
+		ok := object.Key("Destination")
+		ok.String(string(v.Destination))
+	}
+
+	if v.DestinationArn != nil {
+		ok := object.Key("DestinationArn")
+		ok.String(*v.DestinationArn)
+	}
+
+	if v.MetricDefinitions != nil {
+		ok := object.Key("MetricDefinitions")
+		if err := awsRestjson1_serializeDocumentMetricDefinitionsRequest(v.MetricDefinitions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchDeleteRumMetricDefinitions struct {
+}
+
+func (*awsRestjson1_serializeOpBatchDeleteRumMetricDefinitions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchDeleteRumMetricDefinitions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDeleteRumMetricDefinitionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchDeleteRumMetricDefinitionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchDeleteRumMetricDefinitionsInput(v *BatchDeleteRumMetricDefinitionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Destination) > 0 {
+		encoder.SetQuery("destination").String(string(v.Destination))
+	}
+
+	if v.DestinationArn != nil {
+		encoder.SetQuery("destinationArn").String(*v.DestinationArn)
+	}
+
+	if v.MetricDefinitionIds != nil {
+		for i := range v.MetricDefinitionIds {
+			encoder.AddQuery("metricDefinitionIds").String(v.MetricDefinitionIds[i])
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchGetRumMetricDefinitions struct {
+}
+
+func (*awsRestjson1_serializeOpBatchGetRumMetricDefinitions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchGetRumMetricDefinitions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetRumMetricDefinitionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchGetRumMetricDefinitionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchGetRumMetricDefinitionsInput(v *BatchGetRumMetricDefinitionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Destination) > 0 {
+		encoder.SetQuery("destination").String(string(v.Destination))
+	}
+
+	if v.DestinationArn != nil {
+		encoder.SetQuery("destinationArn").String(*v.DestinationArn)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateAppMonitor struct {
 }
 
@@ -161,6 +400,72 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAppMonitorInput(v *DeleteAppMonit
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteRumMetricsDestination struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteRumMetricsDestination) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteRumMetricsDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteRumMetricsDestinationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metricsdestination")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteRumMetricsDestinationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteRumMetricsDestinationInput(v *DeleteRumMetricsDestinationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Destination) > 0 {
+		encoder.SetQuery("destination").String(string(v.Destination))
+	}
+
+	if v.DestinationArn != nil {
+		encoder.SetQuery("destinationArn").String(*v.DestinationArn)
 	}
 
 	return nil
@@ -381,6 +686,72 @@ func awsRestjson1_serializeOpHttpBindingsListAppMonitorsInput(v *ListAppMonitors
 	return nil
 }
 
+type awsRestjson1_serializeOpListRumMetricsDestinations struct {
+}
+
+func (*awsRestjson1_serializeOpListRumMetricsDestinations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListRumMetricsDestinations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRumMetricsDestinationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metricsdestination")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListRumMetricsDestinationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListRumMetricsDestinationsInput(v *ListRumMetricsDestinationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
@@ -536,6 +907,97 @@ func awsRestjson1_serializeOpDocumentPutRumEventsInput(v *PutRumEventsInput, val
 		if err := awsRestjson1_serializeDocumentUserDetails(v.UserDetails, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutRumMetricsDestination struct {
+}
+
+func (*awsRestjson1_serializeOpPutRumMetricsDestination) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutRumMetricsDestination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutRumMetricsDestinationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metricsdestination")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutRumMetricsDestinationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutRumMetricsDestinationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutRumMetricsDestinationInput(v *PutRumMetricsDestinationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutRumMetricsDestinationInput(v *PutRumMetricsDestinationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Destination) > 0 {
+		ok := object.Key("Destination")
+		ok.String(string(v.Destination))
+	}
+
+	if v.DestinationArn != nil {
+		ok := object.Key("DestinationArn")
+		ok.String(*v.DestinationArn)
+	}
+
+	if v.IamRoleArn != nil {
+		ok := object.Key("IamRoleArn")
+		ok.String(*v.IamRoleArn)
 	}
 
 	return nil
@@ -781,6 +1243,104 @@ func awsRestjson1_serializeOpDocumentUpdateAppMonitorInput(v *UpdateAppMonitorIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateRumMetricDefinition struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateRumMetricDefinition) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateRumMetricDefinition) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateRumMetricDefinitionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/rummetrics/{AppMonitorName}/metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateRumMetricDefinitionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateRumMetricDefinitionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateRumMetricDefinitionInput(v *UpdateRumMetricDefinitionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppMonitorName == nil || len(*v.AppMonitorName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppMonitorName must not be empty")}
+	}
+	if v.AppMonitorName != nil {
+		if err := encoder.SetURI("AppMonitorName").String(*v.AppMonitorName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateRumMetricDefinitionInput(v *UpdateRumMetricDefinitionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Destination) > 0 {
+		ok := object.Key("Destination")
+		ok.String(string(v.Destination))
+	}
+
+	if v.DestinationArn != nil {
+		ok := object.Key("DestinationArn")
+		ok.String(*v.DestinationArn)
+	}
+
+	if v.MetricDefinition != nil {
+		ok := object.Key("MetricDefinition")
+		if err := awsRestjson1_serializeDocumentMetricDefinitionRequest(v.MetricDefinition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricDefinitionId != nil {
+		ok := object.Key("MetricDefinitionId")
+		ok.String(*v.MetricDefinitionId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAppMonitorConfiguration(v *types.AppMonitorConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -876,6 +1436,17 @@ func awsRestjson1_serializeDocumentAppMonitorDetails(v *types.AppMonitorDetails,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDimensionKeysMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFavoritePages(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -883,6 +1454,53 @@ func awsRestjson1_serializeDocumentFavoritePages(v []string, value smithyjson.Va
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricDefinitionRequest(v *types.MetricDefinitionRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DimensionKeys != nil {
+		ok := object.Key("DimensionKeys")
+		if err := awsRestjson1_serializeDocumentDimensionKeysMap(v.DimensionKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EventPattern != nil {
+		ok := object.Key("EventPattern")
+		ok.String(*v.EventPattern)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.UnitLabel != nil {
+		ok := object.Key("UnitLabel")
+		ok.String(*v.UnitLabel)
+	}
+
+	if v.ValueKey != nil {
+		ok := object.Key("ValueKey")
+		ok.String(*v.ValueKey)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricDefinitionsRequest(v []types.MetricDefinitionRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMetricDefinitionRequest(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

@@ -430,6 +430,19 @@ func awsRestjson1_deserializeOpDocumentDescribeAccountHealthOutput(v **DescribeA
 
 	for key, value := range shape {
 		switch key {
+		case "AnalyzedResourceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AnalyzedResourceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AnalyzedResourceCount = ptr.Int64(i64)
+			}
+
 		case "MetricsAnalyzed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6019,6 +6032,19 @@ func awsRestjson1_deserializeDocumentCloudFormationHealth(v **types.CloudFormati
 
 	for key, value := range shape {
 		switch key {
+		case "AnalyzedResourceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AnalyzedResourceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AnalyzedResourceCount = ptr.Int64(i64)
+			}
+
 		case "Insight":
 			if err := awsRestjson1_deserializeDocumentInsightHealth(&sv.Insight, value); err != nil {
 				return err
@@ -7368,6 +7394,22 @@ func awsRestjson1_deserializeDocumentMonitoredResourceIdentifier(v **types.Monit
 
 	for key, value := range shape {
 		switch key {
+		case "LastUpdated":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUpdated = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "MonitoredResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7375,6 +7417,11 @@ func awsRestjson1_deserializeDocumentMonitoredResourceIdentifier(v **types.Monit
 					return fmt.Errorf("expected MonitoredResourceName to be of type string, got %T instead", value)
 				}
 				sv.MonitoredResourceName = ptr.String(jtv)
+			}
+
+		case "ResourceCollection":
+			if err := awsRestjson1_deserializeDocumentResourceCollection(&sv.ResourceCollection, value); err != nil {
+				return err
 			}
 
 		case "ResourcePermission":
@@ -10459,6 +10506,19 @@ func awsRestjson1_deserializeDocumentServiceHealth(v **types.ServiceHealth, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AnalyzedResourceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AnalyzedResourceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AnalyzedResourceCount = ptr.Int64(i64)
+			}
+
 		case "Insight":
 			if err := awsRestjson1_deserializeDocumentServiceInsightHealth(&sv.Insight, value); err != nil {
 				return err
@@ -11189,6 +11249,19 @@ func awsRestjson1_deserializeDocumentTagHealth(v **types.TagHealth, value interf
 
 	for key, value := range shape {
 		switch key {
+		case "AnalyzedResourceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AnalyzedResourceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AnalyzedResourceCount = ptr.Int64(i64)
+			}
+
 		case "AppBoundaryKey":
 			if value != nil {
 				jtv, ok := value.(string)

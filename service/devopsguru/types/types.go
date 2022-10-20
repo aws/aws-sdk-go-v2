@@ -199,6 +199,10 @@ type CloudFormationCostEstimationResourceCollectionFilter struct {
 // that are specified by an Amazon Web Services CloudFormation stack.
 type CloudFormationHealth struct {
 
+	// Number of resources that DevOps Guru is monitoring in your account that are
+	// specified by an Amazon Web Services CloudFormation stack.
+	AnalyzedResourceCount *int64
+
 	// Information about the health of the Amazon Web Services resources in your
 	// account that are specified by an Amazon Web Services CloudFormation stack,
 	// including the number of open proactive, open reactive insights, and the Mean
@@ -651,8 +655,20 @@ type LogsAnomalyDetectionIntegrationConfig struct {
 // DevOps Guru to access that resource.
 type MonitoredResourceIdentifier struct {
 
+	// The time at which DevOps Guru last updated this resource.
+	LastUpdated *time.Time
+
 	// The name of the resource being monitored.
 	MonitoredResourceName *string
+
+	// A collection of Amazon Web Services resources supported by DevOps Guru. The two
+	// types of Amazon Web Services resource collections supported are Amazon Web
+	// Services CloudFormation stacks and Amazon Web Services resources that contain
+	// the same Amazon Web Services tag. DevOps Guru can be configured to analyze the
+	// Amazon Web Services resources that are defined in the stacks or that are tagged
+	// using the same tag key. You can specify up to 500 Amazon Web Services
+	// CloudFormation stacks.
+	ResourceCollection *ResourceCollection
 
 	// The permission status of a resource.
 	ResourcePermission ResourcePermission
@@ -1880,6 +1896,10 @@ type ServiceCollection struct {
 // Represents the health of an Amazon Web Services service.
 type ServiceHealth struct {
 
+	// Number of resources that DevOps Guru is monitoring in an analyzed Amazon Web
+	// Services service.
+	AnalyzedResourceCount *int64
+
 	// Represents the health of an Amazon Web Services service. This is a
 	// ServiceInsightHealth that contains the number of open proactive and reactive
 	// insights for this service.
@@ -2123,6 +2143,10 @@ type TagCostEstimationResourceCollectionFilter struct {
 // Information about the health of Amazon Web Services resources in your account
 // that are specified by an Amazon Web Services tag key.
 type TagHealth struct {
+
+	// Number of resources that DevOps Guru is monitoring in your account that are
+	// specified by an Amazon Web Services tag.
+	AnalyzedResourceCount *int64
 
 	// An Amazon Web Services tag key that is used to identify the Amazon Web Services
 	// resources that DevOps Guru analyzes. All Amazon Web Services resources in your

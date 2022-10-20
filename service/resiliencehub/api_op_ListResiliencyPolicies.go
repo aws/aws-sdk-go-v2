@@ -131,6 +131,11 @@ var _ ListResiliencyPoliciesAPIClient = (*Client)(nil)
 // ListResiliencyPoliciesPaginatorOptions is the paginator options for
 // ListResiliencyPolicies
 type ListResiliencyPoliciesPaginatorOptions struct {
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -152,6 +157,9 @@ func NewListResiliencyPoliciesPaginator(client ListResiliencyPoliciesAPIClient, 
 	}
 
 	options := ListResiliencyPoliciesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -179,6 +187,12 @@ func (p *ListResiliencyPoliciesPaginator) NextPage(ctx context.Context, optFns .
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListResiliencyPolicies(ctx, &params, optFns...)
 	if err != nil {

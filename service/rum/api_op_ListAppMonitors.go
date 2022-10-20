@@ -30,7 +30,8 @@ func (c *Client) ListAppMonitors(ctx context.Context, params *ListAppMonitorsInp
 
 type ListAppMonitorsInput struct {
 
-	// The maximum number of results to return in one operation.
+	// The maximum number of results to return in one operation. The default is 50. The
+	// maximum that you can specify is 100.
 	MaxResults *int32
 
 	// Use the token returned by the previous operation to request the next page of
@@ -125,7 +126,8 @@ var _ ListAppMonitorsAPIClient = (*Client)(nil)
 
 // ListAppMonitorsPaginatorOptions is the paginator options for ListAppMonitors
 type ListAppMonitorsPaginatorOptions struct {
-	// The maximum number of results to return in one operation.
+	// The maximum number of results to return in one operation. The default is 50. The
+	// maximum that you can specify is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

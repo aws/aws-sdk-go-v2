@@ -1091,9 +1091,7 @@ func validateOpListMonitoredResourcesInput(v *ListMonitoredResourcesInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListMonitoredResourcesInput"}
-	if v.Filters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
-	} else if v.Filters != nil {
+	if v.Filters != nil {
 		if err := validateListMonitoredResourcesFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}

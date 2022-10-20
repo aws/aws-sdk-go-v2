@@ -139,6 +139,11 @@ var _ ListAppVersionsAPIClient = (*Client)(nil)
 
 // ListAppVersionsPaginatorOptions is the paginator options for ListAppVersions
 type ListAppVersionsPaginatorOptions struct {
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -160,6 +165,9 @@ func NewListAppVersionsPaginator(client ListAppVersionsAPIClient, params *ListAp
 	}
 
 	options := ListAppVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -187,6 +195,12 @@ func (p *ListAppVersionsPaginator) NextPage(ctx context.Context, optFns ...func(
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListAppVersions(ctx, &params, optFns...)
 	if err != nil {

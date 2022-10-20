@@ -1,0 +1,8 @@
+{
+    "id": "48176d8b-5be8-4a7b-9ed2-a9f2028ce6ce",
+    "type": "feature",
+    "description": "This release adds information about the resources DevOps Guru is analyzing.",
+    "modules": [
+        "service/devopsguru"
+    ]
+}

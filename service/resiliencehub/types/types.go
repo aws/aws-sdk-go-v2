@@ -92,7 +92,7 @@ type App struct {
 	// The current resiliency score for the application.
 	ResiliencyScore float64
 
-	// The status of the action.
+	// The status of the application.
 	Status AppStatusType
 
 	// The tags assigned to the resource. A tag is a label that you assign to an Amazon
@@ -300,6 +300,9 @@ type AppSummary struct {
 
 	// The current resiliency score for the application.
 	ResiliencyScore float64
+
+	// The status of the application.
+	Status AppStatusType
 
 	noSmithyDocumentSerde
 }

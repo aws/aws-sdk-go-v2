@@ -7839,6 +7839,15 @@ func awsRestjson1_deserializeDocumentAppSummary(v **types.AppSummary, value inte
 				}
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AppStatusType to be of type string, got %T instead", value)
+				}
+				sv.Status = types.AppStatusType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

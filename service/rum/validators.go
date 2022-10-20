@@ -10,6 +10,66 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchCreateRumMetricDefinitions struct {
+}
+
+func (*validateOpBatchCreateRumMetricDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateRumMetricDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateRumMetricDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateRumMetricDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteRumMetricDefinitions struct {
+}
+
+func (*validateOpBatchDeleteRumMetricDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteRumMetricDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteRumMetricDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteRumMetricDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetRumMetricDefinitions struct {
+}
+
+func (*validateOpBatchGetRumMetricDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetRumMetricDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetRumMetricDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetRumMetricDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAppMonitor struct {
 }
 
@@ -45,6 +105,26 @@ func (m *validateOpDeleteAppMonitor) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAppMonitorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRumMetricsDestination struct {
+}
+
+func (*validateOpDeleteRumMetricsDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRumMetricsDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRumMetricsDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRumMetricsDestinationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -90,6 +170,26 @@ func (m *validateOpGetAppMonitor) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRumMetricsDestinations struct {
+}
+
+func (*validateOpListRumMetricsDestinations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRumMetricsDestinations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRumMetricsDestinationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRumMetricsDestinationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -125,6 +225,26 @@ func (m *validateOpPutRumEvents) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutRumEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutRumMetricsDestination struct {
+}
+
+func (*validateOpPutRumMetricsDestination) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutRumMetricsDestination) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutRumMetricsDestinationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutRumMetricsDestinationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,12 +310,48 @@ func (m *validateOpUpdateAppMonitor) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRumMetricDefinition struct {
+}
+
+func (*validateOpUpdateRumMetricDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRumMetricDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRumMetricDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRumMetricDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpBatchCreateRumMetricDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateRumMetricDefinitions{}, middleware.After)
+}
+
+func addOpBatchDeleteRumMetricDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteRumMetricDefinitions{}, middleware.After)
+}
+
+func addOpBatchGetRumMetricDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetRumMetricDefinitions{}, middleware.After)
+}
+
 func addOpCreateAppMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAppMonitor{}, middleware.After)
 }
 
 func addOpDeleteAppMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAppMonitor{}, middleware.After)
+}
+
+func addOpDeleteRumMetricsDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRumMetricsDestination{}, middleware.After)
 }
 
 func addOpGetAppMonitorDataValidationMiddleware(stack *middleware.Stack) error {
@@ -206,12 +362,20 @@ func addOpGetAppMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAppMonitor{}, middleware.After)
 }
 
+func addOpListRumMetricsDestinationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRumMetricsDestinations{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutRumEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRumEvents{}, middleware.After)
+}
+
+func addOpPutRumMetricsDestinationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutRumMetricsDestination{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -224,6 +388,42 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAppMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAppMonitor{}, middleware.After)
+}
+
+func addOpUpdateRumMetricDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRumMetricDefinition{}, middleware.After)
+}
+
+func validateMetricDefinitionRequest(v *types.MetricDefinitionRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinitionRequest"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricDefinitionsRequest(v []types.MetricDefinitionRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricDefinitionsRequest"}
+	for i := range v {
+		if err := validateMetricDefinitionRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateRumEvent(v *types.RumEvent) error {
@@ -279,6 +479,70 @@ func validateTimeRange(v *types.TimeRange) error {
 	}
 }
 
+func validateOpBatchCreateRumMetricDefinitionsInput(v *BatchCreateRumMetricDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateRumMetricDefinitionsInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
+	}
+	if len(v.Destination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.MetricDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDefinitions"))
+	} else if v.MetricDefinitions != nil {
+		if err := validateMetricDefinitionsRequest(v.MetricDefinitions); err != nil {
+			invalidParams.AddNested("MetricDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteRumMetricDefinitionsInput(v *BatchDeleteRumMetricDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteRumMetricDefinitionsInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
+	}
+	if len(v.Destination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.MetricDefinitionIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDefinitionIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetRumMetricDefinitionsInput(v *BatchGetRumMetricDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetRumMetricDefinitionsInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
+	}
+	if len(v.Destination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAppMonitorInput(v *CreateAppMonitorInput) error {
 	if v == nil {
 		return nil
@@ -304,6 +568,24 @@ func validateOpDeleteAppMonitorInput(v *DeleteAppMonitorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAppMonitorInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRumMetricsDestinationInput(v *DeleteRumMetricsDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRumMetricsDestinationInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
+	}
+	if len(v.Destination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -341,6 +623,21 @@ func validateOpGetAppMonitorInput(v *GetAppMonitorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAppMonitorInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRumMetricsDestinationsInput(v *ListRumMetricsDestinationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRumMetricsDestinationsInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -395,6 +692,24 @@ func validateOpPutRumEventsInput(v *PutRumEventsInput) error {
 	}
 }
 
+func validateOpPutRumMetricsDestinationInput(v *PutRumMetricsDestinationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutRumMetricsDestinationInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
+	}
+	if len(v.Destination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -438,6 +753,34 @@ func validateOpUpdateAppMonitorInput(v *UpdateAppMonitorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAppMonitorInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRumMetricDefinitionInput(v *UpdateRumMetricDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRumMetricDefinitionInput"}
+	if v.AppMonitorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppMonitorName"))
+	}
+	if len(v.Destination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if v.MetricDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDefinition"))
+	} else if v.MetricDefinition != nil {
+		if err := validateMetricDefinitionRequest(v.MetricDefinition); err != nil {
+			invalidParams.AddNested("MetricDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricDefinitionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

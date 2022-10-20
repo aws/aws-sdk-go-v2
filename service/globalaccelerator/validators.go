@@ -30,6 +30,26 @@ func (m *validateOpAddCustomRoutingEndpoints) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddEndpoints struct {
+}
+
+func (*validateOpAddEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAdvertiseByoipCidr struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpRemoveCustomRoutingEndpoints) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveEndpoints struct {
+}
+
+func (*validateOpRemoveEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -894,6 +934,10 @@ func addOpAddCustomRoutingEndpointsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpAddCustomRoutingEndpoints{}, middleware.After)
 }
 
+func addOpAddEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddEndpoints{}, middleware.After)
+}
+
 func addOpAdvertiseByoipCidrValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdvertiseByoipCidr{}, middleware.After)
 }
@@ -1026,6 +1070,10 @@ func addOpRemoveCustomRoutingEndpointsValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpRemoveCustomRoutingEndpoints{}, middleware.After)
 }
 
+func addOpRemoveEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveEndpoints{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -1122,6 +1170,38 @@ func validateCustomRoutingDestinationConfigurations(v []types.CustomRoutingDesti
 	}
 }
 
+func validateEndpointIdentifier(v *types.EndpointIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointIdentifier"}
+	if v.EndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEndpointIdentifiers(v []types.EndpointIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointIdentifiers"}
+	for i := range v {
+		if err := validateEndpointIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1162,6 +1242,24 @@ func validateOpAddCustomRoutingEndpointsInput(v *AddCustomRoutingEndpointsInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddCustomRoutingEndpointsInput"}
+	if v.EndpointConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfigurations"))
+	}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddEndpointsInput(v *AddEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddEndpointsInput"}
 	if v.EndpointConfigurations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointConfigurations"))
 	}
@@ -1728,6 +1826,28 @@ func validateOpRemoveCustomRoutingEndpointsInput(v *RemoveCustomRoutingEndpoints
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveCustomRoutingEndpointsInput"}
 	if v.EndpointIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointIds"))
+	}
+	if v.EndpointGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveEndpointsInput(v *RemoveEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveEndpointsInput"}
+	if v.EndpointIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointIdentifiers"))
+	} else if v.EndpointIdentifiers != nil {
+		if err := validateEndpointIdentifiers(v.EndpointIdentifiers); err != nil {
+			invalidParams.AddNested("EndpointIdentifiers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.EndpointGroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointGroupArn"))

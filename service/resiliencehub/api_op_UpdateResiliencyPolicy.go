@@ -43,9 +43,7 @@ type UpdateResiliencyPolicyInput struct {
 	DataLocationConstraint types.DataLocationConstraint
 
 	// The type of resiliency policy to be created, including the recovery time
-	// objective (RTO) and recovery point objective (RPO) in seconds. If you do not
-	// want to specify regional targets for a regional policy, you must set the values
-	// of rpoInSecs and rtoInSecs to -1.
+	// objective (RTO) and recovery point objective (RPO) in seconds.
 	Policy map[string]types.FailurePolicy
 
 	// The description for the policy.

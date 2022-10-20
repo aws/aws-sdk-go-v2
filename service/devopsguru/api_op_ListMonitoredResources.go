@@ -33,8 +33,6 @@ type ListMonitoredResourcesInput struct {
 
 	// Filters to determine which monitored resources you want to retrieve. You can
 	// filter by resource type or resource permission status.
-	//
-	// This member is required.
 	Filters *types.ListMonitoredResourcesFilters
 
 	// The maximum number of results to return with a single call. To retrieve the

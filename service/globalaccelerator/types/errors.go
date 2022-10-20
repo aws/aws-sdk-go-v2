@@ -364,3 +364,23 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 }
 func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// There's already a transaction in progress. Another transaction can't be
+// processed.
+type TransactionInProgressException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TransactionInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TransactionInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TransactionInProgressException) ErrorCode() string             { return "TransactionInProgressException" }
+func (e *TransactionInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -59,6 +59,10 @@ type DescribeAccountHealthOutput struct {
 	// This member is required.
 	ResourceHours *int64
 
+	// Number of resources that DevOps Guru is monitoring in your Amazon Web Services
+	// account.
+	AnalyzedResourceCount *int64
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

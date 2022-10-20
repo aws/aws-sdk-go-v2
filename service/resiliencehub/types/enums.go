@@ -146,11 +146,12 @@ type ConfigRecommendationOptimizationType string
 
 // Enum values for ConfigRecommendationOptimizationType
 const (
-	ConfigRecommendationOptimizationTypeLeastCost      ConfigRecommendationOptimizationType = "LeastCost"
-	ConfigRecommendationOptimizationTypeLeastChange    ConfigRecommendationOptimizationType = "LeastChange"
-	ConfigRecommendationOptimizationTypeBestAzRecovery ConfigRecommendationOptimizationType = "BestAZRecovery"
-	ConfigRecommendationOptimizationTypeLeastErrors    ConfigRecommendationOptimizationType = "LeastErrors"
-	ConfigRecommendationOptimizationTypeBestAttainable ConfigRecommendationOptimizationType = "BestAttainable"
+	ConfigRecommendationOptimizationTypeLeastCost          ConfigRecommendationOptimizationType = "LeastCost"
+	ConfigRecommendationOptimizationTypeLeastChange        ConfigRecommendationOptimizationType = "LeastChange"
+	ConfigRecommendationOptimizationTypeBestAzRecovery     ConfigRecommendationOptimizationType = "BestAZRecovery"
+	ConfigRecommendationOptimizationTypeLeastErrors        ConfigRecommendationOptimizationType = "LeastErrors"
+	ConfigRecommendationOptimizationTypeBestAttainable     ConfigRecommendationOptimizationType = "BestAttainable"
+	ConfigRecommendationOptimizationTypeBestRegionRecovery ConfigRecommendationOptimizationType = "BestRegionRecovery"
 )
 
 // Values returns all known values for ConfigRecommendationOptimizationType. Note
@@ -164,6 +165,7 @@ func (ConfigRecommendationOptimizationType) Values() []ConfigRecommendationOptim
 		"BestAZRecovery",
 		"LeastErrors",
 		"BestAttainable",
+		"BestRegionRecovery",
 	}
 }
 

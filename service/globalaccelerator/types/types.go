@@ -25,8 +25,8 @@ type Accelerator struct {
 	// a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack
 	// accelerator, you also have a second DNS name, DualStackDnsName, that points to
 	// both the A record and the AAAA record for all four static addresses for the
-	// accelerator (two IPv4 addresses and two IPv6 addresses). For more information
-	// about the default DNS name, see  Support for DNS Addressing in Global
+	// accelerator: two IPv4 addresses and two IPv6 addresses. For more information
+	// about the default DNS name, see  Support for DNS addressing in Global
 	// Accelerator
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html)
 	// in the Global Accelerator Developer Guide.
@@ -40,7 +40,7 @@ type Accelerator struct {
 	// a1234567890abcdef.dualstack.awsglobalaccelerator.com. Note: Global Accelerator
 	// also assigns a default DNS name, DnsName, to your accelerator that points just
 	// to the static IPv4 addresses. For more information, see  Support for DNS
-	// Addressing in Global Accelerator
+	// addressing in Global Accelerator
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing)
 	// in the Global Accelerator Developer Guide.
 	DualStackDnsName *string
@@ -234,8 +234,8 @@ type CustomRoutingAccelerator struct {
 	// a1234567890abcdef.awsglobalaccelerator.com. If you have a dual-stack
 	// accelerator, you also have a second DNS name, DualStackDnsName, that points to
 	// both the A record and the AAAA record for all four static addresses for the
-	// accelerator (two IPv4 addresses and two IPv6 addresses). For more information
-	// about the default DNS name, see  Support for DNS Addressing in Global
+	// accelerator: two IPv4 addresses and two IPv6 addresses. For more information
+	// about the default DNS name, see  Support for DNS addressing in Global
 	// Accelerator
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/dns-addressing-custom-domains.dns-addressing.html)
 	// in the Global Accelerator Developer Guide.
@@ -562,6 +562,28 @@ type EndpointGroup struct {
 	// Region. The percentage is applied to the traffic that would otherwise have been
 	// routed to the Region based on optimal routing. The default value is 100.
 	TrafficDialPercentage *float32
+
+	noSmithyDocumentSerde
+}
+
+// A complex type for an endpoint. Specifies information about the endpoint to
+// remove from the endpoint group.
+type EndpointIdentifier struct {
+
+	// An ID for the endpoint. If the endpoint is a Network Load Balancer or
+	// Application Load Balancer, this is the Amazon Resource Name (ARN) of the
+	// resource. If the endpoint is an Elastic IP address, this is the Elastic IP
+	// address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. An
+	// Application Load Balancer can be either internal or internet-facing.
+	//
+	// This member is required.
+	EndpointId *string
+
+	// Indicates whether client IP address preservation is enabled for an endpoint. The
+	// value is true or false. If the value is set to true, the client's IP address is
+	// preserved in the X-Forwarded-For request header as traffic travels to
+	// applications on the endpoint fronted by the accelerator.
+	ClientIPPreservationEnabled *bool
 
 	noSmithyDocumentSerde
 }

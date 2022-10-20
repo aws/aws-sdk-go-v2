@@ -1,0 +1,8 @@
+{
+    "id": "9f73a543-9c2a-4772-8de6-199151f4575b",
+    "type": "feature",
+    "description": "In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity.",
+    "modules": [
+        "service/resiliencehub"
+    ]
+}
