@@ -1,3 +1,7 @@
+# v1.20.0 (2022-10-20)
+
+* **Feature**: This release adds information about the resources DevOps Guru is analyzing.
+
 # v1.19.0 (2022-09-30)
 
 * **Feature**: This release adds filter feature on AddNotificationChannel API, enable customer to configure the SNS notification messages by Severity or MessageTypes

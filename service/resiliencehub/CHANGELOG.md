@@ -1,3 +1,7 @@
+# v1.7.0 (2022-10-20)
+
+* **Feature**: In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity.
+
 # v1.6.15 (2022-10-06)
 
 * **Documentation**: Documentation change for AWS Resilience Hub. Doc-only update to fix Documentation layout

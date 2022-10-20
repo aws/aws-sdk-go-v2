@@ -1,8 +1,0 @@
-{
-    "id": "c5583412-baa6-4f97-aaec-c0506ba2c8c5",
-    "type": "feature",
-    "description": "Global Accelerator now supports AddEndpoints and RemoveEndpoints operations for standard endpoint groups.",
-    "modules": [
-        "service/globalaccelerator"
-    ]
-}

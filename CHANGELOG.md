@@ -1,3 +1,15 @@
+# Release (2022-10-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.20.0](service/devopsguru/CHANGELOG.md#v1200-2022-10-20)
+  * **Feature**: This release adds information about the resources DevOps Guru is analyzing.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.15.0](service/globalaccelerator/CHANGELOG.md#v1150-2022-10-20)
+  * **Feature**: Global Accelerator now supports AddEndpoints and RemoveEndpoints operations for standard endpoint groups.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.7.0](service/resiliencehub/CHANGELOG.md#v170-2022-10-20)
+  * **Feature**: In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.7.0](service/rum/CHANGELOG.md#v170-2022-10-20)
+  * **Feature**: CloudWatch RUM now supports Extended CloudWatch Metrics with Additional Dimensions
+
 # Release (2022-10-19)
 
 ## General Highlights

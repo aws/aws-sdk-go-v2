@@ -1,3 +1,7 @@
+# v1.31.1 (2022-10-20)
+
+* No change notes available for this release.
+
 # v1.31.0 (2022-10-13)
 
 * **Feature**: Support of AmazonLinux2022 by Patch Manager

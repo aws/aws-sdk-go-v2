@@ -52,7 +52,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.17
 	github.com/aws/aws-sdk-go-v2/service/iot v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.19
-	github.com/aws/aws-sdk-go-v2/service/kms v1.18.12
+	github.com/aws/aws-sdk-go-v2/service/kms v1.18.13
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.24.6
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.17
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.10
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.31.0
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.16.19
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.17
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.2
