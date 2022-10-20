@@ -1,0 +1,8 @@
+{
+    "id": "869890a0-30aa-4f8e-8ddd-5ef80b7a01df",
+    "type": "feature",
+    "description": "Adds `aws.IsCredentialsProvider` for inspecting `CredentialProvider` types when needing to determine if the underlying implementation type matches a target type. This resolves an issue where `CredentialsCache` could mask `AnonymousCredentials` providers, breaking downstream detection logic.",
+    "modules": [
+        "."
+    ]
+}

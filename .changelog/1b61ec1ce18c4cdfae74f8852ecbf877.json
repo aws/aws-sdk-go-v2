@@ -1,0 +1,9 @@
+{
+    "id": "1b61ec1c-e18c-4cdf-ae74-f8852ecbf877",
+    "type": "bugfix",
+    "description": "The SDK client has been updated to utilize the `aws.IsCredentialsProvider` function for determining if `aws.AnonymousCredentials` has been configured for the `CredentialProvider`.",
+    "modules": [
+        "service/eventbridge",
+        "service/s3"
+    ]
+}
