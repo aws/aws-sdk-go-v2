@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.rum#AccessDeniedException": {
             "type": "structure",
@@ -103,13 +103,14 @@
                 "FavoritePages": {
                     "target": "com.amazonaws.rum#FavoritePages",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of pages in the CloudWatch RUM console that are to be displayed with a \"favorite\" icon.</p>"
+                        "smithy.api#documentation": "<p>A list of pages in your application that are to be displayed with a \"favorite\" icon\n         in the CloudWatch RUM console.</p>"
                     }
                 },
                 "SessionSampleRate": {
                     "target": "com.amazonaws.rum#SessionSampleRate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you\n      more data but also incurs more costs.</p>\n         <p>The number you specify is the percentage of user sessions that will be used.</p>\n         <p>If you omit this parameter, the default of 10 is used.</p>"
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Specifies the portion of user sessions to use for RUM data collection. Choosing a higher portion gives you\n      more data but also incurs more costs.</p>\n         <p>The range for this value is 0 to 1 inclusive. Setting this to 1 means that 100% of user sessions are sampled, and setting\n         it to 0.1 means that 10% of user sessions are sampled.</p>\n         <p>If you omit this parameter, the default of 0.1 is used, and 10% of sessions will be sampled.</p>"
                     }
                 },
                 "GuestRoleArn": {
@@ -218,18 +219,36 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.rum#BatchCreateRumMetricDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.rum#BatchDeleteRumMetricDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.rum#BatchGetRumMetricDefinitions"
+                },
+                {
                     "target": "com.amazonaws.rum#CreateAppMonitor"
                 },
                 {
+                    "target": "com.amazonaws.rum#DeleteRumMetricsDestination"
+                },
+                {
                     "target": "com.amazonaws.rum#GetAppMonitorData"
+                },
+                {
+                    "target": "com.amazonaws.rum#ListRumMetricsDestinations"
+                },
+                {
+                    "target": "com.amazonaws.rum#PutRumMetricsDestination"
+                },
+                {
+                    "target": "com.amazonaws.rum#UpdateRumMetricDefinition"
                 }
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "appmonitor/{Name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "appmonitor/{Name}"
                 }
             }
         },
@@ -283,6 +302,369 @@
                 "smithy.api#pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"
             }
         },
+        "com.amazonaws.rum#BatchCreateRumMetricDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#BatchCreateRumMetricDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#BatchCreateRumMetricDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid\n         destinations include CloudWatch and Evidently.</p> \n         <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics\n         are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect \n            with CloudWatch RUM</a>.</p>\n         <p>If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also \n         optionally\n         send the metrics with additional dimensions. The valid dimension names for the additional dimensions are\n         <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>,\n         <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>\n      \n         <p>The maximum number of metric definitions that one destination can contain is 2000.</p>\n         <p>Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension\n         value counts as a custom metric. For more information, see \n         <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n         <p>You must have\n         already created a destination for the metrics before you send them. For more information, see \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>\n         <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,\n      those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchCreateRumMetricDefinitions.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/rummetrics/{AppMonitorName}/metrics"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#BatchCreateRumMetricDefinitionsError": {
+            "type": "structure",
+            "members": {
+                "MetricDefinition": {
+                    "target": "com.amazonaws.rum#MetricDefinitionRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric definition that caused this error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for this metric definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines one error caused by a \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>\n      operation.</p>"
+            }
+        },
+        "com.amazonaws.rum#BatchCreateRumMetricDefinitionsErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#BatchCreateRumMetricDefinitionsError"
+            }
+        },
+        "com.amazonaws.rum#BatchCreateRumMetricDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that is to send the metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment \n         that will receive\n         the metrics and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this \n         experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
+                    }
+                },
+                "MetricDefinitions": {
+                    "target": "com.amazonaws.rum#MetricDefinitionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures which define the metrics that you want to send.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#BatchCreateRumMetricDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "Errors": {
+                    "target": "com.amazonaws.rum#BatchCreateRumMetricDefinitionsErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of error objects, if the operation caused any errors.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricDefinitions": {
+                    "target": "com.amazonaws.rum#MetricDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that define the extended metrics.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#BatchDeleteRumMetricDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the specified metrics from being sent to an extended metrics destination.</p>\n         <p>If some metric definition IDs specified in a <code>BatchDeleteRumMetricDefinitions</code> operations are not valid,\n         those metric definitions fail and return errors, but all valid metric definition IDs in the same operation are still \n         deleted.</p>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchDeleteRumMetricDefinitions</code> operation is 200.</p>",
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchDeleteRumMetricDefinitions.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/rummetrics/{AppMonitorName}/metrics"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsError": {
+            "type": "structure",
+            "members": {
+                "MetricDefinitionId": {
+                    "target": "com.amazonaws.rum#MetricDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the metric definition that caused this error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for this metric definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines one error caused by a \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchDeleteRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>\n         operation.</p>"
+            }
+        },
+        "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsError"
+            }
+        },
+        "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that is sending these metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the destination where you want to stop sending the specified metrics. Valid values are <code>CloudWatch</code> and\n         <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to \n         be the destination and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#httpQuery": "destination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter. </p>\n         <p>This parameter specifies\n         the ARN of the Evidently experiment that was receiving the metrics that are being deleted.</p>",
+                        "smithy.api#httpQuery": "destinationArn"
+                    }
+                },
+                "MetricDefinitionIds": {
+                    "target": "com.amazonaws.rum#MetricDefinitionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures which define the metrics that you want to stop sending.</p>",
+                        "smithy.api#httpQuery": "metricDefinitionIds",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "Errors": {
+                    "target": "com.amazonaws.rum#BatchDeleteRumMetricDefinitionsErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of error objects, if the operation caused any errors.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricDefinitionIds": {
+                    "target": "com.amazonaws.rum#MetricDefinitionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the metric definitions that were deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#BatchGetRumMetricDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#BatchGetRumMetricDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#BatchGetRumMetricDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the list of metrics and dimensions that a RUM app monitor is sending to a single destination.</p>",
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchGetRumMetricDefinitions.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/rummetrics/{AppMonitorName}/metrics"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "MetricDefinitions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.rum#BatchGetRumMetricDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that is sending the metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of destination that you want to view metrics for. Valid values are <code>CloudWatch</code> \n         and <code>Evidently</code>.</p>",
+                        "smithy.api#httpQuery": "destination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter\n         specifies the ARN of the Evidently experiment that corresponds to the destination.</p>",
+                        "smithy.api#httpQuery": "destinationArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.rum#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can \n         specify is 100.</p>\n         <p>To retrieve the remaining results, make another call with the returned \n         <code>NextToken</code> value. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the token returned by the previous operation to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#BatchGetRumMetricDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "MetricDefinitions": {
+                    "target": "com.amazonaws.rum#MetricDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that display information about the metrics that are sent by the specified\n         app monitor to the specified destination.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to \n         retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rum#ConflictException": {
             "type": "structure",
             "members": {
@@ -331,6 +713,9 @@
                     "target": "com.amazonaws.rum#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.rum#ServiceQuotaExceededException"
                 },
                 {
@@ -346,9 +731,9 @@
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/CreateAppMonitor.html"
                 },
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/appmonitor",
-                    "code": 200
+                    "uri": "/appmonitor"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -466,9 +851,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an existing app monitor. This immediately stops the collection of data.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "DELETE",
-                    "uri": "/appmonitor/{Name}",
-                    "code": 200
+                    "uri": "/appmonitor/{Name}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -490,6 +875,115 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.rum#DeleteRumMetricsDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#DeleteRumMetricsDestinationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#DeleteRumMetricsDestinationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a destination for CloudWatch RUM extended metrics, so that the specified app monitor stops\n         sending extended metrics to that destination.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/rummetrics/{AppMonitorName}/metricsdestination"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#DeleteRumMetricsDestinationRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app monitor that is sending metrics to the destination that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of destination to delete. Valid values are <code>CloudWatch</code> and <code>Evidently</code>.</p>",
+                        "smithy.api#httpQuery": "destination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter. This parameter\n         specifies the ARN of the Evidently experiment that corresponds to the destination to delete.</p>",
+                        "smithy.api#httpQuery": "destinationArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#DeleteRumMetricsDestinationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.rum#DestinationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"
+            }
+        },
+        "com.amazonaws.rum#DimensionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 280
+                }
+            }
+        },
+        "com.amazonaws.rum#DimensionKeysMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.rum#DimensionKey"
+            },
+            "value": {
+                "target": "com.amazonaws.rum#DimensionName"
+            }
+        },
+        "com.amazonaws.rum#DimensionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(?!:).*[^\\s].*"
+            }
+        },
         "com.amazonaws.rum#EventData": {
             "type": "string"
         },
@@ -497,6 +991,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rum#EventData"
+            }
+        },
+        "com.amazonaws.rum#EventPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4000
+                }
             }
         },
         "com.amazonaws.rum#FavoritePages": {
@@ -539,9 +1042,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the complete configuration information for one app monitor.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/appmonitor/{Name}",
-                    "code": 200
+                    "uri": "/appmonitor/{Name}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -574,15 +1077,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the raw performance events that RUM has collected from your web application,\n         so that you can do your own processing or analysis of this data.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/appmonitor/{Name}/data",
-                    "code": 200
+                    "uri": "/appmonitor/{Name}/data"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Events",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Events"
                 },
                 "smithy.api#readonly": {}
             }
@@ -614,6 +1117,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.rum#MaxQueryResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return in one operation. </p>"
                     }
                 },
@@ -672,8 +1176,13 @@
                 "smithy.api#length": {
                     "min": 19,
                     "max": 19
-                },
-                "smithy.api#pattern": "/d{4}-[01]/d-[0-3]/dT[0-2]/d:[0-5]/d:[0-5]/d/./d+([+-][0-2]/d:[0-5]/d|Z)"
+                }
+            }
+        },
+        "com.amazonaws.rum#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*"
             }
         },
         "com.amazonaws.rum#IdentityPoolId": {
@@ -741,15 +1250,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of the Amazon CloudWatch RUM app monitors in the account.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/appmonitors",
-                    "code": 200
+                    "uri": "/appmonitors"
                 },
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "AppMonitorSummaries",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "AppMonitorSummaries"
                 },
                 "smithy.api#readonly": {}
             }
@@ -758,9 +1267,9 @@
             "type": "structure",
             "members": {
                 "MaxResults": {
-                    "target": "smithy.api#Integer",
+                    "target": "com.amazonaws.rum#MaxResultsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can \n      specify is 100.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -790,6 +1299,89 @@
                 }
             }
         },
+        "com.amazonaws.rum#ListRumMetricsDestinations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#ListRumMetricsDestinationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#ListRumMetricsDestinationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of destinations that you have created to receive RUM extended metrics, \n         for the specified app monitor.</p>\n         <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html\">AddRumMetrics</a>.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/rummetrics/{AppMonitorName}/metricsdestination"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Destinations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.rum#ListRumMetricsDestinationsRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app monitor associated with the destinations that you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.rum#MaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in one operation. The default is 50. The maximum that you can \n         specify is 100.</p>\n         <p>To retrieve the remaining results, make another call with the returned \n         <code>NextToken</code> value. </p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the token returned by the previous operation to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#ListRumMetricsDestinationsResponse": {
+            "type": "structure",
+            "members": {
+                "Destinations": {
+                    "target": "com.amazonaws.rum#MetricDestinationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of CloudWatch RUM extended metrics destinations associated with the app monitor that \n      you specified.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent operation to \n         retrieve the next set of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rum#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -813,8 +1405,7 @@
                 "smithy.api#documentation": "<p>Displays the tags associated with a CloudWatch RUM resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -854,9 +1445,187 @@
         "com.amazonaws.rum#MaxQueryResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.rum#MaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.rum#MetricDefinition": {
+            "type": "structure",
+            "members": {
+                "MetricDefinitionId": {
+                    "target": "com.amazonaws.rum#MetricDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of this metric definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.rum#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric that is defined in this structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValueKey": {
+                    "target": "com.amazonaws.rum#ValueKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field within the event object that the metric value is sourced from.</p>"
+                    }
+                },
+                "UnitLabel": {
+                    "target": "com.amazonaws.rum#UnitLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field only if you are sending this metric to CloudWatch. It defines\n         the CloudWatch metric unit that this metric is measured in. </p>"
+                    }
+                },
+                "DimensionKeys": {
+                    "target": "com.amazonaws.rum#DimensionKeysMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch The value of this field is used only if the metric destination is <code>CloudWatch</code>.\n         If the metric destination is <code>Evidently</code>, the value of <code>DimensionKeys</code> is ignored.</p>"
+                    }
+                },
+                "EventPattern": {
+                    "target": "com.amazonaws.rum#EventPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern that defines the metric. RUM checks events that happen in a user's session\n      against the pattern, and events that match the pattern are sent to the metric destination.</p>\n         <p>If the metrics destination\n      is <code>CloudWatch</code> and the event\n      also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that displays the definition of one extended metric that RUM sends\n         to CloudWatch or CloudWatch Evidently. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Additional metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>"
+            }
+        },
+        "com.amazonaws.rum#MetricDefinitionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.rum#MetricDefinitionIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#MetricDefinitionId"
+            }
+        },
+        "com.amazonaws.rum#MetricDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.rum#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the metric that is defined in this structure. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PerformanceNavigationDuration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceResourceDuration\n            </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationSatisfiedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationToleratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NavigationFrustratedTransaction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsCumulativeLayoutShift</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsFirstInputDelay</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WebVitalsLargestContentfulPaint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>JsErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>HttpErrorCount</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionCount</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValueKey": {
+                    "target": "com.amazonaws.rum#ValueKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field within the event object that the metric value is sourced from.</p>\n         <p>If you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you\n         just want to count the number of events that the filter catches. </p>\n         <p>If this metric is sent to CloudWatch Evidently, this field will be passed to Evidently raw and Evidently \n         will handle data extraction from the event.</p>"
+                    }
+                },
+                "UnitLabel": {
+                    "target": "com.amazonaws.rum#UnitLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch metric unit to use for this metric. If you omit this field, the metric\n      is recorded with no unit.</p>"
+                    }
+                },
+                "DimensionKeys": {
+                    "target": "com.amazonaws.rum#DimensionKeysMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p>\n         <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch. Valid values for the entries in this field are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"metadata.pageId\": \"PageId\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.browserName\": \"BrowserName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.deviceType\": \"DeviceType\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.osName\": \"OSName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.countryCode\": \"CountryCode\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"event_details.fileType\": \"FileType\"</code>\n               </p>\n            </li>\n         </ul>\n      \n         <p> All dimensions listed in this field\n         must also be included in <code>EventPattern</code>.</p>"
+                    }
+                },
+                "EventPattern": {
+                    "target": "com.amazonaws.rum#EventPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session\n         against the pattern, and events that match the pattern are sent to the metric destination.</p>\n         <p>When you define extended metrics, the metric definition is not valid if <code>EventPattern</code>\n      is omitted.</p>\n         <p>Example event patterns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.js_error_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Safari\" ], } }'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Firefox\" ]\n            },\n            \"event_details\": {\n            \"duration\": [{\n            \"numeric\": [ \"&lt;\", 2000 ]\n            }]\n            }\n            }'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>'{\n            \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n            \"metadata\": {\n            \"browserName\": [ \"Chrome\", \"Safari\" ],\n            \"countryCode\": [ \"US\" ]\n            },\n            \"event_details\": {\n            \"duration\": [{\n            \"numeric\": [ \"&gt;=\", 2000, \"&lt;\", 8000 ]\n            }]\n            }\n            }'</code>\n               </p>\n            </li>\n         </ul>\n         <p>If the metrics destination'\n         is <code>CloudWatch</code> and the event\n         also matches a value in <code>DimensionKeys</code>, then the metric is published with the specified dimensions. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this structure to define one extended metric that RUM will send\n         to CloudWatch or CloudWatch Evidently. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Additional metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>Only certain combinations of values for <code>Name</code>, <code>ValueKey</code>, and <code>EventPattern</code>\n         are valid. In addition to what is displayed in the list below, the <code>EventPattern</code> can also include information\n      used by the <code>DimensionKeys</code> field.</p>\n         <ul>\n            <li>\n               <p>If <code>Name</code> is <code>PerformanceNavigationDuration</code>, then\n      <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n         must include <code>{\"event_type\":[\"com.amazon.rum.performance_navigation_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>PerformanceResourceDuration</code>, then\n            <code>ValueKey</code>must be <code>event_details.duration</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.performance_resource_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>NavigationSatisfiedTransaction</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\n               \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n               \"event_details\": {\n               \"duration\": [{\n               \"numeric\": [\"&gt;\",2000]\n               }]\n               }\n               }</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>NavigationToleratedTransaction</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\n               \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n               \"event_details\": {\n               \"duration\": [{\n               \"numeric\": [\"&gt;=\",2000,\"&lt;\"8000]\n               }]\n               }\n               }</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>NavigationFrustratedTransaction</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\n               \"event_type\": [\"com.amazon.rum.performance_navigation_event\"],\n               \"event_details\": {\n               \"duration\": [{\n               \"numeric\": [\"&gt;=\",8000]\n               }]\n               }\n               }</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>WebVitalsCumulativeLayoutShift</code>, then\n            <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.cumulative_layout_shift_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>WebVitalsFirstInputDelay</code>, then\n            <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.first_input_delay_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>WebVitalsLargestContentfulPaint</code>, then\n            <code>ValueKey</code>must be <code>event_details.value</code> and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.largest_contentful_paint_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>JsErrorCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.js_error_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>HttpErrorCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.http_event\"]}</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>Name</code> is <code>SessionCount</code>, then\n            <code>ValueKey</code>must be null and the <code>EventPattern</code>\n            must include <code>{\"event_type\":[\"com.amazon.rum.session_start_event\"]}</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.rum#MetricDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#MetricDefinition"
+            }
+        },
+        "com.amazonaws.rum#MetricDefinitionsRequest": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#MetricDefinitionRequest"
+            }
+        },
+        "com.amazonaws.rum#MetricDestination": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CloudWatch",
+                        "value": "CloudWatch"
+                    },
+                    {
+                        "name": "Evidently",
+                        "value": "Evidently"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rum#MetricDestinationSummary": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the destination is <code>CloudWatch</code> or <code>Evidently</code>.</p>"
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the destination is <code>Evidently</code>, this specifies the ARN of the Evidently experiment that receives\n       the metrics.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.rum#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field appears only when the destination is <code>Evidently</code>. It specifies\n         the ARN of the IAM role that is used to write to the Evidently experiment that receives the metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that displays information about one destination that CloudWatch RUM sends\n      extended metrics to.</p>"
+            }
+        },
+        "com.amazonaws.rum#MetricDestinationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rum#MetricDestinationSummary"
+            }
+        },
+        "com.amazonaws.rum#MetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
                 }
             }
         },
@@ -954,6 +1723,84 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.rum#PutRumMetricsDestination": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#PutRumMetricsDestinationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#PutRumMetricsDestinationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a destination to receive extended metrics from CloudWatch RUM. You can send\n         extended metrics to CloudWatch or to a CloudWatch Evidently experiment.</p>\n         <p>For more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrics.html\">AddRumMetrics</a>.</p>",
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/PutRumMetricsDestination.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/rummetrics/{AppMonitorName}/metricsdestination"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#PutRumMetricsDestinationRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that will send the metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the destination to send the metrics to. Valid values are <code>CloudWatch</code> and\n         <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment that is to \n         be the destination and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter only if <code>Destination</code> is <code>Evidently</code>. This parameter specifies\n      the ARN of the Evidently experiment that will receive the extended metrics.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.rum#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies\n         the ARN of an IAM role that RUM will assume to write to the Evidently \n         experiment that you are sending metrics to. This role must have permission to write to that experiment.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#PutRumMetricsDestinationResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.rum#QueryFilter": {
             "type": "structure",
             "members": {
@@ -993,48 +1840,13 @@
             }
         },
         "com.amazonaws.rum#QueryTimestamp": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.rum#RUM": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "RUM",
-                    "arnNamespace": "rum",
-                    "cloudFormationName": "RUM",
-                    "cloudTrailEventSource": "rum.amazonaws.com",
-                    "endpointPrefix": "rum"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rum"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "Authorization",
-                        "x-amz-content-sha256",
-                        "X-Amz-Date",
-                        "x-amzn-trace-id",
-                        "X-Amz-Security-Token",
-                        "X-Amz-Targe",
-                        "x-amz-user-agent",
-                        "*",
-                        "content-type",
-                        "x-amzn-platform-id",
-                        "Date"
-                    ],
-                    "additionalExposedHeaders": [
-                        "date",
-                        "x-amz-apigw-id",
-                        "x-amzn-trace-id",
-                        "x-amzn-errortype",
-                        "x-amzn-requestid",
-                        "x-amzn-errormessage"
-                    ]
-                },
-                "smithy.api#documentation": "<p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about \n       your web application performance from actual user sessions in real time. The data collected includes page load \n       times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and \n       also see breakdowns by the browsers and devices that your customers use.</p>\n       \n         <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch \n       RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error \n       messages, stack traces, and user sessions. You can also use RUM to \n       understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>",
-                "smithy.api#title": "CloudWatch RUM"
-            },
             "version": "2018-05-10",
             "operations": [
                 {
@@ -1054,7 +1866,921 @@
                 {
                     "target": "com.amazonaws.rum#AppMonitorResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "RUM",
+                    "arnNamespace": "rum",
+                    "serviceName": "rum"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rum"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "X-Amz-Date",
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Targe",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id",
+                        "x-amzn-errormessage",
+                        "x-amz-apigw-id",
+                        "date"
+                    ]
+                },
+                "smithy.api#documentation": "<p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about \n       your web application performance from actual user sessions in real time. The data collected includes page load \n       times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and \n       also see breakdowns by the browsers and devices that your customers use.</p>\n       \n         <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch \n       RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error \n       messages, stack traces, and user sessions. You can also use RUM to \n       understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>",
+                "smithy.api#title": "CloudWatch RUM",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://rum-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://rum-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://rum.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://rum.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rum.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.rum#ResourceNotFoundException": {
             "type": "structure",
@@ -1152,6 +2878,7 @@
         "com.amazonaws.rum#SessionSampleRate": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1
@@ -1163,16 +2890,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATED",
-                        "name": "CREATED"
+                        "name": "CREATED",
+                        "value": "CREATED"
                     },
                     {
-                        "value": "DELETING",
-                        "name": "DELETING"
+                        "name": "DELETING",
+                        "value": "DELETING"
                     },
                     {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
                     }
                 ]
             }
@@ -1231,8 +2958,7 @@
                 "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, \n       the only resources that \n       can be tagged app monitors.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. \n       If you specify a new tag key for the resource, \n       this tag is appended to the list of tags associated\n       with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces\n       the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1342,6 +3068,7 @@
                 "After": {
                     "target": "com.amazonaws.rum#QueryTimestamp",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The beginning of the time range to retrieve performance events from.</p>",
                         "smithy.api#required": {}
                     }
@@ -1349,6 +3076,7 @@
                 "Before": {
                     "target": "com.amazonaws.rum#QueryTimestamp",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The end of the time range to retrieve performance events from. If you omit this, the time \n      range extends to the time that this operation is performed.</p>"
                     }
                 }
@@ -1359,6 +3087,15 @@
         },
         "com.amazonaws.rum#Token": {
             "type": "string"
+        },
+        "com.amazonaws.rum#UnitLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.rum#UntagResource": {
             "type": "operation",
@@ -1382,9 +3119,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "DELETE",
-                    "uri": "/tags/{ResourceArn}",
-                    "code": 200
+                    "uri": "/tags/{ResourceArn}"
                 },
                 "smithy.api#idempotent": {}
             }
@@ -1445,9 +3182,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor\n         configuration that you specify in this operation are changed. For any parameters that you omit, the existing\n         values are kept.</p>\n         <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use\n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <p>To create a new app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html\">CreateAppMonitor</a>.</p>\n         <p>After you update an app monitor, sign in to the CloudWatch RUM console to get \n         the updated JavaScript code snippet to add to your web application. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet\n            that I've already generated?</a>\n         </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "PATCH",
-                    "uri": "/appmonitor/{Name}",
-                    "code": 200
+                    "uri": "/appmonitor/{Name}"
                 }
             }
         },
@@ -1486,6 +3223,95 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.rum#UpdateRumMetricDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rum#UpdateRumMetricDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rum#UpdateRumMetricDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rum#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rum#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.rum#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For \n         more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>.</p>",
+                "smithy.api#externalDocumentation": {
+                    "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/UpdateRumMetricDefinitions.html"
+                },
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/rummetrics/{AppMonitorName}/metrics"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rum#UpdateRumMetricDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "AppMonitorName": {
+                    "target": "com.amazonaws.rum#AppMonitorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that sends these metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.rum#MetricDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment \n         that will receive\n         the metrics and an IAM role that has permission to write to the experiment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.rum#DestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this \n         experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
+                    }
+                },
+                "MetricDefinition": {
+                    "target": "com.amazonaws.rum#MetricDefinitionRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the new definition that you want to use for this metric.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricDefinitionId": {
+                    "target": "com.amazonaws.rum#MetricDefinitionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the metric definition to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rum#UpdateRumMetricDefinitionResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.rum#Url": {
             "type": "string",
             "traits": {
@@ -1493,7 +3319,7 @@
                     "min": 1,
                     "max": 1260
                 },
-                "smithy.api#pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)"
+                "smithy.api#pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&*//=]*)"
             }
         },
         "com.amazonaws.rum#UserDetails": {
@@ -1530,6 +3356,15 @@
                 "smithy.api#documentation": "<p>One of the arguments for the request is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rum#ValueKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 280
+                }
             }
         }
     }
