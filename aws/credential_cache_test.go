@@ -617,3 +617,46 @@ func (m mockAdjustExpiryBy) AdjustExpiresBy(creds Credentials, dur time.Duration
 	}
 	return m.creds, m.err
 }
+
+func TestCredentialsCache_IsCredentialsProvider(t *testing.T) {
+	tests := map[string]struct {
+		provider CredentialsProvider
+		target   CredentialsProvider
+		want     bool
+	}{
+		"nil provider and target": {
+			provider: nil,
+			target:   nil,
+			want:     true,
+		},
+		"matches value implementations": {
+			provider: NewCredentialsCache(AnonymousCredentials{}),
+			target:   AnonymousCredentials{},
+			want:     true,
+		},
+		"matches value and pointer implementations, wrapped pointer": {
+			provider: NewCredentialsCache(&AnonymousCredentials{}),
+			target:   AnonymousCredentials{},
+			want:     true,
+		},
+		"matches value and pointer implementations, pointer target": {
+			provider: NewCredentialsCache(AnonymousCredentials{}),
+			target:   &AnonymousCredentials{},
+			want:     true,
+		},
+		"does not match mismatched provider types": {
+			provider: NewCredentialsCache(AnonymousCredentials{}),
+			target:   &stubCredentialsProvider{},
+			want:     false,
+		},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			if got := NewCredentialsCache(tt.provider).IsCredentialsProvider(tt.target); got != tt.want {
+				t.Errorf("IsCredentialsProvider() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+var _ isCredentialsProvider = (*CredentialsCache)(nil)
