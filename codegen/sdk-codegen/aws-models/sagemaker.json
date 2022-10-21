@@ -14628,6 +14628,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The recommendations made by Inference Recommender.</p>"
                     }
+                },
+                "EndpointPerformances": {
+                    "target": "com.amazonaws.sagemaker#EndpointPerformances",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The performance results from running an Inference Recommender job on an existing endpoint.</p>"
+                    }
                 }
             }
         },
@@ -19294,6 +19300,21 @@
                 "target": "com.amazonaws.sagemaker#EndpointConfigSummary"
             }
         },
+        "com.amazonaws.sagemaker#EndpointInfo": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sagemaker#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a customer's endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a customer endpoint that was compared in an Inference Recommender job.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#EndpointInput": {
             "type": "structure",
             "members": {
@@ -19460,6 +19481,39 @@
                 "smithy.api#documentation": "<p>The endpoint configuration made by Inference Recommender during a recommendation job.</p>"
             }
         },
+        "com.amazonaws.sagemaker#EndpointPerformance": {
+            "type": "structure",
+            "members": {
+                "Metrics": {
+                    "target": "com.amazonaws.sagemaker#InferenceMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics for an existing endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointInfo": {
+                    "target": "com.amazonaws.sagemaker#EndpointInfo",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The performance results from running an Inference Recommender job on an existing endpoint.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#EndpointPerformances": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#EndpointPerformance"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#EndpointSortKey": {
             "type": "enum",
             "members": {
@@ -19583,6 +19637,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#EndpointSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#Endpoints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#EndpointInfo"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#EntityDescription": {
@@ -23086,6 +23152,30 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceMetrics": {
+            "type": "structure",
+            "members": {
+                "MaxInvocations": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The expected maximum number of requests per minute for the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelLatency": {
+                    "target": "com.amazonaws.sagemaker#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The expected model latency at maximum invocations per minute for the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metrics for an existing endpoint compared in an Inference Recommender job.</p>"
             }
         },
         "com.amazonaws.sagemaker#InferenceRecommendation": {
@@ -38604,6 +38694,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies mandatory fields for running an Inference Recommender job. The fields specified in <code>ContainerConfig</code>\n         override the corresponding fields in the model package.</p>"
                     }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.sagemaker#Endpoints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Existing customer endpoints on which to run an Inference Recommender job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -40652,7 +40748,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -46933,7 +47029,7 @@
                 "InstanceCount": {
                     "target": "com.amazonaws.sagemaker#TransformInstanceCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of\n            ML\n            compute instances to use in the transform job. For distributed\n            transform jobs, specify a value greater than 1. The default value is\n            <code>1</code>.</p>",
+                        "smithy.api#documentation": "<p>The number of\n            ML\n            compute instances to use in the transform job. The default value is\n                <code>1</code>, and the maximum is <code>100</code>. For distributed transform jobs,\n            specify a value greater than <code>1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
