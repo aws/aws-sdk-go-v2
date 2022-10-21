@@ -1,3 +1,7 @@
+# v1.16.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-09-30)
 
 * **Feature**: A new parameter called EnableExplanations is added to InvokeEndpoint API to enable on-demand SageMaker Clarify online explainability requests.

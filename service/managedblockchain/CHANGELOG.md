@@ -1,3 +1,7 @@
+# v1.13.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-10-19)
 
 * **Feature**: Adding new Accessor APIs for Amazon Managed Blockchain

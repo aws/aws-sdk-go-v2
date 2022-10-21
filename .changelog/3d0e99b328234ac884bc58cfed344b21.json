@@ -1,8 +1,0 @@
-{
-    "id": "3d0e99b3-2823-4ac8-84bc-58cfed344b21",
-    "type": "feature",
-    "description": "Add presign functionality for sts:AssumeRole operation",
-    "modules": [
-        "service/sts"
-    ]
-}

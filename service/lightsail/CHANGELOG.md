@@ -1,3 +1,7 @@
+# v1.23.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2022-09-23)
 
 * **Feature**: This release adds Instance Metadata Service (IMDS) support for Lightsail instances.

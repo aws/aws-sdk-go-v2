@@ -1,3 +1,7 @@
+# v1.8.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2022-10-13)
 
 * **Feature**: We are releasing the ability for fields to be configured as arrays.

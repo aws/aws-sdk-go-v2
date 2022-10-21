@@ -1,3 +1,7 @@
+# v1.7.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2022-10-19)
 
 * **Feature**: WorkSpaces Web now supports user access logging for recording session start, stop, and URL navigation.

@@ -1,3 +1,7 @@
+# v1.14.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-09-22)
 
 * **Feature**: This release adds the support for VPC-ENI based connectivity for private devices on AWS Device Farm.

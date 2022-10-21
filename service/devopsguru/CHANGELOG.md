@@ -1,3 +1,7 @@
+# v1.20.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-10-20)
 
 * **Feature**: This release adds information about the resources DevOps Guru is analyzing.

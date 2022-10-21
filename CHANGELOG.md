@@ -1,3 +1,23 @@
+# Release (2022-10-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.17.0
+  * **Feature**: Adds `aws.IsCredentialsProvider` for inspecting `CredentialProvider` types when needing to determine if the underlying implementation type matches a target type. This resolves an issue where `CredentialsCache` could mask `AnonymousCredentials` providers, breaking downstream detection logic.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.21.0](service/cognitoidentityprovider/CHANGELOG.md#v1210-2022-10-21)
+  * **Feature**: This release adds a new "DeletionProtection" field to the UserPool in Cognito. Application admins can configure this value with either ACTIVE or INACTIVE value. Setting this field to ACTIVE will prevent a user pool from accidental deletion.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.16.16](service/eventbridge/CHANGELOG.md#v11616-2022-10-21)
+  * **Bug Fix**: The SDK client has been updated to utilize the `aws.IsCredentialsProvider` function for determining if `aws.AnonymousCredentials` has been configured for the `CredentialProvider`.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.29.0](service/s3/CHANGELOG.md#v1290-2022-10-21)
+  * **Feature**: S3 on Outposts launches support for automatic bucket-style alias. You can use the automatic access point alias instead of an access point ARN for any object-level operation in an Outposts bucket.
+  * **Bug Fix**: The SDK client has been updated to utilize the `aws.IsCredentialsProvider` function for determining if `aws.AnonymousCredentials` has been configured for the `CredentialProvider`.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.49.0](service/sagemaker/CHANGELOG.md#v1490-2022-10-21)
+  * **Feature**: CreateInferenceRecommenderjob API now supports passing endpoint details directly, that will help customers to identify the max invocation and max latency they can achieve for their model and the associated endpoint along with getting recommendations on other instances.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.17.0](service/sts/CHANGELOG.md#v1170-2022-10-21)
+  * **Feature**: Add presign functionality for sts:AssumeRole operation
+
 # Release (2022-10-20)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.19.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-10-07)
 
 * **Feature**: This release adds error status details for deployments and components that failed on a device and adds features to improve visibility into component installation.

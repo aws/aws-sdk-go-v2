@@ -1,3 +1,7 @@
+# v1.11.7 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.6 (2022-10-19)
 
 * **Documentation**: Documentation updates for Chime Messaging SDK

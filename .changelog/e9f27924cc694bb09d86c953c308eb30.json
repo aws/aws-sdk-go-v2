@@ -1,8 +1,0 @@
-{
-    "id": "e9f27924-cc69-4bb0-9d86-c953c308eb30",
-    "type": "feature",
-    "description": "This release adds a new \"DeletionProtection\" field to the UserPool in Cognito. Application admins can configure this value with either ACTIVE or INACTIVE value. Setting this field to ACTIVE will prevent a user pool from accidental deletion.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

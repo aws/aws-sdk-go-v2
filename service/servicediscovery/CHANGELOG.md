@@ -1,3 +1,7 @@
+# v1.18.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-10-18)
 
 * **Feature**: Updated the ListNamespaces API to support the NAME and HTTP_NAME filters, and the BEGINS_WITH filter condition.

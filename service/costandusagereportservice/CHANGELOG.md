@@ -1,3 +1,7 @@
+# v1.14.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2022-09-26)
 
 * **Feature**: This release adds two new support regions(me-central-1/eu-south-2) for OSG.

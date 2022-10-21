@@ -1,3 +1,7 @@
+# v1.17.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-10-04)
 
 * **Feature**: This release adds support for impersonation roles in Amazon WorkMail.

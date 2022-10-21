@@ -1,3 +1,7 @@
+# v1.33.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2022-10-19)
 
 * **Feature**: This release adds API support for managing phone numbers that can be used across multiple AWS regions through telephony traffic distribution.

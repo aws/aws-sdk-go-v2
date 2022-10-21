@@ -1,3 +1,7 @@
+# v1.13.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-09-30)
 
 * **Feature**: This release adds support for archival of single-volume snapshots created by Amazon Data Lifecycle Manager policies

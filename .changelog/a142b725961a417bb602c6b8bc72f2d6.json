@@ -1,8 +1,0 @@
-{
-    "id": "a142b725-961a-417b-b602-c6b8bc72f2d6",
-    "type": "feature",
-    "description": "CreateInferenceRecommenderjob API now supports passing endpoint details directly, that will help customers to identify the max invocation and max latency they can achieve for their model and the associated endpoint along with getting recommendations on other instances.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

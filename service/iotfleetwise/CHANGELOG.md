@@ -1,3 +1,7 @@
+# v1.0.2 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.1 (2022-10-13)
 
 * **Documentation**: Documentation update for AWS IoT FleetWise

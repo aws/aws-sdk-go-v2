@@ -1,3 +1,7 @@
+# v1.21.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-09-27)
 
 * **Feature**: This release is to support retroactive Cost Categories. The new field will enable you to retroactively apply new and existing cost category rules to previous months.

@@ -1,3 +1,7 @@
+# v1.7.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2022-10-20)
 
 * **Feature**: CloudWatch RUM now supports Extended CloudWatch Metrics with Additional Dimensions

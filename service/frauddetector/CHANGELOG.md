@@ -1,3 +1,7 @@
+# v1.20.11 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.10 (2022-10-18)
 
 * **Documentation**: Documentation Updates for Amazon Fraud Detector

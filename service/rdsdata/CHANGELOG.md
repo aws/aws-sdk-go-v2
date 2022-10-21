@@ -1,3 +1,7 @@
+# v1.12.17 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.16 (2022-10-13)
 
 * **Documentation**: Doc update to reflect no support for schema parameter on BatchExecuteStatement API

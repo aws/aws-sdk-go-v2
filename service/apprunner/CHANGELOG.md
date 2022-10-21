@@ -1,3 +1,7 @@
+# v1.13.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2022-09-23)
 
 * **Feature**: AWS App Runner adds a Node.js 16 runtime.

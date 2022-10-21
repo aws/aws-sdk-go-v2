@@ -1,3 +1,7 @@
+# v1.1.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.0 (2022-10-19)
 
 * **Feature**: This release adds the RegisterSlackWorkspaceForOrganization API. You can use the API to register a Slack workspace for an AWS account that is part of an organization.

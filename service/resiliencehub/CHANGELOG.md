@@ -1,3 +1,7 @@
+# v1.7.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2022-10-20)
 
 * **Feature**: In this release, we are introducing support for regional optimization for AWS Resilience Hub applications. It also includes a few documentation updates to improve clarity.

@@ -1,3 +1,7 @@
+# v1.22.10 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.9 (2022-09-23)
 
 * **Documentation**: Add the default specification for ResourceType in ListResourcesForWebACL.

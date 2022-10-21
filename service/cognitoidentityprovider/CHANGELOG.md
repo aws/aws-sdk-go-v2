@@ -1,3 +1,8 @@
+# v1.21.0 (2022-10-21)
+
+* **Feature**: This release adds a new "DeletionProtection" field to the UserPool in Cognito. Application admins can configure this value with either ACTIVE or INACTIVE value. Setting this field to ACTIVE will prevent a user pool from accidental deletion.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2022-09-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

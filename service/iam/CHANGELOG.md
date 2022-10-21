@@ -1,3 +1,7 @@
+# v1.18.21 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.20 (2022-10-13)
 
 * **Documentation**: Documentation updates for the AWS Identity and Access Management API Reference.

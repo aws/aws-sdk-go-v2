@@ -1,3 +1,7 @@
+# v1.19.1 (2022-10-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-10-19)
 
 * **Feature**: This release includes support for exporting CloudTrail Lake query results to an Amazon S3 bucket.
