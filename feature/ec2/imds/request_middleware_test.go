@@ -42,6 +42,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 			},
 			ExpectInitialize: []string{
 				(*operationTimeout)(nil).ID(),
+				"SetLogger",
 			},
 			ExpectSerialize: []string{
 				"ResolveEndpoint",
@@ -58,6 +59,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 			ExpectDeserialize: []string{
 				"APITokenProvider",
 				"OperationDeserializer",
+				"RequestResponseLogger",
 			},
 		},
 
@@ -74,6 +76,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 			},
 			ExpectInitialize: []string{
 				(*operationTimeout)(nil).ID(),
+				"SetLogger",
 			},
 			ExpectSerialize: []string{
 				"ResolveEndpoint",
@@ -88,6 +91,7 @@ func TestAddRequestMiddleware(t *testing.T) {
 			},
 			ExpectDeserialize: []string{
 				"OperationDeserializer",
+				"RequestResponseLogger",
 			},
 		},
 	}
