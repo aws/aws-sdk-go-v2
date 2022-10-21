@@ -100,7 +100,9 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     ShapeId.from("com.amazonaws.s3#DeleteBucket")
             ),
             ShapeId.from("com.amazonaws.sts#AWSSecurityTokenServiceV20110615"), SetUtils.of(
-                    ShapeId.from("com.amazonaws.sts#GetCallerIdentity"))
+                    ShapeId.from("com.amazonaws.sts#GetCallerIdentity"),
+                    ShapeId.from("com.amazonaws.sts#AssumeRole")
+            )
     );
 
     // map of service to list of operations for which presignedURL client and operation should
