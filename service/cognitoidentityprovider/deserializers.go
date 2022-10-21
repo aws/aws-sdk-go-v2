@@ -5320,6 +5320,9 @@ func awsAwsjson11_deserializeOpErrorDeleteIdentityProvider(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -5877,6 +5880,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUserPoolClient(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -12086,6 +12092,9 @@ func awsAwsjson11_deserializeOpErrorUpdateIdentityProvider(response *smithyhttp.
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
@@ -21176,6 +21185,15 @@ func awsAwsjson11_deserializeDocumentUserPoolType(v **types.UserPoolType, value 
 					return fmt.Errorf("expected DomainType to be of type string, got %T instead", value)
 				}
 				sv.CustomDomain = ptr.String(jtv)
+			}
+
+		case "DeletionProtection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeletionProtectionType to be of type string, got %T instead", value)
+				}
+				sv.DeletionProtection = types.DeletionProtectionType(jtv)
 			}
 
 		case "DeviceConfiguration":

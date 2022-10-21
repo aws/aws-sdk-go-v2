@@ -1,0 +1,8 @@
+{
+    "id": "7a522474-ae92-4cf6-952a-9c4faf40bdfa",
+    "type": "feature",
+    "description": "S3 on Outposts launches support for automatic bucket-style alias. You can use the automatic access point alias instead of an access point ARN for any object-level operation in an Outposts bucket.",
+    "modules": [
+        "service/s3"
+    ]
+}

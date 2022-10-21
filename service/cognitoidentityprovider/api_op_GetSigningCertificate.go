@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This method takes a user pool ID, and returns the signing certificate.
+// This method takes a user pool ID, and returns the signing certificate. The
+// issued certificate is valid for 10 years from the date of issue. Amazon Cognito
+// issues and assigns a new signing certificate annually. This process returns a
+// new value in the response to GetSigningCertificate, but doesn't invalidate the
+// original certificate.
 func (c *Client) GetSigningCertificate(ctx context.Context, params *GetSigningCertificateInput, optFns ...func(*Options)) (*GetSigningCertificateOutput, error) {
 	if params == nil {
 		params = &GetSigningCertificateInput{}

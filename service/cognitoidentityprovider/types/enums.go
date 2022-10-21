@@ -256,6 +256,24 @@ func (DefaultEmailOptionType) Values() []DefaultEmailOptionType {
 	}
 }
 
+type DeletionProtectionType string
+
+// Enum values for DeletionProtectionType
+const (
+	DeletionProtectionTypeActive   DeletionProtectionType = "ACTIVE"
+	DeletionProtectionTypeInactive DeletionProtectionType = "INACTIVE"
+)
+
+// Values returns all known values for DeletionProtectionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionProtectionType) Values() []DeletionProtectionType {
+	return []DeletionProtectionType{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type DeliveryMediumType string
 
 // Enum values for DeliveryMediumType

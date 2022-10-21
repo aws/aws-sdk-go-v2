@@ -16917,6 +16917,18 @@ func awsAwsjson11_serializeDocumentEdgeOutputConfig(v *types.EdgeOutputConfig, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEndpointInfo(v *types.EndpointInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndpointName != nil {
+		ok := object.Key("EndpointName")
+		ok.String(*v.EndpointName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEndpointInput(v *types.EndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17018,6 +17030,19 @@ func awsAwsjson11_serializeDocumentEndpointInputConfigurations(v []types.Endpoin
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentEndpointInputConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEndpoints(v []types.EndpointInfo, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentEndpointInfo(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -20943,6 +20968,13 @@ func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.Recomme
 	if v.EndpointConfigurations != nil {
 		ok := object.Key("EndpointConfigurations")
 		if err := awsAwsjson11_serializeDocumentEndpointInputConfigurations(v.EndpointConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Endpoints != nil {
+		ok := object.Key("Endpoints")
+		if err := awsAwsjson11_serializeDocumentEndpoints(v.Endpoints, ok); err != nil {
 			return err
 		}
 	}

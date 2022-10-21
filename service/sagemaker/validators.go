@@ -6528,6 +6528,21 @@ func validateEdgeOutputConfig(v *types.EdgeOutputConfig) error {
 	}
 }
 
+func validateEndpointInfo(v *types.EndpointInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EndpointInfo"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEndpointInput(v *types.EndpointInput) error {
 	if v == nil {
 		return nil
@@ -6573,6 +6588,23 @@ func validateEndpointInputConfigurations(v []types.EndpointInputConfiguration) e
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointInputConfigurations"}
 	for i := range v {
 		if err := validateEndpointInputConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEndpoints(v []types.EndpointInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Endpoints"}
+	for i := range v {
+		if err := validateEndpointInfo(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -8962,6 +8994,11 @@ func validateRecommendationJobInputConfig(v *types.RecommendationJobInputConfig)
 	if v.EndpointConfigurations != nil {
 		if err := validateEndpointInputConfigurations(v.EndpointConfigurations); err != nil {
 			invalidParams.AddNested("EndpointConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Endpoints != nil {
+		if err := validateEndpoints(v.Endpoints); err != nil {
+			invalidParams.AddNested("Endpoints", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

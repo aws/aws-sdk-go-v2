@@ -8100,6 +8100,11 @@ func awsAwsjson11_serializeOpDocumentCreateUserPoolInput(v *CreateUserPoolInput,
 		}
 	}
 
+	if len(v.DeletionProtection) > 0 {
+		ok := object.Key("DeletionProtection")
+		ok.String(string(v.DeletionProtection))
+	}
+
 	if v.DeviceConfiguration != nil {
 		ok := object.Key("DeviceConfiguration")
 		if err := awsAwsjson11_serializeDocumentDeviceConfigurationType(v.DeviceConfiguration, ok); err != nil {
@@ -9686,6 +9691,11 @@ func awsAwsjson11_serializeOpDocumentUpdateUserPoolInput(v *UpdateUserPoolInput,
 		if err := awsAwsjson11_serializeDocumentVerifiedAttributesListType(v.AutoVerifiedAttributes, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.DeletionProtection) > 0 {
+		ok := object.Key("DeletionProtection")
+		ok.String(string(v.DeletionProtection))
 	}
 
 	if v.DeviceConfiguration != nil {

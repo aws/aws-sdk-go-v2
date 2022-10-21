@@ -52,16 +52,17 @@ type SetUserPoolMfaConfigInput struct {
 
 	// The MFA configuration. If you set the MfaConfiguration value to ‘ON’, only users
 	// who have set up an MFA factor can sign in. To learn more, see Adding
-	// Multi-Factor Authentication (MFA) to a user pool. Valid values include:
+	// Multi-Factor Authentication (MFA) to a user pool
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
+	// Valid values include:
 	//
-	// * OFF
-	// MFA won't be used for any users.
+	// * OFF MFA won't be used for any users.
 	//
-	// * ON MFA is required for all users to sign
-	// in.
+	// * ON MFA is
+	// required for all users to sign in.
 	//
-	// * OPTIONAL MFA will be required only for individual users who have an MFA
-	// factor activated.
+	// * OPTIONAL MFA will be required only for
+	// individual users who have an MFA factor activated.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.

@@ -38399,6 +38399,46 @@ func awsAwsjson11_deserializeDocumentEndpointConfigSummaryList(v *[]types.Endpoi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEndpointInfo(v **types.EndpointInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EndpointInfo
+	if *v == nil {
+		sv = &types.EndpointInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointName to be of type string, got %T instead", value)
+				}
+				sv.EndpointName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEndpointInput(v **types.EndpointInput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -38701,6 +38741,115 @@ func awsAwsjson11_deserializeDocumentEndpointOutputConfiguration(v **types.Endpo
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEndpointPerformance(v **types.EndpointPerformance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EndpointPerformance
+	if *v == nil {
+		sv = &types.EndpointPerformance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointInfo":
+			if err := awsAwsjson11_deserializeDocumentEndpointInfo(&sv.EndpointInfo, value); err != nil {
+				return err
+			}
+
+		case "Metrics":
+			if err := awsAwsjson11_deserializeDocumentInferenceMetrics(&sv.Metrics, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEndpointPerformances(v *[]types.EndpointPerformance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EndpointPerformance
+	if *v == nil {
+		cv = []types.EndpointPerformance{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EndpointPerformance
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEndpointPerformance(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEndpoints(v *[]types.EndpointInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EndpointInfo
+	if *v == nil {
+		cv = []types.EndpointInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EndpointInfo
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEndpointInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -42967,6 +43116,63 @@ func awsAwsjson11_deserializeDocumentInferenceExecutionConfig(v **types.Inferenc
 					return fmt.Errorf("expected InferenceExecutionMode to be of type string, got %T instead", value)
 				}
 				sv.Mode = types.InferenceExecutionMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInferenceMetrics(v **types.InferenceMetrics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceMetrics
+	if *v == nil {
+		sv = &types.InferenceMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxInvocations":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxInvocations = int32(i64)
+			}
+
+		case "ModelLatency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ModelLatency = int32(i64)
 			}
 
 		default:
@@ -55257,6 +55463,11 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInputConfig(v **types.Reco
 
 		case "EndpointConfigurations":
 			if err := awsAwsjson11_deserializeDocumentEndpointInputConfigurations(&sv.EndpointConfigurations, value); err != nil {
+				return err
+			}
+
+		case "Endpoints":
+			if err := awsAwsjson11_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
 			}
 
@@ -68413,6 +68624,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeInferenceRecommendationsJobOutput
 					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "EndpointPerformances":
+			if err := awsAwsjson11_deserializeDocumentEndpointPerformances(&sv.EndpointPerformances, value); err != nil {
+				return err
 			}
 
 		case "FailureReason":

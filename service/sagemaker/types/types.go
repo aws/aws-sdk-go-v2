@@ -4136,6 +4136,18 @@ type EndpointConfigSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details about a customer endpoint that was compared in an Inference Recommender
+// job.
+type EndpointInfo struct {
+
+	// The name of a customer's endpoint.
+	//
+	// This member is required.
+	EndpointName *string
+
+	noSmithyDocumentSerde
+}
+
 // Input object for the endpoint
 type EndpointInput struct {
 
@@ -4227,6 +4239,24 @@ type EndpointOutputConfiguration struct {
 	//
 	// This member is required.
 	VariantName *string
+
+	noSmithyDocumentSerde
+}
+
+// The performance results from running an Inference Recommender job on an existing
+// endpoint.
+type EndpointPerformance struct {
+
+	// Details about a customer endpoint that was compared in an Inference Recommender
+	// job.
+	//
+	// This member is required.
+	EndpointInfo *EndpointInfo
+
+	// The metrics for an existing endpoint.
+	//
+	// This member is required.
+	Metrics *InferenceMetrics
 
 	noSmithyDocumentSerde
 }
@@ -7038,6 +7068,22 @@ type InferenceExecutionConfig struct {
 	//
 	// This member is required.
 	Mode InferenceExecutionMode
+
+	noSmithyDocumentSerde
+}
+
+// The metrics for an existing endpoint compared in an Inference Recommender job.
+type InferenceMetrics struct {
+
+	// The expected maximum number of requests per minute for the instance.
+	//
+	// This member is required.
+	MaxInvocations int32
+
+	// The expected model latency at maximum invocations per minute for the instance.
+	//
+	// This member is required.
+	ModelLatency int32
 
 	noSmithyDocumentSerde
 }
@@ -11625,6 +11671,9 @@ type RecommendationJobInputConfig struct {
 	// Specifies the endpoint configuration to use for a job.
 	EndpointConfigurations []EndpointInputConfiguration
 
+	// Existing customer endpoints on which to run an Inference Recommender job.
+	Endpoints []EndpointInfo
+
 	// Specifies the maximum duration of the job, in seconds.>
 	JobDurationInSeconds *int32
 
@@ -13628,8 +13677,9 @@ type TransformOutput struct {
 // use for transform job.
 type TransformResources struct {
 
-	// The number of ML compute instances to use in the transform job. For distributed
-	// transform jobs, specify a value greater than 1. The default value is 1.
+	// The number of ML compute instances to use in the transform job. The default
+	// value is 1, and the maximum is 100. For distributed transform jobs, specify a
+	// value greater than 1.
 	//
 	// This member is required.
 	InstanceCount *int32

@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the specified user. Calling this action requires developer credentials.
+// Deactivates a user and revokes all access tokens for the user. A deactivated
+// user can't sign in, but still appears in the responses to GetUser and ListUsers
+// API requests. You must make this API request with Amazon Web Services
+// credentials that have cognito-idp:AdminDisableUser permissions.
 func (c *Client) AdminDisableUser(ctx context.Context, params *AdminDisableUserInput, optFns ...func(*Options)) (*AdminDisableUserOutput, error) {
 	if params == nil {
 		params = &AdminDisableUserInput{}

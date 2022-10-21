@@ -70,6 +70,14 @@ type UpdateUserPoolInput struct {
 	// update user pools.
 	AutoVerifiedAttributes []types.VerifiedAttributeType
 
+	// When active, DeletionProtection prevents accidental deletion of your user pool.
+	// Before you can delete a user pool that you have protected against deletion, you
+	// must deactivate this feature. When you try to delete a protected user pool in a
+	// DeleteUserPool API request, Amazon Cognito returns an InvalidParameterException
+	// error. To delete a protected user pool, send a new DeleteUserPool request after
+	// you deactivate deletion protection in an UpdateUserPool API request.
+	DeletionProtection types.DeletionProtectionType
+
 	// The device-remembering configuration for a user pool. A null value indicates
 	// that you have deactivated device remembering in your user pool. When you provide
 	// a value for any DeviceConfiguration field, you activate the Amazon Cognito

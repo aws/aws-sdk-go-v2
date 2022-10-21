@@ -44,7 +44,7 @@ type DescribeIdentityProviderInput struct {
 
 type DescribeIdentityProviderOutput struct {
 
-	// The IdP that was deleted.
+	// The identity provider details.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType

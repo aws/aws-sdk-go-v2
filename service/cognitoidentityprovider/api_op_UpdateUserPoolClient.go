@@ -54,7 +54,8 @@ type UpdateUserPoolClientInput struct {
 	// example, when you set AccessTokenValidity to 10 and TokenValidityUnits to hours,
 	// your user can authorize access with their access token for 10 hours. The default
 	// time unit for AccessTokenValidity in an API request is hours. Valid range is
-	// displayed below in seconds.
+	// displayed below in seconds. If you don't specify otherwise in the configuration
+	// of your app client, your access tokens are valid for one hour.
 	AccessTokenValidity *int32
 
 	// The allowed OAuth flows. code Use a code grant flow, which provides an
@@ -138,29 +139,39 @@ type UpdateUserPoolClientInput struct {
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html).
 	EnableTokenRevocation *bool
 
-	// The authentication flows that are supported by the user pool clients. Flow names
-	// without the ALLOW_ prefix are no longer supported in favor of new names with the
-	// ALLOW_ prefix. Note that values with ALLOW_ prefix must be used only along with
-	// values with the ALLOW_ prefix. Valid values include:
+	// The authentication flows that you want your user pool client to support. For
+	// each app client in your user pool, you can sign in your users with any
+	// combination of one or more flows, including with a user name and Secure Remote
+	// Password (SRP), a user name and password, or a custom authentication process
+	// that you define with Lambda functions. If you don't specify a value for
+	// ExplicitAuthFlows, your user client supports ALLOW_REFRESH_TOKEN_AUTH,
+	// ALLOW_USER_SRP_AUTH, and ALLOW_CUSTOM_AUTH. Valid values include:
 	//
 	// *
 	// ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
 	// flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
-	// setting. With this authentication flow, Amazon Cognito receives the password in
-	// the request instead of using the Secure Remote Password (SRP) protocol to verify
+	// setting. With this authentication flow, your app passes a user name and password
+	// to Amazon Cognito in the request, instead of using the Secure Remote Password
+	// (SRP) protocol to securely transmit the password.
+	//
+	// * ALLOW_CUSTOM_AUTH: Enable
+	// Lambda trigger based authentication.
+	//
+	// * ALLOW_USER_PASSWORD_AUTH: Enable user
+	// password-based authentication. In this flow, Amazon Cognito receives the
+	// password in the request instead of using the SRP protocol to verify
 	// passwords.
 	//
-	// * ALLOW_CUSTOM_AUTH: Enable Lambda trigger based authentication.
+	// * ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.
 	//
 	// *
-	// ALLOW_USER_PASSWORD_AUTH: Enable user password-based authentication. In this
-	// flow, Amazon Cognito receives the password in the request instead of using the
-	// SRP protocol to verify passwords.
+	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	//
-	// * ALLOW_USER_SRP_AUTH: Enable SRP-based
-	// authentication.
-	//
-	// * ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
+	// In some
+	// environments, you will see the values ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY,
+	// or USER_PASSWORD_AUTH. You can't assign these legacy ExplicitAuthFlows values to
+	// user pool clients at the same time as values that begin with ALLOW_, like
+	// ALLOW_USER_SRP_AUTH.
 	ExplicitAuthFlows []types.ExplicitAuthFlowsType
 
 	// The ID token time limit. After this limit expires, your user can't use their ID
@@ -169,7 +180,8 @@ type UpdateUserPoolClientInput struct {
 	// you set IdTokenValidity as 10 and TokenValidityUnits as hours, your user can
 	// authenticate their session with their ID token for 10 hours. The default time
 	// unit for AccessTokenValidity in an API request is hours. Valid range is
-	// displayed below in seconds.
+	// displayed below in seconds. If you don't specify otherwise in the configuration
+	// of your app client, your ID tokens are valid for one hour.
 	IdTokenValidity *int32
 
 	// A list of allowed logout URLs for the IdPs.
@@ -202,7 +214,8 @@ type UpdateUserPoolClientInput struct {
 	// access and ID tokens for 10 days. The default time unit for RefreshTokenValidity
 	// in an API request is days. You can't set RefreshTokenValidity to 0. If you do,
 	// Amazon Cognito overrides the value with the default value of 30 days. Valid
-	// range is displayed below in seconds.
+	// range is displayed below in seconds. If you don't specify otherwise in the
+	// configuration of your app client, your refresh tokens are valid for 30 days.
 	RefreshTokenValidity int32
 
 	// A list of provider names for the IdPs that this client supports. The following

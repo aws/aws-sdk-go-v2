@@ -44,7 +44,7 @@ type GetIdentityProviderByIdentifierInput struct {
 
 type GetIdentityProviderByIdentifierOutput struct {
 
-	// The IdP object.
+	// The identity provider details.
 	//
 	// This member is required.
 	IdentityProvider *types.IdentityProviderType
