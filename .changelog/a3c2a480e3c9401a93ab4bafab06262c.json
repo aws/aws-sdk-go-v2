@@ -1,7 +1,7 @@
 {
     "id": "a3c2a480-e3c9-401a-93ab-4bafab06262c",
     "type": "bugfix",
-    "description": "added logger and request response logging middleware to the imds client, fixed respective tests to include the correct middleware in the tested stack",
+    "description": "Fixes an issue that prevented logging of the API request or responses when the respective log modes were enabled.",
     "modules": [
         "feature/ec2/imds"
     ]
