@@ -160,6 +160,13 @@ func awsRestjson1_serializeOpDocumentCreateComputeEnvironmentInput(v *CreateComp
 		}
 	}
 
+	if v.EksConfiguration != nil {
+		ok := object.Key("eksConfiguration")
+		if err := awsRestjson1_serializeDocumentEksConfiguration(v.EksConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceRole != nil {
 		ok := object.Key("serviceRole")
 		ok.String(*v.ServiceRole)
@@ -1329,6 +1336,13 @@ func awsRestjson1_serializeOpDocumentRegisterJobDefinitionInput(v *RegisterJobDe
 		}
 	}
 
+	if v.EksProperties != nil {
+		ok := object.Key("eksProperties")
+		if err := awsRestjson1_serializeDocumentEksProperties(v.EksProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JobDefinitionName != nil {
 		ok := object.Key("jobDefinitionName")
 		ok.String(*v.JobDefinitionName)
@@ -1471,6 +1485,13 @@ func awsRestjson1_serializeOpDocumentSubmitJobInput(v *SubmitJobInput, value smi
 	if v.DependsOn != nil {
 		ok := object.Key("dependsOn")
 		if err := awsRestjson1_serializeDocumentJobDependencyList(v.DependsOn, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EksPropertiesOverride != nil {
+		ok := object.Key("eksPropertiesOverride")
+		if err := awsRestjson1_serializeDocumentEksPropertiesOverride(v.EksPropertiesOverride, ok); err != nil {
 			return err
 		}
 	}
@@ -2504,6 +2525,11 @@ func awsRestjson1_serializeDocumentEc2Configuration(v *types.Ec2Configuration, v
 		ok.String(*v.ImageIdOverride)
 	}
 
+	if v.ImageKubernetesVersion != nil {
+		ok := object.Key("imageKubernetesVersion")
+		ok.String(*v.ImageKubernetesVersion)
+	}
+
 	if v.ImageType != nil {
 		ok := object.Key("imageType")
 		ok.String(*v.ImageType)
@@ -2573,6 +2599,463 @@ func awsRestjson1_serializeDocumentEFSVolumeConfiguration(v *types.EFSVolumeConf
 		ok.Integer(*v.TransitEncryptionPort)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksConfiguration(v *types.EksConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EksClusterArn != nil {
+		ok := object.Key("eksClusterArn")
+		ok.String(*v.EksClusterArn)
+	}
+
+	if v.KubernetesNamespace != nil {
+		ok := object.Key("kubernetesNamespace")
+		ok.String(*v.KubernetesNamespace)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainer(v *types.EksContainer, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Args != nil {
+		ok := object.Key("args")
+		if err := awsRestjson1_serializeDocumentStringList(v.Args, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		if err := awsRestjson1_serializeDocumentStringList(v.Command, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Env != nil {
+		ok := object.Key("env")
+		if err := awsRestjson1_serializeDocumentEksContainerEnvironmentVariables(v.Env, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Image != nil {
+		ok := object.Key("image")
+		ok.String(*v.Image)
+	}
+
+	if v.ImagePullPolicy != nil {
+		ok := object.Key("imagePullPolicy")
+		ok.String(*v.ImagePullPolicy)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Resources != nil {
+		ok := object.Key("resources")
+		if err := awsRestjson1_serializeDocumentEksContainerResourceRequirements(v.Resources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityContext != nil {
+		ok := object.Key("securityContext")
+		if err := awsRestjson1_serializeDocumentEksContainerSecurityContext(v.SecurityContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeMounts != nil {
+		ok := object.Key("volumeMounts")
+		if err := awsRestjson1_serializeDocumentEksContainerVolumeMounts(v.VolumeMounts, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerEnvironmentVariable(v *types.EksContainerEnvironmentVariable, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerEnvironmentVariables(v []types.EksContainerEnvironmentVariable, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEksContainerEnvironmentVariable(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerOverride(v *types.EksContainerOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Args != nil {
+		ok := object.Key("args")
+		if err := awsRestjson1_serializeDocumentStringList(v.Args, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		if err := awsRestjson1_serializeDocumentStringList(v.Command, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Env != nil {
+		ok := object.Key("env")
+		if err := awsRestjson1_serializeDocumentEksContainerEnvironmentVariables(v.Env, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Image != nil {
+		ok := object.Key("image")
+		ok.String(*v.Image)
+	}
+
+	if v.Resources != nil {
+		ok := object.Key("resources")
+		if err := awsRestjson1_serializeDocumentEksContainerResourceRequirements(v.Resources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerOverrideList(v []types.EksContainerOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEksContainerOverride(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerResourceRequirements(v *types.EksContainerResourceRequirements, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Limits != nil {
+		ok := object.Key("limits")
+		if err := awsRestjson1_serializeDocumentEksLimits(v.Limits, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Requests != nil {
+		ok := object.Key("requests")
+		if err := awsRestjson1_serializeDocumentEksRequests(v.Requests, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainers(v []types.EksContainer, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEksContainer(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerSecurityContext(v *types.EksContainerSecurityContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Privileged != nil {
+		ok := object.Key("privileged")
+		ok.Boolean(*v.Privileged)
+	}
+
+	if v.ReadOnlyRootFilesystem != nil {
+		ok := object.Key("readOnlyRootFilesystem")
+		ok.Boolean(*v.ReadOnlyRootFilesystem)
+	}
+
+	if v.RunAsGroup != nil {
+		ok := object.Key("runAsGroup")
+		ok.Long(*v.RunAsGroup)
+	}
+
+	if v.RunAsNonRoot != nil {
+		ok := object.Key("runAsNonRoot")
+		ok.Boolean(*v.RunAsNonRoot)
+	}
+
+	if v.RunAsUser != nil {
+		ok := object.Key("runAsUser")
+		ok.Long(*v.RunAsUser)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerVolumeMount(v *types.EksContainerVolumeMount, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MountPath != nil {
+		ok := object.Key("mountPath")
+		ok.String(*v.MountPath)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.ReadOnly != nil {
+		ok := object.Key("readOnly")
+		ok.Boolean(*v.ReadOnly)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksContainerVolumeMounts(v []types.EksContainerVolumeMount, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEksContainerVolumeMount(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksEmptyDir(v *types.EksEmptyDir, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Medium != nil {
+		ok := object.Key("medium")
+		ok.String(*v.Medium)
+	}
+
+	if v.SizeLimit != nil {
+		ok := object.Key("sizeLimit")
+		ok.String(*v.SizeLimit)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksHostPath(v *types.EksHostPath, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		ok.String(*v.Path)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksLimits(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksPodProperties(v *types.EksPodProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Containers != nil {
+		ok := object.Key("containers")
+		if err := awsRestjson1_serializeDocumentEksContainers(v.Containers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DnsPolicy != nil {
+		ok := object.Key("dnsPolicy")
+		ok.String(*v.DnsPolicy)
+	}
+
+	if v.HostNetwork != nil {
+		ok := object.Key("hostNetwork")
+		ok.Boolean(*v.HostNetwork)
+	}
+
+	if v.ServiceAccountName != nil {
+		ok := object.Key("serviceAccountName")
+		ok.String(*v.ServiceAccountName)
+	}
+
+	if v.Volumes != nil {
+		ok := object.Key("volumes")
+		if err := awsRestjson1_serializeDocumentEksVolumes(v.Volumes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksPodPropertiesOverride(v *types.EksPodPropertiesOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Containers != nil {
+		ok := object.Key("containers")
+		if err := awsRestjson1_serializeDocumentEksContainerOverrideList(v.Containers, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksProperties(v *types.EksProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PodProperties != nil {
+		ok := object.Key("podProperties")
+		if err := awsRestjson1_serializeDocumentEksPodProperties(v.PodProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksPropertiesOverride(v *types.EksPropertiesOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PodProperties != nil {
+		ok := object.Key("podProperties")
+		if err := awsRestjson1_serializeDocumentEksPodPropertiesOverride(v.PodProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksRequests(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksSecret(v *types.EksSecret, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Optional != nil {
+		ok := object.Key("optional")
+		ok.Boolean(*v.Optional)
+	}
+
+	if v.SecretName != nil {
+		ok := object.Key("secretName")
+		ok.String(*v.SecretName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksVolume(v *types.EksVolume, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EmptyDir != nil {
+		ok := object.Key("emptyDir")
+		if err := awsRestjson1_serializeDocumentEksEmptyDir(v.EmptyDir, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HostPath != nil {
+		ok := object.Key("hostPath")
+		if err := awsRestjson1_serializeDocumentEksHostPath(v.HostPath, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Secret != nil {
+		ok := object.Key("secret")
+		if err := awsRestjson1_serializeDocumentEksSecret(v.Secret, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksVolumes(v []types.EksVolume, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEksVolume(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

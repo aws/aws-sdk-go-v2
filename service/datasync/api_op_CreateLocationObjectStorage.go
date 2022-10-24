@@ -57,6 +57,14 @@ type CreateLocationObjectStorageInput struct {
 	// to authenticate with the object storage server.
 	SecretKey *string
 
+	// Specifies a certificate to authenticate with an object storage system that uses
+	// a private or self-signed certificate authority (CA). You must specify a
+	// Base64-encoded .pem file (for example,
+	// file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up
+	// to 32768 bytes (before Base64 encoding). To use this parameter, configure
+	// ServerProtocol to HTTPS.
+	ServerCertificate []byte
+
 	// Specifies the port that your object storage server accepts inbound network
 	// traffic on (for example, port 443).
 	ServerPort *int32

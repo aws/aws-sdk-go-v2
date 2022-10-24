@@ -11,19 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates an DataSync agent that you have deployed on your host. The activation
-// process associates your agent with your account. In the activation process, you
-// specify information such as the Amazon Web Services Region that you want to
-// activate the agent in. You activate the agent in the Amazon Web Services Region
-// where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are
-// created in this Amazon Web Services Region. You can activate the agent in a VPC
-// (virtual private cloud) or provide the agent access to a VPC endpoint so you can
-// run tasks without going over the public internet. You can use an agent for more
-// than one location. If a task uses multiple agents, all of them need to have
-// status AVAILABLE for the task to run. If you use multiple agents for a source
-// location, the status of all the agents must be AVAILABLE for the task to run.
-// Agents are automatically updated by Amazon Web Services on a regular basis,
-// using a mechanism that ensures minimal interruption to your tasks.
+// Activates an DataSync agent that you have deployed in your storage environment.
+// The activation process associates your agent with your account. In the
+// activation process, you specify information such as the Amazon Web Services
+// Region that you want to activate the agent in. You activate the agent in the
+// Amazon Web Services Region where your target locations (in Amazon S3 or Amazon
+// EFS) reside. Your tasks are created in this Amazon Web Services Region. You can
+// activate the agent in a VPC (virtual private cloud) or provide the agent access
+// to a VPC endpoint so you can run tasks without going over the public internet.
+// You can use an agent for more than one location. If a task uses multiple agents,
+// all of them need to have status AVAILABLE for the task to run. If you use
+// multiple agents for a source location, the status of all the agents must be
+// AVAILABLE for the task to run. Agents are automatically updated by Amazon Web
+// Services on a regular basis, using a mechanism that ensures minimal interruption
+// to your tasks.
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}

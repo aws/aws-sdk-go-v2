@@ -11,9 +11,9 @@ import (
 )
 
 // Cancels a job in an Batch job queue. Jobs that are in the SUBMITTED, PENDING, or
-// RUNNABLE state are canceled. Jobs that have progressed to STARTING or RUNNING
-// aren't canceled, but the API operation still succeeds, even if no job is
-// canceled. These jobs must be terminated with the TerminateJob operation.
+// RUNNABLE state are canceled. Jobs that progressed to the STARTING or RUNNING
+// state aren't canceled. However, the API operation still succeeds, even if no job
+// is canceled. These jobs must be terminated with the TerminateJob operation.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
 		params = &CancelJobInput{}

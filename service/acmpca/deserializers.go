@@ -3788,6 +3788,15 @@ func awsAwsjson11_deserializeDocumentCertificateAuthority(v **types.CertificateA
 				sv.Type = types.CertificateAuthorityType(jtv)
 			}
 
+		case "UsageMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateAuthorityUsageMode to be of type string, got %T instead", value)
+				}
+				sv.UsageMode = types.CertificateAuthorityUsageMode(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

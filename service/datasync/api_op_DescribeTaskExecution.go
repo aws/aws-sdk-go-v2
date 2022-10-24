@@ -42,6 +42,10 @@ type DescribeTaskExecutionInput struct {
 // DescribeTaskExecutionResponse
 type DescribeTaskExecutionOutput struct {
 
+	// The physical number of bytes transferred over the network after compression was
+	// applied. In most cases, this number is less than BytesTransferred.
+	BytesCompressed int64
+
 	// The physical number of bytes transferred over the network.
 	BytesTransferred int64
 

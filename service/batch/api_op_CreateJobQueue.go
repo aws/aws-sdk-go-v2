@@ -72,7 +72,7 @@ type CreateJobQueueInput struct {
 	// scheduling policy. After a job queue is created, you can replace but can't
 	// remove the fair share scheduling policy. The format is
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . An example is
-	// aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy.
 	SchedulingPolicyArn *string
 
 	// The state of the job queue. If the job queue state is ENABLED, it is able to

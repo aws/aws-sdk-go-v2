@@ -5,6 +5,7 @@ package datasync
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
@@ -8236,6 +8237,19 @@ func awsAwsjson11_deserializeOpDocumentDescribeLocationObjectStorageOutput(v **D
 				sv.LocationUri = ptr.String(jtv)
 			}
 
+		case "ServerCertificate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ObjectStorageCertificate to be []byte, got %T instead", value)
+				}
+				dv, err := base64.StdEncoding.DecodeString(jtv)
+				if err != nil {
+					return fmt.Errorf("failed to base64 decode ObjectStorageCertificate, %w", err)
+				}
+				sv.ServerCertificate = dv
+			}
+
 		case "ServerPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8466,6 +8480,19 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskExecutionOutput(v **DescribeT
 
 	for key, value := range shape {
 		switch key {
+		case "BytesCompressed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.BytesCompressed = i64
+			}
+
 		case "BytesTransferred":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -66,12 +66,12 @@ type SubmitJobInput struct {
 	// Batch User Guide.
 	ArrayProperties *types.ArrayProperties
 
-	// A list of container overrides in the JSON format that specify the name of a
-	// container in the specified job definition and the overrides it receives. You can
-	// override the default command for a container, which is specified in the job
-	// definition or the Docker image, with a command override. You can also override
-	// existing environment variables on a container or add new environment variables
-	// to it with an environment override.
+	// An object with various properties that override the defaults for the job
+	// definition that specify the name of a container in the specified job definition
+	// and the overrides it should receive. You can override the default command for a
+	// container, which is specified in the job definition or the Docker image, with a
+	// command override. You can also override existing environment variables on a
+	// container or add new environment variables to it with an environment override.
 	ContainerOverrides *types.ContainerOverrides
 
 	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs.
@@ -81,6 +81,10 @@ type SubmitJobInput struct {
 	// jobs. In that case, each index child of this job must wait for the corresponding
 	// index child of each dependency to complete before it can begin.
 	DependsOn []types.JobDependency
+
+	// An object that can only be specified for jobs that are run on Amazon EKS
+	// resources with various properties that override defaults for the job definition.
+	EksPropertiesOverride *types.EksPropertiesOverride
 
 	// A list of node overrides in JSON format that specify the node range to target
 	// and the container overrides for that node range. This parameter isn't applicable
@@ -107,14 +111,14 @@ type SubmitJobInput struct {
 	// job definition.
 	RetryStrategy *types.RetryStrategy
 
-	// The scheduling priority for the job. This will only affect jobs in job queues
-	// with a fair share policy. Jobs with a higher scheduling priority will be
-	// scheduled before jobs with a lower scheduling priority. This will override any
-	// scheduling priority in the job definition. The minimum supported value is 0 and
-	// the maximum supported value is 9999.
+	// The scheduling priority for the job. This only affects jobs in job queues with a
+	// fair share policy. Jobs with a higher scheduling priority are scheduled before
+	// jobs with a lower scheduling priority. This overrides any scheduling priority in
+	// the job definition. The minimum supported value is 0 and the maximum supported
+	// value is 9999.
 	SchedulingPriorityOverride *int32
 
-	// The share identifier for the job. If the job queue does not have a scheduling
+	// The share identifier for the job. If the job queue doesn't have a scheduling
 	// policy, then this parameter must not be specified. If the job queue has a
 	// scheduling policy, then this parameter must be specified.
 	ShareIdentifier *string

@@ -46,12 +46,17 @@ type RegisterJobDefinitionInput struct {
 	// This member is required.
 	Type types.JobDefinitionType
 
-	// An object with various properties specific to single-node container-based jobs.
-	// If the job definition's type parameter is container, then you must specify
-	// either containerProperties or nodeProperties. If the job runs on Fargate
+	// An object with various properties specific to Amazon ECS based single-node
+	// container-based jobs. If the job definition's type parameter is container, then
+	// you must specify either containerProperties or nodeProperties. This must not be
+	// specified for Amazon EKS based job definitions. If the job runs on Fargate
 	// resources, then you must not specify nodeProperties; use only
 	// containerProperties.
 	ContainerProperties *types.ContainerProperties
+
+	// An object with various properties that are specific to Amazon EKS based jobs.
+	// This must not be specified for Amazon ECS based job definitions.
+	EksProperties *types.EksProperties
 
 	// An object with various properties specific to multi-node parallel jobs. If you
 	// specify node properties for a job, it becomes a multi-node parallel job. For
@@ -60,7 +65,8 @@ type RegisterJobDefinitionInput struct {
 	// in the Batch User Guide. If the job definition's type parameter is container,
 	// then you must specify either containerProperties or nodeProperties. If the job
 	// runs on Fargate resources, then you must not specify nodeProperties; use
-	// containerProperties instead.
+	// containerProperties instead. If the job runs on Amazon EKS resources, then you
+	// must not specify nodeProperties.
 	NodeProperties *types.NodeProperties
 
 	// Default parameter substitution placeholders to set in the job definition.
@@ -70,7 +76,8 @@ type RegisterJobDefinitionInput struct {
 
 	// The platform capabilities required by the job definition. If no value is
 	// specified, it defaults to EC2. To run the job on Fargate resources, specify
-	// FARGATE.
+	// FARGATE. If the job runs on Amazon EKS resources, then you must not specify
+	// platformCapabilities.
 	PlatformCapabilities []types.PlatformCapability
 
 	// Specifies whether to propagate the tags from the job or job definition to the
@@ -78,7 +85,8 @@ type RegisterJobDefinitionInput struct {
 	// propagated. Tags can only be propagated to the tasks during task creation. For
 	// tags with the same name, job tags are given priority over job definitions tags.
 	// If the total number of combined tags from the job and job definition is over 50,
-	// the job is moved to the FAILED state.
+	// the job is moved to the FAILED state. If the job runs on Amazon EKS resources,
+	// then you must not specify propagateTags.
 	PropagateTags *bool
 
 	// The retry strategy to use for failed jobs that are submitted with this job
@@ -88,8 +96,8 @@ type RegisterJobDefinitionInput struct {
 	RetryStrategy *types.RetryStrategy
 
 	// The scheduling priority for jobs that are submitted with this job definition.
-	// This will only affect jobs in job queues with a fair share policy. Jobs with a
-	// higher scheduling priority will be scheduled before jobs with a lower scheduling
+	// This only affects jobs in job queues with a fair share policy. Jobs with a
+	// higher scheduling priority are scheduled before jobs with a lower scheduling
 	// priority. The minimum supported value is 0 and the maximum supported value is
 	// 9999.
 	SchedulingPriority *int32

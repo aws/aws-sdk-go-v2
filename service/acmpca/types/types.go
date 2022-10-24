@@ -203,6 +203,12 @@ type CertificateAuthority struct {
 	// Type of your private CA.
 	Type CertificateAuthorityType
 
+	// Specifies whether the CA issues general-purpose certificates that typically
+	// require a revocation mechanism, or short-lived certificates that may optionally
+	// omit revocation because they expire quickly. Short-lived certificate validity is
+	// limited to seven days. The default value is GENERAL_PURPOSE.
+	UsageMode CertificateAuthorityUsageMode
+
 	noSmithyDocumentSerde
 }
 
@@ -312,7 +318,7 @@ type CertificateAuthorityConfiguration struct {
 // following OpenSSL command to list a CRL. openssl crl -inform DER -text -in
 // crl_path -noout For more information, see Planning a certificate revocation list
 // (CRL) (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html)
-// in the Certificate Manager Private Certificate Authority (PCA) User Guide
+// in the Private Certificate Authority (PCA) User Guide
 type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are
@@ -573,7 +579,7 @@ type OcspConfiguration struct {
 	// prefix such as "http://" or "https://". For more information, see Customizing
 	// Online Certificate Status Protocol (OCSP)
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html) in
-	// the Certificate Manager Private Certificate Authority (PCA) User Guide.
+	// the Private Certificate Authority (PCA) User Guide.
 	OcspCustomCname *string
 
 	noSmithyDocumentSerde
@@ -697,7 +703,7 @@ type Qualifier struct {
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html)
 // and Setting up a certificate revocation method
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html) in
-// the Certificate Manager Private Certificate Authority (PCA) User Guide.
+// the Private Certificate Authority (PCA) User Guide.
 type RevocationConfiguration struct {
 
 	// Configuration of the certificate revocation list (CRL), if any, maintained by
@@ -739,12 +745,12 @@ type Tag struct {
 // Validity can be expressed as an explicit date and time when the validity of a
 // certificate starts or expires, or as a span of time after issuance, stated in
 // days, months, or years. For more information, see Validity
-// (https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5) in RFC 5280. ACM
-// Private CA API consumes the Validity data type differently in two distinct
-// parameters of the IssueCertificate action. The required parameter
-// IssueCertificate:Validity specifies the end of a certificate's validity period.
-// The optional parameter IssueCertificate:ValidityNotBefore specifies a customized
-// starting time for the validity period.
+// (https://tools.ietf.org/html/rfc5280#section-4.1.2.5) in RFC 5280. ACM Private
+// CA API consumes the Validity data type differently in two distinct parameters of
+// the IssueCertificate action. The required parameter IssueCertificate:Validity
+// specifies the end of a certificate's validity period. The optional parameter
+// IssueCertificate:ValidityNotBefore specifies a customized starting time for the
+// validity period.
 type Validity struct {
 
 	// Determines how ACM Private CA interprets the Value parameter, an integer.

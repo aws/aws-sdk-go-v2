@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Returns metadata about an Amazon FSx for Lustre location, such as information
-// about its path.
+// Provides details about how an DataSync location for an Amazon FSx for Lustre
+// file system is configured.
 func (c *Client) DescribeLocationFsxLustre(ctx context.Context, params *DescribeLocationFsxLustreInput, optFns ...func(*Options)) (*DescribeLocationFsxLustreOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxLustreInput{}

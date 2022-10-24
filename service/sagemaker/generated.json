@@ -187,6 +187,7 @@
         "api_op_ListHyperParameterTuningJobs.go",
         "api_op_ListImageVersions.go",
         "api_op_ListImages.go",
+        "api_op_ListInferenceRecommendationsJobSteps.go",
         "api_op_ListInferenceRecommendationsJobs.go",
         "api_op_ListLabelingJobs.go",
         "api_op_ListLabelingJobsForWorkteam.go",

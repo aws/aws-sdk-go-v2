@@ -3030,6 +3030,26 @@ func (m *validateOpListImageVersions) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInferenceRecommendationsJobSteps struct {
+}
+
+func (*validateOpListInferenceRecommendationsJobSteps) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInferenceRecommendationsJobSteps) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInferenceRecommendationsJobStepsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInferenceRecommendationsJobStepsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListLabelingJobsForWorkteam struct {
 }
 
@@ -4792,6 +4812,10 @@ func addOpListCandidatesForAutoMLJobValidationMiddleware(stack *middleware.Stack
 
 func addOpListImageVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImageVersions{}, middleware.After)
+}
+
+func addOpListInferenceRecommendationsJobStepsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInferenceRecommendationsJobSteps{}, middleware.After)
 }
 
 func addOpListLabelingJobsForWorkteamValidationMiddleware(stack *middleware.Stack) error {
@@ -13137,6 +13161,21 @@ func validateOpListImageVersionsInput(v *ListImageVersionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListImageVersionsInput"}
 	if v.ImageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInferenceRecommendationsJobStepsInput(v *ListInferenceRecommendationsJobStepsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInferenceRecommendationsJobStepsInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some of the parameters of a previously created location for self-managed
-// object storage server access. For information about creating a self-managed
-// object storage location, see Creating a location for object storage
+// Updates some parameters of an existing object storage location that DataSync
+// accesses for a transfer. For information about creating a self-managed object
+// storage location, see Creating a location for object storage
 // (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
 func (c *Client) UpdateLocationObjectStorage(ctx context.Context, params *UpdateLocationObjectStorageInput, optFns ...func(*Options)) (*UpdateLocationObjectStorageOutput, error) {
 	if params == nil {
@@ -32,40 +32,42 @@ func (c *Client) UpdateLocationObjectStorage(ctx context.Context, params *Update
 
 type UpdateLocationObjectStorageInput struct {
 
-	// The Amazon Resource Name (ARN) of the self-managed object storage server
-	// location to be updated.
+	// Specifies the ARN of the object storage system location that you're updating.
 	//
 	// This member is required.
 	LocationArn *string
 
-	// Optional. The access key is used if credentials are required to access the
-	// self-managed object storage server. If your object storage requires a user name
-	// and password to authenticate, use AccessKey and SecretKey to provide the user
-	// name and password, respectively.
+	// Specifies the access key (for example, a user name) if credentials are required
+	// to authenticate with the object storage server.
 	AccessKey *string
 
-	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
-	// object storage server location.
+	// Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can
+	// securely connect with your location.
 	AgentArns []string
 
-	// Optional. The secret key is used if credentials are required to access the
-	// self-managed object storage server. If your object storage requires a user name
-	// and password to authenticate, use AccessKey and SecretKey to provide the user
-	// name and password, respectively.
+	// Specifies the secret key (for example, a password) if credentials are required
+	// to authenticate with the object storage server.
 	SecretKey *string
 
-	// The port that your self-managed object storage server accepts inbound network
-	// traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443
-	// (HTTPS). You can specify a custom port if your self-managed object storage
-	// server requires one.
+	// Specifies a certificate to authenticate with an object storage system that uses
+	// a private or self-signed certificate authority (CA). You must specify a
+	// Base64-encoded .pem file (for example,
+	// file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up
+	// to 32768 bytes (before Base64 encoding). To use this parameter, configure
+	// ServerProtocol to HTTPS. Updating the certificate doesn't interfere with tasks
+	// that you have in progress.
+	ServerCertificate []byte
+
+	// Specifies the port that your object storage server accepts inbound network
+	// traffic on (for example, port 443).
 	ServerPort *int32
 
-	// The protocol that the object storage server uses to communicate. Valid values
-	// are HTTP or HTTPS.
+	// Specifies the protocol that your object storage server uses to communicate.
 	ServerProtocol types.ObjectStorageServerProtocol
 
-	// The subdirectory in the self-managed object storage server that is used to read
-	// data from.
+	// Specifies the object prefix for your object storage server. If this is a source
+	// location, DataSync only copies objects with this prefix. If this is a
+	// destination location, DataSync writes all objects with this prefix.
 	Subdirectory *string
 
 	noSmithyDocumentSerde

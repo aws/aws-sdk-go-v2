@@ -24,11 +24,11 @@ import (
 // optionally set a maximum price so that Spot Instances only launch when the Spot
 // Instance price is less than a specified percentage of the On-Demand price.
 // Multi-node parallel jobs aren't supported on Spot Instances. In an unmanaged
-// compute environment, you can manage your own EC2 compute resources and have a
-// lot of flexibility with how you configure your compute resources. For example,
-// you can use custom AMIs. However, you must verify that each of your AMIs meet
-// the Amazon ECS container instance AMI specification. For more information, see
-// container instance AMIs
+// compute environment, you can manage your own EC2 compute resources and have
+// flexibility with how you configure your compute resources. For example, you can
+// use custom AMIs. However, you must verify that each of your AMIs meet the Amazon
+// ECS container instance AMI specification. For more information, see container
+// instance AMIs
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html)
 // in the Amazon Elastic Container Service Developer Guide. After you created your
 // unmanaged compute environment, you can use the DescribeComputeEnvironments
@@ -63,8 +63,8 @@ import (
 // To use the enhanced updating of compute environments to update AMIs, follow
 // these rules:
 //
-// * Either do not set the service role (serviceRole) parameter or
-// set it to the AWSBatchServiceRole service-linked role.
+// * Either don't set the service role (serviceRole) parameter or set
+// it to the AWSBatchServiceRole service-linked role.
 //
 // * Set the allocation
 // strategy (allocationStrategy) parameter to BEST_FIT_PROGRESSIVE or
@@ -73,27 +73,27 @@ import (
 // * Set the update to latest image version
 // (updateToLatestImageVersion) parameter to true.
 //
-// * Do not specify an AMI ID in
+// * Don't specify an AMI ID in
 // imageId, imageIdOverride (in ec2Configuration
 // (https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html)),
-// or in the launch template (launchTemplate). In that case Batch will select the
-// latest Amazon ECS optimized AMI supported by Batch at the time the
-// infrastructure update is initiated. Alternatively you can specify the AMI ID in
+// or in the launch template (launchTemplate). In that case, Batch selects the
+// latest Amazon ECS optimized AMI that's supported by Batch at the time the
+// infrastructure update is initiated. Alternatively, you can specify the AMI ID in
 // the imageId or imageIdOverride parameters, or the launch template identified by
-// the LaunchTemplate properties. Changing any of these properties will trigger an
-// infrastructure update. If the AMI ID is specified in the launch template, it can
-// not be replaced by specifying an AMI ID in either the imageId or imageIdOverride
-// parameters. It can only be replaced by specifying a different launch template,
-// or if the launch template version is set to $Default or $Latest, by setting
-// either a new default version for the launch template (if $Default)or by adding a
-// new version to the launch template (if $Latest).
+// the LaunchTemplate properties. Changing any of these properties starts an
+// infrastructure update. If the AMI ID is specified in the launch template, it
+// can't be replaced by specifying an AMI ID in either the imageId or
+// imageIdOverride parameters. It can only be replaced by specifying a different
+// launch template, or if the launch template version is set to $Default or
+// $Latest, by setting either a new default version for the launch template (if
+// $Default) or by adding a new version to the launch template (if $Latest).
 //
-// If these rules are followed,
-// any update that triggers an infrastructure update will cause the AMI ID to be
-// re-selected. If the version setting in the launch template (launchTemplate) is
-// set to $Latest or $Default, the latest or default version of the launch template
-// will be evaluated up at the time of the infrastructure update, even if the
-// launchTemplate was not updated.
+// If
+// these rules are followed, any update that starts an infrastructure update causes
+// the AMI ID to be re-selected. If the version setting in the launch template
+// (launchTemplate) is set to $Latest or $Default, the latest or default version of
+// the launch template is evaluated up at the time of the infrastructure update,
+// even if the launchTemplate wasn't updated.
 func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateComputeEnvironmentInput, optFns ...func(*Options)) (*CreateComputeEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateComputeEnvironmentInput{}
@@ -112,9 +112,9 @@ func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateCom
 // Contains the parameters for CreateComputeEnvironment.
 type CreateComputeEnvironmentInput struct {
 
-	// The name for your compute environment. It can be up to 128 letters long. It can
-	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
-	// (_).
+	// The name for your compute environment. It can be up to 128 characters long. It
+	// can contain uppercase and lowercase letters, numbers, hyphens (-), and
+	// underscores (_).
 	//
 	// This member is required.
 	ComputeEnvironmentName *string
@@ -134,6 +134,9 @@ type CreateComputeEnvironmentInput struct {
 	// in the Batch User Guide.
 	ComputeResources *types.ComputeResource
 
+	// The details for the Amazon EKS cluster that supports the compute environment.
+	EksConfiguration *types.EksConfiguration
+
 	// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make
 	// calls to other Amazon Web Services services on your behalf. For more
 	// information, see Batch service IAM role
@@ -145,8 +148,8 @@ type CreateComputeEnvironmentInput struct {
 	// Batch service-linked role in your account. If your specified role has a path
 	// other than /, then you must specify either the full role ARN (recommended) or
 	// prefix the role name with the path. For example, if a role with the name bar has
-	// a path of /foo/ then you would specify /foo/bar as the role name. For more
-	// information, see Friendly names and paths
+	// a path of /foo/, specify /foo/bar as the role name. For more information, see
+	// Friendly names and paths
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
 	// in the IAM User Guide. Depending on how you created your Batch service role, its
 	// ARN might contain the service-role path prefix. When you only specify the name
@@ -194,7 +197,7 @@ type CreateComputeEnvironmentOutput struct {
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string
 
-	// The name of the compute environment. It can be up to 128 letters long. It can
+	// The name of the compute environment. It can be up to 128 characters long. It can
 	// contain uppercase and lowercase letters, numbers, hyphens (-), and underscores
 	// (_).
 	ComputeEnvironmentName *string

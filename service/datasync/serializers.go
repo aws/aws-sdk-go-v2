@@ -3306,6 +3306,11 @@ func awsAwsjson11_serializeOpDocumentCreateLocationObjectStorageInput(v *CreateL
 		ok.String(*v.SecretKey)
 	}
 
+	if v.ServerCertificate != nil {
+		ok := object.Key("ServerCertificate")
+		ok.Base64EncodeBytes(v.ServerCertificate)
+	}
+
 	if v.ServerHostname != nil {
 		ok := object.Key("ServerHostname")
 		ok.String(*v.ServerHostname)
@@ -4016,6 +4021,11 @@ func awsAwsjson11_serializeOpDocumentUpdateLocationObjectStorageInput(v *UpdateL
 	if v.SecretKey != nil {
 		ok := object.Key("SecretKey")
 		ok.String(*v.SecretKey)
+	}
+
+	if v.ServerCertificate != nil {
+		ok := object.Key("ServerCertificate")
+		ok.Base64EncodeBytes(v.ServerCertificate)
 	}
 
 	if v.ServerPort != nil {

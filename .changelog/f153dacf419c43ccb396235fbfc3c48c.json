@@ -1,0 +1,8 @@
+{
+    "id": "f153dacf-419c-43cc-b396-235fbfc3c48c",
+    "type": "feature",
+    "description": "AWS Private Certificate Authority (AWS Private CA) now offers usage modes which are combination of features to address specific use cases.",
+    "modules": [
+        "service/acmpca"
+    ]
+}

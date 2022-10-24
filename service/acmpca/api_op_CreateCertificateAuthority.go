@@ -100,6 +100,12 @@ type CreateCertificateAuthorityInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 	Tags []types.Tag
 
+	// Specifies whether the CA issues general-purpose certificates that typically
+	// require a revocation mechanism, or short-lived certificates that may optionally
+	// omit revocation because they expire quickly. Short-lived certificate validity is
+	// limited to seven days. The default value is GENERAL_PURPOSE.
+	UsageMode types.CertificateAuthorityUsageMode
+
 	noSmithyDocumentSerde
 }
 

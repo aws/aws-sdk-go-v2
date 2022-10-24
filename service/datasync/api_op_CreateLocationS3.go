@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon S3 bucket. For more information, see Create an
-// Amazon S3 location
+// Creates an endpoint for an Amazon S3 bucket that DataSync can access for a
+// transfer. For more information, see Create an Amazon S3 location
 // (https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli)
 // in the DataSync User Guide.
 func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3Input, optFns ...func(*Options)) (*CreateLocationS3Output, error) {

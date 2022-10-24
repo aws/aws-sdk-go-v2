@@ -59,7 +59,7 @@ type UpdateJobQueueInput struct {
 	// is created, the fair share scheduling policy can be replaced but not removed.
 	// The format is aws:Partition:batch:Region:Account:scheduling-policy/Name . For
 	// example,
-	// aws:aws:batch:us-west-2:012345678910:scheduling-policy/MySchedulingPolicy.
+	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy.
 	SchedulingPolicyArn *string
 
 	// Describes the queue's ability to accept new jobs. If the job queue state is

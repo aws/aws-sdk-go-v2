@@ -15,7 +15,7 @@ import (
 // aren't changed. When a resource is deleted, the tags that are associated with
 // that resource are deleted as well. Batch resources that support tags are compute
 // environments, jobs, job definitions, job queues, and scheduling policies. ARNs
-// for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+// for child jobs of array and multi-node parallel (MNP) jobs aren't supported.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -37,7 +37,7 @@ type TagResourceInput struct {
 	// The Amazon Resource Name (ARN) of the resource that tags are added to. Batch
 	// resources that support tags are compute environments, jobs, job definitions, job
 	// queues, and scheduling policies. ARNs for child jobs of array and multi-node
-	// parallel (MNP) jobs are not supported.
+	// parallel (MNP) jobs aren't supported.
 	//
 	// This member is required.
 	ResourceArn *string

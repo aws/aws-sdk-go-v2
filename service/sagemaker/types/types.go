@@ -7162,6 +7162,34 @@ type InferenceRecommendationsJob struct {
 	noSmithyDocumentSerde
 }
 
+// A returned array object for the Steps response field in the
+// ListInferenceRecommendationsJobSteps
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html)
+// API command.
+type InferenceRecommendationsJobStep struct {
+
+	// The name of the Inference Recommender job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The current status of the benchmark.
+	//
+	// This member is required.
+	Status RecommendationJobStatus
+
+	// The type of the subtask. BENCHMARK: Evaluate the performance of your model on
+	// different instance types.
+	//
+	// This member is required.
+	StepType RecommendationStepType
+
+	// The details for a specific benchmark.
+	InferenceBenchmark *RecommendationJobInferenceBenchmark
+
+	noSmithyDocumentSerde
+}
+
 // Defines how to perform inference generation after a training job is run.
 type InferenceSpecification struct {
 
@@ -11651,6 +11679,28 @@ type RecommendationJobContainerConfig struct {
 	// IMAGE_CLASSIFICATION | OBJECT_DETECTION | TEXT_GENERATION | IMAGE_SEGMENTATION |
 	// FILL_MASK | CLASSIFICATION | REGRESSION | OTHER
 	Task *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for a specific benchmark from an Inference Recommender job.
+type RecommendationJobInferenceBenchmark struct {
+
+	// Defines the model configuration. Includes the specification name and environment
+	// parameters.
+	//
+	// This member is required.
+	ModelConfiguration *ModelConfiguration
+
+	// The endpoint configuration made by Inference Recommender during a recommendation
+	// job.
+	EndpointConfiguration *EndpointOutputConfiguration
+
+	// The reason why a benchmark failed.
+	FailureReason *string
+
+	// The metrics of recommendations.
+	Metrics *RecommendationMetrics
 
 	noSmithyDocumentSerde
 }

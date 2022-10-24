@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Returns metadata about an Amazon FSx for OpenZFS location, such as information
-// about its path.
+// Provides details about how an DataSync location for an Amazon FSx for OpenZFS
+// file system is configured. Response elements related to SMB aren't supported
+// with the DescribeLocationFsxOpenZfs operation.
 func (c *Client) DescribeLocationFsxOpenZfs(ctx context.Context, params *DescribeLocationFsxOpenZfsInput, optFns ...func(*Options)) (*DescribeLocationFsxOpenZfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxOpenZfsInput{}

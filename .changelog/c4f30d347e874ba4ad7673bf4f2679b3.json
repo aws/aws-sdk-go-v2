@@ -1,0 +1,8 @@
+{
+    "id": "c4f30d34-7e87-4ba4-ad76-73bf4f2679b3",
+    "type": "feature",
+    "description": "SageMaker Inference Recommender now supports a new API ListInferenceRecommendationJobSteps to return the details of all the benchmark we create for an inference recommendation job.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

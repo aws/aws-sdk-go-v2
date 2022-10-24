@@ -126,6 +126,25 @@ func (CertificateAuthorityType) Values() []CertificateAuthorityType {
 	}
 }
 
+type CertificateAuthorityUsageMode string
+
+// Enum values for CertificateAuthorityUsageMode
+const (
+	CertificateAuthorityUsageModeGeneralPurpose        CertificateAuthorityUsageMode = "GENERAL_PURPOSE"
+	CertificateAuthorityUsageModeShortLivedCertificate CertificateAuthorityUsageMode = "SHORT_LIVED_CERTIFICATE"
+)
+
+// Values returns all known values for CertificateAuthorityUsageMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CertificateAuthorityUsageMode) Values() []CertificateAuthorityUsageMode {
+	return []CertificateAuthorityUsageMode{
+		"GENERAL_PURPOSE",
+		"SHORT_LIVED_CERTIFICATE",
+	}
+}
+
 type ExtendedKeyUsageType string
 
 // Enum values for ExtendedKeyUsageType

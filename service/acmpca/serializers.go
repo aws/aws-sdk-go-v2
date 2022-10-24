@@ -2042,6 +2042,11 @@ func awsAwsjson11_serializeOpDocumentCreateCertificateAuthorityInput(v *CreateCe
 		}
 	}
 
+	if len(v.UsageMode) > 0 {
+		ok := object.Key("UsageMode")
+		ok.String(string(v.UsageMode))
+	}
+
 	return nil
 }
 

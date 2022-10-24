@@ -44,7 +44,7 @@ type DescribeLocationObjectStorageInput struct {
 type DescribeLocationObjectStorageOutput struct {
 
 	// The access key (for example, a user name) required to authenticate with the
-	// object storage server.
+	// object storage system.
 	AccessKey *string
 
 	// The ARNs of the DataSync agents that can securely connect with your location.
@@ -59,11 +59,15 @@ type DescribeLocationObjectStorageOutput struct {
 	// The URL of the object storage system location.
 	LocationUri *string
 
+	// The self-signed certificate that DataSync uses to securely authenticate with
+	// your object storage system.
+	ServerCertificate []byte
+
 	// The port that your object storage server accepts inbound network traffic on (for
 	// example, port 443).
 	ServerPort *int32
 
-	// The protocol that your object storage server uses to communicate.
+	// The protocol that your object storage system uses to communicate.
 	ServerProtocol types.ObjectStorageServerProtocol
 
 	// Metadata pertaining to the operation's result.

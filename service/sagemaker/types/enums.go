@@ -592,6 +592,7 @@ const (
 	AutoMLMetricExtendedEnumRecall           AutoMLMetricExtendedEnum = "Recall"
 	AutoMLMetricExtendedEnumRecallMacro      AutoMLMetricExtendedEnum = "RecallMacro"
 	AutoMLMetricExtendedEnumLogLoss          AutoMLMetricExtendedEnum = "LogLoss"
+	AutoMLMetricExtendedEnumInferenceLatency AutoMLMetricExtendedEnum = "InferenceLatency"
 )
 
 // Values returns all known values for AutoMLMetricExtendedEnum. Note that this can
@@ -613,6 +614,7 @@ func (AutoMLMetricExtendedEnum) Values() []AutoMLMetricExtendedEnum {
 		"Recall",
 		"RecallMacro",
 		"LogLoss",
+		"InferenceLatency",
 	}
 }
 
@@ -3756,6 +3758,22 @@ func (RecommendationJobType) Values() []RecommendationJobType {
 	return []RecommendationJobType{
 		"Default",
 		"Advanced",
+	}
+}
+
+type RecommendationStepType string
+
+// Enum values for RecommendationStepType
+const (
+	RecommendationStepTypeBenchmark RecommendationStepType = "BENCHMARK"
+)
+
+// Values returns all known values for RecommendationStepType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStepType) Values() []RecommendationStepType {
+	return []RecommendationStepType{
+		"BENCHMARK",
 	}
 }
 

@@ -682,6 +682,252 @@ func validateEFSVolumeConfiguration(v *types.EFSVolumeConfiguration) error {
 	}
 }
 
+func validateEksConfiguration(v *types.EksConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksConfiguration"}
+	if v.EksClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EksClusterArn"))
+	}
+	if v.KubernetesNamespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KubernetesNamespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksContainer(v *types.EksContainer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainer"}
+	if v.Image == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Image"))
+	}
+	if v.Env != nil {
+		if err := validateEksContainerEnvironmentVariables(v.Env); err != nil {
+			invalidParams.AddNested("Env", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksContainerEnvironmentVariable(v *types.EksContainerEnvironmentVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainerEnvironmentVariable"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksContainerEnvironmentVariables(v []types.EksContainerEnvironmentVariable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainerEnvironmentVariables"}
+	for i := range v {
+		if err := validateEksContainerEnvironmentVariable(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksContainerOverride(v *types.EksContainerOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainerOverride"}
+	if v.Env != nil {
+		if err := validateEksContainerEnvironmentVariables(v.Env); err != nil {
+			invalidParams.AddNested("Env", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksContainerOverrideList(v []types.EksContainerOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainerOverrideList"}
+	for i := range v {
+		if err := validateEksContainerOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksContainers(v []types.EksContainer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksContainers"}
+	for i := range v {
+		if err := validateEksContainer(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksPodProperties(v *types.EksPodProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksPodProperties"}
+	if v.Containers != nil {
+		if err := validateEksContainers(v.Containers); err != nil {
+			invalidParams.AddNested("Containers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Volumes != nil {
+		if err := validateEksVolumes(v.Volumes); err != nil {
+			invalidParams.AddNested("Volumes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksPodPropertiesOverride(v *types.EksPodPropertiesOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksPodPropertiesOverride"}
+	if v.Containers != nil {
+		if err := validateEksContainerOverrideList(v.Containers); err != nil {
+			invalidParams.AddNested("Containers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksProperties(v *types.EksProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksProperties"}
+	if v.PodProperties != nil {
+		if err := validateEksPodProperties(v.PodProperties); err != nil {
+			invalidParams.AddNested("PodProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksPropertiesOverride(v *types.EksPropertiesOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksPropertiesOverride"}
+	if v.PodProperties != nil {
+		if err := validateEksPodPropertiesOverride(v.PodProperties); err != nil {
+			invalidParams.AddNested("PodProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksSecret(v *types.EksSecret) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksSecret"}
+	if v.SecretName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksVolume(v *types.EksVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksVolume"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Secret != nil {
+		if err := validateEksSecret(v.Secret); err != nil {
+			invalidParams.AddNested("Secret", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksVolumes(v []types.EksVolume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksVolumes"}
+	for i := range v {
+		if err := validateEksVolume(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvaluateOnExit(v *types.EvaluateOnExit) error {
 	if v == nil {
 		return nil
@@ -1149,6 +1395,11 @@ func validateOpCreateComputeEnvironmentInput(v *CreateComputeEnvironmentInput) e
 			invalidParams.AddNested("ComputeResources", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EksConfiguration != nil {
+		if err := validateEksConfiguration(v.EksConfiguration); err != nil {
+			invalidParams.AddNested("EksConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1332,6 +1583,11 @@ func validateOpRegisterJobDefinitionInput(v *RegisterJobDefinitionInput) error {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EksProperties != nil {
+		if err := validateEksProperties(v.EksProperties); err != nil {
+			invalidParams.AddNested("EksProperties", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1366,6 +1622,11 @@ func validateOpSubmitJobInput(v *SubmitJobInput) error {
 	if v.RetryStrategy != nil {
 		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
 			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EksPropertiesOverride != nil {
+		if err := validateEksPropertiesOverride(v.EksPropertiesOverride); err != nil {
+			invalidParams.AddNested("EksPropertiesOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

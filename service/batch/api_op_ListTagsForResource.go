@@ -12,8 +12,8 @@ import (
 
 // Lists the tags for an Batch resource. Batch resources that support tags are
 // compute environments, jobs, job definitions, job queues, and scheduling
-// policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs are
-// not supported.
+// policies. ARNs for child jobs of array and multi-node parallel (MNP) jobs aren't
+// supported.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -35,7 +35,7 @@ type ListTagsForResourceInput struct {
 	// The Amazon Resource Name (ARN) that identifies the resource that tags are listed
 	// for. Batch resources that support tags are compute environments, jobs, job
 	// definitions, job queues, and scheduling policies. ARNs for child jobs of array
-	// and multi-node parallel (MNP) jobs are not supported.
+	// and multi-node parallel (MNP) jobs aren't supported.
 	//
 	// This member is required.
 	ResourceArn *string
