@@ -1,8 +1,0 @@
-{
-    "id": "87b0209d-ac3e-4f65-bad7-52791d821c8e",
-    "type": "feature",
-    "description": "This release adds support for AWS Batch on Amazon EKS.",
-    "modules": [
-        "service/batch"
-    ]
-}

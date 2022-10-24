@@ -1,3 +1,8 @@
+# v1.19.0 (2022-10-24)
+
+* **Feature**: This release adds support for AWS Batch on Amazon EKS.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.17 (2022-10-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/feature/s3/manager
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.17.0
-	github.com/aws/aws-sdk-go-v2/config v1.17.9
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.29.0
+	github.com/aws/aws-sdk-go-v2 v1.17.1
+	github.com/aws/aws-sdk-go-v2/config v1.17.10
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.29.1
 	github.com/aws/smithy-go v1.13.4
 	github.com/google/go-cmp v0.5.8
 )

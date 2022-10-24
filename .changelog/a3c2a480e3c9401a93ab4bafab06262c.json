@@ -1,8 +1,0 @@
-{
-    "id": "a3c2a480-e3c9-401a-93ab-4bafab06262c",
-    "type": "bugfix",
-    "description": "Fixes an issue that prevented logging of the API request or responses when the respective log modes were enabled.",
-    "modules": [
-        "feature/ec2/imds"
-    ]
-}

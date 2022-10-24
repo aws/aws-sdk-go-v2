@@ -1,3 +1,8 @@
+# v1.19.0 (2022-10-24)
+
+* **Feature**: Added support for self-signed certificates when using object storage locations; added BytesCompressed to the TaskExecution response.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.13 (2022-10-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

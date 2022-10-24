@@ -1,3 +1,8 @@
+# v1.50.0 (2022-10-24)
+
+* **Feature**: SageMaker Inference Recommender now supports a new API ListInferenceRecommendationJobSteps to return the details of all the benchmark we create for an inference recommendation job.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2022-10-21)
 
 * **Feature**: CreateInferenceRecommenderjob API now supports passing endpoint details directly, that will help customers to identify the max invocation and max latency they can achieve for their model and the associated endpoint along with getting recommendations on other instances.

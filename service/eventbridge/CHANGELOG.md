@@ -1,3 +1,7 @@
+# v1.16.17 (2022-10-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.16 (2022-10-21)
 
 * **Bug Fix**: The SDK client has been updated to utilize the `aws.IsCredentialsProvider` function for determining if `aws.AnonymousCredentials` has been configured for the `CredentialProvider`.

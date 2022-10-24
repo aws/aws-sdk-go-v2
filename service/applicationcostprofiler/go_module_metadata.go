@@ -3,4 +3,4 @@
 package applicationcostprofiler
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.9.18"
+const goModuleVersion = "1.9.19"
