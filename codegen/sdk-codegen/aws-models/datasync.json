@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -94,39 +94,42 @@
             }
         },
         "com.amazonaws.datasync#AgentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONLINE",
-                        "name": "ONLINE"
-                    },
-                    {
-                        "value": "OFFLINE",
-                        "name": "OFFLINE"
+            "type": "enum",
+            "members": {
+                "ONLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLINE"
                     }
-                ]
+                },
+                "OFFLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFFLINE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#Atime": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "BEST_EFFORT",
-                        "name": "BEST_EFFORT"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "BEST_EFFORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEST_EFFORT"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#BytesPerSecond": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": -1
                 }
@@ -149,7 +152,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels execution of a task. </p>\n         <p>When you cancel a task execution, the transfer of some files is abruptly interrupted.\n      The contents of files that are transferred to the destination might be incomplete or\n      inconsistent with the source files. However, if you start a new task execution on the same\n      task and you allow the task execution to complete, file content on the destination is complete\n      and consistent. This applies to other unexpected failures that interrupt a task execution. In\n      all of these cases, DataSync successfully complete the transfer when you start the next\n      task execution.</p>"
+                "smithy.api#documentation": "<p>Stops an DataSync task execution that's in progress. The transfer of some\n      files are abruptly interrupted. File contents that're transferred to the destination might be\n      incomplete or inconsistent with the source files.</p>\n         <p>However, if you start a new task execution using the same task and allow it to finish,\n      file content on the destination will be complete and consistent. This applies to other\n      unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully completes the transfer when you start the next task\n      execution.</p>"
             }
         },
         "com.amazonaws.datasync#CancelTaskExecutionRequest": {
@@ -158,7 +161,7 @@
                 "TaskExecutionArn": {
                     "target": "com.amazonaws.datasync#TaskExecutionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution to cancel.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution to stop.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -188,7 +191,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates an DataSync agent that you have deployed on your host. The activation\n      process associates your agent with your account. In the activation process, you specify\n      information such as the Amazon Web Services Region that you want to activate the agent in. You activate the\n      agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your\n      tasks are created in this Amazon Web Services Region.</p>\n         <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to\n      a VPC endpoint so you can run tasks without going over the public internet.</p>\n         <p>You can use an agent for more than one location. If a task uses multiple agents, all of\n      them need to have status AVAILABLE for the task to run. If you use multiple agents for a\n      source location, the status of all the agents must be AVAILABLE for the task to run. </p>\n    \n\n         <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that\n      ensures minimal interruption to your tasks.</p>\n         <p></p>"
+                "smithy.api#documentation": "<p>Activates an DataSync agent that you have deployed in your storage\n      environment. The activation process associates your agent with your account. In the activation\n      process, you specify information such as the Amazon Web Services Region that you want to\n      activate the agent in. You activate the agent in the Amazon Web Services Region where your\n      target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region.</p>\n         <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to\n      a VPC endpoint so you can run tasks without going over the public internet.</p>\n         <p>You can use an agent for more than one location. If a task uses multiple agents, all of\n      them need to have status AVAILABLE for the task to run. If you use multiple agents for a\n      source location, the status of all the agents must be AVAILABLE for the task to run. </p>\n    \n\n         <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that\n      ensures minimal interruption to your tasks.</p>"
             }
         },
         "com.amazonaws.datasync#CreateAgentRequest": {
@@ -483,7 +486,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for OpenZFS file system.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon FSx for OpenZFS file system that DataSync\n      can access for a transfer. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-openzfs-location.html\">Creating a location for FSx for OpenZFS</a>.</p>\n         <note>\n            <p>Request parameters related to <code>SMB</code> aren't supported with the\n        <code>CreateLocationFsxOpenZfs</code> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#CreateLocationFsxOpenZfsRequest": {
@@ -888,6 +891,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the key-value pair that represents a tag that you want to add to the resource. Tags can help you manage, filter, and search for your resources. We recommend creating a name tag for your location.</p>"
                     }
+                },
+                "ServerCertificate": {
+                    "target": "com.amazonaws.datasync#ObjectStorageCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a certificate to authenticate with an object storage system that uses a private\n      or self-signed certificate authority (CA). You must specify a Base64-encoded <code>.pem</code>\n      file (for example, <code>file:///home/user/.ssh/storage_sys_certificate.pem</code>). The certificate can be up to 32768 bytes (before Base64 encoding).</p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -925,7 +934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p>\n\n    \n         <p>For\n      more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Create an Amazon S3 location</a>\n      in the <i>DataSync User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer.</p>\n\n    \n         <p>For\n      more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Create an Amazon S3 location</a>\n      in the <i>DataSync User Guide</i>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationS3Request": {
@@ -1481,7 +1490,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about an Amazon FSx for Lustre\n      location, such as information about its path.</p>"
+                "smithy.api#documentation": "<p>Provides details about how an DataSync location for an Amazon FSx for Lustre file system is configured.</p>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxLustreRequest": {
@@ -1542,7 +1551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides details about how an DataSync location for an Amazon FSx for NetApp ONTAP file system is configured.</p>"
+                "smithy.api#documentation": "<p>Provides details about how an DataSync location for an Amazon FSx for NetApp ONTAP file system is configured.</p>\n         <note>\n            <p>If your location uses SMB, the <code>DescribeLocationFsxOntap</code> operation doesn't\n        actually return a <code>Password</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxOntapRequest": {
@@ -1618,7 +1627,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns metadata about an Amazon FSx for OpenZFS\n      location, such as information about its path.</p>"
+                "smithy.api#documentation": "<p>Provides details about how an DataSync location for an Amazon FSx for OpenZFS file system is configured.</p>\n         <note>\n            <p>Response elements related to <code>SMB</code> aren't supported with the\n        <code>DescribeLocationFsxOpenZfs</code> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#DescribeLocationFsxOpenZfsRequest": {
@@ -1973,7 +1982,7 @@
                 "AccessKey": {
                     "target": "com.amazonaws.datasync#ObjectStorageAccessKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The access key (for example, a user name) required to authenticate with the object storage server.</p>"
+                        "smithy.api#documentation": "<p>The access key (for example, a user name) required to authenticate with the object storage\n      system.</p>"
                     }
                 },
                 "ServerPort": {
@@ -1985,7 +1994,7 @@
                 "ServerProtocol": {
                     "target": "com.amazonaws.datasync#ObjectStorageServerProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol that your object storage server uses to communicate.</p>"
+                        "smithy.api#documentation": "<p>The protocol that your object storage system uses to communicate.</p>"
                     }
                 },
                 "AgentArns": {
@@ -1998,6 +2007,12 @@
                     "target": "com.amazonaws.datasync#Time",
                     "traits": {
                         "smithy.api#documentation": "<p>The time that the location was created.</p>"
+                    }
+                },
+                "ServerCertificate": {
+                    "target": "com.amazonaws.datasync#ObjectStorageCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The self-signed certificate that DataSync uses to securely authenticate with\n      your object storage system.</p>"
                     }
                 }
             },
@@ -2242,13 +2257,13 @@
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>"
                     }
                 },
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      list should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      list should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>"
                     }
                 },
                 "StartTime": {
@@ -2260,30 +2275,35 @@
                 "EstimatedFilesToTransfer": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The expected number of files that is to be transferred over the network. This value is\n      calculated during the PREPARING phase, before the TRANSFERRING phase. This value is the\n      expected number of files to be transferred. It's calculated based on comparing the\n      content of the source and destination locations and finding the delta that needs to be\n      transferred. </p>"
                     }
                 },
                 "EstimatedBytesToTransfer": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The estimated physical number of bytes that is to be transferred over the\n      network.</p>"
                     }
                 },
                 "FilesTransferred": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The actual number of files that was transferred over the network. This value is\n      calculated and updated on an ongoing basis during the TRANSFERRING phase. It's updated\n      periodically when each file is read from the source and sent over the network. </p>\n         <p>If failures occur during a transfer, this value can be less than\n        <code>EstimatedFilesToTransfer</code>. This value can also be greater than\n        <code>EstimatedFilesTransferred</code> in some cases. This element is\n      implementation-specific for some location types, so don't use it as an indicator for a correct\n      file number or to monitor your task execution.</p>"
                     }
                 },
                 "BytesWritten": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of logical bytes written to the destination Amazon Web Services storage resource.</p>"
                     }
                 },
                 "BytesTransferred": {
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The physical number of bytes transferred over the network.</p>"
                     }
                 },
@@ -2291,6 +2311,13 @@
                     "target": "com.amazonaws.datasync#TaskExecutionResultDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>The result of the task execution.</p>"
+                    }
+                },
+                "BytesCompressed": {
+                    "target": "com.amazonaws.datasync#long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The physical number of bytes transferred over the network after compression was applied.\n      In most cases, this number is less than <code>BytesTransferred</code>.</p>"
                     }
                 }
             },
@@ -2426,7 +2453,6 @@
         "com.amazonaws.datasync#Duration": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -2507,18 +2533,20 @@
             }
         },
         "com.amazonaws.datasync#EfsInTransitEncryption": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "TLS1_2",
-                        "name": "TLS1_2"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "TLS1_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS1_2"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#EfsSubdirectory": {
@@ -2542,22 +2570,26 @@
             }
         },
         "com.amazonaws.datasync#EndpointType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUBLIC",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "PRIVATE_LINK",
-                        "name": "PRIVATE_LINK"
-                    },
-                    {
-                        "value": "FIPS",
-                        "name": "FIPS"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
                     }
-                ]
+                },
+                "PRIVATE_LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE_LINK"
+                    }
+                },
+                "FIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIPS"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#FilterAttributeValue": {
@@ -2603,14 +2635,16 @@
             }
         },
         "com.amazonaws.datasync#FilterType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SIMPLE_PATTERN",
-                        "name": "SIMPLE_PATTERN"
+            "type": "enum",
+            "members": {
+                "SIMPLE_PATTERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIMPLE_PATTERN"
                     }
-                ],
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 128
@@ -2636,21 +2670,6 @@
         },
         "com.amazonaws.datasync#FmrsService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "DataSync",
-                    "arnNamespace": "datasync",
-                    "cloudFormationName": "DataSync",
-                    "cloudTrailEventSource": "datasync.amazonaws.com",
-                    "endpointPrefix": "datasync"
-                },
-                "aws.auth#sigv4": {
-                    "name": "datasync"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>DataSync</fullname>\n\n         <p>DataSync is a managed data transfer service that makes it simpler for you to\n      automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3)\n      or Amazon Elastic File System (Amazon EFS). </p>\n         <p>This API interface reference for DataSync contains documentation for a\n      programming interface that you can use to manage DataSync.</p>",
-                "smithy.api#title": "AWS DataSync"
-            },
             "version": "2018-11-09",
             "operations": [
                 {
@@ -2785,7 +2804,1880 @@
                 {
                     "target": "com.amazonaws.datasync#UpdateTaskExecution"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DataSync",
+                    "arnNamespace": "datasync",
+                    "cloudFormationName": "DataSync",
+                    "cloudTrailEventSource": "datasync.amazonaws.com",
+                    "endpointPrefix": "datasync"
+                },
+                "aws.auth#sigv4": {
+                    "name": "datasync"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>DataSync</fullname>\n\n         <p>DataSync is a managed data transfer service that makes it simpler for you\n      to automate moving data between on-premises storage and Amazon Web Services storage services. You also can use DataSync to transfer data between other cloud providers and Amazon Web Services storage services.</p>\n         <p>This API interface reference includes documentation for using DataSync\n      programmatically. For complete information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html\">DataSync User\n          Guide</a>\n            </i>.</p>",
+                "smithy.api#title": "AWS DataSync",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://datasync-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://datasync-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://datasync.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://datasync.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.datasync#FsxFilesystemArn": {
             "type": "string",
@@ -2900,47 +4792,54 @@
             }
         },
         "com.amazonaws.datasync#Gid": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "INT_VALUE",
-                        "name": "INT_VALUE"
-                    },
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "BOTH",
-                        "name": "BOTH"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "INT_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT_VALUE"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "BOTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTH"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#HdfsAuthenticationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SIMPLE",
-                        "name": "SIMPLE"
-                    },
-                    {
-                        "value": "KERBEROS",
-                        "name": "KERBEROS"
+            "type": "enum",
+            "members": {
+                "SIMPLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIMPLE"
                     }
-                ]
+                },
+                "KERBEROS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KERBEROS"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#HdfsBlockSize": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1048576,
                     "max": 1073741824
@@ -2948,26 +4847,32 @@
             }
         },
         "com.amazonaws.datasync#HdfsDataTransferProtection": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "AUTHENTICATION",
-                        "name": "AUTHENTICATION"
-                    },
-                    {
-                        "value": "INTEGRITY",
-                        "name": "INTEGRITY"
-                    },
-                    {
-                        "value": "PRIVACY",
-                        "name": "PRIVACY"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "AUTHENTICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHENTICATION"
+                    }
+                },
+                "INTEGRITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGRITY"
+                    }
+                },
+                "PRIVACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVACY"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#HdfsNameNode": {
@@ -3006,7 +4911,6 @@
         "com.amazonaws.datasync#HdfsReplicationFactor": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 512
@@ -3014,26 +4918,32 @@
             }
         },
         "com.amazonaws.datasync#HdfsRpcProtection": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "AUTHENTICATION",
-                        "name": "AUTHENTICATION"
-                    },
-                    {
-                        "value": "INTEGRITY",
-                        "name": "INTEGRITY"
-                    },
-                    {
-                        "value": "PRIVACY",
-                        "name": "PRIVACY"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "AUTHENTICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHENTICATION"
+                    }
+                },
+                "INTEGRITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGRITY"
+                    }
+                },
+                "PRIVACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVACY"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#HdfsServerHostname": {
@@ -3049,7 +4959,6 @@
         "com.amazonaws.datasync#HdfsServerPort": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65536
@@ -3564,22 +5473,26 @@
             }
         },
         "com.amazonaws.datasync#LocationFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LocationUri",
-                        "name": "LocationUri"
-                    },
-                    {
-                        "value": "LocationType",
-                        "name": "LocationType"
-                    },
-                    {
-                        "value": "CreationTime",
-                        "name": "CreationTime"
+            "type": "enum",
+            "members": {
+                "LocationUri": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocationUri"
                     }
-                ]
+                },
+                "LocationType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocationType"
+                    }
+                },
+                "CreationTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationTime"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#LocationFilters": {
@@ -3635,28 +5548,31 @@
             }
         },
         "com.amazonaws.datasync#LogLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
-                    },
-                    {
-                        "value": "BASIC",
-                        "name": "BASIC"
-                    },
-                    {
-                        "value": "TRANSFER",
-                        "name": "TRANSFER"
+            "type": "enum",
+            "members": {
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
                     }
-                ]
+                },
+                "BASIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASIC"
+                    }
+                },
+                "TRANSFER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSFER"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -3664,18 +5580,20 @@
             }
         },
         "com.amazonaws.datasync#Mtime": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "PRESERVE",
-                        "name": "PRESERVE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "PRESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESERVE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#NetworkInterfaceArn": {
@@ -3723,26 +5641,32 @@
             }
         },
         "com.amazonaws.datasync#NfsVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUTOMATIC",
-                        "name": "AUTOMATIC"
-                    },
-                    {
-                        "value": "NFS3",
-                        "name": "NFS3"
-                    },
-                    {
-                        "value": "NFS4_0",
-                        "name": "NFS4_0"
-                    },
-                    {
-                        "value": "NFS4_1",
-                        "name": "NFS4_1"
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
                     }
-                ]
+                },
+                "NFS3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS3"
+                    }
+                },
+                "NFS4_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS4_0"
+                    }
+                },
+                "NFS4_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NFS4_1"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#ObjectStorageAccessKey": {
@@ -3765,6 +5689,15 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"
             }
         },
+        "com.amazonaws.datasync#ObjectStorageCertificate": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32768
+                }
+            }
+        },
         "com.amazonaws.datasync#ObjectStorageSecretKey": {
             "type": "string",
             "traits": {
@@ -3779,7 +5712,6 @@
         "com.amazonaws.datasync#ObjectStorageServerPort": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 65536
@@ -3787,33 +5719,37 @@
             }
         },
         "com.amazonaws.datasync#ObjectStorageServerProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HTTPS",
-                        "name": "HTTPS"
-                    },
-                    {
-                        "value": "HTTP",
-                        "name": "HTTP"
+            "type": "enum",
+            "members": {
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTPS"
                     }
-                ]
+                },
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#ObjectTags": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PRESERVE",
-                        "name": "PRESERVE"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "PRESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESERVE"
                     }
-                ]
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#OnPremConfig": {
@@ -3832,50 +5768,68 @@
             }
         },
         "com.amazonaws.datasync#Operator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Equals",
-                        "name": "EQ"
-                    },
-                    {
-                        "value": "NotEquals",
-                        "name": "NE"
-                    },
-                    {
-                        "value": "In",
-                        "name": "IN"
-                    },
-                    {
-                        "value": "LessThanOrEqual",
-                        "name": "LE"
-                    },
-                    {
-                        "value": "LessThan",
-                        "name": "LT"
-                    },
-                    {
-                        "value": "GreaterThanOrEqual",
-                        "name": "GE"
-                    },
-                    {
-                        "value": "GreaterThan",
-                        "name": "GT"
-                    },
-                    {
-                        "value": "Contains",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "NotContains",
-                        "name": "NOT_CONTAINS"
-                    },
-                    {
-                        "value": "BeginsWith",
-                        "name": "BEGINS_WITH"
+            "type": "enum",
+            "members": {
+                "EQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Equals"
                     }
-                ]
+                },
+                "NE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEquals"
+                    }
+                },
+                "IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "In"
+                    }
+                },
+                "LE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanOrEqual"
+                    }
+                },
+                "LT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThan"
+                    }
+                },
+                "GE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanOrEqual"
+                    }
+                },
+                "GT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThan"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Contains"
+                    }
+                },
+                "NOT_CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotContains"
+                    }
+                },
+                "BEGINS_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BeginsWith"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#Options": {
@@ -3989,18 +5943,20 @@
             }
         },
         "com.amazonaws.datasync#OverwriteMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALWAYS",
-                        "name": "ALWAYS"
-                    },
-                    {
-                        "value": "NEVER",
-                        "name": "NEVER"
+            "type": "enum",
+            "members": {
+                "ALWAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALWAYS"
                     }
-                ]
+                },
+                "NEVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEVER"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#PLSecurityGroupArnList": {
@@ -4028,67 +5984,77 @@
             }
         },
         "com.amazonaws.datasync#PhaseStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#PosixPermissions": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "PRESERVE",
-                        "name": "PRESERVE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "PRESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESERVE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#PreserveDeletedFiles": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PRESERVE",
-                        "name": "PRESERVE"
-                    },
-                    {
-                        "value": "REMOVE",
-                        "name": "REMOVE"
+            "type": "enum",
+            "members": {
+                "PRESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESERVE"
                     }
-                ]
+                },
+                "REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#PreserveDevices": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "PRESERVE",
-                        "name": "PRESERVE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "PRESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESERVE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#PrivateLinkConfig": {
@@ -4169,38 +6135,50 @@
             }
         },
         "com.amazonaws.datasync#S3StorageClass": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STANDARD",
-                        "name": "STANDARD"
-                    },
-                    {
-                        "value": "STANDARD_IA",
-                        "name": "STANDARD_IA"
-                    },
-                    {
-                        "value": "ONEZONE_IA",
-                        "name": "ONEZONE_IA"
-                    },
-                    {
-                        "value": "INTELLIGENT_TIERING",
-                        "name": "INTELLIGENT_TIERING"
-                    },
-                    {
-                        "value": "GLACIER",
-                        "name": "GLACIER"
-                    },
-                    {
-                        "value": "DEEP_ARCHIVE",
-                        "name": "DEEP_ARCHIVE"
-                    },
-                    {
-                        "value": "OUTPOSTS",
-                        "name": "OUTPOSTS"
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
                     }
-                ]
+                },
+                "STANDARD_IA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD_IA"
+                    }
+                },
+                "ONEZONE_IA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONEZONE_IA"
+                    }
+                },
+                "INTELLIGENT_TIERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTELLIGENT_TIERING"
+                    }
+                },
+                "GLACIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLACIER"
+                    }
+                },
+                "DEEP_ARCHIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEEP_ARCHIVE"
+                    }
+                },
+                "OUTPOSTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTPOSTS"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#S3Subdirectory": {
@@ -4269,22 +6247,26 @@
             }
         },
         "com.amazonaws.datasync#SmbSecurityDescriptorCopyFlags": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "OWNER_DACL",
-                        "name": "OWNER_DACL"
-                    },
-                    {
-                        "value": "OWNER_DACL_SACL",
-                        "name": "OWNER_DACL_SACL"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "OWNER_DACL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OWNER_DACL"
+                    }
+                },
+                "OWNER_DACL_SACL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OWNER_DACL_SACL"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#SmbSubdirectory": {
@@ -4308,22 +6290,26 @@
             }
         },
         "com.amazonaws.datasync#SmbVersion": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AUTOMATIC",
-                        "name": "AUTOMATIC"
-                    },
-                    {
-                        "value": "SMB2",
-                        "name": "SMB2"
-                    },
-                    {
-                        "value": "SMB3",
-                        "name": "SMB3"
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
                     }
-                ]
+                },
+                "SMB2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB2"
+                    }
+                },
+                "SMB3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMB3"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#SourceNetworkInterfaceArns": {
@@ -4624,38 +6610,50 @@
             }
         },
         "com.amazonaws.datasync#TaskExecutionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "QUEUED",
-                        "name": "QUEUED"
-                    },
-                    {
-                        "value": "LAUNCHING",
-                        "name": "LAUNCHING"
-                    },
-                    {
-                        "value": "PREPARING",
-                        "name": "PREPARING"
-                    },
-                    {
-                        "value": "TRANSFERRING",
-                        "name": "TRANSFERRING"
-                    },
-                    {
-                        "value": "VERIFYING",
-                        "name": "VERIFYING"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
                     }
-                ]
+                },
+                "LAUNCHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAUNCHING"
+                    }
+                },
+                "PREPARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPARING"
+                    }
+                },
+                "TRANSFERRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSFERRING"
+                    }
+                },
+                "VERIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFYING"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#TaskFilter": {
@@ -4688,18 +6686,20 @@
             }
         },
         "com.amazonaws.datasync#TaskFilterName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LocationId",
-                        "name": "LocationId"
-                    },
-                    {
-                        "value": "CreationTime",
-                        "name": "CreationTime"
+            "type": "enum",
+            "members": {
+                "LocationId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocationId"
                     }
-                ]
+                },
+                "CreationTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationTime"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#TaskFilters": {
@@ -4741,18 +6741,20 @@
             }
         },
         "com.amazonaws.datasync#TaskQueueing": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#TaskSchedule": {
@@ -4771,71 +6773,87 @@
             }
         },
         "com.amazonaws.datasync#TaskStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "QUEUED",
-                        "name": "QUEUED"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "UNAVAILABLE",
-                        "name": "UNAVAILABLE"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#Time": {
             "type": "timestamp"
         },
         "com.amazonaws.datasync#TransferMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CHANGED",
-                        "name": "CHANGED"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHANGED"
                     }
-                ]
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#Uid": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "INT_VALUE",
-                        "name": "INT_VALUE"
-                    },
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "BOTH",
-                        "name": "BOTH"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
                     }
-                ]
+                },
+                "INT_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT_VALUE"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "BOTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTH"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#UntagResource": {
@@ -5102,7 +7120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some of the parameters of a previously created location for self-managed object\n      storage server access. For information about creating a self-managed object storage location,\n      see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Creating a location for object storage</a>.</p>"
+                "smithy.api#documentation": "<p>Updates some parameters of an existing object storage location that DataSync\n      accesses for a transfer. For information about creating a self-managed object storage\n      location, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Creating a location for object\n        storage</a>.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationObjectStorageRequest": {
@@ -5111,44 +7129,50 @@
                 "LocationArn": {
                     "target": "com.amazonaws.datasync#LocationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the self-managed object storage server location to be updated.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ARN of the object storage system location that you're updating.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServerPort": {
                     "target": "com.amazonaws.datasync#ObjectStorageServerPort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port that your self-managed object storage server accepts inbound network traffic on.\n      The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can \n      specify a custom port if your self-managed object storage server requires one.</p>"
+                        "smithy.api#documentation": "<p>Specifies the port that your object storage server accepts inbound network traffic on (for\n      example, port 443).</p>"
                     }
                 },
                 "ServerProtocol": {
                     "target": "com.amazonaws.datasync#ObjectStorageServerProtocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol that the object storage server uses to communicate. Valid values are\n        <code>HTTP</code> or <code>HTTPS</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the protocol that your object storage server uses to communicate.</p>"
                     }
                 },
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#S3Subdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the self-managed object storage server that is used\n      to read data from.</p>"
+                        "smithy.api#documentation": "<p>Specifies the object prefix for your object storage server. If this is a source location,\n      DataSync only copies objects with this prefix. If this is a destination location, DataSync\n      writes all objects with this prefix.</p>"
                     }
                 },
                 "AccessKey": {
                     "target": "com.amazonaws.datasync#ObjectStorageAccessKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed\n      object storage server. If your object storage requires a user name and password to\n      authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name\n      and password, respectively.</p>"
+                        "smithy.api#documentation": "<p>Specifies the access key (for example, a user name) if credentials are required to\n      authenticate with the object storage server.</p>"
                     }
                 },
                 "SecretKey": {
                     "target": "com.amazonaws.datasync#ObjectStorageSecretKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional. The secret key is used if credentials are required to access the self-managed\n      object storage server. If your object storage requires a user name and password to\n      authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name\n      and password, respectively.</p>"
+                        "smithy.api#documentation": "<p>Specifies the secret key (for example, a password) if credentials are required to\n      authenticate with the object storage server.</p>"
                     }
                 },
                 "AgentArns": {
                     "target": "com.amazonaws.datasync#AgentArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agents associated with the \n      self-managed object storage server location.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can securely connect with\n      your location.</p>"
+                    }
+                },
+                "ServerCertificate": {
+                    "target": "com.amazonaws.datasync#ObjectStorageCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a certificate to authenticate with an object storage system that uses a private\n      or self-signed certificate authority (CA). You must specify a Base64-encoded <code>.pem</code>\n      file (for example, <code>file:///home/user/.ssh/storage_sys_certificate.pem</code>). The certificate can be up to 32768 bytes (before Base64 encoding).</p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>\n         <p>Updating the certificate doesn't interfere with tasks that you have in progress.</p>"
                     }
                 }
             }
@@ -5341,22 +7365,26 @@
             "members": {}
         },
         "com.amazonaws.datasync#VerifyMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "POINT_IN_TIME_CONSISTENT",
-                        "name": "POINT_IN_TIME_CONSISTENT"
-                    },
-                    {
-                        "value": "ONLY_FILES_TRANSFERRED",
-                        "name": "ONLY_FILES_TRANSFERRED"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "POINT_IN_TIME_CONSISTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POINT_IN_TIME_CONSISTENT"
                     }
-                ]
+                },
+                "ONLY_FILES_TRANSFERRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLY_FILES_TRANSFERRED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.datasync#VpcEndpointId": {
@@ -5366,7 +7394,10 @@
             }
         },
         "com.amazonaws.datasync#long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.datasync#string": {
             "type": "string"

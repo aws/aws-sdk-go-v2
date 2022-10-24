@@ -2749,6 +2749,12 @@
                     "traits": {
                         "smithy.api#enumValue": "LogLoss"
                     }
+                },
+                "INFERENCE_LATENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InferenceLatency"
+                    }
                 }
             }
         },
@@ -23295,6 +23301,47 @@
                 "smithy.api#documentation": "<p>A structure that contains a list of recommendation jobs.</p>"
             }
         },
+        "com.amazonaws.sagemaker#InferenceRecommendationsJobStep": {
+            "type": "structure",
+            "members": {
+                "StepType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationStepType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the subtask.</p>\n         <p>\n            <code>BENCHMARK</code>: Evaluate the performance of your model on different instance types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Inference Recommender job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the benchmark.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InferenceBenchmark": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobInferenceBenchmark",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for a specific benchmark.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A returned array object for the <code>Steps</code> response field in the\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InferenceRecommendationsJobStep.html\">ListInferenceRecommendationsJobSteps</a> API command.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#InferenceRecommendationsJobSteps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#InferenceRecommendationsJobStep"
+            }
+        },
         "com.amazonaws.sagemaker#InferenceRecommendationsJobs": {
             "type": "list",
             "member": {
@@ -27408,6 +27455,77 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token for getting the next set of images, if there are any.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobSteps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobStepsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobStepsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the subtasks for an Inference Recommender job.</p>\n         <p>The supported subtasks are benchmarks, which evaluate the performance of your model on different instance types.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Steps",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobStepsRequest": {
+            "type": "structure",
+            "members": {
+                "JobName": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the Inference Recommender job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to return benchmarks of a specified status. If this field is left empty, then all benchmarks are returned.</p>"
+                    }
+                },
+                "StepType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationStepType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to return details about the specified type of subtask.</p>\n         <p>\n            <code>BENCHMARK</code>: Evaluate the performance of your model on different instance types.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you can specify to return more results from the list. Specify this field if you have a token that was returned from a previous request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceRecommendationsJobStepsResponse": {
+            "type": "structure",
+            "members": {
+                "Steps": {
+                    "target": "com.amazonaws.sagemaker#InferenceRecommendationsJobSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all subtask details in Inference Recommender.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you can specify in your next request to return more results from the list.</p>"
                     }
                 }
             }
@@ -38566,6 +38684,9 @@
                 "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType"
             }
         },
+        "com.amazonaws.sagemaker#RecommendationFailureReason": {
+            "type": "string"
+        },
         "com.amazonaws.sagemaker#RecommendationJobArn": {
             "type": "string",
             "traits": {
@@ -38647,6 +38768,32 @@
                     "min": 0,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationJobInferenceBenchmark": {
+            "type": "structure",
+            "members": {
+                "Metrics": {
+                    "target": "com.amazonaws.sagemaker#RecommendationMetrics"
+                },
+                "EndpointConfiguration": {
+                    "target": "com.amazonaws.sagemaker#EndpointOutputConfiguration"
+                },
+                "ModelConfiguration": {
+                    "target": "com.amazonaws.sagemaker#ModelConfiguration",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#RecommendationFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why a benchmark failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for a specific benchmark from an Inference Recommender job.</p>"
             }
         },
         "com.amazonaws.sagemaker#RecommendationJobInputConfig": {
@@ -38905,6 +39052,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The metrics of recommendations.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationStepType": {
+            "type": "enum",
+            "members": {
+                "BENCHMARK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BENCHMARK"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#RecordWrapper": {
@@ -40472,6 +40630,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobs"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobSteps"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListLabelingJobs"
