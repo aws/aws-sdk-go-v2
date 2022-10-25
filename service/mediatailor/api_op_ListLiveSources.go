@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// lists all the live sources in a source location.
+// Lists the live sources contained in a source location. A source represents a
+// piece of content.
 func (c *Client) ListLiveSources(ctx context.Context, params *ListLiveSourcesInput, optFns ...func(*Options)) (*ListLiveSourcesOutput, error) {
 	if params == nil {
 		params = &ListLiveSourcesInput{}
@@ -30,17 +31,18 @@ func (c *Client) ListLiveSources(ctx context.Context, params *ListLiveSourcesInp
 
 type ListLiveSourcesInput struct {
 
-	// The identifier for the source location you are working on.
+	// The name of the source location associated with this Live Sources list.
 	//
 	// This member is required.
 	SourceLocationName *string
 
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of live sources that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults live sources,
+	// use the value of NextToken in the response to get the next page of results.
 	MaxResults int32
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,8 +53,8 @@ type ListLiveSourcesOutput struct {
 	// Lists the live sources.
 	Items []types.LiveSource
 
-	// Pagination token from the list request. Use the token to fetch the next page of
-	// results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +136,9 @@ var _ ListLiveSourcesAPIClient = (*Client)(nil)
 
 // ListLiveSourcesPaginatorOptions is the paginator options for ListLiveSources
 type ListLiveSourcesPaginatorOptions struct {
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of live sources that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults live sources,
+	// use the value of NextToken in the response to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

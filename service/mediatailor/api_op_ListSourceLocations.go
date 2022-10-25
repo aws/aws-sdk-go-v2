@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of source locations.
+// Lists the source locations for a channel. A source location defines the host
+// server URL, and contains a list of sources.
 func (c *Client) ListSourceLocations(ctx context.Context, params *ListSourceLocationsInput, optFns ...func(*Options)) (*ListSourceLocationsOutput, error) {
 	if params == nil {
 		params = &ListSourceLocationsInput{}
@@ -30,12 +31,14 @@ func (c *Client) ListSourceLocations(ctx context.Context, params *ListSourceLoca
 
 type ListSourceLocationsInput struct {
 
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of source locations that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults source
+	// locations, use the value of NextToken in the response to get the next page of
+	// results.
 	MaxResults int32
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,8 +49,8 @@ type ListSourceLocationsOutput struct {
 	// A list of source locations.
 	Items []types.SourceLocation
 
-	// Pagination token from the list request. Use the token to fetch the next page of
-	// results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -127,8 +130,10 @@ var _ ListSourceLocationsAPIClient = (*Client)(nil)
 // ListSourceLocationsPaginatorOptions is the paginator options for
 // ListSourceLocations
 type ListSourceLocationsPaginatorOptions struct {
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of source locations that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults source
+	// locations, use the value of NextToken in the response to get the next page of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

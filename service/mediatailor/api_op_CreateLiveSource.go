@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates name for a specific live source in a source location.
+// The live source configuration.
 func (c *Client) CreateLiveSource(ctx context.Context, params *CreateLiveSourceInput, optFns ...func(*Options)) (*CreateLiveSourceOutput, error) {
 	if params == nil {
 		params = &CreateLiveSourceInput{}
@@ -35,17 +35,20 @@ type CreateLiveSourceInput struct {
 	// This member is required.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
 
-	// The identifier for the live source you are working on.
+	// The name of the live source.
 	//
 	// This member is required.
 	LiveSourceName *string
 
-	// The identifier for the source location you are working on.
+	// The name of the source location.
 	//
 	// This member is required.
 	SourceLocationName *string
 
-	// The tags to assign to the live source.
+	// The tags to assign to the live source. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -53,25 +56,28 @@ type CreateLiveSourceInput struct {
 
 type CreateLiveSourceOutput struct {
 
-	// The ARN of the live source.
+	// The ARN to assign to the live source.
 	Arn *string
 
-	// The timestamp that indicates when the live source was created.
+	// The time the live source was created.
 	CreationTime *time.Time
 
-	// The HTTP package configurations.
+	// A list of HTTP package configuration parameters for this live source.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
 
-	// The timestamp that indicates when the live source was modified.
+	// The time the live source was last modified.
 	LastModifiedTime *time.Time
 
-	// The name of the live source.
+	// The name to assign to the live source.
 	LiveSourceName *string
 
-	// The name of the source location associated with the VOD source.
+	// The name to assign to the source location of the live source.
 	SourceLocationName *string
 
-	// The tags assigned to the live source.
+	// The tags to assign to the live source. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

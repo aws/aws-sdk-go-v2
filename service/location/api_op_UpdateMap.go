@@ -54,7 +54,7 @@ type UpdateMapOutput struct {
 	// resource across AWS.
 	//
 	// * Format example:
-	// arn:aws:geo:region:account-id:maps/ExampleMap
+	// arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
 	MapArn *string

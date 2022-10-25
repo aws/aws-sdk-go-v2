@@ -1653,6 +1653,11 @@ func awsRestjson1_serializeOpDocumentStartResourceScanInput(v *StartResourceScan
 		ok.String(*v.ResourceArn)
 	}
 
+	if v.ResourceOwnerAccount != nil {
+		ok := object.Key("resourceOwnerAccount")
+		ok.String(*v.ResourceOwnerAccount)
+	}
+
 	return nil
 }
 
@@ -2139,6 +2144,24 @@ func awsRestjson1_serializeDocumentConfiguration(v types.Configuration, value sm
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ConfigurationMemberEbsSnapshot:
+		av := object.Key("ebsSnapshot")
+		if err := awsRestjson1_serializeDocumentEbsSnapshotConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationMemberEcrRepository:
+		av := object.Key("ecrRepository")
+		if err := awsRestjson1_serializeDocumentEcrRepositoryConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationMemberEfsFileSystem:
+		av := object.Key("efsFileSystem")
+		if err := awsRestjson1_serializeDocumentEfsFileSystemConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConfigurationMemberIamRole:
 		av := object.Key("iamRole")
 		if err := awsRestjson1_serializeDocumentIamRoleConfiguration(&uv.Value, av); err != nil {
@@ -2151,6 +2174,18 @@ func awsRestjson1_serializeDocumentConfiguration(v types.Configuration, value sm
 			return err
 		}
 
+	case *types.ConfigurationMemberRdsDbClusterSnapshot:
+		av := object.Key("rdsDbClusterSnapshot")
+		if err := awsRestjson1_serializeDocumentRdsDbClusterSnapshotConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationMemberRdsDbSnapshot:
+		av := object.Key("rdsDbSnapshot")
+		if err := awsRestjson1_serializeDocumentRdsDbSnapshotConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConfigurationMemberS3Bucket:
 		av := object.Key("s3Bucket")
 		if err := awsRestjson1_serializeDocumentS3BucketConfiguration(&uv.Value, av); err != nil {
@@ -2160,6 +2195,12 @@ func awsRestjson1_serializeDocumentConfiguration(v types.Configuration, value sm
 	case *types.ConfigurationMemberSecretsManagerSecret:
 		av := object.Key("secretsManagerSecret")
 		if err := awsRestjson1_serializeDocumentSecretsManagerSecretConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationMemberSnsTopic:
+		av := object.Key("snsTopic")
+		if err := awsRestjson1_serializeDocumentSnsTopicConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -2220,6 +2261,78 @@ func awsRestjson1_serializeDocumentCriterion(v *types.Criterion, value smithyjso
 		if err := awsRestjson1_serializeDocumentValueList(v.Neq, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEbsGroupList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEbsSnapshotConfiguration(v *types.EbsSnapshotConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Groups != nil {
+		ok := object.Key("groups")
+		if err := awsRestjson1_serializeDocumentEbsGroupList(v.Groups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.UserIds != nil {
+		ok := object.Key("userIds")
+		if err := awsRestjson1_serializeDocumentEbsUserIdList(v.UserIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEbsUserIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEcrRepositoryConfiguration(v *types.EcrRepositoryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RepositoryPolicy != nil {
+		ok := object.Key("repositoryPolicy")
+		ok.String(*v.RepositoryPolicy)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEfsFileSystemConfiguration(v *types.EfsFileSystemConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileSystemPolicy != nil {
+		ok := object.Key("fileSystemPolicy")
+		ok.String(*v.FileSystemPolicy)
 	}
 
 	return nil
@@ -2461,6 +2574,134 @@ func awsRestjson1_serializeDocumentPolicyGenerationDetails(v *types.PolicyGenera
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRdsDbClusterSnapshotAccountIdsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbClusterSnapshotAttributesMap(v map[string]types.RdsDbClusterSnapshotAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentRdsDbClusterSnapshotAttributeValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbClusterSnapshotAttributeValue(v types.RdsDbClusterSnapshotAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RdsDbClusterSnapshotAttributeValueMemberAccountIds:
+		av := object.Key("accountIds")
+		if err := awsRestjson1_serializeDocumentRdsDbClusterSnapshotAccountIdsList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbClusterSnapshotConfiguration(v *types.RdsDbClusterSnapshotConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentRdsDbClusterSnapshotAttributesMap(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbSnapshotAccountIdsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbSnapshotAttributesMap(v map[string]types.RdsDbSnapshotAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentRdsDbSnapshotAttributeValue(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbSnapshotAttributeValue(v types.RdsDbSnapshotAttributeValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RdsDbSnapshotAttributeValueMemberAccountIds:
+		av := object.Key("accountIds")
+		if err := awsRestjson1_serializeDocumentRdsDbSnapshotAccountIdsList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRdsDbSnapshotConfiguration(v *types.RdsDbSnapshotConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentRdsDbSnapshotAttributesMap(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRegionList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2606,6 +2847,18 @@ func awsRestjson1_serializeDocumentSecretsManagerSecretConfiguration(v *types.Se
 	if v.SecretPolicy != nil {
 		ok := object.Key("secretPolicy")
 		ok.String(*v.SecretPolicy)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnsTopicConfiguration(v *types.SnsTopicConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TopicPolicy != nil {
+		ok := object.Key("topicPolicy")
+		ok.String(*v.TopicPolicy)
 	}
 
 	return nil

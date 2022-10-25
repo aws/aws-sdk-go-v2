@@ -1,0 +1,8 @@
+{
+    "id": "e34dd549-d9a6-4971-9875-6978aadb89c3",
+    "type": "feature",
+    "description": "Relational Database Service - This release adds support for exporting DB cluster data to Amazon S3.",
+    "modules": [
+        "service/rds"
+    ]
+}

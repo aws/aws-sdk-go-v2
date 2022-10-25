@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Provides details about a specific live source in a specific source location.
+// The live source to describe.
 func (c *Client) DescribeLiveSource(ctx context.Context, params *DescribeLiveSourceInput, optFns ...func(*Options)) (*DescribeLiveSourceOutput, error) {
 	if params == nil {
 		params = &DescribeLiveSourceInput{}
@@ -30,12 +30,12 @@ func (c *Client) DescribeLiveSource(ctx context.Context, params *DescribeLiveSou
 
 type DescribeLiveSourceInput struct {
 
-	// The identifier for the live source you are working on.
+	// The name of the live source.
 	//
 	// This member is required.
 	LiveSourceName *string
 
-	// The identifier for the source location you are working on.
+	// The name of the source location associated with this Live Source.
 	//
 	// This member is required.
 	SourceLocationName *string
@@ -60,10 +60,13 @@ type DescribeLiveSourceOutput struct {
 	// The name of the live source.
 	LiveSourceName *string
 
-	// The name of the source location associated with the VOD source.
+	// The name of the source location associated with the live source.
 	SourceLocationName *string
 
-	// The tags assigned to the live source.
+	// The tags assigned to the live source. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

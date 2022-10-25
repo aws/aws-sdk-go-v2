@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -164,6 +165,9 @@ type StartExportTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
 	SourceArn *string
+
+	// The type of source for the export.
+	SourceType types.ExportSourceType
 
 	// The progress status of the export task.
 	Status *string

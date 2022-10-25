@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of channels that are associated with this account.
+// Retrieves information about the channels that are associated with the current
+// AWS account.
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}
@@ -30,12 +31,13 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of channels that you want MediaTailor to return in response
+	// to the current request. If there are more than MaxResults channels, use the
+	// value of NextToken in the response to get the next page of results.
 	MaxResults int32
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -125,8 +127,9 @@ var _ ListChannelsAPIClient = (*Client)(nil)
 
 // ListChannelsPaginatorOptions is the paginator options for ListChannels
 type ListChannelsPaginatorOptions struct {
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of channels that you want MediaTailor to return in response
+	// to the current request. If there are more than MaxResults channels, use the
+	// value of NextToken in the response to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

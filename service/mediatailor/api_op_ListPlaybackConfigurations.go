@@ -12,11 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the playback configurations defined in AWS Elemental
-// MediaTailor. You can specify a maximum number of configurations to return at a
-// time. The default maximum is 50. Results are returned in pagefuls. If
-// MediaTailor has more configurations than the specified maximum, it provides
-// parameters in the response that you can use to retrieve the next pageful.
+// Retrieves existing playback configurations. For information about MediaTailor
+// configurations, see Working with Configurations in AWS Elemental MediaTailor
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
 func (c *Client) ListPlaybackConfigurations(ctx context.Context, params *ListPlaybackConfigurationsInput, optFns ...func(*Options)) (*ListPlaybackConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListPlaybackConfigurationsInput{}
@@ -34,11 +32,14 @@ func (c *Client) ListPlaybackConfigurations(ctx context.Context, params *ListPla
 
 type ListPlaybackConfigurationsInput struct {
 
-	// Maximum number of records to return.
+	// The maximum number of playback configurations that you want MediaTailor to
+	// return in response to the current request. If there are more than MaxResults
+	// playback configurations, use the value of NextToken in the response to get the
+	// next page of results.
 	MaxResults int32
 
-	// Pagination token returned by the GET list request when results exceed the
-	// maximum allowed. Use the token to fetch the next page of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -132,7 +133,10 @@ var _ ListPlaybackConfigurationsAPIClient = (*Client)(nil)
 // ListPlaybackConfigurationsPaginatorOptions is the paginator options for
 // ListPlaybackConfigurations
 type ListPlaybackConfigurationsPaginatorOptions struct {
-	// Maximum number of records to return.
+	// The maximum number of playback configurations that you want MediaTailor to
+	// return in response to the current request. If there are more than MaxResults
+	// playback configurations, use the value of NextToken in the response to get the
+	// next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -41,6 +41,11 @@ type StartResourceScanInput struct {
 	// This member is required.
 	ResourceArn *string
 
+	// The Amazon Web Services account ID that owns the resource. For most Amazon Web
+	// Services resources, the owning account is the account in which the resource was
+	// created.
+	ResourceOwnerAccount *string
+
 	noSmithyDocumentSerde
 }
 

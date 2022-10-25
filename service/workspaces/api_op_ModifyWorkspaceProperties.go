@@ -14,6 +14,10 @@ import (
 // Modifies the specified WorkSpace properties. For important information about how
 // to modify the size of the root and user volumes, see  Modify a WorkSpace
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
+// The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
+// Contact your account team to be allow-listed to use this value. For more
+// information, see Amazon WorkSpaces Core
+// (http://aws.amazon.com/workspaces/core/).
 func (c *Client) ModifyWorkspaceProperties(ctx context.Context, params *ModifyWorkspacePropertiesInput, optFns ...func(*Options)) (*ModifyWorkspacePropertiesOutput, error) {
 	if params == nil {
 		params = &ModifyWorkspacePropertiesInput{}

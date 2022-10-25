@@ -443,16 +443,18 @@ type GeofenceGeometry struct {
 	// A circle on the earth, as defined by a center point and a radius.
 	Circle *Circle
 
-	// An array of 1 or more linear rings. A linear ring is an array of 4 or more
-	// vertices, where the first and last vertex are the same to form a closed
-	// boundary. Each vertex is a 2-dimensional point of the form: [longitude,
-	// latitude]. The first linear ring is an outer ring, describing the polygon's
-	// boundary. Subsequent linear rings may be inner or outer rings to describe holes
-	// and islands. Outer rings must list their vertices in counter-clockwise order
-	// around the ring's center, where the left side is the polygon's exterior. Inner
-	// rings must list their vertices in clockwise order, where the left side is the
-	// polygon's interior. A geofence polygon can consist of between 4 and 1,000
-	// vertices.
+	// A polygon is a list of linear rings which are each made up of a list of
+	// vertices. Each vertex is a 2-dimensional point of the form: [longitude,
+	// latitude]. This is represented as an array of doubles of length 2 (so [double,
+	// double]). An array of 4 or more vertices, where the first and last vertex are
+	// the same (to form a closed boundary), is called a linear ring. The linear ring
+	// vertices must be listed in counter-clockwise order around the ring’s interior.
+	// The linear ring is represented as an array of vertices, or an array of arrays of
+	// doubles ([[double, double], ...]). A geofence consists of a single linear ring.
+	// To allow for future expansion, the Polygon parameter takes an array of linear
+	// rings, which is represented as an array of arrays of arrays of doubles
+	// ([[[double, double], ...], ...]). A linear ring for use in geofences can consist
+	// of between 4 and 1,000 vertices.
 	Polygon [][][]float64
 
 	noSmithyDocumentSerde
@@ -882,21 +884,31 @@ type MapConfiguration struct {
 	//
 	// *
 	// VectorHereContrast – The HERE Contrast (Berlin) map style is a high contrast
-	// detailed base map of the world that blends 3D and 2D rendering.
+	// detailed base map of the world that blends 3D and 2D rendering. The
+	// VectorHereContrast style has been renamed from VectorHereBerlin.
+	// VectorHereBerlin has been deprecated, but will continue to work in applications
+	// that use it.
+	//
+	// * VectorHereExplore – A default HERE map style containing a
+	// neutral, global map and its features including roads, buildings, landmarks, and
+	// water features. It also now includes a fully designed map of Japan.
 	//
 	// *
-	// VectorHereExplore – A default HERE map style containing a neutral, global map
-	// and its features including roads, buildings, landmarks, and water features. It
-	// also now includes a fully designed map of Japan.
+	// VectorHereExploreTruck – A global map containing truck restrictions and
+	// attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments
+	// and icons on top of HERE Explore to support use cases within transport and
+	// logistics.
 	//
-	// * VectorHereExploreTruck – A
-	// global map containing truck restrictions and attributes (e.g. width / height /
-	// HAZMAT) symbolized with highlighted segments and icons on top of HERE Explore to
-	// support use cases within transport and logistics.
+	// * RasterHereExploreSatellite – A global map containing high
+	// resolution satellite imagery.
 	//
-	// The VectorHereContrast style
-	// has been renamed from VectorHereBerlin. VectorHereBerlin has been deprecated,
-	// but will continue to work in applications that use it.
+	// * HybridHereExploreSatellite – A global map
+	// displaying the road network, street names, and city labels over satellite
+	// imagery. This style will automatically retrieve both raster and vector tiles,
+	// and your charges will be based on total tiles retrieved. Hybrid styles use both
+	// vector and raster tiles when rendering the map that you see. This means that
+	// more tiles are retrieved than when using either vector or raster tiles alone.
+	// Your charges will include all tiles retrieved.
 	//
 	// This member is required.
 	Style *string
@@ -956,7 +968,7 @@ type Place struct {
 	// Vancouver.
 	SubRegion *string
 
-	// The time zone in which the Place is located. Returned only when using Here as
+	// The time zone in which the Place is located. Returned only when using HERE as
 	// the selected partner.
 	TimeZone *TimeZone
 

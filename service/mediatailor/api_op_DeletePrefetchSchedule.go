@@ -12,7 +12,10 @@ import (
 
 // Deletes a prefetch schedule for a specific playback configuration. If you call
 // DeletePrefetchSchedule on an expired prefetch schedule, MediaTailor returns an
-// HTTP 404 status code.
+// HTTP 404 status code. For more information about ad prefetching, see Using ad
+// prefetching
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html) in the
+// MediaTailor User Guide.
 func (c *Client) DeletePrefetchSchedule(ctx context.Context, params *DeletePrefetchScheduleInput, optFns ...func(*Options)) (*DeletePrefetchScheduleOutput, error) {
 	if params == nil {
 		params = &DeletePrefetchScheduleInput{}
@@ -30,12 +33,13 @@ func (c *Client) DeletePrefetchSchedule(ctx context.Context, params *DeletePrefe
 
 type DeletePrefetchScheduleInput struct {
 
-	// The identifier for the playback configuration.
+	// The name of the prefetch schedule. If the action is successful, the service
+	// sends back an HTTP 204 response with an empty HTTP body.
 	//
 	// This member is required.
 	Name *string
 
-	// The name of the playback configuration.
+	// The name of the playback configuration for this prefetch schedule.
 	//
 	// This member is required.
 	PlaybackConfigurationName *string

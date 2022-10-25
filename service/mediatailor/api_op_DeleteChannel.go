@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a channel. You must stop the channel before it can be deleted.
+// Deletes a channel. For information about MediaTailor channels, see Working with
+// channels
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// in the MediaTailor User Guide.
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {
 		params = &DeleteChannelInput{}
@@ -28,7 +31,7 @@ func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, 
 
 type DeleteChannelInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel.
 	//
 	// This member is required.
 	ChannelName *string

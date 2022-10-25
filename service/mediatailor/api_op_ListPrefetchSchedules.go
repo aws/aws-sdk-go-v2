@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new prefetch schedule.
+// Lists the prefetch schedules for a playback configuration.
 func (c *Client) ListPrefetchSchedules(ctx context.Context, params *ListPrefetchSchedulesInput, optFns ...func(*Options)) (*ListPrefetchSchedulesOutput, error) {
 	if params == nil {
 		params = &ListPrefetchSchedulesInput{}
@@ -30,15 +30,15 @@ func (c *Client) ListPrefetchSchedules(ctx context.Context, params *ListPrefetch
 
 type ListPrefetchSchedulesInput struct {
 
-	// The name of the playback configuration.
+	// Retrieves the prefetch schedule(s) for a specific playback configuration.
 	//
 	// This member is required.
 	PlaybackConfigurationName *string
 
 	// The maximum number of prefetch schedules that you want MediaTailor to return in
-	// response to the current request. If the playback configuration has more than
-	// MaxResults prefetch schedules, use the value of NextToken in the response to get
-	// the next page of results.
+	// response to the current request. If there are more than MaxResults prefetch
+	// schedules, use the value of NextToken in the response to get the next page of
+	// results.
 	MaxResults int32
 
 	// (Optional) If the playback configuration has more than MaxResults prefetch
@@ -62,8 +62,8 @@ type ListPrefetchSchedulesOutput struct {
 	// items to fetch, just that that page was empty.
 	Items []types.PrefetchSchedule
 
-	// The value that you will use forNextToken in the next
-	// ListPrefetchSchedulesRequest request.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,9 +147,9 @@ var _ ListPrefetchSchedulesAPIClient = (*Client)(nil)
 // ListPrefetchSchedules
 type ListPrefetchSchedulesPaginatorOptions struct {
 	// The maximum number of prefetch schedules that you want MediaTailor to return in
-	// response to the current request. If the playback configuration has more than
-	// MaxResults prefetch schedules, use the value of NextToken in the response to get
-	// the next page of results.
+	// response to the current request. If there are more than MaxResults prefetch
+	// schedules, use the value of NextToken in the response to get the next page of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

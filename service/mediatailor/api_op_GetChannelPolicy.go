@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a channel's IAM policy.
+// Returns the channel's IAM policy. IAM policies are used to control access to
+// your channel.
 func (c *Client) GetChannelPolicy(ctx context.Context, params *GetChannelPolicyInput, optFns ...func(*Options)) (*GetChannelPolicyOutput, error) {
 	if params == nil {
 		params = &GetChannelPolicyInput{}
@@ -28,7 +29,7 @@ func (c *Client) GetChannelPolicy(ctx context.Context, params *GetChannelPolicyI
 
 type GetChannelPolicyInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel associated with this Channel Policy.
 	//
 	// This member is required.
 	ChannelName *string
@@ -38,7 +39,8 @@ type GetChannelPolicyInput struct {
 
 type GetChannelPolicyOutput struct {
 
-	// The IAM policy for the channel.
+	// The IAM policy for the channel. IAM policies are used to control access to your
+	// channel.
 	Policy *string
 
 	// Metadata pertaining to the operation's result.

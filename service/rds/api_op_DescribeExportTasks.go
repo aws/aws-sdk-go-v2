@@ -80,6 +80,9 @@ type DescribeExportTasksInput struct {
 	// The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
 	SourceArn *string
 
+	// The type of source for the export.
+	SourceType types.ExportSourceType
+
 	noSmithyDocumentSerde
 }
 

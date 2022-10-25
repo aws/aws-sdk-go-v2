@@ -1,0 +1,8 @@
+{
+    "id": "14204ab1-6038-44e2-b465-8287498407fd",
+    "type": "feature",
+    "description": "This release adds support for six new resource types in IAM Access Analyzer to help you easily identify public and cross-account access to your AWS resources. Updated service API, documentation, and paginators.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

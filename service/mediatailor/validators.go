@@ -610,6 +610,26 @@ func (m *validateOpPutChannelPolicy) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutPlaybackConfiguration struct {
+}
+
+func (*validateOpPutPlaybackConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPlaybackConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPlaybackConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPlaybackConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartChannel struct {
 }
 
@@ -888,6 +908,10 @@ func addOpListVodSourcesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutChannelPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutChannelPolicy{}, middleware.After)
+}
+
+func addOpPutPlaybackConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPlaybackConfiguration{}, middleware.After)
 }
 
 func addOpStartChannelValidationMiddleware(stack *middleware.Stack) error {
@@ -1653,6 +1677,21 @@ func validateOpPutChannelPolicyInput(v *PutChannelPolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutPlaybackConfigurationInput(v *PutPlaybackConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPlaybackConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

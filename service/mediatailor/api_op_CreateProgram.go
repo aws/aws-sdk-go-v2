@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Creates a program.
+// Creates a program within a channel. For information about programs, see Working
+// with programs
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
+// in the MediaTailor User Guide.
 func (c *Client) CreateProgram(ctx context.Context, params *CreateProgramInput, optFns ...func(*Options)) (*CreateProgramOutput, error) {
 	if params == nil {
 		params = &CreateProgramInput{}
@@ -30,12 +33,12 @@ func (c *Client) CreateProgram(ctx context.Context, params *CreateProgramInput, 
 
 type CreateProgramInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel for this Program.
 	//
 	// This member is required.
 	ChannelName *string
 
-	// The identifier for the program you are working on.
+	// The name of the Program.
 	//
 	// This member is required.
 	ProgramName *string
@@ -67,27 +70,25 @@ type CreateProgramOutput struct {
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
 
-	// The ARN of the program.
+	// The ARN to assign to the program.
 	Arn *string
 
-	// The name of the channel that the program belongs to.
+	// The name to assign to the channel for this program.
 	ChannelName *string
 
-	// The timestamp of when the program was created.
+	// The time the program was created.
 	CreationTime *time.Time
 
 	// The name of the LiveSource for this Program.
 	LiveSourceName *string
 
-	// The name of the program.
+	// The name to assign to this program.
 	ProgramName *string
 
-	// The date and time that the program is scheduled to start in ISO 8601 format and
-	// Coordinated Universal Time (UTC). For example, the value
-	// 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
+	// The scheduled start time for this Program.
 	ScheduledStartTime *time.Time
 
-	// The source location name.
+	// The name to assign to the source location for this program.
 	SourceLocationName *string
 
 	// The name that's used to refer to a VOD source.

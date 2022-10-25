@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific live source in a specific source location.
+// The live source to delete.
 func (c *Client) DeleteLiveSource(ctx context.Context, params *DeleteLiveSourceInput, optFns ...func(*Options)) (*DeleteLiveSourceOutput, error) {
 	if params == nil {
 		params = &DeleteLiveSourceInput{}
@@ -28,12 +28,12 @@ func (c *Client) DeleteLiveSource(ctx context.Context, params *DeleteLiveSourceI
 
 type DeleteLiveSourceInput struct {
 
-	// The identifier for the live source you are working on.
+	// The name of the live source.
 	//
 	// This member is required.
 	LiveSourceName *string
 
-	// The identifier for the source location you are working on.
+	// The name of the source location associated with this Live Source.
 	//
 	// This member is required.
 	SourceLocationName *string

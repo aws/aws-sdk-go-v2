@@ -356,6 +356,12 @@ const (
 	ResourceTypeAwsLambdaLayerversion   ResourceType = "AWS::Lambda::LayerVersion"
 	ResourceTypeAwsKmsKey               ResourceType = "AWS::KMS::Key"
 	ResourceTypeAwsSecretsmanagerSecret ResourceType = "AWS::SecretsManager::Secret"
+	ResourceTypeAwsEfsFilesystem        ResourceType = "AWS::EFS::FileSystem"
+	ResourceTypeAwsEc2Snapshot          ResourceType = "AWS::EC2::Snapshot"
+	ResourceTypeAwsEcrRepository        ResourceType = "AWS::ECR::Repository"
+	ResourceTypeAwsRdsDbsnapshot        ResourceType = "AWS::RDS::DBSnapshot"
+	ResourceTypeAwsRdsDbclustersnapshot ResourceType = "AWS::RDS::DBClusterSnapshot"
+	ResourceTypeAwsSnsTopic             ResourceType = "AWS::SNS::Topic"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -370,6 +376,12 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Lambda::LayerVersion",
 		"AWS::KMS::Key",
 		"AWS::SecretsManager::Secret",
+		"AWS::EFS::FileSystem",
+		"AWS::EC2::Snapshot",
+		"AWS::ECR::Repository",
+		"AWS::RDS::DBSnapshot",
+		"AWS::RDS::DBClusterSnapshot",
+		"AWS::SNS::Topic",
 	}
 }
 

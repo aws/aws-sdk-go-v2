@@ -36,7 +36,9 @@ func (c *Client) CreateMap(ctx context.Context, params *CreateMapInput, optFns .
 
 type CreateMapInput struct {
 
-	// Specifies the map style selected from an available data provider.
+	// Specifies the MapConfiguration, including the map style, for the map resource
+	// that you create. The map style defines the look of maps and the data provider
+	// for your map resource.
 	//
 	// This member is required.
 	Configuration *types.MapConfiguration
@@ -100,7 +102,7 @@ type CreateMapOutput struct {
 	// The Amazon Resource Name (ARN) for the map resource. Used to specify a resource
 	// across all AWS.
 	//
-	// * Format example: arn:aws:geo:region:account-id:maps/ExampleMap
+	// * Format example: arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
 	MapArn *string

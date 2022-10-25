@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Provides details about a specific VOD source in a specific source location.
+// Provides details about a specific video on demand (VOD) source in a specific
+// source location.
 func (c *Client) DescribeVodSource(ctx context.Context, params *DescribeVodSourceInput, optFns ...func(*Options)) (*DescribeVodSourceOutput, error) {
 	if params == nil {
 		params = &DescribeVodSourceInput{}
@@ -30,12 +31,12 @@ func (c *Client) DescribeVodSource(ctx context.Context, params *DescribeVodSourc
 
 type DescribeVodSourceInput struct {
 
-	// The identifier for the source location you are working on.
+	// The name of the source location associated with this VOD Source.
 	//
 	// This member is required.
 	SourceLocationName *string
 
-	// The identifier for the VOD source you are working on.
+	// The name of the VOD Source.
 	//
 	// This member is required.
 	VodSourceName *string
@@ -60,7 +61,10 @@ type DescribeVodSourceOutput struct {
 	// The name of the source location associated with the VOD source.
 	SourceLocationName *string
 
-	// The tags assigned to the VOD source.
+	// The tags assigned to the VOD source. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// The name of the VOD source.

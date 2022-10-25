@@ -15036,6 +15036,9 @@ func awsAwsquery_deserializeOpErrorStartExportTask(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBClusterSnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterSnapshotNotFoundFault(response, errorBody)
 
@@ -33596,6 +33599,19 @@ func awsAwsquery_deserializeDocumentExportTask(v **types.ExportTask, decoder smi
 				sv.SourceArn = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("SourceType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceType = types.ExportSourceType(xtv)
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -44369,6 +44385,19 @@ func awsAwsquery_deserializeOpDocumentCancelExportTaskOutput(v **CancelExportTas
 				sv.SourceArn = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("SourceType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceType = types.ExportSourceType(xtv)
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -51320,6 +51349,19 @@ func awsAwsquery_deserializeOpDocumentStartExportTaskOutput(v **StartExportTaskO
 			{
 				xtv := string(val)
 				sv.SourceArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SourceType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceType = types.ExportSourceType(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):

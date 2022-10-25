@@ -1,0 +1,8 @@
+{
+    "id": "4c7e1d7a-0e45-469a-8b5c-a857bfe220cd",
+    "type": "feature",
+    "description": "This release adds new enums for supporting Workspaces Core features, including creating Manual running mode workspaces, importing regular Workspaces Core images and importing g4dn Workspaces Core images.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

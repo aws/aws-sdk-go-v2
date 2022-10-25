@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific program on a specific channel.
+// Deletes a program within a channel. For information about programs, see Working
+// with programs
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
+// in the MediaTailor User Guide.
 func (c *Client) DeleteProgram(ctx context.Context, params *DeleteProgramInput, optFns ...func(*Options)) (*DeleteProgramOutput, error) {
 	if params == nil {
 		params = &DeleteProgramInput{}
@@ -28,12 +31,12 @@ func (c *Client) DeleteProgram(ctx context.Context, params *DeleteProgramInput, 
 
 type DeleteProgramInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel.
 	//
 	// This member is required.
 	ChannelName *string
 
-	// The identifier for the program you are working on.
+	// The name of the program.
 	//
 	// This member is required.
 	ProgramName *string

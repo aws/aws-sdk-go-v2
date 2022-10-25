@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Describes the properties of a specific channel.
+// Describes a channel. For information about MediaTailor channels, see Working
+// with channels
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// in the MediaTailor User Guide.
 func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInput, optFns ...func(*Options)) (*DescribeChannelOutput, error) {
 	if params == nil {
 		params = &DescribeChannelInput{}
@@ -30,7 +33,7 @@ func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInp
 
 type DescribeChannelInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel.
 	//
 	// This member is required.
 	ChannelName *string
@@ -65,7 +68,10 @@ type DescribeChannelOutput struct {
 	// The channel's playback mode.
 	PlaybackMode *string
 
-	// The tags assigned to the channel.
+	// The tags assigned to the channel. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// The channel's tier.

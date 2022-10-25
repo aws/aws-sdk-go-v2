@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the prefetch schedule for a specific playback
-// configuration. If you call GetPrefetchSchedule on an expired prefetch schedule,
-// MediaTailor returns an HTTP 404 status code.
+// Retrieves a prefetch schedule for a playback configuration. A prefetch schedule
+// allows you to tell MediaTailor to fetch and prepare certain ads before an ad
+// break happens. For more information about ad prefetching, see Using ad
+// prefetching
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/prefetching-ads.html) in the
+// MediaTailor User Guide.
 func (c *Client) GetPrefetchSchedule(ctx context.Context, params *GetPrefetchScheduleInput, optFns ...func(*Options)) (*GetPrefetchScheduleOutput, error) {
 	if params == nil {
 		params = &GetPrefetchScheduleInput{}
@@ -31,12 +34,15 @@ func (c *Client) GetPrefetchSchedule(ctx context.Context, params *GetPrefetchSch
 
 type GetPrefetchScheduleInput struct {
 
-	// The identifier for the playback configuration.
+	// The name of the prefetch schedule. The name must be unique among all prefetch
+	// schedules that are associated with the specified playback configuration.
 	//
 	// This member is required.
 	Name *string
 
-	// The name of the playback configuration.
+	// Returns information about the prefetch schedule for a specific playback
+	// configuration. If you call GetPrefetchSchedule on an expired prefetch schedule,
+	// MediaTailor returns an HTTP 404 status code.
 	//
 	// This member is required.
 	PlaybackConfigurationName *string

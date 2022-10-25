@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific VOD source in a specific source location.
+// The video on demand (VOD) source to delete.
 func (c *Client) DeleteVodSource(ctx context.Context, params *DeleteVodSourceInput, optFns ...func(*Options)) (*DeleteVodSourceOutput, error) {
 	if params == nil {
 		params = &DeleteVodSourceInput{}
@@ -28,12 +28,12 @@ func (c *Client) DeleteVodSource(ctx context.Context, params *DeleteVodSourceInp
 
 type DeleteVodSourceInput struct {
 
-	// The identifier for the source location you are working on.
+	// The name of the source location associated with this VOD Source.
 	//
 	// This member is required.
 	SourceLocationName *string
 
-	// The identifier for the VOD source you are working on.
+	// The name of the VOD source.
 	//
 	// This member is required.
 	VodSourceName *string

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates name for a specific VOD source in a source location.
+// The VOD source configuration parameters.
 func (c *Client) CreateVodSource(ctx context.Context, params *CreateVodSourceInput, optFns ...func(*Options)) (*CreateVodSourceOutput, error) {
 	if params == nil {
 		params = &CreateVodSourceInput{}
@@ -35,17 +35,20 @@ type CreateVodSourceInput struct {
 	// This member is required.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
 
-	// The identifier for the source location you are working on.
+	// The name of the source location for this VOD source.
 	//
 	// This member is required.
 	SourceLocationName *string
 
-	// The identifier for the VOD source you are working on.
+	// The name associated with the VOD source.>
 	//
 	// This member is required.
 	VodSourceName *string
 
-	// The tags to assign to the VOD source.
+	// The tags to assign to the VOD source. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -53,25 +56,28 @@ type CreateVodSourceInput struct {
 
 type CreateVodSourceOutput struct {
 
-	// The ARN of the VOD source.
+	// The ARN to assign to this VOD source.
 	Arn *string
 
-	// The timestamp that indicates when the VOD source was created.
+	// The time the VOD source was created.
 	CreationTime *time.Time
 
-	// The HTTP package configurations.
+	// A list of HTTP package configuration parameters for this VOD source.
 	HttpPackageConfigurations []types.HttpPackageConfiguration
 
-	// The last modified time of the VOD source.
+	// The time the VOD source was last modified.
 	LastModifiedTime *time.Time
 
-	// The name of the source location associated with the VOD source.
+	// The name to assign to the source location for this VOD source.
 	SourceLocationName *string
 
-	// The tags assigned to the VOD source.
+	// The tags to assign to the VOD source. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
-	// The name of the VOD source.
+	// The name to assign to the VOD source.
 	VodSourceName *string
 
 	// Metadata pertaining to the operation's result.

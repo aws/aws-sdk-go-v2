@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the tags assigned to the specified playback configuration
-// resource.
+// A list of tags that are associated with this resource. Tags are key-value pairs
+// that you can associate with Amazon resources to help with organization, access
+// control, and cost tracking. For more information, see Tagging AWS Elemental
+// MediaTailor Resources
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,8 +32,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) for the playback configuration. You can get this
-	// from the response to any playback configuration request.
+	// The Amazon Resource Name (ARN) associated with this resource.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -40,7 +42,10 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A comma-separated list of tag key:value pairs.
+	// The tags associated with this resource. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

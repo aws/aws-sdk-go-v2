@@ -57,9 +57,9 @@ type GetMapGlyphsInput struct {
 	// * VectorHereContrast – Fira GO Regular | Fira GO Bold
 	//
 	// *
-	// VectorHereExplore, VectorHereExploreTruck – Firo GO Italic | Fira GO Map | Fira
-	// GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK JP Light | Noto Sans CJK JP
-	// Regular
+	// VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – Fira GO
+	// Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK
+	// JP Light | Noto Sans CJK JP Regular
 	//
 	// This member is required.
 	FontStack *string

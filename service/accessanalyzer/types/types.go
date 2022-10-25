@@ -445,14 +445,47 @@ type CloudTrailProperties struct {
 //
 // The following types satisfy this interface:
 //
+//	ConfigurationMemberEbsSnapshot
+//	ConfigurationMemberEcrRepository
+//	ConfigurationMemberEfsFileSystem
 //	ConfigurationMemberIamRole
 //	ConfigurationMemberKmsKey
+//	ConfigurationMemberRdsDbClusterSnapshot
+//	ConfigurationMemberRdsDbSnapshot
 //	ConfigurationMemberS3Bucket
 //	ConfigurationMemberSecretsManagerSecret
+//	ConfigurationMemberSnsTopic
 //	ConfigurationMemberSqsQueue
 type Configuration interface {
 	isConfiguration()
 }
+
+// The access control configuration is for an Amazon EBS volume snapshot.
+type ConfigurationMemberEbsSnapshot struct {
+	Value EbsSnapshotConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberEbsSnapshot) isConfiguration() {}
+
+// The access control configuration is for an Amazon ECR repository.
+type ConfigurationMemberEcrRepository struct {
+	Value EcrRepositoryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberEcrRepository) isConfiguration() {}
+
+// The access control configuration is for an Amazon EFS file system.
+type ConfigurationMemberEfsFileSystem struct {
+	Value EfsFileSystemConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberEfsFileSystem) isConfiguration() {}
 
 // The access control configuration is for an IAM role.
 type ConfigurationMemberIamRole struct {
@@ -472,6 +505,24 @@ type ConfigurationMemberKmsKey struct {
 
 func (*ConfigurationMemberKmsKey) isConfiguration() {}
 
+// The access control configuration is for an Amazon RDS DB cluster snapshot.
+type ConfigurationMemberRdsDbClusterSnapshot struct {
+	Value RdsDbClusterSnapshotConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberRdsDbClusterSnapshot) isConfiguration() {}
+
+// The access control configuration is for an Amazon RDS DB snapshot.
+type ConfigurationMemberRdsDbSnapshot struct {
+	Value RdsDbSnapshotConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberRdsDbSnapshot) isConfiguration() {}
+
 // The access control configuration is for an Amazon S3 Bucket.
 type ConfigurationMemberS3Bucket struct {
 	Value S3BucketConfiguration
@@ -489,6 +540,15 @@ type ConfigurationMemberSecretsManagerSecret struct {
 }
 
 func (*ConfigurationMemberSecretsManagerSecret) isConfiguration() {}
+
+// The access control configuration is for an Amazon SNS topic
+type ConfigurationMemberSnsTopic struct {
+	Value SnsTopicConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberSnsTopic) isConfiguration() {}
 
 // The access control configuration is for an Amazon SQS queue.
 type ConfigurationMemberSqsQueue struct {
@@ -513,6 +573,116 @@ type Criterion struct {
 
 	// A "not equals" operator to match for the filter used to create the rule.
 	Neq []string
+
+	noSmithyDocumentSerde
+}
+
+// The proposed access control configuration for an Amazon EBS volume snapshot. You
+// can propose a configuration for a new Amazon EBS volume snapshot or an Amazon
+// EBS volume snapshot that you own by specifying the user IDs, groups, and
+// optional KMS encryption key. For more information, see ModifySnapshotAttribute
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifySnapshotAttribute.html).
+type EbsSnapshotConfiguration struct {
+
+	// The groups that have access to the Amazon EBS volume snapshot. If the value all
+	// is specified, then the Amazon EBS volume snapshot is public.
+	//
+	// * If the
+	// configuration is for an existing Amazon EBS volume snapshot and you do not
+	// specify the groups, then the access preview uses the existing shared groups for
+	// the snapshot.
+	//
+	// * If the access preview is for a new resource and you do not
+	// specify the groups, then the access preview considers the snapshot without any
+	// groups.
+	//
+	// * To propose deletion of existing shared groups, you can specify an
+	// empty list for groups.
+	Groups []string
+
+	// The KMS key identifier for an encrypted Amazon EBS volume snapshot. The KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+	//
+	// *
+	// If the configuration is for an existing Amazon EBS volume snapshot and you do
+	// not specify the kmsKeyId, or you specify an empty string, then the access
+	// preview uses the existing kmsKeyId of the snapshot.
+	//
+	// * If the access preview is
+	// for a new resource and you do not specify the kmsKeyId, the access preview
+	// considers the snapshot as unencrypted.
+	KmsKeyId *string
+
+	// The IDs of the Amazon Web Services accounts that have access to the Amazon EBS
+	// volume snapshot.
+	//
+	// * If the configuration is for an existing Amazon EBS volume
+	// snapshot and you do not specify the userIds, then the access preview uses the
+	// existing shared userIds for the snapshot.
+	//
+	// * If the access preview is for a new
+	// resource and you do not specify the userIds, then the access preview considers
+	// the snapshot without any userIds.
+	//
+	// * To propose deletion of existing shared
+	// accountIds, you can specify an empty list for userIds.
+	UserIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The proposed access control configuration for an Amazon ECR repository. You can
+// propose a configuration for a new Amazon ECR repository or an existing Amazon
+// ECR repository that you own by specifying the Amazon ECR policy. For more
+// information, see Repository
+// (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_Repository.html).
+//
+// *
+// If the configuration is for an existing Amazon ECR repository and you do not
+// specify the Amazon ECR policy, then the access preview uses the existing Amazon
+// ECR policy for the repository.
+//
+// * If the access preview is for a new resource
+// and you do not specify the policy, then the access preview assumes an Amazon ECR
+// repository without a policy.
+//
+// * To propose deletion of an existing Amazon ECR
+// repository policy, you can specify an empty string for the Amazon ECR policy.
+type EcrRepositoryConfiguration struct {
+
+	// The JSON repository policy text to apply to the Amazon ECR repository. For more
+	// information, see Private repository policy examples
+	// (https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html)
+	// in the Amazon ECR User Guide.
+	RepositoryPolicy *string
+
+	noSmithyDocumentSerde
+}
+
+// The proposed access control configuration for an Amazon EFS file system. You can
+// propose a configuration for a new Amazon EFS file system or an existing Amazon
+// EFS file system that you own by specifying the Amazon EFS policy. For more
+// information, see Using file systems in Amazon EFS
+// (https://docs.aws.amazon.com/efs/latest/ug/using-fs.html).
+//
+// * If the
+// configuration is for an existing Amazon EFS file system and you do not specify
+// the Amazon EFS policy, then the access preview uses the existing Amazon EFS
+// policy for the file system.
+//
+// * If the access preview is for a new resource and
+// you do not specify the policy, then the access preview assumes an Amazon EFS
+// file system without a policy.
+//
+// * To propose deletion of an existing Amazon EFS
+// file system policy, you can specify an empty string for the Amazon EFS policy.
+type EfsFileSystemConfiguration struct {
+
+	// The JSON policy definition to apply to the Amazon EFS file system. For more
+	// information on the elements that make up a file system policy, see Amazon EFS
+	// Resource-based policies
+	// (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies).
+	FileSystemPolicy *string
 
 	noSmithyDocumentSerde
 }
@@ -1074,6 +1244,135 @@ type Position struct {
 	noSmithyDocumentSerde
 }
 
+// The values for a manual Amazon RDS DB cluster snapshot attribute.
+//
+// The following types satisfy this interface:
+//
+//	RdsDbClusterSnapshotAttributeValueMemberAccountIds
+type RdsDbClusterSnapshotAttributeValue interface {
+	isRdsDbClusterSnapshotAttributeValue()
+}
+
+// The Amazon Web Services account IDs that have access to the manual Amazon RDS DB
+// cluster snapshot. If the value all is specified, then the Amazon RDS DB cluster
+// snapshot is public and can be copied or restored by all Amazon Web Services
+// accounts.
+//
+// * If the configuration is for an existing Amazon RDS DB cluster
+// snapshot and you do not specify the accountIds in
+// RdsDbClusterSnapshotAttributeValue, then the access preview uses the existing
+// shared accountIds for the snapshot.
+//
+// * If the access preview is for a new
+// resource and you do not specify the specify the accountIds in
+// RdsDbClusterSnapshotAttributeValue, then the access preview considers the
+// snapshot without any attributes.
+//
+// * To propose deletion of existing shared
+// accountIds, you can specify an empty list for accountIds in the
+// RdsDbClusterSnapshotAttributeValue.
+type RdsDbClusterSnapshotAttributeValueMemberAccountIds struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*RdsDbClusterSnapshotAttributeValueMemberAccountIds) isRdsDbClusterSnapshotAttributeValue() {}
+
+// The proposed access control configuration for an Amazon RDS DB cluster snapshot.
+// You can propose a configuration for a new Amazon RDS DB cluster snapshot or an
+// Amazon RDS DB cluster snapshot that you own by specifying the
+// RdsDbClusterSnapshotAttributeValue and optional KMS encryption key. For more
+// information, see ModifyDBClusterSnapshotAttribute
+// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBClusterSnapshotAttribute.html).
+type RdsDbClusterSnapshotConfiguration struct {
+
+	// The names and values of manual DB cluster snapshot attributes. Manual DB cluster
+	// snapshot attributes are used to authorize other Amazon Web Services accounts to
+	// restore a manual DB cluster snapshot. The only valid value for AttributeName for
+	// the attribute map is restore
+	Attributes map[string]RdsDbClusterSnapshotAttributeValue
+
+	// The KMS key identifier for an encrypted Amazon RDS DB cluster snapshot. The KMS
+	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS
+	// key.
+	//
+	// * If the configuration is for an existing Amazon RDS DB cluster snapshot
+	// and you do not specify the kmsKeyId, or you specify an empty string, then the
+	// access preview uses the existing kmsKeyId of the snapshot.
+	//
+	// * If the access
+	// preview is for a new resource and you do not specify the specify the kmsKeyId,
+	// then the access preview considers the snapshot as unencrypted.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The name and values of a manual Amazon RDS DB snapshot attribute. Manual DB
+// snapshot attributes are used to authorize other Amazon Web Services accounts to
+// restore a manual DB snapshot.
+//
+// The following types satisfy this interface:
+//
+//	RdsDbSnapshotAttributeValueMemberAccountIds
+type RdsDbSnapshotAttributeValue interface {
+	isRdsDbSnapshotAttributeValue()
+}
+
+// The Amazon Web Services account IDs that have access to the manual Amazon RDS DB
+// snapshot. If the value all is specified, then the Amazon RDS DB snapshot is
+// public and can be copied or restored by all Amazon Web Services accounts.
+//
+// * If
+// the configuration is for an existing Amazon RDS DB snapshot and you do not
+// specify the accountIds in RdsDbSnapshotAttributeValue, then the access preview
+// uses the existing shared accountIds for the snapshot.
+//
+// * If the access preview
+// is for a new resource and you do not specify the specify the accountIds in
+// RdsDbSnapshotAttributeValue, then the access preview considers the snapshot
+// without any attributes.
+//
+// * To propose deletion of an existing shared accountIds,
+// you can specify an empty list for accountIds in the RdsDbSnapshotAttributeValue.
+type RdsDbSnapshotAttributeValueMemberAccountIds struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*RdsDbSnapshotAttributeValueMemberAccountIds) isRdsDbSnapshotAttributeValue() {}
+
+// The proposed access control configuration for an Amazon RDS DB snapshot. You can
+// propose a configuration for a new Amazon RDS DB snapshot or an Amazon RDS DB
+// snapshot that you own by specifying the RdsDbSnapshotAttributeValue and optional
+// KMS encryption key. For more information, see ModifyDBSnapshotAttribute
+// (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_ModifyDBSnapshotAttribute.html).
+type RdsDbSnapshotConfiguration struct {
+
+	// The names and values of manual DB snapshot attributes. Manual DB snapshot
+	// attributes are used to authorize other Amazon Web Services accounts to restore a
+	// manual DB snapshot. The only valid value for attributeName for the attribute map
+	// is restore.
+	Attributes map[string]RdsDbSnapshotAttributeValue
+
+	// The KMS key identifier for an encrypted Amazon RDS DB snapshot. The KMS key
+	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+	//
+	// *
+	// If the configuration is for an existing Amazon RDS DB snapshot and you do not
+	// specify the kmsKeyId, or you specify an empty string, then the access preview
+	// uses the existing kmsKeyId of the snapshot.
+	//
+	// * If the access preview is for a
+	// new resource and you do not specify the specify the kmsKeyId, then the access
+	// preview considers the snapshot as unencrypted.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an Amazon S3 access point or multi-region access point for
 // the bucket. You can propose up to 10 access points or multi-region access points
 // per bucket. If the proposed Amazon S3 access point configuration is for an
@@ -1206,6 +1505,27 @@ type SecretsManagerSecretConfiguration struct {
 
 	// The proposed resource policy defining who can access or manage the secret.
 	SecretPolicy *string
+
+	noSmithyDocumentSerde
+}
+
+// The proposed access control configuration for an Amazon SNS topic. You can
+// propose a configuration for a new Amazon SNS topic or an existing Amazon SNS
+// topic that you own by specifying the policy. If the configuration is for an
+// existing Amazon SNS topic and you do not specify the Amazon SNS policy, then the
+// access preview uses the existing Amazon SNS policy for the topic. If the access
+// preview is for a new resource and you do not specify the policy, then the access
+// preview assumes an Amazon SNS topic without a policy. To propose deletion of an
+// existing Amazon SNS topic policy, you can specify an empty string for the Amazon
+// SNS policy. For more information, see Topic
+// (https://docs.aws.amazon.com/sns/latest/api/API_Topic.html).
+type SnsTopicConfiguration struct {
+
+	// The JSON policy text that defines who can access an Amazon SNS topic. For more
+	// information, see Example cases for Amazon SNS access control
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html) in
+	// the Amazon SNS Developer Guide.
+	TopicPolicy *string
 
 	noSmithyDocumentSerde
 }
@@ -1407,7 +1727,9 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAclGrantee()                 {}
-func (*UnknownUnionMember) isConfiguration()              {}
-func (*UnknownUnionMember) isNetworkOriginConfiguration() {}
-func (*UnknownUnionMember) isPathElement()                {}
+func (*UnknownUnionMember) isAclGrantee()                         {}
+func (*UnknownUnionMember) isConfiguration()                      {}
+func (*UnknownUnionMember) isNetworkOriginConfiguration()         {}
+func (*UnknownUnionMember) isPathElement()                        {}
+func (*UnknownUnionMember) isRdsDbClusterSnapshotAttributeValue() {}
+func (*UnknownUnionMember) isRdsDbSnapshotAttributeValue()        {}

@@ -30,21 +30,26 @@ func (c *Client) GetChannelSchedule(ctx context.Context, params *GetChannelSched
 
 type GetChannelScheduleInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel associated with this Channel Schedule.
 	//
 	// This member is required.
 	ChannelName *string
 
-	// The schedule duration in minutes. The maximum duration is 4320 minutes (three
-	// days).
+	// The duration in minutes of the channel schedule.
 	DurationMinutes *string
 
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of channel schedules that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults channel
+	// schedules, use the value of NextToken in the response to get the next page of
+	// results.
 	MaxResults int32
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// (Optional) If the playback configuration has more than MaxResults channel
+	// schedules, use NextToken to get the second and subsequent pages of results. For
+	// the first GetChannelScheduleRequest request, omit this value. For the second and
+	// subsequent requests, get the value of NextToken from the previous response and
+	// specify that value for NextToken in the request. If the previous response didn't
+	// include a NextToken element, there are no more channel schedules to get.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,8 +60,8 @@ type GetChannelScheduleOutput struct {
 	// A list of schedule entries for the channel.
 	Items []types.ScheduleEntry
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -139,8 +144,10 @@ var _ GetChannelScheduleAPIClient = (*Client)(nil)
 // GetChannelSchedulePaginatorOptions is the paginator options for
 // GetChannelSchedule
 type GetChannelSchedulePaginatorOptions struct {
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of channel schedules that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults channel
+	// schedules, use the value of NextToken in the response to get the next page of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

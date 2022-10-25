@@ -250,6 +250,24 @@ func (EngineFamily) Values() []EngineFamily {
 	}
 }
 
+type ExportSourceType string
+
+// Enum values for ExportSourceType
+const (
+	ExportSourceTypeSnapshot ExportSourceType = "SNAPSHOT"
+	ExportSourceTypeCluster  ExportSourceType = "CLUSTER"
+)
+
+// Values returns all known values for ExportSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportSourceType) Values() []ExportSourceType {
+	return []ExportSourceType{
+		"SNAPSHOT",
+		"CLUSTER",
+	}
+}
+
 type FailoverStatus string
 
 // Enum values for FailoverStatus

@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Retrieves the properties of the requested program.
+// Describes a program within a channel. For information about programs, see
+// Working with programs
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
+// in the MediaTailor User Guide.
 func (c *Client) DescribeProgram(ctx context.Context, params *DescribeProgramInput, optFns ...func(*Options)) (*DescribeProgramOutput, error) {
 	if params == nil {
 		params = &DescribeProgramInput{}
@@ -30,12 +33,12 @@ func (c *Client) DescribeProgram(ctx context.Context, params *DescribeProgramInp
 
 type DescribeProgramInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel associated with this Program.
 	//
 	// This member is required.
 	ChannelName *string
 
-	// The identifier for the program you are working on.
+	// The name of the program.
 	//
 	// This member is required.
 	ProgramName *string

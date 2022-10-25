@@ -12194,6 +12194,11 @@ func awsAwsquery_serializeOpDocumentDescribeExportTasksInput(v *DescribeExportTa
 		objectKey.String(*v.SourceArn)
 	}
 
+	if len(v.SourceType) > 0 {
+		objectKey := object.Key("SourceType")
+		objectKey.String(string(v.SourceType))
+	}
+
 	return nil
 }
 

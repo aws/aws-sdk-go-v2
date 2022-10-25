@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of alerts for the given resource.
+// Lists the alerts that are associated with a MediaTailor channel assembly
+// resource.
 func (c *Client) ListAlerts(ctx context.Context, params *ListAlertsInput, optFns ...func(*Options)) (*ListAlertsOutput, error) {
 	if params == nil {
 		params = &ListAlertsInput{}
@@ -35,12 +36,13 @@ type ListAlertsInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of alerts that you want MediaTailor to return in response to
+	// the current request. If there are more than MaxResults alerts, use the value of
+	// NextToken in the response to get the next page of results.
 	MaxResults int32
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,8 +53,8 @@ type ListAlertsOutput struct {
 	// A list of alerts that are associated with this resource.
 	Items []types.Alert
 
-	// Pagination token from the list request. Use the token to fetch the next page of
-	// results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -133,8 +135,9 @@ var _ ListAlertsAPIClient = (*Client)(nil)
 
 // ListAlertsPaginatorOptions is the paginator options for ListAlerts
 type ListAlertsPaginatorOptions struct {
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of alerts that you want MediaTailor to return in response to
+	// the current request. If there are more than MaxResults alerts, use the value of
+	// NextToken in the response to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

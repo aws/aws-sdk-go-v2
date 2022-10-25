@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a channel's IAM policy.
+// The channel policy to delete.
 func (c *Client) DeleteChannelPolicy(ctx context.Context, params *DeleteChannelPolicyInput, optFns ...func(*Options)) (*DeleteChannelPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteChannelPolicyInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteChannelPolicy(ctx context.Context, params *DeleteChannelP
 
 type DeleteChannelPolicyInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel associated with this channel policy.
 	//
 	// This member is required.
 	ChannelName *string

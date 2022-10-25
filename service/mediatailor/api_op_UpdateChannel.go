@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Updates an existing channel.
+// Updates a channel. For information about MediaTailor channels, see Working with
+// channels
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// in the MediaTailor User Guide.
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
 		params = &UpdateChannelInput{}
@@ -30,7 +33,7 @@ func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, 
 
 type UpdateChannelInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel.
 	//
 	// This member is required.
 	ChannelName *string
@@ -41,8 +44,8 @@ type UpdateChannelInput struct {
 	Outputs []types.RequestOutputItem
 
 	// The slate used to fill gaps between programs in the schedule. You must configure
-	// filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't
-	// support filler slate for channels using the LOOP PlaybackMode.
+	// filler slate if your channel uses the LINEARPlaybackMode. MediaTailor doesn't
+	// support filler slate for channels using the LOOPPlaybackMode.
 	FillerSlate *types.SlateSource
 
 	noSmithyDocumentSerde
@@ -50,35 +53,42 @@ type UpdateChannelInput struct {
 
 type UpdateChannelOutput struct {
 
-	// The ARN of the channel.
+	// The Amazon Resource Name (ARN) associated with the channel.
 	Arn *string
 
 	// The name of the channel.
 	ChannelName *string
 
-	// Indicates whether the channel is in a running state or not.
+	// Returns the state whether the channel is running or not.
 	ChannelState types.ChannelState
 
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
 
-	// Contains information about the slate used to fill gaps between programs in the
-	// schedule.
+	// The slate used to fill gaps between programs in the schedule. You must configure
+	// filler slate if your channel uses the LINEARPlaybackMode. MediaTailor doesn't
+	// support filler slate for channels using the LOOPPlaybackMode.
 	FillerSlate *types.SlateSource
 
-	// The timestamp of when the channel was last modified.
+	// The timestamp that indicates when the channel was last modified.
 	LastModifiedTime *time.Time
 
 	// The channel's output properties.
 	Outputs []types.ResponseOutputItem
 
-	// The channel's playback mode.
+	// The type of playback mode for this channel. LINEAR - Programs play back-to-back
+	// only once. LOOP - Programs play back-to-back in an endless loop. When the last
+	// program in the schedule plays, playback loops back to the first program in the
+	// schedule.
 	PlaybackMode *string
 
-	// The tags assigned to the channel.
+	// The tags to assign to the channel. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
-	// The channel's tier.
+	// The tier associated with this Channel.
 	Tier *string
 
 	// Metadata pertaining to the operation's result.

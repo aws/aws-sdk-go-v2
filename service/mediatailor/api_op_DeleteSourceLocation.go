@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a source location on a specific channel.
+// Deletes a source location. A source location is a container for sources. For
+// more information about source locations, see Working with source locations
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html)
+// in the MediaTailor User Guide.
 func (c *Client) DeleteSourceLocation(ctx context.Context, params *DeleteSourceLocationInput, optFns ...func(*Options)) (*DeleteSourceLocationOutput, error) {
 	if params == nil {
 		params = &DeleteSourceLocationInput{}
@@ -28,7 +31,7 @@ func (c *Client) DeleteSourceLocation(ctx context.Context, params *DeleteSourceL
 
 type DeleteSourceLocationInput struct {
 
-	// The identifier for the source location you are working on.
+	// The name of the source location.
 	//
 	// This member is required.
 	SourceLocationName *string

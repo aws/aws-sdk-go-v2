@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a new playback configuration to AWS Elemental MediaTailor.
+// Creates a playback configuration. For information about MediaTailor
+// configurations, see Working with configurations in AWS Elemental MediaTailor
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
 func (c *Client) PutPlaybackConfiguration(ctx context.Context, params *PutPlaybackConfigurationInput, optFns ...func(*Options)) (*PutPlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &PutPlaybackConfigurationInput{}
@@ -28,6 +30,11 @@ func (c *Client) PutPlaybackConfiguration(ctx context.Context, params *PutPlayba
 }
 
 type PutPlaybackConfigurationInput struct {
+
+	// The identifier for the playback configuration.
+	//
+	// This member is required.
+	Name *string
 
 	// The URL for the ad decision server (ADS). This includes the specification of
 	// static parameters and placeholders for dynamic parameters. AWS Elemental
@@ -65,9 +72,6 @@ type PutPlaybackConfigurationInput struct {
 	// enable customization of the personalized manifests created by MediaTailor.
 	ManifestProcessingRules *types.ManifestProcessingRules
 
-	// The identifier for the playback configuration.
-	Name *string
-
 	// Defines the maximum duration of underfilled ad time (in seconds) allowed in an
 	// ad break. If the duration of underfilled ad time exceeds the personalization
 	// threshold, then the personalization of the ad break is abandoned and the
@@ -86,7 +90,11 @@ type PutPlaybackConfigurationInput struct {
 	// high-quality asset that contains both audio and video.
 	SlateAdUrl *string
 
-	// The tags to assign to the playback configuration.
+	// The tags to assign to the playback configuration. Tags are key-value pairs that
+	// you can associate with Amazon resources to help with organization, access
+	// control, and cost tracking. For more information, see Tagging AWS Elemental
+	// MediaTailor Resources
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
@@ -107,7 +115,7 @@ type PutPlaybackConfigurationOutput struct {
 	// The URL for the ad decision server (ADS). This includes the specification of
 	// static parameters and placeholders for dynamic parameters. AWS Elemental
 	// MediaTailor substitutes player-specific and session-specific parameters as
-	// needed when calling the ADS. Alternately, for testing, you can provide a static
+	// needed when calling the ADS. Alternately, for testing you can provide a static
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
@@ -159,26 +167,29 @@ type PutPlaybackConfigurationOutput struct {
 	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
 	PersonalizationThresholdSeconds int32
 
-	// The Amazon Resource Name (ARN) for the playback configuration.
+	// The Amazon Resource Name (ARN) associated with the playback configuration.
 	PlaybackConfigurationArn *string
 
-	// The URL that the player accesses to get a manifest from AWS Elemental
-	// MediaTailor. This session will use server-side reporting.
+	// The playback endpoint prefix associated with the playback configuration.
 	PlaybackEndpointPrefix *string
 
-	// The URL that the player uses to initialize a session that uses client-side
-	// reporting.
+	// The session initialization endpoint prefix associated with the playback
+	// configuration.
 	SessionInitializationEndpointPrefix *string
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in
-	// gaps in media content. Configuring the slate is optional for non-VPAID playback
+	// gaps in media content. Configuring the slate is optional for non-VPAID
 	// configurations. For VPAID, the slate is required because MediaTailor provides it
-	// in the slots designated for dynamic ad content. The slate must be a high-quality
-	// asset that contains both audio and video.
+	// in the slots that are designated for dynamic ad content. The slate must be a
+	// high-quality asset that contains both audio and video.
 	SlateAdUrl *string
 
-	// The tags assigned to the playback configuration.
+	// The tags to assign to the playback configuration. Tags are key-value pairs that
+	// you can associate with Amazon resources to help with organization, access
+	// control, and cost tracking. For more information, see Tagging AWS Elemental
+	// MediaTailor Resources
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
@@ -240,6 +251,9 @@ func (c *Client) addOperationPutPlaybackConfigurationMiddlewares(stack *middlewa
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpPutPlaybackConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPlaybackConfiguration(options.Region), middleware.Before); err != nil {

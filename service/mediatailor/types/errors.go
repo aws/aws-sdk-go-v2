@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Invalid request parameters.
+// A request contains unexpected data.
 type BadRequestException struct {
 	Message *string
 

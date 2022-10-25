@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the playback configuration for the specified name.
+// Retrieves a playback configuration. For information about MediaTailor
+// configurations, see Working with configurations in AWS Elemental MediaTailor
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
 func (c *Client) GetPlaybackConfiguration(ctx context.Context, params *GetPlaybackConfigurationInput, optFns ...func(*Options)) (*GetPlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &GetPlaybackConfigurationInput{}
@@ -113,7 +115,11 @@ type GetPlaybackConfigurationOutput struct {
 	// asset that contains both audio and video.
 	SlateAdUrl *string
 
-	// The tags assigned to the playback configuration.
+	// The tags assigned to the playback configuration. Tags are key-value pairs that
+	// you can associate with Amazon resources to help with organization, access
+	// control, and cost tracking. For more information, see Tagging AWS Elemental
+	// MediaTailor Resources
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom

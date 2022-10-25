@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Creates a channel.
+// Creates a channel. For information about MediaTailor channels, see Working with
+// channels
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
+// in the MediaTailor User Guide.
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}
@@ -30,7 +33,7 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
-	// The identifier for the channel you are working on.
+	// The name of the channel.
 	//
 	// This member is required.
 	ChannelName *string
@@ -50,11 +53,14 @@ type CreateChannelInput struct {
 	PlaybackMode types.PlaybackMode
 
 	// The slate used to fill gaps between programs in the schedule. You must configure
-	// filler slate if your channel uses the LINEAR PlaybackMode. MediaTailor doesn't
-	// support filler slate for channels using the LOOP PlaybackMode.
+	// filler slate if your channel uses the LINEARPlaybackMode. MediaTailor doesn't
+	// support filler slate for channels using the LOOPPlaybackMode.
 	FillerSlate *types.SlateSource
 
-	// The tags to assign to the channel.
+	// The tags to assign to the channel. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
 	// The tier of the channel.
@@ -65,10 +71,10 @@ type CreateChannelInput struct {
 
 type CreateChannelOutput struct {
 
-	// The ARN of the channel.
+	// The Amazon Resource Name (ARN) to assign to the channel.
 	Arn *string
 
-	// The name of the channel.
+	// The name to assign to the channel.
 	ChannelName *string
 
 	// Indicates whether the channel is in a running state or not.
@@ -84,16 +90,19 @@ type CreateChannelOutput struct {
 	// The timestamp of when the channel was last modified.
 	LastModifiedTime *time.Time
 
-	// The channel's output properties.
+	// The output properties to assign to the channel.
 	Outputs []types.ResponseOutputItem
 
-	// The channel's playback mode.
+	// The playback mode to assign to the channel.
 	PlaybackMode *string
 
-	// The tags assigned to the channel.
+	// The tags to assign to the channel. Tags are key-value pairs that you can
+	// associate with Amazon resources to help with organization, access control, and
+	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
+	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
 	Tags map[string]string
 
-	// The channel's tier.
+	// The tier of the channel.
 	Tier *string
 
 	// Metadata pertaining to the operation's result.

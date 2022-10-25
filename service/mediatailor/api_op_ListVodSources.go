@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the VOD sources in a source location.
+// Lists the VOD sources contained in a source location. A source represents a
+// piece of content.
 func (c *Client) ListVodSources(ctx context.Context, params *ListVodSourcesInput, optFns ...func(*Options)) (*ListVodSourcesOutput, error) {
 	if params == nil {
 		params = &ListVodSourcesInput{}
@@ -30,17 +31,18 @@ func (c *Client) ListVodSources(ctx context.Context, params *ListVodSourcesInput
 
 type ListVodSourcesInput struct {
 
-	// The identifier for the source location you are working on.
+	// The name of the source location associated with this VOD Source list.
 	//
 	// This member is required.
 	SourceLocationName *string
 
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of VOD sources that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults VOD sources,
+	// use the value of NextToken in the response to get the next page of results.
 	MaxResults int32
 
-	// Pagination token from the GET list request. Use the token to fetch the next page
-	// of results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,8 +53,8 @@ type ListVodSourcesOutput struct {
 	// Lists the VOD sources.
 	Items []types.VodSource
 
-	// Pagination token from the list request. Use the token to fetch the next page of
-	// results.
+	// Pagination token returned by the list request when results exceed the maximum
+	// allowed. Use the token to fetch the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,8 +136,9 @@ var _ ListVodSourcesAPIClient = (*Client)(nil)
 
 // ListVodSourcesPaginatorOptions is the paginator options for ListVodSources
 type ListVodSourcesPaginatorOptions struct {
-	// Upper bound on number of records to return. The maximum number of results is
-	// 100.
+	// The maximum number of VOD sources that you want MediaTailor to return in
+	// response to the current request. If there are more than MaxResults VOD sources,
+	// use the value of NextToken in the response to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

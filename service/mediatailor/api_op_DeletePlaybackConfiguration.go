@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the playback configuration for the specified name.
+// Deletes a playback configuration. For information about MediaTailor
+// configurations, see Working with configurations in AWS Elemental MediaTailor
+// (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html).
 func (c *Client) DeletePlaybackConfiguration(ctx context.Context, params *DeletePlaybackConfigurationInput, optFns ...func(*Options)) (*DeletePlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &DeletePlaybackConfigurationInput{}
@@ -28,7 +30,7 @@ func (c *Client) DeletePlaybackConfiguration(ctx context.Context, params *Delete
 
 type DeletePlaybackConfigurationInput struct {
 
-	// The identifier for the playback configuration.
+	// The name of the playback configuration.
 	//
 	// This member is required.
 	Name *string

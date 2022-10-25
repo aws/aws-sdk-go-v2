@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an IAM policy for the channel.
+// Creates an IAM policy for the channel. IAM policies are used to control access
+// to your channel.
 func (c *Client) PutChannelPolicy(ctx context.Context, params *PutChannelPolicyInput, optFns ...func(*Options)) (*PutChannelPolicyOutput, error) {
 	if params == nil {
 		params = &PutChannelPolicyInput{}
@@ -28,7 +29,7 @@ func (c *Client) PutChannelPolicy(ctx context.Context, params *PutChannelPolicyI
 
 type PutChannelPolicyInput struct {
 
-	// The identifier for the channel you are working on.
+	// The channel name associated with this Channel Policy.
 	//
 	// This member is required.
 	ChannelName *string

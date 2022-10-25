@@ -350,6 +350,7 @@ type RunningMode string
 const (
 	RunningModeAutoStop RunningMode = "AUTO_STOP"
 	RunningModeAlwaysOn RunningMode = "ALWAYS_ON"
+	RunningModeManual   RunningMode = "MANUAL"
 )
 
 // Values returns all known values for RunningMode. Note that this can be expanded
@@ -359,6 +360,7 @@ func (RunningMode) Values() []RunningMode {
 	return []RunningMode{
 		"AUTO_STOP",
 		"ALWAYS_ON",
+		"MANUAL",
 	}
 }
 
@@ -464,11 +466,13 @@ type WorkspaceImageIngestionProcess string
 
 // Enum values for WorkspaceImageIngestionProcess
 const (
-	WorkspaceImageIngestionProcessByolRegular      WorkspaceImageIngestionProcess = "BYOL_REGULAR"
-	WorkspaceImageIngestionProcessByolGraphics     WorkspaceImageIngestionProcess = "BYOL_GRAPHICS"
-	WorkspaceImageIngestionProcessByolGraphicspro  WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
-	WorkspaceImageIngestionProcessByolGraphicsG4dn WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN"
-	WorkspaceImageIngestionProcessByolRegularWsp   WorkspaceImageIngestionProcess = "BYOL_REGULAR_WSP"
+	WorkspaceImageIngestionProcessByolRegular          WorkspaceImageIngestionProcess = "BYOL_REGULAR"
+	WorkspaceImageIngestionProcessByolGraphics         WorkspaceImageIngestionProcess = "BYOL_GRAPHICS"
+	WorkspaceImageIngestionProcessByolGraphicspro      WorkspaceImageIngestionProcess = "BYOL_GRAPHICSPRO"
+	WorkspaceImageIngestionProcessByolGraphicsG4dn     WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN"
+	WorkspaceImageIngestionProcessByolRegularWsp       WorkspaceImageIngestionProcess = "BYOL_REGULAR_WSP"
+	WorkspaceImageIngestionProcessByolRegularByop      WorkspaceImageIngestionProcess = "BYOL_REGULAR_BYOP"
+	WorkspaceImageIngestionProcessByolGraphicsG4dnByop WorkspaceImageIngestionProcess = "BYOL_GRAPHICS_G4DN_BYOP"
 )
 
 // Values returns all known values for WorkspaceImageIngestionProcess. Note that
@@ -482,6 +486,8 @@ func (WorkspaceImageIngestionProcess) Values() []WorkspaceImageIngestionProcess 
 		"BYOL_GRAPHICSPRO",
 		"BYOL_GRAPHICS_G4DN",
 		"BYOL_REGULAR_WSP",
+		"BYOL_REGULAR_BYOP",
+		"BYOL_GRAPHICS_G4DN_BYOP",
 	}
 }
 

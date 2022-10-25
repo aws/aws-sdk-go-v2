@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from the specified playback configuration resource. You can specify
-// one or more tags to remove.
+// The resource to untag.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -29,14 +28,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) for the playback configuration. You can get this
-	// from the response to any playback configuration request.
+	// The Amazon Resource Name (ARN) of the resource to untag.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A comma-separated list of the tag keys to remove from the playback
-	// configuration.
+	// The tag keys associated with the resource.
 	//
 	// This member is required.
 	TagKeys []string
