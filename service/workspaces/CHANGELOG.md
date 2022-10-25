@@ -1,3 +1,7 @@
+# v1.24.0 (2022-10-25)
+
+* **Feature**: This release adds new enums for supporting Workspaces Core features, including creating Manual running mode workspaces, importing regular Workspaces Core images and importing g4dn Workspaces Core images.
+
 # v1.23.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

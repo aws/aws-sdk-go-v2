@@ -1,3 +1,7 @@
+# v1.19.3 (2022-10-25)
+
+* **Documentation**: Added new map styles with satellite imagery for map resources using HERE as a data provider.
+
 # v1.19.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

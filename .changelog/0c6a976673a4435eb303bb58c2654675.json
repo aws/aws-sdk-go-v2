@@ -1,8 +1,0 @@
-{
-    "id": "0c6a9766-73a4-435e-b303-bb58c2654675",
-    "type": "documentation",
-    "description": "Added new map styles with satellite imagery for map resources using HERE as a data provider.",
-    "modules": [
-        "service/location"
-    ]
-}

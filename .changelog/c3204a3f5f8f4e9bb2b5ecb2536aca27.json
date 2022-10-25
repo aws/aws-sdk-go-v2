@@ -1,8 +1,0 @@
-{
-    "id": "c3204a3f-5f8f-4e9b-b2b5-ecb2536aca27",
-    "type": "feature",
-    "description": "This release is a documentation update",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

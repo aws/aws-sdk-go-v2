@@ -1,3 +1,17 @@
+# Release (2022-10-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.17.0](service/accessanalyzer/CHANGELOG.md#v1170-2022-10-25)
+  * **Feature**: This release adds support for six new resource types in IAM Access Analyzer to help you easily identify public and cross-account access to your AWS resources. Updated service API, documentation, and paginators.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.19.3](service/location/CHANGELOG.md#v1193-2022-10-25)
+  * **Documentation**: Added new map styles with satellite imagery for map resources using HERE as a data provider.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.18.0](service/mediatailor/CHANGELOG.md#v1180-2022-10-25)
+  * **Feature**: This release is a documentation update
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.27.0](service/rds/CHANGELOG.md#v1270-2022-10-25)
+  * **Feature**: Relational Database Service - This release adds support for exporting DB cluster data to Amazon S3.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.24.0](service/workspaces/CHANGELOG.md#v1240-2022-10-25)
+  * **Feature**: This release adds new enums for supporting Workspaces Core features, including creating Manual running mode workspaces, importing regular Workspaces Core images and importing g4dn Workspaces Core images.
+
 # Release (2022-10-24)
 
 ## General Highlights

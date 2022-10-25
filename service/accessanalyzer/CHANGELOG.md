@@ -1,3 +1,7 @@
+# v1.17.0 (2022-10-25)
+
+* **Feature**: This release adds support for six new resource types in IAM Access Analyzer to help you easily identify public and cross-account access to your AWS resources. Updated service API, documentation, and paginators.
+
 # v1.16.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
