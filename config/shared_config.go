@@ -1136,7 +1136,7 @@ func (c *SharedConfig) hasCredentials() bool {
 // this func assumes legacy format
 func (c *SharedConfig) hasSSOConfiguration() bool {
 	switch {
-	case len(c.SSOSessionName) != 0:
+	case c.SSOSession != nil:
 	case len(c.SSOAccountID) != 0:
 	case len(c.SSORegion) != 0:
 	case len(c.SSORoleName) != 0:
