@@ -175,7 +175,7 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 	cfgCopy := cfg.Copy()
 	cfgCopy.Region = sharedConfig.SSORegion
 
-	cachedPath, err := ssocreds.StandardCachedTokenFilepath(sharedConfig.SSOSessionName)
+	cachedPath, err := ssocreds.StandardCachedTokenFilepath(sharedConfig.SSOSession.Name)
 	if err != nil {
 		oidcClient := ssooidc.NewFromConfig(*cfg)
 		options = append(options, func(o *ssocreds.Options) {
