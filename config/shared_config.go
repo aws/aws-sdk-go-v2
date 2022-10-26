@@ -849,9 +849,22 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		// First time a profile has been seen, It must either be a assume role
 		// credentials, or SSO. Assert if the credential type requires a role ARN,
 		// the ARN is also set, or validate that the SSO configuration is complete.
-		// TODO: isaiah the below func doesnt do any SSO check. need to fix this
 		if err := c.validateCredentialsConfig(profile); err != nil {
 			return err
+		}
+
+		// at this point, if using SSOTokenProvider format only check that
+		// session name is set. This is because full validation of the sso
+		// section can only be done later when the sso section is fully
+		// parsed and loaded.
+		err := c.validateLegacySSOConfiguration()
+		if c.SSOSessionName == "" || err != nil {
+			return fmt.Errorf(
+				"%v must be set with %v section or %w",
+				ssoSessionNameKey,
+				ssoSectionPrefix,
+				err,
+			)
 		}
 	}
 
@@ -903,6 +916,10 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 	// will be returned.
 	if c.SSOSessionName != "" {
 		c.SSOSession, err = getSSOSession(c.SSOSessionName, sections, logger)
+		if err != nil {
+			return err
+		}
+		err := c.validateSSOTokenProviderConfiguration()
 		if err != nil {
 			return err
 		}
@@ -1088,33 +1105,62 @@ func (c *SharedConfig) validateCredentialType() error {
 		len(c.CredentialSource) != 0,
 		len(c.CredentialProcess) != 0,
 		len(c.WebIdentityTokenFile) != 0,
+		// check if either SSOTokenProvider format is used or
+		// legacy format is used. Both can be set.
+		len(c.SSOSessionName) != 0 || len(c.SSOStartURL) != 0,
 	) {
 		return fmt.Errorf("only one credential type may be specified per profile: source profile, credential source, credential process, web identity token, or sso")
 	}
 
 	return nil
 }
-
 func (c *SharedConfig) validateSSOConfiguration() error {
-	if !c.hasSSOConfiguration() {
-		return nil
+
+	tokenProviderFormatError := c.validateSSOTokenProviderConfiguration()
+	legacyFormatError := c.validateLegacySSOConfiguration()
+
+	if tokenProviderFormatError != nil && legacyFormatError != nil {
+		return fmt.Errorf("%v %v", tokenProviderFormatError, legacyFormatError)
 	}
 
-	var missing []string
+	if tokenProviderFormatError == nil && legacyFormatError == nil {
+		if c.SSOSession.SSORegion != c.SSORegion {
+			return fmt.Errorf("%v differ in %v section and profile", ssoRegionKey, ssoSectionPrefix)
+		}
 
-	if len(c.SSORegion) == 0 {
-		missing = append(missing, ssoRegionKey)
+		if c.SSOSession.SSOStartURL != c.SSOStartURL {
+			return fmt.Errorf("%v differ in %v section and profile", ssoStartURLKey, ssoSectionPrefix)
+		}
 	}
+	return nil
+}
 
-	if len(c.SSOStartURL) == 0 {
-		missing = append(missing, ssoStartURLKey)
+func (c *SharedConfig) validateSSOTokenProviderConfiguration() error {
+	if c.SSOSessionName == "" ||
+		c.SSOSession == nil ||
+		c.SSOSession.SSORegion == "" ||
+		c.SSOSession.SSOStartURL == "" {
+		return fmt.Errorf(
+			`the following %v %v.%v %v.%v are all required
+					properties when SSO configuration is specified
+					with a %v section`,
+			ssoSessionNameKey, ssoSectionPrefix, ssoRegionKey, ssoSectionPrefix, ssoStartURLKey, ssoSectionPrefix)
 	}
+	return nil
+}
 
-	if len(missing) > 0 {
-		return fmt.Errorf("profile %q is configured to use SSO but is missing required configuration: %s",
-			c.Profile, strings.Join(missing, ", "))
+func (c *SharedConfig) validateLegacySSOConfiguration() error {
+	if c.SSOAccountID == "" ||
+		c.SSORegion == "" ||
+		c.SSORoleName == "" ||
+		c.SSOStartURL == "" {
+		return fmt.Errorf(
+			`the following %v %v %v %v are all required
+					properties when SSO configuration is specified
+					without a %v section`,
+			ssoAccountIDKey, ssoRegionKey, ssoRoleNameKey, ssoStartURLKey, ssoSectionPrefix,
+		)
 	}
-
 	return nil
 }
 
@@ -1135,7 +1181,9 @@ func (c *SharedConfig) hasCredentials() bool {
 
 func (c *SharedConfig) hasSSOConfiguration() bool {
 	switch {
+	// TokenProvider format
 	case c.SSOSession != nil:
+	// legacy format
 	case len(c.SSOAccountID) != 0:
 	case len(c.SSORegion) != 0:
 	case len(c.SSORoleName) != 0:
