@@ -52,8 +52,8 @@ func resolveBearerAuthTokenProvider(ctx context.Context, cfg *aws.Config, config
 func resolveBearerAuthTokenProviderChain(ctx context.Context, cfg *aws.Config, configs configs) (err error) {
 	_, sharedConfig, _ := getAWSConfigSources(configs)
 
-	if len(sharedConfig.SSOSessionName) == 0 || sharedConfig.SSOSession == nil {
-		err = fmt.Errorf("both sso_session name and sso-session section must be set, %w", err)
+	if sharedConfig.SSOSession == nil {
+		err = fmt.Errorf("sso-session section in shared config must be set, %w", err)
 		return err
 	}
 
