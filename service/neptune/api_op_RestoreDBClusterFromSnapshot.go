@@ -132,6 +132,12 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Value must be 1150-65535 Default: The same port as the original DB cluster.
 	Port *int32
 
+	// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
+	// information, see Using Amazon Neptune Serverless
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// in the Amazon Neptune User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// The tags to be assigned to the restored DB cluster.
 	Tags []types.Tag
 

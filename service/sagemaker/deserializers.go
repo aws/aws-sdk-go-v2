@@ -56659,7 +56659,7 @@ func awsAwsjson11_deserializeDocumentResourceLimits(v **types.ResourceLimits, va
 				if err != nil {
 					return err
 				}
-				sv.MaxNumberOfTrainingJobs = int32(i64)
+				sv.MaxNumberOfTrainingJobs = ptr.Int32(int32(i64))
 			}
 
 		case "MaxParallelTrainingJobs":

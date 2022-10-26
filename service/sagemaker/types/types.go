@@ -12072,16 +12072,14 @@ type ResourceConfigForUpdate struct {
 // hyperparameter tuning job can launch.
 type ResourceLimits struct {
 
-	// The maximum number of training jobs that a hyperparameter tuning job can launch.
-	//
-	// This member is required.
-	MaxNumberOfTrainingJobs int32
-
 	// The maximum number of concurrent training jobs that a hyperparameter tuning job
 	// can launch.
 	//
 	// This member is required.
 	MaxParallelTrainingJobs int32
+
+	// The maximum number of training jobs that a hyperparameter tuning job can launch.
+	MaxNumberOfTrainingJobs *int32
 
 	noSmithyDocumentSerde
 }

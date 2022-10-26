@@ -21293,9 +21293,9 @@ func awsAwsjson11_serializeDocumentResourceLimits(v *types.ResourceLimits, value
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxNumberOfTrainingJobs != nil {
 		ok := object.Key("MaxNumberOfTrainingJobs")
-		ok.Integer(v.MaxNumberOfTrainingJobs)
+		ok.Integer(*v.MaxNumberOfTrainingJobs)
 	}
 
 	{

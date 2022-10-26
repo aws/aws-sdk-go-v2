@@ -161,3 +161,21 @@ func (NodeType) Values() []NodeType {
 		"BROKER",
 	}
 }
+
+type StorageMode string
+
+// Enum values for StorageMode
+const (
+	StorageModeLocal  StorageMode = "LOCAL"
+	StorageModeTiered StorageMode = "TIERED"
+)
+
+// Values returns all known values for StorageMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageMode) Values() []StorageMode {
+	return []StorageMode{
+		"LOCAL",
+		"TIERED",
+	}
+}

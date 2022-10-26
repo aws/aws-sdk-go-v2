@@ -302,6 +302,11 @@ func awsRestjson1_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if len(v.StorageMode) > 0 {
+		ok := object.Key("storageMode")
+		ok.String(string(v.StorageMode))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
@@ -2615,6 +2620,104 @@ func awsRestjson1_serializeOpDocumentUpdateSecurityInput(v *UpdateSecurityInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateStorage struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateStorage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateStorage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateStorageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/storage")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateStorageInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateStorageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateStorageInput(v *UpdateStorageInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateStorageInput(v *UpdateStorageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("currentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	if v.ProvisionedThroughput != nil {
+		ok := object.Key("provisionedThroughput")
+		if err := awsRestjson1_serializeDocumentProvisionedThroughput(v.ProvisionedThroughput, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.StorageMode) > 0 {
+		ok := object.Key("storageMode")
+		ok.String(string(v.StorageMode))
+	}
+
+	if v.VolumeSizeGB != 0 {
+		ok := object.Key("volumeSizeGB")
+		ok.Integer(v.VolumeSizeGB)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3066,6 +3169,11 @@ func awsRestjson1_serializeDocumentProvisionedRequest(v *types.ProvisionedReques
 		if err := awsRestjson1_serializeDocumentOpenMonitoringInfo(v.OpenMonitoring, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.StorageMode) > 0 {
+		ok := object.Key("storageMode")
+		ok.String(string(v.StorageMode))
 	}
 
 	return nil

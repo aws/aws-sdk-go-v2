@@ -1,0 +1,8 @@
+{
+    "id": "b10c91fe-e300-4ff0-be06-ce38ee3b7904",
+    "type": "feature",
+    "description": "Amazon SageMaker Automatic Model Tuning now supports specifying Grid Search strategy for tuning jobs, which evaluates all hyperparameter combinations exhaustively based on the categorical hyperparameters provided.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

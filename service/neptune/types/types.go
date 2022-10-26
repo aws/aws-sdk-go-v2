@@ -188,6 +188,12 @@ type DBCluster struct {
 	// Not supported by Neptune.
 	ReplicationSourceIdentifier *string
 
+	// Shows the scaling configuration for a Neptune Serverless DB cluster. For more
+	// information, see Using Amazon Neptune Serverless
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// in the Amazon Neptune User Guide.
+	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInfo
+
 	// Specifies the current state of this DB cluster.
 	Status *string
 
@@ -1286,6 +1292,44 @@ type ResourcePendingMaintenanceActions struct {
 
 	// The ARN of the resource that has pending maintenance actions.
 	ResourceIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
+// information, see Using Amazon Neptune Serverless
+// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+// in the Amazon Neptune User Guide.
+type ServerlessV2ScalingConfiguration struct {
+
+	// The maximum number of Neptune capacity units (NCUs) for a DB instance in a
+	// Neptune Serverless cluster. You can specify NCU values in half-step increments,
+	// such as 40, 40.5, 41, and so on.
+	MaxCapacity *float64
+
+	// The minimum number of Neptune capacity units (NCUs) for a DB instance in a
+	// Neptune Serverless cluster. You can specify NCU values in half-step increments,
+	// such as 8, 8.5, 9, and so on.
+	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
+// Shows the scaling configuration for a Neptune Serverless DB cluster. For more
+// information, see Using Amazon Neptune Serverless
+// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+// in the Amazon Neptune User Guide.
+type ServerlessV2ScalingConfigurationInfo struct {
+
+	// The maximum number of Neptune capacity units (NCUs) for a DB instance in a
+	// Neptune Serverless cluster. You can specify NCU values in half-step increments,
+	// such as 40, 40.5, 41, and so on.
+	MaxCapacity *float64
+
+	// The minimum number of Neptune capacity units (NCUs) for a DB instance in a
+	// Neptune Serverless cluster. You can specify NCU values in half-step increments,
+	// such as 8, 8.5, 9, and so on.
+	MinCapacity *float64
 
 	noSmithyDocumentSerde
 }

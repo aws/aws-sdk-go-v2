@@ -153,6 +153,12 @@ type ModifyDBClusterInput struct {
 	// Fri, Sat, Sun. Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
+	// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
+	// information, see Using Amazon Neptune Serverless
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// in the Amazon Neptune User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// A list of VPC security groups that the DB cluster will belong to.
 	VpcSecurityGroupIds []string
 

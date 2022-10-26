@@ -68,6 +68,9 @@ type CreateClusterInput struct {
 	// The settings for open monitoring.
 	OpenMonitoring *types.OpenMonitoringInfo
 
+	// This controls storage mode for supported storage tiers.
+	StorageMode types.StorageMode
+
 	// Create tags when creating the cluster.
 	Tags map[string]string
 

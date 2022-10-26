@@ -610,6 +610,26 @@ func (m *validateOpUpdateSecurity) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStorage struct {
+}
+
+func (*validateOpUpdateStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchAssociateScramSecretValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchAssociateScramSecret{}, middleware.After)
 }
@@ -728,6 +748,10 @@ func addOpUpdateMonitoringValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSecurityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSecurity{}, middleware.After)
+}
+
+func addOpUpdateStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStorage{}, middleware.After)
 }
 
 func validate__listOfBrokerEBSVolumeInfo(v []types.BrokerEBSVolumeInfo) error {
@@ -1637,6 +1661,24 @@ func validateOpUpdateSecurityInput(v *UpdateSecurityInput) error {
 		if err := validateEncryptionInfo(v.EncryptionInfo); err != nil {
 			invalidParams.AddNested("EncryptionInfo", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStorageInput(v *UpdateStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStorageInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

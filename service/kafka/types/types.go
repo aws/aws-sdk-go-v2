@@ -236,6 +236,9 @@ type ClusterInfo struct {
 
 	StateInfo *StateInfo
 
+	// This controls storage mode for supported storage tiers.
+	StorageMode StorageMode
+
 	// Tags attached to the cluster.
 	Tags map[string]string
 
@@ -574,6 +577,9 @@ type MutableClusterInfo struct {
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoring
 
+	// This controls storage mode for supported storage tiers.
+	StorageMode StorageMode
+
 	noSmithyDocumentSerde
 }
 
@@ -701,6 +707,9 @@ type Provisioned struct {
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoringInfo
 
+	// This controls storage mode for supported storage tiers.
+	StorageMode StorageMode
+
 	// The connection string to use to connect to the Apache ZooKeeper cluster.
 	ZookeeperConnectString *string
 
@@ -748,6 +757,9 @@ type ProvisionedRequest struct {
 
 	// The settings for open monitoring.
 	OpenMonitoring *OpenMonitoringInfo
+
+	// This controls storage mode for supported storage tiers.
+	StorageMode StorageMode
 
 	noSmithyDocumentSerde
 }

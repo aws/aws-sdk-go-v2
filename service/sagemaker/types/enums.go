@@ -1864,6 +1864,7 @@ const (
 	HyperParameterTuningJobStrategyTypeBayesian  HyperParameterTuningJobStrategyType = "Bayesian"
 	HyperParameterTuningJobStrategyTypeRandom    HyperParameterTuningJobStrategyType = "Random"
 	HyperParameterTuningJobStrategyTypeHyperband HyperParameterTuningJobStrategyType = "Hyperband"
+	HyperParameterTuningJobStrategyTypeGrid      HyperParameterTuningJobStrategyType = "Grid"
 )
 
 // Values returns all known values for HyperParameterTuningJobStrategyType. Note
@@ -1875,6 +1876,7 @@ func (HyperParameterTuningJobStrategyType) Values() []HyperParameterTuningJobStr
 		"Bayesian",
 		"Random",
 		"Hyperband",
+		"Grid",
 	}
 }
 

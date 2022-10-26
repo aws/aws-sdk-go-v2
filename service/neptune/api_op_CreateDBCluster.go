@@ -185,6 +185,12 @@ type CreateDBClusterInput struct {
 	// DB cluster is created as a Read Replica.
 	ReplicationSourceIdentifier *string
 
+	// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
+	// information, see Using Amazon Neptune Serverless
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// in the Amazon Neptune User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// The AWS region the resource is in. The presigned URL will be created with this
 	// region, if the PresignURL member is empty set.
 	SourceRegion *string

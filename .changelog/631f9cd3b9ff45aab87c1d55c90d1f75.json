@@ -1,0 +1,8 @@
+{
+    "id": "631f9cd3-b9ff-45aa-b87c-1d55c90d1f75",
+    "type": "feature",
+    "description": "This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.",
+    "modules": [
+        "service/kafka"
+    ]
+}

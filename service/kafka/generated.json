@@ -43,6 +43,7 @@
         "api_op_UpdateConnectivity.go",
         "api_op_UpdateMonitoring.go",
         "api_op_UpdateSecurity.go",
+        "api_op_UpdateStorage.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

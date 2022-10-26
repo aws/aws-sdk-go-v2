@@ -144,6 +144,12 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// new DB cluster is restored as a full copy of the source DB cluster.
 	RestoreType *string
 
+	// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
+	// information, see Using Amazon Neptune Serverless
+	// (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
+	// in the Amazon Neptune User Guide.
+	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
+
 	// The tags to be applied to the restored DB cluster.
 	Tags []types.Tag
 
