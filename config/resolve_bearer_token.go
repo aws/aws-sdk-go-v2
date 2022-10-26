@@ -52,25 +52,13 @@ func resolveBearerAuthTokenProvider(ctx context.Context, cfg *aws.Config, config
 func resolveBearerAuthTokenProviderChain(ctx context.Context, cfg *aws.Config, configs configs) (err error) {
 	_, sharedConfig, _ := getAWSConfigSources(configs)
 
-	var provider smithybearer.TokenProvider
-
-	// if there is a SSOSession section (new format)
-	// or if there is sso_region property or sso_start_url property (legacy format)
-	if sharedConfig.SSOSession != nil || (sharedConfig.SSORegion != "" && sharedConfig.SSOStartURL != "") {
-		ssoSession := sharedConfig.SSOSession
-		if ssoSession == nil {
-			// Fallback to legacy SSO session config parameters, if the
-			// sso-session section wasn't used.
-			ssoSession = &SSOSession{
-				Name:        sharedConfig.SSOStartURL,
-				SSORegion:   sharedConfig.SSORegion,
-				SSOStartURL: sharedConfig.SSOStartURL,
-			}
-		}
-
-		provider, err = resolveBearerAuthSSOTokenProvider(
-			ctx, cfg, ssoSession, configs)
+	if len(sharedConfig.SSOSessionName) == 0 || sharedConfig.SSOSession == nil {
+		err = fmt.Errorf("both sso_session name and sso-session section must be set, %w", err)
+		return err
 	}
+
+	provider, err := resolveBearerAuthSSOTokenProvider(
+		ctx, cfg, sharedConfig.SSOSession, configs)
 
 	if err == nil && provider != nil {
 		cfg.BearerAuthTokenProvider, err = wrapWithBearerAuthTokenCache(
