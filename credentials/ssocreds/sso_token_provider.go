@@ -98,6 +98,7 @@ func (p SSOTokenProvider) RetrieveBearerToken(ctx context.Context) (bearer.Token
 		return bearer.Token{}, err
 	}
 
+	// TODO: isaiah this check should be after 5 minutes before expiration and not after expiration
 	if cachedToken.ExpiresAt != nil && sdk.NowTime().After(time.Time(*cachedToken.ExpiresAt)) {
 		cachedToken, err = p.refreshToken(ctx, cachedToken)
 		if err != nil {
@@ -113,6 +114,7 @@ func (p SSOTokenProvider) RetrieveBearerToken(ctx context.Context) (bearer.Token
 	}, nil
 }
 
+// TODO: isaiah this implementation does not have a concept of the 5 minute refresh window as described in the TP SEP
 func (p SSOTokenProvider) refreshToken(ctx context.Context, cachedToken token) (token, error) {
 	if cachedToken.ClientSecret == "" || cachedToken.ClientID == "" || cachedToken.RefreshToken == "" {
 		return token{}, fmt.Errorf("cached SSO token is expired, or not present, and cannot be refreshed")
