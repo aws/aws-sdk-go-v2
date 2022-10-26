@@ -22436,6 +22436,12 @@
                     "traits": {
                         "smithy.api#enumValue": "Hyperband"
                     }
+                },
+                "GRID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Grid"
+                    }
                 }
             },
             "traits": {
@@ -30606,7 +30612,6 @@
         "com.amazonaws.sagemaker#MaxNumberOfTrainingJobs": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -39584,9 +39589,7 @@
                 "MaxNumberOfTrainingJobs": {
                     "target": "com.amazonaws.sagemaker#MaxNumberOfTrainingJobs",
                     "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The\n            maximum\n            number of training jobs that a hyperparameter tuning job can\n            launch.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The\n            maximum\n            number of training jobs that a hyperparameter tuning job can\n            launch.</p>"
                     }
                 },
                 "MaxParallelTrainingJobs": {
