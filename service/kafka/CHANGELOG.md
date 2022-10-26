@@ -1,3 +1,7 @@
+# v1.18.0 (2022-10-26)
+
+* **Feature**: This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.
+
 # v1.17.21 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "12e5a7bb-c34c-4b5c-b372-16077e4b5447",
-    "type": "feature",
-    "description": "Added a new cluster-level attribute to set the capacity range for Neptune Serverless instances.",
-    "modules": [
-        "service/neptune"
-    ]
-}

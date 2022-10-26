@@ -1,8 +1,0 @@
-{
-    "id": "201c6217-68fc-4aca-a0b1-e0a27bb0b949",
-    "type": "documentation",
-    "description": "Doc only update that corrects instances of CLI not using an entity.",
-    "modules": [
-        "service/iam"
-    ]
-}

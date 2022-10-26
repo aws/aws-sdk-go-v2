@@ -1,3 +1,15 @@
+# Release (2022-10-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.18.23](service/iam/CHANGELOG.md#v11823-2022-10-26)
+  * **Documentation**: Doc only update that corrects instances of CLI not using an entity.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.18.0](service/kafka/CHANGELOG.md#v1180-2022-10-26)
+  * **Feature**: This release adds support for Tiered Storage. UpdateStorage allows you to control the Storage Mode for supported storage tiers.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.18.0](service/neptune/CHANGELOG.md#v1180-2022-10-26)
+  * **Feature**: Added a new cluster-level attribute to set the capacity range for Neptune Serverless instances.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.51.0](service/sagemaker/CHANGELOG.md#v1510-2022-10-26)
+  * **Feature**: Amazon SageMaker Automatic Model Tuning now supports specifying Grid Search strategy for tuning jobs, which evaluates all hyperparameter combinations exhaustively based on the categorical hyperparameters provided.
+
 # Release (2022-10-25)
 
 ## Module Highlights

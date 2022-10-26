@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/glue v1.33.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.22
-	github.com/aws/aws-sdk-go-v2/service/iam v1.18.22
+	github.com/aws/aws-sdk-go-v2/service/iam v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.19
 	github.com/aws/aws-sdk-go-v2/service/iot v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.21
@@ -56,7 +56,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.24.8
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.19
-	github.com/aws/aws-sdk-go-v2/service/neptune v1.17.14
+	github.com/aws/aws-sdk-go-v2/service/neptune v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.20
 	github.com/aws/aws-sdk-go-v2/service/polly v1.18.2
