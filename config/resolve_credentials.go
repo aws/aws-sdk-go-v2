@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssooidc"
 	"net/url"
 	"time"
 
@@ -130,6 +131,7 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 		return assumeWebIdentity(ctx, cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
 
 	case sharedConfig.hasSSOConfiguration():
+		// isaiah: this func assumes new (not legacy) format
 		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(sharedConfig.CredentialProcess) != 0:
@@ -172,6 +174,15 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 
 	cfgCopy := cfg.Copy()
 	cfgCopy.Region = sharedConfig.SSORegion
+
+	cachedPath, err := ssocreds.StandardCachedTokenFilepath(sharedConfig.SSOSessionName)
+	if err != nil {
+		oidcClient := ssooidc.NewFromConfig(*cfg)
+		options = append(options, func(o *ssocreds.Options) {
+			o.TokenClient = oidcClient
+			o.CachedTokenFilepath = cachedPath
+		})
+	}
 
 	cfg.Credentials = ssocreds.New(sso.NewFromConfig(cfgCopy), sharedConfig.SSOAccountID, sharedConfig.SSORoleName, sharedConfig.SSOStartURL, options...)
 

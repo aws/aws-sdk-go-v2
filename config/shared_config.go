@@ -849,6 +849,7 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		// First time a profile has been seen, It must either be a assume role
 		// credentials, or SSO. Assert if the credential type requires a role ARN,
 		// the ARN is also set, or validate that the SSO configuration is complete.
+		// TODO: isaiah the below func doesnt do any SSO check. need to fix this
 		if err := c.validateCredentialsConfig(profile); err != nil {
 			return err
 		}
@@ -1132,8 +1133,10 @@ func (c *SharedConfig) hasCredentials() bool {
 	return true
 }
 
+// this func assumes legacy format
 func (c *SharedConfig) hasSSOConfiguration() bool {
 	switch {
+	case len(c.SSOSessionName) != 0:
 	case len(c.SSOAccountID) != 0:
 	case len(c.SSORegion) != 0:
 	case len(c.SSORoleName) != 0:

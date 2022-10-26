@@ -45,6 +45,8 @@ type Options struct {
 	// If custom cached token filepath is used, the Provider's startUrl
 	// parameter will be ignored.
 	CachedTokenFilepath string
+
+	TokenClient CreateTokenAPIClient
 }
 
 // Provider is an AWS credential provider that retrieves temporary AWS
@@ -97,8 +99,20 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		return aws.Credentials{}, &InvalidTokenError{}
 	}
 
+	var accessToken *string
+	if p.options.TokenClient != nil {
+		tokenProvider := NewSSOTokenProvider(p.options.TokenClient, p.cachedTokenFilepath)
+		token, err := tokenProvider.RetrieveBearerToken(ctx)
+		if err != nil {
+			return aws.Credentials{}, err
+		}
+		accessToken = &token.Value
+	} else {
+		accessToken = &tokenFile.AccessToken
+	}
+
 	output, err := p.options.Client.GetRoleCredentials(ctx, &sso.GetRoleCredentialsInput{
-		AccessToken: &tokenFile.AccessToken,
+		AccessToken: accessToken,
 		AccountId:   &p.options.AccountID,
 		RoleName:    &p.options.RoleName,
 	})
