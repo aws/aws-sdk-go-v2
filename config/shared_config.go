@@ -838,6 +838,16 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 	if err != nil {
 		return fmt.Errorf("error fetching config from profile, %v, %w", profile, err)
 	}
+	// If the profile contains an SSO session parameter, the session MUST exist
+	// as a section in the config file. Load the SSO session using the name
+	// provided. If the session section is not found or incomplete an error
+	// will be returned.
+	if c.SSOSessionName != "" {
+		c.SSOSession, err = getSSOSession(c.SSOSessionName, sections, logger)
+		if err != nil {
+			return err
+		}
+	}
 
 	if _, ok := profiles[profile]; ok {
 		// if this is the second instance of the profile the Assume Role
@@ -849,23 +859,13 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		// First time a profile has been seen, It must either be a assume role
 		// credentials, or SSO. Assert if the credential type requires a role ARN,
 		// the ARN is also set, or validate that the SSO configuration is complete.
-		if err := c.validateCredentialsConfig(profile); err != nil {
-			return err
+		credsErr := c.validateCredentialsConfig(profile)
+		ssoErr := c.validateSSOConfiguration()
+
+		if credsErr != nil && ssoErr != nil {
+			return fmt.Errorf("invalid profile %v\n", profile)
 		}
 
-		// at this point, if using SSOTokenProvider format only check that
-		// session name is set. This is because full validation of the sso
-		// section can only be done later when the sso section is fully
-		// parsed and loaded.
-		err := c.validateLegacySSOConfiguration()
-		if c.SSOSessionName == "" || err != nil {
-			return fmt.Errorf(
-				"%v must be set with %v section or %w",
-				ssoSessionNameKey,
-				ssoSectionPrefix,
-				err,
-			)
-		}
 	}
 
 	// if not top level profile and has credentials, return with credentials.
@@ -908,21 +908,6 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		}
 
 		c.Source = srcCfg
-	}
-
-	// If the profile contains an SSO session parameter, the session MUST exist
-	// as a section in the config file. Load the SSO session using the name
-	// provided. If the session section is not found or incomplete an error
-	// will be returned.
-	if c.SSOSessionName != "" {
-		c.SSOSession, err = getSSOSession(c.SSOSessionName, sections, logger)
-		if err != nil {
-			return err
-		}
-		err := c.validateSSOTokenProviderConfiguration()
-		if err != nil {
-			return err
-		}
 	}
 
 	return nil
