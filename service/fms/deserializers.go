@@ -6558,6 +6558,46 @@ func awsAwsjson11_deserializeDocumentNetworkFirewallPolicyModifiedViolation(v **
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentNetworkFirewallStatefulRuleGroupOverride(v **types.NetworkFirewallStatefulRuleGroupOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkFirewallStatefulRuleGroupOverride
+	if *v == nil {
+		sv = &types.NetworkFirewallStatefulRuleGroupOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkFirewallOverrideAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.NetworkFirewallOverrideAction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNetworkFirewallUnexpectedFirewallRoutesViolation(v **types.NetworkFirewallUnexpectedFirewallRoutesViolation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8786,6 +8826,11 @@ func awsAwsjson11_deserializeDocumentStatefulRuleGroup(v **types.StatefulRuleGro
 
 	for key, value := range shape {
 		switch key {
+		case "Override":
+			if err := awsAwsjson11_deserializeDocumentNetworkFirewallStatefulRuleGroupOverride(&sv.Override, value); err != nil {
+				return err
+			}
+
 		case "Priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)

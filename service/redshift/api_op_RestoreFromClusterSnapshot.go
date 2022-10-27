@@ -117,7 +117,9 @@ type RestoreFromClusterSnapshotInput struct {
 	// snapshot.
 	DefaultIamRoleArn *string
 
-	// The elastic IP (EIP) address for the cluster.
+	// The Elastic IP (EIP) address for the cluster. Don't specify the Elastic IP
+	// address for a publicly accessible cluster with availability zone relocation
+	// turned on.
 	ElasticIp *string
 
 	// Enables support for restoring an unencrypted snapshot to a cluster encrypted

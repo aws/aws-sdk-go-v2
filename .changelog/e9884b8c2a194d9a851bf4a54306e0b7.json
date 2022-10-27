@@ -1,0 +1,8 @@
+{
+    "id": "e9884b8c-2a19-4d9a-851b-f4a54306e0b7",
+    "type": "feature",
+    "description": "Added support for custom datatypes when using custom csv classifier.",
+    "modules": [
+        "service/glue"
+    ]
+}

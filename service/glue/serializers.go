@@ -11790,6 +11790,18 @@ func awsAwsjson11_serializeDocumentCreateCsvClassifierRequest(v *types.CreateCsv
 		ok.String(string(v.ContainsHeader))
 	}
 
+	if v.CustomDatatypeConfigured != nil {
+		ok := object.Key("CustomDatatypeConfigured")
+		ok.Boolean(*v.CustomDatatypeConfigured)
+	}
+
+	if v.CustomDatatypes != nil {
+		ok := object.Key("CustomDatatypes")
+		if err := awsAwsjson11_serializeDocumentCustomDatatypes(v.CustomDatatypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Delimiter != nil {
 		ok := object.Key("Delimiter")
 		ok.String(*v.Delimiter)
@@ -11930,6 +11942,17 @@ func awsAwsjson11_serializeDocumentCustomCode(v *types.CustomCode, value smithyj
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomDatatypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -16630,6 +16653,18 @@ func awsAwsjson11_serializeDocumentUpdateCsvClassifierRequest(v *types.UpdateCsv
 	if len(v.ContainsHeader) > 0 {
 		ok := object.Key("ContainsHeader")
 		ok.String(string(v.ContainsHeader))
+	}
+
+	if v.CustomDatatypeConfigured != nil {
+		ok := object.Key("CustomDatatypeConfigured")
+		ok.Boolean(*v.CustomDatatypeConfigured)
+	}
+
+	if v.CustomDatatypes != nil {
+		ok := object.Key("CustomDatatypes")
+		if err := awsAwsjson11_serializeDocumentCustomDatatypes(v.CustomDatatypes, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Delimiter != nil {

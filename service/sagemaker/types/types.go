@@ -160,6 +160,20 @@ type AlgorithmSpecification struct {
 	// any value for both parameters, the training job might raise a null error.
 	AlgorithmName *string
 
+	// The arguments for a container used to run a training job. See How Amazon
+	// SageMaker Runs Your Training Image
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html)
+	// for additional information.
+	ContainerArguments []string
+
+	// The entrypoint script for a Docker container
+	// (https://docs.docker.com/engine/reference/builder/) used to run a training job.
+	// This script takes precedence over the default train processing instructions. See
+	// How Amazon SageMaker Runs Your Training Image
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo-dockerfile.html)
+	// for more information.
+	ContainerEntrypoint []string
+
 	// To generate and save time-series metrics during training, set to true. The
 	// default is false and time-series metrics aren't generated except in the
 	// following cases:

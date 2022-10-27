@@ -1,0 +1,8 @@
+{
+    "id": "da1d911d-de64-466a-9ee6-c05134f275b0",
+    "type": "feature",
+    "description": "Add support NetworkFirewall Managed Rule Group Override flag in GetViolationDetails API",
+    "modules": [
+        "service/fms"
+    ]
+}

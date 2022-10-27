@@ -10843,11 +10843,21 @@ type ReplaceRootVolumeTask struct {
 	// The time the task completed.
 	CompleteTime *string
 
+	// Indicates whether the original root volume is to be deleted after the root
+	// volume replacement task completes.
+	DeleteReplacedRootVolume *bool
+
+	// The ID of the AMI used to create the replacement root volume.
+	ImageId *string
+
 	// The ID of the instance for which the root volume replacement task was created.
 	InstanceId *string
 
 	// The ID of the root volume replacement task.
 	ReplaceRootVolumeTaskId *string
+
+	// The ID of the snapshot used to create the replacement root volume.
+	SnapshotId *string
 
 	// The time the task was started.
 	StartTime *string

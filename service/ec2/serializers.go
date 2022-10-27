@@ -46701,9 +46701,19 @@ func awsEc2query_serializeOpDocumentCreateReplaceRootVolumeTaskInput(v *CreateRe
 		objectKey.String(*v.ClientToken)
 	}
 
+	if v.DeleteReplacedRootVolume != nil {
+		objectKey := object.Key("DeleteReplacedRootVolume")
+		objectKey.Boolean(*v.DeleteReplacedRootVolume)
+	}
+
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
 	}
 
 	if v.InstanceId != nil {

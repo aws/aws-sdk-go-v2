@@ -1590,6 +1590,12 @@ type CreateCsvClassifierRequest struct {
 	// Indicates whether the CSV file contains a header.
 	ContainsHeader CsvHeaderOption
 
+	// Enables the configuration of custom datatypes.
+	CustomDatatypeConfigured *bool
+
+	// Creates a list of supported custom datatypes.
+	CustomDatatypes []string
+
 	// A custom symbol to denote what separates each column entry in the row.
 	Delimiter *string
 
@@ -1689,6 +1695,13 @@ type CsvClassifier struct {
 
 	// The time that this classifier was registered.
 	CreationTime *time.Time
+
+	// Enables the custom datatype to be configured.
+	CustomDatatypeConfigured *bool
+
+	// A list of custom datatypes including "BINARY", "BOOLEAN", "DATE", "DECIMAL",
+	// "DOUBLE", "FLOAT", "INT", "LONG", "SHORT", "STRING", "TIMESTAMP".
+	CustomDatatypes []string
 
 	// A custom symbol to denote what separates each column entry in the row.
 	Delimiter *string
@@ -6468,6 +6481,12 @@ type UpdateCsvClassifierRequest struct {
 
 	// Indicates whether the CSV file contains a header.
 	ContainsHeader CsvHeaderOption
+
+	// Specifies the configuration of custom datatypes.
+	CustomDatatypeConfigured *bool
+
+	// Specifies a list of supported custom datatypes.
+	CustomDatatypes []string
 
 	// A custom symbol to denote what separates each column entry in the row.
 	Delimiter *string

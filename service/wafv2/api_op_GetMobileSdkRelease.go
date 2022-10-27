@@ -13,9 +13,9 @@ import (
 
 // Retrieves information for the specified mobile SDK release, including release
 // notes and tags. The mobile SDK is not generally available. Customers who have
-// access to the mobile SDK can use it to establish and manage Security Token
-// Service (STS) security tokens for use in HTTP(S) requests from a mobile device
-// to WAF. For more information, see WAF client application integration
+// access to the mobile SDK can use it to establish and manage WAF tokens for use
+// in HTTP(S) requests from a mobile device to WAF. For more information, see WAF
+// client application integration
 // (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
 // in the WAF Developer Guide.
 func (c *Client) GetMobileSdkRelease(ctx context.Context, params *GetMobileSdkReleaseInput, optFns ...func(*Options)) (*GetMobileSdkReleaseOutput, error) {

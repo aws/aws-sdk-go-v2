@@ -96918,6 +96918,35 @@ func awsEc2query_deserializeDocumentReplaceRootVolumeTask(v **types.ReplaceRootV
 				sv.CompleteTime = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("deleteReplacedRootVolume", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.DeleteReplacedRootVolume = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("imageId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImageId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("instanceId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -96942,6 +96971,19 @@ func awsEc2query_deserializeDocumentReplaceRootVolumeTask(v **types.ReplaceRootV
 			{
 				xtv := string(val)
 				sv.ReplaceRootVolumeTaskId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("snapshotId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SnapshotId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("startTime", t.Name.Local):

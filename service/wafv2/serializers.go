@@ -2709,6 +2709,18 @@ func awsAwsjson11_serializeDocumentAndStatement(v *types.AndStatement, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAWSManagedRulesBotControlRuleSet(v *types.AWSManagedRulesBotControlRuleSet, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InspectionLevel) > 0 {
+		ok := object.Key("InspectionLevel")
+		ok.String(string(v.InspectionLevel))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBlockAction(v *types.BlockAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2781,6 +2793,34 @@ func awsAwsjson11_serializeDocumentCaptchaAction(v *types.CaptchaAction, value s
 }
 
 func awsAwsjson11_serializeDocumentCaptchaConfig(v *types.CaptchaConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImmunityTimeProperty != nil {
+		ok := object.Key("ImmunityTimeProperty")
+		if err := awsAwsjson11_serializeDocumentImmunityTimeProperty(v.ImmunityTimeProperty, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentChallengeAction(v *types.ChallengeAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsAwsjson11_serializeDocumentCustomRequestHandling(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentChallengeConfig(v *types.ChallengeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3527,6 +3567,13 @@ func awsAwsjson11_serializeDocumentManagedRuleGroupConfig(v *types.ManagedRuleGr
 	object := value.Object()
 	defer object.Close()
 
+	if v.AWSManagedRulesBotControlRuleSet != nil {
+		ok := object.Key("AWSManagedRulesBotControlRuleSet")
+		if err := awsAwsjson11_serializeDocumentAWSManagedRulesBotControlRuleSet(v.AWSManagedRulesBotControlRuleSet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LoginPath != nil {
 		ok := object.Key("LoginPath")
 		ok.String(*v.LoginPath)
@@ -3588,6 +3635,13 @@ func awsAwsjson11_serializeDocumentManagedRuleGroupStatement(v *types.ManagedRul
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.RuleActionOverrides != nil {
+		ok := object.Key("RuleActionOverrides")
+		if err := awsAwsjson11_serializeDocumentRuleActionOverrides(v.RuleActionOverrides, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScopeDownStatement != nil {
@@ -3831,6 +3885,13 @@ func awsAwsjson11_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 		}
 	}
 
+	if v.ChallengeConfig != nil {
+		ok := object.Key("ChallengeConfig")
+		if err := awsAwsjson11_serializeDocumentChallengeConfig(v.ChallengeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -3897,6 +3958,13 @@ func awsAwsjson11_serializeDocumentRuleAction(v *types.RuleAction, value smithyj
 		}
 	}
 
+	if v.Challenge != nil {
+		ok := object.Key("Challenge")
+		if err := awsAwsjson11_serializeDocumentChallengeAction(v.Challenge, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Count != nil {
 		ok := object.Key("Count")
 		if err := awsAwsjson11_serializeDocumentCountAction(v.Count, ok); err != nil {
@@ -3904,6 +3972,38 @@ func awsAwsjson11_serializeDocumentRuleAction(v *types.RuleAction, value smithyj
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRuleActionOverride(v *types.RuleActionOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionToUse != nil {
+		ok := object.Key("ActionToUse")
+		if err := awsAwsjson11_serializeDocumentRuleAction(v.ActionToUse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRuleActionOverrides(v []types.RuleActionOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRuleActionOverride(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -3919,6 +4019,13 @@ func awsAwsjson11_serializeDocumentRuleGroupReferenceStatement(v *types.RuleGrou
 	if v.ExcludedRules != nil {
 		ok := object.Key("ExcludedRules")
 		if err := awsAwsjson11_serializeDocumentExcludedRules(v.ExcludedRules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleActionOverrides != nil {
+		ok := object.Key("RuleActionOverrides")
+		if err := awsAwsjson11_serializeDocumentRuleActionOverrides(v.RuleActionOverrides, ok); err != nil {
 			return err
 		}
 	}
@@ -4233,6 +4340,17 @@ func awsAwsjson11_serializeDocumentTimeWindow(v *types.TimeWindow, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTokenDomains(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUriPath(v *types.UriPath, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4505,6 +4623,13 @@ func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, val
 		}
 	}
 
+	if v.ChallengeConfig != nil {
+		ok := object.Key("ChallengeConfig")
+		if err := awsAwsjson11_serializeDocumentChallengeConfig(v.ChallengeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomResponseBodies != nil {
 		ok := object.Key("CustomResponseBodies")
 		if err := awsAwsjson11_serializeDocumentCustomResponseBodies(v.CustomResponseBodies, ok); err != nil {
@@ -4544,6 +4669,13 @@ func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, val
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TokenDomains != nil {
+		ok := object.Key("TokenDomains")
+		if err := awsAwsjson11_serializeDocumentTokenDomains(v.TokenDomains, ok); err != nil {
 			return err
 		}
 	}
@@ -5531,6 +5663,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, val
 		}
 	}
 
+	if v.ChallengeConfig != nil {
+		ok := object.Key("ChallengeConfig")
+		if err := awsAwsjson11_serializeDocumentChallengeConfig(v.ChallengeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CustomResponseBodies != nil {
 		ok := object.Key("CustomResponseBodies")
 		if err := awsAwsjson11_serializeDocumentCustomResponseBodies(v.CustomResponseBodies, ok); err != nil {
@@ -5575,6 +5714,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, val
 	if len(v.Scope) > 0 {
 		ok := object.Key("Scope")
 		ok.String(string(v.Scope))
+	}
+
+	if v.TokenDomains != nil {
+		ok := object.Key("TokenDomains")
+		if err := awsAwsjson11_serializeDocumentTokenDomains(v.TokenDomains, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VisibilityConfig != nil {

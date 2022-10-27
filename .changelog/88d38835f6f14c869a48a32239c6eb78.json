@@ -1,0 +1,8 @@
+{
+    "id": "88d38835-f6f1-4c86-9a48-a32239c6eb78",
+    "type": "feature",
+    "description": "Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.",
+    "modules": [
+        "service/ec2"
+    ]
+}

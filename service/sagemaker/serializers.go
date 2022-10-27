@@ -14668,6 +14668,20 @@ func awsAwsjson11_serializeDocumentAlgorithmSpecification(v *types.AlgorithmSpec
 		ok.String(*v.AlgorithmName)
 	}
 
+	if v.ContainerArguments != nil {
+		ok := object.Key("ContainerArguments")
+		if err := awsAwsjson11_serializeDocumentTrainingContainerArguments(v.ContainerArguments, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerEntrypoint != nil {
+		ok := object.Key("ContainerEntrypoint")
+		if err := awsAwsjson11_serializeDocumentTrainingContainerEntrypoint(v.ContainerEntrypoint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EnableSageMakerMetricsTimeSeries {
 		ok := object.Key("EnableSageMakerMetricsTimeSeries")
 		ok.Boolean(v.EnableSageMakerMetricsTimeSeries)
@@ -21943,6 +21957,28 @@ func awsAwsjson11_serializeDocumentTrafficRoutingConfig(v *types.TrafficRoutingC
 		ok.Integer(*v.WaitIntervalInSeconds)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrainingContainerArguments(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrainingContainerEntrypoint(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

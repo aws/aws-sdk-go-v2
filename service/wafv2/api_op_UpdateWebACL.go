@@ -107,6 +107,11 @@ type UpdateWebACLInput struct {
 	// default settings for CaptchaConfig.
 	CaptchaConfig *types.CaptchaConfig
 
+	// Specifies how WAF should handle challenge evaluations for rules that don't have
+	// their own ChallengeConfig settings. If you don't specify this, WAF uses its
+	// default settings for ChallengeConfig.
+	ChallengeConfig *types.ChallengeConfig
+
 	// A map of custom response keys and content bodies. When you create a rule with a
 	// block action, you can send a custom response to the web request. You define
 	// these for the web ACL, and then use them in the rules and default actions that
@@ -129,6 +134,16 @@ type UpdateWebACLInput struct {
 	// block, or count. Each rule includes one top-level statement that WAF uses to
 	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []types.Rule
+
+	// Specifies the domains that WAF should accept in a web request token. This
+	// enables the use of tokens across multiple protected websites. When WAF provides
+	// a token, it uses the domain of the Amazon Web Services resource that the web ACL
+	// is protecting. If you don't specify a list of token domains, WAF accepts tokens
+	// only for the domain of the protected resource. With a token domain list, WAF
+	// accepts the resource's host domain plus all domains in the token domain list,
+	// including their prefixed subdomains. Example JSON: "TokenDomains": {
+	// "mywebsite.com", "myotherwebsite.com" }
+	TokenDomains []string
 
 	noSmithyDocumentSerde
 }

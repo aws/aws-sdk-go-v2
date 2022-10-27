@@ -28833,6 +28833,16 @@ func awsAwsjson11_deserializeDocumentAlgorithmSpecification(v **types.AlgorithmS
 				sv.AlgorithmName = ptr.String(jtv)
 			}
 
+		case "ContainerArguments":
+			if err := awsAwsjson11_deserializeDocumentTrainingContainerArguments(&sv.ContainerArguments, value); err != nil {
+				return err
+			}
+
+		case "ContainerEntrypoint":
+			if err := awsAwsjson11_deserializeDocumentTrainingContainerEntrypoint(&sv.ContainerEntrypoint, value); err != nil {
+				return err
+			}
+
 		case "EnableSageMakerMetricsTimeSeries":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -58619,6 +58629,78 @@ func awsAwsjson11_deserializeDocumentTrafficRoutingConfig(v **types.TrafficRouti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTrainingContainerArguments(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TrainingContainerArgument to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTrainingContainerEntrypoint(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TrainingContainerEntrypointString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

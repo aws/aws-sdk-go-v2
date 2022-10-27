@@ -1189,6 +1189,21 @@ func validateAndStatement(v *types.AndStatement) error {
 	}
 }
 
+func validateAWSManagedRulesBotControlRuleSet(v *types.AWSManagedRulesBotControlRuleSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AWSManagedRulesBotControlRuleSet"}
+	if len(v.InspectionLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InspectionLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBlockAction(v *types.BlockAction) error {
 	if v == nil {
 		return nil
@@ -1260,6 +1275,40 @@ func validateCaptchaConfig(v *types.CaptchaConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CaptchaConfig"}
+	if v.ImmunityTimeProperty != nil {
+		if err := validateImmunityTimeProperty(v.ImmunityTimeProperty); err != nil {
+			invalidParams.AddNested("ImmunityTimeProperty", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChallengeAction(v *types.ChallengeAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChallengeAction"}
+	if v.CustomRequestHandling != nil {
+		if err := validateCustomRequestHandling(v.CustomRequestHandling); err != nil {
+			invalidParams.AddNested("CustomRequestHandling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChallengeConfig(v *types.ChallengeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChallengeConfig"}
 	if v.ImmunityTimeProperty != nil {
 		if err := validateImmunityTimeProperty(v.ImmunityTimeProperty); err != nil {
 			invalidParams.AddNested("ImmunityTimeProperty", err.(smithy.InvalidParamsError))
@@ -1852,6 +1901,11 @@ func validateManagedRuleGroupConfig(v *types.ManagedRuleGroupConfig) error {
 			invalidParams.AddNested("PasswordField", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AWSManagedRulesBotControlRuleSet != nil {
+		if err := validateAWSManagedRulesBotControlRuleSet(v.AWSManagedRulesBotControlRuleSet); err != nil {
+			invalidParams.AddNested("AWSManagedRulesBotControlRuleSet", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1900,6 +1954,11 @@ func validateManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement) error
 	if v.ManagedRuleGroupConfigs != nil {
 		if err := validateManagedRuleGroupConfigs(v.ManagedRuleGroupConfigs); err != nil {
 			invalidParams.AddNested("ManagedRuleGroupConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleActionOverrides != nil {
+		if err := validateRuleActionOverrides(v.RuleActionOverrides); err != nil {
+			invalidParams.AddNested("RuleActionOverrides", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2121,6 +2180,11 @@ func validateRule(v *types.Rule) error {
 			invalidParams.AddNested("CaptchaConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ChallengeConfig != nil {
+		if err := validateChallengeConfig(v.ChallengeConfig); err != nil {
+			invalidParams.AddNested("ChallengeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2153,6 +2217,50 @@ func validateRuleAction(v *types.RuleAction) error {
 			invalidParams.AddNested("Captcha", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Challenge != nil {
+		if err := validateChallengeAction(v.Challenge); err != nil {
+			invalidParams.AddNested("Challenge", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleActionOverride(v *types.RuleActionOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleActionOverride"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ActionToUse == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionToUse"))
+	} else if v.ActionToUse != nil {
+		if err := validateRuleAction(v.ActionToUse); err != nil {
+			invalidParams.AddNested("ActionToUse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleActionOverrides(v []types.RuleActionOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleActionOverrides"}
+	for i := range v {
+		if err := validateRuleActionOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2171,6 +2279,11 @@ func validateRuleGroupReferenceStatement(v *types.RuleGroupReferenceStatement) e
 	if v.ExcludedRules != nil {
 		if err := validateExcludedRules(v.ExcludedRules); err != nil {
 			invalidParams.AddNested("ExcludedRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleActionOverrides != nil {
+		if err := validateRuleActionOverrides(v.RuleActionOverrides); err != nil {
+			invalidParams.AddNested("RuleActionOverrides", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2705,6 +2818,11 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 	if v.CaptchaConfig != nil {
 		if err := validateCaptchaConfig(v.CaptchaConfig); err != nil {
 			invalidParams.AddNested("CaptchaConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChallengeConfig != nil {
+		if err := validateChallengeConfig(v.ChallengeConfig); err != nil {
+			invalidParams.AddNested("ChallengeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3552,6 +3670,11 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	if v.CaptchaConfig != nil {
 		if err := validateCaptchaConfig(v.CaptchaConfig); err != nil {
 			invalidParams.AddNested("CaptchaConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChallengeConfig != nil {
+		if err := validateChallengeConfig(v.ChallengeConfig); err != nil {
+			invalidParams.AddNested("ChallengeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

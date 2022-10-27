@@ -32,20 +32,21 @@ import (
 // detected, SageMaker will reject your training job request and return an
 // exception error.
 //
-// * InputDataConfig - Describes the training dataset and the
-// Amazon S3, EFS, or FSx location where it is stored.
+// * InputDataConfig - Describes the input required by the
+// training job and the Amazon S3, EFS, or FSx location where it is stored.
 //
-// * OutputDataConfig -
-// Identifies the Amazon S3 bucket where you want SageMaker to save the results of
-// model training.
+// *
+// OutputDataConfig - Identifies the Amazon S3 bucket where you want SageMaker to
+// save the results of model training.
 //
-// * ResourceConfig - Identifies the resources, ML compute
-// instances, and ML storage volumes to deploy for model training. In distributed
-// training, you specify more than one instance.
+// * ResourceConfig - Identifies the
+// resources, ML compute instances, and ML storage volumes to deploy for model
+// training. In distributed training, you specify more than one instance.
 //
-// * EnableManagedSpotTraining -
-// Optimize the cost of training machine learning models by up to 80% by using
-// Amazon EC2 Spot instances. For more information, see Managed Spot Training
+// *
+// EnableManagedSpotTraining - Optimize the cost of training machine learning
+// models by up to 80% by using Amazon EC2 Spot instances. For more information,
+// see Managed Spot Training
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
 // *

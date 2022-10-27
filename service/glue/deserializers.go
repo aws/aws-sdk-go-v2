@@ -28843,6 +28843,20 @@ func awsAwsjson11_deserializeDocumentCsvClassifier(v **types.CsvClassifier, valu
 				}
 			}
 
+		case "CustomDatatypeConfigured":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.CustomDatatypeConfigured = ptr.Bool(jtv)
+			}
+
+		case "CustomDatatypes":
+			if err := awsAwsjson11_deserializeDocumentCustomDatatypes(&sv.CustomDatatypes, value); err != nil {
+				return err
+			}
+
 		case "Delimiter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -29023,6 +29037,42 @@ func awsAwsjson11_deserializeDocumentCustomCode(v **types.CustomCode, value inte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomDatatypes(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

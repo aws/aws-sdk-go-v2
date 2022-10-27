@@ -787,6 +787,9 @@ func awsAwsjson11_deserializeOpErrorCreateWebACL(response *smithyhttp.Response, 
 	case strings.EqualFold("WAFDuplicateItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFDuplicateItemException(response, errorBody)
 
+	case strings.EqualFold("WAFExpiredManagedRuleGroupVersionException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFExpiredManagedRuleGroupVersionException(response, errorBody)
+
 	case strings.EqualFold("WAFInternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInternalErrorException(response, errorBody)
 
@@ -6803,6 +6806,46 @@ func awsAwsjson11_deserializeDocumentAndStatement(v **types.AndStatement, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAWSManagedRulesBotControlRuleSet(v **types.AWSManagedRulesBotControlRuleSet, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AWSManagedRulesBotControlRuleSet
+	if *v == nil {
+		sv = &types.AWSManagedRulesBotControlRuleSet{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InspectionLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InspectionLevel to be of type string, got %T instead", value)
+				}
+				sv.InspectionLevel = types.InspectionLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBlockAction(v **types.BlockAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7030,6 +7073,144 @@ func awsAwsjson11_deserializeDocumentCaptchaResponse(v **types.CaptchaResponse, 
 	var sv *types.CaptchaResponse
 	if *v == nil {
 		sv = &types.CaptchaResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = types.FailureReason(jtv)
+			}
+
+		case "ResponseCode":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResponseCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResponseCode = ptr.Int32(int32(i64))
+			}
+
+		case "SolveTimestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SolveTimestamp to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SolveTimestamp = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentChallengeAction(v **types.ChallengeAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChallengeAction
+	if *v == nil {
+		sv = &types.ChallengeAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomRequestHandling":
+			if err := awsAwsjson11_deserializeDocumentCustomRequestHandling(&sv.CustomRequestHandling, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentChallengeConfig(v **types.ChallengeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChallengeConfig
+	if *v == nil {
+		sv = &types.ChallengeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ImmunityTimeProperty":
+			if err := awsAwsjson11_deserializeDocumentImmunityTimeProperty(&sv.ImmunityTimeProperty, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentChallengeResponse(v **types.ChallengeResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ChallengeResponse
+	if *v == nil {
+		sv = &types.ChallengeResponse{}
 	} else {
 		sv = *v
 	}
@@ -9393,6 +9574,11 @@ func awsAwsjson11_deserializeDocumentManagedRuleGroupConfig(v **types.ManagedRul
 
 	for key, value := range shape {
 		switch key {
+		case "AWSManagedRulesBotControlRuleSet":
+			if err := awsAwsjson11_deserializeDocumentAWSManagedRulesBotControlRuleSet(&sv.AWSManagedRulesBotControlRuleSet, value); err != nil {
+				return err
+			}
+
 		case "LoginPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9503,6 +9689,11 @@ func awsAwsjson11_deserializeDocumentManagedRuleGroupStatement(v **types.Managed
 					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "RuleActionOverrides":
+			if err := awsAwsjson11_deserializeDocumentRuleActionOverrides(&sv.RuleActionOverrides, value); err != nil {
+				return err
 			}
 
 		case "ScopeDownStatement":
@@ -11058,6 +11249,11 @@ func awsAwsjson11_deserializeDocumentRule(v **types.Rule, value interface{}) err
 				return err
 			}
 
+		case "ChallengeConfig":
+			if err := awsAwsjson11_deserializeDocumentChallengeConfig(&sv.ChallengeConfig, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11146,6 +11342,11 @@ func awsAwsjson11_deserializeDocumentRuleAction(v **types.RuleAction, value inte
 				return err
 			}
 
+		case "Challenge":
+			if err := awsAwsjson11_deserializeDocumentChallengeAction(&sv.Challenge, value); err != nil {
+				return err
+			}
+
 		case "Count":
 			if err := awsAwsjson11_deserializeDocumentCountAction(&sv.Count, value); err != nil {
 				return err
@@ -11157,6 +11358,85 @@ func awsAwsjson11_deserializeDocumentRuleAction(v **types.RuleAction, value inte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleActionOverride(v **types.RuleActionOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleActionOverride
+	if *v == nil {
+		sv = &types.RuleActionOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionToUse":
+			if err := awsAwsjson11_deserializeDocumentRuleAction(&sv.ActionToUse, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRuleActionOverrides(v *[]types.RuleActionOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RuleActionOverride
+	if *v == nil {
+		cv = []types.RuleActionOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RuleActionOverride
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRuleActionOverride(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11307,6 +11587,11 @@ func awsAwsjson11_deserializeDocumentRuleGroupReferenceStatement(v **types.RuleG
 
 		case "ExcludedRules":
 			if err := awsAwsjson11_deserializeDocumentExcludedRules(&sv.ExcludedRules, value); err != nil {
+				return err
+			}
+
+		case "RuleActionOverrides":
+			if err := awsAwsjson11_deserializeDocumentRuleActionOverrides(&sv.RuleActionOverrides, value); err != nil {
 				return err
 			}
 
@@ -11578,9 +11863,23 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 				return err
 			}
 
+		case "ChallengeResponse":
+			if err := awsAwsjson11_deserializeDocumentChallengeResponse(&sv.ChallengeResponse, value); err != nil {
+				return err
+			}
+
 		case "Labels":
 			if err := awsAwsjson11_deserializeDocumentLabels(&sv.Labels, value); err != nil {
 				return err
+			}
+
+		case "OverriddenAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Action to be of type string, got %T instead", value)
+				}
+				sv.OverriddenAction = ptr.String(jtv)
 			}
 
 		case "Request":
@@ -12295,6 +12594,42 @@ func awsAwsjson11_deserializeDocumentTimeWindow(v **types.TimeWindow, value inte
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTokenDomains(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TokenDomain to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -13223,6 +13558,11 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 				return err
 			}
 
+		case "ChallengeConfig":
+			if err := awsAwsjson11_deserializeDocumentChallengeConfig(&sv.ChallengeConfig, value); err != nil {
+				return err
+			}
+
 		case "CustomResponseBodies":
 			if err := awsAwsjson11_deserializeDocumentCustomResponseBodies(&sv.CustomResponseBodies, value); err != nil {
 				return err
@@ -13290,6 +13630,11 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentRules(&sv.Rules, value); err != nil {
+				return err
+			}
+
+		case "TokenDomains":
+			if err := awsAwsjson11_deserializeDocumentTokenDomains(&sv.TokenDomains, value); err != nil {
 				return err
 			}
 

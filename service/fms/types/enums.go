@@ -125,6 +125,23 @@ func (MarketplaceSubscriptionOnboardingStatus) Values() []MarketplaceSubscriptio
 	}
 }
 
+type NetworkFirewallOverrideAction string
+
+// Enum values for NetworkFirewallOverrideAction
+const (
+	NetworkFirewallOverrideActionDropToAlert NetworkFirewallOverrideAction = "DROP_TO_ALERT"
+)
+
+// Values returns all known values for NetworkFirewallOverrideAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NetworkFirewallOverrideAction) Values() []NetworkFirewallOverrideAction {
+	return []NetworkFirewallOverrideAction{
+		"DROP_TO_ALERT",
+	}
+}
+
 type PolicyComplianceStatusType string
 
 // Enum values for PolicyComplianceStatusType
