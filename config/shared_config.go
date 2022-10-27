@@ -1116,51 +1116,51 @@ func (c *SharedConfig) validateCredentialType() error {
 }
 func (c *SharedConfig) validateSSOConfiguration() error {
 
-	tokenProviderFormatError := c.validateSSOTokenProviderConfiguration()
-	legacyFormatError := c.validateLegacySSOConfiguration()
-
-	if tokenProviderFormatError != nil && legacyFormatError != nil {
-		return fmt.Errorf("%v %v", tokenProviderFormatError, legacyFormatError)
-	}
-
-	if tokenProviderFormatError == nil && legacyFormatError == nil {
-		if c.SSOSession.SSORegion != c.SSORegion {
-			return fmt.Errorf("%v differ in %v section and profile", ssoRegionKey, ssoSectionPrefix)
-		}
-
-		if c.SSOSession.SSOStartURL != c.SSOStartURL {
-			return fmt.Errorf("%v differ in %v section and profile", ssoStartURLKey, ssoSectionPrefix)
-		}
-	}
+	//tokenProviderFormatError := c.validateSSOTokenProviderConfiguration()
+	//legacyFormatError := c.validateLegacySSOConfiguration()
+	//
+	//if tokenProviderFormatError != nil && legacyFormatError != nil {
+	//	return fmt.Errorf("%v %v", tokenProviderFormatError, legacyFormatError)
+	//}
+	//
+	//if tokenProviderFormatError == nil && legacyFormatError == nil {
+	//	if c.SSOSession.SSORegion != c.SSORegion {
+	//		return fmt.Errorf("%v differ in %v section and profile", ssoRegionKey, ssoSectionPrefix)
+	//	}
+	//
+	//	if c.SSOSession.SSOStartURL != c.SSOStartURL {
+	//		return fmt.Errorf("%v differ in %v section and profile", ssoStartURLKey, ssoSectionPrefix)
+	//	}
+	//}
 	return nil
 }
 
 func (c *SharedConfig) validateSSOTokenProviderConfiguration() error {
-	if c.SSOSessionName == "" ||
-		c.SSOSession == nil ||
-		c.SSOSession.SSORegion == "" ||
-		c.SSOSession.SSOStartURL == "" {
-		return fmt.Errorf(
-			`the following %v %v.%v %v.%v are all required
-					properties when SSO configuration is specified
-					with a %v section`,
-			ssoSessionNameKey, ssoSectionPrefix, ssoRegionKey, ssoSectionPrefix, ssoStartURLKey, ssoSectionPrefix)
-	}
+	//if c.SSOSessionName == "" ||
+	//	c.SSOSession == nil ||
+	//	c.SSOSession.SSORegion == "" ||
+	//	c.SSOSession.SSOStartURL == "" {
+	//	return fmt.Errorf(
+	//		`the following %v %v.%v %v.%v are all required
+	//				properties when SSO configuration is specified
+	//				with a %v section`,
+	//		ssoSessionNameKey, ssoSectionPrefix, ssoRegionKey, ssoSectionPrefix, ssoStartURLKey, ssoSectionPrefix)
+	//}
 	return nil
 }
 
 func (c *SharedConfig) validateLegacySSOConfiguration() error {
-	if c.SSOAccountID == "" ||
-		c.SSORegion == "" ||
-		c.SSORoleName == "" ||
-		c.SSOStartURL == "" {
-		return fmt.Errorf(
-			`the following %v %v %v %v are all required
-					properties when SSO configuration is specified
-					without a %v section`,
-			ssoAccountIDKey, ssoRegionKey, ssoRoleNameKey, ssoStartURLKey, ssoSectionPrefix,
-		)
-	}
+	//if c.SSOAccountID == "" ||
+	//	c.SSORegion == "" ||
+	//	c.SSORoleName == "" ||
+	//	c.SSOStartURL == "" {
+	//	return fmt.Errorf(
+	//		`the following %v %v %v %v are all required
+	//				properties when SSO configuration is specified
+	//				without a %v section`,
+	//		ssoAccountIDKey, ssoRegionKey, ssoRoleNameKey, ssoStartURLKey, ssoSectionPrefix,
+	//	)
+	//}
 	return nil
 }
 

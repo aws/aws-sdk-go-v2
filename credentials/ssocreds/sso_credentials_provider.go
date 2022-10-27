@@ -2,6 +2,7 @@ package ssocreds
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -82,25 +83,11 @@ func New(client GetRoleCredentialsAPIClient, accountID, roleName, startURL strin
 // Single Sign-On (AWS SSO) user portal by exchanging the accessToken present
 // in ~/.aws/sso/cache.
 func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
-	if p.cachedTokenFilepath == "" {
-		cachedTokenFilepath, err := StandardCachedTokenFilepath(p.options.StartURL)
-		if err != nil {
-			return aws.Credentials{}, &InvalidTokenError{Err: err}
-		}
-		p.cachedTokenFilepath = cachedTokenFilepath
-	}
-
-	tokenFile, err := loadCachedToken(p.cachedTokenFilepath)
-	if err != nil {
-		return aws.Credentials{}, &InvalidTokenError{Err: err}
-	}
-
-	if tokenFile.ExpiresAt == nil || sdk.NowTime().After(time.Time(*tokenFile.ExpiresAt)) {
-		return aws.Credentials{}, &InvalidTokenError{}
-	}
-
+	fmt.Printf("p.cachedTokenFilepath: %v\n", p.cachedTokenFilepath)
+	fmt.Printf("p.options.TokenClient: %v\n", p.options.TokenClient)
 	var accessToken *string
 	if p.options.TokenClient != nil {
+		fmt.Printf("isaiah calling retrieve bearer token\n")
 		tokenProvider := NewSSOTokenProvider(p.options.TokenClient, p.cachedTokenFilepath)
 		token, err := tokenProvider.RetrieveBearerToken(ctx)
 		if err != nil {
@@ -108,6 +95,22 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 		}
 		accessToken = &token.Value
 	} else {
+		if p.cachedTokenFilepath == "" {
+			cachedTokenFilepath, err := StandardCachedTokenFilepath(p.options.StartURL)
+			if err != nil {
+				return aws.Credentials{}, &InvalidTokenError{Err: err}
+			}
+			p.cachedTokenFilepath = cachedTokenFilepath
+		}
+
+		tokenFile, err := loadCachedToken(p.cachedTokenFilepath)
+		if err != nil {
+			return aws.Credentials{}, &InvalidTokenError{Err: err}
+		}
+
+		if tokenFile.ExpiresAt == nil || sdk.NowTime().After(time.Time(*tokenFile.ExpiresAt)) {
+			return aws.Credentials{}, &InvalidTokenError{}
+		}
 		accessToken = &tokenFile.AccessToken
 	}
 
