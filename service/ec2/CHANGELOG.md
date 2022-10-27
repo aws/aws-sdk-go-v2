@@ -1,3 +1,7 @@
+# v1.64.0 (2022-10-27)
+
+* **Feature**: Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.
+
 # v1.63.3 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

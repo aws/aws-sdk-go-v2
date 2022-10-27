@@ -1,3 +1,7 @@
+# v1.34.0 (2022-10-27)
+
+* **Feature**: Added support for custom datatypes when using custom csv classifier.
+
 # v1.33.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

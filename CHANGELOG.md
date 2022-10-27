@@ -1,3 +1,19 @@
+# Release (2022-10-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.64.0](service/ec2/CHANGELOG.md#v1640-2022-10-27)
+  * **Feature**: Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.19.0](service/fms/CHANGELOG.md#v1190-2022-10-27)
+  * **Feature**: Add support NetworkFirewall Managed Rule Group Override flag in GetViolationDetails API
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.34.0](service/glue/CHANGELOG.md#v1340-2022-10-27)
+  * **Feature**: Added support for custom datatypes when using custom csv classifier.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.26.13](service/redshift/CHANGELOG.md#v12613-2022-10-27)
+  * **Documentation**: This release clarifies use for the ElasticIp parameter of the CreateCluster and RestoreFromClusterSnapshot APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.52.0](service/sagemaker/CHANGELOG.md#v1520-2022-10-27)
+  * **Feature**: This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.23.0](service/wafv2/CHANGELOG.md#v1230-2022-10-27)
+  * **Feature**: This release adds the following: Challenge rule action, to silently verify client browsers; rule group rule action override to any valid rule action, not just Count; token sharing between protected applications for challenge/CAPTCHA token; targeted rules option for Bot Control managed rule group.
+
 # Release (2022-10-26)
 
 ## Module Highlights

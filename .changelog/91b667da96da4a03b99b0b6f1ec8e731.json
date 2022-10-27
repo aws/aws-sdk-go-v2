@@ -1,8 +1,0 @@
-{
-    "id": "91b667da-96da-4a03-b99b-0b6f1ec8e731",
-    "type": "documentation",
-    "description": "This release clarifies use for the ElasticIp parameter of the CreateCluster and RestoreFromClusterSnapshot APIs.",
-    "modules": [
-        "service/redshift"
-    ]
-}

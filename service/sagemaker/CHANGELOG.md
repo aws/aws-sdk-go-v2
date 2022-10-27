@@ -1,3 +1,7 @@
+# v1.52.0 (2022-10-27)
+
+* **Feature**: This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.
+
 # v1.51.0 (2022-10-26)
 
 * **Feature**: Amazon SageMaker Automatic Model Tuning now supports specifying Grid Search strategy for tuning jobs, which evaluates all hyperparameter combinations exhaustively based on the categorical hyperparameters provided.

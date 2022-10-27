@@ -1,3 +1,7 @@
+# v1.23.0 (2022-10-27)
+
+* **Feature**: This release adds the following: Challenge rule action, to silently verify client browsers; rule group rule action override to any valid rule action, not just Count; token sharing between protected applications for challenge/CAPTCHA token; targeted rules option for Bot Control managed rule group.
+
 # v1.22.11 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

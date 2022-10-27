@@ -1,8 +1,0 @@
-{
-    "id": "88c6667f-a8b9-4b92-911b-c60fe5cca41b",
-    "type": "feature",
-    "description": "This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
