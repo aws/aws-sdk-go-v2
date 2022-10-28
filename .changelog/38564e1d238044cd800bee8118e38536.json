@@ -1,8 +1,0 @@
-{
-    "id": "38564e1d-2380-44cd-800b-ee8118e38536",
-    "type": "feature",
-    "description": "Fix incorrect endpoint-prefix in endpoint ruleset.",
-    "modules": [
-        "service/supportapp"
-    ]
-}

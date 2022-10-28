@@ -1,8 +1,0 @@
-{
-    "id": "0888db62-ab43-4b32-ad29-7e5f85c78408",
-    "type": "documentation",
-    "description": "Update to the documentation section of the Cloud9 API Reference guide.",
-    "modules": [
-        "service/cloud9"
-    ]
-}

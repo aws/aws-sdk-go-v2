@@ -1,3 +1,7 @@
+# v1.16.20 (2022-10-28)
+
+* **Documentation**: Update to the documentation section of the Cloud9 API Reference guide.
+
 # v1.16.19 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

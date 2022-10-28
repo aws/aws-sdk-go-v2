@@ -1,8 +1,0 @@
-{
-    "id": "42e9afb6-5b57-4c78-a1de-c2c15c3389c7",
-    "type": "feature",
-    "description": "Add LATEST as a possible GameSDK Version on snapshot",
-    "modules": [
-        "service/gamesparks"
-    ]
-}

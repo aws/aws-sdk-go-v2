@@ -1,3 +1,7 @@
+# v1.18.0 (2022-10-28)
+
+* **Feature**: This release includes CertificateBasedAuthProperties in CreateDirectoryConfig and UpdateDirectoryConfig.
+
 # v1.17.13 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

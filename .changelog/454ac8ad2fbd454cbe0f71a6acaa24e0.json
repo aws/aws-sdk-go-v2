@@ -1,8 +1,0 @@
-{
-    "id": "454ac8ad-2fbd-454c-be0f-71a6acaa24e0",
-    "type": "feature",
-    "description": "This release introduces support for SCTE-35 segmentation descriptor messages which can be sent within time signal messages.",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

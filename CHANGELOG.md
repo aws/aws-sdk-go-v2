@@ -1,3 +1,17 @@
+# Release (2022-10-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.14.0](service/apprunner/CHANGELOG.md#v1140-2022-10-28)
+  * **Feature**: AWS App Runner adds .NET 6, Go 1, PHP 8.1 and Ruby 3.1 runtimes.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.18.0](service/appstream/CHANGELOG.md#v1180-2022-10-28)
+  * **Feature**: This release includes CertificateBasedAuthProperties in CreateDirectoryConfig and UpdateDirectoryConfig.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.16.20](service/cloud9/CHANGELOG.md#v11620-2022-10-28)
+  * **Documentation**: Update to the documentation section of the Cloud9 API Reference guide.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.23.0](service/cloudformation/CHANGELOG.md#v1230-2022-10-28)
+  * **Feature**: This release adds more fields to improves visibility of AWS CloudFormation StackSets information in following APIs: ListStackInstances, DescribeStackInstance, ListStackSetOperationResults, ListStackSetOperations, DescribeStackSetOperation.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.19.0](service/mediatailor/CHANGELOG.md#v1190-2022-10-28)
+  * **Feature**: This release introduces support for SCTE-35 segmentation descriptor messages which can be sent within time signal messages.
+
 # Release (2022-10-27)
 
 ## Module Highlights

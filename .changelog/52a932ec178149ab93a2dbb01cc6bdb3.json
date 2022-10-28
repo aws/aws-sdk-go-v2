@@ -1,8 +1,0 @@
-{
-    "id": "52a932ec-1781-49ab-93a2-dbb01cc6bdb3",
-    "type": "feature",
-    "description": "This release includes CertificateBasedAuthProperties in CreateDirectoryConfig and UpdateDirectoryConfig.",
-    "modules": [
-        "service/appstream"
-    ]
-}
