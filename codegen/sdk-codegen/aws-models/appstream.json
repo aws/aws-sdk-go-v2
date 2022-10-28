@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -63,14 +63,14 @@
             }
         },
         "com.amazonaws.appstream#AccessEndpointType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STREAMING",
-                        "name": "STREAMING"
+            "type": "enum",
+            "members": {
+                "STREAMING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAMING"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.appstream#AccountName": {
@@ -93,38 +93,50 @@
             }
         },
         "com.amazonaws.appstream#Action": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
-                        "name": "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"
-                    },
-                    {
-                        "value": "CLIPBOARD_COPY_TO_LOCAL_DEVICE",
-                        "name": "CLIPBOARD_COPY_TO_LOCAL_DEVICE"
-                    },
-                    {
-                        "value": "FILE_UPLOAD",
-                        "name": "FILE_UPLOAD"
-                    },
-                    {
-                        "value": "FILE_DOWNLOAD",
-                        "name": "FILE_DOWNLOAD"
-                    },
-                    {
-                        "value": "PRINTING_TO_LOCAL_DEVICE",
-                        "name": "PRINTING_TO_LOCAL_DEVICE"
-                    },
-                    {
-                        "value": "DOMAIN_PASSWORD_SIGNIN",
-                        "name": "DOMAIN_PASSWORD_SIGNIN"
-                    },
-                    {
-                        "value": "DOMAIN_SMART_CARD_SIGNIN",
-                        "name": "DOMAIN_SMART_CARD_SIGNIN"
+            "type": "enum",
+            "members": {
+                "CLIPBOARD_COPY_FROM_LOCAL_DEVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"
                     }
-                ]
+                },
+                "CLIPBOARD_COPY_TO_LOCAL_DEVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIPBOARD_COPY_TO_LOCAL_DEVICE"
+                    }
+                },
+                "FILE_UPLOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_UPLOAD"
+                    }
+                },
+                "FILE_DOWNLOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_DOWNLOAD"
+                    }
+                },
+                "PRINTING_TO_LOCAL_DEVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRINTING_TO_LOCAL_DEVICE"
+                    }
+                },
+                "DOMAIN_PASSWORD_SIGNIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_PASSWORD_SIGNIN"
+                    }
+                },
+                "DOMAIN_SMART_CARD_SIGNIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_SMART_CARD_SIGNIN"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#AppBlock": {
@@ -187,18 +199,20 @@
             }
         },
         "com.amazonaws.appstream#AppVisibility": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ASSOCIATED",
-                        "name": "ASSOCIATED"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#Application": {
@@ -237,6 +251,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If there is a problem, the application can be disabled after image creation.</p>"
                     }
                 },
@@ -300,18 +315,20 @@
             }
         },
         "com.amazonaws.appstream#ApplicationAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LAUNCH_PARAMETERS",
-                        "name": "LAUNCH_PARAMETERS"
-                    },
-                    {
-                        "value": "WORKING_DIRECTORY",
-                        "name": "WORKING_DIRECTORY"
+            "type": "enum",
+            "members": {
+                "LAUNCH_PARAMETERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAUNCH_PARAMETERS"
                     }
-                ]
+                },
+                "WORKING_DIRECTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKING_DIRECTORY"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#ApplicationAttributes": {
@@ -366,6 +383,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables or disables persistent application settings for users during their streaming sessions. </p>",
                         "smithy.api#required": {}
                     }
@@ -387,6 +405,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether persistent application settings are enabled for users during their streaming sessions.</p>"
                     }
                 },
@@ -605,22 +624,32 @@
             "members": {}
         },
         "com.amazonaws.appstream#AuthenticationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "API",
-                        "name": "API"
-                    },
-                    {
-                        "value": "SAML",
-                        "name": "SAML"
-                    },
-                    {
-                        "value": "USERPOOL",
-                        "name": "USERPOOL"
+            "type": "enum",
+            "members": {
+                "API": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API"
                     }
-                ]
+                },
+                "SAML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAML"
+                    }
+                },
+                "USERPOOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERPOOL"
+                    }
+                },
+                "AWS_AD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_AD"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#AwsAccountId": {
@@ -728,12 +757,55 @@
             }
         },
         "com.amazonaws.appstream#Boolean": {
-            "type": "boolean"
-        },
-        "com.amazonaws.appstream#BooleanObject": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.appstream#BooleanObject": {
+            "type": "boolean"
+        },
+        "com.amazonaws.appstream#CertificateBasedAuthProperties": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.appstream#CertificateBasedAuthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate-based authentication properties.</p>"
+                    }
+                },
+                "CertificateAuthorityArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the AWS Certificate Manager Private CA resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity\n            Provider (IdP) user identities to Active Directory domain-joined streaming instances.\n            Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD\n            domain password if certificate-based authentication is unsuccessful, or to unlock a\n            desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based\n            authentication, but does not allow users to log in using their AD domain password. Users\n            will be disconnected to re-authenticate using certificates.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CertificateBasedAuthStatus": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#ComputeCapacity": {
@@ -1121,6 +1193,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
                     }
+                },
+                "CertificateBasedAuthProperties": {
+                    "target": "com.amazonaws.appstream#CertificateBasedAuthProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity\n            Provider (IdP) user identities to Active Directory domain-joined streaming instances.\n            Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD\n            domain password if certificate-based authentication is unsuccessful, or to unlock a\n            desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based\n            authentication, but does not allow users to log in using their AD domain password. Users\n            will be disconnected to re-authenticate using certificates.</p>"
+                    }
                 }
             }
         },
@@ -1255,7 +1333,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a fleet. A fleet consists of streaming instances that run a specified image when using Always-On or On-Demand.</p>"
+                "smithy.api#documentation": "<p>Creates a fleet. A fleet consists of streaming instances that your users access for their applications and desktops.</p>"
             }
         },
         "com.amazonaws.appstream#CreateFleetRequest": {
@@ -1283,7 +1361,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul> \n        <p>The following instance types are available for Elastic fleets:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>    \n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul> \n        <p>The following instance types are available for Elastic fleets:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1884,6 +1962,7 @@
                 "dryRun": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>"
                     }
                 }
@@ -1898,6 +1977,7 @@
                 "canUpdateImage": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a new image can be created.</p>"
                     }
                 }
@@ -3066,7 +3146,6 @@
         "com.amazonaws.appstream#DescribeImagesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 25
@@ -3478,6 +3557,12 @@
                     "target": "com.amazonaws.appstream#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the directory configuration was created.</p>"
+                    }
+                },
+                "CertificateBasedAuthProperties": {
+                    "target": "com.amazonaws.appstream#CertificateBasedAuthProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity\n            Provider (IdP) user identities to Active Directory domain-joined streaming instances.\n            Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD\n            domain password if certificate-based authentication is unsuccessful, or to unlock a\n            desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based\n            authentication, but does not allow users to log in using their AD domain password. Users\n            will be disconnected to re-authenticate using certificates.</p>"
                     }
                 }
             },
@@ -4146,35 +4231,47 @@
             }
         },
         "com.amazonaws.appstream#FleetAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The fleet attribute.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "VPC_CONFIGURATION",
-                        "name": "VPC_CONFIGURATION"
-                    },
-                    {
-                        "value": "VPC_CONFIGURATION_SECURITY_GROUP_IDS",
-                        "name": "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_INFO",
-                        "name": "DOMAIN_JOIN_INFO"
-                    },
-                    {
-                        "value": "IAM_ROLE_ARN",
-                        "name": "IAM_ROLE_ARN"
-                    },
-                    {
-                        "value": "USB_DEVICE_FILTER_STRINGS",
-                        "name": "USB_DEVICE_FILTER_STRINGS"
-                    },
-                    {
-                        "value": "SESSION_SCRIPT_S3_LOCATION",
-                        "name": "SESSION_SCRIPT_S3_LOCATION"
+            "type": "enum",
+            "members": {
+                "VPC_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_CONFIGURATION"
                     }
-                ]
+                },
+                "VPC_CONFIGURATION_SECURITY_GROUP_IDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+                    }
+                },
+                "DOMAIN_JOIN_INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_INFO"
+                    }
+                },
+                "IAM_ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ROLE_ARN"
+                    }
+                },
+                "USB_DEVICE_FILTER_STRINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USB_DEVICE_FILTER_STRINGS"
+                    }
+                },
+                "SESSION_SCRIPT_S3_LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SESSION_SCRIPT_S3_LOCATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fleet attribute.</p>"
             }
         },
         "com.amazonaws.appstream#FleetAttributes": {
@@ -4207,130 +4304,188 @@
             }
         },
         "com.amazonaws.appstream#FleetErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION",
-                        "name": "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
-                    },
-                    {
-                        "value": "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION",
-                        "name": "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
-                    },
-                    {
-                        "value": "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION",
-                        "name": "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
-                    },
-                    {
-                        "value": "NETWORK_INTERFACE_LIMIT_EXCEEDED",
-                        "name": "NETWORK_INTERFACE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "INTERNAL_SERVICE_ERROR",
-                        "name": "INTERNAL_SERVICE_ERROR"
-                    },
-                    {
-                        "value": "IAM_SERVICE_ROLE_IS_MISSING",
-                        "name": "IAM_SERVICE_ROLE_IS_MISSING"
-                    },
-                    {
-                        "value": "MACHINE_ROLE_IS_MISSING",
-                        "name": "MACHINE_ROLE_IS_MISSING"
-                    },
-                    {
-                        "value": "STS_DISABLED_IN_REGION",
-                        "name": "STS_DISABLED_IN_REGION"
-                    },
-                    {
-                        "value": "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES",
-                        "name": "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
-                    },
-                    {
-                        "value": "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION",
-                        "name": "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
-                    },
-                    {
-                        "value": "SUBNET_NOT_FOUND",
-                        "name": "SUBNET_NOT_FOUND"
-                    },
-                    {
-                        "value": "IMAGE_NOT_FOUND",
-                        "name": "IMAGE_NOT_FOUND"
-                    },
-                    {
-                        "value": "INVALID_SUBNET_CONFIGURATION",
-                        "name": "INVALID_SUBNET_CONFIGURATION"
-                    },
-                    {
-                        "value": "SECURITY_GROUPS_NOT_FOUND",
-                        "name": "SECURITY_GROUPS_NOT_FOUND"
-                    },
-                    {
-                        "value": "IGW_NOT_ATTACHED",
-                        "name": "IGW_NOT_ATTACHED"
-                    },
-                    {
-                        "value": "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION",
-                        "name": "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
-                    },
-                    {
-                        "value": "FLEET_STOPPED",
-                        "name": "FLEET_STOPPED"
-                    },
-                    {
-                        "value": "FLEET_INSTANCE_PROVISIONING_FAILURE",
-                        "name": "FLEET_INSTANCE_PROVISIONING_FAILURE"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND",
-                        "name": "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_ACCESS_DENIED",
-                        "name": "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_LOGON_FAILURE",
-                        "name": "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_INVALID_PARAMETER",
-                        "name": "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_MORE_DATA",
-                        "name": "DOMAIN_JOIN_ERROR_MORE_DATA"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN",
-                        "name": "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_NOT_SUPPORTED",
-                        "name": "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME",
-                        "name": "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED",
-                        "name": "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED",
-                        "name": "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED",
-                        "name": "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
-                    },
-                    {
-                        "value": "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR",
-                        "name": "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+            "type": "enum",
+            "members": {
+                "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"
                     }
-                ]
+                },
+                "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"
+                    }
+                },
+                "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"
+                    }
+                },
+                "NETWORK_INTERFACE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_INTERFACE_LIMIT_EXCEEDED"
+                    }
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_ERROR"
+                    }
+                },
+                "IAM_SERVICE_ROLE_IS_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_SERVICE_ROLE_IS_MISSING"
+                    }
+                },
+                "MACHINE_ROLE_IS_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MACHINE_ROLE_IS_MISSING"
+                    }
+                },
+                "STS_DISABLED_IN_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STS_DISABLED_IN_REGION"
+                    }
+                },
+                "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"
+                    }
+                },
+                "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"
+                    }
+                },
+                "SUBNET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBNET_NOT_FOUND"
+                    }
+                },
+                "IMAGE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_NOT_FOUND"
+                    }
+                },
+                "INVALID_SUBNET_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SUBNET_CONFIGURATION"
+                    }
+                },
+                "SECURITY_GROUPS_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_GROUPS_NOT_FOUND"
+                    }
+                },
+                "IGW_NOT_ATTACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGW_NOT_ATTACHED"
+                    }
+                },
+                "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"
+                    }
+                },
+                "FLEET_STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET_STOPPED"
+                    }
+                },
+                "FLEET_INSTANCE_PROVISIONING_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLEET_INSTANCE_PROVISIONING_FAILURE"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_ACCESS_DENIED"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_LOGON_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_LOGON_FAILURE"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_INVALID_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_INVALID_PARAMETER"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_MORE_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_MORE_DATA"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_NOT_SUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_NOT_SUPPORTED"
+                    }
+                },
+                "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"
+                    }
+                },
+                "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"
+                    }
+                },
+                "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"
+                    }
+                },
+                "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"
+                    }
+                },
+                "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#FleetErrors": {
@@ -4349,45 +4504,55 @@
             }
         },
         "com.amazonaws.appstream#FleetState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
                     }
-                ]
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#FleetType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALWAYS_ON",
-                        "name": "ALWAYS_ON"
-                    },
-                    {
-                        "value": "ON_DEMAND",
-                        "name": "ON_DEMAND"
-                    },
-                    {
-                        "value": "ELASTIC",
-                        "name": "ELASTIC"
+            "type": "enum",
+            "members": {
+                "ALWAYS_ON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALWAYS_ON"
                     }
-                ]
+                },
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
+                },
+                "ELASTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ELASTIC"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#Image": {
@@ -4433,6 +4598,7 @@
                 "ImageBuilderSupported": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether an image builder can be launched from this image.</p>"
                     }
                 },
@@ -4622,54 +4788,74 @@
             }
         },
         "com.amazonaws.appstream#ImageBuilderState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "UPDATING_AGENT",
-                        "name": "UPDATING_AGENT"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "REBOOTING",
-                        "name": "REBOOTING"
-                    },
-                    {
-                        "value": "SNAPSHOTTING",
-                        "name": "SNAPSHOTTING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "PENDING_QUALIFICATION",
-                        "name": "PENDING_QUALIFICATION"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "UPDATING_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING_AGENT"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "REBOOTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REBOOTING"
+                    }
+                },
+                "SNAPSHOTTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SNAPSHOTTING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PENDING_QUALIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_QUALIFICATION"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#ImageBuilderStateChangeReason": {
@@ -4693,18 +4879,20 @@
             }
         },
         "com.amazonaws.appstream#ImageBuilderStateChangeReasonCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
-                    },
-                    {
-                        "value": "IMAGE_UNAVAILABLE",
-                        "name": "IMAGE_UNAVAILABLE"
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
                     }
-                ]
+                },
+                "IMAGE_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_UNAVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#ImageList": {
@@ -4734,38 +4922,50 @@
             }
         },
         "com.amazonaws.appstream#ImageState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COPYING",
-                        "name": "COPYING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "IMPORTING",
-                        "name": "IMPORTING"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COPYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPYING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "IMPORTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORTING"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#ImageStateChangeReason": {
@@ -4789,22 +4989,26 @@
             }
         },
         "com.amazonaws.appstream#ImageStateChangeReasonCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
-                    },
-                    {
-                        "value": "IMAGE_BUILDER_NOT_AVAILABLE",
-                        "name": "IMAGE_BUILDER_NOT_AVAILABLE"
-                    },
-                    {
-                        "value": "IMAGE_COPY_FAILURE",
-                        "name": "IMAGE_COPY_FAILURE"
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
                     }
-                ]
+                },
+                "IMAGE_BUILDER_NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_BUILDER_NOT_AVAILABLE"
+                    }
+                },
+                "IMAGE_COPY_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE_COPY_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#IncompatibleImageException": {
@@ -4821,10 +5025,7 @@
             }
         },
         "com.amazonaws.appstream#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.appstream#InvalidAccountStatusException": {
             "type": "structure",
@@ -5110,15 +5311,11 @@
             }
         },
         "com.amazonaws.appstream#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.appstream#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 500
@@ -5126,18 +5323,20 @@
             }
         },
         "com.amazonaws.appstream#MessageAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUPPRESS",
-                        "name": "SUPPRESS"
-                    },
-                    {
-                        "value": "RESEND",
-                        "name": "RESEND"
+            "type": "enum",
+            "members": {
+                "SUPPRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPPRESS"
                     }
-                ]
+                },
+                "RESEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESEND"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#Metadata": {
@@ -5204,37 +5403,24 @@
             }
         },
         "com.amazonaws.appstream#Permission": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#PhotonAdminProxyService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "AppStream",
-                    "arnNamespace": "appstream",
-                    "cloudFormationName": "AppStream",
-                    "cloudTrailEventSource": "appstream.amazonaws.com",
-                    "endpointPrefix": "appstream2"
-                },
-                "aws.auth#sigv4": {
-                    "name": "appstream"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Amazon AppStream 2.0</fullname>\n        <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p>\n        \n        <note>\n            <p>You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>\n         </note>\n        \n        <p>To learn more about AppStream 2.0, see the following resources:</p>\n            \n            <ul>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a>\n               </p>\n            </li>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a>\n               </p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon AppStream"
-            },
             "version": "2016-12-01",
             "operations": [
                 {
@@ -5432,29 +5618,1292 @@
                 {
                     "target": "com.amazonaws.appstream#UpdateStack"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AppStream",
+                    "arnNamespace": "appstream",
+                    "cloudFormationName": "AppStream",
+                    "cloudTrailEventSource": "appstream.amazonaws.com",
+                    "endpointPrefix": "appstream2"
+                },
+                "aws.auth#sigv4": {
+                    "name": "appstream"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Amazon AppStream 2.0</fullname>\n        <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This documentation provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed, secure application streaming service that lets you stream desktop applications to users without rewriting applications. AppStream 2.0 manages the AWS resources that are required to host and run your applications, scales automatically, and provides access to your users on demand. </p>\n        \n        <note>\n            <p>You can call the AppStream 2.0 API operations by using an interface VPC endpoint (interface endpoint). For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/access-api-cli-through-interface-vpc-endpoint.html\">Access AppStream 2.0 API Operations and CLI Commands Through an Interface VPC Endpoint</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>\n         </note>\n        \n        <p>To learn more about AppStream 2.0, see the following resources:</p>\n            \n            <ul>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a>\n               </p>\n            </li>\n            <li>\n               <p> \n                  <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon AppStream",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://appstream2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://appstream2-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://appstream2.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://appstream2.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://appstream2.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.appstream#PlatformType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WINDOWS",
-                        "name": "WINDOWS"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2016",
-                        "name": "WINDOWS_SERVER_2016"
-                    },
-                    {
-                        "value": "WINDOWS_SERVER_2019",
-                        "name": "WINDOWS_SERVER_2019"
-                    },
-                    {
-                        "value": "AMAZON_LINUX2",
-                        "name": "AMAZON_LINUX2"
+            "type": "enum",
+            "members": {
+                "WINDOWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS"
                     }
-                ]
+                },
+                "WINDOWS_SERVER_2016": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2016"
+                    }
+                },
+                "WINDOWS_SERVER_2019": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2019"
+                    }
+                },
+                "AMAZON_LINUX2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_LINUX2"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#Platforms": {
@@ -5470,18 +6919,20 @@
             }
         },
         "com.amazonaws.appstream#PreferredProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TCP",
-                        "name": "TCP"
-                    },
-                    {
-                        "value": "UDP",
-                        "name": "UDP"
+            "type": "enum",
+            "members": {
+                "TCP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TCP"
                     }
-                ]
+                },
+                "UDP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UDP"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#RedirectURL": {
@@ -5794,18 +7245,20 @@
             }
         },
         "com.amazonaws.appstream#SessionConnectionState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECTED",
-                        "name": "CONNECTED"
-                    },
-                    {
-                        "value": "NOT_CONNECTED",
-                        "name": "NOT_CONNECTED"
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
                     }
-                ]
+                },
+                "NOT_CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CONNECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#SessionList": {
@@ -5818,23 +7271,29 @@
             }
         },
         "com.amazonaws.appstream#SessionState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Possible values for the state of a streaming session.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "EXPIRED",
-                        "name": "EXPIRED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Possible values for the state of a streaming session.</p>"
             }
         },
         "com.amazonaws.appstream#SettingsGroup": {
@@ -5968,58 +7427,80 @@
             }
         },
         "com.amazonaws.appstream#StackAttribute": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STORAGE_CONNECTORS",
-                        "name": "STORAGE_CONNECTORS"
-                    },
-                    {
-                        "value": "STORAGE_CONNECTOR_HOMEFOLDERS",
-                        "name": "STORAGE_CONNECTOR_HOMEFOLDERS"
-                    },
-                    {
-                        "value": "STORAGE_CONNECTOR_GOOGLE_DRIVE",
-                        "name": "STORAGE_CONNECTOR_GOOGLE_DRIVE"
-                    },
-                    {
-                        "value": "STORAGE_CONNECTOR_ONE_DRIVE",
-                        "name": "STORAGE_CONNECTOR_ONE_DRIVE"
-                    },
-                    {
-                        "value": "REDIRECT_URL",
-                        "name": "REDIRECT_URL"
-                    },
-                    {
-                        "value": "FEEDBACK_URL",
-                        "name": "FEEDBACK_URL"
-                    },
-                    {
-                        "value": "THEME_NAME",
-                        "name": "THEME_NAME"
-                    },
-                    {
-                        "value": "USER_SETTINGS",
-                        "name": "USER_SETTINGS"
-                    },
-                    {
-                        "value": "EMBED_HOST_DOMAINS",
-                        "name": "EMBED_HOST_DOMAINS"
-                    },
-                    {
-                        "value": "IAM_ROLE_ARN",
-                        "name": "IAM_ROLE_ARN"
-                    },
-                    {
-                        "value": "ACCESS_ENDPOINTS",
-                        "name": "ACCESS_ENDPOINTS"
-                    },
-                    {
-                        "value": "STREAMING_EXPERIENCE_SETTINGS",
-                        "name": "STREAMING_EXPERIENCE_SETTINGS"
+            "type": "enum",
+            "members": {
+                "STORAGE_CONNECTORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_CONNECTORS"
                     }
-                ]
+                },
+                "STORAGE_CONNECTOR_HOMEFOLDERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_CONNECTOR_HOMEFOLDERS"
+                    }
+                },
+                "STORAGE_CONNECTOR_GOOGLE_DRIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_CONNECTOR_GOOGLE_DRIVE"
+                    }
+                },
+                "STORAGE_CONNECTOR_ONE_DRIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_CONNECTOR_ONE_DRIVE"
+                    }
+                },
+                "REDIRECT_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REDIRECT_URL"
+                    }
+                },
+                "FEEDBACK_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FEEDBACK_URL"
+                    }
+                },
+                "THEME_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THEME_NAME"
+                    }
+                },
+                "USER_SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_SETTINGS"
+                    }
+                },
+                "EMBED_HOST_DOMAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMBED_HOST_DOMAINS"
+                    }
+                },
+                "IAM_ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ROLE_ARN"
+                    }
+                },
+                "ACCESS_ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_ENDPOINTS"
+                    }
+                },
+                "STREAMING_EXPERIENCE_SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAMING_EXPERIENCE_SETTINGS"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#StackAttributes": {
@@ -6049,18 +7530,20 @@
             }
         },
         "com.amazonaws.appstream#StackErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STORAGE_CONNECTOR_ERROR",
-                        "name": "STORAGE_CONNECTOR_ERROR"
-                    },
-                    {
-                        "value": "INTERNAL_SERVICE_ERROR",
-                        "name": "INTERNAL_SERVICE_ERROR"
+            "type": "enum",
+            "members": {
+                "STORAGE_CONNECTOR_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_CONNECTOR_ERROR"
                     }
-                ]
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#StackErrors": {
@@ -6312,38 +7795,46 @@
             }
         },
         "com.amazonaws.appstream#StorageConnectorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The type of storage connector.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "HOMEFOLDERS",
-                        "name": "HOMEFOLDERS"
-                    },
-                    {
-                        "value": "GOOGLE_DRIVE",
-                        "name": "GOOGLE_DRIVE"
-                    },
-                    {
-                        "value": "ONE_DRIVE",
-                        "name": "ONE_DRIVE"
+            "type": "enum",
+            "members": {
+                "HOMEFOLDERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOMEFOLDERS"
                     }
-                ]
+                },
+                "GOOGLE_DRIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GOOGLE_DRIVE"
+                    }
+                },
+                "ONE_DRIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_DRIVE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of storage connector.</p>"
             }
         },
         "com.amazonaws.appstream#StreamView": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "APP",
-                        "name": "APP"
-                    },
-                    {
-                        "value": "DESKTOP",
-                        "name": "DESKTOP"
+            "type": "enum",
+            "members": {
+                "APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APP"
                     }
-                ]
+                },
+                "DESKTOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESKTOP"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#StreamingExperienceSettings": {
@@ -6670,6 +8161,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
                     }
+                },
+                "CertificateBasedAuthProperties": {
+                    "target": "com.amazonaws.appstream#CertificateBasedAuthProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate-based authentication properties used to authenticate SAML 2.0 Identity\n            Provider (IdP) user identities to Active Directory domain-joined streaming instances.\n            Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD\n            domain password if certificate-based authentication is unsuccessful, or to unlock a\n            desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based\n            authentication, but does not allow users to log in using their AD domain password. Users\n            will be disconnected to re-authenticate using certificates.</p>"
+                    }
                 }
             }
         },
@@ -6829,7 +8326,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.appstream#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul> \n        <p>The following instance types are available for Elastic fleets:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The instance type to use when launching fleet instances. The following instance types are available:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.large</p>\n            </li>\n            <li>\n               <p>stream.compute.xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.compute.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.large</p>\n            </li>\n            <li>\n               <p>stream.memory.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.large</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.3xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.6xlarge</p>\n            </li>\n            <li>\n               <p>stream.memory.z1d.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.large</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-design.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-desktop.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.2xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.12xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics.g4dn.16xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.4xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.8xlarge</p>\n            </li>\n            <li>\n               <p>stream.graphics-pro.16xlarge</p>\n            </li>\n         </ul> \n        <p>The following instance types are available for Elastic fleets:</p>\n        <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ComputeCapacity": {
@@ -6859,6 +8356,7 @@
                 "DeleteVpcConfig": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Deletes the VPC association for the specified fleet.</p>"
                     }
@@ -7073,6 +8571,7 @@
                 "DeleteStorageConnectors": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#deprecated": {},
                         "smithy.api#documentation": "<p>Deletes the storage connectors currently enabled for the stack.</p>"
                     }
@@ -7139,33 +8638,37 @@
             }
         },
         "com.amazonaws.appstream#UsageReportExecutionErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RESOURCE_NOT_FOUND",
-                        "name": "RESOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "INTERNAL_SERVICE_ERROR",
-                        "name": "INTERNAL_SERVICE_ERROR"
+            "type": "enum",
+            "members": {
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
                     }
-                ]
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "INTERNAL_SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVICE_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#UsageReportSchedule": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAILY",
-                        "name": "DAILY"
+            "type": "enum",
+            "members": {
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAILY"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.appstream#UsageReportSubscription": {
@@ -7240,6 +8743,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the user in the user pool is enabled.</p>"
                     }
                 },
@@ -7365,6 +8869,7 @@
                 "SendEmailNotification": {
                     "target": "com.amazonaws.appstream#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a welcome email is sent to a user after the user is created in the user pool.</p>"
                     }
                 }
@@ -7400,26 +8905,32 @@
             }
         },
         "com.amazonaws.appstream#UserStackAssociationErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STACK_NOT_FOUND",
-                        "name": "STACK_NOT_FOUND"
-                    },
-                    {
-                        "value": "USER_NAME_NOT_FOUND",
-                        "name": "USER_NAME_NOT_FOUND"
-                    },
-                    {
-                        "value": "DIRECTORY_NOT_FOUND",
-                        "name": "DIRECTORY_NOT_FOUND"
-                    },
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
+            "type": "enum",
+            "members": {
+                "STACK_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STACK_NOT_FOUND"
                     }
-                ]
+                },
+                "USER_NAME_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_NAME_NOT_FOUND"
+                    }
+                },
+                "DIRECTORY_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_NOT_FOUND"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#UserStackAssociationErrorList": {
@@ -7452,22 +8963,26 @@
             }
         },
         "com.amazonaws.appstream#VisibilityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUBLIC",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
-                    },
-                    {
-                        "value": "SHARED",
-                        "name": "SHARED"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#VpcConfig": {
