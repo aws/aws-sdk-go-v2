@@ -4368,6 +4368,38 @@ func awsAwsquery_serializeDocumentNotificationARNs(v []string, value query.Value
 	return nil
 }
 
+func awsAwsquery_serializeDocumentOperationResultFilter(v *types.OperationResultFilter, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.Name) > 0 {
+		objectKey := object.Key("Name")
+		objectKey.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		objectKey := object.Key("Values")
+		objectKey.String(*v.Values)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentOperationResultFilters(v []types.OperationResultFilter, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentOperationResultFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentOrganizationalUnitIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -6086,6 +6118,13 @@ func awsAwsquery_serializeOpDocumentListStackSetOperationResultsInput(v *ListSta
 	if len(v.CallAs) > 0 {
 		objectKey := object.Key("CallAs")
 		objectKey.String(string(v.CallAs))
+	}
+
+	if v.Filters != nil {
+		objectKey := object.Key("Filters")
+		if err := awsAwsquery_serializeDocumentOperationResultFilters(v.Filters, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {

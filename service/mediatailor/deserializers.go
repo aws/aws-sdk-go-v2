@@ -7334,6 +7334,11 @@ func awsRestjson1_deserializeDocumentAdBreak(v **types.AdBreak, value interface{
 				return err
 			}
 
+		case "TimeSignalMessage":
+			if err := awsRestjson1_deserializeDocumentTimeSignalMessage(&sv.TimeSignalMessage, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9230,6 +9235,171 @@ func awsRestjson1_deserializeDocumentSecretsManagerAccessTokenConfiguration(v **
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSegmentationDescriptor(v **types.SegmentationDescriptor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SegmentationDescriptor
+	if *v == nil {
+		sv = &types.SegmentationDescriptor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SegmentationEventId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentationEventId = ptr.Int32(int32(i64))
+			}
+
+		case "SegmentationTypeId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentationTypeId = ptr.Int32(int32(i64))
+			}
+
+		case "SegmentationUpid":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SegmentationUpid = ptr.String(jtv)
+			}
+
+		case "SegmentationUpidType":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentationUpidType = ptr.Int32(int32(i64))
+			}
+
+		case "SegmentNum":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentNum = ptr.Int32(int32(i64))
+			}
+
+		case "SegmentsExpected":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentsExpected = ptr.Int32(int32(i64))
+			}
+
+		case "SubSegmentNum":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SubSegmentNum = ptr.Int32(int32(i64))
+			}
+
+		case "SubSegmentsExpected":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SubSegmentsExpected = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSegmentationDescriptorList(v *[]types.SegmentationDescriptor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SegmentationDescriptor
+	if *v == nil {
+		cv = []types.SegmentationDescriptor{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SegmentationDescriptor
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSegmentationDescriptor(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSegmentDeliveryConfiguration(v **types.SegmentDeliveryConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9506,6 +9676,42 @@ func awsRestjson1_deserializeDocumentSpliceInsertMessage(v **types.SpliceInsertM
 					return err
 				}
 				sv.UniqueProgramId = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimeSignalMessage(v **types.TimeSignalMessage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimeSignalMessage
+	if *v == nil {
+		sv = &types.TimeSignalMessage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SegmentationDescriptors":
+			if err := awsRestjson1_deserializeDocumentSegmentationDescriptorList(&sv.SegmentationDescriptors, value); err != nil {
+				return err
 			}
 
 		default:

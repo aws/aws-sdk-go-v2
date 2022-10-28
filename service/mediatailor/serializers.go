@@ -3273,6 +3273,13 @@ func awsRestjson1_serializeDocumentAdBreak(v *types.AdBreak, value smithyjson.Va
 		}
 	}
 
+	if v.TimeSignalMessage != nil {
+		ok := object.Key("TimeSignalMessage")
+		if err := awsRestjson1_serializeDocumentTimeSignalMessage(v.TimeSignalMessage, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3646,6 +3653,66 @@ func awsRestjson1_serializeDocumentSecretsManagerAccessTokenConfiguration(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSegmentationDescriptor(v *types.SegmentationDescriptor, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SegmentationEventId != nil {
+		ok := object.Key("SegmentationEventId")
+		ok.Integer(*v.SegmentationEventId)
+	}
+
+	if v.SegmentationTypeId != nil {
+		ok := object.Key("SegmentationTypeId")
+		ok.Integer(*v.SegmentationTypeId)
+	}
+
+	if v.SegmentationUpid != nil {
+		ok := object.Key("SegmentationUpid")
+		ok.String(*v.SegmentationUpid)
+	}
+
+	if v.SegmentationUpidType != nil {
+		ok := object.Key("SegmentationUpidType")
+		ok.Integer(*v.SegmentationUpidType)
+	}
+
+	if v.SegmentNum != nil {
+		ok := object.Key("SegmentNum")
+		ok.Integer(*v.SegmentNum)
+	}
+
+	if v.SegmentsExpected != nil {
+		ok := object.Key("SegmentsExpected")
+		ok.Integer(*v.SegmentsExpected)
+	}
+
+	if v.SubSegmentNum != nil {
+		ok := object.Key("SubSegmentNum")
+		ok.Integer(*v.SubSegmentNum)
+	}
+
+	if v.SubSegmentsExpected != nil {
+		ok := object.Key("SubSegmentsExpected")
+		ok.Integer(*v.SubSegmentsExpected)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSegmentationDescriptorList(v []types.SegmentationDescriptor, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSegmentationDescriptor(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSegmentDeliveryConfiguration(v *types.SegmentDeliveryConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3702,6 +3769,20 @@ func awsRestjson1_serializeDocumentSpliceInsertMessage(v *types.SpliceInsertMess
 	if v.UniqueProgramId != 0 {
 		ok := object.Key("UniqueProgramId")
 		ok.Integer(v.UniqueProgramId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimeSignalMessage(v *types.TimeSignalMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SegmentationDescriptors != nil {
+		ok := object.Key("SegmentationDescriptors")
+		if err := awsRestjson1_serializeDocumentSegmentationDescriptorList(v.SegmentationDescriptors, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

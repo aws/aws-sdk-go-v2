@@ -482,6 +482,22 @@ func (OnFailure) Values() []OnFailure {
 	}
 }
 
+type OperationResultFilterName string
+
+// Enum values for OperationResultFilterName
+const (
+	OperationResultFilterNameOperationResultStatus OperationResultFilterName = "OPERATION_RESULT_STATUS"
+)
+
+// Values returns all known values for OperationResultFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OperationResultFilterName) Values() []OperationResultFilterName {
+	return []OperationResultFilterName{
+		"OPERATION_RESULT_STATUS",
+	}
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -832,7 +848,8 @@ type StackInstanceFilterName string
 
 // Enum values for StackInstanceFilterName
 const (
-	StackInstanceFilterNameDetailedStatus StackInstanceFilterName = "DETAILED_STATUS"
+	StackInstanceFilterNameDetailedStatus  StackInstanceFilterName = "DETAILED_STATUS"
+	StackInstanceFilterNameLastOperationId StackInstanceFilterName = "LAST_OPERATION_ID"
 )
 
 // Values returns all known values for StackInstanceFilterName. Note that this can
@@ -841,6 +858,7 @@ const (
 func (StackInstanceFilterName) Values() []StackInstanceFilterName {
 	return []StackInstanceFilterName{
 		"DETAILED_STATUS",
+		"LAST_OPERATION_ID",
 	}
 }
 

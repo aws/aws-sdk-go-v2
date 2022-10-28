@@ -43,6 +43,7 @@ type MessageType string
 // Enum values for MessageType
 const (
 	MessageTypeSpliceInsert MessageType = "SPLICE_INSERT"
+	MessageTypeTimeSignal   MessageType = "TIME_SIGNAL"
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
@@ -51,6 +52,7 @@ const (
 func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"SPLICE_INSERT",
+		"TIME_SIGNAL",
 	}
 }
 

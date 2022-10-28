@@ -1,0 +1,8 @@
+{
+    "id": "76c6e871-3067-4234-8e21-a77638992d36",
+    "type": "feature",
+    "description": "Fix incorrect endpoint-prefix in endpoint ruleset.",
+    "modules": [
+        "service/privatenetworks"
+    ]
+}

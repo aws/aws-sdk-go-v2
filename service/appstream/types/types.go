@@ -168,6 +168,26 @@ type ApplicationSettingsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The certificate-based authentication properties used to authenticate SAML 2.0
+// Identity Provider (IdP) user identities to Active Directory domain-joined
+// streaming instances. Fallback is turned on by default when certificate-based
+// authentication is Enabled . Fallback allows users to log in using their AD
+// domain password if certificate-based authentication is unsuccessful, or to
+// unlock a desktop lock screen. Enabled_no_directory_login_fallback enables
+// certificate-based authentication, but does not allow users to log in using their
+// AD domain password. Users will be disconnected to re-authenticate using
+// certificates.
+type CertificateBasedAuthProperties struct {
+
+	// The ARN of the AWS Certificate Manager Private CA resource.
+	CertificateAuthorityArn *string
+
+	// The status of the certificate-based authentication properties.
+	Status CertificateBasedAuthStatus
+
+	noSmithyDocumentSerde
+}
+
 // Describes the capacity for a fleet.
 type ComputeCapacity struct {
 
@@ -207,6 +227,17 @@ type DirectoryConfig struct {
 	//
 	// This member is required.
 	DirectoryName *string
+
+	// The certificate-based authentication properties used to authenticate SAML 2.0
+	// Identity Provider (IdP) user identities to Active Directory domain-joined
+	// streaming instances. Fallback is turned on by default when certificate-based
+	// authentication is Enabled . Fallback allows users to log in using their AD
+	// domain password if certificate-based authentication is unsuccessful, or to
+	// unlock a desktop lock screen. Enabled_no_directory_login_fallback enables
+	// certificate-based authentication, but does not allow users to log in using their
+	// AD domain password. Users will be disconnected to re-authenticate using
+	// certificates.
+	CertificateBasedAuthProperties *CertificateBasedAuthProperties
 
 	// The time the directory configuration was created.
 	CreatedTime *time.Time

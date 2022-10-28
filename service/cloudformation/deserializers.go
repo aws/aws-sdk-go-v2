@@ -13681,6 +13681,19 @@ func awsAwsquery_deserializeDocumentStackInstance(v **types.StackInstance, decod
 				sv.LastDriftCheckTimestamp = ptr.Time(t)
 			}
 
+		case strings.EqualFold("LastOperationId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LastOperationId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("OrganizationalUnitId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -14014,6 +14027,19 @@ func awsAwsquery_deserializeDocumentStackInstanceSummary(v **types.StackInstance
 					return err
 				}
 				sv.LastDriftCheckTimestamp = ptr.Time(t)
+			}
+
+		case strings.EqualFold("LastOperationId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LastOperationId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("OrganizationalUnitId", t.Name.Local):
@@ -15835,6 +15861,12 @@ func awsAwsquery_deserializeDocumentStackSetOperation(v **types.StackSetOperatio
 				sv.Status = types.StackSetOperationStatus(xtv)
 			}
 
+		case strings.EqualFold("StatusDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStackSetOperationStatusDetails(&sv.StatusDetails, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("StatusReason", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16160,6 +16192,59 @@ func awsAwsquery_deserializeDocumentStackSetOperationResultSummary(v **types.Sta
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentStackSetOperationStatusDetails(v **types.StackSetOperationStatusDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.StackSetOperationStatusDetails
+	if *v == nil {
+		sv = &types.StackSetOperationStatusDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FailedStackInstancesCount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.FailedStackInstancesCount = int32(i64)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentStackSetOperationSummaries(v *[]types.StackSetOperationSummary, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16310,6 +16395,12 @@ func awsAwsquery_deserializeDocumentStackSetOperationSummary(v **types.StackSetO
 				sv.OperationId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("OperationPreferences", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStackSetOperationPreferences(&sv.OperationPreferences, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Status", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16321,6 +16412,12 @@ func awsAwsquery_deserializeDocumentStackSetOperationSummary(v **types.StackSetO
 			{
 				xtv := string(val)
 				sv.Status = types.StackSetOperationStatus(xtv)
+			}
+
+		case strings.EqualFold("StatusDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStackSetOperationStatusDetails(&sv.StatusDetails, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("StatusReason", t.Name.Local):

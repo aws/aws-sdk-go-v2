@@ -89,6 +89,7 @@ const (
 	AuthenticationTypeApi      AuthenticationType = "API"
 	AuthenticationTypeSaml     AuthenticationType = "SAML"
 	AuthenticationTypeUserpool AuthenticationType = "USERPOOL"
+	AuthenticationTypeAwsAd    AuthenticationType = "AWS_AD"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -99,6 +100,27 @@ func (AuthenticationType) Values() []AuthenticationType {
 		"API",
 		"SAML",
 		"USERPOOL",
+		"AWS_AD",
+	}
+}
+
+type CertificateBasedAuthStatus string
+
+// Enum values for CertificateBasedAuthStatus
+const (
+	CertificateBasedAuthStatusDisabled                        CertificateBasedAuthStatus = "DISABLED"
+	CertificateBasedAuthStatusEnabled                         CertificateBasedAuthStatus = "ENABLED"
+	CertificateBasedAuthStatusEnabledNoDirectoryLoginFallback CertificateBasedAuthStatus = "ENABLED_NO_DIRECTORY_LOGIN_FALLBACK"
+)
+
+// Values returns all known values for CertificateBasedAuthStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateBasedAuthStatus) Values() []CertificateBasedAuthStatus {
+	return []CertificateBasedAuthStatus{
+		"DISABLED",
+		"ENABLED",
+		"ENABLED_NO_DIRECTORY_LOGIN_FALLBACK",
 	}
 }
 

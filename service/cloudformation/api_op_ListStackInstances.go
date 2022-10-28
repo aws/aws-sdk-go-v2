@@ -55,7 +55,7 @@ type ListStackInstancesInput struct {
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs
 
-	// The status that stack instances are filtered by.
+	// The filter to apply to stack instances
 	Filters []types.StackInstanceFilter
 
 	// The maximum number of results to be returned with a single call. If the number

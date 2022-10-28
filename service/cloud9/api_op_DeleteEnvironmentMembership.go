@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an environment member from an Cloud9 development environment.
+// Deletes an environment member from a development environment.
 func (c *Client) DeleteEnvironmentMembership(ctx context.Context, params *DeleteEnvironmentMembershipInput, optFns ...func(*Options)) (*DeleteEnvironmentMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentMembershipInput{}

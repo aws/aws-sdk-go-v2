@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a fleet. A fleet consists of streaming instances that run a specified
-// image when using Always-On or On-Demand.
+// Creates a fleet. A fleet consists of streaming instances that your users access
+// for their applications and desktops.
 func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optFns ...func(*Options)) (*CreateFleetOutput, error) {
 	if params == nil {
 		params = &CreateFleetInput{}
@@ -40,85 +40,97 @@ type CreateFleetInput struct {
 	// *
 	// stream.standard.large
 	//
-	// * stream.compute.large
+	// * stream.standard.xlarge
+	//
+	// * stream.standard.2xlarge
+	//
+	// *
+	// stream.compute.large
 	//
 	// * stream.compute.xlarge
 	//
-	// *
-	// stream.compute.2xlarge
+	// * stream.compute.2xlarge
 	//
-	// * stream.compute.4xlarge
+	// *
+	// stream.compute.4xlarge
 	//
 	// * stream.compute.8xlarge
 	//
-	// *
-	// stream.memory.large
+	// * stream.memory.large
 	//
-	// * stream.memory.xlarge
+	// *
+	// stream.memory.xlarge
 	//
 	// * stream.memory.2xlarge
 	//
-	// *
-	// stream.memory.4xlarge
+	// * stream.memory.4xlarge
 	//
-	// * stream.memory.8xlarge
+	// *
+	// stream.memory.8xlarge
 	//
 	// * stream.memory.z1d.large
 	//
-	// *
-	// stream.memory.z1d.xlarge
-	//
-	// * stream.memory.z1d.2xlarge
+	// * stream.memory.z1d.xlarge
 	//
 	// *
-	// stream.memory.z1d.3xlarge
+	// stream.memory.z1d.2xlarge
 	//
-	// * stream.memory.z1d.6xlarge
-	//
-	// *
-	// stream.memory.z1d.12xlarge
-	//
-	// * stream.graphics-design.large
+	// * stream.memory.z1d.3xlarge
 	//
 	// *
-	// stream.graphics-design.xlarge
+	// stream.memory.z1d.6xlarge
 	//
-	// * stream.graphics-design.2xlarge
-	//
-	// *
-	// stream.graphics-design.4xlarge
-	//
-	// * stream.graphics-desktop.2xlarge
+	// * stream.memory.z1d.12xlarge
 	//
 	// *
-	// stream.graphics.g4dn.xlarge
+	// stream.graphics-design.large
 	//
-	// * stream.graphics.g4dn.2xlarge
-	//
-	// *
-	// stream.graphics.g4dn.4xlarge
-	//
-	// * stream.graphics.g4dn.8xlarge
+	// * stream.graphics-design.xlarge
 	//
 	// *
-	// stream.graphics.g4dn.12xlarge
+	// stream.graphics-design.2xlarge
 	//
-	// * stream.graphics.g4dn.16xlarge
-	//
-	// *
-	// stream.graphics-pro.4xlarge
-	//
-	// * stream.graphics-pro.8xlarge
+	// * stream.graphics-design.4xlarge
 	//
 	// *
-	// stream.graphics-pro.16xlarge
+	// stream.graphics-desktop.2xlarge
 	//
-	// The following instance types are available for
-	// Elastic fleets:
+	// * stream.graphics.g4dn.xlarge
+	//
+	// *
+	// stream.graphics.g4dn.2xlarge
+	//
+	// * stream.graphics.g4dn.4xlarge
+	//
+	// *
+	// stream.graphics.g4dn.8xlarge
+	//
+	// * stream.graphics.g4dn.12xlarge
+	//
+	// *
+	// stream.graphics.g4dn.16xlarge
+	//
+	// * stream.graphics-pro.4xlarge
+	//
+	// *
+	// stream.graphics-pro.8xlarge
+	//
+	// * stream.graphics-pro.16xlarge
+	//
+	// The following
+	// instance types are available for Elastic fleets:
 	//
 	// * stream.standard.small
 	//
-	// * stream.standard.medium
+	// *
+	// stream.standard.medium
+	//
+	// * stream.standard.large
+	//
+	// * stream.standard.xlarge
+	//
+	// *
+	// stream.standard.2xlarge
 	//
 	// This member is required.
 	InstanceType *string

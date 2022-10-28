@@ -279,14 +279,13 @@ type DeploymentTargets struct {
 	// specified in Accounts parameter. This enables user to avoid certain accounts
 	// within an OU such as suspended accounts.
 	//
-	// * UNION: (default value) StackSets
-	// includes additional accounts deployment targets. This is the default value if
-	// AccountFilterType is not provided. This enables user to update an entire OU and
-	// individual accounts from a different OU in one request, which used to be two
-	// separate requests.
+	// * UNION: StackSets includes additional
+	// accounts deployment targets. This is the default value if AccountFilterType is
+	// not provided. This enables user to update an entire OU and individual accounts
+	// from a different OU in one request, which used to be two separate requests.
 	//
-	// * NONE: Deploys to all the accounts in specified
-	// organizational units (OU).
+	// *
+	// NONE: Deploys to all the accounts in specified organizational units (OU).
 	AccountFilterType AccountFilterType
 
 	// The names of one or more Amazon Web Services accounts for which you want to
@@ -376,6 +375,18 @@ type ModuleInfo struct {
 	// AWS::Second::Example::MODULE.
 	// AWS::First::Example::MODULE/AWS::Second::Example::MODULE
 	TypeHierarchy *string
+
+	noSmithyDocumentSerde
+}
+
+// The status that operation results are filtered by.
+type OperationResultFilter struct {
+
+	// The type of filter to apply.
+	Name OperationResultFilterName
+
+	// The value to filter by.
+	Values *string
 
 	noSmithyDocumentSerde
 }
@@ -1096,6 +1107,9 @@ type StackInstance struct {
 	// drift detection hasn't yet been performed.
 	LastDriftCheckTimestamp *time.Time
 
+	// The last unique ID of a StackSet operation performed on a stack instance.
+	LastOperationId *string
+
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
@@ -1181,7 +1195,7 @@ type StackInstanceComprehensiveStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The status that stack instances are filtered by.
+// The filter to apply to stack instances
 type StackInstanceFilter struct {
 
 	// The type of filter to apply.
@@ -1223,6 +1237,9 @@ type StackInstanceSummary struct {
 	// the stack instance. This value will be NULL for any stack instance on which
 	// drift detection hasn't yet been performed.
 	LastDriftCheckTimestamp *time.Time
+
+	// The last unique ID of a StackSet operation performed on a stack instance.
+	LastOperationId *string
 
 	// [Service-managed permissions] The organization root ID or organizational unit
 	// (OU) IDs that you specified for DeploymentTargets
@@ -1865,6 +1882,9 @@ type StackSetOperation struct {
 	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
 
+	// Detailed information about the StackSet operation.
+	StatusDetails *StackSetOperationStatusDetails
+
 	// The status of the operation in details.
 	StatusReason *string
 
@@ -1973,6 +1993,15 @@ type StackSetOperationResultSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about the StackSet operation.
+type StackSetOperationStatusDetails struct {
+
+	// The number of stack instances for which the StackSet operation failed.
+	FailedStackInstancesCount int32
+
+	noSmithyDocumentSerde
+}
+
 // The structures that contain summary information about the specified operation.
 type StackSetOperationSummary struct {
 
@@ -1996,6 +2025,12 @@ type StackSetOperationSummary struct {
 
 	// The unique ID of the stack set operation.
 	OperationId *string
+
+	// The user-specified preferences for how CloudFormation performs a stack set
+	// operation. For more information about maximum concurrent accounts and failure
+	// tolerance, see Stack set operation options
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).
+	OperationPreferences *StackSetOperationPreferences
 
 	// The overall status of the operation.
 	//
@@ -2026,6 +2061,9 @@ type StackSetOperationSummary struct {
 	// operation completed creating or updating all the specified stacks without
 	// exceeding the failure tolerance for the operation.
 	Status StackSetOperationStatus
+
+	// Detailed information about the stack set operation.
+	StatusDetails *StackSetOperationStatusDetails
 
 	// The status of the operation in details.
 	StatusReason *string

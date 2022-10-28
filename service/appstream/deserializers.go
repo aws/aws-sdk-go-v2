@@ -8743,6 +8743,55 @@ func awsAwsjson11_deserializeDocumentApplicationSettingsResponse(v **types.Appli
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCertificateBasedAuthProperties(v **types.CertificateBasedAuthProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CertificateBasedAuthProperties
+	if *v == nil {
+		sv = &types.CertificateBasedAuthProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CertificateAuthorityArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.CertificateAuthorityArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateBasedAuthStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.CertificateBasedAuthStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentComputeCapacityStatus(v **types.ComputeCapacityStatus, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8888,6 +8937,11 @@ func awsAwsjson11_deserializeDocumentDirectoryConfig(v **types.DirectoryConfig, 
 
 	for key, value := range shape {
 		switch key {
+		case "CertificateBasedAuthProperties":
+			if err := awsAwsjson11_deserializeDocumentCertificateBasedAuthProperties(&sv.CertificateBasedAuthProperties, value); err != nil {
+				return err
+			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {

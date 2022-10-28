@@ -3669,6 +3669,23 @@ func awsAwsjson11_serializeDocumentAwsAccountIdList(v []string, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCertificateBasedAuthProperties(v *types.CertificateBasedAuthProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityArn != nil {
+		ok := object.Key("CertificateAuthorityArn")
+		ok.String(*v.CertificateAuthorityArn)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentComputeCapacity(v *types.ComputeCapacity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4318,6 +4335,13 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 func awsAwsjson11_serializeOpDocumentCreateDirectoryConfigInput(v *CreateDirectoryConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CertificateBasedAuthProperties != nil {
+		ok := object.Key("CertificateBasedAuthProperties")
+		if err := awsAwsjson11_serializeDocumentCertificateBasedAuthProperties(v.CertificateBasedAuthProperties, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DirectoryName != nil {
 		ok := object.Key("DirectoryName")
@@ -5620,6 +5644,13 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 func awsAwsjson11_serializeOpDocumentUpdateDirectoryConfigInput(v *UpdateDirectoryConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CertificateBasedAuthProperties != nil {
+		ok := object.Key("CertificateBasedAuthProperties")
+		if err := awsAwsjson11_serializeDocumentCertificateBasedAuthProperties(v.CertificateBasedAuthProperties, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DirectoryName != nil {
 		ok := object.Key("DirectoryName")
