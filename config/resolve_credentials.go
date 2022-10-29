@@ -176,22 +176,20 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 
 	cfgCopy := cfg.Copy()
 
-	//cfgCopy.Region = sharedConfig.SSORegion
-	cfgCopy.Region = sharedConfig.SSOSession.SSORegion
-
-	cachedPath, err := ssocreds.StandardCachedTokenFilepath(sharedConfig.SSOSession.Name)
-	fmt.Printf("isaiah cachedPath: %v\n", cachedPath)
-	if err == nil {
-
-		fmt.Printf("isaiah config: %v", cfgCopy.Region)
+	if sharedConfig.SSOSession != nil {
+		cfgCopy.Region = sharedConfig.SSOSession.SSORegion
+		cachedPath, err := ssocreds.StandardCachedTokenFilepath(sharedConfig.SSOSession.Name)
+		if err != nil {
+			return err
+		}
 		oidcClient := ssooidc.NewFromConfig(cfgCopy)
-		fmt.Printf("isaiah adding bearer token options\n")
 		options = append(options, func(o *ssocreds.Options) {
 			o.TokenClient = oidcClient
 			o.CachedTokenFilepath = cachedPath
 		})
+	} else {
+		cfgCopy.Region = sharedConfig.SSORegion
 	}
-	//fmt.Printf("options[last]: %v", options[len(options)])
 
 	cfg.Credentials = ssocreds.New(sso.NewFromConfig(cfgCopy), sharedConfig.SSOAccountID, sharedConfig.SSORoleName, sharedConfig.SSOStartURL, options...)
 

@@ -1090,62 +1090,82 @@ func (c *SharedConfig) validateCredentialType() error {
 		len(c.CredentialSource) != 0,
 		len(c.CredentialProcess) != 0,
 		len(c.WebIdentityTokenFile) != 0,
-		// check if either SSOTokenProvider format is used or
-		// legacy format is used. Both can be set.
-		len(c.SSOSessionName) != 0 || len(c.SSOStartURL) != 0,
 	) {
-		return fmt.Errorf("only one credential type may be specified per profile: source profile, credential source, credential process, web identity token, or sso")
+		return fmt.Errorf("only one credential type may be specified per profile: source profile, credential source, credential process, web identity token")
 	}
 
 	return nil
 }
 func (c *SharedConfig) validateSSOConfiguration() error {
 
-	//tokenProviderFormatError := c.validateSSOTokenProviderConfiguration()
-	//legacyFormatError := c.validateLegacySSOConfiguration()
-	//
-	//if tokenProviderFormatError != nil && legacyFormatError != nil {
-	//	return fmt.Errorf("%v %v", tokenProviderFormatError, legacyFormatError)
-	//}
-	//
-	//if tokenProviderFormatError == nil && legacyFormatError == nil {
-	//	if c.SSOSession.SSORegion != c.SSORegion {
-	//		return fmt.Errorf("%v differ in %v section and profile", ssoRegionKey, ssoSectionPrefix)
-	//	}
-	//
-	//	if c.SSOSession.SSOStartURL != c.SSOStartURL {
-	//		return fmt.Errorf("%v differ in %v section and profile", ssoStartURLKey, ssoSectionPrefix)
-	//	}
-	//}
+	tokenProviderFormatError := c.validateSSOTokenProviderConfiguration()
+	legacyFormatError := c.validateLegacySSOConfiguration()
+
+	if tokenProviderFormatError != nil && legacyFormatError != nil {
+		return fmt.Errorf("%v %v", tokenProviderFormatError, legacyFormatError)
+	}
+
+	if tokenProviderFormatError == nil && legacyFormatError == nil {
+		if c.SSOSession.SSORegion != c.SSORegion {
+			return fmt.Errorf("%v differ in %v section and profile", ssoRegionKey, ssoSectionPrefix)
+		}
+
+		if c.SSOSession.SSOStartURL != c.SSOStartURL {
+			return fmt.Errorf("%v differ in %v section and profile", ssoStartURLKey, ssoSectionPrefix)
+		}
+	}
 	return nil
 }
 
 func (c *SharedConfig) validateSSOTokenProviderConfiguration() error {
-	//if c.SSOSessionName == "" ||
-	//	c.SSOSession == nil ||
-	//	c.SSOSession.SSORegion == "" ||
-	//	c.SSOSession.SSOStartURL == "" {
-	//	return fmt.Errorf(
-	//		`the following %v %v.%v %v.%v are all required
-	//				properties when SSO configuration is specified
-	//				with a %v section`,
-	//		ssoSessionNameKey, ssoSectionPrefix, ssoRegionKey, ssoSectionPrefix, ssoStartURLKey, ssoSectionPrefix)
-	//}
+	var missing []string
+
+	if len(c.SSOSessionName) == 0 {
+		missing = append(missing, ssoSessionNameKey)
+	}
+
+	if c.SSOSession == nil {
+		missing = append(missing, ssoSectionPrefix)
+	} else {
+		if len(c.SSOSession.SSORegion) == 0 {
+			missing = append(missing, fmt.Sprintf("%s.%s", ssoSectionPrefix, ssoRegionKey))
+		}
+
+		if len(c.SSOSession.SSOStartURL) == 0 {
+			missing = append(missing, fmt.Sprintf("%s.%s", ssoSectionPrefix, ssoStartURLKey))
+		}
+	}
+
+	if len(missing) > 0 {
+		return fmt.Errorf("profile %q is configured to use SSO but is missing required configuration: %s",
+			c.Profile, strings.Join(missing, ", "))
+	}
 	return nil
 }
 
 func (c *SharedConfig) validateLegacySSOConfiguration() error {
-	//if c.SSOAccountID == "" ||
-	//	c.SSORegion == "" ||
-	//	c.SSORoleName == "" ||
-	//	c.SSOStartURL == "" {
-	//	return fmt.Errorf(
-	//		`the following %v %v %v %v are all required
-	//				properties when SSO configuration is specified
-	//				without a %v section`,
-	//		ssoAccountIDKey, ssoRegionKey, ssoRoleNameKey, ssoStartURLKey, ssoSectionPrefix,
-	//	)
-	//}
+	var missing []string
+
+	if len(c.SSORegion) == 0 {
+		missing = append(missing, ssoRegionKey)
+	}
+
+	if len(c.SSOStartURL) == 0 {
+		missing = append(missing, ssoStartURLKey)
+	}
+
+	if len(c.SSOAccountID) == 0 {
+		missing = append(missing, ssoAccountIDKey)
+	}
+
+	if len(c.SSORoleName) == 0 {
+		missing = append(missing, ssoRoleNameKey)
+	}
+
+	if len(missing) > 0 {
+		return fmt.Errorf("profile %q is configured to use SSO but is missing required configuration: %s",
+			c.Profile, strings.Join(missing, ", "))
+	}
 	return nil
 }
 

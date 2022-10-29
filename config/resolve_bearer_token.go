@@ -52,13 +52,12 @@ func resolveBearerAuthTokenProvider(ctx context.Context, cfg *aws.Config, config
 func resolveBearerAuthTokenProviderChain(ctx context.Context, cfg *aws.Config, configs configs) (err error) {
 	_, sharedConfig, _ := getAWSConfigSources(configs)
 
-	if sharedConfig.SSOSession == nil {
-		err = fmt.Errorf("sso-session section in shared config must be set, %w", err)
-		return err
-	}
+	var provider smithybearer.TokenProvider
 
-	provider, err := resolveBearerAuthSSOTokenProvider(
-		ctx, cfg, sharedConfig.SSOSession, configs)
+	if sharedConfig.SSOSession != nil {
+		provider, err = resolveBearerAuthSSOTokenProvider(
+			ctx, cfg, sharedConfig.SSOSession, configs)
+	}
 
 	if err == nil && provider != nil {
 		cfg.BearerAuthTokenProvider, err = wrapWithBearerAuthTokenCache(
