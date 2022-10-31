@@ -79,6 +79,9 @@
                     "target": "com.amazonaws.apprunner#CreateVpcConnector"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#CreateVpcIngressConnection"
+                },
+                {
                     "target": "com.amazonaws.apprunner#DeleteAutoScalingConfiguration"
                 },
                 {
@@ -94,6 +97,9 @@
                     "target": "com.amazonaws.apprunner#DeleteVpcConnector"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#DeleteVpcIngressConnection"
+                },
+                {
                     "target": "com.amazonaws.apprunner#DescribeAutoScalingConfiguration"
                 },
                 {
@@ -107,6 +113,9 @@
                 },
                 {
                     "target": "com.amazonaws.apprunner#DescribeVpcConnector"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DescribeVpcIngressConnection"
                 },
                 {
                     "target": "com.amazonaws.apprunner#DisassociateCustomDomain"
@@ -133,6 +142,9 @@
                     "target": "com.amazonaws.apprunner#ListVpcConnectors"
                 },
                 {
+                    "target": "com.amazonaws.apprunner#ListVpcIngressConnections"
+                },
+                {
                     "target": "com.amazonaws.apprunner#PauseService"
                 },
                 {
@@ -149,6 +161,9 @@
                 },
                 {
                     "target": "com.amazonaws.apprunner#UpdateService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#UpdateVpcIngressConnection"
                 }
             ],
             "traits": {
@@ -494,8 +509,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -507,8 +522,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -520,8 +535,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -533,8 +548,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -546,8 +561,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -559,8 +574,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -572,8 +587,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -585,8 +600,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -598,8 +613,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -611,8 +626,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -624,8 +639,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -637,8 +652,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -650,8 +665,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -663,8 +678,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -676,8 +691,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -689,8 +704,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -702,8 +717,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -715,8 +730,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -728,8 +743,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -741,8 +756,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -754,8 +769,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -766,8 +781,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -778,8 +793,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -867,6 +882,13 @@
                     "target": "com.amazonaws.apprunner#CustomDomain",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the domain name that's being associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcDNSTargets": {
+                    "target": "com.amazonaws.apprunner#VpcDNSTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS Target records for the custom domains of this Amazon VPC.\n    </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1694,6 +1716,76 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#CreateVpcIngressConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#CreateVpcIngressConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#CreateVpcIngressConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an App Runner VPC Ingress Connection resource. App Runner requires this resource when you want to associate your App Runner service with an Amazon VPC endpoint.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CreateVpcIngressConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for this App Runner service that is used to create the VPC Ingress Connection resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcIngressConnectionName": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the VPC Ingress Connection resource. It must be unique across all the active VPC Ingress Connections in your Amazon Web Services account in the Amazon Web Services Region.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IngressVpcConfiguration": {
+                    "target": "com.amazonaws.apprunner#IngressVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the customer’s Amazon VPC and the related Amazon Web Services PrivateLink VPC endpoint that are used to create the VPC Ingress Connection\n      resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with the VPC Ingress Connection resource. A tag is a key-value pair.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateVpcIngressConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnection": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC Ingress Connection resource that's created by this request. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#CustomDomain": {
             "type": "structure",
             "members": {
@@ -1780,6 +1872,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.apprunner#CustomDomain"
+            }
+        },
+        "com.amazonaws.apprunner#CustomerAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.apprunner#DeleteAutoScalingConfiguration": {
@@ -1945,7 +2047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete an App Runner service.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>"
+                "smithy.api#documentation": "<p>Delete an App Runner service.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>\n         <note>\n            <p>Make sure that you don't have any active VPCIngressConnections associated with the service you want to delete. \n      </p>\n         </note>"
             }
         },
         "com.amazonaws.apprunner#DeleteServiceRequest": {
@@ -2021,6 +2123,56 @@
                     "target": "com.amazonaws.apprunner#VpcConnector",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the App Runner VPC connector that this request just deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteVpcIngressConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DeleteVpcIngressConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DeleteVpcIngressConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an App Runner VPC Ingress Connection resource that's associated with an App Runner service. The VPC Ingress Connection must be in one of the following states to be deleted:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_CREATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_UPDATE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_DELETION</code>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteVpcIngressConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteVpcIngressConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnection": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC Ingress Connection that this request just deleted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2155,6 +2307,13 @@
                     "target": "com.amazonaws.apprunner#CustomDomainList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of descriptions of custom domain names that are associated with the service. In a paginated request, the request returns up to\n        <code>MaxResults</code> records per call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcDNSTargets": {
+                    "target": "com.amazonaws.apprunner#VpcDNSTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS Target records for the custom domains of this Amazon VPC.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2307,6 +2466,53 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#DescribeVpcIngressConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DescribeVpcIngressConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DescribeVpcIngressConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a full description of an App Runner VPC Ingress Connection resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DescribeVpcIngressConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner VPC Ingress Connection that you want a description for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeVpcIngressConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnection": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC Ingress Connection that you specified in this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#DisassociateCustomDomain": {
             "type": "operation",
             "input": {
@@ -2373,6 +2579,13 @@
                     "target": "com.amazonaws.apprunner#CustomDomain",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the domain name that's being disassociated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcDNSTargets": {
+                    "target": "com.amazonaws.apprunner#VpcDNSTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DNS Target records for the custom domains of this Amazon VPC.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2633,6 +2846,41 @@
                         "smithy.api#enumValue": "ECR_PUBLIC"
                     }
                 }
+            }
+        },
+        "com.amazonaws.apprunner#IngressConfiguration": {
+            "type": "structure",
+            "members": {
+                "IsPubliclyAccessible": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to <code>True</code>. To make the service\n      privately accessible, from only within an Amazon VPC set it to <code>False</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Network configuration settings for inbound network traffic.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#IngressVpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "VpcId": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC that is used for the VPC endpoint.</p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint that your App Runner service connects to.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of your VPC and the associated VPC endpoint. The VPC endpoint is an Amazon Web Services PrivateLink resource that allows access to your App Runner\n      services from within an Amazon VPC.</p>"
             }
         },
         "com.amazonaws.apprunner#InstanceConfiguration": {
@@ -3187,6 +3435,92 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#ListVpcIngressConnections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListVpcIngressConnectionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListVpcIngressConnectionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a list of App Runner VPC Ingress Connections in your Amazon Web Services account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListVpcIngressConnectionsFilter": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a service to filter by.\n    </p>"
+                    }
+                },
+                "VpcEndpointId": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a VPC Endpoint to filter by.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of VPC Ingress Connections based on the filter provided. It can return either <code>ServiceArn</code> or <code>VpcEndpointId</code>, or both.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ListVpcIngressConnectionsRequest": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.apprunner#ListVpcIngressConnectionsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC Ingress Connections to be listed based on either the Service Arn or Vpc Endpoint Id, or both.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListVpcIngressConnectionsResponse": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionSummaryList": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnectionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summary information records for VPC Ingress Connections. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#MaxResults": {
             "type": "integer",
             "traits": {
@@ -3213,6 +3547,12 @@
                     "target": "com.amazonaws.apprunner#EgressConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Network configuration settings for outbound message traffic.</p>"
+                    }
+                },
+                "IngressConfiguration": {
+                    "target": "com.amazonaws.apprunner#IngressConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Network configuration settings for inbound message traffic.</p>"
                     }
                 }
             },
@@ -3762,8 +4102,7 @@
                 "ServiceUrl": {
                     "target": "com.amazonaws.apprunner#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -4426,6 +4765,63 @@
                 }
             }
         },
+        "com.amazonaws.apprunner#UpdateVpcIngressConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#UpdateVpcIngressConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#UpdateVpcIngressConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an existing App Runner VPC Ingress Connection resource. The VPC Ingress Connection must be in one of the following states to be updated:</p>\n         <ul>\n            <li>\n               <p>\n          AVAILABLE\n        </p>\n            </li>\n            <li>\n               <p>\n          FAILED_CREATION\n        </p>\n            </li>\n            <li>\n               <p>\n          FAILED_UPDATE\n        </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.apprunner#UpdateVpcIngressConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (Arn) for the App Runner VPC Ingress Connection resource that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IngressVpcConfiguration": {
+                    "target": "com.amazonaws.apprunner#IngressVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the customer’s Amazon VPC and the related Amazon Web Services PrivateLink VPC endpoint that are used to update the VPC Ingress Connection\n      resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#UpdateVpcIngressConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnection": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner VPC Ingress Connection resource that's updated by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.apprunner#VpcConnector": {
             "type": "structure",
             "members": {
@@ -4514,6 +4910,189 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.apprunner#VpcConnector"
+            }
+        },
+        "com.amazonaws.apprunner#VpcDNSTarget": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the VPC Ingress Connection that is associated with your service.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon VPC that is associated with the custom domain name of the target DNS.</p>"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.apprunner#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name of your target DNS that is associated with the Amazon VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>DNS Target record for a custom domain of this Amazon VPC.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#VpcDNSTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#VpcDNSTarget"
+            }
+        },
+        "com.amazonaws.apprunner#VpcIngressConnection": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the VPC Ingress Connection.\n    </p>"
+                    }
+                },
+                "VpcIngressConnectionName": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided VPC Ingress Connection name.</p>"
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service associated with the VPC Ingress Connection.\n    </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#VpcIngressConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the VPC Ingress Connection. \n      The VPC Ingress Connection displays one of the following statuses: <code>AVAILABLE</code>, <code>PENDING_CREATION</code>, <code>PENDING_UPDATE</code>, <code>PENDING_DELETION</code>,<code>FAILED_CREATION</code>, <code>FAILED_UPDATE</code>, <code>FAILED_DELETION</code>, and <code>DELETED</code>..\n    </p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.apprunner#CustomerAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Account Id you use to create the VPC Ingress Connection resource.</p>"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.apprunner#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name associated with the VPC Ingress Connection resource.</p>"
+                    }
+                },
+                "IngressVpcConfiguration": {
+                    "target": "com.amazonaws.apprunner#IngressVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifications for the customer’s VPC and related PrivateLink VPC endpoint that are used to associate with the VPC Ingress Connection resource.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the VPC Ingress Connection was created. It's in the Unix time stamp format.</p>\n         <ul>\n            <li>\n               <p>\n            Type: Timestamp \n          </p>\n            </li>\n            <li>\n               <p>\n            Required: Yes\n          </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DeletedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the App Runner service was deleted. It's in the Unix time stamp format.</p>\n         <ul>\n            <li>\n               <p>\n          Type: Timestamp \n        </p>\n            </li>\n            <li>\n               <p>\n          Required: No\n        </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The App Runner resource that specifies an App Runner endpoint for incoming traffic. It establishes a connection between a VPC interface endpoint and a App Runner\n      service, to make your App Runner service accessible from only within an Amazon VPC.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#VpcIngressConnectionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}$"
+            }
+        },
+        "com.amazonaws.apprunner#VpcIngressConnectionStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "PENDING_CREATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CREATION"
+                    }
+                },
+                "PENDING_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_UPDATE"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                },
+                "FAILED_CREATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_CREATION"
+                    }
+                },
+                "FAILED_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_UPDATE"
+                    }
+                },
+                "FAILED_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_DELETION"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#VpcIngressConnectionSummary": {
+            "type": "structure",
+            "members": {
+                "VpcIngressConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the VPC Ingress Connection.\n    </p>"
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service associated with the VPC Ingress Connection.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about an VPC Ingress Connection, which includes its VPC Ingress Connection ARN and its associated Service ARN.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#VpcIngressConnectionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#VpcIngressConnectionSummary"
             }
         }
     }

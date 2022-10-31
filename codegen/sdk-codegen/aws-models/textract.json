@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -85,7 +85,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Analyzes an input document for relationships between detected items.  </p>\n         <p>The types of information returned are as follows: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n                  <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n                  <i>Name: Ana Silva Carolina</i> contains a key and value.\n                  <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n               the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information about a detected table. A CELL\n               <code>Block</code> object is returned for each cell in a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more WORD <code>Block</code> objects.\n        All lines and words that are detected in the document are returned (including text that doesn't have a\n               relationship with the value of <code>FeatureTypes</code>). </p>\n            </li>\n            <li>\n               <p>Queries.A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that \n            connect it to the query asked. This Block also contains a location and attached confidence score.</p>\n            </li>\n         </ul>\n      \n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables.\n         A SELECTION_ELEMENT <code>Block</code> object contains information about a selection element,\n         including the selection status.</p>\n      \n         <p>You can choose which type of analysis to perform by specifying the <code>FeatureTypes</code> list. \n      </p>\n         <p>The output is returned in a list of <code>Block</code> objects.</p>\n         <p>\n            <code>AnalyzeDocument</code> is a synchronous operation. To analyze documents \n      asynchronously, use <a>StartDocumentAnalysis</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text Analysis</a>.</p>"
+                "smithy.api#documentation": "<p>Analyzes an input document for relationships between detected items. </p>\n         <p>The types of information returned are as follows: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n                  <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n                  <i>Name: Ana Silva Carolina</i> contains a key and value.\n                  <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n               the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information\n               about a detected table. A CELL <code>Block</code> object is returned for each cell in\n               a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more\n               WORD <code>Block</code> objects. All lines and words that are detected in the\n               document are returned (including text that doesn't have a relationship with the value\n               of <code>FeatureTypes</code>). </p>\n            </li>\n            <li>\n               <p>Query. A QUERY Block object contains the query text, alias and link to the\n               associated Query results block object.</p>\n            </li>\n            <li>\n               <p>Query Result. A QUERY_RESULT Block object contains the answer to the query and an\n               ID that connects it to the query asked. This Block also contains a confidence\n               score.</p>\n            </li>\n         </ul>\n\n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be\n         detected in form data and in tables. A SELECTION_ELEMENT <code>Block</code> object contains\n         information about a selection element, including the selection status.</p>\n\n         <p>You can choose which type of analysis to perform by specifying the\n            <code>FeatureTypes</code> list. </p>\n         <p>The output is returned in a list of <code>Block</code> objects.</p>\n         <p>\n            <code>AnalyzeDocument</code> is a synchronous operation. To analyze documents\n         asynchronously, use <a>StartDocumentAnalysis</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text\n         Analysis</a>.</p>"
             }
         },
         "com.amazonaws.textract#AnalyzeDocumentRequest": {
@@ -94,21 +94,21 @@
                 "Document": {
                     "target": "com.amazonaws.textract#Document",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI\n         to call Amazon Textract operations, you can't pass image bytes. The document must be an image \n         in JPEG, PNG, PDF, or TIFF format.</p>\n         <p>If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode\n         image bytes that are passed using the <code>Bytes</code> field. </p>",
+                        "smithy.api#documentation": "<p>The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS\n         CLI to call Amazon Textract operations, you can't pass image bytes. The document must be an\n         image in JPEG, PNG, PDF, or TIFF format.</p>\n         <p>If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode\n         image bytes that are passed using the <code>Bytes</code> field. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FeatureTypes": {
                     "target": "com.amazonaws.textract#FeatureTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected form data. \n         To perform both types of analysis, add TABLES and FORMS to\n            <code>FeatureTypes</code>. All lines and words detected in the document are included in\n         the response (including text that isn't related to the value of <code>FeatureTypes</code>). </p>",
+                        "smithy.api#documentation": "<p>A list of the types of analysis to perform. Add TABLES to the list to return information\n         about the tables that are detected in the input document. Add FORMS to return detected form\n         data. To perform both types of analysis, add TABLES and FORMS to <code>FeatureTypes</code>.\n         All lines and words detected in the document are included in the response (including text\n         that isn't related to the value of <code>FeatureTypes</code>). </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HumanLoopConfig": {
                     "target": "com.amazonaws.textract#HumanLoopConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the configuration for the human in the loop workflow for analyzing documents.</p>"
+                        "smithy.api#documentation": "<p>Sets the configuration for the human in the loop workflow for analyzing\n         documents.</p>"
                     }
                 },
                 "QueriesConfig": {
@@ -186,7 +186,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>AnalyzeExpense</code> synchronously analyzes an input document for financially related relationships between text.</p>\n         <p>Information is returned as <code>ExpenseDocuments</code> and seperated as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LineItemGroups</code>- A data set containing <code>LineItems</code> which\n         store information about the lines of text, such as an item purchased and its price on a receipt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SummaryFields</code>- Contains all other information a receipt, such as header information\n         or the vendors name.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n            <code>AnalyzeExpense</code> synchronously analyzes an input document for financially\n         related relationships between text.</p>\n         <p>Information is returned as <code>ExpenseDocuments</code> and seperated as\n         follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LineItemGroups</code>- A data set containing <code>LineItems</code> which\n               store information about the lines of text, such as an item purchased and its price on\n               a receipt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SummaryFields</code>- Contains all other information a receipt, such as\n               header information or the vendors name.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.textract#AnalyzeExpenseRequest": {
@@ -252,7 +252,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Analyzes identity documents for relevant information. This information is extracted\n         and returned as <code>IdentityDocumentFields</code>, which records both the normalized\n         field and value of the extracted text.Unlike other Amazon Textract operations, <code>AnalyzeID</code> \n      doesn't return any Geometry data.</p>"
+                "smithy.api#documentation": "<p>Analyzes identity documents for relevant information. This information is extracted and\n         returned as <code>IdentityDocumentFields</code>, which records both the normalized field\n         and value of the extracted text.Unlike other Amazon Textract operations,\n            <code>AnalyzeID</code> doesn't return any Geometry data.</p>"
             }
         },
         "com.amazonaws.textract#AnalyzeIDDetections": {
@@ -300,7 +300,7 @@
                 "IdentityDocuments": {
                     "target": "com.amazonaws.textract#IdentityDocumentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of documents processed by AnalyzeID. Includes a number denoting their\n         place in the list and the response structure for the document.</p>"
+                        "smithy.api#documentation": "<p>The list of documents processed by AnalyzeID. Includes a number denoting their place in\n         the list and the response structure for the document.</p>"
                     }
                 },
                 "DocumentMetadata": {
@@ -335,7 +335,7 @@
                 "BlockType": {
                     "target": "com.amazonaws.textract#BlockType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attachs it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of text item that's recognized. In operations for text detection, the following\n         types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of the LINE <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word detected on a document page. A word is one or\n               more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n         </ul>\n         <p>In text analysis operations, the following types are returned:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>PAGE</i> - Contains a list of child <code>Block</code> objects\n               that are detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>KEY_VALUE_SET</i> - Stores the KEY and VALUE <code>Block</code>\n               objects for linked text that's detected on a document page. Use the\n                  <code>EntityType</code> field to determine if a KEY_VALUE_SET object is a KEY\n                  <code>Block</code> object or a VALUE <code>Block</code> object. </p>\n            </li>\n            <li>\n               <p>\n                  <i>WORD</i> - A word that's detected on a document page. A word is\n               one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>\n                  <i>LINE</i> - A string of tab-delimited, contiguous words that are\n               detected on a document page.</p>\n            </li>\n            <li>\n               <p>\n                  <i>TABLE</i> - A table that's detected on a document page. A table\n               is grid-based information with two or more rows or columns, with a cell span of one\n               row and one column each. </p>\n            </li>\n            <li>\n               <p>\n                  <i>CELL</i> - A cell within a detected table. The cell is the parent\n               of the block that contains the text in the cell.</p>\n            </li>\n            <li>\n               <p>\n                  <i>SELECTION_ELEMENT</i> - A selection element such as an option\n               button (radio button) or a check box that's detected on a document page. Use the\n               value of <code>SelectionStatus</code> to determine the status of the selection\n               element.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY</i> - A question asked during the call of AnalyzeDocument. Contains an\n               alias and an ID that attaches it to its answer.</p>\n            </li>\n            <li>\n               <p>\n                  <i>QUERY_RESULT</i> - A response to a question asked during the call\n               of analyze document. Comes with an alias and ID for ease of locating in a \n               response. Also contains location and confidence score.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Confidence": {
@@ -413,7 +413,7 @@
                 "Page": {
                     "target": "com.amazonaws.textract#UInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by asynchronous\n         operations. Page values greater than 1 are only returned for multipage documents that are\n         in PDF or TIFF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is\n         considered to be a single-page document. The value of <code>Page</code> is always 1.\n         Synchronous operations don't return <code>Page</code> because every input document is\n         considered to be a single-page document.</p>"
+                        "smithy.api#documentation": "<p>The page on which a block was detected. <code>Page</code> is returned by synchronous and\n         asynchronous operations. Page values greater than 1 are only returned for multipage\n         documents that are in PDF or TIFF format. A scanned image (JPEG/PNG) provided to an\n         asynchronous operation, even if it contains multiple document pages, is considered a\n         single-page document. This means that for scanned images the value of <code>Page</code> is\n         always 1. Synchronous operations operations will also return a <code>Page</code> value of 1\n         because every input document is considered to be a single-page document.</p>"
                     }
                 },
                 "Query": {
@@ -434,54 +434,74 @@
             }
         },
         "com.amazonaws.textract#BlockType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KEY_VALUE_SET",
-                        "name": "KEY_VALUE_SET"
-                    },
-                    {
-                        "value": "PAGE",
-                        "name": "PAGE"
-                    },
-                    {
-                        "value": "LINE",
-                        "name": "LINE"
-                    },
-                    {
-                        "value": "WORD",
-                        "name": "WORD"
-                    },
-                    {
-                        "value": "TABLE",
-                        "name": "TABLE"
-                    },
-                    {
-                        "value": "CELL",
-                        "name": "CELL"
-                    },
-                    {
-                        "value": "SELECTION_ELEMENT",
-                        "name": "SELECTION_ELEMENT"
-                    },
-                    {
-                        "value": "MERGED_CELL",
-                        "name": "MERGED_CELL"
-                    },
-                    {
-                        "value": "TITLE",
-                        "name": "TITLE"
-                    },
-                    {
-                        "value": "QUERY",
-                        "name": "QUERY"
-                    },
-                    {
-                        "value": "QUERY_RESULT",
-                        "name": "QUERY_RESULT"
+            "type": "enum",
+            "members": {
+                "KEY_VALUE_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY_VALUE_SET"
                     }
-                ]
+                },
+                "PAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAGE"
+                    }
+                },
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                },
+                "WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORD"
+                    }
+                },
+                "TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLE"
+                    }
+                },
+                "CELL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CELL"
+                    }
+                },
+                "SELECTION_ELEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTION_ELEMENT"
+                    }
+                },
+                "MERGED_CELL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MERGED_CELL"
+                    }
+                },
+                "TITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TITLE"
+                    }
+                },
+                "QUERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY"
+                    }
+                },
+                "QUERY_RESULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_RESULT"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#BoundingBox": {
@@ -490,24 +510,28 @@
                 "Width": {
                     "target": "com.amazonaws.textract#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The width of the bounding box as a ratio of the overall document page\n         width.</p>"
                     }
                 },
                 "Height": {
                     "target": "com.amazonaws.textract#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The height of the bounding box as a ratio of the overall document page\n         height.</p>"
                     }
                 },
                 "Left": {
                     "target": "com.amazonaws.textract#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The left coordinate of the bounding box as a ratio of overall document page\n         width.</p>"
                     }
                 },
                 "Top": {
                     "target": "com.amazonaws.textract#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The top coordinate of the bounding box as a ratio of overall document page\n         height.</p>"
                     }
                 }
@@ -527,18 +551,20 @@
             }
         },
         "com.amazonaws.textract#ContentClassifier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FreeOfPersonallyIdentifiableInformation",
-                        "name": "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION"
-                    },
-                    {
-                        "value": "FreeOfAdultContent",
-                        "name": "FREE_OF_ADULT_CONTENT"
+            "type": "enum",
+            "members": {
+                "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FreeOfPersonallyIdentifiableInformation"
                     }
-                ]
+                },
+                "FREE_OF_ADULT_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FreeOfAdultContent"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#ContentClassifiers": {
@@ -591,7 +617,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects text in the input document. Amazon Textract can detect lines of text and the\n         words that make up a line of text. The input document must be an image in JPEG, PNG, PDF, or TIFF\n         format. <code>DetectDocumentText</code> returns the detected text in an array of <a>Block</a> objects. </p>\n         <p>Each document page has as an associated <code>Block</code> of type PAGE. Each PAGE <code>Block</code> object\n         is the parent of LINE <code>Block</code> objects that represent the lines of detected text on a page. A LINE <code>Block</code> object is\n         a parent for each word that makes up the line. Words are represented by <code>Block</code> objects of type WORD.</p>\n      \n         <p>\n            <code>DetectDocumentText</code> is a synchronous operation. To analyze documents \n         asynchronously, use <a>StartDocumentTextDetection</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html\">Document Text Detection</a>.</p>"
+                "smithy.api#documentation": "<p>Detects text in the input document. Amazon Textract can detect lines of text and the\n         words that make up a line of text. The input document must be in one of the following image\n         formats:  JPEG, PNG, PDF, or TIFF. <code>DetectDocumentText</code> returns the detected\n         text in an array of <a>Block</a> objects. </p>\n         <p>Each document page has as an associated <code>Block</code> of type PAGE. Each PAGE <code>Block</code> object\n         is the parent of LINE <code>Block</code> objects that represent the lines of detected text on a page. A LINE <code>Block</code> object is\n         a parent for each word that makes up the line. Words are represented by <code>Block</code> objects of type WORD.</p>\n      \n         <p>\n            <code>DetectDocumentText</code> is a synchronous operation. To analyze documents \n         asynchronously, use <a>StartDocumentTextDetection</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html\">Document Text Detection</a>.</p>"
             }
         },
         "com.amazonaws.textract#DetectDocumentTextRequest": {
@@ -705,22 +731,26 @@
             }
         },
         "com.amazonaws.textract#EntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "KEY",
-                        "name": "KEY"
-                    },
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
-                    },
-                    {
-                        "value": "COLUMN_HEADER",
-                        "name": "COLUMN_HEADER"
+            "type": "enum",
+            "members": {
+                "KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KEY"
                     }
-                ]
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                },
+                "COLUMN_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLUMN_HEADER"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#EntityTypes": {
@@ -731,6 +761,26 @@
         },
         "com.amazonaws.textract#ErrorCode": {
             "type": "string"
+        },
+        "com.amazonaws.textract#ExpenseCurrency": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Currency code for detected currency.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.textract#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Percentage confideence in the detected currency.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the kind of currency detected.</p>"
+            }
         },
         "com.amazonaws.textract#ExpenseDetection": {
             "type": "structure",
@@ -775,6 +825,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information detected on each table of a document, seperated into <code>LineItems</code>.</p>"
                     }
+                },
+                "Blocks": {
+                    "target": "com.amazonaws.textract#BlockList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is a block object, the same as reported when DetectDocumentText is run on a document.\n      It provides word level recognition of text.</p>"
+                    }
                 }
             },
             "traits": {
@@ -813,6 +869,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The page number the value was detected on.</p>"
                     }
+                },
+                "Currency": {
+                    "target": "com.amazonaws.textract#ExpenseCurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the kind of currency, both the code and confidence associated with any monatary value\n         detected.</p>"
+                    }
+                },
+                "GroupProperties": {
+                    "target": "com.amazonaws.textract#ExpenseGroupPropertyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows which group a response object belongs to, such as whether an address line\n         belongs to the vendor's address or the recipent's address.</p>"
+                    }
                 }
             },
             "traits": {
@@ -823,6 +891,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.textract#ExpenseField"
+            }
+        },
+        "com.amazonaws.textract#ExpenseGroupProperty": {
+            "type": "structure",
+            "members": {
+                "Types": {
+                    "target": "com.amazonaws.textract#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Informs you on the kind of label associated with the group</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a group Id number, which will be the same for each in the group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Shows the group that a certain key belongs to. This helps differentiate responses\n         like addresses that can appear similar in response JSON.</p>"
+            }
+        },
+        "com.amazonaws.textract#ExpenseGroupPropertyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#ExpenseGroupProperty"
             }
         },
         "com.amazonaws.textract#ExpenseType": {
@@ -846,22 +940,26 @@
             }
         },
         "com.amazonaws.textract#FeatureType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TABLES",
-                        "name": "TABLES"
-                    },
-                    {
-                        "value": "FORMS",
-                        "name": "FORMS"
-                    },
-                    {
-                        "value": "QUERIES",
-                        "name": "QUERIES"
+            "type": "enum",
+            "members": {
+                "TABLES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLES"
                     }
-                ]
+                },
+                "FORMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORMS"
+                    }
+                },
+                "QUERIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERIES"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#FeatureTypes": {
@@ -871,7 +969,10 @@
             }
         },
         "com.amazonaws.textract#Float": {
-            "type": "float"
+            "type": "float",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.textract#FlowDefinitionArn": {
             "type": "string",
@@ -937,7 +1038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document.</p>\n         <p>You start asynchronous text analysis by calling <a>StartDocumentAnalysis</a>, which returns a job identifier\n            (<code>JobId</code>). When the text analysis operation finishes, Amazon Textract publishes a\n         completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to\n            <code>StartDocumentAnalysis</code>. To get the results of the text-detection operation,\n         first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>.\n         If so, call <code>GetDocumentAnalysis</code>, and pass the job identifier\n            (<code>JobId</code>) from the initial call to <code>StartDocumentAnalysis</code>.</p>\n         <p>\n            <code>GetDocumentAnalysis</code> returns an array of <a>Block</a> objects. The following\n         types of information are returned: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n            <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n            <i>Name: Ana Silva Carolina</i> contains a key and value.\n            <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n            the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information about a detected table. A CELL\n            <code>Block</code> object is returned for each cell in a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more WORD <code>Block</code> objects.\n            All lines and words that are detected in the document are returned (including text that doesn't have a\n            relationship with the value of the <code>StartDocumentAnalysis</code> \n                  <code>FeatureTypes</code> input parameter). </p>\n            </li>\n            <li>\n               <p>Queries. A QUERIES_RESULT Block object contains the answer to the query, the alias associated and an ID that \n            connect it to the query asked. This Block also contains a location and attached confidence score</p>\n            </li>\n         </ul>\n      \n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables.\n         A SELECTION_ELEMENT <code>Block</code> object contains information about a selection element,\n         including the selection status.</p>\n      \n      \n         <p>Use the <code>MaxResults</code> parameter to limit the number of blocks that are\n         returned. If there are more results than specified in <code>MaxResults</code>, the value of\n            <code>NextToken</code> in the operation response contains a pagination token for getting\n         the next set of results. To get the next page of results, call\n            <code>GetDocumentAnalysis</code>, and populate the <code>NextToken</code> request\n         parameter with the token value that's returned from the previous call to\n            <code>GetDocumentAnalysis</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text Analysis</a>.</p>"
+                "smithy.api#documentation": "<p>Gets the results for an Amazon Textract asynchronous operation that analyzes text in a\n         document.</p>\n         <p>You start asynchronous text analysis by calling <a>StartDocumentAnalysis</a>,\n         which returns a job identifier (<code>JobId</code>). When the text analysis operation\n         finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic\n         that's registered in the initial call to <code>StartDocumentAnalysis</code>. To get the\n         results of the text-detection operation, first check that the status value published to the\n         Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <code>GetDocumentAnalysis</code>, and\n         pass the job identifier (<code>JobId</code>) from the initial call to\n            <code>StartDocumentAnalysis</code>.</p>\n         <p>\n            <code>GetDocumentAnalysis</code> returns an array of <a>Block</a> objects.\n         The following types of information are returned: </p>\n         <ul>\n            <li>\n               <p>Form data (key-value pairs). The related information is returned in two <a>Block</a> objects, each of type <code>KEY_VALUE_SET</code>: a KEY\n                  <code>Block</code> object and a VALUE <code>Block</code> object. For example,\n                  <i>Name: Ana Silva Carolina</i> contains a key and value.\n                  <i>Name:</i> is the key. <i>Ana Silva Carolina</i> is\n               the value.</p>\n            </li>\n            <li>\n               <p>Table and table cell data. A TABLE <code>Block</code> object contains information\n               about a detected table. A CELL <code>Block</code> object is returned for each cell in\n               a table.</p>\n            </li>\n            <li>\n               <p>Lines and words of text. A LINE <code>Block</code> object contains one or more\n               WORD <code>Block</code> objects. All lines and words that are detected in the\n               document are returned (including text that doesn't have a relationship with the value\n               of the <code>StartDocumentAnalysis</code>\n                  <code>FeatureTypes</code> input parameter). </p>\n            </li>\n            <li>\n               <p>Query. A QUERY Block object contains the query text, alias and link to the\n               associated Query results block object.</p>\n            </li>\n            <li>\n               <p>Query Results. A QUERY_RESULT Block object contains the answer to the query and an\n               ID that connects it to the query asked. This Block also contains a confidence\n               score.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>While processing a document with queries, look out for\n               <code>INVALID_REQUEST_PARAMETERS</code> output. This indicates that either the per\n            page query limit has been exceeded or that the operation is trying to query a page in\n            the document which doesn’t exist. </p>\n         </note>\n\n         <p>Selection elements such as check boxes and option buttons (radio buttons) can be\n         detected in form data and in tables. A SELECTION_ELEMENT <code>Block</code> object contains\n         information about a selection element, including the selection status.</p>\n\n\n         <p>Use the <code>MaxResults</code> parameter to limit the number of blocks that are\n         returned. If there are more results than specified in <code>MaxResults</code>, the value of\n            <code>NextToken</code> in the operation response contains a pagination token for getting\n         the next set of results. To get the next page of results, call\n            <code>GetDocumentAnalysis</code>, and populate the <code>NextToken</code> request\n         parameter with the token value that's returned from the previous call to\n            <code>GetDocumentAnalysis</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html\">Document Text\n         Analysis</a>.</p>"
             }
         },
         "com.amazonaws.textract#GetDocumentAnalysisRequest": {
@@ -946,7 +1047,7 @@
                 "JobId": {
                     "target": "com.amazonaws.textract#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the text-detection job. The <code>JobId</code> is returned from\n         <code>StartDocumentAnalysis</code>. A <code>JobId</code> value is only valid for 7 days.</p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the text-detection job. The <code>JobId</code> is returned from\n            <code>StartDocumentAnalysis</code>. A <code>JobId</code> value is only valid for 7\n         days.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -959,7 +1060,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.textract#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination\n         token in the response. You can use this pagination token to retrieve the next set of blocks.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there are more blocks to retrieve),\n         Amazon Textract returns a pagination token in the response. You can use this pagination\n         token to retrieve the next set of blocks.</p>"
                     }
                 }
             }
@@ -970,7 +1071,7 @@
                 "DocumentMetadata": {
                     "target": "com.amazonaws.textract#DocumentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a document that Amazon Textract processed. <code>DocumentMetadata</code> is\n         returned in every page of paginated responses from an Amazon Textract video operation.</p>"
+                        "smithy.api#documentation": "<p>Information about a document that Amazon Textract processed.\n            <code>DocumentMetadata</code> is returned in every page of paginated responses from an\n         Amazon Textract video operation.</p>"
                     }
                 },
                 "JobStatus": {
@@ -982,7 +1083,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.textract#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Textract returns this token. You can use this token in\n         the subsequent request to retrieve the next set of text detection results.</p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Textract returns this token. You can use this token\n         in the subsequent request to retrieve the next set of text detection results.</p>"
                     }
                 },
                 "Blocks": {
@@ -1000,7 +1101,7 @@
                 "StatusMessage": {
                     "target": "com.amazonaws.textract#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns if the detection job could not be completed. Contains explanation for what error occured.</p>"
+                        "smithy.api#documentation": "<p>Returns if the detection job could not be completed. Contains explanation for what error\n         occured.</p>"
                     }
                 },
                 "AnalyzeDocumentModelVersion": {
@@ -1526,26 +1627,32 @@
             }
         },
         "com.amazonaws.textract#JobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "PARTIAL_SUCCESS",
-                        "name": "PARTIAL_SUCCESS"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "PARTIAL_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIAL_SUCCESS"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#JobTag": {
@@ -1632,7 +1739,6 @@
         "com.amazonaws.textract#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -1726,7 +1832,6 @@
         "com.amazonaws.textract#Percent": {
             "type": "float",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -1739,12 +1844,14 @@
                 "X": {
                     "target": "com.amazonaws.textract#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value of the X coordinate for a point on a <code>Polygon</code>.</p>"
                     }
                 },
                 "Y": {
                     "target": "com.amazonaws.textract#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value of the Y coordinate for a point on a <code>Polygon</code>.</p>"
                     }
                 }
@@ -1819,7 +1926,7 @@
                 "Pages": {
                     "target": "com.amazonaws.textract#QueryPages",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of pages associated with the query. The following is a list of rules for using this parameter.</p>\n         <ul>\n            <li>\n               <p>If a page is not specified, it is set to <code>[\"1\"]</code> by default.</p>\n            </li>\n            <li>\n               <p>The following characters are allowed in the parameter's string: \n               <code>0 1 2 3 4 5 6 7 8 9 - *</code>. No whitespace is allowed.</p>\n            </li>\n            <li>\n               <p>When using <code>*</code> to indicate all pages, it must be the only element\n               in the string.</p>\n            </li>\n            <li>\n               <p>You can use page intervals, such as <code>[“1-3”, “1-1”, “4-*”]</code>. Where <code>*</code> indicates last page of \n               document.</p>\n            </li>\n            <li>\n               <p>Specified pages must be greater than 0 and less than or equal to the number of pages in the document.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Pages is a parameter that the user inputs to specify which pages to apply a query to. The following is a \n         list of rules for using this parameter.</p>\n         <ul>\n            <li>\n               <p>If a page is not specified, it is set to <code>[\"1\"]</code> by default.</p>\n            </li>\n            <li>\n               <p>The following characters are allowed in the parameter's string: \n               <code>0 1 2 3 4 5 6 7 8 9 - *</code>. No whitespace is allowed.</p>\n            </li>\n            <li>\n               <p>When using * to indicate all pages, it must be the only element in the list.</p>\n            </li>\n            <li>\n               <p>You can use page intervals, such as <code>[“1-3”, “1-1”, “4-*”]</code>. Where <code>*</code> indicates last page of \n               document.</p>\n            </li>\n            <li>\n               <p>Specified pages must be greater than 0 and less than or equal to the number of pages in the document.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1885,34 +1992,44 @@
             }
         },
         "com.amazonaws.textract#RelationshipType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
-                    },
-                    {
-                        "value": "CHILD",
-                        "name": "CHILD"
-                    },
-                    {
-                        "value": "COMPLEX_FEATURES",
-                        "name": "COMPLEX_FEATURES"
-                    },
-                    {
-                        "value": "MERGED_CELL",
-                        "name": "MERGED_CELL"
-                    },
-                    {
-                        "value": "TITLE",
-                        "name": "TITLE"
-                    },
-                    {
-                        "value": "ANSWER",
-                        "name": "ANSWER"
+            "type": "enum",
+            "members": {
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
                     }
-                ]
+                },
+                "CHILD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHILD"
+                    }
+                },
+                "COMPLEX_FEATURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLEX_FEATURES"
+                    }
+                },
+                "MERGED_CELL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MERGED_CELL"
+                    }
+                },
+                "TITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TITLE"
+                    }
+                },
+                "ANSWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANSWER"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#RoleArn": {
@@ -1992,18 +2109,20 @@
             }
         },
         "com.amazonaws.textract#SelectionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SELECTED",
-                        "name": "SELECTED"
-                    },
-                    {
-                        "value": "NOT_SELECTED",
-                        "name": "NOT_SELECTED"
+            "type": "enum",
+            "members": {
+                "SELECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTED"
                     }
-                ]
+                },
+                "NOT_SELECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_SELECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#StartDocumentAnalysis": {
@@ -2331,6 +2450,12 @@
         "com.amazonaws.textract#String": {
             "type": "string"
         },
+        "com.amazonaws.textract#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#String"
+            }
+        },
         "com.amazonaws.textract#SynthesizedJsonHumanLoopActivationConditionsEvaluationResults": {
             "type": "string",
             "traits": {
@@ -2342,37 +2467,24 @@
             }
         },
         "com.amazonaws.textract#TextType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HANDWRITING",
-                        "name": "HANDWRITING"
-                    },
-                    {
-                        "value": "PRINTED",
-                        "name": "PRINTED"
+            "type": "enum",
+            "members": {
+                "HANDWRITING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HANDWRITING"
                     }
-                ]
+                },
+                "PRINTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRINTED"
+                    }
+                }
             }
         },
         "com.amazonaws.textract#Textract": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Textract",
-                    "arnNamespace": "textract",
-                    "cloudFormationName": "Textract",
-                    "cloudTrailEventSource": "textract.amazonaws.com",
-                    "endpointPrefix": "textract"
-                },
-                "aws.auth#sigv4": {
-                    "name": "textract"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Textract detects and analyzes text in documents and converts it\n         into machine-readable text. This is the API reference documentation for\n         Amazon Textract.</p>",
-                "smithy.api#title": "Amazon Textract"
-            },
             "version": "2018-06-27",
             "operations": [
                 {
@@ -2405,7 +2517,1208 @@
                 {
                     "target": "com.amazonaws.textract#StartExpenseAnalysis"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Textract",
+                    "arnNamespace": "textract",
+                    "cloudFormationName": "Textract",
+                    "cloudTrailEventSource": "textract.amazonaws.com",
+                    "endpointPrefix": "textract"
+                },
+                "aws.auth#sigv4": {
+                    "name": "textract"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Textract detects and analyzes text in documents and converts it\n         into machine-readable text. This is the API reference documentation for\n         Amazon Textract.</p>",
+                "smithy.api#title": "Amazon Textract",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://textract-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://textract-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://textract.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://textract.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://textract.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.textract#ThrottlingException": {
             "type": "structure",
@@ -2425,7 +3738,6 @@
         "com.amazonaws.textract#UInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -2447,14 +3759,14 @@
             }
         },
         "com.amazonaws.textract#ValueType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
+            "type": "enum",
+            "members": {
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.textract#Warning": {

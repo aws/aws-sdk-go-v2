@@ -578,6 +578,9 @@
                     "target": "com.amazonaws.connect#DisassociateSecurityKey"
                 },
                 {
+                    "target": "com.amazonaws.connect#DismissUserContact"
+                },
+                {
                     "target": "com.amazonaws.connect#GetContactAttributes"
                 },
                 {
@@ -879,7 +882,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2839,7 +2842,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can  call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/claim",
@@ -2956,7 +2959,7 @@
                 "PhoneNumberStatus": {
                     "target": "com.amazonaws.connect#PhoneNumberStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the phone number.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLAIMED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or\n      <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> means a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or\n      <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation is still in progress and has not yet completed. You can\n     call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> at a later time to verify if the previous operation has\n     completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or\n      <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation has failed. It will include a message indicating the\n     failure reason. A common reason for a failure may be that the <code>TargetArn</code> value you\n     are claiming or updating a phone number to has reached its limit of total claimed numbers. If\n     you received a <code>FAILED</code> status from a <code>ClaimPhoneNumber</code> API call, you\n     have one day to retry claiming the phone number before the number is released back to the\n     inventory for other customers to claim.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You will not be billed for the phone number during the 1-day period if number claiming fails. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the phone number.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CLAIMED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or\n      <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> means a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or\n      <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation is still in progress and has not yet completed. You can\n     call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> at a later time to verify if the previous operation has\n     completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html\">ClaimedPhoneNumber</a> or\n      <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a> operation has failed. It will include a message indicating the\n     failure reason. A common reason for a failure may be that the <code>TargetArn</code> value you\n     are claiming or updating a phone number to has reached its limit of total claimed numbers. If\n     you received a <code>FAILED</code> status from a <code>ClaimPhoneNumber</code> API call, you\n     have one day to retry claiming the phone number before the number is released back to the\n     inventory for other customers to claim.</p>\n            </li>\n         </ul>\n         <note>\n            <p>You will not be billed for the phone number during the 1-day period if number claiming\n    fails. </p>\n         </note>"
                     }
                 }
             },
@@ -8156,6 +8159,75 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#DismissUserContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DismissUserContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DismissUserContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which \n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a \n   <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in the \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent Event Stream</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/users/{InstanceId}/{UserId}/contact",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DismissUserContactRequest": {
+            "type": "structure",
+            "members": {
+                "UserId": {
+                    "target": "com.amazonaws.connect#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user account.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DismissUserContactResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#DisplayName": {
             "type": "string",
@@ -16241,7 +16313,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the Amazon Connect console.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period of 30 days.\n    It cannot be searched for or claimed again until the period has ended. If you accidentally\n    release a phone number, contact Amazon Web Services Support.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n     Amazon Connect console.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period of 30 days.\n    It cannot be searched for or claimed again until the period has ended. If you accidentally\n    release a phone number, contact Amazon Web Services Support.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -19249,7 +19321,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#TrafficDistributionGroupStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the traffic distribution group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATION_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n            <li> \n               <p>\n                  <code>ACTIVE</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has succeeded.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>CREATION_FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has failed.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>PENDING_DELETION</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation is still in progress and has not yet\n    completed.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>DELETION_FAILED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation has failed.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html\">UpdateTrafficDistributionGroup</a> operation is still in progress and has not yet\n    completed.</p>    \n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the traffic distribution group.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATION_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATION_FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_DELETION</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETION_FAILED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html\">UpdateTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -19352,7 +19424,7 @@
                 "Status": {
                     "target": "com.amazonaws.connect#TrafficDistributionGroupStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the traffic distribution group. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATION_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n            <li> \n               <p>\n                  <code>ACTIVE</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has succeeded.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>CREATION_FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has failed.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>PENDING_DELETION</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation is still in progress and has not yet\n    completed.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>DELETION_FAILED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation has failed.</p>    \n            </li>\n            <li> \n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html\">UpdateTrafficDistributionGroup</a> operation is still in progress and has not yet\n    completed.</p>    \n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the traffic distribution group. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATION_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATION_FAILED</code> indicates that the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html\">CreateTrafficDistributionGroup</a> operation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_DELETION</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETION_FAILED</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html\">DeleteTrafficDistributionGroup</a> operation has failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_IN_PROGRESS</code> means the previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html\">UpdateTrafficDistributionGroup</a> operation is still in progress and has not yet\n     completed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -21538,7 +21610,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group.\n   \n   \n   For more information about updating a traffic distribution group see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution/{Id}",
@@ -22255,7 +22327,7 @@
                 "SecondaryEmail": {
                     "target": "com.amazonaws.connect#Email",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user's secondary email address. If you provide a secondary email, the user receives email\n   notifications - other than password reset notifications - to this email address instead of to\n   their primary email address.</p>\n         <p>Pattern: <code>(?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,63}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The user's secondary email address. If you provide a secondary email, the user receives\n   email notifications - other than password reset notifications - to this email address instead of\n   to their primary email address.</p>\n         <p>Pattern: <code>(?=^.{0,265}$)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,63}</code>\n         </p>"
                     }
                 },
                 "Mobile": {

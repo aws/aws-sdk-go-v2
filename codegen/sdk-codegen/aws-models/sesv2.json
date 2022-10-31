@@ -142,6 +142,133 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.sesv2#BatchGetMetricData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#BatchGetMetricDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#BatchGetMetricDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves batches of metric data collected based on your sending activity.</p>\n        <p>You can execute this operation no more than 16 times per second,\n            and with at most 160 queries from the batches per second (cumulative).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/metrics/batch",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#BatchGetMetricDataQueries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#BatchGetMetricDataQuery"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sesv2#BatchGetMetricDataQuery": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.sesv2#QueryIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.sesv2#MetricNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query namespace - e.g. <code>VDM</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metric": {
+                    "target": "com.amazonaws.sesv2#Metric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queried metric. This can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SEND</code> – Emails sent eligible for tracking\n                    in the VDM dashboard. This excludes emails sent to the mailbox simulator and emails\n                    addressed to more than one recipient.</p>\n            </li>\n            <li>\n                <p>\n                  <code>COMPLAINT</code> – Complaints received for your\n                    account. This excludes complaints from the mailbox simulator, those originating from\n                    your account-level suppression list (if enabled), and those for emails addressed to more\n                    than one recipient</p>\n            </li>\n            <li>\n                <p>\n                  <code>PERMANENT_BOUNCE</code> – Permanent bounces - i.e. feedback received for\n                    emails sent to non-existent mailboxes. Excludes bounces from the mailbox simulator, those\n                    originating from your account-level suppression list (if enabled), and those for emails\n                    addressed to more than one recipient.</p>\n            </li>\n            <li>\n                <p>\n                  <code>TRANSIENT_BOUNCE</code> – Transient bounces - i.e. feedback received for\n                    delivery failures excluding issues with non-existent mailboxes. Excludes bounces from the\n                    mailbox simulator, and those for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OPEN</code> – Unique open events for emails including open trackers.\n                    Excludes opens for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CLICK</code> – Unique click events for emails including wrapped links.\n                    Excludes clicks for emails addressed to more than one recipient.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELIVERY</code> – Successful deliveries for email sending attempts.\n                    Excludes deliveries to the mailbox simulator and for emails addressed to more\n                    than one recipient.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELIVERY_OPEN</code> – Successful deliveries for email sending attempts.\n                    Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient,\n                    and emails without open trackers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELIVERY_CLICK</code> – Successful deliveries for email sending attempts.\n                    Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient,\n                    and emails without click trackers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DELIVERY_COMPLAINT</code> – Successful deliveries for email sending attempts.\n                    Excludes deliveries to the mailbox simulator, for emails addressed to more than one recipient,\n                    and emails addressed to recipients hosted by ISPs with which Amazon SES does not have a\n                    feedback loop agreement.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.sesv2#Dimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains mapping between <code>MetricDimensionName</code>\n            and <code>MetricDimensionValue</code> to filter metrics by.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the start date for the query interval.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the end date for the query interval.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single metric data query to include in a batch.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#BatchGetMetricDataRequest": {
+            "type": "structure",
+            "members": {
+                "Queries": {
+                    "target": "com.amazonaws.sesv2#BatchGetMetricDataQueries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of queries for metrics to be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to retrieve a batch of metric data.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#BatchGetMetricDataResponse": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.sesv2#MetricDataResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of successfully retrieved <code>MetricDataResult</code>.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.sesv2#MetricDataErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>MetricDataError</code> encountered while processing your metric data batch request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the result of processing your metric data batch request</p>"
+            }
+        },
         "com.amazonaws.sesv2#BehaviorOnMxFailure": {
             "type": "enum",
             "members": {
@@ -648,6 +775,12 @@
                 "smithy.api#documentation": "<p>An object that represents the content of the email, and optionally a character set\n            specification.</p>"
             }
         },
+        "com.amazonaws.sesv2#Counter": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.sesv2#CreateConfigurationSet": {
             "type": "operation",
             "input": {
@@ -798,6 +931,12 @@
                 },
                 "SuppressionOptions": {
                     "target": "com.amazonaws.sesv2#SuppressionOptions"
+                },
+                "VdmOptions": {
+                    "target": "com.amazonaws.sesv2#VdmOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that defines the VDM options for emails that you send using the configuration set.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1587,6 +1726,34 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sesv2#DailyVolume"
+            }
+        },
+        "com.amazonaws.sesv2#DashboardAttributes": {
+            "type": "structure",
+            "members": {
+                "EngagementMetrics": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of your VDM engagement metrics collection. Can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> – Amazon SES enables engagement metrics for your account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> – Amazon SES disables engagement metrics for your account.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing additional settings for your VDM configuration as applicable to the Dashboard.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#DashboardOptions": {
+            "type": "structure",
+            "members": {
+                "EngagementMetrics": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of your VDM engagement metrics collection. Can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> – Amazon SES enables engagement metrics for the configuration set.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> – Amazon SES disables engagement metrics for the configuration set.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing additional settings for your VDM configuration as applicable to the Dashboard.</p>"
             }
         },
         "com.amazonaws.sesv2#DataFormat": {
@@ -2398,6 +2565,21 @@
                 "smithy.api#documentation": "<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To\n            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or\n            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose\n                <code>messageTag</code>. To use your own email headers, choose\n                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>"
             }
         },
+        "com.amazonaws.sesv2#Dimensions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sesv2#MetricDimensionName"
+            },
+            "value": {
+                "target": "com.amazonaws.sesv2#MetricDimensionValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.sesv2#DisplayName": {
             "type": "string"
         },
@@ -3106,6 +3288,23 @@
                 "smithy.api#documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address\n            is not successfully verified.</p>"
             }
         },
+        "com.amazonaws.sesv2#FeatureStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sesv2#FeedbackId": {
             "type": "string"
         },
@@ -3190,6 +3389,12 @@
                     "target": "com.amazonaws.sesv2#AccountDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that defines your account details.</p>"
+                    }
+                },
+                "VdmAttributes": {
+                    "target": "com.amazonaws.sesv2#VdmAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VDM attributes that apply to your Amazon SES account.</p>"
                     }
                 }
             },
@@ -3401,6 +3606,12 @@
                     "target": "com.amazonaws.sesv2#SuppressionOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for your\n            account.</p>"
+                    }
+                },
+                "VdmOptions": {
+                    "target": "com.amazonaws.sesv2#VdmOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the VDM preferences for your configuration set.</p>"
                     }
                 }
             },
@@ -4577,6 +4788,34 @@
                 "smithy.api#documentation": "<p>Information about the suppressed email address.</p>"
             }
         },
+        "com.amazonaws.sesv2#GuardianAttributes": {
+            "type": "structure",
+            "members": {
+                "OptimizedSharedDelivery": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of your VDM optimized shared delivery. Can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> – Amazon SES enables optimized shared delivery for your account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> – Amazon SES disables optimized shared delivery for your account.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing additional settings for your VDM configuration as applicable to the Guardian.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#GuardianOptions": {
+            "type": "structure",
+            "members": {
+                "OptimizedSharedDelivery": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of your VDM optimized shared delivery. Can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> – Amazon SES enables optimized shared delivery for the configuration set.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> – Amazon SES disables optimized shared delivery for the configuration set.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing additional settings for your VDM configuration as applicable to the Guardian.</p>"
+            }
+        },
         "com.amazonaws.sesv2#Identity": {
             "type": "string",
             "traits": {
@@ -4775,6 +5014,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains information about the inbox placement data settings for a\n            verified domain that’s associated with your Amazon Web Services account. This data is available only\n            if you enabled the Deliverability dashboard for the domain.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#InternalServiceErrorException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sesv2#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request couldn't be processed because an error occurred with the Amazon SES API v2.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
             }
         },
         "com.amazonaws.sesv2#InvalidNextTokenException": {
@@ -5747,6 +5999,142 @@
                 "smithy.api#documentation": "<p>A list of dedicated IP pools that are associated with your Amazon Web Services account.</p>"
             }
         },
+        "com.amazonaws.sesv2#ListRecommendationFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the recommendations present in your Amazon SES account in the current Amazon Web Services Region.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/vdm/recommendations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListRecommendationsFilter": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sesv2#ListRecommendationsFilterKey"
+            },
+            "value": {
+                "target": "com.amazonaws.sesv2#ListRecommendationFilterValue"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains mapping between <code>ListRecommendationsFilterKey</code>\n            and <code>ListRecommendationFilterValue</code> to filter by.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListRecommendationsFilterKey": {
+            "type": "enum",
+            "members": {
+                "TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPE"
+                    }
+                },
+                "IMPACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPACT"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATUS"
+                    }
+                },
+                "RESOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ARN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>ListRecommendations</code> filter type. This can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>TYPE</code> – The recommendation type, with values like <code>DKIM</code>,\n                    <code>SPF</code> or <code>DMARC</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>IMPACT</code> – The recommendation impact, with values like\n                    <code>HIGH</code> or <code>LOW</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STATUS</code> – The recommendation status, with values like\n                    <code>OPEN</code> or <code>FIXED</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RESOURCE_ARN</code> – The resource affected by the recommendation,\n                    with values like <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#ListRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.sesv2#ListRecommendationsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters applied when retrieving recommendations. Can eiter be an individual filter, or\n              combinations of <code>STATUS</code> and <code>IMPACT</code> or\n              <code>STATUS</code> and <code>TYPE</code>\n         </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListRecommendations</code> to\n            indicate the position in the list of recommendations.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to\n            <code>ListRecommendations</code>. If the number of results is larger than\n            the number you specified in this parameter, then the response includes a\n            <code>NextToken</code> element, which you can use to obtain additional\n            results.</p>\n        <p>The value you specify has to be at least 1, and can be no more than 100.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list the existing recommendations for your account.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#ListRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "Recommendations": {
+                    "target": "com.amazonaws.sesv2#RecommendationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendations applicable to your account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string token indicating that there might be additional recommendations available to be\n            listed. Use the token provided in the <code>ListRecommendationsResponse</code> to use in the\n            subsequent call to <code>ListRecommendations</code> with the same parameters to retrieve the\n            next page of recommendations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the response to your request to retrieve the list of recommendations for your account.</p>"
+            }
+        },
         "com.amazonaws.sesv2#ListSuppressedDestinations": {
             "type": "operation",
             "input": {
@@ -6093,6 +6481,181 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The value of the message tag. The message tag value has to meet the following\n            criteria:</p>\n        <ul>\n            <li>\n                <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-).</p>\n            </li>\n            <li>\n                <p>It can contain no more than 256 characters.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#Metric": {
+            "type": "enum",
+            "members": {
+                "SEND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND"
+                    }
+                },
+                "COMPLAINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLAINT"
+                    }
+                },
+                "PERMANENT_BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENT_BOUNCE"
+                    }
+                },
+                "TRANSIENT_BOUNCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIENT_BOUNCE"
+                    }
+                },
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN"
+                    }
+                },
+                "CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLICK"
+                    }
+                },
+                "DELIVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY"
+                    }
+                },
+                "DELIVERY_OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY_OPEN"
+                    }
+                },
+                "DELIVERY_CLICK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY_CLICK"
+                    }
+                },
+                "DELIVERY_COMPLAINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERY_COMPLAINT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#MetricDataError": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.sesv2#QueryIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query identifier.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.sesv2#QueryErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query error code. Can be one of:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>INTERNAL_FAILURE</code> – Amazon SES has failed to process one of the queries.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACCESS_DENIED</code> – You have insufficient access to retrieve metrics\n                    based on the given query.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sesv2#QueryErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message associated with the current query error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error corresponding to the unsuccessful processing of a single metric data query.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#MetricDataErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#MetricDataError"
+            }
+        },
+        "com.amazonaws.sesv2#MetricDataResult": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.sesv2#QueryIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query identifier.</p>"
+                    }
+                },
+                "Timestamps": {
+                    "target": "com.amazonaws.sesv2#TimestampList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of timestamps for the metric data results.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.sesv2#MetricValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of values (cumulative / sum) for the metric data results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a single metric data query.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#MetricDataResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#MetricDataResult"
+            }
+        },
+        "com.amazonaws.sesv2#MetricDimensionName": {
+            "type": "enum",
+            "members": {
+                "EMAIL_IDENTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_IDENTITY"
+                    }
+                },
+                "CONFIGURATION_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIGURATION_SET"
+                    }
+                },
+                "ISP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ISP"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>BatchGetMetricDataQuery</code> dimension name. This can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>EMAIL_IDENTITY</code> – The email identity used when sending messages.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CONFIGURATION_SET</code> – The configuration set used when sending messages\n                    (if one was used).</p>\n            </li>\n            <li>\n                <p>\n                  <code>ISP</code> – The recipient ISP (e.g. <code>Gmail</code>, <code>Yahoo</code>,\n                    etc.).</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#MetricDimensionValue": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#MetricNamespace": {
+            "type": "enum",
+            "members": {
+                "VDM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VDM"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#MetricValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Counter"
             }
         },
         "com.amazonaws.sesv2#NextToken": {
@@ -6474,6 +7037,50 @@
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
             }
         },
+        "com.amazonaws.sesv2#PutAccountVdmAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutAccountVdmAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutAccountVdmAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update your Amazon SES account VDM attributes.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/account/vdm",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountVdmAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "VdmAttributes": {
+                    "target": "com.amazonaws.sesv2#VdmAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VDM attributes that you wish to apply to your Amazon SES account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to submit new account VDM attributes.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountVdmAttributesResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.sesv2#PutConfigurationSetDeliveryOptions": {
             "type": "operation",
             "input": {
@@ -6761,6 +7368,63 @@
             }
         },
         "com.amazonaws.sesv2#PutConfigurationSetTrackingOptionsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PutConfigurationSetVdmOptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutConfigurationSetVdmOptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutConfigurationSetVdmOptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Specify VDM preferences for email that you send using the configuration set.</p>\n        <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/vdm-options",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutConfigurationSetVdmOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.sesv2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VdmOptions": {
+                    "target": "com.amazonaws.sesv2#VdmOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VDM options to apply to the configuration set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to add specific VDM settings to a configuration set.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PutConfigurationSetVdmOptionsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -7313,6 +7977,35 @@
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
             }
         },
+        "com.amazonaws.sesv2#QueryErrorCode": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#QueryErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#QueryIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.sesv2#RawMessage": {
             "type": "structure",
             "members": {
@@ -7338,6 +8031,122 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The name of a blacklist that an IP address was found on.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#Recommendation": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.sesv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource affected by the recommendation,\n            with values like <code>arn:aws:ses:us-east-1:123456789012:identity/example.com</code>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.sesv2#RecommendationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation type, with values like <code>DKIM</code>,\n            <code>SPF</code> or <code>DMARC</code>.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sesv2#RecommendationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation description / disambiguator - e.g. <code>DKIM1</code> and <code>DKIM2</code>\n              are different recommendations about your DKIM setup.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sesv2#RecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation status, with values like\n            <code>OPEN</code> or <code>FIXED</code>.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first time this issue was encountered and the recommendation was generated.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time the recommendation was updated.</p>"
+                    }
+                },
+                "Impact": {
+                    "target": "com.amazonaws.sesv2#RecommendationImpact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation impact, with values like\n            <code>HIGH</code> or <code>LOW</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recommendation generated for your account.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#RecommendationDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#RecommendationImpact": {
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#RecommendationStatus": {
+            "type": "enum",
+            "members": {
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN"
+                    }
+                },
+                "FIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIXED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#RecommendationType": {
+            "type": "enum",
+            "members": {
+                "DKIM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DKIM"
+                    }
+                },
+                "DMARC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DMARC"
+                    }
+                },
+                "SPF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPF"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sesv2#RecommendationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Recommendation"
             }
         },
         "com.amazonaws.sesv2#RenderedEmailTemplate": {
@@ -7894,6 +8703,9 @@
             "version": "2019-09-27",
             "operations": [
                 {
+                    "target": "com.amazonaws.sesv2#BatchGetMetricData"
+                },
+                {
                     "target": "com.amazonaws.sesv2#CreateConfigurationSet"
                 },
                 {
@@ -8044,6 +8856,9 @@
                     "target": "com.amazonaws.sesv2#ListImportJobs"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#ListRecommendations"
+                },
+                {
                     "target": "com.amazonaws.sesv2#ListSuppressedDestinations"
                 },
                 {
@@ -8062,6 +8877,9 @@
                     "target": "com.amazonaws.sesv2#PutAccountSuppressionAttributes"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#PutAccountVdmAttributes"
+                },
+                {
                     "target": "com.amazonaws.sesv2#PutConfigurationSetDeliveryOptions"
                 },
                 {
@@ -8075,6 +8893,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutConfigurationSetTrackingOptions"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#PutConfigurationSetVdmOptions"
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutDedicatedIpInPool"
@@ -8159,7 +8980,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -10125,6 +10946,12 @@
         "com.amazonaws.sesv2#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.sesv2#TimestampList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#Timestamp"
+            }
+        },
         "com.amazonaws.sesv2#TlsPolicy": {
             "type": "enum",
             "members": {
@@ -10753,6 +11580,53 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.sesv2#VdmAttributes": {
+            "type": "structure",
+            "members": {
+                "VdmEnabled": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the status of your VDM configuration. Can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> – Amazon SES enables VDM for your account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISABLED</code> – Amazon SES disables VDM for your account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardAttributes": {
+                    "target": "com.amazonaws.sesv2#DashboardAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional settings for your VDM configuration as applicable to the Dashboard.</p>"
+                    }
+                },
+                "GuardianAttributes": {
+                    "target": "com.amazonaws.sesv2#GuardianAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional settings for your VDM configuration as applicable to the Guardian.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VDM attributes that apply to your Amazon SES account.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#VdmOptions": {
+            "type": "structure",
+            "members": {
+                "DashboardOptions": {
+                    "target": "com.amazonaws.sesv2#DashboardOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional settings for your VDM configuration as applicable to the Dashboard.</p>"
+                    }
+                },
+                "GuardianOptions": {
+                    "target": "com.amazonaws.sesv2#GuardianOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional settings for your VDM configuration as applicable to the Guardian.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines the VDM settings that apply to emails that you send\n            using the configuration set.</p>"
             }
         },
         "com.amazonaws.sesv2#VerificationStatus": {
