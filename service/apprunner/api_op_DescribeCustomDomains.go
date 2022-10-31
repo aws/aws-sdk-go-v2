@@ -72,6 +72,11 @@ type DescribeCustomDomainsOutput struct {
 	// This member is required.
 	ServiceArn *string
 
+	// DNS Target records for the custom domains of this Amazon VPC.
+	//
+	// This member is required.
+	VpcDNSTargets []types.VpcDNSTarget
+
 	// The token that you can pass in a subsequent request to get the next result page.
 	// It's returned in a paginated request.
 	NextToken *string

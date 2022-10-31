@@ -59,6 +59,11 @@ type PutDestinationInput struct {
 	// This member is required.
 	TargetArn *string
 
+	// An optional list of key-value pairs to associate with the resource. For more
+	// information about tagging, see Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

@@ -33,7 +33,7 @@ func (c *Client) GetBehaviorModelTrainingSummaries(ctx context.Context, params *
 
 type GetBehaviorModelTrainingSummariesInput struct {
 
-	// The maximum number of results to return at one time. The default is 25.
+	// The maximum number of results to return at one time. The default is 10.
 	MaxResults *int32
 
 	// The token for the next set of results.
@@ -132,7 +132,7 @@ var _ GetBehaviorModelTrainingSummariesAPIClient = (*Client)(nil)
 // GetBehaviorModelTrainingSummariesPaginatorOptions is the paginator options for
 // GetBehaviorModelTrainingSummaries
 type GetBehaviorModelTrainingSummariesPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25.
+	// The maximum number of results to return at one time. The default is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

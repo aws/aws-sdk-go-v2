@@ -1,0 +1,8 @@
+{
+    "id": "8beabd70-e4b7-401e-804b-a94bec21cbdb",
+    "type": "feature",
+    "description": "Elastic IP transfer is a new Amazon VPC feature that allows you to transfer your Elastic IP addresses from one AWS Account to another.",
+    "modules": [
+        "service/ec2"
+    ]
+}

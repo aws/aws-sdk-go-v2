@@ -83,7 +83,7 @@ type Block struct {
 	//
 	// * QUERY - A
 	// question asked during the call of AnalyzeDocument. Contains an alias and an ID
-	// that attachs it to its answer.
+	// that attaches it to its answer.
 	//
 	// * QUERY_RESULT - A response to a question asked
 	// during the call of analyze document. Comes with an alias and ID for ease of
@@ -123,12 +123,14 @@ type Block struct {
 	// single operation.
 	Id *string
 
-	// The page on which a block was detected. Page is returned by asynchronous
-	// operations. Page values greater than 1 are only returned for multipage documents
-	// that are in PDF or TIFF format. A scanned image (JPEG/PNG), even if it contains
-	// multiple document pages, is considered to be a single-page document. The value
-	// of Page is always 1. Synchronous operations don't return Page because every
-	// input document is considered to be a single-page document.
+	// The page on which a block was detected. Page is returned by synchronous and
+	// asynchronous operations. Page values greater than 1 are only returned for
+	// multipage documents that are in PDF or TIFF format. A scanned image (JPEG/PNG)
+	// provided to an asynchronous operation, even if it contains multiple document
+	// pages, is considered a single-page document. This means that for scanned images
+	// the value of Page is always 1. Synchronous operations operations will also
+	// return a Page value of 1 because every input document is considered to be a
+	// single-page document.
 	Page *int32
 
 	//
@@ -248,6 +250,18 @@ type DocumentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Returns the kind of currency detected.
+type ExpenseCurrency struct {
+
+	// Currency code for detected currency.
+	Code *string
+
+	// Percentage confideence in the detected currency.
+	Confidence *float32
+
+	noSmithyDocumentSerde
+}
+
 // An object used to store information about the Value or Label detected by Amazon
 // Textract.
 type ExpenseDetection struct {
@@ -269,6 +283,10 @@ type ExpenseDetection struct {
 // The structure holding all the information returned by AnalyzeExpense
 type ExpenseDocument struct {
 
+	// This is a block object, the same as reported when DetectDocumentText is run on a
+	// document. It provides word level recognition of text.
+	Blocks []Block
+
 	// Denotes which invoice or receipt in the document the information is coming from.
 	// First document will be 1, the second 2, and so on.
 	ExpenseIndex *int32
@@ -286,6 +304,14 @@ type ExpenseDocument struct {
 // LabelDetection, and ValueDetection
 type ExpenseField struct {
 
+	// Shows the kind of currency, both the code and confidence associated with any
+	// monatary value detected.
+	Currency *ExpenseCurrency
+
+	// Shows which group a response object belongs to, such as whether an address line
+	// belongs to the vendor's address or the recipent's address.
+	GroupProperties []ExpenseGroupProperty
+
 	// The explicitly stated label of a detected element.
 	LabelDetection *ExpenseDetection
 
@@ -298,6 +324,19 @@ type ExpenseField struct {
 
 	// The value of a detected element. Present in explicit and implicit elements.
 	ValueDetection *ExpenseDetection
+
+	noSmithyDocumentSerde
+}
+
+// Shows the group that a certain key belongs to. This helps differentiate
+// responses like addresses that can appear similar in response JSON.
+type ExpenseGroupProperty struct {
+
+	// Provides a group Id number, which will be the same for each in the group.
+	Id *string
+
+	// Informs you on the kind of label associated with the group
+	Types []string
 
 	noSmithyDocumentSerde
 }
@@ -537,24 +576,24 @@ type Query struct {
 	// Alias attached to the query, for ease of location.
 	Alias *string
 
-	// List of pages associated with the query. The following is a list of rules for
-	// using this parameter.
+	// Pages is a parameter that the user inputs to specify which pages to apply a
+	// query to. The following is a list of rules for using this parameter.
 	//
-	// * If a page is not specified, it is set to ["1"] by
-	// default.
+	// * If a
+	// page is not specified, it is set to ["1"] by default.
 	//
-	// * The following characters are allowed in the parameter's string: 0 1
-	// 2 3 4 5 6 7 8 9 - *. No whitespace is allowed.
+	// * The following
+	// characters are allowed in the parameter's string: 0 1 2 3 4 5 6 7 8 9 - *. No
+	// whitespace is allowed.
 	//
-	// * When using * to indicate all
-	// pages, it must be the only element in the string.
+	// * When using * to indicate all pages, it must be the
+	// only element in the list.
 	//
-	// * You can use page intervals,
-	// such as [“1-3”, “1-1”, “4-*”]. Where * indicates last page of document.
+	// * You can use page intervals, such as [“1-3”, “1-1”,
+	// “4-*”]. Where * indicates last page of document.
 	//
-	// *
-	// Specified pages must be greater than 0 and less than or equal to the number of
-	// pages in the document.
+	// * Specified pages must be
+	// greater than 0 and less than or equal to the number of pages in the document.
 	Pages []string
 
 	noSmithyDocumentSerde

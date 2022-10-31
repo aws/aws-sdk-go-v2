@@ -1,0 +1,8 @@
+{
+    "id": "a9042d86-6876-4d47-95ef-19791e381bf8",
+    "type": "feature",
+    "description": "Amazon connect now support a new API DismissUserContact to dismiss or remove terminated contacts in Agent CCP",
+    "modules": [
+        "service/connect"
+    ]
+}

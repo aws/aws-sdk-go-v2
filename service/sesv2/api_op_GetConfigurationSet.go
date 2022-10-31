@@ -74,6 +74,10 @@ type GetConfigurationSetOutput struct {
 	// send using the configuration set.
 	TrackingOptions *types.TrackingOptions
 
+	// An object that contains information about the VDM preferences for your
+	// configuration set.
+	VdmOptions *types.VdmOptions
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

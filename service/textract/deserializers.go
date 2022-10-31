@@ -2582,6 +2582,80 @@ func awsAwsjson11_deserializeDocumentEntityTypes(v *[]types.EntityType, value in
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentExpenseCurrency(v **types.ExpenseCurrency, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExpenseCurrency
+	if *v == nil {
+		sv = &types.ExpenseCurrency{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "Confidence":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Confidence = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Confidence = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Percent to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExpenseDetection(v **types.ExpenseDetection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2683,6 +2757,11 @@ func awsAwsjson11_deserializeDocumentExpenseDocument(v **types.ExpenseDocument, 
 
 	for key, value := range shape {
 		switch key {
+		case "Blocks":
+			if err := awsAwsjson11_deserializeDocumentBlockList(&sv.Blocks, value); err != nil {
+				return err
+			}
+
 		case "ExpenseIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2771,6 +2850,16 @@ func awsAwsjson11_deserializeDocumentExpenseField(v **types.ExpenseField, value 
 
 	for key, value := range shape {
 		switch key {
+		case "Currency":
+			if err := awsAwsjson11_deserializeDocumentExpenseCurrency(&sv.Currency, value); err != nil {
+				return err
+			}
+
+		case "GroupProperties":
+			if err := awsAwsjson11_deserializeDocumentExpenseGroupPropertyList(&sv.GroupProperties, value); err != nil {
+				return err
+			}
+
 		case "LabelDetection":
 			if err := awsAwsjson11_deserializeDocumentExpenseDetection(&sv.LabelDetection, value); err != nil {
 				return err
@@ -2832,6 +2921,85 @@ func awsAwsjson11_deserializeDocumentExpenseFieldList(v *[]types.ExpenseField, v
 		var col types.ExpenseField
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentExpenseField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExpenseGroupProperty(v **types.ExpenseGroupProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExpenseGroupProperty
+	if *v == nil {
+		sv = &types.ExpenseGroupProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "Types":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.Types, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExpenseGroupPropertyList(v *[]types.ExpenseGroupProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ExpenseGroupProperty
+	if *v == nil {
+		cv = []types.ExpenseGroupProperty{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ExpenseGroupProperty
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentExpenseGroupProperty(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -4246,6 +4414,42 @@ func awsAwsjson11_deserializeDocumentRelationshipList(v *[]types.Relationship, v
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStringList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

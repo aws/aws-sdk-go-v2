@@ -209,6 +209,27 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// A resource can have no more than 50 tags.
+type TooManyTagsException struct {
+	Message *string
+
+	ResourceName *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The most likely cause is an invalid Amazon Web Services access key ID or secret
 // key.
 type UnrecognizedClientException struct {

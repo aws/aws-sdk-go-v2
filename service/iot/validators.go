@@ -4572,6 +4572,11 @@ func validateAction(v *types.Action) error {
 			invalidParams.AddNested("OpenSearch", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Location != nil {
+		if err := validateLocationAction(v.Location); err != nil {
+			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5329,6 +5334,53 @@ func validateLambdaAction(v *types.LambdaAction) error {
 	invalidParams := smithy.InvalidParamsError{Context: "LambdaAction"}
 	if v.FunctionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocationAction(v *types.LocationAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationAction"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.TrackerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrackerName"))
+	}
+	if v.DeviceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceId"))
+	}
+	if v.Timestamp != nil {
+		if err := validateLocationTimestamp(v.Timestamp); err != nil {
+			invalidParams.AddNested("Timestamp", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Latitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Latitude"))
+	}
+	if v.Longitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocationTimestamp(v *types.LocationTimestamp) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationTimestamp"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

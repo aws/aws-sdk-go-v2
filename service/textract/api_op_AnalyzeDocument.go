@@ -29,9 +29,12 @@ import (
 // document are returned (including text that doesn't have a relationship with the
 // value of FeatureTypes).
 //
-// * Queries.A QUERIES_RESULT Block object contains the
-// answer to the query, the alias associated and an ID that connect it to the query
-// asked. This Block also contains a location and attached confidence
+// * Query. A QUERY Block object contains the query text,
+// alias and link to the associated Query results block object.
+//
+// * Query Result. A
+// QUERY_RESULT Block object contains the answer to the query and an ID that
+// connects it to the query asked. This Block also contains a confidence
 // score.
 //
 // Selection elements such as check boxes and option buttons (radio

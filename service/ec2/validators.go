@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptAddressTransfer struct {
+}
+
+func (*validateOpAcceptAddressTransfer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAddressTransfer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAddressTransferInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAddressTransferInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAcceptReservedInstancesExchangeQuote struct {
 }
 
@@ -3970,6 +3990,26 @@ func (m *validateOpDetachVpnGateway) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableAddressTransfer struct {
+}
+
+func (*validateOpDisableAddressTransfer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableAddressTransfer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableAddressTransferInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableAddressTransferInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableFastLaunch struct {
 }
 
@@ -4285,6 +4325,26 @@ func (m *validateOpDisassociateVpcCidrBlock) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateVpcCidrBlockInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableAddressTransfer struct {
+}
+
+func (*validateOpEnableAddressTransfer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableAddressTransfer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableAddressTransferInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableAddressTransferInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -7410,6 +7470,10 @@ func (m *validateOpWithdrawByoipCidr) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptAddressTransferValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAddressTransfer{}, middleware.After)
+}
+
 func addOpAcceptReservedInstancesExchangeQuoteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptReservedInstancesExchangeQuote{}, middleware.After)
 }
@@ -8202,6 +8266,10 @@ func addOpDetachVpnGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetachVpnGateway{}, middleware.After)
 }
 
+func addOpDisableAddressTransferValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableAddressTransfer{}, middleware.After)
+}
+
 func addOpDisableFastLaunchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableFastLaunch{}, middleware.After)
 }
@@ -8264,6 +8332,10 @@ func addOpDisassociateTrunkInterfaceValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateVpcCidrBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateVpcCidrBlock{}, middleware.After)
+}
+
+func addOpEnableAddressTransferValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableAddressTransfer{}, middleware.After)
 }
 
 func addOpEnableFastLaunchValidationMiddleware(stack *middleware.Stack) error {
@@ -9602,6 +9674,21 @@ func validateVolumeDetail(v *types.VolumeDetail) error {
 	invalidParams := smithy.InvalidParamsError{Context: "VolumeDetail"}
 	if v.Size == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Size"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptAddressTransferInput(v *AcceptAddressTransferInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAddressTransferInput"}
+	if v.Address == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Address"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12950,6 +13037,21 @@ func validateOpDetachVpnGatewayInput(v *DetachVpnGatewayInput) error {
 	}
 }
 
+func validateOpDisableAddressTransferInput(v *DisableAddressTransferInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableAddressTransferInput"}
+	if v.AllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableFastLaunchInput(v *DisableFastLaunchInput) error {
 	if v == nil {
 		return nil
@@ -13200,6 +13302,24 @@ func validateOpDisassociateVpcCidrBlockInput(v *DisassociateVpcCidrBlockInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateVpcCidrBlockInput"}
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableAddressTransferInput(v *EnableAddressTransferInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableAddressTransferInput"}
+	if v.AllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
+	}
+	if v.TransferAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransferAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

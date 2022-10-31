@@ -17456,6 +17456,13 @@ func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Valu
 		}
 	}
 
+	if v.Location != nil {
+		ok := object.Key("location")
+		if err := awsRestjson1_serializeDocumentLocationAction(v.Location, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OpenSearch != nil {
 		ok := object.Key("openSearch")
 		if err := awsRestjson1_serializeDocumentOpenSearchAction(v.OpenSearch, ok); err != nil {
@@ -19072,6 +19079,62 @@ func awsRestjson1_serializeDocumentLambdaAction(v *types.LambdaAction, value smi
 	if v.FunctionArn != nil {
 		ok := object.Key("functionArn")
 		ok.String(*v.FunctionArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLocationAction(v *types.LocationAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceId != nil {
+		ok := object.Key("deviceId")
+		ok.String(*v.DeviceId)
+	}
+
+	if v.Latitude != nil {
+		ok := object.Key("latitude")
+		ok.String(*v.Latitude)
+	}
+
+	if v.Longitude != nil {
+		ok := object.Key("longitude")
+		ok.String(*v.Longitude)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.Timestamp != nil {
+		ok := object.Key("timestamp")
+		if err := awsRestjson1_serializeDocumentLocationTimestamp(v.Timestamp, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrackerName != nil {
+		ok := object.Key("trackerName")
+		ok.String(*v.TrackerName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLocationTimestamp(v *types.LocationTimestamp, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Unit != nil {
+		ok := object.Key("unit")
+		ok.String(*v.Unit)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
 	}
 
 	return nil

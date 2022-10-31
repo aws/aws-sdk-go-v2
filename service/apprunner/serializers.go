@@ -345,6 +345,61 @@ func (m *awsAwsjson10_serializeOpCreateVpcConnector) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpCreateVpcIngressConnection struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateVpcIngressConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateVpcIngressConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateVpcIngressConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AppRunner.CreateVpcIngressConnection")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateVpcIngressConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDeleteAutoScalingConfiguration struct {
 }
 
@@ -620,6 +675,61 @@ func (m *awsAwsjson10_serializeOpDeleteVpcConnector) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDeleteVpcIngressConnection struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteVpcIngressConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteVpcIngressConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteVpcIngressConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AppRunner.DeleteVpcIngressConnection")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteVpcIngressConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDescribeAutoScalingConfiguration struct {
 }
 
@@ -880,6 +990,61 @@ func (m *awsAwsjson10_serializeOpDescribeVpcConnector) HandleSerialize(ctx conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDescribeVpcConnectorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDescribeVpcIngressConnection struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeVpcIngressConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeVpcIngressConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeVpcIngressConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AppRunner.DescribeVpcIngressConnection")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeVpcIngressConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1335,6 +1500,61 @@ func (m *awsAwsjson10_serializeOpListVpcConnectors) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListVpcIngressConnections struct {
+}
+
+func (*awsAwsjson10_serializeOpListVpcIngressConnections) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListVpcIngressConnections) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListVpcIngressConnectionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AppRunner.ListVpcIngressConnections")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListVpcIngressConnectionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpPauseService struct {
 }
 
@@ -1664,6 +1884,61 @@ func (m *awsAwsjson10_serializeOpUpdateService) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson10_serializeOpUpdateVpcIngressConnection struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateVpcIngressConnection) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateVpcIngressConnection) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateVpcIngressConnectionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AppRunner.UpdateVpcIngressConnection")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateVpcIngressConnectionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson10_serializeDocumentAuthenticationConfiguration(v *types.AuthenticationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1874,6 +2149,35 @@ func awsAwsjson10_serializeDocumentImageRepository(v *types.ImageRepository, val
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentIngressConfiguration(v *types.IngressConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsPubliclyAccessible {
+		ok := object.Key("IsPubliclyAccessible")
+		ok.Boolean(v.IsPubliclyAccessible)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentIngressVpcConfiguration(v *types.IngressVpcConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VpcEndpointId != nil {
+		ok := object.Key("VpcEndpointId")
+		ok.String(*v.VpcEndpointId)
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentInstanceConfiguration(v *types.InstanceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1896,6 +2200,23 @@ func awsAwsjson10_serializeDocumentInstanceConfiguration(v *types.InstanceConfig
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentListVpcIngressConnectionsFilter(v *types.ListVpcIngressConnectionsFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServiceArn != nil {
+		ok := object.Key("ServiceArn")
+		ok.String(*v.ServiceArn)
+	}
+
+	if v.VpcEndpointId != nil {
+		ok := object.Key("VpcEndpointId")
+		ok.String(*v.VpcEndpointId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentNetworkConfiguration(v *types.NetworkConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1903,6 +2224,13 @@ func awsAwsjson10_serializeDocumentNetworkConfiguration(v *types.NetworkConfigur
 	if v.EgressConfiguration != nil {
 		ok := object.Key("EgressConfiguration")
 		if err := awsAwsjson10_serializeDocumentEgressConfiguration(v.EgressConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IngressConfiguration != nil {
+		ok := object.Key("IngressConfiguration")
+		if err := awsAwsjson10_serializeDocumentIngressConfiguration(v.IngressConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -2257,6 +2585,37 @@ func awsAwsjson10_serializeOpDocumentCreateVpcConnectorInput(v *CreateVpcConnect
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentCreateVpcIngressConnectionInput(v *CreateVpcIngressConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IngressVpcConfiguration != nil {
+		ok := object.Key("IngressVpcConfiguration")
+		if err := awsAwsjson10_serializeDocumentIngressVpcConfiguration(v.IngressVpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServiceArn != nil {
+		ok := object.Key("ServiceArn")
+		ok.String(*v.ServiceArn)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcIngressConnectionName != nil {
+		ok := object.Key("VpcIngressConnectionName")
+		ok.String(*v.VpcIngressConnectionName)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteAutoScalingConfigurationInput(v *DeleteAutoScalingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2312,6 +2671,18 @@ func awsAwsjson10_serializeOpDocumentDeleteVpcConnectorInput(v *DeleteVpcConnect
 	if v.VpcConnectorArn != nil {
 		ok := object.Key("VpcConnectorArn")
 		ok.String(*v.VpcConnectorArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteVpcIngressConnectionInput(v *DeleteVpcIngressConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VpcIngressConnectionArn != nil {
+		ok := object.Key("VpcIngressConnectionArn")
+		ok.String(*v.VpcIngressConnectionArn)
 	}
 
 	return nil
@@ -2382,6 +2753,18 @@ func awsAwsjson10_serializeOpDocumentDescribeVpcConnectorInput(v *DescribeVpcCon
 	if v.VpcConnectorArn != nil {
 		ok := object.Key("VpcConnectorArn")
 		ok.String(*v.VpcConnectorArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeVpcIngressConnectionInput(v *DescribeVpcIngressConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VpcIngressConnectionArn != nil {
+		ok := object.Key("VpcIngressConnectionArn")
+		ok.String(*v.VpcIngressConnectionArn)
 	}
 
 	return nil
@@ -2548,6 +2931,30 @@ func awsAwsjson10_serializeOpDocumentListVpcConnectorsInput(v *ListVpcConnectors
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentListVpcIngressConnectionsInput(v *ListVpcIngressConnectionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsAwsjson10_serializeDocumentListVpcIngressConnectionsFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentPauseServiceInput(v *PauseServiceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2669,6 +3076,25 @@ func awsAwsjson10_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 		if err := awsAwsjson10_serializeDocumentSourceConfiguration(v.SourceConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentUpdateVpcIngressConnectionInput(v *UpdateVpcIngressConnectionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IngressVpcConfiguration != nil {
+		ok := object.Key("IngressVpcConfiguration")
+		if err := awsAwsjson10_serializeDocumentIngressVpcConfiguration(v.IngressVpcConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcIngressConnectionArn != nil {
+		ok := object.Key("VpcIngressConnectionArn")
+		ok.String(*v.VpcIngressConnectionArn)
 	}
 
 	return nil

@@ -380,6 +380,31 @@ type ImageRepository struct {
 	noSmithyDocumentSerde
 }
 
+// Network configuration settings for inbound network traffic.
+type IngressConfiguration struct {
+
+	// Specifies whether your App Runner service is publicly accessible. To make the
+	// service publicly accessible set it to True. To make the service privately
+	// accessible, from only within an Amazon VPC set it to False.
+	IsPubliclyAccessible bool
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of your VPC and the associated VPC endpoint. The VPC endpoint
+// is an Amazon Web Services PrivateLink resource that allows access to your App
+// Runner services from within an Amazon VPC.
+type IngressVpcConfiguration struct {
+
+	// The ID of the VPC endpoint that your App Runner service connects to.
+	VpcEndpointId *string
+
+	// The ID of the VPC that is used for the VPC endpoint.
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the runtime configuration of an App Runner service instance (scaling
 // unit).
 type InstanceConfiguration struct {
@@ -400,12 +425,28 @@ type InstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Returns a list of VPC Ingress Connections based on the filter provided. It can
+// return either ServiceArn or VpcEndpointId, or both.
+type ListVpcIngressConnectionsFilter struct {
+
+	// The Amazon Resource Name (ARN) of a service to filter by.
+	ServiceArn *string
+
+	// The ID of a VPC Endpoint to filter by.
+	VpcEndpointId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes configuration settings related to network traffic of an App Runner
 // service. Consists of embedded objects for each configurable network feature.
 type NetworkConfiguration struct {
 
 	// Network configuration settings for outbound message traffic.
 	EgressConfiguration *EgressConfiguration
+
+	// Network configuration settings for inbound message traffic.
+	IngressConfiguration *IngressConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -566,12 +607,6 @@ type Service struct {
 	// This member is required.
 	ServiceName *string
 
-	// A subdomain URL that App Runner generated for this service. You can use this URL
-	// to access your service web application.
-	//
-	// This member is required.
-	ServiceUrl *string
-
 	// The source deployed to the App Runner service. It can be a code or an image
 	// repository.
 	//
@@ -615,6 +650,10 @@ type Service struct {
 
 	// The observability configuration of this service.
 	ObservabilityConfiguration *ServiceObservabilityConfiguration
+
+	// A subdomain URL that App Runner generated for this service. You can use this URL
+	// to access your service web application.
+	ServiceUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -805,6 +844,88 @@ type VpcConnector struct {
 	// ("Status": "ACTIVE") that share the same Name. At this time, App Runner supports
 	// only one revision per name.
 	VpcConnectorRevision int32
+
+	noSmithyDocumentSerde
+}
+
+// DNS Target record for a custom domain of this Amazon VPC.
+type VpcDNSTarget struct {
+
+	// The domain name of your target DNS that is associated with the Amazon VPC.
+	DomainName *string
+
+	// The ID of the Amazon VPC that is associated with the custom domain name of the
+	// target DNS.
+	VpcId *string
+
+	// The Amazon Resource Name (ARN) of the VPC Ingress Connection that is associated
+	// with your service.
+	VpcIngressConnectionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The App Runner resource that specifies an App Runner endpoint for incoming
+// traffic. It establishes a connection between a VPC interface endpoint and a App
+// Runner service, to make your App Runner service accessible from only within an
+// Amazon VPC.
+type VpcIngressConnection struct {
+
+	// The Account Id you use to create the VPC Ingress Connection resource.
+	AccountId *string
+
+	// The time when the VPC Ingress Connection was created. It's in the Unix time
+	// stamp format.
+	//
+	// * Type: Timestamp
+	//
+	// * Required: Yes
+	CreatedAt *time.Time
+
+	// The time when the App Runner service was deleted. It's in the Unix time stamp
+	// format.
+	//
+	// * Type: Timestamp
+	//
+	// * Required: No
+	DeletedAt *time.Time
+
+	// The domain name associated with the VPC Ingress Connection resource.
+	DomainName *string
+
+	// Specifications for the customer’s VPC and related PrivateLink VPC endpoint that
+	// are used to associate with the VPC Ingress Connection resource.
+	IngressVpcConfiguration *IngressVpcConfiguration
+
+	// The Amazon Resource Name (ARN) of the service associated with the VPC Ingress
+	// Connection.
+	ServiceArn *string
+
+	// The current status of the VPC Ingress Connection. The VPC Ingress Connection
+	// displays one of the following statuses: AVAILABLE, PENDING_CREATION,
+	// PENDING_UPDATE, PENDING_DELETION,FAILED_CREATION, FAILED_UPDATE,
+	// FAILED_DELETION, and DELETED..
+	Status VpcIngressConnectionStatus
+
+	// The Amazon Resource Name (ARN) of the VPC Ingress Connection.
+	VpcIngressConnectionArn *string
+
+	// The customer-provided VPC Ingress Connection name.
+	VpcIngressConnectionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about an VPC Ingress Connection, which includes its
+// VPC Ingress Connection ARN and its associated Service ARN.
+type VpcIngressConnectionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the service associated with the VPC Ingress
+	// Connection.
+	ServiceArn *string
+
+	// The Amazon Resource Name (ARN) of the VPC Ingress Connection.
+	VpcIngressConnectionArn *string
 
 	noSmithyDocumentSerde
 }

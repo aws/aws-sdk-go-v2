@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates the specified tags for the specified log group. To list the tags
-// for a log group, use ListTagsLogGroup
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html).
-// To remove tags, use UntagLogGroup
-// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html).
+// The TagLogGroup operation is on the path to deprecation. We recommend that you
+// use TagResource
+// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html)
+// instead. Adds or updates the specified tags for the specified log group. To list
+// the tags for a log group, use ListTagsForResource
+// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html).
+// To remove tags, use UntagResource
+// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html).
 // For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging)
 // in the Amazon CloudWatch Logs User Guide. CloudWatch Logs doesn’t support IAM
@@ -23,6 +26,8 @@ import (
 // about using tags to control access, see Controlling access to Amazon Web
 // Services resources using tags
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
+//
+// Deprecated: Please use the generic tagging API TagResource
 func (c *Client) TagLogGroup(ctx context.Context, params *TagLogGroupInput, optFns ...func(*Options)) (*TagLogGroupOutput, error) {
 	if params == nil {
 		params = &TagLogGroupInput{}

@@ -13,7 +13,8 @@ import (
 
 // Delete an App Runner service. This is an asynchronous operation. On a successful
 // call, you can use the returned OperationId and the ListOperations call to track
-// the operation's progress.
+// the operation's progress. Make sure that you don't have any active
+// VPCIngressConnections associated with the service you want to delete.
 func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, optFns ...func(*Options)) (*DeleteServiceOutput, error) {
 	if params == nil {
 		params = &DeleteServiceInput{}

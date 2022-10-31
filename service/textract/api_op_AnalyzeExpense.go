@@ -13,7 +13,7 @@ import (
 
 // AnalyzeExpense synchronously analyzes an input document for financially related
 // relationships between text. Information is returned as ExpenseDocuments and
-// seperated as follows.
+// seperated as follows:
 //
 // * LineItemGroups- A data set containing LineItems which
 // store information about the lines of text, such as an item purchased and its

@@ -105,6 +105,26 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request couldn't be processed because an error occurred with the Amazon SES
+// API v2.
+type InternalServiceErrorException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalServiceErrorException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalServiceErrorException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
+func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The specified request includes an invalid or expired token.
 type InvalidNextTokenException struct {
 	Message *string

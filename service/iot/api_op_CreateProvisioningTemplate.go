@@ -54,7 +54,10 @@ type CreateProvisioningTemplateInput struct {
 	// True to enable the provisioning template, otherwise false.
 	Enabled bool
 
-	// Creates a pre-provisioning hook template.
+	// Creates a pre-provisioning hook template. Only supports template of type
+	// FLEET_PROVISIONING. For more information about provisioning template types, see
+	// type
+	// (https://docs.aws.amazon.com/iot/latest/apireference/API_CreateProvisioningTemplate.html#iot-CreateProvisioningTemplate-request-type).
 	PreProvisioningHook *types.ProvisioningHook
 
 	// Metadata which can be used to manage the provisioning template. For URI Request

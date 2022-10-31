@@ -41,6 +41,87 @@ type AccountDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single metric data query to include in a batch.
+type BatchGetMetricDataQuery struct {
+
+	// Represents the end date for the query interval.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// The query identifier.
+	//
+	// This member is required.
+	Id *string
+
+	// The queried metric. This can be one of the following:
+	//
+	// * SEND – Emails sent
+	// eligible for tracking in the VDM dashboard. This excludes emails sent to the
+	// mailbox simulator and emails addressed to more than one recipient.
+	//
+	// * COMPLAINT
+	// – Complaints received for your account. This excludes complaints from the
+	// mailbox simulator, those originating from your account-level suppression list
+	// (if enabled), and those for emails addressed to more than one recipient
+	//
+	// *
+	// PERMANENT_BOUNCE – Permanent bounces - i.e. feedback received for emails sent to
+	// non-existent mailboxes. Excludes bounces from the mailbox simulator, those
+	// originating from your account-level suppression list (if enabled), and those for
+	// emails addressed to more than one recipient.
+	//
+	// * TRANSIENT_BOUNCE – Transient
+	// bounces - i.e. feedback received for delivery failures excluding issues with
+	// non-existent mailboxes. Excludes bounces from the mailbox simulator, and those
+	// for emails addressed to more than one recipient.
+	//
+	// * OPEN – Unique open events
+	// for emails including open trackers. Excludes opens for emails addressed to more
+	// than one recipient.
+	//
+	// * CLICK – Unique click events for emails including wrapped
+	// links. Excludes clicks for emails addressed to more than one recipient.
+	//
+	// *
+	// DELIVERY – Successful deliveries for email sending attempts. Excludes deliveries
+	// to the mailbox simulator and for emails addressed to more than one recipient.
+	//
+	// *
+	// DELIVERY_OPEN – Successful deliveries for email sending attempts. Excludes
+	// deliveries to the mailbox simulator, for emails addressed to more than one
+	// recipient, and emails without open trackers.
+	//
+	// * DELIVERY_CLICK – Successful
+	// deliveries for email sending attempts. Excludes deliveries to the mailbox
+	// simulator, for emails addressed to more than one recipient, and emails without
+	// click trackers.
+	//
+	// * DELIVERY_COMPLAINT – Successful deliveries for email sending
+	// attempts. Excludes deliveries to the mailbox simulator, for emails addressed to
+	// more than one recipient, and emails addressed to recipients hosted by ISPs with
+	// which Amazon SES does not have a feedback loop agreement.
+	//
+	// This member is required.
+	Metric Metric
+
+	// The query namespace - e.g. VDM
+	//
+	// This member is required.
+	Namespace MetricNamespace
+
+	// Represents the start date for the query interval.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	// An object that contains mapping between MetricDimensionName and
+	// MetricDimensionValue to filter metrics by.
+	Dimensions map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information about a blacklisting event that impacts one
 // of the dedicated IP addresses that is associated with your account.
 type BlacklistEntry struct {
@@ -348,6 +429,39 @@ type DailyVolume struct {
 	// An object that contains inbox placement metrics for a specific day in the
 	// analysis period.
 	VolumeStatistics *VolumeStatistics
+
+	noSmithyDocumentSerde
+}
+
+// An object containing additional settings for your VDM configuration as
+// applicable to the Dashboard.
+type DashboardAttributes struct {
+
+	// Specifies the status of your VDM engagement metrics collection. Can be one of
+	// the following:
+	//
+	// * ENABLED – Amazon SES enables engagement metrics for your
+	// account.
+	//
+	// * DISABLED – Amazon SES disables engagement metrics for your account.
+	EngagementMetrics FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object containing additional settings for your VDM configuration as
+// applicable to the Dashboard.
+type DashboardOptions struct {
+
+	// Specifies the status of your VDM engagement metrics collection. Can be one of
+	// the following:
+	//
+	// * ENABLED – Amazon SES enables engagement metrics for the
+	// configuration set.
+	//
+	// * DISABLED – Amazon SES disables engagement metrics for the
+	// configuration set.
+	EngagementMetrics FeatureStatus
 
 	noSmithyDocumentSerde
 }
@@ -865,6 +979,40 @@ type FailureInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An object containing additional settings for your VDM configuration as
+// applicable to the Guardian.
+type GuardianAttributes struct {
+
+	// Specifies the status of your VDM optimized shared delivery. Can be one of the
+	// following:
+	//
+	// * ENABLED – Amazon SES enables optimized shared delivery for your
+	// account.
+	//
+	// * DISABLED – Amazon SES disables optimized shared delivery for your
+	// account.
+	OptimizedSharedDelivery FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// An object containing additional settings for your VDM configuration as
+// applicable to the Guardian.
+type GuardianOptions struct {
+
+	// Specifies the status of your VDM optimized shared delivery. Can be one of the
+	// following:
+	//
+	// * ENABLED – Amazon SES enables optimized shared delivery for the
+	// configuration set.
+	//
+	// * DISABLED – Amazon SES disables optimized shared delivery
+	// for the configuration set.
+	OptimizedSharedDelivery FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about an email identity.
 type IdentityInfo struct {
 
@@ -1124,6 +1272,43 @@ type MessageTag struct {
 	noSmithyDocumentSerde
 }
 
+// An error corresponding to the unsuccessful processing of a single metric data
+// query.
+type MetricDataError struct {
+
+	// The query error code. Can be one of:
+	//
+	// * INTERNAL_FAILURE – Amazon SES has failed
+	// to process one of the queries.
+	//
+	// * ACCESS_DENIED – You have insufficient access
+	// to retrieve metrics based on the given query.
+	Code QueryErrorCode
+
+	// The query identifier.
+	Id *string
+
+	// The error message associated with the current query error.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of a single metric data query.
+type MetricDataResult struct {
+
+	// The query identifier.
+	Id *string
+
+	// A list of timestamps for the metric data results.
+	Timestamps []time.Time
+
+	// A list of values (cumulative / sum) for the metric data results.
+	Values []int64
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information about email that was sent from the selected
 // domain.
 type OverallVolume struct {
@@ -1214,6 +1399,35 @@ type RawMessage struct {
 	//
 	// This member is required.
 	Data []byte
+
+	noSmithyDocumentSerde
+}
+
+// A recommendation generated for your account.
+type Recommendation struct {
+
+	// The first time this issue was encountered and the recommendation was generated.
+	CreatedTimestamp *time.Time
+
+	// The recommendation description / disambiguator - e.g. DKIM1 and DKIM2 are
+	// different recommendations about your DKIM setup.
+	Description *string
+
+	// The recommendation impact, with values like HIGH or LOW.
+	Impact RecommendationImpact
+
+	// The last time the recommendation was updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The resource affected by the recommendation, with values like
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	ResourceArn *string
+
+	// The recommendation status, with values like OPEN or FIXED.
+	Status RecommendationStatus
+
+	// The recommendation type, with values like DKIM, SPF or DMARC.
+	Type RecommendationType
 
 	noSmithyDocumentSerde
 }
@@ -1586,6 +1800,46 @@ type TrackingOptions struct {
 	//
 	// This member is required.
 	CustomRedirectDomain *string
+
+	noSmithyDocumentSerde
+}
+
+// The VDM attributes that apply to your Amazon SES account.
+type VdmAttributes struct {
+
+	// Specifies the status of your VDM configuration. Can be one of the following:
+	//
+	// *
+	// ENABLED – Amazon SES enables VDM for your account.
+	//
+	// * DISABLED – Amazon SES
+	// disables VDM for your account.
+	//
+	// This member is required.
+	VdmEnabled FeatureStatus
+
+	// Specifies additional settings for your VDM configuration as applicable to the
+	// Dashboard.
+	DashboardAttributes *DashboardAttributes
+
+	// Specifies additional settings for your VDM configuration as applicable to the
+	// Guardian.
+	GuardianAttributes *GuardianAttributes
+
+	noSmithyDocumentSerde
+}
+
+// An object that defines the VDM settings that apply to emails that you send using
+// the configuration set.
+type VdmOptions struct {
+
+	// Specifies additional settings for your VDM configuration as applicable to the
+	// Dashboard.
+	DashboardOptions *DashboardOptions
+
+	// Specifies additional settings for your VDM configuration as applicable to the
+	// Guardian.
+	GuardianOptions *GuardianOptions
 
 	noSmithyDocumentSerde
 }

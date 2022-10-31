@@ -1350,6 +1350,26 @@ func (m *validateOpDisassociateSecurityKey) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDismissUserContact struct {
+}
+
+func (*validateOpDismissUserContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDismissUserContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DismissUserContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDismissUserContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetContactAttributes struct {
 }
 
@@ -3416,6 +3436,10 @@ func addOpDisassociateRoutingProfileQueuesValidationMiddleware(stack *middleware
 
 func addOpDisassociateSecurityKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateSecurityKey{}, middleware.After)
+}
+
+func addOpDismissUserContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDismissUserContact{}, middleware.After)
 }
 
 func addOpGetContactAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -5695,6 +5719,27 @@ func validateOpDisassociateSecurityKeyInput(v *DisassociateSecurityKeyInput) err
 	}
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDismissUserContactInput(v *DismissUserContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DismissUserContactInput"}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

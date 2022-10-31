@@ -100,6 +100,10 @@ type Action struct {
 	// Invoke a Lambda function.
 	Lambda *LambdaAction
 
+	// The Amazon Location Service rule action sends device location updates from an
+	// MQTT message to an Amazon Location tracker resource.
+	Location *LocationAction
+
 	// Write data to an Amazon OpenSearch Service domain.
 	OpenSearch *OpenSearchAction
 
@@ -2265,6 +2269,62 @@ type LambdaAction struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Location rule action sends device location updates from an MQTT
+// message to an Amazon Location tracker resource.
+type LocationAction struct {
+
+	// The unique ID of the device providing the location data.
+	//
+	// This member is required.
+	DeviceId *string
+
+	// A string that evaluates to a double value that represents the latitude of the
+	// device's location.
+	//
+	// This member is required.
+	Latitude *string
+
+	// A string that evaluates to a double value that represents the longitude of the
+	// device's location.
+	//
+	// This member is required.
+	Longitude *string
+
+	// The IAM role that grants permission to write to the Amazon Location resource.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The name of the tracker resource in Amazon Location in which the location is
+	// updated.
+	//
+	// This member is required.
+	TrackerName *string
+
+	// The time that the location data was sampled. The default value is the time the
+	// MQTT message was processed.
+	Timestamp *LocationTimestamp
+
+	noSmithyDocumentSerde
+}
+
+// Describes how to interpret an application-defined timestamp value from an MQTT
+// message payload and the precision of that value.
+type LocationTimestamp struct {
+
+	// An expression that returns a long epoch time value.
+	//
+	// This member is required.
+	Value *string
+
+	// The precision of the timestamp value that results from the expression described
+	// in value. Valid values: SECONDS | MILLISECONDS | MICROSECONDS | NANOSECONDS. The
+	// default is MILLISECONDS.
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the logging options payload.
 type LoggingOptionsPayload struct {
 
@@ -2790,7 +2850,7 @@ type ProvisioningTemplateVersionSummary struct {
 	// false.
 	IsDefaultVersion bool
 
-	// The ID of the fleet privisioning template version.
+	// The ID of the fleet provisioning template version.
 	VersionId *int32
 
 	noSmithyDocumentSerde

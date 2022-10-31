@@ -38,13 +38,19 @@ import (
 // (including text that doesn't have a relationship with the value of the
 // StartDocumentAnalysisFeatureTypes input parameter).
 //
-// * Queries. A QUERIES_RESULT
-// Block object contains the answer to the query, the alias associated and an ID
-// that connect it to the query asked. This Block also contains a location and
-// attached confidence score
+// * Query. A QUERY Block
+// object contains the query text, alias and link to the associated Query results
+// block object.
 //
-// Selection elements such as check boxes and option
-// buttons (radio buttons) can be detected in form data and in tables. A
+// * Query Results. A QUERY_RESULT Block object contains the answer
+// to the query and an ID that connects it to the query asked. This Block also
+// contains a confidence score.
+//
+// While processing a document with queries, look out
+// for INVALID_REQUEST_PARAMETERS output. This indicates that either the per page
+// query limit has been exceeded or that the operation is trying to query a page in
+// the document which doesn’t exist. Selection elements such as check boxes and
+// option buttons (radio buttons) can be detected in form data and in tables. A
 // SELECTION_ELEMENT Block object contains information about a selection element,
 // including the selection status. Use the MaxResults parameter to limit the number
 // of blocks that are returned. If there are more results than specified in

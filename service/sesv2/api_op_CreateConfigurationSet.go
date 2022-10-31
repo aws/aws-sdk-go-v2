@@ -64,6 +64,10 @@ type CreateConfigurationSetInput struct {
 	// send using the configuration set.
 	TrackingOptions *types.TrackingOptions
 
+	// An object that defines the VDM options for emails that you send using the
+	// configuration set.
+	VdmOptions *types.VdmOptions
+
 	noSmithyDocumentSerde
 }
 

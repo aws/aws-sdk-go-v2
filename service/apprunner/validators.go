@@ -130,6 +130,26 @@ func (m *validateOpCreateVpcConnector) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcIngressConnection struct {
+}
+
+func (*validateOpCreateVpcIngressConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcIngressConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcIngressConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcIngressConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAutoScalingConfiguration struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpDeleteVpcConnector) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVpcIngressConnection struct {
+}
+
+func (*validateOpDeleteVpcIngressConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcIngressConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcIngressConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcIngressConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAutoScalingConfiguration struct {
 }
 
@@ -325,6 +365,26 @@ func (m *validateOpDescribeVpcConnector) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeVpcConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVpcIngressConnection struct {
+}
+
+func (*validateOpDescribeVpcIngressConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVpcIngressConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVpcIngressConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVpcIngressConnectionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +570,26 @@ func (m *validateOpUpdateService) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateVpcIngressConnection struct {
+}
+
+func (*validateOpUpdateVpcIngressConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVpcIngressConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVpcIngressConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVpcIngressConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateCustomDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateCustomDomain{}, middleware.After)
 }
@@ -534,6 +614,10 @@ func addOpCreateVpcConnectorValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateVpcConnector{}, middleware.After)
 }
 
+func addOpCreateVpcIngressConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcIngressConnection{}, middleware.After)
+}
+
 func addOpDeleteAutoScalingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAutoScalingConfiguration{}, middleware.After)
 }
@@ -554,6 +638,10 @@ func addOpDeleteVpcConnectorValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteVpcConnector{}, middleware.After)
 }
 
+func addOpDeleteVpcIngressConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcIngressConnection{}, middleware.After)
+}
+
 func addOpDescribeAutoScalingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAutoScalingConfiguration{}, middleware.After)
 }
@@ -572,6 +660,10 @@ func addOpDescribeServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeVpcConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeVpcConnector{}, middleware.After)
+}
+
+func addOpDescribeVpcIngressConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVpcIngressConnection{}, middleware.After)
 }
 
 func addOpDisassociateCustomDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -608,6 +700,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateServiceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateService{}, middleware.After)
+}
+
+func addOpUpdateVpcIngressConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVpcIngressConnection{}, middleware.After)
 }
 
 func validateCodeConfiguration(v *types.CodeConfiguration) error {
@@ -893,6 +989,27 @@ func validateOpCreateVpcConnectorInput(v *CreateVpcConnectorInput) error {
 	}
 }
 
+func validateOpCreateVpcIngressConnectionInput(v *CreateVpcIngressConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcIngressConnectionInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
+	}
+	if v.VpcIngressConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcIngressConnectionName"))
+	}
+	if v.IngressVpcConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngressVpcConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAutoScalingConfigurationInput(v *DeleteAutoScalingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -968,6 +1085,21 @@ func validateOpDeleteVpcConnectorInput(v *DeleteVpcConnectorInput) error {
 	}
 }
 
+func validateOpDeleteVpcIngressConnectionInput(v *DeleteVpcIngressConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcIngressConnectionInput"}
+	if v.VpcIngressConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcIngressConnectionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAutoScalingConfigurationInput(v *DescribeAutoScalingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1035,6 +1167,21 @@ func validateOpDescribeVpcConnectorInput(v *DescribeVpcConnectorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcConnectorInput"}
 	if v.VpcConnectorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcConnectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVpcIngressConnectionInput(v *DescribeVpcIngressConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcIngressConnectionInput"}
+	if v.VpcIngressConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcIngressConnectionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1189,6 +1336,24 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 		if err := validateServiceObservabilityConfiguration(v.ObservabilityConfiguration); err != nil {
 			invalidParams.AddNested("ObservabilityConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVpcIngressConnectionInput(v *UpdateVpcIngressConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVpcIngressConnectionInput"}
+	if v.VpcIngressConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcIngressConnectionArn"))
+	}
+	if v.IngressVpcConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngressVpcConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

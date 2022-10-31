@@ -67,6 +67,11 @@ type DisassociateCustomDomainOutput struct {
 	// This member is required.
 	ServiceArn *string
 
+	// DNS Target records for the custom domains of this Amazon VPC.
+	//
+	// This member is required.
+	VpcDNSTargets []types.VpcDNSTarget
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

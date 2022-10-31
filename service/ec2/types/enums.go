@@ -150,6 +150,26 @@ func (AddressFamily) Values() []AddressFamily {
 	}
 }
 
+type AddressTransferStatus string
+
+// Enum values for AddressTransferStatus
+const (
+	AddressTransferStatusPending  AddressTransferStatus = "pending"
+	AddressTransferStatusDisabled AddressTransferStatus = "disabled"
+	AddressTransferStatusAccepted AddressTransferStatus = "accepted"
+)
+
+// Values returns all known values for AddressTransferStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AddressTransferStatus) Values() []AddressTransferStatus {
+	return []AddressTransferStatus{
+		"pending",
+		"disabled",
+		"accepted",
+	}
+}
+
 type Affinity string
 
 // Enum values for Affinity

@@ -269,6 +269,24 @@ func (EventType) Values() []EventType {
 	}
 }
 
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled  FeatureStatus = "ENABLED"
+	FeatureStatusDisabled FeatureStatus = "DISABLED"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -329,6 +347,28 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type ListRecommendationsFilterKey string
+
+// Enum values for ListRecommendationsFilterKey
+const (
+	ListRecommendationsFilterKeyType        ListRecommendationsFilterKey = "TYPE"
+	ListRecommendationsFilterKeyImpact      ListRecommendationsFilterKey = "IMPACT"
+	ListRecommendationsFilterKeyStatus      ListRecommendationsFilterKey = "STATUS"
+	ListRecommendationsFilterKeyResourceArn ListRecommendationsFilterKey = "RESOURCE_ARN"
+)
+
+// Values returns all known values for ListRecommendationsFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListRecommendationsFilterKey) Values() []ListRecommendationsFilterKey {
+	return []ListRecommendationsFilterKey{
+		"TYPE",
+		"IMPACT",
+		"STATUS",
+		"RESOURCE_ARN",
+	}
+}
+
 type MailFromDomainStatus string
 
 // Enum values for MailFromDomainStatus
@@ -366,6 +406,150 @@ func (MailType) Values() []MailType {
 	return []MailType{
 		"MARKETING",
 		"TRANSACTIONAL",
+	}
+}
+
+type Metric string
+
+// Enum values for Metric
+const (
+	MetricSend              Metric = "SEND"
+	MetricComplaint         Metric = "COMPLAINT"
+	MetricPermanentBounce   Metric = "PERMANENT_BOUNCE"
+	MetricTransientBounce   Metric = "TRANSIENT_BOUNCE"
+	MetricOpen              Metric = "OPEN"
+	MetricClick             Metric = "CLICK"
+	MetricDelivery          Metric = "DELIVERY"
+	MetricDeliveryOpen      Metric = "DELIVERY_OPEN"
+	MetricDeliveryClick     Metric = "DELIVERY_CLICK"
+	MetricDeliveryComplaint Metric = "DELIVERY_COMPLAINT"
+)
+
+// Values returns all known values for Metric. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Metric) Values() []Metric {
+	return []Metric{
+		"SEND",
+		"COMPLAINT",
+		"PERMANENT_BOUNCE",
+		"TRANSIENT_BOUNCE",
+		"OPEN",
+		"CLICK",
+		"DELIVERY",
+		"DELIVERY_OPEN",
+		"DELIVERY_CLICK",
+		"DELIVERY_COMPLAINT",
+	}
+}
+
+type MetricDimensionName string
+
+// Enum values for MetricDimensionName
+const (
+	MetricDimensionNameEmailIdentity    MetricDimensionName = "EMAIL_IDENTITY"
+	MetricDimensionNameConfigurationSet MetricDimensionName = "CONFIGURATION_SET"
+	MetricDimensionNameIsp              MetricDimensionName = "ISP"
+)
+
+// Values returns all known values for MetricDimensionName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricDimensionName) Values() []MetricDimensionName {
+	return []MetricDimensionName{
+		"EMAIL_IDENTITY",
+		"CONFIGURATION_SET",
+		"ISP",
+	}
+}
+
+type MetricNamespace string
+
+// Enum values for MetricNamespace
+const (
+	MetricNamespaceVdm MetricNamespace = "VDM"
+)
+
+// Values returns all known values for MetricNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricNamespace) Values() []MetricNamespace {
+	return []MetricNamespace{
+		"VDM",
+	}
+}
+
+type QueryErrorCode string
+
+// Enum values for QueryErrorCode
+const (
+	QueryErrorCodeInternalFailure QueryErrorCode = "INTERNAL_FAILURE"
+	QueryErrorCodeAccessDenied    QueryErrorCode = "ACCESS_DENIED"
+)
+
+// Values returns all known values for QueryErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryErrorCode) Values() []QueryErrorCode {
+	return []QueryErrorCode{
+		"INTERNAL_FAILURE",
+		"ACCESS_DENIED",
+	}
+}
+
+type RecommendationImpact string
+
+// Enum values for RecommendationImpact
+const (
+	RecommendationImpactLow  RecommendationImpact = "LOW"
+	RecommendationImpactHigh RecommendationImpact = "HIGH"
+)
+
+// Values returns all known values for RecommendationImpact. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationImpact) Values() []RecommendationImpact {
+	return []RecommendationImpact{
+		"LOW",
+		"HIGH",
+	}
+}
+
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusOpen  RecommendationStatus = "OPEN"
+	RecommendationStatusFixed RecommendationStatus = "FIXED"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"OPEN",
+		"FIXED",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeDkim  RecommendationType = "DKIM"
+	RecommendationTypeDmarc RecommendationType = "DMARC"
+	RecommendationTypeSpf   RecommendationType = "SPF"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"DKIM",
+		"DMARC",
+		"SPF",
 	}
 }
 

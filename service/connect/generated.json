@@ -75,6 +75,7 @@
         "api_op_DisassociateQueueQuickConnects.go",
         "api_op_DisassociateRoutingProfileQueues.go",
         "api_op_DisassociateSecurityKey.go",
+        "api_op_DismissUserContact.go",
         "api_op_GetContactAttributes.go",
         "api_op_GetCurrentMetricData.go",
         "api_op_GetCurrentUserData.go",

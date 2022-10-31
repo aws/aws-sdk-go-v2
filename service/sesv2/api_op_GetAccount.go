@@ -84,6 +84,9 @@ type GetAccountOutput struct {
 	// preferences for your account in the current Amazon Web Services Region.
 	SuppressionAttributes *types.SuppressionAttributes
 
+	// The VDM attributes that apply to your Amazon SES account.
+	VdmAttributes *types.VdmAttributes
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

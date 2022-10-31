@@ -1,0 +1,8 @@
+{
+    "id": "260817fd-4c30-432b-98da-785066bc6ba1",
+    "type": "feature",
+    "description": "SDK release to support tagging for destinations and log groups with TagResource. Also supports tag on create with PutDestination.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

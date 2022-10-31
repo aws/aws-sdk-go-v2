@@ -361,3 +361,33 @@ func (VpcConnectorStatus) Values() []VpcConnectorStatus {
 		"INACTIVE",
 	}
 }
+
+type VpcIngressConnectionStatus string
+
+// Enum values for VpcIngressConnectionStatus
+const (
+	VpcIngressConnectionStatusAvailable       VpcIngressConnectionStatus = "AVAILABLE"
+	VpcIngressConnectionStatusPendingCreation VpcIngressConnectionStatus = "PENDING_CREATION"
+	VpcIngressConnectionStatusPendingUpdate   VpcIngressConnectionStatus = "PENDING_UPDATE"
+	VpcIngressConnectionStatusPendingDeletion VpcIngressConnectionStatus = "PENDING_DELETION"
+	VpcIngressConnectionStatusFailedCreation  VpcIngressConnectionStatus = "FAILED_CREATION"
+	VpcIngressConnectionStatusFailedUpdate    VpcIngressConnectionStatus = "FAILED_UPDATE"
+	VpcIngressConnectionStatusFailedDeletion  VpcIngressConnectionStatus = "FAILED_DELETION"
+	VpcIngressConnectionStatusDeleted         VpcIngressConnectionStatus = "DELETED"
+)
+
+// Values returns all known values for VpcIngressConnectionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VpcIngressConnectionStatus) Values() []VpcIngressConnectionStatus {
+	return []VpcIngressConnectionStatus{
+		"AVAILABLE",
+		"PENDING_CREATION",
+		"PENDING_UPDATE",
+		"PENDING_DELETION",
+		"FAILED_CREATION",
+		"FAILED_UPDATE",
+		"FAILED_DELETION",
+		"DELETED",
+	}
+}
