@@ -1,8 +1,0 @@
-{
-    "id": "0b0496a1-f770-4733-82f7-efb8871eb3d0",
-    "type": "feature",
-    "description": "This release adds support for private App Runner services. Services may now be configured to be made private and only accessible from a VPC. The changes include a new VpcIngressConnection resource and several new and modified APIs.",
-    "modules": [
-        "service/apprunner"
-    ]
-}

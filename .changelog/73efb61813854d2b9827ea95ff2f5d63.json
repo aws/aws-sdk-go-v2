@@ -1,8 +1,0 @@
-{
-    "id": "73efb618-1385-4d2b-9827-ea95ff2f5d63",
-    "type": "feature",
-    "description": "This release adds the Amazon Location action to IoT Rules Engine.",
-    "modules": [
-        "service/iot"
-    ]
-}

@@ -1,3 +1,21 @@
+# Release (2022-10-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.15.0](service/apprunner/CHANGELOG.md#v1150-2022-10-31)
+  * **Feature**: This release adds support for private App Runner services. Services may now be configured to be made private and only accessible from a VPC. The changes include a new VpcIngressConnection resource and several new and modified APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.16.0](service/cloudwatchlogs/CHANGELOG.md#v1160-2022-10-31)
+  * **Feature**: SDK release to support tagging for destinations and log groups with TagResource. Also supports tag on create with PutDestination.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.34.0](service/connect/CHANGELOG.md#v1340-2022-10-31)
+  * **Feature**: Amazon connect now support a new API DismissUserContact to dismiss or remove terminated contacts in Agent CCP
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.65.0](service/ec2/CHANGELOG.md#v1650-2022-10-31)
+  * **Feature**: Elastic IP transfer is a new Amazon VPC feature that allows you to transfer your Elastic IP addresses from one AWS Account to another.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.30.0](service/iot/CHANGELOG.md#v1300-2022-10-31)
+  * **Feature**: This release adds the Amazon Location action to IoT Rules Engine.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.15.0](service/sesv2/CHANGELOG.md#v1150-2022-10-31)
+  * **Feature**: This release includes support for interacting with the Virtual Deliverability Manager, allowing you to opt in/out of the feature and to retrieve recommendations and metric data.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.16.0](service/textract/CHANGELOG.md#v1160-2022-10-31)
+  * **Feature**: This release introduces additional support for 30+ normalized fields such as vendor address and currency. It also includes OCR output in the response and accuracy improvements for the already supported fields in previous version
+
 # Release (2022-10-28)
 
 ## Module Highlights

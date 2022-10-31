@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.15.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.13
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.3
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.64.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.65.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.20
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.18.26
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.18
@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.22
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.19
-	github.com/aws/aws-sdk-go-v2/service/iot v1.29.4
+	github.com/aws/aws-sdk-go-v2/service/iot v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.21
 	github.com/aws/aws-sdk-go-v2/service/kms v1.18.15
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.24.8

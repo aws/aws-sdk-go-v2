@@ -1,3 +1,7 @@
+# v1.16.0 (2022-10-31)
+
+* **Feature**: SDK release to support tagging for destinations and log groups with TagResource. Also supports tag on create with PutDestination.
+
 # v1.15.22 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

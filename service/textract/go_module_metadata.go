@@ -3,4 +3,4 @@
 package textract
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.15.16"
+const goModuleVersion = "1.16.0"

@@ -1,3 +1,7 @@
+# v1.30.0 (2022-10-31)
+
+* **Feature**: This release adds the Amazon Location action to IoT Rules Engine.
+
 # v1.29.4 (2022-10-25)
 
 * No change notes available for this release.

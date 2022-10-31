@@ -1,3 +1,7 @@
+# v1.65.0 (2022-10-31)
+
+* **Feature**: Elastic IP transfer is a new Amazon VPC feature that allows you to transfer your Elastic IP addresses from one AWS Account to another.
+
 # v1.64.0 (2022-10-27)
 
 * **Feature**: Feature supports the replacement of instance root volume using an updated AMI without requiring customers to stop their instance.

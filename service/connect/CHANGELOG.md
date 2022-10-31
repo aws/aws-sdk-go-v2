@@ -1,3 +1,7 @@
+# v1.34.0 (2022-10-31)
+
+* **Feature**: Amazon connect now support a new API DismissUserContact to dismiss or remove terminated contacts in Agent CCP
+
 # v1.33.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

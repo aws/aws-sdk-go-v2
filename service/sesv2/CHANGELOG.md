@@ -1,3 +1,7 @@
+# v1.15.0 (2022-10-31)
+
+* **Feature**: This release includes support for interacting with the Virtual Deliverability Manager, allowing you to opt in/out of the feature and to retrieve recommendations and metric data.
+
 # v1.14.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

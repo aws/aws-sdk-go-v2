@@ -1,3 +1,7 @@
+# v1.16.0 (2022-10-31)
+
+* **Feature**: This release introduces additional support for 30+ normalized fields such as vendor address and currency. It also includes OCR output in the response and accuracy improvements for the already supported fields in previous version
+
 # v1.15.16 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
