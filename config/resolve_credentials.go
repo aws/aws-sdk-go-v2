@@ -172,11 +172,17 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 		options = append(options, v)
 	}
 
-	// TODO: isaiah add getBearerAuthTokenCacheOptions like above
-
 	cfgCopy := cfg.Copy()
 
 	if sharedConfig.SSOSession != nil {
+		ssoTokenProviderOptionsFn, found, err := getSSOTokenProviderOptions(ctx, configs)
+		if err != nil {
+			return fmt.Errorf("failed to get SSOTokenProviderOptions from config sources, %w", err)
+		}
+		var optFns []func(*ssocreds.SSOTokenProviderOptions)
+		if found {
+			optFns = append(optFns, ssoTokenProviderOptionsFn)
+		}
 		cfgCopy.Region = sharedConfig.SSOSession.SSORegion
 		cachedPath, err := ssocreds.StandardCachedTokenFilepath(sharedConfig.SSOSession.Name)
 		if err != nil {
