@@ -1,8 +1,0 @@
-{
-    "id": "55162d85-db55-4975-8d0f-aca42266d234",
-    "type": "feature",
-    "description": "Add ocr results in AnalyzeIDResponse as blocks",
-    "modules": [
-        "service/textract"
-    ]
-}

@@ -1,3 +1,11 @@
+# Release (2022-11-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.28.0](service/rds/CHANGELOG.md#v1280-2022-11-01)
+  * **Feature**: Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.17.0](service/textract/CHANGELOG.md#v1170-2022-11-01)
+  * **Feature**: Add ocr results in AnalyzeIDResponse as blocks
+
 # Release (2022-10-31)
 
 ## Module Highlights

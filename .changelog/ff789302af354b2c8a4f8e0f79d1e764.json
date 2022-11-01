@@ -1,8 +1,0 @@
-{
-    "id": "ff789302-af35-4b2c-8a4f-8e0f79d1e764",
-    "type": "feature",
-    "description": "Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.",
-    "modules": [
-        "service/rds"
-    ]
-}

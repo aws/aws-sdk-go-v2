@@ -1,3 +1,7 @@
+# v1.28.0 (2022-11-01)
+
+* **Feature**: Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.
+
 # v1.27.0 (2022-10-25)
 
 * **Feature**: Relational Database Service - This release adds support for exporting DB cluster data to Amazon S3.
