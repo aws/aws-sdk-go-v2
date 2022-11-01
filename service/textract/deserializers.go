@@ -3362,6 +3362,11 @@ func awsAwsjson11_deserializeDocumentIdentityDocument(v **types.IdentityDocument
 
 	for key, value := range shape {
 		switch key {
+		case "Blocks":
+			if err := awsAwsjson11_deserializeDocumentBlockList(&sv.Blocks, value); err != nil {
+				return err
+			}
+
 		case "DocumentIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -516,6 +516,10 @@ type ModifyDBInstanceInput struct {
 	// value is 1,440.
 	ResumeFullAutomationModeMinutes *int32
 
+	// Specifies the storage throughput value for the DB instance. This setting doesn't
+	// apply to RDS Custom or Amazon Aurora.
+	StorageThroughput *int32
+
 	// Specifies the storage type to be associated with the DB instance. If you specify
 	// Provisioned IOPS (io1), you must also include a value for the Iops parameter. If
 	// you choose to migrate your DB instance from using standard storage to using
@@ -529,9 +533,9 @@ type ModifyDBInstanceInput struct {
 	// migration takes place, nightly backups for the instance are suspended. No other
 	// Amazon RDS operations can take place for the instance, including modifying the
 	// instance, rebooting the instance, deleting the instance, creating a read replica
-	// for the instance, and creating a DB snapshot of the instance. Valid values:
-	// standard | gp2 | io1 Default: io1 if the Iops parameter is specified, otherwise
-	// gp2
+	// for the instance, and creating a DB snapshot of the instance. Valid values: gp2
+	// | gp3 | io1 | standard Default: io1 if the Iops parameter is specified,
+	// otherwise gp2
 	StorageType *string
 
 	// The ARN from the key store with which to associate the instance for TDE

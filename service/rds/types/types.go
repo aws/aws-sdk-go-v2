@@ -1473,7 +1473,10 @@ type DBInstance struct {
 	// Specifies whether the DB instance is encrypted.
 	StorageEncrypted bool
 
-	// Specifies the storage type associated with DB instance.
+	// Specifies the storage throughput for the DB instance.
+	StorageThroughput *int32
+
+	// Specifies the storage type associated with the DB instance.
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
@@ -1591,6 +1594,9 @@ type DBInstanceAutomatedBackup struct {
 	// automated snapshot to be available.
 	Status *string
 
+	// Specifies the storage throughput for the automated backup.
+	StorageThroughput *int32
+
 	// Specifies the storage type associated with the automated backup.
 	StorageType *string
 
@@ -1603,7 +1609,7 @@ type DBInstanceAutomatedBackup struct {
 	// were created with a time zone specified.
 	Timezone *string
 
-	// Provides the VPC ID associated with the DB instance
+	// Provides the VPC ID associated with the DB instance.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -2081,6 +2087,9 @@ type DBSnapshot struct {
 
 	// Specifies the status of this DB snapshot.
 	Status *string
+
+	// Specifies the storage throughput for the DB snapshot.
+	StorageThroughput *int32
 
 	// Specifies the storage type associated with DB snapshot.
 	StorageType *string
@@ -2916,6 +2925,12 @@ type OrderableDBInstanceOption struct {
 	// Maximum storage size for a DB instance.
 	MaxStorageSize *int32
 
+	// Maximum storage throughput for a DB instance.
+	MaxStorageThroughputPerDbInstance *int32
+
+	// Maximum storage throughput to provisioned IOPS ratio for a DB instance.
+	MaxStorageThroughputPerIops *float64
+
 	// Minimum total provisioned IOPS for a DB instance.
 	MinIopsPerDbInstance *int32
 
@@ -2924,6 +2939,12 @@ type OrderableDBInstanceOption struct {
 
 	// Minimum storage size for a DB instance.
 	MinStorageSize *int32
+
+	// Minimum storage throughput for a DB instance.
+	MinStorageThroughputPerDbInstance *int32
+
+	// Minimum storage throughput to provisioned IOPS ratio for a DB instance.
+	MinStorageThroughputPerIops *float64
 
 	// Indicates whether a DB instance is Multi-AZ capable.
 	MultiAZCapable bool
@@ -2989,6 +3010,9 @@ type OrderableDBInstanceOption struct {
 
 	// Indicates whether a DB instance supports encrypted storage.
 	SupportsStorageEncryption bool
+
+	// Indicates whether a DB instance supports storage throughput.
+	SupportsStorageThroughput bool
 
 	// Indicates whether a DB instance is in a VPC.
 	Vpc bool
@@ -3165,6 +3189,9 @@ type PendingModifiedValues struct {
 	// Custom resumes full automation. The minimum value is 60 (default). The maximum
 	// value is 1,440.
 	ResumeFullAutomationModeTime *time.Time
+
+	// The storage throughput of the DB instance.
+	StorageThroughput *int32
 
 	// The storage type of the DB instance.
 	StorageType *string
@@ -3720,13 +3747,21 @@ type ValidStorageOptions struct {
 	// storage.
 	IopsToStorageRatio []DoubleRange
 
-	// The valid range of provisioned IOPS. For example, 1000-20000.
+	// The valid range of provisioned IOPS. For example, 1000-256,000.
 	ProvisionedIops []Range
 
-	// The valid range of storage in gibibytes (GiB). For example, 100 to 16384.
+	// The valid range of provisioned storage throughput. For example, 500-4,000
+	// mebibytes per second (MiBps).
+	ProvisionedStorageThroughput []Range
+
+	// The valid range of storage in gibibytes (GiB). For example, 100 to 16,384.
 	StorageSize []Range
 
-	// The valid storage types for your DB instance. For example, gp2, io1.
+	// The valid range of storage throughput to provisioned IOPS ratios. For example,
+	// 0-0.25.
+	StorageThroughputToIopsRatio []DoubleRange
+
+	// The valid storage types for your DB instance. For example: gp2, gp3, io1.
 	StorageType *string
 
 	// Whether or not Amazon RDS can automatically scale storage for DB instances that

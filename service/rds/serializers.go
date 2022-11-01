@@ -10425,6 +10425,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.Boolean(*v.StorageEncrypted)
 	}
 
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
+	}
+
 	if v.StorageType != nil {
 		objectKey := object.Key("StorageType")
 		objectKey.String(*v.StorageType)
@@ -10623,6 +10628,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.SourceDBInstanceIdentifier != nil {
 		objectKey := object.Key("SourceDBInstanceIdentifier")
 		objectKey.String(*v.SourceDBInstanceIdentifier)
+	}
+
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
 	}
 
 	if v.StorageType != nil {
@@ -13215,6 +13225,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.Integer(*v.ResumeFullAutomationModeMinutes)
 	}
 
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
+	}
+
 	if v.StorageType != nil {
 		objectKey := object.Key("StorageType")
 		objectKey.String(*v.StorageType)
@@ -14441,6 +14456,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.Boolean(*v.PubliclyAccessible)
 	}
 
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
+	}
+
 	if v.StorageType != nil {
 		objectKey := object.Key("StorageType")
 		objectKey.String(*v.StorageType)
@@ -14693,6 +14713,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 		objectKey.Boolean(*v.StorageEncrypted)
 	}
 
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
+	}
+
 	if v.StorageType != nil {
 		objectKey := object.Key("StorageType")
 		objectKey.String(*v.StorageType)
@@ -14871,6 +14896,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.SourceDbiResourceId != nil {
 		objectKey := object.Key("SourceDbiResourceId")
 		objectKey.String(*v.SourceDbiResourceId)
+	}
+
+	if v.StorageThroughput != nil {
+		objectKey := object.Key("StorageThroughput")
+		objectKey.Integer(*v.StorageThroughput)
 	}
 
 	if v.StorageType != nil {

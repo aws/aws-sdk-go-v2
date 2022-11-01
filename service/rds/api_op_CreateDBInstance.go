@@ -123,87 +123,88 @@ type CreateDBInstanceInput struct {
 	// Constraints to the amount of storage for each storage type are the following:
 	//
 	// *
-	// General Purpose (SSD) storage (gp2): Must be an integer from 40 to 65536 for RDS
-	// Custom for Oracle, 16384 for RDS Custom for SQL Server.
+	// General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536
+	// for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.
+	//
+	// * Provisioned
+	// IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for
+	// Oracle, 16384 for RDS Custom for SQL Server.
+	//
+	// MySQL Constraints to the amount of
+	// storage for each storage type are the following:
+	//
+	// * General Purpose (SSD)
+	// storage (gp2, gp3): Must be an integer from 20 to 65536.
 	//
 	// * Provisioned IOPS
-	// storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle,
-	// 16384 for RDS Custom for SQL Server.
+	// storage (io1): Must be an integer from 100 to 65536.
 	//
-	// MySQL Constraints to the amount of storage
-	// for each storage type are the following:
+	// * Magnetic storage
+	// (standard): Must be an integer from 5 to 3072.
 	//
-	// * General Purpose (SSD) storage (gp2):
-	// Must be an integer from 20 to 65536.
+	// MariaDB Constraints to the
+	// amount of storage for each storage type are the following:
 	//
-	// * Provisioned IOPS storage (io1): Must be
-	// an integer from 100 to 65536.
+	// * General Purpose
+	// (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.
 	//
-	// * Magnetic storage (standard): Must be an integer
-	// from 5 to 3072.
+	// * Provisioned
+	// IOPS storage (io1): Must be an integer from 100 to 65536.
 	//
-	// MariaDB Constraints to the amount of storage for each storage
-	// type are the following:
+	// * Magnetic storage
+	// (standard): Must be an integer from 5 to 3072.
 	//
-	// * General Purpose (SSD) storage (gp2): Must be an
-	// integer from 20 to 65536.
+	// PostgreSQL Constraints to the
+	// amount of storage for each storage type are the following:
 	//
-	// * Provisioned IOPS storage (io1): Must be an integer
-	// from 100 to 65536.
+	// * General Purpose
+	// (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.
 	//
-	// * Magnetic storage (standard): Must be an integer from 5 to
-	// 3072.
+	// * Provisioned
+	// IOPS storage (io1): Must be an integer from 100 to 65536.
 	//
-	// PostgreSQL Constraints to the amount of storage for each storage type are
-	// the following:
+	// * Magnetic storage
+	// (standard): Must be an integer from 5 to 3072.
 	//
-	// * General Purpose (SSD) storage (gp2): Must be an integer from
-	// 20 to 65536.
+	// Oracle Constraints to the amount
+	// of storage for each storage type are the following:
 	//
-	// * Provisioned IOPS storage (io1): Must be an integer from 100 to
-	// 65536.
+	// * General Purpose (SSD)
+	// storage (gp2, gp3): Must be an integer from 20 to 65536.
 	//
-	// * Magnetic storage (standard): Must be an integer from 5 to
-	// 3072.
+	// * Provisioned IOPS
+	// storage (io1): Must be an integer from 100 to 65536.
 	//
-	// Oracle Constraints to the amount of storage for each storage type are the
-	// following:
+	// * Magnetic storage
+	// (standard): Must be an integer from 10 to 3072.
 	//
-	// * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
-	// 65536.
+	// SQL Server Constraints to the
+	// amount of storage for each storage type are the following:
 	//
-	// * Provisioned IOPS storage (io1): Must be an integer from 100 to
-	// 65536.
+	// * General Purpose
+	// (SSD) storage (gp2, gp3):
 	//
-	// * Magnetic storage (standard): Must be an integer from 10 to 3072.
+	// * Enterprise and Standard editions: Must be an
+	// integer from 20 to 16384.
 	//
-	// SQL
-	// Server Constraints to the amount of storage for each storage type are the
-	// following:
-	//
-	// * General Purpose (SSD) storage (gp2):
-	//
-	// * Enterprise and Standard
-	// editions: Must be an integer from 20 to 16384.
-	//
-	// * Web and Express editions: Must
-	// be an integer from 20 to 16384.
+	// * Web and Express editions: Must be an integer from
+	// 20 to 16384.
 	//
 	// * Provisioned IOPS storage (io1):
 	//
-	// * Enterprise
-	// and Standard editions: Must be an integer from 100 to 16384.
-	//
-	// * Web and Express
+	// * Enterprise and Standard
 	// editions: Must be an integer from 100 to 16384.
 	//
-	// * Magnetic storage
-	// (standard):
+	// * Web and Express editions:
+	// Must be an integer from 100 to 16384.
 	//
-	// * Enterprise and Standard editions: Must be an integer from 20 to
-	// 1024.
+	// * Magnetic storage (standard):
 	//
-	// * Web and Express editions: Must be an integer from 20 to 1024.
+	// *
+	// Enterprise and Standard editions: Must be an integer from 20 to 1024.
+	//
+	// * Web and
+	// Express editions: Must be an integer from 20 to 1024.
 	AllocatedStorage *int32
 
 	// A value that indicates whether minor engine upgrades are applied automatically
@@ -495,10 +496,10 @@ type CreateDBInstanceInput struct {
 	EngineVersion *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
-	// initially allocated for the DB instance. For information about valid Iops
-	// values, see Amazon RDS Provisioned IOPS storage to improve performance
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
-	// in the Amazon RDS User Guide. Constraints: For MariaDB, MySQL, Oracle, and
+	// initially allocated for the DB instance. For information about valid IOPS
+	// values, see Amazon RDS DB instance storage
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html) in
+	// the Amazon RDS User Guide. Constraints: For MariaDB, MySQL, Oracle, and
 	// PostgreSQL DB instances, must be a multiple between .5 and 50 of the storage
 	// amount for the DB instance. For SQL Server DB instances, must be a multiple
 	// between 1 and 50 of the storage amount for the DB instance. Amazon Aurora Not
@@ -730,10 +731,15 @@ type CreateDBInstanceInput struct {
 	// cluster.
 	StorageEncrypted *bool
 
+	// Specifies the storage throughput value for the DB instance. This setting doesn't
+	// apply to RDS Custom or Amazon Aurora.
+	StorageThroughput *int32
+
 	// Specifies the storage type to be associated with the DB instance. Valid values:
-	// standard | gp2 | io1 If you specify io1, you must also include a value for the
-	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
-	// Amazon Aurora Not applicable. Storage is managed by the DB cluster.
+	// gp2 | gp3 | io1 | standard If you specify io1 or gp3, you must also include a
+	// value for the Iops parameter. Default: io1 if the Iops parameter is specified,
+	// otherwise gp2 Amazon Aurora Not applicable. Storage is managed by the DB
+	// cluster.
 	StorageType *string
 
 	// Tags to assign to the DB instance.

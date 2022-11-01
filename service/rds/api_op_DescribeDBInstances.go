@@ -39,12 +39,12 @@ func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInst
 
 type DescribeDBInstancesInput struct {
 
-	// The user-supplied instance identifier. If this parameter is specified,
-	// information from only the specific DB instance is returned. This parameter isn't
-	// case-sensitive. Constraints:
+	// The user-supplied instance identifier or the Amazon Resource Name (ARN) of the
+	// DB instance. If this parameter is specified, information from only the specific
+	// DB instance is returned. This parameter isn't case-sensitive. Constraints:
 	//
-	// * If supplied, must match the identifier of an
-	// existing DBInstance.
+	// * If
+	// supplied, must match the identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A filter that specifies one or more DB instances to describe. Supported

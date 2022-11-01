@@ -292,8 +292,7 @@ type CreateDBClusterInput struct {
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
 	// initially allocated for each DB instance in the Multi-AZ DB cluster. For
-	// information about valid Iops values, see Amazon RDS Provisioned IOPS storage to
-	// improve performance
+	// information about valid IOPS values, see Amazon RDS Provisioned IOPS storage
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide. This setting is required to create a Multi-AZ DB
 	// cluster. Constraints: Must be a multiple between .5 and 50 of the storage amount

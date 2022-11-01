@@ -253,7 +253,32 @@ type DocumentMetadata struct {
 // Returns the kind of currency detected.
 type ExpenseCurrency struct {
 
-	// Currency code for detected currency.
+	// Currency code for detected currency. the current supported codes are:
+	//
+	// * USD
+	//
+	// *
+	// EUR
+	//
+	// * GBP
+	//
+	// * CAD
+	//
+	// * INR
+	//
+	// * JPY
+	//
+	// * CHF
+	//
+	// * AUD
+	//
+	// * CNY
+	//
+	// * BZR
+	//
+	// * SEK
+	//
+	// * HKD
 	Code *string
 
 	// Percentage confideence in the detected currency.
@@ -328,14 +353,15 @@ type ExpenseField struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the group that a certain key belongs to. This helps differentiate
-// responses like addresses that can appear similar in response JSON.
+// Shows the group that a certain key belongs to. This helps differentiate between
+// names and addresses for different organizations, that can be hard to determine
+// via JSON response.
 type ExpenseGroupProperty struct {
 
 	// Provides a group Id number, which will be the same for each in the group.
 	Id *string
 
-	// Informs you on the kind of label associated with the group
+	// Informs you on whether the expense group is a name or an address.
 	Types []string
 
 	noSmithyDocumentSerde
@@ -422,6 +448,9 @@ type HumanLoopDataAttributes struct {
 
 // The structure that lists each document processed in an AnalyzeID operation.
 type IdentityDocument struct {
+
+	// Individual word recognition, as returned by document detection.
+	Blocks []Block
 
 	// Denotes the placement of a document in the IdentityDocument list. The first
 	// document is marked 1, the second 2 and so on.

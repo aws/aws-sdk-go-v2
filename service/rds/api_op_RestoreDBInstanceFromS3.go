@@ -172,8 +172,8 @@ type RestoreDBInstanceFromS3Input struct {
 	EngineVersion *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to allocate
-	// initially for the DB instance. For information about valid Iops values, see
-	// Amazon RDS Provisioned IOPS Storage to Improve Performance
+	// initially for the DB instance. For information about valid IOPS values, see
+	// Amazon RDS Provisioned IOPS storage
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide.
 	Iops *int32
@@ -348,9 +348,14 @@ type RestoreDBInstanceFromS3Input struct {
 	// A value that indicates whether the new DB instance is encrypted or not.
 	StorageEncrypted *bool
 
+	// Specifies the storage throughput value for the DB instance. This setting doesn't
+	// apply to RDS Custom or Amazon Aurora.
+	StorageThroughput *int32
+
 	// Specifies the storage type to be associated with the DB instance. Valid values:
-	// standard | gp2 | io1 If you specify io1, you must also include a value for the
-	// Iops parameter. Default: io1 if the Iops parameter is specified; otherwise gp2
+	// gp2 | gp3 | io1 | standard If you specify io1 or gp3, you must also include a
+	// value for the Iops parameter. Default: io1 if the Iops parameter is specified;
+	// otherwise gp2
 	StorageType *string
 
 	// A list of tags to associate with this DB instance. For more information, see

@@ -44,12 +44,12 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 
 type DescribeDBClustersInput struct {
 
-	// The user-supplied DB cluster identifier. If this parameter is specified,
-	// information from only the specific DB cluster is returned. This parameter isn't
-	// case-sensitive. Constraints:
+	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the
+	// DB cluster. If this parameter is specified, information from only the specific
+	// DB cluster is returned. This parameter isn't case-sensitive. Constraints:
 	//
-	// * If supplied, must match an existing
-	// DBClusterIdentifier.
+	// * If
+	// supplied, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string
 
 	// A filter that specifies one or more DB clusters to describe. Supported

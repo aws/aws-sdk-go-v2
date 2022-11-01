@@ -26962,6 +26962,23 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 				sv.StorageEncrypted = xtv
 			}
 
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("StorageType", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -27407,6 +27424,23 @@ func awsAwsquery_deserializeDocumentDBInstanceAutomatedBackup(v **types.DBInstan
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):
@@ -30973,6 +31007,23 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):
@@ -38442,6 +38493,40 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 				sv.MaxStorageSize = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("MaxStorageThroughputPerDbInstance", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxStorageThroughputPerDbInstance = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MaxStorageThroughputPerIops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxStorageThroughputPerIops = ptr.Float64(f64)
+			}
+
 		case strings.EqualFold("MinIopsPerDbInstance", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -38491,6 +38576,40 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 					return err
 				}
 				sv.MinStorageSize = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinStorageThroughputPerDbInstance", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinStorageThroughputPerDbInstance = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("MinStorageThroughputPerIops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.MinStorageThroughputPerIops = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("MultiAZCapable", t.Name.Local):
@@ -38714,6 +38833,22 @@ func awsAwsquery_deserializeDocumentOrderableDBInstanceOption(v **types.Orderabl
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.SupportsStorageEncryption = xtv
+			}
+
+		case strings.EqualFold("SupportsStorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsStorageThroughput = xtv
 			}
 
 		case strings.EqualFold("Vpc", t.Name.Local):
@@ -39669,6 +39804,23 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 					return err
 				}
 				sv.ResumeFullAutomationModeTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("StorageThroughput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.StorageThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("StorageType", t.Name.Local):
@@ -43665,9 +43817,21 @@ func awsAwsquery_deserializeDocumentValidStorageOptions(v **types.ValidStorageOp
 				return err
 			}
 
+		case strings.EqualFold("ProvisionedStorageThroughput", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentRangeList(&sv.ProvisionedStorageThroughput, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("StorageSize", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentRangeList(&sv.StorageSize, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("StorageThroughputToIopsRatio", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDoubleRangeList(&sv.StorageThroughputToIopsRatio, nodeDecoder); err != nil {
 				return err
 			}
 

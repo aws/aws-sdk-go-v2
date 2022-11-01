@@ -299,9 +299,14 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// The resource ID of the source DB instance from which to restore.
 	SourceDbiResourceId *string
 
+	// Specifies the storage throughput value for the DB instance. This setting doesn't
+	// apply to RDS Custom or Amazon Aurora.
+	StorageThroughput *int32
+
 	// Specifies the storage type to be associated with the DB instance. Valid values:
-	// standard | gp2 | io1 If you specify io1, you must also include a value for the
-	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
+	// gp2 | gp3 | io1 | standard If you specify io1 or gp3, you must also include a
+	// value for the Iops parameter. Default: io1 if the Iops parameter is specified,
+	// otherwise gp2
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources

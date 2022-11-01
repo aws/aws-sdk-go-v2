@@ -241,8 +241,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// converted to a non-PIOPS instance. The conversion takes additional time, though
 	// your DB instance is available for connections before the conversion starts. The
 	// provisioned IOPS value must follow the requirements for your database engine.
-	// For more information, see Amazon RDS Provisioned IOPS Storage to Improve
-	// Performance
+	// For more information, see Amazon RDS Provisioned IOPS storage
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
 	// in the Amazon RDS User Guide. Constraints: Must be an integer greater than 1000.
 	Iops *int32
@@ -297,9 +296,14 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// to a private IP address. For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
+	// Specifies the storage throughput value for the DB instance. This setting doesn't
+	// apply to RDS Custom or Amazon Aurora.
+	StorageThroughput *int32
+
 	// Specifies the storage type to be associated with the DB instance. Valid values:
-	// standard | gp2 | io1 If you specify io1, you must also include a value for the
-	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
+	// gp2 | gp3 | io1 | standard If you specify io1 or gp3, you must also include a
+	// value for the Iops parameter. Default: io1 if the Iops parameter is specified,
+	// otherwise gp2
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
