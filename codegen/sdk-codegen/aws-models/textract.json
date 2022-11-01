@@ -768,7 +768,7 @@
                 "Code": {
                     "target": "com.amazonaws.textract#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Currency code for detected currency.</p>"
+                        "smithy.api#documentation": "<p>Currency code for detected currency. the current supported codes are:</p>\n         <ul>\n            <li>\n               <p>USD</p>\n            </li>\n            <li>\n               <p>EUR</p>\n            </li>\n            <li>\n               <p>GBP</p>\n            </li>\n            <li>\n               <p>CAD</p>\n            </li>\n            <li>\n               <p>INR</p>\n            </li>\n            <li>\n               <p>JPY</p>\n            </li>\n            <li>\n               <p>CHF</p>\n            </li>\n            <li>\n               <p>AUD</p>\n            </li>\n            <li>\n               <p>CNY</p>\n            </li>\n            <li>\n               <p>BZR</p>\n            </li>\n            <li>\n               <p>SEK</p>\n            </li>\n            <li>\n               <p>HKD</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Confidence": {
@@ -899,7 +899,7 @@
                 "Types": {
                     "target": "com.amazonaws.textract#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Informs you on the kind of label associated with the group</p>"
+                        "smithy.api#documentation": "<p>Informs you on whether the expense group is a name or an address.</p>"
                     }
                 },
                 "Id": {
@@ -910,7 +910,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Shows the group that a certain key belongs to. This helps differentiate responses\n         like addresses that can appear similar in response JSON.</p>"
+                "smithy.api#documentation": "<p>Shows the group that a certain key belongs to. This helps differentiate between\n         names and addresses for different organizations, that can be hard to determine\n         via JSON response.</p>"
             }
         },
         "com.amazonaws.textract#ExpenseGroupPropertyList": {
@@ -1499,6 +1499,12 @@
                     "target": "com.amazonaws.textract#IdentityDocumentFieldList",
                     "traits": {
                         "smithy.api#documentation": "<p>The structure used to record information extracted from identity documents.\n         Contains both normalized field and value of the extracted text.</p>"
+                    }
+                },
+                "Blocks": {
+                    "target": "com.amazonaws.textract#BlockList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Individual word recognition, as returned by document detection.</p>"
                     }
                 }
             },
