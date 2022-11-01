@@ -143,6 +143,7 @@ type SSOSession struct {
 }
 
 func (s *SSOSession) setFromIniSection(section ini.Section) error {
+	updateString(&s.Name, section, ssoSessionNameKey)
 	updateString(&s.SSORegion, section, ssoRegionKey)
 	updateString(&s.SSOStartURL, section, ssoStartURLKey)
 
