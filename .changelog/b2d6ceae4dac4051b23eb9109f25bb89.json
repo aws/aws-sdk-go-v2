@@ -1,8 +1,0 @@
-{
-    "id": "b2d6ceae-4dac-4051-b23e-b9109f25bb89",
-    "type": "feature",
-    "description": "This release adds the ListAssetModelProperties and ListAssetProperties APIs. You can list all properties that belong to a single asset model or asset using these two new APIs.",
-    "modules": [
-        "service/iotsitewise"
-    ]
-}

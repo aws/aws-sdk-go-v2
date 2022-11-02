@@ -1,3 +1,7 @@
+# v1.17.0 (2022-11-02)
+
+* **Feature**: Adds support for tagging replication-set on creation.
+
 # v1.16.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

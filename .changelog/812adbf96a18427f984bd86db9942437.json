@@ -1,8 +1,0 @@
-{
-    "id": "812adbf9-6a18-427f-984b-d86db9942437",
-    "type": "feature",
-    "description": "This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

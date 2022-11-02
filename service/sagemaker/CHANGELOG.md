@@ -1,3 +1,7 @@
+# v1.53.0 (2022-11-02)
+
+* **Feature**: This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.
+
 # v1.52.0 (2022-10-27)
 
 * **Feature**: This change allows customers to provide a custom entrypoint script for the docker container to be run while executing training jobs, and provide custom arguments to the entrypoint script.

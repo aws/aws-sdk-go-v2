@@ -1,3 +1,15 @@
+# Release (2022-11-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.26.0](service/iotsitewise/CHANGELOG.md#v1260-2022-11-02)
+  * **Feature**: This release adds the ListAssetModelProperties and ListAssetProperties APIs. You can list all properties that belong to a single asset model or asset using these two new APIs.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.25.0](service/s3control/CHANGELOG.md#v1250-2022-11-02)
+  * **Feature**: S3 on Outposts launches support for Lifecycle configuration for Outposts buckets. With S3 Lifecycle configuration, you can mange objects so they are stored cost effectively. You can manage objects using size-based rules and specify how many noncurrent versions bucket will retain.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.53.0](service/sagemaker/CHANGELOG.md#v1530-2022-11-02)
+  * **Feature**: This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.17.0](service/ssmincidents/CHANGELOG.md#v1170-2022-11-02)
+  * **Feature**: Adds support for tagging replication-set on creation.
+
 # Release (2022-11-01)
 
 ## Module Highlights
