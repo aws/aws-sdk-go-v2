@@ -16,8 +16,8 @@ type AccessPolicySummary struct {
 	// This member is required.
 	Id *string
 
-	// The identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group,
-	// or an IAM user).
+	// The identity (an IAM Identity Center user, an IAM Identity Center group, or an
+	// IAM user).
 	//
 	// This member is required.
 	Identity *Identity
@@ -136,6 +136,9 @@ type AssetCompositeModel struct {
 	// The description of the composite model.
 	Description *string
 
+	// The ID of the asset composite model.
+	Id *string
+
 	noSmithyDocumentSerde
 }
 
@@ -208,6 +211,9 @@ type AssetModelCompositeModel struct {
 
 	// The description of the composite model.
 	Description *string
+
+	// The ID of the asset model composite model.
+	Id *string
 
 	// The asset property definitions for this composite model.
 	Properties []AssetModelProperty
@@ -351,6 +357,41 @@ type AssetModelPropertyDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a summary of a property associated with a model.
+type AssetModelPropertySummary struct {
+
+	// The data type of the property.
+	//
+	// This member is required.
+	DataType PropertyDataType
+
+	// The name of the property.
+	//
+	// This member is required.
+	Name *string
+
+	// Contains a property type, which can be one of attribute, measurement, metric, or
+	// transform.
+	//
+	// This member is required.
+	Type *PropertyType
+
+	// The ID of the composite model that contains the asset model property.
+	AssetModelCompositeModelId *string
+
+	// The data type of the structure for this property. This parameter exists on
+	// properties that have the STRUCT data type.
+	DataTypeSpec *string
+
+	// The ID of the property.
+	Id *string
+
+	// The unit (such as Newtons or RPM) of the property.
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains current status information for an asset model. For more information,
 // see Asset and model states
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
@@ -447,6 +488,35 @@ type AssetProperty struct {
 	Notification *PropertyNotification
 
 	// The unit (such as Newtons or RPM) of the asset property.
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a summary of a property associated with an asset.
+type AssetPropertySummary struct {
+
+	// The alias that identifies the property, such as an OPC-UA server data stream
+	// path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// information, see Mapping industrial data streams to asset properties
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// in the IoT SiteWise User Guide.
+	Alias *string
+
+	// The ID of the composite model that contains the asset property.
+	AssetCompositeModelId *string
+
+	// The ID of the property.
+	Id *string
+
+	// Contains asset property value notification information. When the notification
+	// state is enabled, IoT SiteWise publishes property value updates to a unique MQTT
+	// topic. For more information, see Interacting with other services
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html)
+	// in the IoT SiteWise User Guide.
+	Notification *PropertyNotification
+
+	// The unit of measure (such as Newtons or RPM) of the asset property.
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -1087,6 +1157,9 @@ type CompositeModelProperty struct {
 	// This member is required.
 	Type *string
 
+	// The ID of the composite model that contains the property.
+	Id *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1415,7 +1488,7 @@ type GreengrassV2 struct {
 // Contains information for a group identity in an access policy.
 type GroupIdentity struct {
 
-	// The Amazon Web Services SSO ID of the group.
+	// The IAM Identity Center ID of the group.
 	//
 	// This member is required.
 	Id *string
@@ -1455,13 +1528,13 @@ type IAMUserIdentity struct {
 }
 
 // Contains an identity that can access an IoT SiteWise Monitor resource.
-// Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web
-// Services SSO identity IDs. You can find the Amazon Web Services SSO identity IDs
-// in the URL of user and group pages in the Amazon Web Services SSO console
+// Currently, you can't use Amazon Web Services APIs to retrieve IAM Identity
+// Center identity IDs. You can find the IAM Identity Center identity IDs in the
+// URL of user and group pages in the IAM Identity Center console
 // (https://console.aws.amazon.com/singlesignon).
 type Identity struct {
 
-	// An Amazon Web Services SSO group identity.
+	// An IAM Identity Center group identity.
 	Group *GroupIdentity
 
 	// An IAM role identity.
@@ -1470,7 +1543,7 @@ type Identity struct {
 	// An IAM user identity.
 	IamUser *IAMUserIdentity
 
-	// An Amazon Web Services SSO user identity.
+	// An IAM Identity Center user identity.
 	User *UserIdentity
 
 	noSmithyDocumentSerde
@@ -1760,9 +1833,9 @@ type PortalSummary struct {
 	Name *string
 
 	// The URL for the IoT SiteWise Monitor portal. You can use this URL to access
-	// portals that use Amazon Web Services SSO for authentication. For portals that
-	// use IAM for authentication, you must use the IoT SiteWise console to get a URL
-	// that you can use to access the portal.
+	// portals that use IAM Identity Center for authentication. For portals that use
+	// IAM for authentication, you must use the IoT SiteWise console to get a URL that
+	// you can use to access the portal.
 	//
 	// This member is required.
 	StartUrl *string
@@ -2154,7 +2227,7 @@ type TumblingWindow struct {
 // Contains information for a user identity in an access policy.
 type UserIdentity struct {
 
-	// The Amazon Web Services SSO ID of the user.
+	// The IAM Identity Center ID of the user.
 	//
 	// This member is required.
 	Id *string

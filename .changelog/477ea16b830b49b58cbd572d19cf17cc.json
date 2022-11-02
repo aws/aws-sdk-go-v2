@@ -1,0 +1,8 @@
+{
+    "id": "477ea16b-830b-49b5-8cbd-572d19cf17cc",
+    "type": "feature",
+    "description": "S3 on Outposts launches support for Lifecycle configuration for Outposts buckets. With S3 Lifecycle configuration, you can mange objects so they are stored cost effectively. You can manage objects using size-based rules and specify how many noncurrent versions bucket will retain.",
+    "modules": [
+        "service/s3control"
+    ]
+}

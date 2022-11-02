@@ -47303,7 +47303,7 @@ func awsAwsjson11_deserializeDocumentModelPackageContainerDefinition(v **types.M
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FrameworkVersion to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ModelPackageFrameworkVersion to be of type string, got %T instead", value)
 				}
 				sv.FrameworkVersion = ptr.String(jtv)
 			}

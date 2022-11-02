@@ -40,6 +40,9 @@ type DescribeAssetModelInput struct {
 	// This member is required.
 	AssetModelId *string
 
+	// Whether or not to exclude asset model properties from the response.
+	ExcludeProperties bool
+
 	noSmithyDocumentSerde
 }
 

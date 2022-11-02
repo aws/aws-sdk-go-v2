@@ -485,6 +485,43 @@ func (JobStatus) Values() []JobStatus {
 	}
 }
 
+type ListAssetModelPropertiesFilter string
+
+// Enum values for ListAssetModelPropertiesFilter
+const (
+	ListAssetModelPropertiesFilterAll  ListAssetModelPropertiesFilter = "ALL"
+	ListAssetModelPropertiesFilterBase ListAssetModelPropertiesFilter = "BASE"
+)
+
+// Values returns all known values for ListAssetModelPropertiesFilter. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ListAssetModelPropertiesFilter) Values() []ListAssetModelPropertiesFilter {
+	return []ListAssetModelPropertiesFilter{
+		"ALL",
+		"BASE",
+	}
+}
+
+type ListAssetPropertiesFilter string
+
+// Enum values for ListAssetPropertiesFilter
+const (
+	ListAssetPropertiesFilterAll  ListAssetPropertiesFilter = "ALL"
+	ListAssetPropertiesFilterBase ListAssetPropertiesFilter = "BASE"
+)
+
+// Values returns all known values for ListAssetPropertiesFilter. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListAssetPropertiesFilter) Values() []ListAssetPropertiesFilter {
+	return []ListAssetPropertiesFilter{
+		"ALL",
+		"BASE",
+	}
+}
+
 type ListAssetsFilter string
 
 // Enum values for ListAssetsFilter

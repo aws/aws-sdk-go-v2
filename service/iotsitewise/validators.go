@@ -750,6 +750,46 @@ func (m *validateOpGetInterpolatedAssetPropertyValues) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAssetModelProperties struct {
+}
+
+func (*validateOpListAssetModelProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetModelProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetModelPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetModelPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetProperties struct {
+}
+
+func (*validateOpListAssetProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssetRelationships struct {
 }
 
@@ -1296,6 +1336,14 @@ func addOpGetAssetPropertyAggregatesValidationMiddleware(stack *middleware.Stack
 
 func addOpGetInterpolatedAssetPropertyValuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInterpolatedAssetPropertyValues{}, middleware.After)
+}
+
+func addOpListAssetModelPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetModelProperties{}, middleware.After)
+}
+
+func addOpListAssetPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetProperties{}, middleware.After)
 }
 
 func addOpListAssetRelationshipsValidationMiddleware(stack *middleware.Stack) error {
@@ -3147,6 +3195,36 @@ func validateOpGetInterpolatedAssetPropertyValuesInput(v *GetInterpolatedAssetPr
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetModelPropertiesInput(v *ListAssetModelPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetModelPropertiesInput"}
+	if v.AssetModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetPropertiesInput(v *ListAssetPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetPropertiesInput"}
+	if v.AssetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

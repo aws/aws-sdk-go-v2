@@ -10912,6 +10912,40 @@ func awsRestxml_deserializeDocumentLifecycleRuleAndOperator(v **types.LifecycleR
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("ObjectSizeGreaterThan", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ObjectSizeGreaterThan = ptr.Int64(i64)
+			}
+
+		case strings.EqualFold("ObjectSizeLessThan", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ObjectSizeLessThan = ptr.Int64(i64)
+			}
+
 		case strings.EqualFold("Prefix", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -10971,6 +11005,40 @@ func awsRestxml_deserializeDocumentLifecycleRuleFilter(v **types.LifecycleRuleFi
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentLifecycleRuleAndOperator(&sv.And, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ObjectSizeGreaterThan", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ObjectSizeGreaterThan = ptr.Int64(i64)
+			}
+
+		case strings.EqualFold("ObjectSizeLessThan", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ObjectSizeLessThan = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("Prefix", t.Name.Local):
@@ -11579,6 +11647,23 @@ func awsRestxml_deserializeDocumentNoncurrentVersionExpiration(v **types.Noncurr
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("NewerNoncurrentVersions", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.NewerNoncurrentVersions = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("NoncurrentDays", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

@@ -13,10 +13,10 @@ import (
 )
 
 // Creates a portal, which can contain projects and dashboards. IoT SiteWise
-// Monitor uses Amazon Web Services SSO or IAM to authenticate portal users and
-// manage user permissions. Before you can sign in to a new portal, you must add at
-// least one identity to that portal. For more information, see Adding or removing
-// portal administrators
+// Monitor uses IAM Identity Center or IAM to authenticate portal users and manage
+// user permissions. Before you can sign in to a new portal, you must add at least
+// one identity to that portal. For more information, see Adding or removing portal
+// administrators
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins)
 // in the IoT SiteWise User Guide.
 func (c *Client) CreatePortal(ctx context.Context, params *CreatePortalInput, optFns ...func(*Options)) (*CreatePortalOutput, error) {
@@ -80,10 +80,10 @@ type CreatePortalInput struct {
 	// The service to use to authenticate users to the portal. Choose from the
 	// following options:
 	//
-	// * SSO – The portal uses Amazon Web Services Single Sign On
-	// to authenticate users and manage user permissions. Before you can create a
-	// portal that uses Amazon Web Services SSO, you must enable Amazon Web Services
-	// SSO. For more information, see Enabling Amazon Web Services SSO
+	// * SSO – The portal uses IAM Identity Center (successor to
+	// Single Sign-On) to authenticate users and manage user permissions. Before you
+	// can create a portal that uses IAM Identity Center, you must enable IAM Identity
+	// Center. For more information, see Enabling IAM Identity Center
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso)
 	// in the IoT SiteWise User Guide. This option is only available in Amazon Web
 	// Services Regions other than the China Regions.
@@ -127,9 +127,9 @@ type CreatePortalOutput struct {
 	PortalId *string
 
 	// The URL for the IoT SiteWise Monitor portal. You can use this URL to access
-	// portals that use Amazon Web Services SSO for authentication. For portals that
-	// use IAM for authentication, you must use the IoT SiteWise console to get a URL
-	// that you can use to access the portal.
+	// portals that use IAM Identity Center for authentication. For portals that use
+	// IAM for authentication, you must use the IoT SiteWise console to get a URL that
+	// you can use to access the portal.
 	//
 	// This member is required.
 	PortalStartUrl *string
@@ -140,8 +140,8 @@ type CreatePortalOutput struct {
 	// This member is required.
 	PortalStatus *types.PortalStatus
 
-	// The associated Amazon Web Services SSO application ID, if the portal uses Amazon
-	// Web Services SSO.
+	// The associated IAM Identity Center application ID, if the portal uses IAM
+	// Identity Center.
 	//
 	// This member is required.
 	SsoApplicationId *string

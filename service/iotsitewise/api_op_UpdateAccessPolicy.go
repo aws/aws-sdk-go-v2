@@ -36,8 +36,8 @@ type UpdateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyId *string
 
-	// The identity for this access policy. Choose an Amazon Web Services SSO user, an
-	// Amazon Web Services SSO group, or an IAM user.
+	// The identity for this access policy. Choose an IAM Identity Center user, an IAM
+	// Identity Center group, or an IAM user.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity

@@ -37,9 +37,12 @@ type CreateReplicationSetInput struct {
 	// This member is required.
 	Regions map[string]types.RegionMapInputValue
 
-	// A token ensuring that the operation is called only once with the specified
+	// A token that ensures that the operation is called only once with the specified
 	// details.
 	ClientToken *string
+
+	// A list of tags to add to the replication set.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

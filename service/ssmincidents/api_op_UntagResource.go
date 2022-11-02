@@ -33,7 +33,7 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The name of the tag you're removing from the response plan.
+	// The name of the tag to remove from the response plan.
 	//
 	// This member is required.
 	TagKeys []string

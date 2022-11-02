@@ -1,0 +1,8 @@
+{
+    "id": "f62f1738-4f2c-4374-9b16-e45f5592defa",
+    "type": "feature",
+    "description": "Adds support for tagging replication-set on creation.",
+    "modules": [
+        "service/ssmincidents"
+    ]
+}

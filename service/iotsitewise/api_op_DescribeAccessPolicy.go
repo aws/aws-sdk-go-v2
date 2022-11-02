@@ -60,8 +60,8 @@ type DescribeAccessPolicyOutput struct {
 	// This member is required.
 	AccessPolicyId *string
 
-	// The identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or
-	// IAM user) to which this access policy applies.
+	// The identity (IAM Identity Center user, IAM Identity Center group, or IAM user)
+	// to which this access policy applies.
 	//
 	// This member is required.
 	AccessPolicyIdentity *types.Identity

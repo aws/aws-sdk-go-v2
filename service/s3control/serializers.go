@@ -5361,6 +5361,28 @@ func awsRestxml_serializeDocumentLifecycleRule(v *types.LifecycleRule, value smi
 
 func awsRestxml_serializeDocumentLifecycleRuleAndOperator(v *types.LifecycleRuleAndOperator, value smithyxml.Value) error {
 	defer value.Close()
+	if v.ObjectSizeGreaterThan != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeGreaterThan",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.ObjectSizeGreaterThan)
+	}
+	if v.ObjectSizeLessThan != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeLessThan",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.ObjectSizeLessThan)
+	}
 	if v.Prefix != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -5402,6 +5424,28 @@ func awsRestxml_serializeDocumentLifecycleRuleFilter(v *types.LifecycleRuleFilte
 		if err := awsRestxml_serializeDocumentLifecycleRuleAndOperator(v.And, el); err != nil {
 			return err
 		}
+	}
+	if v.ObjectSizeGreaterThan != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeGreaterThan",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.ObjectSizeGreaterThan)
+	}
+	if v.ObjectSizeLessThan != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ObjectSizeLessThan",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.ObjectSizeLessThan)
 	}
 	if v.Prefix != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -5454,6 +5498,17 @@ func awsRestxml_serializeDocumentLifecycleRules(v []types.LifecycleRule, value s
 
 func awsRestxml_serializeDocumentNoncurrentVersionExpiration(v *types.NoncurrentVersionExpiration, value smithyxml.Value) error {
 	defer value.Close()
+	if v.NewerNoncurrentVersions != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "NewerNoncurrentVersions",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.NewerNoncurrentVersions)
+	}
 	if v.NoncurrentDays != 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

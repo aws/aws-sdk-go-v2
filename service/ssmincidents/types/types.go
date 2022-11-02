@@ -397,7 +397,8 @@ type IncidentTemplate struct {
 	// same incident.
 	DedupeString *string
 
-	// Tags to apply to an incident when calling the StartIncident API action.
+	// Tags to assign to the template. When the StartIncident API action is called,
+	// Incident Manager assigns the tags specified in the template to the incident.
 	IncidentTags map[string]string
 
 	// The Amazon SNS targets that are notified when updates are made to an incident.

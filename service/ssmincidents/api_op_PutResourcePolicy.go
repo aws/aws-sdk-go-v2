@@ -12,9 +12,9 @@ import (
 
 // Adds a resource policy to the specified response plan. The resource policy is
 // used to share the response plan using Resource Access Manager (RAM). For more
-// information about cross-account sharing, see Setting up cross-account
-// functionality
-// (https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html).
+// information about cross-account sharing, see Cross-Region and cross-account
+// incident management
+// (https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-manager-cross-account-cross-region.html).
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -37,8 +37,8 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// The Amazon Resource Name (ARN) of the response plan you're adding the resource
-	// policy to.
+	// The Amazon Resource Name (ARN) of the response plan to add the resource policy
+	// to.
 	//
 	// This member is required.
 	ResourceArn *string

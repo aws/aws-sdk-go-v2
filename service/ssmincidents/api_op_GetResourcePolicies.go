@@ -36,7 +36,7 @@ type GetResourcePoliciesInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The maximum number of resource policies to display per page of results.
+	// The maximum number of resource policies to display for each page of results.
 	MaxResults *int32
 
 	// The pagination token to continue to the next page of results.
@@ -135,7 +135,7 @@ var _ GetResourcePoliciesAPIClient = (*Client)(nil)
 // GetResourcePoliciesPaginatorOptions is the paginator options for
 // GetResourcePolicies
 type GetResourcePoliciesPaginatorOptions struct {
-	// The maximum number of resource policies to display per page of results.
+	// The maximum number of resource policies to display for each page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -87,6 +87,13 @@ func awsRestjson1_serializeOpDocumentCreateReplicationSetInput(v *CreateReplicat
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

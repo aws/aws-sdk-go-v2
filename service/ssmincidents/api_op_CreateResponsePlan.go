@@ -55,8 +55,8 @@ type CreateResponsePlanInput struct {
 	// The long format of the response plan name. This field can contain spaces.
 	DisplayName *string
 
-	// The contacts and escalation plans that the response plan engages during an
-	// incident.
+	// The Amazon Resource Name (ARN) for the contacts and escalation plans that the
+	// response plan engages during an incident.
 	Engagements []string
 
 	// A list of tags that you are adding to the response plan.

@@ -692,8 +692,7 @@ type LifecycleRule struct {
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string
 
-	// The noncurrent version expiration of the lifecycle rule. This is not supported
-	// by Amazon S3 on Outposts buckets.
+	// The noncurrent version expiration of the lifecycle rule.
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration
 
 	// Specifies the transition rule for the lifecycle rule that describes when
@@ -714,6 +713,12 @@ type LifecycleRule struct {
 // The container for the Outposts bucket lifecycle rule and operator.
 type LifecycleRuleAndOperator struct {
 
+	// Minimum object size to which the rule applies.
+	ObjectSizeGreaterThan *int64
+
+	// Maximum object size to which the rule applies.
+	ObjectSizeLessThan *int64
+
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string
 
@@ -729,6 +734,12 @@ type LifecycleRuleFilter struct {
 
 	// The container for the AND condition for the lifecycle rule.
 	And *LifecycleRuleAndOperator
+
+	// Minimum object size to which the rule applies.
+	ObjectSizeGreaterThan *int64
+
+	// Maximum object size to which the rule applies.
+	ObjectSizeLessThan *int64
 
 	// Prefix identifying one or more objects to which the rule applies. Replacement
 	// must be made for object keys containing special characters (such as carriage
@@ -852,6 +863,14 @@ type MultiRegionAccessPointsAsyncResponse struct {
 // The container of the noncurrent version expiration.
 type NoncurrentVersionExpiration struct {
 
+	// Specifies how many noncurrent versions S3 on Outposts will retain. If there are
+	// this many more recent noncurrent versions, S3 on Outposts will take the
+	// associated action. For more information about noncurrent versions, see Lifecycle
+	// configuration elements
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html)
+	// in the Amazon S3 User Guide.
+	NewerNoncurrentVersions *int32
+
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
@@ -907,8 +926,8 @@ type ObjectLambdaConfiguration struct {
 	// This member is required.
 	TransformationConfigurations []ObjectLambdaTransformationConfiguration
 
-	// A container for allowed features. Valid inputs are GetObject-Range and
-	// GetObject-PartNumber.
+	// A container for allowed features. Valid inputs are GetObject-Range,
+	// GetObject-PartNumber, HeadObject-Range, and HeadObject-PartNumber.
 	AllowedFeatures []ObjectLambdaAllowedFeature
 
 	// A container for whether the CloudWatch metrics configuration is enabled.
@@ -939,7 +958,7 @@ func (*ObjectLambdaContentTransformationMemberAwsLambda) isObjectLambdaContentTr
 type ObjectLambdaTransformationConfiguration struct {
 
 	// A container for the action of an Object Lambda Access Point configuration. Valid
-	// input is GetObject.
+	// inputs are GetObject, ListObjects, HeadObject, and ListObjectsV2.
 	//
 	// This member is required.
 	Actions []ObjectLambdaTransformationConfigurationAction

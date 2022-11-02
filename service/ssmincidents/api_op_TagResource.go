@@ -33,7 +33,7 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tags that you are adding to the response plan.
+	// A list of tags to add to the response plan.
 	//
 	// This member is required.
 	Tags map[string]string

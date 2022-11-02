@@ -2069,6 +2069,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetInput(v *DescribeAssetInpu
 		}
 	}
 
+	if v.ExcludeProperties {
+		encoder.SetQuery("excludeProperties").Boolean(v.ExcludeProperties)
+	}
+
 	return nil
 }
 
@@ -2125,6 +2129,10 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAssetModelInput(v *DescribeAsse
 		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
 			return err
 		}
+	}
+
+	if v.ExcludeProperties {
+		encoder.SetQuery("excludeProperties").Boolean(v.ExcludeProperties)
 	}
 
 	return nil
@@ -3348,6 +3356,76 @@ func awsRestjson1_serializeOpHttpBindingsListAccessPoliciesInput(v *ListAccessPo
 	return nil
 }
 
+type awsRestjson1_serializeOpListAssetModelProperties struct {
+}
+
+func (*awsRestjson1_serializeOpListAssetModelProperties) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAssetModelProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssetModelPropertiesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}/properties")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAssetModelPropertiesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAssetModelPropertiesInput(v *ListAssetModelPropertiesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetModelId == nil || len(*v.AssetModelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetModelId must not be empty")}
+	}
+	if v.AssetModelId != nil {
+		if err := encoder.SetURI("assetModelId").String(*v.AssetModelId); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Filter) > 0 {
+		encoder.SetQuery("filter").String(string(v.Filter))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAssetModels struct {
 }
 
@@ -3392,6 +3470,76 @@ func (m *awsRestjson1_serializeOpListAssetModels) HandleSerialize(ctx context.Co
 func awsRestjson1_serializeOpHttpBindingsListAssetModelsInput(v *ListAssetModelsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAssetProperties struct {
+}
+
+func (*awsRestjson1_serializeOpListAssetProperties) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAssetProperties) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssetPropertiesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/properties")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAssetPropertiesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAssetPropertiesInput(v *ListAssetPropertiesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetId == nil || len(*v.AssetId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assetId must not be empty")}
+	}
+	if v.AssetId != nil {
+		if err := encoder.SetURI("assetId").String(*v.AssetId); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Filter) > 0 {
+		encoder.SetQuery("filter").String(string(v.Filter))
 	}
 
 	if v.MaxResults != nil {
@@ -5383,6 +5531,11 @@ func awsRestjson1_serializeDocumentAssetModelCompositeModel(v *types.AssetModelC
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
 	}
 
 	if v.Name != nil {
