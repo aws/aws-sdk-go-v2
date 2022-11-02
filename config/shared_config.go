@@ -1117,11 +1117,11 @@ func (c *SharedConfig) validateSSOTokenProviderConfiguration() error {
 	}
 
 	if len(c.SSORegion) > 0 && c.SSORegion != c.SSOSession.SSORegion {
-		return fmt.Errorf("%s in profile %q must match %s in section %s", ssoRegionKey, c.Profile, ssoRegionKey, c.SSOSessionName)
+		return fmt.Errorf("%s in profile %q must match %s in %s", ssoRegionKey, c.Profile, ssoRegionKey, ssoSectionPrefix)
 	}
 
 	if len(c.SSOStartURL) > 0 && c.SSOStartURL != c.SSOSession.SSOStartURL {
-		return fmt.Errorf("%s in profile %q must match %s in section %s", ssoStartURLKey, c.Profile, ssoStartURLKey, c.SSOSessionName)
+		return fmt.Errorf("%s in profile %q must match %s in %s", ssoStartURLKey, c.Profile, ssoStartURLKey, ssoSectionPrefix)
 	}
 
 	return nil
