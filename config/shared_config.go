@@ -901,15 +901,6 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		ssoSession.setFromIniSection(section)
 		ssoSession.Name = c.SSOSessionName
 		c.SSOSession = &ssoSession
-		err := c.validateSSOTokenProviderConfiguration()
-		if err != nil {
-			return err
-		}
-	} else if c.hasLegacySSOConfiguration() {
-		err := c.validateLegacySSOConfiguration()
-		if err != nil {
-			return err
-		}
 	}
 
 	return nil
@@ -1083,15 +1074,21 @@ func (c *SharedConfig) validateCredentialType() error {
 
 	return nil
 }
+
 func (c *SharedConfig) validateSSOConfiguration() error {
-
-	tokenProviderFormatError := c.validateSSOTokenProviderConfiguration()
-	legacyFormatError := c.validateLegacySSOConfiguration()
-
-	if tokenProviderFormatError != nil && legacyFormatError != nil {
-		return fmt.Errorf("%v %v", tokenProviderFormatError, legacyFormatError)
+	if c.hasSSOTokenProviderConfiguration() {
+		err := c.validateSSOTokenProviderConfiguration()
+		if err != nil {
+			return err
+		}
 	}
 
+	if c.hasLegacySSOConfiguration() {
+		err := c.validateLegacySSOConfiguration()
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

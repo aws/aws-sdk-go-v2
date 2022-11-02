@@ -351,11 +351,6 @@ func TestNewSharedConfig(t *testing.T) {
 				},
 			},
 		},
-		"SSO Session missing region": {
-			ConfigFilenames: []string{testConfigFilename},
-			Profile:         "sso-session-missing-region",
-			Err:             fmt.Errorf("profile \"sso-session-missing-region\" is configured to use SSO but is missing required configuration: sso_region"),
-		},
 		"profile names are case-sensitive (Mixed)": {
 			ConfigFilenames:      []string{testConfigFilename},
 			CredentialsFilenames: []string{testCredentialsFilename},
