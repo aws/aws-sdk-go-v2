@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -41,21 +41,6 @@
         },
         "com.amazonaws.iotsitewise#AWSIoTSiteWise": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "IoTSiteWise",
-                    "arnNamespace": "iotsitewise",
-                    "cloudFormationName": "IoTSiteWise",
-                    "cloudTrailEventSource": "iotsitewise.amazonaws.com",
-                    "endpointPrefix": "iotsitewise"
-                },
-                "aws.auth#sigv4": {
-                    "name": "iotsitewise"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Welcome to the IoT SiteWise API Reference. IoT SiteWise is an Amazon Web Services service that connects <a href=\"https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications\">Industrial Internet of Things (IIoT)</a> devices to the power of the Amazon Web Services Cloud. For more information, see the\n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/\">IoT SiteWise User Guide</a>. For information about IoT SiteWise quotas, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>",
-                "smithy.api#title": "AWS IoT SiteWise"
-            },
             "version": "2019-12-02",
             "operations": [
                 {
@@ -194,7 +179,13 @@
                     "target": "com.amazonaws.iotsitewise#ListAccessPolicies"
                 },
                 {
+                    "target": "com.amazonaws.iotsitewise#ListAssetModelProperties"
+                },
+                {
                     "target": "com.amazonaws.iotsitewise#ListAssetModels"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ListAssetProperties"
                 },
                 {
                     "target": "com.amazonaws.iotsitewise#ListAssetRelationships"
@@ -271,7 +262,1108 @@
                 {
                     "target": "com.amazonaws.iotsitewise#UpdateProject"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IoTSiteWise",
+                    "arnNamespace": "iotsitewise",
+                    "cloudFormationName": "IoTSiteWise",
+                    "cloudTrailEventSource": "iotsitewise.amazonaws.com",
+                    "endpointPrefix": "iotsitewise"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iotsitewise"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Welcome to the IoT SiteWise API Reference. IoT SiteWise is an Amazon Web Services service that connects <a href=\"https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications\">Industrial Internet of Things (IIoT)</a> devices to the power of the Amazon Web Services Cloud. For more information, see the\n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/\">IoT SiteWise User Guide</a>. For information about IoT SiteWise quotas, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#title": "AWS IoT SiteWise",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://iotsitewise-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://iotsitewise-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://iotsitewise.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://iotsitewise.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iotsitewise.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.iotsitewise#AccessPolicySummaries": {
             "type": "list",
@@ -292,7 +1384,7 @@
                 "identity": {
                     "target": "com.amazonaws.iotsitewise#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user).</p>",
+                        "smithy.api#documentation": "<p>The identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -328,34 +1420,44 @@
             }
         },
         "com.amazonaws.iotsitewise#AggregateType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVERAGE",
-                        "name": "AVERAGE"
-                    },
-                    {
-                        "value": "COUNT",
-                        "name": "COUNT"
-                    },
-                    {
-                        "value": "MAXIMUM",
-                        "name": "MAXIMUM"
-                    },
-                    {
-                        "value": "MINIMUM",
-                        "name": "MINIMUM"
-                    },
-                    {
-                        "value": "SUM",
-                        "name": "SUM"
-                    },
-                    {
-                        "value": "STANDARD_DEVIATION",
-                        "name": "STANDARD_DEVIATION"
+            "type": "enum",
+            "members": {
+                "AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE"
                     }
-                ]
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAXIMUM"
+                    }
+                },
+                "MINIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINIMUM"
+                    }
+                },
+                "SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM"
+                    }
+                },
+                "STANDARD_DEVIATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD_DEVIATION"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#AggregateTypes": {
@@ -370,10 +1472,7 @@
             }
         },
         "com.amazonaws.iotsitewise#AggregatedDoubleValue": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.iotsitewise#AggregatedValue": {
             "type": "structure",
@@ -512,6 +1611,12 @@
                         "smithy.api#documentation": "<p>The asset properties that this composite model defines.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "id": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the asset composite model.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -525,14 +1630,14 @@
             }
         },
         "com.amazonaws.iotsitewise#AssetErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
+            "type": "enum",
+            "members": {
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iotsitewise#AssetErrorDetails": {
@@ -647,6 +1752,12 @@
                     "target": "com.amazonaws.iotsitewise#AssetModelProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>The asset property definitions for this composite model.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the asset model composite model.\n    </p>"
                     }
                 }
             },
@@ -862,35 +1973,103 @@
                 "target": "com.amazonaws.iotsitewise#AssetModelPropertyDefinition"
             }
         },
-        "com.amazonaws.iotsitewise#AssetModelState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "PROPAGATING",
-                        "name": "PROPAGATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+        "com.amazonaws.iotsitewise#AssetModelPropertySummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#AssetModelPropertySummary"
+            }
+        },
+        "com.amazonaws.iotsitewise#AssetModelPropertySummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the property.</p>"
                     }
-                ]
+                },
+                "name": {
+                    "target": "com.amazonaws.iotsitewise#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataType": {
+                    "target": "com.amazonaws.iotsitewise#PropertyDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataTypeSpec": {
+                    "target": "com.amazonaws.iotsitewise#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the structure for this property. This parameter exists on properties that\n      have the <code>STRUCT</code> data type.</p>"
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.iotsitewise#PropertyUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit (such as <code>Newtons</code> or <code>RPM</code>) of the property.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.iotsitewise#PropertyType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "assetModelCompositeModelId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the composite model that contains the asset model property.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of a property associated with a model.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#AssetModelState": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PROPAGATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROPAGATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#AssetModelStatus": {
@@ -1046,6 +2225,47 @@
                 "smithy.api#pattern": "^[^\\u0000-\\u001F\\u007F]+$"
             }
         },
+        "com.amazonaws.iotsitewise#AssetPropertySummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#AssetPropertySummary"
+            }
+        },
+        "com.amazonaws.iotsitewise#AssetPropertySummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the property.</p>"
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.iotsitewise#PropertyAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias that identifies the property, such as an OPC-UA server data stream path\n        (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the\n        <i>IoT SiteWise User Guide</i>.</p>"
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.iotsitewise#PropertyUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unit of measure (such as Newtons or RPM) of the asset property.\n    </p>"
+                    }
+                },
+                "notification": {
+                    "target": "com.amazonaws.iotsitewise#PropertyNotification"
+                },
+                "assetCompositeModelId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the composite model that contains the asset property.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of a property associated with an asset.</p>"
+            }
+        },
         "com.amazonaws.iotsitewise#AssetPropertyValue": {
             "type": "structure",
             "members": {
@@ -1114,41 +2334,49 @@
             }
         },
         "com.amazonaws.iotsitewise#AssetRelationshipType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HIERARCHY",
-                        "name": "HIERARCHY"
+            "type": "enum",
+            "members": {
+                "HIERARCHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIERARCHY"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iotsitewise#AssetState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#AssetStatus": {
@@ -1489,18 +2717,20 @@
             }
         },
         "com.amazonaws.iotsitewise#AuthMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IAM",
-                        "name": "IAM"
-                    },
-                    {
-                        "value": "SSO",
-                        "name": "SSO"
+            "type": "enum",
+            "members": {
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
                     }
-                ]
+                },
+                "SSO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSO"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#BatchAssociateProjectAssets": {
@@ -1663,18 +2893,20 @@
             }
         },
         "com.amazonaws.iotsitewise#BatchEntryCompletionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
                     }
-                ]
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregates": {
@@ -1700,7 +2932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets aggregated values (for example, average, minimum, and maximum) for one or more asset properties. \n    For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates\">Querying\n    aggregates</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Gets aggregated values (for example, average, minimum, and maximum) for one or more asset\n      properties. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates\">Querying aggregates</a> in the\n        <i>IoT SiteWise User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -1792,26 +3024,30 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information for an asset property aggregate entry that is associated with the \n  <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information for an asset property aggregate entry that is associated with the\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "InvalidRequestException",
-                        "name": "InvalidRequestException"
-                    },
-                    {
-                        "value": "AccessDeniedException",
-                        "name": "AccessDeniedException"
+            "type": "enum",
+            "members": {
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
                     }
-                ]
+                },
+                "InvalidRequestException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidRequestException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorEntries": {
@@ -1846,7 +3082,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains error information for an asset property aggregate entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
+                "smithy.api#documentation": "<p>Contains error information for an asset property aggregate entry that is associated with\n      the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesErrorInfo": {
@@ -1868,13 +3104,12 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the error code and the timestamp for an asset property aggregate entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
+                "smithy.api#documentation": "<p>Contains the error code and the timestamp for an asset property aggregate entry that is\n      associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -1886,7 +3121,7 @@
                 "entries": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesEntries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of asset property aggregate entries for the batch get request. \n  You can specify up to 16 entries per request.</p>",
+                        "smithy.api#documentation": "<p>The list of asset property aggregate entries for the batch get request. You can specify up\n      to 16 entries per request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1899,7 +3134,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of <code>maxResults</code>. \n        The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of\n            <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1955,7 +3190,7 @@
                 "completionStatus": {
                     "target": "com.amazonaws.iotsitewise#BatchEntryCompletionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>",
+                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1967,7 +3202,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> request.</p>"
+                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> request.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyAggregatesSuccessEntries": {
@@ -1989,13 +3224,13 @@
                 "aggregatedValues": {
                     "target": "com.amazonaws.iotsitewise#AggregatedValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The requested aggregated asset property values (for example, average, minimum, and maximum).</p>",
+                        "smithy.api#documentation": "<p>The requested aggregated asset property values (for example, average, minimum, and\n      maximum).</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
+                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html\">BatchGetAssetPropertyAggregates</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValue": {
@@ -2021,7 +3256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the current value for one or more asset properties. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values\">Querying\n    current values</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Gets the current value for one or more asset properties. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values\">Querying\n        current values</a> in the <i>IoT SiteWise User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -2072,26 +3307,30 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information for an asset property value entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information for an asset property value entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "InvalidRequestException",
-                        "name": "InvalidRequestException"
-                    },
-                    {
-                        "value": "AccessDeniedException",
-                        "name": "AccessDeniedException"
+            "type": "enum",
+            "members": {
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
                     }
-                ]
+                },
+                "InvalidRequestException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidRequestException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorEntries": {
@@ -2126,7 +3365,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains error information for an asset property value entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>"
+                "smithy.api#documentation": "<p>Contains error information for an asset property value entry that is associated with the\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueErrorInfo": {
@@ -2174,7 +3413,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the historical values for one or more asset properties. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values\">Querying\n    historical values</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Gets the historical values for one or more asset properties. For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values\">Querying historical values</a> in the <i>IoT SiteWise User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -2250,26 +3489,30 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information for an asset property historical value entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains information for an asset property historical value entry that is associated with\n      the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> API.</p>\n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "InvalidRequestException",
-                        "name": "InvalidRequestException"
-                    },
-                    {
-                        "value": "AccessDeniedException",
-                        "name": "AccessDeniedException"
+            "type": "enum",
+            "members": {
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
                     }
-                ]
+                },
+                "InvalidRequestException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidRequestException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryErrorEntries": {
@@ -2332,7 +3575,6 @@
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -2344,7 +3586,7 @@
                 "entries": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryEntries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of asset property historical value entries for the batch get request. \n    You can specify up to 16 entries per request.</p>",
+                        "smithy.api#documentation": "<p>The list of asset property historical value entries for the batch get request. You can\n      specify up to 16 entries per request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2357,7 +3599,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistoryMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of <code>maxResults</code>. \n        The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs\n      first.</p>\n         <ul>\n            <li>\n               <p>The size of the result set is less than 1 MB.</p>\n            </li>\n            <li>\n               <p>The number of data points in the result set is less than the value of\n            <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -2413,7 +3655,7 @@
                 "completionStatus": {
                     "target": "com.amazonaws.iotsitewise#BatchEntryCompletionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValueHistory.html\">BatchGetAssetPropertyValueHistory</a> API.</p>",
+                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValueHistory.html\">BatchGetAssetPropertyValueHistory</a> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2425,7 +3667,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> request.</p>"
+                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> request.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueHistorySuccessEntries": {
@@ -2453,7 +3695,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> API.</p>"
+                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValueHistory</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueRequest": {
@@ -2462,7 +3704,7 @@
                 "entries": {
                     "target": "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueEntries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of asset property value entries for the batch get request. \n    You can specify up to 16 entries per request.</p>",
+                        "smithy.api#documentation": "<p>The list of asset property value entries for the batch get request. You can specify up to\n      16 entries per request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2525,7 +3767,7 @@
                 "completionStatus": {
                     "target": "com.amazonaws.iotsitewise#BatchEntryCompletionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the \n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> request.</p>",
+                        "smithy.api#documentation": "<p>The completion status of each entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2537,7 +3779,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous \n      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> request.</p>"
+                "smithy.api#documentation": "<p>Contains information for an entry that has been processed by the previous <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> request.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchGetAssetPropertyValueSuccessEntries": {
@@ -2561,7 +3803,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the \n    <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>"
+                "smithy.api#documentation": "<p>Contains success information for an entry that is associated with the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html\">BatchGetAssetPropertyValue</a> API.</p>"
             }
         },
         "com.amazonaws.iotsitewise#BatchPutAssetPropertyError": {
@@ -2671,46 +3913,62 @@
             }
         },
         "com.amazonaws.iotsitewise#BatchPutAssetPropertyValueErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ResourceNotFoundException",
-                        "name": "ResourceNotFoundException"
-                    },
-                    {
-                        "value": "InvalidRequestException",
-                        "name": "InvalidRequestException"
-                    },
-                    {
-                        "value": "InternalFailureException",
-                        "name": "InternalFailureException"
-                    },
-                    {
-                        "value": "ServiceUnavailableException",
-                        "name": "ServiceUnavailableException"
-                    },
-                    {
-                        "value": "ThrottlingException",
-                        "name": "ThrottlingException"
-                    },
-                    {
-                        "value": "LimitExceededException",
-                        "name": "LimitExceededException"
-                    },
-                    {
-                        "value": "ConflictingOperationException",
-                        "name": "ConflictingOperationException"
-                    },
-                    {
-                        "value": "TimestampOutOfRangeException",
-                        "name": "TimestampOutOfRangeException"
-                    },
-                    {
-                        "value": "AccessDeniedException",
-                        "name": "AccessDeniedException"
+            "type": "enum",
+            "members": {
+                "ResourceNotFoundException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFoundException"
                     }
-                ]
+                },
+                "InvalidRequestException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidRequestException"
+                    }
+                },
+                "InternalFailureException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailureException"
+                    }
+                },
+                "ServiceUnavailableException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceUnavailableException"
+                    }
+                },
+                "ThrottlingException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ThrottlingException"
+                    }
+                },
+                "LimitExceededException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LimitExceededException"
+                    }
+                },
+                "ConflictingOperationException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConflictingOperationException"
+                    }
+                },
+                "TimestampOutOfRangeException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimestampOutOfRangeException"
+                    }
+                },
+                "AccessDeniedException": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDeniedException"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#BatchPutAssetPropertyValueRequest": {
@@ -2766,26 +4024,32 @@
             }
         },
         "com.amazonaws.iotsitewise#CapabilitySyncStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_SYNC",
-                        "name": "IN_SYNC"
-                    },
-                    {
-                        "value": "OUT_OF_SYNC",
-                        "name": "OUT_OF_SYNC"
-                    },
-                    {
-                        "value": "SYNC_FAILED",
-                        "name": "SYNC_FAILED"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "IN_SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_SYNC"
                     }
-                ]
+                },
+                "OUT_OF_SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUT_OF_SYNC"
+                    }
+                },
+                "SYNC_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNC_FAILED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ClientToken": {
@@ -2799,42 +4063,56 @@
             }
         },
         "com.amazonaws.iotsitewise#ColumnName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALIAS",
-                        "name": "ALIAS"
-                    },
-                    {
-                        "value": "ASSET_ID",
-                        "name": "ASSET_ID"
-                    },
-                    {
-                        "value": "PROPERTY_ID",
-                        "name": "PROPERTY_ID"
-                    },
-                    {
-                        "value": "DATA_TYPE",
-                        "name": "DATA_TYPE"
-                    },
-                    {
-                        "value": "TIMESTAMP_SECONDS",
-                        "name": "TIMESTAMP_SECONDS"
-                    },
-                    {
-                        "value": "TIMESTAMP_NANO_OFFSET",
-                        "name": "TIMESTAMP_NANO_OFFSET"
-                    },
-                    {
-                        "value": "QUALITY",
-                        "name": "QUALITY"
-                    },
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
+            "type": "enum",
+            "members": {
+                "ALIAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALIAS"
                     }
-                ]
+                },
+                "ASSET_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSET_ID"
+                    }
+                },
+                "PROPERTY_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROPERTY_ID"
+                    }
+                },
+                "DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_TYPE"
+                    }
+                },
+                "TIMESTAMP_SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTAMP_SECONDS"
+                    }
+                },
+                "TIMESTAMP_NANO_OFFSET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTAMP_NANO_OFFSET"
+                    }
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
+                    }
+                },
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ColumnNames": {
@@ -2865,6 +4143,12 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "id": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the composite model that contains the property.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -2872,18 +4156,20 @@
             }
         },
         "com.amazonaws.iotsitewise#ComputeLocation": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EDGE",
-                        "name": "EDGE"
-                    },
-                    {
-                        "value": "CLOUD",
-                        "name": "CLOUD"
+            "type": "enum",
+            "members": {
+                "EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE"
                     }
-                ]
+                },
+                "CLOUD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUD"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ConfigurationErrorDetails": {
@@ -2909,22 +4195,26 @@
             }
         },
         "com.amazonaws.iotsitewise#ConfigurationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "UPDATE_IN_PROGRESS",
-                        "name": "UPDATE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "UPDATE_FAILED",
-                        "name": "UPDATE_FAILED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "UPDATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ConfigurationStatus": {
@@ -3013,7 +4303,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an access policy that grants the specified identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or\n      IAM user) access to the specified IoT SiteWise Monitor portal or project resource.</p>",
+                "smithy.api#documentation": "<p>Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or\n      IAM user) access to the specified IoT SiteWise Monitor portal or project resource.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "monitor."
                 },
@@ -3030,7 +4320,7 @@
                 "accessPolicyIdentity": {
                     "target": "com.amazonaws.iotsitewise#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.</p>",
+                        "smithy.api#documentation": "<p>The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3339,7 +4629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, \n  see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html\">Create a bulk import job (CLI)</a> \n  in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <important>\n            <p>You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. \n      For more information about how to configure storage settings, \n      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html\">PutStorageConfiguration</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html\">Create a\n        bulk import job (CLI)</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n         <important>\n            <p>You must enable IoT SiteWise to export data to Amazon S3 before you create a bulk import job. For\n        more information about how to configure storage settings, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html\">PutStorageConfiguration</a>.</p>\n         </important>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -3624,7 +4914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses Amazon Web Services SSO or IAM\n      to authenticate portal users and manage user permissions.</p>\n         <note>\n            <p>Before you can sign in to a new portal, you must add at least one identity to that\n        portal. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins\">Adding or removing portal\n          administrators</a> in the <i>IoT SiteWise User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses IAM Identity Center or IAM\n      to authenticate portal users and manage user permissions.</p>\n         <note>\n            <p>Before you can sign in to a new portal, you must add at least one identity to that\n        portal. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins\">Adding or removing portal\n          administrators</a> in the <i>IoT SiteWise User Guide</i>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "monitor."
                 },
@@ -3687,7 +4977,7 @@
                 "portalAuthMode": {
                     "target": "com.amazonaws.iotsitewise#AuthMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service to use to authenticate users to the portal. Choose from the following\n      options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSO</code> – The portal uses Amazon Web Services Single Sign On to authenticate users and manage\n          user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO.\n          For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling Amazon Web Services SSO</a> in the\n            <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than\n          the China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage\n          user permissions.</p>\n            </li>\n         </ul>\n         <p>You can't change this value after you create a portal.</p>\n         <p>Default: <code>SSO</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The service to use to authenticate users to the portal. Choose from the following\n      options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SSO</code> – The portal uses IAM Identity Center (successor to Single Sign-On) to authenticate users and manage\n          user permissions. Before you can create a portal that uses IAM Identity Center, you must enable IAM Identity Center.\n          For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling IAM Identity Center</a> in the\n            <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than\n          the China Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage\n          user permissions.</p>\n            </li>\n         </ul>\n         <p>You can't change this value after you create a portal.</p>\n         <p>Default: <code>SSO</code>\n         </p>"
                     }
                 },
                 "notificationSenderEmail": {
@@ -3724,7 +5014,7 @@
                 "portalStartUrl": {
                     "target": "com.amazonaws.iotsitewise#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that\n      use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the \n      IoT SiteWise console to get a URL that you can use to access the portal.</p>",
+                        "smithy.api#documentation": "<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that\n      use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the \n      IoT SiteWise console to get a URL that you can use to access the portal.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3738,7 +5028,7 @@
                 "ssoApplicationId": {
                     "target": "com.amazonaws.iotsitewise#SSOApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The associated Amazon Web Services SSO application ID, if the portal uses Amazon Web Services SSO.</p>",
+                        "smithy.api#documentation": "<p>The associated IAM Identity Center application ID, if the portal uses IAM Identity Center.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4511,7 +5801,7 @@
                 "accessPolicyIdentity": {
                     "target": "com.amazonaws.iotsitewise#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) to which this access policy\n      applies.</p>",
+                        "smithy.api#documentation": "<p>The identity (IAM Identity Center user, IAM Identity Center group, or IAM user) to which this access policy\n      applies.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4699,6 +5989,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "excludeProperties": {
+                    "target": "com.amazonaws.iotsitewise#ExcludeProperties",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n      Whether or not to exclude asset model properties from the response.\n    </p>",
+                        "smithy.api#httpQuery": "excludeProperties"
+                    }
                 }
             }
         },
@@ -4879,6 +6177,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "excludeProperties": {
+                    "target": "com.amazonaws.iotsitewise#ExcludeProperties",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n      Whether or not to exclude asset properties from the response.\n    </p>",
+                        "smithy.api#httpQuery": "excludeProperties"
+                    }
                 }
             }
         },
@@ -4985,7 +6291,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a bulk import job request. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html\">Describe a bulk import job (CLI)</a> \n    in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a bulk import job request. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html\">Describe\n        a bulk import job (CLI)</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -5590,14 +6896,14 @@
                 "portalClientId": {
                     "target": "com.amazonaws.iotsitewise#PortalClientId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services SSO application generated client ID (used with Amazon Web Services SSO APIs). IoT SiteWise includes\n        <code>portalClientId</code> for only portals that use Amazon Web Services SSO to authenticate users.</p>",
+                        "smithy.api#documentation": "<p>The IAM Identity Center application generated client ID (used with IAM Identity Center APIs). IoT SiteWise includes\n        <code>portalClientId</code> for only portals that use IAM Identity Center to authenticate users.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "portalStartUrl": {
                     "target": "com.amazonaws.iotsitewise#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that\n      use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the \n      IoT SiteWise console to get a URL that you can use to access the portal.</p>",
+                        "smithy.api#documentation": "<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that\n      use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the \n      IoT SiteWise console to get a URL that you can use to access the portal.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5997,18 +7303,20 @@
             }
         },
         "com.amazonaws.iotsitewise#DetailedErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INCOMPATIBLE_COMPUTE_LOCATION",
-                        "name": "INCOMPATIBLE_COMPUTE_LOCATION"
-                    },
-                    {
-                        "value": "INCOMPATIBLE_FORWARDING_CONFIGURATION",
-                        "name": "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+            "type": "enum",
+            "members": {
+                "INCOMPATIBLE_COMPUTE_LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCOMPATIBLE_COMPUTE_LOCATION"
                     }
-                ]
+                },
+                "INCOMPATIBLE_FORWARDING_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#DetailedErrorMessage": {
@@ -6165,18 +7473,20 @@
             }
         },
         "com.amazonaws.iotsitewise#DisassociatedDataStorageState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#Email": {
@@ -6190,18 +7500,20 @@
             }
         },
         "com.amazonaws.iotsitewise#EncryptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SITEWISE_DEFAULT_ENCRYPTION",
-                        "name": "SITEWISE_DEFAULT_ENCRYPTION"
-                    },
-                    {
-                        "value": "KMS_BASED_ENCRYPTION",
-                        "name": "KMS_BASED_ENCRYPTION"
+            "type": "enum",
+            "members": {
+                "SITEWISE_DEFAULT_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SITEWISE_DEFAULT_ENCRYPTION"
                     }
-                ]
+                },
+                "KMS_BASED_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS_BASED_ENCRYPTION"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#EntryId": {
@@ -6215,18 +7527,20 @@
             }
         },
         "com.amazonaws.iotsitewise#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VALIDATION_ERROR",
-                        "name": "VALIDATION_ERROR"
-                    },
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
+            "type": "enum",
+            "members": {
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
                     }
-                ]
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ErrorDetails": {
@@ -6266,14 +7580,14 @@
                 "bucket": {
                     "target": "com.amazonaws.iotsitewise#Bucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket to which errors associated with the bulk import job are sent.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket to which errors associated with the bulk import job are\n      sent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "prefix": {
                     "target": "com.amazonaws.iotsitewise#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon S3 uses the prefix as a folder name to organize data in the bucket. \n  Each Amazon S3 object has a key that is its unique identifier in the bucket. \n  Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). \n  For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a> \n  in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Amazon S3 uses the prefix as a folder name to organize data in the bucket. Each Amazon S3 object has\n      a key that is its unique identifier in the bucket. Each object in a bucket has exactly one\n      key. The prefix must end with a forward slash (/). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects\n        using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6284,6 +7598,12 @@
         },
         "com.amazonaws.iotsitewise#ExceptionMessage": {
             "type": "string"
+        },
+        "com.amazonaws.iotsitewise#ExcludeProperties": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.iotsitewise#Expression": {
             "type": "string",
@@ -6335,14 +7655,14 @@
                 "key": {
                     "target": "com.amazonaws.iotsitewise#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the Amazon S3 object that contains your data. Each object has a key that is a\n    unique identifier. Each object has exactly one key.</p>",
+                        "smithy.api#documentation": "<p>The key of the Amazon S3 object that contains your data. Each object has a key that is a unique\n      identifier. Each object has exactly one key.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "versionId": {
                     "target": "com.amazonaws.iotsitewise#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version ID to identify a specific version of the Amazon S3 object that contains your data.</p>"
+                        "smithy.api#documentation": "<p>The version ID to identify a specific version of the Amazon S3 object that contains your\n      data.</p>"
                     }
                 }
             },
@@ -6386,18 +7706,20 @@
             }
         },
         "com.amazonaws.iotsitewise#ForwardingConfigState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
                     }
-                ]
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#GatewayCapabilitySummaries": {
@@ -7047,7 +8369,7 @@
                 "id": {
                     "target": "com.amazonaws.iotsitewise#IdentityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services SSO ID of the group.</p>",
+                        "smithy.api#documentation": "<p>The IAM Identity Center ID of the group.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7114,13 +8436,13 @@
                 "user": {
                     "target": "com.amazonaws.iotsitewise#UserIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Web Services SSO user identity.</p>"
+                        "smithy.api#documentation": "<p>An IAM Identity Center user identity.</p>"
                     }
                 },
                 "group": {
                     "target": "com.amazonaws.iotsitewise#GroupIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Web Services SSO group identity.</p>"
+                        "smithy.api#documentation": "<p>An IAM Identity Center group identity.</p>"
                     }
                 },
                 "iamUser": {
@@ -7137,7 +8459,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p>\n         <note>\n            <p>Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the\n        Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">Amazon Web Services SSO console</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p>\n         <note>\n            <p>Currently, you can't use Amazon Web Services APIs to retrieve IAM Identity Center identity IDs. You can find the\n        IAM Identity Center identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">IAM Identity Center console</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.iotsitewise#IdentityId": {
@@ -7151,22 +8473,26 @@
             }
         },
         "com.amazonaws.iotsitewise#IdentityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "GROUP",
-                        "name": "GROUP"
-                    },
-                    {
-                        "value": "IAM",
-                        "name": "IAM"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
                     }
-                ]
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                },
+                "IAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#Image": {
@@ -7218,14 +8544,14 @@
             }
         },
         "com.amazonaws.iotsitewise#ImageFileType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PNG",
-                        "name": "PNG"
+            "type": "enum",
+            "members": {
+                "PNG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PNG"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iotsitewise#ImageLocation": {
@@ -7313,7 +8639,6 @@
         "com.amazonaws.iotsitewise#IntervalInSeconds": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 320000000
@@ -7323,7 +8648,6 @@
         "com.amazonaws.iotsitewise#IntervalWindowInSeconds": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 320000000
@@ -7362,34 +8686,44 @@
             }
         },
         "com.amazonaws.iotsitewise#JobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COMPLETED_WITH_FAILURES",
-                        "name": "COMPLETED_WITH_FAILURES"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED_WITH_FAILURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED_WITH_FAILURES"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#JobSummaries": {
@@ -7472,7 +8806,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of access policies for an identity (an Amazon Web Services SSO user, an Amazon Web Services SSO\n      group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of access policies for an identity (an IAM Identity Center user, an IAM Identity Center\n      group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "monitor."
                 },
@@ -7495,7 +8829,7 @@
                 "identityType": {
                     "target": "com.amazonaws.iotsitewise#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user). This parameter is required\n      if you specify <code>identityId</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of identity (IAM Identity Center user, IAM Identity Center group, or IAM user). This parameter is required\n      if you specify <code>identityId</code>.</p>",
                         "smithy.api#httpQuery": "identityType"
                     }
                 },
@@ -7550,6 +8884,115 @@
                     "target": "com.amazonaws.iotsitewise#AccessPolicySummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list that summarizes each access policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetModelProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#ListAssetModelPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#ListAssetModelPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of properties associated with an asset model.\n      If you update properties associated with the model before you finish listing all the properties, \n        you need to start all over again.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/asset-models/{assetModelId}/properties",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "assetModelPropertySummaries",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetModelPropertiesFilter": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetModelPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "assetModelId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset model.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotsitewise#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. If not specified, the default value is 50.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.iotsitewise#ListAssetModelPropertiesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filters the requested list of asset model properties. You can choose one of the following\n      options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – The list includes all asset model properties for a given asset\n          model ID. </p>\n            </li>\n            <li>\n               <p>\n                  <code>BASE</code> – The list includes only base asset model properties for a given\n          asset model ID. </p>\n            </li>\n         </ul>\n         <p>Default: <code>BASE</code>\n         </p>",
+                        "smithy.api#httpQuery": "filter"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetModelPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "assetModelPropertySummaries": {
+                    "target": "com.amazonaws.iotsitewise#AssetModelPropertySummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that summarizes the properties associated with the specified asset model.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7624,6 +9067,115 @@
                     "target": "com.amazonaws.iotsitewise#AssetModelSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list that summarizes each asset model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#ListAssetPropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#ListAssetPropertiesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a paginated list of properties associated with an asset.\n      If you update properties associated with the model before you finish listing all the properties, \n        you need to start all over again.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/assets/{assetId}/properties",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "assetPropertySummaries",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetPropertiesFilter": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BASE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetPropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "assetId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotsitewise#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return for each paginated request. If not specified, the default value is 50.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.iotsitewise#ListAssetPropertiesFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Filters the requested list of asset properties. You can choose one of the following\n      options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code> – The list includes all asset properties for a given asset\n          model ID. </p>\n            </li>\n            <li>\n               <p>\n                  <code>BASE</code> – The list includes only base asset properties for a given\n          asset model ID. </p>\n            </li>\n         </ul>\n         <p>Default: <code>BASE</code>\n         </p>",
+                        "smithy.api#httpQuery": "filter"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#ListAssetPropertiesResponse": {
+            "type": "structure",
+            "members": {
+                "assetPropertySummaries": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertySummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that summarizes the properties associated with the specified asset.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7769,18 +9321,20 @@
             }
         },
         "com.amazonaws.iotsitewise#ListAssetsFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "TOP_LEVEL",
-                        "name": "TOP_LEVEL"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "TOP_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_LEVEL"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ListAssetsRequest": {
@@ -7956,7 +9510,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a paginated list of bulk import job requests. For more information, \n    see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html\">List bulk import jobs (CLI)</a> \n    in the <i>IoT SiteWise User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a paginated list of bulk import job requests. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ListBulkImportJobs.html\">List bulk\n        import jobs (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "data."
                 },
@@ -7974,38 +9528,50 @@
             }
         },
         "com.amazonaws.iotsitewise#ListBulkImportJobsFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "COMPLETED_WITH_FAILURES",
-                        "name": "COMPLETED_WITH_FAILURES"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "COMPLETED_WITH_FAILURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED_WITH_FAILURES"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#ListBulkImportJobsRequest": {
@@ -8611,37 +10177,43 @@
             }
         },
         "com.amazonaws.iotsitewise#ListTimeSeriesType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASSOCIATED",
-                        "name": "ASSOCIATED"
-                    },
-                    {
-                        "value": "DISASSOCIATED",
-                        "name": "DISASSOCIATED"
+            "type": "enum",
+            "members": {
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
                     }
-                ]
+                },
+                "DISASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#LoggingLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "INFO",
-                        "name": "INFO"
-                    },
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
+            "type": "enum",
+            "members": {
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
                     }
-                ]
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#LoggingOptions": {
@@ -8672,7 +10244,6 @@
         "com.amazonaws.iotsitewise#MaxInterpolatedResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -8681,7 +10252,6 @@
         "com.amazonaws.iotsitewise#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 250
@@ -8782,22 +10352,26 @@
             }
         },
         "com.amazonaws.iotsitewise#MonitorErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "VALIDATION_ERROR",
-                        "name": "VALIDATION_ERROR"
-                    },
-                    {
-                        "value": "LIMIT_EXCEEDED",
-                        "name": "LIMIT_EXCEEDED"
+            "type": "enum",
+            "members": {
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
                     }
-                ]
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
+                },
+                "LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIMIT_EXCEEDED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#MonitorErrorDetails": {
@@ -8861,7 +10435,6 @@
         "com.amazonaws.iotsitewise#NumberOfDays": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 30
                 }
@@ -8879,7 +10452,6 @@
         "com.amazonaws.iotsitewise#OffsetInNanos": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 999999999
@@ -8887,18 +10459,20 @@
             }
         },
         "com.amazonaws.iotsitewise#Permission": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADMINISTRATOR",
-                        "name": "ADMINISTRATOR"
-                    },
-                    {
-                        "value": "VIEWER",
-                        "name": "VIEWER"
+            "type": "enum",
+            "members": {
+                "ADMINISTRATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMINISTRATOR"
                     }
-                ]
+                },
+                "VIEWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIEWER"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#PortalClientId": {
@@ -8927,30 +10501,38 @@
             }
         },
         "com.amazonaws.iotsitewise#PortalState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#PortalStatus": {
@@ -9006,7 +10588,7 @@
                 "startUrl": {
                     "target": "com.amazonaws.iotsitewise#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that\n      use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the \n      IoT SiteWise console to get a URL that you can use to access the portal.</p>",
+                        "smithy.api#documentation": "<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that\n      use IAM Identity Center for authentication. For portals that use IAM for authentication, you must use the \n      IoT SiteWise console to get a URL that you can use to access the portal.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9163,30 +10745,38 @@
             }
         },
         "com.amazonaws.iotsitewise#PropertyDataType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "INTEGER",
-                        "name": "INTEGER"
-                    },
-                    {
-                        "value": "DOUBLE",
-                        "name": "DOUBLE"
-                    },
-                    {
-                        "value": "BOOLEAN",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "STRUCT",
-                        "name": "STRUCT"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGER"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "STRUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRUCT"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#PropertyNotification": {
@@ -9212,18 +10802,20 @@
             }
         },
         "com.amazonaws.iotsitewise#PropertyNotificationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#PropertyNotificationTopic": {
@@ -9272,22 +10864,13 @@
             }
         },
         "com.amazonaws.iotsitewise#PropertyValueBooleanValue": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.iotsitewise#PropertyValueDoubleValue": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.iotsitewise#PropertyValueIntegerValue": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.iotsitewise#PropertyValueStringValue": {
             "type": "string"
@@ -9587,22 +11170,26 @@
             }
         },
         "com.amazonaws.iotsitewise#Quality": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GOOD",
-                        "name": "GOOD"
-                    },
-                    {
-                        "value": "BAD",
-                        "name": "BAD"
-                    },
-                    {
-                        "value": "UNCERTAIN",
-                        "name": "UNCERTAIN"
+            "type": "enum",
+            "members": {
+                "GOOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GOOD"
                     }
-                ]
+                },
+                "BAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAD"
+                    }
+                },
+                "UNCERTAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNCERTAIN"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#Resolution": {
@@ -9688,18 +11275,20 @@
             }
         },
         "com.amazonaws.iotsitewise#ResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PORTAL",
-                        "name": "PORTAL"
-                    },
-                    {
-                        "value": "PROJECT",
-                        "name": "PROJECT"
+            "type": "enum",
+            "members": {
+                "PORTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PORTAL"
                     }
-                ]
+                },
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#RetentionPeriod": {
@@ -9749,18 +11338,20 @@
             }
         },
         "com.amazonaws.iotsitewise#StorageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SITEWISE_DEFAULT_STORAGE",
-                        "name": "SITEWISE_DEFAULT_STORAGE"
-                    },
-                    {
-                        "value": "MULTI_LAYER_STORAGE",
-                        "name": "MULTI_LAYER_STORAGE"
+            "type": "enum",
+            "members": {
+                "SITEWISE_DEFAULT_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SITEWISE_DEFAULT_STORAGE"
                     }
-                ]
+                },
+                "MULTI_LAYER_STORAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_LAYER_STORAGE"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#String": {
@@ -9921,7 +11512,6 @@
         "com.amazonaws.iotsitewise#TimeInSeconds": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 9223372036854774
@@ -9929,18 +11519,20 @@
             }
         },
         "com.amazonaws.iotsitewise#TimeOrdering": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASCENDING",
-                        "name": "ASCENDING"
-                    },
-                    {
-                        "value": "DESCENDING",
-                        "name": "DESCENDING"
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
                     }
-                ]
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#TimeSeriesId": {
@@ -10093,29 +11685,31 @@
             }
         },
         "com.amazonaws.iotsitewise#TraversalDirection": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PARENT",
-                        "name": "PARENT"
-                    },
-                    {
-                        "value": "CHILD",
-                        "name": "CHILD"
+            "type": "enum",
+            "members": {
+                "PARENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARENT"
                     }
-                ]
+                },
+                "CHILD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHILD"
+                    }
+                }
             }
         },
         "com.amazonaws.iotsitewise#TraversalType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PATH_TO_ROOT",
-                        "name": "PATH_TO_ROOT"
+            "type": "enum",
+            "members": {
+                "PATH_TO_ROOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATH_TO_ROOT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.iotsitewise#TumblingWindow": {
@@ -10156,10 +11750,7 @@
             }
         },
         "com.amazonaws.iotsitewise#Unlimited": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.iotsitewise#UntagResource": {
             "type": "operation",
@@ -10277,7 +11868,7 @@
                 "accessPolicyIdentity": {
                     "target": "com.amazonaws.iotsitewise#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.</p>",
+                        "smithy.api#documentation": "<p>The identity for this access policy. Choose an IAM Identity Center user, an IAM Identity Center group, or an IAM user.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10532,7 +12123,7 @@
                 "propertyUnit": {
                     "target": "com.amazonaws.iotsitewise#PropertyUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the \n      value of the <code>assetModelProperty</code> in the asset model.</p>"
+                        "smithy.api#documentation": "<p>The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a\n      value for this parameter, the service uses the value of the <code>assetModelProperty</code> in\n      the asset model.</p>"
                     }
                 }
             }
@@ -11001,7 +12592,7 @@
                 "id": {
                     "target": "com.amazonaws.iotsitewise#IdentityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services SSO ID of the user.</p>",
+                        "smithy.api#documentation": "<p>The IAM Identity Center ID of the user.</p>",
                         "smithy.api#required": {}
                     }
                 }
