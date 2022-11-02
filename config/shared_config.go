@@ -1081,6 +1081,7 @@ func (c *SharedConfig) validateSSOConfiguration() error {
 		if err != nil {
 			return err
 		}
+		return nil
 	}
 
 	if c.hasLegacySSOConfiguration() {
