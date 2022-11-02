@@ -131,7 +131,6 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 		return assumeWebIdentity(ctx, cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
 
 	case sharedConfig.hasSSOConfiguration():
-		// isaiah: this func assumes new (not legacy) format
 		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(sharedConfig.CredentialProcess) != 0:
