@@ -335,21 +335,26 @@ func TestNewSharedConfig(t *testing.T) {
 				CredentialProcess: "/path/to/process",
 			},
 		},
-		"SSO Session alone": {
+		"SSO Session success": {
 			ConfigFilenames: []string{testConfigFilename},
-			Profile:         "sso-session-alone",
+			Profile:         "sso-session-success",
 			Expected: SharedConfig{
-				Profile:        "sso-session-alone",
+				Profile:        "sso-session-success",
 				Region:         "us-east-1",
 				SSOAccountID:   "123456789012",
 				SSORoleName:    "testRole",
-				SSOSessionName: "sso-session-alone-dev",
+				SSOSessionName: "sso-session-success-dev",
 				SSOSession: &SSOSession{
-					Name:        "sso-session-alone-dev",
+					Name:        "sso-session-success-dev",
 					SSORegion:   "us-east-1",
 					SSOStartURL: "https://d-123456789a.awsapps.com/start",
 				},
 			},
+		},
+		"SSO Session missing region": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "sso-session-missing-region",
+			Err:             fmt.Errorf("profile \"sso-session-missing-region\" is configured to use SSO but is missing required configuration: sso_region"),
 		},
 		"profile names are case-sensitive (Mixed)": {
 			ConfigFilenames:      []string{testConfigFilename},

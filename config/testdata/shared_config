@@ -166,16 +166,25 @@ sso_role_name = TestRole
 sso_start_url = https://127.0.0.1/start
 credential_process = /path/to/process
 
-[profile sso-session-alone]
+[profile sso-session-success]
 region = us-east-1
-sso_session = sso-session-alone-dev
+sso_session = sso-session-success-dev
 sso_account_id = 123456789012
 sso_role_name = testRole
 
-[sso-session sso-session-alone-dev]
+[sso-session sso-session-success-dev]
 sso_region = us-east-1
 sso_start_url = https://d-123456789a.awsapps.com/start
 sso_registration_scopes = sso:account:access
+
+[profile sso-session-missing-region]
+region = us-east-1
+sso_session = sso-session-missing-region-dev
+sso_account_id = 123456789012
+sso_role_name = testRole
+
+[sso-session sso-session-missing-region-dev]
+sso_start_url = https://d-123456789a.awsapps.com/start
 
 [profile DoNotNormalize]
 aws_access_key_id = DoNotNormalize_config_akid
