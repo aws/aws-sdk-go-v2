@@ -1,8 +1,0 @@
-{
-    "id": "12cbf7cc-6d18-48ea-a8c9-ac944aa01472",
-    "type": "feature",
-    "description": "Amazon SageMaker now supports running training jobs on ml.trn1 instance types.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

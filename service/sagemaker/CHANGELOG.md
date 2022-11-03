@@ -1,3 +1,7 @@
+# v1.54.0 (2022-11-03)
+
+* **Feature**: Amazon SageMaker now supports running training jobs on ml.trn1 instance types.
+
 # v1.53.0 (2022-11-02)
 
 * **Feature**: This release updates Framework model regex for ModelPackage to support new Framework version xgboost, sklearn.

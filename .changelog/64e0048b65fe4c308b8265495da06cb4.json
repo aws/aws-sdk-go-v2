@@ -1,8 +1,0 @@
-{
-    "id": "64e0048b-65fe-4c30-8b82-65495da06cb4",
-    "type": "feature",
-    "description": "Adding support for r6gd instances for MemoryDB Redis with data tiering. In a cluster with data tiering enabled, when available memory capacity is exhausted, the least recently used data is automatically tiered to solid state drives for cost-effective capacity scaling with minimal performance impact.",
-    "modules": [
-        "service/memorydb"
-    ]
-}

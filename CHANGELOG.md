@@ -1,3 +1,11 @@
+# Release (2022-11-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.10.0](service/memorydb/CHANGELOG.md#v1100-2022-11-03)
+  * **Feature**: Adding support for r6gd instances for MemoryDB Redis with data tiering. In a cluster with data tiering enabled, when available memory capacity is exhausted, the least recently used data is automatically tiered to solid state drives for cost-effective capacity scaling with minimal performance impact.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.54.0](service/sagemaker/CHANGELOG.md#v1540-2022-11-03)
+  * **Feature**: Amazon SageMaker now supports running training jobs on ml.trn1 instance types.
+
 # Release (2022-11-02)
 
 ## Module Highlights
