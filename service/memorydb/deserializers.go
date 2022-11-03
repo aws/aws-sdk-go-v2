@@ -6700,6 +6700,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				return err
 			}
 
+		case "DataTiering":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataTieringStatus to be of type string, got %T instead", value)
+				}
+				sv.DataTiering = types.DataTieringStatus(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9631,6 +9640,15 @@ func awsAwsjson11_deserializeDocumentSnapshot(v **types.Snapshot, value interfac
 		case "ClusterConfiguration":
 			if err := awsAwsjson11_deserializeDocumentClusterConfiguration(&sv.ClusterConfiguration, value); err != nil {
 				return err
+			}
+
+		case "DataTiering":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataTieringStatus to be of type string, got %T instead", value)
+				}
+				sv.DataTiering = types.DataTieringStatus(jtv)
 			}
 
 		case "KmsKeyId":

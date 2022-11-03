@@ -2297,6 +2297,11 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		ok.String(*v.ClusterName)
 	}
 
+	if v.DataTiering != nil {
+		ok := object.Key("DataTiering")
+		ok.Boolean(*v.DataTiering)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)

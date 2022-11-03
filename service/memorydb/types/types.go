@@ -114,6 +114,12 @@ type Cluster struct {
 	// The cluster's configuration endpoint
 	ClusterEndpoint *Endpoint
 
+	// Enables data tiering. Data tiering is only supported for clusters using the r6gd
+	// node type. This parameter must be set when using r6gd nodes. For more
+	// information, see Data tiering
+	// (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html).
+	DataTiering DataTieringStatus
+
 	// A description of the cluster
 	Description *string
 
@@ -561,6 +567,12 @@ type Snapshot struct {
 
 	// The configuration of the cluster from which the snapshot was taken
 	ClusterConfiguration *ClusterConfiguration
+
+	// Enables data tiering. Data tiering is only supported for clusters using the r6gd
+	// node type. This parameter must be set when using r6gd nodes. For more
+	// information, see Data tiering
+	// (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html).
+	DataTiering DataTieringStatus
 
 	// The ID of the KMS key used to encrypt the snapshot.
 	KmsKeyId *string

@@ -50,6 +50,12 @@ type CreateClusterInput struct {
 	// upgrades after launch.
 	AutoMinorVersionUpgrade *bool
 
+	// Enables data tiering. Data tiering is only supported for clusters using the r6gd
+	// node type. This parameter must be set when using r6gd nodes. For more
+	// information, see Data tiering
+	// (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html).
+	DataTiering *bool
+
 	// An optional description of the cluster.
 	Description *string
 
@@ -61,7 +67,25 @@ type CreateClusterInput struct {
 
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period.
+	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
+	// for ddd are:
+	//
+	// * sun
+	//
+	// * mon
+	//
+	// * tue
+	//
+	// * wed
+	//
+	// * thu
+	//
+	// * fri
+	//
+	// * sat
+	//
+	// Example:
+	// sun:23:00-mon:01:30
 	MaintenanceWindow *string
 
 	// The number of replicas to apply to each shard. The default value is 1. The
