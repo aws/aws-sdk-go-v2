@@ -46043,6 +46043,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.g5.48xlarge"
                     }
+                },
+                "ML_TRN1_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1.2xlarge"
+                    }
+                },
+                "ML_TRN1_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1.32xlarge"
+                    }
                 }
             }
         },
