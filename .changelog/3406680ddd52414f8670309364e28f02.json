@@ -1,8 +1,0 @@
-{
-    "id": "3406680d-dd52-414f-8670-309364e28f02",
-    "type": "documentation",
-    "description": "Doc-only update for bug fixes and support of export to buckets encrypted with SSE-KMS",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

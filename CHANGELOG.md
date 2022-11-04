@@ -1,3 +1,15 @@
+# Release (2022-11-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.16.1](service/cloudwatchlogs/CHANGELOG.md#v1161-2022-11-04)
+  * **Documentation**: Doc-only update for bug fixes and support of export to buckets encrypted with SSE-KMS
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.66.0](service/ec2/CHANGELOG.md#v1660-2022-11-04)
+  * **Feature**: This release adds API support for the recipient of an AMI account share to remove shared AMI launch permissions.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.15.0](service/emrcontainers/CHANGELOG.md#v1150-2022-11-04)
+  * **Feature**: Adding support for Job templates. Job templates allow you to create and store templates to configure Spark applications parameters. This helps you ensure consistent settings across applications by reusing and enforcing configuration overrides in data pipelines.
+* `github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting`: [v1.0.37](service/internal/eventstreamtesting/CHANGELOG.md#v1037-2022-11-04)
+  * **Dependency Update**: update golang.org/x/net dependency to 0.1.0
+
 # Release (2022-11-03)
 
 ## Module Highlights

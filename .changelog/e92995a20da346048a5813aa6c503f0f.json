@@ -1,9 +1,0 @@
-{
-    "id": "e92995a2-0da3-4604-8a58-13aa6c503f0f",
-    "type": "dependency",
-    "description": "update golang.org/x/net dependency to 0.1.0",
-    "modules": [
-        "internal/codegen",
-        "service/internal/eventstreamtesting"
-    ]
-}
