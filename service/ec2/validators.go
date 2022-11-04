@@ -690,6 +690,26 @@ func (m *validateOpCancelExportTask) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelImageLaunchPermission struct {
+}
+
+func (*validateOpCancelImageLaunchPermission) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelImageLaunchPermission) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelImageLaunchPermissionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelImageLaunchPermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelReservedInstancesListing struct {
 }
 
@@ -7606,6 +7626,10 @@ func addOpCancelExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelExportTask{}, middleware.After)
 }
 
+func addOpCancelImageLaunchPermissionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelImageLaunchPermission{}, middleware.After)
+}
+
 func addOpCancelReservedInstancesListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelReservedInstancesListing{}, middleware.After)
 }
@@ -10255,6 +10279,21 @@ func validateOpCancelExportTaskInput(v *CancelExportTaskInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CancelExportTaskInput"}
 	if v.ExportTaskId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExportTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelImageLaunchPermissionInput(v *CancelImageLaunchPermissionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelImageLaunchPermissionInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

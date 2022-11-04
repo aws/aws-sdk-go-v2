@@ -30,6 +30,26 @@ func (m *validateOpCancelJobRun) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateJobTemplate struct {
+}
+
+func (*validateOpCreateJobTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateJobTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateJobTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateJobTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateManagedEndpoint struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateVirtualCluster) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVirtualClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteJobTemplate struct {
+}
+
+func (*validateOpDeleteJobTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteJobTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteJobTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteJobTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -125,6 +165,26 @@ func (m *validateOpDescribeJobRun) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeJobRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeJobTemplate struct {
+}
+
+func (*validateOpDescribeJobTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeJobTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeJobTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeJobTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -294,12 +354,20 @@ func addOpCancelJobRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJobRun{}, middleware.After)
 }
 
+func addOpCreateJobTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateJobTemplate{}, middleware.After)
+}
+
 func addOpCreateManagedEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateManagedEndpoint{}, middleware.After)
 }
 
 func addOpCreateVirtualClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVirtualCluster{}, middleware.After)
+}
+
+func addOpDeleteJobTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteJobTemplate{}, middleware.After)
 }
 
 func addOpDeleteManagedEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -312,6 +380,10 @@ func addOpDeleteVirtualClusterValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeJobRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJobRun{}, middleware.After)
+}
+
+func addOpDescribeJobTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeJobTemplate{}, middleware.After)
 }
 
 func addOpDescribeManagedEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -455,6 +527,36 @@ func validateJobDriver(v *types.JobDriver) error {
 	}
 }
 
+func validateJobTemplateData(v *types.JobTemplateData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobTemplateData"}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.ReleaseLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReleaseLabel"))
+	}
+	if v.ConfigurationOverrides != nil {
+		if err := validateParametricConfigurationOverrides(v.ConfigurationOverrides); err != nil {
+			invalidParams.AddNested("ConfigurationOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobDriver == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobDriver"))
+	} else if v.JobDriver != nil {
+		if err := validateJobDriver(v.JobDriver); err != nil {
+			invalidParams.AddNested("JobDriver", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
 	if v == nil {
 		return nil
@@ -468,6 +570,23 @@ func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
 	if v.S3MonitoringConfiguration != nil {
 		if err := validateS3MonitoringConfiguration(v.S3MonitoringConfiguration); err != nil {
 			invalidParams.AddNested("S3MonitoringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParametricConfigurationOverrides(v *types.ParametricConfigurationOverrides) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParametricConfigurationOverrides"}
+	if v.ApplicationConfiguration != nil {
+		if err := validateConfigurationList(v.ApplicationConfiguration); err != nil {
+			invalidParams.AddNested("ApplicationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -517,6 +636,31 @@ func validateOpCancelJobRunInput(v *CancelJobRunInput) error {
 	}
 	if v.VirtualClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VirtualClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateJobTemplateInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.JobTemplateData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobTemplateData"))
+	} else if v.JobTemplateData != nil {
+		if err := validateJobTemplateData(v.JobTemplateData); err != nil {
+			invalidParams.AddNested("JobTemplateData", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -585,6 +729,21 @@ func validateOpCreateVirtualClusterInput(v *CreateVirtualClusterInput) error {
 	}
 }
 
+func validateOpDeleteJobTemplateInput(v *DeleteJobTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteManagedEndpointInput(v *DeleteManagedEndpointInput) error {
 	if v == nil {
 		return nil
@@ -628,6 +787,21 @@ func validateOpDescribeJobRunInput(v *DescribeJobRunInput) error {
 	}
 	if v.VirtualClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VirtualClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeJobTemplateInput(v *DescribeJobTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -725,15 +899,7 @@ func validateOpStartJobRunInput(v *StartJobRunInput) error {
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
-	}
-	if v.ReleaseLabel == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReleaseLabel"))
-	}
-	if v.JobDriver == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JobDriver"))
-	} else if v.JobDriver != nil {
+	if v.JobDriver != nil {
 		if err := validateJobDriver(v.JobDriver); err != nil {
 			invalidParams.AddNested("JobDriver", err.(smithy.InvalidParamsError))
 		}

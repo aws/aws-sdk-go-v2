@@ -12,7 +12,16 @@ import (
 
 // Sets the retention of the specified log group. A retention policy allows you to
 // configure the number of days for which to retain log events in the specified log
-// group.
+// group. CloudWatch Logs doesn’t immediately delete log events when they reach
+// their retention setting. It typically takes up to 72 hours after that before log
+// events are deleted, but in rare situations might take longer. This means that if
+// you change a log group to have a longer retention setting when it contains log
+// events that are past the expiration date, but haven’t been actually deleted,
+// those log events will take up to 72 hours to be deleted after the new retention
+// date is reached. To make sure that log data is deleted permanently, keep a log
+// group at its lower retention setting until 72 hours has passed after the end of
+// the previous retention period, or you have confirmed that the older log events
+// are deleted.
 func (c *Client) PutRetentionPolicy(ctx context.Context, params *PutRetentionPolicyInput, optFns ...func(*Options)) (*PutRetentionPolicyOutput, error) {
 	if params == nil {
 		params = &PutRetentionPolicyInput{}
@@ -37,8 +46,8 @@ type PutRetentionPolicyInput struct {
 
 	// The number of days to retain the log events in the specified log group. Possible
 	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
-	// and 3653. To set a log group to never have log events expire, use
-	// DeleteRetentionPolicy
+	// 2192, 2557, 2922, 3288, and 3653. To set a log group to never have log events
+	// expire, use DeleteRetentionPolicy
 	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html).
 	//
 	// This member is required.

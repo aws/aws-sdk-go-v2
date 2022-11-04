@@ -36,21 +36,6 @@ type StartJobRunInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The execution role ARN for the job run.
-	//
-	// This member is required.
-	ExecutionRoleArn *string
-
-	// The job driver for the job run.
-	//
-	// This member is required.
-	JobDriver *types.JobDriver
-
-	// The Amazon EMR release version to use for the job run.
-	//
-	// This member is required.
-	ReleaseLabel *string
-
 	// The virtual cluster ID for which the job run request is submitted.
 	//
 	// This member is required.
@@ -59,8 +44,23 @@ type StartJobRunInput struct {
 	// The configuration overrides for the job run.
 	ConfigurationOverrides *types.ConfigurationOverrides
 
+	// The execution role ARN for the job run.
+	ExecutionRoleArn *string
+
+	// The job driver for the job run.
+	JobDriver *types.JobDriver
+
+	// The job template ID to be used to start the job run.
+	JobTemplateId *string
+
+	// The values of job template parameters to start a job run.
+	JobTemplateParameters map[string]string
+
 	// The name of the job run.
 	Name *string
+
+	// The Amazon EMR release version to use for the job run.
+	ReleaseLabel *string
 
 	// The tags assigned to job runs.
 	Tags map[string]string

@@ -51,6 +51,7 @@
         "api_op_CancelCapacityReservationFleets.go",
         "api_op_CancelConversionTask.go",
         "api_op_CancelExportTask.go",
+        "api_op_CancelImageLaunchPermission.go",
         "api_op_CancelImportTask.go",
         "api_op_CancelReservedInstancesListing.go",
         "api_op_CancelSpotFleetRequests.go",

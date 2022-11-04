@@ -1,0 +1,8 @@
+{
+    "id": "3f9e3048-0215-484e-b55b-4b1d3bf60cb5",
+    "type": "feature",
+    "description": "This release adds API support for the recipient of an AMI account share to remove shared AMI launch permissions.",
+    "modules": [
+        "service/ec2"
+    ]
+}

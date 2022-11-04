@@ -154,6 +154,7 @@ var defaultPartitions = endpoints.Partitions{
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "ingest-fips-us-east-2",
@@ -162,6 +163,7 @@ var defaultPartitions = endpoints.Partitions{
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-2",
 				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "ingest-fips-us-west-2",
@@ -170,6 +172,61 @@ var defaultPartitions = endpoints.Partitions{
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "ingest-us-east-1",
+			}: endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region:  "ingest-us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "ingest.timestream-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "ingest-us-east-2",
+			}: endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region:  "ingest-us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "ingest.timestream-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "ingest-us-west-2",
+			}: endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region:  "ingest-us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "ingest.timestream-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-1",

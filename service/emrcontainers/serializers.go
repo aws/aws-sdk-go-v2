@@ -82,6 +82,98 @@ func awsRestjson1_serializeOpHttpBindingsCancelJobRunInput(v *CancelJobRunInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateJobTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpCreateJobTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateJobTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateJobTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobtemplates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateJobTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateJobTemplateInput(v *CreateJobTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateJobTemplateInput(v *CreateJobTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.JobTemplateData != nil {
+		ok := object.Key("jobTemplateData")
+		if err := awsRestjson1_serializeDocumentJobTemplateData(v.JobTemplateData, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateManagedEndpoint struct {
 }
 
@@ -289,6 +381,64 @@ func awsRestjson1_serializeOpDocumentCreateVirtualClusterInput(v *CreateVirtualC
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteJobTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteJobTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteJobTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteJobTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobtemplates/{id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteJobTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteJobTemplateInput(v *DeleteJobTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteManagedEndpoint struct {
 }
 
@@ -474,6 +624,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeJobRunInput(v *DescribeJobRunIn
 	}
 	if v.VirtualClusterId != nil {
 		if err := encoder.SetURI("virtualClusterId").String(*v.VirtualClusterId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeJobTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeJobTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeJobTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeJobTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobtemplates/{id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeJobTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeJobTemplateInput(v *DescribeJobTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
 	}
@@ -685,6 +893,71 @@ func awsRestjson1_serializeOpHttpBindingsListJobRunsInput(v *ListJobRunsInput, e
 		if err := encoder.SetURI("virtualClusterId").String(*v.VirtualClusterId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListJobTemplates struct {
+}
+
+func (*awsRestjson1_serializeOpListJobTemplates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListJobTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListJobTemplatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobtemplates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListJobTemplatesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListJobTemplatesInput(v *ListJobTemplatesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CreatedAfter != nil {
+		encoder.SetQuery("createdAfter").String(smithytime.FormatDateTime(*v.CreatedAfter))
+	}
+
+	if v.CreatedBefore != nil {
+		encoder.SetQuery("createdBefore").String(smithytime.FormatDateTime(*v.CreatedBefore))
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -1006,6 +1279,18 @@ func awsRestjson1_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value
 	if v.JobDriver != nil {
 		ok := object.Key("jobDriver")
 		if err := awsRestjson1_serializeDocumentJobDriver(v.JobDriver, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobTemplateId != nil {
+		ok := object.Key("jobTemplateId")
+		ok.String(*v.JobTemplateId)
+	}
+
+	if v.JobTemplateParameters != nil {
+		ok := object.Key("jobTemplateParameters")
+		if err := awsRestjson1_serializeDocumentTemplateParameterInputMap(v.JobTemplateParameters, ok); err != nil {
 			return err
 		}
 	}
@@ -1340,6 +1625,51 @@ func awsRestjson1_serializeDocumentJobDriver(v *types.JobDriver, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobTemplateData(v *types.JobTemplateData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationOverrides != nil {
+		ok := object.Key("configurationOverrides")
+		if err := awsRestjson1_serializeDocumentParametricConfigurationOverrides(v.ConfigurationOverrides, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("executionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if v.JobDriver != nil {
+		ok := object.Key("jobDriver")
+		if err := awsRestjson1_serializeDocumentJobDriver(v.JobDriver, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.JobTags != nil {
+		ok := object.Key("jobTags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.JobTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ParameterConfiguration != nil {
+		ok := object.Key("parameterConfiguration")
+		if err := awsRestjson1_serializeDocumentTemplateParameterConfigurationMap(v.ParameterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReleaseLabel != nil {
+		ok := object.Key("releaseLabel")
+		ok.String(*v.ReleaseLabel)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1361,6 +1691,82 @@ func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringCo
 		if err := awsRestjson1_serializeDocumentS3MonitoringConfiguration(v.S3MonitoringConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParametricCloudWatchMonitoringConfiguration(v *types.ParametricCloudWatchMonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupName != nil {
+		ok := object.Key("logGroupName")
+		ok.String(*v.LogGroupName)
+	}
+
+	if v.LogStreamNamePrefix != nil {
+		ok := object.Key("logStreamNamePrefix")
+		ok.String(*v.LogStreamNamePrefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParametricConfigurationOverrides(v *types.ParametricConfigurationOverrides, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationConfiguration != nil {
+		ok := object.Key("applicationConfiguration")
+		if err := awsRestjson1_serializeDocumentConfigurationList(v.ApplicationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MonitoringConfiguration != nil {
+		ok := object.Key("monitoringConfiguration")
+		if err := awsRestjson1_serializeDocumentParametricMonitoringConfiguration(v.MonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParametricMonitoringConfiguration(v *types.ParametricMonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchMonitoringConfiguration != nil {
+		ok := object.Key("cloudWatchMonitoringConfiguration")
+		if err := awsRestjson1_serializeDocumentParametricCloudWatchMonitoringConfiguration(v.CloudWatchMonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PersistentAppUI != nil {
+		ok := object.Key("persistentAppUI")
+		ok.String(*v.PersistentAppUI)
+	}
+
+	if v.S3MonitoringConfiguration != nil {
+		ok := object.Key("s3MonitoringConfiguration")
+		if err := awsRestjson1_serializeDocumentParametricS3MonitoringConfiguration(v.S3MonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParametricS3MonitoringConfiguration(v *types.ParametricS3MonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogUri != nil {
+		ok := object.Key("logUri")
+		ok.String(*v.LogUri)
 	}
 
 	return nil
@@ -1431,6 +1837,48 @@ func awsRestjson1_serializeDocumentSparkSubmitJobDriver(v *types.SparkSubmitJobD
 }
 
 func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTemplateParameterConfiguration(v *types.TemplateParameterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultValue != nil {
+		ok := object.Key("defaultValue")
+		ok.String(*v.DefaultValue)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTemplateParameterConfigurationMap(v map[string]types.TemplateParameterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentTemplateParameterConfiguration(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTemplateParameterInputMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

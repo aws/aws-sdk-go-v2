@@ -8,40 +8,30 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Enables deprecation of the specified AMI at the specified date and time. For
-// more information, see Deprecate an AMI
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
-func (c *Client) EnableImageDeprecation(ctx context.Context, params *EnableImageDeprecationInput, optFns ...func(*Options)) (*EnableImageDeprecationOutput, error) {
+// Removes your Amazon Web Services account from the launch permissions for the
+// specified AMI. For more information, see Cancel sharing an AMI with your Amazon
+// Web Services account (https://docs.aws.amazon.com/) in the Amazon Elastic
+// Compute Cloud User Guide.
+func (c *Client) CancelImageLaunchPermission(ctx context.Context, params *CancelImageLaunchPermissionInput, optFns ...func(*Options)) (*CancelImageLaunchPermissionOutput, error) {
 	if params == nil {
-		params = &EnableImageDeprecationInput{}
+		params = &CancelImageLaunchPermissionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableImageDeprecation", params, optFns, c.addOperationEnableImageDeprecationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CancelImageLaunchPermission", params, optFns, c.addOperationCancelImageLaunchPermissionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*EnableImageDeprecationOutput)
+	out := result.(*CancelImageLaunchPermissionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type EnableImageDeprecationInput struct {
+type CancelImageLaunchPermissionInput struct {
 
-	// The date and time to deprecate the AMI, in UTC, in the following format:
-	// YYYY-MM-DDTHH:MM:SSZ. If you specify a value for seconds, Amazon EC2 rounds the
-	// seconds to the nearest minute. You can’t specify a date in the past. The upper
-	// limit for DeprecateAt is 10 years from now, except for public AMIs, where the
-	// upper limit is 2 years from the creation date.
-	//
-	// This member is required.
-	DeprecateAt *time.Time
-
-	// The ID of the AMI.
+	// The ID of the AMI that was shared with your Amazon Web Services account.
 	//
 	// This member is required.
 	ImageId *string
@@ -55,7 +45,7 @@ type EnableImageDeprecationInput struct {
 	noSmithyDocumentSerde
 }
 
-type EnableImageDeprecationOutput struct {
+type CancelImageLaunchPermissionOutput struct {
 
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool
@@ -66,12 +56,12 @@ type EnableImageDeprecationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationEnableImageDeprecationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsEc2query_serializeOpEnableImageDeprecation{}, middleware.After)
+func (c *Client) addOperationCancelImageLaunchPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsEc2query_serializeOpCancelImageLaunchPermission{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpEnableImageDeprecation{}, middleware.After)
+	err = stack.Deserialize.Add(&awsEc2query_deserializeOpCancelImageLaunchPermission{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -111,10 +101,10 @@ func (c *Client) addOperationEnableImageDeprecationMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpEnableImageDeprecationValidationMiddleware(stack); err != nil {
+	if err = addOpCancelImageLaunchPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableImageDeprecation(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelImageLaunchPermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -129,11 +119,11 @@ func (c *Client) addOperationEnableImageDeprecationMiddlewares(stack *middleware
 	return nil
 }
 
-func newServiceMetadataMiddleware_opEnableImageDeprecation(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCancelImageLaunchPermission(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ec2",
-		OperationName: "EnableImageDeprecation",
+		OperationName: "CancelImageLaunchPermission",
 	}
 }

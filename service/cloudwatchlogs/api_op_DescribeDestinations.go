@@ -34,7 +34,7 @@ type DescribeDestinationsInput struct {
 	DestinationNamePrefix *string
 
 	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// maximum value of 50 items is used.
 	Limit *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -130,7 +130,7 @@ var _ DescribeDestinationsAPIClient = (*Client)(nil)
 // DescribeDestinations
 type DescribeDestinationsPaginatorOptions struct {
 	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
+	// maximum value of 50 items is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

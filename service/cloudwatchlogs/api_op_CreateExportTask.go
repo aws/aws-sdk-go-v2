@@ -13,10 +13,13 @@ import (
 // Creates an export task, which allows you to efficiently export data from a log
 // group to an Amazon S3 bucket. When you perform a CreateExportTask operation, you
 // must use credentials that have permission to write to the S3 bucket that you
-// specify as the destination. This is an asynchronous call. If all the required
-// information is provided, this operation initiates an export task and responds
-// with the ID of the task. After the task has started, you can use
-// DescribeExportTasks
+// specify as the destination. Exporting log data to Amazon S3 buckets that are
+// encrypted by KMS is supported. Exporting log data to Amazon S3 buckets that have
+// S3 Object Lock enabled with a retention period is also supported. Exporting to
+// S3 buckets that are encrypted with AES-256 is supported. This is an asynchronous
+// call. If all the required information is provided, this operation initiates an
+// export task and responds with the ID of the task. After the task has started,
+// you can use DescribeExportTasks
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html)
 // to get the status of the export task. Each account can only have one active
 // (RUNNING or PENDING) export task at a time. To cancel an export task, use
@@ -25,8 +28,8 @@ import (
 // You can export logs from multiple log groups or multiple time ranges to the same
 // S3 bucket. To separate out log data for each export task, you can specify a
 // prefix to be used as the Amazon S3 key prefix for all exported objects.
-// Exporting to S3 buckets that are encrypted with AES-256 is supported. Exporting
-// to S3 buckets encrypted with SSE-KMS is not supported.
+// Time-based sorting on chunks of log data inside an exported file is not
+// guaranteed. You can sort the exported log fild data by using Linux utilities.
 func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskInput, optFns ...func(*Options)) (*CreateExportTaskOutput, error) {
 	if params == nil {
 		params = &CreateExportTaskInput{}
@@ -64,7 +67,8 @@ type CreateExportTaskInput struct {
 
 	// The end time of the range for the request, expressed as the number of
 	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
-	// this time are not exported.
+	// this time are not exported. You must specify a time that is not earlier than
+	// when this log group was created.
 	//
 	// This member is required.
 	To *int64

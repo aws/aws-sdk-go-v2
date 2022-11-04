@@ -180,7 +180,8 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Specify the driver that the job runs on.
+// Specify the driver that the job runs on. Exactly one of the two available job
+// drivers is required, either sparkSqlJobDriver or sparkSubmitJobDriver.
 type JobDriver struct {
 
 	// The job driver for job type.
@@ -247,6 +248,76 @@ type JobRun struct {
 	noSmithyDocumentSerde
 }
 
+// This entity describes a job template. Job template stores values of StartJobRun
+// API request in a template and can be used to start a job run. Job template
+// allows two use cases: avoid repeating recurring StartJobRun API request values,
+// enforcing certain values in StartJobRun API request.
+type JobTemplate struct {
+
+	// The job template data which holds values of StartJobRun API request.
+	//
+	// This member is required.
+	JobTemplateData *JobTemplateData
+
+	// The ARN of the job template.
+	Arn *string
+
+	// The date and time when the job template was created.
+	CreatedAt *time.Time
+
+	// The user who created the job template.
+	CreatedBy *string
+
+	// The error message in case the decryption of job template fails.
+	DecryptionError *string
+
+	// The ID of the job template.
+	Id *string
+
+	// The KMS key ARN used to encrypt the job template.
+	KmsKeyArn *string
+
+	// The name of the job template.
+	Name *string
+
+	// The tags assigned to the job template.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The values of StartJobRun API requests used in job runs started using the job
+// template.
+type JobTemplateData struct {
+
+	// The execution role ARN of the job run.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// Specify the driver that the job runs on. Exactly one of the two available job
+	// drivers is required, either sparkSqlJobDriver or sparkSubmitJobDriver.
+	//
+	// This member is required.
+	JobDriver *JobDriver
+
+	// The release version of Amazon EMR.
+	//
+	// This member is required.
+	ReleaseLabel *string
+
+	// The configuration settings that are used to override defaults configuration.
+	ConfigurationOverrides *ParametricConfigurationOverrides
+
+	// The tags assigned to jobs started using the job template.
+	JobTags map[string]string
+
+	// The configuration of parameters existing in the job template.
+	ParameterConfiguration map[string]TemplateParameterConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Configuration setting for monitoring.
 type MonitoringConfiguration struct {
 
@@ -258,6 +329,60 @@ type MonitoringConfiguration struct {
 
 	// Amazon S3 configuration for monitoring log publishing.
 	S3MonitoringConfiguration *S3MonitoringConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A configuration for CloudWatch monitoring. You can configure your jobs to send
+// log information to CloudWatch Logs. This data type allows job template
+// parameters to be specified within.
+type ParametricCloudWatchMonitoringConfiguration struct {
+
+	// The name of the log group for log publishing.
+	LogGroupName *string
+
+	// The specified name prefix for log streams.
+	LogStreamNamePrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// A configuration specification to be used to override existing configurations.
+// This data type allows job template parameters to be specified within.
+type ParametricConfigurationOverrides struct {
+
+	// The configurations for the application running by the job run.
+	ApplicationConfiguration []Configuration
+
+	// The configurations for monitoring.
+	MonitoringConfiguration *ParametricMonitoringConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration setting for monitoring. This data type allows job template
+// parameters to be specified within.
+type ParametricMonitoringConfiguration struct {
+
+	// Monitoring configurations for CloudWatch.
+	CloudWatchMonitoringConfiguration *ParametricCloudWatchMonitoringConfiguration
+
+	// Monitoring configurations for the persistent application UI.
+	PersistentAppUI *string
+
+	// Amazon S3 configuration for monitoring log publishing.
+	S3MonitoringConfiguration *ParametricS3MonitoringConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Amazon S3 configuration for monitoring log publishing. You can configure your
+// jobs to send log information to Amazon S3. This data type allows job template
+// parameters to be specified within.
+type ParametricS3MonitoringConfiguration struct {
+
+	// Amazon S3 destination URI for log publishing.
+	LogUri *string
 
 	noSmithyDocumentSerde
 }
@@ -299,6 +424,18 @@ type SparkSubmitJobDriver struct {
 
 	// The Spark submit parameters that are used for job runs.
 	SparkSubmitParameters *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of a job template parameter.
+type TemplateParameterConfiguration struct {
+
+	// The default value for the job template parameter.
+	DefaultValue *string
+
+	// The type of the job template parameter. Allowed values are: ‘String’, ‘Number’.
+	Type TemplateParameterDataType
 
 	noSmithyDocumentSerde
 }

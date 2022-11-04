@@ -16,7 +16,8 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
 // Queries time out after 15 minutes of execution. If your queries are timing out,
 // reduce the time range being searched or partition your query into a number of
-// queries.
+// queries. You are limited to 20 concurrent CloudWatch Logs insights queries,
+// including queries that have been added to dashboards.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}

@@ -110,6 +110,24 @@ func (PersistentAppUI) Values() []PersistentAppUI {
 	}
 }
 
+type TemplateParameterDataType string
+
+// Enum values for TemplateParameterDataType
+const (
+	TemplateParameterDataTypeNumber TemplateParameterDataType = "NUMBER"
+	TemplateParameterDataTypeString TemplateParameterDataType = "STRING"
+)
+
+// Values returns all known values for TemplateParameterDataType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateParameterDataType) Values() []TemplateParameterDataType {
+	return []TemplateParameterDataType{
+		"NUMBER",
+		"STRING",
+	}
+}
+
 type VirtualClusterState string
 
 // Enum values for VirtualClusterState
