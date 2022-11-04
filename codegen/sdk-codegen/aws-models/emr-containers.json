@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -41,31 +41,22 @@
         },
         "com.amazonaws.emrcontainers#AwsChicagoWebService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "EMR containers",
-                    "arnNamespace": "emr-containers",
-                    "cloudFormationName": "EMRcontainers",
-                    "cloudTrailEventSource": "emrcontainers.amazonaws.com",
-                    "endpointPrefix": "emr-containers"
-                },
-                "aws.auth#sigv4": {
-                    "name": "emr-containers"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run\n         open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With\n         this deployment option, you can focus on running analytics workloads while Amazon EMR on\n         EKS builds, configures, and manages containers for open-source applications. For more\n         information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is Amazon EMR on\n            EKS</a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The\n            <code>emr-containers</code> prefix is used in the following scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws\n                  emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example,\n                  <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKS Service Endpoints</a>.</p>\n            </li>\n         </ul>",
-                "smithy.api#title": "Amazon EMR Containers"
-            },
             "version": "2020-10-01",
             "operations": [
                 {
                     "target": "com.amazonaws.emrcontainers#CancelJobRun"
                 },
                 {
+                    "target": "com.amazonaws.emrcontainers#CreateJobTemplate"
+                },
+                {
                     "target": "com.amazonaws.emrcontainers#CreateManagedEndpoint"
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#CreateVirtualCluster"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#DeleteJobTemplate"
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#DeleteManagedEndpoint"
@@ -77,6 +68,9 @@
                     "target": "com.amazonaws.emrcontainers#DescribeJobRun"
                 },
                 {
+                    "target": "com.amazonaws.emrcontainers#DescribeJobTemplate"
+                },
+                {
                     "target": "com.amazonaws.emrcontainers#DescribeManagedEndpoint"
                 },
                 {
@@ -84,6 +78,9 @@
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#ListJobRuns"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ListJobTemplates"
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#ListManagedEndpoints"
@@ -103,7 +100,1368 @@
                 {
                     "target": "com.amazonaws.emrcontainers#UntagResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EMR containers",
+                    "arnNamespace": "emr-containers",
+                    "cloudFormationName": "EMRcontainers",
+                    "cloudTrailEventSource": "emrcontainers.amazonaws.com",
+                    "endpointPrefix": "emr-containers"
+                },
+                "aws.auth#sigv4": {
+                    "name": "emr-containers"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows you to run\n         open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS). With\n         this deployment option, you can focus on running analytics workloads while Amazon EMR on\n         EKS builds, configures, and manages containers for open-source applications. For more\n         information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is Amazon EMR on\n            EKS</a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The\n            <code>emr-containers</code> prefix is used in the following scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example, <code>aws\n                  emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For example,\n                  <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKS Service Endpoints</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon EMR Containers",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://emr-containers-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://emr-containers-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://emr-containers.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://emr-containers.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://emr-containers.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.emrcontainers#Base64Encoded": {
             "type": "string",
@@ -341,14 +1699,110 @@
             }
         },
         "com.amazonaws.emrcontainers#ContainerProviderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EKS",
-                        "name": "EKS"
+            "type": "enum",
+            "members": {
+                "EKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS"
                     }
-                ]
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#CreateJobTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#CreateJobTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a job template. Job template stores values of StartJobRun API request in a\n         template and can be used to start a job run. Job template allows two use cases: avoid\n         repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun\n         API request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/jobtemplates",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified name of the job template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.emrcontainers#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token of the job template.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobTemplateData": {
+                    "target": "com.amazonaws.emrcontainers#JobTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job template data which holds values of StartJobRun API request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that are associated with the job template.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.emrcontainers#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN used to encrypt the job template.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateJobTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output display the created job template ID.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the name of the created job template.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output display the ARN of the created job template.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays the date and time when the job template was created.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#CreateManagedEndpoint": {
@@ -371,7 +1825,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to\n         Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
+                "smithy.api#documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects EMR Studio \n         to Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints",
@@ -424,7 +1878,7 @@
                         "smithy.api#deprecated": {
                             "message": "Customer provided certificate-arn is deprecated and would be removed in future."
                         },
-                        "smithy.api#documentation": "<p>The certificate ARN provided by users for the managed endpoint. This field is under\n         deprecation and will be removed in future releases.</p>"
+                        "smithy.api#documentation": "<p>The certificate ARN provided by users for the managed endpoint. This field \n         is under deprecation and will be removed in future releases.</p>"
                     }
                 },
                 "configurationOverrides": {
@@ -444,7 +1898,7 @@
                 "tags": {
                     "target": "com.amazonaws.emrcontainers#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags of the managed endpoint. </p>"
+                        "smithy.api#documentation": "<p>The tags of the managed endpoint.\n      </p>"
                     }
                 }
             }
@@ -568,6 +2022,55 @@
                 "smithy.api#timestampFormat": "date-time"
             }
         },
+        "com.amazonaws.emrcontainers#DeleteJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DeleteJobTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DeleteJobTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a job template. Job template stores values of StartJobRun API request in a\n         template and can be used to start a job run. Job template allows two use cases: avoid\n         repeating recurring StartJobRun API request values, enforcing certain values in StartJobRun\n         API request.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/jobtemplates/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job template that will be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DeleteJobTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output contains the ID of the job template that was deleted.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emrcontainers#DeleteManagedEndpoint": {
             "type": "operation",
             "input": {
@@ -585,7 +2088,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway that connects EMR Studio to\n         Amazon EMR on EKS so that EMR Studio can communicate with your virtual cluster.</p>",
+                "smithy.api#documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway \n         that connects EMR Studio to Amazon EMR on EKS so that EMR Studio \n         can communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints/{id}",
@@ -740,6 +2243,58 @@
                 }
             }
         },
+        "com.amazonaws.emrcontainers#DescribeJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DescribeJobTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DescribeJobTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays detailed information about a specified job template. Job template stores values\n         of StartJobRun API request in a template and can be used to start a job run. Job template\n         allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing\n         certain values in StartJobRun API request.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/jobtemplates/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job template that will be described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeJobTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "jobTemplate": {
+                    "target": "com.amazonaws.emrcontainers#JobTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output displays information about the specified job template.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emrcontainers#DescribeManagedEndpoint": {
             "type": "operation",
             "input": {
@@ -760,7 +2315,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway\n         that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your\n         virtual cluster.</p>",
+                "smithy.api#documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is \n         a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can \n         communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints/{id}",
@@ -929,7 +2484,7 @@
                 "certificateAuthority": {
                     "target": "com.amazonaws.emrcontainers#Certificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The certificate generated by emr control plane on customer behalf to secure the managed endpoint.</p>"
+                        "smithy.api#documentation": "<p>The certificate generated by emr control plane on customer behalf to secure the managed\n         endpoint.</p>"
                     }
                 },
                 "configurationOverrides": {
@@ -996,30 +2551,38 @@
             }
         },
         "com.amazonaws.emrcontainers#EndpointState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "TERMINATING",
-                        "name": "TERMINATING"
-                    },
-                    {
-                        "value": "TERMINATED",
-                        "name": "TERMINATED"
-                    },
-                    {
-                        "value": "TERMINATED_WITH_ERRORS",
-                        "name": "TERMINATED_WITH_ERRORS"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                },
+                "TERMINATED_WITH_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED_WITH_ERRORS"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#EndpointStates": {
@@ -1091,26 +2654,32 @@
             }
         },
         "com.amazonaws.emrcontainers#FailureReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNAL_ERROR",
-                        "name": "INTERNAL_ERROR"
-                    },
-                    {
-                        "value": "USER_ERROR",
-                        "name": "USER_ERROR"
-                    },
-                    {
-                        "value": "VALIDATION_ERROR",
-                        "name": "VALIDATION_ERROR"
-                    },
-                    {
-                        "value": "CLUSTER_UNAVAILABLE",
-                        "name": "CLUSTER_UNAVAILABLE"
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
                     }
-                ]
+                },
+                "USER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_ERROR"
+                    }
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
+                },
+                "CLUSTER_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLUSTER_UNAVAILABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#IAMRoleArn": {
@@ -1137,10 +2706,7 @@
             }
         },
         "com.amazonaws.emrcontainers#JavaInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.emrcontainers#JobArn": {
             "type": "string",
@@ -1169,7 +2735,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specify the driver that the job runs on.</p>"
+                "smithy.api#documentation": "<p>Specify the driver that the job runs on. Exactly one of the two available job drivers is\n         required, either sparkSqlJobDriver or sparkSubmitJobDriver.</p>"
             }
         },
         "com.amazonaws.emrcontainers#JobRun": {
@@ -1277,38 +2843,50 @@
             }
         },
         "com.amazonaws.emrcontainers#JobRunState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "CANCEL_PENDING",
-                        "name": "CANCEL_PENDING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "CANCEL_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCEL_PENDING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#JobRunStates": {
@@ -1327,6 +2905,141 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emrcontainers#JobRun"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobTemplate": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the job template.</p>"
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job template.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job template.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time when the job template was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.emrcontainers#RequestIdentityUserArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The user who created the job template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the job template.</p>"
+                    }
+                },
+                "jobTemplateData": {
+                    "target": "com.amazonaws.emrcontainers#JobTemplateData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job template data which holds values of StartJobRun API request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.emrcontainers#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The KMS key ARN used to encrypt the job template.</p>"
+                    }
+                },
+                "decryptionError": {
+                    "target": "com.amazonaws.emrcontainers#String2048",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message in case the decryption of job template fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This entity describes a job template. Job template stores values of StartJobRun API\n         request in a template and can be used to start a job run. Job template allows two use\n         cases: avoid repeating recurring StartJobRun API request values, enforcing certain values\n         in StartJobRun API request.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobTemplateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 60,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/jobtemplates\\/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobTemplateData": {
+            "type": "structure",
+            "members": {
+                "executionRoleArn": {
+                    "target": "com.amazonaws.emrcontainers#ParametricIAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN of the job run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "releaseLabel": {
+                    "target": "com.amazonaws.emrcontainers#ParametricReleaseLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The release version of Amazon EMR.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationOverrides": {
+                    "target": "com.amazonaws.emrcontainers#ParametricConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The configuration settings that are used to override defaults configuration.</p>"
+                    }
+                },
+                "jobDriver": {
+                    "target": "com.amazonaws.emrcontainers#JobDriver",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameterConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#TemplateParameterConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of parameters existing in the job template.</p>"
+                    }
+                },
+                "jobTags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to jobs started using the job template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The values of StartJobRun API requests used in job runs started using the job\n         template.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#JobTemplates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#JobTemplate"
+            }
+        },
+        "com.amazonaws.emrcontainers#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z0-9-]*):kms:([a-zA-Z0-9]+-?)+:(\\d{12})?:key\\/[(0-9a-zA-Z)-?]+|\\$\\{[a-zA-Z]\\w*\\})$"
             }
         },
         "com.amazonaws.emrcontainers#KubernetesNamespace": {
@@ -1442,6 +3155,87 @@
                 }
             }
         },
+        "com.amazonaws.emrcontainers#ListJobTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#ListJobTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#ListJobTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists job templates based on a set of parameters. Job template stores values of\n         StartJobRun API request in a template and can be used to start a job run. Job template\n         allows two use cases: avoid repeating recurring StartJobRun API request values, enforcing\n         certain values in StartJobRun API request.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/jobtemplates",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "templates",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListJobTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "createdAfter": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which the job templates were created.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "createdBefore": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The date and time before which the job templates were created.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.emrcontainers#JavaInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of job templates that can be listed.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next set of job templates to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListJobTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "templates": {
+                    "target": "com.amazonaws.emrcontainers#JobTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This output lists information about the specified job templates.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> This output displays the token for the next set of job templates.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emrcontainers#ListManagedEndpoints": {
             "type": "operation",
             "input": {
@@ -1459,7 +3253,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway\n         that connects EMR Studio to Amazon EMR on EKS so that EMR Studio can communicate with your\n         virtual cluster.</p>",
+                "smithy.api#documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint \n         is a gateway that connects EMR Studio to Amazon EMR on EKS so that EMR Studio \n         can communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints",
@@ -1745,19 +3539,121 @@
                 "smithy.api#pattern": "\\S"
             }
         },
-        "com.amazonaws.emrcontainers#PersistentAppUI": {
+        "com.amazonaws.emrcontainers#ParametricCloudWatchMonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "logGroupName": {
+                    "target": "com.amazonaws.emrcontainers#TemplateParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the log group for log publishing.</p>"
+                    }
+                },
+                "logStreamNamePrefix": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The specified name prefix for log streams.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A configuration for CloudWatch monitoring. You can configure your jobs to send log\n         information to CloudWatch Logs. This data type allows job template parameters to be\n         specified within.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ParametricConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "applicationConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#ConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The configurations for the application running by the job run.</p>"
+                    }
+                },
+                "monitoringConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#ParametricMonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The configurations for monitoring. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A configuration specification to be used to override existing configurations. This data\n         type allows job template parameters to be specified within.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ParametricIAMRoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$)|([\\.\\-_\\#A-Za-z0-9\\$\\{\\}]+)$"
+            }
+        },
+        "com.amazonaws.emrcontainers#ParametricMonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "persistentAppUI": {
+                    "target": "com.amazonaws.emrcontainers#TemplateParameter",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Monitoring configurations for the persistent application UI.</p>"
                     }
-                ]
+                },
+                "cloudWatchMonitoringConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#ParametricCloudWatchMonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Monitoring configurations for CloudWatch.</p>"
+                    }
+                },
+                "s3MonitoringConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#ParametricS3MonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Amazon S3 configuration for monitoring log publishing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Configuration setting for monitoring. This data type allows job template parameters to\n         be specified within.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ParametricReleaseLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^([\\.\\-_/A-Za-z0-9]+|\\$\\{[a-zA-Z]\\w*\\})$"
+            }
+        },
+        "com.amazonaws.emrcontainers#ParametricS3MonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "logUri": {
+                    "target": "com.amazonaws.emrcontainers#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon S3 destination URI for log publishing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to\n         send log information to Amazon S3. This data type allows job template parameters to be\n         specified within.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#PersistentAppUI": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#ReleaseLabel": {
@@ -1979,22 +3875,19 @@
                 "executionRoleArn": {
                     "target": "com.amazonaws.emrcontainers#IAMRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The execution role ARN for the job run.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The execution role ARN for the job run.</p>"
                     }
                 },
                 "releaseLabel": {
                     "target": "com.amazonaws.emrcontainers#ReleaseLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EMR release version to use for the job run.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon EMR release version to use for the job run.</p>"
                     }
                 },
                 "jobDriver": {
                     "target": "com.amazonaws.emrcontainers#JobDriver",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job driver for the job run.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The job driver for the job run.</p>"
                     }
                 },
                 "configurationOverrides": {
@@ -2007,6 +3900,18 @@
                     "target": "com.amazonaws.emrcontainers#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to job runs.</p>"
+                    }
+                },
+                "jobTemplateId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job template ID to be used to start the job run.</p>"
+                    }
+                },
+                "jobTemplateParameters": {
+                    "target": "com.amazonaws.emrcontainers#TemplateParameterInputMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of job template parameters to start a job run.</p>"
                     }
                 }
             }
@@ -2056,6 +3961,16 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.emrcontainers#String2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
                 },
                 "smithy.api#pattern": "\\S"
             }
@@ -2164,6 +4079,93 @@
         "com.amazonaws.emrcontainers#TagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.emrcontainers#TemplateParameter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9\\$\\{\\}]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#TemplateParameterConfiguration": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.emrcontainers#TemplateParameterDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the job template parameter. Allowed values are: ‘String’, ‘Number’.</p>"
+                    }
+                },
+                "defaultValue": {
+                    "target": "com.amazonaws.emrcontainers#String1024",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for the job template parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a job template parameter.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#TemplateParameterConfigurationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emrcontainers#TemplateParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.emrcontainers#TemplateParameterConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TemplateParameterDataType": {
+            "type": "enum",
+            "members": {
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TemplateParameterInputMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emrcontainers#TemplateParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.emrcontainers#String1024"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#TemplateParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_\\#A-Za-z0-9]+$"
+            }
         },
         "com.amazonaws.emrcontainers#UntagResource": {
             "type": "operation",
@@ -2302,26 +4304,32 @@
             }
         },
         "com.amazonaws.emrcontainers#VirtualClusterState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "TERMINATING",
-                        "name": "TERMINATING"
-                    },
-                    {
-                        "value": "TERMINATED",
-                        "name": "TERMINATED"
-                    },
-                    {
-                        "value": "ARRESTED",
-                        "name": "ARRESTED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                },
+                "ARRESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARRESTED"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#VirtualClusterStates": {
