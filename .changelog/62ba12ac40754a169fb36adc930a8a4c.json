@@ -1,8 +1,0 @@
-{
-    "id": "62ba12ac-4075-4a16-9fb3-6adc930a8a4c",
-    "type": "feature",
-    "description": "This release adds protocols attribute to workspaces properties data type. This enables customers to migrate workspaces from PC over IP (PCoIP) to WorkSpaces Streaming Protocol (WSP) using create and modify workspaces public APIs.",
-    "modules": [
-        "service/workspaces"
-    ]
-}

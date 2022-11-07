@@ -1,3 +1,7 @@
+# v1.23.1 (2022-11-07)
+
+* **Documentation**: The geo match statement now adds labels for country and region. You can match requests at the region level by combining a geo match statement with label match statements.
+
 # v1.23.0 (2022-10-27)
 
 * **Feature**: This release adds the following: Challenge rule action, to silently verify client browsers; rule group rule action override to any valid rule action, not just Count; token sharing between protected applications for challenge/CAPTCHA token; targeted rules option for Bot Control managed rule group.

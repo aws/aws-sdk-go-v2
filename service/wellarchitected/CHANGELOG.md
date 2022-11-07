@@ -1,3 +1,7 @@
+# v1.17.0 (2022-11-07)
+
+* **Feature**: This release adds support for integrations with AWS Trusted Advisor and AWS Service Catalog AppRegistry to improve workload discovery and speed up your workload reviews.
+
 # v1.16.13 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

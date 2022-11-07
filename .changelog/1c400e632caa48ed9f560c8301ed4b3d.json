@@ -1,8 +1,0 @@
-{
-    "id": "1c400e63-2caa-48ed-9f56-0c8301ed4b3d",
-    "type": "feature",
-    "description": "This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,29 @@
+# Release (2022-11-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.19.0](service/athena/CHANGELOG.md#v1190-2022-11-07)
+  * **Feature**: Adds support for using Query Result Reuse
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.24.0](service/autoscaling/CHANGELOG.md#v1240-2022-11-07)
+  * **Feature**: This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.20.0](service/cloudtrail/CHANGELOG.md#v1200-2022-11-07)
+  * **Feature**: This release includes support for configuring a delegated administrator to manage an AWS Organizations organization CloudTrail trails and event data stores, and AWS Key Management Service encryption of CloudTrail Lake event data stores.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.67.0](service/ec2/CHANGELOG.md#v1670-2022-11-07)
+  * **Feature**: This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.23.0](service/elasticache/CHANGELOG.md#v1230-2022-11-07)
+  * **Feature**: Added support for IPv6 and dual stack for Memcached and Redis clusters. Customers can now launch new Redis and Memcached clusters with IPv6 and dual stack networking support.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.26.0](service/lexmodelsv2/CHANGELOG.md#v1260-2022-11-07)
+  * **Feature**: Amazon Lex now supports new APIs for viewing and editing Custom Vocabulary in bots.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.27.0](service/mediaconvert/CHANGELOG.md#v1270-2022-11-07)
+  * **Feature**: The AWS Elemental MediaConvert SDK has added support for setting the SDR reference white point for HDR conversions and conversion of HDR10 to DolbyVision without mastering metadata.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.32.0](service/ssm/CHANGELOG.md#v1320-2022-11-07)
+  * **Feature**: This release includes support for applying a CloudWatch alarm to multi account multi region Systems Manager Automation
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.23.1](service/wafv2/CHANGELOG.md#v1231-2022-11-07)
+  * **Documentation**: The geo match statement now adds labels for country and region. You can match requests at the region level by combining a geo match statement with label match statements.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.17.0](service/wellarchitected/CHANGELOG.md#v1170-2022-11-07)
+  * **Feature**: This release adds support for integrations with AWS Trusted Advisor and AWS Service Catalog AppRegistry to improve workload discovery and speed up your workload reviews.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.25.0](service/workspaces/CHANGELOG.md#v1250-2022-11-07)
+  * **Feature**: This release adds protocols attribute to workspaces properties data type. This enables customers to migrate workspaces from PC over IP (PCoIP) to WorkSpaces Streaming Protocol (WSP) using create and modify workspaces public APIs.
+
 # Release (2022-11-04)
 
 ## Module Highlights

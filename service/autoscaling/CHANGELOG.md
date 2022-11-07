@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-07)
+
+* **Feature**: This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.
+
 # v1.23.18 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

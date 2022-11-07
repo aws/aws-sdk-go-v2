@@ -1,8 +1,0 @@
-{
-    "id": "cbbf96d5-9db7-4132-af65-2f795e3c8504",
-    "type": "feature",
-    "description": "This release adds support for integrations with AWS Trusted Advisor and AWS Service Catalog AppRegistry to improve workload discovery and speed up your workload reviews.",
-    "modules": [
-        "service/wellarchitected"
-    ]
-}

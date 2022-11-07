@@ -1,3 +1,7 @@
+# v1.19.0 (2022-11-07)
+
+* **Feature**: Adds support for using Query Result Reuse
+
 # v1.18.12 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

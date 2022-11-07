@@ -1,8 +1,0 @@
-{
-    "id": "6e2fc04b-1557-44f8-bbb2-b597f26d09d3",
-    "type": "feature",
-    "description": "This release includes support for applying a CloudWatch alarm to multi account multi region Systems Manager Automation",
-    "modules": [
-        "service/ssm"
-    ]
-}
