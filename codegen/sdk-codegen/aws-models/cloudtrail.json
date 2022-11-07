@@ -49,6 +49,76 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudtrail#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^\\d+$"
+            }
+        },
+        "com.amazonaws.cloudtrail#AccountNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccountNotFound",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when when the specified account is not found or not part of an organization.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.cloudtrail#AccountNotRegisteredException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccountNotRegistered",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the specified account is not registered as the CloudTrail delegated administrator.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudtrail#AccountRegisteredException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "AccountRegistered",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the account is already registered as the CloudTrail delegated administrator.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#AddTags": {
             "type": "operation",
             "input": {
@@ -75,6 +145,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -252,6 +325,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
@@ -272,8 +348,10 @@
                 "EventDataStore": {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "EventDataStore is no longer required by CancelQueryRequest"
+                        },
+                        "smithy.api#documentation": "<p>The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.</p>"
                     }
                 },
                 "QueryId": {
@@ -302,6 +380,26 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudtrail#CannotDelegateManagementAccountException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CannotDelegateManagementAccount",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the management account of an organization is registered as the CloudTrail delegated administrator.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.cloudtrail#Channel": {
@@ -473,6 +571,9 @@
                     "target": "com.amazonaws.cloudtrail#DeleteTrail"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdmin"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#DescribeQuery"
                 },
                 {
@@ -536,6 +637,9 @@
                     "target": "com.amazonaws.cloudtrail#PutInsightSelectors"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdmin"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#RemoveTags"
                 },
                 {
@@ -585,7 +689,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2799,10 +2903,25 @@
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidKmsKeyIdException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTagParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#KmsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#KmsKeyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -2866,6 +2985,12 @@
                 },
                 "TagsList": {
                     "target": "com.amazonaws.cloudtrail#TagsList"
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The\n         value can be an alias name prefixed by <code>alias/</code>, a fully specified ARN to an alias, a fully\n         specified ARN to a key, or a globally unique identifier.</p>\n         <important>\n            <p>Disabling or deleting the KMS key, or removing CloudTrail \n         permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users \n         from querying the data in the event data store that was encrypted with the key. \n         After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or\n         delete a KMS key that you are using with an event data store, delete or back up your event data store.</p>\n         </important>\n         <p>CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys,\n         see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Using multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>alias/MyAliasName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>12345678-1234-1234-1234-123456789012</code>\n               </p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -2933,6 +3058,12 @@
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that shows when an event data store was updated, if applicable. \n         <code>UpdatedTimestamp</code> is always either the same or newer than the time shown in <code>CreatedTimestamp</code>.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. \n         The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 }
             }
@@ -3008,6 +3139,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#MaximumNumberOfTrailsExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -3240,6 +3374,26 @@
         "com.amazonaws.cloudtrail#Date": {
             "type": "timestamp"
         },
+        "com.amazonaws.cloudtrail#DelegatedAdminAccountLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "DelegatedAdminAccountLimitExceeded",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the maximum number of CloudTrail delegated administrators is reached.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudtrail#DeleteEventDataStore": {
             "type": "operation",
             "input": {
@@ -3266,6 +3420,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -3317,6 +3474,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -3427,6 +3587,73 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#AccountNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#AccountNotRegisteredException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailAccessNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NotOrganizationManagementAccountException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationsNotInUseException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes CloudTrail delegated administrator permissions from a member account in an organization.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminRequest": {
+            "type": "structure",
+            "members": {
+                "DelegatedAdminAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A delegated administrator account ID. This is a member account in an organization \n         that is currently designated as a delegated administrator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Removes CloudTrail delegated administrator permissions from a specified member account in an organization \n         that is currently designated as a delegated administrator.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#DeregisterOrganizationDelegatedAdminResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the following response if successful. Otherwise, returns an error.</p>"
+            }
+        },
         "com.amazonaws.cloudtrail#DescribeQuery": {
             "type": "operation",
             "input": {
@@ -3449,6 +3676,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
@@ -3469,8 +3699,10 @@
                 "EventDataStore": {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (or the ID suffix of the ARN) of an event data store on which the specified query was run.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "EventDataStore is no longer required by DescribeQueryRequest"
+                        },
+                        "smithy.api#documentation": "<p>The ARN (or the ID suffix of the ARN) of an event data store on which the specified query was run.</p>"
                     }
                 },
                 "QueryId": {
@@ -3540,6 +3772,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -3883,6 +4118,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 350
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._/\\-:]+$"
+            }
+        },
         "com.amazonaws.cloudtrail#EventDataStoreMaxLimitExceededException": {
             "type": "structure",
             "members": {
@@ -4055,7 +4300,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about \n         service-linked channels, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html\">Viewing service-linked channels for CloudTrail by using the CLI.</a>.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Returns information about a specific channel. Amazon Web Services services create service-linked channels to get information about CloudTrail events on your behalf. For more information about \n         service-linked channels, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html\">Viewing service-linked channels for CloudTrail by using the CLI</a>.\n      </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4123,6 +4368,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -4210,6 +4458,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Shows the time that an event data store was updated, if applicable. <code>UpdatedTimestamp</code> is always either the same or newer than the time shown in <code>CreatedTimestamp</code>.</p>"
                     }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. \n         The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                    }
                 }
             }
         },
@@ -4224,6 +4478,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -4388,6 +4645,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
@@ -4450,6 +4710,9 @@
                     "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidMaxResultsException"
                 },
                 {
@@ -4457,6 +4720,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -4482,8 +4748,10 @@
                 "EventDataStore": {
                     "target": "com.amazonaws.cloudtrail#EventDataStoreArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN (or ID suffix of the ARN) of the event data store against which the query was run.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "EventDataStore is no longer required by GetQueryResultsRequest"
+                        },
+                        "smithy.api#documentation": "<p>The ARN (or ID suffix of the ARN) of the event data store against which the query was run.</p>"
                     }
                 },
                 "QueryId": {
@@ -5667,7 +5935,7 @@
                     "code": "KmsException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>This exception is thrown when there is an issue with the specified KMS key and the trail can’t be updated.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when there is an issue with the specified KMS key and the trail or event data store can't be updated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5799,6 +6067,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -6143,6 +6414,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidQueryStatusException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
                 },
                 {
@@ -6250,6 +6524,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -6630,6 +6907,46 @@
         "com.amazonaws.cloudtrail#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NoManagementAccountSLRExists",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the management account does not have a service-linked role. \n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.cloudtrail#NotOrganizationManagementAccountException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudtrail#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Brief description of the exception returned by the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "NotOrganizationManagementAccount",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>\n         This exception is thrown when the account making the request is not the organization's management account.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
         "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException": {
             "type": "structure",
             "members": {
@@ -6801,6 +7118,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
                 },
                 {
@@ -6891,6 +7211,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#KmsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -7166,6 +7489,79 @@
                 }
             }
         },
+        "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#AccountNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#AccountRegisteredException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#CannotDelegateManagementAccountException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailAccessNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#DelegatedAdminAccountLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NotOrganizationManagementAccountException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationNotInAllFeaturesModeException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#OrganizationsNotInUseException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers an organization’s member account as the CloudTrail delegated administrator.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminRequest": {
+            "type": "structure",
+            "members": {
+                "MemberAccountId": {
+                    "target": "com.amazonaws.cloudtrail#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An organization member account ID that you want to designate as a delegated administrator.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an organization member account ID as a CloudTrail delegated administrator.</p>"
+            }
+        },
+        "com.amazonaws.cloudtrail#RegisterOrganizationDelegatedAdminResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the following response if successful. Otherwise, returns an error.</p>"
+            }
+        },
         "com.amazonaws.cloudtrail#RemoveTags": {
             "type": "operation",
             "input": {
@@ -7189,6 +7585,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -7372,6 +7771,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
                 },
                 {
@@ -7464,6 +7866,12 @@
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that shows when an event data store was updated, if applicable. \n         <code>UpdatedTimestamp</code> is always either the same or newer than the time shown in <code>CreatedTimestamp</code>.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. \n         The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 }
             }
@@ -7730,6 +8138,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
                 },
                 {
@@ -7788,6 +8199,9 @@
                     "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InsufficientS3BucketPolicyException"
                 },
                 {
@@ -7804,6 +8218,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#MaxConcurrentQueriesException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#OperationNotPermittedException"
@@ -7963,6 +8380,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -8349,7 +8769,22 @@
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidKmsKeyIdException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#KmsException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#KmsKeyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"
@@ -8417,6 +8852,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates that termination protection is enabled and the event data store cannot be automatically deleted.</p>"
                     }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The\n         value can be an alias name prefixed by <code>alias/</code>, a fully specified ARN to an alias, a fully\n         specified ARN to a key, or a globally unique identifier.</p>\n         <important>\n            <p>Disabling or deleting the KMS key, or removing CloudTrail \n         permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users \n         from querying the data in the event data store that was encrypted with the key. \n         After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or\n         delete a KMS key that you are using with an event data store, delete or back up your event data store.</p>\n         </important>\n         <p>CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys,\n         see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Using multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>alias/MyAliasName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>12345678-1234-1234-1234-123456789012</code>\n               </p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -8482,6 +8923,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp that shows when the event data store was last updated. <code>UpdatedTimestamp</code> is always either the same or newer than the time shown in <code>CreatedTimestamp</code>.</p>"
                     }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.cloudtrail#EventDataStoreKmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the events delivered by CloudTrail. \n         The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                    }
                 }
             }
         },
@@ -8534,6 +8981,9 @@
                     "target": "com.amazonaws.cloudtrail#InvalidParameterCombinationException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InvalidParameterException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidS3BucketNameException"
                 },
                 {
@@ -8553,6 +9003,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#KmsKeyNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#NoManagementAccountSLRExistsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#NotOrganizationMasterAccountException"

@@ -4477,6 +4477,29 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#Protocol": {
+            "type": "enum",
+            "members": {
+                "PCOIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PCOIP"
+                    }
+                },
+                "WSP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WSP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ProtocolList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#Protocol"
+            }
+        },
         "com.amazonaws.workspaces#RebootRequest": {
             "type": "structure",
             "members": {
@@ -6488,6 +6511,12 @@
                     "target": "com.amazonaws.workspaces#Compute",
                     "traits": {
                         "smithy.api#documentation": "<p>The compute type. For more information, see <a href=\"http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles\">Amazon WorkSpaces\n         Bundles</a>.</p>"
+                    }
+                },
+                "Protocols": {
+                    "target": "com.amazonaws.workspaces#ProtocolList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol. For more information, see \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html\">\n            Protocols for Amazon WorkSpaces</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Only available for WorkSpaces created with PCoIP bundles.</p>\n               </li>\n               <li>\n                  <p>The <code>Protocols</code> property is case sensitive. Ensure you use <code>PCOIP</code> or <code>WSP</code>.</p>\n               </li>\n               <li>\n                  <p>Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles \n               (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 }
             },

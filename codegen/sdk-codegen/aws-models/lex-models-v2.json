@@ -430,6 +430,321 @@
                 "smithy.api#documentation": "<p>Specifies the audio input specifications.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Batch create custom vocabulary item for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchcreate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItemRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique locale identifier of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "customVocabularyItemList": {
+                    "target": "com.amazonaws.lexmodelsv2#CreateCustomVocabularyItemsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom vocabulary item list of the bot to batch create the custom\n         vocabulary item for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItemResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch create response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to batch create the custom\n         vocabulary item response for.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique locale identifier of the bot to batch create the custom\n         vocabulary item response for.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors of the action to batch create the custom\n         vocabulary item response for a bot.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources of the action to batch create the custom\n         vocabulary item response for a bot.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchDeleteCustomVocabularyItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#BatchDeleteCustomVocabularyItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#BatchDeleteCustomVocabularyItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Batch delete custom vocabulary item for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchdelete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchDeleteCustomVocabularyItemRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "customVocabularyItemList": {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyItemsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom vocabulary list to batch delete request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchDeleteCustomVocabularyItemResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to batch delete response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to batch delete response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot to batch delete response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors of the action to batch delete response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources of the action to batch delete response for the custom\n         vocabulary item.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchUpdateCustomVocabularyItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#BatchUpdateCustomVocabularyItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#BatchUpdateCustomVocabularyItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Batch update custom vocabulary item for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchupdate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchUpdateCustomVocabularyItemRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "customVocabularyItemList": {
+                    "target": "com.amazonaws.lexmodelsv2#UpdateCustomVocabularyItemsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom vocabulary item list of the bot to the batch update request for the custom\n         vocabulary item.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BatchUpdateCustomVocabularyItemResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to the batch update response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to the batch update response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot to the batch update response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors of the action to batch update response for the custom\n         vocabulary item.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources of the action to batch update response for the custom\n         vocabulary item.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#Boolean": {
             "type": "boolean",
             "traits": {
@@ -2578,6 +2893,18 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#CreateCustomVocabularyItemsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#NewCustomVocabularyItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#CreateExport": {
             "type": "operation",
             "input": {
@@ -3572,6 +3899,21 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#CustomVocabularyEntryId": {
+            "type": "structure",
+            "members": {
+                "itemId": {
+                    "target": "com.amazonaws.lexmodelsv2#ItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique item identifier for the custom vocabulary\n         items.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique entry identifier for the custom vocabulary \n         items.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#CustomVocabularyExportSpecification": {
             "type": "structure",
             "members": {
@@ -3628,6 +3970,46 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides the parameters required for importing a custom vocabulary.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CustomVocabularyItem": {
+            "type": "structure",
+            "members": {
+                "itemId": {
+                    "target": "com.amazonaws.lexmodelsv2#ItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique item identifer for the custom vocabulary item \n         from the custom vocabulary list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phrase": {
+                    "target": "com.amazonaws.lexmodelsv2#Phrase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique phrase for the custom vocabulary item \n         from the custom vocabulary list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weight": {
+                    "target": "com.amazonaws.lexmodelsv2#Weight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight assigned for the custom vocabulary item \n         from the custom vocabulary list.</p>"
+                    }
+                },
+                "displayAs": {
+                    "target": "com.amazonaws.lexmodelsv2#Phrase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display as value for the custom vocabulary item \n         from the custom vocabulary list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique custom vocabulary item from the custom \n         vocabulary list.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CustomVocabularyItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItem"
             }
         },
         "com.amazonaws.lexmodelsv2#CustomVocabularyStatus": {
@@ -4144,6 +4526,18 @@
                     "method": "DELETE",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary",
                     "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteCustomVocabularyItemsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#CustomVocabularyEntryId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -6915,6 +7309,38 @@
                 "smithy.api#documentation": "<p>The object representing the passwords that were used to encrypt the\n         data related to the bot recommendation, as well as the KMS key ARN used\n         to encrypt the associated metadata.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#ErrorCode": {
+            "type": "enum",
+            "members": {
+                "DUPLICATE_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_INPUT"
+                    }
+                },
+                "RESOURCE_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_DOES_NOT_EXIST"
+                    }
+                },
+                "RESOURCE_ALREADY_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_ALREADY_EXISTS"
+                    }
+                },
+                "INTERNAL_SERVER_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_FAILURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ErrorMessage": {
+            "type": "string"
+        },
         "com.amazonaws.lexmodelsv2#ExceptionMessage": {
             "type": "string"
         },
@@ -7137,6 +7563,38 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the external source of the slot type's\n         definition.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItem": {
+            "type": "structure",
+            "members": {
+                "itemId": {
+                    "target": "com.amazonaws.lexmodelsv2#ItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique item identifer for the failed custom vocabulary item \n         from the custom vocabulary list.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for the failed custom vocabulary item \n         from the custom vocabulary list.</p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.lexmodelsv2#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique error code for the failed custom vocabulary item \n         from the custom vocabulary list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique failed custom vocabulary item from the custom \n         vocabulary list.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#FailedCustomVocabularyItem"
             }
         },
         "com.amazonaws.lexmodelsv2#FailureReason": {
@@ -7756,8 +8214,6 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether an intent's closing response is used. When this\n         field is false, the closing response isn't sent to the user. If the\n            <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 },
@@ -7797,8 +8253,6 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether the intent's confirmation is sent to the user.\n         When this field is false, confirmation and declination responses aren't\n         sent. If the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 },
@@ -8072,6 +8526,15 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.lexmodelsv2#ItemId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#KendraConfiguration": {
             "type": "structure",
             "members": {
@@ -8156,6 +8619,15 @@
             "type": "service",
             "version": "2020-08-07",
             "operations": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#BatchCreateCustomVocabularyItem"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#BatchDeleteCustomVocabularyItem"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#BatchUpdateCustomVocabularyItem"
+                },
                 {
                     "target": "com.amazonaws.lexmodelsv2#BuildBotLocale"
                 },
@@ -8292,6 +8764,9 @@
                     "target": "com.amazonaws.lexmodelsv2#ListBuiltInSlotTypes"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListCustomVocabularyItems"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListExports"
                 },
                 {
@@ -8371,7 +8846,937 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p></p>",
-                "smithy.api#title": "Amazon Lex Model Building V2"
+                "smithy.api#title": "Amazon Lex Model Building V2",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://models-v2-lex-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://models-v2-lex-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://models-v2-lex.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://models-v2-lex.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://models-v2-lex.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#LexTranscriptFilter": {
@@ -9210,6 +10615,121 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#ListCustomVocabularyItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListCustomVocabularyItemsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListCustomVocabularyItemsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List custom vocabulary items for the specified locale in the \n         specified bot.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListCustomVocabularyItemsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to the list custom vocabulary \n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to the list custom vocabulary \n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot to the list custom vocabulary \n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum results to the list custom vocabulary \n         request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken identifier to the list custom vocabulary \n         request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListCustomVocabularyItemsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot to the list custom vocabulary \n         response.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot version of the bot to the list custom vocabulary \n         response.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale identifier of the bot to the list custom vocabulary \n         response.</p>"
+                    }
+                },
+                "customVocabularyItems": {
+                    "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom vocabulary items from the list custom vocabulary \n         response.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken identifier to the list custom vocabulary \n         response.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#ListExports": {
             "type": "operation",
             "input": {
@@ -9590,7 +11110,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of recommended intents provided by the bot\n         recommendation that you can use in your bot.</p>",
+                "smithy.api#documentation": "<p>Gets a list of recommended intents provided by the bot\n         recommendation that you can use in your bot. Intents in the \n         response are ordered by relevance.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/intents",
@@ -10188,6 +11708,33 @@
                 "smithy.api#pattern": "^([0-9a-zA-Z][_-]?)+$"
             }
         },
+        "com.amazonaws.lexmodelsv2#NewCustomVocabularyItem": {
+            "type": "structure",
+            "members": {
+                "phrase": {
+                    "target": "com.amazonaws.lexmodelsv2#Phrase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique phrase for the new custom vocabulary item from the custom \n         vocabulary list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weight": {
+                    "target": "com.amazonaws.lexmodelsv2#Weight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight assigned to the new custom vocabulary item from the custom \n         vocabulary list.</p>"
+                    }
+                },
+                "displayAs": {
+                    "target": "com.amazonaws.lexmodelsv2#Phrase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display as value assigned to the new custom vocabulary item from the custom \n         vocabulary list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The new custom vocabulary item from the custom \n         vocabulary list.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#NextIndex": {
             "type": "integer",
             "traits": {
@@ -10340,6 +11887,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The object that contains a path format that will be applied when\n         Amazon Lex reads the transcript file in the bucket you provide. Specify this\n         object if you only want Lex to read a subset of files in your Amazon S3\n         bucket.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#Phrase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#PlainTextMessage": {
@@ -11060,8 +12616,6 @@
                 "searchOrder": {
                     "target": "com.amazonaws.lexmodelsv2#SearchOrder",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "Descending",
                         "smithy.api#documentation": "<p>How SearchResults are ordered. Valid values are Ascending or\n         Descending. The default is Descending.</p>"
                     }
                 },
@@ -11918,8 +13472,6 @@
                 "resolutionStrategy": {
                     "target": "com.amazonaws.lexmodelsv2#SlotValueResolutionStrategy",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "OriginalValue",
                         "smithy.api#documentation": "<p>Determines the slot resolution strategy that Amazon Lex uses to\n         return slot type values. The field can be set to one of the following\n         values:</p>\n\n         <ul>\n            <li>\n               <p>OriginalValue - Returns the value entered by the user, if the\n               user value is similar to the slot value.</p>\n            </li>\n            <li>\n               <p>TopResolution - If there is a resolution list for the slot,\n               return the first value in the resolution list as the slot type\n               value. If there is no resolution list, null is returned.</p>\n            </li>\n         </ul>\n\n         <p>If you don't specify the valueSelectionStrategy, the default is\n         OriginalValue. </p>",
                         "smithy.api#required": {}
                     }
@@ -13460,6 +15012,18 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#UpdateCustomVocabularyItemsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#CustomVocabularyItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#UpdateExport": {
             "type": "operation",
             "input": {
@@ -14392,8 +15956,6 @@
                 "engine": {
                     "target": "com.amazonaws.lexmodelsv2#VoiceEngine",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": "standard",
                         "smithy.api#documentation": "<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more\n         information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">\n               <code>engine</code> parameter of the\n               <code>SynthesizeSpeech</code> operation</a> in the\n               <i>Amazon Polly developer guide</i>.</p>\n         <p>If you do not specify a value, the default is\n         <code>standard</code>.</p>"
                     }
                 }
@@ -14428,14 +15990,21 @@
                 "active": {
                     "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
                     "traits": {
-                        "smithy.api#addedDefault": {},
-                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Specifies whether the bot will wait for a user to respond. When this\n         field is false, wait and continue responses for a slot aren't used. If\n         the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the prompts that Amazon Lex uses while a bot is waiting for\n         customer input. </p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#Weight": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3
+                }
             }
         }
     }

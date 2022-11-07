@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -45,19 +45,33 @@
                 "smithy.api#httpError": 403
             }
         },
-        "com.amazonaws.wellarchitected#AdditionalResourceType": {
-            "type": "string",
+        "com.amazonaws.wellarchitected#AccountSummary": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.wellarchitected#CheckStatus"
+            },
+            "value": {
+                "target": "com.amazonaws.wellarchitected#CheckStatusCount"
+            },
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HELPFUL_RESOURCE",
-                        "name": "HELPFUL_RESOURCE"
-                    },
-                    {
-                        "value": "IMPROVEMENT_PLAN",
-                        "name": "IMPROVEMENT_PLAN"
+                "smithy.api#documentation": "<p>Account summary for a Well-Architected best practice in relation to Trusted Advisor checks.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AdditionalResourceType": {
+            "type": "enum",
+            "members": {
+                "HELPFUL_RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HELPFUL_RESOURCE"
                     }
-                ]
+                },
+                "IMPROVEMENT_PLAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPROVEMENT_PLAN"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#AdditionalResources": {
@@ -126,7 +140,10 @@
                     }
                 },
                 "IsApplicable": {
-                    "target": "com.amazonaws.wellarchitected#IsApplicable"
+                    "target": "com.amazonaws.wellarchitected#IsApplicable",
+                    "traits": {
+                        "smithy.api#default": false
+                    }
                 },
                 "Risk": {
                     "target": "com.amazonaws.wellarchitected#Risk"
@@ -146,30 +163,38 @@
             }
         },
         "com.amazonaws.wellarchitected#AnswerReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OUT_OF_SCOPE",
-                        "name": "OUT_OF_SCOPE"
-                    },
-                    {
-                        "value": "BUSINESS_PRIORITIES",
-                        "name": "BUSINESS_PRIORITIES"
-                    },
-                    {
-                        "value": "ARCHITECTURE_CONSTRAINTS",
-                        "name": "ARCHITECTURE_CONSTRAINTS"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "OUT_OF_SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUT_OF_SCOPE"
                     }
-                ]
+                },
+                "BUSINESS_PRIORITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS_PRIORITIES"
+                    }
+                },
+                "ARCHITECTURE_CONSTRAINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHITECTURE_CONSTRAINTS"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#AnswerSummaries": {
@@ -206,7 +231,10 @@
                     }
                 },
                 "IsApplicable": {
-                    "target": "com.amazonaws.wellarchitected#IsApplicable"
+                    "target": "com.amazonaws.wellarchitected#IsApplicable",
+                    "traits": {
+                        "smithy.api#default": false
+                    }
                 },
                 "Risk": {
                     "target": "com.amazonaws.wellarchitected#Risk"
@@ -220,6 +248,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An answer summary of a lens review in a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2084
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+$"
             }
         },
         "com.amazonaws.wellarchitected#AssociateLenses": {
@@ -301,6 +339,246 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The Base64-encoded string representation of a lens review report.</p>\n        <p>This data can be used to create a PDF file.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckDescription": {
+            "type": "string"
+        },
+        "com.amazonaws.wellarchitected#CheckDetail": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.wellarchitected#CheckId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trusted Advisor check ID.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.wellarchitected#CheckName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trusted Advisor check name.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#CheckDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trusted Advisor check description.</p>"
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.wellarchitected#CheckProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider of the check related to the best practice.</p>"
+                    }
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Well-Architected Lens ARN associated to the check.</p>"
+                    }
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#CheckStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status associated to the check.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "FlaggedResources": {
+                    "target": "com.amazonaws.wellarchitected#FlaggedResources",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Count of flagged resources associated to the check.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.wellarchitected#CheckFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason associated to the check.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Account details for a Well-Architected best practice in relation to Trusted Advisor checks.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#CheckDetail"
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckFailureReason": {
+            "type": "enum",
+            "members": {
+                "ASSUME_ROLE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSUME_ROLE_ERROR"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "UNKNOWN_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_ERROR"
+                    }
+                },
+                "PREMIUM_SUPPORT_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREMIUM_SUPPORT_REQUIRED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckId": {
+            "type": "string"
+        },
+        "com.amazonaws.wellarchitected#CheckName": {
+            "type": "string"
+        },
+        "com.amazonaws.wellarchitected#CheckProvider": {
+            "type": "enum",
+            "members": {
+                "TRUSTED_ADVISOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUSTED_ADVISOR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckStatus": {
+            "type": "enum",
+            "members": {
+                "OKAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OKAY"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARNING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_AVAILABLE"
+                    }
+                },
+                "FETCH_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FETCH_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckStatusCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 101
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#CheckSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#CheckSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.wellarchitected#CheckId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trusted Advisor check ID.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.wellarchitected#CheckName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trusted Advisor check name.</p>"
+                    }
+                },
+                "Provider": {
+                    "target": "com.amazonaws.wellarchitected#CheckProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider of the check related to the best practice.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.wellarchitected#CheckDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Trusted Advisor check description.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Well-Architected Lens ARN associated to the check.</p>"
+                    }
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#CheckStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status associated to the check.</p>"
+                    }
+                },
+                "AccountSummary": {
+                    "target": "com.amazonaws.wellarchitected#AccountSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account summary associated to the check.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Trusted Advisor check summary.</p>"
             }
         },
         "com.amazonaws.wellarchitected#Choice": {
@@ -496,49 +774,61 @@
             }
         },
         "com.amazonaws.wellarchitected#ChoiceReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OUT_OF_SCOPE",
-                        "name": "OUT_OF_SCOPE"
-                    },
-                    {
-                        "value": "BUSINESS_PRIORITIES",
-                        "name": "BUSINESS_PRIORITIES"
-                    },
-                    {
-                        "value": "ARCHITECTURE_CONSTRAINTS",
-                        "name": "ARCHITECTURE_CONSTRAINTS"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "OUT_OF_SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUT_OF_SCOPE"
                     }
-                ]
+                },
+                "BUSINESS_PRIORITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS_PRIORITIES"
+                    }
+                },
+                "ARCHITECTURE_CONSTRAINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHITECTURE_CONSTRAINTS"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ChoiceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SELECTED",
-                        "name": "SELECTED"
-                    },
-                    {
-                        "value": "NOT_APPLICABLE",
-                        "name": "NOT_APPLICABLE"
-                    },
-                    {
-                        "value": "UNSELECTED",
-                        "name": "UNSELECTED"
+            "type": "enum",
+            "members": {
+                "SELECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELECTED"
                     }
-                ]
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
+                    }
+                },
+                "UNSELECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSELECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ChoiceTitle": {
@@ -633,6 +923,7 @@
         "com.amazonaws.wellarchitected#Count": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>A non-negative integer that denotes how many.</p>",
                 "smithy.api#range": {
                     "min": 0
@@ -671,7 +962,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a lens share.</p>\n        <p>The owner of a lens can share it with other Amazon Web Services accounts and IAM users in the same Amazon Web Services Region. \n            Shared access to a lens is not removed until the lens invitation is deleted.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Create a lens share.</p>\n        <p>The owner of a lens can share it with other Amazon Web Services accounts, IAM users, an organization,\n            and organizational units (OUs) in the same Amazon Web Services Region. \n            Shared access to a lens is not removed until the lens invitation is deleted.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/lenses/{LensAlias}/shares",
@@ -772,6 +1063,7 @@
                 "IsMajorVersion": {
                     "target": "com.amazonaws.wellarchitected#IsMajorVersion",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to true if this new major lens version.</p>"
                     }
                 },
@@ -876,7 +1168,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 }
             },
             "traits": {
@@ -912,7 +1207,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new workload.</p>\n        <p>The owner of a workload can share the workload with other Amazon Web Services accounts and IAM users\n            in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Create a new workload.</p>\n        <p>The owner of a workload can share the workload with other Amazon Web Services accounts, IAM users,\n            an organization, and organizational units (OUs) \n            in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html\">Defining a Workload</a> in the\n                <i>Well-Architected Tool User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/workloads",
@@ -985,6 +1280,18 @@
                     "target": "com.amazonaws.wellarchitected#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to be associated with the workload.</p>"
+                    }
+                },
+                "DiscoveryConfig": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Well-Architected discovery configuration settings associated to the workload.</p>"
+                    }
+                },
+                "Applications": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadApplications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AppRegistry application ARNs associated to the workload.</p>"
                     }
                 }
             },
@@ -1188,7 +1495,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a lens share.</p>\n        <p>After the lens share is deleted,  Amazon Web Services accounts and IAM users \n            that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Delete a lens share.</p>\n        <p>After the lens share is deleted,  Amazon Web Services accounts, IAM users, organizations,\n            and organizational units (OUs) \n            that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p>\n        <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your custom lenses with other Amazon Web Services accounts, \n                you acknowledge that Amazon Web Services will make your custom lenses available to those \n                other accounts. Those other accounts may continue to access and use your \n                shared custom lenses even if you delete the custom lenses \n                from your own Amazon Web Services account or terminate \n                your Amazon Web Services account.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/lenses/{LensAlias}/shares/{ShareId}",
@@ -1351,22 +1658,26 @@
             }
         },
         "com.amazonaws.wellarchitected#DifferenceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UPDATED",
-                        "name": "UPDATED"
-                    },
-                    {
-                        "value": "NEW",
-                        "name": "NEW"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
                     }
-                ]
+                },
+                "NEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#DisassociateLenses": {
@@ -1518,6 +1829,16 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#FlaggedResources": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 9999
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#GetAnswer": {
             "type": "operation",
             "input": {
@@ -1579,6 +1900,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MilestoneNumber"
                     }
                 }
@@ -1594,7 +1916,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
@@ -1731,6 +2056,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MilestoneNumber"
                     }
                 }
@@ -1746,7 +2072,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "LensReview": {
                     "target": "com.amazonaws.wellarchitected#LensReview"
@@ -1810,6 +2139,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MilestoneNumber"
                     }
                 }
@@ -1825,7 +2155,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "LensReviewReport": {
                     "target": "com.amazonaws.wellarchitected#LensReviewReport"
@@ -1977,6 +2310,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2156,22 +2490,26 @@
             }
         },
         "com.amazonaws.wellarchitected#ImportLensStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ImprovementPlanUrl": {
@@ -2241,14 +2579,21 @@
         "com.amazonaws.wellarchitected#IsApplicable": {
             "type": "boolean",
             "traits": {
+                "smithy.api#default": false,
                 "smithy.api#documentation": "<p>Defines whether this question is applicable to a lens review.</p>"
             }
         },
         "com.amazonaws.wellarchitected#IsMajorVersion": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.wellarchitected#Lens": {
             "type": "structure",
@@ -2504,49 +2849,61 @@
             }
         },
         "com.amazonaws.wellarchitected#LensStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CURRENT",
-                        "name": "CURRENT"
-                    },
-                    {
-                        "value": "NOT_CURRENT",
-                        "name": "NOT_CURRENT"
-                    },
-                    {
-                        "value": "DEPRECATED",
-                        "name": "DEPRECATED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
-                    },
-                    {
-                        "value": "UNSHARED",
-                        "name": "UNSHARED"
+            "type": "enum",
+            "members": {
+                "CURRENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CURRENT"
                     }
-                ]
+                },
+                "NOT_CURRENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CURRENT"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "UNSHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSHARED"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#LensStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "PUBLISHED",
-                        "name": "PUBLISHED"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
+                    }
+                },
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#LensSummaries": {
@@ -2609,22 +2966,26 @@
             }
         },
         "com.amazonaws.wellarchitected#LensType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AWS_OFFICIAL",
-                        "name": "AWS_OFFICIAL"
-                    },
-                    {
-                        "value": "CUSTOM_SHARED",
-                        "name": "CUSTOM_SHARED"
-                    },
-                    {
-                        "value": "CUSTOM_SELF",
-                        "name": "CUSTOM_SELF"
+            "type": "enum",
+            "members": {
+                "AWS_OFFICIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OFFICIAL"
                     }
-                ]
+                },
+                "CUSTOM_SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_SHARED"
+                    }
+                },
+                "CUSTOM_SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_SELF"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#LensUpgradeSummary": {
@@ -2736,6 +3097,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MilestoneNumber"
                     }
                 },
@@ -2748,6 +3110,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListAnswersMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -2760,6 +3123,7 @@
         "com.amazonaws.wellarchitected#ListAnswersMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -2773,7 +3137,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
@@ -2793,6 +3160,204 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output of a list answers call.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ListCheckDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListCheckDetailsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListCheckDetailsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List of Trusted Advisor check details by account related to the workload.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads/{WorkloadId}/checks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListCheckDetailsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Well-Architected Lens ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListCheckDetailsOutput": {
+            "type": "structure",
+            "members": {
+                "CheckDetails": {
+                    "target": "com.amazonaws.wellarchitected#CheckDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details about the Trusted Advisor checks related to the Well-Architected best practice.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListCheckSummaries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListCheckSummariesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListCheckSummariesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List of Trusted Advisor checks summarized for all accounts related to the workload.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads/{WorkloadId}/checkSummaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListCheckSummariesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
+                },
+                "LensArn": {
+                    "target": "com.amazonaws.wellarchitected#LensArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Well-Architected Lens ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListCheckSummariesOutput": {
+            "type": "structure",
+            "members": {
+                "CheckSummaries": {
+                    "target": "com.amazonaws.wellarchitected#CheckSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Trusted Advisor summaries related to the Well-Architected best practice.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
             }
         },
         "com.amazonaws.wellarchitected#ListLensReviewImprovements": {
@@ -2860,6 +3425,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MilestoneNumber"
                     }
                 },
@@ -2872,6 +3438,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListLensReviewImprovementsMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -2884,6 +3451,7 @@
         "com.amazonaws.wellarchitected#ListLensReviewImprovementsMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2897,7 +3465,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "LensAlias": {
                     "target": "com.amazonaws.wellarchitected#LensAlias"
@@ -2971,6 +3542,7 @@
                 "MilestoneNumber": {
                     "target": "com.amazonaws.wellarchitected#MilestoneNumber",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MilestoneNumber"
                     }
                 },
@@ -2983,6 +3555,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MaxResults"
                     }
                 }
@@ -2998,7 +3571,10 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadId"
                 },
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "LensReviewSummaries": {
                     "target": "com.amazonaws.wellarchitected#LensReviewSummaries"
@@ -3063,7 +3639,7 @@
                 "SharedWithPrefix": {
                     "target": "com.amazonaws.wellarchitected#SharedWithPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID or IAM role with which the lens is shared.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the lens is shared.</p>",
                         "smithy.api#httpQuery": "SharedWithPrefix"
                     }
                 },
@@ -3076,6 +3652,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3150,6 +3727,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "MaxResults"
                     }
                 },
@@ -3245,7 +3823,10 @@
                     "target": "com.amazonaws.wellarchitected#NextToken"
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.wellarchitected#MaxResults"
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 }
             },
             "traits": {
@@ -3317,6 +3898,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListNotificationsMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>"
                     }
                 }
@@ -3325,6 +3907,7 @@
         "com.amazonaws.wellarchitected#ListNotificationsMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3413,6 +3996,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListShareInvitationsMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3425,6 +4009,7 @@
         "com.amazonaws.wellarchitected#ListShareInvitationsMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3548,7 +4133,7 @@
                 "SharedWithPrefix": {
                     "target": "com.amazonaws.wellarchitected#SharedWithPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.</p>",
                         "smithy.api#httpQuery": "SharedWithPrefix"
                     }
                 },
@@ -3561,6 +4146,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -3579,6 +4165,7 @@
         "com.amazonaws.wellarchitected#ListWorkloadSharesMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3650,6 +4237,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.wellarchitected#ListWorkloadsMaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>"
                     }
                 }
@@ -3661,6 +4249,7 @@
         "com.amazonaws.wellarchitected#ListWorkloadsMaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
@@ -3684,6 +4273,7 @@
         "com.amazonaws.wellarchitected#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                 "smithy.api#range": {
                     "min": 1,
@@ -3695,7 +4285,10 @@
             "type": "structure",
             "members": {
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "MilestoneName": {
                     "target": "com.amazonaws.wellarchitected#MilestoneName"
@@ -3724,6 +4317,7 @@
         "com.amazonaws.wellarchitected#MilestoneNumber": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "<p>The milestone number.</p>\n        <p>A workload can have a maximum of 100 milestones.</p>",
                 "smithy.api#range": {
                     "min": 1,
@@ -3744,7 +4338,10 @@
             "type": "structure",
             "members": {
                 "MilestoneNumber": {
-                    "target": "com.amazonaws.wellarchitected#MilestoneNumber"
+                    "target": "com.amazonaws.wellarchitected#MilestoneNumber",
+                    "traits": {
+                        "smithy.api#default": 0
+                    }
                 },
                 "MilestoneName": {
                     "target": "com.amazonaws.wellarchitected#MilestoneName"
@@ -3803,49 +4400,57 @@
             }
         },
         "com.amazonaws.wellarchitected#NotificationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LENS_VERSION_UPGRADED",
-                        "name": "LENS_VERSION_UPGRADED"
-                    },
-                    {
-                        "value": "LENS_VERSION_DEPRECATED",
-                        "name": "LENS_VERSION_DEPRECATED"
+            "type": "enum",
+            "members": {
+                "LENS_VERSION_UPGRADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LENS_VERSION_UPGRADED"
                     }
-                ]
+                },
+                "LENS_VERSION_DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LENS_VERSION_DEPRECATED"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#OrganizationSharingStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "DISABLED",
-                        "name": "DISABLED"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#PermissionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Permission granted on a workload share.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "READONLY",
-                        "name": "READONLY"
-                    },
-                    {
-                        "value": "CONTRIBUTOR",
-                        "name": "CONTRIBUTOR"
+            "type": "enum",
+            "members": {
+                "READONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READONLY"
                     }
-                ]
+                },
+                "CONTRIBUTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTRIBUTOR"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Permission granted on a workload share.</p>"
             }
         },
         "com.amazonaws.wellarchitected#PillarDifference": {
@@ -4032,31 +4637,41 @@
             }
         },
         "com.amazonaws.wellarchitected#Risk": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The risk for a given workload, lens review, pillar, or question.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "UNANSWERED",
-                        "name": "UNANSWERED"
-                    },
-                    {
-                        "value": "HIGH",
-                        "name": "HIGH"
-                    },
-                    {
-                        "value": "MEDIUM",
-                        "name": "MEDIUM"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "NOT_APPLICABLE",
-                        "name": "NOT_APPLICABLE"
+            "type": "enum",
+            "members": {
+                "UNANSWERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNANSWERED"
                     }
-                ]
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The risk for a given workload, lens review, pillar, or question.</p>"
             }
         },
         "com.amazonaws.wellarchitected#RiskCounts": {
@@ -4160,19 +4775,23 @@
             }
         },
         "com.amazonaws.wellarchitected#ShareInvitationAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Share invitation action taken by contributor.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCEPT",
-                        "name": "ACCEPT"
-                    },
-                    {
-                        "value": "REJECT",
-                        "name": "REJECT"
+            "type": "enum",
+            "members": {
+                "ACCEPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPT"
                     }
-                ]
+                },
+                "REJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Share invitation action taken by contributor.</p>"
             }
         },
         "com.amazonaws.wellarchitected#ShareInvitationId": {
@@ -4232,64 +4851,82 @@
             }
         },
         "com.amazonaws.wellarchitected#ShareResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WORKLOAD",
-                        "name": "WORKLOAD"
-                    },
-                    {
-                        "value": "LENS",
-                        "name": "LENS"
+            "type": "enum",
+            "members": {
+                "WORKLOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKLOAD"
                     }
-                ]
+                },
+                "LENS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LENS"
+                    }
+                }
             }
         },
         "com.amazonaws.wellarchitected#ShareStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The status of a workload share.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCEPTED",
-                        "name": "ACCEPTED"
-                    },
-                    {
-                        "value": "REJECTED",
-                        "name": "REJECTED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "REVOKED",
-                        "name": "REVOKED"
-                    },
-                    {
-                        "value": "EXPIRED",
-                        "name": "EXPIRED"
-                    },
-                    {
-                        "value": "ASSOCIATING",
-                        "name": "ASSOCIATING"
-                    },
-                    {
-                        "value": "ASSOCIATED",
-                        "name": "ASSOCIATED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTED"
                     }
-                ]
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "ASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATING"
+                    }
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a workload share.</p>"
             }
         },
         "com.amazonaws.wellarchitected#SharedWith": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>",
+                "smithy.api#documentation": "<p>The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.</p>",
                 "smithy.api#length": {
                     "min": 12,
                     "max": 2048
@@ -4435,6 +5072,23 @@
                 "smithy.api#documentation": "<p>The date and time recorded.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#TrustedAdvisorIntegrationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#UntagResource": {
             "type": "operation",
             "input": {
@@ -4558,7 +5212,10 @@
                     "target": "com.amazonaws.wellarchitected#Notes"
                 },
                 "IsApplicable": {
-                    "target": "com.amazonaws.wellarchitected#IsApplicable"
+                    "target": "com.amazonaws.wellarchitected#IsApplicable",
+                    "traits": {
+                        "smithy.api#default": false
+                    }
                 },
                 "Reason": {
                     "target": "com.amazonaws.wellarchitected#AnswerReason",
@@ -4747,7 +5404,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a workload invitation.</p>",
+                "smithy.api#documentation": "<p>Update a workload or custom lens share invitation.</p>\n        <note>\n            <p>This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/shareInvitations/{ShareInvitationId}",
@@ -4783,7 +5440,7 @@
                 "ShareInvitation": {
                     "target": "com.amazonaws.wellarchitected#ShareInvitation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated workload share invitation.</p>"
+                        "smithy.api#documentation": "<p>The updated workload or custom lens share invitation.</p>"
                     }
                 }
             }
@@ -4865,6 +5522,7 @@
                 "IsReviewOwnerUpdateAcknowledged": {
                     "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n        <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
                     }
                 },
@@ -4879,6 +5537,18 @@
                 },
                 "ImprovementStatus": {
                     "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+                },
+                "DiscoveryConfig": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Well-Architected discovery configuration settings to associate to the workload.</p>"
+                    }
+                },
+                "Applications": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadApplications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AppRegistry application ARNs to associate to the workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5104,27 +5774,35 @@
             }
         },
         "com.amazonaws.wellarchitected#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The reason why the request failed validation.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "UNKNOWN_OPERATION",
-                        "name": "UNKNOWN_OPERATION"
-                    },
-                    {
-                        "value": "CANNOT_PARSE",
-                        "name": "CANNOT_PARSE"
-                    },
-                    {
-                        "value": "FIELD_VALIDATION_FAILED",
-                        "name": "FIELD_VALIDATION_FAILED"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_OPERATION"
                     }
-                ]
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANNOT_PARSE"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_VALIDATION_FAILED"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reason why the request failed validation.</p>"
             }
         },
         "com.amazonaws.wellarchitected#VersionDifferences": {
@@ -5143,21 +5821,6 @@
         },
         "com.amazonaws.wellarchitected#WellArchitectedApiServiceLambda": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "WellArchitected",
-                    "arnNamespace": "wellarchitected",
-                    "cloudFormationName": "WellArchitected",
-                    "cloudTrailEventSource": "wellarchitected.amazonaws.com",
-                    "endpointPrefix": "wellarchitected"
-                },
-                "aws.auth#sigv4": {
-                    "name": "wellarchitected"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Well-Architected Tool</fullname>\n        \n         <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the \n           <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information \n            about the Well-Architected Tool, see the \n           <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>",
-                "smithy.api#title": "AWS Well-Architected Tool"
-            },
             "version": "2020-03-31",
             "operations": [
                 {
@@ -5224,6 +5887,12 @@
                     "target": "com.amazonaws.wellarchitected#ListAnswers"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ListCheckDetails"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListCheckSummaries"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#ListLenses"
                 },
                 {
@@ -5280,7 +5949,1420 @@
                 {
                     "target": "com.amazonaws.wellarchitected#UpgradeLensReview"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "WellArchitected",
+                    "arnNamespace": "wellarchitected",
+                    "cloudFormationName": "WellArchitected",
+                    "cloudTrailEventSource": "wellarchitected.amazonaws.com",
+                    "endpointPrefix": "wellarchitected"
+                },
+                "aws.auth#sigv4": {
+                    "name": "wellarchitected"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Well-Architected Tool</fullname>\n        \n         <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the \n            <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the \n           <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information \n            about the Well-Architected Tool, see the \n           <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>",
+                "smithy.api#title": "AWS Well-Architected Tool",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://wellarchitected-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://wellarchitected.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://wellarchitected.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://wellarchitected.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.wellarchitected#Workload": {
             "type": "structure",
@@ -5324,6 +7406,7 @@
                 "IsReviewOwnerUpdateAcknowledged": {
                     "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n        <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
                     }
                 },
@@ -5362,6 +7445,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags associated with the workload.</p>"
                     }
+                },
+                "DiscoveryConfig": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Discovery configuration associated to the workload.</p>"
+                    }
+                },
+                "Applications": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadApplications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of AppRegistry application ARNs associated to the workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5381,6 +7476,18 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#WorkloadApplications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ApplicationArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign": {
             "type": "string",
             "traits": {
@@ -5388,7 +7495,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"
             }
         },
         "com.amazonaws.wellarchitected#WorkloadArn": {
@@ -5420,20 +7528,38 @@
                 }
             }
         },
-        "com.amazonaws.wellarchitected#WorkloadEnvironment": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The environment for the workload.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "PRODUCTION",
-                        "name": "PRODUCTION"
-                    },
-                    {
-                        "value": "PREPRODUCTION",
-                        "name": "PREPRODUCTION"
+        "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig": {
+            "type": "structure",
+            "members": {
+                "TrustedAdvisorIntegrationStatus": {
+                    "target": "com.amazonaws.wellarchitected#TrustedAdvisorIntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Discovery integration status in respect to Trusted Advisor for the workload.</p>"
                     }
-                ]
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Discovery configuration associated to the workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadEnvironment": {
+            "type": "enum",
+            "members": {
+                "PRODUCTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRODUCTION"
+                    }
+                },
+                "PREPRODUCTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPRODUCTION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The environment for the workload.</p>"
             }
         },
         "com.amazonaws.wellarchitected#WorkloadId": {
@@ -5444,31 +7570,41 @@
             }
         },
         "com.amazonaws.wellarchitected#WorkloadImprovementStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The improvement status for a workload.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_APPLICABLE",
-                        "name": "NOT_APPLICABLE"
-                    },
-                    {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "RISK_ACKNOWLEDGED",
-                        "name": "RISK_ACKNOWLEDGED"
+            "type": "enum",
+            "members": {
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
                     }
-                ]
+                },
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "RISK_ACKNOWLEDGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RISK_ACKNOWLEDGED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The improvement status for a workload.</p>"
             }
         },
         "com.amazonaws.wellarchitected#WorkloadIndustry": {
