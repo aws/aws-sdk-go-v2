@@ -1777,11 +1777,13 @@ type ColorSpace string
 
 // Enum values for ColorSpace
 const (
-	ColorSpaceFollow  ColorSpace = "FOLLOW"
-	ColorSpaceRec601  ColorSpace = "REC_601"
-	ColorSpaceRec709  ColorSpace = "REC_709"
-	ColorSpaceHdr10   ColorSpace = "HDR10"
-	ColorSpaceHlg2020 ColorSpace = "HLG_2020"
+	ColorSpaceFollow   ColorSpace = "FOLLOW"
+	ColorSpaceRec601   ColorSpace = "REC_601"
+	ColorSpaceRec709   ColorSpace = "REC_709"
+	ColorSpaceHdr10    ColorSpace = "HDR10"
+	ColorSpaceHlg2020  ColorSpace = "HLG_2020"
+	ColorSpaceP3dci    ColorSpace = "P3DCI"
+	ColorSpaceP3d65Sdr ColorSpace = "P3D65_SDR"
 )
 
 // Values returns all known values for ColorSpace. Note that this can be expanded
@@ -1794,6 +1796,8 @@ func (ColorSpace) Values() []ColorSpace {
 		"REC_709",
 		"HDR10",
 		"HLG_2020",
+		"P3DCI",
+		"P3D65_SDR",
 	}
 }
 
@@ -1801,11 +1805,13 @@ type ColorSpaceConversion string
 
 // Enum values for ColorSpaceConversion
 const (
-	ColorSpaceConversionNone         ColorSpaceConversion = "NONE"
-	ColorSpaceConversionForce601     ColorSpaceConversion = "FORCE_601"
-	ColorSpaceConversionForce709     ColorSpaceConversion = "FORCE_709"
-	ColorSpaceConversionForceHdr10   ColorSpaceConversion = "FORCE_HDR10"
-	ColorSpaceConversionForceHlg2020 ColorSpaceConversion = "FORCE_HLG_2020"
+	ColorSpaceConversionNone          ColorSpaceConversion = "NONE"
+	ColorSpaceConversionForce601      ColorSpaceConversion = "FORCE_601"
+	ColorSpaceConversionForce709      ColorSpaceConversion = "FORCE_709"
+	ColorSpaceConversionForceHdr10    ColorSpaceConversion = "FORCE_HDR10"
+	ColorSpaceConversionForceHlg2020  ColorSpaceConversion = "FORCE_HLG_2020"
+	ColorSpaceConversionForceP3dci    ColorSpaceConversion = "FORCE_P3DCI"
+	ColorSpaceConversionForceP3d65Sdr ColorSpaceConversion = "FORCE_P3D65_SDR"
 )
 
 // Values returns all known values for ColorSpaceConversion. Note that this can be
@@ -1818,6 +1824,8 @@ func (ColorSpaceConversion) Values() []ColorSpaceConversion {
 		"FORCE_709",
 		"FORCE_HDR10",
 		"FORCE_HLG_2020",
+		"FORCE_P3DCI",
+		"FORCE_P3D65_SDR",
 	}
 }
 

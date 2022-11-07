@@ -1,0 +1,8 @@
+{
+    "id": "c073c75c-e61c-4f71-86fd-466c0094a62d",
+    "type": "documentation",
+    "description": "The geo match statement now adds labels for country and region. You can match requests at the region level by combining a geo match statement with label match statements.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

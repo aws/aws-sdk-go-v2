@@ -1,0 +1,8 @@
+{
+    "id": "067b15f6-9cac-4c99-9fce-98bfe06b0752",
+    "type": "feature",
+    "description": "Added support for IPv6 and dual stack for Memcached and Redis clusters. Customers can now launch new Redis and Memcached clusters with IPv6 and dual stack networking support.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

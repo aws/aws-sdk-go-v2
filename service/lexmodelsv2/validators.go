@@ -10,6 +10,66 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchCreateCustomVocabularyItem struct {
+}
+
+func (*validateOpBatchCreateCustomVocabularyItem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateCustomVocabularyItem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateCustomVocabularyItemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateCustomVocabularyItemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteCustomVocabularyItem struct {
+}
+
+func (*validateOpBatchDeleteCustomVocabularyItem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteCustomVocabularyItem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteCustomVocabularyItemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteCustomVocabularyItemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateCustomVocabularyItem struct {
+}
+
+func (*validateOpBatchUpdateCustomVocabularyItem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateCustomVocabularyItem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateCustomVocabularyItemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateCustomVocabularyItemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBuildBotLocale struct {
 }
 
@@ -890,6 +950,26 @@ func (m *validateOpListBuiltInSlotTypes) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCustomVocabularyItems struct {
+}
+
+func (*validateOpListCustomVocabularyItems) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomVocabularyItems) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomVocabularyItemsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomVocabularyItemsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListExports struct {
 }
 
@@ -1330,6 +1410,18 @@ func (m *validateOpUpdateSlotType) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchCreateCustomVocabularyItemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateCustomVocabularyItem{}, middleware.After)
+}
+
+func addOpBatchDeleteCustomVocabularyItemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteCustomVocabularyItem{}, middleware.After)
+}
+
+func addOpBatchUpdateCustomVocabularyItemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateCustomVocabularyItem{}, middleware.After)
+}
+
 func addOpBuildBotLocaleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBuildBotLocale{}, middleware.After)
 }
@@ -1504,6 +1596,10 @@ func addOpListBuiltInIntentsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListBuiltInSlotTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBuiltInSlotTypes{}, middleware.After)
+}
+
+func addOpListCustomVocabularyItemsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomVocabularyItems{}, middleware.After)
 }
 
 func addOpListExportsValidationMiddleware(stack *middleware.Stack) error {
@@ -2331,6 +2427,23 @@ func validateConversationLogSettings(v *types.ConversationLogSettings) error {
 	}
 }
 
+func validateCreateCustomVocabularyItemsList(v []types.NewCustomVocabularyItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomVocabularyItemsList"}
+	for i := range v {
+		if err := validateNewCustomVocabularyItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomPayload(v *types.CustomPayload) error {
 	if v == nil {
 		return nil
@@ -2338,6 +2451,21 @@ func validateCustomPayload(v *types.CustomPayload) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CustomPayload"}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomVocabularyEntryId(v *types.CustomVocabularyEntryId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomVocabularyEntryId"}
+	if v.ItemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2380,6 +2508,24 @@ func validateCustomVocabularyImportSpecification(v *types.CustomVocabularyImport
 	}
 	if v.LocaleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomVocabularyItem(v *types.CustomVocabularyItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomVocabularyItem"}
+	if v.ItemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemId"))
+	}
+	if v.Phrase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Phrase"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2431,6 +2577,23 @@ func validateDefaultConditionalBranch(v *types.DefaultConditionalBranch) error {
 	if v.Response != nil {
 		if err := validateResponseSpecification(v.Response); err != nil {
 			invalidParams.AddNested("Response", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteCustomVocabularyItemsList(v []types.CustomVocabularyEntryId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomVocabularyItemsList"}
+	for i := range v {
+		if err := validateCustomVocabularyEntryId(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3230,6 +3393,21 @@ func validateMessageVariationsList(v []types.Message) error {
 		if err := validateMessage(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNewCustomVocabularyItem(v *types.NewCustomVocabularyItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NewCustomVocabularyItem"}
+	if v.Phrase == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Phrase"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4279,6 +4457,23 @@ func validateTranscriptSourceSetting(v *types.TranscriptSourceSetting) error {
 	}
 }
 
+func validateUpdateCustomVocabularyItemsList(v []types.CustomVocabularyItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomVocabularyItemsList"}
+	for i := range v {
+		if err := validateCustomVocabularyItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUtteranceAggregationDuration(v *types.UtteranceAggregationDuration) error {
 	if v == nil {
 		return nil
@@ -4335,6 +4530,90 @@ func validateWaitAndContinueSpecification(v *types.WaitAndContinueSpecification)
 	if v.StillWaitingResponse != nil {
 		if err := validateStillWaitingResponseSpecification(v.StillWaitingResponse); err != nil {
 			invalidParams.AddNested("StillWaitingResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchCreateCustomVocabularyItemInput(v *BatchCreateCustomVocabularyItemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateCustomVocabularyItemInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.CustomVocabularyItemList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomVocabularyItemList"))
+	} else if v.CustomVocabularyItemList != nil {
+		if err := validateCreateCustomVocabularyItemsList(v.CustomVocabularyItemList); err != nil {
+			invalidParams.AddNested("CustomVocabularyItemList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteCustomVocabularyItemInput(v *BatchDeleteCustomVocabularyItemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteCustomVocabularyItemInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.CustomVocabularyItemList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomVocabularyItemList"))
+	} else if v.CustomVocabularyItemList != nil {
+		if err := validateDeleteCustomVocabularyItemsList(v.CustomVocabularyItemList); err != nil {
+			invalidParams.AddNested("CustomVocabularyItemList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateCustomVocabularyItemInput(v *BatchUpdateCustomVocabularyItemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateCustomVocabularyItemInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
+	}
+	if v.CustomVocabularyItemList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomVocabularyItemList"))
+	} else if v.CustomVocabularyItemList != nil {
+		if err := validateUpdateCustomVocabularyItemsList(v.CustomVocabularyItemList); err != nil {
+			invalidParams.AddNested("CustomVocabularyItemList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5357,6 +5636,27 @@ func validateOpListBuiltInSlotTypesInput(v *ListBuiltInSlotTypesInput) error {
 		if err := validateBuiltInSlotTypeSortBy(v.SortBy); err != nil {
 			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomVocabularyItemsInput(v *ListCustomVocabularyItemsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomVocabularyItemsInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.BotVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotVersion"))
+	}
+	if v.LocaleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocaleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

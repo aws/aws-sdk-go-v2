@@ -19,7 +19,14 @@ import (
 // in the Amazon EC2 Auto Scaling User Guide. For more information, see Launch
 // configurations
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchConfiguration.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// in the Amazon EC2 Auto Scaling User Guide. Amazon EC2 Auto Scaling configures
+// instances launched as part of an Auto Scaling group using either a launch
+// template or a launch configuration. We strongly recommend that you do not use
+// launch configurations. They do not provide full functionality for Amazon EC2
+// Auto Scaling or Amazon EC2. For information about using launch templates, see
+// Launch templates
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html) in
+// the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) CreateLaunchConfiguration(ctx context.Context, params *CreateLaunchConfigurationInput, optFns ...func(*Options)) (*CreateLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateLaunchConfigurationInput{}
@@ -63,17 +70,10 @@ type CreateLaunchConfigurationInput struct {
 	// in the Amazon EC2 User Guide for Linux Instances.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
-	// EC2-Classic retires on August 15, 2022. This property is not supported after
-	// that date. The ID of a ClassicLink-enabled VPC to link your EC2-Classic
-	// instances to. For more information, see ClassicLink
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html) in
-	// the Amazon EC2 User Guide for Linux Instances.
+	// Available for backward compatibility.
 	ClassicLinkVPCId *string
 
-	// EC2-Classic retires on August 15, 2022. This property is not supported after
-	// that date. The IDs of one or more security groups for the specified
-	// ClassicLink-enabled VPC. If you specify the ClassicLinkVPCId property, you must
-	// specify ClassicLinkVPCSecurityGroups.
+	// Available for backward compatibility.
 	ClassicLinkVPCSecurityGroups []string
 
 	// Specifies whether the launch configuration is optimized for EBS I/O (true) or

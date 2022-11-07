@@ -13,9 +13,9 @@ import (
 )
 
 // Create a new workload. The owner of a workload can share the workload with other
-// Amazon Web Services accounts and IAM users in the same Amazon Web Services
-// Region. Only the owner of a workload can delete it. For more information, see
-// Defining a Workload
+// Amazon Web Services accounts, IAM users, an organization, and organizational
+// units (OUs) in the same Amazon Web Services Region. Only the owner of a workload
+// can delete it. For more information, see Defining a Workload
 // (https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html)
 // in the Well-Architected Tool User Guide.
 func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput, optFns ...func(*Options)) (*CreateWorkloadOutput, error) {
@@ -74,12 +74,18 @@ type CreateWorkloadInput struct {
 	// The list of Amazon Web Services account IDs associated with the workload.
 	AccountIds []string
 
+	// List of AppRegistry application ARNs associated to the workload.
+	Applications []string
+
 	// The URL of the architectural design for the workload.
 	ArchitecturalDesign *string
 
 	// The list of Amazon Web Services Regions associated with the workload, for
 	// example, us-east-2, or ca-central-1.
 	AwsRegions []string
+
+	// Well-Architected discovery configuration settings associated to the workload.
+	DiscoveryConfig *types.WorkloadDiscoveryConfig
 
 	// The industry for the workload.
 	Industry *string

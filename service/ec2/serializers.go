@@ -35272,6 +35272,19 @@ func awsEc2query_serializeDocumentAllocationIds(v []string, value query.Value) e
 	return nil
 }
 
+func awsEc2query_serializeDocumentAllowedInstanceTypeSet(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentArchitectureTypeSet(v []types.ArchitectureType, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -37788,6 +37801,13 @@ func awsEc2query_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 		}
 	}
 
+	if v.AllowedInstanceTypes != nil {
+		objectKey := object.FlatKey("AllowedInstanceTypeSet")
+		if err := awsEc2query_serializeDocumentAllowedInstanceTypeSet(v.AllowedInstanceTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if len(v.BareMetal) > 0 {
 		objectKey := object.Key("BareMetal")
 		objectKey.String(string(v.BareMetal))
@@ -37848,6 +37868,13 @@ func awsEc2query_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 	if v.MemoryMiB != nil {
 		objectKey := object.Key("MemoryMiB")
 		if err := awsEc2query_serializeDocumentMemoryMiB(v.MemoryMiB, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkBandwidthGbps != nil {
+		objectKey := object.Key("NetworkBandwidthGbps")
+		if err := awsEc2query_serializeDocumentNetworkBandwidthGbps(v.NetworkBandwidthGbps, objectKey); err != nil {
 			return err
 		}
 	}
@@ -37930,6 +37957,13 @@ func awsEc2query_serializeDocumentInstanceRequirementsRequest(v *types.InstanceR
 		}
 	}
 
+	if v.AllowedInstanceTypes != nil {
+		objectKey := object.FlatKey("AllowedInstanceType")
+		if err := awsEc2query_serializeDocumentAllowedInstanceTypeSet(v.AllowedInstanceTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if len(v.BareMetal) > 0 {
 		objectKey := object.Key("BareMetal")
 		objectKey.String(string(v.BareMetal))
@@ -37990,6 +38024,13 @@ func awsEc2query_serializeDocumentInstanceRequirementsRequest(v *types.InstanceR
 	if v.MemoryMiB != nil {
 		objectKey := object.Key("MemoryMiB")
 		if err := awsEc2query_serializeDocumentMemoryMiBRequest(v.MemoryMiB, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkBandwidthGbps != nil {
+		objectKey := object.Key("NetworkBandwidthGbps")
+		if err := awsEc2query_serializeDocumentNetworkBandwidthGbpsRequest(v.NetworkBandwidthGbps, objectKey); err != nil {
 			return err
 		}
 	}
@@ -39776,6 +39817,92 @@ func awsEc2query_serializeDocumentNetworkAclIdStringList(v []string, value query
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentNetworkBandwidthGbps(v *types.NetworkBandwidthGbps, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Max != nil {
+		objectKey := object.Key("Max")
+		switch {
+		case math.IsNaN(*v.Max):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Max, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Max, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Max)
+
+		}
+	}
+
+	if v.Min != nil {
+		objectKey := object.Key("Min")
+		switch {
+		case math.IsNaN(*v.Min):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Min, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Min, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Min)
+
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentNetworkBandwidthGbpsRequest(v *types.NetworkBandwidthGbpsRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Max != nil {
+		objectKey := object.Key("Max")
+		switch {
+		case math.IsNaN(*v.Max):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Max, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Max, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Max)
+
+		}
+	}
+
+	if v.Min != nil {
+		objectKey := object.Key("Min")
+		switch {
+		case math.IsNaN(*v.Min):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Min, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Min, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Min)
+
+		}
+	}
+
 	return nil
 }
 

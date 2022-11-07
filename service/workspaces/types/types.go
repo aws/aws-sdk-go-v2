@@ -987,6 +987,20 @@ type WorkspaceProperties struct {
 	// (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
 	ComputeTypeName Compute
 
+	// The protocol. For more information, see  Protocols for Amazon WorkSpaces
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html).
+	//
+	// *
+	// Only available for WorkSpaces created with PCoIP bundles.
+	//
+	// * The Protocols
+	// property is case sensitive. Ensure you use PCOIP or WSP.
+	//
+	// * Unavailable for
+	// Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics,
+	// GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
+	Protocols []Protocol
+
 	// The size of the root volume. For important information about how to modify the
 	// size of the root and user volumes, see Modify a WorkSpace
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).

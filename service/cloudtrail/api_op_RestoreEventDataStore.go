@@ -53,6 +53,11 @@ type RestoreEventDataStoreOutput struct {
 	// The event data store ARN.
 	EventDataStoreArn *string
 
+	// Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The
+	// value is a fully specified ARN to a KMS key in the following format.
+	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	KmsKeyId *string
+
 	// Indicates whether the event data store is collecting events from all regions, or
 	// only from the region in which the event data store was created.
 	MultiRegionEnabled *bool

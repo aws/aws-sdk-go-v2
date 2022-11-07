@@ -53,8 +53,8 @@ type CreateWorkloadShareInput struct {
 	// This member is required.
 	PermissionType types.PermissionType
 
-	// The Amazon Web Services account ID or IAM role with which the workload is
-	// shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
+	// unit (OU) ID with which the workload is shared.
 	//
 	// This member is required.
 	SharedWith *string

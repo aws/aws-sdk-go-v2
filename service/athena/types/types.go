@@ -341,6 +341,9 @@ type QueryExecution struct {
 	// are specified for the workgroup.
 	ResultConfiguration *ResultConfiguration
 
+	// Specifies the query result reuse behavior that was used for the query.
+	ResultReuseConfiguration *ResultReuseConfiguration
+
 	// The type of query statement that was run. DDL indicates DDL query statements.
 	// DML indicates DML (Data Manipulation Language) query statements, such as CREATE
 	// TABLE AS SELECT. UTILITY indicates query statements other than DDL and DML, such
@@ -404,6 +407,10 @@ type QueryExecutionStatistics struct {
 	// resources. Note that if transient errors occur, Athena might automatically add
 	// the query back to the queue.
 	QueryQueueTimeInMillis *int64
+
+	// Contains information about whether previous query results were reused for the
+	// query.
+	ResultReuseInformation *ResultReuseInformation
 
 	// The number of milliseconds that Athena took to finalize and publish the query
 	// results after the query engine finished running the query.
@@ -691,6 +698,45 @@ type ResultConfigurationUpdates struct {
 	// Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	RemoveOutputLocation *bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether previous query results are reused, and if so, their maximum
+// age.
+type ResultReuseByAgeConfiguration struct {
+
+	// True if previous query results can be reused when the query is run; otherwise,
+	// false. The default is false.
+	//
+	// This member is required.
+	Enabled bool
+
+	// Specifies, in minutes, the maximum age of a previous query result that Athena
+	// should consider for reuse. The default is 60.
+	MaxAgeInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the query result reuse behavior for the query.
+type ResultReuseConfiguration struct {
+
+	// Specifies whether previous query results are reused, and if so, their maximum
+	// age.
+	ResultReuseByAgeConfiguration *ResultReuseByAgeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about whether the result of a previous query was reused.
+type ResultReuseInformation struct {
+
+	// True if a previous query result was reused; false if the result was generated
+	// from a new run of the query.
+	//
+	// This member is required.
+	ReusedPreviousResult bool
 
 	noSmithyDocumentSerde
 }

@@ -2249,6 +2249,37 @@ func awsAwsjson11_serializeDocumentResultConfigurationUpdates(v *types.ResultCon
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentResultReuseByAgeConfiguration(v *types.ResultReuseByAgeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.MaxAgeInMinutes != nil {
+		ok := object.Key("MaxAgeInMinutes")
+		ok.Integer(*v.MaxAgeInMinutes)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentResultReuseConfiguration(v *types.ResultReuseConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResultReuseByAgeConfiguration != nil {
+		ok := object.Key("ResultReuseByAgeConfiguration")
+		if err := awsAwsjson11_serializeDocumentResultReuseByAgeConfiguration(v.ResultReuseByAgeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2975,6 +3006,13 @@ func awsAwsjson11_serializeOpDocumentStartQueryExecutionInput(v *StartQueryExecu
 	if v.ResultConfiguration != nil {
 		ok := object.Key("ResultConfiguration")
 		if err := awsAwsjson11_serializeDocumentResultConfiguration(v.ResultConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResultReuseConfiguration != nil {
+		ok := object.Key("ResultReuseConfiguration")
+		if err := awsAwsjson11_serializeDocumentResultReuseConfiguration(v.ResultReuseConfiguration, ok); err != nil {
 			return err
 		}
 	}

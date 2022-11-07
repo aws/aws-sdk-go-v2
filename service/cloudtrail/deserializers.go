@@ -136,6 +136,9 @@ func awsAwsjson11_deserializeOpErrorAddTags(response *smithyhttp.Response, metad
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -280,6 +283,9 @@ func awsAwsjson11_deserializeOpErrorCancelQuery(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
 
@@ -412,11 +418,26 @@ func awsAwsjson11_deserializeOpErrorCreateEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
 
+	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
+
+	case strings.EqualFold("InvalidKmsKeyIdException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidKmsKeyIdException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("InvalidTagParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTagParameterException(response, errorBody)
+
+	case strings.EqualFold("KmsException", errorCode):
+		return awsAwsjson11_deserializeErrorKmsException(response, errorBody)
+
+	case strings.EqualFold("KmsKeyNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorKmsKeyNotFoundException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
@@ -604,6 +625,9 @@ func awsAwsjson11_deserializeOpErrorCreateTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("MaximumNumberOfTrailsExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorMaximumNumberOfTrailsExceededException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -754,6 +778,9 @@ func awsAwsjson11_deserializeOpErrorDeleteEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -883,6 +910,9 @@ func awsAwsjson11_deserializeOpErrorDeleteTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -891,6 +921,144 @@ func awsAwsjson11_deserializeOpErrorDeleteTrail(response *smithyhttp.Response, m
 
 	case strings.EqualFold("TrailNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorTrailNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDeregisterOrganizationDelegatedAdmin struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeregisterOrganizationDelegatedAdmin) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeregisterOrganizationDelegatedAdmin) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeregisterOrganizationDelegatedAdmin(response, &metadata)
+	}
+	output := &DeregisterOrganizationDelegatedAdminOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeregisterOrganizationDelegatedAdminOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeregisterOrganizationDelegatedAdmin(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccountNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
+
+	case strings.EqualFold("AccountNotRegisteredException", errorCode):
+		return awsAwsjson11_deserializeErrorAccountNotRegisteredException(response, errorBody)
+
+	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotOrganizationManagementAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorNotOrganizationManagementAccountException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("OrganizationNotInAllFeaturesModeException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationNotInAllFeaturesModeException(response, errorBody)
+
+	case strings.EqualFold("OrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -1015,6 +1183,9 @@ func awsAwsjson11_deserializeOpErrorDescribeQuery(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
 
@@ -1134,6 +1305,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTrails(response *smithyhttp.Response
 	switch {
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
@@ -1378,6 +1552,9 @@ func awsAwsjson11_deserializeOpErrorGetEventDataStore(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
 
@@ -1494,6 +1671,9 @@ func awsAwsjson11_deserializeOpErrorGetEventSelectors(response *smithyhttp.Respo
 	switch {
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
@@ -1738,6 +1918,9 @@ func awsAwsjson11_deserializeOpErrorGetInsightSelectors(response *smithyhttp.Res
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
 
@@ -1864,6 +2047,9 @@ func awsAwsjson11_deserializeOpErrorGetQueryResults(response *smithyhttp.Respons
 	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
 		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
 
+	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
+
 	case strings.EqualFold("InvalidMaxResultsException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidMaxResultsException(response, errorBody)
 
@@ -1872,6 +2058,9 @@ func awsAwsjson11_deserializeOpErrorGetQueryResults(response *smithyhttp.Respons
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
@@ -2352,6 +2541,9 @@ func awsAwsjson11_deserializeOpErrorListEventDataStores(response *smithyhttp.Res
 
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
@@ -2851,6 +3043,9 @@ func awsAwsjson11_deserializeOpErrorListQueries(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidQueryStatusException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidQueryStatusException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
 
@@ -2979,6 +3174,9 @@ func awsAwsjson11_deserializeOpErrorListTags(response *smithyhttp.Response, meta
 
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
@@ -3355,6 +3553,9 @@ func awsAwsjson11_deserializeOpErrorPutEventSelectors(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -3493,6 +3694,9 @@ func awsAwsjson11_deserializeOpErrorPutInsightSelectors(response *smithyhttp.Res
 	case strings.EqualFold("KmsException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -3504,6 +3708,150 @@ func awsAwsjson11_deserializeOpErrorPutInsightSelectors(response *smithyhttp.Res
 
 	case strings.EqualFold("TrailNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorTrailNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpRegisterOrganizationDelegatedAdmin struct {
+}
+
+func (*awsAwsjson11_deserializeOpRegisterOrganizationDelegatedAdmin) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpRegisterOrganizationDelegatedAdmin) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorRegisterOrganizationDelegatedAdmin(response, &metadata)
+	}
+	output := &RegisterOrganizationDelegatedAdminOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentRegisterOrganizationDelegatedAdminOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorRegisterOrganizationDelegatedAdmin(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccountNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
+
+	case strings.EqualFold("AccountRegisteredException", errorCode):
+		return awsAwsjson11_deserializeErrorAccountRegisteredException(response, errorBody)
+
+	case strings.EqualFold("CannotDelegateManagementAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorCannotDelegateManagementAccountException(response, errorBody)
+
+	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("DelegatedAdminAccountLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorDelegatedAdminAccountLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotOrganizationManagementAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorNotOrganizationManagementAccountException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("OrganizationNotInAllFeaturesModeException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationNotInAllFeaturesModeException(response, errorBody)
+
+	case strings.EqualFold("OrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -3630,6 +3978,9 @@ func awsAwsjson11_deserializeOpErrorRemoveTags(response *smithyhttp.Response, me
 
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
@@ -3774,6 +4125,9 @@ func awsAwsjson11_deserializeOpErrorRestoreEventDataStore(response *smithyhttp.R
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
@@ -4048,6 +4402,9 @@ func awsAwsjson11_deserializeOpErrorStartLogging(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -4177,6 +4534,9 @@ func awsAwsjson11_deserializeOpErrorStartQuery(response *smithyhttp.Response, me
 	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
 		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
 
+	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
+
 	case strings.EqualFold("InsufficientS3BucketPolicyException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientS3BucketPolicyException(response, errorBody)
 
@@ -4194,6 +4554,9 @@ func awsAwsjson11_deserializeOpErrorStartQuery(response *smithyhttp.Response, me
 
 	case strings.EqualFold("MaxConcurrentQueriesException", errorCode):
 		return awsAwsjson11_deserializeErrorMaxConcurrentQueriesException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
@@ -4441,6 +4804,9 @@ func awsAwsjson11_deserializeOpErrorStopLogging(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
 
@@ -4579,8 +4945,23 @@ func awsAwsjson11_deserializeOpErrorUpdateEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
 
+	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
+
+	case strings.EqualFold("InvalidKmsKeyIdException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidKmsKeyIdException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("KmsException", errorCode):
+		return awsAwsjson11_deserializeErrorKmsException(response, errorBody)
+
+	case strings.EqualFold("KmsKeyNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorKmsKeyNotFoundException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
@@ -4744,6 +5125,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("InvalidS3BucketNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidS3BucketNameException(response, errorBody)
 
@@ -4764,6 +5148,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTrail(response *smithyhttp.Response, m
 
 	case strings.EqualFold("KmsKeyNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorKmsKeyNotFoundException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
 
 	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
 		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
@@ -4819,6 +5206,146 @@ func awsAwsjson11_deserializeErrorAccountHasOngoingImportException(response *smi
 
 	output := &types.AccountHasOngoingImportException{}
 	err := awsAwsjson11_deserializeDocumentAccountHasOngoingImportException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorAccountNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccountNotFoundException{}
+	err := awsAwsjson11_deserializeDocumentAccountNotFoundException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorAccountNotRegisteredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccountNotRegisteredException{}
+	err := awsAwsjson11_deserializeDocumentAccountNotRegisteredException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorAccountRegisteredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccountRegisteredException{}
+	err := awsAwsjson11_deserializeDocumentAccountRegisteredException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorCannotDelegateManagementAccountException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.CannotDelegateManagementAccountException{}
+	err := awsAwsjson11_deserializeDocumentCannotDelegateManagementAccountException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -5064,6 +5591,41 @@ func awsAwsjson11_deserializeErrorConflictException(response *smithyhttp.Respons
 
 	output := &types.ConflictException{}
 	err := awsAwsjson11_deserializeDocumentConflictException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorDelegatedAdminAccountLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.DelegatedAdminAccountLimitExceededException{}
+	err := awsAwsjson11_deserializeDocumentDelegatedAdminAccountLimitExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -6619,6 +7181,76 @@ func awsAwsjson11_deserializeErrorMaximumNumberOfTrailsExceededException(respons
 	return output
 }
 
+func awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.NoManagementAccountSLRExistsException{}
+	err := awsAwsjson11_deserializeDocumentNoManagementAccountSLRExistsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorNotOrganizationManagementAccountException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.NotOrganizationManagementAccountException{}
+	err := awsAwsjson11_deserializeDocumentNotOrganizationManagementAccountException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -7114,6 +7746,126 @@ func awsAwsjson11_deserializeDocumentAccountHasOngoingImportException(v **types.
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAccountNotFoundException(v **types.AccountNotFoundException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccountNotFoundException
+	if *v == nil {
+		sv = &types.AccountNotFoundException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccountNotRegisteredException(v **types.AccountNotRegisteredException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccountNotRegisteredException
+	if *v == nil {
+		sv = &types.AccountNotRegisteredException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccountRegisteredException(v **types.AccountRegisteredException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccountRegisteredException
+	if *v == nil {
+		sv = &types.AccountRegisteredException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAdvancedEventSelector(v **types.AdvancedEventSelector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7294,6 +8046,46 @@ func awsAwsjson11_deserializeDocumentAdvancedFieldSelectors(v *[]types.AdvancedF
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCannotDelegateManagementAccountException(v **types.CannotDelegateManagementAccountException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CannotDelegateManagementAccountException
+	if *v == nil {
+		sv = &types.CannotDelegateManagementAccountException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -7772,6 +8564,46 @@ func awsAwsjson11_deserializeDocumentDataResourceValues(v *[]string, value inter
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDelegatedAdminAccountLimitExceededException(v **types.DelegatedAdminAccountLimitExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DelegatedAdminAccountLimitExceededException
+	if *v == nil {
+		sv = &types.DelegatedAdminAccountLimitExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -10544,6 +11376,86 @@ func awsAwsjson11_deserializeDocumentMaximumNumberOfTrailsExceededException(v **
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentNoManagementAccountSLRExistsException(v **types.NoManagementAccountSLRExistsException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NoManagementAccountSLRExistsException
+	if *v == nil {
+		sv = &types.NoManagementAccountSLRExistsException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNotOrganizationManagementAccountException(v **types.NotOrganizationManagementAccountException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NotOrganizationManagementAccountException
+	if *v == nil {
+		sv = &types.NotOrganizationManagementAccountException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNotOrganizationMasterAccountException(v **types.NotOrganizationMasterAccountException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12368,6 +13280,15 @@ func awsAwsjson11_deserializeOpDocumentCreateEventDataStoreOutput(v **CreateEven
 				sv.EventDataStoreArn = ptr.String(jtv)
 			}
 
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreKmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "MultiRegionEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12666,6 +13587,37 @@ func awsAwsjson11_deserializeOpDocumentDeleteTrailOutput(v **DeleteTrailOutput, 
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentDeregisterOrganizationDelegatedAdminOutput(v **DeregisterOrganizationDelegatedAdminOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeregisterOrganizationDelegatedAdminOutput
+	if *v == nil {
+		sv = &DeregisterOrganizationDelegatedAdminOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentDescribeQueryOutput(v **DescribeQueryOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12910,6 +13862,15 @@ func awsAwsjson11_deserializeOpDocumentGetEventDataStoreOutput(v **GetEventDataS
 					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
 				}
 				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreKmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "MultiRegionEnabled":
@@ -14048,6 +15009,37 @@ func awsAwsjson11_deserializeOpDocumentPutInsightSelectorsOutput(v **PutInsightS
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentRegisterOrganizationDelegatedAdminOutput(v **RegisterOrganizationDelegatedAdminOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *RegisterOrganizationDelegatedAdminOutput
+	if *v == nil {
+		sv = &RegisterOrganizationDelegatedAdminOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentRemoveTagsOutput(v **RemoveTagsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14129,6 +15121,15 @@ func awsAwsjson11_deserializeOpDocumentRestoreEventDataStoreOutput(v **RestoreEv
 					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
 				}
 				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreKmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "MultiRegionEnabled":
@@ -14617,6 +15618,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateEventDataStoreOutput(v **UpdateEven
 					return fmt.Errorf("expected EventDataStoreArn to be of type string, got %T instead", value)
 				}
 				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventDataStoreKmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
 			}
 
 		case "MultiRegionEnabled":

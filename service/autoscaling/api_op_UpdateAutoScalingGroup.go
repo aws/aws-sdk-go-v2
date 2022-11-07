@@ -169,9 +169,8 @@ type UpdateAutoScalingGroupInput struct {
 	// The minimum size of the Auto Scaling group.
 	MinSize *int32
 
-	// An embedded object that specifies a mixed instances policy. For more
-	// information, see Auto Scaling groups with multiple instance types and purchase
-	// options
+	// The mixed instances policy. For more information, see Auto Scaling groups with
+	// multiple instance types and purchase options
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	MixedInstancesPolicy *types.MixedInstancesPolicy

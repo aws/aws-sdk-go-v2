@@ -12,13 +12,14 @@ import (
 )
 
 // Create a lens share. The owner of a lens can share it with other Amazon Web
-// Services accounts and IAM users in the same Amazon Web Services Region. Shared
-// access to a lens is not removed until the lens invitation is deleted. Disclaimer
-// By sharing your custom lenses with other Amazon Web Services accounts, you
-// acknowledge that Amazon Web Services will make your custom lenses available to
-// those other accounts. Those other accounts may continue to access and use your
-// shared custom lenses even if you delete the custom lenses from your own Amazon
-// Web Services account or terminate your Amazon Web Services account.
+// Services accounts, IAM users, an organization, and organizational units (OUs) in
+// the same Amazon Web Services Region. Shared access to a lens is not removed
+// until the lens invitation is deleted. Disclaimer By sharing your custom lenses
+// with other Amazon Web Services accounts, you acknowledge that Amazon Web
+// Services will make your custom lenses available to those other accounts. Those
+// other accounts may continue to access and use your shared custom lenses even if
+// you delete the custom lenses from your own Amazon Web Services account or
+// terminate your Amazon Web Services account.
 func (c *Client) CreateLensShare(ctx context.Context, params *CreateLensShareInput, optFns ...func(*Options)) (*CreateLensShareOutput, error) {
 	if params == nil {
 		params = &CreateLensShareInput{}
@@ -58,8 +59,8 @@ type CreateLensShareInput struct {
 	// This member is required.
 	LensAlias *string
 
-	// The Amazon Web Services account ID or IAM role with which the workload is
-	// shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
+	// unit (OU) ID with which the workload is shared.
 	//
 	// This member is required.
 	SharedWith *string

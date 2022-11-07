@@ -44,6 +44,68 @@ func (AnswerReason) Values() []AnswerReason {
 	}
 }
 
+type CheckFailureReason string
+
+// Enum values for CheckFailureReason
+const (
+	CheckFailureReasonAssumeRoleError        CheckFailureReason = "ASSUME_ROLE_ERROR"
+	CheckFailureReasonAccessDenied           CheckFailureReason = "ACCESS_DENIED"
+	CheckFailureReasonUnknownError           CheckFailureReason = "UNKNOWN_ERROR"
+	CheckFailureReasonPremiumSupportRequired CheckFailureReason = "PREMIUM_SUPPORT_REQUIRED"
+)
+
+// Values returns all known values for CheckFailureReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CheckFailureReason) Values() []CheckFailureReason {
+	return []CheckFailureReason{
+		"ASSUME_ROLE_ERROR",
+		"ACCESS_DENIED",
+		"UNKNOWN_ERROR",
+		"PREMIUM_SUPPORT_REQUIRED",
+	}
+}
+
+type CheckProvider string
+
+// Enum values for CheckProvider
+const (
+	CheckProviderTrustedAdvisor CheckProvider = "TRUSTED_ADVISOR"
+)
+
+// Values returns all known values for CheckProvider. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CheckProvider) Values() []CheckProvider {
+	return []CheckProvider{
+		"TRUSTED_ADVISOR",
+	}
+}
+
+type CheckStatus string
+
+// Enum values for CheckStatus
+const (
+	CheckStatusOkay         CheckStatus = "OKAY"
+	CheckStatusWarning      CheckStatus = "WARNING"
+	CheckStatusError        CheckStatus = "ERROR"
+	CheckStatusNotAvailable CheckStatus = "NOT_AVAILABLE"
+	CheckStatusFetchFailed  CheckStatus = "FETCH_FAILED"
+)
+
+// Values returns all known values for CheckStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CheckStatus) Values() []CheckStatus {
+	return []CheckStatus{
+		"OKAY",
+		"WARNING",
+		"ERROR",
+		"NOT_AVAILABLE",
+		"FETCH_FAILED",
+	}
+}
+
 type ChoiceReason string
 
 // Enum values for ChoiceReason
@@ -333,6 +395,25 @@ func (ShareStatus) Values() []ShareStatus {
 		"ASSOCIATING",
 		"ASSOCIATED",
 		"FAILED",
+	}
+}
+
+type TrustedAdvisorIntegrationStatus string
+
+// Enum values for TrustedAdvisorIntegrationStatus
+const (
+	TrustedAdvisorIntegrationStatusEnabled  TrustedAdvisorIntegrationStatus = "ENABLED"
+	TrustedAdvisorIntegrationStatusDisabled TrustedAdvisorIntegrationStatus = "DISABLED"
+)
+
+// Values returns all known values for TrustedAdvisorIntegrationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TrustedAdvisorIntegrationStatus) Values() []TrustedAdvisorIntegrationStatus {
+	return []TrustedAdvisorIntegrationStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

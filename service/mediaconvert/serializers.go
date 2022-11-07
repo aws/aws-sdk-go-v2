@@ -4029,6 +4029,11 @@ func awsRestjson1_serializeDocumentColorCorrector(v *types.ColorCorrector, value
 		ok.Integer(v.Saturation)
 	}
 
+	if v.SdrReferenceWhiteLevel != 0 {
+		ok := object.Key("sdrReferenceWhiteLevel")
+		ok.Integer(v.SdrReferenceWhiteLevel)
+	}
+
 	return nil
 }
 
@@ -6180,6 +6185,11 @@ func awsRestjson1_serializeDocumentImageInserter(v *types.ImageInserter, value s
 		if err := awsRestjson1_serializeDocument__listOfInsertableImage(v.InsertableImages, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SdrReferenceWhiteLevel != 0 {
+		ok := object.Key("sdrReferenceWhiteLevel")
+		ok.Integer(v.SdrReferenceWhiteLevel)
 	}
 
 	return nil

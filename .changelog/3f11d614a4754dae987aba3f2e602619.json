@@ -1,0 +1,8 @@
+{
+    "id": "3f11d614-a475-4dae-987a-ba3f2e602619",
+    "type": "feature",
+    "description": "Amazon Lex now supports new APIs for viewing and editing Custom Vocabulary in bots.",
+    "modules": [
+        "service/lexmodelsv2"
+    ]
+}

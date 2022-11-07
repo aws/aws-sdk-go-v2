@@ -326,6 +326,24 @@ func (OperatingSystemType) Values() []OperatingSystemType {
 	}
 }
 
+type Protocol string
+
+// Enum values for Protocol
+const (
+	ProtocolPcoip Protocol = "PCOIP"
+	ProtocolWsp   Protocol = "WSP"
+)
+
+// Values returns all known values for Protocol. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Protocol) Values() []Protocol {
+	return []Protocol{
+		"PCOIP",
+		"WSP",
+	}
+}
+
 type ReconnectEnum string
 
 // Enum values for ReconnectEnum

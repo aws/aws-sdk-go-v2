@@ -5086,6 +5086,9 @@ type StepExecution struct {
 	// The timeout seconds of the step.
 	TimeoutSeconds *int64
 
+	// The CloudWatch alarms that were invoked by the automation.
+	TriggeredAlarms []AlarmStateInformation
+
 	// Strategies used when step fails, we support Continue and Abort. Abort will fail
 	// the automation when the step fails. Continue will ignore the failure of current
 	// step and allow automation to run the next step. With conditional branching, we
@@ -5223,6 +5226,10 @@ type TargetLocation struct {
 
 	// The Amazon Web Services Regions targeted by the current Automation execution.
 	Regions []string
+
+	// The details for the CloudWatch alarm you want to apply to an automation or
+	// command.
+	TargetLocationAlarmConfiguration *AlarmConfiguration
 
 	// The maximum number of Amazon Web Services Regions and Amazon Web Services
 	// accounts allowed to run the Automation concurrently.

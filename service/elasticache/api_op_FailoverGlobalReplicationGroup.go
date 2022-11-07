@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to failover the primary region to a selected secondary region. The selected
-// secondary region will become primary, and all other clusters will become
-// secondary.
+// Used to failover the primary region to a secondary region. The secondary region
+// will become primary, and all other clusters will become secondary.
 func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *FailoverGlobalReplicationGroupInput, optFns ...func(*Options)) (*FailoverGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &FailoverGlobalReplicationGroupInput{}

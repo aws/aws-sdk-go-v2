@@ -1,0 +1,8 @@
+{
+    "id": "06f8294f-e556-4abc-aad4-b3a6dff9ec0d",
+    "type": "feature",
+    "description": "The AWS Elemental MediaConvert SDK has added support for setting the SDR reference white point for HDR conversions and conversion of HDR10 to DolbyVision without mastering metadata.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

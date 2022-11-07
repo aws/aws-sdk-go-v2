@@ -866,6 +866,17 @@ type CustomPayload struct {
 	noSmithyDocumentSerde
 }
 
+// The unique entry identifier for the custom vocabulary items.
+type CustomVocabularyEntryId struct {
+
+	// The unique item identifier for the custom vocabulary items.
+	//
+	// This member is required.
+	ItemId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides the parameters required for exporting a custom vocabulary.
 type CustomVocabularyExportSpecification struct {
 
@@ -905,6 +916,32 @@ type CustomVocabularyImportSpecification struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	noSmithyDocumentSerde
+}
+
+// The unique custom vocabulary item from the custom vocabulary list.
+type CustomVocabularyItem struct {
+
+	// The unique item identifer for the custom vocabulary item from the custom
+	// vocabulary list.
+	//
+	// This member is required.
+	ItemId *string
+
+	// The unique phrase for the custom vocabulary item from the custom vocabulary
+	// list.
+	//
+	// This member is required.
+	Phrase *string
+
+	// The display as value for the custom vocabulary item from the custom vocabulary
+	// list.
+	DisplayAs *string
+
+	// The weight assigned for the custom vocabulary item from the custom vocabulary
+	// list.
+	Weight *int32
 
 	noSmithyDocumentSerde
 }
@@ -1200,6 +1237,24 @@ type ExternalSourceSetting struct {
 
 	// Settings required for a slot type based on a grammar that you provide.
 	GrammarSlotTypeSetting *GrammarSlotTypeSetting
+
+	noSmithyDocumentSerde
+}
+
+// The unique failed custom vocabulary item from the custom vocabulary list.
+type FailedCustomVocabularyItem struct {
+
+	// The unique error code for the failed custom vocabulary item from the custom
+	// vocabulary list.
+	ErrorCode ErrorCode
+
+	// The error message for the failed custom vocabulary item from the custom
+	// vocabulary list.
+	ErrorMessage *string
+
+	// The unique item identifer for the failed custom vocabulary item from the custom
+	// vocabulary list.
+	ItemId *string
 
 	noSmithyDocumentSerde
 }
@@ -1772,6 +1827,26 @@ type MultipleValuesSetting struct {
 	// ValidationException. If the allowMutlipleValues is not set, the default value is
 	// false.
 	AllowMultipleValues bool
+
+	noSmithyDocumentSerde
+}
+
+// The new custom vocabulary item from the custom vocabulary list.
+type NewCustomVocabularyItem struct {
+
+	// The unique phrase for the new custom vocabulary item from the custom vocabulary
+	// list.
+	//
+	// This member is required.
+	Phrase *string
+
+	// The display as value assigned to the new custom vocabulary item from the custom
+	// vocabulary list.
+	DisplayAs *string
+
+	// The weight assigned to the new custom vocabulary item from the custom vocabulary
+	// list.
+	Weight *int32
 
 	noSmithyDocumentSerde
 }

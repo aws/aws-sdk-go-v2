@@ -29,6 +29,90 @@ func (e *AccountHasOngoingImportException) ErrorCode() string {
 }
 func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// This exception is thrown when when the specified account is not found or not
+// part of an organization.
+type AccountNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccountNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccountNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccountNotFoundException) ErrorCode() string             { return "AccountNotFoundException" }
+func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the specified account is not registered as the
+// CloudTrail delegated administrator.
+type AccountNotRegisteredException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccountNotRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccountNotRegisteredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccountNotRegisteredException) ErrorCode() string             { return "AccountNotRegisteredException" }
+func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the account is already registered as the
+// CloudTrail delegated administrator.
+type AccountRegisteredException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccountRegisteredException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccountRegisteredException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccountRegisteredException) ErrorCode() string             { return "AccountRegisteredException" }
+func (e *AccountRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the management account of an organization is
+// registered as the CloudTrail delegated administrator.
+type CannotDelegateManagementAccountException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CannotDelegateManagementAccountException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CannotDelegateManagementAccountException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CannotDelegateManagementAccountException) ErrorCode() string {
+	return "CannotDelegateManagementAccountException"
+}
+func (e *CannotDelegateManagementAccountException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // This exception is thrown when the specified value of ChannelARN is not valid.
 type ChannelARNInvalidException struct {
 	Message *string
@@ -186,6 +270,30 @@ func (e *ConflictException) ErrorMessage() string {
 }
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This exception is thrown when the maximum number of CloudTrail delegated
+// administrators is reached.
+type DelegatedAdminAccountLimitExceededException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DelegatedAdminAccountLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DelegatedAdminAccountLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DelegatedAdminAccountLimitExceededException) ErrorCode() string {
+	return "DelegatedAdminAccountLimitExceededException"
+}
+func (e *DelegatedAdminAccountLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // An event data store with that name already exists.
 type EventDataStoreAlreadyExistsException struct {
@@ -1059,7 +1167,7 @@ func (e *InvalidTrailNameException) ErrorCode() string             { return "Inv
 func (e *InvalidTrailNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when there is an issue with the specified KMS key and
-// the trail can’t be updated.
+// the trail or event data store can't be updated.
 type KmsException struct {
 	Message *string
 
@@ -1158,6 +1266,54 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorCode() string {
 	return "MaximumNumberOfTrailsExceededException"
 }
 func (e *MaximumNumberOfTrailsExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// This exception is thrown when the management account does not have a
+// service-linked role.
+type NoManagementAccountSLRExistsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoManagementAccountSLRExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoManagementAccountSLRExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoManagementAccountSLRExistsException) ErrorCode() string {
+	return "NoManagementAccountSLRExistsException"
+}
+func (e *NoManagementAccountSLRExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// This exception is thrown when the account making the request is not the
+// organization's management account.
+type NotOrganizationManagementAccountException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotOrganizationManagementAccountException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotOrganizationManagementAccountException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotOrganizationManagementAccountException) ErrorCode() string {
+	return "NotOrganizationManagementAccountException"
+}
+func (e *NotOrganizationManagementAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

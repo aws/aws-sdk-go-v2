@@ -1956,6 +1956,9 @@ func awsAwsjson11_deserializeOpErrorGetQueryResults(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidRequestException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
 
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5878,6 +5881,11 @@ func awsAwsjson11_deserializeDocumentQueryExecution(v **types.QueryExecution, va
 				return err
 			}
 
+		case "ResultReuseConfiguration":
+			if err := awsAwsjson11_deserializeDocumentResultReuseConfiguration(&sv.ResultReuseConfiguration, value); err != nil {
+				return err
+			}
+
 		case "StatementType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6115,6 +6123,11 @@ func awsAwsjson11_deserializeDocumentQueryExecutionStatistics(v **types.QueryExe
 					return err
 				}
 				sv.QueryQueueTimeInMillis = ptr.Int64(i64)
+			}
+
+		case "ResultReuseInformation":
+			if err := awsAwsjson11_deserializeDocumentResultReuseInformation(&sv.ResultReuseInformation, value); err != nil {
+				return err
 			}
 
 		case "ServiceProcessingTimeInMillis":
@@ -6815,6 +6828,135 @@ func awsAwsjson11_deserializeDocumentResultConfiguration(v **types.ResultConfigu
 					return fmt.Errorf("expected ResultOutputLocation to be of type string, got %T instead", value)
 				}
 				sv.OutputLocation = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResultReuseByAgeConfiguration(v **types.ResultReuseByAgeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResultReuseByAgeConfiguration
+	if *v == nil {
+		sv = &types.ResultReuseByAgeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "MaxAgeInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Age to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAgeInMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResultReuseConfiguration(v **types.ResultReuseConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResultReuseConfiguration
+	if *v == nil {
+		sv = &types.ResultReuseConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ResultReuseByAgeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentResultReuseByAgeConfiguration(&sv.ResultReuseByAgeConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentResultReuseInformation(v **types.ResultReuseInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResultReuseInformation
+	if *v == nil {
+		sv = &types.ResultReuseInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ReusedPreviousResult":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReusedPreviousResult = jtv
 			}
 
 		default:

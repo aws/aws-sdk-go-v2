@@ -13,7 +13,7 @@ import (
 )
 
 // Gets a list of recommended intents provided by the bot recommendation that you
-// can use in your bot.
+// can use in your bot. Intents in the response are ordered by relevance.
 func (c *Client) ListRecommendedIntents(ctx context.Context, params *ListRecommendedIntentsInput, optFns ...func(*Options)) (*ListRecommendedIntentsOutput, error) {
 	if params == nil {
 		params = &ListRecommendedIntentsInput{}

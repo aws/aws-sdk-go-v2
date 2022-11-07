@@ -39427,6 +39427,11 @@ func awsAwsjson11_deserializeDocumentStepExecution(v **types.StepExecution, valu
 				sv.TimeoutSeconds = ptr.Int64(i64)
 			}
 
+		case "TriggeredAlarms":
+			if err := awsAwsjson11_deserializeDocumentAlarmStateInformationList(&sv.TriggeredAlarms, value); err != nil {
+				return err
+			}
+
 		case "ValidNextSteps":
 			if err := awsAwsjson11_deserializeDocumentValidNextStepList(&sv.ValidNextSteps, value); err != nil {
 				return err
@@ -39721,6 +39726,11 @@ func awsAwsjson11_deserializeDocumentTargetLocation(v **types.TargetLocation, va
 
 		case "Regions":
 			if err := awsAwsjson11_deserializeDocumentRegions(&sv.Regions, value); err != nil {
+				return err
+			}
+
+		case "TargetLocationAlarmConfiguration":
+			if err := awsAwsjson11_deserializeDocumentAlarmConfiguration(&sv.TargetLocationAlarmConfiguration, value); err != nil {
 				return err
 			}
 

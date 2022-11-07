@@ -430,6 +430,46 @@ func (m *validateOpListAnswers) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCheckDetails struct {
+}
+
+func (*validateOpListCheckDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCheckDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCheckDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCheckDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCheckSummaries struct {
+}
+
+func (*validateOpListCheckSummaries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCheckSummaries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCheckSummariesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCheckSummariesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListLensReviewImprovements struct {
 }
 
@@ -792,6 +832,14 @@ func addOpImportLensValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAnswersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAnswers{}, middleware.After)
+}
+
+func addOpListCheckDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCheckDetails{}, middleware.After)
+}
+
+func addOpListCheckSummariesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCheckSummaries{}, middleware.After)
 }
 
 func addOpListLensReviewImprovementsValidationMiddleware(stack *middleware.Stack) error {
@@ -1274,6 +1322,60 @@ func validateOpListAnswersInput(v *ListAnswersInput) error {
 	}
 	if v.LensAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCheckDetailsInput(v *ListCheckDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCheckDetailsInput"}
+	if v.WorkloadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
+	}
+	if v.LensArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensArn"))
+	}
+	if v.PillarId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PillarId"))
+	}
+	if v.QuestionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if v.ChoiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChoiceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCheckSummariesInput(v *ListCheckSummariesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCheckSummariesInput"}
+	if v.WorkloadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
+	}
+	if v.LensArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LensArn"))
+	}
+	if v.PillarId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PillarId"))
+	}
+	if v.QuestionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuestionId"))
+	}
+	if v.ChoiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

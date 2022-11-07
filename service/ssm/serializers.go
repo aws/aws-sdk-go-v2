@@ -10312,6 +10312,13 @@ func awsAwsjson11_serializeDocumentTargetLocation(v *types.TargetLocation, value
 		}
 	}
 
+	if v.TargetLocationAlarmConfiguration != nil {
+		ok := object.Key("TargetLocationAlarmConfiguration")
+		if err := awsAwsjson11_serializeDocumentAlarmConfiguration(v.TargetLocationAlarmConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetLocationMaxConcurrency != nil {
 		ok := object.Key("TargetLocationMaxConcurrency")
 		ok.String(*v.TargetLocationMaxConcurrency)

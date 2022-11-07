@@ -428,6 +428,28 @@ func (Effect) Values() []Effect {
 	}
 }
 
+type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	ErrorCodeDuplicateInput        ErrorCode = "DUPLICATE_INPUT"
+	ErrorCodeResourceDoesNotExist  ErrorCode = "RESOURCE_DOES_NOT_EXIST"
+	ErrorCodeResourceAlreadyExists ErrorCode = "RESOURCE_ALREADY_EXISTS"
+	ErrorCodeInternalServerFailure ErrorCode = "INTERNAL_SERVER_FAILURE"
+)
+
+// Values returns all known values for ErrorCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ErrorCode) Values() []ErrorCode {
+	return []ErrorCode{
+		"DUPLICATE_INPUT",
+		"RESOURCE_DOES_NOT_EXIST",
+		"RESOURCE_ALREADY_EXISTS",
+		"INTERNAL_SERVER_FAILURE",
+	}
+}
+
 type ExportFilterName string
 
 // Enum values for ExportFilterName

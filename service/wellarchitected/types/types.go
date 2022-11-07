@@ -106,6 +106,93 @@ type AnswerSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Account details for a Well-Architected best practice in relation to Trusted
+// Advisor checks.
+type CheckDetail struct {
+
+	// An Amazon Web Services account ID.
+	AccountId *string
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// Trusted Advisor check description.
+	Description *string
+
+	// Count of flagged resources associated to the check.
+	FlaggedResources int32
+
+	// Trusted Advisor check ID.
+	Id *string
+
+	// Well-Architected Lens ARN associated to the check.
+	LensArn *string
+
+	// Trusted Advisor check name.
+	Name *string
+
+	// The ID used to identify a pillar, for example, security. A pillar is identified
+	// by its PillarReviewSummary$PillarId.
+	PillarId *string
+
+	// Provider of the check related to the best practice.
+	Provider CheckProvider
+
+	// The ID of the question.
+	QuestionId *string
+
+	// Reason associated to the check.
+	Reason CheckFailureReason
+
+	// Status associated to the check.
+	Status CheckStatus
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Trusted Advisor check summary.
+type CheckSummary struct {
+
+	// Account summary associated to the check.
+	AccountSummary map[string]int32
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// Trusted Advisor check description.
+	Description *string
+
+	// Trusted Advisor check ID.
+	Id *string
+
+	// Well-Architected Lens ARN associated to the check.
+	LensArn *string
+
+	// Trusted Advisor check name.
+	Name *string
+
+	// The ID used to identify a pillar, for example, security. A pillar is identified
+	// by its PillarReviewSummary$PillarId.
+	PillarId *string
+
+	// Provider of the check related to the best practice.
+	Provider CheckProvider
+
+	// The ID of the question.
+	QuestionId *string
+
+	// Status associated to the check.
+	Status CheckStatus
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A choice available to answer question.
 type Choice struct {
 
@@ -362,8 +449,8 @@ type LensShareSummary struct {
 	// The ID associated with the workload share.
 	ShareId *string
 
-	// The Amazon Web Services account ID or IAM role with which the workload is
-	// shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
+	// unit (OU) ID with which the workload is shared.
 	SharedWith *string
 
 	// The status of a workload share.
@@ -599,8 +686,8 @@ type ShareInvitationSummary struct {
 	// An Amazon Web Services account ID.
 	SharedBy *string
 
-	// The Amazon Web Services account ID or IAM role with which the workload is
-	// shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
+	// unit (OU) ID with which the workload is shared.
 	SharedWith *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web Services
@@ -647,6 +734,9 @@ type Workload struct {
 	// The list of Amazon Web Services account IDs associated with the workload.
 	AccountIds []string
 
+	// List of AppRegistry application ARNs associated to the workload.
+	Applications []string
+
 	// The URL of the architectural design for the workload.
 	ArchitecturalDesign *string
 
@@ -656,6 +746,9 @@ type Workload struct {
 
 	// The description for the workload.
 	Description *string
+
+	// Discovery configuration associated to the workload.
+	DiscoveryConfig *WorkloadDiscoveryConfig
 
 	// The environment for the workload.
 	Environment WorkloadEnvironment
@@ -788,6 +881,15 @@ type Workload struct {
 	noSmithyDocumentSerde
 }
 
+// Discovery configuration associated to the workload.
+type WorkloadDiscoveryConfig struct {
+
+	// Discovery integration status in respect to Trusted Advisor for the workload.
+	TrustedAdvisorIntegrationStatus TrustedAdvisorIntegrationStatus
+
+	noSmithyDocumentSerde
+}
+
 // A workload share return object.
 type WorkloadShare struct {
 
@@ -800,8 +902,8 @@ type WorkloadShare struct {
 	// An Amazon Web Services account ID.
 	SharedBy *string
 
-	// The Amazon Web Services account ID or IAM role with which the workload is
-	// shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
+	// unit (OU) ID with which the workload is shared.
 	SharedWith *string
 
 	// The status of a workload share.
@@ -828,8 +930,8 @@ type WorkloadShareSummary struct {
 	// The ID associated with the workload share.
 	ShareId *string
 
-	// The Amazon Web Services account ID or IAM role with which the workload is
-	// shared.
+	// The Amazon Web Services account ID, IAM role, organization ID, or organizational
+	// unit (OU) ID with which the workload is shared.
 	SharedWith *string
 
 	// The status of a workload share.

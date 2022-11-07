@@ -3978,6 +3978,19 @@ func awsAwsquery_serializeDocumentActivityIds(v []string, value query.Value) err
 	return nil
 }
 
+func awsAwsquery_serializeDocumentAllowedInstanceTypes(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAutoScalingGroupNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -4373,6 +4386,13 @@ func awsAwsquery_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 		}
 	}
 
+	if v.AllowedInstanceTypes != nil {
+		objectKey := object.Key("AllowedInstanceTypes")
+		if err := awsAwsquery_serializeDocumentAllowedInstanceTypes(v.AllowedInstanceTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if len(v.BareMetal) > 0 {
 		objectKey := object.Key("BareMetal")
 		objectKey.String(string(v.BareMetal))
@@ -4433,6 +4453,13 @@ func awsAwsquery_serializeDocumentInstanceRequirements(v *types.InstanceRequirem
 	if v.MemoryMiB != nil {
 		objectKey := object.Key("MemoryMiB")
 		if err := awsAwsquery_serializeDocumentMemoryMiBRequest(v.MemoryMiB, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkBandwidthGbps != nil {
+		objectKey := object.Key("NetworkBandwidthGbps")
+		if err := awsAwsquery_serializeDocumentNetworkBandwidthGbpsRequest(v.NetworkBandwidthGbps, objectKey); err != nil {
 			return err
 		}
 	}
@@ -4925,6 +4952,49 @@ func awsAwsquery_serializeDocumentMixedInstancesPolicy(v *types.MixedInstancesPo
 		objectKey := object.Key("LaunchTemplate")
 		if err := awsAwsquery_serializeDocumentLaunchTemplate(v.LaunchTemplate, objectKey); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentNetworkBandwidthGbpsRequest(v *types.NetworkBandwidthGbpsRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Max != nil {
+		objectKey := object.Key("Max")
+		switch {
+		case math.IsNaN(*v.Max):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Max, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Max, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Max)
+
+		}
+	}
+
+	if v.Min != nil {
+		objectKey := object.Key("Min")
+		switch {
+		case math.IsNaN(*v.Min):
+			objectKey.String("NaN")
+
+		case math.IsInf(*v.Min, 1):
+			objectKey.String("Infinity")
+
+		case math.IsInf(*v.Min, -1):
+			objectKey.String("-Infinity")
+
+		default:
+			objectKey.Double(*v.Min)
+
 		}
 	}
 

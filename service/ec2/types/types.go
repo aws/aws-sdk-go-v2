@@ -3999,7 +3999,7 @@ type FleetLaunchTemplateOverridesRequest struct {
 // template in the request, but not both. For information about launch templates,
 // see Launch an instance from a launch template
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
-// in the Amazon EC2 User Guide for Linux Instances.
+// in the Amazon EC2 User Guide.
 type FleetLaunchTemplateSpecification struct {
 
 	// The ID of the launch template. You must specify the LaunchTemplateId or the
@@ -5981,10 +5981,22 @@ type InstancePrivateIpAddress struct {
 // Amazon EC2 will identify instance types with these attributes. When you specify
 // multiple attributes, you get instance types that satisfy all of the specified
 // attributes. If you specify multiple values for an attribute, you get instance
-// types that satisfy any of the specified values. You must specify VCpuCount and
-// MemoryMiB. All other attributes are optional. Any unspecified optional attribute
-// is set to its default. For more information, see Attribute-based instance type
-// selection for EC2 Fleet
+// types that satisfy any of the specified values. To limit the list of instance
+// types from which Amazon EC2 can identify matching instance types, you can use
+// one of the following parameters, but not both in the same request:
+//
+// *
+// AllowedInstanceTypes - The instance types to include in the list. All other
+// instance types are ignored, even if they match your specified attributes.
+//
+// *
+// ExcludedInstanceTypes - The instance types to exclude from the list, even if
+// they match your specified attributes.
+//
+// You must specify VCpuCount and MemoryMiB.
+// All other attributes are optional. Any unspecified optional attribute is set to
+// its default. For more information, see Attribute-based instance type selection
+// for EC2 Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html),
 // Attribute-based instance type selection for Spot Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html),
@@ -6064,6 +6076,17 @@ type InstanceRequirements struct {
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
 
+	// The instance types to apply your specified attributes against. All other
+	// instance types are ignored, even if they match your specified attributes. You
+	// can use strings with one or more wild cards, represented by an asterisk (*), to
+	// allow an instance type, size, or generation. The following are examples:
+	// m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*,Amazon EC2
+	// will allow the entire C5 instance family, which includes all C5a and C5n
+	// instance types. If you specify m5a.*, Amazon EC2 will allow all the M5a instance
+	// types, but not the M5n instance types. If you specify AllowedInstanceTypes, you
+	// can't specify ExcludedInstanceTypes. Default: All instance types
+	AllowedInstanceTypes []string
+
 	// Indicates whether bare metal instance types must be included, excluded, or
 	// required.
 	//
@@ -6122,7 +6145,8 @@ type InstanceRequirements struct {
 	// example, if you specify c5*,Amazon EC2 will exclude the entire C5 instance
 	// family, which includes all C5a and C5n instance types. If you specify m5a.*,
 	// Amazon EC2 will exclude all the M5a instance types, but not the M5n instance
-	// types. Default: No excluded instance types
+	// types. If you specify ExcludedInstanceTypes, you can't specify
+	// AllowedInstanceTypes. Default: No excluded instance types
 	ExcludedInstanceTypes []string
 
 	// Indicates whether current or previous generation instance types are included.
@@ -6169,6 +6193,10 @@ type InstanceRequirements struct {
 
 	// The minimum and maximum amount of memory, in MiB.
 	MemoryMiB *MemoryMiB
+
+	// The minimum and maximum amount of network bandwidth, in gigabits per second
+	// (Gbps). Default: No minimum or maximum limits
+	NetworkBandwidthGbps *NetworkBandwidthGbps
 
 	// The minimum and maximum number of network interfaces. Default: No minimum or
 	// maximum limits
@@ -6226,10 +6254,22 @@ type InstanceRequirements struct {
 // Amazon EC2 will identify instance types with these attributes. When you specify
 // multiple attributes, you get instance types that satisfy all of the specified
 // attributes. If you specify multiple values for an attribute, you get instance
-// types that satisfy any of the specified values. You must specify VCpuCount and
-// MemoryMiB. All other attributes are optional. Any unspecified optional attribute
-// is set to its default. For more information, see Attribute-based instance type
-// selection for EC2 Fleet
+// types that satisfy any of the specified values. To limit the list of instance
+// types from which Amazon EC2 can identify matching instance types, you can use
+// one of the following parameters, but not both in the same request:
+//
+// *
+// AllowedInstanceTypes - The instance types to include in the list. All other
+// instance types are ignored, even if they match your specified attributes.
+//
+// *
+// ExcludedInstanceTypes - The instance types to exclude from the list, even if
+// they match your specified attributes.
+//
+// You must specify VCpuCount and MemoryMiB.
+// All other attributes are optional. Any unspecified optional attribute is set to
+// its default. For more information, see Attribute-based instance type selection
+// for EC2 Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html),
 // Attribute-based instance type selection for Spot Fleet
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html),
@@ -6319,6 +6359,17 @@ type InstanceRequirementsRequest struct {
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
 
+	// The instance types to apply your specified attributes against. All other
+	// instance types are ignored, even if they match your specified attributes. You
+	// can use strings with one or more wild cards, represented by an asterisk (*), to
+	// allow an instance type, size, or generation. The following are examples:
+	// m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*,Amazon EC2
+	// will allow the entire C5 instance family, which includes all C5a and C5n
+	// instance types. If you specify m5a.*, Amazon EC2 will allow all the M5a instance
+	// types, but not the M5n instance types. If you specify AllowedInstanceTypes, you
+	// can't specify ExcludedInstanceTypes. Default: All instance types
+	AllowedInstanceTypes []string
+
 	// Indicates whether bare metal instance types must be included, excluded, or
 	// required.
 	//
@@ -6377,7 +6428,8 @@ type InstanceRequirementsRequest struct {
 	// example, if you specify c5*,Amazon EC2 will exclude the entire C5 instance
 	// family, which includes all C5a and C5n instance types. If you specify m5a.*,
 	// Amazon EC2 will exclude all the M5a instance types, but not the M5n instance
-	// types. Default: No excluded instance types
+	// types. If you specify ExcludedInstanceTypes, you can't specify
+	// AllowedInstanceTypes. Default: No excluded instance types
 	ExcludedInstanceTypes []string
 
 	// Indicates whether current or previous generation instance types are included.
@@ -6421,6 +6473,10 @@ type InstanceRequirementsRequest struct {
 	// The minimum and maximum amount of memory per vCPU, in GiB. Default: No minimum
 	// or maximum limits
 	MemoryGiBPerVCpu *MemoryGiBPerVCpuRequest
+
+	// The minimum and maximum amount of network bandwidth, in gigabits per second
+	// (Gbps). Default: No minimum or maximum limits
+	NetworkBandwidthGbps *NetworkBandwidthGbpsRequest
 
 	// The minimum and maximum number of network interfaces. Default: No minimum or
 	// maximum limits
@@ -9351,6 +9407,48 @@ type NetworkAclEntry struct {
 	// The rule number for the entry. ACL entries are processed in ascending order by
 	// rule number.
 	RuleNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of network bandwidth, in gigabits per second
+// (Gbps). Setting the minimum bandwidth does not guarantee that your instance will
+// achieve the minimum bandwidth. Amazon EC2 will identify instance types that
+// support the specified minimum bandwidth, but the actual bandwidth of your
+// instance might go below the specified minimum at times. For more information,
+// see Available instance bandwidth
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth)
+// in the Amazon EC2 User Guide.
+type NetworkBandwidthGbps struct {
+
+	// The maximum amount of network bandwidth, in Gbps. If this parameter is not
+	// specified, there is no maximum limit.
+	Max *float64
+
+	// The minimum amount of network bandwidth, in Gbps. If this parameter is not
+	// specified, there is no minimum limit.
+	Min *float64
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of network bandwidth, in gigabits per second
+// (Gbps). Setting the minimum bandwidth does not guarantee that your instance will
+// achieve the minimum bandwidth. Amazon EC2 will identify instance types that
+// support the specified minimum bandwidth, but the actual bandwidth of your
+// instance might go below the specified minimum at times. For more information,
+// see Available instance bandwidth
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html#available-instance-bandwidth)
+// in the Amazon EC2 User Guide.
+type NetworkBandwidthGbpsRequest struct {
+
+	// The maximum amount of network bandwidth, in Gbps. To specify no maximum limit,
+	// omit this parameter.
+	Max *float64
+
+	// The minimum amount of network bandwidth, in Gbps. To specify no minimum limit,
+	// omit this parameter.
+	Min *float64
 
 	noSmithyDocumentSerde
 }
@@ -13063,9 +13161,8 @@ type SpotFleetRequestConfigData struct {
 	// that grants the Spot Fleet the permission to request, launch, terminate, and tag
 	// instances on your behalf. For more information, see Spot Fleet prerequisites
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html#spot-fleet-prerequisites)
-	// in the Amazon EC2 User Guide for Linux Instances. Spot Fleet can terminate Spot
-	// Instances on your behalf when you cancel its Spot Fleet request using
-	// CancelSpotFleetRequests
+	// in the Amazon EC2 User Guide. Spot Fleet can terminate Spot Instances on your
+	// behalf when you cancel its Spot Fleet request using CancelSpotFleetRequests
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CancelSpotFleetRequests)
 	// or when the Spot Fleet request expires, if you set
 	// TerminateInstancesWithExpiration.
@@ -13086,18 +13183,18 @@ type SpotFleetRequestConfigData struct {
 	// across the Spot Instance pools specified by the Spot Fleet launch configuration.
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html)
-	// in the Amazon EC2 User Guide for Linux Instances. lowestPrice - Spot Fleet
-	// launches instances from the lowest-price Spot Instance pool that has available
-	// capacity. If the cheapest pool doesn't have available capacity, the Spot
-	// Instances come from the next cheapest pool that has available capacity. If a
-	// pool runs out of capacity before fulfilling your desired capacity, Spot Fleet
-	// will continue to fulfill your request by drawing from the next cheapest pool. To
-	// ensure that your desired capacity is met, you might receive Spot Instances from
-	// several pools. diversified - Spot Fleet launches instances from all of the Spot
-	// Instance pools that you specify. capacityOptimized (recommended) - Spot Fleet
-	// launches instances from Spot Instance pools with optimal capacity for the number
-	// of instances that are launching. To give certain instance types a higher chance
-	// of launching first, use capacityOptimizedPrioritized. Set a priority for each
+	// in the Amazon EC2 User Guide. lowestPrice - Spot Fleet launches instances from
+	// the lowest-price Spot Instance pool that has available capacity. If the cheapest
+	// pool doesn't have available capacity, the Spot Instances come from the next
+	// cheapest pool that has available capacity. If a pool runs out of capacity before
+	// fulfilling your desired capacity, Spot Fleet will continue to fulfill your
+	// request by drawing from the next cheapest pool. To ensure that your desired
+	// capacity is met, you might receive Spot Instances from several pools.
+	// diversified - Spot Fleet launches instances from all of the Spot Instance pools
+	// that you specify. capacityOptimized (recommended) - Spot Fleet launches
+	// instances from Spot Instance pools with optimal capacity for the number of
+	// instances that are launching. To give certain instance types a higher chance of
+	// launching first, use capacityOptimizedPrioritized. Set a priority for each
 	// instance type by using the Priority parameter for LaunchTemplateOverrides. You
 	// can assign the same priority to different LaunchTemplateOverrides. EC2
 	// implements the priorities on a best-effort basis, but optimizes for capacity

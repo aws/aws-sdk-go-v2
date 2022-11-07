@@ -73,17 +73,17 @@ type CacheCluster struct {
 	// *
 	// General purpose:
 	//
-	// * Current generation: M6g node types: (available only for
-	// Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16
-	// onward): cache.m6g.large, cache.m6g.xlarge, cache.m6g.2xlarge,
-	// cache.m6g.4xlarge, cache.m6g.8xlarge, cache.m6g.12xlarge, cache.m6g.16xlarge For
-	// region availability, see Supported Node Types
+	// * Current generation: M6g node types (available only for Redis
+	// engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+	// cache.m6g.large, cache.m6g.xlarge, cache.m6g.2xlarge, cache.m6g.4xlarge,
+	// cache.m6g.8xlarge, cache.m6g.12xlarge, cache.m6g.16xlarge For region
+	// availability, see Supported Node Types
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
 	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
 	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
 	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
-	// onward and for Memcached engine version 1.5.16 onward): cache.t4g.micro,
+	// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
 	// cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
 	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
 	// cache.t2.medium
@@ -101,18 +101,11 @@ type CacheCluster struct {
 	// clusters is not supported for these types.) C1 node types: cache.c1.xlarge
 	//
 	// *
-	// Memory optimized with data tiering:
+	// Memory optimized:
 	//
-	// * Current generation: R6gd node types
-	// (available only for Redis engine version 6.2 onward). cache.r6gd.xlarge,
-	// cache.r6gd.2xlarge, cache.r6gd.4xlarge, cache.r6gd.8xlarge, cache.r6gd.12xlarge,
-	// cache.r6gd.16xlarge
-	//
-	// * Memory optimized:
-	//
-	// * Current generation: R6g node types
-	// (available only for Redis engine version 5.0.6 onward and for Memcached engine
-	// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
+	// * Current generation: R6g node types (available only for
+	// Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16
+	// onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
 	// cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
 	// region availability, see Supported Node Types
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
@@ -173,8 +166,19 @@ type CacheCluster struct {
 	// The version of the cache engine that is used in this cluster.
 	EngineVersion *string
 
+	// The network type associated with the cluster, either ipv4 | ipv6. IPv6 is
+	// supported for workloads using Redis engine version 6.2 onward or Memcached
+	// engine version 1.6.6 on all instances built on the Nitro system
+	// (https://aws.amazon.com/ec2/nitro/).
+	IpDiscovery IpDiscovery
+
 	// Returns the destination, format and type of the logs.
 	LogDeliveryConfigurations []LogDeliveryConfiguration
+
+	// Must be either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using
+	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
+	// instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/).
+	NetworkType NetworkType
 
 	// Describes a notification topic and its status. Notification topics are used for
 	// publishing ElastiCache events to subscribers using Amazon Simple Notification
@@ -283,7 +287,7 @@ type CacheEngineVersion struct {
 // * General purpose:
 //
 // * Current generation: M6g node
-// types: (available only for Redis engine version 5.0.6 onward and for Memcached
+// types (available only for Redis engine version 5.0.6 onward and for Memcached
 // engine version 1.5.16 onward): cache.m6g.large, cache.m6g.xlarge,
 // cache.m6g.2xlarge, cache.m6g.4xlarge, cache.m6g.8xlarge, cache.m6g.12xlarge,
 // cache.m6g.16xlarge For region availability, see Supported Node Types
@@ -292,7 +296,7 @@ type CacheEngineVersion struct {
 // cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
 // cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
 // cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
-// onward and for Memcached engine version 1.5.16 onward): cache.t4g.micro,
+// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
 // cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
 // cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
 // cache.t2.medium
@@ -310,18 +314,11 @@ type CacheEngineVersion struct {
 // clusters is not supported for these types.) C1 node types: cache.c1.xlarge
 //
 // *
-// Memory optimized with data tiering:
+// Memory optimized:
 //
-// * Current generation: R6gd node types
-// (available only for Redis engine version 6.2 onward). cache.r6gd.xlarge,
-// cache.r6gd.2xlarge, cache.r6gd.4xlarge, cache.r6gd.8xlarge, cache.r6gd.12xlarge,
-// cache.r6gd.16xlarge
-//
-// * Memory optimized:
-//
-// * Current generation: R6g node types
-// (available only for Redis engine version 5.0.6 onward and for Memcached engine
-// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
+// * Current generation: R6g node types (available only for
+// Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16
+// onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
 // cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
 // region availability, see Supported Node Types
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
@@ -570,6 +567,11 @@ type CacheSubnetGroup struct {
 
 	// A list of subnets associated with the cache subnet group.
 	Subnets []Subnet
+
+	// Either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using Redis
+	// engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
+	// built on the Nitro system (https://aws.amazon.com/ec2/nitro/).
+	SupportedNetworkTypes []NetworkType
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
 	VpcId *string
@@ -1298,6 +1300,12 @@ type ReplicationGroup struct {
 	// Global datastore.
 	GlobalReplicationGroupInfo *GlobalReplicationGroupInfo
 
+	// The network type you choose when modifying a cluster, either ipv4 | ipv6. IPv6
+	// is supported for workloads using Redis engine version 6.2 onward or Memcached
+	// engine version 1.6.6 on all instances built on the Nitro system
+	// (https://aws.amazon.com/ec2/nitro/).
+	IpDiscovery IpDiscovery
+
 	// The ID of the KMS key used to encrypt the disk in the cluster.
 	KmsKeyId *string
 
@@ -1314,6 +1322,11 @@ type ReplicationGroup struct {
 	// more information, see Minimizing Downtime: Multi-AZ
 	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html)
 	MultiAZ MultiAZStatus
+
+	// Must be either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using
+	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
+	// instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/).
+	NetworkType NetworkType
 
 	// A list of node groups in this replication group. For Redis (cluster mode
 	// disabled) replication groups, this is a single-element list. For Redis (cluster
@@ -1404,8 +1417,8 @@ type ReservedCacheNode struct {
 	// * General purpose:
 	//
 	// * Current
-	// generation: M6g node types: (available only for Redis engine version 5.0.6
-	// onward and for Memcached engine version 1.5.16 onward): cache.m6g.large,
+	// generation: M6g node types (available only for Redis engine version 5.0.6 onward
+	// and for Memcached engine version 1.5.16 onward): cache.m6g.large,
 	// cache.m6g.xlarge, cache.m6g.2xlarge, cache.m6g.4xlarge, cache.m6g.8xlarge,
 	// cache.m6g.12xlarge, cache.m6g.16xlarge For region availability, see Supported
 	// Node Types
@@ -1415,10 +1428,8 @@ type ReservedCacheNode struct {
 	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
 	// cache.m4.10xlarge T4g node types (available only for Redis engine version 5.0.6
 	// onward and Memcached engine version 1.5.16 onward): cache.t4g.micro,
-	// cache.t4g.small, cache.t4g.medium
-	//
-	// T3 node types: cache.t3.micro,
-	// cache.t3.small, cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
+	// cache.t4g.small, cache.t4g.medium T3 node types: cache.t3.micro, cache.t3.small,
+	// cache.t3.medium T2 node types: cache.t2.micro, cache.t2.small,
 	// cache.t2.medium
 	//
 	// * Previous generation: (not recommended. Existing clusters are
@@ -1434,18 +1445,11 @@ type ReservedCacheNode struct {
 	// clusters is not supported for these types.) C1 node types: cache.c1.xlarge
 	//
 	// *
-	// Memory optimized with data tiering:
+	// Memory optimized:
 	//
-	// * Current generation: R6gd node types
-	// (available only for Redis engine version 6.2 onward). cache.r6gd.xlarge,
-	// cache.r6gd.2xlarge, cache.r6gd.4xlarge, cache.r6gd.8xlarge, cache.r6gd.12xlarge,
-	// cache.r6gd.16xlarge
-	//
-	// * Memory optimized:
-	//
-	// * Current generation: R6g node types
-	// (available only for Redis engine version 5.0.6 onward and for Memcached engine
-	// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
+	// * Current generation: R6g node types (available only for
+	// Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16
+	// onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
 	// cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
 	// region availability, see Supported Node Types
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
@@ -1526,8 +1530,8 @@ type ReservedCacheNodesOffering struct {
 	// * General purpose:
 	//
 	// * Current
-	// generation: M6g node types: (available only for Redis engine version 5.0.6
-	// onward and for Memcached engine version 1.5.16 onward): cache.m6g.large,
+	// generation: M6g node types (available only for Redis engine version 5.0.6 onward
+	// and for Memcached engine version 1.5.16 onward): cache.m6g.large,
 	// cache.m6g.xlarge, cache.m6g.2xlarge, cache.m6g.4xlarge, cache.m6g.8xlarge,
 	// cache.m6g.12xlarge, cache.m6g.16xlarge For region availability, see Supported
 	// Node Types
@@ -1554,18 +1558,11 @@ type ReservedCacheNodesOffering struct {
 	// clusters is not supported for these types.) C1 node types: cache.c1.xlarge
 	//
 	// *
-	// Memory optimized with data tiering:
+	// Memory optimized:
 	//
-	// * Current generation: R6gd node types
-	// (available only for Redis engine version 6.2 onward). cache.r6gd.xlarge,
-	// cache.r6gd.2xlarge, cache.r6gd.4xlarge, cache.r6gd.8xlarge, cache.r6gd.12xlarge,
-	// cache.r6gd.16xlarge
-	//
-	// * Memory optimized:
-	//
-	// * Current generation: R6g node types
-	// (available only for Redis engine version 5.0.6 onward and for Memcached engine
-	// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
+	// * Current generation: R6g node types (available only for
+	// Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16
+	// onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
 	// cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
 	// region availability, see Supported Node Types
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
@@ -1745,7 +1742,7 @@ type Snapshot struct {
 	// General purpose:
 	//
 	// * Current generation: M6g node types (available only for Redis
-	// engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).
+	// engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
 	// cache.m6g.large, cache.m6g.xlarge, cache.m6g.2xlarge, cache.m6g.4xlarge,
 	// cache.m6g.8xlarge, cache.m6g.12xlarge, cache.m6g.16xlarge For region
 	// availability, see Supported Node Types
@@ -1772,22 +1769,13 @@ type Snapshot struct {
 	// clusters is not supported for these types.) C1 node types: cache.c1.xlarge
 	//
 	// *
-	// Memory optimized with data tiering:
+	// Memory optimized:
 	//
-	// * Current generation: R6gd node types
-	// (available only for Redis engine version 6.2 onward). cache.r6gd.xlarge,
-	// cache.r6gd.2xlarge, cache.r6gd.4xlarge, cache.r6gd.8xlarge, cache.r6gd.12xlarge,
-	// cache.r6gd.16xlarge
-	//
-	// * Memory optimized:
-	//
-	// * Current generation: R6g node types
-	// (available only for Redis engine version 5.0.6 onward and for Memcached engine
-	// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
+	// * Current generation: R6g node types (available only for
+	// Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16
+	// onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
 	// cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
 	// region availability, see Supported Node Types
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	// For region availability, see Supported Node Types
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
 	// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
 	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
@@ -1938,6 +1926,11 @@ type Subnet struct {
 
 	// The outpost ARN of the subnet.
 	SubnetOutpost *SubnetOutpost
+
+	// Either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using Redis
+	// engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
+	// built on the Nitro system (https://aws.amazon.com/ec2/nitro/).
+	SupportedNetworkTypes []NetworkType
 
 	noSmithyDocumentSerde
 }

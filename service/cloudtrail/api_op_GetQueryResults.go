@@ -31,16 +31,16 @@ func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInp
 
 type GetQueryResultsInput struct {
 
-	// The ARN (or ID suffix of the ARN) of the event data store against which the
-	// query was run.
-	//
-	// This member is required.
-	EventDataStore *string
-
 	// The ID of the query for which you want to get results.
 	//
 	// This member is required.
 	QueryId *string
+
+	// The ARN (or ID suffix of the ARN) of the event data store against which the
+	// query was run.
+	//
+	// Deprecated: EventDataStore is no longer required by GetQueryResultsRequest
+	EventDataStore *string
 
 	// The maximum number of query results to display on a single page.
 	MaxQueryResults *int32

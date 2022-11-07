@@ -11339,10 +11339,36 @@ func awsAwsquery_deserializeDocumentCacheCluster(v **types.CacheCluster, decoder
 				sv.EngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("IpDiscovery", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpDiscovery = types.IpDiscovery(xtv)
+			}
+
 		case strings.EqualFold("LogDeliveryConfigurations", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogDeliveryConfigurationList(&sv.LogDeliveryConfigurations, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("NetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NetworkType = types.NetworkType(xtv)
 			}
 
 		case strings.EqualFold("NotificationConfiguration", t.Name.Local):
@@ -13593,6 +13619,12 @@ func awsAwsquery_deserializeDocumentCacheSubnetGroup(v **types.CacheSubnetGroup,
 		case strings.EqualFold("Subnets", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSubnetList(&sv.Subnets, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("SupportedNetworkTypes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentNetworkTypeList(&sv.SupportedNetworkTypes, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -16441,6 +16473,86 @@ func awsAwsquery_deserializeDocumentLogDeliveryConfigurationListUnwrapped(v *[]t
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentNetworkTypeList(v *[]types.NetworkType, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.NetworkType
+	if *v == nil {
+		sv = make([]types.NetworkType, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.NetworkType
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = types.NetworkType(xtv)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentNetworkTypeListUnwrapped(v *[]types.NetworkType, decoder smithyxml.NodeDecoder) error {
+	var sv []types.NetworkType
+	if *v == nil {
+		sv = make([]types.NetworkType, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.NetworkType
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = types.NetworkType(xtv)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentNodeGroup(v **types.NodeGroup, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18868,6 +18980,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				return err
 			}
 
+		case strings.EqualFold("IpDiscovery", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IpDiscovery = types.IpDiscovery(xtv)
+			}
+
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -18910,6 +19035,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 			{
 				xtv := string(val)
 				sv.MultiAZ = types.MultiAZStatus(xtv)
+			}
+
+		case strings.EqualFold("NetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NetworkType = types.NetworkType(xtv)
 			}
 
 		case strings.EqualFold("NodeGroups", t.Name.Local):
@@ -21500,6 +21638,12 @@ func awsAwsquery_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 		case strings.EqualFold("SubnetOutpost", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSubnetOutpost(&sv.SubnetOutpost, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("SupportedNetworkTypes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentNetworkTypeList(&sv.SupportedNetworkTypes, nodeDecoder); err != nil {
 				return err
 			}
 

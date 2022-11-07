@@ -9,6 +9,9 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchCreateCustomVocabularyItem.go",
+        "api_op_BatchDeleteCustomVocabularyItem.go",
+        "api_op_BatchUpdateCustomVocabularyItem.go",
         "api_op_BuildBotLocale.go",
         "api_op_CreateBot.go",
         "api_op_CreateBotAlias.go",
@@ -54,6 +57,7 @@
         "api_op_ListBots.go",
         "api_op_ListBuiltInIntents.go",
         "api_op_ListBuiltInSlotTypes.go",
+        "api_op_ListCustomVocabularyItems.go",
         "api_op_ListExports.go",
         "api_op_ListImports.go",
         "api_op_ListIntents.go",

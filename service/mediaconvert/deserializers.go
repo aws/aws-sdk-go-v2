@@ -8906,6 +8906,19 @@ func awsRestjson1_deserializeDocumentColorCorrector(v **types.ColorCorrector, va
 				sv.Saturation = int32(i64)
 			}
 
+		case "sdrReferenceWhiteLevel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin100Max1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SdrReferenceWhiteLevel = int32(i64)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10565,7 +10578,7 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin64000Max640000 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin32000Max3024000 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -13897,6 +13910,19 @@ func awsRestjson1_deserializeDocumentImageInserter(v **types.ImageInserter, valu
 		case "insertableImages":
 			if err := awsRestjson1_deserializeDocument__listOfInsertableImage(&sv.InsertableImages, value); err != nil {
 				return err
+			}
+
+		case "sdrReferenceWhiteLevel":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin100Max1000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SdrReferenceWhiteLevel = int32(i64)
 			}
 
 		default:

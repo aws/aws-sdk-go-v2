@@ -33,17 +33,17 @@ func (c *Client) CancelQuery(ctx context.Context, params *CancelQueryInput, optF
 
 type CancelQueryInput struct {
 
-	// The ARN (or the ID suffix of the ARN) of an event data store on which the
-	// specified query is running.
-	//
-	// This member is required.
-	EventDataStore *string
-
 	// The ID of the query that you want to cancel. The QueryId comes from the response
 	// of a StartQuery operation.
 	//
 	// This member is required.
 	QueryId *string
+
+	// The ARN (or the ID suffix of the ARN) of an event data store on which the
+	// specified query is running.
+	//
+	// Deprecated: EventDataStore is no longer required by CancelQueryRequest
+	EventDataStore *string
 
 	noSmithyDocumentSerde
 }

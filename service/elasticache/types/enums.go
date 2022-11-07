@@ -152,6 +152,24 @@ func (DestinationType) Values() []DestinationType {
 	}
 }
 
+type IpDiscovery string
+
+// Enum values for IpDiscovery
+const (
+	IpDiscoveryIpv4 IpDiscovery = "ipv4"
+	IpDiscoveryIpv6 IpDiscovery = "ipv6"
+)
+
+// Values returns all known values for IpDiscovery. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IpDiscovery) Values() []IpDiscovery {
+	return []IpDiscovery{
+		"ipv4",
+		"ipv6",
+	}
+}
+
 type LogDeliveryConfigurationStatus string
 
 // Enum values for LogDeliveryConfigurationStatus
@@ -228,6 +246,26 @@ func (MultiAZStatus) Values() []MultiAZStatus {
 	return []MultiAZStatus{
 		"enabled",
 		"disabled",
+	}
+}
+
+type NetworkType string
+
+// Enum values for NetworkType
+const (
+	NetworkTypeIpv4      NetworkType = "ipv4"
+	NetworkTypeIpv6      NetworkType = "ipv6"
+	NetworkTypeDualStack NetworkType = "dual_stack"
+)
+
+// Values returns all known values for NetworkType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (NetworkType) Values() []NetworkType {
+	return []NetworkType{
+		"ipv4",
+		"ipv6",
+		"dual_stack",
 	}
 }
 

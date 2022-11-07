@@ -1,0 +1,8 @@
+{
+    "id": "f07b3f83-ddb1-4d53-a5c8-b1ad72415072",
+    "type": "feature",
+    "description": "Adds support for using Query Result Reuse",
+    "modules": [
+        "service/athena"
+    ]
+}

@@ -852,6 +852,35 @@ func validateResultConfigurationUpdates(v *types.ResultConfigurationUpdates) err
 	}
 }
 
+func validateResultReuseByAgeConfiguration(v *types.ResultReuseByAgeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResultReuseByAgeConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResultReuseConfiguration(v *types.ResultReuseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResultReuseConfiguration"}
+	if v.ResultReuseByAgeConfiguration != nil {
+		if err := validateResultReuseByAgeConfiguration(v.ResultReuseByAgeConfiguration); err != nil {
+			invalidParams.AddNested("ResultReuseByAgeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 	if v == nil {
 		return nil
@@ -1298,6 +1327,11 @@ func validateOpStartQueryExecutionInput(v *StartQueryExecutionInput) error {
 	if v.ResultConfiguration != nil {
 		if err := validateResultConfiguration(v.ResultConfiguration); err != nil {
 			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResultReuseConfiguration != nil {
+		if err := validateResultReuseConfiguration(v.ResultReuseConfiguration); err != nil {
+			invalidParams.AddNested("ResultReuseConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

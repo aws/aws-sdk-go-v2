@@ -39,6 +39,9 @@ type UpdateWorkloadInput struct {
 	// The list of Amazon Web Services account IDs associated with the workload.
 	AccountIds []string
 
+	// List of AppRegistry application ARNs to associate to the workload.
+	Applications []string
+
 	// The URL of the architectural design for the workload.
 	ArchitecturalDesign *string
 
@@ -48,6 +51,9 @@ type UpdateWorkloadInput struct {
 
 	// The description for the workload.
 	Description *string
+
+	// Well-Architected discovery configuration settings to associate to the workload.
+	DiscoveryConfig *types.WorkloadDiscoveryConfig
 
 	// The environment for the workload.
 	Environment types.WorkloadEnvironment

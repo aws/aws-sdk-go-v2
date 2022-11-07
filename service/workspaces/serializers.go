@@ -3732,6 +3732,17 @@ func awsAwsjson11_serializeDocumentLoginMessage(v map[string]string, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentProtocolList(v []types.Protocol, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRebootRequest(v *types.RebootRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4111,6 +4122,13 @@ func awsAwsjson11_serializeDocumentWorkspaceProperties(v *types.WorkspacePropert
 	if len(v.ComputeTypeName) > 0 {
 		ok := object.Key("ComputeTypeName")
 		ok.String(string(v.ComputeTypeName))
+	}
+
+	if v.Protocols != nil {
+		ok := object.Key("Protocols")
+		if err := awsAwsjson11_serializeDocumentProtocolList(v.Protocols, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RootVolumeSizeGib != nil {

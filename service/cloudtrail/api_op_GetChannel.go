@@ -14,7 +14,7 @@ import (
 // Returns information about a specific channel. Amazon Web Services services
 // create service-linked channels to get information about CloudTrail events on
 // your behalf. For more information about service-linked channels, see Viewing
-// service-linked channels for CloudTrail by using the CLI.
+// service-linked channels for CloudTrail by using the CLI
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/viewing-service-linked-channels.html).
 func (c *Client) GetChannel(ctx context.Context, params *GetChannelInput, optFns ...func(*Options)) (*GetChannelOutput, error) {
 	if params == nil {

@@ -9937,6 +9937,42 @@ func awsAwsjson11_deserializeDocumentOperationNotSupportedException(v **types.Op
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentProtocolList(v *[]types.Protocol, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Protocol
+	if *v == nil {
+		cv = []types.Protocol{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Protocol
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+			}
+			col = types.Protocol(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.ResourceAlreadyExistsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11619,6 +11655,11 @@ func awsAwsjson11_deserializeDocumentWorkspaceProperties(v **types.WorkspaceProp
 					return fmt.Errorf("expected Compute to be of type string, got %T instead", value)
 				}
 				sv.ComputeTypeName = types.Compute(jtv)
+			}
+
+		case "Protocols":
+			if err := awsAwsjson11_deserializeDocumentProtocolList(&sv.Protocols, value); err != nil {
+				return err
 			}
 
 		case "RootVolumeSizeGib":

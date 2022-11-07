@@ -66,6 +66,9 @@ type StartQueryExecutionInput struct {
 	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	ResultConfiguration *types.ResultConfiguration
 
+	// Specifies the query result reuse behavior for the query.
+	ResultReuseConfiguration *types.ResultReuseConfiguration
+
 	// The name of the workgroup in which the query is being started.
 	WorkGroup *string
 

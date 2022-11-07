@@ -29,6 +29,8 @@
         "api_op_GetWorkload.go",
         "api_op_ImportLens.go",
         "api_op_ListAnswers.go",
+        "api_op_ListCheckDetails.go",
+        "api_op_ListCheckSummaries.go",
         "api_op_ListLensReviewImprovements.go",
         "api_op_ListLensReviews.go",
         "api_op_ListLensShares.go",

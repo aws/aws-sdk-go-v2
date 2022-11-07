@@ -1,0 +1,8 @@
+{
+    "id": "e4391373-6e35-4172-9766-9d9d72c2e5fb",
+    "type": "feature",
+    "description": "This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

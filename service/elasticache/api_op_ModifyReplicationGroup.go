@@ -116,6 +116,12 @@ type ModifyReplicationGroupInput struct {
 	// create it anew with the earlier engine version.
 	EngineVersion *string
 
+	// The network type you choose when modifying a cluster, either ipv4 | ipv6. IPv6
+	// is supported for workloads using Redis engine version 6.2 onward or Memcached
+	// engine version 1.6.6 on all instances built on the Nitro system
+	// (https://aws.amazon.com/ec2/nitro/).
+	IpDiscovery types.IpDiscovery
+
 	// Specifies the destination, format and type of the logs.
 	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
 

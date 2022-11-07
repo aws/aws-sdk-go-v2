@@ -130,6 +130,26 @@ func (m *validateOpDeleteTrail) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterOrganizationDelegatedAdmin struct {
+}
+
+func (*validateOpDeregisterOrganizationDelegatedAdmin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterOrganizationDelegatedAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterOrganizationDelegatedAdminInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterOrganizationDelegatedAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeQuery struct {
 }
 
@@ -430,6 +450,26 @@ func (m *validateOpPutInsightSelectors) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterOrganizationDelegatedAdmin struct {
+}
+
+func (*validateOpRegisterOrganizationDelegatedAdmin) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterOrganizationDelegatedAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterOrganizationDelegatedAdminInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterOrganizationDelegatedAdminInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveTags struct {
 }
 
@@ -634,6 +674,10 @@ func addOpDeleteTrailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTrail{}, middleware.After)
 }
 
+func addOpDeregisterOrganizationDelegatedAdminValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterOrganizationDelegatedAdmin{}, middleware.After)
+}
+
 func addOpDescribeQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeQuery{}, middleware.After)
 }
@@ -692,6 +736,10 @@ func addOpPutEventSelectorsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutInsightSelectorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutInsightSelectors{}, middleware.After)
+}
+
+func addOpRegisterOrganizationDelegatedAdminValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterOrganizationDelegatedAdmin{}, middleware.After)
 }
 
 func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -932,9 +980,6 @@ func validateOpCancelQueryInput(v *CancelQueryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelQueryInput"}
-	if v.EventDataStore == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
-	}
 	if v.QueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
 	}
@@ -1023,14 +1068,26 @@ func validateOpDeleteTrailInput(v *DeleteTrailInput) error {
 	}
 }
 
+func validateOpDeregisterOrganizationDelegatedAdminInput(v *DeregisterOrganizationDelegatedAdminInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterOrganizationDelegatedAdminInput"}
+	if v.DelegatedAdminAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DelegatedAdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeQueryInput(v *DescribeQueryInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeQueryInput"}
-	if v.EventDataStore == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
-	}
 	if v.QueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
 	}
@@ -1121,9 +1178,6 @@ func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetQueryResultsInput"}
-	if v.EventDataStore == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
-	}
 	if v.QueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
 	}
@@ -1256,6 +1310,21 @@ func validateOpPutInsightSelectorsInput(v *PutInsightSelectorsInput) error {
 	}
 	if v.InsightSelectors == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InsightSelectors"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterOrganizationDelegatedAdminInput(v *RegisterOrganizationDelegatedAdminInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterOrganizationDelegatedAdminInput"}
+	if v.MemberAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

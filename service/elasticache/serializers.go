@@ -5095,11 +5095,21 @@ func awsAwsquery_serializeOpDocumentCreateCacheClusterInput(v *CreateCacheCluste
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if len(v.IpDiscovery) > 0 {
+		objectKey := object.Key("IpDiscovery")
+		objectKey.String(string(v.IpDiscovery))
+	}
+
 	if v.LogDeliveryConfigurations != nil {
 		objectKey := object.Key("LogDeliveryConfigurations")
 		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v.LogDeliveryConfigurations, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.NetworkType) > 0 {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(string(v.NetworkType))
 	}
 
 	if v.NotificationTopicArn != nil {
@@ -5372,6 +5382,11 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 		objectKey.String(*v.GlobalReplicationGroupId)
 	}
 
+	if len(v.IpDiscovery) > 0 {
+		objectKey := object.Key("IpDiscovery")
+		objectKey.String(string(v.IpDiscovery))
+	}
+
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
@@ -5387,6 +5402,11 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 	if v.MultiAZEnabled != nil {
 		objectKey := object.Key("MultiAZEnabled")
 		objectKey.Boolean(*v.MultiAZEnabled)
+	}
+
+	if len(v.NetworkType) > 0 {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(string(v.NetworkType))
 	}
 
 	if v.NodeGroupConfiguration != nil {
@@ -6562,6 +6582,11 @@ func awsAwsquery_serializeOpDocumentModifyCacheClusterInput(v *ModifyCacheCluste
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if len(v.IpDiscovery) > 0 {
+		objectKey := object.Key("IpDiscovery")
+		objectKey.String(string(v.IpDiscovery))
+	}
+
 	if v.LogDeliveryConfigurations != nil {
 		objectKey := object.Key("LogDeliveryConfigurations")
 		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v.LogDeliveryConfigurations, objectKey); err != nil {
@@ -6750,6 +6775,11 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupInput(v *ModifyReplica
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
+	}
+
+	if len(v.IpDiscovery) > 0 {
+		objectKey := object.Key("IpDiscovery")
+		objectKey.String(string(v.IpDiscovery))
 	}
 
 	if v.LogDeliveryConfigurations != nil {

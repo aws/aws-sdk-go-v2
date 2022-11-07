@@ -3242,6 +3242,11 @@ func validateCreateAssociationBatchRequestEntry(v *types.CreateAssociationBatchR
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.TargetLocations != nil {
+		if err := validateTargetLocations(v.TargetLocations); err != nil {
+			invalidParams.AddNested("TargetLocations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AlarmConfiguration != nil {
 		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {
 			invalidParams.AddNested("AlarmConfiguration", err.(smithy.InvalidParamsError))
@@ -4248,6 +4253,11 @@ func validateRunbook(v *types.Runbook) error {
 	if v.DocumentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
 	}
+	if v.TargetLocations != nil {
+		if err := validateTargetLocations(v.TargetLocations); err != nil {
+			invalidParams.AddNested("TargetLocations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4367,6 +4377,40 @@ func validateTagList(v []types.Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetLocation(v *types.TargetLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetLocation"}
+	if v.TargetLocationAlarmConfiguration != nil {
+		if err := validateAlarmConfiguration(v.TargetLocationAlarmConfiguration); err != nil {
+			invalidParams.AddNested("TargetLocationAlarmConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetLocations(v []types.TargetLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetLocations"}
+	for i := range v {
+		if err := validateTargetLocation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4507,6 +4551,11 @@ func validateOpCreateAssociationInput(v *CreateAssociationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAssociationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TargetLocations != nil {
+		if err := validateTargetLocations(v.TargetLocations); err != nil {
+			invalidParams.AddNested("TargetLocations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -6230,6 +6279,11 @@ func validateOpStartAutomationExecutionInput(v *StartAutomationExecutionInput) e
 	if v.DocumentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DocumentName"))
 	}
+	if v.TargetLocations != nil {
+		if err := validateTargetLocations(v.TargetLocations); err != nil {
+			invalidParams.AddNested("TargetLocations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -6347,6 +6401,11 @@ func validateOpUpdateAssociationInput(v *UpdateAssociationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssociationInput"}
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if v.TargetLocations != nil {
+		if err := validateTargetLocations(v.TargetLocations); err != nil {
+			invalidParams.AddNested("TargetLocations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AlarmConfiguration != nil {
 		if err := validateAlarmConfiguration(v.AlarmConfiguration); err != nil {

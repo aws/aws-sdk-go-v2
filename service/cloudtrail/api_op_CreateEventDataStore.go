@@ -42,6 +42,32 @@ type CreateEventDataStoreInput struct {
 	// in the CloudTrail User Guide.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
+	// Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail.
+	// The value can be an alias name prefixed by alias/, a fully specified ARN to an
+	// alias, a fully specified ARN to a key, or a globally unique identifier.
+	// Disabling or deleting the KMS key, or removing CloudTrail permissions on the
+	// key, prevents CloudTrail from logging events to the event data store, and
+	// prevents users from querying the data in the event data store that was encrypted
+	// with the key. After you associate an event data store with a KMS key, the KMS
+	// key cannot be removed or changed. Before you disable or delete a KMS key that
+	// you are using with an event data store, delete or back up your event data store.
+	// CloudTrail also supports KMS multi-Region keys. For more information about
+	// multi-Region keys, see Using multi-Region keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+	// in the Key Management Service Developer Guide. Examples:
+	//
+	// * alias/MyAliasName
+	//
+	// *
+	// arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//
+	// *
+	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	// *
+	// 12345678-1234-1234-1234-123456789012
+	KmsKeyId *string
+
 	// Specifies whether the event data store includes events from all regions, or only
 	// from the region in which the event data store is created.
 	MultiRegionEnabled *bool
@@ -76,6 +102,11 @@ type CreateEventDataStoreOutput struct {
 
 	// The ARN of the event data store.
 	EventDataStoreArn *string
+
+	// Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The
+	// value is a fully specified ARN to a KMS key in the following format.
+	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	KmsKeyId *string
 
 	// Indicates whether the event data store collects events from all regions, or only
 	// from the region in which it was created.
