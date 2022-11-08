@@ -843,7 +843,6 @@ func (c *SharedConfig) setFromIniSections(profiles map[string]struct{}, profile 
 		if err := c.validateCredentialsConfig(profile); err != nil {
 			return err
 		}
-
 	}
 
 	// if not top level profile and has credentials, return with credentials.
@@ -1104,11 +1103,11 @@ func (c *SharedConfig) validateSSOTokenProviderConfiguration() error {
 		missing = append(missing, ssoSectionPrefix)
 	} else {
 		if len(c.SSOSession.SSORegion) == 0 {
-			missing = append(missing, fmt.Sprintf("%s", ssoRegionKey))
+			missing = append(missing, ssoRegionKey)
 		}
 
 		if len(c.SSOSession.SSOStartURL) == 0 {
-			missing = append(missing, fmt.Sprintf("%s", ssoStartURLKey))
+			missing = append(missing, ssoStartURLKey)
 		}
 	}
 

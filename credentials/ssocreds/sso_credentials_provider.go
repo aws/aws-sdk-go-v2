@@ -46,7 +46,9 @@ type Options struct {
 	// parameter will be ignored.
 	CachedTokenFilepath string
 
-	TokenClient CreateTokenAPIClient
+	// Used by the SSOCredentialProvider if a token configuration
+	// profile is used in the shared config
+	TokenProvider *SSOTokenProvider
 }
 
 // Provider is an AWS credential provider that retrieves temporary AWS
@@ -80,12 +82,13 @@ func New(client GetRoleCredentialsAPIClient, accountID, roleName, startURL strin
 
 // Retrieve retrieves temporary AWS credentials from the configured Amazon
 // Single Sign-On (AWS SSO) user portal by exchanging the accessToken present
-// in ~/.aws/sso/cache.
+// in ~/.aws/sso/cache. However, if a token provider configuration exists
+// in the shared config, then we ought to use the token provider rather then
+// direct access on the cached token.
 func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 	var accessToken *string
-	if p.options.TokenClient != nil {
-		tokenProvider := NewSSOTokenProvider(p.options.TokenClient, p.cachedTokenFilepath)
-		token, err := tokenProvider.RetrieveBearerToken(ctx)
+	if p.options.TokenProvider != nil {
+		token, err := p.options.TokenProvider.RetrieveBearerToken(ctx)
 		if err != nil {
 			return aws.Credentials{}, err
 		}

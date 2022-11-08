@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/service/ssooidc"
 	"net/url"
 	"time"
 
@@ -16,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/sso"
+	"github.com/aws/aws-sdk-go-v2/service/ssooidc"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
@@ -188,8 +188,9 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 			return err
 		}
 		oidcClient := ssooidc.NewFromConfig(cfgCopy)
+		tokenProvider := ssocreds.NewSSOTokenProvider(oidcClient, cachedPath, optFns...)
 		options = append(options, func(o *ssocreds.Options) {
-			o.TokenClient = oidcClient
+			o.TokenProvider = tokenProvider
 			o.CachedTokenFilepath = cachedPath
 		})
 	} else {
