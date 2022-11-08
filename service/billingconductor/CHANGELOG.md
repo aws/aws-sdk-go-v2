@@ -1,3 +1,7 @@
+# v1.1.0 (2022-11-08)
+
+* **Feature**: This release adds the Recurring Custom Line Item feature along with a new API ListCustomLineItemVersions.
+
 # v1.0.19 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

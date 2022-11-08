@@ -1,3 +1,7 @@
+# v1.19.1 (2022-11-08)
+
+* No change notes available for this release.
+
 # v1.19.0 (2022-11-07)
 
 * **Feature**: Adds support for using Query Result Reuse

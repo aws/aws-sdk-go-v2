@@ -1,8 +1,0 @@
-{
-    "id": "b5172f2c-b352-4274-8dc2-649600cabde4",
-    "type": "feature",
-    "description": "This release adds support for Amazon Lightsail to automate the delegation of domains registered through Amazon Route 53 to Lightsail DNS management and to automate record creation for DNS validation of Lightsail SSL/TLS certificates.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

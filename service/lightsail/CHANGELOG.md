@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-08)
+
+* **Feature**: This release adds support for Amazon Lightsail to automate the delegation of domains registered through Amazon Route 53 to Lightsail DNS management and to automate record creation for DNS validation of Lightsail SSL/TLS certificates.
+
 # v1.23.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.20.0 (2022-11-08)
+
+* **Feature**: AWS Firewall Manager now supports importing existing AWS Network Firewall firewalls into Firewall Manager policies.
+
 # v1.19.0 (2022-10-27)
 
 * **Feature**: Add support NetworkFirewall Managed Rule Group Override flag in GetViolationDetails API

@@ -1,8 +1,0 @@
-{
-    "id": "1d93634a-07a8-4b2b-9a03-3d1694717be5",
-    "type": "feature",
-    "description": "Amazon Polly adds new voices: Elin (sv-SE), Ida (nb-NO), Laura (nl-NL) and Suvi (fi-FI). They are available as neural voices only.",
-    "modules": [
-        "service/polly"
-    ]
-}

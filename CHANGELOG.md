@@ -1,3 +1,26 @@
+# Release (2022-11-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.16.0](service/acm/CHANGELOG.md#v1160-2022-11-08)
+  * **Feature**: Support added for requesting elliptic curve certificate key algorithm types P-256 (EC_prime256v1) and P-384 (EC_secp384r1).
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.1.0](service/billingconductor/CHANGELOG.md#v110-2022-11-08)
+  * **Feature**: This release adds the Recurring Custom Line Item feature along with a new API ListCustomLineItemVersions.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.68.0](service/ec2/CHANGELOG.md#v1680-2022-11-08)
+  * **Feature**: This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.20.0](service/fms/CHANGELOG.md#v1200-2022-11-08)
+  * **Feature**: AWS Firewall Manager now supports importing existing AWS Network Firewall firewalls into Firewall Manager policies.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.24.0](service/lightsail/CHANGELOG.md#v1240-2022-11-08)
+  * **Feature**: This release adds support for Amazon Lightsail to automate the delegation of domains registered through Amazon Route 53 to Lightsail DNS management and to automate record creation for DNS validation of Lightsail SSL/TLS certificates.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.11.0](service/opensearch/CHANGELOG.md#v1110-2022-11-08)
+  * **Feature**: Amazon OpenSearch Service now offers managed VPC endpoints to connect to your Amazon OpenSearch Service VPC-enabled domain in a Virtual Private Cloud (VPC). This feature allows you to privately access OpenSearch Service domain without using public IPs or requiring traffic to traverse the Internet.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.19.0](service/polly/CHANGELOG.md#v1190-2022-11-08)
+  * **Feature**: Amazon Polly adds new voices: Elin (sv-SE), Ida (nb-NO), Laura (nl-NL) and Suvi (fi-FI). They are available as neural voices only.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.0.0](service/resourceexplorer2/CHANGELOG.md#v100-2022-11-08)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for AWS Resource Explorer. AWS Resource Explorer lets your users search for and discover your AWS resources across the AWS Regions in your account.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.23.0](service/route53/CHANGELOG.md#v1230-2022-11-08)
+  * **Feature**: Amazon Route 53 now supports the Europe (Zurich) Region (eu-central-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # Release (2022-11-07)
 
 ## Module Highlights

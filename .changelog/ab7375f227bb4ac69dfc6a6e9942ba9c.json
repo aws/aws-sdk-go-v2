@@ -1,8 +1,0 @@
-{
-    "id": "ab7375f2-27bb-4ac6-9dfc-6a6e9942ba9c",
-    "type": "feature",
-    "description": "AWS Firewall Manager now supports importing existing AWS Network Firewall firewalls into Firewall Manager policies.",
-    "modules": [
-        "service/fms"
-    ]
-}

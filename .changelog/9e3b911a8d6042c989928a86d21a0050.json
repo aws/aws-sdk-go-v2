@@ -1,8 +1,0 @@
-{
-    "id": "9e3b911a-8d60-42c9-8992-8a86d21a0050",
-    "type": "feature",
-    "description": "Support added for requesting elliptic curve certificate key algorithm types P-256 (EC_prime256v1) and P-384 (EC_secp384r1).",
-    "modules": [
-        "service/acm"
-    ]
-}

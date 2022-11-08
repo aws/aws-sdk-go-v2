@@ -1,3 +1,7 @@
+# v1.68.0 (2022-11-08)
+
+* **Feature**: This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager
+
 # v1.67.0 (2022-11-07)
 
 * **Feature**: This release adds support for two new attributes for attribute-based instance type selection - NetworkBandwidthGbps and AllowedInstanceTypes.
