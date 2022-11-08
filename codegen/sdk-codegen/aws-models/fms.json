@@ -39,6 +39,12 @@
                 "smithy.api#pattern": "^[0-9]+$"
             }
         },
+        "com.amazonaws.fms#AWSAccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#AWSAccountId"
+            }
+        },
         "com.amazonaws.fms#AWSFMS_20180101": {
             "type": "service",
             "version": "2018-01-01",
@@ -48,6 +54,12 @@
                 },
                 {
                     "target": "com.amazonaws.fms#AssociateThirdPartyFirewall"
+                },
+                {
+                    "target": "com.amazonaws.fms#BatchAssociateResource"
+                },
+                {
+                    "target": "com.amazonaws.fms#BatchDisassociateResource"
                 },
                 {
                     "target": "com.amazonaws.fms#DeleteAppsList"
@@ -60,6 +72,9 @@
                 },
                 {
                     "target": "com.amazonaws.fms#DeleteProtocolsList"
+                },
+                {
+                    "target": "com.amazonaws.fms#DeleteResourceSet"
                 },
                 {
                     "target": "com.amazonaws.fms#DisassociateAdminAccount"
@@ -89,6 +104,9 @@
                     "target": "com.amazonaws.fms#GetProtocolsList"
                 },
                 {
+                    "target": "com.amazonaws.fms#GetResourceSet"
+                },
+                {
                     "target": "com.amazonaws.fms#GetThirdPartyFirewallAssociationStatus"
                 },
                 {
@@ -101,6 +119,9 @@
                     "target": "com.amazonaws.fms#ListComplianceStatus"
                 },
                 {
+                    "target": "com.amazonaws.fms#ListDiscoveredResources"
+                },
+                {
                     "target": "com.amazonaws.fms#ListMemberAccounts"
                 },
                 {
@@ -108,6 +129,12 @@
                 },
                 {
                     "target": "com.amazonaws.fms#ListProtocolsLists"
+                },
+                {
+                    "target": "com.amazonaws.fms#ListResourceSetResources"
+                },
+                {
+                    "target": "com.amazonaws.fms#ListResourceSets"
                 },
                 {
                     "target": "com.amazonaws.fms#ListTagsForResource"
@@ -126,6 +153,9 @@
                 },
                 {
                     "target": "com.amazonaws.fms#PutProtocolsList"
+                },
+                {
+                    "target": "com.amazonaws.fms#PutResourceSet"
                 },
                 {
                     "target": "com.amazonaws.fms#TagResource"
@@ -2156,6 +2186,16 @@
                 "smithy.api#documentation": "<p>Violation detail for the rule violation in a security group when compared to the primary security group of the Firewall Manager policy.</p>"
             }
         },
+        "com.amazonaws.fms#Base62Id": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 22,
+                    "max": 22
+                },
+                "smithy.api#pattern": "^[a-z0-9A-Z]{22}$"
+            }
+        },
         "com.amazonaws.fms#BasicInteger": {
             "type": "integer",
             "traits": {
@@ -2163,6 +2203,137 @@
                 "smithy.api#range": {
                     "min": -2147483648,
                     "max": 2147483647
+                }
+            }
+        },
+        "com.amazonaws.fms#BatchAssociateResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#BatchAssociateResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#BatchAssociateResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.fms#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate resources to a Firewall Manager resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#BatchAssociateResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceSetIdentifier": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.fms#IdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uniform resource identifiers (URIs) of resources that should be associated to the resource set. The URIs must be Amazon Resource Names (ARNs).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#BatchAssociateResourceResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceSetIdentifier": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailedItems": {
+                    "target": "com.amazonaws.fms#FailedItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources that failed to associate to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#BatchDisassociateResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#BatchDisassociateResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#BatchDisassociateResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates resources from a Firewall Manager resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#BatchDisassociateResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceSetIdentifier": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.fms#IdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The uniform resource identifiers (URI) of resources that should be disassociated from the resource set. The URIs must be Amazon Resource Names (ARNs).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#BatchDisassociateResourceResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceSetIdentifier": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailedItems": {
+                    "target": "com.amazonaws.fms#FailedItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources that failed to disassociate from the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -2416,6 +2587,44 @@
                 }
             }
         },
+        "com.amazonaws.fms#DeleteResourceSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#DeleteResourceSetRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified <a>ResourceSet</a>.</p>"
+            }
+        },
+        "com.amazonaws.fms#DeleteResourceSetRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.fms#Base62Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.fms#DependentServiceName": {
             "type": "enum",
             "members": {
@@ -2443,6 +2652,16 @@
                         "smithy.api#enumValue": "AWSVPC"
                     }
                 }
+            }
+        },
+        "com.amazonaws.fms#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.fms#DestinationType": {
@@ -2473,7 +2692,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 4096
                 },
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=,+\\-@]*)$"
             }
@@ -2552,6 +2771,44 @@
                         "smithy.api#documentation": "<p>The current status for the disassociation of a Firewall Manager administrators account with a third-party firewall.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.fms#DiscoveredResource": {
+            "type": "structure",
+            "members": {
+                "URI": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The universal resource identifier (URI) of the discovered resource.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.fms#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the discovered resource.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.fms#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the discovered resource.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.fms#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the discovered resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource in the organization that's available to be associated with a Firewall Manager resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#DiscoveredResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#DiscoveredResource"
             }
         },
         "com.amazonaws.fms#DnsDuplicateRuleGroupViolation": {
@@ -3006,6 +3263,73 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the actions that you can take to remediate scope violations\n         caused by your policy's <code>FirewallCreationConfig</code>.\n            <code>FirewallCreationConfig</code> is an optional configuration that you can use to\n         choose which Availability Zones Firewall Manager creates Network Firewall endpoints in.</p>"
+            }
+        },
+        "com.amazonaws.fms#FailedItem": {
+            "type": "structure",
+            "members": {
+                "URI": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The univeral resource indicator (URI) of the resource that failed.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.fms#FailedItemReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the resource's association could not be updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of a resource that failed when trying to update it's association to a resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#FailedItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#FailedItem"
+            }
+        },
+        "com.amazonaws.fms#FailedItemReason": {
+            "type": "enum",
+            "members": {
+                "NotValidArn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALID_ARN"
+                    }
+                },
+                "NotValidPartition": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALID_PARTITION"
+                    }
+                },
+                "NotValidRegion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALID_REGION"
+                    }
+                },
+                "NotValidService": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALID_SERVICE"
+                    }
+                },
+                "NotValidResourceType": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALID_RESOURCE_TYPE"
+                    }
+                },
+                "NotValidAccountId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_VALID_ACCOUNT_ID"
+                    }
+                }
             }
         },
         "com.amazonaws.fms#FirewallDeploymentModel": {
@@ -3526,6 +3850,63 @@
                 }
             }
         },
+        "com.amazonaws.fms#GetResourceSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#GetResourceSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#GetResourceSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specific resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#GetResourceSetRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.fms#Base62Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#GetResourceSetResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceSet": {
+                    "target": "com.amazonaws.fms#ResourceSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the specified resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceSetArn": {
+                    "target": "com.amazonaws.fms#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.fms#GetThirdPartyFirewallAssociationStatus": {
             "type": "operation",
             "input": {
@@ -3655,6 +4036,22 @@
                     "min": 0,
                     "max": 65535
                 }
+            }
+        },
+        "com.amazonaws.fms#Identifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.fms#IdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#Identifier"
             }
         },
         "com.amazonaws.fms#InternalErrorException": {
@@ -3882,6 +4279,77 @@
                 }
             }
         },
+        "com.amazonaws.fms#ListDiscoveredResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#ListDiscoveredResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#ListDiscoveredResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of resources in the organization's accounts that are available to be associated with a resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#ListDiscoveredResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "MemberAccountIds": {
+                    "target": "com.amazonaws.fms#AWSAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs to discover resources in. Only one account is supported per request. The account must be a member of your organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.fms#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resources to discover.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.fms#PaginationMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Firewall Manager to return for this request. If more\n          objects are available, in the response, Firewall Manager provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Firewall Manager returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#ListDiscoveredResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.fms#DiscoveredResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the resources that were discovered.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Firewall Manager returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.fms#ListId": {
             "type": "string",
             "traits": {
@@ -4089,6 +4557,131 @@
                 }
             }
         },
+        "com.amazonaws.fms#ListResourceSetResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#ListResourceSetResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#ListResourceSetResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of resources that are currently associated to a resource set.</p>"
+            }
+        },
+        "com.amazonaws.fms#ListResourceSetResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.fms#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set, used in a TODO to refer to the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.fms#PaginationMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Firewall Manager to return for this request. If more\n          objects are available, in the response, Firewall Manager provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Firewall Manager returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#ListResourceSetResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.fms#ResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the associated resources' uniform resource identifiers (URI).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Firewall Manager returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#ListResourceSets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#ListResourceSetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#ListResourceSetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of <code>ResourceSetSummary</code> objects.</p>"
+            }
+        },
+        "com.amazonaws.fms#ListResourceSetsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.fms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Firewall Manager returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.fms#PaginationMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Firewall Manager to return for this request. If more\n          objects are available, in the response, Firewall Manager provides a\n         <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#ListResourceSetsResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceSets": {
+                    "target": "com.amazonaws.fms#ResourceSetSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>ResourceSetSummary</code> objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.fms#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available\n         for retrieval exceeds the maximum you requested, Firewall Manager returns a <code>NextToken</code>\n         value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.fms#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4249,6 +4842,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.fms#AWSAccountId"
+            }
+        },
+        "com.amazonaws.fms#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.fms#NetworkFirewallAction": {
@@ -4959,6 +5562,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the Amazon Web Services account IDs and Organizations organizational units (OUs) to exclude from the policy.\n          Specifying an OU is the equivalent of specifying all accounts in the OU and in any of its child OUs, including any child OUs and accounts that are added at a later time.</p>\n              <p>You can specify inclusions or exclusions, but not both. If you specify an <code>IncludeMap</code>, Firewall Manager\n          applies the policy to all accounts specified by the <code>IncludeMap</code>, and\n          does not evaluate any <code>ExcludeMap</code> specifications. If you do not specify an <code>IncludeMap</code>, then Firewall Manager\n            applies the policy to all accounts except for those specified by the <code>ExcludeMap</code>.</p>\n         <p>You can specify account IDs, OUs, or a combination: </p>\n         <ul>\n            <li>\n               <p>Specify account IDs by setting the key to <code>ACCOUNT</code>. For example, the following is a valid map:\n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify OUs by setting the key to <code>ORG_UNIT</code>. For example, the following is a valid map:\n  <code>{“ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n            <li>\n               <p>Specify accounts and OUs together in a single map, separated with a comma. For example, the following is a valid map:\n      <code>{“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}</code>.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "ResourceSetIds": {
+                    "target": "com.amazonaws.fms#ResourceSetIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers of the resource sets used by the policy.</p>"
+                    }
+                },
+                "PolicyDescription": {
+                    "target": "com.amazonaws.fms#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the Network Firewall firewall policy.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5618,6 +6233,69 @@
                 }
             }
         },
+        "com.amazonaws.fms#PutResourceSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fms#PutResourceSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fms#PutResourceSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fms#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the resource set.</p>\n         <p>An Firewall Manager resource set defines the resources to import into an Firewall Manager policy from another Amazon Web Services service.</p>"
+            }
+        },
+        "com.amazonaws.fms#PutResourceSetRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceSet": {
+                    "target": "com.amazonaws.fms#ResourceSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the resource set to be created or updated.></p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.fms#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves the tags associated with the specified resource set. Tags are key:value pairs that\n         you can use to categorize and manage your resources, for purposes like billing. For\n         example, you might set the tag key to \"customer\" and the value to the customer name or ID.\n         You can specify one or more tags to add to each Amazon Web Services resource, up to 50 tags for a\n         resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fms#PutResourceSetResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceSet": {
+                    "target": "com.amazonaws.fms#ResourceSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceSetArn": {
+                    "target": "com.amazonaws.fms#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.fms#ReferenceRule": {
             "type": "string"
         },
@@ -5731,6 +6409,27 @@
                 "smithy.api#documentation": "<p>An ordered list of actions you can take to remediate a violation.</p>"
             }
         },
+        "com.amazonaws.fms#Resource": {
+            "type": "structure",
+            "members": {
+                "URI": {
+                    "target": "com.amazonaws.fms#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource's universal resource indicator (URI).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.fms#AWSAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that the associated resource belongs to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of a resource that is associated to an Firewall Manager resource set.</p>"
+            }
+        },
         "com.amazonaws.fms#ResourceArn": {
             "type": "string",
             "traits": {
@@ -5750,6 +6449,16 @@
                 }
             }
         },
+        "com.amazonaws.fms#ResourceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.fms#ResourceId": {
             "type": "string",
             "traits": {
@@ -5764,6 +6473,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.fms#ResourceId"
+            }
+        },
+        "com.amazonaws.fms#ResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#Resource"
             }
         },
         "com.amazonaws.fms#ResourceName": {
@@ -5786,6 +6501,96 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified resource was not found.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fms#ResourceSet": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.fms#Base62Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.fms#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the resource set. You can't change the name of a resource set after you create it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.fms#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the resource set.</p>"
+                    }
+                },
+                "UpdateToken": {
+                    "target": "com.amazonaws.fms#UpdateToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional token that you can use for optimistic locking. Firewall Manager returns a token to your requests that access the resource set. The token marks the state of the resource set resource at the time of the request. Update tokens are not allowed when creating a resource set. After creation, each subsequent update call to the resource set requires the update token.\n</p>\n         <p>To make an unconditional change to the resource set, omit the token in your update request. Without the token, Firewall Manager performs your updates regardless of whether the resource set has changed since you last retrieved it.</p>\n         <p>To make a conditional change to the resource set, provide the token in your update request. Firewall Manager uses the token to ensure that the resource set hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the resource set again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>"
+                    }
+                },
+                "ResourceTypeList": {
+                    "target": "com.amazonaws.fms#ResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the resources that can be associated to the resource set. Depending on\n         your setting for max results and the number of resource sets, a single call might not\n         return the full list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "com.amazonaws.fms#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the resource set was changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of resources to include in a policy.</p>"
+            }
+        },
+        "com.amazonaws.fms#ResourceSetIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#Base62Id"
+            }
+        },
+        "com.amazonaws.fms#ResourceSetSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.fms#Base62Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the resource set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.fms#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the resource set. You can't change the name of a resource set after you create it.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.fms#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the resource set.</p>"
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "com.amazonaws.fms#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time that the resource set was changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summarizes the resource sets used in a policy.</p>"
+            }
+        },
+        "com.amazonaws.fms#ResourceSetSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#ResourceSetSummary"
             }
         },
         "com.amazonaws.fms#ResourceTag": {
@@ -6306,6 +7111,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "THIRD_PARTY_FIREWALL"
+                    }
+                },
+                "IMPORT_NETWORK_FIREWALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORT_NETWORK_FIREWALL"
                     }
                 }
             }
