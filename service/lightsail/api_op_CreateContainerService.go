@@ -57,8 +57,8 @@ type CreateContainerServiceInput struct {
 	// service will make up part of its default domain. The default domain of a
 	// container service is typically https://...cs.amazonlightsail.com. If the name of
 	// your container service is container-service-1, and it's located in the US East
-	// (Ohio) AWS region (us-east-2), then the domain for your container service will
-	// be like the following example:
+	// (Ohio) Amazon Web Services Region (us-east-2), then the domain for your
+	// container service will be like the following example:
 	// https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com The
 	// following are the requirements for container service names:
 	//

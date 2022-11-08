@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all supported versions of OpenSearch and Elasticsearch.
+// Lists all versions of OpenSearch and Elasticsearch that Amazon OpenSearch
+// Service supports.
 func (c *Client) ListVersions(ctx context.Context, params *ListVersionsInput, optFns ...func(*Options)) (*ListVersionsOutput, error) {
 	if params == nil {
 		params = &ListVersionsInput{}
@@ -27,19 +28,16 @@ func (c *Client) ListVersions(ctx context.Context, params *ListVersionsInput, op
 	return out, nil
 }
 
-// Container for the parameters to the ListVersions operation. Use MaxResults to
-// control the maximum number of results to retrieve in a single call. Use
-// NextToken in response to retrieve more results. If the received response does
-// not contain a NextToken, there are no more results to retrieve.
+// Container for the request parameters to the ListVersions operation.
 type ListVersionsInput struct {
 
-	// Set this value to limit the number of results returned. Value must be greater
-	// than 10 or it won't be honored.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// Paginated APIs accept the NextToken input to return the next page of results and
-	// provide a NextToken output in the response, which you can use to retrieve more
-	// results.
+	// If your initial ListVersions operation returns a nextToken, you can include the
+	// returned nextToken in subsequent ListVersions operations, which returns results
+	// in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,12 +47,13 @@ type ListVersionsInput struct {
 // operation.
 type ListVersionsOutput struct {
 
-	// Paginated APIs accept the NextToken input to return the next page of results and
-	// provide a NextToken output in the response, which you can use to retrieve more
-	// results.
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
-	// List of supported OpenSearch versions.
+	// A list of all versions of OpenSearch and Elasticsearch that Amazon OpenSearch
+	// Service supports.
 	Versions []string
 
 	// Metadata pertaining to the operation's result.
@@ -132,8 +131,8 @@ var _ ListVersionsAPIClient = (*Client)(nil)
 
 // ListVersionsPaginatorOptions is the paginator options for ListVersions
 type ListVersionsPaginatorOptions struct {
-	// Set this value to limit the number of results returned. Value must be greater
-	// than 10 or it won't be honored.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

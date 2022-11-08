@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a package for use with Amazon OpenSearch Service domains.
+// Creates a package for use with Amazon OpenSearch Service domains. For more
+// information, see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, optFns ...func(*Options)) (*CreatePackageOutput, error) {
 	if params == nil {
 		params = &CreatePackageInput{}
@@ -30,7 +32,7 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 // Container for request parameters to the CreatePackage operation.
 type CreatePackageInput struct {
 
-	// Unique identifier for the package.
+	// Unique name for the package.
 	//
 	// This member is required.
 	PackageName *string
@@ -40,7 +42,7 @@ type CreatePackageInput struct {
 	// This member is required.
 	PackageSource *types.PackageSource
 
-	// Type of package. Currently supports only TXT-DICTIONARY.
+	// Type of package.
 	//
 	// This member is required.
 	PackageType types.PackageType
@@ -54,7 +56,7 @@ type CreatePackageInput struct {
 // Container for the response returned by the CreatePackage operation.
 type CreatePackageOutput struct {
 
-	// Information about the package.
+	// Basic information about an OpenSearch Service package.
 	PackageDetails *types.PackageDetails
 
 	// Metadata pertaining to the operation's result.

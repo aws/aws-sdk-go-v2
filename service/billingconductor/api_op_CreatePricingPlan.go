@@ -30,7 +30,7 @@ func (c *Client) CreatePricingPlan(ctx context.Context, params *CreatePricingPla
 
 type CreatePricingPlanInput struct {
 
-	// The pricing plan name. The names must be unique to each pricing plan.
+	// The name of the pricing plan. The names must be unique to each pricing plan.
 	//
 	// This member is required.
 	Name *string
@@ -39,7 +39,7 @@ type CreatePricingPlanInput struct {
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
-	// The pricing plan description.
+	// The description of the pricing plan.
 	Description *string
 
 	// A list of Amazon Resource Names (ARNs) that define the pricing plan parameters.

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of upgrade-compatible versions of OpenSearch/Elasticsearch. You
-// can optionally pass a DomainName to get all upgrade-compatible versions of
-// OpenSearch/Elasticsearch for that specific domain.
+// Returns a map of OpenSearch or Elasticsearch versions and the versions you can
+// upgrade them to.
 func (c *Client) GetCompatibleVersions(ctx context.Context, params *GetCompatibleVersionsInput, optFns ...func(*Options)) (*GetCompatibleVersionsOutput, error) {
 	if params == nil {
 		params = &GetCompatibleVersionsInput{}
@@ -32,9 +31,8 @@ func (c *Client) GetCompatibleVersions(ctx context.Context, params *GetCompatibl
 // Container for the request parameters to GetCompatibleVersions operation.
 type GetCompatibleVersionsInput struct {
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// The name of an existing domain. Provide this parameter to limit the results to a
+	// single domain.
 	DomainName *string
 
 	noSmithyDocumentSerde
@@ -43,8 +41,8 @@ type GetCompatibleVersionsInput struct {
 // Container for the response returned by the GetCompatibleVersions operation.
 type GetCompatibleVersionsOutput struct {
 
-	// A map of compatible OpenSearch versions returned as part of the
-	// GetCompatibleVersions operation.
+	// A map of OpenSearch or Elasticsearch versions and the versions you can upgrade
+	// them to.
 	CompatibleVersions []types.CompatibleVersionsMap
 
 	// Metadata pertaining to the operation's result.

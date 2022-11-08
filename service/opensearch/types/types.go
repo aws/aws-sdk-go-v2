@@ -7,20 +7,19 @@ import (
 	"time"
 )
 
-// The configured access rules for the domain's document and search endpoints, and
-// the current status of those rules.
+// The configured access rules for the domain's search endpoint, and the current
+// status of those rules.
 type AccessPoliciesStatus struct {
 
 	// The access policy configured for the domain. Access policies can be
-	// resource-based, IP-based, or IAM-based. See  Configuring access policies
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-access-policies)for
-	// more information.
+	// resource-based, IP-based, or IAM-based. For more information, see Configuring
+	// access policies
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-access-policies).
 	//
 	// This member is required.
 	Options *string
 
-	// The status of the access policy for the domain. See OptionStatus for the status
-	// information that's included.
+	// The status of the access policy for the domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -28,49 +27,52 @@ type AccessPoliciesStatus struct {
 	noSmithyDocumentSerde
 }
 
-// List of limits that are specific to a given InstanceType and for each of its
-// InstanceRole .
+// List of limits that are specific to a given instance type.
 type AdditionalLimit struct {
 
-	// Additional limit is specific to a given InstanceType and for each of its
-	// InstanceRole etc.
+	// * MaximumNumberOfDataNodesSupported - This attribute only applies to master
+	// nodes and specifies the maximum number of data nodes of a given instance type a
+	// master node can support.
 	//
-	// Attributes and their details:
-	//
-	// *
-	// MaximumNumberOfDataNodesSupported
-	//  This attribute is present on the master node
-	// only to specify how much data nodes up to which given ESPartitionInstanceType
-	// can support as master node.
-	// * MaximumNumberOfDataNodesWithoutMasterNode
-	//  This
-	// attribute is present on data node only to specify how much data nodes of given
-	// ESPartitionInstanceType up to which you don't need any master nodes to govern
-	// them.
+	// * MaximumNumberOfDataNodesWithoutMasterNode - This
+	// attribute only applies to data nodes and specifies the maximum number of data
+	// nodes of a given instance type can exist without a master node governing them.
 	LimitName *string
 
-	// Value for a given AdditionalLimit$LimitName .
+	// The values of the additional instance type limits.
 	LimitValues []string
 
 	noSmithyDocumentSerde
 }
 
-// Status of the advanced options for the specified domain. Currently, the
-// following advanced options are available:
+// Status of the advanced options for the specified domain. The following options
+// are available:
 //
-// * Option to allow references to
-// indices in an HTTP request body. Must be false when configuring access to
-// individual sub-resources. By default, the value is true. See Advanced cluster
-// parameters
-// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
-// for more information.
+// * "rest.action.multi.allow_explicit_index": "true" | "false" -
+// Note the use of a string rather than a boolean. Specifies whether explicit
+// references to indexes are allowed inside the body of HTTP requests. If you want
+// to configure access policies for domain sub-resources, such as specific indexes
+// and domain APIs, you must disable this property. Default is true.
 //
-// * Option to specify the percentage of heap space
-// allocated to field data. By default, this setting is unbounded.
+// *
+// "indices.fielddata.cache.size": "80"  - Note the use of a string rather than a
+// boolean. Specifies the percentage of heap space allocated to field data. Default
+// is unbounded.
 //
-// For more
-// information, see  Advanced cluster parameters
-// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
+// * "indices.query.bool.max_clause_count": "1024" - Note the use of
+// a string rather than a boolean. Specifies the maximum number of clauses allowed
+// in a Lucene boolean query. Default is 1,024. Queries with more than the
+// permitted number of clauses result in a TooManyClauses error.
+//
+// *
+// "override_main_response_version": "true" | "false" - Note the use of a string
+// rather than a boolean. Specifies whether the domain reports its version as 7.10
+// to allow Elasticsearch OSS clients and plugins to continue working with it.
+// Default is false when creating a domain and true when upgrading a domain.
+//
+// For
+// more information, see Advanced cluster parameters
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
 type AdvancedOptionsStatus struct {
 
 	// The status of advanced options for the specified domain.
@@ -78,7 +80,7 @@ type AdvancedOptionsStatus struct {
 	// This member is required.
 	Options map[string]string
 
-	// The OptionStatus for advanced options for the specified domain.
+	// The status of advanced options for the specified domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -86,62 +88,69 @@ type AdvancedOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The advanced security configuration: whether advanced security is enabled,
-// whether the internal database option is enabled.
+// Container for fine-grained access control settings.
 type AdvancedSecurityOptions struct {
 
-	// Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.
+	// Date and time when the migration period will be disabled. Only necessary when
+	// enabling fine-grained access control on an existing domain
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing).
 	AnonymousAuthDisableDate *time.Time
 
-	// True if Anonymous auth is enabled. Anonymous auth can be enabled only when
-	// AdvancedSecurity is enabled on existing domains.
+	// True if a 30-day migration period is enabled, during which administrators can
+	// create role mappings. Only necessary when enabling fine-grained access control
+	// on an existing domain
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing).
 	AnonymousAuthEnabled *bool
 
-	// True if advanced security is enabled.
+	// True if fine-grained access control is enabled.
 	Enabled *bool
 
 	// True if the internal user database is enabled.
 	InternalUserDatabaseEnabled *bool
 
-	// Describes the SAML application configured for a domain.
+	// Container for information about the SAML configuration for OpenSearch
+	// Dashboards.
 	SAMLOptions *SAMLOptionsOutput
 
 	noSmithyDocumentSerde
 }
 
-// The advanced security configuration: whether advanced security is enabled,
-// whether the internal database option is enabled, master username and password
-// (if internal database is enabled), and master user ARN (if IAM is enabled).
+// Options for enabling and configuring fine-grained access control. For more
+// information, see Fine-grained access control in Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html).
 type AdvancedSecurityOptionsInput struct {
 
-	// True if Anonymous auth is enabled. Anonymous auth can be enabled only when
-	// AdvancedSecurity is enabled on existing domains.
+	// True to enable a 30-day migration period during which administrators can create
+	// role mappings. Only necessary when enabling fine-grained access control on an
+	// existing domain
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-enabling-existing).
 	AnonymousAuthEnabled *bool
 
-	// True if advanced security is enabled.
+	// True to enable fine-grained access control.
 	Enabled *bool
 
-	// True if the internal user database is enabled.
+	// True to enable the internal user database.
 	InternalUserDatabaseEnabled *bool
 
-	// Credentials for the master user: username and password, ARN, or both.
+	// Container for information about the master user.
 	MasterUserOptions *MasterUserOptions
 
-	// The SAML application configuration for the domain.
+	// Container for information about the SAML configuration for OpenSearch
+	// Dashboards.
 	SAMLOptions *SAMLOptionsInput
 
 	noSmithyDocumentSerde
 }
 
-// The status of advanced security options for the specified domain.
+// The status of fine-grained access control settings for a domain.
 type AdvancedSecurityOptionsStatus struct {
 
-	// Advanced security options for the specified domain.
+	// Container for fine-grained access control settings.
 	//
 	// This member is required.
 	Options *AdvancedSecurityOptions
 
-	// Status of the advanced security options for the specified domain.
+	// Status of the fine-grained access control settings for a domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -149,102 +158,112 @@ type AdvancedSecurityOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the Auto-Tune type and Auto-Tune action details.
+// Information about an Amazon Web Services account or service that has access to
+// an Amazon OpenSearch Service domain through the use of an interface VPC
+// endpoint.
+type AuthorizedPrincipal struct {
+
+	// The IAM principal
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
+	// that is allowed access to the domain.
+	Principal *string
+
+	// The type of principal.
+	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Auto-Tune action. For more information, see Auto-Tune for
+// Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type AutoTune struct {
 
-	// Specifies details about the Auto-Tune action. See  Auto-Tune for Amazon
-	// OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Details about an Auto-Tune action.
 	AutoTuneDetails *AutoTuneDetails
 
-	// Specifies the Auto-Tune type. Valid value is SCHEDULED_ACTION.
+	// The type of Auto-Tune action.
 	AutoTuneType AutoTuneType
 
 	noSmithyDocumentSerde
 }
 
-// Specifies details about the Auto-Tune action. See  Auto-Tune for Amazon
-// OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// Specifies details about a scheduled Auto-Tune action. For more information, see
+// Auto-Tune for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type AutoTuneDetails struct {
 
-	// Specifies details about the scheduled Auto-Tune action. See  Auto-Tune for
-	// Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Container for details about a scheduled Auto-Tune action.
 	ScheduledAutoTuneDetails *ScheduledAutoTuneDetails
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the Auto-Tune maintenance schedule. See  Auto-Tune for Amazon
-// OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// The Auto-Tune maintenance schedule. For more information, see Auto-Tune for
+// Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type AutoTuneMaintenanceSchedule struct {
 
-	// A cron expression for a recurring maintenance schedule. See  Auto-Tune for
-	// Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// A cron expression for a recurring maintenance schedule during which Auto-Tune
+	// can deploy changes.
 	CronExpressionForRecurrence *string
 
-	// Specifies maintenance schedule duration: duration value and duration unit. See
-	// Auto-Tune for Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// The duration of the maintenance schedule. For example, "Duration": {"Value": 2,
+	// "Unit": "HOURS"}.
 	Duration *Duration
 
-	// The timestamp at which the Auto-Tune maintenance schedule starts.
+	// The Epoch timestamp at which the Auto-Tune maintenance schedule starts.
 	StartAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// The Auto-Tune options: the Auto-Tune desired state for the domain, rollback
-// state when disabling Auto-Tune options and list of maintenance schedules.
+// Auto-Tune settings when updating a domain. For more information, see Auto-Tune
+// for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type AutoTuneOptions struct {
 
-	// The Auto-Tune desired state. Valid values are ENABLED and DISABLED.
+	// Whether Auto-Tune is enabled or disabled.
 	DesiredState AutoTuneDesiredState
 
-	// A list of maintenance schedules. See  Auto-Tune for Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// A list of maintenance schedules during which Auto-Tune can deploy changes.
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
 
-	// The rollback state while disabling Auto-Tune for the domain. Valid values are
-	// NO_ROLLBACK and DEFAULT_ROLLBACK.
+	// When disabling Auto-Tune, specify NO_ROLLBACK to retain all prior Auto-Tune
+	// settings or DEFAULT_ROLLBACK to revert to the OpenSearch Service defaults. If
+	// you specify DEFAULT_ROLLBACK, you must include a MaintenanceSchedule in the
+	// request. Otherwise, OpenSearch Service is unable to perform the rollback.
 	RollbackOnDisable RollbackOnDisable
 
 	noSmithyDocumentSerde
 }
 
-// The Auto-Tune options: the Auto-Tune desired state for the domain and list of
-// maintenance schedules.
+// Options for configuring Auto-Tune. For more information, see Auto-Tune for
+// Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type AutoTuneOptionsInput struct {
 
-	// The Auto-Tune desired state. Valid values are ENABLED and DISABLED.
+	// Whether Auto-Tune is enabled or disabled.
 	DesiredState AutoTuneDesiredState
 
-	// A list of maintenance schedules. See  Auto-Tune for Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// A list of maintenance schedules during which Auto-Tune can deploy changes.
+	// Maintenance schedules are overwrite, not append. If your request includes no
+	// schedules, the request deletes all existing schedules. To preserve existing
+	// schedules, make a call to DescribeDomainConfig first and use the
+	// MaintenanceSchedules portion of the response as the basis for this section.
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
 
 	noSmithyDocumentSerde
 }
 
-// The Auto-Tune options: the Auto-Tune desired state for the domain and list of
-// maintenance schedules.
+// The Auto-Tune settings for a domain, displayed when enabling or disabling
+// Auto-Tune.
 type AutoTuneOptionsOutput struct {
 
-	// The error message while enabling or disabling Auto-Tune.
+	// Any errors that occurred while enabling or disabling Auto-Tune.
 	ErrorMessage *string
 
-	// The AutoTuneState for the domain.
+	// The current state of Auto-Tune on the domain.
 	State AutoTuneState
 
 	noSmithyDocumentSerde
@@ -253,34 +272,36 @@ type AutoTuneOptionsOutput struct {
 // The Auto-Tune status for the domain.
 type AutoTuneOptionsStatus struct {
 
-	// Specifies Auto-Tune options for the domain.
+	// Auto-Tune settings for updating a domain.
 	Options *AutoTuneOptions
 
-	// The status of the Auto-Tune options for the domain.
+	// The current status of Auto-Tune for a domain.
 	Status *AutoTuneStatus
 
 	noSmithyDocumentSerde
 }
 
-// Provides the current Auto-Tune status for the domain.
+// The current status of Auto-Tune for the domain. For more information, see
+// Auto-Tune for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type AutoTuneStatus struct {
 
-	// The timestamp of the Auto-Tune options creation date.
+	// Date and time when Auto-Tune was enabled for the domain.
 	//
 	// This member is required.
 	CreationDate *time.Time
 
-	// The AutoTuneState for the domain.
+	// The current state of Auto-Tune on the domain.
 	//
 	// This member is required.
 	State AutoTuneState
 
-	// The timestamp of when the Auto-Tune options were last updated.
+	// Date and time when the Auto-Tune options were last updated for the domain.
 	//
 	// This member is required.
 	UpdateDate *time.Time
 
-	// The error message while enabling or disabling Auto-Tune.
+	// Any errors that occurred while enabling or disabling Auto-Tune.
 	ErrorMessage *string
 
 	// Indicates whether the domain is being deleted.
@@ -292,48 +313,48 @@ type AutoTuneStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an Amazon OpenSearch Service domain.
 type AWSDomainInformation struct {
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// Name of the domain.
 	//
 	// This member is required.
 	DomainName *string
 
+	// The Amazon Web Services account ID of the domain owner.
 	OwnerId *string
 
+	// The Amazon Web Services Region in which the domain is located.
 	Region *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies change details of the domain configuration change.
+// Container for information about a configuration change happening on a domain.
 type ChangeProgressDetails struct {
 
-	// The unique change identifier associated with a specific domain configuration
-	// change.
+	// The ID of the configuration change.
 	ChangeId *string
 
-	// Contains an optional message associated with the domain configuration change.
+	// A message corresponding to the status of the configuration change.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// A progress stage details of a specific domain configuration change.
+// Progress details for each stage of a domain update.
 type ChangeProgressStage struct {
 
-	// The description of the progress stage.
+	// The description of the stage.
 	Description *string
 
-	// The last updated timestamp of the progress stage.
+	// The most recent updated timestamp of the stage.
 	LastUpdated *time.Time
 
-	// The name of the specific progress stage.
+	// The name of the stage.
 	Name *string
 
-	// The overall status of a specific progress stage.
+	// The status of the stage.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -350,19 +371,17 @@ type ChangeProgressStatusDetails struct {
 	// configuration change.
 	ChangeProgressStages []ChangeProgressStage
 
-	// The list of properties involved in the domain configuration change that are
-	// completed.
+	// The list of properties in the domain configuration change that have completed.
 	CompletedProperties []string
 
-	// The list of properties involved in the domain configuration change that are
-	// still in pending.
+	// The list of properties in the domain configuration change that are still
+	// pending.
 	PendingProperties []string
 
 	// The time at which the configuration change is made on the domain.
 	StartTime *time.Time
 
-	// The overall status of the domain configuration change. This field can take the
-	// following values: PENDING, PROCESSING, COMPLETED and FAILED
+	// The overall status of the domain configuration change.
 	Status OverallChangeStatus
 
 	// The total number of stages required for the configuration change.
@@ -371,62 +390,62 @@ type ChangeProgressStatusDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for the domain cluster, such as the type and number of
-// instances.
+// Container for the cluster configuration of an OpenSearch Service domain. For
+// more information, see Creating and managing Amazon OpenSearch Service domains
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html).
 type ClusterConfig struct {
 
-	// Specifies the ColdStorageOptions config for a Domain
+	// Container for cold storage configuration options.
 	ColdStorageOptions *ColdStorageOptions
 
-	// Total number of dedicated master nodes, active and on standby, for the cluster.
+	// Number of dedicated master nodes in the cluster. This number must be greater
+	// than 1, otherwise you receive a validation exception.
 	DedicatedMasterCount *int32
 
-	// A boolean value to indicate whether a dedicated master node is enabled. See
-	// Dedicated master nodes in Amazon OpenSearch Service
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains.html#managedomains-dedicatedmasternodes)
-	// for more information.
+	// Indicates whether dedicated master nodes are enabled for the cluster.True if the
+	// cluster will use a dedicated master node.False if the cluster will not.
 	DedicatedMasterEnabled *bool
 
-	// The instance type for a dedicated master node.
+	// OpenSearch Service instance type of the dedicated master nodes in the cluster.
 	DedicatedMasterType OpenSearchPartitionInstanceType
 
-	// The number of instances in the specified domain cluster.
+	// Number of dedicated master nodes in the cluster. This number must be greater
+	// than 1, otherwise you receive a validation exception.
 	InstanceCount *int32
 
-	// The instance type for an OpenSearch cluster. UltraWarm instance types are not
-	// supported for data instances.
+	// Instance type of data nodes in the cluster.
 	InstanceType OpenSearchPartitionInstanceType
 
-	// The number of UltraWarm nodes in the cluster.
+	// The number of warm nodes in the cluster.
 	WarmCount *int32
 
-	// True to enable UltraWarm storage.
+	// Whether to enable warm storage for the cluster.
 	WarmEnabled *bool
 
-	// The instance type for the OpenSearch cluster's warm nodes.
+	// The instance type for the cluster's warm nodes.
 	WarmType OpenSearchWarmPartitionInstanceType
 
-	// The zone awareness configuration for a domain when zone awareness is enabled.
+	// Container for zone awareness configuration options. Only required if
+	// ZoneAwarenessEnabled is true.
 	ZoneAwarenessConfig *ZoneAwarenessConfig
 
-	// A boolean value to indicate whether zone awareness is enabled. See Configuring a
-	// multi-AZ domain in Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html)
-	// for more information.
+	// Indicates whether multiple Availability Zones are enabled. For more information,
+	// see Configuring a multi-AZ domain in Amazon OpenSearch Service
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html).
 	ZoneAwarenessEnabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// The configuration status for the specified domain.
+// The cluster configuration status for a domain.
 type ClusterConfigStatus struct {
 
-	// The cluster configuration for the specified domain.
+	// Cluster configuration options for the specified domain.
 	//
 	// This member is required.
 	Options *ClusterConfig
 
-	// The cluster configuration status for the specified domain.
+	// The status of cluster configuration options for the specified domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -434,23 +453,26 @@ type ClusterConfigStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Options to specify the Cognito user and identity pools for OpenSearch Dashboards
-// authentication. For more information, see Configuring Amazon Cognito
+// Container for the parameters required to enable Cognito authentication for an
+// OpenSearch Service domain. For more information, see Configuring Amazon Cognito
 // authentication for OpenSearch Dashboards
-// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
 type CognitoOptions struct {
 
-	// The option to enable Cognito for OpenSearch Dashboards authentication.
+	// Whether to enable or disable Amazon Cognito authentication for OpenSearch
+	// Dashboards.
 	Enabled *bool
 
-	// The Cognito identity pool ID for OpenSearch Dashboards authentication.
+	// The Amazon Cognito identity pool ID that you want OpenSearch Service to use for
+	// OpenSearch Dashboards authentication.
 	IdentityPoolId *string
 
-	// The role ARN that provides OpenSearch permissions for accessing Cognito
-	// resources.
+	// The AmazonOpenSearchServiceCognitoAccess role that allows OpenSearch Service to
+	// configure your user pool and identity pool.
 	RoleArn *string
 
-	// The Cognito user pool ID for OpenSearch Dashboards authentication.
+	// The Amazon Cognito user pool ID that you want OpenSearch Service to use for
+	// OpenSearch Dashboards authentication.
 	UserPoolId *string
 
 	noSmithyDocumentSerde
@@ -472,10 +494,13 @@ type CognitoOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration for cold storage options such as enabled
+// Container for the parameters required to enable cold storage for an OpenSearch
+// Service domain. For more information, see Cold storage for Amazon OpenSearch
+// Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cold-storage.html).
 type ColdStorageOptions struct {
 
-	// Enable cold storage option. Accepted values true or false
+	// Whether to enable or disable cold storage on the domain.
 	//
 	// This member is required.
 	Enabled *bool
@@ -483,14 +508,14 @@ type ColdStorageOptions struct {
 	noSmithyDocumentSerde
 }
 
-// A map from an EngineVersion to a list of compatible EngineVersion s to which the
-// domain can be upgraded.
+// A map of OpenSearch or Elasticsearch versions and the versions you can upgrade
+// them to.
 type CompatibleVersionsMap struct {
 
-	// The current version of OpenSearch a domain is on.
+	// The current version that the OpenSearch Service domain is running.
 	SourceVersion *string
 
-	// List of supported OpenSearch versions.
+	// The possible versions that you can upgrade the domain to.
 	TargetVersions []string
 
 	noSmithyDocumentSerde
@@ -502,110 +527,107 @@ type DescribePackagesFilter struct {
 	// Any field from PackageDetails.
 	Name DescribePackagesFilterName
 
-	// A list of values for the specified field.
+	// A list of values for the specified filter field.
 	Value []string
 
 	noSmithyDocumentSerde
 }
 
-// The configuration of a domain.
+// Container for the configuration of an OpenSearch Service domain.
 type DomainConfig struct {
 
-	// IAM access policy as a JSON-formatted string.
+	// Specifies the access policies for the domain.
 	AccessPolicies *AccessPoliciesStatus
 
-	// The AdvancedOptions for the domain. See Advanced options
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
-	// for more information.
+	// Key-value pairs to specify advanced configuration options. For more information,
+	// see Advanced options
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
 	AdvancedOptions *AdvancedOptionsStatus
 
-	// Specifies AdvancedSecurityOptions for the domain.
+	// Container for fine-grained access control settings for the domain.
 	AdvancedSecurityOptions *AdvancedSecurityOptionsStatus
 
-	// Specifies AutoTuneOptions for the domain.
+	// Container for Auto-Tune settings for the domain.
 	AutoTuneOptions *AutoTuneOptionsStatus
 
-	// Specifies change details of the domain configuration change.
+	// Container for information about the progress of an existing configuration
+	// change.
 	ChangeProgressDetails *ChangeProgressDetails
 
-	// The ClusterConfig for the domain.
+	// Container for the cluster configuration of a the domain.
 	ClusterConfig *ClusterConfigStatus
 
-	// The CognitoOptions for the specified domain. For more information, see
-	// Configuring Amazon Cognito authentication for OpenSearch Dashboards
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
+	// Container for Amazon Cognito options for the domain.
 	CognitoOptions *CognitoOptionsStatus
 
-	// The DomainEndpointOptions for the domain.
+	// Additional options for the domain endpoint, such as whether to require HTTPS for
+	// all traffic.
 	DomainEndpointOptions *DomainEndpointOptionsStatus
 
-	// The EBSOptions for the domain.
+	// Container for EBS options configured for an OpenSearch Service domain.
 	EBSOptions *EBSOptionsStatus
 
-	// The EncryptionAtRestOptions for the domain.
+	// Key-value pairs to enable encryption at rest.
 	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
 
-	// String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine
-	// version for the OpenSearch or Elasticsearch domain.
+	// The OpenSearch or Elasticsearch version that the domain is running.
 	EngineVersion *VersionStatus
 
-	// Log publishing options for the given domain.
+	// Key-value pairs to configure slow log publishing.
 	LogPublishingOptions *LogPublishingOptionsStatus
 
-	// The NodeToNodeEncryptionOptions for the domain.
+	// Whether node-to-node encryption is enabled or disabled.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptionsStatus
 
-	// The SnapshotOptions for the domain.
+	// DEPRECATED. Container for parameters required to configure automated snapshots
+	// of domain indexes.
 	SnapshotOptions *SnapshotOptionsStatus
 
-	// The VPCOptions for the specified domain. For more information, see  Launching
-	// your Amazon OpenSearch Service domains using a VPC
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+	// The current VPC options for the domain and the status of any updates to their
+	// configuration.
 	VPCOptions *VPCDerivedInfoStatus
 
 	noSmithyDocumentSerde
 }
 
-// Options to configure the endpoint for the domain.
+// Options to configure a custom endpoint for an OpenSearch Service domain.
 type DomainEndpointOptions struct {
 
-	// The fully qualified domain for your custom endpoint.
+	// The fully qualified URL for the custom endpoint.
 	CustomEndpoint *string
 
-	// The ACM certificate ARN for your custom endpoint.
+	// The ARN for your security certificate, managed in Amazon Web Services
+	// Certificate Manager (ACM).
 	CustomEndpointCertificateArn *string
 
 	// Whether to enable a custom endpoint for the domain.
 	CustomEndpointEnabled *bool
 
-	// Whether only HTTPS endpoint should be enabled for the domain.
+	// True to require that all traffic to the domain arrive over HTTPS.
 	EnforceHTTPS *bool
 
-	// Specify the TLS security policy to apply to the HTTPS endpoint of the
-	// domain.
-	//
+	// Specify the TLS security policy to apply to the HTTPS endpoint of the domain.
 	// Can be one of the following values:
 	//
-	// * Policy-Min-TLS-1-0-2019-07: TLS
-	// security policy which supports TLSv1.0 and higher.
+	// * Policy-Min-TLS-1-0-2019-07: TLS security
+	// policy which supports TLS version 1.0 and higher.
 	//
-	// *
-	// Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLSv1.2
+	// * Policy-Min-TLS-1-2-2019-07:
+	// TLS security policy which supports only TLS version 1.2
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
 }
 
-// The configured endpoint options for the domain and their current status.
+// The configured endpoint options for a domain and their current status.
 type DomainEndpointOptionsStatus struct {
 
-	// Options to configure the endpoint for the domain.
+	// Options to configure the endpoint for a domain.
 	//
 	// This member is required.
 	Options *DomainEndpointOptions
 
-	// The status of the endpoint options for the domain. See OptionStatus for the
-	// status information that's included.
+	// The status of the endpoint options for a domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -613,222 +635,239 @@ type DomainEndpointOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an OpenSearch Service domain.
 type DomainInfo struct {
 
-	// The DomainName.
+	// Name of the domain.
 	DomainName *string
 
-	// Specifies the EngineType of the domain.
+	// The type of search engine that the domain is running.OpenSearch for an
+	// OpenSearch engine, or Elasticsearch for a legacy Elasticsearch OSS engine.
 	EngineType EngineType
 
 	noSmithyDocumentSerde
 }
 
+// Container for information about an OpenSearch Service domain.
 type DomainInformationContainer struct {
+
+	// Information about an Amazon OpenSearch Service domain.
 	AWSDomainInformation *AWSDomainInformation
 
 	noSmithyDocumentSerde
 }
 
-// Information on a package associated with a domain.
+// Information about a package that is associated with a domain. For more
+// information, see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 type DomainPackageDetails struct {
 
-	// The name of the domain you've associated a package with.
+	// Name of the domain that the package is associated with.
 	DomainName *string
 
-	// State of the association. Values are ASSOCIATING, ASSOCIATION_FAILED, ACTIVE,
-	// DISSOCIATING, and DISSOCIATION_FAILED.
+	// State of the association.
 	DomainPackageStatus DomainPackageStatus
 
 	// Additional information if the package is in an error state. Null otherwise.
 	ErrorDetails *ErrorDetails
 
-	// The timestamp of the most recent update to the package association status.
+	// Timestamp of the most recent update to the package association status.
 	LastUpdated *time.Time
 
-	// The internal ID of the package.
+	// Internal ID of the package.
 	PackageID *string
 
 	// User-specified name of the package.
 	PackageName *string
 
-	// Currently supports only TXT-DICTIONARY.
+	// The type of package.
 	PackageType PackageType
 
+	// The current version of the package.
 	PackageVersion *string
 
-	// The relative path on Amazon OpenSearch Service nodes, which can be used as
-	// synonym_path when the package is a synonym file.
+	// Denotes the location of the package on the OpenSearch Service cluster nodes.
+	// It's the same as synonym_path for dictionary files.
 	ReferencePath *string
 
 	noSmithyDocumentSerde
 }
 
-// The current status of a domain.
+// The current status of an OpenSearch Service domain.
 type DomainStatus struct {
 
-	// The Amazon Resource Name (ARN) of a domain. See IAM identifiers
+	// The Amazon Resource Name (ARN) of the domain. For more information, see IAM
+	// identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
-	// the AWS Identity and Access Management User Guide for more information.
+	// the AWS Identity and Access Management User Guide.
 	//
 	// This member is required.
 	ARN *string
 
-	// The type and number of instances in the domain.
+	// Container for the cluster configuration of the domain.
 	//
 	// This member is required.
 	ClusterConfig *ClusterConfig
 
-	// The unique identifier for the specified domain.
+	// Unique identifier for the domain.
 	//
 	// This member is required.
 	DomainId *string
 
-	// The name of a domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// Name of the domain. Domain names are unique across all domains owned by the same
+	// account within an Amazon Web Services Region.
 	//
 	// This member is required.
 	DomainName *string
 
-	// IAM access policy as a JSON-formatted string.
+	// Identity and Access Management (IAM) policy document specifying the access
+	// policies for the domain.
 	AccessPolicies *string
 
-	// The status of the AdvancedOptions.
+	// Key-value pairs that specify advanced configuration options.
 	AdvancedOptions map[string]string
 
-	// The current status of the domain's advanced security options.
+	// Settings for fine-grained access control.
 	AdvancedSecurityOptions *AdvancedSecurityOptions
 
-	// The current status of the domain's Auto-Tune options.
+	// Auto-Tune settings for the domain.
 	AutoTuneOptions *AutoTuneOptionsOutput
 
-	// Specifies change details of the domain configuration change.
+	// Information about a configuration change happening on the domain.
 	ChangeProgressDetails *ChangeProgressDetails
 
-	// The CognitoOptions for the specified domain. For more information, see
-	// Configuring Amazon Cognito authentication for OpenSearch Dashboards
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
+	// Key-value pairs to configure Amazon Cognito authentication for OpenSearch
+	// Dashboards.
 	CognitoOptions *CognitoOptions
 
-	// The domain creation status. True if the creation of a domain is complete.  False
-	// if domain creation is still in progress.
+	// Creation status of an OpenSearch Service domain. True if domain creation is
+	// complete. False if domain creation is still in progress.
 	Created *bool
 
-	// The domain deletion status. True if a delete request has been received for the
-	// domain but resource cleanup is still in progress. False if the domain has not
-	// been deleted. Once domain deletion is complete, the status of the domain is no
-	// longer returned.
+	// Deletion status of an OpenSearch Service domain. True if domain deletion is
+	// complete. False if domain deletion is still in progress. Once deletion is
+	// complete, the status of the domain is no longer returned.
 	Deleted *bool
 
-	// The current status of the domain's endpoint options.
+	// Additional options for the domain endpoint, such as whether to require HTTPS for
+	// all traffic.
 	DomainEndpointOptions *DomainEndpointOptions
 
-	// The EBSOptions for the specified domain.
+	// Container for EBS-based storage settings for the domain.
 	EBSOptions *EBSOptions
 
-	// The status of the EncryptionAtRestOptions.
+	// Encryption at rest settings for the domain.
 	EncryptionAtRestOptions *EncryptionAtRestOptions
 
-	// The domain endpoint that you use to submit index and search requests.
+	// Domain-specific endpoint used to submit index, search, and data upload requests
+	// to the domain.
 	Endpoint *string
 
-	// Map containing the domain endpoints used to submit index and search requests.
-	// Example key, value:
+	// The key-value pair that exists if the OpenSearch Service domain uses VPC
+	// endpoints.. Example key, value:
 	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
 	Endpoints map[string]string
 
+	// Version of OpenSearch or Elasticsearch that the domain is running, in the format
+	// Elasticsearch_X.Y or OpenSearch_X.Y.
 	EngineVersion *string
 
-	// Log publishing options for the given domain.
+	// Log publishing options for the domain.
 	LogPublishingOptions map[string]LogPublishingOption
 
-	// The status of the NodeToNodeEncryptionOptions.
+	// Whether node-to-node encryption is enabled or disabled.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
 
-	// The status of the domain configuration. True if Amazon OpenSearch Service is
-	// processing configuration changes. False if the configuration is active.
+	// The status of the domain configuration. True if OpenSearch Service is processing
+	// configuration changes. False if the configuration is active.
 	Processing *bool
 
 	// The current status of the domain's service software.
 	ServiceSoftwareOptions *ServiceSoftwareOptions
 
-	// The status of the SnapshotOptions.
+	// DEPRECATED. Container for parameters required to configure automated snapshots
+	// of domain indexes.
 	SnapshotOptions *SnapshotOptions
 
-	// The status of a domain version upgrade. True if Amazon OpenSearch Service is
-	// undergoing a version upgrade. False if the configuration is active.
+	// The status of a domain version upgrade to a new version of OpenSearch or
+	// Elasticsearch. True if OpenSearch Service is in the process of a version
+	// upgrade. False if the configuration is active.
 	UpgradeProcessing *bool
 
-	// The VPCOptions for the specified domain. For more information, see  Launching
-	// your Amazon OpenSearch Service domains using a VPC
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+	// The VPC configuration for the domain.
 	VPCOptions *VPCDerivedInfo
 
 	noSmithyDocumentSerde
 }
 
+// Results of a dry run performed in an update domain request.
 type DryRunResults struct {
 
-	// Specifies the way in which Amazon OpenSearch Service applies the update.
-	// Possible responses are Blue/Green (the update requires a blue/green deployment),
-	// DynamicUpdate (no blue/green required), Undetermined (the domain is undergoing
-	// an update and can't predict the deployment type; try again after the update is
-	// complete), and None (the request doesn't include any configuration changes).
+	// Specifies the way in which OpenSearch Service will apply an update. Possible
+	// values are:
+	//
+	// * Blue/Green - The update requires a blue/green deployment.
+	//
+	// *
+	// DynamicUpdate - No blue/green deployment required
+	//
+	// * Undetermined - The domain
+	// is in the middle of an update and can't predict the deployment type. Try again
+	// after the update is complete.
+	//
+	// * None - The request doesn't include any
+	// configuration changes.
 	DeploymentType *string
 
-	// Contains an optional message associated with the DryRunResults.
+	// A message corresponding to the deployment type.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// The maintenance schedule duration: duration value and duration unit. See
-// Auto-Tune for Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// The duration of a maintenance schedule. For more information, see Auto-Tune for
+// Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type Duration struct {
 
-	// The unit of a maintenance schedule duration. Valid value is HOURS. See
-	// Auto-Tune for Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// The unit of measurement for the duration of a maintenance schedule.
 	Unit TimeUnit
 
-	// Integer to specify the value of a maintenance schedule duration. See  Auto-Tune
-	// for Amazon OpenSearch Service
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Integer to specify the value of a maintenance schedule duration.
 	Value int64
 
 	noSmithyDocumentSerde
 }
 
-// Options to enable, disable, and specify the properties of EBS storage volumes.
+// Container for the parameters required to enable EBS-based storage for an
+// OpenSearch Service domain.
 type EBSOptions struct {
 
-	// Whether EBS-based storage is enabled.
+	// Indicates whether EBS volumes are attached to data nodes in an OpenSearch
+	// Service domain.
 	EBSEnabled *bool
 
-	// The IOPS for Provisioned IOPS And GP3 EBS volume (SSD).
+	// Specifies the baseline input/output (I/O) performance of EBS volumes attached to
+	// data nodes. Applicable only for the gp3 and provisioned IOPS EBS volume types.
 	Iops *int32
 
-	// The Throughput for GP3 EBS volume (SSD).
+	// Specifies the throughput (in MiB/s) of the EBS volumes attached to data nodes.
+	// Applicable only for the gp3 volume type.
 	Throughput *int32
 
-	// Integer to specify the size of an EBS volume.
+	// Specifies the size (in GiB) of EBS volumes attached to data nodes.
 	VolumeSize *int32
 
-	// The volume type for EBS-based storage.
+	// Specifies the type of EBS volumes attached to data nodes.
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
 }
 
-// Status of the EBS options for the specified domain.
+// The status of the EBS options for the specified OpenSearch Service domain.
 type EBSOptionsStatus struct {
 
-	// The EBS options for the specified domain.
+	// The configured EBS options for the specified domain.
 	//
 	// This member is required.
 	Options *EBSOptions
@@ -841,27 +880,30 @@ type EBSOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies encryption at rest options.
+// Specifies whether the domain should encrypt data at rest, and if so, the Key
+// Management Service (KMS) key to use. Can be used only to create a new domain,
+// not update an existing one.
 type EncryptionAtRestOptions struct {
 
-	// The option to enable encryption at rest.
+	// True to enable encryption at rest.
 	Enabled *bool
 
-	// The KMS key ID for encryption at rest options.
+	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// Status of the encryption At Rest options for the specified domain.
+// Status of the encryption at rest options for the specified OpenSearch Service
+// domain.
 type EncryptionAtRestOptionsStatus struct {
 
-	// The Encryption At Rest options for the specified domain.
+	// Encryption at rest options for the specified domain.
 	//
 	// This member is required.
 	Options *EncryptionAtRestOptions
 
-	// The status of the Encryption At Rest options for the specified domain.
+	// The status of the encryption at rest options for the specified domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -869,16 +911,20 @@ type EncryptionAtRestOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Additional information if the package is in an error state. Null otherwise.
 type ErrorDetails struct {
+
+	// A message describing the error.
 	ErrorMessage *string
 
+	// The type of error that occurred.
 	ErrorType *string
 
 	noSmithyDocumentSerde
 }
 
 // A filter used to limit results when describing inbound or outbound cross-cluster
-// connections. Multiple values can be specified per filter. A cross-cluster
+// connections. You can specify multiple values per filter. A cross-cluster
 // connection must match at least one of the specified values for it to be returned
 // from an operation.
 type Filter struct {
@@ -886,144 +932,147 @@ type Filter struct {
 	// The name of the filter.
 	Name *string
 
-	// Contains one or more values for the filter.
+	// One or more values for the filter.
 	Values []string
 
 	noSmithyDocumentSerde
 }
 
-// Details of an inbound connection.
+// Describes an inbound cross-cluster connection for Amazon OpenSearch Service. For
+// more information, see Cross-cluster search for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
 type InboundConnection struct {
 
-	// The connection ID for the inbound cross-cluster connection.
+	// The unique identifier of the connection.
 	ConnectionId *string
 
-	// The InboundConnectionStatus for the outbound connection.
+	// The current status of the connection.
 	ConnectionStatus *InboundConnectionStatus
 
-	// The AWSDomainInformation for the local OpenSearch domain.
+	// Information about the source (local) domain.
 	LocalDomainInfo *DomainInformationContainer
 
-	// The AWSDomainInformation for the remote OpenSearch domain.
+	// Information about the destination (remote) domain.
 	RemoteDomainInfo *DomainInformationContainer
 
 	noSmithyDocumentSerde
 }
 
-// The connection status of an inbound cross-cluster connection.
+// The status of an inbound cross-cluster connection for OpenSearch Service.
 type InboundConnectionStatus struct {
 
-	// Verbose information for the inbound connection status.
+	// Information about the connection.
 	Message *string
 
-	// The state code for the inbound connection. Can be one of the following:
+	// The status code for the connection. Can be one of the following:
 	//
 	// *
-	// PENDING_ACCEPTANCE: Inbound connection is not yet accepted by the remote domain
+	// PENDING_ACCEPTANCE - Inbound connection is not yet accepted by the remote domain
 	// owner.
 	//
 	// * APPROVED: Inbound connection is pending acceptance by the remote
 	// domain owner.
 	//
-	// * PROVISIONING: Inbound connection provisioning is in
-	// progress.
-	//
-	// * ACTIVE: Inbound connection is active and ready to use.
+	// * PROVISIONING: Inbound connection is being provisioned.
 	//
 	// *
-	// REJECTING: Inbound connection rejection is in process.
+	// ACTIVE: Inbound connection is active and ready to use.
 	//
-	// * REJECTED: Inbound
-	// connection is rejected.
+	// * REJECTING: Inbound
+	// connection rejection is in process.
 	//
-	// * DELETING: Inbound connection deletion is in
-	// progress.
+	// * REJECTED: Inbound connection is
+	// rejected.
 	//
-	// * DELETED: Inbound connection is deleted and can no longer be used.
+	// * DELETING: Inbound connection deletion is in progress.
+	//
+	// * DELETED:
+	// Inbound connection is deleted and can no longer be used.
 	StatusCode InboundConnectionStatusCode
 
 	noSmithyDocumentSerde
 }
 
-// InstanceCountLimits represents the limits on the number of instances that can be
-// created in Amazon OpenSearch Service for a given InstanceType.
+// Limits on the number of instances that can be created in OpenSearch Service for
+// a given instance type.
 type InstanceCountLimits struct {
 
-	// Maximum number of instances that can be instantiated for a given InstanceType.
+	// The minimum allowed number of instances.
 	MaximumInstanceCount int32
 
-	// Minimum number of instances that can be instantiated for a given InstanceType.
+	// The maximum allowed number of instances.
 	MinimumInstanceCount int32
 
 	noSmithyDocumentSerde
 }
 
-// InstanceLimits represents the list of instance-related attributes that are
-// available for a given InstanceType.
+// Instance-related attributes that are available for a given instance type.
 type InstanceLimits struct {
 
-	// InstanceCountLimits represents the limits on the number of instances that can be
-	// created in Amazon OpenSearch Service for a given InstanceType.
+	// Limits on the number of instances that can be created for a given instance type.
 	InstanceCountLimits *InstanceCountLimits
 
 	noSmithyDocumentSerde
 }
 
+// Lists all instance types and available features for a given OpenSearch or
+// Elasticsearch version.
 type InstanceTypeDetails struct {
+
+	// Whether fine-grained access control is supported for the instance type.
 	AdvancedSecurityEnabled *bool
 
+	// Whether logging is supported for the instance type.
 	AppLogsEnabled *bool
 
+	// Whether Amazon Cognito access is supported for the instance type.
 	CognitoEnabled *bool
 
+	// Whether encryption at rest and node-to-node encryption are supported for the
+	// instance type.
 	EncryptionEnabled *bool
 
+	// Whether the instance acts as a data node, a dedicated master node, or an
+	// UltraWarm node.
 	InstanceRole []string
 
+	// The instance type.
 	InstanceType OpenSearchPartitionInstanceType
 
+	// Whether UltraWarm is supported for the instance type.
 	WarmEnabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Limits for a given InstanceType and for each of its roles.
-//
-// Limits contains the
-// following: StorageTypes, InstanceLimits, and AdditionalLimits
+// Limits for a given instance type and for each of its roles.
 type Limits struct {
 
-	// List of additional limits that are specific to a given InstanceType and for each
-	// of its InstanceRole .
+	// List of additional limits that are specific to a given instance type for each of
+	// its instance roles.
 	AdditionalLimits []AdditionalLimit
 
-	// InstanceLimits represents the list of instance-related attributes that are
-	// available for a given InstanceType.
+	// The limits for a given instance type.
 	InstanceLimits *InstanceLimits
 
-	// Storage-related types and attributes that are available for a given
-	// InstanceType.
+	// Storage-related attributes that are available for a given instance type.
 	StorageTypes []StorageType
 
 	noSmithyDocumentSerde
 }
 
-// Log Publishing option that is set for a given domain.
-//
-// Attributes and their
-// details:
-//
-// * CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to
-// publish logs to.
-//
-// * Enabled: Whether the log publishing for a given log type is
-// enabled or not.
+// Specifies whether the Amazon OpenSearch Service domain publishes the OpenSearch
+// application and slow logs to Amazon CloudWatch. For more information, see
+// Monitoring OpenSearch logs with Amazon CloudWatch Logs
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createdomain-configure-slow-logs.html).
+// After you enable log publishing, you still have to enable the collection of slow
+// logs using the OpenSearch REST API.
 type LogPublishingOption struct {
 
-	// ARN of the Cloudwatch log group to publish logs to.
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs group to publish logs to.
 	CloudWatchLogsLogGroupArn *string
 
-	// Whether the given log publishing option is enabled or not.
+	// Whether the log should be published.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -1035,31 +1084,33 @@ type LogPublishingOptionsStatus struct {
 	// The log publishing options configured for the domain.
 	Options map[string]LogPublishingOption
 
-	// The status of the log publishing options for the domain. See OptionStatus for
-	// the status information that's included.
+	// The status of the log publishing options for the domain.
 	Status *OptionStatus
 
 	noSmithyDocumentSerde
 }
 
-// Credentials for the master user: username and password, ARN, or both.
+// Credentials for the master user for a domain.
 type MasterUserOptions struct {
 
-	// ARN for the master user (if IAM is enabled).
+	// Amazon Resource Name (ARN) for the master user. Only specify if
+	// InternalUserDatabaseEnabled is false.
 	MasterUserARN *string
 
-	// The master user's username, which is stored in the Amazon OpenSearch Service
-	// domain's internal database.
+	// User name for the master user. Only specify if InternalUserDatabaseEnabled is
+	// true.
 	MasterUserName *string
 
-	// The master user's password, which is stored in the Amazon OpenSearch Service
-	// domain's internal database.
+	// Password for the master user. Only specify if InternalUserDatabaseEnabled is
+	// true.
 	MasterUserPassword *string
 
 	noSmithyDocumentSerde
 }
 
-// The node-to-node encryption options.
+// Enables or disables node-to-node encryption. For more information, see
+// Node-to-node encryption for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ntn.html).
 type NodeToNodeEncryptionOptions struct {
 
 	// True to enable node-to-node encryption.
@@ -1084,15 +1135,15 @@ type NodeToNodeEncryptionOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the current status of the entity.
+// Provides the current status of an entity.
 type OptionStatus struct {
 
-	// The timestamp of when the entity was created.
+	// The timestamp when the entity was created.
 	//
 	// This member is required.
 	CreationDate *time.Time
 
-	// Provides the OptionState for the domain.
+	// The state of the entity.
 	//
 	// This member is required.
 	State OptionState
@@ -1102,7 +1153,7 @@ type OptionStatus struct {
 	// This member is required.
 	UpdateDate *time.Time
 
-	// Indicates whether the domain is being deleted.
+	// Indicates whether the entity is being deleted.
 	PendingDeletion *bool
 
 	// The latest version of the entity.
@@ -1111,64 +1162,65 @@ type OptionStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies details about an outbound connection.
+// Specifies details about an outbound cross-cluster connection.
 type OutboundConnection struct {
 
-	// The connection alias for the outbound cross-cluster connection.
+	// Name of the connection.
 	ConnectionAlias *string
 
-	// The connection ID for the outbound cross-cluster connection.
+	// Unique identifier of the connection.
 	ConnectionId *string
 
-	// The OutboundConnectionStatus for the outbound connection.
+	// Status of the connection.
 	ConnectionStatus *OutboundConnectionStatus
 
-	// The DomainInformation for the local OpenSearch domain.
+	// Information about the source (local) domain.
 	LocalDomainInfo *DomainInformationContainer
 
-	// The DomainInformation for the remote OpenSearch domain.
+	// Information about the destination (remote) domain.
 	RemoteDomainInfo *DomainInformationContainer
 
 	noSmithyDocumentSerde
 }
 
-// The connection status of an outbound cross-cluster connection.
+// The status of an outbound cross-cluster connection.
 type OutboundConnectionStatus struct {
 
-	// Verbose information for the outbound connection status.
+	// Verbose information for the outbound connection.
 	Message *string
 
-	// The state code for the outbound connection. Can be one of the following:
+	// The status code for the outbound connection. Can be one of the following:
 	//
 	// *
-	// VALIDATING: The outbound connection request is being validated.
+	// VALIDATING - The outbound connection request is being validated.
 	//
 	// *
-	// VALIDATION_FAILED: Validation failed for the connection request.
+	// VALIDATION_FAILED - Validation failed for the connection request.
 	//
 	// *
 	// PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet
 	// accepted by the remote domain owner.
 	//
-	// * APPROVED: Outbound connection has been
+	// * APPROVED - Outbound connection has been
 	// approved by the remote domain owner for getting provisioned.
 	//
-	// * PROVISIONING:
+	// * PROVISIONING -
 	// Outbound connection request is in process.
 	//
-	// * ACTIVE: Outbound connection is
+	// * ACTIVE - Outbound connection is
 	// active and ready to use.
 	//
-	// * REJECTING: Outbound connection rejection by remote
+	// * REJECTING - Outbound connection rejection by remote
 	// domain owner is in progress.
 	//
-	// * REJECTED: Outbound connection request is
+	// * REJECTED - Outbound connection request is
 	// rejected by remote domain owner.
 	//
-	// * DELETING: Outbound connection deletion is in
-	// progress.
+	// * DELETING - Outbound connection deletion is
+	// in progress.
 	//
-	// * DELETED: Outbound connection is deleted and can no longer be used.
+	// * DELETED - Outbound connection is deleted and can no longer be
+	// used.
 	StatusCode OutboundConnectionStatusCode
 
 	noSmithyDocumentSerde
@@ -1176,37 +1228,38 @@ type OutboundConnectionStatus struct {
 
 // Basic information about a package.
 type PackageDetails struct {
+
+	// The package version.
 	AvailablePackageVersion *string
 
-	// The timestamp of when the package was created.
+	// The timestamp when the package was created.
 	CreatedAt *time.Time
 
 	// Additional information if the package is in an error state. Null otherwise.
 	ErrorDetails *ErrorDetails
 
+	// Date and time when the package was last updated.
 	LastUpdatedAt *time.Time
 
 	// User-specified description of the package.
 	PackageDescription *string
 
-	// Internal ID of the package.
+	// The unique identifier of the package.
 	PackageID *string
 
 	// User-specified name of the package.
 	PackageName *string
 
-	// Current state of the package. Values are COPYING, COPY_FAILED, AVAILABLE,
-	// DELETING, and DELETE_FAILED.
+	// Current status of the package.
 	PackageStatus PackageStatus
 
-	// Currently supports only TXT-DICTIONARY.
+	// The type of package.
 	PackageType PackageType
 
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 location for importing the package specified as S3BucketName and
-// S3Key
+// The Amazon S3 location to import the package from.
 type PackageSource struct {
 
 	// The name of the Amazon S3 bucket containing the package.
@@ -1218,13 +1271,13 @@ type PackageSource struct {
 	noSmithyDocumentSerde
 }
 
-// Details of a package version.
+// Details about a package version.
 type PackageVersionHistory struct {
 
-	// A message associated with the package version.
+	// A message associated with the package version when it was uploaded.
 	CommitMessage *string
 
-	// The timestamp of when the package was created.
+	// The date and time when the package was created.
 	CreatedAt *time.Time
 
 	// The package version.
@@ -1233,8 +1286,8 @@ type PackageVersionHistory struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the specific price and frequency of a recurring charges for a reserved
-// OpenSearch instance, or for a reserved OpenSearch instance offering.
+// Contains the specific price and frequency of a recurring charges for an
+// OpenSearch Reserved Instance, or for a Reserved Instance offering.
 type RecurringCharge struct {
 
 	// The monetary amount of the recurring charge.
@@ -1246,31 +1299,33 @@ type RecurringCharge struct {
 	noSmithyDocumentSerde
 }
 
-// Details of a reserved OpenSearch instance.
+// Details of an OpenSearch Reserved Instance.
 type ReservedInstance struct {
+
+	// The unique identifier of the billing subscription.
 	BillingSubscriptionId *int64
 
-	// The currency code for the reserved OpenSearch instance offering.
+	// The currency code for the offering.
 	CurrencyCode *string
 
 	// The duration, in seconds, for which the OpenSearch instance is reserved.
 	Duration int32
 
-	// The upfront fixed charge you will paid to purchase the specific reserved
-	// OpenSearch instance offering.
+	// The upfront fixed charge you will paid to purchase the specific Reserved
+	// Instance offering.
 	FixedPrice *float64
 
 	// The number of OpenSearch instances that have been reserved.
 	InstanceCount int32
 
-	// The OpenSearch instance type offered by the reserved instance offering.
+	// The OpenSearch instance type offered by theReserved Instance offering.
 	InstanceType OpenSearchPartitionInstanceType
 
-	// The payment option as defined in the reserved OpenSearch instance offering.
+	// The payment option as defined in the Reserved Instance offering.
 	PaymentOption ReservedInstancePaymentOption
 
-	// The charge to your account regardless of whether you are creating any domains
-	// using the instance offering.
+	// The recurring charge to your account, regardless of whether you create any
+	// domains using the Reserved Instance offering.
 	RecurringCharges []RecurringCharge
 
 	// The customer-specified identifier to track this reservation.
@@ -1279,65 +1334,65 @@ type ReservedInstance struct {
 	// The unique identifier for the reservation.
 	ReservedInstanceId *string
 
-	// The offering identifier.
+	// The unique identifier of the Reserved Instance offering.
 	ReservedInstanceOfferingId *string
 
-	// The time the reservation started.
+	// The date and time when the reservation was purchased.
 	StartTime *time.Time
 
-	// The state of the reserved OpenSearch instance.
+	// The state of the Reserved Instance.
 	State *string
 
-	// The rate you are charged for each hour for the domain that is using this
-	// reserved instance.
+	// The hourly rate at which you're charged for the domain using this Reserved
+	// Instance.
 	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
 
-// Details of a reserved OpenSearch instance offering.
+// Details of an OpenSearch Reserved Instance offering.
 type ReservedInstanceOffering struct {
 
-	// The currency code for the reserved OpenSearch instance offering.
+	// The currency code for the Reserved Instance offering.
 	CurrencyCode *string
 
 	// The duration, in seconds, for which the offering will reserve the OpenSearch
 	// instance.
 	Duration int32
 
-	// The upfront fixed charge you will pay to purchase the specific reserved
-	// OpenSearch instance offering.
+	// The upfront fixed charge you will pay to purchase the specific Reserved Instance
+	// offering.
 	FixedPrice *float64
 
-	// The OpenSearch instance type offered by the reserved instance offering.
+	// The OpenSearch instance type offered by the Reserved Instance offering.
 	InstanceType OpenSearchPartitionInstanceType
 
-	// Payment option for the reserved OpenSearch instance offering
+	// Payment option for the Reserved Instance offering
 	PaymentOption ReservedInstancePaymentOption
 
-	// The charge to your account regardless of whether you are creating any domains
-	// using the instance offering.
+	// The recurring charge to your account, regardless of whether you creates any
+	// domains using the offering.
 	RecurringCharges []RecurringCharge
 
-	// The OpenSearch reserved instance offering identifier.
+	// The unique identifier of the Reserved Instance offering.
 	ReservedInstanceOfferingId *string
 
-	// The rate you are charged for each hour the domain that is using the offering is
-	// running.
+	// The hourly rate at which you're charged for the domain using this Reserved
+	// Instance.
 	UsagePrice *float64
 
 	noSmithyDocumentSerde
 }
 
-// The SAML identity povider's information.
+// The SAML identity povider information.
 type SAMLIdp struct {
 
-	// The unique entity ID of the application in SAML identity provider.
+	// The unique entity ID of the application in the SAML identity provider.
 	//
 	// This member is required.
 	EntityId *string
 
-	// The metadata of the SAML application in XML format.
+	// The metadata of the SAML application, in XML format.
 	//
 	// This member is required.
 	MetadataContent *string
@@ -1345,10 +1400,10 @@ type SAMLIdp struct {
 	noSmithyDocumentSerde
 }
 
-// The SAML application configuration for the domain.
+// The SAML authentication configuration for an Amazon OpenSearch Service domain.
 type SAMLOptionsInput struct {
 
-	// True if SAML is enabled.
+	// True to enable SAML authentication for a domain.
 	Enabled *bool
 
 	// The SAML Identity Provider's information.
@@ -1357,8 +1412,8 @@ type SAMLOptionsInput struct {
 	// The backend role that the SAML master user is mapped to.
 	MasterBackendRole *string
 
-	// The SAML master username, which is stored in the Amazon OpenSearch Service
-	// domain's internal database.
+	// The SAML master user name, which is stored in the domain's internal user
+	// database.
 	MasterUserName *string
 
 	// Element of the SAML assertion to use for backend roles. Default is roles.
@@ -1368,7 +1423,7 @@ type SAMLOptionsInput struct {
 	// Acceptable values are between 1 and 1440, and the default value is 60.
 	SessionTimeoutMinutes *int32
 
-	// Element of the SAML assertion to use for username. Default is NameID.
+	// Element of the SAML assertion to use for the user name. Default is NameID.
 	SubjectKey *string
 
 	noSmithyDocumentSerde
@@ -1395,29 +1450,30 @@ type SAMLOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies details about the scheduled Auto-Tune action. See  Auto-Tune for
-// Amazon OpenSearch Service
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// Specifies details about a scheduled Auto-Tune action. For more information, see
+// Auto-Tune for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html).
 type ScheduledAutoTuneDetails struct {
 
-	// The Auto-Tune action description.
+	// A description of the Auto-Tune action.
 	Action *string
 
-	// The Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and
-	// JVM_YOUNG_GEN_TUNING.
+	// The type of Auto-Tune action.
 	ActionType ScheduledAutoTuneActionType
 
-	// The timestamp of the Auto-Tune action scheduled for the domain.
+	// The date and time when the Auto-Tune action is scheduled for the domain.
 	Date *time.Time
 
-	// The Auto-Tune action severity. Valid values are LOW, MEDIUM, and HIGH.
+	// The severity of the Auto-Tune action. Valid values are LOW, MEDIUM, and HIGH.
 	Severity ScheduledAutoTuneSeverityType
 
 	noSmithyDocumentSerde
 }
 
-// The current options of an domain service software options.
+// The current status of the service software for an Amazon OpenSearch Service
+// domain. For more information, see Service software updates in Amazon OpenSearch
+// Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
 type ServiceSoftwareOptions struct {
 
 	// The timestamp, in Epoch time, until which you can manually request a service
@@ -1431,39 +1487,39 @@ type ServiceSoftwareOptions struct {
 	// The current service software version present on the domain.
 	CurrentVersion *string
 
-	// The description of the UpdateStatus.
+	// A description of the service software update status.
 	Description *string
 
-	// The new service software version if one is available.
+	// The new service software version, if one is available.
 	NewVersion *string
 
 	// True if a service software is never automatically updated. False if a service
-	// software is automatically updated after AutomatedUpdateDate.
+	// software is automatically updated after the automated update date.
 	OptionalDeployment *bool
 
 	// True if you're able to update your service software version. False if you can't
 	// update your service software version.
 	UpdateAvailable *bool
 
-	// The status of your service software update. This field can take the following
-	// values:  ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and  NOT_ELIGIBLE.
+	// The status of your service software update.
 	UpdateStatus DeploymentStatus
 
 	noSmithyDocumentSerde
 }
 
-// The time, in UTC format, when the service takes a daily automated snapshot of
-// the specified domain. Default is 0 hours.
+// The time, in UTC format, when OpenSearch Service takes a daily automated
+// snapshot of the specified domain. Default is 0 hours.
 type SnapshotOptions struct {
 
-	// The time, in UTC format, when the service takes a daily automated snapshot of
-	// the specified domain. Default is 0 hours.
+	// The time, in UTC format, when OpenSearch Service takes a daily automated
+	// snapshot of the specified domain. Default is 0 hours.
 	AutomatedSnapshotStartHour *int32
 
 	noSmithyDocumentSerde
 }
 
-// Status of a daily automated snapshot.
+// Container for information about a daily automated snapshot for an OpenSearch
+// Service domain.
 type SnapshotOptionsStatus struct {
 
 	// The daily snapshot options specified for the domain.
@@ -1479,90 +1535,68 @@ type SnapshotOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
-// StorageTypes represents the list of storage-related types and their attributes
-// that are available for a given InstanceType.
+// A list of storage types for an Amazon OpenSearch Service domain that are
+// available for a given intance type.
 type StorageType struct {
 
-	// Sub-type of the given storage type. List of available sub-storage options:
-	// "instance" storageType has no storageSubType. "ebs" storageType has the
-	// following valid storageSubTypes:
-	//
-	// * standard
-	//
-	// * gp2
-	//
-	// * gp3
-	//
-	// * io1
-	//
-	// See
-	// VolumeType for more information regarding each EBS storage option.
+	// The storage sub-type, such as gp3 or io1.
 	StorageSubTypeName *string
 
 	// Limits that are applicable for the given storage type.
 	StorageTypeLimits []StorageTypeLimit
 
-	// Type of storage. List of available storage options:
-	//
-	// * instance
-	//  Built-in
-	// storage available for the instance
-	// * ebs
-	//  Elastic block storage attached to the
-	// instance
+	// The name of the storage type.
 	StorageTypeName *string
 
 	noSmithyDocumentSerde
 }
 
-// Limits that are applicable for the given storage type.
+// Limits that are applicable for the given Amazon OpenSearch Service storage type.
 type StorageTypeLimit struct {
 
 	// Name of storage limits that are applicable for the given storage type. If
-	// StorageType is "ebs", the following storage options are applicable:
+	// StorageType is ebs, the following options are available:
+	//
+	// * MinimumVolumeSize -
+	// Minimum volume size that is available for the given storage type. Can be empty
+	// if not applicable.
+	//
+	// * MaximumVolumeSize - Maximum volume size that is available
+	// for the given storage type. Can be empty if not applicable.
+	//
+	// * MaximumIops -
+	// Maximum amount of IOPS that is available for the given the storage type. Can be
+	// empty if not applicable.
+	//
+	// * MinimumIops - Minimum amount of IOPS that is
+	// available for the given the storage type. Can be empty if not applicable.
 	//
 	// *
-	// MinimumVolumeSize
-	//  Minimum amount of volume size that is applicable for the
-	// given storage type. Can be empty if not applicable.
-	// * MaximumVolumeSize
-	//  Maximum
-	// amount of volume size that is applicable for the given storage type. Can be
+	// MaximumThroughput - Maximum amount of throughput that is available for the given
+	// the storage type. Can be empty if not applicable.
+	//
+	// * MinimumThroughput - Minimum
+	// amount of throughput that is available for the given the storage type. Can be
 	// empty if not applicable.
-	// * MaximumIops
-	//  Maximum amount of Iops that is
-	// applicable for given the storage type. Can be empty if not applicable.
-	// *
-	// MinimumIops
-	//  Minimum amount of Iops that is applicable for given the storage
-	// type. Can be empty if not applicable.
-	// * MaximumThroughput
-	//  Maximum amount of
-	// Throughput that is applicable for given the storage type. Can be empty if not
-	// applicable.
-	// * MinimumThroughput
-	//  Minimum amount of Throughput that is applicable
-	// for given the storage type. Can be empty if not applicable.
 	LimitName *string
 
-	// Values for the StorageTypeLimit$LimitName .
+	// The limit values.
 	LimitValues []string
 
 	noSmithyDocumentSerde
 }
 
-// A key value pair for a resource tag.
+// A tag (key-value pair) for an Amazon OpenSearch Service resource.
 type Tag struct {
 
-	// The TagKey, the name of the tag. Tag keys must be unique for the domain to which
-	// they are attached.
+	// The tag key. Tag keys must be unique for the domain to which they are attached.
 	//
 	// This member is required.
 	Key *string
 
-	// The TagValue, the value assigned to the corresponding tag key. Tag values can be
-	// null and don't have to be unique in a tag set. For example, you can have a key
-	// value pair in a tag set of project : Trinity and cost-center : Trinity
+	// The value assigned to the corresponding tag key. Tag values can be null and
+	// don't have to be unique in a tag set. For example, you can have a key value pair
+	// in a tag set of project : Trinity and cost-center : Trinity
 	//
 	// This member is required.
 	Value *string
@@ -1570,18 +1604,19 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// History of the last 10 upgrades and upgrade eligibility checks.
+// History of the last 10 upgrades and upgrade eligibility checks for an Amazon
+// OpenSearch Service domain.
 type UpgradeHistory struct {
 
-	// UTC timestamp at which the upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ"
-	// format.
+	// UTC timestamp at which the upgrade API call was made, in the format
+	// yyyy-MM-ddTHH:mm:ssZ.
 	StartTimestamp *time.Time
 
-	// A list of UpgradeStepItem s representing information about each step performed
-	// as part of a specific upgrade or upgrade eligibility check.
+	// A list of each step performed as part of a specific upgrade or upgrade
+	// eligibility check.
 	StepsList []UpgradeStepItem
 
-	// A string that briefly describes the upgrade.
+	// A string that describes the upgrade.
 	UpgradeName *string
 
 	// The current status of the upgrade. The status can take one of the following
@@ -1599,7 +1634,7 @@ type UpgradeHistory struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a single step of the upgrade or upgrade eligibility check workflow.
+// Represents a single step of an upgrade or upgrade eligibility check workflow.
 type UpgradeStepItem struct {
 
 	// A list of strings containing detailed information about the errors encountered
@@ -1610,7 +1645,7 @@ type UpgradeStepItem struct {
 	// step.
 	ProgressPercent *float64
 
-	// One of three steps an upgrade or upgrade eligibility check goes through:
+	// One of three steps that an upgrade or upgrade eligibility check goes through:
 	//
 	// *
 	// PreUpgradeCheck
@@ -1635,17 +1670,16 @@ type UpgradeStepItem struct {
 	noSmithyDocumentSerde
 }
 
-// The status of the OpenSearch version options for the specified OpenSearch
-// domain.
+// The status of the the OpenSearch or Elasticsearch version options for the
+// specified Amazon OpenSearch Service domain.
 type VersionStatus struct {
 
-	// The OpenSearch version for the specified OpenSearch domain.
+	// The OpenSearch or Elasticsearch version for the specified domain.
 	//
 	// This member is required.
 	Options *string
 
-	// The status of the OpenSearch version options for the specified OpenSearch
-	// domain.
+	// The status of the version options for the specified domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -1653,30 +1687,29 @@ type VersionStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Options to specify the subnets and security groups for the VPC endpoint. For
-// more information, see  Launching your Amazon OpenSearch Service domains using a
-// VPC
-// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+// Information about the subnets and security groups for an Amazon OpenSearch
+// Service domain provisioned within a virtual private cloud (VPC). For more
+// information, see Launching your Amazon OpenSearch Service domains using a VPC
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+// This information only exists if the domain was created with VPCOptions.
 type VPCDerivedInfo struct {
 
-	// The Availability Zones for the domain. Exists only if the domain was created
-	// with VPCOptions.
+	// The list of Availability Zones associated with the VPC subnets.
 	AvailabilityZones []string
 
-	// The security groups for the VPC endpoint.
+	// The list of security group IDs associated with the VPC endpoints for the domain.
 	SecurityGroupIds []string
 
-	// The subnets for the VPC endpoint.
+	// A list of subnet IDs associated with the VPC endpoints for the domain.
 	SubnetIds []string
 
-	// The VPC ID for the domain. Exists only if the domain was created with
-	// VPCOptions.
+	// The ID for your VPC. Amazon VPC generates this value when you create a VPC.
 	VPCId *string
 
 	noSmithyDocumentSerde
 }
 
-// Status of the VPC options for the specified domain.
+// Status of the VPC options for a specified domain.
 type VPCDerivedInfoStatus struct {
 
 	// The VPC options for the specified domain.
@@ -1692,28 +1725,91 @@ type VPCDerivedInfoStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Options to specify the subnets and security groups for the VPC endpoint. For
-// more information, see  Launching your Amazon OpenSearch Service domains using a
-// VPC
-// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+// The connection endpoint for connecting to an Amazon OpenSearch Service domain
+// through a proxy.
+type VpcEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the domain associated with the endpoint.
+	DomainArn *string
+
+	// The connection endpoint ID for connecting to the domain.
+	Endpoint *string
+
+	// The current status of the endpoint.
+	Status VpcEndpointStatus
+
+	// The unique identifier of the endpoint.
+	VpcEndpointId *string
+
+	// The creator of the endpoint.
+	VpcEndpointOwner *string
+
+	// Options to specify the subnets and security groups for an Amazon OpenSearch
+	// Service VPC endpoint.
+	VpcOptions *VPCDerivedInfo
+
+	noSmithyDocumentSerde
+}
+
+// Error information when attempting to describe an Amazon OpenSearch
+// Service-managed VPC endpoint.
+type VpcEndpointError struct {
+
+	// The code associated with the error.
+	ErrorCode VpcEndpointErrorCode
+
+	// A message describing the error.
+	ErrorMessage *string
+
+	// The unique identifier of the endpoint.
+	VpcEndpointId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for an Amazon OpenSearch Service-managed VPC endpoint.
+type VpcEndpointSummary struct {
+
+	// The Amazon Resource Name (ARN) of the domain associated with the endpoint.
+	DomainArn *string
+
+	// The current status of the endpoint.
+	Status VpcEndpointStatus
+
+	// The unique identifier of the endpoint.
+	VpcEndpointId *string
+
+	// The creator of the endpoint.
+	VpcEndpointOwner *string
+
+	noSmithyDocumentSerde
+}
+
+// Options to specify the subnets and security groups for an Amazon OpenSearch
+// Service VPC endpoint. For more information, see Launching your Amazon OpenSearch
+// Service domains using a VPC
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
 type VPCOptions struct {
 
-	// The security groups for the VPC endpoint.
+	// The list of security group IDs associated with the VPC endpoints for the domain.
+	// If you do not provide a security group ID, OpenSearch Service uses the default
+	// security group for the VPC.
 	SecurityGroupIds []string
 
-	// The subnets for the VPC endpoint.
+	// A list of subnet IDs associated with the VPC endpoints for the domain. If your
+	// domain uses multiple Availability Zones, you need to provide two subnet IDs, one
+	// per zone. Otherwise, provide only one.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
 
-// The zone awareness configuration for the domain cluster, such as the number of
-// availability zones.
+// The zone awareness configuration for an Amazon OpenSearch Service domain.
 type ZoneAwarenessConfig struct {
 
-	// An integer value to indicate the number of availability zones for a domain when
-	// zone awareness is enabled. This should be equal to number of subnets if VPC
-	// endpoints is enabled.
+	// If you enabled multiple Availability Zones, this value is the number of zones
+	// that you want the domain to use. Valid values are 2 and 3. If your domain is
+	// provisioned within a VPC, this value be equal to number of subnets.
 	AvailabilityZoneCount *int32
 
 	noSmithyDocumentSerde

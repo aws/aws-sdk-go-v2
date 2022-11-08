@@ -85461,6 +85461,19 @@ func awsEc2query_deserializeDocumentLaunchTemplatePlacement(v **types.LaunchTemp
 				sv.AvailabilityZone = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("groupId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.GroupId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("groupName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -93853,6 +93866,19 @@ func awsEc2query_deserializeDocumentPlacement(v **types.Placement, decoder smith
 			{
 				xtv := string(val)
 				sv.AvailabilityZone = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("groupId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.GroupId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("groupName", t.Name.Local):

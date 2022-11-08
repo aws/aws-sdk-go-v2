@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to either upgrade your domain or perform an upgrade eligibility check
-// to a compatible version of OpenSearch or Elasticsearch.
+// Allows you to either upgrade your Amazon OpenSearch Service domain or perform an
+// upgrade eligibility check to a compatible version of OpenSearch or
+// Elasticsearch.
 func (c *Client) UpgradeDomain(ctx context.Context, params *UpgradeDomainInput, optFns ...func(*Options)) (*UpgradeDomainOutput, error) {
 	if params == nil {
 		params = &UpgradeDomainInput{}
@@ -28,37 +29,24 @@ func (c *Client) UpgradeDomain(ctx context.Context, params *UpgradeDomainInput, 
 	return out, nil
 }
 
-// Container for the request parameters to UpgradeDomain operation.
+// Container for the request parameters to the UpgradeDomain operation.
 type UpgradeDomainInput struct {
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// Name of the OpenSearch Service domain that you want to upgrade.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The version of OpenSearch you intend to upgrade the domain to.
+	// OpenSearch or Elasticsearch version to which you want to upgrade, in the format
+	// Opensearch_X.Y or Elasticsearch_X.Y.
 	//
 	// This member is required.
 	TargetVersion *string
 
-	// Exposes select native OpenSearch configuration values from opensearch.yml.
-	// Currently, the following advanced options are available:
-	//
-	// * Option to allow
-	// references to indices in an HTTP request body. Must be false when configuring
-	// access to individual sub-resources. By default, the value is true. See Advanced
-	// cluster parameters
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
-	// for more information.
-	//
-	// * Option to specify the percentage of heap space
-	// allocated to field data. By default, this setting is unbounded.
-	//
-	// For more
-	// information, see  Advanced cluster parameters
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
+	// Only supports the override_main_response_version parameter and not other
+	// advanced options. You can only include this option when upgrading to an
+	// OpenSearch version. Specifies whether the domain reports its version as 7.10 so
+	// that it continues to work with Elasticsearch OSS clients and plugins.
 	AdvancedOptions map[string]string
 
 	// When true, indicates that an upgrade eligibility check needs to be performed.
@@ -68,42 +56,25 @@ type UpgradeDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response returned by UpgradeDomain operation.
+// Container for the response returned by UpgradeDomain operation.
 type UpgradeDomainOutput struct {
 
-	// Exposes select native OpenSearch configuration values from opensearch.yml.
-	// Currently, the following advanced options are available:
-	//
-	// * Option to allow
-	// references to indices in an HTTP request body. Must be false when configuring
-	// access to individual sub-resources. By default, the value is true. See Advanced
-	// cluster parameters
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
-	// for more information.
-	//
-	// * Option to specify the percentage of heap space
-	// allocated to field data. By default, this setting is unbounded.
-	//
-	// For more
-	// information, see  Advanced cluster parameters
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
+	// The advanced options configuration for the domain.
 	AdvancedOptions map[string]string
 
-	// Specifies change details of the domain configuration change.
+	// Container for information about a configuration change happening on a domain.
 	ChangeProgressDetails *types.ChangeProgressDetails
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// The name of the domain that was upgraded.
 	DomainName *string
 
-	// When true, indicates that an upgrade eligibility check needs to be performed.
-	// Does not actually perform the upgrade.
+	// When true, indicates that an upgrade eligibility check was performed.
 	PerformCheckOnly *bool
 
-	// The version of OpenSearch that you intend to upgrade the domain to.
+	// OpenSearch or Elasticsearch version that the domain was upgraded to.
 	TargetVersion *string
 
+	// The unique identifier of the domain upgrade.
 	UpgradeId *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the latest status of the last upgrade or upgrade eligibility check
-// performed on the domain.
+// Returns the most recent status of the last upgrade or upgrade eligibility check
+// performed on an Amazon OpenSearch Service domain.
 func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusInput, optFns ...func(*Options)) (*GetUpgradeStatusOutput, error) {
 	if params == nil {
 		params = &GetUpgradeStatusInput{}
@@ -31,9 +31,7 @@ func (c *Client) GetUpgradeStatus(ctx context.Context, params *GetUpgradeStatusI
 // Container for the request parameters to the GetUpgradeStatus operation.
 type GetUpgradeStatusInput struct {
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// The domain of the domain to get upgrade status information for.
 	//
 	// This member is required.
 	DomainName *string
@@ -44,30 +42,13 @@ type GetUpgradeStatusInput struct {
 // Container for the response returned by the GetUpgradeStatus operation.
 type GetUpgradeStatusOutput struct {
 
-	// One of four statuses an upgrade have, returned as part of the
-	// GetUpgradeStatusResponse object. The status can take one of the following
-	// values:
-	//
-	// * In Progress
-	//
-	// * Succeeded
-	//
-	// * Succeeded with Issues
-	//
-	// * Failed
+	// The status of the current step that an upgrade is on.
 	StepStatus types.UpgradeStatus
 
-	// A string that briefly describes the update.
+	// A string that describes the update.
 	UpgradeName *string
 
-	// One of three steps an upgrade or upgrade eligibility check goes through:
-	//
-	// *
-	// PreUpgradeCheck
-	//
-	// * Snapshot
-	//
-	// * Upgrade
+	// One of three steps that an upgrade or upgrade eligibility check goes through.
 	UpgradeStep types.UpgradeStep
 
 	// Metadata pertaining to the operation's result.

@@ -1527,6 +1527,91 @@ func awsRestjson1_serializeOpDocumentListCustomLineItemsInput(v *ListCustomLineI
 	return nil
 }
 
+type awsRestjson1_serializeOpListCustomLineItemVersions struct {
+}
+
+func (*awsRestjson1_serializeOpListCustomLineItemVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCustomLineItemVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCustomLineItemVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/list-custom-line-item-versions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListCustomLineItemVersionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCustomLineItemVersionsInput(v *ListCustomLineItemVersionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListCustomLineItemVersionsInput(v *ListCustomLineItemVersionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsRestjson1_serializeDocumentListCustomLineItemVersionsFilter(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListPricingPlans struct {
 }
 
@@ -2793,6 +2878,37 @@ func awsRestjson1_serializeDocumentListCustomLineItemsFilter(v *types.ListCustom
 	if v.Names != nil {
 		ok := object.Key("Names")
 		if err := awsRestjson1_serializeDocumentCustomLineItemNameList(v.Names, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListCustomLineItemVersionsBillingPeriodRangeFilter(v *types.ListCustomLineItemVersionsBillingPeriodRangeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndBillingPeriod != nil {
+		ok := object.Key("EndBillingPeriod")
+		ok.String(*v.EndBillingPeriod)
+	}
+
+	if v.StartBillingPeriod != nil {
+		ok := object.Key("StartBillingPeriod")
+		ok.String(*v.StartBillingPeriod)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListCustomLineItemVersionsFilter(v *types.ListCustomLineItemVersionsFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BillingPeriodRange != nil {
+		ok := object.Key("BillingPeriodRange")
+		if err := awsRestjson1_serializeDocumentListCustomLineItemVersionsBillingPeriodRangeFilter(v.BillingPeriodRange, ok); err != nil {
 			return err
 		}
 	}

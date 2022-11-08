@@ -1711,28 +1711,26 @@ type ResourceRecordSet struct {
 	// the resource that this resource record set refers to. The resource typically is
 	// an Amazon Web Services resource, such as an EC2 instance or an ELB load
 	// balancer, and is referred to by an IP address or a DNS domain name, depending on
-	// the record type. Although creating latency and latency alias resource record
-	// sets in a private hosted zone is allowed, it's not supported. When Amazon Route
-	// 53 receives a DNS query for a domain name and type for which you have created
-	// latency resource record sets, Route 53 selects the latency resource record set
-	// that has the lowest latency between the end user and the associated Amazon EC2
-	// Region. Route 53 then returns the value that is associated with the selected
-	// resource record set. Note the following:
+	// the record type. When Amazon Route 53 receives a DNS query for a domain name and
+	// type for which you have created latency resource record sets, Route 53 selects
+	// the latency resource record set that has the lowest latency between the end user
+	// and the associated Amazon EC2 Region. Route 53 then returns the value that is
+	// associated with the selected resource record set. Note the following:
 	//
-	// * You can only specify one
-	// ResourceRecord per latency resource record set.
+	// * You can
+	// only specify one ResourceRecord per latency resource record set.
 	//
-	// * You can only create one
-	// latency resource record set for each Amazon EC2 Region.
+	// * You can only
+	// create one latency resource record set for each Amazon EC2 Region.
 	//
-	// * You aren't required
-	// to create latency resource record sets for all Amazon EC2 Regions. Route 53 will
-	// choose the region with the best latency from among the regions that you create
-	// latency resource record sets for.
+	// * You aren't
+	// required to create latency resource record sets for all Amazon EC2 Regions.
+	// Route 53 will choose the region with the best latency from among the regions
+	// that you create latency resource record sets for.
 	//
-	// * You can't create non-latency resource
-	// record sets that have the same values for the Name and Type elements as latency
-	// resource record sets.
+	// * You can't create
+	// non-latency resource record sets that have the same values for the Name and Type
+	// elements as latency resource record sets.
 	Region ResourceRecordSetRegion
 
 	// Information about the resource records to act upon. If you're creating an alias

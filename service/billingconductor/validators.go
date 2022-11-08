@@ -290,6 +290,26 @@ func (m *validateOpDisassociatePricingRules) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCustomLineItemVersions struct {
+}
+
+func (*validateOpListCustomLineItemVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomLineItemVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomLineItemVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomLineItemVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPricingPlansAssociatedWithPricingRule struct {
 }
 
@@ -546,6 +566,10 @@ func addOpDisassociatePricingRulesValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDisassociatePricingRules{}, middleware.After)
 }
 
+func addOpListCustomLineItemVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomLineItemVersions{}, middleware.After)
+}
+
 func addOpListPricingPlansAssociatedWithPricingRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPricingPlansAssociatedWithPricingRule{}, middleware.After)
 }
@@ -623,9 +647,6 @@ func validateCustomLineItemBillingPeriodRange(v *types.CustomLineItemBillingPeri
 	invalidParams := smithy.InvalidParamsError{Context: "CustomLineItemBillingPeriodRange"}
 	if v.InclusiveStartBillingPeriod == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InclusiveStartBillingPeriod"))
-	}
-	if v.ExclusiveEndBillingPeriod == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExclusiveEndBillingPeriod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1017,6 +1038,21 @@ func validateOpDisassociatePricingRulesInput(v *DisassociatePricingRulesInput) e
 	}
 	if v.PricingRuleArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PricingRuleArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCustomLineItemVersionsInput(v *ListCustomLineItemVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomLineItemVersionsInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

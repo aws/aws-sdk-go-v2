@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a package with an Amazon OpenSearch Service domain.
+// Associates a package with an Amazon OpenSearch Service domain. For more
+// information, see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageInput, optFns ...func(*Options)) (*AssociatePackageOutput, error) {
 	if params == nil {
 		params = &AssociatePackageInput{}
@@ -30,7 +32,7 @@ func (c *Client) AssociatePackage(ctx context.Context, params *AssociatePackageI
 // Container for the request parameters to the AssociatePackage operation.
 type AssociatePackageInput struct {
 
-	// The name of the domain to associate the package with.
+	// Name of the domain to associate the package with.
 	//
 	// This member is required.
 	DomainName *string
@@ -44,10 +46,10 @@ type AssociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by AssociatePackage operation.
+// Container for the response returned by the AssociatePackage operation.
 type AssociatePackageOutput struct {
 
-	// DomainPackageDetails
+	// Information about a package that is associated with a domain.
 	DomainPackageDetails *types.DomainPackageDetails
 
 	// Metadata pertaining to the operation's result.

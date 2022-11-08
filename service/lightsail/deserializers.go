@@ -25070,6 +25070,55 @@ func awsAwsjson11_deserializeDocumentDistributionList(v *[]types.LightsailDistri
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDnsRecordCreationState(v **types.DnsRecordCreationState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DnsRecordCreationState
+	if *v == nil {
+		sv = &types.DnsRecordCreationState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DnsRecordCreationStateCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.DnsRecordCreationStateCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDomain(v **types.Domain, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25134,6 +25183,11 @@ func awsAwsjson11_deserializeDocumentDomain(v **types.Domain, value interface{})
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "registeredDomainDelegationInfo":
+			if err := awsAwsjson11_deserializeDocumentRegisteredDomainDelegationInfo(&sv.RegisteredDomainDelegationInfo, value); err != nil {
+				return err
 			}
 
 		case "resourceType":
@@ -25375,6 +25429,11 @@ func awsAwsjson11_deserializeDocumentDomainValidationRecord(v **types.DomainVali
 
 	for key, value := range shape {
 		switch key {
+		case "dnsRecordCreationState":
+			if err := awsAwsjson11_deserializeDocumentDnsRecordCreationState(&sv.DnsRecordCreationState, value); err != nil {
+				return err
+			}
+
 		case "domainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -25387,6 +25446,15 @@ func awsAwsjson11_deserializeDocumentDomainValidationRecord(v **types.DomainVali
 		case "resourceRecord":
 			if err := awsAwsjson11_deserializeDocumentResourceRecord(&sv.ResourceRecord, value); err != nil {
 				return err
+			}
+
+		case "validationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateDomainValidationStatus to be of type string, got %T instead", value)
+				}
+				sv.ValidationStatus = types.CertificateDomainValidationStatus(jtv)
 			}
 
 		default:
@@ -28171,6 +28239,55 @@ func awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificate(v **types.LoadBa
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateDnsRecordCreationState(v **types.LoadBalancerTlsCertificateDnsRecordCreationState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LoadBalancerTlsCertificateDnsRecordCreationState
+	if *v == nil {
+		sv = &types.LoadBalancerTlsCertificateDnsRecordCreationState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LoadBalancerTlsCertificateDnsRecordCreationStateCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.LoadBalancerTlsCertificateDnsRecordCreationStateCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateDomainValidationOption(v **types.LoadBalancerTlsCertificateDomainValidationOption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28276,6 +28393,11 @@ func awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateDomainValidationR
 
 	for key, value := range shape {
 		switch key {
+		case "dnsRecordCreationState":
+			if err := awsAwsjson11_deserializeDocumentLoadBalancerTlsCertificateDnsRecordCreationState(&sv.DnsRecordCreationState, value); err != nil {
+				return err
+			}
+
 		case "domainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -29069,6 +29191,55 @@ func awsAwsjson11_deserializeDocumentMonthlyTransfer(v **types.MonthlyTransfer, 
 					return err
 				}
 				sv.GbPerMonthAllocated = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNameServersUpdateState(v **types.NameServersUpdateState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NameServersUpdateState
+	if *v == nil {
+		sv = &types.NameServersUpdateState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameServersUpdateStateCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.NameServersUpdateStateCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -29899,6 +30070,55 @@ func awsAwsjson11_deserializeDocumentQueryStringObject(v **types.QueryStringObje
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentR53HostedZoneDeletionState(v **types.R53HostedZoneDeletionState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.R53HostedZoneDeletionState
+	if *v == nil {
+		sv = &types.R53HostedZoneDeletionState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected R53HostedZoneDeletionStateCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.R53HostedZoneDeletionStateCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRegion(v **types.Region, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30007,6 +30227,47 @@ func awsAwsjson11_deserializeDocumentRegionList(v *[]types.Region, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRegisteredDomainDelegationInfo(v **types.RegisteredDomainDelegationInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegisteredDomainDelegationInfo
+	if *v == nil {
+		sv = &types.RegisteredDomainDelegationInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nameServersUpdateState":
+			if err := awsAwsjson11_deserializeDocumentNameServersUpdateState(&sv.NameServersUpdateState, value); err != nil {
+				return err
+			}
+
+		case "r53HostedZoneDeletionState":
+			if err := awsAwsjson11_deserializeDocumentR53HostedZoneDeletionState(&sv.R53HostedZoneDeletionState, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

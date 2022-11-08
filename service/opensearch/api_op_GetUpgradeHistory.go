@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the complete history of the last 10 upgrades performed on the domain.
+// Retrieves the complete history of the last 10 upgrades performed on an Amazon
+// OpenSearch Service domain.
 func (c *Client) GetUpgradeHistory(ctx context.Context, params *GetUpgradeHistoryInput, optFns ...func(*Options)) (*GetUpgradeHistoryOutput, error) {
 	if params == nil {
 		params = &GetUpgradeHistoryInput{}
@@ -31,19 +32,18 @@ func (c *Client) GetUpgradeHistory(ctx context.Context, params *GetUpgradeHistor
 // Container for the request parameters to the GetUpgradeHistory operation.
 type GetUpgradeHistoryInput struct {
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// The name of an existing domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// Set this value to limit the number of results returned.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// Paginated APIs accept the NextToken input to return the next page of results and
-	// provide a NextToken output in the response, which you can use to retrieve more
-	// results.
+	// If your initial GetUpgradeHistory operation returns a nextToken, you can include
+	// the returned nextToken in subsequent GetUpgradeHistory operations, which returns
+	// results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,13 +52,13 @@ type GetUpgradeHistoryInput struct {
 // Container for the response returned by the GetUpgradeHistory operation.
 type GetUpgradeHistoryOutput struct {
 
-	// Pagination token that needs to be supplied to the next call to get the next page
-	// of results.
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
-	// A list of UpgradeHistory objects corresponding to each upgrade or upgrade
-	// eligibility check performed on a domain returned as part of the
-	// GetUpgradeHistoryResponse object.
+	// A list of objects corresponding to each upgrade or upgrade eligibility check
+	// performed on a domain.
 	UpgradeHistories []types.UpgradeHistory
 
 	// Metadata pertaining to the operation's result.
@@ -140,7 +140,8 @@ var _ GetUpgradeHistoryAPIClient = (*Client)(nil)
 
 // GetUpgradeHistoryPaginatorOptions is the paginator options for GetUpgradeHistory
 type GetUpgradeHistoryPaginatorOptions struct {
-	// Set this value to limit the number of results returned.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

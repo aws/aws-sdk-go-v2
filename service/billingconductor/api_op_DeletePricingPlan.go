@@ -29,7 +29,7 @@ func (c *Client) DeletePricingPlan(ctx context.Context, params *DeletePricingPla
 
 type DeletePricingPlanInput struct {
 
-	// The Amazon Resource Name (ARN) of the pricing plan you're deleting.
+	// The Amazon Resource Name (ARN) of the pricing plan that you're deleting.
 	//
 	// This member is required.
 	Arn *string

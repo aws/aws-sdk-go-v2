@@ -39126,6 +39126,11 @@ func awsEc2query_serializeDocumentLaunchTemplatePlacementRequest(v *types.Launch
 		objectKey.String(*v.AvailabilityZone)
 	}
 
+	if v.GroupId != nil {
+		objectKey := object.Key("GroupId")
+		objectKey.String(*v.GroupId)
+	}
+
 	if v.GroupName != nil {
 		objectKey := object.Key("GroupName")
 		objectKey.String(*v.GroupName)
@@ -40433,6 +40438,11 @@ func awsEc2query_serializeDocumentPlacement(v *types.Placement, value query.Valu
 	if v.AvailabilityZone != nil {
 		objectKey := object.Key("AvailabilityZone")
 		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.GroupId != nil {
+		objectKey := object.Key("GroupId")
+		objectKey.String(*v.GroupId)
 	}
 
 	if v.GroupName != nil {
@@ -57860,6 +57870,11 @@ func awsEc2query_serializeOpDocumentModifyInstancePlacementInput(v *ModifyInstan
 	if len(v.Affinity) > 0 {
 		objectKey := object.Key("Affinity")
 		objectKey.String(string(v.Affinity))
+	}
+
+	if v.GroupId != nil {
+		objectKey := object.Key("GroupId")
+		objectKey.String(*v.GroupId)
 	}
 
 	if v.GroupName != nil {

@@ -32,6 +32,7 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType *string
+	Reason       ConflictExceptionReason
 
 	noSmithyDocumentSerde
 }

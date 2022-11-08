@@ -31,7 +31,7 @@ func (c *Client) CreatePricingRule(ctx context.Context, params *CreatePricingRul
 
 type CreatePricingRuleInput struct {
 
-	// A percentage modifier applied on the public pricing rates.
+	// A percentage modifier that's applied on the public pricing rates.
 	//
 	// This member is required.
 	ModifierPercentage *float64
@@ -41,7 +41,7 @@ type CreatePricingRuleInput struct {
 	// This member is required.
 	Name *string
 
-	// The scope of pricing rule that indicates if it is globally applicable, or is
+	// The scope of pricing rule that indicates if it's globally applicable, or it's
 	// service-specific.
 	//
 	// This member is required.
@@ -52,7 +52,7 @@ type CreatePricingRuleInput struct {
 	// This member is required.
 	Type types.PricingRuleType
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	// The token that's needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 

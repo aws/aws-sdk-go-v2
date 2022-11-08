@@ -8387,6 +8387,10 @@ type LaunchTemplatePlacement struct {
 	// The Availability Zone of the instance.
 	AvailabilityZone *string
 
+	// The Group ID of the placement group. You must specify the Placement Group Group
+	// ID to launch an instance in a shared placement group.
+	GroupId *string
+
 	// The name of the placement group for the instance.
 	GroupName *string
 
@@ -8418,6 +8422,10 @@ type LaunchTemplatePlacementRequest struct {
 
 	// The Availability Zone for the instance.
 	AvailabilityZone *string
+
+	// The Group Id of a placement group. You must specify the Placement Group Group Id
+	// to launch an instance in a shared placement group.
+	GroupId *string
 
 	// The name of the placement group for the instance.
 	GroupName *string
@@ -10369,6 +10377,9 @@ type Placement struct {
 	// the Region. This parameter is not supported by CreateFleet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
 	AvailabilityZone *string
+
+	// The Group Id of the placement group.
+	GroupId *string
 
 	// The name of the placement group the instance is in.
 	GroupName *string

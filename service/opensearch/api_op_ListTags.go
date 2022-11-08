@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tags for the given domain.
+// Returns all resource tags for an Amazon OpenSearch Service domain. For more
+// information, see Tagging Amazon OpenSearch Service domains
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html).
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -27,11 +29,10 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 	return out, nil
 }
 
-// Container for the parameters to the ListTags operation. Specify the ARN of the
-// domain that the tags you want to view are attached to.
+// Container for the parameters to the ListTags operation.
 type ListTagsInput struct {
 
-	// Specify the ARN of the domain that the tags you want to view are attached to.
+	// Amazon Resource Name (ARN) for the domain to view tags for.
 	//
 	// This member is required.
 	ARN *string
@@ -39,10 +40,10 @@ type ListTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a ListTags operation. Contains tags for all requested domains.
+// The results of a ListTags operation.
 type ListTagsOutput struct {
 
-	// List of Tag for the requested domain.
+	// List of resource tags associated with the specified domain.
 	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Schedules a service software update for an Amazon OpenSearch Service domain.
+// Schedules a service software update for an Amazon OpenSearch Service domain. For
+// more information, see Service software updates in Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
 func (c *Client) StartServiceSoftwareUpdate(ctx context.Context, params *StartServiceSoftwareUpdateInput, optFns ...func(*Options)) (*StartServiceSoftwareUpdateOutput, error) {
 	if params == nil {
 		params = &StartServiceSoftwareUpdateInput{}
@@ -27,8 +29,8 @@ func (c *Client) StartServiceSoftwareUpdate(ctx context.Context, params *StartSe
 	return out, nil
 }
 
-// Container for the parameters to the StartServiceSoftwareUpdate operation.
-// Specifies the name of the domain to schedule a service software update for.
+// Container for the request parameters to the StartServiceSoftwareUpdate
+// operation.
 type StartServiceSoftwareUpdateInput struct {
 
 	// The name of the domain that you want to update to the latest service software.
@@ -39,11 +41,11 @@ type StartServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a StartServiceSoftwareUpdate operation. Contains the status of the
-// update.
+// Represents the output of a StartServiceSoftwareUpdate operation. Contains the
+// status of the update.
 type StartServiceSoftwareUpdateOutput struct {
 
-	// The current status of the OpenSearch service software update.
+	// The current status of the OpenSearch Service software update.
 	ServiceSoftwareOptions *types.ServiceSoftwareOptions
 
 	// Metadata pertaining to the operation's result.

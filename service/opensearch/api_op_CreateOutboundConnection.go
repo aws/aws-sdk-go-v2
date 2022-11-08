@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new cross-cluster connection from a local OpenSearch domain to a
-// remote OpenSearch domain.
+// Creates a new cross-cluster search connection from a source Amazon OpenSearch
+// Service domain to a destination domain. For more information, see Cross-cluster
+// search for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
 func (c *Client) CreateOutboundConnection(ctx context.Context, params *CreateOutboundConnectionInput, optFns ...func(*Options)) (*CreateOutboundConnectionOutput, error) {
 	if params == nil {
 		params = &CreateOutboundConnectionInput{}
@@ -31,18 +33,17 @@ func (c *Client) CreateOutboundConnection(ctx context.Context, params *CreateOut
 // Container for the parameters to the CreateOutboundConnection operation.
 type CreateOutboundConnectionInput struct {
 
-	// The connection alias used used by the customer for this cross-cluster
-	// connection.
+	// Name of the connection.
 	//
 	// This member is required.
 	ConnectionAlias *string
 
-	// The AWSDomainInformation for the local OpenSearch domain.
+	// Name and Region of the source (local) domain.
 	//
 	// This member is required.
 	LocalDomainInfo *types.DomainInformationContainer
 
-	// The AWSDomainInformation for the remote OpenSearch domain.
+	// Name and Region of the destination (remote) domain.
 	//
 	// This member is required.
 	RemoteDomainInfo *types.DomainInformationContainer
@@ -50,24 +51,24 @@ type CreateOutboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateOutboundConnection request. Contains the details about the
+// The result of a CreateOutboundConnection request. Contains details about the
 // newly created cross-cluster connection.
 type CreateOutboundConnectionOutput struct {
 
-	// The connection alias provided during the create connection request.
+	// Name of the connection.
 	ConnectionAlias *string
 
-	// The unique ID for the created outbound connection, which is used for subsequent
-	// operations on the connection.
+	// The unique identifier for the created outbound connection, which is used for
+	// subsequent operations on the connection.
 	ConnectionId *string
 
-	// The OutboundConnectionStatus for the newly created connection.
+	// The status of the connection.
 	ConnectionStatus *types.OutboundConnectionStatus
 
-	// The AWSDomainInformation for the local OpenSearch domain.
+	// Information about the source (local) domain.
 	LocalDomainInfo *types.DomainInformationContainer
 
-	// The AWSDomainInformation for the remote OpenSearch domain.
+	// Information about the destination (remote) domain.
 	RemoteDomainInfo *types.DomainInformationContainer
 
 	// Metadata pertaining to the operation's result.

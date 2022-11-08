@@ -69,7 +69,7 @@ type UpdatePricingRuleOutput struct {
 	// The new name of the pricing rule. The name must be unique to each pricing rule.
 	Name *string
 
-	// The scope of pricing rule that indicates if it is globally applicable, or is
+	// The scope of pricing rule that indicates if it's globally applicable, or it's
 	// service-specific.
 	Scope types.PricingRuleScope
 

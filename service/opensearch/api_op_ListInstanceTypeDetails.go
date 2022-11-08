@@ -12,6 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists all instance types and available features for a given OpenSearch or
+// Elasticsearch version.
 func (c *Client) ListInstanceTypeDetails(ctx context.Context, params *ListInstanceTypeDetailsInput, optFns ...func(*Options)) (*ListInstanceTypeDetailsOutput, error) {
 	if params == nil {
 		params = &ListInstanceTypeDetailsInput{}
@@ -29,31 +31,36 @@ func (c *Client) ListInstanceTypeDetails(ctx context.Context, params *ListInstan
 
 type ListInstanceTypeDetailsInput struct {
 
+	// Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
+	// OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
+	//
 	// This member is required.
 	EngineVersion *string
 
-	// The name of an domain. Domain names are unique across the domains owned by an
-	// account within an AWS region. Domain names start with a letter or number and can
-	// contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+	// Name of the domain to list instance type details for.
 	DomainName *string
 
-	// Set this value to limit the number of results returned.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// Paginated APIs accept the NextToken input to return the next page of results and
-	// provide a NextToken output in the response, which you can use to retrieve more
-	// results.
+	// If your initial ListInstanceTypeDetails operation returns a nextToken, you can
+	// include the returned nextToken in subsequent ListInstanceTypeDetails operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
 type ListInstanceTypeDetailsOutput struct {
+
+	// Lists all supported instance types and features for the given OpenSearch or
+	// Elasticsearch version.
 	InstanceTypeDetails []types.InstanceTypeDetails
 
-	// Paginated APIs accept the NextToken input to return the next page of results and
-	// provide a NextToken output in the response, which you can use to retrieve more
-	// results.
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -136,7 +143,8 @@ var _ ListInstanceTypeDetailsAPIClient = (*Client)(nil)
 // ListInstanceTypeDetailsPaginatorOptions is the paginator options for
 // ListInstanceTypeDetails
 type ListInstanceTypeDetailsPaginatorOptions struct {
-	// Set this value to limit the number of results returned.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

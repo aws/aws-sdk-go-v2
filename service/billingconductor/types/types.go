@@ -6,11 +6,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Amazon Web Services Billing Conductor is in beta release and is subject to
-// change. Your use of Amazon Web Services Billing Conductor is subject to the Beta
-// Service Participation terms of the Amazon Web Services Service Terms
-// (https://aws.amazon.com/service-terms/) (Section 1.10). A representation of a
-// linked account.
+// A representation of a linked account.
 type AccountAssociationsListElement struct {
 
 	// The Amazon Web Services account email.
@@ -44,10 +40,10 @@ type AccountGrouping struct {
 // A representation of a resource association error.
 type AssociateResourceError struct {
 
-	// The reason the resource association failed.
+	// The reason why the resource association failed.
 	Message *string
 
-	// A static error code that used to classify the type of failure.
+	// A static error code that's used to classify the type of failure.
 	Reason AssociateResourceErrorReason
 
 	noSmithyDocumentSerde
@@ -102,16 +98,16 @@ type BillingGroupListElement struct {
 	// Services charges for a billing group.
 	ComputationPreference *ComputationPreference
 
-	// The time the billing group was created.
+	// The time when the billing group was created.
 	CreationTime int64
 
-	// The billing group description.
+	// The description of the billing group.
 	Description *string
 
-	// The most recent time the billing group was modified.
+	// The most recent time when the billing group was modified.
 	LastModifiedTime int64
 
-	// The billing group's name.
+	// The name of the billing group.
 	Name *string
 
 	// The account ID that serves as the main account in a billing group.
@@ -133,8 +129,8 @@ type BillingGroupListElement struct {
 // Services charges for a billing group.
 type ComputationPreference struct {
 
-	// The Amazon Resource Name (ARN) of the pricing plan used to compute the Amazon
-	// Web Services charges for a billing group.
+	// The Amazon Resource Name (ARN) of the pricing plan that's used to compute the
+	// Amazon Web Services charges for a billing group.
 	//
 	// This member is required.
 	PricingPlanArn *string
@@ -145,17 +141,15 @@ type ComputationPreference struct {
 // The billing period range in which the custom line item request will be applied.
 type CustomLineItemBillingPeriodRange struct {
 
-	// The inclusive end billing period that defines a billing period range where a
-	// custom line is applied.
-	//
-	// This member is required.
-	ExclusiveEndBillingPeriod *string
-
 	// The inclusive start billing period that defines a billing period range where a
 	// custom line is applied.
 	//
 	// This member is required.
 	InclusiveStartBillingPeriod *string
+
+	// The inclusive end billing period that defines a billing period range where a
+	// custom line is applied.
+	ExclusiveEndBillingPeriod *string
 
 	noSmithyDocumentSerde
 }
@@ -181,7 +175,8 @@ type CustomLineItemChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of the charge details associated with a flat custom line item.
+// A representation of the charge details that are associated with a flat custom
+// line item.
 type CustomLineItemFlatChargeDetails struct {
 
 	// The custom line item's fixed charge value in USD.
@@ -220,20 +215,20 @@ type CustomLineItemListElement struct {
 	// association with the charge value.
 	Description *string
 
-	// The most recent time the custom line item was modified.
+	// The most recent time when the custom line item was modified.
 	LastModifiedTime int64
 
 	// The custom line item's name.
 	Name *string
 
-	// The product code associated with the custom line item.
+	// The product code that's associated with the custom line item.
 	ProductCode *string
 
 	noSmithyDocumentSerde
 }
 
-// A representation of the charge details associated with a percentage custom line
-// item.
+// A representation of the charge details that are associated with a percentage
+// custom line item.
 type CustomLineItemPercentageChargeDetails struct {
 
 	// The custom line item's percentage value. This will be multiplied against the
@@ -248,13 +243,53 @@ type CustomLineItemPercentageChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A representation of a custom line item version.
+type CustomLineItemVersionListElement struct {
+
+	// The number of resources that are associated with the custom line item.
+	AssociationSize int64
+
+	// The Amazon Resource Name (ARN) of the billing group that the custom line item
+	// applies to.
+	BillingGroupArn *string
+
+	// A representation of the charge details of a custom line item.
+	ChargeDetails *ListCustomLineItemChargeDetails
+
+	// The time when the custom line item version was created.
+	CreationTime int64
+
+	// The charge value currency of the custom line item.
+	CurrencyCode CurrencyCode
+
+	// The description of the custom line item.
+	Description *string
+
+	// The end billing period of the custom line item version.
+	EndBillingPeriod *string
+
+	// The most recent time that the custom line item version was modified.
+	LastModifiedTime int64
+
+	// The name of the custom line item.
+	Name *string
+
+	// The product code that’s associated with the custom line item.
+	ProductCode *string
+
+	// The start billing period of the custom line item version.
+	StartBillingPeriod *string
+
+	noSmithyDocumentSerde
+}
+
 // A resource disassociation result for a percentage custom line item.
 type DisassociateResourceResponseElement struct {
 
 	// The resource ARN that was disassociated from the custom line item.
 	Arn *string
 
-	// An AssociateResourceError shown if the resource disassociation fails.
+	// An AssociateResourceError that's shown if the resource disassociation fails.
 	Error *AssociateResourceError
 
 	noSmithyDocumentSerde
@@ -320,7 +355,8 @@ type ListCustomLineItemChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of the charge details associated with a flat custom line item.
+// A representation of the charge details that are associated with a flat custom
+// line item.
 type ListCustomLineItemFlatChargeDetails struct {
 
 	// The custom line item's fixed charge value in USD.
@@ -331,8 +367,8 @@ type ListCustomLineItemFlatChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of the charge details associated with a percentage custom line
-// item.
+// A representation of the charge details that are associated with a percentage
+// custom line item.
 type ListCustomLineItemPercentageChargeDetails struct {
 
 	// The custom line item's percentage value. This will be multiplied against the
@@ -356,6 +392,31 @@ type ListCustomLineItemsFilter struct {
 
 	// A list of custom line items to retrieve information.
 	Names []string
+
+	noSmithyDocumentSerde
+}
+
+// A billing period filter that specifies the custom line item versions to
+// retrieve.
+type ListCustomLineItemVersionsBillingPeriodRangeFilter struct {
+
+	// The exclusive end billing period that defines a billing period range where a
+	// custom line item version is applied.
+	EndBillingPeriod *string
+
+	// The inclusive start billing period that defines a billing period range where a
+	// custom line item version is applied.
+	StartBillingPeriod *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter that specifies the billing period range where the custom line item
+// versions reside.
+type ListCustomLineItemVersionsFilter struct {
+
+	// The billing period range in which the custom line item version is applied.
+	BillingPeriodRange *ListCustomLineItemVersionsBillingPeriodRangeFilter
 
 	noSmithyDocumentSerde
 }
@@ -398,6 +459,9 @@ type ListResourcesAssociatedToCustomLineItemResponseElement struct {
 	// The ARN of the associated resource.
 	Arn *string
 
+	// The end billing period of the associated resource.
+	EndBillingPeriod *string
+
 	// The type of relationship between the custom line item and the associated
 	// resource.
 	Relationship CustomLineItemRelationship
@@ -412,19 +476,19 @@ type PricingPlanListElement struct {
 	// identify a pricing plan.
 	Arn *string
 
-	// The time the pricing plan was created.
+	// The time when the pricing plan was created.
 	CreationTime int64
 
 	// The pricing plan description.
 	Description *string
 
-	// The most recent time the pricing plan was modified.
+	// The most recent time when the pricing plan was modified.
 	LastModifiedTime int64
 
 	// The name of a pricing plan.
 	Name *string
 
-	// The pricing rules count currently associated with this pricing plan list
+	// The pricing rules count that's currently associated with this pricing plan list
 	// element.
 	Size int64
 
@@ -440,13 +504,13 @@ type PricingRuleListElement struct {
 	// The pricing plans count that this pricing rule is associated with.
 	AssociatedPricingPlanCount int64
 
-	// The time the pricing rule was created.
+	// The time when the pricing rule was created.
 	CreationTime int64
 
 	// The pricing rule description.
 	Description *string
 
-	// The most recent time the pricing rule was modified.
+	// The most recent time when the pricing rule was modified.
 	LastModifiedTime int64
 
 	// A percentage modifier applied on the public pricing rates.
@@ -484,8 +548,8 @@ type UpdateCustomLineItemChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of the new charge details associated with a flat custom line
-// item.
+// A representation of the new charge details that are associated with a flat
+// custom line item.
 type UpdateCustomLineItemFlatChargeDetails struct {
 
 	// The custom line item's new fixed charge value in USD.
@@ -496,8 +560,8 @@ type UpdateCustomLineItemFlatChargeDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A representation of the new charge details associated with a percentage custom
-// line item.
+// A representation of the new charge details that are associated with a percentage
+// custom line item.
 type UpdateCustomLineItemPercentageChargeDetails struct {
 
 	// The custom line item's new percentage value. This will be multiplied against the

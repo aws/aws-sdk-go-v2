@@ -28,12 +28,12 @@ func (c *Client) UpdatePricingPlan(ctx context.Context, params *UpdatePricingPla
 
 type UpdatePricingPlanInput struct {
 
-	// The Amazon Resource Name (ARN) of the pricing plan you're updating.
+	// The Amazon Resource Name (ARN) of the pricing plan that you're updating.
 	//
 	// This member is required.
 	Arn *string
 
-	// The pricing plan description.
+	// The description of the pricing plan.
 	Description *string
 
 	// The name of the pricing plan. The name must be unique to each pricing plan.
@@ -50,13 +50,13 @@ type UpdatePricingPlanOutput struct {
 	// The new description for the pricing rule.
 	Description *string
 
-	// The most recent time the pricing plan was modified.
+	// The most recent time when the pricing plan was modified.
 	LastModifiedTime int64
 
 	// The name of the pricing plan. The name must be unique to each pricing plan.
 	Name *string
 
-	// The pricing rules count currently associated with this pricing plan list.
+	// The pricing rules count that's currently associated with this pricing plan list.
 	Size int64
 
 	// Metadata pertaining to the operation's result.

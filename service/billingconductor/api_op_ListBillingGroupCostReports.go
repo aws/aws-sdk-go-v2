@@ -42,7 +42,7 @@ type ListBillingGroupCostReportsInput struct {
 	// The maximum number of reports to retrieve.
 	MaxResults *int32
 
-	// The pagination token used on subsequent calls to get reports.
+	// The pagination token that's used on subsequent calls to get reports.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type ListBillingGroupCostReportsOutput struct {
 	// A list of BillingGroupCostReportElement retrieved.
 	BillingGroupCostReports []types.BillingGroupCostReportElement
 
-	// The pagination token used on subsequent calls to get reports.
+	// The pagination token that's used on subsequent calls to get reports.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

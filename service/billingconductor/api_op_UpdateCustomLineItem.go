@@ -68,7 +68,7 @@ type UpdateCustomLineItemOutput struct {
 	// The description of the successfully updated custom line item.
 	Description *string
 
-	// The most recent time the custom line item was modified.
+	// The most recent time when the custom line item was modified.
 	LastModifiedTime int64
 
 	// The name of the successfully updated custom line item.

@@ -1,0 +1,8 @@
+{
+    "id": "283ef0bd-b264-4f7a-a3f1-9c4d086fd327",
+    "type": "feature",
+    "description": "Amazon OpenSearch Service now offers managed VPC endpoints to connect to your Amazon OpenSearch Service VPC-enabled domain in a Virtual Private Cloud (VPC). This feature allows you to privately access OpenSearch Service domain without using public IPs or requiring traffic to traverse the Internet.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

@@ -56,12 +56,12 @@ type AccessKeyLastUsed struct {
 	// if the access key has not been used.
 	LastUsedDate *time.Time
 
-	// The AWS Region where this access key was most recently used. This value is N/A
-	// if the access key has not been used.
+	// The Amazon Web Services Region where this access key was most recently used.
+	// This value is N/A if the access key has not been used.
 	Region *string
 
-	// The name of the AWS service with which this access key was most recently used.
-	// This value is N/A if the access key has not been used.
+	// The name of the Amazon Web Services service with which this access key was most
+	// recently used. This value is N/A if the access key has not been used.
 	ServiceName *string
 
 	noSmithyDocumentSerde
@@ -889,24 +889,24 @@ type Certificate struct {
 	// ADDITIONAL_VERIFICATION_REQUIRED - Lightsail requires additional information to
 	// process this certificate request. This can happen as a fraud-protection measure,
 	// such as when the domain ranks within the Alexa top 1000 websites. To provide the
-	// required information, use the AWS Support Center
-	// (https://console.aws.amazon.com/support/home) to contact AWS Support. You cannot
-	// request a certificate for Amazon-owned domain names such as those ending in
-	// amazonaws.com, cloudfront.net, or elasticbeanstalk.com.
+	// required information, use the Amazon Web Services Support Center
+	// (https://console.aws.amazon.com/support/home) to contact Amazon Web Services
+	// Support. You cannot request a certificate for Amazon-owned domain names such as
+	// those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.
 	//
-	// * DOMAIN_NOT_ALLOWED -
-	// One or more of the domain names in the certificate request was reported as an
-	// unsafe domain by VirusTotal (https://www.virustotal.com/gui/home/url). To
-	// correct the problem, search for your domain name on the VirusTotal
-	// (https://www.virustotal.com/gui/home/url) website. If your domain is reported as
-	// suspicious, see Google Help for Hacked Websites
-	// (https://developers.google.com/web/fundamentals/security/hacked) to learn what
-	// you can do. If you believe that the result is a false positive, notify the
-	// organization that is reporting the domain. VirusTotal is an aggregate of several
-	// antivirus and URL scanners and cannot remove your domain from a block list
-	// itself. After you correct the problem and the VirusTotal registry has been
+	// *
+	// DOMAIN_NOT_ALLOWED - One or more of the domain names in the certificate request
+	// was reported as an unsafe domain by VirusTotal
+	// (https://www.virustotal.com/gui/home/url). To correct the problem, search for
+	// your domain name on the VirusTotal (https://www.virustotal.com/gui/home/url)
+	// website. If your domain is reported as suspicious, see Google Help for Hacked
+	// Websites (https://developers.google.com/web/fundamentals/security/hacked) to
+	// learn what you can do. If you believe that the result is a false positive,
+	// notify the organization that is reporting the domain. VirusTotal is an aggregate
+	// of several antivirus and URL scanners and cannot remove your domain from a block
+	// list itself. After you correct the problem and the VirusTotal registry has been
 	// updated, request a new certificate. If you see this error and your domain is not
-	// included in the VirusTotal list, visit the AWS Support Center
+	// included in the VirusTotal list, visit the Amazon Web Services Support Center
 	// (https://console.aws.amazon.com/support/home) and create a case.
 	//
 	// *
@@ -1718,6 +1718,39 @@ type DistributionBundle struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the creation state of the canonical name (CNAME) records that are
+// automatically added by Amazon Lightsail to the DNS of a domain to validate
+// domain ownership for an SSL/TLS certificate. When you create an SSL/TLS
+// certificate for a Lightsail resource, you must add a set of CNAME records to the
+// DNS of the domains for the certificate to validate that you own the domains.
+// Lightsail can automatically add the CNAME records to the DNS of the domain if
+// the DNS zone for the domain exists within your Lightsail account. If automatic
+// record addition fails, or if you manage the DNS of your domain using a
+// third-party service, then you must manually add the CNAME records to the DNS of
+// your domain. For more information, see Verify an SSL/TLS certificate in Amazon
+// Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/verify-tls-ssl-certificate-using-dns-cname-https)
+// in the Amazon Lightsail Developer Guide.
+type DnsRecordCreationState struct {
+
+	// The status code for the automated DNS record creation. Following are the
+	// possible values:
+	//
+	// * SUCCEEDED - The validation records were successfully added
+	// to the domain.
+	//
+	// * STARTED - The automatic DNS record creation has started.
+	//
+	// *
+	// FAILED - The validation records failed to be added to the domain.
+	Code DnsRecordCreationStateCode
+
+	// The message that describes the reason for the status code.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a domain where you are storing recordsets.
 type Domain struct {
 
@@ -1736,6 +1769,10 @@ type Domain struct {
 
 	// The name of the domain.
 	Name *string
+
+	// An object that describes the state of the Route 53 domain delegation to a
+	// Lightsail DNS zone.
+	RegisteredDomainDelegationInfo *RegisteredDomainDelegationInfo
 
 	// The resource type.
 	ResourceType ResourceType
@@ -1808,9 +1845,15 @@ type DomainEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the domain validation records of an Amazon Lightsail SSL/TLS
+// Describes the domain name system (DNS) records that you must add to the DNS of
+// your registered domain to validate ownership for an Amazon Lightsail SSL/TLS
 // certificate.
 type DomainValidationRecord struct {
+
+	// An object that describes the state of the canonical name (CNAME) records that
+	// are automatically added by Lightsail to the DNS of the domain to validate domain
+	// ownership.
+	DnsRecordCreationState *DnsRecordCreationState
 
 	// The domain name of the certificate validation record. For example, example.com
 	// or www.example.com.
@@ -1819,6 +1862,9 @@ type DomainValidationRecord struct {
 	// An object that describes the DNS records to add to your domain's DNS to validate
 	// it for the certificate.
 	ResourceRecord *ResourceRecord
+
+	// The validation status of the record.
+	ValidationStatus CertificateDomainValidationStatus
 
 	noSmithyDocumentSerde
 }
@@ -2904,7 +2950,8 @@ type LoadBalancerTlsCertificate struct {
 	// The load balancer name where your SSL/TLS certificate is attached.
 	LoadBalancerName *string
 
-	// The AWS Region and Availability Zone where you created your certificate.
+	// The Amazon Web Services Region and Availability Zone where you created your
+	// certificate.
 	Location *ResourceLocation
 
 	// The name of the SSL/TLS certificate (e.g., my-certificate).
@@ -2987,6 +3034,29 @@ type LoadBalancerTlsCertificate struct {
 	noSmithyDocumentSerde
 }
 
+// An object that describes the state of the canonical name (CNAME) records that
+// are automatically added by Lightsail to the DNS of the domain to validate domain
+// ownership.
+type LoadBalancerTlsCertificateDnsRecordCreationState struct {
+
+	// The status code for the automated DNS record creation. Following are the
+	// possible values:
+	//
+	// * SUCCEEDED - The validation records were successfully
+	// added.
+	//
+	// * STARTED - The automatic DNS record creation has started.
+	//
+	// * FAILED -
+	// The validation record addition failed.
+	Code LoadBalancerTlsCertificateDnsRecordCreationStateCode
+
+	// The message that describes the reason for the status code.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the domain names on an SSL/TLS certificate that you
 // will use to validate domain ownership.
 type LoadBalancerTlsCertificateDomainValidationOption struct {
@@ -3002,6 +3072,11 @@ type LoadBalancerTlsCertificateDomainValidationOption struct {
 
 // Describes the validation record of each domain name in the SSL/TLS certificate.
 type LoadBalancerTlsCertificateDomainValidationRecord struct {
+
+	// An object that describes the state of the canonical name (CNAME) records that
+	// are automatically added by Lightsail to the DNS of a domain to validate domain
+	// ownership.
+	DnsRecordCreationState *LoadBalancerTlsCertificateDnsRecordCreationState
 
 	// The domain name against which your SSL/TLS certificate was validated.
 	DomainName *string
@@ -3178,6 +3253,34 @@ type MonthlyTransfer struct {
 
 	// The amount allocated per month (in GB).
 	GbPerMonthAllocated *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of the name server records update made by Amazon Lightsail
+// to an Amazon Route 53 registered domain. For more information, see DNS in Amazon
+// Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/understanding-dns-in-amazon-lightsail)
+// in the Amazon Lightsail Developer Guide.
+type NameServersUpdateState struct {
+
+	// The status code for the name servers update. Following are the possible
+	// values:
+	//
+	// * SUCCEEDED - The name server records were successfully updated.
+	//
+	// *
+	// PENDING - The name server record update is in progress.
+	//
+	// * FAILED - The name
+	// server record update failed.
+	//
+	// * STARTED - The automatic name server record
+	// update started.
+	Code NameServersUpdateStateCode
+
+	// The message that describes the reason for the status code.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -3455,7 +3558,31 @@ type QueryStringObject struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the AWS Region.
+// Describes the deletion state of an Amazon Route 53 hosted zone for a domain that
+// is being automatically delegated to an Amazon Lightsail DNS zone.
+type R53HostedZoneDeletionState struct {
+
+	// The status code for the deletion state. Following are the possible values:
+	//
+	// *
+	// SUCCEEDED - The hosted zone was successfully deleted.
+	//
+	// * PENDING - The hosted
+	// zone deletion is in progress.
+	//
+	// * FAILED - The hosted zone deletion failed.
+	//
+	// *
+	// STARTED - The hosted zone deletion started.
+	Code R53HostedZoneDeletionStateCode
+
+	// The message that describes the reason for the status code.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Amazon Web Services Region.
 type Region struct {
 
 	// The Availability Zones. Follows the format us-east-2a (case-sensitive).
@@ -3464,8 +3591,8 @@ type Region struct {
 	// The continent code (e.g., NA, meaning North America).
 	ContinentCode *string
 
-	// The description of the AWS Region (e.g., This region is recommended to serve
-	// users in the eastern United States and eastern Canada).
+	// The description of the Amazon Web Services Region (e.g., This region is
+	// recommended to serve users in the eastern United States and eastern Canada).
 	Description *string
 
 	// The display name (e.g., Ohio).
@@ -3477,6 +3604,46 @@ type Region struct {
 	// The Availability Zones for databases. Follows the format us-east-2a
 	// (case-sensitive).
 	RelationalDatabaseAvailabilityZones []AvailabilityZone
+
+	noSmithyDocumentSerde
+}
+
+// Describes the delegation state of an Amazon Route 53 registered domain to Amazon
+// Lightsail. When you delegate an Amazon Route 53 registered domain to Lightsail,
+// you can manage the DNS of the domain using a Lightsail DNS zone. You no longer
+// use the Route 53 hosted zone to manage the DNS of the domain. To delegate the
+// domain, Lightsail automatically updates the domain's name servers in Route 53 to
+// the name servers of the Lightsail DNS zone. Then, Lightsail automatically
+// deletes the Route 53 hosted zone for the domain. All of the following conditions
+// must be true for automatic domain delegation to be successful:
+//
+// * The registered
+// domain must be in the same Amazon Web Services account as the Lightsail account
+// making the request.
+//
+// * The user or entity making the request must have
+// permission to manage domains in Route 53.
+//
+// * The Route 53 hosted zone for the
+// domain must be empty. It cannot contain DNS records other than start of
+// authority (SOA) and name server records.
+//
+// If automatic domain delegation fails,
+// or if you manage the DNS of your domain using a service other than Route 53,
+// then you must manually add the Lightsail DNS zone name servers to your domain in
+// order to delegate management of its DNS to Lightsail. For more information, see
+// Creating a DNS zone to manage your domain’s records in Amazon Lightsail
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-create-dns-entry)
+// in the Amazon Lightsail Developer Guide.
+type RegisteredDomainDelegationInfo struct {
+
+	// An object that describes the state of the name server records that are
+	// automatically added to the Route 53 domain by Lightsail.
+	NameServersUpdateState *NameServersUpdateState
+
+	// Describes the deletion state of an Amazon Route 53 hosted zone for a domain that
+	// is being automatically delegated to an Amazon Lightsail DNS zone.
+	R53HostedZoneDeletionState *R53HostedZoneDeletionState
 
 	noSmithyDocumentSerde
 }
@@ -3815,7 +3982,7 @@ type ResourceLocation struct {
 	// The Availability Zone. Follows the format us-east-2a (case-sensitive).
 	AvailabilityZone *string
 
-	// The AWS Region name.
+	// The Amazon Web Services Region name.
 	RegionName RegionName
 
 	noSmithyDocumentSerde

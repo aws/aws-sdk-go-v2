@@ -28,7 +28,7 @@ func (c *Client) DeleteBillingGroup(ctx context.Context, params *DeleteBillingGr
 
 type DeleteBillingGroupInput struct {
 
-	// The Amazon Resource Name (ARN) of the billing group you're deleting.
+	// The Amazon Resource Name (ARN) of the billing group that you're deleting.
 	//
 	// This member is required.
 	Arn *string

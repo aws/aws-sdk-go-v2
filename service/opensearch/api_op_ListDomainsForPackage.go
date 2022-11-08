@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Amazon OpenSearch Service domains associated with the package.
+// Lists all Amazon OpenSearch Service domains associated with a given package. For
+// more information, see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) ListDomainsForPackage(ctx context.Context, params *ListDomainsForPackageInput, optFns ...func(*Options)) (*ListDomainsForPackageOutput, error) {
 	if params == nil {
 		params = &ListDomainsForPackageInput{}
@@ -31,16 +33,18 @@ func (c *Client) ListDomainsForPackage(ctx context.Context, params *ListDomainsF
 // Container for the request parameters to the ListDomainsForPackage operation.
 type ListDomainsForPackageInput struct {
 
-	// The package for which to list associated domains.
+	// The unique identifier of the package for which to list associated domains.
 	//
 	// This member is required.
 	PackageID *string
 
-	// Limits the results to a maximum number of domains.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// Used for pagination. Only necessary if a previous API call includes a non-null
-	// NextToken value. If provided, returns results for the next page.
+	// If your initial ListDomainsForPackage operation returns a nextToken, you can
+	// include the returned nextToken in subsequent ListDomainsForPackage operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,9 +53,12 @@ type ListDomainsForPackageInput struct {
 // Container for the response parameters to the ListDomainsForPackage operation.
 type ListDomainsForPackageOutput struct {
 
-	// List of DomainPackageDetails objects.
+	// Information about all domains associated with a package.
 	DomainPackageDetailsList []types.DomainPackageDetails
 
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -134,7 +141,8 @@ var _ ListDomainsForPackageAPIClient = (*Client)(nil)
 // ListDomainsForPackagePaginatorOptions is the paginator options for
 // ListDomainsForPackage
 type ListDomainsForPackagePaginatorOptions struct {
-	// Limits the results to a maximum number of domains.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

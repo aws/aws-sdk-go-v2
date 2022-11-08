@@ -25,6 +25,7 @@
         "api_op_ListAccountAssociations.go",
         "api_op_ListBillingGroupCostReports.go",
         "api_op_ListBillingGroups.go",
+        "api_op_ListCustomLineItemVersions.go",
         "api_op_ListCustomLineItems.go",
         "api_op_ListPricingPlans.go",
         "api_op_ListPricingPlansAssociatedWithPricingRule.go",

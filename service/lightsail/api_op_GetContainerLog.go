@@ -18,7 +18,7 @@ import (
 // merged from all nodes on your container service. Container logs are retained for
 // a certain amount of time. For more information, see Amazon Lightsail endpoints
 // and quotas (https://docs.aws.amazon.com/general/latest/gr/lightsail.html) in the
-// AWS General Reference.
+// Amazon Web Services General Reference.
 func (c *Client) GetContainerLog(ctx context.Context, params *GetContainerLogInput, optFns ...func(*Options)) (*GetContainerLogOutput, error) {
 	if params == nil {
 		params = &GetContainerLogInput{}

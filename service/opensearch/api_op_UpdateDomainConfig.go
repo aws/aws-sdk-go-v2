@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the cluster configuration of the specified domain, such as setting the
-// instance type and the number of instances.
+// Modifies the cluster configuration of the specified Amazon OpenSearch Service
+// domain.
 func (c *Client) UpdateDomainConfig(ctx context.Context, params *UpdateDomainConfigInput, optFns ...func(*Options)) (*UpdateDomainConfigOutput, error) {
 	if params == nil {
 		params = &UpdateDomainConfigInput{}
@@ -28,75 +28,94 @@ func (c *Client) UpdateDomainConfig(ctx context.Context, params *UpdateDomainCon
 	return out, nil
 }
 
-// Container for the parameters to the UpdateDomain operation. Specifies the type
-// and number of instances in the domain cluster.
+// Container for the request parameters to the UpdateDomain operation.
 type UpdateDomainConfigInput struct {
 
-	// The name of the domain you're updating.
+	// The name of the domain that you're updating.
 	//
 	// This member is required.
 	DomainName *string
 
-	// IAM access policy as a JSON-formatted string.
+	// Identity and Access Management (IAM) access policy as a JSON-formatted string.
 	AccessPolicies *string
 
-	// Modifies the advanced option to allow references to indices in an HTTP request
-	// body. Must be false when configuring access to individual sub-resources. By
-	// default, the value is true. See Advanced options
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
-	// for more information.
+	// Key-value pairs to specify advanced configuration options. The following
+	// key-value pairs are supported:
+	//
+	// * "rest.action.multi.allow_explicit_index":
+	// "true" | "false" - Note the use of a string rather than a boolean. Specifies
+	// whether explicit references to indexes are allowed inside the body of HTTP
+	// requests. If you want to configure access policies for domain sub-resources,
+	// such as specific indexes and domain APIs, you must disable this property.
+	// Default is true.
+	//
+	// * "indices.fielddata.cache.size": "80"  - Note the use of a
+	// string rather than a boolean. Specifies the percentage of heap space allocated
+	// to field data. Default is unbounded.
+	//
+	// * "indices.query.bool.max_clause_count":
+	// "1024" - Note the use of a string rather than a boolean. Specifies the maximum
+	// number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries
+	// with more than the permitted number of clauses result in a TooManyClauses
+	// error.
+	//
+	// * "override_main_response_version": "true" | "false" - Note the use of a
+	// string rather than a boolean. Specifies whether the domain reports its version
+	// as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with
+	// it. Default is false when creating a domain and true when upgrading a
+	// domain.
+	//
+	// For more information, see Advanced cluster parameters
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
 	AdvancedOptions map[string]string
 
-	// Specifies advanced security options.
+	// Options for fine-grained access control.
 	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
 
-	// Specifies Auto-Tune options.
+	// Options for Auto-Tune.
 	AutoTuneOptions *types.AutoTuneOptions
 
-	// The type and number of instances to instantiate for the domain cluster.
+	// Changes that you want to make to the cluster configuration, such as the instance
+	// type and number of EC2 instances.
 	ClusterConfig *types.ClusterConfig
 
-	// Options to specify the Cognito user and identity pools for OpenSearch Dashboards
-	// authentication. For more information, see Configuring Amazon Cognito
-	// authentication for OpenSearch Dashboards
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
+	// Key-value pairs to configure Amazon Cognito authentication for OpenSearch
+	// Dashboards.
 	CognitoOptions *types.CognitoOptions
 
-	// Options to specify configuration that will be applied to the domain endpoint.
+	// Additional options for the domain endpoint, such as whether to require HTTPS for
+	// all traffic.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
 	// This flag, when set to True, specifies whether the UpdateDomain request should
-	// return the results of validation checks (DryRunResults) without actually
-	// applying the change.
+	// return the results of validation check without actually applying the change.
 	DryRun *bool
 
-	// Specify the type and size of the EBS volume to use.
+	// The type and size of the EBS volume to attach to instances in the domain.
 	EBSOptions *types.EBSOptions
 
-	// Specifies encryption of data at rest options.
+	// Encryption at rest options for the domain.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
-	// Map of LogType and LogPublishingOption, each containing options to publish a
-	// given type of OpenSearch log.
+	// Options to publish OpenSearch lots to Amazon CloudWatch Logs.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
-	// Specifies node-to-node encryption options.
+	// Node-To-Node Encryption options for the domain.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
 
 	// Option to set the time, in UTC format, for the daily automated snapshot. Default
 	// value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
 
-	// Options to specify the subnets and security groups for the VPC endpoint. For
-	// more information, see Launching your Amazon OpenSearch Service domains using a
-	// VPC
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+	// Options to specify the subnets and security groups for a VPC endpoint. For more
+	// information, see Launching your Amazon OpenSearch Service domains using a VPC
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
 	VPCOptions *types.VPCOptions
 
 	noSmithyDocumentSerde
 }
 
-// The result of an UpdateDomain request. Contains the status of the domain being
+// The results of an UpdateDomain request. Contains the status of the domain being
 // updated.
 type UpdateDomainConfigOutput struct {
 
@@ -105,7 +124,7 @@ type UpdateDomainConfigOutput struct {
 	// This member is required.
 	DomainConfig *types.DomainConfig
 
-	// Contains result of DryRun.
+	// Results of a dry run performed in an update domain request.
 	DryRunResults *types.DryRunResults
 
 	// Metadata pertaining to the operation's result.

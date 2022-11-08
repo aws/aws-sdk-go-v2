@@ -41,7 +41,7 @@ type ListPricingRulesInput struct {
 	// The maximum number of pricing rules to retrieve.
 	MaxResults *int32
 
-	// The pagination token used on subsequent call to get pricing rules.
+	// The pagination token that's used on subsequent call to get pricing rules.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,7 +52,7 @@ type ListPricingRulesOutput struct {
 	// The billing period for which the described pricing rules are applicable.
 	BillingPeriod *string
 
-	// The pagination token used on subsequent calls to get pricing rules.
+	// The pagination token that's used on subsequent calls to get pricing rules.
 	NextToken *string
 
 	// A list containing the described pricing rules.

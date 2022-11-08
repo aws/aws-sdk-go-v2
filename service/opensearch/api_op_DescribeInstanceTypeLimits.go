@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe the limits for a given instance type and OpenSearch or Elasticsearch
-// version. When modifying an existing domain, specify the DomainName to see which
-// limits you can modify.
+// Describes the instance count, storage, and master node limits for a given
+// OpenSearch or Elasticsearch version and instance type.
 func (c *Client) DescribeInstanceTypeLimits(ctx context.Context, params *DescribeInstanceTypeLimitsInput, optFns ...func(*Options)) (*DescribeInstanceTypeLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceTypeLimitsInput{}
@@ -32,19 +31,19 @@ func (c *Client) DescribeInstanceTypeLimits(ctx context.Context, params *Describ
 // Container for the parameters to the DescribeInstanceTypeLimits operation.
 type DescribeInstanceTypeLimitsInput struct {
 
-	// Version of OpenSearch for which Limits are needed.
+	// Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or
+	// OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
 	//
 	// This member is required.
 	EngineVersion *string
 
-	// The instance type for an OpenSearch cluster for which OpenSearch Limits are
-	// needed.
+	// The OpenSearch Service instance type for which you need limit information.
 	//
 	// This member is required.
 	InstanceType types.OpenSearchPartitionInstanceType
 
-	// The name of the domain you want to modify. Only include this value if you're
-	// querying OpenSearch Limits for an existing domain.
+	// The name of the domain. Only specify if you need the limits for an existing
+	// domain.
 	DomainName *string
 
 	noSmithyDocumentSerde
@@ -54,16 +53,8 @@ type DescribeInstanceTypeLimitsInput struct {
 // operation.
 type DescribeInstanceTypeLimitsOutput struct {
 
-	// The role of a given instance and all applicable limits. The role performed by a
-	// given OpenSearch instance can be one of the following:
-	//
-	// * data: If the given
-	// InstanceType is used as a data node
-	//
-	// * master: If the given InstanceType is used
-	// as a master node
-	//
-	// * ultra_warm: If the given InstanceType is used as a warm node
+	// Map that contains all applicable instance type limits.data refers to data
+	// nodes.master refers to dedicated master nodes.
 	LimitsByRole map[string]types.Limits
 
 	// Metadata pertaining to the operation's result.

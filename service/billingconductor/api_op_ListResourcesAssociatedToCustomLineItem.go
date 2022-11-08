@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the resources associated to a custom line item.
+// List the resources that are associated to a custom line item.
 func (c *Client) ListResourcesAssociatedToCustomLineItem(ctx context.Context, params *ListResourcesAssociatedToCustomLineItemInput, optFns ...func(*Options)) (*ListResourcesAssociatedToCustomLineItemOutput, error) {
 	if params == nil {
 		params = &ListResourcesAssociatedToCustomLineItemInput{}
@@ -46,7 +46,7 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 	// (Optional) The maximum number of resource associations to be retrieved.
 	MaxResults *int32
 
-	// (Optional) The pagination token returned by a previous request.
+	// (Optional) The pagination token that's returned by a previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde

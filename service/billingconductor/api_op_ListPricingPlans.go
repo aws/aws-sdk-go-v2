@@ -41,7 +41,7 @@ type ListPricingPlansInput struct {
 	// The maximum number of pricing plans to retrieve.
 	MaxResults *int32
 
-	// The pagination token used on subsequent call to get pricing plans.
+	// The pagination token that's used on subsequent call to get pricing plans.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,7 +52,7 @@ type ListPricingPlansOutput struct {
 	// The billing period for which the described pricing plans are applicable.
 	BillingPeriod *string
 
-	// The pagination token used on subsequent calls to get pricing plans.
+	// The pagination token that's used on subsequent calls to get pricing plans.
 	NextToken *string
 
 	// A list of PricingPlanListElement retrieved.

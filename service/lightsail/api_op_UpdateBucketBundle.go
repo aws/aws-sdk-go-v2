@@ -14,8 +14,8 @@ import (
 // Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A
 // bucket bundle specifies the monthly cost, storage space, and data transfer quota
 // for a bucket. You can update a bucket's bundle only one time within a monthly
-// AWS billing cycle. To determine if you can update a bucket's bundle, use the
-// GetBuckets
+// Amazon Web Services billing cycle. To determine if you can update a bucket's
+// bundle, use the GetBuckets
 // (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html)
 // action. The ableToUpdateBundle parameter in the response will indicate whether
 // you can currently update a bucket's bundle. Update a bucket's bundle if it's

@@ -52,7 +52,7 @@ type CreateBillingGroupInput struct {
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
-	// The billing group description.
+	// The description of the billing group.
 	Description *string
 
 	// The account ID that serves as the main account in a billing group.

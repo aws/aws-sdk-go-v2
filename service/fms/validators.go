@@ -50,6 +50,46 @@ func (m *validateOpAssociateThirdPartyFirewall) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchAssociateResource struct {
+}
+
+func (*validateOpBatchAssociateResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAssociateResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAssociateResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAssociateResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDisassociateResource struct {
+}
+
+func (*validateOpBatchDisassociateResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDisassociateResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDisassociateResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDisassociateResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAppsList struct {
 }
 
@@ -105,6 +145,26 @@ func (m *validateOpDeleteProtocolsList) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProtocolsListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResourceSet struct {
+}
+
+func (*validateOpDeleteResourceSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,26 @@ func (m *validateOpGetProtocolsList) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourceSet struct {
+}
+
+func (*validateOpGetResourceSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetThirdPartyFirewallAssociationStatus struct {
 }
 
@@ -310,6 +390,26 @@ func (m *validateOpListComplianceStatus) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDiscoveredResources struct {
+}
+
+func (*validateOpListDiscoveredResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDiscoveredResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDiscoveredResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDiscoveredResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListProtocolsLists struct {
 }
 
@@ -325,6 +425,26 @@ func (m *validateOpListProtocolsLists) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListProtocolsListsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResourceSetResources struct {
+}
+
+func (*validateOpListResourceSetResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourceSetResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourceSetResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourceSetResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +570,26 @@ func (m *validateOpPutProtocolsList) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutResourceSet struct {
+}
+
+func (*validateOpPutResourceSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourceSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourceSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourceSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -498,6 +638,14 @@ func addOpAssociateThirdPartyFirewallValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpAssociateThirdPartyFirewall{}, middleware.After)
 }
 
+func addOpBatchAssociateResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAssociateResource{}, middleware.After)
+}
+
+func addOpBatchDisassociateResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDisassociateResource{}, middleware.After)
+}
+
 func addOpDeleteAppsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAppsList{}, middleware.After)
 }
@@ -508,6 +656,10 @@ func addOpDeletePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteProtocolsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProtocolsList{}, middleware.After)
+}
+
+func addOpDeleteResourceSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceSet{}, middleware.After)
 }
 
 func addOpDisassociateThirdPartyFirewallValidationMiddleware(stack *middleware.Stack) error {
@@ -534,6 +686,10 @@ func addOpGetProtocolsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProtocolsList{}, middleware.After)
 }
 
+func addOpGetResourceSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceSet{}, middleware.After)
+}
+
 func addOpGetThirdPartyFirewallAssociationStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetThirdPartyFirewallAssociationStatus{}, middleware.After)
 }
@@ -550,8 +706,16 @@ func addOpListComplianceStatusValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpListComplianceStatus{}, middleware.After)
 }
 
+func addOpListDiscoveredResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDiscoveredResources{}, middleware.After)
+}
+
 func addOpListProtocolsListsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProtocolsLists{}, middleware.After)
+}
+
+func addOpListResourceSetResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourceSetResources{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -576,6 +740,10 @@ func addOpPutPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutProtocolsListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutProtocolsList{}, middleware.After)
+}
+
+func addOpPutResourceSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourceSet{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -716,6 +884,24 @@ func validateProtocolsListData(v *types.ProtocolsListData) error {
 	}
 }
 
+func validateResourceSet(v *types.ResourceSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceSet"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ResourceTypeList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTypeList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceTag(v *types.ResourceTag) error {
 	if v == nil {
 		return nil
@@ -828,6 +1014,42 @@ func validateOpAssociateThirdPartyFirewallInput(v *AssociateThirdPartyFirewallIn
 	}
 }
 
+func validateOpBatchAssociateResourceInput(v *BatchAssociateResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAssociateResourceInput"}
+	if v.ResourceSetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceSetIdentifier"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDisassociateResourceInput(v *BatchDisassociateResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDisassociateResourceInput"}
+	if v.ResourceSetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceSetIdentifier"))
+	}
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAppsListInput(v *DeleteAppsListInput) error {
 	if v == nil {
 		return nil
@@ -865,6 +1087,21 @@ func validateOpDeleteProtocolsListInput(v *DeleteProtocolsListInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteProtocolsListInput"}
 	if v.ListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourceSetInput(v *DeleteResourceSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceSetInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -966,6 +1203,21 @@ func validateOpGetProtocolsListInput(v *GetProtocolsListInput) error {
 	}
 }
 
+func validateOpGetResourceSetInput(v *GetResourceSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceSetInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetThirdPartyFirewallAssociationStatusInput(v *GetThirdPartyFirewallAssociationStatusInput) error {
 	if v == nil {
 		return nil
@@ -1035,6 +1287,24 @@ func validateOpListComplianceStatusInput(v *ListComplianceStatusInput) error {
 	}
 }
 
+func validateOpListDiscoveredResourcesInput(v *ListDiscoveredResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDiscoveredResourcesInput"}
+	if v.MemberAccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberAccountIds"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListProtocolsListsInput(v *ListProtocolsListsInput) error {
 	if v == nil {
 		return nil
@@ -1042,6 +1312,21 @@ func validateOpListProtocolsListsInput(v *ListProtocolsListsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListProtocolsListsInput"}
 	if v.MaxResults == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxResults"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourceSetResourcesInput(v *ListResourceSetResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourceSetResourcesInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1159,6 +1444,30 @@ func validateOpPutProtocolsListInput(v *PutProtocolsListInput) error {
 	} else if v.ProtocolsList != nil {
 		if err := validateProtocolsListData(v.ProtocolsList); err != nil {
 			invalidParams.AddNested("ProtocolsList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourceSetInput(v *PutResourceSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourceSetInput"}
+	if v.ResourceSet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceSet"))
+	} else if v.ResourceSet != nil {
+		if err := validateResourceSet(v.ResourceSet); err != nil {
+			invalidParams.AddNested("ResourceSet", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TagList != nil {

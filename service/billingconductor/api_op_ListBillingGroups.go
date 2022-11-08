@@ -42,7 +42,7 @@ type ListBillingGroupsInput struct {
 	// The maximum number of billing groups to retrieve.
 	MaxResults *int32
 
-	// The pagination token used on subsequent calls to get billing groups.
+	// The pagination token that's used on subsequent calls to get billing groups.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type ListBillingGroupsOutput struct {
 	// A list of BillingGroupListElement retrieved.
 	BillingGroups []types.BillingGroupListElement
 
-	// The pagination token used on subsequent calls to get billing groups.
+	// The pagination token that's used on subsequent calls to get billing groups.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

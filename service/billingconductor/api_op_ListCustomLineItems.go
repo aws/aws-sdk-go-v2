@@ -42,7 +42,8 @@ type ListCustomLineItemsInput struct {
 	// The maximum number of billing groups to retrieve.
 	MaxResults *int32
 
-	// The pagination token used on subsequent calls to get custom line items (FFLIs).
+	// The pagination token that's used on subsequent calls to get custom line items
+	// (FFLIs).
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,7 +54,8 @@ type ListCustomLineItemsOutput struct {
 	// A list of FreeFormLineItemListElements received.
 	CustomLineItems []types.CustomLineItemListElement
 
-	// The pagination token used on subsequent calls to get custom line items (FFLIs).
+	// The pagination token that's used on subsequent calls to get custom line items
+	// (FFLIs).
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

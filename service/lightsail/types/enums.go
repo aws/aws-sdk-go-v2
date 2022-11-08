@@ -194,6 +194,27 @@ func (BucketMetricName) Values() []BucketMetricName {
 	}
 }
 
+type CertificateDomainValidationStatus string
+
+// Enum values for CertificateDomainValidationStatus
+const (
+	CertificateDomainValidationStatusPendingValidation CertificateDomainValidationStatus = "PENDING_VALIDATION"
+	CertificateDomainValidationStatusFailed            CertificateDomainValidationStatus = "FAILED"
+	CertificateDomainValidationStatusSuccess           CertificateDomainValidationStatus = "SUCCESS"
+)
+
+// Values returns all known values for CertificateDomainValidationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CertificateDomainValidationStatus) Values() []CertificateDomainValidationStatus {
+	return []CertificateDomainValidationStatus{
+		"PENDING_VALIDATION",
+		"FAILED",
+		"SUCCESS",
+	}
+}
+
 type CertificateStatus string
 
 // Enum values for CertificateStatus
@@ -535,6 +556,26 @@ func (DistributionMetricName) Values() []DistributionMetricName {
 		"TotalErrorRate",
 		"Http4xxErrorRate",
 		"Http5xxErrorRate",
+	}
+}
+
+type DnsRecordCreationStateCode string
+
+// Enum values for DnsRecordCreationStateCode
+const (
+	DnsRecordCreationStateCodeSucceeded DnsRecordCreationStateCode = "SUCCEEDED"
+	DnsRecordCreationStateCodeStarted   DnsRecordCreationStateCode = "STARTED"
+	DnsRecordCreationStateCodeFailed    DnsRecordCreationStateCode = "FAILED"
+)
+
+// Values returns all known values for DnsRecordCreationStateCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DnsRecordCreationStateCode) Values() []DnsRecordCreationStateCode {
+	return []DnsRecordCreationStateCode{
+		"SUCCEEDED",
+		"STARTED",
+		"FAILED",
 	}
 }
 
@@ -965,6 +1006,27 @@ func (LoadBalancerState) Values() []LoadBalancerState {
 	}
 }
 
+type LoadBalancerTlsCertificateDnsRecordCreationStateCode string
+
+// Enum values for LoadBalancerTlsCertificateDnsRecordCreationStateCode
+const (
+	LoadBalancerTlsCertificateDnsRecordCreationStateCodeSucceeded LoadBalancerTlsCertificateDnsRecordCreationStateCode = "SUCCEEDED"
+	LoadBalancerTlsCertificateDnsRecordCreationStateCodeStarted   LoadBalancerTlsCertificateDnsRecordCreationStateCode = "STARTED"
+	LoadBalancerTlsCertificateDnsRecordCreationStateCodeFailed    LoadBalancerTlsCertificateDnsRecordCreationStateCode = "FAILED"
+)
+
+// Values returns all known values for
+// LoadBalancerTlsCertificateDnsRecordCreationStateCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LoadBalancerTlsCertificateDnsRecordCreationStateCode) Values() []LoadBalancerTlsCertificateDnsRecordCreationStateCode {
+	return []LoadBalancerTlsCertificateDnsRecordCreationStateCode{
+		"SUCCEEDED",
+		"STARTED",
+		"FAILED",
+	}
+}
+
 type LoadBalancerTlsCertificateDomainStatus string
 
 // Enum values for LoadBalancerTlsCertificateDomainStatus
@@ -1253,6 +1315,28 @@ func (MetricUnit) Values() []MetricUnit {
 		"Terabits/Second",
 		"Count/Second",
 		"None",
+	}
+}
+
+type NameServersUpdateStateCode string
+
+// Enum values for NameServersUpdateStateCode
+const (
+	NameServersUpdateStateCodeSucceeded NameServersUpdateStateCode = "SUCCEEDED"
+	NameServersUpdateStateCodePending   NameServersUpdateStateCode = "PENDING"
+	NameServersUpdateStateCodeFailed    NameServersUpdateStateCode = "FAILED"
+	NameServersUpdateStateCodeStarted   NameServersUpdateStateCode = "STARTED"
+)
+
+// Values returns all known values for NameServersUpdateStateCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NameServersUpdateStateCode) Values() []NameServersUpdateStateCode {
+	return []NameServersUpdateStateCode{
+		"SUCCEEDED",
+		"PENDING",
+		"FAILED",
+		"STARTED",
 	}
 }
 
@@ -1549,6 +1633,29 @@ func (PortState) Values() []PortState {
 	return []PortState{
 		"open",
 		"closed",
+	}
+}
+
+type R53HostedZoneDeletionStateCode string
+
+// Enum values for R53HostedZoneDeletionStateCode
+const (
+	R53HostedZoneDeletionStateCodeSucceeded R53HostedZoneDeletionStateCode = "SUCCEEDED"
+	R53HostedZoneDeletionStateCodePending   R53HostedZoneDeletionStateCode = "PENDING"
+	R53HostedZoneDeletionStateCodeFailed    R53HostedZoneDeletionStateCode = "FAILED"
+	R53HostedZoneDeletionStateCodeStarted   R53HostedZoneDeletionStateCode = "STARTED"
+)
+
+// Values returns all known values for R53HostedZoneDeletionStateCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (R53HostedZoneDeletionStateCode) Values() []R53HostedZoneDeletionStateCode {
+	return []R53HostedZoneDeletionStateCode{
+		"SUCCEEDED",
+		"PENDING",
+		"FAILED",
+		"STARTED",
 	}
 }
 

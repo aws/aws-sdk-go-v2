@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides cluster configuration information about the specified domain, such as
-// the state, creation date, update version, and update date for cluster options.
+// Returns the configuration of an Amazon OpenSearch Service domain.
 func (c *Client) DescribeDomainConfig(ctx context.Context, params *DescribeDomainConfigInput, optFns ...func(*Options)) (*DescribeDomainConfigOutput, error) {
 	if params == nil {
 		params = &DescribeDomainConfigInput{}
@@ -28,11 +27,10 @@ func (c *Client) DescribeDomainConfig(ctx context.Context, params *DescribeDomai
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainConfig operation. Specifies
-// the domain name for which you want configuration information.
+// Container for the parameters to the DescribeDomainConfig operation.
 type DescribeDomainConfigInput struct {
 
-	// The domain you want to get information about.
+	// Name of the OpenSearch Service domain configuration that you want to describe.
 	//
 	// This member is required.
 	DomainName *string
@@ -40,12 +38,10 @@ type DescribeDomainConfigInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeDomainConfig request. Contains the configuration
-// information of the requested domain.
+// Contains the configuration information of the requested domain.
 type DescribeDomainConfigOutput struct {
 
-	// The configuration information of the domain requested in the
-	// DescribeDomainConfig request.
+	// Container for the configuration of the OpenSearch Service domain.
 	//
 	// This member is required.
 	DomainConfig *types.DomainConfig

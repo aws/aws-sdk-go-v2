@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon OpenSearch Service domain. For more information, see
-// Creating and managing Amazon OpenSearch Service domains
-// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html)
-// in the Amazon OpenSearch Service Developer Guide.
+// Creates an Amazon OpenSearch Service domain. For more information, see Creating
+// and managing Amazon OpenSearch Service domains
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html).
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}
@@ -32,81 +31,104 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 
 type CreateDomainInput struct {
 
-	// The name of the Amazon OpenSearch Service domain you're creating. Domain names
-	// are unique across the domains owned by an account within an AWS region. Domain
-	// names must start with a lowercase letter and can contain the following
-	// characters: a-z (lowercase), 0-9, and - (hyphen).
+	// Name of the OpenSearch Service domain to create. Domain names are unique across
+	// the domains owned by an account within an Amazon Web Services Region.
 	//
 	// This member is required.
 	DomainName *string
 
-	// IAM access policy as a JSON-formatted string.
+	// Identity and Access Management (IAM) policy document specifying the access
+	// policies for the new domain.
 	AccessPolicies *string
 
-	// Option to allow references to indices in an HTTP request body. Must be false
-	// when configuring access to individual sub-resources. By default, the value is
-	// true. See Advanced cluster parameters
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options)
-	// for more information.
+	// Key-value pairs to specify advanced configuration options. The following
+	// key-value pairs are supported:
+	//
+	// * "rest.action.multi.allow_explicit_index":
+	// "true" | "false" - Note the use of a string rather than a boolean. Specifies
+	// whether explicit references to indexes are allowed inside the body of HTTP
+	// requests. If you want to configure access policies for domain sub-resources,
+	// such as specific indexes and domain APIs, you must disable this property.
+	// Default is true.
+	//
+	// * "indices.fielddata.cache.size": "80"  - Note the use of a
+	// string rather than a boolean. Specifies the percentage of heap space allocated
+	// to field data. Default is unbounded.
+	//
+	// * "indices.query.bool.max_clause_count":
+	// "1024" - Note the use of a string rather than a boolean. Specifies the maximum
+	// number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries
+	// with more than the permitted number of clauses result in a TooManyClauses
+	// error.
+	//
+	// * "override_main_response_version": "true" | "false" - Note the use of a
+	// string rather than a boolean. Specifies whether the domain reports its version
+	// as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with
+	// it. Default is false when creating a domain and true when upgrading a
+	// domain.
+	//
+	// For more information, see Advanced cluster parameters
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options).
 	AdvancedOptions map[string]string
 
-	// Specifies advanced security options.
+	// Options for fine-grained access control.
 	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
 
-	// Specifies Auto-Tune options.
+	// Options for Auto-Tune.
 	AutoTuneOptions *types.AutoTuneOptionsInput
 
-	// Configuration options for a domain. Specifies the instance type and number of
-	// instances in the domain.
+	// Container for the cluster configuration of a domain.
 	ClusterConfig *types.ClusterConfig
 
-	// Options to specify the Cognito user and identity pools for OpenSearch Dashboards
-	// authentication. For more information, see Configuring Amazon Cognito
-	// authentication for OpenSearch Dashboards
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
+	// Key-value pairs to configure Amazon Cognito authentication. For more
+	// information, see Configuring Amazon Cognito authentication for OpenSearch
+	// Dashboards
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cognito-auth.html).
 	CognitoOptions *types.CognitoOptions
 
-	// Options to specify configurations that will be applied to the domain endpoint.
+	// Additional options for the domain endpoint, such as whether to require HTTPS for
+	// all traffic.
 	DomainEndpointOptions *types.DomainEndpointOptions
 
-	// Options to enable, disable, and specify the type and size of EBS storage
-	// volumes.
+	// Container for the parameters required to enable EBS-based storage for an
+	// OpenSearch Service domain.
 	EBSOptions *types.EBSOptions
 
-	// Options for encryption of data at rest.
+	// Key-value pairs to enable encryption at rest.
 	EncryptionAtRestOptions *types.EncryptionAtRestOptions
 
 	// String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine
-	// version for the Amazon OpenSearch Service domain. For example, "OpenSearch_1.0"
-	// or "Elasticsearch_7.9". For more information, see Creating and managing Amazon
+	// version for the OpenSearch Service domain. For example, OpenSearch_1.0 or
+	// Elasticsearch_7.9. For more information, see Creating and managing Amazon
 	// OpenSearch Service domains
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomains).
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomains).
 	EngineVersion *string
 
-	// Map of LogType and LogPublishingOption, each containing options to publish a
-	// given type of OpenSearch log.
+	// Key-value pairs to configure slow log publishing.
 	LogPublishingOptions map[string]types.LogPublishingOption
 
-	// Node-to-node encryption options.
+	// Enables node-to-node encryption.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
 
-	// Option to set time, in UTC format, of the daily automated snapshot. Default
-	// value is 0 hours.
+	// DEPRECATED. Container for the parameters required to configure automated
+	// snapshots of domain indexes.
 	SnapshotOptions *types.SnapshotOptions
 
-	// A list of Tag added during domain creation.
+	// List of tags to add to the domain upon creation.
 	TagList []types.Tag
 
-	// Options to specify the subnets and security groups for a VPC endpoint. For more
-	// information, see Launching your Amazon OpenSearch Service domains using a VPC
-	// (http://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
+	// Container for the values required to configure VPC access domains. If you don't
+	// specify these values, OpenSearch Service creates the domain with a public
+	// endpoint. For more information, see Launching your Amazon OpenSearch Service
+	// domains using a VPC
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html).
 	VPCOptions *types.VPCOptions
 
 	noSmithyDocumentSerde
 }
 
 // The result of a CreateDomain operation. Contains the status of the newly created
-// Amazon OpenSearch Service domain.
+// domain.
 type CreateDomainOutput struct {
 
 	// The status of the newly created domain.

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a package for use with Amazon OpenSearch Service domains.
+// Updates a package for use with Amazon OpenSearch Service domains. For more
+// information, see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, optFns ...func(*Options)) (*UpdatePackageOutput, error) {
 	if params == nil {
 		params = &UpdatePackageInput{}
@@ -35,13 +37,12 @@ type UpdatePackageInput struct {
 	// This member is required.
 	PackageID *string
 
-	// The Amazon S3 location for importing the package specified as S3BucketName and
-	// S3Key
+	// Amazon S3 bucket and key for the package.
 	//
 	// This member is required.
 	PackageSource *types.PackageSource
 
-	// A commit message for the new version which is shown as part of
+	// Commit message for the updated file, which is shown as part of
 	// GetPackageVersionHistoryResponse.
 	CommitMessage *string
 
@@ -54,7 +55,7 @@ type UpdatePackageInput struct {
 // Container for the response returned by the UpdatePackage operation.
 type UpdatePackageOutput struct {
 
-	// Information about the package.
+	// Information about a package.
 	PackageDetails *types.PackageDetails
 
 	// Metadata pertaining to the operation's result.

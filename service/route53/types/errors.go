@@ -494,6 +494,10 @@ func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // specified doesn’t exist or it can’t be used with the log group associated with
 // query log. Update or provide a resource policy to grant permissions for the KMS
 // key.
+//
+// * The Key management service (KMS) key you specified is marked as disabled
+// for the log group associated with query log. Update or provide a resource policy
+// to grant permissions for the KMS key.
 type InsufficientCloudWatchLogsResourcePolicy struct {
 	Message *string
 

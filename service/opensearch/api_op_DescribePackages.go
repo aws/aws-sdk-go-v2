@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes all packages available to Amazon OpenSearch Service domains. Includes
-// options for filtering, limiting the number of results, and pagination.
+// Describes all packages available to OpenSearch Service. For more information,
+// see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) DescribePackages(ctx context.Context, params *DescribePackagesInput, optFns ...func(*Options)) (*DescribePackagesOutput, error) {
 	if params == nil {
 		params = &DescribePackagesInput{}
@@ -35,11 +36,13 @@ type DescribePackagesInput struct {
 	// Only returns packages that match the DescribePackagesFilterList values.
 	Filters []types.DescribePackagesFilter
 
-	// Limits results to a maximum number of packages.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// Used for pagination. Only necessary if a previous API call includes a non-null
-	// NextToken value. If provided, returns results for the next page.
+	// If your initial DescribePackageFilters operation returns a nextToken, you can
+	// include the returned nextToken in subsequent DescribePackageFilters operations,
+	// which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,9 +50,13 @@ type DescribePackagesInput struct {
 
 // Container for the response returned by the DescribePackages operation.
 type DescribePackagesOutput struct {
+
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
-	// List of PackageDetails objects.
+	// Basic information about a package.
 	PackageDetailsList []types.PackageDetails
 
 	// Metadata pertaining to the operation's result.
@@ -128,7 +135,8 @@ var _ DescribePackagesAPIClient = (*Client)(nil)
 
 // DescribePackagesPaginatorOptions is the paginator options for DescribePackages
 type DescribePackagesPaginatorOptions struct {
-	// Limits results to a maximum number of packages.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

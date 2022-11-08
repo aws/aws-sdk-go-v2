@@ -13,7 +13,9 @@ import (
 
 // Cancels a scheduled service software update for an Amazon OpenSearch Service
 // domain. You can only perform this operation before the AutomatedUpdateDate and
-// when the UpdateStatus is in the PENDING_UPDATE state.
+// when the domain's UpdateStatus is PENDING_UPDATE. For more information, see
+// Service software updates in Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html).
 func (c *Client) CancelServiceSoftwareUpdate(ctx context.Context, params *CancelServiceSoftwareUpdateInput, optFns ...func(*Options)) (*CancelServiceSoftwareUpdateOutput, error) {
 	if params == nil {
 		params = &CancelServiceSoftwareUpdateInput{}
@@ -29,13 +31,11 @@ func (c *Client) CancelServiceSoftwareUpdate(ctx context.Context, params *Cancel
 	return out, nil
 }
 
-// Container for the parameters to the CancelServiceSoftwareUpdate operation.
-// Specifies the name of the domain that you wish to cancel a service software
-// update on.
+// Container for the request parameters to cancel a service software update.
 type CancelServiceSoftwareUpdateInput struct {
 
-	// The name of the domain that you want to stop the latest service software update
-	// on.
+	// Name of the OpenSearch Service domain that you want to cancel the service
+	// software update on.
 	//
 	// This member is required.
 	DomainName *string
@@ -43,11 +43,11 @@ type CancelServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CancelServiceSoftwareUpdate operation. Contains the status of
-// the update.
+// Container for the response to a CancelServiceSoftwareUpdate operation. Contains
+// the status of the update.
 type CancelServiceSoftwareUpdateOutput struct {
 
-	// The current status of the OpenSearch service software update.
+	// Container for the state of your domain relative to the latest service software.
 	ServiceSoftwareOptions *types.ServiceSoftwareOptions
 
 	// Metadata pertaining to the operation's result.

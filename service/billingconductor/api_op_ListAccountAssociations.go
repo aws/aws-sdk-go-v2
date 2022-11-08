@@ -12,14 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon Web Services Billing Conductor is in beta release and is subject to
-// change. Your use of Amazon Web Services Billing Conductor is subject to the Beta
-// Service Participation terms of the Amazon Web Services Service Terms
-// (https://aws.amazon.com/service-terms/) (Section 1.10). This is a paginated call
-// to list linked accounts that are linked to the payer account for the specified
-// time period. If no information is provided, the current billing period is used.
-// The response will optionally include the billing group associated with the
-// linked account.
+// This is a paginated call to list linked accounts that are linked to the payer
+// account for the specified time period. If no information is provided, the
+// current billing period is used. The response will optionally include the billing
+// group that's associated with the linked account.
 func (c *Client) ListAccountAssociations(ctx context.Context, params *ListAccountAssociationsInput, optFns ...func(*Options)) (*ListAccountAssociationsOutput, error) {
 	if params == nil {
 		params = &ListAccountAssociationsInput{}
@@ -42,11 +38,11 @@ type ListAccountAssociationsInput struct {
 
 	// The filter on the account ID of the linked account, or any of the following:
 	// MONITORED: linked accounts that are associated to billing groups. UNMONITORED:
-	// linked accounts that are not associated to billing groups. Billing Group Arn:
+	// linked accounts that aren't associated to billing groups. Billing Group Arn:
 	// linked accounts that are associated to the provided billing group Arn.
 	Filters *types.ListAccountAssociationsFilter
 
-	// The pagination token used on subsequent calls to retrieve accounts.
+	// The pagination token that's used on subsequent calls to retrieve accounts.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -57,7 +53,7 @@ type ListAccountAssociationsOutput struct {
 	// The list of linked accounts in the payer account.
 	LinkedAccounts []types.AccountAssociationsListElement
 
-	// The pagination token used on subsequent calls to get accounts.
+	// The pagination token that's used on subsequent calls to get accounts.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

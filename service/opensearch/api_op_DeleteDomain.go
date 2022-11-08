@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes the specified domain and all of its data. Once a domain is
-// deleted, it cannot be recovered.
+// Deletes an Amazon OpenSearch Service domain and all of its data. You can't
+// recover a domain after you delete it.
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {
 		params = &DeleteDomainInput{}
@@ -28,8 +28,7 @@ func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, op
 	return out, nil
 }
 
-// Container for the parameters to the DeleteDomain operation. Specifies the name
-// of the domain you want to delete.
+// Container for the parameters to the DeleteDomain operation.
 type DeleteDomainInput struct {
 
 	// The name of the domain you want to permanently delete.
@@ -40,7 +39,7 @@ type DeleteDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteDomain request. Contains the status of the pending
+// The results of a DeleteDomain request. Contains the status of the pending
 // deletion, or a "domain not found" error if the domain and all of its resources
 // have been deleted.
 type DeleteDomainOutput struct {

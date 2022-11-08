@@ -17,8 +17,8 @@ import (
 // in ascending order. The newest version is listed at the top of the response. A
 // set number of deployments are kept before the oldest one is replaced with the
 // newest one. For more information, see Amazon Lightsail endpoints and quotas
-// (https://docs.aws.amazon.com/general/latest/gr/lightsail.html) in the AWS
-// General Reference.
+// (https://docs.aws.amazon.com/general/latest/gr/lightsail.html) in the Amazon Web
+// Services General Reference.
 func (c *Client) GetContainerServiceDeployments(ctx context.Context, params *GetContainerServiceDeploymentsInput, optFns ...func(*Options)) (*GetContainerServiceDeploymentsOutput, error) {
 	if params == nil {
 		params = &GetContainerServiceDeploymentsInput{}

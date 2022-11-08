@@ -1,0 +1,8 @@
+{
+    "id": "025f0cf0-8a31-4331-8f2b-930659f7185a",
+    "type": "feature",
+    "description": "Amazon Route 53 now supports the Europe (Zurich) Region (eu-central-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.",
+    "modules": [
+        "service/route53"
+    ]
+}

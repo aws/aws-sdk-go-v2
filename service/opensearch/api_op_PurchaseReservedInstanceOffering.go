@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to purchase reserved OpenSearch instances.
+// Allows you to purchase Amazon OpenSearch Service Reserved Instances.
 func (c *Client) PurchaseReservedInstanceOffering(ctx context.Context, params *PurchaseReservedInstanceOfferingInput, optFns ...func(*Options)) (*PurchaseReservedInstanceOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseReservedInstanceOfferingInput{}
@@ -26,7 +26,8 @@ func (c *Client) PurchaseReservedInstanceOffering(ctx context.Context, params *P
 	return out, nil
 }
 
-// Container for parameters to PurchaseReservedInstanceOffering
+// Container for request parameters to the PurchaseReservedInstanceOffering
+// operation.
 type PurchaseReservedInstanceOfferingInput struct {
 
 	// A customer-specified identifier to track this reservation.
@@ -34,7 +35,7 @@ type PurchaseReservedInstanceOfferingInput struct {
 	// This member is required.
 	ReservationName *string
 
-	// The ID of the reserved OpenSearch instance offering to purchase.
+	// The ID of the Reserved Instance offering to purchase.
 	//
 	// This member is required.
 	ReservedInstanceOfferingId *string
@@ -51,7 +52,7 @@ type PurchaseReservedInstanceOfferingOutput struct {
 	// The customer-specified identifier used to track this reservation.
 	ReservationName *string
 
-	// Details of the reserved OpenSearch instance which was purchased.
+	// The ID of the Reserved Instance offering that was purchased.
 	ReservedInstanceId *string
 
 	// Metadata pertaining to the operation's result.

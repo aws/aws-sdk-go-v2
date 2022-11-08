@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Dissociates a package from the Amazon OpenSearch Service domain.
+// Removes a package from the specified Amazon OpenSearch Service domain. The
+// package can't be in use with any OpenSearch index for the dissociation to
+// succeed. The package is still available in OpenSearch Service for association
+// later. For more information, see Custom packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackageInput, optFns ...func(*Options)) (*DissociatePackageOutput, error) {
 	if params == nil {
 		params = &DissociatePackageInput{}
@@ -30,13 +34,13 @@ func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackag
 // Container for the request parameters to the DissociatePackage operation.
 type DissociatePackageInput struct {
 
-	// The name of the domain to associate the package with.
+	// Name of the domain to dissociate the package from.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The internal ID of the package to associate with a domain. Use DescribePackages
-	// to find this value.
+	// Internal ID of the package to dissociate from the domain. Use
+	// ListPackagesForDomain to find this value.
 	//
 	// This member is required.
 	PackageID *string
@@ -44,10 +48,10 @@ type DissociatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the response returned by DissociatePackage operation.
+// Container for the response returned by an DissociatePackage operation.
 type DissociatePackageOutput struct {
 
-	// DomainPackageDetails
+	// Information about a package that has been dissociated from the domain.
 	DomainPackageDetails *types.DomainPackageDetails
 
 	// Metadata pertaining to the operation's result.

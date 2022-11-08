@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the pricing rule identified by the input Amazon Resource Name (ARN).
+// Deletes the pricing rule that's identified by the input Amazon Resource Name
+// (ARN).
 func (c *Client) DeletePricingRule(ctx context.Context, params *DeletePricingRuleInput, optFns ...func(*Options)) (*DeletePricingRuleOutput, error) {
 	if params == nil {
 		params = &DeletePricingRuleInput{}
@@ -28,7 +29,7 @@ func (c *Client) DeletePricingRule(ctx context.Context, params *DeletePricingRul
 
 type DeletePricingRuleInput struct {
 
-	// The Amazon Resource Name (ARN) of the pricing rule you are deleting.
+	// The Amazon Resource Name (ARN) of the pricing rule that you are deleting.
 	//
 	// This member is required.
 	Arn *string

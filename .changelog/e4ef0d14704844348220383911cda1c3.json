@@ -1,0 +1,8 @@
+{
+    "id": "e4ef0d14-7048-4434-8220-383911cda1c3",
+    "type": "feature",
+    "description": "This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager",
+    "modules": [
+        "service/ec2"
+    ]
+}

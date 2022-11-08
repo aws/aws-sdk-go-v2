@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the inbound cross-cluster connections for a remote domain.
+// Lists all the inbound cross-cluster search connections for a destination
+// (remote) Amazon OpenSearch Service domain. For more information, see
+// Cross-cluster search for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
 func (c *Client) DescribeInboundConnections(ctx context.Context, params *DescribeInboundConnectionsInput, optFns ...func(*Options)) (*DescribeInboundConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeInboundConnectionsInput{}
@@ -32,41 +35,30 @@ func (c *Client) DescribeInboundConnections(ctx context.Context, params *Describ
 type DescribeInboundConnectionsInput struct {
 
 	// A list of filters used to match properties for inbound cross-cluster
-	// connections. Available Filter values are:
-	//
-	// * connection-id
-	//
-	// *
-	// local-domain-info.domain-name
-	//
-	// * local-domain-info.owner-id
-	//
-	// *
-	// local-domain-info.region
-	//
-	// * remote-domain-info.domain-name
+	// connections.
 	Filters []types.Filter
 
-	// Set this value to limit the number of results returned. If not specified,
-	// defaults to 100.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// If more results are available and NextToken is present, make the next request to
-	// the same API with the received NextToken to paginate the remaining results.
+	// If your initial DescribeInboundConnections operation returns a nextToken, you
+	// can include the returned nextToken in subsequent DescribeInboundConnections
+	// operations, which returns results in the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeInboundConnections request. Contains a list of
-// connections matching the filter criteria.
+// Contains a list of connections matching the filter criteria.
 type DescribeInboundConnectionsOutput struct {
 
-	// A list of InboundConnection matching the specified filter criteria.
+	// List of inbound connections.
 	Connections []types.InboundConnection
 
-	// If more results are available and NextToken is present, make the next request to
-	// the same API with the received NextToken to paginate the remaining results.
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -146,8 +138,8 @@ var _ DescribeInboundConnectionsAPIClient = (*Client)(nil)
 // DescribeInboundConnectionsPaginatorOptions is the paginator options for
 // DescribeInboundConnections
 type DescribeInboundConnectionsPaginatorOptions struct {
-	// Set this value to limit the number of results returned. If not specified,
-	// defaults to 100.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

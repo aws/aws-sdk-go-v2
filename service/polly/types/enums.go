@@ -281,6 +281,10 @@ const (
 	VoiceIdPedro     VoiceId = "Pedro"
 	VoiceIdKajal     VoiceId = "Kajal"
 	VoiceIdHiujin    VoiceId = "Hiujin"
+	VoiceIdLaura     VoiceId = "Laura"
+	VoiceIdElin      VoiceId = "Elin"
+	VoiceIdIda       VoiceId = "Ida"
+	VoiceIdSuvi      VoiceId = "Suvi"
 )
 
 // Values returns all known values for VoiceId. Note that this can be expanded in
@@ -361,5 +365,9 @@ func (VoiceId) Values() []VoiceId {
 		"Pedro",
 		"Kajal",
 		"Hiujin",
+		"Laura",
+		"Elin",
+		"Ida",
+		"Suvi",
 	}
 }

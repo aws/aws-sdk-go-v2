@@ -58,7 +58,7 @@ type UpdateBillingGroupOutput struct {
 	// A description of the billing group.
 	Description *string
 
-	// The most recent time the billing group was modified.
+	// The most recent time when the billing group was modified.
 	LastModifiedTime int64
 
 	// The name of the billing group. The names must be unique to each billing group.

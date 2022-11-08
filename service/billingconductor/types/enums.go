@@ -6,10 +6,11 @@ type AssociateResourceErrorReason string
 
 // Enum values for AssociateResourceErrorReason
 const (
-	AssociateResourceErrorReasonInvalidArn              AssociateResourceErrorReason = "INVALID_ARN"
-	AssociateResourceErrorReasonServiceLimitExceeded    AssociateResourceErrorReason = "SERVICE_LIMIT_EXCEEDED"
-	AssociateResourceErrorReasonIllegalCustomlineitem   AssociateResourceErrorReason = "ILLEGAL_CUSTOMLINEITEM"
-	AssociateResourceErrorReasonInternalServerException AssociateResourceErrorReason = "INTERNAL_SERVER_EXCEPTION"
+	AssociateResourceErrorReasonInvalidArn                AssociateResourceErrorReason = "INVALID_ARN"
+	AssociateResourceErrorReasonServiceLimitExceeded      AssociateResourceErrorReason = "SERVICE_LIMIT_EXCEEDED"
+	AssociateResourceErrorReasonIllegalCustomlineitem     AssociateResourceErrorReason = "ILLEGAL_CUSTOMLINEITEM"
+	AssociateResourceErrorReasonInternalServerException   AssociateResourceErrorReason = "INTERNAL_SERVER_EXCEPTION"
+	AssociateResourceErrorReasonInvalidBillingPeriodRange AssociateResourceErrorReason = "INVALID_BILLING_PERIOD_RANGE"
 )
 
 // Values returns all known values for AssociateResourceErrorReason. Note that this
@@ -21,6 +22,7 @@ func (AssociateResourceErrorReason) Values() []AssociateResourceErrorReason {
 		"SERVICE_LIMIT_EXCEEDED",
 		"ILLEGAL_CUSTOMLINEITEM",
 		"INTERNAL_SERVER_EXCEPTION",
+		"INVALID_BILLING_PERIOD_RANGE",
 	}
 }
 
@@ -39,6 +41,30 @@ func (BillingGroupStatus) Values() []BillingGroupStatus {
 	return []BillingGroupStatus{
 		"ACTIVE",
 		"PRIMARY_ACCOUNT_MISSING",
+	}
+}
+
+type ConflictExceptionReason string
+
+// Enum values for ConflictExceptionReason
+const (
+	ConflictExceptionReasonResourceNameConflict                            ConflictExceptionReason = "RESOURCE_NAME_CONFLICT"
+	ConflictExceptionReasonPricingRuleInPricingPlanConflict                ConflictExceptionReason = "PRICING_RULE_IN_PRICING_PLAN_CONFLICT"
+	ConflictExceptionReasonPricingPlanAttachedToBillingGroupDeleteConflict ConflictExceptionReason = "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT"
+	ConflictExceptionReasonPricingRuleAttachedToPricingPlanDeleteConflict  ConflictExceptionReason = "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT"
+	ConflictExceptionReasonWriteConflictRetry                              ConflictExceptionReason = "WRITE_CONFLICT_RETRY"
+)
+
+// Values returns all known values for ConflictExceptionReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConflictExceptionReason) Values() []ConflictExceptionReason {
+	return []ConflictExceptionReason{
+		"RESOURCE_NAME_CONFLICT",
+		"PRICING_RULE_IN_PRICING_PLAN_CONFLICT",
+		"PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT",
+		"PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT",
+		"WRITE_CONFLICT_RETRY",
 	}
 }
 
@@ -180,6 +206,10 @@ const (
 	ValidationExceptionReasonMultipleLinkedAccountIds          ValidationExceptionReason = "MULTIPLE_LINKED_ACCOUNT_IDS"
 	ValidationExceptionReasonMissingPricingPlanArn             ValidationExceptionReason = "MISSING_PRICING_PLAN_ARN"
 	ValidationExceptionReasonMultiplePricingPlanArn            ValidationExceptionReason = "MULTIPLE_PRICING_PLAN_ARN"
+	ValidationExceptionReasonIllegalChildAssociateResource     ValidationExceptionReason = "ILLEGAL_CHILD_ASSOCIATE_RESOURCE"
+	ValidationExceptionReasonCustomLineItemAssociationExists   ValidationExceptionReason = "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"
+	ValidationExceptionReasonInvalidBillingPeriodForOperation  ValidationExceptionReason = "INVALID_BILLING_PERIOD_FOR_OPERATION"
+	ValidationExceptionReasonInvalidBillingGroup               ValidationExceptionReason = "INVALID_BILLING_GROUP"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -231,5 +261,9 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"MULTIPLE_LINKED_ACCOUNT_IDS",
 		"MISSING_PRICING_PLAN_ARN",
 		"MULTIPLE_PRICING_PLAN_ARN",
+		"ILLEGAL_CHILD_ASSOCIATE_RESOURCE",
+		"CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS",
+		"INVALID_BILLING_PERIOD_FOR_OPERATION",
+		"INVALID_BILLING_GROUP",
 	}
 }

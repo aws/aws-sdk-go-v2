@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of the pricing plans associated with a pricing rule.
+// A list of the pricing plans that are associated with a pricing rule.
 func (c *Client) ListPricingPlansAssociatedWithPricingRule(ctx context.Context, params *ListPricingPlansAssociatedWithPricingRuleInput, optFns ...func(*Options)) (*ListPricingPlansAssociatedWithPricingRuleOutput, error) {
 	if params == nil {
 		params = &ListPricingPlansAssociatedWithPricingRuleInput{}
@@ -55,7 +55,8 @@ type ListPricingPlansAssociatedWithPricingRuleOutput struct {
 	// The pagination token to be used on subsequent calls.
 	NextToken *string
 
-	// The list containing pricing plans associated with the requested pricing rule.
+	// The list containing pricing plans that are associated with the requested pricing
+	// rule.
 	PricingPlanArns []string
 
 	// The pricing rule Amazon Resource Name (ARN) for which associations will be

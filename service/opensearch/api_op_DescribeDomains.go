@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns domain configuration information about the specified domains, including
-// the domain ID, domain endpoint, and domain ARN.
+// Returns domain configuration information about the specified Amazon OpenSearch
+// Service domains.
 func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInput, optFns ...func(*Options)) (*DescribeDomainsOutput, error) {
 	if params == nil {
 		params = &DescribeDomainsInput{}
@@ -28,11 +28,12 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains operation. By default, the
-// API returns the status of all domains.
+// Container for the parameters to the DescribeDomains operation.
 type DescribeDomainsInput struct {
 
-	// The domains for which you want information.
+	// Array of OpenSearch Service domain names that you want information about. If you
+	// don't specify any domains, OpenSearch Service returns information about all
+	// domains owned by the account.
 	//
 	// This member is required.
 	DomainNames []string
@@ -40,11 +41,11 @@ type DescribeDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeDomains request. Contains the status of the specified
-// domains or all domains owned by the account.
+// Contains the status of the specified domains or all domains owned by the
+// account.
 type DescribeDomainsOutput struct {
 
-	// The status of the domains requested in the DescribeDomains request.
+	// The status of the requested domains.
 	//
 	// This member is required.
 	DomainStatusList []types.DomainStatus

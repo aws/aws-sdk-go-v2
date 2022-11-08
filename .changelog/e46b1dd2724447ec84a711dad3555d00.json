@@ -1,0 +1,8 @@
+{
+    "id": "e46b1dd2-7244-47ec-84a7-11dad3555d00",
+    "type": "feature",
+    "description": "This release adds the Recurring Custom Line Item feature along with a new API ListCustomLineItemVersions.",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

@@ -154,16 +154,16 @@ type CreateRelationalDatabaseInput struct {
 	// information about the preferred backup window time blocks for each region, see
 	// the Working With Backups
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
-	// guide in the Amazon Relational Database Service (Amazon RDS) documentation.
-	// Constraints:
-	//
-	// * Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
+	// guide in the Amazon Relational Database Service documentation. Constraints:
 	//
 	// *
-	// Specified in Coordinated Universal Time (UTC).
+	// Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
 	//
-	// * Must not conflict with the
-	// preferred maintenance window.
+	// * Specified in
+	// Coordinated Universal Time (UTC).
+	//
+	// * Must not conflict with the preferred
+	// maintenance window.
 	//
 	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string

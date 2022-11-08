@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the remote domain owner to reject an inbound cross-cluster connection
-// request.
+// Allows the remote Amazon OpenSearch Service domain owner to reject an inbound
+// cross-cluster connection request.
 func (c *Client) RejectInboundConnection(ctx context.Context, params *RejectInboundConnectionInput, optFns ...func(*Options)) (*RejectInboundConnectionOutput, error) {
 	if params == nil {
 		params = &RejectInboundConnectionInput{}
@@ -28,10 +28,10 @@ func (c *Client) RejectInboundConnection(ctx context.Context, params *RejectInbo
 	return out, nil
 }
 
-// Container for the parameters to the RejectInboundConnection operation.
+// Container for the request parameters to the RejectInboundConnection operation.
 type RejectInboundConnectionInput struct {
 
-	// The ID of the inbound connection to reject.
+	// The unique identifier of the inbound connection to reject.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -39,11 +39,10 @@ type RejectInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a RejectInboundConnection operation. Contains details about the
-// rejected inbound connection.
+// Represents the output of a RejectInboundConnection operation.
 type RejectInboundConnectionOutput struct {
 
-	// The InboundConnection of the rejected inbound connection.
+	// Contains details about the rejected inbound connection.
 	Connection *types.InboundConnection
 
 	// Metadata pertaining to the operation's result.

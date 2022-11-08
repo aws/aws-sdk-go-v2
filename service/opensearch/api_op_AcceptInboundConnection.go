@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the remote domain owner to accept an inbound cross-cluster connection
-// request.
+// Allows the destination Amazon OpenSearch Service domain owner to accept an
+// inbound cross-cluster search connection request. For more information, see
+// Cross-cluster search for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
 func (c *Client) AcceptInboundConnection(ctx context.Context, params *AcceptInboundConnectionInput, optFns ...func(*Options)) (*AcceptInboundConnectionOutput, error) {
 	if params == nil {
 		params = &AcceptInboundConnectionInput{}
@@ -31,7 +33,7 @@ func (c *Client) AcceptInboundConnection(ctx context.Context, params *AcceptInbo
 // Container for the parameters to the AcceptInboundConnection operation.
 type AcceptInboundConnectionInput struct {
 
-	// The ID of the inbound connection you want to accept.
+	// The ID of the inbound connection to accept.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -39,11 +41,10 @@ type AcceptInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of an AcceptInboundConnection operation. Contains details about the
-// accepted inbound connection.
+// Contains details about the accepted inbound connection.
 type AcceptInboundConnectionOutput struct {
 
-	// The InboundConnection of the accepted inbound connection.
+	// Information about the accepted inbound connection.
 	Connection *types.InboundConnection
 
 	// Metadata pertaining to the operation's result.

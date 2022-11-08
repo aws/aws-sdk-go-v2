@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the local domain owner to delete an existing outbound cross-cluster
-// connection.
+// Allows the source Amazon OpenSearch Service domain owner to delete an existing
+// outbound cross-cluster search connection. For more information, see
+// Cross-cluster search for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
 func (c *Client) DeleteOutboundConnection(ctx context.Context, params *DeleteOutboundConnectionInput, optFns ...func(*Options)) (*DeleteOutboundConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteOutboundConnectionInput{}
@@ -39,11 +41,10 @@ type DeleteOutboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteOutboundConnection operation. Contains details about the
-// deleted outbound connection.
+// Details about the deleted outbound connection.
 type DeleteOutboundConnectionOutput struct {
 
-	// The OutboundConnection of the deleted outbound connection.
+	// The deleted inbound connection.
 	Connection *types.OutboundConnection
 
 	// Metadata pertaining to the operation's result.

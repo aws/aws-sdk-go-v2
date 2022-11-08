@@ -61,9 +61,9 @@ type RequestCertificateInput struct {
 	// The Amazon Resource Name (ARN) of the private certificate authority (CA) that
 	// will be used to issue the certificate. If you do not provide an ARN and you are
 	// trying to request a private certificate, ACM will attempt to issue a public
-	// certificate. For more information about private CAs, see the Certificate Manager
+	// certificate. For more information about private CAs, see the Amazon Web Services
 	// Private Certificate Authority
-	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html) user
+	// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html) user
 	// guide. The ARN must have the following form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	CertificateAuthorityArn *string
@@ -79,6 +79,17 @@ type RequestCertificateInput struct {
 	// will issue only one. If you change the idempotency token for each call, ACM
 	// recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string
+
+	// Specifies the algorithm of the public and private key pair that your certificate
+	// uses to encrypt data. RSA is the default key algorithm for ACM certificates.
+	// Elliptic Curve Digital Signature Algorithm (ECDSA) keys are smaller, offering
+	// security comparable to RSA keys but with greater computing efficiency. However,
+	// ECDSA is not supported by all network clients. Some AWS services may require RSA
+	// keys, or only support ECDSA keys of a particular size, while others allow the
+	// use of either RSA and ECDSA keys to ensure that compatibility is not broken.
+	// Check the requirements for the AWS service where you plan to deploy your
+	// certificate. Default: RSA_2048
+	KeyAlgorithm types.KeyAlgorithm
 
 	// Currently, you can use this parameter to specify whether to add the certificate
 	// to a certificate transparency log. Certificate transparency makes it possible to

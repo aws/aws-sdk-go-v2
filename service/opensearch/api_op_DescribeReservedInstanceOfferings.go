@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists available reserved OpenSearch instance offerings.
+// Describes the available Amazon OpenSearch Service Reserved Instance offerings
+// for a given Region. For more information, see Reserved Instances in Amazon
+// OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ri.html).
 func (c *Client) DescribeReservedInstanceOfferings(ctx context.Context, params *DescribeReservedInstanceOfferingsInput, optFns ...func(*Options)) (*DescribeReservedInstanceOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeReservedInstanceOfferingsInput{}
@@ -28,30 +31,36 @@ func (c *Client) DescribeReservedInstanceOfferings(ctx context.Context, params *
 	return out, nil
 }
 
-// Container for parameters to DescribeReservedInstanceOfferings
+// Container for the request parameters to a DescribeReservedInstanceOfferings
+// operation.
 type DescribeReservedInstanceOfferingsInput struct {
 
-	// Set this value to limit the number of results returned. If not specified,
-	// defaults to 100.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	MaxResults int32
 
-	// Provides an identifier to allow retrieval of paginated results.
+	// If your initial DescribeReservedInstanceOfferings operation returns a nextToken,
+	// you can include the returned nextToken in subsequent
+	// DescribeReservedInstanceOfferings operations, which returns results in the next
+	// page.
 	NextToken *string
 
-	// The offering identifier filter value. Use this parameter to show only the
-	// available offering that matches the specified reservation identifier.
+	// The Reserved Instance identifier filter value. Use this parameter to show only
+	// the available instance types that match the specified reservation identifier.
 	ReservedInstanceOfferingId *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for results from DescribeReservedInstanceOfferings
+// Container for results of a DescribeReservedInstanceOfferings request.
 type DescribeReservedInstanceOfferingsOutput struct {
 
-	// Provides an identifier to allow retrieval of paginated results.
+	// When nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page.
 	NextToken *string
 
-	// List of reserved OpenSearch instance offerings
+	// List of Reserved Instance offerings.
 	ReservedInstanceOfferings []types.ReservedInstanceOffering
 
 	// Metadata pertaining to the operation's result.
@@ -131,8 +140,8 @@ var _ DescribeReservedInstanceOfferingsAPIClient = (*Client)(nil)
 // DescribeReservedInstanceOfferingsPaginatorOptions is the paginator options for
 // DescribeReservedInstanceOfferings
 type DescribeReservedInstanceOfferingsPaginatorOptions struct {
-	// Set this value to limit the number of results returned. If not specified,
-	// defaults to 100.
+	// An optional parameter that specifies the maximum number of results to return.
+	// You can use nextToken to get the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

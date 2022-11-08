@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the package.
+// Deletes an Amazon OpenSearch Service package. For more information, see Custom
+// packages for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html).
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
 		params = &DeletePackageInput{}
@@ -27,7 +29,8 @@ func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, 
 	return out, nil
 }
 
-// Container for the request parameters to the DeletePackage operation.
+// Deletes a package from OpenSearch Service. The package can't be associated with
+// any OpenSearch Service domain.
 type DeletePackageInput struct {
 
 	// The internal ID of the package you want to delete. Use DescribePackages to find
@@ -42,7 +45,7 @@ type DeletePackageInput struct {
 // Container for the response parameters to the DeletePackage operation.
 type DeletePackageOutput struct {
 
-	// PackageDetails
+	// Information about the deleted package.
 	PackageDetails *types.PackageDetails
 
 	// Metadata pertaining to the operation's result.

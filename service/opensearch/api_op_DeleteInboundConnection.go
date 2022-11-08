@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows the remote domain owner to delete an existing inbound cross-cluster
-// connection.
+// Allows the destination Amazon OpenSearch Service domain owner to delete an
+// existing inbound cross-cluster search connection. For more information, see
+// Cross-cluster search for Amazon OpenSearch Service
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html).
 func (c *Client) DeleteInboundConnection(ctx context.Context, params *DeleteInboundConnectionInput, optFns ...func(*Options)) (*DeleteInboundConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteInboundConnectionInput{}
@@ -39,11 +41,11 @@ type DeleteInboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteInboundConnection operation. Contains details about the
+// The results of a DeleteInboundConnection operation. Contains details about the
 // deleted inbound connection.
 type DeleteInboundConnectionOutput struct {
 
-	// The InboundConnection of the deleted inbound connection.
+	// The deleted inbound connection.
 	Connection *types.InboundConnection
 
 	// Metadata pertaining to the operation's result.

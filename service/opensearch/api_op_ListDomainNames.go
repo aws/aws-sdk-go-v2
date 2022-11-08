@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the names of all domains owned by the current user's account.
+// Returns the names of all Amazon OpenSearch Service domains owned by the current
+// user in the active Region.
 func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInput, optFns ...func(*Options)) (*ListDomainNamesOutput, error) {
 	if params == nil {
 		params = &ListDomainNamesInput{}
@@ -30,18 +31,18 @@ func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInp
 // Container for the parameters to the ListDomainNames operation.
 type ListDomainNamesInput struct {
 
-	// Optional parameter to filter the output by domain engine type. Acceptable values
-	// are 'Elasticsearch' and 'OpenSearch'.
+	// Filters the output by domain engine type.
 	EngineType types.EngineType
 
 	noSmithyDocumentSerde
 }
 
-// The result of a ListDomainNames operation. Contains the names of all domains
+// The results of a ListDomainNames operation. Contains the names of all domains
 // owned by this account and their respective engine types.
 type ListDomainNamesOutput struct {
 
-	// List of domain names and respective engine types.
+	// The names of all OpenSearch Service domains owned by the current user and their
+	// respective engine types.
 	DomainNames []types.DomainInfo
 
 	// Metadata pertaining to the operation's result.

@@ -11,11 +11,11 @@ import (
 )
 
 // Renews an eligible ACM certificate. At this time, only exported private
-// certificates can be renewed with this operation. In order to renew your ACM
-// Private CA certificates with ACM, you must first grant the ACM service principal
-// permission to do so
-// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaPermissions.html). For
-// more information, see Testing Managed Renewal
+// certificates can be renewed with this operation. In order to renew your Amazon
+// Web Services Private CA certificates with ACM, you must first grant the ACM
+// service principal permission to do so
+// (https://docs.aws.amazon.com/privateca/latest/userguide/PcaPermissions.html).
+// For more information, see Testing Managed Renewal
 // (https://docs.aws.amazon.com/acm/latest/userguide/manual-renewal.html) in the
 // ACM User Guide.
 func (c *Client) RenewCertificate(ctx context.Context, params *RenewCertificateInput, optFns ...func(*Options)) (*RenewCertificateOutput, error) {

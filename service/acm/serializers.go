@@ -1237,6 +1237,11 @@ func awsAwsjson11_serializeOpDocumentRequestCertificateInput(v *RequestCertifica
 		ok.String(*v.IdempotencyToken)
 	}
 
+	if len(v.KeyAlgorithm) > 0 {
+		ok := object.Key("KeyAlgorithm")
+		ok.String(string(v.KeyAlgorithm))
+	}
+
 	if v.Options != nil {
 		ok := object.Key("Options")
 		if err := awsAwsjson11_serializeDocumentCertificateOptions(v.Options, ok); err != nil {
