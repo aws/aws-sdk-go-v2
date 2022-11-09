@@ -1,3 +1,7 @@
+# v1.69.0 (2022-11-09)
+
+* **Feature**: Amazon EC2 Trn1 instances, powered by AWS Trainium chips, are purpose built for high-performance deep learning training. u-24tb1.112xlarge and u-18tb1.112xlarge High Memory instances are purpose-built to run large in-memory databases.
+
 # v1.68.0 (2022-11-08)
 
 * **Feature**: This release enables sharing of EC2 Placement Groups across accounts and within AWS Organizations using Resource Access Manager

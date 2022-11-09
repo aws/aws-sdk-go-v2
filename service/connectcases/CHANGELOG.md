@@ -1,3 +1,7 @@
+# v1.1.0 (2022-11-09)
+
+* **Feature**: This release adds the ability to disable templates through the UpdateTemplate API. Disabling templates prevents customers from creating cases using the template. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
 # v1.0.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

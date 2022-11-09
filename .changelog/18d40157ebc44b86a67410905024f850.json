@@ -1,8 +1,0 @@
-{
-    "id": "18d40157-ebc4-4b86-a674-10905024f850",
-    "type": "feature",
-    "description": "This release adds new fields SignInUrl, UserArn, and UserId to GetFederationToken response payload.",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.35.0 (2022-11-09)
+
+* **Feature**: This release adds new fields SignInUrl, UserArn, and UserId to GetFederationToken response payload.
+
 # v1.34.0 (2022-10-31)
 
 * **Feature**: Amazon connect now support a new API DismissUserContact to dismiss or remove terminated contacts in Agent CCP

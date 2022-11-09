@@ -1,3 +1,19 @@
+# Release (2022-11-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.35.0](service/connect/CHANGELOG.md#v1350-2022-11-09)
+  * **Feature**: This release adds new fields SignInUrl, UserArn, and UserId to GetFederationToken response payload.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.1.0](service/connectcases/CHANGELOG.md#v110-2022-11-09)
+  * **Feature**: This release adds the ability to disable templates through the UpdateTemplate API. Disabling templates prevents customers from creating cases using the template. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.69.0](service/ec2/CHANGELOG.md#v1690-2022-11-09)
+  * **Feature**: Amazon EC2 Trn1 instances, powered by AWS Trainium chips, are purpose built for high-performance deep learning training. u-24tb1.112xlarge and u-18tb1.112xlarge High Memory instances are purpose-built to run large in-memory databases.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.14.0](service/groundstation/CHANGELOG.md#v1140-2022-11-09)
+  * **Feature**: This release adds the preview of customer-provided ephemeris support for AWS Ground Station, allowing space vehicle owners to provide their own position and trajectory information for a satellite.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.19.0](service/mediapackagevod/CHANGELOG.md#v1190-2022-11-09)
+  * **Feature**: This release adds "IncludeIframeOnlyStream" for Dash endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.7.0](service/transcribestreaming/CHANGELOG.md#v170-2022-11-09)
+  * **Feature**: This will release hi-IN and th-TH
+
 # Release (2022-11-08)
 
 ## Module Highlights

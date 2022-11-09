@@ -1,3 +1,7 @@
+# v1.7.0 (2022-11-09)
+
+* **Feature**: This will release hi-IN and th-TH
+
 # v1.6.21 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
