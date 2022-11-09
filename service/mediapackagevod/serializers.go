@@ -1419,6 +1419,11 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		ok.Boolean(v.IncludeEncoderConfigurationInSegments)
 	}
 
+	if v.IncludeIframeOnlyStream {
+		ok := object.Key("includeIframeOnlyStream")
+		ok.Boolean(v.IncludeIframeOnlyStream)
+	}
+
 	if v.PeriodTriggers != nil {
 		ok := object.Key("periodTriggers")
 		if err := awsRestjson1_serializeDocument__listOf__PeriodTriggersElement(v.PeriodTriggers, ok); err != nil {

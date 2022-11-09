@@ -53,6 +53,7 @@ type ClaimPhoneNumberInput struct {
 	// field. For more information about idempotency, see Making retries safe with
 	// idempotent APIs
 	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+	// Pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$
 	ClientToken *string
 
 	// The description of the phone number.

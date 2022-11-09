@@ -3,5 +3,14 @@
 // Package transcribestreaming provides the API client, operations, and parameter
 // types for Amazon Transcribe Streaming Service.
 //
-// Operations and objects for transcribing streaming speech to text.
+// Amazon Transcribe streaming offers two types of real-time transcription:
+// Standard and Medical.
+//
+// * Standard transcriptions are the most common option.
+// Refer to for details.
+//
+// * Medical transcriptions are tailored to medical
+// professionals and incorporate medical terms. A common use case for this service
+// is transcribing doctor-patient dialogue in real time, so doctors can focus on
+// their patient instead of taking notes. Refer to for details.
 package transcribestreaming

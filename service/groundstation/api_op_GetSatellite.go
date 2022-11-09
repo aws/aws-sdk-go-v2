@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +38,9 @@ type GetSatelliteInput struct {
 }
 
 type GetSatelliteOutput struct {
+
+	// The current ephemeris being used to compute the trajectory of the satellite.
+	CurrentEphemeris *types.EphemerisMetaData
 
 	// A list of ground stations to which the satellite is on-boarded.
 	GroundStations []string

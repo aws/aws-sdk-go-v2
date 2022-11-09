@@ -754,6 +754,11 @@ type TemplateSummary struct {
 	// This member is required.
 	Name *string
 
+	// The status of the template.
+	//
+	// This member is required.
+	Status TemplateStatus
+
 	// The Amazon Resource Name (ARN) of the template.
 	//
 	// This member is required.

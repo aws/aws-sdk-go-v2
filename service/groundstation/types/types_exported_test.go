@@ -74,3 +74,46 @@ var _ *types.S3RecordingConfig
 var _ *types.AntennaUplinkConfig
 var _ *types.AntennaDownlinkConfig
 var _ *types.DataflowEndpointConfig
+
+func ExampleEphemerisData_outputUsage() {
+	var union types.EphemerisData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EphemerisDataMemberOem:
+		_ = v.Value // Value is types.OEMEphemeris
+
+	case *types.EphemerisDataMemberTle:
+		_ = v.Value // Value is types.TLEEphemeris
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TLEEphemeris
+var _ *types.OEMEphemeris
+
+func ExampleEphemerisTypeDescription_outputUsage() {
+	var union types.EphemerisTypeDescription
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EphemerisTypeDescriptionMemberOem:
+		_ = v.Value // Value is types.EphemerisDescription
+
+	case *types.EphemerisTypeDescriptionMemberTle:
+		_ = v.Value // Value is types.EphemerisDescription
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EphemerisDescription

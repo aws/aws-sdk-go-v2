@@ -70,6 +70,26 @@ func (m *validateOpCreateDataflowEndpointGroup) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEphemeris struct {
+}
+
+func (*validateOpCreateEphemeris) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEphemeris) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEphemerisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEphemerisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMissionProfile struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpDeleteDataflowEndpointGroup) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEphemeris struct {
+}
+
+func (*validateOpDeleteEphemeris) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEphemeris) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEphemerisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEphemerisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMissionProfile struct {
 }
 
@@ -165,6 +205,26 @@ func (m *validateOpDescribeContact) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeEphemeris struct {
+}
+
+func (*validateOpDescribeEphemeris) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEphemeris) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEphemerisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEphemerisInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +350,26 @@ func (m *validateOpListContacts) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEphemerides struct {
+}
+
+func (*validateOpListEphemerides) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEphemerides) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEphemeridesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEphemeridesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -390,6 +470,26 @@ func (m *validateOpUpdateConfig) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEphemeris struct {
+}
+
+func (*validateOpUpdateEphemeris) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEphemeris) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEphemerisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEphemerisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMissionProfile struct {
 }
 
@@ -422,6 +522,10 @@ func addOpCreateDataflowEndpointGroupValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateDataflowEndpointGroup{}, middleware.After)
 }
 
+func addOpCreateEphemerisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEphemeris{}, middleware.After)
+}
+
 func addOpCreateMissionProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMissionProfile{}, middleware.After)
 }
@@ -434,12 +538,20 @@ func addOpDeleteDataflowEndpointGroupValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDeleteDataflowEndpointGroup{}, middleware.After)
 }
 
+func addOpDeleteEphemerisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEphemeris{}, middleware.After)
+}
+
 func addOpDeleteMissionProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMissionProfile{}, middleware.After)
 }
 
 func addOpDescribeContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContact{}, middleware.After)
+}
+
+func addOpDescribeEphemerisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEphemeris{}, middleware.After)
 }
 
 func addOpGetConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -466,6 +578,10 @@ func addOpListContactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContacts{}, middleware.After)
 }
 
+func addOpListEphemeridesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEphemerides{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -484,6 +600,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfig{}, middleware.After)
+}
+
+func addOpUpdateEphemerisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEphemeris{}, middleware.After)
 }
 
 func addOpUpdateMissionProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -736,6 +856,25 @@ func validateEndpointDetailsList(v []types.EndpointDetails) error {
 	}
 }
 
+func validateEphemerisData(v types.EphemerisData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EphemerisData"}
+	switch uv := v.(type) {
+	case *types.EphemerisDataMemberTle:
+		if err := validateTLEEphemeris(&uv.Value); err != nil {
+			invalidParams.AddNested("[tle]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFrequency(v *types.Frequency) error {
 	if v == nil {
 		return nil
@@ -855,6 +994,83 @@ func validateSpectrumConfig(v *types.SpectrumConfig) error {
 	}
 }
 
+func validateTimeRange(v *types.TimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeRange"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTLEData(v *types.TLEData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TLEData"}
+	if v.TleLine1 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TleLine1"))
+	}
+	if v.TleLine2 == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TleLine2"))
+	}
+	if v.ValidTimeRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValidTimeRange"))
+	} else if v.ValidTimeRange != nil {
+		if err := validateTimeRange(v.ValidTimeRange); err != nil {
+			invalidParams.AddNested("ValidTimeRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTLEDataList(v []types.TLEData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TLEDataList"}
+	for i := range v {
+		if err := validateTLEData(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTLEEphemeris(v *types.TLEEphemeris) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TLEEphemeris"}
+	if v.TleData != nil {
+		if err := validateTLEDataList(v.TleData); err != nil {
+			invalidParams.AddNested("TleData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrackingConfig(v *types.TrackingConfig) error {
 	if v == nil {
 		return nil
@@ -963,6 +1179,29 @@ func validateOpCreateDataflowEndpointGroupInput(v *CreateDataflowEndpointGroupIn
 	}
 }
 
+func validateOpCreateEphemerisInput(v *CreateEphemerisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEphemerisInput"}
+	if v.SatelliteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SatelliteId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Ephemeris != nil {
+		if err := validateEphemerisData(v.Ephemeris); err != nil {
+			invalidParams.AddNested("Ephemeris", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMissionProfileInput(v *CreateMissionProfileInput) error {
 	if v == nil {
 		return nil
@@ -1020,6 +1259,21 @@ func validateOpDeleteDataflowEndpointGroupInput(v *DeleteDataflowEndpointGroupIn
 	}
 }
 
+func validateOpDeleteEphemerisInput(v *DeleteEphemerisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEphemerisInput"}
+	if v.EphemerisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EphemerisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMissionProfileInput(v *DeleteMissionProfileInput) error {
 	if v == nil {
 		return nil
@@ -1042,6 +1296,21 @@ func validateOpDescribeContactInput(v *DescribeContactInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeContactInput"}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEphemerisInput(v *DescribeEphemerisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEphemerisInput"}
+	if v.EphemerisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EphemerisId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1138,6 +1407,27 @@ func validateOpListContactsInput(v *ListContactsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListContactsInput"}
 	if v.StatusList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StatusList"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEphemeridesInput(v *ListEphemeridesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEphemeridesInput"}
+	if v.SatelliteId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SatelliteId"))
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
@@ -1250,6 +1540,24 @@ func validateOpUpdateConfigInput(v *UpdateConfigInput) error {
 		if err := validateConfigTypeData(v.ConfigData); err != nil {
 			invalidParams.AddNested("ConfigData", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEphemerisInput(v *UpdateEphemerisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEphemerisInput"}
+	if v.EphemerisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EphemerisId"))
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

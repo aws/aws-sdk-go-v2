@@ -34,7 +34,7 @@ func (c *Client) ReplicateInstance(ctx context.Context, params *ReplicateInstanc
 type ReplicateInstanceInput struct {
 
 	// The identifier of the Amazon Connect instance. You can find the instanceId in
-	// the ARN of the instance.
+	// the ARN of the instance. You can provide the InstanceId, or the entire ARN.
 	//
 	// This member is required.
 	InstanceId *string

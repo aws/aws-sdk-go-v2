@@ -8,9 +8,9 @@ import (
 )
 
 // One or more arguments to the StartStreamTranscription or
-// StartMedicalStreamTranscription operation was invalid. For example,
-// MediaEncoding was not set to a valid encoding, or LanguageCode was not set to a
-// valid code. Check the parameters and try your request again.
+// StartMedicalStreamTranscription operation was not valid. For example,
+// MediaEncoding or LanguageCode used not valid values. Check the specified
+// parameters and try your request again.
 type BadRequestException struct {
 	Message *string
 
@@ -49,8 +49,8 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A problem occurred while processing the audio. Amazon Transcribe or Amazon
-// Transcribe Medical terminated processing. Try your request again.
+// A problem occurred while processing the audio. Amazon Transcribe terminated
+// processing.
 type InternalFailureException struct {
 	Message *string
 
@@ -69,10 +69,9 @@ func (e *InternalFailureException) ErrorMessage() string {
 func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// You have exceeded the maximum number of concurrent transcription streams, are
-// starting transcription streams too quickly, or the maximum audio length of 4
-// hours. Wait until a stream has finished processing, or break your audio stream
-// into smaller chunks and try your request again.
+// Your client has exceeded one of the Amazon Transcribe limits. This is typically
+// the audio length limit. Break your audio stream into smaller chunks and try your
+// request again.
 type LimitExceededException struct {
 	Message *string
 
@@ -91,7 +90,7 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Service is currently unavailable. Try your request later.
+// The service is currently unavailable. Try your request later.
 type ServiceUnavailableException struct {
 	Message *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "da271392-dc0a-48b4-912a-5aef5b1b4e5e",
+    "type": "feature",
+    "description": "This will release hi-IN and th-TH",
+    "modules": [
+        "service/transcribestreaming"
+    ]
+}

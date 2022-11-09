@@ -15,9 +15,11 @@ import (
 	"time"
 )
 
-// Starts a bidirectional HTTP/2 stream where audio is streamed to Amazon
-// Transcribe Medical and the transcription results are streamed to your
-// application.
+// Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
+// Amazon Transcribe Medical and the transcription results are streamed to your
+// application. For more information on streaming with Amazon Transcribe Medical,
+// see Transcribing streaming audio
+// (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
 func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *StartMedicalStreamTranscriptionInput, optFns ...func(*Options)) (*StartMedicalStreamTranscriptionOutput, error) {
 	if params == nil {
 		params = &StartMedicalStreamTranscriptionInput{}
@@ -35,62 +37,81 @@ func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *St
 
 type StartMedicalStreamTranscriptionInput struct {
 
-	// Indicates the source language used in the input audio stream. For Amazon
-	// Transcribe Medical, this is US English (en-US).
+	// Specify the language code that represents the language spoken in your audio.
+	// Amazon Transcribe Medical only supports US English (en-US).
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The encoding used for the input audio.
+	// Specify the encoding used for the input audio. Supported formats are:
+	//
+	// * FLAC
+	//
+	// *
+	// OPUS-encoded audio in an Ogg container
+	//
+	// * PCM (only signed 16-bit little-endian
+	// audio formats, which does not include WAV)
+	//
+	// For more information, see Media
+	// formats
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio).
 	//
 	// This member is required.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate of the input audio (in Hertz). Amazon Transcribe medical
+	// The sample rate of the input audio (in hertz). Amazon Transcribe Medical
 	// supports a range from 16,000 Hz to 48,000 Hz. Note that the sample rate you
 	// specify must match that of your audio.
 	//
 	// This member is required.
 	MediaSampleRateHertz *int32
 
-	// The medical specialty of the clinician or provider.
+	// Specify the medical specialty contained in your audio.
 	//
 	// This member is required.
 	Specialty types.Specialty
 
-	// The type of input audio. Choose DICTATION for a provider dictating patient
-	// notes. Choose CONVERSATION for a dialogue between a patient and one or more
-	// medical professionanls.
+	// Specify the type of input audio. For example, choose DICTATION for a provider
+	// dictating patient notes and CONVERSATION for a dialogue between a patient and a
+	// medical professional.
 	//
 	// This member is required.
 	Type types.Type
 
-	// Set this field to PHI to identify personal health information in the
-	// transcription output.
+	// Labels all personal health information (PHI) identified in your transcript.
+	// Content identification is performed at the segment level; PHI is flagged upon
+	// complete transcription of an audio segment. For more information, see
+	// Identifying personal health information (PHI) in a transcription
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html).
 	ContentIdentificationType types.MedicalContentIdentificationType
 
-	// When true, instructs Amazon Transcribe Medical to process each audio channel
-	// separately and then merge the transcription output of each channel into a single
-	// transcription. Amazon Transcribe Medical also produces a transcription of each
-	// item. An item includes the start time, end time, and any alternative
-	// transcriptions. You can't set both ShowSpeakerLabel and
-	// EnableChannelIdentification in the same request. If you set both, your request
-	// returns a BadRequestException.
+	// Enables channel identification in multi-channel audio. Channel identification
+	// transcribes the audio on each channel independently, then appends the output for
+	// each channel into one transcript. If you have multi-channel audio and do not
+	// enable channel identification, your audio is transcribed in a continuous manner
+	// and your transcript is not separated by channel. For more information, see
+	// Transcribing multi-channel audio
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html).
 	EnableChannelIdentification bool
 
-	// The number of channels that are in your audio stream.
+	// Specify the number of channels in your audio stream. Up to two channels are
+	// supported.
 	NumberOfChannels *int32
 
-	// Optional. An identifier for the transcription session. If you don't provide a
-	// session ID, Amazon Transcribe generates one for you and returns it in the
-	// response.
+	// Specify a name for your transcription session. If you don't include this
+	// parameter in your request, Amazon Transcribe Medical generates an ID and returns
+	// it in the response. You can use a session ID to retry a streaming session.
 	SessionId *string
 
-	// When true, enables speaker identification in your real-time stream.
+	// Enables speaker partitioning (diarization) in your transcription output. Speaker
+	// partitioning labels the speech from individual speakers in your media file. For
+	// more information, see Partitioning speakers (diarization)
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
 	ShowSpeakerLabel bool
 
-	// The name of the medical custom vocabulary to use when processing the real-time
-	// stream.
+	// Specify the name of the custom vocabulary that you want to use when processing
+	// your transcription. Note that vocabulary names are case sensitive.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -98,44 +119,41 @@ type StartMedicalStreamTranscriptionInput struct {
 
 type StartMedicalStreamTranscriptionOutput struct {
 
-	// If the value is PHI, indicates that you've configured your stream to identify
-	// personal health information.
+	// Shows whether content identification was enabled for your transcription.
 	ContentIdentificationType types.MedicalContentIdentificationType
 
-	// Shows whether channel identification has been enabled in the stream.
+	// Shows whether channel identification was enabled for your transcription.
 	EnableChannelIdentification bool
 
-	// The language code for the response transcript. For Amazon Transcribe Medical,
-	// this is US English (en-US).
+	// Provides the language code that you specified in your request. This must be
+	// en-US.
 	LanguageCode types.LanguageCode
 
-	// The encoding used for the input audio stream.
+	// Provides the media encoding you specified in your request.
 	MediaEncoding types.MediaEncoding
 
-	// The sample rate of the input audio, in Hertz (Hz).
+	// Provides the sample rate that you specified in your request.
 	MediaSampleRateHertz *int32
 
-	// The number of channels identified in the stream.
+	// Provides the number of channels that you specified in your request.
 	NumberOfChannels *int32
 
-	// An identifier for the streaming transcription.
+	// Provides the identifier for your streaming request.
 	RequestId *string
 
-	// Optional. An identifier for the transcription session. If you don't provide a
-	// session ID, Amazon Transcribe generates one for you and returns it in the
-	// response.
+	// Provides the identifier for your transcription session.
 	SessionId *string
 
-	// Shows whether speaker identification was enabled in the stream.
+	// Shows whether speaker partitioning was enabled for your transcription.
 	ShowSpeakerLabel bool
 
-	// The specialty in the medical domain.
+	// Provides the medical specialty that you specified in your request.
 	Specialty types.Specialty
 
-	// The type of audio that was transcribed.
+	// Provides the type of audio you specified in your request.
 	Type types.Type
 
-	// The name of the vocabulary used when processing the stream.
+	// Provides the name of the custom vocabulary that you specified in your request.
 	VocabularyName *string
 
 	eventStream *StartMedicalStreamTranscriptionEventStream

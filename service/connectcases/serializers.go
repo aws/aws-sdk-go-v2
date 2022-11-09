@@ -724,6 +724,11 @@ func awsRestjson1_serializeOpDocumentCreateTemplateInput(v *CreateTemplateInput,
 		}
 	}
 
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
 	return nil
 }
 
@@ -1554,6 +1559,12 @@ func awsRestjson1_serializeOpHttpBindingsListTemplatesInput(v *ListTemplatesInpu
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.Status != nil {
+		for i := range v.Status {
+			encoder.AddQuery("status").String(string(v.Status[i]))
+		}
 	}
 
 	return nil
@@ -2391,6 +2402,11 @@ func awsRestjson1_serializeOpDocumentUpdateTemplateInput(v *UpdateTemplateInput,
 		if err := awsRestjson1_serializeDocumentRequiredFieldList(v.RequiredFields, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

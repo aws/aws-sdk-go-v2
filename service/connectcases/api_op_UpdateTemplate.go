@@ -12,9 +12,10 @@ import (
 )
 
 // Updates the attributes of an existing template. The template attributes that can
-// be modified include name, description, layouts, and requiredFields. At least one
-// of these attributes must not be null. If a null value is provided for a given
-// attribute, that attribute is ignored and its current value is preserved.
+// be modified include name, description, layoutConfiguration, requiredFields, and
+// status. At least one of these attributes must not be null. If a null value is
+// provided for a given attribute, that attribute is ignored and its current value
+// is preserved.
 func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput, optFns ...func(*Options)) (*UpdateTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateTemplateInput{}
@@ -54,6 +55,9 @@ type UpdateTemplateInput struct {
 	// A list of fields that must contain a value for a case to be successfully created
 	// with this template.
 	RequiredFields []types.RequiredField
+
+	// The status of the template.
+	Status types.TemplateStatus
 
 	noSmithyDocumentSerde
 }

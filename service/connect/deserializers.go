@@ -10116,6 +10116,33 @@ func awsRestjson1_deserializeOpDocumentGetFederationTokenOutput(v **GetFederatio
 				return err
 			}
 
+		case "SignInUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.SignInUrl = ptr.String(jtv)
+			}
+
+		case "UserArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.UserArn = ptr.String(jtv)
+			}
+
+		case "UserId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentResourceId to be of type string, got %T instead", value)
+				}
+				sv.UserId = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

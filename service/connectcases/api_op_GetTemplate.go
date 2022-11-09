@@ -49,6 +49,11 @@ type GetTemplateOutput struct {
 	// This member is required.
 	Name *string
 
+	// The status of the template.
+	//
+	// This member is required.
+	Status types.TemplateStatus
+
 	// The Amazon Resource Name (ARN) of the template.
 	//
 	// This member is required.

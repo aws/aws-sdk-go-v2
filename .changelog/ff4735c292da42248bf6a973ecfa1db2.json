@@ -1,0 +1,8 @@
+{
+    "id": "ff4735c2-92da-4224-8bf6-a973ecfa1db2",
+    "type": "feature",
+    "description": "This release adds the preview of customer-provided ephemeris support for AWS Ground Station, allowing space vehicle owners to provide their own position and trajectory information for a satellite.",
+    "modules": [
+        "service/groundstation"
+    ]
+}

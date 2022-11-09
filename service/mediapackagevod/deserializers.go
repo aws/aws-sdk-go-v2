@@ -3796,6 +3796,15 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 				sv.IncludeEncoderConfigurationInSegments = jtv
 			}
 
+		case "includeIframeOnlyStream":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeIframeOnlyStream = jtv
+			}
+
 		case "periodTriggers":
 			if err := awsRestjson1_deserializeDocument__listOf__PeriodTriggersElement(&sv.PeriodTriggers, value); err != nil {
 				return err

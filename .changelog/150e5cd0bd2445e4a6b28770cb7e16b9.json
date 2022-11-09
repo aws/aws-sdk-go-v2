@@ -1,0 +1,8 @@
+{
+    "id": "150e5cd0-bd24-45e4-a6b2-8770cb7e16b9",
+    "type": "feature",
+    "description": "This release adds \"IncludeIframeOnlyStream\" for Dash endpoints.",
+    "modules": [
+        "service/mediapackagevod"
+    ]
+}

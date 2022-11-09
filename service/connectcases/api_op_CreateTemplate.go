@@ -12,10 +12,12 @@ import (
 )
 
 // Creates a template in the Cases domain. This template is used to define the case
-// object model (that is, define what data can be captured on cases) in a Cases
+// object model (that is, to define what data can be captured on cases) in a Cases
 // domain. A template must have a unique name within a domain, and it must
 // reference existing field IDs and layout IDs. Additionally, multiple fields with
-// same IDs are not allowed within the same Template.
+// same IDs are not allowed within the same Template. A template can be either
+// Active or Inactive, as indicated by its status. Inactive templates cannot be
+// used to create cases.
 func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput, optFns ...func(*Options)) (*CreateTemplateOutput, error) {
 	if params == nil {
 		params = &CreateTemplateInput{}
@@ -52,6 +54,9 @@ type CreateTemplateInput struct {
 	// A list of fields that must contain a value for a case to be successfully created
 	// with this template.
 	RequiredFields []types.RequiredField
+
+	// The status of the template.
+	Status types.TemplateStatus
 
 	noSmithyDocumentSerde
 }

@@ -157,6 +157,9 @@ type DashPackage struct {
 	// during content playback.
 	IncludeEncoderConfigurationInSegments bool
 
+	// When enabled, an I-Frame only stream will be included in the output.
+	IncludeIframeOnlyStream bool
+
 	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
 	// over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into
 	// multiple periods. If empty, the content will not be partitioned into more than

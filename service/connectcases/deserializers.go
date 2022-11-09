@@ -2329,6 +2329,15 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				return err
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.TemplateStatus(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -4432,6 +4441,9 @@ func awsRestjson1_deserializeOpErrorUpdateLayout(response *smithyhttp.Response, 
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -7076,6 +7088,15 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 					return fmt.Errorf("expected TemplateName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.TemplateStatus(jtv)
 			}
 
 		case "templateArn":

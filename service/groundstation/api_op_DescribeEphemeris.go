@@ -12,76 +12,66 @@ import (
 	"time"
 )
 
-// Describes an existing contact.
-func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInput, optFns ...func(*Options)) (*DescribeContactOutput, error) {
+// Describes an existing ephemeris.
+func (c *Client) DescribeEphemeris(ctx context.Context, params *DescribeEphemerisInput, optFns ...func(*Options)) (*DescribeEphemerisOutput, error) {
 	if params == nil {
-		params = &DescribeContactInput{}
+		params = &DescribeEphemerisInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeContact", params, optFns, c.addOperationDescribeContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeEphemeris", params, optFns, c.addOperationDescribeEphemerisMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeContactOutput)
+	out := result.(*DescribeEphemerisOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeContactInput struct {
+type DescribeEphemerisInput struct {
 
-	// UUID of a contact.
+	// The AWS Ground Station ephemeris ID.
 	//
 	// This member is required.
-	ContactId *string
+	EphemerisId *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeContactOutput struct {
+type DescribeEphemerisOutput struct {
 
-	// UUID of a contact.
-	ContactId *string
+	// The time the ephemeris was uploaded in UTC.
+	CreationTime *time.Time
 
-	// Status of a contact.
-	ContactStatus types.ContactStatus
+	// Whether or not the ephemeris is enabled.
+	Enabled *bool
 
-	// List describing source and destination details for each dataflow edge.
-	DataflowList []types.DataflowDetail
+	// The AWS Ground Station ephemeris ID.
+	EphemerisId *string
 
-	// End time of a contact in UTC.
-	EndTime *time.Time
+	// Reason that an ephemeris failed validation. Only provided for ephemerides with
+	// INVALID status.
+	InvalidReason types.EphemerisInvalidReason
 
-	// Error message for a contact.
-	ErrorMessage *string
+	// A name string associated with the ephemeris. Used as a human-readable identifier
+	// for the ephemeris.
+	Name *string
 
-	// Ground station for a contact.
-	GroundStation *string
+	// Customer-provided priority score to establish the order in which overlapping
+	// ephemerides should be used. The default for customer-provided ephemeris priority
+	// is 1, and higher numbers take precedence. Priority must be 1 or greater
+	Priority *int32
 
-	// Maximum elevation angle of a contact.
-	MaximumElevation *types.Elevation
+	// The AWS Ground Station satellite ID associated with ephemeris.
+	SatelliteId *string
 
-	// ARN of a mission profile.
-	MissionProfileArn *string
+	// The status of the ephemeris.
+	Status types.EphemerisStatus
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
-	PostPassEndTime *time.Time
+	// Supplied ephemeris data.
+	SuppliedData types.EphemerisTypeDescription
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch event
-	// indicating an upcoming pass.
-	PrePassStartTime *time.Time
-
-	// Region of a contact.
-	Region *string
-
-	// ARN of a satellite.
-	SatelliteArn *string
-
-	// Start time of a contact in UTC.
-	StartTime *time.Time
-
-	// Tags assigned to a contact.
+	// Tags assigned to an ephemeris.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
@@ -90,12 +80,12 @@ type DescribeContactOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContact{}, middleware.After)
+func (c *Client) addOperationDescribeEphemerisMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEphemeris{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeContact{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEphemeris{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -135,10 +125,10 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeContactValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeEphemerisValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeContact(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEphemeris(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,11 +143,11 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeContact(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeEphemeris(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "groundstation",
-		OperationName: "DescribeContact",
+		OperationName: "DescribeEphemeris",
 	}
 }

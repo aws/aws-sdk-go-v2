@@ -29,7 +29,7 @@ func (c *Client) ReserveContact(ctx context.Context, params *ReserveContactInput
 
 type ReserveContactInput struct {
 
-	// End time of a contact.
+	// End time of a contact in UTC.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -49,7 +49,7 @@ type ReserveContactInput struct {
 	// This member is required.
 	SatelliteArn *string
 
-	// Start time of a contact.
+	// Start time of a contact in UTC.
 	//
 	// This member is required.
 	StartTime *time.Time

@@ -13,66 +13,59 @@ import (
 	"time"
 )
 
-// Returns a list of contacts. If statusList contains AVAILABLE, the request must
-// include groundStation, missionprofileArn, and satelliteArn.
-func (c *Client) ListContacts(ctx context.Context, params *ListContactsInput, optFns ...func(*Options)) (*ListContactsOutput, error) {
+// List existing ephemerides.
+func (c *Client) ListEphemerides(ctx context.Context, params *ListEphemeridesInput, optFns ...func(*Options)) (*ListEphemeridesOutput, error) {
 	if params == nil {
-		params = &ListContactsInput{}
+		params = &ListEphemeridesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListContacts", params, optFns, c.addOperationListContactsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListEphemerides", params, optFns, c.addOperationListEphemeridesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListContactsOutput)
+	out := result.(*ListEphemeridesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListContactsInput struct {
+type ListEphemeridesInput struct {
 
-	// End time of a contact in UTC.
+	// The end time to list in UTC. The operation will return an ephemeris if its
+	// expiration time is within the time range defined by the startTime and endTime.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// Start time of a contact in UTC.
+	// The AWS Ground Station satellite ID to list ephemeris for.
+	//
+	// This member is required.
+	SatelliteId *string
+
+	// The start time to list in UTC. The operation will return an ephemeris if its
+	// expiration time is within the time range defined by the startTime and endTime.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// Status of a contact reservation.
-	//
-	// This member is required.
-	StatusList []types.ContactStatus
-
-	// Name of a ground station.
-	GroundStation *string
-
-	// Maximum number of contacts returned.
+	// Maximum number of ephemerides to return.
 	MaxResults *int32
 
-	// ARN of a mission profile.
-	MissionProfileArn *string
-
-	// Next token returned in the request of a previous ListContacts call. Used to get
-	// the next page of results.
+	// Pagination token.
 	NextToken *string
 
-	// ARN of a satellite.
-	SatelliteArn *string
+	// The list of ephemeris status to return.
+	StatusList []types.EphemerisStatus
 
 	noSmithyDocumentSerde
 }
 
-type ListContactsOutput struct {
+type ListEphemeridesOutput struct {
 
-	// List of contacts.
-	ContactList []types.ContactData
+	// List of ephemerides.
+	Ephemerides []types.EphemerisItem
 
-	// Next token returned in the response of a previous ListContacts call. Used to get
-	// the next page of results.
+	// Pagination token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -81,12 +74,12 @@ type ListContactsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContacts{}, middleware.After)
+func (c *Client) addOperationListEphemeridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEphemerides{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContacts{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEphemerides{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -126,10 +119,10 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpListContactsValidationMiddleware(stack); err != nil {
+	if err = addOpListEphemeridesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContacts(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEphemerides(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,16 +137,17 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-// ListContactsAPIClient is a client that implements the ListContacts operation.
-type ListContactsAPIClient interface {
-	ListContacts(context.Context, *ListContactsInput, ...func(*Options)) (*ListContactsOutput, error)
+// ListEphemeridesAPIClient is a client that implements the ListEphemerides
+// operation.
+type ListEphemeridesAPIClient interface {
+	ListEphemerides(context.Context, *ListEphemeridesInput, ...func(*Options)) (*ListEphemeridesOutput, error)
 }
 
-var _ ListContactsAPIClient = (*Client)(nil)
+var _ ListEphemeridesAPIClient = (*Client)(nil)
 
-// ListContactsPaginatorOptions is the paginator options for ListContacts
-type ListContactsPaginatorOptions struct {
-	// Maximum number of contacts returned.
+// ListEphemeridesPaginatorOptions is the paginator options for ListEphemerides
+type ListEphemeridesPaginatorOptions struct {
+	// Maximum number of ephemerides to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -161,22 +155,22 @@ type ListContactsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListContactsPaginator is a paginator for ListContacts
-type ListContactsPaginator struct {
-	options   ListContactsPaginatorOptions
-	client    ListContactsAPIClient
-	params    *ListContactsInput
+// ListEphemeridesPaginator is a paginator for ListEphemerides
+type ListEphemeridesPaginator struct {
+	options   ListEphemeridesPaginatorOptions
+	client    ListEphemeridesAPIClient
+	params    *ListEphemeridesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListContactsPaginator returns a new ListContactsPaginator
-func NewListContactsPaginator(client ListContactsAPIClient, params *ListContactsInput, optFns ...func(*ListContactsPaginatorOptions)) *ListContactsPaginator {
+// NewListEphemeridesPaginator returns a new ListEphemeridesPaginator
+func NewListEphemeridesPaginator(client ListEphemeridesAPIClient, params *ListEphemeridesInput, optFns ...func(*ListEphemeridesPaginatorOptions)) *ListEphemeridesPaginator {
 	if params == nil {
-		params = &ListContactsInput{}
+		params = &ListEphemeridesInput{}
 	}
 
-	options := ListContactsPaginatorOptions{}
+	options := ListEphemeridesPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -185,7 +179,7 @@ func NewListContactsPaginator(client ListContactsAPIClient, params *ListContacts
 		fn(&options)
 	}
 
-	return &ListContactsPaginator{
+	return &ListEphemeridesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -195,12 +189,12 @@ func NewListContactsPaginator(client ListContactsAPIClient, params *ListContacts
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListContactsPaginator) HasMorePages() bool {
+func (p *ListEphemeridesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListContacts page.
-func (p *ListContactsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListContactsOutput, error) {
+// NextPage retrieves the next ListEphemerides page.
+func (p *ListEphemeridesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListEphemeridesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -214,7 +208,7 @@ func (p *ListContactsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListContacts(ctx, &params, optFns...)
+	result, err := p.client.ListEphemerides(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -233,11 +227,11 @@ func (p *ListContactsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListContacts(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListEphemerides(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "groundstation",
-		OperationName: "ListContacts",
+		OperationName: "ListEphemerides",
 	}
 }

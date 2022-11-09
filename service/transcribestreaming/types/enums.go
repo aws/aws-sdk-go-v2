@@ -68,6 +68,8 @@ const (
 	LanguageCodeJaJp LanguageCode = "ja-JP"
 	LanguageCodeKoKr LanguageCode = "ko-KR"
 	LanguageCodeZhCn LanguageCode = "zh-CN"
+	LanguageCodeHiIn LanguageCode = "hi-IN"
+	LanguageCodeThTh LanguageCode = "th-TH"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -87,6 +89,8 @@ func (LanguageCode) Values() []LanguageCode {
 		"ja-JP",
 		"ko-KR",
 		"zh-CN",
+		"hi-IN",
+		"th-TH",
 	}
 }
 

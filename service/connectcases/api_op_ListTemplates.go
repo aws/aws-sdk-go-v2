@@ -43,6 +43,9 @@ type ListTemplatesInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
+	// A list of status values to filter on.
+	Status []types.TemplateStatus
+
 	noSmithyDocumentSerde
 }
 
