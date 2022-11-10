@@ -38,18 +38,18 @@ import (
 // * Action: resource-explorer-2:CreateIndex
 // Resource: The ARN of the index (as it will exist after the operation completes)
 // in the Amazon Web Services Region and account in which you're trying to create
-// the index. Use the wildcard character () at the end of the string to match the
+// the index. Use the wildcard character (*) at the end of the string to match the
 // eventual UUID. For example, the following Resource element restricts the role or
 // user to creating an index in only the us-east-2 Region of the specified account.
-// "Resource": "arn:aws:resource-explorer-2:us-east-2:<account-id>:index/"
-// Alternatively, you can use "Resource": "" to allow the role or user to create an
-// index in any Region.
+// "Resource": "arn:aws:resource-explorer-2:us-west-2:<account-id>:index/*"
+// Alternatively, you can use "Resource": "*" to allow the role or user to create
+// an index in any Region.
 //
 // * Action: iam:CreateServiceLinkedRole Resource: No
-// specific resource (). This permission is required only the first time you create
-// an index to turn on Resource Explorer in the account. Resource Explorer uses
-// this to create the service-linked role needed to index the resources in your
-// account
+// specific resource (*). This permission is required only the first time you
+// create an index to turn on Resource Explorer in the account. Resource Explorer
+// uses this to create the service-linked role needed to index the resources in
+// your account
 // (https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html).
 // Resource Explorer uses the same service-linked role for all additional indexes
 // you create afterwards.

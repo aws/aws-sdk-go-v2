@@ -2632,6 +2632,24 @@ type PortMapping struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing the protection status details for a task. You can set the
+// protection status with the UpdateTaskProtection API and get the status of tasks
+// with the GetTaskProtection API.
+type ProtectedTask struct {
+
+	// The epoch time when protection for the task will expire.
+	ExpirationDate *time.Time
+
+	// The protection status of the task. If scale-in protection is enabled for a task,
+	// the value is true. Otherwise, it is false.
+	ProtectionEnabled bool
+
+	// The task ARN.
+	TaskArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for the App Mesh proxy. For tasks that use the EC2
 // launch type, the container instances require at least version 1.26.0 of the
 // container agent and at least version 1.26.0-1 of the ecs-init package to use a

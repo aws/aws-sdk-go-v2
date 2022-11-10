@@ -128,9 +128,9 @@ type UpdateAutoScalingGroupInput struct {
 	// checking the health status of an EC2 instance that has come into service and
 	// marking it unhealthy due to a failed Elastic Load Balancing or custom health
 	// check. This is useful if your instances do not immediately pass these health
-	// checks after they enter the InService state. For more information, see Health
-	// check grace period
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
+	// checks after they enter the InService state. For more information, see Set the
+	// health check grace period for an Auto Scaling group
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	HealthCheckGracePeriod *int32
 

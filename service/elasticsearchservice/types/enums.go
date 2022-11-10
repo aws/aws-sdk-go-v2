@@ -470,6 +470,24 @@ func (PackageType) Values() []PackageType {
 	}
 }
 
+type PrincipalType string
+
+// Enum values for PrincipalType
+const (
+	PrincipalTypeAwsAccount PrincipalType = "AWS_ACCOUNT"
+	PrincipalTypeAwsService PrincipalType = "AWS_SERVICE"
+)
+
+// Values returns all known values for PrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalType) Values() []PrincipalType {
+	return []PrincipalType{
+		"AWS_ACCOUNT",
+		"AWS_SERVICE",
+	}
+}
+
 type ReservedElasticsearchInstancePaymentOption string
 
 // Enum values for ReservedElasticsearchInstancePaymentOption
@@ -643,5 +661,51 @@ func (VolumeType) Values() []VolumeType {
 		"gp2",
 		"io1",
 		"gp3",
+	}
+}
+
+type VpcEndpointErrorCode string
+
+// Enum values for VpcEndpointErrorCode
+const (
+	VpcEndpointErrorCodeEndpointNotFound VpcEndpointErrorCode = "ENDPOINT_NOT_FOUND"
+	VpcEndpointErrorCodeServerError      VpcEndpointErrorCode = "SERVER_ERROR"
+)
+
+// Values returns all known values for VpcEndpointErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEndpointErrorCode) Values() []VpcEndpointErrorCode {
+	return []VpcEndpointErrorCode{
+		"ENDPOINT_NOT_FOUND",
+		"SERVER_ERROR",
+	}
+}
+
+type VpcEndpointStatus string
+
+// Enum values for VpcEndpointStatus
+const (
+	VpcEndpointStatusCreating     VpcEndpointStatus = "CREATING"
+	VpcEndpointStatusCreateFailed VpcEndpointStatus = "CREATE_FAILED"
+	VpcEndpointStatusActive       VpcEndpointStatus = "ACTIVE"
+	VpcEndpointStatusUpdating     VpcEndpointStatus = "UPDATING"
+	VpcEndpointStatusUpdateFailed VpcEndpointStatus = "UPDATE_FAILED"
+	VpcEndpointStatusDeleting     VpcEndpointStatus = "DELETING"
+	VpcEndpointStatusDeleteFailed VpcEndpointStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for VpcEndpointStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VpcEndpointStatus) Values() []VpcEndpointStatus {
+	return []VpcEndpointStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
 	}
 }

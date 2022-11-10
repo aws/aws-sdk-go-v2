@@ -222,6 +222,7 @@ const (
 	AllocationStrategyDiversified                  AllocationStrategy = "diversified"
 	AllocationStrategyCapacityOptimized            AllocationStrategy = "capacityOptimized"
 	AllocationStrategyCapacityOptimizedPrioritized AllocationStrategy = "capacityOptimizedPrioritized"
+	AllocationStrategyPriceCapacityOptimized       AllocationStrategy = "priceCapacityOptimized"
 )
 
 // Values returns all known values for AllocationStrategy. Note that this can be
@@ -233,6 +234,7 @@ func (AllocationStrategy) Values() []AllocationStrategy {
 		"diversified",
 		"capacityOptimized",
 		"capacityOptimizedPrioritized",
+		"priceCapacityOptimized",
 	}
 }
 
@@ -5873,6 +5875,7 @@ const (
 	SpotAllocationStrategyDiversified                  SpotAllocationStrategy = "diversified"
 	SpotAllocationStrategyCapacityOptimized            SpotAllocationStrategy = "capacity-optimized"
 	SpotAllocationStrategyCapacityOptimizedPrioritized SpotAllocationStrategy = "capacity-optimized-prioritized"
+	SpotAllocationStrategyPriceCapacityOptimized       SpotAllocationStrategy = "price-capacity-optimized"
 )
 
 // Values returns all known values for SpotAllocationStrategy. Note that this can
@@ -5884,6 +5887,7 @@ func (SpotAllocationStrategy) Values() []SpotAllocationStrategy {
 		"diversified",
 		"capacity-optimized",
 		"capacity-optimized-prioritized",
+		"price-capacity-optimized",
 	}
 }
 

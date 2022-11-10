@@ -70,6 +70,26 @@ func (m *validateOpAssociatePackage) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAuthorizeVpcEndpointAccess struct {
+}
+
+func (*validateOpAuthorizeVpcEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAuthorizeVpcEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AuthorizeVpcEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAuthorizeVpcEndpointAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelElasticsearchServiceSoftwareUpdate struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpCreatePackage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVpcEndpoint struct {
+}
+
+func (*validateOpCreateVpcEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVpcEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVpcEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVpcEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteElasticsearchDomain struct {
 }
 
@@ -225,6 +265,26 @@ func (m *validateOpDeletePackage) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVpcEndpoint struct {
+}
+
+func (*validateOpDeleteVpcEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVpcEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVpcEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVpcEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -345,6 +405,26 @@ func (m *validateOpDescribeElasticsearchInstanceTypeLimits) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeElasticsearchInstanceTypeLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeVpcEndpoints struct {
+}
+
+func (*validateOpDescribeVpcEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeVpcEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeVpcEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeVpcEndpointsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +590,46 @@ func (m *validateOpListTags) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListVpcEndpointAccess struct {
+}
+
+func (*validateOpListVpcEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVpcEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVpcEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVpcEndpointAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListVpcEndpointsForDomain struct {
+}
+
+func (*validateOpListVpcEndpointsForDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVpcEndpointsForDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVpcEndpointsForDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVpcEndpointsForDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPurchaseReservedElasticsearchInstanceOffering struct {
 }
 
@@ -565,6 +685,26 @@ func (m *validateOpRemoveTags) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRevokeVpcEndpointAccess struct {
+}
+
+func (*validateOpRevokeVpcEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRevokeVpcEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RevokeVpcEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRevokeVpcEndpointAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +770,26 @@ func (m *validateOpUpdatePackage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateVpcEndpoint struct {
+}
+
+func (*validateOpUpdateVpcEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVpcEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVpcEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVpcEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpgradeElasticsearchDomain struct {
 }
 
@@ -662,6 +822,10 @@ func addOpAssociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociatePackage{}, middleware.After)
 }
 
+func addOpAuthorizeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAuthorizeVpcEndpointAccess{}, middleware.After)
+}
+
 func addOpCancelElasticsearchServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelElasticsearchServiceSoftwareUpdate{}, middleware.After)
 }
@@ -678,6 +842,10 @@ func addOpCreatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePackage{}, middleware.After)
 }
 
+func addOpCreateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVpcEndpoint{}, middleware.After)
+}
+
 func addOpDeleteElasticsearchDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteElasticsearchDomain{}, middleware.After)
 }
@@ -692,6 +860,10 @@ func addOpDeleteOutboundCrossClusterSearchConnectionValidationMiddleware(stack *
 
 func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePackage{}, middleware.After)
+}
+
+func addOpDeleteVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVpcEndpoint{}, middleware.After)
 }
 
 func addOpDescribeDomainAutoTunesValidationMiddleware(stack *middleware.Stack) error {
@@ -716,6 +888,10 @@ func addOpDescribeElasticsearchDomainsValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeElasticsearchInstanceTypeLimitsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeElasticsearchInstanceTypeLimits{}, middleware.After)
+}
+
+func addOpDescribeVpcEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeVpcEndpoints{}, middleware.After)
 }
 
 func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
@@ -750,6 +926,14 @@ func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTags{}, middleware.After)
 }
 
+func addOpListVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVpcEndpointAccess{}, middleware.After)
+}
+
+func addOpListVpcEndpointsForDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVpcEndpointsForDomain{}, middleware.After)
+}
+
 func addOpPurchaseReservedElasticsearchInstanceOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseReservedElasticsearchInstanceOffering{}, middleware.After)
 }
@@ -762,6 +946,10 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTags{}, middleware.After)
 }
 
+func addOpRevokeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRevokeVpcEndpointAccess{}, middleware.After)
+}
+
 func addOpStartElasticsearchServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartElasticsearchServiceSoftwareUpdate{}, middleware.After)
 }
@@ -772,6 +960,10 @@ func addOpUpdateElasticsearchDomainConfigValidationMiddleware(stack *middleware.
 
 func addOpUpdatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePackage{}, middleware.After)
+}
+
+func addOpUpdateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVpcEndpoint{}, middleware.After)
 }
 
 func addOpUpgradeElasticsearchDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -967,6 +1159,24 @@ func validateOpAssociatePackageInput(v *AssociatePackageInput) error {
 	}
 }
 
+func validateOpAuthorizeVpcEndpointAccessInput(v *AuthorizeVpcEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizeVpcEndpointAccessInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelElasticsearchServiceSoftwareUpdateInput(v *CancelElasticsearchServiceSoftwareUpdateInput) error {
 	if v == nil {
 		return nil
@@ -1062,6 +1272,24 @@ func validateOpCreatePackageInput(v *CreatePackageInput) error {
 	}
 }
 
+func validateOpCreateVpcEndpointInput(v *CreateVpcEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVpcEndpointInput"}
+	if v.DomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainArn"))
+	}
+	if v.VpcOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcOptions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteElasticsearchDomainInput(v *DeleteElasticsearchDomainInput) error {
 	if v == nil {
 		return nil
@@ -1114,6 +1342,21 @@ func validateOpDeletePackageInput(v *DeletePackageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageInput"}
 	if v.PackageID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVpcEndpointInput(v *DeleteVpcEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVpcEndpointInput"}
+	if v.VpcEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1207,6 +1450,21 @@ func validateOpDescribeElasticsearchInstanceTypeLimitsInput(v *DescribeElasticse
 	}
 	if v.ElasticsearchVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ElasticsearchVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeVpcEndpointsInput(v *DescribeVpcEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeVpcEndpointsInput"}
+	if v.VpcEndpointIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1338,6 +1596,36 @@ func validateOpListTagsInput(v *ListTagsInput) error {
 	}
 }
 
+func validateOpListVpcEndpointAccessInput(v *ListVpcEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVpcEndpointAccessInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListVpcEndpointsForDomainInput(v *ListVpcEndpointsForDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVpcEndpointsForDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPurchaseReservedElasticsearchInstanceOfferingInput(v *PurchaseReservedElasticsearchInstanceOfferingInput) error {
 	if v == nil {
 		return nil
@@ -1381,6 +1669,24 @@ func validateOpRemoveTagsInput(v *RemoveTagsInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRevokeVpcEndpointAccessInput(v *RevokeVpcEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevokeVpcEndpointAccessInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1439,6 +1745,24 @@ func validateOpUpdatePackageInput(v *UpdatePackageInput) error {
 	}
 	if v.PackageSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PackageSource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVpcEndpointInput(v *UpdateVpcEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVpcEndpointInput"}
+	if v.VpcEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointId"))
+	}
+	if v.VpcOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcOptions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

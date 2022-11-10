@@ -1,0 +1,8 @@
+{
+    "id": "13f465fb-e5a7-4e47-8ed0-57a76407f9a8",
+    "type": "feature",
+    "description": "This release adds a new price capacity optimized allocation strategy for Spot Instances to help customers optimize provisioning of Spot Instances via EC2 Auto Scaling, EC2 Fleet, and Spot Fleet. It allocates Spot Instances based on both spare capacity availability and Spot Instance price.",
+    "modules": [
+        "service/ec2"
+    ]
+}

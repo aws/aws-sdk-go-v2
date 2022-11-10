@@ -1,0 +1,8 @@
+{
+    "id": "c98764fc-efa5-4149-88f1-2abf4143090d",
+    "type": "documentation",
+    "description": "Text only updates to some Resource Explorer descriptions.",
+    "modules": [
+        "service/resourceexplorer2"
+    ]
+}

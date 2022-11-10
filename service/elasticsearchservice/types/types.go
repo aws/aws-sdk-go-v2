@@ -152,6 +152,19 @@ type AdvancedSecurityOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an account or service that has access to an Amazon OpenSearch
+// Service domain through the use of an interface VPC endpoint.
+type AuthorizedPrincipal struct {
+
+	// The IAM principal that is allowed access to the domain.
+	Principal *string
+
+	// The type of principal.
+	PrincipalType PrincipalType
+
+	noSmithyDocumentSerde
+}
+
 // Specifies Auto-Tune type and Auto-Tune action details.
 type AutoTune struct {
 
@@ -1674,6 +1687,66 @@ type VPCDerivedInfoStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The connection endpoint for connecting to an Amazon OpenSearch Service domain
+// through a proxy.
+type VpcEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the domain associated with the endpoint.
+	DomainArn *string
+
+	// The connection endpoint ID for connecting to the domain.
+	Endpoint *string
+
+	// The current status of the endpoint.
+	Status VpcEndpointStatus
+
+	// The unique identifier of the endpoint.
+	VpcEndpointId *string
+
+	// The creator of the endpoint.
+	VpcEndpointOwner *string
+
+	// Options to specify the subnets and security groups for an Amazon OpenSearch
+	// Service VPC endpoint.
+	VpcOptions *VPCDerivedInfo
+
+	noSmithyDocumentSerde
+}
+
+// Error information when attempting to describe an Amazon OpenSearch
+// Service-managed VPC endpoint.
+type VpcEndpointError struct {
+
+	// The code associated with the error.
+	ErrorCode VpcEndpointErrorCode
+
+	// A message describing the error.
+	ErrorMessage *string
+
+	// The unique identifier of the endpoint.
+	VpcEndpointId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for an Amazon OpenSearch Service-managed VPC endpoint.
+type VpcEndpointSummary struct {
+
+	// The Amazon Resource Name (ARN) of the domain associated with the endpoint.
+	DomainArn *string
+
+	// The current status of the endpoint.
+	Status VpcEndpointStatus
+
+	// The unique identifier of the endpoint.
+	VpcEndpointId *string
+
+	// The creator of the endpoint.
+	VpcEndpointOwner *string
 
 	noSmithyDocumentSerde
 }

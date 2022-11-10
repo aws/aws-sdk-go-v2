@@ -49,7 +49,9 @@ func (c *Client) CreateAutoScalingGroup(ctx context.Context, params *CreateAutoS
 type CreateAutoScalingGroupInput struct {
 
 	// The name of the Auto Scaling group. This name must be unique per Region per
-	// account.
+	// account. The name can contain any ASCII character 33 to 126 including most
+	// punctuation characters, digits, and upper and lowercased letters. You cannot use
+	// a colon (:) in the name.
 	//
 	// This member is required.
 	AutoScalingGroupName *string
@@ -136,9 +138,9 @@ type CreateAutoScalingGroupInput struct {
 	// checking the health status of an EC2 instance that has come into service and
 	// marking it unhealthy due to a failed Elastic Load Balancing or custom health
 	// check. This is useful if your instances do not immediately pass these health
-	// checks after they enter the InService state. For more information, see Health
-	// check grace period
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
+	// checks after they enter the InService state. For more information, see Set the
+	// health check grace period for an Auto Scaling group
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
 	HealthCheckGracePeriod *int32
 

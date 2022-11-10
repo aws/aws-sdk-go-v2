@@ -30,15 +30,5 @@
 // your account. For more information about Amazon Web Services Resource Explorer,
 // including how to enable and configure the service, see the Amazon Web Services
 // Resource Explorer User Guide
-// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/). The example
-// HTTP query requests and responses in this guide are displayed with the JSON
-// (https://json.org) formatted across multiple lines for readability. The actual
-// query responses from the Resource Explorer service do not include this extra
-// whitespace. We want your feedback about this documentation Our goal is to help
-// you get everything you can from Resource Explorer. If this guide helps you to do
-// that, then let us know. If the guide isn't helping you, then we want to hear
-// from you so we can address the issue. Use the Feedback link that's in the
-// upper-right corner of every page. That sends your comments directly to the
-// writers of this guide. We review every submission, looking for opportunities to
-// improve the documentation. Thank you in advance for your help!
+// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/).
 package resourceexplorer2

@@ -352,6 +352,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "eu-central-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-central-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kms-fips.eu-central-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-2-fips",
 			}: endpoints.Endpoint{
 				Hostname: "kms-fips.eu-central-2.amazonaws.com",

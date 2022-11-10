@@ -370,6 +370,26 @@ func (m *validateOpExecuteCommand) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTaskProtection struct {
+}
+
+func (*validateOpGetTaskProtection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTaskProtection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTaskProtectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTaskProtectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAttributes struct {
 }
 
@@ -810,6 +830,26 @@ func (m *validateOpUpdateServicePrimaryTaskSet) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTaskProtection struct {
+}
+
+func (*validateOpUpdateTaskProtection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTaskProtection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTaskProtectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTaskProtectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTaskSet struct {
 }
 
@@ -902,6 +942,10 @@ func addOpExecuteCommandValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExecuteCommand{}, middleware.After)
 }
 
+func addOpGetTaskProtectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTaskProtection{}, middleware.After)
+}
+
 func addOpListAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAttributes{}, middleware.After)
 }
@@ -988,6 +1032,10 @@ func addOpUpdateServiceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateServicePrimaryTaskSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateServicePrimaryTaskSet{}, middleware.After)
+}
+
+func addOpUpdateTaskProtectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTaskProtection{}, middleware.After)
 }
 
 func addOpUpdateTaskSetValidationMiddleware(stack *middleware.Stack) error {
@@ -2250,6 +2298,21 @@ func validateOpExecuteCommandInput(v *ExecuteCommandInput) error {
 	}
 }
 
+func validateOpGetTaskProtectionInput(v *GetTaskProtectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTaskProtectionInput"}
+	if v.Cluster == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cluster"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAttributesInput(v *ListAttributesInput) error {
 	if v == nil {
 		return nil
@@ -2701,6 +2764,24 @@ func validateOpUpdateServicePrimaryTaskSetInput(v *UpdateServicePrimaryTaskSetIn
 	}
 	if v.PrimaryTaskSet == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrimaryTaskSet"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTaskProtectionInput(v *UpdateTaskProtectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTaskProtectionInput"}
+	if v.Cluster == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cluster"))
+	}
+	if v.Tasks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tasks"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
