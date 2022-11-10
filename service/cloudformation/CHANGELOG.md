@@ -1,3 +1,7 @@
+# v1.23.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.23.0 (2022-10-28)
 
 * **Feature**: This release adds more fields to improves visibility of AWS CloudFormation StackSets information in following APIs: ListStackInstances, DescribeStackInstance, ListStackSetOperationResults, ListStackSetOperations, DescribeStackSetOperation.

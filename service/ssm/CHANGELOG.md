@@ -1,3 +1,7 @@
+# v1.32.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.32.0 (2022-11-07)
 
 * **Feature**: This release includes support for applying a CloudWatch alarm to multi account multi region Systems Manager Automation

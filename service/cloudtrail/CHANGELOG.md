@@ -1,3 +1,7 @@
+# v1.20.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.20.0 (2022-11-07)
 
 * **Feature**: This release includes support for configuring a delegated administrator to manage an AWS Organizations organization CloudTrail trails and event data stores, and AWS Key Management Service encryption of CloudTrail Lake event data stores.

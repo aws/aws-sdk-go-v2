@@ -1,3 +1,7 @@
+# v1.19.0 (2022-11-10)
+
+* **Feature**: This release adds support for task scale-in protection with updateTaskProtection and getTaskProtection APIs. UpdateTaskProtection API can be used to protect a service managed task from being terminated by scale-in events and getTaskProtection API to get the scale-in protection status of a task.
+
 # v1.18.26 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

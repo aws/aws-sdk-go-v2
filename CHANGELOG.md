@@ -1,3 +1,23 @@
+# Release (2022-11-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.24.1](service/autoscaling/CHANGELOG.md#v1241-2022-11-10)
+  * **Documentation**: This release adds a new price capacity optimized allocation strategy for Spot Instances to help customers optimize provisioning of Spot Instances via EC2 Auto Scaling, EC2 Fleet, and Spot Fleet. It allocates Spot Instances based on both spare capacity availability and Spot Instance price.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.70.0](service/ec2/CHANGELOG.md#v1700-2022-11-10)
+  * **Feature**: This release adds a new price capacity optimized allocation strategy for Spot Instances to help customers optimize provisioning of Spot Instances via EC2 Auto Scaling, EC2 Fleet, and Spot Fleet. It allocates Spot Instances based on both spare capacity availability and Spot Instance price.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.19.0](service/ecs/CHANGELOG.md#v1190-2022-11-10)
+  * **Feature**: This release adds support for task scale-in protection with updateTaskProtection and getTaskProtection APIs. UpdateTaskProtection API can be used to protect a service managed task from being terminated by scale-in events and getTaskProtection API to get the scale-in protection status of a task.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.17.0](service/elasticsearchservice/CHANGELOG.md#v1170-2022-11-10)
+  * **Feature**: Amazon OpenSearch Service now offers managed VPC endpoints to connect to your Amazon OpenSearch Service VPC-enabled domain in a Virtual Private Cloud (VPC). This feature allows you to privately access OpenSearch Service domain without using public IPs or requiring traffic to traverse the Internet.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.0.1](service/resourceexplorer2/CHANGELOG.md#v101-2022-11-10)
+  * **Documentation**: Text only updates to some Resource Explorer descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.0.0](service/scheduler/CHANGELOG.md#v100-2022-11-10)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS introduces the new Amazon EventBridge Scheduler. EventBridge Scheduler is a serverless scheduler that allows you to create, run, and manage tasks from one central, managed service.
+
 # Release (2022-11-09)
 
 ## Module Highlights

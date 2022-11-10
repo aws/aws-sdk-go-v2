@@ -1,3 +1,7 @@
+# v1.25.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.25.0 (2022-11-02)
 
 * **Feature**: S3 on Outposts launches support for Lifecycle configuration for Outposts buckets. With S3 Lifecycle configuration, you can mange objects so they are stored cost effectively. You can manage objects using size-based rules and specify how many noncurrent versions bucket will retain.

@@ -1,3 +1,7 @@
+# v1.18.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.18.0 (2022-10-26)
 
 * **Feature**: Added a new cluster-level attribute to set the capacity range for Neptune Serverless instances.

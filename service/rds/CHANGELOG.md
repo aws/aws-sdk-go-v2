@@ -1,3 +1,7 @@
+# v1.28.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.28.0 (2022-11-01)
 
 * **Feature**: Relational Database Service - This release adds support for configuring Storage Throughput on RDS database instances.

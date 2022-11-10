@@ -1,3 +1,7 @@
+# v1.23.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.23.0 (2022-11-07)
 
 * **Feature**: Added support for IPv6 and dual stack for Memcached and Redis clusters. Customers can now launch new Redis and Memcached clusters with IPv6 and dual stack networking support.

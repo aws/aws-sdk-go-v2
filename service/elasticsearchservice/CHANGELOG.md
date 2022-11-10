@@ -1,3 +1,7 @@
+# v1.17.0 (2022-11-10)
+
+* **Feature**: Amazon OpenSearch Service now offers managed VPC endpoints to connect to your Amazon OpenSearch Service VPC-enabled domain in a Virtual Private Cloud (VPC). This feature allows you to privately access OpenSearch Service domain without using public IPs or requiring traffic to traverse the Internet.
+
 # v1.16.12 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

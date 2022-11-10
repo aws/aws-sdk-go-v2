@@ -1,3 +1,7 @@
+# v1.0.38 (2022-11-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.37 (2022-11-04)
 
 * **Dependency Update**: update golang.org/x/net dependency to 0.1.0

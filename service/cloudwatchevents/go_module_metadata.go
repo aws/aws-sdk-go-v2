@@ -3,4 +3,4 @@
 package cloudwatchevents
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.14.21"
+const goModuleVersion = "1.14.22"

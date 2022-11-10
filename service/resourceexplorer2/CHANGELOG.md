@@ -1,3 +1,7 @@
+# v1.0.1 (2022-11-10)
+
+* **Documentation**: Text only updates to some Resource Explorer descriptions.
+
 # v1.0.0 (2022-11-08)
 
 * **Release**: New AWS service client module

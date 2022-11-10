@@ -1,3 +1,7 @@
+# v1.16.1 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.16.0 (2022-11-08)
 
 * **Feature**: Support added for requesting elliptic curve certificate key algorithm types P-256 (EC_prime256v1) and P-384 (EC_secp384r1).

@@ -1,3 +1,7 @@
+# v1.26.14 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.26.13 (2022-10-27)
 
 * **Documentation**: This release clarifies use for the ElasticIp parameter of the CreateCluster and RestoreFromClusterSnapshot APIs.

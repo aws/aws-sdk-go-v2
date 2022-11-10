@@ -1,3 +1,7 @@
+# v1.16.2 (2022-11-10)
+
+* No change notes available for this release.
+
 # v1.16.1 (2022-11-04)
 
 * **Documentation**: Doc-only update for bug fixes and support of export to buckets encrypted with SSE-KMS

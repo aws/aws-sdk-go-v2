@@ -1,8 +1,0 @@
-{
-    "id": "a7bf989b-952c-4c19-8677-6e7aa0612eb0",
-    "type": "feature",
-    "description": "This release adds support for task scale-in protection with updateTaskProtection and getTaskProtection APIs. UpdateTaskProtection API can be used to protect a service managed task from being terminated by scale-in events and getTaskProtection API to get the scale-in protection status of a task.",
-    "modules": [
-        "service/ecs"
-    ]
-}
