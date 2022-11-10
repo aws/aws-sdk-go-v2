@@ -81,7 +81,7 @@ func awsRestjson1_deserializeOpErrorAssociateResource(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -204,7 +204,7 @@ func awsRestjson1_deserializeOpErrorCreateCanary(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -357,7 +357,7 @@ func awsRestjson1_deserializeOpErrorCreateGroup(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -485,7 +485,7 @@ func awsRestjson1_deserializeOpErrorDeleteCanary(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -577,7 +577,7 @@ func awsRestjson1_deserializeOpErrorDeleteGroup(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -697,7 +697,7 @@ func awsRestjson1_deserializeOpErrorDescribeCanaries(response *smithyhttp.Respon
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -856,7 +856,7 @@ func awsRestjson1_deserializeOpErrorDescribeCanariesLastRun(response *smithyhttp
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1015,7 +1015,7 @@ func awsRestjson1_deserializeOpErrorDescribeRuntimeVersions(response *smithyhttp
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1146,7 +1146,7 @@ func awsRestjson1_deserializeOpErrorDisassociateResource(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1266,7 +1266,7 @@ func awsRestjson1_deserializeOpErrorGetCanary(response *smithyhttp.Response, met
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1416,7 +1416,7 @@ func awsRestjson1_deserializeOpErrorGetCanaryRuns(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1578,7 +1578,7 @@ func awsRestjson1_deserializeOpErrorGetGroup(response *smithyhttp.Response, meta
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1734,7 +1734,7 @@ func awsRestjson1_deserializeOpErrorListAssociatedGroups(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -1896,7 +1896,7 @@ func awsRestjson1_deserializeOpErrorListGroupResources(response *smithyhttp.Resp
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2061,7 +2061,7 @@ func awsRestjson1_deserializeOpErrorListGroups(response *smithyhttp.Response, me
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2220,7 +2220,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2351,7 +2351,7 @@ func awsRestjson1_deserializeOpErrorStartCanary(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2443,7 +2443,7 @@ func awsRestjson1_deserializeOpErrorStopCanary(response *smithyhttp.Response, me
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2535,7 +2535,7 @@ func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2630,7 +2630,7 @@ func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {
@@ -2725,7 +2725,7 @@ func awsRestjson1_deserializeOpErrorUpdateCanary(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {

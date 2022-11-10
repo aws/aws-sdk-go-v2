@@ -109,7 +109,7 @@ func awsAwsjson10_deserializeOpErrorSendCommand(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
+	if len(errorCode) == 0 && len(code) != 0 {
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 	if len(message) != 0 {

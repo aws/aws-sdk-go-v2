@@ -241,7 +241,7 @@ final class AwsProtocolUtils {
         writer.write("errorBody.Seek(0, io.SeekStart)");
 
         // Only set the values if something was found so that we keep the default values.
-        writer.write("if len(code) != 0 { errorCode = restjson.SanitizeErrorCode(code) }");
+        writer.write("if len(errorCode) == 0 && len(code) != 0 { errorCode = restjson.SanitizeErrorCode(code) }");
         writer.write("if len(message) != 0 { errorMessage = message }");
         writer.write("");
     }
