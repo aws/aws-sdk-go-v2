@@ -1,0 +1,3032 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.scheduler#AWSChronosService": {
+            "type": "service",
+            "version": "2021-06-30",
+            "operations": [
+                {
+                    "target": "com.amazonaws.scheduler#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.scheduler#Schedule"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ScheduleGroup"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Scheduler",
+                    "arnNamespace": "scheduler",
+                    "cloudFormationName": "Scheduler"
+                },
+                "aws.auth#sigv4": {
+                    "name": "scheduler"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>\n       Amazon EventBridge Scheduler is a serverless scheduler that allows you to create, run, and manage tasks from one central, managed service.\n       EventBridge Scheduler delivers your tasks reliably, with built-in mechanisms that adjust your schedules based on the availability of downstream targets.\n       The following reference lists the available API actions, and data types for EventBridge Scheduler.\n     </p>",
+                "smithy.api#title": "Amazon EventBridge Scheduler",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://scheduler-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://scheduler-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://scheduler.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://scheduler.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://scheduler.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.scheduler#AssignPublicIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#AwsVpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "Subnets": {
+                    "target": "com.amazonaws.scheduler#Subnets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.scheduler#SecurityGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups.\n         If you do not specify a security group, the default security group for the VPC is used.</p>"
+                    }
+                },
+                "AssignPublicIp": {
+                    "target": "com.amazonaws.scheduler#AssignPublicIp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the task's elastic network interface receives a public IP address. You can specify <code>ENABLED</code> only when <code>LaunchType</code> in <code>EcsParameters</code> is set to <code>FARGATE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure specifies the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#CapacityProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CapacityProviderStrategy": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#CapacityProviderStrategyItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CapacityProviderStrategyItem": {
+            "type": "structure",
+            "members": {
+                "capacityProvider": {
+                    "target": "com.amazonaws.scheduler#CapacityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name of the capacity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weight": {
+                    "target": "com.amazonaws.scheduler#CapacityProviderStrategyItemWeight",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the\n         base value, if defined, is satisfied.</p>"
+                    }
+                },
+                "base": {
+                    "target": "com.amazonaws.scheduler#CapacityProviderStrategyItemBase",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined.\n         If no value is specified, the default value of <code>0</code> is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a capacity provider strategy.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#CapacityProviderStrategyItemBase": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100000
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CapacityProviderStrategyItemWeight": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.scheduler#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting the resource can cause an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.scheduler#CreateSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#CreateScheduleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#CreateScheduleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the specified schedule.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/schedules/{Name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.scheduler#CreateScheduleGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#CreateScheduleGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#CreateScheduleGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the specified schedule group.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/schedule-groups/{Name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.scheduler#CreateScheduleGroupInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group that you are creating.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.scheduler#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags to associate with the schedule group.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.scheduler#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CreateScheduleGroupOutput": {
+            "type": "structure",
+            "members": {
+                "ScheduleGroupArn": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CreateScheduleInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule that you are creating.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group to associate with this schedule. If you omit this, the default schedule group is used.</p>"
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.scheduler#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The expression that defines when the schedule runs. The following formats are supported.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rate</code> expression - <code>rate(unit value)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cron</code> expression - <code>cron(fields)</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n  You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify.\n  You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target\n  at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time,\n  such as at 8:00 am (UTC+0) every 1st day of the month.\n</p>\n         <p>\n  A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>.\n</p>\n         <p>\n  A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options:\n  <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>\n         </p>\n         <p>\n  For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.scheduler#StartDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify.\nEventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.scheduler#EndDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify.\nEventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.scheduler#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description you specify for the schedule.</p>"
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "com.amazonaws.scheduler#ScheduleExpressionTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone in which the scheduling expression is evaluated.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the schedule is enabled or disabled.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.scheduler#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the customer managed KMS key that EventBridge Scheduler will use to encrypt and decrypt your data.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.scheduler#Target",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule's target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlexibleTimeWindow": {
+                    "target": "com.amazonaws.scheduler#FlexibleTimeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to configure a time window during which EventBridge Scheduler invokes the schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.scheduler#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CreateScheduleOutput": {
+            "type": "structure",
+            "members": {
+                "ScheduleArn": {
+                    "target": "com.amazonaws.scheduler#ScheduleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#CreationDate": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.scheduler#DeadLetterConfig": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SQS queue specified as the destination for the dead-letter queue.</p>",
+                        "smithy.api#pattern": "^arn:aws(-[a-z]+)?:sqs:[a-z0-9\\-]+:\\d{12}:[a-zA-Z0-9\\-_]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about an Amazon SQS queue that EventBridge Scheduler uses as a dead-letter queue for your schedule. If specified, EventBridge Scheduler delivers failed events that could not be successfully delivered to a target to the queue.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#DeleteSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#DeleteScheduleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#DeleteScheduleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified schedule.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/schedules/{Name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.scheduler#DeleteScheduleGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#DeleteScheduleGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#DeleteScheduleGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified schedule group. Deleting a schedule group results in EventBridge Scheduler deleting all schedules associated with the group.\n         When you delete a group, it remains in a <code>DELETING</code> state until all of its associated schedules are deleted.\n         Schedules associated with the group that are set to run while the schedule group is in the process of being deleted might continue to invoke their targets\n         until the schedule group and its associated schedules are deleted.</p>\n         <note>\n            <p>\n            This operation is eventually consistent.\n         </p>\n         </note>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/schedule-groups/{Name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.scheduler#DeleteScheduleGroupInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "Name"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.scheduler#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#DeleteScheduleGroupOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.scheduler#DeleteScheduleInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group associated with this schedule. If you omit this, the default schedule group is used.</p>",
+                        "smithy.api#httpQuery": "groupName"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.scheduler#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#DeleteScheduleOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.scheduler#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                }
+            }
+        },
+        "com.amazonaws.scheduler#DetailType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.scheduler#EcsParameters": {
+            "type": "structure",
+            "members": {
+                "TaskDefinitionArn": {
+                    "target": "com.amazonaws.scheduler#TaskDefinitionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task definition to use if the event target is an Amazon ECS task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskCount": {
+                    "target": "com.amazonaws.scheduler#TaskCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tasks to create based on <code>TaskDefinition</code>. The default is <code>1</code>.</p>"
+                    }
+                },
+                "LaunchType": {
+                    "target": "com.amazonaws.scheduler#LaunchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task.\n         The <code>FARGATE</code> value is supported only in the Regions where Fargate with Amazon ECS is supported.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html\">AWS Fargate on Amazon ECS</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
+                    }
+                },
+                "NetworkConfiguration": {
+                    "target": "com.amazonaws.scheduler#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure specifies the network configuration for an ECS task.</p>"
+                    }
+                },
+                "PlatformVersion": {
+                    "target": "com.amazonaws.scheduler#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as <code>1.1.0</code>.</p>"
+                    }
+                },
+                "Group": {
+                    "target": "com.amazonaws.scheduler#Group",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>"
+                    }
+                },
+                "CapacityProviderStrategy": {
+                    "target": "com.amazonaws.scheduler#CapacityProviderStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity provider strategy to use for the task.</p>"
+                    }
+                },
+                "EnableECSManagedTags": {
+                    "target": "com.amazonaws.scheduler#EnableECSManagedTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable Amazon ECS managed tags for the task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS Resources</a>\n         in the <i>Amazon ECS Developer Guide</i>.</p>"
+                    }
+                },
+                "EnableExecuteCommand": {
+                    "target": "com.amazonaws.scheduler#EnableExecuteCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task.</p>"
+                    }
+                },
+                "PlacementConstraints": {
+                    "target": "com.amazonaws.scheduler#PlacementConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime).</p>"
+                    }
+                },
+                "PlacementStrategy": {
+                    "target": "com.amazonaws.scheduler#PlacementStrategies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task placement strategy for a task or service.</p>"
+                    }
+                },
+                "PropagateTags": {
+                    "target": "com.amazonaws.scheduler#PropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated.\n         Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use Amazon ECS's <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html\">\n               <code>TagResource</code>\n            </a>\n         API action.\n      </p>"
+                    }
+                },
+                "ReferenceId": {
+                    "target": "com.amazonaws.scheduler#ReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reference ID to use for the task.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.scheduler#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\">\n               <code>RunTask</code>\n            </a> in the <i>Amazon ECS API Reference</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the Amazon ECS <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\">\n               <code>RunTask</code>\n            </a> API operation.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#EnableECSManagedTags": {
+            "type": "boolean"
+        },
+        "com.amazonaws.scheduler#EnableExecuteCommand": {
+            "type": "boolean"
+        },
+        "com.amazonaws.scheduler#EndDate": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.scheduler#EventBridgeParameters": {
+            "type": "structure",
+            "members": {
+                "DetailType": {
+                    "target": "com.amazonaws.scheduler#DetailType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.scheduler#Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the EventBridge <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\">\n               <code>PutEvents</code>\n            </a> API operation.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#FlexibleTimeWindow": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.scheduler#FlexibleTimeWindowMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the schedule is invoked within a flexible time window.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumWindowInMinutes": {
+                    "target": "com.amazonaws.scheduler#MaximumWindowInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum time window during which a schedule can be invoked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows you to configure a time window during which EventBridge Scheduler invokes the schedule.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#FlexibleTimeWindowMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OFF",
+                        "name": "OFF"
+                    },
+                    {
+                        "value": "FLEXIBLE",
+                        "name": "FLEXIBLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#GetSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#GetScheduleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#GetScheduleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the specified schedule.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/schedules/{Name}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.scheduler#GetScheduleGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#GetScheduleGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#GetScheduleGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the specified schedule group.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/schedule-groups/{Name}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.scheduler#GetScheduleGroupInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#GetScheduleGroupOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule group.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the state of the schedule group.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.scheduler#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the schedule group was created.</p>"
+                    }
+                },
+                "LastModificationDate": {
+                    "target": "com.amazonaws.scheduler#LastModificationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the schedule group was last modified.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#GetScheduleInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group associated with this schedule. If you omit this, EventBridge Scheduler assumes that the schedule is associated with the default group.</p>",
+                        "smithy.api#httpQuery": "groupName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#GetScheduleOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#ScheduleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule.</p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group associated with this schedule.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule.</p>"
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.scheduler#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The expression that defines when the schedule runs. The following formats are supported.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rate</code> expression - <code>rate(unit value)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cron</code> expression - <code>cron(fields)</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n  You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify.\n  You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target\n  at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time,\n  such as at 8:00 am (UTC+0) every 1st day of the month.\n</p>\n         <p>\n  A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>.\n</p>\n         <p>\n  A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options:\n  <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>\n         </p>\n         <p>\n  For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>.\n</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.scheduler#StartDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify.\nEventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.scheduler#EndDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify.\nEventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.scheduler#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the schedule.</p>"
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "com.amazonaws.scheduler#ScheduleExpressionTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone in which the scheduling expression is evaluated.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the schedule is enabled or disabled.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.scheduler#CreationDate",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The time at which the schedule was created.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
+                    }
+                },
+                "LastModificationDate": {
+                    "target": "com.amazonaws.scheduler#LastModificationDate",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The time at which the schedule was last modified.</p>",
+                        "smithy.api#suppress": [
+                            "UnstableTrait"
+                        ]
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.scheduler#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for a customer managed KMS Key that is be used to encrypt and decrypt your data.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.scheduler#Target",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule target.</p>"
+                    }
+                },
+                "FlexibleTimeWindow": {
+                    "target": "com.amazonaws.scheduler#FlexibleTimeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to configure a time window during which EventBridge Scheduler invokes the schedule.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#Group": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.scheduler#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected error encountered while processing the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.scheduler#KinesisParameters": {
+            "type": "structure",
+            "members": {
+                "PartitionKey": {
+                    "target": "com.amazonaws.scheduler#TargetPartitionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the shard to which EventBridge Scheduler sends the event. For more information, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html\">Amazon Kinesis Data Streams terminology and concepts</a> in the\n         <i>Amazon Kinesis Streams Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the Amazon Kinesis <a href=\"kinesis/latest/APIReference/API_PutRecord.html\">\n               <code>PutRecord</code>\n            </a> API operation.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:kms:[a-z0-9\\-]+:\\d{12}:(key|alias)\\/[0-9a-zA-Z-_]*$"
+            }
+        },
+        "com.amazonaws.scheduler#LastModificationDate": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.scheduler#LaunchType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EC2",
+                        "name": "EC2"
+                    },
+                    {
+                        "value": "FARGATE",
+                        "name": "FARGATE"
+                    },
+                    {
+                        "value": "EXTERNAL",
+                        "name": "EXTERNAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#ListScheduleGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#ListScheduleGroupsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#ListScheduleGroupsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of your schedule groups.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/schedule-groups"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "ScheduleGroups"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.scheduler#ListScheduleGroupsInput": {
+            "type": "structure",
+            "members": {
+                "NamePrefix": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name prefix that you can use to return a filtered list of your schedule groups.</p>",
+                        "smithy.api#httpQuery": "NamePrefix"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.scheduler#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.scheduler#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, limits the number of results returned by this operation. The operation also returns a <code>NextToken</code> which you can use in a subsequent operation to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ListScheduleGroupsOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.scheduler#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether there are additional results to retrieve. If the value is null, there are no more results.</p>"
+                    }
+                },
+                "ScheduleGroups": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule groups that match the specified criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ListSchedules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#ListSchedulesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#ListSchedulesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of your EventBridge Scheduler schedules.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/schedules"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Schedules"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.scheduler#ListSchedulesInput": {
+            "type": "structure",
+            "members": {
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, only lists the schedules whose associated schedule group matches the given filter.</p>",
+                        "smithy.api#httpQuery": "ScheduleGroup"
+                    }
+                },
+                "NamePrefix": {
+                    "target": "com.amazonaws.scheduler#NamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Schedule name prefix to return the filtered list of resources.</p>",
+                        "smithy.api#httpQuery": "NamePrefix"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, only lists the schedules whose current state matches the given filter.</p>",
+                        "smithy.api#httpQuery": "State"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.scheduler#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned by a previous call to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.scheduler#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, limits the number of results returned by this operation. The operation also returns a <code>NextToken</code> which you can use in a subsequent operation to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ListSchedulesOutput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.scheduler#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether there are additional results to retrieve. If the value is null, there are no more results.</p>"
+                    }
+                },
+                "Schedules": {
+                    "target": "com.amazonaws.scheduler#ScheduleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedules that match the specified criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags associated with the Scheduler resource.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.scheduler#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.scheduler#TagResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the EventBridge Scheduler resource for which you want to view tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.scheduler#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the specified resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.scheduler#MaximumEventAgeInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.scheduler#MaximumRetryAttempts": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 185
+                }
+            }
+        },
+        "com.amazonaws.scheduler#MaximumWindowInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1440
+                }
+            }
+        },
+        "com.amazonaws.scheduler#MessageGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.scheduler#Name": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_.]+$"
+            }
+        },
+        "com.amazonaws.scheduler#NamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z][0-9a-zA-Z-_]*$"
+            }
+        },
+        "com.amazonaws.scheduler#NetworkConfiguration": {
+            "type": "structure",
+            "members": {
+                "awsvpcConfiguration": {
+                    "target": "com.amazonaws.scheduler#AwsVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the network configuration for an ECS task.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.scheduler#PlacementConstraint": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.scheduler#PlacementConstraintType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of constraint. Use <code>distinctInstance</code> to ensure that each task in a particular group is running on a different container instance. Use <code>memberOf</code> to restrict the selection to a group of valid candidates.</p>"
+                    }
+                },
+                "expression": {
+                    "target": "com.amazonaws.scheduler#PlacementConstraintExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>.\n         For more information, see <a href=\"https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html\">Cluster query language</a> in the <i>Amazon ECS Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing a constraint on task placement.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#PlacementConstraintExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.scheduler#PlacementConstraintType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "distinctInstance",
+                        "name": "DISTINCT_INSTANCE"
+                    },
+                    {
+                        "value": "memberOf",
+                        "name": "MEMBER_OF"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#PlacementConstraints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#PlacementConstraint"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.scheduler#PlacementStrategies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#PlacementStrategy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.scheduler#PlacementStrategy": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.scheduler#PlacementStrategyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates\n         evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter.\n         For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).</p>"
+                    }
+                },
+                "field": {
+                    "target": "com.amazonaws.scheduler#PlacementStrategyField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to apply the placement strategy against. For the spread placement strategy, valid values are <code>instanceId</code> (or <code>instanceId</code>, which has the same effect),\n         or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>. For the binpack placement strategy, valid values are\n         <code>cpu</code> and <code>memory</code>. For the random placement strategy, this field is not used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The task placement strategy for a task or service.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#PlacementStrategyField": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.scheduler#PlacementStrategyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "random",
+                        "name": "RANDOM"
+                    },
+                    {
+                        "value": "spread",
+                        "name": "SPREAD"
+                    },
+                    {
+                        "value": "binpack",
+                        "name": "BINPACK"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#PlatformVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.scheduler#PropagateTags": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TASK_DEFINITION",
+                        "name": "TASK_DEFINITION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#ReferenceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request references a resource which does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.scheduler#RetryPolicy": {
+            "type": "structure",
+            "members": {
+                "MaximumEventAgeInSeconds": {
+                    "target": "com.amazonaws.scheduler#MaximumEventAgeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount of time, in seconds, to continue to make retry attempts.</p>"
+                    }
+                },
+                "MaximumRetryAttempts": {
+                    "target": "com.amazonaws.scheduler#MaximumRetryAttempts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of retry attempts to make before the request fails. Retry attempts with exponential backoff continue until either the maximum number of attempts is made or\n         until the duration of the <code>MaximumEventAgeInSeconds</code> is reached.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>RetryPolicy</code> object that includes information about the retry policy settings, including the maximum age of an event, and the maximum number of times EventBridge Scheduler will try to deliver the event to a target.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:iam::\\d{12}:role\\/(service-role\\/){0,1}[a-zA-Z0-9\\+=,\\.@\\-_]+$"
+            }
+        },
+        "com.amazonaws.scheduler#SageMakerPipelineParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#SageMakerPipelineParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.scheduler#SageMakerPipelineParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name and value pair of a parameter to use to start execution of a SageMaker Model Building Pipeline.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#SageMakerPipelineParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#SageMakerPipelineParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.scheduler#SageMakerPipelineParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.scheduler#SageMakerPipelineParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.scheduler#SageMakerPipelineParameters": {
+            "type": "structure",
+            "members": {
+                "PipelineParameterList": {
+                    "target": "com.amazonaws.scheduler#SageMakerPipelineParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of parameter names and values to use when executing the SageMaker Model Building Pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the Amazon SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html\">\n               <code>StartPipelineExecution</code>\n            </a> API operation.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#Schedule": {
+            "type": "resource",
+            "identifiers": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.scheduler#CreateSchedule"
+            },
+            "read": {
+                "target": "com.amazonaws.scheduler#GetSchedule"
+            },
+            "update": {
+                "target": "com.amazonaws.scheduler#UpdateSchedule"
+            },
+            "delete": {
+                "target": "com.amazonaws.scheduler#DeleteSchedule"
+            },
+            "list": {
+                "target": "com.amazonaws.scheduler#ListSchedules"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {},
+                "smithy.api#noReplace": {},
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:scheduler:[a-z0-9\\-]+:\\d{12}:schedule\\/[0-9a-zA-Z-_.]+\\/[0-9a-zA-Z-_.]+$"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleExpressionTimezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroup": {
+            "type": "resource",
+            "identifiers": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.scheduler#CreateScheduleGroup"
+            },
+            "read": {
+                "target": "com.amazonaws.scheduler#GetScheduleGroup"
+            },
+            "delete": {
+                "target": "com.amazonaws.scheduler#DeleteScheduleGroup"
+            },
+            "list": {
+                "target": "com.amazonaws.scheduler#ListScheduleGroups"
+            },
+            "traits": {
+                "aws.cloudformation#cfnResource": {},
+                "smithy.api#noReplace": {},
+                "smithy.api#suppress": [
+                    "UnstableTrait"
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#ScheduleGroupSummary"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_.]+$"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroupNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z][0-9a-zA-Z-_]*$"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroupState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleGroupSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule group.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the state of the schedule group.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.scheduler#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the schedule group was created.</p>"
+                    }
+                },
+                "LastModificationDate": {
+                    "target": "com.amazonaws.scheduler#LastModificationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the schedule group was last modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a schedule group.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#ScheduleSummary"
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.scheduler#ScheduleSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#ScheduleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule.</p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group associated with this schedule.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the schedule is enabled or disabled.</p>"
+                    }
+                },
+                "CreationDate": {
+                    "target": "com.amazonaws.scheduler#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the schedule was created.</p>"
+                    }
+                },
+                "LastModificationDate": {
+                    "target": "com.amazonaws.scheduler#LastModificationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the schedule was last modified.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.scheduler#TargetSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule's target details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a schedule.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#SecurityGroup": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.scheduler#SecurityGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#SecurityGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds a service quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.scheduler#Source": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(?=[/\\.\\-_A-Za-z0-9]+)((?!aws\\.).*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"
+            }
+        },
+        "com.amazonaws.scheduler#SqsParameters": {
+            "type": "structure",
+            "members": {
+                "MessageGroupId": {
+                    "target": "com.amazonaws.scheduler#MessageGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The FIFO message group ID to use as the target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The templated target type for the Amazon SQS <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\">\n               <code>SendMessage</code>\n            </a> API operation.\n         Contains the message group ID to use when the target is a FIFO queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have content-based deduplication enabled.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the Amazon SQS message deduplication ID</a> in the\n         <i>Amazon SQS Developer Guide</i>.\n      </p>"
+            }
+        },
+        "com.amazonaws.scheduler#StartDate": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.scheduler#Subnet": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.scheduler#Subnets": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#Subnet"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.scheduler#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.scheduler#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.scheduler#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Tag to associate with a schedule group.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.scheduler#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.scheduler#TagValue"
+            }
+        },
+        "com.amazonaws.scheduler#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified EventBridge Scheduler resource. You can only assign tags to schedule groups.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TagResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)?:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$"
+            }
+        },
+        "com.amazonaws.scheduler#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.scheduler#TagResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule group that you are adding tags to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.scheduler#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags to associate with the schedule group.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.scheduler#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.scheduler#Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.scheduler#TagMap"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.scheduler#Target": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.scheduler#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that EventBridge Scheduler will use for this target when the schedule is invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeadLetterConfig": {
+                    "target": "com.amazonaws.scheduler#DeadLetterConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about an Amazon SQS queue that EventBridge Scheduler uses as a dead-letter queue for your schedule. If specified, EventBridge Scheduler delivers failed events that could not be successfully delivered to a target to the queue.</p>"
+                    }
+                },
+                "RetryPolicy": {
+                    "target": "com.amazonaws.scheduler#RetryPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>RetryPolicy</code> object that includes information about the retry policy settings, including the maximum age of an event, and the maximum number of times EventBridge Scheduler will try to deliver the event to a target.</p>"
+                    }
+                },
+                "Input": {
+                    "target": "com.amazonaws.scheduler#TargetInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target,\n         the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler\n         delivers a default notification to the target.</p>"
+                    }
+                },
+                "EcsParameters": {
+                    "target": "com.amazonaws.scheduler#EcsParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon ECS <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html\">\n               <code>RunTask</code>\n            </a> API operation.</p>"
+                    }
+                },
+                "EventBridgeParameters": {
+                    "target": "com.amazonaws.scheduler#EventBridgeParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the EventBridge <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\">\n               <code>PutEvents</code>\n            </a> API operation.</p>"
+                    }
+                },
+                "KinesisParameters": {
+                    "target": "com.amazonaws.scheduler#KinesisParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon Kinesis <a href=\"kinesis/latest/APIReference/API_PutRecord.html\">\n               <code>PutRecord</code>\n            </a> API operation.</p>"
+                    }
+                },
+                "SageMakerPipelineParameters": {
+                    "target": "com.amazonaws.scheduler#SageMakerPipelineParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html\">\n               <code>StartPipelineExecution</code>\n            </a> API operation.</p>"
+                    }
+                },
+                "SqsParameters": {
+                    "target": "com.amazonaws.scheduler#SqsParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The templated target type for the Amazon SQS <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\">\n               <code>SendMessage</code>\n            </a> API operation.\n         Contains the message group ID to use when the target is a FIFO queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have content-based deduplication enabled.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html\">Using the Amazon SQS message deduplication ID</a> in the\n         <i>Amazon SQS Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The schedule's target. EventBridge Scheduler supports templated target that invoke common API operations, as well as universal targets that you can customize to\n        invoke over 6,000 API operations across more than 270 services. You can only specify one templated or universal target for a schedule.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#TargetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TargetInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TargetPartitionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TargetSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.scheduler#TargetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a target.</p>"
+            }
+        },
+        "com.amazonaws.scheduler#TaskCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.scheduler#TaskDefinitionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.scheduler#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified EventBridge Scheduler schedule group.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.scheduler#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.scheduler#TagResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule group from which you are removing tags.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.scheduler#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "TagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#UntagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.scheduler#UpdateSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.scheduler#UpdateScheduleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.scheduler#UpdateScheduleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.scheduler#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.scheduler#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "scheduler:TagResource",
+                    "scheduler:UntagResource"
+                ],
+                "smithy.api#documentation": "<p>\n         Updates the specified schedule. When you call <code>UpdateSchedule</code>, EventBridge Scheduler uses all values, including empty values, specified in the request and\n         overrides the existing schedule. This is by design. This means that if you do not set an optional field in your request, that field will be set to\n         its system-default value after the update.\n      </p>\n         <p>\n         Before calling this operation, we recommend that you call the <code>GetSchedule</code> API operation and make a note of all optional parameters\n         for your <code>UpdateSchedule</code> call.\n      </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/schedules/{Name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.scheduler#UpdateScheduleInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.scheduler#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule that you are updating.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.scheduler#ScheduleGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the schedule group with which the schedule is associated. You must provide this value in order for EventBridge Scheduler to find the schedule you want to update.\n         If you omit this value, EventBridge Scheduler assumes the group is associated to the default group.</p>"
+                    }
+                },
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.scheduler#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  The expression that defines when the schedule runs. The following formats are supported.\n</p>\n         <ul>\n            <li>\n               <p>\n                  <code>at</code> expression - <code>at(yyyy-mm-ddThh:mm:ss)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>rate</code> expression - <code>rate(unit value)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cron</code> expression - <code>cron(fields)</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n  You can use <code>at</code> expressions to create one-time schedules that invoke a target once, at the time and in the time zone, that you specify.\n  You can use <code>rate</code> and <code>cron</code> expressions to create recurring schedules. Rate-based schedules are useful when you want to invoke a target\n  at regular intervals, such as every 15 minutes or every five days. Cron-based schedules are useful when you want to invoke a target periodically at a specific time,\n  such as at 8:00 am (UTC+0) every 1st day of the month.\n</p>\n         <p>\n  A <code>cron</code> expression consists of six fields separated by white spaces: <code>(minutes hours day_of_month month day_of_week year)</code>.\n</p>\n         <p>\n  A <code>rate</code> expression consists of a <i>value</i> as a positive integer, and a <i>unit</i> with the following options:\n  <code>minute</code> | <code>minutes</code> | <code>hour</code> | <code>hours</code> | <code>day</code> | <code>days</code>\n         </p>\n         <p>\n  For more information and examples, see <a href=\"https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html\">Schedule types on EventBridge Scheduler</a> in the <i>EventBridge Scheduler User Guide</i>.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.scheduler#StartDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the <code>StartDate</code> you specify.\nEventBridge Scheduler ignores <code>StartDate</code> for one-time schedules.</p>"
+                    }
+                },
+                "EndDate": {
+                    "target": "com.amazonaws.scheduler#EndDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the <code>EndDate</code> you specify.\nEventBridge Scheduler ignores <code>EndDate</code> for one-time schedules.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.scheduler#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description you specify for the schedule.</p>"
+                    }
+                },
+                "ScheduleExpressionTimezone": {
+                    "target": "com.amazonaws.scheduler#ScheduleExpressionTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timezone in which the scheduling expression is evaluated.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.scheduler#ScheduleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the schedule is enabled or disabled.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.scheduler#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the customer managed KMS key that that you want EventBridge Scheduler to use to encrypt and decrypt your data.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.scheduler#Target",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule target. You can use this operation to change the target that your schedule invokes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlexibleTimeWindow": {
+                    "target": "com.amazonaws.scheduler#FlexibleTimeWindow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows you to configure a time window during which EventBridge Scheduler invokes the schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.scheduler#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n  Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token,\n  EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.  \n</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#UpdateScheduleOutput": {
+            "type": "structure",
+            "members": {
+                "ScheduleArn": {
+                    "target": "com.amazonaws.scheduler#ScheduleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schedule that you updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.scheduler#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}
