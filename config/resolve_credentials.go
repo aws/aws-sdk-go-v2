@@ -190,7 +190,7 @@ func resolveSSOCredentials(ctx context.Context, cfg *aws.Config, sharedConfig *S
 		oidcClient := ssooidc.NewFromConfig(cfgCopy)
 		tokenProvider := ssocreds.NewSSOTokenProvider(oidcClient, cachedPath, optFns...)
 		options = append(options, func(o *ssocreds.Options) {
-			o.TokenProvider = tokenProvider
+			o.SSOTokenProvider = tokenProvider
 			o.CachedTokenFilepath = cachedPath
 		})
 	} else {

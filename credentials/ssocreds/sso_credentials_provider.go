@@ -48,7 +48,7 @@ type Options struct {
 
 	// Used by the SSOCredentialProvider if a token configuration
 	// profile is used in the shared config
-	TokenProvider *SSOTokenProvider
+	SSOTokenProvider *SSOTokenProvider
 }
 
 // Provider is an AWS credential provider that retrieves temporary AWS
@@ -87,8 +87,8 @@ func New(client GetRoleCredentialsAPIClient, accountID, roleName, startURL strin
 // direct access on the cached token.
 func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 	var accessToken *string
-	if p.options.TokenProvider != nil {
-		token, err := p.options.TokenProvider.RetrieveBearerToken(ctx)
+	if p.options.SSOTokenProvider != nil {
+		token, err := p.options.SSOTokenProvider.RetrieveBearerToken(ctx)
 		if err != nil {
 			return aws.Credentials{}, err
 		}
