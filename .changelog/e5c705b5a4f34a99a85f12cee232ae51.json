@@ -1,0 +1,9 @@
+{
+    "id": "e5c705b5-a4f3-4a99-a85f-12cee232ae51",
+    "type": "announcement",
+    "description": "When using the SSOTokenProvider, a previous implementation incorrectly compensated for invalid SSOTokenProvider configurations in the shared profile. This has been fixed via PR #1903 and tracked in issue #1846",
+    "modules": [
+        "config",
+        "credentials"
+    ]
+}
