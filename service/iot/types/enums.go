@@ -1205,6 +1205,7 @@ const (
 	ResourceTypeAccountSettings     ResourceType = "ACCOUNT_SETTINGS"
 	ResourceTypeRoleAlias           ResourceType = "ROLE_ALIAS"
 	ResourceTypeIamRole             ResourceType = "IAM_ROLE"
+	ResourceTypeIssuerCertificate   ResourceType = "ISSUER_CERTIFICATE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1220,6 +1221,7 @@ func (ResourceType) Values() []ResourceType {
 		"ACCOUNT_SETTINGS",
 		"ROLE_ALIAS",
 		"IAM_ROLE",
+		"ISSUER_CERTIFICATE",
 	}
 }
 

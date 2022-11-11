@@ -280,6 +280,13 @@ func awsRestjson1_serializeOpDocumentCreateTimelineEventInput(v *CreateTimelineE
 		ok.String(*v.EventData)
 	}
 
+	if v.EventReferences != nil {
+		ok := object.Key("eventReferences")
+		if err := awsRestjson1_serializeDocumentEventReferenceList(v.EventReferences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EventTime != nil {
 		ok := object.Key("eventTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EventTime))
@@ -2257,6 +2264,13 @@ func awsRestjson1_serializeOpDocumentUpdateTimelineEventInput(v *UpdateTimelineE
 		ok.String(*v.EventId)
 	}
 
+	if v.EventReferences != nil {
+		ok := object.Key("eventReferences")
+		if err := awsRestjson1_serializeDocumentEventReferenceList(v.EventReferences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EventTime != nil {
 		ok := object.Key("eventTime")
 		ok.Double(smithytime.FormatEpochSeconds(*v.EventTime))
@@ -2473,6 +2487,42 @@ func awsRestjson1_serializeDocumentEngagementSet(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventReference(v types.EventReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.EventReferenceMemberRelatedItemId:
+		av := object.Key("relatedItemId")
+		av.String(uv.Value)
+
+	case *types.EventReferenceMemberResource:
+		av := object.Key("resource")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEventReferenceList(v []types.EventReference, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentEventReference(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilter(v *types.Filter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2661,6 +2711,11 @@ func awsRestjson1_serializeDocumentRegionMapInputValue(v *types.RegionMapInputVa
 func awsRestjson1_serializeDocumentRelatedItem(v *types.RelatedItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.GeneratedId != nil {
+		ok := object.Key("generatedId")
+		ok.String(*v.GeneratedId)
+	}
 
 	if v.Identifier != nil {
 		ok := object.Key("identifier")

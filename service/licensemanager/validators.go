@@ -590,6 +590,26 @@ func (m *validateOpListLicenseVersions) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListReceivedGrantsForOrganization struct {
+}
+
+func (*validateOpListReceivedGrantsForOrganization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListReceivedGrantsForOrganization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListReceivedGrantsForOrganizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListReceivedGrantsForOrganizationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResourceInventory struct {
 }
 
@@ -904,6 +924,10 @@ func addOpListLicenseSpecificationsForResourceValidationMiddleware(stack *middle
 
 func addOpListLicenseVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLicenseVersions{}, middleware.After)
+}
+
+func addOpListReceivedGrantsForOrganizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListReceivedGrantsForOrganization{}, middleware.After)
 }
 
 func addOpListResourceInventoryValidationMiddleware(stack *middleware.Stack) error {
@@ -1866,6 +1890,21 @@ func validateOpListLicenseVersionsInput(v *ListLicenseVersionsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListLicenseVersionsInput"}
+	if v.LicenseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListReceivedGrantsForOrganizationInput(v *ListReceivedGrantsForOrganizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListReceivedGrantsForOrganizationInput"}
 	if v.LicenseArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
 	}

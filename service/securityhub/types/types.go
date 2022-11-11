@@ -987,7 +987,7 @@ type AwsBackupBackupPlanLifecycleDetails struct {
 	noSmithyDocumentSerde
 }
 
-// An array of CopyAction objects, which contains the details of the copy
+// An array of CopyAction objects, each of which contains details of the copy
 // operation.
 type AwsBackupBackupPlanRuleCopyActionsDetails struct {
 
@@ -1014,7 +1014,7 @@ type AwsBackupBackupPlanRuleDetails struct {
 	// completed, or it is canceled by Backup.
 	CompletionWindowMinutes int64
 
-	// An array of CopyAction objects, which contains the details of the copy
+	// An array of CopyAction objects, each of which contains details of the copy
 	// operation.
 	CopyActions []AwsBackupBackupPlanRuleCopyActionsDetails
 

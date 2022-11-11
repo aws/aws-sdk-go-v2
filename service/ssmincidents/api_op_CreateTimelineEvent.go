@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,6 +57,15 @@ type CreateTimelineEventInput struct {
 
 	// A token ensuring that the action is called only once with the specified details.
 	ClientToken *string
+
+	// Adds one or more references to the TimelineEvent. A reference can be an Amazon
+	// Web Services resource involved in the incident or in some way associated with
+	// it. When you specify a reference, you enter the Amazon Resource Name (ARN) of
+	// the resource. You can also specify a related item. As an example, you could
+	// specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this
+	// example is the resource. You could also specify a Amazon CloudWatch metric for
+	// that table. The metric is the related item.
+	EventReferences []types.EventReference
 
 	noSmithyDocumentSerde
 }

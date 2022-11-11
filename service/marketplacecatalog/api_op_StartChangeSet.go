@@ -12,18 +12,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation allows you to request changes for your entities. Within a single
-// ChangeSet, you cannot start the same change type against the same entity
-// multiple times. Additionally, when a ChangeSet is running, all the entities
-// targeted by the different changes are locked until the ChangeSet has completed
-// (either succeeded, cancelled, or failed). If you try to start a ChangeSet
-// containing a change against an entity that is already locked, you will receive a
-// ResourceInUseException. For example, you cannot start the ChangeSet described in
-// the example
+// Allows you to request changes for your entities. Within a single ChangeSet, you
+// can't start the same change type against the same entity multiple times.
+// Additionally, when a ChangeSet is running, all the entities targeted by the
+// different changes are locked until the change set has completed (either
+// succeeded, cancelled, or failed). If you try to start a change set containing a
+// change against an entity that is already locked, you will receive a
+// ResourceInUseException error. For example, you can't start the ChangeSet
+// described in the example
 // (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
-// later in this topic, because it contains two changes to execute the same change
-// type (AddRevisions) against the same entity (entity-id@1). For more information
-// about working with change sets, see  Working with change sets
+// later in this topic because it contains two changes to run the same change type
+// (AddRevisions) against the same entity (entity-id@1). For more information about
+// working with change sets, see  Working with change sets
 // (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets).
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {
 	if params == nil {
@@ -55,6 +55,10 @@ type StartChangeSetInput struct {
 	// Optional case sensitive string of up to 100 ASCII characters. The change set
 	// name can be used to filter the list of change sets.
 	ChangeSetName *string
+
+	// A list of objects specifying each key name and value for the ChangeSetTags
+	// property.
+	ChangeSetTags []types.Tag
 
 	// A unique token to identify the request to ensure idempotency.
 	ClientRequestToken *string

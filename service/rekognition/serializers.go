@@ -3829,6 +3829,50 @@ func awsAwsjson11_serializeDocumentDetectionFilter(v *types.DetectionFilter, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDetectLabelsFeatureList(v []types.DetectLabelsFeatureName, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDetectLabelsImagePropertiesSettings(v *types.DetectLabelsImagePropertiesSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxDominantColors != 0 {
+		ok := object.Key("MaxDominantColors")
+		ok.Integer(v.MaxDominantColors)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDetectLabelsSettings(v *types.DetectLabelsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GeneralLabels != nil {
+		ok := object.Key("GeneralLabels")
+		if err := awsAwsjson11_serializeDocumentGeneralLabelsSettings(v.GeneralLabels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageProperties != nil {
+		ok := object.Key("ImageProperties")
+		if err := awsAwsjson11_serializeDocumentDetectLabelsImagePropertiesSettings(v.ImageProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDetectTextFilters(v *types.DetectTextFilters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3910,6 +3954,52 @@ func awsAwsjson11_serializeDocumentFaceSearchSettings(v *types.FaceSearchSetting
 		default:
 			ok.Float(*v.FaceMatchThreshold)
 
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGeneralLabelsFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGeneralLabelsSettings(v *types.GeneralLabelsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LabelCategoryExclusionFilters != nil {
+		ok := object.Key("LabelCategoryExclusionFilters")
+		if err := awsAwsjson11_serializeDocumentGeneralLabelsFilterList(v.LabelCategoryExclusionFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelCategoryInclusionFilters != nil {
+		ok := object.Key("LabelCategoryInclusionFilters")
+		if err := awsAwsjson11_serializeDocumentGeneralLabelsFilterList(v.LabelCategoryInclusionFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelExclusionFilters != nil {
+		ok := object.Key("LabelExclusionFilters")
+		if err := awsAwsjson11_serializeDocumentGeneralLabelsFilterList(v.LabelExclusionFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelInclusionFilters != nil {
+		ok := object.Key("LabelInclusionFilters")
+		if err := awsAwsjson11_serializeDocumentGeneralLabelsFilterList(v.LabelInclusionFilters, ok); err != nil {
+			return err
 		}
 	}
 
@@ -5089,6 +5179,13 @@ func awsAwsjson11_serializeOpDocumentDetectLabelsInput(v *DetectLabelsInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Features != nil {
+		ok := object.Key("Features")
+		if err := awsAwsjson11_serializeDocumentDetectLabelsFeatureList(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Image != nil {
 		ok := object.Key("Image")
 		if err := awsAwsjson11_serializeDocumentImage(v.Image, ok); err != nil {
@@ -5116,6 +5213,13 @@ func awsAwsjson11_serializeOpDocumentDetectLabelsInput(v *DetectLabelsInput, val
 		default:
 			ok.Float(*v.MinConfidence)
 
+		}
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentDetectLabelsSettings(v.Settings, ok); err != nil {
+			return err
 		}
 	}
 

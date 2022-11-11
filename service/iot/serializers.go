@@ -11571,6 +11571,67 @@ func awsRestjson1_serializeOpHttpBindingsListProvisioningTemplateVersionsInput(v
 	return nil
 }
 
+type awsRestjson1_serializeOpListRelatedResourcesForAuditFinding struct {
+}
+
+func (*awsRestjson1_serializeOpListRelatedResourcesForAuditFinding) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListRelatedResourcesForAuditFinding) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRelatedResourcesForAuditFindingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/audit/relatedResources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListRelatedResourcesForAuditFindingInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListRelatedResourcesForAuditFindingInput(v *ListRelatedResourcesForAuditFindingInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FindingId != nil {
+		encoder.SetQuery("findingId").String(*v.FindingId)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListRoleAliases struct {
 }
 
@@ -18972,6 +19033,28 @@ func awsRestjson1_serializeDocumentIotSiteWiseAction(v *types.IotSiteWiseAction,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIssuerCertificateIdentifier(v *types.IssuerCertificateIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IssuerCertificateSerialNumber != nil {
+		ok := object.Key("issuerCertificateSerialNumber")
+		ok.String(*v.IssuerCertificateSerialNumber)
+	}
+
+	if v.IssuerCertificateSubject != nil {
+		ok := object.Key("issuerCertificateSubject")
+		ok.String(*v.IssuerCertificateSubject)
+	}
+
+	if v.IssuerId != nil {
+		ok := object.Key("issuerId")
+		ok.String(*v.IssuerId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJobExecutionsRetryConfig(v *types.JobExecutionsRetryConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19805,6 +19888,11 @@ func awsRestjson1_serializeDocumentResourceIdentifier(v *types.ResourceIdentifie
 		ok.String(*v.CognitoIdentityPoolId)
 	}
 
+	if v.DeviceCertificateArn != nil {
+		ok := object.Key("deviceCertificateArn")
+		ok.String(*v.DeviceCertificateArn)
+	}
+
 	if v.DeviceCertificateId != nil {
 		ok := object.Key("deviceCertificateId")
 		ok.String(*v.DeviceCertificateId)
@@ -19813,6 +19901,13 @@ func awsRestjson1_serializeDocumentResourceIdentifier(v *types.ResourceIdentifie
 	if v.IamRoleArn != nil {
 		ok := object.Key("iamRoleArn")
 		ok.String(*v.IamRoleArn)
+	}
+
+	if v.IssuerCertificateIdentifier != nil {
+		ok := object.Key("issuerCertificateIdentifier")
+		if err := awsRestjson1_serializeDocumentIssuerCertificateIdentifier(v.IssuerCertificateIdentifier, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PolicyVersionIdentifier != nil {

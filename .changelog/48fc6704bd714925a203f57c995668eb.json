@@ -1,0 +1,8 @@
+{
+    "id": "48fc6704-bd71-4925-a203-f57c995668eb",
+    "type": "documentation",
+    "description": "Added links related to enabling job bookmarks.",
+    "modules": [
+        "service/glue"
+    ]
+}

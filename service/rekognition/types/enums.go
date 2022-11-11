@@ -162,6 +162,24 @@ func (DatasetType) Values() []DatasetType {
 	}
 }
 
+type DetectLabelsFeatureName string
+
+// Enum values for DetectLabelsFeatureName
+const (
+	DetectLabelsFeatureNameGeneralLabels   DetectLabelsFeatureName = "GENERAL_LABELS"
+	DetectLabelsFeatureNameImageProperties DetectLabelsFeatureName = "IMAGE_PROPERTIES"
+)
+
+// Values returns all known values for DetectLabelsFeatureName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DetectLabelsFeatureName) Values() []DetectLabelsFeatureName {
+	return []DetectLabelsFeatureName{
+		"GENERAL_LABELS",
+		"IMAGE_PROPERTIES",
+	}
+}
+
 type EmotionName string
 
 // Enum values for EmotionName

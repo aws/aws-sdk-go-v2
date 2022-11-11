@@ -1872,6 +1872,21 @@ type IotSiteWiseAction struct {
 	noSmithyDocumentSerde
 }
 
+// The certificate issuer indentifier.
+type IssuerCertificateIdentifier struct {
+
+	// The issuer certificate serial number.
+	IssuerCertificateSerialNumber *string
+
+	// The subject of the issuer certificate.
+	IssuerCertificateSubject *string
+
+	// The issuer ID.
+	IssuerId *string
+
+	noSmithyDocumentSerde
+}
+
 // The Job object contains details about a job.
 type Job struct {
 
@@ -3004,11 +3019,17 @@ type ResourceIdentifier struct {
 	// The ID of the Amazon Cognito identity pool.
 	CognitoIdentityPoolId *string
 
+	// The ARN of the identified device certificate.
+	DeviceCertificateArn *string
+
 	// The ID of the certificate attached to the resource.
 	DeviceCertificateId *string
 
 	// The ARN of the IAM role that has overly permissive actions.
 	IamRoleArn *string
+
+	// The issuer certificate identifier.
+	IssuerCertificateIdentifier *IssuerCertificateIdentifier
 
 	// The version of the policy associated with the resource.
 	PolicyVersionIdentifier *PolicyVersionIdentifier

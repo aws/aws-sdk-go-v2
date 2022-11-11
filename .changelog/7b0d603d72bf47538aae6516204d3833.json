@@ -1,0 +1,8 @@
+{
+    "id": "7b0d603d-72bf-4753-8aae-6516204d3833",
+    "type": "feature",
+    "description": "RelatedItems now have an ID field which can be used for referencing them else where. Introducing event references in TimelineEvent API and increasing maximum length of \"eventData\" to 12K characters.",
+    "modules": [
+        "service/ssmincidents"
+    ]
+}

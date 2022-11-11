@@ -4674,6 +4674,92 @@ func awsRestjson1_deserializeDocumentEngagementSet(v *[]string, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEventReference(v *types.EventReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.EventReference
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "relatedItemId":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeneratedId to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.EventReferenceMemberRelatedItemId{Value: mv}
+			break loop
+
+		case "resource":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.EventReferenceMemberResource{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEventReferenceList(v *[]types.EventReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EventReference
+	if *v == nil {
+		cv = []types.EventReference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EventReference
+		if err := awsRestjson1_deserializeDocumentEventReference(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEventSummary(v **types.EventSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4703,6 +4789,11 @@ func awsRestjson1_deserializeDocumentEventSummary(v **types.EventSummary, value 
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.EventId = ptr.String(jtv)
+			}
+
+		case "eventReferences":
+			if err := awsRestjson1_deserializeDocumentEventReferenceList(&sv.EventReferences, value); err != nil {
+				return err
 			}
 
 		case "eventTime":
@@ -5610,6 +5701,15 @@ func awsRestjson1_deserializeDocumentRelatedItem(v **types.RelatedItem, value in
 
 	for key, value := range shape {
 		switch key {
+		case "generatedId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GeneratedId to be of type string, got %T instead", value)
+				}
+				sv.GeneratedId = ptr.String(jtv)
+			}
+
 		case "identifier":
 			if err := awsRestjson1_deserializeDocumentItemIdentifier(&sv.Identifier, value); err != nil {
 				return err
@@ -6413,6 +6513,11 @@ func awsRestjson1_deserializeDocumentTimelineEvent(v **types.TimelineEvent, valu
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.EventId = ptr.String(jtv)
+			}
+
+		case "eventReferences":
+			if err := awsRestjson1_deserializeDocumentEventReferenceList(&sv.EventReferences, value); err != nil {
+				return err
 			}
 
 		case "eventTime":

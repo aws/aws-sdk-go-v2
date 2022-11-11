@@ -63,9 +63,9 @@ type UpdateFindingAggregatorInput struct {
 	RegionLinkingMode *string
 
 	// If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED, then this is a
-	// comma-separated list of Regions that do not aggregate findings to the
+	// space-separated list of Regions that do not aggregate findings to the
 	// aggregation Region. If RegionLinkingMode is SPECIFIED_REGIONS, then this is a
-	// comma-separated list of Regions that do aggregate findings to the aggregation
+	// space-separated list of Regions that do aggregate findings to the aggregation
 	// Region.
 	Regions []string
 

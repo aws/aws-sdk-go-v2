@@ -195,7 +195,8 @@ type CelebrityRecognition struct {
 	Celebrity *CelebrityDetail
 
 	// The time, in milliseconds from the start of the video, that the celebrity was
-	// recognized.
+	// recognized. Note that Timestamp is not guaranteed to be accurate to the
+	// individual frame where the celebrity first appears.
 	Timestamp int64
 
 	noSmithyDocumentSerde
@@ -311,7 +312,8 @@ type ContentModerationDetection struct {
 	ModerationLabel *ModerationLabel
 
 	// Time, in milliseconds from the beginning of the video, that the content
-	// moderation label was detected.
+	// moderation label was detected. Note that Timestamp is not guaranteed to be
+	// accurate to the individual frame where the moderated content first appears.
 	Timestamp int64
 
 	noSmithyDocumentSerde
@@ -509,6 +511,102 @@ type DetectionFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The background of the image with regard to image quality and dominant colors.
+type DetectLabelsImageBackground struct {
+
+	// The dominant colors found in the background of an image, defined with RGB
+	// values, CSS color name, simplified color name, and PixelPercentage (the
+	// percentage of image pixels that have a particular color).
+	DominantColors []DominantColor
+
+	// The quality of the image background as defined by brightness and sharpness.
+	Quality *DetectLabelsImageQuality
+
+	noSmithyDocumentSerde
+}
+
+// The foreground of the image with regard to image quality and dominant colors.
+type DetectLabelsImageForeground struct {
+
+	// The dominant colors found in the foreground of an image, defined with RGB
+	// values, CSS color name, simplified color name, and PixelPercentage (the
+	// percentage of image pixels that have a particular color).
+	DominantColors []DominantColor
+
+	// The quality of the image foreground as defined by brightness and sharpness.
+	Quality *DetectLabelsImageQuality
+
+	noSmithyDocumentSerde
+}
+
+// Information about the quality and dominant colors of an input image. Quality and
+// color information is returned for the entire image, foreground, and background.
+type DetectLabelsImageProperties struct {
+
+	// Information about the properties of an image’s background, including the
+	// background’s quality and dominant colors, including the quality and dominant
+	// colors of the image.
+	Background *DetectLabelsImageBackground
+
+	// Information about the dominant colors found in an image, described with RGB
+	// values, CSS color name, simplified color name, and PixelPercentage (the
+	// percentage of image pixels that have a particular color).
+	DominantColors []DominantColor
+
+	// Information about the properties of an image’s foreground, including the
+	// foreground’s quality and dominant colors, including the quality and dominant
+	// colors of the image.
+	Foreground *DetectLabelsImageForeground
+
+	// Information about the quality of the image foreground as defined by brightness,
+	// sharpness, and contrast. The higher the value the greater the brightness,
+	// sharpness, and contrast respectively.
+	Quality *DetectLabelsImageQuality
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the IMAGE_PROPERTIES feature type.
+type DetectLabelsImagePropertiesSettings struct {
+
+	// The maximum number of dominant colors to return when detecting labels in an
+	// image. The default value is 10.
+	MaxDominantColors int32
+
+	noSmithyDocumentSerde
+}
+
+// The quality of an image provided for label detection, with regard to brightness,
+// sharpness, and contrast.
+type DetectLabelsImageQuality struct {
+
+	// The brightness of an image provided for label detection.
+	Brightness *float32
+
+	// The contrast of an image provided for label detection.
+	Contrast *float32
+
+	// The sharpness of an image provided for label detection.
+	Sharpness *float32
+
+	noSmithyDocumentSerde
+}
+
+// Settings for the DetectLabels request. Settings can include filters for both
+// GENERAL_LABELS and IMAGE_PROPERTIES. GENERAL_LABELS filters can be inclusive or
+// exclusive and applied to individual labels or label categories. IMAGE_PROPERTIES
+// filters allow specification of a maximum number of dominant colors.
+type DetectLabelsSettings struct {
+
+	// Contains the specified filters for GENERAL_LABELS.
+	GeneralLabels *GeneralLabelsSettings
+
+	// Contains the chosen number of maximum dominant colors in an image.
+	ImageProperties *DetectLabelsImagePropertiesSettings
+
+	noSmithyDocumentSerde
+}
+
 // A set of optional parameters that you can use to set the criteria that the text
 // must meet to be included in your response. WordFilter looks at a word’s height,
 // width, and minimum confidence. RegionOfInterest lets you set a specific region
@@ -534,6 +632,33 @@ type DistributeDataset struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// A description of the dominant colors in an image.
+type DominantColor struct {
+
+	// The Blue RGB value for a dominant color.
+	Blue *int32
+
+	// The CSS color name of a dominant color.
+	CSSColor *string
+
+	// The Green RGB value for a dominant color.
+	Green *int32
+
+	// The Hex code equivalent of the RGB values for a dominant color.
+	HexCode *string
+
+	// The percentage of image pixels that have a given dominant color.
+	PixelPercent *float32
+
+	// The Red RGB value for a dominant color.
+	Red *int32
+
+	// One of 12 simplified color names applied to a dominant color.
+	SimplifiedColor *string
 
 	noSmithyDocumentSerde
 }
@@ -735,6 +860,8 @@ type FaceDetection struct {
 	Face *FaceDetail
 
 	// Time, in milliseconds from the start of the video, that the face was detected.
+	// Note that Timestamp is not guaranteed to be accurate to the individual frame
+	// where the face first appears.
 	Timestamp int64
 
 	noSmithyDocumentSerde
@@ -805,6 +932,26 @@ type Gender struct {
 
 	// The predicted gender of the face.
 	Value GenderType
+
+	noSmithyDocumentSerde
+}
+
+// Contains filters for the object labels returned by DetectLabels. Filters can be
+// inclusive, exclusive, or a combination of both and can be applied to individual
+// l abels or entire label categories.
+type GeneralLabelsSettings struct {
+
+	// The label categories that should be excluded from the return from DetectLabels.
+	LabelCategoryExclusionFilters []string
+
+	// The label categories that should be included in the return from DetectLabels.
+	LabelCategoryInclusionFilters []string
+
+	// The labels that should be excluded from the return from DetectLabels.
+	LabelExclusionFilters []string
+
+	// The labels that should be included in the return from DetectLabels.
+	LabelInclusionFilters []string
 
 	noSmithyDocumentSerde
 }
@@ -942,6 +1089,9 @@ type Instance struct {
 	// The confidence that Amazon Rekognition has in the accuracy of the bounding box.
 	Confidence *float32
 
+	// The dominant colors found in an individual instance of a label.
+	DominantColors []DominantColor
+
 	noSmithyDocumentSerde
 }
 
@@ -968,8 +1118,10 @@ type KinesisVideoStream struct {
 }
 
 // Specifies the starting point in a Kinesis stream to start processing. You can
-// use the producer timestamp or the fragment number. For more information, see
-// Fragment
+// use the producer timestamp or the fragment number. One of either producer
+// timestamp or fragment number is required. If you use the producer timestamp, you
+// must put the time in milliseconds. For more information about fragment numbers,
+// see Fragment
 // (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html).
 type KinesisVideoStreamStartSelector struct {
 
@@ -977,7 +1129,8 @@ type KinesisVideoStreamStartSelector struct {
 	// on the ingestion order.
 	FragmentNumber *string
 
-	// The timestamp from the producer corresponding to the fragment.
+	// The timestamp from the producer corresponding to the fragment, in milliseconds,
+	// expressed in unix time format.
 	ProducerTimestamp *int64
 
 	noSmithyDocumentSerde
@@ -997,6 +1150,12 @@ type KnownGender struct {
 // detected instances, parent labels, and level of confidence.
 type Label struct {
 
+	// A list of potential aliases for a given label.
+	Aliases []LabelAlias
+
+	// A list of the categories associated with a given label.
+	Categories []LabelCategory
+
 	// Level of confidence.
 	Confidence *float32
 
@@ -1014,6 +1173,24 @@ type Label struct {
 	noSmithyDocumentSerde
 }
 
+// A potential alias of for a given label.
+type LabelAlias struct {
+
+	// The name of an alias for a given label.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The category that applies to a given label.
+type LabelCategory struct {
+
+	// The name of a category that applies to a given label.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a label detected in a video analysis request and the time the
 // label was detected in the video.
 type LabelDetection struct {
@@ -1022,6 +1199,8 @@ type LabelDetection struct {
 	Label *Label
 
 	// Time, in milliseconds from the start of the video, that the label was detected.
+	// Note that Timestamp is not guaranteed to be accurate to the individual frame
+	// where the label first appears.
 	Timestamp int64
 
 	noSmithyDocumentSerde
@@ -1169,7 +1348,8 @@ type PersonDetection struct {
 	Person *PersonDetail
 
 	// The time, in milliseconds from the start of the video, that the person's path
-	// was tracked.
+	// was tracked. Note that Timestamp is not guaranteed to be accurate to the
+	// individual frame where the person's path first appears.
 	Timestamp int64
 
 	noSmithyDocumentSerde
@@ -1658,10 +1838,12 @@ type StartTextDetectionFilters struct {
 	noSmithyDocumentSerde
 }
 
+// This is a required parameter for label detection stream processors and should
+// not be used to start a face search stream processor.
 type StreamProcessingStartSelector struct {
 
 	// Specifies the starting point in the stream to start processing. This can be done
-	// with a timestamp or a fragment number in a Kinesis stream.
+	// with a producer timestamp or a fragment number in a Kinesis stream.
 	KVSStreamStartSelector *KinesisVideoStreamStartSelector
 
 	noSmithyDocumentSerde
@@ -1909,7 +2091,8 @@ type TextDetectionResult struct {
 	TextDetection *TextDetection
 
 	// The time, in milliseconds from the start of the video, that the text was
-	// detected.
+	// detected. Note that Timestamp is not guaranteed to be accurate to the individual
+	// frame where the text first appears.
 	Timestamp int64
 
 	noSmithyDocumentSerde

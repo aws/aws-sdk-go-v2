@@ -197,6 +197,37 @@ type EmptyChatChannel struct {
 	noSmithyDocumentSerde
 }
 
+// An item referenced in a TimelineEvent that is involved in or somehow associated
+// with an incident. You can specify an Amazon Resource Name (ARN) for an Amazon
+// Web Services resource or a RelatedItem ID.
+//
+// The following types satisfy this interface:
+//
+//	EventReferenceMemberRelatedItemId
+//	EventReferenceMemberResource
+type EventReference interface {
+	isEventReference()
+}
+
+// The ID of a RelatedItem referenced in a TimelineEvent.
+type EventReferenceMemberRelatedItemId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EventReferenceMemberRelatedItemId) isEventReference() {}
+
+// The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in
+// a TimelineEvent.
+type EventReferenceMemberResource struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*EventReferenceMemberResource) isEventReference() {}
+
 // Details about a timeline event during an incident.
 type EventSummary struct {
 
@@ -224,6 +255,9 @@ type EventSummary struct {
 	//
 	// This member is required.
 	IncidentRecordArn *string
+
+	// A list of references in a TimelineEvent.
+	EventReferences []EventReference
 
 	noSmithyDocumentSerde
 }
@@ -526,6 +560,10 @@ type RelatedItem struct {
 	// This member is required.
 	Identifier *ItemIdentifier
 
+	// A unique ID for a RelatedItem. Don't specify this parameter when you add a
+	// RelatedItem by using the UpdateRelatedItems API action.
+	GeneratedId *string
+
 	// The title of the related item.
 	Title *string
 
@@ -716,6 +754,9 @@ type TimelineEvent struct {
 	// This member is required.
 	IncidentRecordArn *string
 
+	// A list of references in a TimelineEvent.
+	EventReferences []EventReference
+
 	noSmithyDocumentSerde
 }
 
@@ -792,6 +833,7 @@ func (*UnknownUnionMember) isAutomationExecution()        {}
 func (*UnknownUnionMember) isChatChannel()                {}
 func (*UnknownUnionMember) isCondition()                  {}
 func (*UnknownUnionMember) isDynamicSsmParameterValue()   {}
+func (*UnknownUnionMember) isEventReference()             {}
 func (*UnknownUnionMember) isItemValue()                  {}
 func (*UnknownUnionMember) isNotificationTargetItem()     {}
 func (*UnknownUnionMember) isRelatedItemsUpdate()         {}

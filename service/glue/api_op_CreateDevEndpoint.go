@@ -141,7 +141,7 @@ type CreateDevEndpointOutput struct {
 	// Python 2.
 	Arguments map[string]string
 
-	// The AWS Availability Zone where this DevEndpoint is located.
+	// The Amazon Web Services Availability Zone where this DevEndpoint is located.
 	AvailabilityZone *string
 
 	// The point in time at which this DevEndpoint was created.

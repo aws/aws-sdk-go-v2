@@ -11083,6 +11083,437 @@ func awsAwsjson11_deserializeDocumentDatasetStats(v **types.DatasetStats, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDetectLabelsImageBackground(v **types.DetectLabelsImageBackground, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DetectLabelsImageBackground
+	if *v == nil {
+		sv = &types.DetectLabelsImageBackground{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DominantColors":
+			if err := awsAwsjson11_deserializeDocumentDominantColors(&sv.DominantColors, value); err != nil {
+				return err
+			}
+
+		case "Quality":
+			if err := awsAwsjson11_deserializeDocumentDetectLabelsImageQuality(&sv.Quality, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDetectLabelsImageForeground(v **types.DetectLabelsImageForeground, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DetectLabelsImageForeground
+	if *v == nil {
+		sv = &types.DetectLabelsImageForeground{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DominantColors":
+			if err := awsAwsjson11_deserializeDocumentDominantColors(&sv.DominantColors, value); err != nil {
+				return err
+			}
+
+		case "Quality":
+			if err := awsAwsjson11_deserializeDocumentDetectLabelsImageQuality(&sv.Quality, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDetectLabelsImageProperties(v **types.DetectLabelsImageProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DetectLabelsImageProperties
+	if *v == nil {
+		sv = &types.DetectLabelsImageProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Background":
+			if err := awsAwsjson11_deserializeDocumentDetectLabelsImageBackground(&sv.Background, value); err != nil {
+				return err
+			}
+
+		case "DominantColors":
+			if err := awsAwsjson11_deserializeDocumentDominantColors(&sv.DominantColors, value); err != nil {
+				return err
+			}
+
+		case "Foreground":
+			if err := awsAwsjson11_deserializeDocumentDetectLabelsImageForeground(&sv.Foreground, value); err != nil {
+				return err
+			}
+
+		case "Quality":
+			if err := awsAwsjson11_deserializeDocumentDetectLabelsImageQuality(&sv.Quality, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDetectLabelsImageQuality(v **types.DetectLabelsImageQuality, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DetectLabelsImageQuality
+	if *v == nil {
+		sv = &types.DetectLabelsImageQuality{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Brightness":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Brightness = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Brightness = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Contrast":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Contrast = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Contrast = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Sharpness":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Sharpness = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Sharpness = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDominantColor(v **types.DominantColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DominantColor
+	if *v == nil {
+		sv = &types.DominantColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Blue":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Blue = ptr.Int32(int32(i64))
+			}
+
+		case "CSSColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CSSColor = ptr.String(jtv)
+			}
+
+		case "Green":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Green = ptr.Int32(int32(i64))
+			}
+
+		case "HexCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HexCode = ptr.String(jtv)
+			}
+
+		case "PixelPercent":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PixelPercent = ptr.Float32(float32(f64))
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PixelPercent = ptr.Float32(float32(f64))
+
+				default:
+					return fmt.Errorf("expected Percent to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Red":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Red = ptr.Int32(int32(i64))
+			}
+
+		case "SimplifiedColor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SimplifiedColor = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDominantColors(v *[]types.DominantColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DominantColor
+	if *v == nil {
+		cv = []types.DominantColor{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DominantColor
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDominantColor(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEmotion(v **types.Emotion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12846,6 +13277,11 @@ func awsAwsjson11_deserializeDocumentInstance(v **types.Instance, value interfac
 				}
 			}
 
+		case "DominantColors":
+			if err := awsAwsjson11_deserializeDocumentDominantColors(&sv.DominantColors, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13379,6 +13815,16 @@ func awsAwsjson11_deserializeDocumentLabel(v **types.Label, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "Aliases":
+			if err := awsAwsjson11_deserializeDocumentLabelAliases(&sv.Aliases, value); err != nil {
+				return err
+			}
+
+		case "Categories":
+			if err := awsAwsjson11_deserializeDocumentLabelCategories(&sv.Categories, value); err != nil {
+				return err
+			}
+
 		case "Confidence":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13430,6 +13876,154 @@ func awsAwsjson11_deserializeDocumentLabel(v **types.Label, value interface{}) e
 		case "Parents":
 			if err := awsAwsjson11_deserializeDocumentParents(&sv.Parents, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLabelAlias(v **types.LabelAlias, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LabelAlias
+	if *v == nil {
+		sv = &types.LabelAlias{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLabelAliases(v *[]types.LabelAlias, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LabelAlias
+	if *v == nil {
+		cv = []types.LabelAlias{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LabelAlias
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLabelAlias(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLabelCategories(v *[]types.LabelCategory, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LabelCategory
+	if *v == nil {
+		cv = []types.LabelCategory{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LabelCategory
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLabelCategory(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLabelCategory(v **types.LabelCategory, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LabelCategory
+	if *v == nil {
+		sv = &types.LabelCategory{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
 			}
 
 		default:
@@ -18781,6 +19375,11 @@ func awsAwsjson11_deserializeOpDocumentDetectLabelsOutput(v **DetectLabelsOutput
 
 	for key, value := range shape {
 		switch key {
+		case "ImageProperties":
+			if err := awsAwsjson11_deserializeDocumentDetectLabelsImageProperties(&sv.ImageProperties, value); err != nil {
+				return err
+			}
+
 		case "LabelModelVersion":
 			if value != nil {
 				jtv, ok := value.(string)

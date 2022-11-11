@@ -30,6 +30,9 @@ type Change struct {
 	// Optional name for the change.
 	ChangeName *string
 
+	// The tags associated with the change.
+	EntityTags []Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -202,6 +205,22 @@ type Sort struct {
 	// The sorting order. Can be ASCENDING or DESCENDING. The default value is
 	// DESCENDING.
 	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// A list of objects specifying each key name and value.
+type Tag struct {
+
+	// The key associated with the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value associated with the tag.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

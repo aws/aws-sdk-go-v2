@@ -131,6 +131,28 @@ func ExampleDynamicSsmParameterValue_outputUsage() {
 
 var _ types.VariableType
 
+func ExampleEventReference_outputUsage() {
+	var union types.EventReference
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EventReferenceMemberRelatedItemId:
+		_ = v.Value // Value is string
+
+	case *types.EventReferenceMemberResource:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
+
 func ExampleItemValue_outputUsage() {
 	var union types.ItemValue
 	// type switches can be used to check the union value

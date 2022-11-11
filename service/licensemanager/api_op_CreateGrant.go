@@ -56,7 +56,8 @@ type CreateGrantInput struct {
 	// This member is required.
 	LicenseArn *string
 
-	// The grant principals.
+	// The grant principals. This value should be specified as an Amazon Resource Name
+	// (ARN).
 	//
 	// This member is required.
 	Principals []string

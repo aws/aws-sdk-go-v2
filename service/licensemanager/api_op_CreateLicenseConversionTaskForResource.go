@@ -30,8 +30,8 @@ func (c *Client) CreateLicenseConversionTaskForResource(ctx context.Context, par
 type CreateLicenseConversionTaskForResourceInput struct {
 
 	// Information that identifies the license type you are converting to. For the
-	// structure of the destination license, see Convert a license type using the AWS
-	// CLI
+	// structure of the destination license, see Convert a license type using the
+	// Amazon Web Services CLI
 	// (https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli)
 	// in the License Manager User Guide.
 	//
@@ -45,7 +45,8 @@ type CreateLicenseConversionTaskForResourceInput struct {
 	ResourceArn *string
 
 	// Information that identifies the license type you are converting from. For the
-	// structure of the source license, see Convert a license type using the AWS CLI
+	// structure of the source license, see Convert a license type using the Amazon Web
+	// Services CLI
 	// (https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli)
 	// in the License Manager User Guide.
 	//

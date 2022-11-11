@@ -12,9 +12,7 @@
 // Rekognition Streaming Video
 // (https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html). It
 // provides descriptions of actions, data types, common parameters, and common
-// errors.
-//
-// # Amazon Rekognition Image
+// errors. Amazon Rekognition Image
 //
 // * CompareFaces
 // (https://docs.aws.amazon.com/rekognition/latest/APIReference/API_CompareFaces.html)

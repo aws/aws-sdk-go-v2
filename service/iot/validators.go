@@ -2590,6 +2590,26 @@ func (m *validateOpListProvisioningTemplateVersions) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRelatedResourcesForAuditFinding struct {
+}
+
+func (*validateOpListRelatedResourcesForAuditFinding) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRelatedResourcesForAuditFinding) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRelatedResourcesForAuditFindingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRelatedResourcesForAuditFindingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSecurityProfilesForTarget struct {
 }
 
@@ -4184,6 +4204,10 @@ func addOpListPrincipalThingsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListProvisioningTemplateVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProvisioningTemplateVersions{}, middleware.After)
+}
+
+func addOpListRelatedResourcesForAuditFindingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRelatedResourcesForAuditFinding{}, middleware.After)
 }
 
 func addOpListSecurityProfilesForTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -8345,6 +8369,21 @@ func validateOpListProvisioningTemplateVersionsInput(v *ListProvisioningTemplate
 	invalidParams := smithy.InvalidParamsError{Context: "ListProvisioningTemplateVersionsInput"}
 	if v.TemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRelatedResourcesForAuditFindingInput(v *ListRelatedResourcesForAuditFindingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRelatedResourcesForAuditFindingInput"}
+	if v.FindingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

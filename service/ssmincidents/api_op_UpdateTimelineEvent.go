@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +48,18 @@ type UpdateTimelineEventInput struct {
 
 	// A short description of the event.
 	EventData *string
+
+	// Updates all existing references in a TimelineEvent. A reference can be an Amazon
+	// Web Services resource involved in the incident or in some way associated with
+	// it. When you specify a reference, you enter the Amazon Resource Name (ARN) of
+	// the resource. You can also specify a related item. As an example, you could
+	// specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this
+	// example is the resource. You could also specify a Amazon CloudWatch metric for
+	// that table. The metric is the related item. This update action overrides all
+	// existing references. If you want to keep existing references, you must specify
+	// them in the call. If you don't, this action removes them and enters only new
+	// references.
+	EventReferences []types.EventReference
 
 	// The time that the event occurred.
 	EventTime *time.Time
