@@ -76,6 +76,25 @@ sso_region = us-west-2
 sso_role_name = TestRole
 sso_start_url = https://127.0.0.1/start
 
+[profile sso-session-missing-region]
+region = us-east-1
+sso_session = sso-session-missing-region-dev
+sso_account_id = 123456789012
+sso_role_name = testRole
+
+[sso-session sso-session-missing-region-dev]
+sso_start_url = https://d-123456789a.awsapps.com/start
+
+[profile sso-session-mismatched-region]
+sso_session = sso-session-mismatched-region-dev
+sso_region = us-east-1
+sso_account_id = 123456789012
+sso_role_name = testRole
+
+[sso-session sso-session-mismatched-region-dev]
+sso_start_url = https://d-123456789a.awsapps.com/start
+sso_region = us-west-2
+
 [profile webident]
 web_identity_token_file = ./testdata/wit.txt
 role_arn = webident_arn

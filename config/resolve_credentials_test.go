@@ -360,6 +360,14 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			expectedSecretKey:    "WEB_IDENTITY_SECRET",
 			expectedSessionToken: "WEB_IDENTITY_SESSION_TOKEN",
 		},
+		"SSO Session missing region": {
+			envProfile:    "sso-session-missing-region",
+			expectedError: "profile \"sso-session-missing-region\" is configured to use SSO but is missing required configuration: sso_region",
+		},
+		"SSO Session mismatched region": {
+			envProfile:    "sso-session-mismatched-region",
+			expectedError: "sso_region in profile \"sso-session-mismatched-region\" must match sso_region in sso-session",
+		},
 		"web identity": {
 			envProfile:           "webident",
 			expectedAccessKey:    "WEB_IDENTITY_AKID",

@@ -335,6 +335,22 @@ func TestNewSharedConfig(t *testing.T) {
 				CredentialProcess: "/path/to/process",
 			},
 		},
+		"SSO Session success": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "sso-session-success",
+			Expected: SharedConfig{
+				Profile:        "sso-session-success",
+				Region:         "us-east-1",
+				SSOAccountID:   "123456789012",
+				SSORoleName:    "testRole",
+				SSOSessionName: "sso-session-success-dev",
+				SSOSession: &SSOSession{
+					Name:        "sso-session-success-dev",
+					SSORegion:   "us-east-1",
+					SSOStartURL: "https://d-123456789a.awsapps.com/start",
+				},
+			},
+		},
 		"profile names are case-sensitive (Mixed)": {
 			ConfigFilenames:      []string{testConfigFilename},
 			CredentialsFilenames: []string{testCredentialsFilename},

@@ -52,7 +52,7 @@ func TestResolveBearerAuthToken(t *testing.T) {
 					SSOStartURL: "https://example.aws/start",
 				},
 			},
-			expectProvider: true,
+			expectProvider: false,
 			expectToken: smithybearer.Token{
 				Value:     "access token",
 				CanExpire: true,
