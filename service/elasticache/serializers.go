@@ -4177,6 +4177,7 @@ func (m *awsAwsquery_serializeOpTestFailover) HandleSerialize(ctx context.Contex
 }
 func awsAwsquery_serializeDocumentAvailabilityZonesList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("AvailabilityZone").Empty()
 		return nil
 	}
 	array := value.Array("AvailabilityZone")
@@ -4190,6 +4191,7 @@ func awsAwsquery_serializeDocumentAvailabilityZonesList(v []string, value query.
 
 func awsAwsquery_serializeDocumentCacheClusterIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4203,6 +4205,7 @@ func awsAwsquery_serializeDocumentCacheClusterIdList(v []string, value query.Val
 
 func awsAwsquery_serializeDocumentCacheNodeIdsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("CacheNodeId").Empty()
 		return nil
 	}
 	array := value.Array("CacheNodeId")
@@ -4216,6 +4219,7 @@ func awsAwsquery_serializeDocumentCacheNodeIdsList(v []string, value query.Value
 
 func awsAwsquery_serializeDocumentCacheSecurityGroupNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("CacheSecurityGroupName").Empty()
 		return nil
 	}
 	array := value.Array("CacheSecurityGroupName")
@@ -4289,6 +4293,7 @@ func awsAwsquery_serializeDocumentCustomerNodeEndpoint(v *types.CustomerNodeEndp
 
 func awsAwsquery_serializeDocumentCustomerNodeEndpointList(v []types.CustomerNodeEndpoint, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4344,6 +4349,7 @@ func awsAwsquery_serializeDocumentFilter(v *types.Filter, value query.Value) err
 
 func awsAwsquery_serializeDocumentFilterList(v []types.Filter, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4359,6 +4365,7 @@ func awsAwsquery_serializeDocumentFilterList(v []types.Filter, value query.Value
 
 func awsAwsquery_serializeDocumentFilterValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4372,6 +4379,7 @@ func awsAwsquery_serializeDocumentFilterValueList(v []string, value query.Value)
 
 func awsAwsquery_serializeDocumentGlobalNodeGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("GlobalNodeGroupId").Empty()
 		return nil
 	}
 	array := value.Array("GlobalNodeGroupId")
@@ -4385,6 +4393,7 @@ func awsAwsquery_serializeDocumentGlobalNodeGroupIdList(v []string, value query.
 
 func awsAwsquery_serializeDocumentKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4444,6 +4453,7 @@ func awsAwsquery_serializeDocumentLogDeliveryConfigurationRequest(v *types.LogDe
 
 func awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v []types.LogDeliveryConfigurationRequest, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("LogDeliveryConfigurationRequest").Empty()
 		return nil
 	}
 	array := value.Array("LogDeliveryConfigurationRequest")
@@ -4505,6 +4515,7 @@ func awsAwsquery_serializeDocumentNodeGroupConfiguration(v *types.NodeGroupConfi
 
 func awsAwsquery_serializeDocumentNodeGroupConfigurationList(v []types.NodeGroupConfiguration, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("NodeGroupConfiguration").Empty()
 		return nil
 	}
 	array := value.Array("NodeGroupConfiguration")
@@ -4520,6 +4531,7 @@ func awsAwsquery_serializeDocumentNodeGroupConfigurationList(v []types.NodeGroup
 
 func awsAwsquery_serializeDocumentNodeGroupsToRemoveList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("NodeGroupToRemove").Empty()
 		return nil
 	}
 	array := value.Array("NodeGroupToRemove")
@@ -4533,6 +4545,7 @@ func awsAwsquery_serializeDocumentNodeGroupsToRemoveList(v []string, value query
 
 func awsAwsquery_serializeDocumentNodeGroupsToRetainList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("NodeGroupToRetain").Empty()
 		return nil
 	}
 	array := value.Array("NodeGroupToRetain")
@@ -4546,6 +4559,7 @@ func awsAwsquery_serializeDocumentNodeGroupsToRetainList(v []string, value query
 
 func awsAwsquery_serializeDocumentOutpostArnsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("OutpostArn").Empty()
 		return nil
 	}
 	array := value.Array("OutpostArn")
@@ -4576,6 +4590,7 @@ func awsAwsquery_serializeDocumentParameterNameValue(v *types.ParameterNameValue
 
 func awsAwsquery_serializeDocumentParameterNameValueList(v []types.ParameterNameValue, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("ParameterNameValue").Empty()
 		return nil
 	}
 	array := value.Array("ParameterNameValue")
@@ -4591,6 +4606,7 @@ func awsAwsquery_serializeDocumentParameterNameValueList(v []types.ParameterName
 
 func awsAwsquery_serializeDocumentPasswordListInput(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4604,6 +4620,7 @@ func awsAwsquery_serializeDocumentPasswordListInput(v []string, value query.Valu
 
 func awsAwsquery_serializeDocumentPreferredAvailabilityZoneList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("PreferredAvailabilityZone").Empty()
 		return nil
 	}
 	array := value.Array("PreferredAvailabilityZone")
@@ -4617,6 +4634,7 @@ func awsAwsquery_serializeDocumentPreferredAvailabilityZoneList(v []string, valu
 
 func awsAwsquery_serializeDocumentPreferredOutpostArnList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("PreferredOutpostArn").Empty()
 		return nil
 	}
 	array := value.Array("PreferredOutpostArn")
@@ -4654,6 +4672,7 @@ func awsAwsquery_serializeDocumentRegionalConfiguration(v *types.RegionalConfigu
 
 func awsAwsquery_serializeDocumentRegionalConfigurationList(v []types.RegionalConfiguration, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("RegionalConfiguration").Empty()
 		return nil
 	}
 	array := value.Array("RegionalConfiguration")
@@ -4669,6 +4688,7 @@ func awsAwsquery_serializeDocumentRegionalConfigurationList(v []types.RegionalCo
 
 func awsAwsquery_serializeDocumentRemoveReplicasList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4682,6 +4702,7 @@ func awsAwsquery_serializeDocumentRemoveReplicasList(v []string, value query.Val
 
 func awsAwsquery_serializeDocumentReplicaConfigurationList(v []types.ConfigureShard, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("ConfigureShard").Empty()
 		return nil
 	}
 	array := value.Array("ConfigureShard")
@@ -4697,6 +4718,7 @@ func awsAwsquery_serializeDocumentReplicaConfigurationList(v []types.ConfigureSh
 
 func awsAwsquery_serializeDocumentReplicationGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4729,6 +4751,7 @@ func awsAwsquery_serializeDocumentReshardingConfiguration(v *types.ReshardingCon
 
 func awsAwsquery_serializeDocumentReshardingConfigurationList(v []types.ReshardingConfiguration, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("ReshardingConfiguration").Empty()
 		return nil
 	}
 	array := value.Array("ReshardingConfiguration")
@@ -4744,6 +4767,7 @@ func awsAwsquery_serializeDocumentReshardingConfigurationList(v []types.Reshardi
 
 func awsAwsquery_serializeDocumentSecurityGroupIdsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("SecurityGroupId").Empty()
 		return nil
 	}
 	array := value.Array("SecurityGroupId")
@@ -4757,6 +4781,7 @@ func awsAwsquery_serializeDocumentSecurityGroupIdsList(v []string, value query.V
 
 func awsAwsquery_serializeDocumentServiceUpdateStatusList(v []types.ServiceUpdateStatus, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4770,6 +4795,7 @@ func awsAwsquery_serializeDocumentServiceUpdateStatusList(v []types.ServiceUpdat
 
 func awsAwsquery_serializeDocumentSnapshotArnsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("SnapshotArn").Empty()
 		return nil
 	}
 	array := value.Array("SnapshotArn")
@@ -4783,6 +4809,7 @@ func awsAwsquery_serializeDocumentSnapshotArnsList(v []string, value query.Value
 
 func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("SubnetIdentifier").Empty()
 		return nil
 	}
 	array := value.Array("SubnetIdentifier")
@@ -4813,6 +4840,7 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("Tag").Empty()
 		return nil
 	}
 	array := value.Array("Tag")
@@ -4845,6 +4873,7 @@ func awsAwsquery_serializeDocumentTimeRangeFilter(v *types.TimeRangeFilter, valu
 
 func awsAwsquery_serializeDocumentUpdateActionStatusList(v []types.UpdateActionStatus, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4858,6 +4887,7 @@ func awsAwsquery_serializeDocumentUpdateActionStatusList(v []types.UpdateActionS
 
 func awsAwsquery_serializeDocumentUserGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4871,6 +4901,7 @@ func awsAwsquery_serializeDocumentUserGroupIdList(v []string, value query.Value)
 
 func awsAwsquery_serializeDocumentUserGroupIdListInput(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -4884,6 +4915,7 @@ func awsAwsquery_serializeDocumentUserGroupIdListInput(v []string, value query.V
 
 func awsAwsquery_serializeDocumentUserIdListInput(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")

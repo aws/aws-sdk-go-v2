@@ -1841,6 +1841,7 @@ func awsAwsquery_serializeDocumentDomainEndpointOptions(v *types.DomainEndpointO
 
 func awsAwsquery_serializeDocumentDomainNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -1949,6 +1950,7 @@ func awsAwsquery_serializeDocumentDoubleOptions(v *types.DoubleOptions, value qu
 
 func awsAwsquery_serializeDocumentDynamicFieldNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -2270,6 +2272,7 @@ func awsAwsquery_serializeDocumentScalingParameters(v *types.ScalingParameters, 
 
 func awsAwsquery_serializeDocumentStandardNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")

@@ -3013,6 +3013,7 @@ func (m *awsAwsquery_serializeOpValidateConfigurationSettings) HandleSerialize(c
 }
 func awsAwsquery_serializeDocumentApplicationNamesList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3125,6 +3126,7 @@ func awsAwsquery_serializeDocumentConfigurationOptionSetting(v *types.Configurat
 
 func awsAwsquery_serializeDocumentConfigurationOptionSettingsList(v []types.ConfigurationOptionSetting, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3140,6 +3142,7 @@ func awsAwsquery_serializeDocumentConfigurationOptionSettingsList(v []types.Conf
 
 func awsAwsquery_serializeDocumentEnvironmentHealthAttributes(v []types.EnvironmentHealthAttribute, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3153,6 +3156,7 @@ func awsAwsquery_serializeDocumentEnvironmentHealthAttributes(v []types.Environm
 
 func awsAwsquery_serializeDocumentEnvironmentIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3166,6 +3170,7 @@ func awsAwsquery_serializeDocumentEnvironmentIdList(v []string, value query.Valu
 
 func awsAwsquery_serializeDocumentEnvironmentNamesList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3201,6 +3206,7 @@ func awsAwsquery_serializeDocumentEnvironmentTier(v *types.EnvironmentTier, valu
 
 func awsAwsquery_serializeDocumentInstancesHealthAttributes(v []types.InstancesHealthAttribute, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3280,6 +3286,7 @@ func awsAwsquery_serializeDocumentOptionSpecification(v *types.OptionSpecificati
 
 func awsAwsquery_serializeDocumentOptionsSpecifierList(v []types.OptionSpecification, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3319,6 +3326,7 @@ func awsAwsquery_serializeDocumentPlatformFilter(v *types.PlatformFilter, value 
 
 func awsAwsquery_serializeDocumentPlatformFilters(v []types.PlatformFilter, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3334,6 +3342,7 @@ func awsAwsquery_serializeDocumentPlatformFilters(v []types.PlatformFilter, valu
 
 func awsAwsquery_serializeDocumentPlatformFilterValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3388,6 +3397,7 @@ func awsAwsquery_serializeDocumentSearchFilter(v *types.SearchFilter, value quer
 
 func awsAwsquery_serializeDocumentSearchFilters(v []types.SearchFilter, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3403,6 +3413,7 @@ func awsAwsquery_serializeDocumentSearchFilters(v []types.SearchFilter, value qu
 
 func awsAwsquery_serializeDocumentSearchFilterValues(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3472,6 +3483,7 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 
 func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3485,6 +3497,7 @@ func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) erro
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3500,6 +3513,7 @@ func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) erro
 
 func awsAwsquery_serializeDocumentTags(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3515,6 +3529,7 @@ func awsAwsquery_serializeDocumentTags(v []types.Tag, value query.Value) error {
 
 func awsAwsquery_serializeDocumentVersionLabels(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3528,6 +3543,7 @@ func awsAwsquery_serializeDocumentVersionLabels(v []string, value query.Value) e
 
 func awsAwsquery_serializeDocumentVersionLabelsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")

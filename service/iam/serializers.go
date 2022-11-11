@@ -10100,6 +10100,7 @@ func (m *awsAwsquery_serializeOpUploadSSHPublicKey) HandleSerialize(ctx context.
 }
 func awsAwsquery_serializeDocumentActionNameListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10113,6 +10114,7 @@ func awsAwsquery_serializeDocumentActionNameListType(v []string, value query.Val
 
 func awsAwsquery_serializeDocumentClientIDListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10150,6 +10152,7 @@ func awsAwsquery_serializeDocumentContextEntry(v *types.ContextEntry, value quer
 
 func awsAwsquery_serializeDocumentContextEntryListType(v []types.ContextEntry, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10165,6 +10168,7 @@ func awsAwsquery_serializeDocumentContextEntryListType(v []types.ContextEntry, v
 
 func awsAwsquery_serializeDocumentContextKeyValueListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10178,6 +10182,7 @@ func awsAwsquery_serializeDocumentContextKeyValueListType(v []string, value quer
 
 func awsAwsquery_serializeDocumentEntityListType(v []types.EntityType, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10191,6 +10196,7 @@ func awsAwsquery_serializeDocumentEntityListType(v []types.EntityType, value que
 
 func awsAwsquery_serializeDocumentResourceNameListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10204,6 +10210,7 @@ func awsAwsquery_serializeDocumentResourceNameListType(v []string, value query.V
 
 func awsAwsquery_serializeDocumentServiceNamespaceListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10217,6 +10224,7 @@ func awsAwsquery_serializeDocumentServiceNamespaceListType(v []string, value que
 
 func awsAwsquery_serializeDocumentSimulationPolicyListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10247,6 +10255,7 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 
 func awsAwsquery_serializeDocumentTagKeyListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10260,6 +10269,7 @@ func awsAwsquery_serializeDocumentTagKeyListType(v []string, value query.Value) 
 
 func awsAwsquery_serializeDocumentTagListType(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -10275,6 +10285,7 @@ func awsAwsquery_serializeDocumentTagListType(v []types.Tag, value query.Value) 
 
 func awsAwsquery_serializeDocumentThumbprintListType(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")

@@ -3409,6 +3409,7 @@ func (m *awsAwsquery_serializeOpStopDBCluster) HandleSerialize(ctx context.Conte
 }
 func awsAwsquery_serializeDocumentAttributeValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("AttributeValue").Empty()
 		return nil
 	}
 	array := value.Array("AttributeValue")
@@ -3422,6 +3423,7 @@ func awsAwsquery_serializeDocumentAttributeValueList(v []string, value query.Val
 
 func awsAwsquery_serializeDocumentAvailabilityZones(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("AvailabilityZone").Empty()
 		return nil
 	}
 	array := value.Array("AvailabilityZone")
@@ -3456,6 +3458,7 @@ func awsAwsquery_serializeDocumentCloudwatchLogsExportConfiguration(v *types.Clo
 
 func awsAwsquery_serializeDocumentEventCategoriesList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("EventCategory").Empty()
 		return nil
 	}
 	array := value.Array("EventCategory")
@@ -3488,6 +3491,7 @@ func awsAwsquery_serializeDocumentFilter(v *types.Filter, value query.Value) err
 
 func awsAwsquery_serializeDocumentFilterList(v []types.Filter, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("Filter").Empty()
 		return nil
 	}
 	array := value.Array("Filter")
@@ -3503,6 +3507,7 @@ func awsAwsquery_serializeDocumentFilterList(v []types.Filter, value query.Value
 
 func awsAwsquery_serializeDocumentFilterValueList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("Value").Empty()
 		return nil
 	}
 	array := value.Array("Value")
@@ -3516,6 +3521,7 @@ func awsAwsquery_serializeDocumentFilterValueList(v []string, value query.Value)
 
 func awsAwsquery_serializeDocumentKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3529,6 +3535,7 @@ func awsAwsquery_serializeDocumentKeyList(v []string, value query.Value) error {
 
 func awsAwsquery_serializeDocumentLogTypeList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -3599,6 +3606,7 @@ func awsAwsquery_serializeDocumentParameter(v *types.Parameter, value query.Valu
 
 func awsAwsquery_serializeDocumentParametersList(v []types.Parameter, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("Parameter").Empty()
 		return nil
 	}
 	array := value.Array("Parameter")
@@ -3614,6 +3622,7 @@ func awsAwsquery_serializeDocumentParametersList(v []types.Parameter, value quer
 
 func awsAwsquery_serializeDocumentSourceIdsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("SourceId").Empty()
 		return nil
 	}
 	array := value.Array("SourceId")
@@ -3627,6 +3636,7 @@ func awsAwsquery_serializeDocumentSourceIdsList(v []string, value query.Value) e
 
 func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("SubnetIdentifier").Empty()
 		return nil
 	}
 	array := value.Array("SubnetIdentifier")
@@ -3657,6 +3667,7 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("Tag").Empty()
 		return nil
 	}
 	array := value.Array("Tag")
@@ -3672,6 +3683,7 @@ func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) erro
 
 func awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("VpcSecurityGroupId").Empty()
 		return nil
 	}
 	array := value.Array("VpcSecurityGroupId")

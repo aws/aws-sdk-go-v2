@@ -2701,6 +2701,7 @@ func (m *awsAwsquery_serializeOpVerifySMSSandboxPhoneNumber) HandleSerialize(ctx
 }
 func awsAwsquery_serializeDocumentActionsList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -2714,6 +2715,7 @@ func awsAwsquery_serializeDocumentActionsList(v []string, value query.Value) err
 
 func awsAwsquery_serializeDocumentDelegatesList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -2727,6 +2729,7 @@ func awsAwsquery_serializeDocumentDelegatesList(v []string, value query.Value) e
 
 func awsAwsquery_serializeDocumentListString(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -2847,6 +2850,7 @@ func awsAwsquery_serializeDocumentPublishBatchRequestEntry(v *types.PublishBatch
 
 func awsAwsquery_serializeDocumentPublishBatchRequestEntryList(v []types.PublishBatchRequestEntry, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -2898,6 +2902,7 @@ func awsAwsquery_serializeDocumentTag(v *types.Tag, value query.Value) error {
 
 func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -2911,6 +2916,7 @@ func awsAwsquery_serializeDocumentTagKeyList(v []string, value query.Value) erro
 
 func awsAwsquery_serializeDocumentTagList(v []types.Tag, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
