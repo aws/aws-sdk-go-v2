@@ -23,6 +23,7 @@ import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
@@ -75,10 +76,16 @@ class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
         MemberShape member = shape.getMember();
         Shape target = context.getModel().expectShape(member.getTarget());
 
-        // If the list is empty, exit early to avoid extra effort.
-        writer.write("if len(v) == 0 { return nil }");
+        String arrayName = getSerializedLocationName(member, "member");
 
-        writer.write("array := value.Array($S)", getSerializedLocationName(member, "member"));
+        // If the list is empty, serialize an empty query value.
+        writer.write("""
+            if len(v) == 0 {
+                value.Array($S).Empty()
+                return nil
+            }""", arrayName);
+
+        writer.write("array := value.Array($S)", arrayName);
         writer.write("");
 
         writer.openBlock("for i := range v {", "}", () -> {

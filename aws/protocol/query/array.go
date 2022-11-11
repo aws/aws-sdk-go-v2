@@ -59,3 +59,20 @@ func (a *Array) Value() Value {
 	// Lists can't have flat members
 	return newValue(a.values, fmt.Sprintf("%s.%d", prefix, a.size), false)
 }
+
+// Empty allows empty Query Array URI encoding, e.g.
+//
+//	"ListArg": [] -> ?ListArg=
+//
+// If this method is not called on an empty Query Array, it will
+// not be serialized when encoded.
+//
+// The method should ONLY be used if the Array is known to be empty.
+func (a *Array) Empty() {
+	// If the Array is not empty, return to avoid wrong encoding
+	if a.size != 0 {
+		return
+	}
+	// Set value of prefix to empty string (no text)
+	newValue(a.values, a.prefix, false).String("")
+}

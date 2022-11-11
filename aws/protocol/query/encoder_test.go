@@ -35,6 +35,14 @@ func TestEncode(t *testing.T) {
 			},
 			Expect: []byte(`list.spam.1=spam&list.spam.2=eggs`),
 		},
+		"empty list": {
+			Encode: func(e *Encoder) error {
+				list := e.Object().Key("ListArg").Array("member")
+				list.Empty()
+				return e.Encode()
+			},
+			Expect: []byte(`ListArg=`),
+		},
 		"flat list": {
 			Encode: func(e *Encoder) error {
 				list := e.Object().FlatKey("list").Array("spam")
@@ -43,6 +51,14 @@ func TestEncode(t *testing.T) {
 				return e.Encode()
 			},
 			Expect: []byte(`list.1=spam&list.2=eggs`),
+		},
+		"empty flat list": {
+			Encode: func(e *Encoder) error {
+				list := e.Object().FlatKey("ListArg").Array("member")
+				list.Empty()
+				return e.Encode()
+			},
+			Expect: []byte(`ListArg=`),
 		},
 		"map": {
 			Encode: func(e *Encoder) error {
