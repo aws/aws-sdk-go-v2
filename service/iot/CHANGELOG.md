@@ -1,3 +1,7 @@
+# v1.31.0 (2022-11-11)
+
+* **Feature**: This release add new api listRelatedResourcesForAuditFinding and new member type IssuerCertificates for Iot device device defender Audit.
+
 # v1.30.0 (2022-10-31)
 
 * **Feature**: This release adds the Amazon Location action to IoT Rules Engine.

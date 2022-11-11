@@ -1,3 +1,7 @@
+# v1.23.8 (2022-11-11)
+
+* **Documentation**: Documentation updates for Security Hub
+
 # v1.23.7 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

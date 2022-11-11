@@ -1,3 +1,7 @@
+# v1.15.1 (2022-11-11)
+
+* No change notes available for this release.
+
 # v1.15.0 (2022-10-31)
 
 * **Feature**: This release includes support for interacting with the Virtual Deliverability Manager, allowing you to opt in/out of the feature and to retrieve recommendations and metric data.

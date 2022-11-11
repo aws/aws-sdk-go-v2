@@ -1,9 +1,0 @@
-{
-    "id": "2f60f375-046b-4667-89bf-f94b7406ba45",
-    "type": "feature",
-    "description": "Adds token refresh support (via SSOTokenProvider) when using the SSOCredentialProvider",
-    "modules": [
-        "config",
-        "credentials"
-    ]
-}

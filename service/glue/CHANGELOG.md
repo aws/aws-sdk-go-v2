@@ -1,3 +1,7 @@
+# v1.34.1 (2022-11-11)
+
+* **Documentation**: Added links related to enabling job bookmarks.
+
 # v1.34.0 (2022-10-27)
 
 * **Feature**: Added support for custom datatypes when using custom csv classifier.

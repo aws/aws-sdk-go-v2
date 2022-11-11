@@ -1,3 +1,30 @@
+# Release (2022-11-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.18.0](config/CHANGELOG.md#v1180-2022-11-11)
+  * **Announcement**: When using the SSOTokenProvider, a previous implementation incorrectly compensated for invalid SSOTokenProvider configurations in the shared profile. This has been fixed via PR #1903 and tracked in issue #1846
+  * **Feature**: Adds token refresh support (via SSOTokenProvider) when using the SSOCredentialProvider
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.13.0](credentials/CHANGELOG.md#v1130-2022-11-11)
+  * **Announcement**: When using the SSOTokenProvider, a previous implementation incorrectly compensated for invalid SSOTokenProvider configurations in the shared profile. This has been fixed via PR #1903 and tracked in issue #1846
+  * **Feature**: Adds token refresh support (via SSOTokenProvider) when using the SSOCredentialProvider
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.34.1](service/glue/CHANGELOG.md#v1341-2022-11-11)
+  * **Documentation**: Added links related to enabling job bookmarks.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.31.0](service/iot/CHANGELOG.md#v1310-2022-11-11)
+  * **Feature**: This release add new api listRelatedResourcesForAuditFinding and new member type IssuerCertificates for Iot device device defender Audit.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.16.0](service/licensemanager/CHANGELOG.md#v1160-2022-11-11)
+  * **Feature**: AWS License Manager now supports onboarded Management Accounts or Delegated Admins to view granted licenses aggregated from all accounts in the organization.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.14.0](service/marketplacecatalog/CHANGELOG.md#v1140-2022-11-11)
+  * **Feature**: Added three new APIs to support tagging and tag-based authorization: TagResource, UntagResource, and ListTagsForResource. Added optional parameters to the StartChangeSet API to support tagging a resource while making a request to create it.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.21.0](service/rekognition/CHANGELOG.md#v1210-2022-11-11)
+  * **Feature**: Adding support for ImageProperties feature to detect dominant colors and image brightness, sharpness, and contrast, inclusion and exclusion filters for labels and label categories, new fields to the API response, "aliases" and "categories"
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.23.8](service/securityhub/CHANGELOG.md#v1238-2022-11-11)
+  * **Documentation**: Documentation updates for Security Hub
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.18.0](service/ssmincidents/CHANGELOG.md#v1180-2022-11-11)
+  * **Feature**: RelatedItems now have an ID field which can be used for referencing them else where. Introducing event references in TimelineEvent API and increasing maximum length of "eventData" to 12K characters.
+
 # Release (2022-11-10)
 
 ## General Highlights

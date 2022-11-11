@@ -1,8 +1,0 @@
-{
-    "id": "ca2595cb-db60-4a47-8242-3111eed50fab",
-    "type": "feature",
-    "description": "Added three new APIs to support tagging and tag-based authorization: TagResource, UntagResource, and ListTagsForResource. Added optional parameters to the StartChangeSet API to support tagging a resource while making a request to create it.",
-    "modules": [
-        "service/marketplacecatalog"
-    ]
-}

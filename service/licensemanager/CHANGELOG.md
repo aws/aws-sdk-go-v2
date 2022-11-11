@@ -1,3 +1,7 @@
+# v1.16.0 (2022-11-11)
+
+* **Feature**: AWS License Manager now supports onboarded Management Accounts or Delegated Admins to view granted licenses aggregated from all accounts in the organization.
+
 # v1.15.20 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

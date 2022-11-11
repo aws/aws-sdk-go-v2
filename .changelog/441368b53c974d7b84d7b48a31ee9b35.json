@@ -1,8 +1,0 @@
-{
-    "id": "441368b5-3c97-4d7b-84d7-b48a31ee9b35",
-    "type": "documentation",
-    "description": "Documentation updates for Security Hub",
-    "modules": [
-        "service/securityhub"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "a30d951f-b7aa-48e3-8bdb-4841d4a9ded0",
-    "type": "feature",
-    "description": "Adding support for ImageProperties feature to detect dominant colors and image brightness, sharpness, and contrast, inclusion and exclusion filters for labels and label categories, new fields to the API response, \"aliases\" and \"categories\"",
-    "modules": [
-        "service/rekognition"
-    ]
-}

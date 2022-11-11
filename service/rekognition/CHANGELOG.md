@@ -1,3 +1,7 @@
+# v1.21.0 (2022-11-11)
+
+* **Feature**: Adding support for ImageProperties feature to detect dominant colors and image brightness, sharpness, and contrast, inclusion and exclusion filters for labels and label categories, new fields to the API response, "aliases" and "categories"
+
 # v1.20.7 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

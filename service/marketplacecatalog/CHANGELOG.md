@@ -1,3 +1,7 @@
+# v1.14.0 (2022-11-11)
+
+* **Feature**: Added three new APIs to support tagging and tag-based authorization: TagResource, UntagResource, and ListTagsForResource. Added optional parameters to the StartChangeSet API to support tagging a resource while making a request to create it.
+
 # v1.13.11 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
