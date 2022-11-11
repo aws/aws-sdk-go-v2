@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -41,21 +41,6 @@
         },
         "com.amazonaws.marketplacecatalog#AWSMPSeymour": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Marketplace Catalog",
-                    "arnNamespace": "aws-marketplace",
-                    "cloudFormationName": "MarketplaceCatalog",
-                    "cloudTrailEventSource": "marketplacecatalog.amazonaws.com",
-                    "endpointPrefix": "catalog.marketplace"
-                },
-                "aws.auth#sigv4": {
-                    "name": "aws-marketplace"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update\n            capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n\n        <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
-                "smithy.api#title": "AWS Marketplace Catalog Service"
-            },
             "version": "2018-09-17",
             "operations": [
                 {
@@ -74,9 +59,495 @@
                     "target": "com.amazonaws.marketplacecatalog#ListEntities"
                 },
                 {
+                    "target": "com.amazonaws.marketplacecatalog#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.marketplacecatalog#StartChangeSet"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#UntagResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Marketplace Catalog",
+                    "arnNamespace": "aws-marketplace",
+                    "cloudFormationName": "MarketplaceCatalog",
+                    "cloudTrailEventSource": "marketplacecatalog.amazonaws.com",
+                    "endpointPrefix": "catalog.marketplace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "aws-marketplace"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and\n            update capabilities. An entity can be a product or an offer on AWS Marketplace. </p>\n        <p>You can automate your entity update process by integrating the AWS Marketplace Catalog\n            API with your AWS Marketplace product build or deployment pipelines. You can also create\n            your own applications on top of the Catalog API to manage your products on AWS\n            Marketplace.</p>",
+                "smithy.api#title": "AWS Marketplace Catalog Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://catalog.marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://catalog.marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://catalog.marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://catalog.marketplace.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://catalog.marketplace.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.marketplacecatalog#AccessDeniedException": {
             "type": "structure",
@@ -193,6 +664,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EntityTags": {
+                    "target": "com.amazonaws.marketplacecatalog#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the change.</p>"
+                    }
+                },
                 "Details": {
                     "target": "com.amazonaws.marketplacecatalog#Json",
                     "traits": {
@@ -291,7 +768,7 @@
                 "FailureCode": {
                     "target": "com.amazonaws.marketplacecatalog#FailureCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either \n            <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the \n            <code>ErrorDetailList</code> of <code>DescribeChangeSet</code>), or <code>SERVER_FAULT</code>,\n        which means that there is a problem in the system, and you should retry your request.</p>"
+                        "smithy.api#documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either\n                <code>CLIENT_ERROR</code>, which means that there are issues with the request (see\n            the <code>ErrorDetailList</code> of <code>DescribeChangeSet</code>), or\n                <code>SERVER_FAULT</code>, which means that there is a problem in the system, and\n            you should retry your request.</p>"
                     }
                 }
             },
@@ -300,30 +777,38 @@
             }
         },
         "com.amazonaws.marketplacecatalog#ChangeStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PREPARING",
-                        "name": "PREPARING"
-                    },
-                    {
-                        "value": "APPLYING",
-                        "name": "APPLYING"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PREPARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPARING"
                     }
-                ]
+                },
+                "APPLYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLYING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#ChangeSummary": {
@@ -379,9 +864,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 36
+                    "max": 64
                 },
-                "smithy.api#pattern": "^[\\w\\-]+$"
+                "smithy.api#pattern": "^[!-~]+$"
             }
         },
         "com.amazonaws.marketplacecatalog#DateTimeISO8601": {
@@ -491,7 +976,7 @@
                 "FailureCode": {
                     "target": "com.amazonaws.marketplacecatalog#FailureCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either \n            <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the \n            <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a \n            problem in the system, and you should retry your request.</p>"
+                        "smithy.api#documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either\n                <code>CLIENT_ERROR</code>, which means that there are issues with the request (see\n            the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there\n            is a problem in the system, and you should retry your request.</p>"
                     }
                 },
                 "FailureDescription": {
@@ -619,7 +1104,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An entity contains data that describes your product, its supported features,\n            and how it can be used or launched by your customer. </p>"
+                "smithy.api#documentation": "<p>An entity contains data that describes your product, its supported features, and how\n            it can be used or launched by your customer. </p>"
             }
         },
         "com.amazonaws.marketplacecatalog#EntityNameString": {
@@ -638,7 +1123,7 @@
                 "Name": {
                     "target": "com.amazonaws.marketplacecatalog#EntityNameString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the entity. This value is not unique. It is defined by the\n            seller.</p>"
+                        "smithy.api#documentation": "<p>The name for the entity. This value is not unique. It is defined by the seller.</p>"
                     }
                 },
                 "EntityType": {
@@ -668,7 +1153,7 @@
                 "Visibility": {
                     "target": "com.amazonaws.marketplacecatalog#VisibilityValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The visibility status of the entity to\n            buyers.\n            This value can be <code>Public</code> (everyone can view the entity),\n                <code>Limited</code> (the entity is visible to limited accounts only), or\n                <code>Restricted</code> (the entity was published and then unpublished and only\n            existing\n            buyers\n            can view it). </p>"
+                        "smithy.api#documentation": "<p>The visibility status of the entity to buyers. This value can be <code>Public</code>\n            (everyone can view the entity), <code>Limited</code> (the entity is visible to limited\n            accounts only), or <code>Restricted</code> (the entity was published and then\n            unpublished and only existing buyers can view it). </p>"
                     }
                 }
             },
@@ -739,18 +1224,20 @@
             }
         },
         "com.amazonaws.marketplacecatalog#FailureCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CLIENT_ERROR",
-                        "name": "ClientError"
-                    },
-                    {
-                        "value": "SERVER_FAULT",
-                        "name": "ServerFault"
+            "type": "enum",
+            "members": {
+                "ClientError": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIENT_ERROR"
                     }
-                ]
+                },
+                "ServerFault": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER_FAULT"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#Filter": {
@@ -765,7 +1252,7 @@
                 "ValueList": {
                     "target": "com.amazonaws.marketplacecatalog#ValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <code>ListEntities</code> - This is a list of unique <code>EntityId</code>s.</p>\n\n        <p>\n            <code>ListChangeSets</code> - The supported filter names and associated\n                <code>ValueList</code>s is as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of\n                    non-unique <code>ChangeSetName</code>s. These are defined when you call the\n                        <code>StartChangeSet</code> action.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Status</code> - The supported <code>ValueList</code> is a list of\n                    statuses for all change set requests.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EntityId</code> - The supported <code>ValueList</code> is a list of\n                    unique <code>EntityId</code>s.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BeforeStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started before the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started after the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended before the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended after the filter value.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n            <code>ListEntities</code> - This is a list of unique <code>EntityId</code>s.</p>\n        <p>\n            <code>ListChangeSets</code> - The supported filter names and associated\n                <code>ValueList</code>s is as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ChangeSetName</code> - The supported <code>ValueList</code> is a list of\n                    non-unique <code>ChangeSetName</code>s. These are defined when you call the\n                        <code>StartChangeSet</code> action.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Status</code> - The supported <code>ValueList</code> is a list of\n                    statuses for all change set requests.</p>\n            </li>\n            <li>\n                <p>\n                  <code>EntityId</code> - The supported <code>ValueList</code> is a list of\n                    unique <code>EntityId</code>s.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BeforeStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started before the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AfterStartTime</code> - The supported <code>ValueList</code> is a list\n                    of all change sets that started after the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BeforeEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended before the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of\n                    all change sets that ended after the filter value.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -861,7 +1348,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of change sets owned by the account being used to make the call. You\n            can filter this list by providing any combination of <code>entityId</code>,\n                <code>ChangeSetName</code>, and status. If you provide more than one filter, the API\n            operation applies a logical AND between the filters.</p>\n\n        <p>You can describe a change during the 60-day request history retention period for API\n            calls.</p>",
+                "smithy.api#documentation": "<p>Returns the list of change sets owned by the account being used to make the call. You\n            can filter this list by providing any combination of <code>entityId</code>,\n                <code>ChangeSetName</code>, and status. If you provide more than one filter, the API\n            operation applies a logical AND between the filters.</p>\n        <p>You can describe a change during the 60-day request history retention period for API\n            calls.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListChangeSets",
@@ -1026,10 +1513,72 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all tags that have been added to a resource (either an <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities\">entity</a> or <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\">change set</a>).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListTagsForResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Amazon Resource Name (ARN) associated with the resource you want to list\n            tags on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The ARN associated with the resource you want to list tags on.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.marketplacecatalog#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. A list of objects specifying each key name and value. Number of objects\n            allowed: 1-50.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.marketplacecatalog#MaxResultInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
@@ -1056,6 +1605,16 @@
                     "min": 1,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ResourceARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:aws-marketplace:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"
             }
         },
         "com.amazonaws.marketplacecatalog#ResourceId": {
@@ -1132,7 +1691,7 @@
                 "SortBy": {
                     "target": "com.amazonaws.marketplacecatalog#SortBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, supported attributes include\n                <code>LastModifiedDate</code> (default), <code>Visibility</code>,\n                <code>EntityId</code>, and <code>Name</code>.</p>\n\n        <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code>\n            and <code>EndTime</code>.</p>"
+                        "smithy.api#documentation": "<p>For <code>ListEntities</code>, supported attributes include\n                <code>LastModifiedDate</code> (default), <code>Visibility</code>,\n                <code>EntityId</code>, and <code>Name</code>.</p>\n        <p>For <code>ListChangeSets</code>, supported attributes include <code>StartTime</code>\n            and <code>EndTime</code>.</p>"
                     }
                 },
                 "SortOrder": {
@@ -1157,18 +1716,20 @@
             }
         },
         "com.amazonaws.marketplacecatalog#SortOrder": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASCENDING",
-                        "name": "ASCENDING"
-                    },
-                    {
-                        "value": "DESCENDING",
-                        "name": "DESCENDING"
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
                     }
-                ]
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.marketplacecatalog#StartChangeSet": {
@@ -1203,7 +1764,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation allows you to request changes for your entities. Within a single\n            ChangeSet, you cannot start the same change type against the same entity multiple times.\n            Additionally, when a ChangeSet is running, all the entities targeted by the different\n            changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If \n            you try to start a ChangeSet containing a change against an entity that is already\n            locked, you will receive a <code>ResourceInUseException</code>.</p>\n\n        <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic, because it contains two changes to execute the same change\n            type (<code>AddRevisions</code>) against the same entity\n            (<code>entity-id@1)</code>.</p>\n        \n        <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\">\n            Working with change sets</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to request changes for your entities. Within a single\n                <code>ChangeSet</code>, you can't start the same change type against the same entity\n            multiple times. Additionally, when a <code>ChangeSet</code> is running, all the entities\n            targeted by the different changes are locked until the change set has completed (either\n            succeeded, cancelled, or failed). If you try to start a change set containing a change\n            against an entity that is already locked, you will receive a\n                <code>ResourceInUseException</code> error.</p>\n        <p>For example, you can't start the <code>ChangeSet</code> described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic because it contains two changes to run the same\n            change type (<code>AddRevisions</code>) against the same entity\n                (<code>entity-id@1</code>).</p>\n        <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartChangeSet",
@@ -1240,6 +1801,12 @@
                         "smithy.api#documentation": "<p>A unique token to identify the request to ensure idempotency.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "ChangeSetTags": {
+                    "target": "com.amazonaws.marketplacecatalog#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects specifying each key name and value for the\n                <code>ChangeSetTags</code> property.</p>"
+                    }
                 }
             }
         },
@@ -1260,6 +1827,129 @@
                 }
             }
         },
+        "com.amazonaws.marketplacecatalog#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.marketplacecatalog#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.marketplacecatalog#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of objects specifying each key name and value.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tags a resource (either an <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities\">entity</a> or <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\">change set</a>).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/TagResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Amazon Resource Name (ARN) associated with the resource you want to\n            tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.marketplacecatalog#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. A list of objects specifying each key name and value. Number of objects\n            allowed: 1-50.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.marketplacecatalog#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -1272,6 +1962,63 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
+        },
+        "com.amazonaws.marketplacecatalog#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacecatalog#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacecatalog#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacecatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacecatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a tag or list of tags from a resource (either an <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities\">entity</a> or <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\">change set</a>).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UntagResource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.marketplacecatalog#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The Amazon Resource Name (ARN) associated with the resource you want to\n            remove the tag from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.marketplacecatalog#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. A list of key names of tags to be removed. Number of strings allowed:\n            0-256.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.marketplacecatalog#ValidationException": {
             "type": "structure",
