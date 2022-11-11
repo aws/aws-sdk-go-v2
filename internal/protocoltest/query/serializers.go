@@ -1809,6 +1809,7 @@ func awsAwsquery_serializeDocumentComplexMap(v map[string]types.GreetingStruct, 
 
 func awsAwsquery_serializeDocumentListWithXmlName(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("item").Empty()
 		return nil
 	}
 	array := value.Array("item")
@@ -1917,6 +1918,7 @@ func awsAwsquery_serializeDocumentStructArg(v *types.StructArg, value query.Valu
 
 func awsAwsquery_serializeDocumentGreetingList(v []types.GreetingStruct, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
@@ -1944,6 +1946,7 @@ func awsAwsquery_serializeDocumentGreetingStruct(v *types.GreetingStruct, value 
 
 func awsAwsquery_serializeDocumentStringList(v []string, value query.Value) error {
 	if len(v) == 0 {
+		value.Array("member").Empty()
 		return nil
 	}
 	array := value.Array("member")
