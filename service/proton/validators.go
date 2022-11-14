@@ -2783,9 +2783,6 @@ func validateOpNotifyResourceDeploymentStatusChangeInput(v *NotifyResourceDeploy
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
-	if len(v.Status) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Status"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

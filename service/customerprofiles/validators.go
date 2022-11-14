@@ -874,6 +874,41 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
 }
 
+func validateAdditionalSearchKey(v *types.AdditionalSearchKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalSearchKey"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdditionalSearchKeysList(v []types.AdditionalSearchKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdditionalSearchKeysList"}
+	for i := range v {
+		if err := validateAdditionalSearchKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAppflowIntegration(v *types.AppflowIntegration) error {
 	if v == nil {
 		return nil
@@ -1967,6 +2002,11 @@ func validateOpSearchProfilesInput(v *SearchProfilesInput) error {
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if v.AdditionalSearchKeys != nil {
+		if err := validateAdditionalSearchKeysList(v.AdditionalSearchKeys); err != nil {
+			invalidParams.AddNested("AdditionalSearchKeys", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -5263,9 +5263,6 @@ func validateOpRestoreDBInstanceFromDBSnapshotInput(v *RestoreDBInstanceFromDBSn
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
 	}
-	if v.DBSnapshotIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DBSnapshotIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

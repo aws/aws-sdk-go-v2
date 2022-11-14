@@ -2863,9 +2863,21 @@ func awsRestjson1_serializeOpDocumentSearchProfilesInput(v *SearchProfilesInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalSearchKeys != nil {
+		ok := object.Key("AdditionalSearchKeys")
+		if err := awsRestjson1_serializeDocumentAdditionalSearchKeysList(v.AdditionalSearchKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KeyName != nil {
 		ok := object.Key("KeyName")
 		ok.String(*v.KeyName)
+	}
+
+	if len(v.LogicalOperator) > 0 {
+		ok := object.Key("LogicalOperator")
+		ok.String(string(v.LogicalOperator))
 	}
 
 	if v.Values != nil {
@@ -3323,6 +3335,38 @@ func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdditionalSearchKey(v *types.AdditionalSearchKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyName != nil {
+		ok := object.Key("KeyName")
+		ok.String(*v.KeyName)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentRequestValueList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdditionalSearchKeysList(v []types.AdditionalSearchKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAdditionalSearchKey(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

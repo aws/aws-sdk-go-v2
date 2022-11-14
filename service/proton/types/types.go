@@ -11,15 +11,20 @@ import (
 // account.
 type AccountSettings struct {
 
+	// The Amazon Resource Name (ARN) of the service role that Proton uses for
+	// provisioning pipelines. Proton assumes this role for CodeBuild-based
+	// provisioning.
+	PipelineCodebuildRoleArn *string
+
 	// The linked repository for pipeline provisioning. Required if you have
 	// environments configured for self-managed provisioning with services that include
 	// pipelines. A linked repository is a repository that has been registered with
 	// Proton. For more information, see CreateRepository.
 	PipelineProvisioningRepository *RepositoryBranch
 
-	// The Amazon Resource Name (ARN) of the service role you want to use for
-	// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
-	// provisioning, and by customer-owned automation for self-managed provisioning.
+	// The Amazon Resource Name (ARN) of the service role that Proton uses for
+	// provisioning pipelines. Proton assumes this role for Amazon Web Services-managed
+	// provisioning.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -227,6 +232,10 @@ type Environment struct {
 	// This member is required.
 	TemplateName *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
+	// provision infrastructure using CodeBuild-based provisioning on your behalf.
+	CodebuildRoleArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
 	// provisioning directly defined components in this environment. It determines the
 	// scope of infrastructure that a component can provision. The environment must
@@ -243,7 +252,7 @@ type Environment struct {
 	// The description of the environment.
 	Description *string
 
-	// The ID of the environment account connection that's used to provision
+	// The ID of the environment account connection that Proton uses to provision
 	// infrastructure resources in an environment account.
 	EnvironmentAccountConnectionId *string
 
@@ -251,8 +260,9 @@ type Environment struct {
 	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
-	// make calls to other services on your behalf.
+	// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
+	// provision infrastructure using Amazon Web Services-managed provisioning and
+	// CloudFormation on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -313,7 +323,10 @@ type EnvironmentAccountConnection struct {
 	// This member is required.
 	RequestedAt *time.Time
 
-	// The IAM service role that's associated with the environment account connection.
+	// The Amazon Resource Name (ARN) of an IAM service role in the environment
+	// account. Proton uses this role to provision infrastructure resources using
+	// Amazon Web Services-managed provisioning and CloudFormation in the associated
+	// environment account.
 	//
 	// This member is required.
 	RoleArn *string
@@ -322,6 +335,11 @@ type EnvironmentAccountConnection struct {
 	//
 	// This member is required.
 	Status EnvironmentAccountConnectionStatus
+
+	// The Amazon Resource Name (ARN) of an IAM service role in the environment
+	// account. Proton uses this role to provision infrastructure resources using
+	// CodeBuild-based provisioning in the associated environment account.
+	CodebuildRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
 	// provisioning directly defined components in the associated environment account.

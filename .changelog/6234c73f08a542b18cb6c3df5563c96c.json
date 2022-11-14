@@ -1,0 +1,8 @@
+{
+    "id": "6234c73f-08a5-42b1-8cb6-c3df5563c96c",
+    "type": "feature",
+    "description": "This release enhances the SearchProfiles API by providing functionality to search for profiles using multiple keys and logical operators.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

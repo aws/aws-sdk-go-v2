@@ -12,23 +12,22 @@ import (
 )
 
 // Update an environment. If the environment is associated with an environment
-// account connection, don't update or include the protonServiceRoleArn and
-// provisioningRepository parameter to update or connect to an environment account
-// connection. You can only update to a new environment account connection if that
-// connection was created in the same environment account that the current
-// environment account connection was created in. The account connection must also
-// be associated with the current environment. If the environment isn't associated
-// with an environment account connection, don't update or include the
-// environmentAccountConnectionId parameter. You can't update or connect the
-// environment to an environment account connection if it isn't already associated
-// with an environment connection. You can update either the
-// environmentAccountConnectionId or protonServiceRoleArn parameter and value. You
-// can’t update both. If the environment was configured for Amazon Web
-// Services-managed provisioning, omit the provisioningRepository parameter. If the
-// environment was configured for self-managed provisioning, specify the
-// provisioningRepository parameter and omit the protonServiceRoleArn and
-// environmentAccountConnectionId parameters. For more information, see
-// Environments
+// account connection, don't update or include the protonServiceRoleArn,
+// codebuildRoleArn, and provisioningRepository parameters. You can only update to
+// a new environment account connection if that connection was created in the same
+// environment account that the current environment account connection was created
+// in. The account connection must also be associated with the current environment.
+// If the environment isn't associated with an environment account connection,
+// don't update or include the environmentAccountConnectionId parameter. You can't
+// update or connect the environment to an environment account connection if it
+// isn't already associated with an environment connection. You can update either
+// environmentAccountConnectionId or one or more of protonServiceRoleArn,
+// codebuildRoleArn, and provisioningRepository. If the environment was configured
+// for Amazon Web Services-managed or CodeBuild-based provisioning, omit the
+// provisioningRepository parameter. If the environment was configured for
+// self-managed provisioning, specify the provisioningRepository parameter and omit
+// the protonServiceRoleArn, codebuildRoleArn, and provisioningRepository
+// parameters. For more information, see Environments
 // (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html) and
 // Provisioning methods
 // (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html)
@@ -84,6 +83,10 @@ type UpdateEnvironmentInput struct {
 	// This member is required.
 	Name *string
 
+	// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
+	// provision infrastructure using CodeBuild-based provisioning on your behalf.
+	CodebuildRoleArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
 	// provisioning directly defined components in this environment. It determines the
 	// scope of infrastructure that a component can provision. The environment must
@@ -97,14 +100,20 @@ type UpdateEnvironmentInput struct {
 	// A description of the environment update.
 	Description *string
 
-	// The ID of the environment account connection. You can only update to a new
-	// environment account connection if it was created in the same environment account
-	// that the current environment account connection was created in and is associated
-	// with the current environment.
+	// The ID of the environment account connection that you provide if you want Proton
+	// to provision infrastructure resources for your environment or for any of the
+	// service instances running in it in an environment account. For more information,
+	// see Environment account connections
+	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
+	// in the Proton User guide. You can only update to a new environment account
+	// connection if it was created in the same environment account that the current
+	// environment account connection was created in and is associated with the current
+	// environment.
 	EnvironmentAccountConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
-	// make API calls to other services your behalf.
+	// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
+	// provision infrastructure using Amazon Web Services-managed provisioning and
+	// CloudFormation on your behalf.
 	ProtonServiceRoleArn *string
 
 	// The linked repository that you use to host your rendered infrastructure

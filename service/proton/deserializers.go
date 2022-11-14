@@ -9677,6 +9677,15 @@ func awsAwsjson10_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 
 	for key, value := range shape {
 		switch key {
+		case "pipelineCodebuildRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArnOrEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PipelineCodebuildRoleArn = ptr.String(jtv)
+			}
+
 		case "pipelineProvisioningRepository":
 			if err := awsAwsjson10_deserializeDocumentRepositoryBranch(&sv.PipelineProvisioningRepository, value); err != nil {
 				return err
@@ -9686,7 +9695,7 @@ func awsAwsjson10_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected PipelineRoleArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArnOrEmptyString to be of type string, got %T instead", value)
 				}
 				sv.PipelineServiceRoleArn = ptr.String(jtv)
 			}
@@ -10222,11 +10231,20 @@ func awsAwsjson10_deserializeDocumentEnvironment(v **types.Environment, value in
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "codebuildRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.CodebuildRoleArn = ptr.String(jtv)
+			}
+
 		case "componentRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ComponentRoleArn = ptr.String(jtv)
 			}
@@ -10432,11 +10450,20 @@ func awsAwsjson10_deserializeDocumentEnvironmentAccountConnection(v **types.Envi
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "codebuildRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.CodebuildRoleArn = ptr.String(jtv)
+			}
+
 		case "componentRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ComponentRoleArn = ptr.String(jtv)
 			}

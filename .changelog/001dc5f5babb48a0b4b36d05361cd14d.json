@@ -1,0 +1,8 @@
+{
+    "id": "001dc5f5-babb-48a0-b4b3-6d05361cd14d",
+    "type": "feature",
+    "description": "Added 2 new document related operations, DeleteDocumentVersion and RestoreDocumentVersions.",
+    "modules": [
+        "service/workdocs"
+    ]
+}

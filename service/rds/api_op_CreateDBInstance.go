@@ -731,8 +731,9 @@ type CreateDBInstanceInput struct {
 	// cluster.
 	StorageEncrypted *bool
 
-	// Specifies the storage throughput value for the DB instance. This setting doesn't
-	// apply to RDS Custom or Amazon Aurora.
+	// Specifies the storage throughput value for the DB instance. This setting applies
+	// only to the gp3 storage type. This setting doesn't apply to RDS Custom or Amazon
+	// Aurora.
 	StorageThroughput *int32
 
 	// Specifies the storage type to be associated with the DB instance. Valid values:

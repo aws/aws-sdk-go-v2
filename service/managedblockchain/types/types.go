@@ -514,6 +514,8 @@ type NetworkEthereumAttributes struct {
 	//
 	// * mainnet = 1
 	//
+	// * goerli = 5
+	//
 	// * rinkeby = 4
 	//
 	// * ropsten = 3
@@ -739,8 +741,8 @@ type NodeEthereumAttributes struct {
 	HttpEndpoint *string
 
 	// The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods
-	// over WebSockets connections from a client. Use this endpoint in client code for
-	// smart contracts when using a WebSockets connection. Connections to this endpoint
+	// over WebSocket connections from a client. Use this endpoint in client code for
+	// smart contracts when using a WebSocket connection. Connections to this endpoint
 	// are authenticated using Signature Version 4
 	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 	WebSocketEndpoint *string

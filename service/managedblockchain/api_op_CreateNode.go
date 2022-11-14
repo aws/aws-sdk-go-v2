@@ -45,10 +45,12 @@ type CreateNodeInput struct {
 	//
 	// * n-ethereum-mainnet
 	//
-	// * n-ethereum-rinkeby
+	// * n-ethereum-goerli
 	//
 	// *
-	// n-ethereum-ropsten
+	// n-ethereum-rinkeby
+	//
+	// * n-ethereum-ropsten
 	//
 	// This member is required.
 	NetworkId *string

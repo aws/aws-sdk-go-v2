@@ -8046,6 +8046,85 @@ func awsRestjson1_deserializeDocumentFieldNameList(v *[]string, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFoundByKeyValue(v **types.FoundByKeyValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FoundByKeyValue
+	if *v == nil {
+		sv = &types.FoundByKeyValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KeyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected name to be of type string, got %T instead", value)
+				}
+				sv.KeyName = ptr.String(jtv)
+			}
+
+		case "Values":
+			if err := awsRestjson1_deserializeDocumentRequestValueList(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFoundByList(v *[]types.FoundByKeyValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FoundByKeyValue
+	if *v == nil {
+		cv = []types.FoundByKeyValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FoundByKeyValue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFoundByKeyValue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdentityResolutionJob(v **types.IdentityResolutionJob, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9424,6 +9503,11 @@ func awsRestjson1_deserializeDocumentProfile(v **types.Profile, value interface{
 					return fmt.Errorf("expected string1To255 to be of type string, got %T instead", value)
 				}
 				sv.FirstName = ptr.String(jtv)
+			}
+
+		case "FoundByItems":
+			if err := awsRestjson1_deserializeDocumentFoundByList(&sv.FoundByItems, value); err != nil {
+				return err
 			}
 
 		case "Gender":

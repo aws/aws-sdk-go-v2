@@ -102,19 +102,30 @@ type BackendConnectionErrors struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a connection between two services.
+// Information about a connection between two services. An edge can be a
+// synchronous connection, such as typical call between client and service, or an
+// asynchronous link, such as a Lambda function which retrieves an event from an
+// SNS queue.
 type Edge struct {
 
 	// Aliases for the edge.
 	Aliases []Alias
 
+	// Describes an asynchronous connection, with a value of link.
+	EdgeType *string
+
 	// The end time of the last segment on the edge.
 	EndTime *time.Time
+
+	// A histogram that maps the spread of event age when received by consumers. Age is
+	// calculated each time an event is received. Only populated when EdgeType is link.
+	ReceivedEventAgeHistogram []HistogramEntry
 
 	// Identifier of the edge. Unique within a service map.
 	ReferenceId *int32
 
-	// A histogram that maps the spread of client response times on an edge.
+	// A histogram that maps the spread of client response times on an edge. Only
+	// populated for synchronous edges.
 	ResponseTimeHistogram []HistogramEntry
 
 	// The start time of the first segment on the edge.
@@ -1119,9 +1130,10 @@ type Trace struct {
 	// subsegments.
 	Id *string
 
-	// LimitExceeded is set to true when the trace has exceeded one of the defined
-	// quotas. For more information about quotas, see Amazon Web Services X-Ray
-	// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/xray.html).
+	// LimitExceeded is set to true when the trace has exceeded the Trace document size
+	// limit. For more information about this limit and other X-Ray limits and quotas,
+	// see Amazon Web Services X-Ray endpoints and quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/xray.html).
 	LimitExceeded *bool
 
 	// Segment documents for the segments and subsegments that comprise the trace.

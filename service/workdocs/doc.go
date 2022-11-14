@@ -34,5 +34,19 @@
 // IAM policy). This includes, but is not limited to, the ability to modify file
 // permissions and upload any file to any user. This allows developers to perform
 // the three use cases above, as well as give users the ability to grant access on
-// a selective basis using the IAM model.
+// a selective basis using the IAM model. The pricing for Amazon WorkDocs APIs
+// varies depending on the API call type for these actions:
+//
+// * READ (Get*)
+//
+// * WRITE
+// (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)
+//
+// * LIST
+// (Describe*)
+//
+// * DELETE*, CANCEL
+//
+// For information about Amazon WorkDocs API
+// pricing, see Amazon WorkDocs Pricing (https://aws.amazon.com/workdocs/pricing/).
 package workdocs

@@ -14347,6 +14347,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.String(*v.CustomIamInstanceProfile)
 	}
 
+	if v.DBClusterSnapshotIdentifier != nil {
+		objectKey := object.Key("DBClusterSnapshotIdentifier")
+		objectKey.String(*v.DBClusterSnapshotIdentifier)
+	}
+
 	if v.DBInstanceClass != nil {
 		objectKey := object.Key("DBInstanceClass")
 		objectKey.String(*v.DBInstanceClass)

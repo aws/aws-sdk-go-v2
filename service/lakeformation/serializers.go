@@ -3929,6 +3929,13 @@ func awsRestjson1_serializeDocumentDataLakeSettings(v *types.DataLakeSettings, v
 		}
 	}
 
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsRestjson1_serializeDocumentParametersMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TrustedResourceOwners != nil {
 		ok := object.Key("TrustedResourceOwners")
 		if err := awsRestjson1_serializeDocumentTrustedResourceOwners(v.TrustedResourceOwners, ok); err != nil {
@@ -4130,6 +4137,17 @@ func awsRestjson1_serializeDocumentLFTagsList(v []types.LFTagPair, value smithyj
 		if err := awsRestjson1_serializeDocumentLFTagPair(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParametersMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

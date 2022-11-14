@@ -4717,6 +4717,15 @@ func awsRestjson1_deserializeDocumentEdge(v **types.Edge, value interface{}) err
 				return err
 			}
 
+		case "EdgeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EdgeType = ptr.String(jtv)
+			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4731,6 +4740,11 @@ func awsRestjson1_deserializeDocumentEdge(v **types.Edge, value interface{}) err
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ReceivedEventAgeHistogram":
+			if err := awsRestjson1_deserializeDocumentHistogram(&sv.ReceivedEventAgeHistogram, value); err != nil {
+				return err
 			}
 
 		case "ReferenceId":

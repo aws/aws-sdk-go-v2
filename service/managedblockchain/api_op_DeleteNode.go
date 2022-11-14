@@ -35,7 +35,9 @@ type DeleteNodeInput struct {
 	// * n-ethereum-mainnet
 	//
 	// *
-	// n-ethereum-rinkeby
+	// n-ethereum-goerli
+	//
+	// * n-ethereum-rinkeby
 	//
 	// * n-ethereum-ropsten
 	//

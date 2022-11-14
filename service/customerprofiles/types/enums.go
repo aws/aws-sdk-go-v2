@@ -138,6 +138,24 @@ func (JobScheduleDayOfTheWeek) Values() []JobScheduleDayOfTheWeek {
 	}
 }
 
+type LogicalOperator string
+
+// Enum values for LogicalOperator
+const (
+	LogicalOperatorAnd LogicalOperator = "AND"
+	LogicalOperatorOr  LogicalOperator = "OR"
+)
+
+// Values returns all known values for LogicalOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LogicalOperator) Values() []LogicalOperator {
+	return []LogicalOperator{
+		"AND",
+		"OR",
+	}
+}
+
 type MarketoConnectorOperator string
 
 // Enum values for MarketoConnectorOperator

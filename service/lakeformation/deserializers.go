@@ -7991,6 +7991,11 @@ func awsRestjson1_deserializeDocumentDataLakeSettings(v **types.DataLakeSettings
 				return err
 			}
 
+		case "Parameters":
+			if err := awsRestjson1_deserializeDocumentParametersMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
 		case "TrustedResourceOwners":
 			if err := awsRestjson1_deserializeDocumentTrustedResourceOwners(&sv.TrustedResourceOwners, value); err != nil {
 				return err
@@ -8796,6 +8801,42 @@ func awsRestjson1_deserializeDocumentOperationTimeoutException(v **types.Operati
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParametersMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ParametersMapValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

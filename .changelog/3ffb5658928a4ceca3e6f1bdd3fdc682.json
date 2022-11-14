@@ -1,0 +1,8 @@
+{
+    "id": "3ffb5658-928a-4cec-a3e6-f1bdd3fdc682",
+    "type": "documentation",
+    "description": "Updating the API docs data type: NetworkEthereumAttributes, and the operations DeleteNode, and CreateNode to also include the supported Goerli network.",
+    "modules": [
+        "service/managedblockchain"
+    ]
+}

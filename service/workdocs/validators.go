@@ -270,6 +270,26 @@ func (m *validateOpDeleteDocument) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDocumentVersion struct {
+}
+
+func (*validateOpDeleteDocumentVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDocumentVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDocumentVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDocumentVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteFolderContents struct {
 }
 
@@ -630,26 +650,6 @@ func (m *validateOpGetFolderPath) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpInitiateDocumentVersionUpload struct {
-}
-
-func (*validateOpInitiateDocumentVersionUpload) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpInitiateDocumentVersionUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*InitiateDocumentVersionUploadInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpInitiateDocumentVersionUploadInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpRemoveAllResourcePermissions struct {
 }
 
@@ -685,6 +685,26 @@ func (m *validateOpRemoveResourcePermission) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveResourcePermissionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestoreDocumentVersions struct {
+}
+
+func (*validateOpRestoreDocumentVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreDocumentVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreDocumentVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreDocumentVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -822,6 +842,10 @@ func addOpDeleteDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDocument{}, middleware.After)
 }
 
+func addOpDeleteDocumentVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDocumentVersion{}, middleware.After)
+}
+
 func addOpDeleteFolderContentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFolderContents{}, middleware.After)
 }
@@ -894,16 +918,16 @@ func addOpGetFolderPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFolderPath{}, middleware.After)
 }
 
-func addOpInitiateDocumentVersionUploadValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpInitiateDocumentVersionUpload{}, middleware.After)
-}
-
 func addOpRemoveAllResourcePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveAllResourcePermissions{}, middleware.After)
 }
 
 func addOpRemoveResourcePermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveResourcePermission{}, middleware.After)
+}
+
+func addOpRestoreDocumentVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreDocumentVersions{}, middleware.After)
 }
 
 func addOpUpdateDocumentValidationMiddleware(stack *middleware.Stack) error {
@@ -1201,6 +1225,24 @@ func validateOpDeleteDocumentInput(v *DeleteDocumentInput) error {
 	}
 }
 
+func validateOpDeleteDocumentVersionInput(v *DeleteDocumentVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDocumentVersionInput"}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFolderContentsInput(v *DeleteFolderContentsInput) error {
 	if v == nil {
 		return nil
@@ -1480,21 +1522,6 @@ func validateOpGetFolderPathInput(v *GetFolderPathInput) error {
 	}
 }
 
-func validateOpInitiateDocumentVersionUploadInput(v *InitiateDocumentVersionUploadInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "InitiateDocumentVersionUploadInput"}
-	if v.ParentFolderId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ParentFolderId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpRemoveAllResourcePermissionsInput(v *RemoveAllResourcePermissionsInput) error {
 	if v == nil {
 		return nil
@@ -1520,6 +1547,21 @@ func validateOpRemoveResourcePermissionInput(v *RemoveResourcePermissionInput) e
 	}
 	if v.PrincipalId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrincipalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreDocumentVersionsInput(v *RestoreDocumentVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreDocumentVersionsInput"}
+	if v.DocumentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

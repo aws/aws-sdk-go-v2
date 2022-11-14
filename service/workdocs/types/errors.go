@@ -299,7 +299,8 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum of 100,000 folders under the parent folder has been exceeded.
+// The maximum of 100,000 files and folders under the parent folder has been
+// exceeded.
 type LimitExceededException struct {
 	Message *string
 

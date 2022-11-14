@@ -1,0 +1,8 @@
+{
+    "id": "1f1138bf-9130-4ea9-b67d-2463acf2ab60",
+    "type": "feature",
+    "description": "Add support for CodeBuild Provisioning",
+    "modules": [
+        "service/proton"
+    ]
+}

@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for profiles within a specific domain name using name, phone number,
-// email address, account number, or a custom defined index.
+// Searches for profiles within a specific domain using one or more predefined
+// search keys (e.g., _fullName, _phone, _email, _account, etc.) and/or
+// custom-defined search keys. A search key is a data type pair that consists of a
+// KeyName and Values list. This operation supports searching for profiles with a
+// minimum of 1 key-value(s) pair and up to 5 key-value(s) pairs using either AND
+// or OR logic.
 func (c *Client) SearchProfiles(ctx context.Context, params *SearchProfilesInput, optFns ...func(*Options)) (*SearchProfilesOutput, error) {
 	if params == nil {
 		params = &SearchProfilesInput{}
@@ -50,7 +54,32 @@ type SearchProfilesInput struct {
 	// This member is required.
 	Values []string
 
-	// The maximum number of objects returned per page.
+	// A list of AdditionalSearchKey objects that are each searchable identifiers of a
+	// profile. Each AdditionalSearchKey object contains a KeyName and a list of Values
+	// associated with that specific key (i.e., a key-value(s) pair). These additional
+	// search keys will be used in conjunction with the LogicalOperator and the
+	// required KeyName and Values parameters to search for profiles that satisfy the
+	// search criteria.
+	AdditionalSearchKeys []types.AdditionalSearchKey
+
+	// Relationship between all specified search keys that will be used to search for
+	// profiles. This includes the required KeyName and Values parameters as well as
+	// any key-value(s) pairs specified in the AdditionalSearchKeys list. This
+	// parameter influences which profiles will be returned in the response in the
+	// following manner:
+	//
+	// * AND - The response only includes profiles that match all of
+	// the search keys.
+	//
+	// * OR - The response includes profiles that match at least one
+	// of the search keys.
+	//
+	// The OR relationship is the default behavior if this
+	// parameter is not included in the request.
+	LogicalOperator types.LogicalOperator
+
+	// The maximum number of objects returned per page. The default is 20 if this
+	// parameter is not included in the request.
 	MaxResults *int32
 
 	// The pagination token from the previous SearchProfiles API call.
@@ -61,7 +90,7 @@ type SearchProfilesInput struct {
 
 type SearchProfilesOutput struct {
 
-	// The list of SearchProfiles instances.
+	// The list of Profiles matching the search criteria.
 	Items []types.Profile
 
 	// The pagination token from the previous SearchProfiles API call.

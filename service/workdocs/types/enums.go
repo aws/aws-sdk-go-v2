@@ -463,6 +463,7 @@ type SubscriptionProtocolType string
 // Enum values for SubscriptionProtocolType
 const (
 	SubscriptionProtocolTypeHttps SubscriptionProtocolType = "HTTPS"
+	SubscriptionProtocolTypeSqs   SubscriptionProtocolType = "SQS"
 )
 
 // Values returns all known values for SubscriptionProtocolType. Note that this can
@@ -471,6 +472,7 @@ const (
 func (SubscriptionProtocolType) Values() []SubscriptionProtocolType {
 	return []SubscriptionProtocolType{
 		"HTTPS",
+		"SQS",
 	}
 }
 

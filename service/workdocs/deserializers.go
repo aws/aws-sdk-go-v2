@@ -96,6 +96,9 @@ func awsRestjson1_deserializeOpErrorAbortDocumentVersionUpload(response *smithyh
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("EntityNotExistsException", errorCode):
 		return awsRestjson1_deserializeErrorEntityNotExistsException(response, errorBody)
 
@@ -383,6 +386,9 @@ func awsRestjson1_deserializeOpErrorAddResourcePermissions(response *smithyhttp.
 	switch {
 	case strings.EqualFold("FailedDependencyException", errorCode):
 		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
+
+	case strings.EqualFold("ProhibitedStateException", errorCode):
+		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -806,6 +812,9 @@ func awsRestjson1_deserializeOpErrorCreateFolder(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("ConflictingOperationException", errorCode):
 		return awsRestjson1_deserializeErrorConflictingOperationException(response, errorBody)
 
@@ -1075,6 +1084,9 @@ func awsRestjson1_deserializeOpErrorCreateNotificationSubscription(response *smi
 	}
 
 	switch {
+	case strings.EqualFold("InvalidArgumentException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidArgumentException(response, errorBody)
+
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
 
@@ -1683,11 +1695,124 @@ func awsRestjson1_deserializeOpErrorDeleteDocument(response *smithyhttp.Response
 	case strings.EqualFold("FailedDependencyException", errorCode):
 		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ProhibitedStateException", errorCode):
 		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedOperationException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedOperationException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedResourceAccessException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedResourceAccessException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpDeleteDocumentVersion struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteDocumentVersion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteDocumentVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteDocumentVersion(response, &metadata)
+	}
+	output := &DeleteDocumentVersionOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteDocumentVersion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("ConflictingOperationException", errorCode):
+		return awsRestjson1_deserializeErrorConflictingOperationException(response, errorBody)
+
+	case strings.EqualFold("EntityNotExistsException", errorCode):
+		return awsRestjson1_deserializeErrorEntityNotExistsException(response, errorBody)
+
+	case strings.EqualFold("FailedDependencyException", errorCode):
+		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
+
+	case strings.EqualFold("InvalidOperationException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("ProhibitedStateException", errorCode):
+		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperationException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedOperationException(response, errorBody)
@@ -1792,6 +1917,9 @@ func awsRestjson1_deserializeOpErrorDeleteFolder(response *smithyhttp.Response, 
 
 	case strings.EqualFold("FailedDependencyException", errorCode):
 		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ProhibitedStateException", errorCode):
 		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
@@ -1997,6 +2125,9 @@ func awsRestjson1_deserializeOpErrorDeleteLabels(response *smithyhttp.Response, 
 
 	case strings.EqualFold("FailedDependencyException", errorCode):
 		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
+
+	case strings.EqualFold("ProhibitedStateException", errorCode):
+		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -2365,7 +2496,7 @@ func awsRestjson1_deserializeOpDocumentDescribeActivitiesOutput(v **DescribeActi
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected MarkerType to be of type string, got %T instead", value)
+					return fmt.Errorf("expected SearchMarkerType to be of type string, got %T instead", value)
 				}
 				sv.Marker = ptr.String(jtv)
 			}
@@ -2661,6 +2792,9 @@ func awsRestjson1_deserializeOpErrorDescribeDocumentVersions(response *smithyhtt
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("InvalidPasswordException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidPasswordException(response, errorBody)
 
 	case strings.EqualFold("ProhibitedStateException", errorCode):
 		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
@@ -3332,6 +3466,9 @@ func awsRestjson1_deserializeOpErrorDescribeResourcePermissions(response *smithy
 	switch {
 	case strings.EqualFold("FailedDependencyException", errorCode):
 		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
+
+	case strings.EqualFold("InvalidArgumentException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidArgumentException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
@@ -5022,6 +5159,12 @@ func awsRestjson1_deserializeOpErrorInitiateDocumentVersionUpload(response *smit
 	case strings.EqualFold("FailedDependencyException", errorCode):
 		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
 
+	case strings.EqualFold("InvalidPasswordException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidPasswordException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ProhibitedStateException", errorCode):
 		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
@@ -5273,6 +5416,116 @@ func awsRestjson1_deserializeOpErrorRemoveResourcePermission(response *smithyhtt
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedOperationException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedOperationException(response, errorBody)
+
+	case strings.EqualFold("UnauthorizedResourceAccessException", errorCode):
+		return awsRestjson1_deserializeErrorUnauthorizedResourceAccessException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpRestoreDocumentVersions struct {
+}
+
+func (*awsRestjson1_deserializeOpRestoreDocumentVersions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpRestoreDocumentVersions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorRestoreDocumentVersions(response, &metadata)
+	}
+	output := &RestoreDocumentVersionsOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorRestoreDocumentVersions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsRestjson1_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("ConflictingOperationException", errorCode):
+		return awsRestjson1_deserializeErrorConflictingOperationException(response, errorBody)
+
+	case strings.EqualFold("EntityNotExistsException", errorCode):
+		return awsRestjson1_deserializeErrorEntityNotExistsException(response, errorBody)
+
+	case strings.EqualFold("FailedDependencyException", errorCode):
+		return awsRestjson1_deserializeErrorFailedDependencyException(response, errorBody)
+
+	case strings.EqualFold("InvalidOperationException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("ProhibitedStateException", errorCode):
+		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
 	case strings.EqualFold("UnauthorizedOperationException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedOperationException(response, errorBody)
@@ -5744,6 +5997,9 @@ func awsRestjson1_deserializeOpErrorUpdateUser(response *smithyhttp.Response, me
 
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidArgumentException(response, errorBody)
+
+	case strings.EqualFold("ProhibitedStateException", errorCode):
+		return awsRestjson1_deserializeErrorProhibitedStateException(response, errorBody)
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)

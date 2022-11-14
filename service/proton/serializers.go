@@ -4477,6 +4477,11 @@ func awsAwsjson10_serializeOpDocumentCreateEnvironmentAccountConnectionInput(v *
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CodebuildRoleArn != nil {
+		ok := object.Key("codebuildRoleArn")
+		ok.String(*v.CodebuildRoleArn)
+	}
+
 	if v.ComponentRoleArn != nil {
 		ok := object.Key("componentRoleArn")
 		ok.String(*v.ComponentRoleArn)
@@ -4510,6 +4515,11 @@ func awsAwsjson10_serializeOpDocumentCreateEnvironmentAccountConnectionInput(v *
 func awsAwsjson10_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CodebuildRoleArn != nil {
+		ok := object.Key("codebuildRoleArn")
+		ok.String(*v.CodebuildRoleArn)
+	}
 
 	if v.ComponentRoleArn != nil {
 		ok := object.Key("componentRoleArn")
@@ -5772,6 +5782,11 @@ func awsAwsjson10_serializeOpDocumentUpdateAccountSettingsInput(v *UpdateAccount
 		ok.Boolean(*v.DeletePipelineProvisioningRepository)
 	}
 
+	if v.PipelineCodebuildRoleArn != nil {
+		ok := object.Key("pipelineCodebuildRoleArn")
+		ok.String(*v.PipelineCodebuildRoleArn)
+	}
+
 	if v.PipelineProvisioningRepository != nil {
 		ok := object.Key("pipelineProvisioningRepository")
 		if err := awsAwsjson10_serializeDocumentRepositoryBranchInput(v.PipelineProvisioningRepository, ok); err != nil {
@@ -5833,6 +5848,11 @@ func awsAwsjson10_serializeOpDocumentUpdateEnvironmentAccountConnectionInput(v *
 	object := value.Object()
 	defer object.Close()
 
+	if v.CodebuildRoleArn != nil {
+		ok := object.Key("codebuildRoleArn")
+		ok.String(*v.CodebuildRoleArn)
+	}
+
 	if v.ComponentRoleArn != nil {
 		ok := object.Key("componentRoleArn")
 		ok.String(*v.ComponentRoleArn)
@@ -5854,6 +5874,11 @@ func awsAwsjson10_serializeOpDocumentUpdateEnvironmentAccountConnectionInput(v *
 func awsAwsjson10_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CodebuildRoleArn != nil {
+		ok := object.Key("codebuildRoleArn")
+		ok.String(*v.CodebuildRoleArn)
+	}
 
 	if v.ComponentRoleArn != nil {
 		ok := object.Key("componentRoleArn")

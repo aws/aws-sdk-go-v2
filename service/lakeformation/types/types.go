@@ -215,9 +215,8 @@ type DataLakeSettings struct {
 	AuthorizedSessionTagValueList []string
 
 	// Specifies whether access control on newly created database is managed by Lake
-	// Formation permissions or exclusively by IAM permissions. You can override this
-	// default setting when you create a database. A null value indicates access
-	// control by Lake Formation permissions. A value that assigns ALL to
+	// Formation permissions or exclusively by IAM permissions. A null value indicates
+	// access control by Lake Formation permissions. A value that assigns ALL to
 	// IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is
 	// referred to as the setting "Use only IAM access control," and is for backward
 	// compatibility with the Glue permission model implemented by IAM permissions. The
@@ -246,6 +245,11 @@ type DataLakeSettings struct {
 	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR
 	// clusters that are to perform data filtering.>
 	ExternalDataFilteringAllowList []DataLakePrincipal
+
+	// A key-value map that provides an additional configuration on your data lake.
+	// CrossAccountVersion is the key you can configure in the Parameters field.
+	// Accepted values for the CrossAccountVersion key are 1, 2, and 3.
+	Parameters map[string]string
 
 	// A list of the resource-owning account IDs that the caller's account can use to
 	// share their user access details (user ARNs). The user ARNs can be logged in the

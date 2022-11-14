@@ -35,6 +35,11 @@ type UpdateAccountSettingsInput struct {
 	// repository.
 	DeletePipelineProvisioningRepository *bool
 
+	// The Amazon Resource Name (ARN) of the service role you want to use for
+	// provisioning pipelines. Proton assumes this role for CodeBuild-based
+	// provisioning.
+	PipelineCodebuildRoleArn *string
+
 	// A linked repository for pipeline provisioning. Specify it if you have
 	// environments configured for self-managed provisioning with services that include
 	// pipelines. A linked repository is a repository that has been registered with

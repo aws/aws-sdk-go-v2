@@ -1473,7 +1473,8 @@ type DBInstance struct {
 	// Specifies whether the DB instance is encrypted.
 	StorageEncrypted bool
 
-	// Specifies the storage throughput for the DB instance.
+	// Specifies the storage throughput for the DB instance. This setting applies only
+	// to the gp3 storage type.
 	StorageThroughput *int32
 
 	// Specifies the storage type associated with the DB instance.
