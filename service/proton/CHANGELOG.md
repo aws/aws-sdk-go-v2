@@ -1,3 +1,7 @@
+# v1.16.0 (2022-11-14)
+
+* **Feature**: Add support for CodeBuild Provisioning
+
 # v1.15.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

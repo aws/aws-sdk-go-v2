@@ -1,3 +1,7 @@
+# v1.12.0 (2022-11-14)
+
+* **Feature**: Added 2 new document related operations, DeleteDocumentVersion and RestoreDocumentVersions.
+
 # v1.11.19 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

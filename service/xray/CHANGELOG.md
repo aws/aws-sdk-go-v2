@@ -1,3 +1,7 @@
+# v1.14.0 (2022-11-14)
+
+* **Feature**: This release enhances GetServiceGraph API to support new type of edge to represent links between SQS and Lambda in event-driven applications.
+
 # v1.13.22 (2022-11-10)
 
 * No change notes available for this release.

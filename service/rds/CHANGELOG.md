@@ -1,3 +1,7 @@
+# v1.29.0 (2022-11-14)
+
+* **Feature**: This release adds support for restoring an RDS Multi-AZ DB cluster snapshot to a Single-AZ deployment or a Multi-AZ DB instance deployment.
+
 # v1.28.1 (2022-11-10)
 
 * No change notes available for this release.

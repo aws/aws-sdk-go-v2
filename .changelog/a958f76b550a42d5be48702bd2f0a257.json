@@ -1,8 +1,0 @@
-{
-    "id": "a958f76b-550a-42d5-be48-702bd2f0a257",
-    "type": "feature",
-    "description": "This release enhances GetServiceGraph API to support new type of edge to represent links between SQS and Lambda in event-driven applications.",
-    "modules": [
-        "service/xray"
-    ]
-}

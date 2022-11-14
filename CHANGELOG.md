@@ -1,3 +1,21 @@
+# Release (2022-11-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.20.0](service/customerprofiles/CHANGELOG.md#v1200-2022-11-14)
+  * **Feature**: This release enhances the SearchProfiles API by providing functionality to search for profiles using multiple keys and logical operators.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.18.0](service/lakeformation/CHANGELOG.md#v1180-2022-11-14)
+  * **Feature**: This release adds a new parameter "Parameters" in the DataLakeSettings.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.13.3](service/managedblockchain/CHANGELOG.md#v1133-2022-11-14)
+  * **Documentation**: Updating the API docs data type: NetworkEthereumAttributes, and the operations DeleteNode, and CreateNode to also include the supported Goerli network.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.16.0](service/proton/CHANGELOG.md#v1160-2022-11-14)
+  * **Feature**: Add support for CodeBuild Provisioning
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.29.0](service/rds/CHANGELOG.md#v1290-2022-11-14)
+  * **Feature**: This release adds support for restoring an RDS Multi-AZ DB cluster snapshot to a Single-AZ deployment or a Multi-AZ DB instance deployment.
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.12.0](service/workdocs/CHANGELOG.md#v1120-2022-11-14)
+  * **Feature**: Added 2 new document related operations, DeleteDocumentVersion and RestoreDocumentVersions.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.14.0](service/xray/CHANGELOG.md#v1140-2022-11-14)
+  * **Feature**: This release enhances GetServiceGraph API to support new type of edge to represent links between SQS and Lambda in event-driven applications.
+
 # Release (2022-11-11)
 
 ## General Highlights

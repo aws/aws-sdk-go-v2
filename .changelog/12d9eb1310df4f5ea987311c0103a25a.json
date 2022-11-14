@@ -1,8 +1,0 @@
-{
-    "id": "12d9eb13-10df-4f5e-a987-311c0103a25a",
-    "type": "feature",
-    "description": "This release adds support for restoring an RDS Multi-AZ DB cluster snapshot to a Single-AZ deployment or a Multi-AZ DB instance deployment.",
-    "modules": [
-        "service/rds"
-    ]
-}
