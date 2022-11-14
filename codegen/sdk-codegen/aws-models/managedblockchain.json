@@ -579,7 +579,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.managedblockchain#ResourceIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the network for the node.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-ropsten</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the network for the node.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-ropsten</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -740,7 +740,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is \n        subject to change. We recommend that you use this feature only with \n        test scenarios, and not in production environments.</p>\n         </important>\n         <p>Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the \n         information required for token based access to your Ethereum nodes including, the \n         <code>BILLING_TOKEN</code>. After an accessor is deleted, the status of the accessor changes \n         from <code>AVAILABLE</code> to <code>PENDING_DELETION</code>. An accessor in the \n         <code>PENDING_DELETION</code> state can’t be used for new WebSocket requests or \n         HTTP requests. However, WebSocket connections that are initiated while the accessor was in the \n         <code>AVAILABLE</code> state remain open until they expire (up to 2 hours).</p>",
+                "smithy.api#documentation": "<important>\n            <p>The token based access feature is in preview release for Ethereum on Amazon Managed Blockchain and is \n        subject to change. We recommend that you use this feature only with \n        test scenarios, and not in production environments.</p>\n         </important>\n         <p>Deletes an accessor that your Amazon Web Services account owns. An accessor object is a container that has the \n         information required for token based access to your Ethereum nodes including, the \n         <code>BILLING_TOKEN</code>. After an accessor is deleted, the status of the accessor changes \n         from <code>AVAILABLE</code> to <code>PENDING_DELETION</code>. An accessor in the \n         <code>PENDING_DELETION</code> state can’t be used for new WebSocket requests or \n         HTTP requests. However, WebSocket connections that were initiated while the accessor was in the \n         <code>AVAILABLE</code> state remain open until they expire (up to 2 hours).</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accessors/{AccessorId}",
@@ -870,7 +870,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.managedblockchain#ResourceIdString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-ropsten</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>\n         <p>Ethereum public networks have the following <code>NetworkId</code>s:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>n-ethereum-mainnet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-goerli</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-rinkeby</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-ethereum-ropsten</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2553,7 +2553,7 @@
                 "ChainId": {
                     "target": "com.amazonaws.managedblockchain#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p>\n         <ul>\n            <li>\n               <p>mainnet = <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>rinkeby = <code>4</code>\n               </p>\n            </li>\n            <li>\n               <p>ropsten = <code>3</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p>\n         <ul>\n            <li>\n               <p>mainnet = <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>goerli = <code>5</code>\n               </p>\n            </li>\n            <li>\n               <p>rinkeby = <code>4</code>\n               </p>\n            </li>\n            <li>\n               <p>ropsten = <code>3</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2877,7 +2877,7 @@
                 "WebSocketEndpoint": {
                     "target": "com.amazonaws.managedblockchain#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSockets connections from a client. Use this endpoint in client code for smart contracts when using a WebSockets connection. Connections to this endpoint are authenticated using <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>.</p>"
+                        "smithy.api#documentation": "<p>The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSocket connections from a client. Use this endpoint in client code for smart contracts when using a WebSocket connection. Connections to this endpoint are authenticated using <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4</a>.</p>"
                     }
                 }
             },
@@ -3703,7 +3703,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": true,
+                            "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -4023,9 +4023,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -4036,9 +4036,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -4049,9 +4049,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -4062,9 +4062,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -4075,9 +4075,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -4088,9 +4088,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -4101,9 +4101,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -4114,9 +4114,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -4127,9 +4127,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -4140,9 +4140,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -4153,9 +4153,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -4166,9 +4166,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -4179,9 +4179,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -4192,9 +4192,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -4205,9 +4205,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -4218,9 +4218,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -4231,9 +4231,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4244,9 +4244,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4257,9 +4257,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4270,9 +4270,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4283,9 +4283,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4296,9 +4296,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4309,9 +4309,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4322,9 +4322,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4335,9 +4335,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4348,9 +4348,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4361,9 +4361,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4374,9 +4374,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4387,9 +4387,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4399,9 +4399,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4411,9 +4411,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }

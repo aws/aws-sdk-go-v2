@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -127,6 +127,28 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#AdditionalSearchKey": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list that is\n         used in conjunction with the\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName\">KeyName</a>\n         and\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values\">Values</a>\n         parameters to search for profiles using the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> API.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#Address": {
             "type": "structure",
             "members": {
@@ -249,6 +271,7 @@
                 "RecordsProcessed": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Number of records processed in <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
@@ -256,6 +279,7 @@
                 "StepsCompleted": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total steps completed in <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
@@ -263,6 +287,7 @@
                 "TotalSteps": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total steps in <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
@@ -299,6 +324,7 @@
                 "RecordsProcessed": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total number of records processed during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>",
                         "smithy.api#required": {}
                     }
@@ -470,18 +496,20 @@
             }
         },
         "com.amazonaws.customerprofiles#ConflictResolvingModel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RECENCY",
-                        "name": "RECENCY"
-                    },
-                    {
-                        "value": "SOURCE",
-                        "name": "SOURCE"
+            "type": "enum",
+            "members": {
+                "RECENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECENCY"
                     }
-                ]
+                },
+                "SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#ConnectorOperator": {
@@ -969,21 +997,6 @@
         },
         "com.amazonaws.customerprofiles#CustomerProfiles_20200815": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Customer Profiles",
-                    "arnNamespace": "profile",
-                    "cloudFormationName": "CustomerProfiles",
-                    "cloudTrailEventSource": "customerprofiles.amazonaws.com",
-                    "endpointPrefix": "profile"
-                },
-                "aws.auth#sigv4": {
-                    "name": "profile"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information\n         about the Amazon Connect Customer Profiles API, including supported operations, data types,\n         parameters, and schemas.</p>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has\n         pre-built connectors powered by AppFlow that make it easy to combine customer information\n         from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your\n         enterprise resource planning (ERP), with contact history from your Amazon Connect contact\n         center.</p>\n         <p>If you're new to Amazon Connect , you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html\">Amazon Connect Administrator Guide</a>.</p>",
-                "smithy.api#title": "Amazon Connect Customer Profiles"
-            },
             "version": "2020-08-15",
             "operations": [
                 {
@@ -1100,21 +1113,916 @@
                 {
                     "target": "com.amazonaws.customerprofiles#UpdateProfile"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Customer Profiles",
+                    "arnNamespace": "profile",
+                    "cloudFormationName": "CustomerProfiles",
+                    "cloudTrailEventSource": "customerprofiles.amazonaws.com",
+                    "endpointPrefix": "profile"
+                },
+                "aws.auth#sigv4": {
+                    "name": "profile"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has\n         pre-built connectors powered by AppFlow that make it easy to combine customer information\n         from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your\n         enterprise resource planning (ERP), with contact history from your Amazon Connect contact center.\n         If you're new to Amazon Connect, you might find it helpful to review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/\">Amazon Connect Administrator Guide</a>.</p>",
+                "smithy.api#title": "Amazon Connect Customer Profiles",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://profile-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://profile-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://profile.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://profile.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://profile.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.customerprofiles#DataPullMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Incremental",
-                        "name": "INCREMENTAL"
-                    },
-                    {
-                        "value": "Complete",
-                        "name": "COMPLETE"
+            "type": "enum",
+            "members": {
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Incremental"
                     }
-                ]
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#Date": {
@@ -1626,24 +2534,28 @@
                 "ProfileCount": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of profiles currently in the domain.</p>"
                     }
                 },
                 "MeteringProfileCount": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of profiles that you are currently paying for in the domain. If you have more\n         than 100 objects associated with a single profile, that profile counts as two profiles. If\n         you have more than 200 objects, that profile counts as three, and so on.</p>"
                     }
                 },
                 "ObjectCount": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects in domain.</p>"
                     }
                 },
                 "TotalSize": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total size, in bytes, of all objects in the domain.</p>"
                     }
                 }
@@ -1653,15 +2565,11 @@
             }
         },
         "com.amazonaws.customerprofiles#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.customerprofiles#Double0To1": {
             "type": "double",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0.0,
                     "max": 1.0
@@ -1697,30 +2605,38 @@
             }
         },
         "com.amazonaws.customerprofiles#FieldContentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "STRING",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "NUMBER",
-                        "name": "NUMBER"
-                    },
-                    {
-                        "value": "PHONE_NUMBER",
-                        "name": "PHONE_NUMBER"
-                    },
-                    {
-                        "value": "EMAIL_ADDRESS",
-                        "name": "EMAIL_ADDRESS"
-                    },
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
                     }
-                ]
+                },
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER"
+                    }
+                },
+                "PHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER"
+                    }
+                },
+                "EMAIL_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL_ADDRESS"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#FieldMap": {
@@ -1941,23 +2857,47 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][\\w!@#.-]+$"
             }
         },
-        "com.amazonaws.customerprofiles#Gender": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MALE",
-                        "name": "MALE"
-                    },
-                    {
-                        "value": "FEMALE",
-                        "name": "FEMALE"
-                    },
-                    {
-                        "value": "UNSPECIFIED",
-                        "name": "UNSPECIFIED"
+        "com.amazonaws.customerprofiles#FoundByKeyValue": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile.</p>"
                     }
-                ]
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A data type pair that consists of a <code>KeyName</code> and <code>Values</code> list that were used\n         to find a profile returned in response to a <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#Gender": {
+            "type": "enum",
+            "members": {
+                "MALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MALE"
+                    }
+                },
+                "FEMALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FEMALE"
+                    }
+                },
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSPECIFIED"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#GetAutoMergingPreview": {
@@ -2040,18 +2980,21 @@
                 "NumberOfMatchesInSample": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of match groups in the domain that have been reviewed in this preview dry\n         run.</p>"
                     }
                 },
                 "NumberOfProfilesInSample": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of profiles found in this preview dry run.</p>"
                     }
                 },
                 "NumberOfProfilesWillBeMerged": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of profiles that would be merged if this wasn't a preview dry run.</p>"
                     }
                 }
@@ -2592,6 +3535,7 @@
                 "AllowProfileCreation": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
                     }
                 },
@@ -2704,6 +3648,7 @@
                 "AllowProfileCreation": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
                     }
                 },
@@ -2990,38 +3935,50 @@
             }
         },
         "com.amazonaws.customerprofiles#IdentityResolutionJobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "PREPROCESSING",
-                        "name": "PREPROCESSING"
-                    },
-                    {
-                        "value": "FIND_MATCHING",
-                        "name": "FIND_MATCHING"
-                    },
-                    {
-                        "value": "MERGING",
-                        "name": "MERGING"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "PARTIAL_SUCCESS",
-                        "name": "PARTIAL_SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "PREPROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREPROCESSING"
+                    }
+                },
+                "FIND_MATCHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIND_MATCHING"
+                    }
+                },
+                "MERGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MERGING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "PARTIAL_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIAL_SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#IdentityResolutionJobsList": {
@@ -3100,38 +4057,50 @@
             }
         },
         "com.amazonaws.customerprofiles#JobScheduleDayOfTheWeek": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUNDAY",
-                        "name": "SUNDAY"
-                    },
-                    {
-                        "value": "MONDAY",
-                        "name": "MONDAY"
-                    },
-                    {
-                        "value": "TUESDAY",
-                        "name": "TUESDAY"
-                    },
-                    {
-                        "value": "WEDNESDAY",
-                        "name": "WEDNESDAY"
-                    },
-                    {
-                        "value": "THURSDAY",
-                        "name": "THURSDAY"
-                    },
-                    {
-                        "value": "FRIDAY",
-                        "name": "FRIDAY"
-                    },
-                    {
-                        "value": "SATURDAY",
-                        "name": "SATURDAY"
+            "type": "enum",
+            "members": {
+                "SUNDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUNDAY"
                     }
-                ]
+                },
+                "MONDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONDAY"
+                    }
+                },
+                "TUESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUESDAY"
+                    }
+                },
+                "WEDNESDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEDNESDAY"
+                    }
+                },
+                "THURSDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THURSDAY"
+                    }
+                },
+                "FRIDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRIDAY"
+                    }
+                },
+                "SATURDAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SATURDAY"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#JobScheduleTime": {
@@ -3150,18 +4119,21 @@
                 "NumberOfProfilesReviewed": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of profiles reviewed.</p>"
                     }
                 },
                 "NumberOfMatchesFound": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of matches found.</p>"
                     }
                 },
                 "NumberOfMergesDone": {
                     "target": "com.amazonaws.customerprofiles#long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of merges completed.</p>"
                     }
                 }
@@ -4150,74 +5122,104 @@
             }
         },
         "com.amazonaws.customerprofiles#MarketoConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#MarketoSourceProperties": {
@@ -4525,85 +5527,115 @@
             }
         },
         "com.amazonaws.customerprofiles#OperatorPropertiesKeys": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VALUE",
-                        "name": "VALUE"
-                    },
-                    {
-                        "value": "VALUES",
-                        "name": "VALUES"
-                    },
-                    {
-                        "value": "DATA_TYPE",
-                        "name": "DATA_TYPE"
-                    },
-                    {
-                        "value": "UPPER_BOUND",
-                        "name": "UPPER_BOUND"
-                    },
-                    {
-                        "value": "LOWER_BOUND",
-                        "name": "LOWER_BOUND"
-                    },
-                    {
-                        "value": "SOURCE_DATA_TYPE",
-                        "name": "SOURCE_DATA_TYPE"
-                    },
-                    {
-                        "value": "DESTINATION_DATA_TYPE",
-                        "name": "DESTINATION_DATA_TYPE"
-                    },
-                    {
-                        "value": "VALIDATION_ACTION",
-                        "name": "VALIDATION_ACTION"
-                    },
-                    {
-                        "value": "MASK_VALUE",
-                        "name": "MASK_VALUE"
-                    },
-                    {
-                        "value": "MASK_LENGTH",
-                        "name": "MASK_LENGTH"
-                    },
-                    {
-                        "value": "TRUNCATE_LENGTH",
-                        "name": "TRUNCATE_LENGTH"
-                    },
-                    {
-                        "value": "MATH_OPERATION_FIELDS_ORDER",
-                        "name": "MATH_OPERATION_FIELDS_ORDER"
-                    },
-                    {
-                        "value": "CONCAT_FORMAT",
-                        "name": "CONCAT_FORMAT"
-                    },
-                    {
-                        "value": "SUBFIELD_CATEGORY_MAP",
-                        "name": "SUBFIELD_CATEGORY_MAP"
+            "type": "enum",
+            "members": {
+                "VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUE"
                     }
-                ]
+                },
+                "VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALUES"
+                    }
+                },
+                "DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_TYPE"
+                    }
+                },
+                "UPPER_BOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPPER_BOUND"
+                    }
+                },
+                "LOWER_BOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOWER_BOUND"
+                    }
+                },
+                "SOURCE_DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_DATA_TYPE"
+                    }
+                },
+                "DESTINATION_DATA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESTINATION_DATA_TYPE"
+                    }
+                },
+                "VALIDATION_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ACTION"
+                    }
+                },
+                "MASK_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_VALUE"
+                    }
+                },
+                "MASK_LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LENGTH"
+                    }
+                },
+                "TRUNCATE_LENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUNCATE_LENGTH"
+                    }
+                },
+                "MATH_OPERATION_FIELDS_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MATH_OPERATION_FIELDS_ORDER"
+                    }
+                },
+                "CONCAT_FORMAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONCAT_FORMAT"
+                    }
+                },
+                "SUBFIELD_CATEGORY_MAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBFIELD_CATEGORY_MAP"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#PartyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INDIVIDUAL",
-                        "name": "INDIVIDUAL"
-                    },
-                    {
-                        "value": "BUSINESS",
-                        "name": "BUSINESS"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "INDIVIDUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDIVIDUAL"
                     }
-                ]
+                },
+                "BUSINESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSINESS"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#Profile": {
@@ -4739,6 +5771,12 @@
                     "target": "com.amazonaws.customerprofiles#Attributes",
                     "traits": {
                         "smithy.api#documentation": "<p>A key value pair of attributes of a customer profile.</p>"
+                    }
+                },
+                "FoundByItems": {
+                    "target": "com.amazonaws.customerprofiles#foundByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items used to find a profile returned in a <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> response.\n         An item is a key-value(s) pair that matches an attribute in the profile.</p>\n         <p>If the optional <code>AdditionalSearchKeys</code> parameter was included in the\n         <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request, the <code>FoundByItems</code> list should be\n         interpreted based on the <code>LogicalOperator</code> used in the request:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AND</code> - The profile included in the response matched all of the search keys\n            specified in the request. The <code>FoundByItems</code> will include all of the key-value(s)\n            pairs that were specified in the request (as this is a requirement of <code>AND</code> search logic).</p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> - The profile included in the response matched at least one of the\n            search keys specified in the request. The <code>FoundByItems</code> will\n            include each of the key-value(s) pairs that the profile was found by.</p>\n            </li>\n         </ul>\n         <p>The <code>OR</code> relationship is the default behavior if the <code>LogicalOperator</code> parameter is\n         not included in the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html\">SearchProfiles</a> request.</p>"
                     }
                 }
             },
@@ -5091,6 +6129,7 @@
                 "AllowProfileCreation": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
                     }
                 },
@@ -5158,6 +6197,7 @@
                 "AllowProfileCreation": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether a profile should be created when data is received if one doesn’t exist\n         for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation\n         flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and\n         associate this object with the profile. If it is set to <code>TRUE</code>, and if no match\n         is found, then the service creates a new standard profile.</p>"
                     }
                 },
@@ -5223,90 +6263,128 @@
             }
         },
         "com.amazonaws.customerprofiles#S3ConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#S3ExportingConfig": {
@@ -5372,94 +6450,134 @@
             }
         },
         "com.amazonaws.customerprofiles#SalesforceConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#SalesforceSourceProperties": {
@@ -5475,12 +6593,14 @@
                 "EnableDynamicFieldUpdate": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The flag that enables dynamic fetching of new (recently added) fields in the Salesforce\n         objects while running a flow.</p>"
                     }
                 },
                 "IncludeDeletedRecords": {
                     "target": "com.amazonaws.customerprofiles#boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether Amazon AppFlow includes deleted files in the flow run.</p>"
                     }
                 }
@@ -5502,6 +6622,7 @@
         "com.amazonaws.customerprofiles#ScheduleOffset": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 36000
@@ -5545,7 +6666,7 @@
                 "ScheduleOffset": {
                     "target": "com.amazonaws.customerprofiles#ScheduleOffset",
                     "traits": {
-                        "smithy.api#box": {},
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>Specifies the optional offset that is added to the time interval for a\n         schedule-triggered flow.</p>"
                     }
                 },
@@ -5586,7 +6707,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for profiles within a specific domain name using name, phone number, email\n         address, account number, or a custom defined index.</p>",
+                "smithy.api#documentation": "<p>Searches for profiles within a specific domain using one or more predefined search keys\n         (e.g., _fullName, _phone, _email, _account, etc.) and/or custom-defined search keys. A search key\n         is a data type pair that consists of a <code>KeyName</code> and <code>Values</code> list.</p>\n         <p>This operation supports searching for profiles with a minimum of 1 key-value(s) pair and up to\n         5 key-value(s) pairs using either <code>AND</code> or <code>OR</code> logic.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/profiles/search",
@@ -5607,7 +6728,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.customerprofiles#maxSize100",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>\n         <p>The default is 20 if this parameter is not included in the request.</p>",
                         "smithy.api#httpQuery": "max-results"
                     }
                 },
@@ -5632,6 +6753,18 @@
                         "smithy.api#documentation": "<p>A list of key values.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AdditionalSearchKeys": {
+                    "target": "com.amazonaws.customerprofiles#additionalSearchKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AdditionalSearchKey</code> objects that are each searchable identifiers of a\n         profile. Each <code>AdditionalSearchKey</code> object contains a <code>KeyName</code> and a\n         list of <code>Values</code> associated with that specific key (i.e., a key-value(s) pair).\n         These additional search keys will be used in conjunction with the <code>LogicalOperator</code> and the\n         required <code>KeyName</code> and <code>Values</code> parameters to search for profiles\n         that satisfy the search criteria. </p>"
+                    }
+                },
+                "LogicalOperator": {
+                    "target": "com.amazonaws.customerprofiles#logicalOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Relationship between all specified search keys that will be used to search for\n         profiles. This includes the required <code>KeyName</code> and <code>Values</code> parameters\n         as well as any key-value(s) pairs specified in the <code>AdditionalSearchKeys</code> list.</p>\n         <p>This parameter influences which profiles will be returned in the response in the following manner:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AND</code> - The response only includes profiles that match all of the search keys.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> - The response includes profiles that match at least one of the search keys.</p>\n            </li>\n         </ul>\n         <p>The <code>OR</code> relationship is the default behavior if this parameter is not included in the request.</p>"
+                    }
                 }
             }
         },
@@ -5641,7 +6774,7 @@
                 "Items": {
                     "target": "com.amazonaws.customerprofiles#ProfileList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of SearchProfiles instances.</p>"
+                        "smithy.api#documentation": "<p>The list of Profiles matching the search criteria.</p>"
                     }
                 },
                 "NextToken": {
@@ -5653,94 +6786,134 @@
             }
         },
         "com.amazonaws.customerprofiles#ServiceNowConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "CONTAINS",
-                        "name": "CONTAINS"
-                    },
-                    {
-                        "value": "LESS_THAN",
-                        "name": "LESS_THAN"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "BETWEEN",
-                        "name": "BETWEEN"
-                    },
-                    {
-                        "value": "LESS_THAN_OR_EQUAL_TO",
-                        "name": "LESS_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "GREATER_THAN_OR_EQUAL_TO",
-                        "name": "GREATER_THAN_OR_EQUAL_TO"
-                    },
-                    {
-                        "value": "EQUAL_TO",
-                        "name": "EQUAL_TO"
-                    },
-                    {
-                        "value": "NOT_EQUAL_TO",
-                        "name": "NOT_EQUAL_TO"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTAINS"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                },
+                "LESS_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+                    }
+                },
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#ServiceNowSourceProperties": {
@@ -5797,30 +6970,38 @@
             }
         },
         "com.amazonaws.customerprofiles#SourceConnectorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Salesforce",
-                        "name": "SALESFORCE"
-                    },
-                    {
-                        "value": "Marketo",
-                        "name": "MARKETO"
-                    },
-                    {
-                        "value": "Zendesk",
-                        "name": "ZENDESK"
-                    },
-                    {
-                        "value": "Servicenow",
-                        "name": "SERVICENOW"
-                    },
-                    {
-                        "value": "S3",
-                        "name": "S3"
+            "type": "enum",
+            "members": {
+                "SALESFORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Salesforce"
                     }
-                ]
+                },
+                "MARKETO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Marketo"
+                    }
+                },
+                "ZENDESK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Zendesk"
+                    }
+                },
+                "SERVICENOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Servicenow"
+                    }
+                },
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#SourceFields": {
@@ -5864,42 +7045,56 @@
             }
         },
         "com.amazonaws.customerprofiles#StandardIdentifier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROFILE",
-                        "name": "PROFILE"
-                    },
-                    {
-                        "value": "ASSET",
-                        "name": "ASSET"
-                    },
-                    {
-                        "value": "CASE",
-                        "name": "CASE"
-                    },
-                    {
-                        "value": "UNIQUE",
-                        "name": "UNIQUE"
-                    },
-                    {
-                        "value": "SECONDARY",
-                        "name": "SECONDARY"
-                    },
-                    {
-                        "value": "LOOKUP_ONLY",
-                        "name": "LOOKUP_ONLY"
-                    },
-                    {
-                        "value": "NEW_ONLY",
-                        "name": "NEW_ONLY"
-                    },
-                    {
-                        "value": "ORDER",
-                        "name": "ORDER"
+            "type": "enum",
+            "members": {
+                "PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE"
                     }
-                ]
+                },
+                "ASSET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSET"
+                    }
+                },
+                "CASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CASE"
+                    }
+                },
+                "UNIQUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNIQUE"
+                    }
+                },
+                "SECONDARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECONDARY"
+                    }
+                },
+                "LOOKUP_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOOKUP_ONLY"
+                    }
+                },
+                "NEW_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEW_ONLY"
+                    }
+                },
+                "ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORDER"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#StandardIdentifierList": {
@@ -5909,38 +7104,50 @@
             }
         },
         "com.amazonaws.customerprofiles#Status": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "SPLIT",
-                        "name": "SPLIT"
-                    },
-                    {
-                        "value": "RETRY",
-                        "name": "RETRY"
-                    },
-                    {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
+            "type": "enum",
+            "members": {
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "SPLIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPLIT"
+                    }
+                },
+                "RETRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETRY"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#TagArn": {
@@ -6101,38 +7308,50 @@
             }
         },
         "com.amazonaws.customerprofiles#TaskType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Arithmetic",
-                        "name": "ARITHMETIC"
-                    },
-                    {
-                        "value": "Filter",
-                        "name": "FILTER"
-                    },
-                    {
-                        "value": "Map",
-                        "name": "MAP"
-                    },
-                    {
-                        "value": "Mask",
-                        "name": "MASK"
-                    },
-                    {
-                        "value": "Merge",
-                        "name": "MERGE"
-                    },
-                    {
-                        "value": "Truncate",
-                        "name": "TRUNCATE"
-                    },
-                    {
-                        "value": "Validate",
-                        "name": "VALIDATE"
+            "type": "enum",
+            "members": {
+                "ARITHMETIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arithmetic"
                     }
-                ]
+                },
+                "FILTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Filter"
+                    }
+                },
+                "MAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Map"
+                    }
+                },
+                "MASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Mask"
+                    }
+                },
+                "MERGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Merge"
+                    }
+                },
+                "TRUNCATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Truncate"
+                    }
+                },
+                "VALIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Validate"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#Tasks": {
@@ -6200,22 +7419,26 @@
             }
         },
         "com.amazonaws.customerprofiles#TriggerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Scheduled",
-                        "name": "SCHEDULED"
-                    },
-                    {
-                        "value": "Event",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "OnDemand",
-                        "name": "ONDEMAND"
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
                     }
-                ]
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Event"
+                    }
+                },
+                "ONDEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnDemand"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#UntagResource": {
@@ -6728,77 +7951,103 @@
             }
         },
         "com.amazonaws.customerprofiles#WorkflowType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "APPFLOW_INTEGRATION",
-                        "name": "APPFLOW_INTEGRATION"
+            "type": "enum",
+            "members": {
+                "APPFLOW_INTEGRATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPFLOW_INTEGRATION"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.customerprofiles#ZendeskConnectorOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROJECTION",
-                        "name": "PROJECTION"
-                    },
-                    {
-                        "value": "GREATER_THAN",
-                        "name": "GREATER_THAN"
-                    },
-                    {
-                        "value": "ADDITION",
-                        "name": "ADDITION"
-                    },
-                    {
-                        "value": "MULTIPLICATION",
-                        "name": "MULTIPLICATION"
-                    },
-                    {
-                        "value": "DIVISION",
-                        "name": "DIVISION"
-                    },
-                    {
-                        "value": "SUBTRACTION",
-                        "name": "SUBTRACTION"
-                    },
-                    {
-                        "value": "MASK_ALL",
-                        "name": "MASK_ALL"
-                    },
-                    {
-                        "value": "MASK_FIRST_N",
-                        "name": "MASK_FIRST_N"
-                    },
-                    {
-                        "value": "MASK_LAST_N",
-                        "name": "MASK_LAST_N"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NULL",
-                        "name": "VALIDATE_NON_NULL"
-                    },
-                    {
-                        "value": "VALIDATE_NON_ZERO",
-                        "name": "VALIDATE_NON_ZERO"
-                    },
-                    {
-                        "value": "VALIDATE_NON_NEGATIVE",
-                        "name": "VALIDATE_NON_NEGATIVE"
-                    },
-                    {
-                        "value": "VALIDATE_NUMERIC",
-                        "name": "VALIDATE_NUMERIC"
-                    },
-                    {
-                        "value": "NO_OP",
-                        "name": "NO_OP"
+            "type": "enum",
+            "members": {
+                "PROJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECTION"
                     }
-                ]
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "ADDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDITION"
+                    }
+                },
+                "MULTIPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIPLICATION"
+                    }
+                },
+                "DIVISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIVISION"
+                    }
+                },
+                "SUBTRACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTRACTION"
+                    }
+                },
+                "MASK_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_ALL"
+                    }
+                },
+                "MASK_FIRST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_FIRST_N"
+                    }
+                },
+                "MASK_LAST_N": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK_LAST_N"
+                    }
+                },
+                "VALIDATE_NON_NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NULL"
+                    }
+                },
+                "VALIDATE_NON_ZERO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_ZERO"
+                    }
+                },
+                "VALIDATE_NON_NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NON_NEGATIVE"
+                    }
+                },
+                "VALIDATE_NUMERIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATE_NUMERIC"
+                    }
+                },
+                "NO_OP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_OP"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#ZendeskSourceProperties": {
@@ -6816,8 +8065,23 @@
                 "smithy.api#documentation": "<p>The properties that are applied when using Zendesk as a flow source.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#additionalSearchKeysList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#AdditionalSearchKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.customerprofiles#encryptionKey": {
             "type": "string",
@@ -6831,20 +8095,50 @@
         "com.amazonaws.customerprofiles#expirationDaysInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1098
                 }
             }
         },
+        "com.amazonaws.customerprofiles#foundByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#FoundByKeyValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#logicalOperator": {
+            "type": "enum",
+            "members": {
+                "AND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AND"
+                    }
+                },
+                "OR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.customerprofiles#matchesNumber": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6853,7 +8147,6 @@
         "com.amazonaws.customerprofiles#maxSize100": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -6874,10 +8167,7 @@
             }
         },
         "com.amazonaws.customerprofiles#optionalBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.customerprofiles#requestValueList": {
             "type": "list",

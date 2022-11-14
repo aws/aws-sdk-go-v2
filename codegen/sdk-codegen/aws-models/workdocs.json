@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -71,6 +71,9 @@
                 },
                 {
                     "target": "com.amazonaws.workdocs#DeleteDocument"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#DeleteDocumentVersion"
                 },
                 {
                     "target": "com.amazonaws.workdocs#DeleteFolder"
@@ -145,6 +148,9 @@
                     "target": "com.amazonaws.workdocs#RemoveResourcePermission"
                 },
                 {
+                    "target": "com.amazonaws.workdocs#RestoreDocumentVersions"
+                },
+                {
                     "target": "com.amazonaws.workdocs#UpdateDocument"
                 },
                 {
@@ -169,10 +175,680 @@
                     "name": "workdocs"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The WorkDocs API is designed for the following use cases:</p>\n        <ul>\n            <li>\n                <p>File Migration: File migration applications are supported for users who\n                    want to migrate their files from an on-premises or off-premises file system or\n                    service. Users can insert files into a user directory structure, as well as\n                    allow for basic metadata changes, such as modifications to the permissions of\n                    files.</p>\n            </li>\n            <li>\n                <p>Security: Support security applications are supported for users who have\n                    additional security needs, such as antivirus or data loss prevention. The API\n                    actions, along with AWS CloudTrail, allow these applications to detect when\n                    changes occur in Amazon WorkDocs. Then, the application can take the necessary\n                    actions and replace the target file. If the target file violates the policy, the\n                    application can also choose to email the user.</p>\n            </li>\n            <li>\n                <p>eDiscovery/Analytics: General administrative applications are supported,\n                    such as eDiscovery and analytics. These applications can choose to mimic or\n                    record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to\n                    replicate data for eDiscovery, backup, or analytical applications.</p>\n            </li>\n         </ul>\n        <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed.\n            They not only require the use of the AWS SDK, but also allow for the exclusive use of\n            IAM users and roles to help facilitate access, trust, and permission policies. By\n            creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM\n            user gains full administrative visibility into the entire Amazon WorkDocs site (or as\n            set in the IAM policy). This includes, but is not limited to, the ability to modify file\n            permissions and upload any file to any user. This allows developers to perform the three\n            use cases above, as well as give users the ability to grant access on a selective basis\n            using the IAM model.</p>",
+                "smithy.api#documentation": "<p>The WorkDocs API is designed for the following use cases:</p>\n        <ul>\n            <li>\n                <p>File Migration: File migration applications are supported for users who\n                    want to migrate their files from an on-premises or off-premises file system or\n                    service. Users can insert files into a user directory structure, as well as\n                    allow for basic metadata changes, such as modifications to the permissions of\n                    files.</p>\n            </li>\n            <li>\n                <p>Security: Support security applications are supported for users who have\n                    additional security needs, such as antivirus or data loss prevention. The API\n                    actions, along with AWS CloudTrail, allow these applications to detect when\n                    changes occur in Amazon WorkDocs. Then, the application can take the necessary\n                    actions and replace the target file. If the target file violates the policy, the\n                    application can also choose to email the user.</p>\n            </li>\n            <li>\n                <p>eDiscovery/Analytics: General administrative applications are supported,\n                    such as eDiscovery and analytics. These applications can choose to mimic or\n                    record the actions in an Amazon WorkDocs site, along with AWS CloudTrail, to\n                    replicate data for eDiscovery, backup, or analytical applications.</p>\n            </li>\n         </ul>\n        <p>All Amazon WorkDocs API actions are Amazon authenticated and certificate-signed.\n            They not only require the use of the AWS SDK, but also allow for the exclusive use of\n            IAM users and roles to help facilitate access, trust, and permission policies. By\n            creating a role and allowing an IAM user to access the Amazon WorkDocs site, the IAM\n            user gains full administrative visibility into the entire Amazon WorkDocs site (or as\n            set in the IAM policy). This includes, but is not limited to, the ability to modify file\n            permissions and upload any file to any user. This allows developers to perform the three\n            use cases above, as well as give users the ability to grant access on a selective basis\n            using the IAM model.</p>\n        <note>\n            <p>The pricing for Amazon WorkDocs APIs varies depending on the API call type for these actions:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>READ  (Get*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>WRITE (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>LIST (Describe*)</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>DELETE*, CANCEL</code>\n                  </p>\n               </li>\n            </ul>\n            <p>For information about Amazon WorkDocs API pricing, see <a href=\"https://aws.amazon.com/workdocs/pricing/\">Amazon WorkDocs Pricing</a>.</p>\n        </note>",
                 "smithy.api#title": "Amazon WorkDocs",
                 "smithy.api#xmlNamespace": {
                     "uri": "https://aws.amazon.com/api/v1/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://workdocs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://workdocs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://workdocs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://workdocs.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://workdocs.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
                 }
             }
         },
@@ -181,7 +857,13 @@
             "input": {
                 "target": "com.amazonaws.workdocs#AbortDocumentVersionUploadRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
+                {
+                    "target": "com.amazonaws.workdocs#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.workdocs#EntityNotExistsException"
                 },
@@ -321,6 +1003,7 @@
                 "IsIndirectActivity": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether an activity is indirect or direct. An indirect activity results\n            from a direct activity performed on a parent resource. For example, sharing a parent\n            folder (the direct activity) shares all of the subfolders and documents within the\n            parent folder (the indirect activity).</p>"
                     }
                 },
@@ -372,146 +1055,210 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\w,]+"
+                "smithy.api#pattern": "^[\\w,]+$"
             }
         },
         "com.amazonaws.workdocs#ActivityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DOCUMENT_CHECKED_IN",
-                        "name": "DOCUMENT_CHECKED_IN"
-                    },
-                    {
-                        "value": "DOCUMENT_CHECKED_OUT",
-                        "name": "DOCUMENT_CHECKED_OUT"
-                    },
-                    {
-                        "value": "DOCUMENT_RENAMED",
-                        "name": "DOCUMENT_RENAMED"
-                    },
-                    {
-                        "value": "DOCUMENT_VERSION_UPLOADED",
-                        "name": "DOCUMENT_VERSION_UPLOADED"
-                    },
-                    {
-                        "value": "DOCUMENT_VERSION_DELETED",
-                        "name": "DOCUMENT_VERSION_DELETED"
-                    },
-                    {
-                        "value": "DOCUMENT_VERSION_VIEWED",
-                        "name": "DOCUMENT_VERSION_VIEWED"
-                    },
-                    {
-                        "value": "DOCUMENT_VERSION_DOWNLOADED",
-                        "name": "DOCUMENT_VERSION_DOWNLOADED"
-                    },
-                    {
-                        "value": "DOCUMENT_RECYCLED",
-                        "name": "DOCUMENT_RECYCLED"
-                    },
-                    {
-                        "value": "DOCUMENT_RESTORED",
-                        "name": "DOCUMENT_RESTORED"
-                    },
-                    {
-                        "value": "DOCUMENT_REVERTED",
-                        "name": "DOCUMENT_REVERTED"
-                    },
-                    {
-                        "value": "DOCUMENT_SHARED",
-                        "name": "DOCUMENT_SHARED"
-                    },
-                    {
-                        "value": "DOCUMENT_UNSHARED",
-                        "name": "DOCUMENT_UNSHARED"
-                    },
-                    {
-                        "value": "DOCUMENT_SHARE_PERMISSION_CHANGED",
-                        "name": "DOCUMENT_SHARE_PERMISSION_CHANGED"
-                    },
-                    {
-                        "value": "DOCUMENT_SHAREABLE_LINK_CREATED",
-                        "name": "DOCUMENT_SHAREABLE_LINK_CREATED"
-                    },
-                    {
-                        "value": "DOCUMENT_SHAREABLE_LINK_REMOVED",
-                        "name": "DOCUMENT_SHAREABLE_LINK_REMOVED"
-                    },
-                    {
-                        "value": "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED",
-                        "name": "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"
-                    },
-                    {
-                        "value": "DOCUMENT_MOVED",
-                        "name": "DOCUMENT_MOVED"
-                    },
-                    {
-                        "value": "DOCUMENT_COMMENT_ADDED",
-                        "name": "DOCUMENT_COMMENT_ADDED"
-                    },
-                    {
-                        "value": "DOCUMENT_COMMENT_DELETED",
-                        "name": "DOCUMENT_COMMENT_DELETED"
-                    },
-                    {
-                        "value": "DOCUMENT_ANNOTATION_ADDED",
-                        "name": "DOCUMENT_ANNOTATION_ADDED"
-                    },
-                    {
-                        "value": "DOCUMENT_ANNOTATION_DELETED",
-                        "name": "DOCUMENT_ANNOTATION_DELETED"
-                    },
-                    {
-                        "value": "FOLDER_CREATED",
-                        "name": "FOLDER_CREATED"
-                    },
-                    {
-                        "value": "FOLDER_DELETED",
-                        "name": "FOLDER_DELETED"
-                    },
-                    {
-                        "value": "FOLDER_RENAMED",
-                        "name": "FOLDER_RENAMED"
-                    },
-                    {
-                        "value": "FOLDER_RECYCLED",
-                        "name": "FOLDER_RECYCLED"
-                    },
-                    {
-                        "value": "FOLDER_RESTORED",
-                        "name": "FOLDER_RESTORED"
-                    },
-                    {
-                        "value": "FOLDER_SHARED",
-                        "name": "FOLDER_SHARED"
-                    },
-                    {
-                        "value": "FOLDER_UNSHARED",
-                        "name": "FOLDER_UNSHARED"
-                    },
-                    {
-                        "value": "FOLDER_SHARE_PERMISSION_CHANGED",
-                        "name": "FOLDER_SHARE_PERMISSION_CHANGED"
-                    },
-                    {
-                        "value": "FOLDER_SHAREABLE_LINK_CREATED",
-                        "name": "FOLDER_SHAREABLE_LINK_CREATED"
-                    },
-                    {
-                        "value": "FOLDER_SHAREABLE_LINK_REMOVED",
-                        "name": "FOLDER_SHAREABLE_LINK_REMOVED"
-                    },
-                    {
-                        "value": "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED",
-                        "name": "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"
-                    },
-                    {
-                        "value": "FOLDER_MOVED",
-                        "name": "FOLDER_MOVED"
+            "type": "enum",
+            "members": {
+                "DOCUMENT_CHECKED_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_CHECKED_IN"
                     }
-                ]
+                },
+                "DOCUMENT_CHECKED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_CHECKED_OUT"
+                    }
+                },
+                "DOCUMENT_RENAMED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_RENAMED"
+                    }
+                },
+                "DOCUMENT_VERSION_UPLOADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_VERSION_UPLOADED"
+                    }
+                },
+                "DOCUMENT_VERSION_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_VERSION_DELETED"
+                    }
+                },
+                "DOCUMENT_VERSION_VIEWED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_VERSION_VIEWED"
+                    }
+                },
+                "DOCUMENT_VERSION_DOWNLOADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_VERSION_DOWNLOADED"
+                    }
+                },
+                "DOCUMENT_RECYCLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_RECYCLED"
+                    }
+                },
+                "DOCUMENT_RESTORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_RESTORED"
+                    }
+                },
+                "DOCUMENT_REVERTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_REVERTED"
+                    }
+                },
+                "DOCUMENT_SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_SHARED"
+                    }
+                },
+                "DOCUMENT_UNSHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_UNSHARED"
+                    }
+                },
+                "DOCUMENT_SHARE_PERMISSION_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_SHARE_PERMISSION_CHANGED"
+                    }
+                },
+                "DOCUMENT_SHAREABLE_LINK_CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_SHAREABLE_LINK_CREATED"
+                    }
+                },
+                "DOCUMENT_SHAREABLE_LINK_REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_SHAREABLE_LINK_REMOVED"
+                    }
+                },
+                "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"
+                    }
+                },
+                "DOCUMENT_MOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_MOVED"
+                    }
+                },
+                "DOCUMENT_COMMENT_ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_COMMENT_ADDED"
+                    }
+                },
+                "DOCUMENT_COMMENT_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_COMMENT_DELETED"
+                    }
+                },
+                "DOCUMENT_ANNOTATION_ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_ANNOTATION_ADDED"
+                    }
+                },
+                "DOCUMENT_ANNOTATION_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_ANNOTATION_DELETED"
+                    }
+                },
+                "FOLDER_CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_CREATED"
+                    }
+                },
+                "FOLDER_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_DELETED"
+                    }
+                },
+                "FOLDER_RENAMED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_RENAMED"
+                    }
+                },
+                "FOLDER_RECYCLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_RECYCLED"
+                    }
+                },
+                "FOLDER_RESTORED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_RESTORED"
+                    }
+                },
+                "FOLDER_SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_SHARED"
+                    }
+                },
+                "FOLDER_UNSHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_UNSHARED"
+                    }
+                },
+                "FOLDER_SHARE_PERMISSION_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_SHARE_PERMISSION_CHANGED"
+                    }
+                },
+                "FOLDER_SHAREABLE_LINK_CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_SHAREABLE_LINK_CREATED"
+                    }
+                },
+                "FOLDER_SHAREABLE_LINK_REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_SHAREABLE_LINK_REMOVED"
+                    }
+                },
+                "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"
+                    }
+                },
+                "FOLDER_MOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_MOVED"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#AddResourcePermissions": {
@@ -525,6 +1272,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.workdocs#FailedDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#ProhibitedStateException"
                 },
                 {
                     "target": "com.amazonaws.workdocs#ServiceUnavailableException"
@@ -600,22 +1350,27 @@
             }
         },
         "com.amazonaws.workdocs#BooleanEnumType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRUE",
-                        "name": "TRUE"
-                    },
-                    {
-                        "value": "FALSE",
-                        "name": "FALSE"
+            "type": "enum",
+            "members": {
+                "TRUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUE"
                     }
-                ]
+                },
+                "FALSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FALSE"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#BooleanType": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.workdocs#Comment": {
             "type": "structure",
@@ -687,7 +1442,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w+-.@]+"
+                "smithy.api#pattern": "^[\\w+-.@]+$"
             }
         },
         "com.amazonaws.workdocs#CommentList": {
@@ -735,22 +1490,26 @@
             }
         },
         "com.amazonaws.workdocs#CommentStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
-                    },
-                    {
-                        "value": "PUBLISHED",
-                        "name": "PUBLISHED"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "DELETED"
+            "type": "enum",
+            "members": {
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
                     }
-                ]
+                },
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#CommentTextType": {
@@ -764,18 +1523,20 @@
             }
         },
         "com.amazonaws.workdocs#CommentVisibilityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUBLIC",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#ConcurrentModificationException": {
@@ -901,6 +1662,7 @@
                 "NotifyCollaborators": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set this parameter to TRUE to send an email out to the document collaborators after\n            the comment is created.</p>"
                     }
                 }
@@ -1004,6 +1766,9 @@
                 "target": "com.amazonaws.workdocs#CreateFolderResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.workdocs#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.workdocs#ConflictingOperationException"
                 },
@@ -1155,6 +1920,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.workdocs#InvalidArgumentException"
+                },
+                {
                     "target": "com.amazonaws.workdocs#ServiceUnavailableException"
                 },
                 {
@@ -1165,7 +1933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a\n            confirmation message, and must confirm the subscription.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html\">Subscribe to\n                Notifications</a> in the <i>Amazon WorkDocs Developer\n            Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a\n            confirmation message, and must confirm the subscription.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html\">Setting up notifications for an IAM user or role</a> in the <i>Amazon WorkDocs Developer\n            Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/api/v1/organizations/{OrganizationId}/subscriptions",
@@ -1346,7 +2114,7 @@
                     "min": 1,
                     "max": 56
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*$"
             }
         },
         "com.amazonaws.workdocs#CustomMetadataLimitExceededException": {
@@ -1384,13 +2152,16 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*$"
             }
         },
         "com.amazonaws.workdocs#DeactivateUser": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#DeactivateUserRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1458,6 +2229,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#DeleteCommentRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1599,6 +2373,7 @@
                 "DeleteAll": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Flag to indicate removal of all custom metadata properties from the specified\n            resource.</p>",
                         "smithy.api#httpQuery": "deleteAll"
                     }
@@ -1614,6 +2389,9 @@
             "input": {
                 "target": "com.amazonaws.workdocs#DeleteDocumentRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.workdocs#ConcurrentModificationException"
@@ -1626,6 +2404,9 @@
                 },
                 {
                     "target": "com.amazonaws.workdocs#FailedDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.workdocs#ProhibitedStateException"
@@ -1669,10 +2450,13 @@
                 }
             }
         },
-        "com.amazonaws.workdocs#DeleteFolder": {
+        "com.amazonaws.workdocs#DeleteDocumentVersion": {
             "type": "operation",
             "input": {
-                "target": "com.amazonaws.workdocs#DeleteFolderRequest"
+                "target": "com.amazonaws.workdocs#DeleteDocumentVersionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1686,6 +2470,89 @@
                 },
                 {
                     "target": "com.amazonaws.workdocs#FailedDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#ProhibitedStateException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#UnauthorizedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#UnauthorizedResourceAccessException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a version of an Amazon WorkDocs document. Use the <code>DeletePriorVersions</code> parameter to delete prior versions.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/api/v1/documentVersions/{DocumentId}/versions/{VersionId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.workdocs#DeleteDocumentVersionRequest": {
+            "type": "structure",
+            "members": {
+                "AuthenticationToken": {
+                    "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#httpHeader": "Authentication"
+                    }
+                },
+                "DocumentId": {
+                    "target": "com.amazonaws.workdocs#ResourceIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a document.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.workdocs#DocumentVersionIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version ID of a document.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletePriorVersions": {
+                    "target": "com.amazonaws.workdocs#BooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to <code>TRUE</code>, deletes the specified version and <i>all prior versions</i> of a document.</p>",
+                        "smithy.api#httpQuery": "deletePriorVersions",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workdocs#DeleteFolder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workdocs#DeleteFolderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workdocs#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#ConflictingOperationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#EntityNotExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#FailedDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.workdocs#ProhibitedStateException"
@@ -1713,6 +2580,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#DeleteFolderContentsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1802,6 +2672,9 @@
                     "target": "com.amazonaws.workdocs#FailedDependencyException"
                 },
                 {
+                    "target": "com.amazonaws.workdocs#ProhibitedStateException"
+                },
+                {
                     "target": "com.amazonaws.workdocs#ServiceUnavailableException"
                 },
                 {
@@ -1848,6 +2721,7 @@
                 "DeleteAll": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Flag to request removal of all labels from the specified resource.</p>",
                         "smithy.api#httpQuery": "deleteAll"
                     }
@@ -1862,6 +2736,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#DeleteNotificationSubscriptionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -1911,6 +2788,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#DeleteUserRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -2047,6 +2927,7 @@
                 "IncludeIndirectActivities": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Includes indirect activities. An indirect activity results from a direct activity\n            performed on a parent resource. For example, sharing a parent folder (the direct\n            activity) shares all of the subfolders and documents within the parent folder (the\n            indirect activity).</p>",
                         "smithy.api#httpQuery": "includeIndirectActivities"
                     }
@@ -2059,7 +2940,7 @@
                     }
                 },
                 "Marker": {
-                    "target": "com.amazonaws.workdocs#MarkerType",
+                    "target": "com.amazonaws.workdocs#SearchMarkerType",
                     "traits": {
                         "smithy.api#documentation": "<p>The marker for the next set of results.</p>",
                         "smithy.api#httpQuery": "marker"
@@ -2077,7 +2958,7 @@
                     }
                 },
                 "Marker": {
-                    "target": "com.amazonaws.workdocs#MarkerType",
+                    "target": "com.amazonaws.workdocs#SearchMarkerType",
                     "traits": {
                         "smithy.api#documentation": "<p>The marker for the next set of results.</p>"
                     }
@@ -2197,6 +3078,9 @@
                 },
                 {
                     "target": "com.amazonaws.workdocs#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#InvalidPasswordException"
                 },
                 {
                     "target": "com.amazonaws.workdocs#ProhibitedStateException"
@@ -2592,6 +3476,9 @@
                     "target": "com.amazonaws.workdocs#FailedDependencyException"
                 },
                 {
+                    "target": "com.amazonaws.workdocs#InvalidArgumentException"
+                },
+                {
                     "target": "com.amazonaws.workdocs#ServiceUnavailableException"
                 },
                 {
@@ -2819,7 +3706,7 @@
                 "Query": {
                     "target": "com.amazonaws.workdocs#SearchQueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A query to filter users by user name.</p>",
+                        "smithy.api#documentation": "<p>A query to filter users by user name. Remember the following about the <code>Userids</code> and <code>Query</code> parameters:</p>\n        <ul>\n            <li>\n               <p>If you don't use either parameter, the API returns a paginated list of all users on the site.</p>\n            </li>\n            <li>\n               <p>If you use both parameters, the API ignores the <code>Query</code> parameter.</p>\n            </li>\n            <li>\n               <p>The <code>Userid</code> parameter only returns user names that match a corresponding user ID.</p>\n            </li>\n            <li>\n               <p>The <code>Query</code> parameter runs a \"prefix\" search for users by the <code>GivenName</code>, <code>SurName</code>, or <code>UserName</code> fields included in a \n                <a href=\"https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html\">CreateUser</a> API call. For example, querying on \n                <code>Ma</code> returns Márcia Oliveira, María García, and Mateo Jackson. If you use multiple characters, the API only returns data that matches all characters. For example, querying on <code>Ma J</code> only \n                returns Mateo Jackson.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "query"
                     }
                 },
@@ -2976,18 +3863,20 @@
             }
         },
         "com.amazonaws.workdocs#DocumentSourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ORIGINAL",
-                        "name": "ORIGINAL"
-                    },
-                    {
-                        "value": "WITH_COMMENTS",
-                        "name": "WITH_COMMENTS"
+            "type": "enum",
+            "members": {
+                "ORIGINAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORIGINAL"
                     }
-                ]
+                },
+                "WITH_COMMENTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WITH_COMMENTS"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#DocumentSourceUrlMap": {
@@ -3000,37 +3889,43 @@
             }
         },
         "com.amazonaws.workdocs#DocumentStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INITIALIZED",
-                        "name": "INITIALIZED"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+            "type": "enum",
+            "members": {
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#DocumentThumbnailType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SMALL",
-                        "name": "SMALL"
-                    },
-                    {
-                        "value": "SMALL_HQ",
-                        "name": "SMALL_HQ"
-                    },
-                    {
-                        "value": "LARGE",
-                        "name": "LARGE"
+            "type": "enum",
+            "members": {
+                "SMALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMALL"
                     }
-                ]
+                },
+                "SMALL_HQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMALL_HQ"
+                    }
+                },
+                "LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LARGE"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#DocumentThumbnailUrlMap": {
@@ -3049,7 +3944,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w+-.@]+"
+                "smithy.api#pattern": "^[\\w+-.@]+$"
             }
         },
         "com.amazonaws.workdocs#DocumentVersionMetadata": {
@@ -3145,14 +4040,14 @@
             }
         },
         "com.amazonaws.workdocs#DocumentVersionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.workdocs#DraftUploadOutOfSyncException": {
@@ -3175,7 +4070,8 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+                "smithy.api#pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workdocs#EntityAlreadyExistsException": {
@@ -3204,7 +4100,10 @@
                     "target": "com.amazonaws.workdocs#ErrorMessageType"
                 },
                 "EntityIds": {
-                    "target": "com.amazonaws.workdocs#EntityIdList"
+                    "target": "com.amazonaws.workdocs#EntityIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the non-existent resources.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3239,26 +4138,30 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w,]+"
+                "smithy.api#pattern": "^[\\w,]+$"
             }
         },
         "com.amazonaws.workdocs#FolderContentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "DOCUMENT",
-                        "name": "DOCUMENT"
-                    },
-                    {
-                        "value": "FOLDER",
-                        "name": "FOLDER"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT"
+                    }
+                },
+                "FOLDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#FolderMetadata": {
@@ -3546,6 +4449,7 @@
                 "IncludeCustomMetadata": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set this to <code>TRUE</code> to include custom metadata in the response.</p>",
                         "smithy.api#httpQuery": "includeCustomMetadata"
                     }
@@ -3645,6 +4549,7 @@
                 "IncludeCustomMetadata": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set this to TRUE to include custom metadata in the response.</p>",
                         "smithy.api#httpQuery": "includeCustomMetadata"
                     }
@@ -3815,6 +4720,7 @@
                 "IncludeCustomMetadata": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to TRUE to include custom metadata in the response.</p>",
                         "smithy.api#httpQuery": "includeCustomMetadata"
                     }
@@ -3971,7 +4877,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[&\\w+-.@]+"
+                "smithy.api#pattern": "^[&\\w+-.@]+$"
             }
         },
         "com.amazonaws.workdocs#HeaderNameType": {
@@ -3981,7 +4887,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w-]+"
+                "smithy.api#pattern": "^[\\w-]+$"
             }
         },
         "com.amazonaws.workdocs#HeaderValueType": {
@@ -4000,7 +4906,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[&\\w+-.@]+"
+                "smithy.api#pattern": "^[&\\w+-.@]+$"
             }
         },
         "com.amazonaws.workdocs#IllegalUserStateException": {
@@ -4036,6 +4942,12 @@
                 },
                 {
                     "target": "com.amazonaws.workdocs#FailedDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#InvalidPasswordException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.workdocs#ProhibitedStateException"
@@ -4117,8 +5029,7 @@
                 "ParentFolderId": {
                     "target": "com.amazonaws.workdocs#ResourceIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the parent folder.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the parent folder.</p>"
                     }
                 }
             }
@@ -4200,7 +5111,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The maximum of 100,000 folders under the parent folder has been exceeded.</p>",
+                "smithy.api#documentation": "<p>The maximum of 100,000 files and folders under the parent folder has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -4208,7 +5119,6 @@
         "com.amazonaws.workdocs#LimitType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 999
@@ -4216,54 +5126,74 @@
             }
         },
         "com.amazonaws.workdocs#LocaleType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "en",
-                        "name": "EN"
-                    },
-                    {
-                        "value": "fr",
-                        "name": "FR"
-                    },
-                    {
-                        "value": "ko",
-                        "name": "KO"
-                    },
-                    {
-                        "value": "de",
-                        "name": "DE"
-                    },
-                    {
-                        "value": "es",
-                        "name": "ES"
-                    },
-                    {
-                        "value": "ja",
-                        "name": "JA"
-                    },
-                    {
-                        "value": "ru",
-                        "name": "RU"
-                    },
-                    {
-                        "value": "zh_CN",
-                        "name": "ZH_CN"
-                    },
-                    {
-                        "value": "zh_TW",
-                        "name": "ZH_TW"
-                    },
-                    {
-                        "value": "pt_BR",
-                        "name": "PT_BR"
-                    },
-                    {
-                        "value": "default",
-                        "name": "DEFAULT"
+            "type": "enum",
+            "members": {
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
                     }
-                ]
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr"
+                    }
+                },
+                "KO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko"
+                    }
+                },
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de"
+                    }
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es"
+                    }
+                },
+                "JA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja"
+                    }
+                },
+                "RU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ru"
+                    }
+                },
+                "ZH_CN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh_CN"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh_TW"
+                    }
+                },
+                "PT_BR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt_BR"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#MarkerType": {
@@ -4273,7 +5203,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\u0000-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0000-\\u00FF]+$"
             }
         },
         "com.amazonaws.workdocs#MessageType": {
@@ -4292,6 +5222,7 @@
                 "SendEmail": {
                     "target": "com.amazonaws.workdocs#BooleanType",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value to indicate an email notification should be sent to the\n            receipients.</p>"
                     }
                 },
@@ -4307,18 +5238,20 @@
             }
         },
         "com.amazonaws.workdocs#OrderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASCENDING",
-                        "name": "ASCENDING"
-                    },
-                    {
-                        "value": "DESCENDING",
-                        "name": "DESCENDING"
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
                     }
-                ]
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#OrganizationUserList": {
@@ -4363,7 +5296,7 @@
                     "min": 4,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+",
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -4396,7 +5329,6 @@
         "com.amazonaws.workdocs#PositiveIntegerType": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4405,7 +5337,6 @@
         "com.amazonaws.workdocs#PositiveSizeType": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -4444,30 +5375,38 @@
             }
         },
         "com.amazonaws.workdocs#PrincipalType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "GROUP",
-                        "name": "GROUP"
-                    },
-                    {
-                        "value": "INVITE",
-                        "name": "INVITE"
-                    },
-                    {
-                        "value": "ANONYMOUS",
-                        "name": "ANONYMOUS"
-                    },
-                    {
-                        "value": "ORGANIZATION",
-                        "name": "ORGANIZATION"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
                     }
-                ]
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                },
+                "INVITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVITE"
+                    }
+                },
+                "ANONYMOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANONYMOUS"
+                    }
+                },
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATION"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#ProhibitedStateException": {
@@ -4487,6 +5426,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#RemoveAllResourcePermissionsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4535,6 +5477,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#RemoveResourcePermissionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -4621,14 +5566,14 @@
             }
         },
         "com.amazonaws.workdocs#ResourceCollectionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SHARED_WITH_ME",
-                        "name": "SHARED_WITH_ME"
+            "type": "enum",
+            "members": {
+                "SHARED_WITH_ME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED_WITH_ME"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.workdocs#ResourceIdType": {
@@ -4638,7 +5583,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\w+-.@]+"
+                "smithy.api#pattern": "^[\\w+-.@]+$"
             }
         },
         "com.amazonaws.workdocs#ResourceMetadata": {
@@ -4698,7 +5643,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\u0020-\\u202D\\u202F-\\uFFFF]+"
+                "smithy.api#pattern": "^[\\u0020-\\u202D\\u202F-\\uFFFF]+$"
             }
         },
         "com.amazonaws.workdocs#ResourcePath": {
@@ -4742,94 +5687,185 @@
             }
         },
         "com.amazonaws.workdocs#ResourceSortType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
+            "type": "enum",
+            "members": {
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
                     }
-                ]
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#ResourceStateType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "RESTORING",
-                        "name": "RESTORING"
-                    },
-                    {
-                        "value": "RECYCLING",
-                        "name": "RECYCLING"
-                    },
-                    {
-                        "value": "RECYCLED",
-                        "name": "RECYCLED"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "RESTORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORING"
+                    }
+                },
+                "RECYCLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECYCLING"
+                    }
+                },
+                "RECYCLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECYCLED"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#ResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FOLDER",
-                        "name": "FOLDER"
-                    },
-                    {
-                        "value": "DOCUMENT",
-                        "name": "DOCUMENT"
+            "type": "enum",
+            "members": {
+                "FOLDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER"
                     }
-                ]
+                },
+                "DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workdocs#RestoreDocumentVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workdocs#RestoreDocumentVersionsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workdocs#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#ConflictingOperationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#EntityNotExistsException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#FailedDependencyException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#ProhibitedStateException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#UnauthorizedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#UnauthorizedResourceAccessException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Recovers a deleted version of an Amazon WorkDocs document.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/api/v1/documentVersions/restore/{DocumentId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.workdocs#RestoreDocumentVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "AuthenticationToken": {
+                    "target": "com.amazonaws.workdocs#AuthenticationHeaderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon WorkDocs authentication token. Not required when using AWS administrator credentials to access the API.</p>",
+                        "smithy.api#httpHeader": "Authentication"
+                    }
+                },
+                "DocumentId": {
+                    "target": "com.amazonaws.workdocs#ResourceIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the document.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#RolePermissionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DIRECT",
-                        "name": "DIRECT"
-                    },
-                    {
-                        "value": "INHERITED",
-                        "name": "INHERITED"
+            "type": "enum",
+            "members": {
+                "DIRECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT"
                     }
-                ]
+                },
+                "INHERITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERITED"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#RoleType": {
+            "type": "enum",
+            "members": {
+                "VIEWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIEWER"
+                    }
+                },
+                "CONTRIBUTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTRIBUTOR"
+                    }
+                },
+                "OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OWNER"
+                    }
+                },
+                "COOWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COOWNER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workdocs#SearchMarkerType": {
             "type": "string",
             "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VIEWER",
-                        "name": "VIEWER"
-                    },
-                    {
-                        "value": "CONTRIBUTOR",
-                        "name": "CONTRIBUTOR"
-                    },
-                    {
-                        "value": "OWNER",
-                        "name": "OWNER"
-                    },
-                    {
-                        "value": "COOWNER",
-                        "name": "COOWNER"
-                    }
-                ]
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 12288
+                },
+                "smithy.api#pattern": "^[\\u0000-\\u00FF]+$"
             }
         },
         "com.amazonaws.workdocs#SearchQueryType": {
@@ -4839,7 +5875,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\u0020-\\uFFFF]+",
+                "smithy.api#pattern": "^[\\u0020-\\uFFFF]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -4942,18 +5978,20 @@
             }
         },
         "com.amazonaws.workdocs#ShareStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILURE",
-                        "name": "FAILURE"
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
                     }
-                ]
+                },
+                "FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#SharedLabel": {
@@ -4963,7 +6001,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*$"
             }
         },
         "com.amazonaws.workdocs#SharedLabels": {
@@ -4988,10 +6026,7 @@
             }
         },
         "com.amazonaws.workdocs#SizeType": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.workdocs#StorageLimitExceededException": {
             "type": "structure",
@@ -5040,18 +6075,20 @@
             }
         },
         "com.amazonaws.workdocs#StorageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNLIMITED",
-                        "name": "UNLIMITED"
-                    },
-                    {
-                        "value": "QUOTA",
-                        "name": "QUOTA"
+            "type": "enum",
+            "members": {
+                "UNLIMITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNLIMITED"
                     }
-                ]
+                },
+                "QUOTA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#Subscription": {
@@ -5102,25 +6139,31 @@
             }
         },
         "com.amazonaws.workdocs#SubscriptionProtocolType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HTTPS",
-                        "name": "HTTPS"
+            "type": "enum",
+            "members": {
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTPS"
                     }
-                ]
+                },
+                "SQS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQS"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#SubscriptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.workdocs#TimeZoneIdType": {
@@ -5194,6 +6237,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#UpdateDocumentRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5279,6 +6325,9 @@
             "input": {
                 "target": "com.amazonaws.workdocs#UpdateDocumentVersionRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.workdocs#ConcurrentModificationException"
@@ -5352,6 +6401,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.workdocs#UpdateFolderRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -5455,6 +6507,9 @@
                 },
                 {
                     "target": "com.amazonaws.workdocs#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.workdocs#ProhibitedStateException"
                 },
                 {
                     "target": "com.amazonaws.workdocs#ServiceUnavailableException"
@@ -5692,18 +6747,20 @@
             }
         },
         "com.amazonaws.workdocs#UserFilterType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "ACTIVE_PENDING",
-                        "name": "ACTIVE_PENDING"
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
                     }
-                ]
+                },
+                "ACTIVE_PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE_PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#UserIdsType": {
@@ -5713,7 +6770,7 @@
                     "min": 1,
                     "max": 2000
                 },
-                "smithy.api#pattern": "[&\\w+-.@, ]+"
+                "smithy.api#pattern": "^[&\\w+-.@, ]+$"
             }
         },
         "com.amazonaws.workdocs#UserMetadata": {
@@ -5761,49 +6818,61 @@
             }
         },
         "com.amazonaws.workdocs#UserSortType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER_NAME",
-                        "name": "USER_NAME"
-                    },
-                    {
-                        "value": "FULL_NAME",
-                        "name": "FULL_NAME"
-                    },
-                    {
-                        "value": "STORAGE_LIMIT",
-                        "name": "STORAGE_LIMIT"
-                    },
-                    {
-                        "value": "USER_STATUS",
-                        "name": "USER_STATUS"
-                    },
-                    {
-                        "value": "STORAGE_USED",
-                        "name": "STORAGE_USED"
+            "type": "enum",
+            "members": {
+                "USER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_NAME"
                     }
-                ]
+                },
+                "FULL_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL_NAME"
+                    }
+                },
+                "STORAGE_LIMIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_LIMIT"
+                    }
+                },
+                "USER_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_STATUS"
+                    }
+                },
+                "STORAGE_USED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STORAGE_USED"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#UserStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "INACTIVE",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#UserStorageMetadata": {
@@ -5827,30 +6896,38 @@
             }
         },
         "com.amazonaws.workdocs#UserType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "USER",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "ADMIN",
-                        "name": "ADMIN"
-                    },
-                    {
-                        "value": "POWERUSER",
-                        "name": "POWERUSER"
-                    },
-                    {
-                        "value": "MINIMALUSER",
-                        "name": "MINIMALUSER"
-                    },
-                    {
-                        "value": "WORKSPACESUSER",
-                        "name": "WORKSPACESUSER"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
                     }
-                ]
+                },
+                "ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN"
+                    }
+                },
+                "POWERUSER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POWERUSER"
+                    }
+                },
+                "MINIMALUSER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINIMALUSER"
+                    }
+                },
+                "WORKSPACESUSER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKSPACESUSER"
+                    }
+                }
             }
         },
         "com.amazonaws.workdocs#UsernameType": {
@@ -5860,7 +6937,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?"
+                "smithy.api#pattern": "^[\\w\\-+.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]+)?$"
             }
         }
     }
