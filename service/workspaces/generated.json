@@ -51,6 +51,7 @@
         "api_op_ListAvailableManagementCidrRanges.go",
         "api_op_MigrateWorkspace.go",
         "api_op_ModifyAccount.go",
+        "api_op_ModifyCertificateBasedAuthProperties.go",
         "api_op_ModifyClientProperties.go",
         "api_op_ModifySamlProperties.go",
         "api_op_ModifySelfservicePermissions.go",

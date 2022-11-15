@@ -1,0 +1,8 @@
+{
+    "id": "132556db-d36e-4dc8-8223-e105b56ff58b",
+    "type": "feature",
+    "description": "Amazon Route 53 now supports the Europe (Spain) Region (eu-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.",
+    "modules": [
+        "service/route53"
+    ]
+}

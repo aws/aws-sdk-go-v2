@@ -428,15 +428,16 @@ type InstanceAttributeType string
 
 // Enum values for InstanceAttributeType
 const (
-	InstanceAttributeTypeInboundCalls          InstanceAttributeType = "INBOUND_CALLS"
-	InstanceAttributeTypeOutboundCalls         InstanceAttributeType = "OUTBOUND_CALLS"
-	InstanceAttributeTypeContactflowLogs       InstanceAttributeType = "CONTACTFLOW_LOGS"
-	InstanceAttributeTypeContactLens           InstanceAttributeType = "CONTACT_LENS"
-	InstanceAttributeTypeAutoResolveBestVoices InstanceAttributeType = "AUTO_RESOLVE_BEST_VOICES"
-	InstanceAttributeTypeUseCustomTtsVoices    InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
-	InstanceAttributeTypeEarlyMedia            InstanceAttributeType = "EARLY_MEDIA"
-	InstanceAttributeTypeMultiPartyConference  InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
-	InstanceAttributeTypeHighVolumeOutbound    InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
+	InstanceAttributeTypeInboundCalls              InstanceAttributeType = "INBOUND_CALLS"
+	InstanceAttributeTypeOutboundCalls             InstanceAttributeType = "OUTBOUND_CALLS"
+	InstanceAttributeTypeContactflowLogs           InstanceAttributeType = "CONTACTFLOW_LOGS"
+	InstanceAttributeTypeContactLens               InstanceAttributeType = "CONTACT_LENS"
+	InstanceAttributeTypeAutoResolveBestVoices     InstanceAttributeType = "AUTO_RESOLVE_BEST_VOICES"
+	InstanceAttributeTypeUseCustomTtsVoices        InstanceAttributeType = "USE_CUSTOM_TTS_VOICES"
+	InstanceAttributeTypeEarlyMedia                InstanceAttributeType = "EARLY_MEDIA"
+	InstanceAttributeTypeMultiPartyConference      InstanceAttributeType = "MULTI_PARTY_CONFERENCE"
+	InstanceAttributeTypeHighVolumeOutbound        InstanceAttributeType = "HIGH_VOLUME_OUTBOUND"
+	InstanceAttributeTypeEnhancedContactMonitoring InstanceAttributeType = "ENHANCED_CONTACT_MONITORING"
 )
 
 // Values returns all known values for InstanceAttributeType. Note that this can be
@@ -453,6 +454,7 @@ func (InstanceAttributeType) Values() []InstanceAttributeType {
 		"EARLY_MEDIA",
 		"MULTI_PARTY_CONFERENCE",
 		"HIGH_VOLUME_OUTBOUND",
+		"ENHANCED_CONTACT_MONITORING",
 	}
 }
 

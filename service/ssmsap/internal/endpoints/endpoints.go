@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver MemoryDB endpoint resolver
+// Resolver SsmSap endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
@@ -106,98 +106,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "memory-db.{region}.api.aws",
+				Hostname:          "ssm-sap.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.amazonaws.com",
+				Hostname:          "ssm-sap-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.api.aws",
+				Hostname:          "ssm-sap-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "memory-db.{region}.amazonaws.com",
+				Hostname:          "ssm-sap.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "ap-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ca-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-3",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "fips",
-			}: endpoints.Endpoint{
-				Hostname: "memory-db-fips.us-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-west-1",
-				},
-			},
-			endpoints.EndpointKey{
-				Region: "sa-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-west-2",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-cn",
@@ -205,42 +141,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "memory-db.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "ssm-sap.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.amazonaws.com.cn",
+				Hostname:          "ssm-sap-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "ssm-sap-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "memory-db.{region}.amazonaws.com.cn",
+				Hostname:          "ssm-sap.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "cn-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso",
@@ -248,14 +176,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.c2s.ic.gov",
+				Hostname:          "ssm-sap-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "memory-db.{region}.c2s.ic.gov",
+				Hostname:          "ssm-sap.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -269,14 +197,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "ssm-sap-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "memory-db.{region}.sc2s.sgov.gov",
+				Hostname:          "ssm-sap.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -290,28 +218,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "memory-db.{region}.api.aws",
+				Hostname:          "ssm-sap.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.amazonaws.com",
+				Hostname:          "ssm-sap-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "memory-db-fips.{region}.api.aws",
+				Hostname:          "ssm-sap-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "memory-db.{region}.amazonaws.com",
+				Hostname:          "ssm-sap.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

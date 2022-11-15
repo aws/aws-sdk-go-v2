@@ -1,0 +1,8 @@
+{
+    "id": "e1a27641-022f-442b-97d0-851fbea281cc",
+    "type": "feature",
+    "description": "This release introduces ModifyCertificateBasedAuthProperties, a new API that allows control of certificate-based auth properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return certificate-based auth properties in its responses.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

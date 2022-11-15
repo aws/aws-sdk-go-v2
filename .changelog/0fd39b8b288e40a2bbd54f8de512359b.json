@@ -1,0 +1,8 @@
+{
+    "id": "0fd39b8b-288e-40a2-bbd5-4f8de512359b",
+    "type": "feature",
+    "description": "This release updates the APIs: UpdateInstanceAttribute, DescribeInstanceAttribute, and ListInstanceAttributes. You can use it to programmatically enable/disable enhanced contact monitoring using attribute type ENHANCED_CONTACT_MONITORING on the specified Amazon Connect instance.",
+    "modules": [
+        "service/connect"
+    ]
+}

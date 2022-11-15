@@ -376,12 +376,18 @@ type Deployment struct {
 	// Whether or not the deployment is the latest revision for its target.
 	IsLatestForTarget bool
 
+	// The parent deployment's target ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// within a subdeployment.
+	ParentTargetArn *string
+
 	// The revision number of the deployment.
 	RevisionId *string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target IoT thing or thing group.
+	// the target IoT thing or thing group. When creating a subdeployment, the
+	// targetARN can only be a thing group.
 	TargetArn *string
 
 	noSmithyDocumentSerde

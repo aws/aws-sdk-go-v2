@@ -1,0 +1,8 @@
+{
+    "id": "2513d66f-923b-44a5-9b85-614008e6c135",
+    "type": "feature",
+    "description": "Adds new parent target ARN paramater to CreateDeployment, GetDeployment, and ListDeployments APIs for the new subdeployments feature.",
+    "modules": [
+        "service/greengrassv2"
+    ]
+}

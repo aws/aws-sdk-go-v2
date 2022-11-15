@@ -43,7 +43,8 @@ type CreateDeploymentInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target IoT thing or thing group.
+	// the target IoT thing or thing group. When creating a subdeployment, the
+	// targetARN can only be a thing group.
 	//
 	// This member is required.
 	TargetArn *string
@@ -73,6 +74,11 @@ type CreateDeploymentInput struct {
 	// specifies the rollout, timeout, and stop configurations for the deployment
 	// configuration.
 	IotJobConfiguration *types.DeploymentIoTJobConfiguration
+
+	// The parent deployment's target ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// within a subdeployment.
+	ParentTargetArn *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources

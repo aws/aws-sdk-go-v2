@@ -650,6 +650,26 @@ func (m *validateOpMigrateWorkspace) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyCertificateBasedAuthProperties struct {
+}
+
+func (*validateOpModifyCertificateBasedAuthProperties) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyCertificateBasedAuthProperties) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyCertificateBasedAuthPropertiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyCertificateBasedAuthPropertiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyClientProperties struct {
 }
 
@@ -1156,6 +1176,10 @@ func addOpListAvailableManagementCidrRangesValidationMiddleware(stack *middlewar
 
 func addOpMigrateWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpMigrateWorkspace{}, middleware.After)
+}
+
+func addOpModifyCertificateBasedAuthPropertiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyCertificateBasedAuthProperties{}, middleware.After)
 }
 
 func addOpModifyClientPropertiesValidationMiddleware(stack *middleware.Stack) error {
@@ -2010,6 +2034,21 @@ func validateOpMigrateWorkspaceInput(v *MigrateWorkspaceInput) error {
 	}
 	if v.BundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyCertificateBasedAuthPropertiesInput(v *ModifyCertificateBasedAuthPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyCertificateBasedAuthPropertiesInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

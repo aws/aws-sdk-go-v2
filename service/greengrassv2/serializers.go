@@ -485,6 +485,11 @@ func awsRestjson1_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentIn
 		}
 	}
 
+	if v.ParentTargetArn != nil {
+		ok := object.Key("parentTargetArn")
+		ok.String(*v.ParentTargetArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1439,6 +1444,10 @@ func awsRestjson1_serializeOpHttpBindingsListDeploymentsInput(v *ListDeployments
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ParentTargetArn != nil {
+		encoder.SetQuery("parentTargetArn").String(*v.ParentTargetArn)
 	}
 
 	if v.TargetArn != nil {

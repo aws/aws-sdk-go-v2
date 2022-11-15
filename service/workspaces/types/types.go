@@ -34,6 +34,20 @@ type AccountModification struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the properties of the certificate-based authentication you want to use
+// with your WorkSpaces.
+type CertificateBasedAuthProperties struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Certificate Manager
+	// Private CA resource.
+	CertificateAuthorityArn *string
+
+	// The status of the certificate-based authentication properties.
+	Status CertificateBasedAuthStatusEnum
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Amazon WorkSpaces client.
 type ClientProperties struct {
 
@@ -871,6 +885,11 @@ type WorkspaceDirectory struct {
 
 	// The directory alias.
 	Alias *string
+
+	// The certificate-based authentication properties used to authenticate SAML 2.0
+	// Identity Provider (IdP) user identities to Active Directory for WorkSpaces
+	// login.
+	CertificateBasedAuthProperties *CertificateBasedAuthProperties
 
 	// The user name for the service account.
 	CustomerUserName *string

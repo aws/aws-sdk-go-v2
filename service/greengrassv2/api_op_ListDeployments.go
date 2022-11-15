@@ -47,6 +47,11 @@ type ListDeploymentsInput struct {
 	// The token to be used for the next set of paginated results.
 	NextToken *string
 
+	// The parent deployment's target ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// within a subdeployment.
+	ParentTargetArn *string
+
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the target IoT thing or thing group.

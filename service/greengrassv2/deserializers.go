@@ -2702,6 +2702,15 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				sv.IsLatestForTarget = jtv
 			}
 
+		case "parentTargetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThingGroupARN to be of type string, got %T instead", value)
+				}
+				sv.ParentTargetArn = ptr.String(jtv)
+			}
+
 		case "revisionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6243,6 +6252,15 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 					return fmt.Errorf("expected IsLatestForTarget to be of type *bool, got %T instead", value)
 				}
 				sv.IsLatestForTarget = jtv
+			}
+
+		case "parentTargetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThingGroupARN to be of type string, got %T instead", value)
+				}
+				sv.ParentTargetArn = ptr.String(jtv)
 			}
 
 		case "revisionId":

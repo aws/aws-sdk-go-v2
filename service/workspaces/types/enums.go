@@ -62,6 +62,25 @@ func (AssociationStatus) Values() []AssociationStatus {
 	}
 }
 
+type CertificateBasedAuthStatusEnum string
+
+// Enum values for CertificateBasedAuthStatusEnum
+const (
+	CertificateBasedAuthStatusEnumDisabled CertificateBasedAuthStatusEnum = "DISABLED"
+	CertificateBasedAuthStatusEnumEnabled  CertificateBasedAuthStatusEnum = "ENABLED"
+)
+
+// Values returns all known values for CertificateBasedAuthStatusEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CertificateBasedAuthStatusEnum) Values() []CertificateBasedAuthStatusEnum {
+	return []CertificateBasedAuthStatusEnum{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type ClientDeviceType string
 
 // Enum values for ClientDeviceType
@@ -213,6 +232,23 @@ func (DedicatedTenancySupportResultEnum) Values() []DedicatedTenancySupportResul
 	return []DedicatedTenancySupportResultEnum{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type DeletableCertificateBasedAuthProperty string
+
+// Enum values for DeletableCertificateBasedAuthProperty
+const (
+	DeletableCertificateBasedAuthPropertyCertificateBasedAuthPropertiesCertificateAuthorityArn DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"
+)
+
+// Values returns all known values for DeletableCertificateBasedAuthProperty. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DeletableCertificateBasedAuthProperty) Values() []DeletableCertificateBasedAuthProperty {
+	return []DeletableCertificateBasedAuthProperty{
+		"CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN",
 	}
 }
 
