@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-15)
+
+* **Feature**: Amazon Route 53 now supports the Europe (Spain) Region (eu-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # v1.23.0 (2022-11-08)
 
 * **Feature**: Amazon Route 53 now supports the Europe (Zurich) Region (eu-central-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.

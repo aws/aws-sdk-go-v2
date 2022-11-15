@@ -1,3 +1,7 @@
+# v1.20.0 (2022-11-15)
+
+* **Feature**: Adds new parent target ARN paramater to CreateDeployment, GetDeployment, and ListDeployments APIs for the new subdeployments feature.
+
 # v1.19.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

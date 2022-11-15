@@ -63,7 +63,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rds v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.14
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.19
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.21
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.29.2
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.19
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.20
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.23.1
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.25.0
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.26.0
 	github.com/aws/smithy-go v1.13.4
 	github.com/google/go-cmp v0.5.8
 )

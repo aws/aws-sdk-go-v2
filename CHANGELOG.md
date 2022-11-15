@@ -1,3 +1,18 @@
+# Release (2022-11-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.36.0](service/connect/CHANGELOG.md#v1360-2022-11-15)
+  * **Feature**: This release updates the APIs: UpdateInstanceAttribute, DescribeInstanceAttribute, and ListInstanceAttributes. You can use it to programmatically enable/disable enhanced contact monitoring using attribute type ENHANCED_CONTACT_MONITORING on the specified Amazon Connect instance.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.20.0](service/greengrassv2/CHANGELOG.md#v1200-2022-11-15)
+  * **Feature**: Adds new parent target ARN paramater to CreateDeployment, GetDeployment, and ListDeployments APIs for the new subdeployments feature.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.24.0](service/route53/CHANGELOG.md#v1240-2022-11-15)
+  * **Feature**: Amazon Route 53 now supports the Europe (Spain) Region (eu-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.0.0](service/ssmsap/CHANGELOG.md#v100-2022-11-15)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Systems Manager for SAP provides simplified operations and management of SAP applications such as SAP HANA. With this release, SAP customers and partners can automate and simplify their SAP system administration tasks such as backup/restore of SAP HANA.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.26.0](service/workspaces/CHANGELOG.md#v1260-2022-11-15)
+  * **Feature**: This release introduces ModifyCertificateBasedAuthProperties, a new API that allows control of certificate-based auth properties associated with a WorkSpaces directory. The DescribeWorkspaceDirectories API will now additionally return certificate-based auth properties in its responses.
+
 # Release (2022-11-14)
 
 ## Module Highlights
