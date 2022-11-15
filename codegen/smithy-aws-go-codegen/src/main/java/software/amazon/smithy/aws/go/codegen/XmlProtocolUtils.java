@@ -349,7 +349,7 @@ public final class XmlProtocolUtils {
      * This method is used indirectly by generateErrorDispatcher to generate operation specific error handling functions
      *
      * @param context the generation context
-     * @see <a href="https://awslabs.github.io/smithy/1.0/spec/aws/aws-restxml-protocol.html#operation-error-serialization">Rest-XML operation error serialization.</a>
+     * @see <a href="https://smithy.io/2.0/aws/protocols/aws-restxml-protocol.html#error-response-serialization">Rest-XML operation error serialization.</a>
      */
     public static void writeXmlErrorMessageCodeDeserializer(ProtocolGenerator.GenerationContext context) {
         GoWriter writer = context.getWriter().get();

@@ -64,7 +64,7 @@ import software.amazon.smithy.model.traits.XmlNamespaceTrait;
  * It handles reading and writing from document bodies, including generating any
  * functions needed for performing serde.
  *
- * @see <a href="https://awslabs.github.io/smithy/spec/http.html">Smithy HTTP protocol bindings.</a>
+ * @see <a href="https://smithy.io/2.0/spec/http-bindings.html">Smithy HTTP protocol bindings.</a>
  */
 abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     private final Set<ShapeId> generatedDocumentBodyShapeSerializers = new HashSet<>();
