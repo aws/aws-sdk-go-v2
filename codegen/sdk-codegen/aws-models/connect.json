@@ -10031,6 +10031,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HIGH_VOLUME_OUTBOUND"
                     }
+                },
+                "ENHANCED_CONTACT_MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENHANCED_CONTACT_MONITORING"
+                    }
                 }
             }
         },

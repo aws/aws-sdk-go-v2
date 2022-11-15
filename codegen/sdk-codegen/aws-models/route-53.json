@@ -476,8 +476,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-east-1"
+                                                                            "signingRegion": "us-east-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -536,8 +536,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-east-1"
+                                                                            "signingRegion": "us-east-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -596,8 +596,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-east-1"
+                                                                            "signingRegion": "us-east-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -622,8 +622,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-east-1"
+                                                            "signingRegion": "us-east-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -719,8 +719,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "cn-northwest-1"
+                                                                            "signingRegion": "cn-northwest-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -779,8 +779,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "cn-northwest-1"
+                                                                            "signingRegion": "cn-northwest-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -839,8 +839,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "cn-northwest-1"
+                                                                            "signingRegion": "cn-northwest-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -865,8 +865,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "cn-northwest-1"
+                                                            "signingRegion": "cn-northwest-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -962,8 +962,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-gov-west-1"
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1022,8 +1022,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-gov-west-1"
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1082,8 +1082,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-gov-west-1"
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1108,8 +1108,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-gov-west-1"
+                                                            "signingRegion": "us-gov-west-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1181,8 +1181,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-iso-east-1"
+                                                                            "signingRegion": "us-iso-east-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1207,8 +1207,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-iso-east-1"
+                                                            "signingRegion": "us-iso-east-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1280,8 +1280,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-isob-east-1"
+                                                                            "signingRegion": "us-isob-east-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1306,8 +1306,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-isob-east-1"
+                                                            "signingRegion": "us-isob-east-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1449,8 +1449,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-east-1"
+                                                                            "signingRegion": "us-east-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1476,8 +1476,8 @@
                                                                     "authSchemes": [
                                                                         {
                                                                             "name": "sigv4",
-                                                                            "signingName": "route53",
-                                                                            "signingRegion": "us-gov-west-1"
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "route53"
                                                                         }
                                                                     ]
                                                                 },
@@ -1579,8 +1579,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-east-1"
+                                                            "signingRegion": "us-east-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1606,8 +1606,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "cn-northwest-1"
+                                                            "signingRegion": "cn-northwest-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1633,8 +1633,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-gov-west-1"
+                                                            "signingRegion": "us-gov-west-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1660,8 +1660,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-iso-east-1"
+                                                            "signingRegion": "us-iso-east-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1687,8 +1687,8 @@
                                                     "authSchemes": [
                                                         {
                                                             "name": "sigv4",
-                                                            "signingName": "route53",
-                                                            "signingRegion": "us-isob-east-1"
+                                                            "signingRegion": "us-isob-east-1",
+                                                            "signingName": "route53"
                                                         }
                                                     ]
                                                 },
@@ -1730,9 +1730,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "aws-cn-global",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "aws-cn-global"
                             }
                         },
                         {
@@ -1752,9 +1752,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "aws-global",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "aws-global"
                             }
                         },
                         {
@@ -1774,9 +1774,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "aws-iso-global",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "aws-iso-global"
                             }
                         },
                         {
@@ -1796,9 +1796,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "aws-iso-b-global",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "aws-iso-b-global"
                             }
                         },
                         {
@@ -1818,9 +1818,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "aws-us-gov-global",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "aws-us-gov-global"
                             }
                         },
                         {
@@ -1831,9 +1831,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1843,9 +1843,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1855,9 +1855,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3003,6 +3003,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "eu-south-1"
+                    }
+                },
+                "eu_south_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-2"
                     }
                 },
                 "us_gov_west_1": {
@@ -10060,6 +10066,12 @@
                     "traits": {
                         "smithy.api#enumValue": "eu-south-1"
                     }
+                },
+                "eu_south_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-2"
+                    }
                 }
             },
             "traits": {
@@ -11642,6 +11654,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "eu-south-1"
+                    }
+                },
+                "eu_south_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-south-2"
                     }
                 }
             },
