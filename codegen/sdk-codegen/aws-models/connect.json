@@ -372,6 +372,18 @@
                 }
             }
         },
+        "com.amazonaws.connect#AllowedMonitorCapabilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#MonitorCapability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.connect#AmazonConnectService": {
             "type": "service",
             "version": "2017-08-08",
@@ -693,6 +705,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.connect#MonitorContact"
                 },
                 {
                     "target": "com.amazonaws.connect#PutUserStatus"
@@ -2882,7 +2897,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>\n         <p>Pattern: <code>^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>\n  \n         <p>Pattern: <code>^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$</code>\n         </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -3567,7 +3582,7 @@
                     "code": "ContactNotFoundException",
                     "httpResponseCode": 410
                 },
-                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist.</p>",
+                "smithy.api#documentation": "<p>The contact with the specified ID is not active or does not exist. Applies to Voice calls\n   only, not to Chat, Task, or Voice Callback.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
             }
@@ -8189,7 +8204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which \n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a \n   <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in the \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent Event Stream</a>.</p>",
+                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n    <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users/{InstanceId}/{UserId}/contact",
@@ -8211,7 +8226,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the\n   instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8491,7 +8506,7 @@
                 "Groupings": {
                     "target": "com.amazonaws.connect#Groupings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. If you group by <code>CHANNEL</code>, you should include a Channels filter.\n   VOICE, CHAT, and TASK channels are supported.</p>\n         <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n   returned.</p>"
+                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. </p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n    VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing profile filter.</p>\n            </li>\n            <li>\n               <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n    returned.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CurrentMetrics": {
@@ -13555,6 +13570,119 @@
                 }
             }
         },
+        "com.amazonaws.connect#MonitorCapability": {
+            "type": "enum",
+            "members": {
+                "SILENT_MONITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SILENT_MONITOR"
+                    }
+                },
+                "BARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BARGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#MonitorContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#MonitorContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#MonitorContactResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#IdempotencyException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by \n   <i>userId</i> will be set to silent monitoring mode on the contact.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/contact/monitor",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#MonitorContactRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.connect#AgentResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowedMonitorCapabilities": {
+                    "target": "com.amazonaws.connect#AllowedMonitorCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify which monitoring actions the user is allowed to take. For example, whether the user is \n   allowed to escalate from silent monitoring to barge.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#MonitorContactResponse": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact.</p>"
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Name": {
             "type": "string",
             "traits": {
@@ -15826,7 +15954,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return queues.</p>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return queues.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#QueueSearchFilter": {
@@ -16922,7 +17050,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return routing profiles.</p>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return routing profiles.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#RoutingProfileSearchFilter": {
@@ -17167,7 +17295,7 @@
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#QueueSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return queues.</p>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return queues.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. </p>\n         </note>"
                     }
                 }
             }
@@ -17267,7 +17395,7 @@
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#RoutingProfileSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return routing profiles.</p>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return routing profiles.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. </p>\n         </note>"
                     }
                 }
             }
@@ -17361,7 +17489,7 @@
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#SecurityProfileSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return security profiles. </p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n   \n         </note>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return security profiles. </p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results.</p>\n         </note>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n   \n         </note>"
                     }
                 },
                 "SearchFilter": {
@@ -17738,7 +17866,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return security profiles.</p>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return security profiles.</p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and\n    maximum of 25 characters. Any queries with character lengths outside of this range will throw\n    invalid results.</p> \n         </note>"
             }
         },
         "com.amazonaws.connect#SecurityProfileSearchSummary": {
@@ -22513,7 +22641,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return users.</p>\n         <note>\n            <p>The <code>Username</code>, <code>Firstname</code>, and <code>Lastname</code> fields support\n    \"contains\" queries with a minimum of 2 characters and a maximum of 25 characters. Any queries\n    with character lengths outside of this range result in empty results.\n    </p>\n         </note>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return users.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. \n    </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#UserSearchFilter": {

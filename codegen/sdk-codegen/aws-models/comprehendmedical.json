@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -107,26 +107,62 @@
             }
         },
         "com.amazonaws.comprehendmedical#AttributeName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SIGN",
-                        "name": "SIGN"
-                    },
-                    {
-                        "value": "SYMPTOM",
-                        "name": "SYMPTOM"
-                    },
-                    {
-                        "value": "DIAGNOSIS",
-                        "name": "DIAGNOSIS"
-                    },
-                    {
-                        "value": "NEGATION",
-                        "name": "NEGATION"
+            "type": "enum",
+            "members": {
+                "SIGN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGN"
                     }
-                ]
+                },
+                "SYMPTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYMPTOM"
+                    }
+                },
+                "DIAGNOSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIAGNOSIS"
+                    }
+                },
+                "NEGATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEGATION"
+                    }
+                },
+                "PERTAINS_TO_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERTAINS_TO_FAMILY"
+                    }
+                },
+                "HYPOTHETICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYPOTHETICAL"
+                    }
+                },
+                "LOW_CONFIDENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW_CONFIDENCE"
+                    }
+                },
+                "PAST_HISTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAST_HISTORY"
+                    }
+                },
+                "FUTURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FUTURE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#BoundedLengthString": {
@@ -294,21 +330,6 @@
         },
         "com.amazonaws.comprehendmedical#ComprehendMedical_20181030": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "ComprehendMedical",
-                    "arnNamespace": "comprehendmedical",
-                    "cloudFormationName": "ComprehendMedical",
-                    "cloudTrailEventSource": "comprehendmedical.amazonaws.com",
-                    "endpointPrefix": "comprehendmedical"
-                },
-                "aws.auth#sigv4": {
-                    "name": "comprehendmedical"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p> Comprehend Medical; extracts structured information from unstructured clinical text. Use these actions\n      to gain insight in your documents. </p>",
-                "smithy.api#title": "AWS Comprehend Medical"
-            },
             "version": "2018-10-30",
             "operations": [
                 {
@@ -389,7 +410,796 @@
                 {
                     "target": "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJob"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ComprehendMedical",
+                    "arnNamespace": "comprehendmedical",
+                    "cloudFormationName": "ComprehendMedical",
+                    "cloudTrailEventSource": "comprehendmedical.amazonaws.com",
+                    "endpointPrefix": "comprehendmedical"
+                },
+                "aws.auth#sigv4": {
+                    "name": "comprehendmedical"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p> Comprehend Medical; extracts structured information from unstructured clinical text. Use these actions\n      to gain insight in your documents. </p>",
+                "smithy.api#title": "AWS Comprehend Medical",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://comprehendmedical-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://comprehendmedical-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://comprehendmedical.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://comprehendmedical.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehendmedical.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.comprehendmedical#DescribeEntitiesDetectionV2Job": {
             "type": "operation",
@@ -924,200 +1734,329 @@
             }
         },
         "com.amazonaws.comprehendmedical#EntitySubType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "DX_NAME",
-                        "name": "DX_NAME"
-                    },
-                    {
-                        "value": "DOSAGE",
-                        "name": "DOSAGE"
-                    },
-                    {
-                        "value": "ROUTE_OR_MODE",
-                        "name": "ROUTE_OR_MODE"
-                    },
-                    {
-                        "value": "FORM",
-                        "name": "FORM"
-                    },
-                    {
-                        "value": "FREQUENCY",
-                        "name": "FREQUENCY"
-                    },
-                    {
-                        "value": "DURATION",
-                        "name": "DURATION"
-                    },
-                    {
-                        "value": "GENERIC_NAME",
-                        "name": "GENERIC_NAME"
-                    },
-                    {
-                        "value": "BRAND_NAME",
-                        "name": "BRAND_NAME"
-                    },
-                    {
-                        "value": "STRENGTH",
-                        "name": "STRENGTH"
-                    },
-                    {
-                        "value": "RATE",
-                        "name": "RATE"
-                    },
-                    {
-                        "value": "ACUITY",
-                        "name": "ACUITY"
-                    },
-                    {
-                        "value": "TEST_NAME",
-                        "name": "TEST_NAME"
-                    },
-                    {
-                        "value": "TEST_VALUE",
-                        "name": "TEST_VALUE"
-                    },
-                    {
-                        "value": "TEST_UNITS",
-                        "name": "TEST_UNITS"
-                    },
-                    {
-                        "value": "TEST_UNIT",
-                        "name": "TEST_UNIT"
-                    },
-                    {
-                        "value": "PROCEDURE_NAME",
-                        "name": "PROCEDURE_NAME"
-                    },
-                    {
-                        "value": "TREATMENT_NAME",
-                        "name": "TREATMENT_NAME"
-                    },
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "AGE",
-                        "name": "AGE"
-                    },
-                    {
-                        "value": "CONTACT_POINT",
-                        "name": "CONTACT_POINT"
-                    },
-                    {
-                        "value": "PHONE_OR_FAX",
-                        "name": "PHONE_OR_FAX"
-                    },
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "IDENTIFIER",
-                        "name": "IDENTIFIER"
-                    },
-                    {
-                        "value": "ID",
-                        "name": "ID"
-                    },
-                    {
-                        "value": "URL",
-                        "name": "URL"
-                    },
-                    {
-                        "value": "ADDRESS",
-                        "name": "ADDRESS"
-                    },
-                    {
-                        "value": "PROFESSION",
-                        "name": "PROFESSION"
-                    },
-                    {
-                        "value": "SYSTEM_ORGAN_SITE",
-                        "name": "SYSTEM_ORGAN_SITE"
-                    },
-                    {
-                        "value": "DIRECTION",
-                        "name": "DIRECTION"
-                    },
-                    {
-                        "value": "QUALITY",
-                        "name": "QUALITY"
-                    },
-                    {
-                        "value": "QUANTITY",
-                        "name": "QUANTITY"
-                    },
-                    {
-                        "value": "TIME_EXPRESSION",
-                        "name": "TIME_EXPRESSION"
-                    },
-                    {
-                        "value": "TIME_TO_MEDICATION_NAME",
-                        "name": "TIME_TO_MEDICATION_NAME"
-                    },
-                    {
-                        "value": "TIME_TO_DX_NAME",
-                        "name": "TIME_TO_DX_NAME"
-                    },
-                    {
-                        "value": "TIME_TO_TEST_NAME",
-                        "name": "TIME_TO_TEST_NAME"
-                    },
-                    {
-                        "value": "TIME_TO_PROCEDURE_NAME",
-                        "name": "TIME_TO_PROCEDURE_NAME"
-                    },
-                    {
-                        "value": "TIME_TO_TREATMENT_NAME",
-                        "name": "TIME_TO_TREATMENT_NAME"
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
                     }
-                ]
+                },
+                "DX_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DX_NAME"
+                    }
+                },
+                "DOSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOSAGE"
+                    }
+                },
+                "ROUTE_OR_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_OR_MODE"
+                    }
+                },
+                "FORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM"
+                    }
+                },
+                "FREQUENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREQUENCY"
+                    }
+                },
+                "DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DURATION"
+                    }
+                },
+                "GENERIC_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERIC_NAME"
+                    }
+                },
+                "BRAND_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BRAND_NAME"
+                    }
+                },
+                "STRENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH"
+                    }
+                },
+                "RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RATE"
+                    }
+                },
+                "ACUITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACUITY"
+                    }
+                },
+                "TEST_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_NAME"
+                    }
+                },
+                "TEST_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_VALUE"
+                    }
+                },
+                "TEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNITS"
+                    }
+                },
+                "TEST_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNIT"
+                    }
+                },
+                "PROCEDURE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCEDURE_NAME"
+                    }
+                },
+                "TREATMENT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TREATMENT_NAME"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                },
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "CONTACT_POINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTACT_POINT"
+                    }
+                },
+                "PHONE_OR_FAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_OR_FAX"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "IDENTIFIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTIFIER"
+                    }
+                },
+                "ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                },
+                "ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDRESS"
+                    }
+                },
+                "PROFESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFESSION"
+                    }
+                },
+                "SYSTEM_ORGAN_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
+                    }
+                },
+                "DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTION"
+                    }
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
+                    }
+                },
+                "QUANTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUANTITY"
+                    }
+                },
+                "TIME_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_EXPRESSION"
+                    }
+                },
+                "TIME_TO_MEDICATION_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_TO_MEDICATION_NAME"
+                    }
+                },
+                "TIME_TO_DX_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_TO_DX_NAME"
+                    }
+                },
+                "TIME_TO_TEST_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_TO_TEST_NAME"
+                    }
+                },
+                "TIME_TO_PROCEDURE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_TO_PROCEDURE_NAME"
+                    }
+                },
+                "TIME_TO_TREATMENT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_TO_TREATMENT_NAME"
+                    }
+                },
+                "AMOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMOUNT"
+                    }
+                },
+                "GENDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENDER"
+                    }
+                },
+                "RACE_ETHNICITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RACE_ETHNICITY"
+                    }
+                },
+                "ALLERGIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLERGIES"
+                    }
+                },
+                "TOBACCO_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOBACCO_USE"
+                    }
+                },
+                "ALCOHOL_CONSUMPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALCOHOL_CONSUMPTION"
+                    }
+                },
+                "REC_DRUG_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REC_DRUG_USE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#EntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MEDICATION",
-                        "name": "MEDICATION"
-                    },
-                    {
-                        "value": "MEDICAL_CONDITION",
-                        "name": "MEDICAL_CONDITION"
-                    },
-                    {
-                        "value": "PROTECTED_HEALTH_INFORMATION",
-                        "name": "PROTECTED_HEALTH_INFORMATION"
-                    },
-                    {
-                        "value": "TEST_TREATMENT_PROCEDURE",
-                        "name": "TEST_TREATMENT_PROCEDURE"
-                    },
-                    {
-                        "value": "ANATOMY",
-                        "name": "ANATOMY"
-                    },
-                    {
-                        "value": "TIME_EXPRESSION",
-                        "name": "TIME_EXPRESSION"
+            "type": "enum",
+            "members": {
+                "MEDICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICATION"
                     }
-                ]
+                },
+                "MEDICAL_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICAL_CONDITION"
+                    }
+                },
+                "PROTECTED_HEALTH_INFORMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROTECTED_HEALTH_INFORMATION"
+                    }
+                },
+                "TEST_TREATMENT_PROCEDURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_TREATMENT_PROCEDURE"
+                    }
+                },
+                "ANATOMY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANATOMY"
+                    }
+                },
+                "TIME_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_EXPRESSION"
+                    }
+                },
+                "BEHAVIORAL_ENVIRONMENTAL_SOCIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BEHAVIORAL_ENVIRONMENTAL_SOCIAL"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#Float": {
-            "type": "float",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "float"
         },
         "com.amazonaws.comprehendmedical#ICD10CMAttribute": {
             "type": "structure",
@@ -1194,38 +2133,50 @@
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMAttributeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACUITY",
-                        "name": "ACUITY"
-                    },
-                    {
-                        "value": "DIRECTION",
-                        "name": "DIRECTION"
-                    },
-                    {
-                        "value": "SYSTEM_ORGAN_SITE",
-                        "name": "SYSTEM_ORGAN_SITE"
-                    },
-                    {
-                        "value": "QUALITY",
-                        "name": "QUALITY"
-                    },
-                    {
-                        "value": "QUANTITY",
-                        "name": "QUANTITY"
-                    },
-                    {
-                        "value": "TIME_TO_DX_NAME",
-                        "name": "TIME_TO_DX_NAME"
-                    },
-                    {
-                        "value": "TIME_EXPRESSION",
-                        "name": "TIME_EXPRESSION"
+            "type": "enum",
+            "members": {
+                "ACUITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACUITY"
                     }
-                ]
+                },
+                "DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTION"
+                    }
+                },
+                "SYSTEM_ORGAN_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
+                    }
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
+                    }
+                },
+                "QUANTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUANTITY"
+                    }
+                },
+                "TIME_TO_DX_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_TO_DX_NAME"
+                    }
+                },
+                "TIME_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_EXPRESSION"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMConcept": {
@@ -1329,14 +2280,14 @@
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMEntityCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MEDICAL_CONDITION",
-                        "name": "MEDICAL_CONDITION"
+            "type": "enum",
+            "members": {
+                "MEDICAL_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICAL_CONDITION"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMEntityList": {
@@ -1346,33 +2297,37 @@
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMEntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DX_NAME",
-                        "name": "DX_NAME"
-                    },
-                    {
-                        "value": "TIME_EXPRESSION",
-                        "name": "TIME_EXPRESSION"
+            "type": "enum",
+            "members": {
+                "DX_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DX_NAME"
                     }
-                ]
+                },
+                "TIME_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_EXPRESSION"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMRelationshipType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OVERLAP",
-                        "name": "OVERLAP"
-                    },
-                    {
-                        "value": "SYSTEM_ORGAN_SITE",
-                        "name": "SYSTEM_ORGAN_SITE"
+            "type": "enum",
+            "members": {
+                "OVERLAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERLAP"
                     }
-                ]
+                },
+                "SYSTEM_ORGAN_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMTrait": {
@@ -1402,26 +2357,50 @@
             }
         },
         "com.amazonaws.comprehendmedical#ICD10CMTraitName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NEGATION",
-                        "name": "NEGATION"
-                    },
-                    {
-                        "value": "DIAGNOSIS",
-                        "name": "DIAGNOSIS"
-                    },
-                    {
-                        "value": "SIGN",
-                        "name": "SIGN"
-                    },
-                    {
-                        "value": "SYMPTOM",
-                        "name": "SYMPTOM"
+            "type": "enum",
+            "members": {
+                "NEGATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEGATION"
                     }
-                ]
+                },
+                "DIAGNOSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIAGNOSIS"
+                    }
+                },
+                "SIGN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGN"
+                    }
+                },
+                "SYMPTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYMPTOM"
+                    }
+                },
+                "PERTAINS_TO_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERTAINS_TO_FAMILY"
+                    }
+                },
+                "HYPOTHETICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYPOTHETICAL"
+                    }
+                },
+                "LOW_CONFIDENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW_CONFIDENCE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#IamRoleArn": {
@@ -1672,10 +2651,7 @@
             }
         },
         "com.amazonaws.comprehendmedical#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.comprehendmedical#InternalServerException": {
             "type": "structure",
@@ -1737,38 +2713,50 @@
             }
         },
         "com.amazonaws.comprehendmedical#JobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "PARTIAL_SUCCESS",
-                        "name": "PARTIAL_SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "STOP_REQUESTED",
-                        "name": "STOP_REQUESTED"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "PARTIAL_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIAL_SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#KMSKey": {
@@ -1782,14 +2770,14 @@
             }
         },
         "com.amazonaws.comprehendmedical#LanguageCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "en",
-                        "name": "EN"
+            "type": "enum",
+            "members": {
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ListEntitiesDetectionV2Jobs": {
@@ -2131,7 +3119,6 @@
         "com.amazonaws.comprehendmedical#MaxResultsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -2172,86 +3159,128 @@
             }
         },
         "com.amazonaws.comprehendmedical#RelationshipType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EVERY",
-                        "name": "EVERY"
-                    },
-                    {
-                        "value": "WITH_DOSAGE",
-                        "name": "WITH_DOSAGE"
-                    },
-                    {
-                        "value": "ADMINISTERED_VIA",
-                        "name": "ADMINISTERED_VIA"
-                    },
-                    {
-                        "value": "FOR",
-                        "name": "FOR"
-                    },
-                    {
-                        "value": "NEGATIVE",
-                        "name": "NEGATIVE"
-                    },
-                    {
-                        "value": "OVERLAP",
-                        "name": "OVERLAP"
-                    },
-                    {
-                        "value": "DOSAGE",
-                        "name": "DOSAGE"
-                    },
-                    {
-                        "value": "ROUTE_OR_MODE",
-                        "name": "ROUTE_OR_MODE"
-                    },
-                    {
-                        "value": "FORM",
-                        "name": "FORM"
-                    },
-                    {
-                        "value": "FREQUENCY",
-                        "name": "FREQUENCY"
-                    },
-                    {
-                        "value": "DURATION",
-                        "name": "DURATION"
-                    },
-                    {
-                        "value": "STRENGTH",
-                        "name": "STRENGTH"
-                    },
-                    {
-                        "value": "RATE",
-                        "name": "RATE"
-                    },
-                    {
-                        "value": "ACUITY",
-                        "name": "ACUITY"
-                    },
-                    {
-                        "value": "TEST_VALUE",
-                        "name": "TEST_VALUE"
-                    },
-                    {
-                        "value": "TEST_UNITS",
-                        "name": "TEST_UNITS"
-                    },
-                    {
-                        "value": "TEST_UNIT",
-                        "name": "TEST_UNIT"
-                    },
-                    {
-                        "value": "DIRECTION",
-                        "name": "DIRECTION"
-                    },
-                    {
-                        "value": "SYSTEM_ORGAN_SITE",
-                        "name": "SYSTEM_ORGAN_SITE"
+            "type": "enum",
+            "members": {
+                "EVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVERY"
                     }
-                ]
+                },
+                "WITH_DOSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WITH_DOSAGE"
+                    }
+                },
+                "ADMINISTERED_VIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMINISTERED_VIA"
+                    }
+                },
+                "FOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOR"
+                    }
+                },
+                "NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEGATIVE"
+                    }
+                },
+                "OVERLAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERLAP"
+                    }
+                },
+                "DOSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOSAGE"
+                    }
+                },
+                "ROUTE_OR_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_OR_MODE"
+                    }
+                },
+                "FORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM"
+                    }
+                },
+                "FREQUENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREQUENCY"
+                    }
+                },
+                "DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DURATION"
+                    }
+                },
+                "STRENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH"
+                    }
+                },
+                "RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RATE"
+                    }
+                },
+                "ACUITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACUITY"
+                    }
+                },
+                "TEST_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_VALUE"
+                    }
+                },
+                "TEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNITS"
+                    }
+                },
+                "TEST_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNIT"
+                    }
+                },
+                "DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTION"
+                    }
+                },
+                "SYSTEM_ORGAN_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
+                    }
+                },
+                "AMOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMOUNT"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ResourceNotFoundException": {
@@ -2330,38 +3359,50 @@
             }
         },
         "com.amazonaws.comprehendmedical#RxNormAttributeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DOSAGE",
-                        "name": "DOSAGE"
-                    },
-                    {
-                        "value": "DURATION",
-                        "name": "DURATION"
-                    },
-                    {
-                        "value": "FORM",
-                        "name": "FORM"
-                    },
-                    {
-                        "value": "FREQUENCY",
-                        "name": "FREQUENCY"
-                    },
-                    {
-                        "value": "RATE",
-                        "name": "RATE"
-                    },
-                    {
-                        "value": "ROUTE_OR_MODE",
-                        "name": "ROUTE_OR_MODE"
-                    },
-                    {
-                        "value": "STRENGTH",
-                        "name": "STRENGTH"
+            "type": "enum",
+            "members": {
+                "DOSAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOSAGE"
                     }
-                ]
+                },
+                "DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DURATION"
+                    }
+                },
+                "FORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORM"
+                    }
+                },
+                "FREQUENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FREQUENCY"
+                    }
+                },
+                "RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RATE"
+                    }
+                },
+                "ROUTE_OR_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_OR_MODE"
+                    }
+                },
+                "STRENGTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#RxNormConcept": {
@@ -2465,14 +3506,14 @@
             }
         },
         "com.amazonaws.comprehendmedical#RxNormEntityCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MEDICATION",
-                        "name": "MEDICATION"
+            "type": "enum",
+            "members": {
+                "MEDICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICATION"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.comprehendmedical#RxNormEntityList": {
@@ -2482,18 +3523,20 @@
             }
         },
         "com.amazonaws.comprehendmedical#RxNormEntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BRAND_NAME",
-                        "name": "BRAND_NAME"
-                    },
-                    {
-                        "value": "GENERIC_NAME",
-                        "name": "GENERIC_NAME"
+            "type": "enum",
+            "members": {
+                "BRAND_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BRAND_NAME"
                     }
-                ]
+                },
+                "GENERIC_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERIC_NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#RxNormTrait": {
@@ -2523,14 +3566,14 @@
             }
         },
         "com.amazonaws.comprehendmedical#RxNormTraitName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NEGATION",
-                        "name": "NEGATION"
+            "type": "enum",
+            "members": {
+                "NEGATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEGATION"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.comprehendmedical#S3Bucket": {
@@ -2634,34 +3677,44 @@
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTAttributeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACUITY",
-                        "name": "ACUITY"
-                    },
-                    {
-                        "value": "QUALITY",
-                        "name": "QUALITY"
-                    },
-                    {
-                        "value": "DIRECTION",
-                        "name": "DIRECTION"
-                    },
-                    {
-                        "value": "SYSTEM_ORGAN_SITE",
-                        "name": "SYSTEM_ORGAN_SITE"
-                    },
-                    {
-                        "value": "TEST_VALUE",
-                        "name": "TEST_VALUE"
-                    },
-                    {
-                        "value": "TEST_UNIT",
-                        "name": "TEST_UNIT"
+            "type": "enum",
+            "members": {
+                "ACUITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACUITY"
                     }
-                ]
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
+                    }
+                },
+                "DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTION"
+                    }
+                },
+                "SYSTEM_ORGAN_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
+                    }
+                },
+                "TEST_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_VALUE"
+                    }
+                },
+                "TEST_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNIT"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTConcept": {
@@ -2791,22 +3844,26 @@
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTEntityCategory": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MEDICAL_CONDITION",
-                        "name": "MEDICAL_CONDITION"
-                    },
-                    {
-                        "value": "ANATOMY",
-                        "name": "ANATOMY"
-                    },
-                    {
-                        "value": "TEST_TREATMENT_PROCEDURE",
-                        "name": "TEST_TREATMENT_PROCEDURE"
+            "type": "enum",
+            "members": {
+                "MEDICAL_CONDITION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDICAL_CONDITION"
                     }
-                ]
+                },
+                "ANATOMY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANATOMY"
+                    }
+                },
+                "TEST_TREATMENT_PROCEDURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_TREATMENT_PROCEDURE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTEntityList": {
@@ -2816,57 +3873,73 @@
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTEntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DX_NAME",
-                        "name": "DX_NAME"
-                    },
-                    {
-                        "value": "TEST_NAME",
-                        "name": "TEST_NAME"
-                    },
-                    {
-                        "value": "PROCEDURE_NAME",
-                        "name": "PROCEDURE_NAME"
-                    },
-                    {
-                        "value": "TREATMENT_NAME",
-                        "name": "TREATMENT_NAME"
+            "type": "enum",
+            "members": {
+                "DX_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DX_NAME"
                     }
-                ]
+                },
+                "TEST_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_NAME"
+                    }
+                },
+                "PROCEDURE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCEDURE_NAME"
+                    }
+                },
+                "TREATMENT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TREATMENT_NAME"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTRelationshipType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACUITY",
-                        "name": "ACUITY"
-                    },
-                    {
-                        "value": "QUALITY",
-                        "name": "QUALITY"
-                    },
-                    {
-                        "value": "TEST_VALUE",
-                        "name": "TEST_VALUE"
-                    },
-                    {
-                        "value": "TEST_UNITS",
-                        "name": "TEST_UNITS"
-                    },
-                    {
-                        "value": "DIRECTION",
-                        "name": "DIRECTION"
-                    },
-                    {
-                        "value": "SYSTEM_ORGAN_SITE",
-                        "name": "SYSTEM_ORGAN_SITE"
+            "type": "enum",
+            "members": {
+                "ACUITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACUITY"
                     }
-                ]
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
+                    }
+                },
+                "TEST_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_VALUE"
+                    }
+                },
+                "TEST_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNITS"
+                    }
+                },
+                "DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTION"
+                    }
+                },
+                "SYSTEM_ORGAN_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTTrait": {
@@ -2896,26 +3969,62 @@
             }
         },
         "com.amazonaws.comprehendmedical#SNOMEDCTTraitName": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NEGATION",
-                        "name": "NEGATION"
-                    },
-                    {
-                        "value": "DIAGNOSIS",
-                        "name": "DIAGNOSIS"
-                    },
-                    {
-                        "value": "SIGN",
-                        "name": "SIGN"
-                    },
-                    {
-                        "value": "SYMPTOM",
-                        "name": "SYMPTOM"
+            "type": "enum",
+            "members": {
+                "NEGATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEGATION"
                     }
-                ]
+                },
+                "DIAGNOSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIAGNOSIS"
+                    }
+                },
+                "SIGN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIGN"
+                    }
+                },
+                "SYMPTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYMPTOM"
+                    }
+                },
+                "PERTAINS_TO_FAMILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERTAINS_TO_FAMILY"
+                    }
+                },
+                "HYPOTHETICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HYPOTHETICAL"
+                    }
+                },
+                "LOW_CONFIDENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW_CONFIDENCE"
+                    }
+                },
+                "PAST_HISTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAST_HISTORY"
+                    }
+                },
+                "FUTURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FUTURE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehendmedical#ServiceUnavailableException": {

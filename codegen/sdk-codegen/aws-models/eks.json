@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -30,61 +30,60 @@
     },
     "shapes": {
         "com.amazonaws.eks#AMITypes": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AL2_x86_64",
-                        "name": "AL2_x86_64"
-                    },
-                    {
-                        "value": "AL2_x86_64_GPU",
-                        "name": "AL2_x86_64_GPU"
-                    },
-                    {
-                        "value": "AL2_ARM_64",
-                        "name": "AL2_ARM_64"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
-                    },
-                    {
-                        "value": "BOTTLEROCKET_ARM_64",
-                        "name": "BOTTLEROCKET_ARM_64"
-                    },
-                    {
-                        "value": "BOTTLEROCKET_x86_64",
-                        "name": "BOTTLEROCKET_x86_64"
-                    },
-                    {
-                        "value": "BOTTLEROCKET_ARM_64_NVIDIA",
-                        "name": "BOTTLEROCKET_ARM_64_NVIDIA"
-                    },
-                    {
-                        "value": "BOTTLEROCKET_x86_64_NVIDIA",
-                        "name": "BOTTLEROCKET_x86_64_NVIDIA"
+            "type": "enum",
+            "members": {
+                "AL2_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AL2_x86_64"
                     }
-                ]
+                },
+                "AL2_x86_64_GPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AL2_x86_64_GPU"
+                    }
+                },
+                "AL2_ARM_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AL2_ARM_64"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "BOTTLEROCKET_ARM_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTLEROCKET_ARM_64"
+                    }
+                },
+                "BOTTLEROCKET_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTLEROCKET_x86_64"
+                    }
+                },
+                "BOTTLEROCKET_ARM_64_NVIDIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTLEROCKET_ARM_64_NVIDIA"
+                    }
+                },
+                "BOTTLEROCKET_x86_64_NVIDIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTLEROCKET_x86_64_NVIDIA"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#AWSWesleyFrontend": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "EKS",
-                    "arnNamespace": "eks",
-                    "cloudFormationName": "EKS",
-                    "cloudTrailEventSource": "eks.amazonaws.com",
-                    "endpointPrefix": "eks"
-                },
-                "aws.auth#sigv4": {
-                    "name": "eks"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy\n            for you to run Kubernetes on Amazon Web Services without needing to stand up or maintain\n            your own Kubernetes control plane. Kubernetes is an open-source system for automating\n            the deployment, scaling, and management of containerized applications. </p>\n        <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so\n            you can use all the existing plugins and tooling from the Kubernetes community.\n            Applications running on Amazon EKS are fully compatible with applications\n            running on any standard Kubernetes environment, whether running in on-premises data\n            centers or public clouds. This means that you can easily migrate any standard Kubernetes\n            application to Amazon EKS without any code modification required.</p>",
-                "smithy.api#title": "Amazon Elastic Kubernetes Service"
-            },
             "version": "2017-11-01",
             "operations": [
                 {
@@ -189,7 +188,2138 @@
                 {
                     "target": "com.amazonaws.eks#UpdateNodegroupVersion"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "EKS",
+                    "arnNamespace": "eks",
+                    "cloudFormationName": "EKS",
+                    "cloudTrailEventSource": "eks.amazonaws.com",
+                    "endpointPrefix": "eks"
+                },
+                "aws.auth#sigv4": {
+                    "name": "eks"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy\n            for you to run Kubernetes on Amazon Web Services without needing to stand up or maintain\n            your own Kubernetes control plane. Kubernetes is an open-source system for automating\n            the deployment, scaling, and management of containerized applications. </p>\n        <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so\n            you can use all the existing plugins and tooling from the Kubernetes community.\n            Applications running on Amazon EKS are fully compatible with applications\n            running on any standard Kubernetes environment, whether running in on-premises data\n            centers or public clouds. This means that you can easily migrate any standard Kubernetes\n            application to Amazon EKS without any code modification required.</p>",
+                "smithy.api#title": "Amazon Elastic Kubernetes Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://eks-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://fips.eks.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://eks.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://eks-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://eks.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://eks.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://fips.eks.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://eks.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.eks#AccessDeniedException": {
             "type": "structure",
@@ -339,42 +2469,56 @@
             }
         },
         "com.amazonaws.eks#AddonIssueCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AccessDenied",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "InternalFailure",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "ClusterUnreachable",
-                        "name": "CLUSTER_UNREACHABLE"
-                    },
-                    {
-                        "value": "InsufficientNumberOfReplicas",
-                        "name": "INSUFFICIENT_NUMBER_OF_REPLICAS"
-                    },
-                    {
-                        "value": "ConfigurationConflict",
-                        "name": "CONFIGURATION_CONFLICT"
-                    },
-                    {
-                        "value": "AdmissionRequestDenied",
-                        "name": "ADMISSION_REQUEST_DENIED"
-                    },
-                    {
-                        "value": "UnsupportedAddonModification",
-                        "name": "UNSUPPORTED_ADDON_MODIFICATION"
-                    },
-                    {
-                        "value": "K8sResourceNotFound",
-                        "name": "K8S_RESOURCE_NOT_FOUND"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
                     }
-                ]
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                },
+                "CLUSTER_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterUnreachable"
+                    }
+                },
+                "INSUFFICIENT_NUMBER_OF_REPLICAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientNumberOfReplicas"
+                    }
+                },
+                "CONFIGURATION_CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfigurationConflict"
+                    }
+                },
+                "ADMISSION_REQUEST_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AdmissionRequestDenied"
+                    }
+                },
+                "UNSUPPORTED_ADDON_MODIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsupportedAddonModification"
+                    }
+                },
+                "K8S_RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "K8sResourceNotFound"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#AddonIssueList": {
@@ -384,42 +2528,56 @@
             }
         },
         "com.amazonaws.eks#AddonStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "CREATE_FAILED",
-                        "name": "CREATE_FAILED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
-                    },
-                    {
-                        "value": "DEGRADED",
-                        "name": "DEGRADED"
-                    },
-                    {
-                        "value": "UPDATE_FAILED",
-                        "name": "UPDATE_FAILED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "DEGRADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEGRADED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#AddonVersionInfo": {
@@ -650,42 +2808,40 @@
             }
         },
         "com.amazonaws.eks#Boolean": {
-            "type": "boolean"
-        },
-        "com.amazonaws.eks#BoxedBoolean": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
         },
+        "com.amazonaws.eks#BoxedBoolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.eks#BoxedInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.eks#Capacity": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
             }
         },
         "com.amazonaws.eks#CapacityTypes": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ON_DEMAND",
-                        "name": "ON_DEMAND"
-                    },
-                    {
-                        "value": "SPOT",
-                        "name": "SPOT"
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
                     }
-                ]
+                },
+                "SPOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPOT"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#Certificate": {
@@ -899,34 +3055,44 @@
             }
         },
         "com.amazonaws.eks#ClusterIssueCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AccessDenied",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "ClusterUnreachable",
-                        "name": "CLUSTER_UNREACHABLE"
-                    },
-                    {
-                        "value": "ConfigurationConflict",
-                        "name": "CONFIGURATION_CONFLICT"
-                    },
-                    {
-                        "value": "InternalFailure",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "ResourceLimitExceeded",
-                        "name": "RESOURCE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "ResourceNotFound",
-                        "name": "RESOURCE_NOT_FOUND"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
                     }
-                ]
+                },
+                "CLUSTER_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterUnreachable"
+                    }
+                },
+                "CONFIGURATION_CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfigurationConflict"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                },
+                "RESOURCE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceLimitExceeded"
+                    }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceNotFound"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#ClusterIssueList": {
@@ -946,34 +3112,44 @@
             }
         },
         "com.amazonaws.eks#ClusterStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#Compatibilities": {
@@ -1000,6 +3176,7 @@
                 "defaultVersion": {
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The supported default version.</p>"
                     }
                 }
@@ -1009,46 +3186,62 @@
             }
         },
         "com.amazonaws.eks#ConnectorConfigProvider": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EKS_ANYWHERE",
-                        "name": "EKS_ANYWHERE"
-                    },
-                    {
-                        "value": "ANTHOS",
-                        "name": "ANTHOS"
-                    },
-                    {
-                        "value": "GKE",
-                        "name": "GKE"
-                    },
-                    {
-                        "value": "AKS",
-                        "name": "AKS"
-                    },
-                    {
-                        "value": "OPENSHIFT",
-                        "name": "OPENSHIFT"
-                    },
-                    {
-                        "value": "TANZU",
-                        "name": "TANZU"
-                    },
-                    {
-                        "value": "RANCHER",
-                        "name": "RANCHER"
-                    },
-                    {
-                        "value": "EC2",
-                        "name": "EC2"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "EKS_ANYWHERE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_ANYWHERE"
                     }
-                ]
+                },
+                "ANTHOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANTHOS"
+                    }
+                },
+                "GKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GKE"
+                    }
+                },
+                "AKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AKS"
+                    }
+                },
+                "OPENSHIFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPENSHIFT"
+                    }
+                },
+                "TANZU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TANZU"
+                    }
+                },
+                "RANCHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RANCHER"
+                    }
+                },
+                "EC2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#ConnectorConfigRequest": {
@@ -1111,6 +3304,34 @@
                 "smithy.api#documentation": "<p>The full description of your connected cluster.</p>"
             }
         },
+        "com.amazonaws.eks#ControlPlanePlacementRequest": {
+            "type": "structure",
+            "members": {
+                "groupName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement group for the Kubernetes control plane instances. This\n            setting can't be changed after cluster creation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The placement configuration for all the control plane instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.eks#ControlPlanePlacementResponse": {
+            "type": "structure",
+            "members": {
+                "groupName": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the placement group for the Kubernetes control plane instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The placement configuration for all the control plane instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.eks#CreateAddon": {
             "type": "operation",
             "input": {
@@ -1140,7 +3361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS add-on.</p>\n        <p>Amazon EKS add-ons help to automate the provisioning and lifecycle management\n            of common operational software for Amazon EKS clusters. Amazon EKS\n            add-ons require clusters running version 1.18 or later because Amazon EKS\n            add-ons rely on the Server-side Apply Kubernetes feature, which is only available in\n            Kubernetes 1.18 and later. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in\n            the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS add-on.</p>\n        <p>Amazon EKS add-ons help to automate the provisioning and lifecycle management\n            of common operational software for Amazon EKS clusters. For more information,\n            see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in the <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/addons",
@@ -1311,7 +3532,7 @@
                 "outpostConfig": {
                     "target": "com.amazonaws.eks#OutpostConfigRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object representing the configuration of your local Amazon EKS cluster on\n            an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html\">Creating an Amazon EKS cluster on an Amazon Web Services Outpost</a> in\n            the <i>Amazon EKS User Guide</i>. This object isn't available for creating Amazon EKS\n            clusters on the Amazon Web Services\n            cloud.</p>"
+                        "smithy.api#documentation": "<p>An object representing the configuration of your local Amazon EKS cluster on\n            an Amazon Web Services Outpost. Before creating a local cluster on an Outpost, review\n            <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-overview.html\">Local clusters for Amazon EKS on Amazon Web Services Outposts</a> in\n            the <i>Amazon EKS User Guide</i>. This object isn't available for creating Amazon EKS\n            clusters on the Amazon Web Services\n            cloud.</p>"
                     }
                 }
             }
@@ -1653,6 +3874,7 @@
                 "preserve": {
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on. If an IAM\n            account is associated with the add-on, it is not removed.</p>",
                         "smithy.api#httpQuery": "preserve"
                     }
@@ -2106,7 +4328,6 @@
         "com.amazonaws.eks#DescribeAddonVersionsRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -2735,78 +4956,110 @@
             }
         },
         "com.amazonaws.eks#ErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SubnetNotFound",
-                        "name": "SUBNET_NOT_FOUND"
-                    },
-                    {
-                        "value": "SecurityGroupNotFound",
-                        "name": "SECURITY_GROUP_NOT_FOUND"
-                    },
-                    {
-                        "value": "EniLimitReached",
-                        "name": "ENI_LIMIT_REACHED"
-                    },
-                    {
-                        "value": "IpNotAvailable",
-                        "name": "IP_NOT_AVAILABLE"
-                    },
-                    {
-                        "value": "AccessDenied",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "OperationNotPermitted",
-                        "name": "OPERATION_NOT_PERMITTED"
-                    },
-                    {
-                        "value": "VpcIdNotFound",
-                        "name": "VPC_ID_NOT_FOUND"
-                    },
-                    {
-                        "value": "Unknown",
-                        "name": "UNKNOWN"
-                    },
-                    {
-                        "value": "NodeCreationFailure",
-                        "name": "NODE_CREATION_FAILURE"
-                    },
-                    {
-                        "value": "PodEvictionFailure",
-                        "name": "POD_EVICTION_FAILURE"
-                    },
-                    {
-                        "value": "InsufficientFreeAddresses",
-                        "name": "INSUFFICIENT_FREE_ADDRESSES"
-                    },
-                    {
-                        "value": "ClusterUnreachable",
-                        "name": "CLUSTER_UNREACHABLE"
-                    },
-                    {
-                        "value": "InsufficientNumberOfReplicas",
-                        "name": "INSUFFICIENT_NUMBER_OF_REPLICAS"
-                    },
-                    {
-                        "value": "ConfigurationConflict",
-                        "name": "CONFIGURATION_CONFLICT"
-                    },
-                    {
-                        "value": "AdmissionRequestDenied",
-                        "name": "ADMISSION_REQUEST_DENIED"
-                    },
-                    {
-                        "value": "UnsupportedAddonModification",
-                        "name": "UNSUPPORTED_ADDON_MODIFICATION"
-                    },
-                    {
-                        "value": "K8sResourceNotFound",
-                        "name": "K8S_RESOURCE_NOT_FOUND"
+            "type": "enum",
+            "members": {
+                "SUBNET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SubnetNotFound"
                     }
-                ]
+                },
+                "SECURITY_GROUP_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecurityGroupNotFound"
+                    }
+                },
+                "ENI_LIMIT_REACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EniLimitReached"
+                    }
+                },
+                "IP_NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IpNotAvailable"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
+                    }
+                },
+                "OPERATION_NOT_PERMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OperationNotPermitted"
+                    }
+                },
+                "VPC_ID_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VpcIdNotFound"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unknown"
+                    }
+                },
+                "NODE_CREATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeCreationFailure"
+                    }
+                },
+                "POD_EVICTION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PodEvictionFailure"
+                    }
+                },
+                "INSUFFICIENT_FREE_ADDRESSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientFreeAddresses"
+                    }
+                },
+                "CLUSTER_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterUnreachable"
+                    }
+                },
+                "INSUFFICIENT_NUMBER_OF_REPLICAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientNumberOfReplicas"
+                    }
+                },
+                "CONFIGURATION_CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfigurationConflict"
+                    }
+                },
+                "ADMISSION_REQUEST_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AdmissionRequestDenied"
+                    }
+                },
+                "UNSUPPORTED_ADDON_MODIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsupportedAddonModification"
+                    }
+                },
+                "K8S_RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "K8sResourceNotFound"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#ErrorDetail": {
@@ -2939,36 +5192,43 @@
             }
         },
         "com.amazonaws.eks#FargateProfileStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "CREATE_FAILED",
-                        "name": "CREATE_FAILED"
-                    },
-                    {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#FargateProfilesRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3100,18 +5360,20 @@
             }
         },
         "com.amazonaws.eks#IpFamily": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ipv4",
-                        "name": "IPV4"
-                    },
-                    {
-                        "value": "ipv6",
-                        "name": "IPV6"
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
                     }
-                ]
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#Issue": {
@@ -3204,7 +5466,7 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The launch template version number, <code>$Latest</code>, or\n            <code>$Default</code>.</p>\n        <p>If the value is <code>$Latest</code>, Amazon EKS uses the latest version of\n            the launch template.</p>\n        <p>If the value is <code>$Default</code>, Amazon EKS uses the default version of\n            the launch template.</p>\n        <p>Default: The default version of the launch template.</p>"
+                        "smithy.api#documentation": "<p>The version number of the launch template to use. If no version is specified, then the\n            template's default version is used.</p>"
                     }
                 },
                 "id": {
@@ -3288,7 +5550,6 @@
         "com.amazonaws.eks#ListAddonsRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3378,7 +5639,6 @@
         "com.amazonaws.eks#ListClustersRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3553,7 +5813,6 @@
         "com.amazonaws.eks#ListIdentityProviderConfigsRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3647,7 +5906,6 @@
         "com.amazonaws.eks#ListNodegroupsRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3801,7 +6059,6 @@
         "com.amazonaws.eks#ListUpdatesRequestMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3852,30 +6109,38 @@
             }
         },
         "com.amazonaws.eks#LogType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "api",
-                        "name": "API"
-                    },
-                    {
-                        "value": "audit",
-                        "name": "AUDIT"
-                    },
-                    {
-                        "value": "authenticator",
-                        "name": "AUTHENTICATOR"
-                    },
-                    {
-                        "value": "controllerManager",
-                        "name": "CONTROLLER_MANAGER"
-                    },
-                    {
-                        "value": "scheduler",
-                        "name": "SCHEDULER"
+            "type": "enum",
+            "members": {
+                "API": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "api"
                     }
-                ]
+                },
+                "AUDIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "audit"
+                    }
+                },
+                "AUTHENTICATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "authenticator"
+                    }
+                },
+                "CONTROLLER_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "controllerManager"
+                    }
+                },
+                "SCHEDULER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scheduler"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#LogTypes": {
@@ -4059,86 +6324,122 @@
             }
         },
         "com.amazonaws.eks#NodegroupIssueCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AutoScalingGroupNotFound",
-                        "name": "AUTO_SCALING_GROUP_NOT_FOUND"
-                    },
-                    {
-                        "value": "AutoScalingGroupInvalidConfiguration",
-                        "name": "AUTO_SCALING_GROUP_INVALID_CONFIGURATION"
-                    },
-                    {
-                        "value": "Ec2SecurityGroupNotFound",
-                        "name": "EC2_SECURITY_GROUP_NOT_FOUND"
-                    },
-                    {
-                        "value": "Ec2SecurityGroupDeletionFailure",
-                        "name": "EC2_SECURITY_GROUP_DELETION_FAILURE"
-                    },
-                    {
-                        "value": "Ec2LaunchTemplateNotFound",
-                        "name": "EC2_LAUNCH_TEMPLATE_NOT_FOUND"
-                    },
-                    {
-                        "value": "Ec2LaunchTemplateVersionMismatch",
-                        "name": "EC2_LAUNCH_TEMPLATE_VERSION_MISMATCH"
-                    },
-                    {
-                        "value": "Ec2SubnetNotFound",
-                        "name": "EC2_SUBNET_NOT_FOUND"
-                    },
-                    {
-                        "value": "Ec2SubnetInvalidConfiguration",
-                        "name": "EC2_SUBNET_INVALID_CONFIGURATION"
-                    },
-                    {
-                        "value": "IamInstanceProfileNotFound",
-                        "name": "IAM_INSTANCE_PROFILE_NOT_FOUND"
-                    },
-                    {
-                        "value": "IamLimitExceeded",
-                        "name": "IAM_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "IamNodeRoleNotFound",
-                        "name": "IAM_NODE_ROLE_NOT_FOUND"
-                    },
-                    {
-                        "value": "NodeCreationFailure",
-                        "name": "NODE_CREATION_FAILURE"
-                    },
-                    {
-                        "value": "AsgInstanceLaunchFailures",
-                        "name": "ASG_INSTANCE_LAUNCH_FAILURES"
-                    },
-                    {
-                        "value": "InstanceLimitExceeded",
-                        "name": "INSTANCE_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "InsufficientFreeAddresses",
-                        "name": "INSUFFICIENT_FREE_ADDRESSES"
-                    },
-                    {
-                        "value": "AccessDenied",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "InternalFailure",
-                        "name": "INTERNAL_FAILURE"
-                    },
-                    {
-                        "value": "ClusterUnreachable",
-                        "name": "CLUSTER_UNREACHABLE"
-                    },
-                    {
-                        "value": "Ec2SubnetMissingIpv6Assignment",
-                        "name": "EC2_SUBNET_MISSING_IPV6_ASSIGNMENT"
+            "type": "enum",
+            "members": {
+                "AUTO_SCALING_GROUP_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoScalingGroupNotFound"
                     }
-                ]
+                },
+                "AUTO_SCALING_GROUP_INVALID_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutoScalingGroupInvalidConfiguration"
+                    }
+                },
+                "EC2_SECURITY_GROUP_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SecurityGroupNotFound"
+                    }
+                },
+                "EC2_SECURITY_GROUP_DELETION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SecurityGroupDeletionFailure"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2LaunchTemplateNotFound"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE_VERSION_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2LaunchTemplateVersionMismatch"
+                    }
+                },
+                "EC2_SUBNET_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SubnetNotFound"
+                    }
+                },
+                "EC2_SUBNET_INVALID_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SubnetInvalidConfiguration"
+                    }
+                },
+                "IAM_INSTANCE_PROFILE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IamInstanceProfileNotFound"
+                    }
+                },
+                "IAM_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IamLimitExceeded"
+                    }
+                },
+                "IAM_NODE_ROLE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IamNodeRoleNotFound"
+                    }
+                },
+                "NODE_CREATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeCreationFailure"
+                    }
+                },
+                "ASG_INSTANCE_LAUNCH_FAILURES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AsgInstanceLaunchFailures"
+                    }
+                },
+                "INSTANCE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceLimitExceeded"
+                    }
+                },
+                "INSUFFICIENT_FREE_ADDRESSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InsufficientFreeAddresses"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AccessDenied"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalFailure"
+                    }
+                },
+                "CLUSTER_UNREACHABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterUnreachable"
+                    }
+                },
+                "EC2_SUBNET_MISSING_IPV6_ASSIGNMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2SubnetMissingIpv6Assignment"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#NodegroupResources": {
@@ -4188,38 +6489,50 @@
             }
         },
         "com.amazonaws.eks#NodegroupStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "CREATE_FAILED",
-                        "name": "CREATE_FAILED"
-                    },
-                    {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
-                    },
-                    {
-                        "value": "DEGRADED",
-                        "name": "DEGRADED"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                },
+                "DEGRADED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEGRADED"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#NodegroupUpdateConfig": {
@@ -4245,7 +6558,6 @@
         "com.amazonaws.eks#NonZeroInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4430,13 +6742,19 @@
                 "controlPlaneInstanceType": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. The instance type that you specify is used for all\nKubernetes            control plane instances. The instance type can't be changed after cluster\n            creation.</p>\n        <p>Choose an instance type based on the number of nodes that your cluster will have. If\n            your cluster will have:</p>\n        <ul>\n            <li>\n                <p>1–20 nodes, then we recommend specifying a <code>large</code> instance\n                    type.</p>\n            </li>\n            <li>\n                <p>21–100 nodes, then we recommend specifying an <code>xlarge</code>\n                    instance type.</p>\n            </li>\n            <li>\n                <p>101–250 nodes, then we recommend specifying a <code>2xlarge</code>\n                    instance type.</p>\n            </li>\n         </ul>\n        <p>For a list of the available Amazon EC2 instance types, see Compute and storage\n            in <a href=\"http://aws.amazon.com/outposts/rack/features/\">Outposts rack\n                features</a>. The control plane is not automatically scaled by Amazon EKS.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. Choose an instance type based on the number of nodes\n            that your cluster will have. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>The instance type that you specify is used for all Kubernetes control plane instances. The\n            instance type can't be changed after cluster creation. The control plane is not\n            automatically scaled by Amazon EKS.</p>\n        <p> </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "controlPlanePlacement": {
+                    "target": "com.amazonaws.eks#ControlPlanePlacementRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the placement configuration for all the control plane instance\n            of your local Amazon EKS cluster on an Amazon Web Services Outpost.  For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of your local Amazon EKS cluster on an Amazon Web Services\n            Outpost. Before creating a cluster on an Outpost, review <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html\">Creating a local Amazon EKS cluster on an Amazon Web Services Outpost</a> in the\n            <i>Amazon EKS User Guide</i>. This API isn't available for Amazon EKS clusters on the\n                Amazon Web Services cloud.</p>"
+                "smithy.api#documentation": "<p>The configuration of your local Amazon EKS cluster on an Amazon Web Services\n            Outpost. Before creating a cluster on an Outpost, review <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-create.html\">Creating a local cluster on an Outpost</a> in the\n            <i>Amazon EKS User Guide</i>. This API isn't available for Amazon EKS clusters on the\n                Amazon Web Services cloud.</p>"
             }
         },
         "com.amazonaws.eks#OutpostConfigResponse": {
@@ -4455,6 +6773,12 @@
                         "smithy.api#documentation": "<p>The Amazon EC2 instance type used for the control plane. The instance type is\n            the same for all control plane\n            instances.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "controlPlanePlacement": {
+                    "target": "com.amazonaws.eks#ControlPlanePlacementResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the placement configuration for all the control plane instance\n            of your local Amazon EKS cluster on an Amazon Web Services Outpost. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4464,7 +6788,6 @@
         "com.amazonaws.eks#PercentCapacity": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4589,22 +6912,26 @@
             }
         },
         "com.amazonaws.eks#ResolveConflicts": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OVERWRITE",
-                        "name": "OVERWRITE"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "PRESERVE",
-                        "name": "PRESERVE"
+            "type": "enum",
+            "members": {
+                "OVERWRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERWRITE"
                     }
-                ]
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "PRESERVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESERVE"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#ResourceInUseException": {
@@ -4887,22 +7214,26 @@
             }
         },
         "com.amazonaws.eks#TaintEffect": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NO_SCHEDULE",
-                        "name": "NO_SCHEDULE"
-                    },
-                    {
-                        "value": "NO_EXECUTE",
-                        "name": "NO_EXECUTE"
-                    },
-                    {
-                        "value": "PREFER_NO_SCHEDULE",
-                        "name": "PREFER_NO_SCHEDULE"
+            "type": "enum",
+            "members": {
+                "NO_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_SCHEDULE"
                     }
-                ]
+                },
+                "NO_EXECUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_EXECUTE"
+                    }
+                },
+                "PREFER_NO_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREFER_NO_SCHEDULE"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#Timestamp": {
@@ -5467,6 +7798,7 @@
                 "force": {
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Force the update if the existing node group's pods are unable to be drained due to a\n            pod disruption budget issue. If an update fails because pods could not be drained, you\n            can force the update after it fails to terminate the old node whether or not any pods\n            are running on the node.</p>"
                     }
                 },
@@ -5508,102 +7840,146 @@
             }
         },
         "com.amazonaws.eks#UpdateParamType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Version",
-                        "name": "VERSION"
-                    },
-                    {
-                        "value": "PlatformVersion",
-                        "name": "PLATFORM_VERSION"
-                    },
-                    {
-                        "value": "EndpointPrivateAccess",
-                        "name": "ENDPOINT_PRIVATE_ACCESS"
-                    },
-                    {
-                        "value": "EndpointPublicAccess",
-                        "name": "ENDPOINT_PUBLIC_ACCESS"
-                    },
-                    {
-                        "value": "ClusterLogging",
-                        "name": "CLUSTER_LOGGING"
-                    },
-                    {
-                        "value": "DesiredSize",
-                        "name": "DESIRED_SIZE"
-                    },
-                    {
-                        "value": "LabelsToAdd",
-                        "name": "LABELS_TO_ADD"
-                    },
-                    {
-                        "value": "LabelsToRemove",
-                        "name": "LABELS_TO_REMOVE"
-                    },
-                    {
-                        "value": "TaintsToAdd",
-                        "name": "TAINTS_TO_ADD"
-                    },
-                    {
-                        "value": "TaintsToRemove",
-                        "name": "TAINTS_TO_REMOVE"
-                    },
-                    {
-                        "value": "MaxSize",
-                        "name": "MAX_SIZE"
-                    },
-                    {
-                        "value": "MinSize",
-                        "name": "MIN_SIZE"
-                    },
-                    {
-                        "value": "ReleaseVersion",
-                        "name": "RELEASE_VERSION"
-                    },
-                    {
-                        "value": "PublicAccessCidrs",
-                        "name": "PUBLIC_ACCESS_CIDRS"
-                    },
-                    {
-                        "value": "LaunchTemplateName",
-                        "name": "LAUNCH_TEMPLATE_NAME"
-                    },
-                    {
-                        "value": "LaunchTemplateVersion",
-                        "name": "LAUNCH_TEMPLATE_VERSION"
-                    },
-                    {
-                        "value": "IdentityProviderConfig",
-                        "name": "IDENTITY_PROVIDER_CONFIG"
-                    },
-                    {
-                        "value": "EncryptionConfig",
-                        "name": "ENCRYPTION_CONFIG"
-                    },
-                    {
-                        "value": "AddonVersion",
-                        "name": "ADDON_VERSION"
-                    },
-                    {
-                        "value": "ServiceAccountRoleArn",
-                        "name": "SERVICE_ACCOUNT_ROLE_ARN"
-                    },
-                    {
-                        "value": "ResolveConflicts",
-                        "name": "RESOLVE_CONFLICTS"
-                    },
-                    {
-                        "value": "MaxUnavailable",
-                        "name": "MAX_UNAVAILABLE"
-                    },
-                    {
-                        "value": "MaxUnavailablePercentage",
-                        "name": "MAX_UNAVAILABLE_PERCENTAGE"
+            "type": "enum",
+            "members": {
+                "VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Version"
                     }
-                ]
+                },
+                "PLATFORM_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformVersion"
+                    }
+                },
+                "ENDPOINT_PRIVATE_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EndpointPrivateAccess"
+                    }
+                },
+                "ENDPOINT_PUBLIC_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EndpointPublicAccess"
+                    }
+                },
+                "CLUSTER_LOGGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterLogging"
+                    }
+                },
+                "DESIRED_SIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DesiredSize"
+                    }
+                },
+                "LABELS_TO_ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LabelsToAdd"
+                    }
+                },
+                "LABELS_TO_REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LabelsToRemove"
+                    }
+                },
+                "TAINTS_TO_ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TaintsToAdd"
+                    }
+                },
+                "TAINTS_TO_REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TaintsToRemove"
+                    }
+                },
+                "MAX_SIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaxSize"
+                    }
+                },
+                "MIN_SIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MinSize"
+                    }
+                },
+                "RELEASE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReleaseVersion"
+                    }
+                },
+                "PUBLIC_ACCESS_CIDRS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PublicAccessCidrs"
+                    }
+                },
+                "LAUNCH_TEMPLATE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LaunchTemplateName"
+                    }
+                },
+                "LAUNCH_TEMPLATE_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LaunchTemplateVersion"
+                    }
+                },
+                "IDENTITY_PROVIDER_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IdentityProviderConfig"
+                    }
+                },
+                "ENCRYPTION_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EncryptionConfig"
+                    }
+                },
+                "ADDON_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AddonVersion"
+                    }
+                },
+                "SERVICE_ACCOUNT_ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceAccountRoleArn"
+                    }
+                },
+                "RESOLVE_CONFLICTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResolveConflicts"
+                    }
+                },
+                "MAX_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaxUnavailable"
+                    }
+                },
+                "MAX_UNAVAILABLE_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MaxUnavailablePercentage"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#UpdateParams": {
@@ -5613,26 +7989,32 @@
             }
         },
         "com.amazonaws.eks#UpdateStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InProgress",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "Cancelled",
-                        "name": "CANCELLED"
-                    },
-                    {
-                        "value": "Successful",
-                        "name": "SUCCESSFUL"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Cancelled"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Successful"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#UpdateTaintsPayload": {
@@ -5656,42 +8038,56 @@
             }
         },
         "com.amazonaws.eks#UpdateType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VersionUpdate",
-                        "name": "VERSION_UPDATE"
-                    },
-                    {
-                        "value": "EndpointAccessUpdate",
-                        "name": "ENDPOINT_ACCESS_UPDATE"
-                    },
-                    {
-                        "value": "LoggingUpdate",
-                        "name": "LOGGING_UPDATE"
-                    },
-                    {
-                        "value": "ConfigUpdate",
-                        "name": "CONFIG_UPDATE"
-                    },
-                    {
-                        "value": "AssociateIdentityProviderConfig",
-                        "name": "ASSOCIATE_IDENTITY_PROVIDER_CONFIG"
-                    },
-                    {
-                        "value": "DisassociateIdentityProviderConfig",
-                        "name": "DISASSOCIATE_IDENTITY_PROVIDER_CONFIG"
-                    },
-                    {
-                        "value": "AssociateEncryptionConfig",
-                        "name": "ASSOCIATE_ENCRYPTION_CONFIG"
-                    },
-                    {
-                        "value": "AddonUpdate",
-                        "name": "ADDON_UPDATE"
+            "type": "enum",
+            "members": {
+                "VERSION_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VersionUpdate"
                     }
-                ]
+                },
+                "ENDPOINT_ACCESS_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EndpointAccessUpdate"
+                    }
+                },
+                "LOGGING_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoggingUpdate"
+                    }
+                },
+                "CONFIG_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfigUpdate"
+                    }
+                },
+                "ASSOCIATE_IDENTITY_PROVIDER_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssociateIdentityProviderConfig"
+                    }
+                },
+                "DISASSOCIATE_IDENTITY_PROVIDER_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DisassociateIdentityProviderConfig"
+                    }
+                },
+                "ASSOCIATE_ENCRYPTION_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssociateEncryptionConfig"
+                    }
+                },
+                "ADDON_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AddonUpdate"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#VpcConfigRequest": {
@@ -5706,7 +8102,7 @@
                 "securityGroupIds": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces\n            that Amazon EKS creates to use that allow communication between your nodes and\n            the Kubernetes control plane. If you don't specify any security groups, then familiarize\n            yourself with the difference between Amazon EKS defaults for clusters deployed\n            with Kubernetes:</p>\n        <ul>\n            <li>\n                <p>1.14 Amazon EKS platform version <code>eks.2</code> and earlier</p>\n            </li>\n            <li>\n                <p>1.14 Amazon EKS platform version <code>eks.3</code> and later </p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group\n                considerations</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
+                        "smithy.api#documentation": "<p>Specify one or more security groups for the cross-account elastic network interfaces\n            that Amazon EKS creates to use that allow communication between your nodes and\n            the Kubernetes control plane. If you don't specify any security groups, then familiarize\n            yourself with the difference between Amazon EKS defaults for clusters deployed\n            with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Amazon EKS security group\n                considerations</a> in the <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
                 "endpointPublicAccess": {
@@ -5762,12 +8158,14 @@
                 "endpointPublicAccess": {
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS public API server endpoint is\n            enabled. If the Amazon EKS public API server endpoint is disabled, your\n            cluster's Kubernetes API server can only receive requests that originate from within the\n            cluster VPC.</p>"
                     }
                 },
                 "endpointPrivateAccess": {
                     "target": "com.amazonaws.eks#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>This parameter indicates whether the Amazon EKS private API server endpoint is\n            enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes\n            API requests that originate from within your cluster's VPC use the private VPC endpoint\n            instead of traversing the internet. If this value is disabled and you have nodes or\n                Fargate pods in the cluster, then ensure that\n                <code>publicAccessCidrs</code> includes the necessary CIDR blocks for communication\n            with the nodes or Fargate pods. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>"
                     }
                 },
@@ -5785,29 +8183,32 @@
         "com.amazonaws.eks#ZeroCapacity": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
             }
         },
         "com.amazonaws.eks#configStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.eks#labelKey": {

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -56,7 +56,359 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use\n      it for model training either alone or combined with historical data. For more information see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html\">Recording Events</a>.</p>",
-                "smithy.api#title": "Amazon Personalize Events"
+                "smithy.api#title": "Amazon Personalize Events",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://personalize-events-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://personalize-events-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://personalize-events.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://personalize-events.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.personalizeevents#Arn": {
@@ -106,7 +458,7 @@
                 "properties": {
                     "target": "com.amazonaws.personalizeevents#SynthesizedJsonEventPropertiesJSON",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>)\n      , you might also send the number of movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n      \n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Interactions\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Interactions schema.</p>"
+                        "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>)\n      , you might also send the number of movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n    \n         <p>\n            <code>{\"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Interactions\n      schema. In the above example, the <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Interactions schema.</p>"
                     }
                 },
                 "sentAt": {
@@ -119,18 +471,35 @@
                 "recommendationId": {
                     "target": "com.amazonaws.personalizeevents#RecommendationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the recommendation.</p>"
+                        "smithy.api#documentation": "<p>The ID of the list of recommendations that contains the item the user interacted with. Provide a <code>recommendationId</code> to have Amazon Personalize implicitly record the\n      recommendations you show your user as impressions data. Or provide a <code>recommendationId</code> if you use a metric attribution to measure the impact of recommendations. \n    </p>\n         <p>\n      For more information on recording impressions data, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data\">Recording impressions data</a>. \n      For more information on creating a metric attribution see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.\n    </p>"
                     }
                 },
                 "impression": {
                     "target": "com.amazonaws.personalizeevents#Impression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of item IDs that represents the sequence of items you have shown the user. For example, <code>[\"itemId1\", \"itemId2\", \"itemId3\"]</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of item IDs that represents the sequence of items you have shown the user. For example, <code>[\"itemId1\", \"itemId2\", \"itemId3\"]</code>. Provide a list of \n      items to manually record impressions data for an event. For more information on recording impressions data, \n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data\">Recording impressions data</a>. </p>"
+                    }
+                },
+                "metricAttribution": {
+                    "target": "com.amazonaws.personalizeevents#MetricAttribution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the metric attribution associated with an event. For more information about metric attributions, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents user interaction event information sent using the\n      <code>PutEvents</code> API.</p>"
+                "smithy.api#documentation": "<p>Represents user interaction event information sent using the\n      <code>PutEvents</code> API.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.personalizeevents#EventAttributionSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\x20-\\x7E]*[\\x21-\\x7E]+[\\x20-\\x7E]*$"
             }
         },
         "com.amazonaws.personalizeevents#EventList": {
@@ -146,10 +515,7 @@
             }
         },
         "com.amazonaws.personalizeevents#FloatType": {
-            "type": "float",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "float"
         },
         "com.amazonaws.personalizeevents#Impression": {
             "type": "list",
@@ -203,7 +569,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalizeevents#ItemList": {
@@ -218,10 +585,28 @@
                 }
             }
         },
+        "com.amazonaws.personalizeevents#MetricAttribution": {
+            "type": "structure",
+            "members": {
+                "eventAttributionSource": {
+                    "target": "com.amazonaws.personalizeevents#EventAttributionSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the event, such as a third party.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a metric attribution associated with an event. For more information about metric attributions, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>"
+            }
+        },
         "com.amazonaws.personalizeevents#PutEvents": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.personalizeevents#PutEventsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -274,6 +659,9 @@
             "input": {
                 "target": "com.amazonaws.personalizeevents#PutItemsRequest"
             },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
             "errors": [
                 {
                     "target": "com.amazonaws.personalizeevents#InvalidInputException"
@@ -317,6 +705,9 @@
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.personalizeevents#PutUsersRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
             },
             "errors": [
                 {
@@ -408,7 +799,8 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#mediaType": "application/json"
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalizeevents#SynthesizedJsonItemProperties": {
@@ -418,7 +810,8 @@
                     "min": 1,
                     "max": 24262
                 },
-                "smithy.api#mediaType": "application/json"
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalizeevents#SynthesizedJsonUserProperties": {
@@ -428,7 +821,8 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#mediaType": "application/json"
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalizeevents#User": {
@@ -458,7 +852,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalizeevents#UserList": {

@@ -669,8 +669,8 @@
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingName": "billingconductor",
-                                                "signingRegion": "us-east-1"
+                                                "signingRegion": "us-east-1",
+                                                "signingName": "billingconductor"
                                             }
                                         ]
                                     },
@@ -678,9 +678,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "aws-global"
+                                "Region": "aws-global",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -691,9 +691,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -703,9 +703,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -715,9 +715,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1216,6 +1216,12 @@
                         "smithy.api#documentation": "<p>\n      A list of <code>DisassociateResourceResponseElement</code> for each resource that failed disassociation from a percentage custom line item.\n    </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.billingconductor#BillingEntity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9 ]+$"
             }
         },
         "com.amazonaws.billingconductor#BillingGroup": {
@@ -1948,6 +1954,12 @@
                     "target": "com.amazonaws.billingconductor#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A map that contains tag keys and tag values that are attached to a pricing rule.\n    </p>"
+                    }
+                },
+                "BillingEntity": {
+                    "target": "com.amazonaws.billingconductor#BillingEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.\n    </p>"
                     }
                 }
             }
@@ -4458,6 +4470,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p> The most recent time when the pricing rule was modified. </p>"
                     }
+                },
+                "BillingEntity": {
+                    "target": "com.amazonaws.billingconductor#BillingEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -4486,6 +4504,10 @@
                     {
                         "value": "SERVICE",
                         "name": "SERVICE"
+                    },
+                    {
+                        "value": "BILLING_ENTITY",
+                        "name": "BILLING_ENTITY"
                     }
                 ]
             }
@@ -5387,6 +5409,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>\n      The most recent time the pricing rule was modified.\n    </p>"
                     }
+                },
+                "BillingEntity": {
+                    "target": "com.amazonaws.billingconductor#BillingEntity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.\n    </p>"
+                    }
                 }
             }
         },
@@ -5635,12 +5663,20 @@
                         "name": "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"
                     },
                     {
+                        "value": "INVALID_BILLING_GROUP",
+                        "name": "INVALID_BILLING_GROUP"
+                    },
+                    {
                         "value": "INVALID_BILLING_PERIOD_FOR_OPERATION",
                         "name": "INVALID_BILLING_PERIOD_FOR_OPERATION"
                     },
                     {
-                        "value": "INVALID_BILLING_GROUP",
-                        "name": "INVALID_BILLING_GROUP"
+                        "value": "ILLEGAL_BILLING_ENTITY",
+                        "name": "ILLEGAL_BILLING_ENTITY"
+                    },
+                    {
+                        "value": "ILLEGAL_MODIFIER_PERCENTAGE",
+                        "name": "ILLEGAL_MODIFIER_PERCENTAGE"
                     }
                 ]
             }
