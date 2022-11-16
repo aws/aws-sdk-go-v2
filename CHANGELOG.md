@@ -1,3 +1,40 @@
+# Release (2022-11-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.19.1](service/batch/CHANGELOG.md#v1191-2022-11-16)
+  * **Documentation**: Documentation updates related to Batch on EKS
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.2.0](service/billingconductor/CHANGELOG.md#v120-2022-11-16)
+  * **Feature**: This release adds a new feature BillingEntity pricing rule.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.24.0](service/cloudformation/CHANGELOG.md#v1240-2022-11-16)
+  * **Feature**: Added UnsupportedTarget HandlerErrorCode for use with CFN Resource Hooks
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.14.0](service/comprehendmedical/CHANGELOG.md#v1140-2022-11-16)
+  * **Feature**: This release supports new set of entities and traits. It also adds new category (BEHAVIORAL_ENVIRONMENTAL_SOCIAL).
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.37.0](service/connect/CHANGELOG.md#v1370-2022-11-16)
+  * **Feature**: This release adds a new MonitorContact API for initiating monitoring of ongoing Voice and Chat contacts.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.23.0](service/eks/CHANGELOG.md#v1230-2022-11-16)
+  * **Feature**: Adds support for customer-provided placement groups for Kubernetes control plane instances when creating local EKS clusters on Outposts
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.24.0](service/elasticache/CHANGELOG.md#v1240-2022-11-16)
+  * **Feature**: for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.8.0](service/iottwinmaker/CHANGELOG.md#v180-2022-11-16)
+  * **Feature**: This release adds the following: 1) ExecuteQuery API allows users to query their AWS IoT TwinMaker Knowledge Graph 2) Pricing plan APIs allow users to configure and manage their pricing mode 3) Support for property groups and tabular property values in existing AWS IoT TwinMaker APIs.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.12.0](service/personalizeevents/CHANGELOG.md#v1120-2022-11-16)
+  * **Feature**: This release provides support for creation and use of metric attributions in AWS Personalize
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.17.0](service/proton/CHANGELOG.md#v1170-2022-11-16)
+  * **Feature**: Add support for sorting and filtering in ListServiceInstances
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.30.0](service/rds/CHANGELOG.md#v1300-2022-11-16)
+  * **Feature**: This release adds support for container databases (CDBs) to Amazon RDS Custom for Oracle. A CDB contains one PDB at creation. You can add more PDBs using Oracle SQL. You can also customize your database installation by setting the Oracle base, Oracle home, and the OS user name and group.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.33.0](service/ssm/CHANGELOG.md#v1330-2022-11-16)
+  * **Feature**: This release adds support for cross account access in CreateOpsItem, UpdateOpsItem and GetOpsItem. It introduces new APIs to setup resource policies for SSM resources: PutResourcePolicy, GetResourcePolicies and DeleteResourcePolicy.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.19.0](service/ssmincidents/CHANGELOG.md#v1190-2022-11-16)
+  * **Feature**: Add support for PagerDuty integrations on ResponsePlan, IncidentRecord, and RelatedItem APIs
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.24.0](service/transfer/CHANGELOG.md#v1240-2022-11-16)
+  * **Feature**: Allow additional operations to throw ThrottlingException
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.15.0](service/xray/CHANGELOG.md#v1150-2022-11-16)
+  * **Feature**: This release adds new APIs - PutResourcePolicy, DeleteResourcePolicy, ListResourcePolicies for supporting resource based policies for AWS X-Ray.
+
 # Release (2022-11-15)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-16)
+
+* **Feature**: Allow additional operations to throw ThrottlingException
+
 # v1.23.3 (2022-11-08)
 
 * No change notes available for this release.

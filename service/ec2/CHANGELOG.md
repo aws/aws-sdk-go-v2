@@ -1,3 +1,7 @@
+# v1.70.1 (2022-11-16)
+
+* No change notes available for this release.
+
 # v1.70.0 (2022-11-10)
 
 * **Feature**: This release adds a new price capacity optimized allocation strategy for Spot Instances to help customers optimize provisioning of Spot Instances via EC2 Auto Scaling, EC2 Fleet, and Spot Fleet. It allocates Spot Instances based on both spare capacity availability and Spot Instance price.

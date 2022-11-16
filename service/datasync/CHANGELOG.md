@@ -1,3 +1,7 @@
+# v1.19.1 (2022-11-16)
+
+* No change notes available for this release.
+
 # v1.19.0 (2022-10-24)
 
 * **Feature**: Added support for self-signed certificates when using object storage locations; added BytesCompressed to the TaskExecution response.

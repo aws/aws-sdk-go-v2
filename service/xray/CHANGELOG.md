@@ -1,3 +1,7 @@
+# v1.15.0 (2022-11-16)
+
+* **Feature**: This release adds new APIs - PutResourcePolicy, DeleteResourcePolicy, ListResourcePolicies for supporting resource based policies for AWS X-Ray.
+
 # v1.14.0 (2022-11-14)
 
 * **Feature**: This release enhances GetServiceGraph API to support new type of edge to represent links between SQS and Lambda in event-driven applications.

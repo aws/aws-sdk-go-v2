@@ -1,8 +1,0 @@
-{
-    "id": "ea793e15-1317-4a72-9424-4873aad1de8f",
-    "type": "feature",
-    "description": "Add support for PagerDuty integrations on ResponsePlan, IncidentRecord, and RelatedItem APIs",
-    "modules": [
-        "service/ssmincidents"
-    ]
-}

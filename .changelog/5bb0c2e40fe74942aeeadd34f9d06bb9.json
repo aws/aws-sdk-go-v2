@@ -1,8 +1,0 @@
-{
-    "id": "5bb0c2e4-0fe7-4942-aeea-dd34f9d06bb9",
-    "type": "feature",
-    "description": "for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0",
-    "modules": [
-        "service/elasticache"
-    ]
-}

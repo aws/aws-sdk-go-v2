@@ -1,8 +1,0 @@
-{
-    "id": "e4d86047-6a2e-4e07-92a3-af4aafeb85d8",
-    "type": "feature",
-    "description": "Allow additional operations to throw ThrottlingException",
-    "modules": [
-        "service/transfer"
-    ]
-}

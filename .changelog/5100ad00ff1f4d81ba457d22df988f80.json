@@ -1,8 +1,0 @@
-{
-    "id": "5100ad00-ff1f-4d81-ba45-7d22df988f80",
-    "type": "feature",
-    "description": "This release adds a new feature BillingEntity pricing rule.",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

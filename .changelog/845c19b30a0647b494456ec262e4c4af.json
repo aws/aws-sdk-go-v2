@@ -1,8 +1,0 @@
-{
-    "id": "845c19b3-0a06-47b4-9445-6ec262e4c4af",
-    "type": "feature",
-    "description": "Add support for sorting and filtering in ListServiceInstances",
-    "modules": [
-        "service/proton"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "043abd10-2b7c-42b8-a7b4-8e4f4db2c8cc",
-    "type": "feature",
-    "description": "This release adds a new MonitorContact API for initiating monitoring of ongoing Voice and Chat contacts.",
-    "modules": [
-        "service/connect"
-    ]
-}

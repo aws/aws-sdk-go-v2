@@ -1,8 +1,0 @@
-{
-    "id": "63338df3-afe0-48f7-acc7-fe4891fd79e2",
-    "type": "feature",
-    "description": "This release adds support for container databases (CDBs) to Amazon RDS Custom for Oracle. A CDB contains one PDB at creation. You can add more PDBs using Oracle SQL. You can also customize your database installation by setting the Oracle base, Oracle home, and the OS user name and group.",
-    "modules": [
-        "service/rds"
-    ]
-}

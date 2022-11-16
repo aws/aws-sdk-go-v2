@@ -1,3 +1,7 @@
+# v1.19.0 (2022-11-16)
+
+* **Feature**: Add support for PagerDuty integrations on ResponsePlan, IncidentRecord, and RelatedItem APIs
+
 # v1.18.0 (2022-11-11)
 
 * **Feature**: RelatedItems now have an ID field which can be used for referencing them else where. Introducing event references in TimelineEvent API and increasing maximum length of "eventData" to 12K characters.

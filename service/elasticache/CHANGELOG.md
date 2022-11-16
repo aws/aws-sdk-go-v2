@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-16)
+
+* **Feature**: for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0
+
 # v1.23.1 (2022-11-10)
 
 * No change notes available for this release.

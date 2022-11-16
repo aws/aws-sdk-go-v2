@@ -1,3 +1,7 @@
+# v1.37.0 (2022-11-16)
+
+* **Feature**: This release adds a new MonitorContact API for initiating monitoring of ongoing Voice and Chat contacts.
+
 # v1.36.0 (2022-11-15)
 
 * **Feature**: This release updates the APIs: UpdateInstanceAttribute, DescribeInstanceAttribute, and ListInstanceAttributes. You can use it to programmatically enable/disable enhanced contact monitoring using attribute type ENHANCED_CONTACT_MONITORING on the specified Amazon Connect instance.

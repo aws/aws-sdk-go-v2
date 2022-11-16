@@ -1,3 +1,7 @@
+# v1.14.0 (2022-11-16)
+
+* **Feature**: This release supports new set of entities and traits. It also adds new category (BEHAVIORAL_ENVIRONMENTAL_SOCIAL).
+
 # v1.13.19 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

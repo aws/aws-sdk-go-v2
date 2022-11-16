@@ -1,3 +1,7 @@
+# v1.19.1 (2022-11-16)
+
+* **Documentation**: Documentation updates related to Batch on EKS
+
 # v1.19.0 (2022-10-24)
 
 * **Feature**: This release adds support for AWS Batch on Amazon EKS.
