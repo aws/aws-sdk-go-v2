@@ -256,6 +256,9 @@ func awsAwsjson11_deserializeOpErrorCreateAgreement(response *smithyhttp.Respons
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -379,6 +382,9 @@ func awsAwsjson11_deserializeOpErrorCreateConnector(response *smithyhttp.Respons
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -498,6 +504,9 @@ func awsAwsjson11_deserializeOpErrorCreateProfile(response *smithyhttp.Response,
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5915,6 +5924,9 @@ func awsAwsjson11_deserializeOpErrorUpdateAccess(response *smithyhttp.Response, 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6038,6 +6050,9 @@ func awsAwsjson11_deserializeOpErrorUpdateAgreement(response *smithyhttp.Respons
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6157,6 +6172,9 @@ func awsAwsjson11_deserializeOpErrorUpdateCertificate(response *smithyhttp.Respo
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6280,6 +6298,9 @@ func awsAwsjson11_deserializeOpErrorUpdateConnector(response *smithyhttp.Respons
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6523,6 +6544,9 @@ func awsAwsjson11_deserializeOpErrorUpdateProfile(response *smithyhttp.Response,
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

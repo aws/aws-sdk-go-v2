@@ -71,6 +71,15 @@ type DeleteCustomDBEngineVersionOutput struct {
 	// The creation time of the DB engine version.
 	CreateTime *time.Time
 
+	// JSON string that lists the installation files and parameters that RDS Custom
+	// uses to create a custom engine version (CEV). RDS Custom applies the patches in
+	// the order in which they're listed in the manifest. You can set the Oracle home,
+	// Oracle base, and UNIX/Linux user and group using the installation parameters.
+	// For more information, see JSON fields in the CEV manifest
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
+	// in the Amazon RDS User Guide.
+	CustomDBEngineVersionManifest *string
+
 	// The description of the database engine.
 	DBEngineDescription *string
 

@@ -1,0 +1,8 @@
+{
+    "id": "1b25d838-63c1-4e8d-a362-dcac933a0449",
+    "type": "feature",
+    "description": "This release supports new set of entities and traits. It also adds new category (BEHAVIORAL_ENVIRONMENTAL_SOCIAL).",
+    "modules": [
+        "service/comprehendmedical"
+    ]
+}

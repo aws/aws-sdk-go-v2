@@ -7,6 +7,29 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// A policy revision id was provided which does not match the latest policy
+// revision. This exception is also if a policy revision id of 0 is provided via
+// PutResourcePolicy and a policy with the same name already exists.
+type InvalidPolicyRevisionIdException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidPolicyRevisionIdException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidPolicyRevisionIdException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidPolicyRevisionIdException) ErrorCode() string {
+	return "InvalidPolicyRevisionIdException"
+}
+func (e *InvalidPolicyRevisionIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request is missing required parameters or has invalid parameters.
 type InvalidRequestException struct {
 	Message *string
@@ -25,6 +48,90 @@ func (e *InvalidRequestException) ErrorMessage() string {
 }
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The provided resource policy would prevent the caller of this request from
+// calling PutResourcePolicy in the future.
+type LockoutPreventionException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *LockoutPreventionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LockoutPreventionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LockoutPreventionException) ErrorCode() string             { return "LockoutPreventionException" }
+func (e *LockoutPreventionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Invalid policy document provided in request.
+type MalformedPolicyDocumentException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MalformedPolicyDocumentException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MalformedPolicyDocumentException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MalformedPolicyDocumentException) ErrorCode() string {
+	return "MalformedPolicyDocumentException"
+}
+func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Exceeded the maximum number of resource policies for a target Amazon Web
+// Services account.
+type PolicyCountLimitExceededException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PolicyCountLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PolicyCountLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PolicyCountLimitExceededException) ErrorCode() string {
+	return "PolicyCountLimitExceededException"
+}
+func (e *PolicyCountLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Exceeded the maximum size for a resource policy.
+type PolicySizeLimitExceededException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PolicySizeLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PolicySizeLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PolicySizeLimitExceededException) ErrorCode() string {
+	return "PolicySizeLimitExceededException"
+}
+func (e *PolicySizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource was not found. Verify that the name or Amazon Resource Name (ARN)
 // of the resource is correct.

@@ -16,20 +16,14 @@ import (
 // services. You can provision environments using the following methods:
 //
 // * Amazon
-// Web Services-managed provisioning – Proton makes direct calls to provision your
+// Web Services-managed provisioning: Proton makes direct calls to provision your
 // resources.
 //
-// * Self-managed provisioning – Proton makes pull requests on your
+// * Self-managed provisioning: Proton makes pull requests on your
 // repository to provide compiled infrastructure as code (IaC) files that your IaC
 // engine uses to provision resources.
 //
-// * CodeBuild-based provisioning – Proton
-// uses CodeBuild to run shell commands that you provide. Your commands can read
-// inputs that Proton provides, and are responsible for provisioning or
-// deprovisioning infrastructure and generating output values.
-//
-// For more
-// information, see Environments
+// For more information, see Environments
 // (https://docs.aws.amazon.com/proton/latest/userguide/ag-environments.html) and
 // Provisioning methods
 // (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html)
@@ -98,29 +92,28 @@ type CreateEnvironmentInput struct {
 	// A description of the environment that's being created and deployed.
 	Description *string
 
-	// The ID of the environment account connection that you provide if you want Proton
-	// to provision infrastructure resources for your environment or for any of the
-	// service instances running in it in an environment account. For more information,
-	// see Environment account connections
+	// The ID of the environment account connection that you provide if you're
+	// provisioning your environment infrastructure resources to an environment
+	// account. For more information, see Environment account connections
 	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
-	// in the Proton User guide. If you specify the environmentAccountConnectionId
-	// parameter, don't specify protonServiceRoleArn, codebuildRoleArn, or
-	// provisioningRepository.
+	// in the Proton User guide. To use Amazon Web Services-managed provisioning for
+	// the environment, specify either the environmentAccountConnectionId or
+	// protonServiceRoleArn parameter and omit the provisioningRepository parameter.
 	EnvironmentAccountConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
-	// provision infrastructure using Amazon Web Services-managed provisioning and
-	// CloudFormation on your behalf. To use Amazon Web Services-managed provisioning
-	// for the environment or for any service instance running in the environment,
-	// specify either the environmentAccountConnectionId or protonServiceRoleArn
-	// parameter.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf. To use Amazon Web Services-managed
+	// provisioning for the environment, specify either the
+	// environmentAccountConnectionId or protonServiceRoleArn parameter and omit the
+	// provisioningRepository parameter.
 	ProtonServiceRoleArn *string
 
 	// The linked repository that you use to host your rendered infrastructure
 	// templates for self-managed provisioning. A linked repository is a repository
 	// that has been registered with Proton. For more information, see
-	// CreateRepository. To use self-managed provisioning for the environment or for
-	// any service instance running in the environment, specify this parameter.
+	// CreateRepository. To use self-managed provisioning for the environment, specify
+	// this parameter and omit the environmentAccountConnectionId and
+	// protonServiceRoleArn parameters.
 	ProvisioningRepository *types.RepositoryBranchInput
 
 	// An optional list of metadata items that you can associate with the Proton

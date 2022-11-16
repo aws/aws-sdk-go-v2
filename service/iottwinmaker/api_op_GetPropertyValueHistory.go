@@ -58,7 +58,7 @@ type GetPropertyValueHistoryInput struct {
 
 	// The ISO8601 DateTime of the latest property value to return. For more
 	// information about the ISO8601 DateTime format, see the data type PropertyValue
-	// (https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html).
+	// (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html).
 	EndTime *string
 
 	// The ID of the entity.
@@ -68,7 +68,8 @@ type GetPropertyValueHistoryInput struct {
 	// interpolate data.
 	Interpolation *types.InterpolationParameters
 
-	// The maximum number of results to return.
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -88,7 +89,7 @@ type GetPropertyValueHistoryInput struct {
 
 	// The ISO8601 DateTime of the earliest property value to return. For more
 	// information about the ISO8601 DateTime format, see the data type PropertyValue
-	// (https://docs.aws.amazon.com/roci/latest/roci-api/API_PropertyValue.html).
+	// (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html).
 	StartTime *string
 
 	noSmithyDocumentSerde
@@ -215,7 +216,8 @@ var _ GetPropertyValueHistoryAPIClient = (*Client)(nil)
 // GetPropertyValueHistoryPaginatorOptions is the paginator options for
 // GetPropertyValueHistory
 type GetPropertyValueHistoryPaginatorOptions struct {
-	// The maximum number of results to return.
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

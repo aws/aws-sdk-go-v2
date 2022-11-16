@@ -1710,6 +1710,27 @@ func (e *MaxDocumentSizeExceeded) ErrorMessage() string {
 func (e *MaxDocumentSizeExceeded) ErrorCode() string             { return "MaxDocumentSizeExceeded" }
 func (e *MaxDocumentSizeExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You don't have permission to view OpsItems in the specified account. Verify that
+// your account is configured either as a Systems Manager delegated administrator
+// or that you are logged into the Organizations management account.
+type OpsItemAccessDeniedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OpsItemAccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsItemAccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsItemAccessDeniedException) ErrorCode() string             { return "OpsItemAccessDeniedException" }
+func (e *OpsItemAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The OpsItem already exists.
 type OpsItemAlreadyExistsException struct {
 	Message *string
@@ -2323,6 +2344,83 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 }
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The hash provided in the call doesn't match the stored hash. This exception is
+// thrown when trying to update an obsolete policy version or when multiple
+// requests to update a policy are sent.
+type ResourcePolicyConflictException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyConflictException) ErrorCode() string {
+	return "ResourcePolicyConflictException"
+}
+func (e *ResourcePolicyConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// One or more parameters specified for the call aren't valid. Verify the
+// parameters and their values and try again.
+type ResourcePolicyInvalidParameterException struct {
+	Message *string
+
+	ParameterNames []string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyInvalidParameterException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyInvalidParameterException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyInvalidParameterException) ErrorCode() string {
+	return "ResourcePolicyInvalidParameterException"
+}
+func (e *ResourcePolicyInvalidParameterException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The PutResourcePolicy API action enforces two limits. A policy can't be greater
+// than 1024 bytes in size. And only one policy can be attached to OpsItemGroup.
+// Verify these limits and try again.
+type ResourcePolicyLimitExceededException struct {
+	Message *string
+
+	Limit     int32
+	LimitType *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyLimitExceededException) ErrorCode() string {
+	return "ResourcePolicyLimitExceededException"
+}
+func (e *ResourcePolicyLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The specified service setting wasn't found. Either the service name or the
 // setting hasn't been provisioned by the Amazon Web Services service team.

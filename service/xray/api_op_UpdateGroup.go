@@ -44,7 +44,7 @@ type UpdateGroupInput struct {
 	// InsightsEnabled boolean can be set to true to enable insights for the group or
 	// false to disable insights for the group.
 	//
-	// * The NotifcationsEnabled boolean can
+	// * The NotificationsEnabled boolean can
 	// be set to true to enable insights notifications for the group. Notifications can
 	// only be enabled on a group with InsightsEnabled set to true.
 	InsightsConfiguration *types.InsightsConfiguration

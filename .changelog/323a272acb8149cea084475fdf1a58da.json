@@ -1,0 +1,8 @@
+{
+    "id": "323a272a-cb81-49ce-a084-475fdf1a58da",
+    "type": "feature",
+    "description": "Added UnsupportedTarget HandlerErrorCode for use with CFN Resource Hooks",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

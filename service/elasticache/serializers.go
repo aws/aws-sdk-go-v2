@@ -4175,6 +4175,25 @@ func (m *awsAwsquery_serializeOpTestFailover) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsquery_serializeDocumentAuthenticationMode(v *types.AuthenticationMode, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Passwords != nil {
+		objectKey := object.Key("Passwords")
+		if err := awsAwsquery_serializeDocumentPasswordListInput(v.Passwords, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		objectKey := object.Key("Type")
+		objectKey.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentAvailabilityZonesList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -5593,6 +5612,13 @@ func awsAwsquery_serializeOpDocumentCreateUserInput(v *CreateUserInput, value qu
 		objectKey.String(*v.AccessString)
 	}
 
+	if v.AuthenticationMode != nil {
+		objectKey := object.Key("AuthenticationMode")
+		if err := awsAwsquery_serializeDocumentAuthenticationMode(v.AuthenticationMode, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
@@ -6954,6 +6980,13 @@ func awsAwsquery_serializeOpDocumentModifyUserInput(v *ModifyUserInput, value qu
 	if v.AppendAccessString != nil {
 		objectKey := object.Key("AppendAccessString")
 		objectKey.String(*v.AppendAccessString)
+	}
+
+	if v.AuthenticationMode != nil {
+		objectKey := object.Key("AuthenticationMode")
+		if err := awsAwsquery_serializeDocumentAuthenticationMode(v.AuthenticationMode, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.NoPasswordRequired != nil {

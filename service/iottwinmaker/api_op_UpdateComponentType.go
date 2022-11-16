@@ -58,6 +58,9 @@ type UpdateComponentTypeInput struct {
 	// Each string in the mapping must be unique to this object.
 	PropertyDefinitions map[string]types.PropertyDefinitionRequest
 
+	// The property groups
+	PropertyGroups map[string]types.PropertyGroupRequest
+
 	noSmithyDocumentSerde
 }
 

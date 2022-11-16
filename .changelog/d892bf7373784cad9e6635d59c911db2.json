@@ -1,0 +1,8 @@
+{
+    "id": "d892bf73-7378-4cad-9e66-35d59c911db2",
+    "type": "feature",
+    "description": "This release adds support for cross account access in CreateOpsItem, UpdateOpsItem and GetOpsItem. It introduces new APIs to setup resource policies for SSM resources: PutResourcePolicy, GetResourcePolicies and DeleteResourcePolicy.",
+    "modules": [
+        "service/ssm"
+    ]
+}

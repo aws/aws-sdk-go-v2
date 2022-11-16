@@ -6993,6 +6993,46 @@ func awsRestjson1_deserializeDocumentConnectorConfigResponse(v **types.Connector
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentControlPlanePlacementResponse(v **types.ControlPlanePlacementResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlPlanePlacementResponse
+	if *v == nil {
+		sv = &types.ControlPlanePlacementResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.GroupName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEncryptionConfig(v **types.EncryptionConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8727,6 +8767,11 @@ func awsRestjson1_deserializeDocumentOutpostConfigResponse(v **types.OutpostConf
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ControlPlaneInstanceType = ptr.String(jtv)
+			}
+
+		case "controlPlanePlacement":
+			if err := awsRestjson1_deserializeDocumentControlPlanePlacementResponse(&sv.ControlPlanePlacement, value); err != nil {
+				return err
 			}
 
 		case "outpostArns":

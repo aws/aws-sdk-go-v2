@@ -47,7 +47,8 @@ func (e *ContactFlowNotPublishedException) ErrorCode() string {
 }
 func (e *ContactFlowNotPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The contact with the specified ID is not active or does not exist.
+// The contact with the specified ID is not active or does not exist. Applies to
+// Voice calls only, not to Chat, Task, or Voice Callback.
 type ContactNotFoundException struct {
 	Message *string
 

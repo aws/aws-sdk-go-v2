@@ -93,6 +93,11 @@ func validateEvent(v *types.Event) error {
 	if v.SentAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SentAt"))
 	}
+	if v.MetricAttribution != nil {
+		if err := validateMetricAttribution(v.MetricAttribution); err != nil {
+			invalidParams.AddNested("MetricAttribution", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -141,6 +146,21 @@ func validateItemList(v []types.Item) error {
 		if err := validateItem(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricAttribution(v *types.MetricAttribution) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricAttribution"}
+	if v.EventAttributionSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventAttributionSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

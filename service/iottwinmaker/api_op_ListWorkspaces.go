@@ -30,7 +30,8 @@ func (c *Client) ListWorkspaces(ctx context.Context, params *ListWorkspacesInput
 
 type ListWorkspacesInput struct {
 
-	// The maximum number of results to display.
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -153,7 +154,8 @@ var _ ListWorkspacesAPIClient = (*Client)(nil)
 
 // ListWorkspacesPaginatorOptions is the paginator options for ListWorkspaces
 type ListWorkspacesPaginatorOptions struct {
-	// The maximum number of results to display.
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

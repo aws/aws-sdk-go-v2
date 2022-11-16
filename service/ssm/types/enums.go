@@ -1272,6 +1272,7 @@ const (
 	OpsItemFilterKeyChangeRequestTemplate             OpsItemFilterKey = "ChangeRequestByTemplate"
 	OpsItemFilterKeyChangeRequestTargetsResourceGroup OpsItemFilterKey = "ChangeRequestByTargetsResourceGroup"
 	OpsItemFilterKeyInsightType                       OpsItemFilterKey = "InsightByType"
+	OpsItemFilterKeyAccountId                         OpsItemFilterKey = "AccountId"
 )
 
 // Values returns all known values for OpsItemFilterKey. Note that this can be
@@ -1306,6 +1307,7 @@ func (OpsItemFilterKey) Values() []OpsItemFilterKey {
 		"ChangeRequestByTemplate",
 		"ChangeRequestByTargetsResourceGroup",
 		"InsightByType",
+		"AccountId",
 	}
 }
 

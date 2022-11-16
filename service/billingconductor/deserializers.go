@@ -5273,6 +5273,15 @@ func awsRestjson1_deserializeOpDocumentUpdatePricingRuleOutput(v **UpdatePricing
 				sv.AssociatedPricingPlanCount = i64
 			}
 
+		case "BillingEntity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingEntity to be of type string, got %T instead", value)
+				}
+				sv.BillingEntity = ptr.String(jtv)
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7342,6 +7351,15 @@ func awsRestjson1_deserializeDocumentPricingRuleListElement(v **types.PricingRul
 					return err
 				}
 				sv.AssociatedPricingPlanCount = i64
+			}
+
+		case "BillingEntity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BillingEntity to be of type string, got %T instead", value)
+				}
+				sv.BillingEntity = ptr.String(jtv)
 			}
 
 		case "CreationTime":

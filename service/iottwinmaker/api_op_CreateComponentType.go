@@ -59,6 +59,9 @@ type CreateComponentTypeInput struct {
 	// Each string in the mapping must be unique to this object.
 	PropertyDefinitions map[string]types.PropertyDefinitionRequest
 
+	//
+	PropertyGroups map[string]types.PropertyGroupRequest
+
 	// Metadata that you can use to manage the component type.
 	Tags map[string]string
 

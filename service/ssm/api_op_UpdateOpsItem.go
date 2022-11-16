@@ -88,6 +88,9 @@ type UpdateOpsItemInput struct {
 	// Keys that you want to remove from the OperationalData map.
 	OperationalDataToDelete []string
 
+	// The OpsItem Amazon Resource Name (ARN).
+	OpsItemArn *string
+
 	// The time specified in a change request for a runbook workflow to end. Currently
 	// supported only for the OpsItem type /aws/changerequest.
 	PlannedEndTime *time.Time

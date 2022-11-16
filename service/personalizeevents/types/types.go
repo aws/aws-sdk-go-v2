@@ -34,12 +34,21 @@ type Event struct {
 	EventValue *float32
 
 	// A list of item IDs that represents the sequence of items you have shown the
-	// user. For example, ["itemId1", "itemId2", "itemId3"].
+	// user. For example, ["itemId1", "itemId2", "itemId3"]. Provide a list of items to
+	// manually record impressions data for an event. For more information on recording
+	// impressions data, see Recording impressions data
+	// (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data).
 	Impression []string
 
 	// The item ID key that corresponds to the ITEM_ID field of the Interactions
 	// schema.
 	ItemId *string
+
+	// Contains information about the metric attribution associated with an event. For
+	// more information about metric attributions, see Measuring impact of
+	// recommendations
+	// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+	MetricAttribution *MetricAttribution
 
 	// A string map of event-specific data that you might choose to record. For
 	// example, if a user rates a movie on your site, other than movie ID (itemId) and
@@ -52,7 +61,16 @@ type Event struct {
 	// This value conforms to the media type: application/json
 	Properties *string
 
-	// The ID of the recommendation.
+	// The ID of the list of recommendations that contains the item the user interacted
+	// with. Provide a recommendationId to have Amazon Personalize implicitly record
+	// the recommendations you show your user as impressions data. Or provide a
+	// recommendationId if you use a metric attribution to measure the impact of
+	// recommendations. For more information on recording impressions data, see
+	// Recording impressions data
+	// (https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html#putevents-including-impressions-data).
+	// For more information on creating a metric attribution see Measuring impact of
+	// recommendations
+	// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
 	RecommendationId *string
 
 	noSmithyDocumentSerde
@@ -78,6 +96,20 @@ type Item struct {
 	//
 	// This value conforms to the media type: application/json
 	Properties *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a metric attribution associated with an event. For
+// more information about metric attributions, see Measuring impact of
+// recommendations
+// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+type MetricAttribution struct {
+
+	// The source of the event, such as a third party.
+	//
+	// This member is required.
+	EventAttributionSource *string
 
 	noSmithyDocumentSerde
 }

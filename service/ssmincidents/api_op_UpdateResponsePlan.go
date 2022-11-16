@@ -89,6 +89,9 @@ type UpdateResponsePlanInput struct {
 	// The short format name of the incident. The title can't contain spaces.
 	IncidentTemplateTitle *string
 
+	// Information about third-party services integrated into the response plan.
+	Integrations []types.Integration
+
 	noSmithyDocumentSerde
 }
 

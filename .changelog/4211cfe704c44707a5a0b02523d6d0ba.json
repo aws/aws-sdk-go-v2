@@ -1,0 +1,8 @@
+{
+    "id": "4211cfe7-04c4-4707-a5a0-b02523d6d0ba",
+    "type": "documentation",
+    "description": "Documentation updates related to Batch on EKS",
+    "modules": [
+        "service/batch"
+    ]
+}

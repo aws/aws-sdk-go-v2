@@ -2070,6 +2070,26 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpMonitorContact struct {
+}
+
+func (*validateOpMonitorContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpMonitorContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*MonitorContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpMonitorContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutUserStatus struct {
 }
 
@@ -3580,6 +3600,10 @@ func addOpListUserHierarchyGroupsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
+}
+
+func addOpMonitorContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpMonitorContact{}, middleware.After)
 }
 
 func addOpPutUserStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -6316,6 +6340,27 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUsersInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpMonitorContactInput(v *MonitorContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitorContactInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

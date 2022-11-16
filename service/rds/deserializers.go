@@ -22050,6 +22050,40 @@ func awsAwsquery_deserializeDocumentClusterPendingModifiedValues(v **types.Clust
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AllocatedStorage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.AllocatedStorage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("BackupRetentionPeriod", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("DBClusterIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -22090,6 +22124,23 @@ func awsAwsquery_deserializeDocumentClusterPendingModifiedValues(v **types.Clust
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
 				}
 				sv.IAMDatabaseAuthenticationEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Iops", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("MasterUserPassword", t.Name.Local):
@@ -22813,6 +22864,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 			{
 				xtv := string(val)
 				sv.DBSubnetGroup = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBSystemId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBSystemId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DeletionProtection", t.Name.Local):
@@ -25072,6 +25136,19 @@ func awsAwsquery_deserializeDocumentDBClusterSnapshot(v **types.DBClusterSnapsho
 				sv.DBClusterSnapshotIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBSystemId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBSystemId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Engine", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -25686,6 +25763,19 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 					return err
 				}
 				sv.CreateTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("CustomDBEngineVersionManifest", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
@@ -26476,6 +26566,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentDBSubnetGroup(&sv.DBSubnetGroup, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("DBSystemId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBSystemId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DeletionProtection", t.Name.Local):
@@ -44905,6 +45008,19 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				sv.CreateTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("CustomDBEngineVersionManifest", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -45973,6 +46089,19 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 					return err
 				}
 				sv.CreateTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("CustomDBEngineVersionManifest", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):
@@ -49344,6 +49473,19 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 					return err
 				}
 				sv.CreateTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("CustomDBEngineVersionManifest", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDBEngineVersionManifest = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DatabaseInstallationFilesS3BucketName", t.Name.Local):

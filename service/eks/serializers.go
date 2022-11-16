@@ -2838,6 +2838,18 @@ func awsRestjson1_serializeDocumentConnectorConfigRequest(v *types.ConnectorConf
 	return nil
 }
 
+func awsRestjson1_serializeDocumentControlPlanePlacementRequest(v *types.ControlPlanePlacementRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupName != nil {
+		ok := object.Key("groupName")
+		ok.String(*v.GroupName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEncryptionConfig(v *types.EncryptionConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3145,6 +3157,13 @@ func awsRestjson1_serializeDocumentOutpostConfigRequest(v *types.OutpostConfigRe
 	if v.ControlPlaneInstanceType != nil {
 		ok := object.Key("controlPlaneInstanceType")
 		ok.String(*v.ControlPlaneInstanceType)
+	}
+
+	if v.ControlPlanePlacement != nil {
+		ok := object.Key("controlPlanePlacement")
+		if err := awsRestjson1_serializeDocumentControlPlanePlacementRequest(v.ControlPlanePlacement, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.OutpostArns != nil {

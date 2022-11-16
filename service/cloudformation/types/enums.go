@@ -342,6 +342,7 @@ const (
 	HandlerErrorCodeHandlerInternalFailure   HandlerErrorCode = "HandlerInternalFailure"
 	HandlerErrorCodeNonCompliant             HandlerErrorCode = "NonCompliant"
 	HandlerErrorCodeUnknown                  HandlerErrorCode = "Unknown"
+	HandlerErrorCodeUnsupportedTarget        HandlerErrorCode = "UnsupportedTarget"
 )
 
 // Values returns all known values for HandlerErrorCode. Note that this can be
@@ -367,6 +368,7 @@ func (HandlerErrorCode) Values() []HandlerErrorCode {
 		"HandlerInternalFailure",
 		"NonCompliant",
 		"Unknown",
+		"UnsupportedTarget",
 	}
 }
 

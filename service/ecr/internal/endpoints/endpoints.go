@@ -320,6 +320,14 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "eu-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "api.ecr.eu-south-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "api.ecr.eu-west-1.amazonaws.com",

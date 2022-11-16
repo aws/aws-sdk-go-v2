@@ -4210,6 +4210,36 @@ func awsAwsjson10_serializeDocumentEnvironmentTemplateFilterList(v []types.Envir
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentListServiceInstancesFilter(v *types.ListServiceInstancesFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Key) > 0 {
+		ok := object.Key("key")
+		ok.String(string(v.Key))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentListServiceInstancesFilterList(v []types.ListServiceInstancesFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentListServiceInstancesFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentOutput(v *types.Output, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5554,6 +5584,13 @@ func awsAwsjson10_serializeOpDocumentListServiceInstancesInput(v *ListServiceIns
 	object := value.Object()
 	defer object.Close()
 
+	if v.Filters != nil {
+		ok := object.Key("filters")
+		if err := awsAwsjson10_serializeDocumentListServiceInstancesFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -5567,6 +5604,16 @@ func awsAwsjson10_serializeOpDocumentListServiceInstancesInput(v *ListServiceIns
 	if v.ServiceName != nil {
 		ok := object.Key("serviceName")
 		ok.String(*v.ServiceName)
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("sortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("sortOrder")
+		ok.String(string(v.SortOrder))
 	}
 
 	return nil

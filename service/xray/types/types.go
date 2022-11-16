@@ -623,6 +623,27 @@ type ResourceARNDetail struct {
 	noSmithyDocumentSerde
 }
 
+// A resource policy grants one or more Amazon Web Services services and accounts
+// permissions to access X-Ray. Each resource policy is associated with a specific
+// Amazon Web Services account.
+type ResourcePolicy struct {
+
+	// When the policy was last updated, in Unix time seconds.
+	LastUpdatedTime *time.Time
+
+	// The resource policy document, which can be up to 5kb in size.
+	PolicyDocument *string
+
+	// The name of the resource policy. Must be unique within a specific Amazon Web
+	// Services account.
+	PolicyName *string
+
+	// Returns the current policy revision id for this policy name.
+	PolicyRevisionId *string
+
+	noSmithyDocumentSerde
+}
+
 // The root cause information for a response time warning.
 type ResponseTimeRootCause struct {
 

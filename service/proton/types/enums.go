@@ -113,6 +113,68 @@ func (EnvironmentAccountConnectionStatus) Values() []EnvironmentAccountConnectio
 	}
 }
 
+type ListServiceInstancesFilterBy string
+
+// Enum values for ListServiceInstancesFilterBy
+const (
+	ListServiceInstancesFilterByName                            ListServiceInstancesFilterBy = "name"
+	ListServiceInstancesFilterByDeploymentStatus                ListServiceInstancesFilterBy = "deploymentStatus"
+	ListServiceInstancesFilterByTemplateName                    ListServiceInstancesFilterBy = "templateName"
+	ListServiceInstancesFilterByServiceName                     ListServiceInstancesFilterBy = "serviceName"
+	ListServiceInstancesFilterByDeployedTemplateVersionStatus   ListServiceInstancesFilterBy = "deployedTemplateVersionStatus"
+	ListServiceInstancesFilterByEnvironmentName                 ListServiceInstancesFilterBy = "environmentName"
+	ListServiceInstancesFilterByLastDeploymentAttemptedAtBefore ListServiceInstancesFilterBy = "lastDeploymentAttemptedAtBefore"
+	ListServiceInstancesFilterByLastDeploymentAttemptedAtAfter  ListServiceInstancesFilterBy = "lastDeploymentAttemptedAtAfter"
+	ListServiceInstancesFilterByCreatedAtBefore                 ListServiceInstancesFilterBy = "createdAtBefore"
+	ListServiceInstancesFilterByCreatedAtAfter                  ListServiceInstancesFilterBy = "createdAtAfter"
+)
+
+// Values returns all known values for ListServiceInstancesFilterBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListServiceInstancesFilterBy) Values() []ListServiceInstancesFilterBy {
+	return []ListServiceInstancesFilterBy{
+		"name",
+		"deploymentStatus",
+		"templateName",
+		"serviceName",
+		"deployedTemplateVersionStatus",
+		"environmentName",
+		"lastDeploymentAttemptedAtBefore",
+		"lastDeploymentAttemptedAtAfter",
+		"createdAtBefore",
+		"createdAtAfter",
+	}
+}
+
+type ListServiceInstancesSortBy string
+
+// Enum values for ListServiceInstancesSortBy
+const (
+	ListServiceInstancesSortByName                      ListServiceInstancesSortBy = "name"
+	ListServiceInstancesSortByDeploymentStatus          ListServiceInstancesSortBy = "deploymentStatus"
+	ListServiceInstancesSortByTemplateName              ListServiceInstancesSortBy = "templateName"
+	ListServiceInstancesSortByServiceName               ListServiceInstancesSortBy = "serviceName"
+	ListServiceInstancesSortByEnvironmentName           ListServiceInstancesSortBy = "environmentName"
+	ListServiceInstancesSortByLastDeploymentAttemptedAt ListServiceInstancesSortBy = "lastDeploymentAttemptedAt"
+	ListServiceInstancesSortByCreatedAt                 ListServiceInstancesSortBy = "createdAt"
+)
+
+// Values returns all known values for ListServiceInstancesSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListServiceInstancesSortBy) Values() []ListServiceInstancesSortBy {
+	return []ListServiceInstancesSortBy{
+		"name",
+		"deploymentStatus",
+		"templateName",
+		"serviceName",
+		"environmentName",
+		"lastDeploymentAttemptedAt",
+		"createdAt",
+	}
+}
+
 type ProvisionedResourceEngine string
 
 // Enum values for ProvisionedResourceEngine
@@ -299,6 +361,24 @@ const (
 func (ServiceTemplateSupportedComponentSourceType) Values() []ServiceTemplateSupportedComponentSourceType {
 	return []ServiceTemplateSupportedComponentSourceType{
 		"DIRECTLY_DEFINED",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

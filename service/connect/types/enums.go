@@ -550,6 +550,24 @@ func (LexVersion) Values() []LexVersion {
 	}
 }
 
+type MonitorCapability string
+
+// Enum values for MonitorCapability
+const (
+	MonitorCapabilitySilentMonitor MonitorCapability = "SILENT_MONITOR"
+	MonitorCapabilityBarge         MonitorCapability = "BARGE"
+)
+
+// Values returns all known values for MonitorCapability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MonitorCapability) Values() []MonitorCapability {
+	return []MonitorCapability{
+		"SILENT_MONITOR",
+		"BARGE",
+	}
+}
+
 type PhoneNumberCountryCode string
 
 // Enum values for PhoneNumberCountryCode

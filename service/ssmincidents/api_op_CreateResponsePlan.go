@@ -59,6 +59,9 @@ type CreateResponsePlanInput struct {
 	// response plan engages during an incident.
 	Engagements []string
 
+	// Information about third-party services integrated into the response plan.
+	Integrations []types.Integration
+
 	// A list of tags that you are adding to the response plan.
 	Tags map[string]string
 

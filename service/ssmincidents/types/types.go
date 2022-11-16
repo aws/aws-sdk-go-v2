@@ -445,6 +445,25 @@ type IncidentTemplate struct {
 	noSmithyDocumentSerde
 }
 
+// Information about third-party services integrated into a response plan.
+//
+// The following types satisfy this interface:
+//
+//	IntegrationMemberPagerDutyConfiguration
+type Integration interface {
+	isIntegration()
+}
+
+// Information about the PagerDuty service where the response plan creates an
+// incident.
+type IntegrationMemberPagerDutyConfiguration struct {
+	Value PagerDutyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*IntegrationMemberPagerDutyConfiguration) isIntegration() {}
+
 // Details and type of a related item.
 type ItemIdentifier struct {
 
@@ -467,6 +486,7 @@ type ItemIdentifier struct {
 //
 //	ItemValueMemberArn
 //	ItemValueMemberMetricDefinition
+//	ItemValueMemberPagerDutyIncidentDetail
 //	ItemValueMemberUrl
 type ItemValue interface {
 	isItemValue()
@@ -490,6 +510,15 @@ type ItemValueMemberMetricDefinition struct {
 }
 
 func (*ItemValueMemberMetricDefinition) isItemValue() {}
+
+// Details about an incident that is associated with a PagerDuty incident.
+type ItemValueMemberPagerDutyIncidentDetail struct {
+	Value PagerDutyIncidentDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ItemValueMemberPagerDutyIncidentDetail) isItemValue() {}
 
 // The URL, if the related item is a non-Amazon Web Services resource.
 type ItemValueMemberUrl struct {
@@ -517,6 +546,63 @@ type NotificationTargetItemMemberSnsTopicArn struct {
 }
 
 func (*NotificationTargetItemMemberSnsTopicArn) isNotificationTargetItem() {}
+
+// Details about the PagerDuty configuration for a response plan.
+type PagerDutyConfiguration struct {
+
+	// The name of the PagerDuty configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// Details about the PagerDuty service associated with the configuration.
+	//
+	// This member is required.
+	PagerDutyIncidentConfiguration *PagerDutyIncidentConfiguration
+
+	// The ID of the Amazon Web Services Secrets Manager secret that stores your
+	// PagerDuty key, either a General Access REST API Key or User Token REST API Key,
+	// and other user credentials.
+	//
+	// This member is required.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the PagerDuty service where the response plan creates an incident.
+type PagerDutyIncidentConfiguration struct {
+
+	// The ID of the PagerDuty service that the response plan associates with an
+	// incident when it launches.
+	//
+	// This member is required.
+	ServiceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the PagerDuty incident associated with an incident created by an
+// Incident Manager response plan.
+type PagerDutyIncidentDetail struct {
+
+	// The ID of the incident associated with the PagerDuty service for the response
+	// plan.
+	//
+	// This member is required.
+	Id *string
+
+	// Indicates whether to resolve the PagerDuty incident when you resolve the
+	// associated Incident Manager incident.
+	AutoResolve *bool
+
+	// The ID of the Amazon Web Services Secrets Manager secret that stores your
+	// PagerDuty key, either a General Access REST API Key or User Token REST API Key,
+	// and other user credentials.
+	SecretId *string
+
+	noSmithyDocumentSerde
+}
 
 // Information about a Amazon Web Services Region in your replication set.
 type RegionInfo struct {
@@ -834,6 +920,7 @@ func (*UnknownUnionMember) isChatChannel()                {}
 func (*UnknownUnionMember) isCondition()                  {}
 func (*UnknownUnionMember) isDynamicSsmParameterValue()   {}
 func (*UnknownUnionMember) isEventReference()             {}
+func (*UnknownUnionMember) isIntegration()                {}
 func (*UnknownUnionMember) isItemValue()                  {}
 func (*UnknownUnionMember) isNotificationTargetItem()     {}
 func (*UnknownUnionMember) isRelatedItemsUpdate()         {}

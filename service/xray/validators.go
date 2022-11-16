@@ -70,6 +70,26 @@ func (m *validateOpCreateSamplingRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInsightEvents struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpPutEncryptionConfig) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutTelemetryRecords struct {
 }
 
@@ -402,6 +442,10 @@ func addOpCreateSamplingRuleValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateSamplingRule{}, middleware.After)
 }
 
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
 func addOpGetInsightEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInsightEvents{}, middleware.After)
 }
@@ -444,6 +488,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutEncryptionConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEncryptionConfig{}, middleware.After)
+}
+
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
 func addOpPutTelemetryRecordsValidationMiddleware(stack *middleware.Stack) error {
@@ -660,6 +708,21 @@ func validateOpCreateSamplingRuleInput(v *CreateSamplingRuleInput) error {
 	}
 }
 
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetInsightEventsInput(v *GetInsightEventsInput) error {
 	if v == nil {
 		return nil
@@ -839,6 +902,24 @@ func validateOpPutEncryptionConfigInput(v *PutEncryptionConfigInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutEncryptionConfigInput"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -190,6 +190,26 @@ func (m *validateOpDeleteWorkspace) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExecuteQuery struct {
+}
+
+func (*validateOpExecuteQuery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteQueryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetComponentType struct {
 }
 
@@ -470,6 +490,26 @@ func (m *validateOpUpdateEntity) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePricingPlan struct {
+}
+
+func (*validateOpUpdatePricingPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePricingPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePricingPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePricingPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateScene struct {
 }
 
@@ -546,6 +586,10 @@ func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkspace{}, middleware.After)
 }
 
+func addOpExecuteQueryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteQuery{}, middleware.After)
+}
+
 func addOpGetComponentTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponentType{}, middleware.After)
 }
@@ -600,6 +644,10 @@ func addOpUpdateComponentTypeValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateEntityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEntity{}, middleware.After)
+}
+
+func addOpUpdatePricingPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePricingPlan{}, middleware.After)
 }
 
 func addOpUpdateSceneValidationMiddleware(stack *middleware.Stack) error {
@@ -799,6 +847,38 @@ func validateLambdaFunction(v *types.LambdaFunction) error {
 	}
 }
 
+func validateOrderBy(v *types.OrderBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrderBy"}
+	if v.PropertyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PropertyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrderByList(v []types.OrderBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrderByList"}
+	for i := range v {
+		if err := validateOrderBy(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParentEntityUpdateRequest(v *types.ParentEntityUpdateRequest) error {
 	if v == nil {
 		return nil
@@ -931,6 +1011,23 @@ func validatePropertyValues(v []types.PropertyValue) error {
 	for i := range v {
 		if err := validatePropertyValue(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTabularConditions(v *types.TabularConditions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TabularConditions"}
+	if v.OrderBy != nil {
+		if err := validateOrderByList(v.OrderBy); err != nil {
+			invalidParams.AddNested("OrderBy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1124,6 +1221,24 @@ func validateOpDeleteWorkspaceInput(v *DeleteWorkspaceInput) error {
 	}
 }
 
+func validateOpExecuteQueryInput(v *ExecuteQueryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteQueryInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.QueryStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetComponentTypeInput(v *GetComponentTypeInput) error {
 	if v == nil {
 		return nil
@@ -1188,6 +1303,11 @@ func validateOpGetPropertyValueInput(v *GetPropertyValueInput) error {
 	}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.TabularConditions != nil {
+		if err := validateTabularConditions(v.TabularConditions); err != nil {
+			invalidParams.AddNested("TabularConditions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1373,6 +1493,21 @@ func validateOpUpdateEntityInput(v *UpdateEntityInput) error {
 		if err := validateParentEntityUpdateRequest(v.ParentEntityUpdate); err != nil {
 			invalidParams.AddNested("ParentEntityUpdate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePricingPlanInput(v *UpdatePricingPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePricingPlanInput"}
+	if len(v.PricingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PricingMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

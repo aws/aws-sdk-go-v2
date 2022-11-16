@@ -67,6 +67,10 @@ type GetResponsePlanOutput struct {
 	// response plan engages during an incident.
 	Engagements []string
 
+	// Information about third-party services integrated into the Incident Manager
+	// response plan.
+	Integrations []types.Integration
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

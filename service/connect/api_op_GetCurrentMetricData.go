@@ -91,9 +91,16 @@ type GetCurrentMetricDataInput struct {
 
 	// The grouping applied to the metrics returned. For example, when grouped by
 	// QUEUE, the metrics returned apply to each queue rather than aggregated for all
-	// queues. If you group by CHANNEL, you should include a Channels filter. VOICE,
-	// CHAT, and TASK channels are supported. If no Grouping is included in the
-	// request, a summary of metrics is returned.
+	// queues.
+	//
+	// * If you group by CHANNEL, you should include a Channels filter. VOICE,
+	// CHAT, and TASK channels are supported.
+	//
+	// * If you group by ROUTING_PROFILE, you
+	// must include either a queue or routing profile filter.
+	//
+	// * If no Grouping is
+	// included in the request, a summary of metrics is returned.
 	Groupings []types.Grouping
 
 	// The maximum number of results to return per page.

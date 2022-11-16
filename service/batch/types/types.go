@@ -470,7 +470,9 @@ type ComputeResourceUpdate struct {
 	// The desired number of Amazon EC2 vCPUS in the compute environment. Batch
 	// modifies this value between the minimum and maximum values based on job queue
 	// demand. This parameter isn't applicable to jobs that are running on Fargate
-	// resources. Don't specify it.
+	// resources. Don't specify it. Batch doesn't support changing the desired number
+	// of vCPUs of an existing compute environment. Don't specify this parameter for
+	// compute environments using Amazon EKS clusters.
 	DesiredvCpus *int32
 
 	// Provides information used to select Amazon Machine Images (AMIs) for EC2
@@ -1698,7 +1700,7 @@ type EksPodProperties struct {
 	// node. For more information, see Pod's DNS policy
 	// (https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy)
 	// in the Kubernetes documentation. Valid values: Default | ClusterFirst |
-	// ClusterFirstWithHostNet | None
+	// ClusterFirstWithHostNet
 	DnsPolicy *string
 
 	// Indicates if the pod uses the hosts' network IP address. The default value is
@@ -1737,10 +1739,19 @@ type EksPodPropertiesDetail struct {
 	// hostNetwork parameter is not specified, the default is ClusterFirstWithHostNet.
 	// ClusterFirst indicates that any DNS query that does not match the configured
 	// cluster domain suffix is forwarded to the upstream nameserver inherited from the
-	// node. For more information, see Pod's DNS policy
+	// node. If no value was specified for dnsPolicy in the RegisterJobDefinition
+	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_RegisterJobDefinition.html)
+	// API operation, then no value will be returned for dnsPolicy by either of
+	// DescribeJobDefinitions
+	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeJobDefinitions.html)
+	// or DescribeJobs
+	// (https://docs.aws.amazon.com/batch/latest/APIReference/API_DescribeJobs.html)
+	// API operations. The pod spec setting will contain either ClusterFirst or
+	// ClusterFirstWithHostNet, depending on the value of the hostNetwork parameter.
+	// For more information, see Pod's DNS policy
 	// (https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy)
 	// in the Kubernetes documentation. Valid values: Default | ClusterFirst |
-	// ClusterFirstWithHostNet | None
+	// ClusterFirstWithHostNet
 	DnsPolicy *string
 
 	// Indicates if the pod uses the hosts' network IP address. The default value is
@@ -2736,10 +2747,13 @@ type ResourceRequirement struct {
 	// VCPU values must be one of the values supported for that memory value. value =
 	// 512 VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU = 0.25, 0.5,
 	// or 1 value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2 value =
-	// 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, or 4 value = 9216,
-	// 10240, 11264, 12288, 13312, 14336, 15360, or 16384 VCPU = 2 or 4 value = 17408,
-	// 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672,
-	// 29696, or 30720 VCPU = 4 type="VCPU" The number of vCPUs reserved for the
+	// 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, 4, or 8 value =
+	// 9216, 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4 value = 16384
+	// VCPU = 2, 4, or 8 value = 17408, 18432, 19456, 21504, 22528, 23552, 25600,
+	// 26624, 27648, 29696, or 30720 VCPU = 4 value = 20480, 24576, or 28672 VCPU = 4
+	// or 8 value = 36864, 45056, 53248, or 61440 VCPU = 8 value = 32768, 40960, 49152,
+	// or 57344 VCPU = 8 or 16 value = 65536, 73728, 81920, 90112, 98304, 106496,
+	// 114688, or 122880 VCPU = 16 type="VCPU" The number of vCPUs reserved for the
 	// container. This parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
@@ -2747,15 +2761,21 @@ type ResourceRequirement struct {
 	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
 	// 1,024 CPU shares. For EC2 resources, you must specify at least one vCPU. This is
 	// required but can be specified in several places; it must be specified for each
-	// node at least once. For jobs that are running on Fargate resources, then value
-	// must match one of the supported values and the MEMORY values must be one of the
-	// values supported for that VCPU value. The supported values are 0.25, 0.5, 1, 2,
-	// and 4 value = 0.25 MEMORY = 512, 1024, or 2048 value = 0.5 MEMORY = 1024, 2048,
-	// 3072, or 4096 value = 1 MEMORY = 2048, 3072, 4096, 5120, 6144, 7168, or 8192
-	// value = 2 MEMORY = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288,
-	// 13312, 14336, 15360, or 16384 value = 4 MEMORY = 8192, 9216, 10240, 11264,
-	// 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456, 20480, 21504, 22528,
-	// 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720
+	// node at least once. The default for the Fargate On-Demand vCPU resource count
+	// quota is 6 vCPUs. For more information about Fargate quotas, see Fargate quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate)
+	// in the Amazon Web Services General Reference. For jobs that are running on
+	// Fargate resources, then value must match one of the supported values and the
+	// MEMORY values must be one of the values supported for that VCPU value. The
+	// supported values are 0.25, 0.5, 1, 2, 4, 8, and 16 value = 0.25 MEMORY = 512,
+	// 1024, or 2048 value = 0.5 MEMORY = 1024, 2048, 3072, or 4096 value = 1 MEMORY =
+	// 2048, 3072, 4096, 5120, 6144, 7168, or 8192 value = 2 MEMORY = 4096, 5120, 6144,
+	// 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384 value = 4
+	// MEMORY = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384, 17408,
+	// 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672,
+	// 29696, or 30720 value = 8 MEMORY = 16384, 20480, 24576, 28672, 32768, 36864,
+	// 40960, 45056, 49152, 53248, 57344, or 61440 value = 16 MEMORY = 32768, 40960,
+	// 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880
 	//
 	// This member is required.
 	Value *string
@@ -2932,8 +2952,8 @@ type Ulimit struct {
 }
 
 // Specifies the infrastructure update policy for the compute environment. For more
-// information about infrastructure updates, see Infrastructure updates
-// (https://docs.aws.amazon.com/batch/latest/userguide/infrastructure-updates.html)
+// information about infrastructure updates, see Updating compute environments
+// (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
 // in the Batch User Guide.
 type UpdatePolicy struct {
 

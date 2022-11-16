@@ -1,0 +1,8 @@
+{
+    "id": "42c6c114-277e-4203-8fb0-0de38f6acf0c",
+    "type": "feature",
+    "description": "This release adds the following: 1) ExecuteQuery API allows users to query their AWS IoT TwinMaker Knowledge Graph 2) Pricing plan APIs allow users to configure and manage their pricing mode 3) Support for property groups and tabular property values in existing AWS IoT TwinMaker APIs.",
+    "modules": [
+        "service/iottwinmaker"
+    ]
+}

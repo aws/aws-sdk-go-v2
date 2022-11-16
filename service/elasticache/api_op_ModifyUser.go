@@ -40,6 +40,9 @@ type ModifyUserInput struct {
 	// Adds additional user permissions to the access string.
 	AppendAccessString *string
 
+	// Specifies how to authenticate the user.
+	AuthenticationMode *types.AuthenticationMode
+
 	// Indicates no password is required for the user.
 	NoPasswordRequired *bool
 

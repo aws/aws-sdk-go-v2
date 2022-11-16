@@ -22,9 +22,9 @@ type AccountSettings struct {
 	// Proton. For more information, see CreateRepository.
 	PipelineProvisioningRepository *RepositoryBranch
 
-	// The Amazon Resource Name (ARN) of the service role that Proton uses for
-	// provisioning pipelines. Proton assumes this role for Amazon Web Services-managed
-	// provisioning.
+	// The Amazon Resource Name (ARN) of the service role you want to use for
+	// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
+	// provisioning, and by customer-owned automation for self-managed provisioning.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -252,7 +252,7 @@ type Environment struct {
 	// The description of the environment.
 	Description *string
 
-	// The ID of the environment account connection that Proton uses to provision
+	// The ID of the environment account connection that's used to provision
 	// infrastructure resources in an environment account.
 	EnvironmentAccountConnectionId *string
 
@@ -260,9 +260,8 @@ type Environment struct {
 	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The Amazon Resource Name (ARN) of the IAM service role that allows Proton to
-	// provision infrastructure using Amazon Web Services-managed provisioning and
-	// CloudFormation on your behalf.
+	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
+	// make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -323,10 +322,7 @@ type EnvironmentAccountConnection struct {
 	// This member is required.
 	RequestedAt *time.Time
 
-	// The Amazon Resource Name (ARN) of an IAM service role in the environment
-	// account. Proton uses this role to provision infrastructure resources using
-	// Amazon Web Services-managed provisioning and CloudFormation in the associated
-	// environment account.
+	// The IAM service role that's associated with the environment account connection.
 	//
 	// This member is required.
 	RoleArn *string
@@ -702,6 +698,22 @@ type EnvironmentTemplateVersionSummary struct {
 
 	// The status message of the version of an environment template.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A filtering criterion to scope down the result list of the ListServiceInstances
+// action.
+type ListServiceInstancesFilter struct {
+
+	// The name of a filtering criterion.
+	Key ListServiceInstancesFilterBy
+
+	// A value to filter by. With the date/time keys (*At{Before,After}), the value is
+	// a valid RFC 3339 (https://datatracker.ietf.org/doc/html/rfc3339.html) string
+	// with no UTC offset and with an optional fractional precision (for example,
+	// 1985-04-12T23:20:50.52Z).
+	Value *string
 
 	noSmithyDocumentSerde
 }

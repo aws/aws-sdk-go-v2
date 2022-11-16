@@ -57,6 +57,10 @@ type UpdatePricingRuleOutput struct {
 	// The pricing plans count that this pricing rule is associated with.
 	AssociatedPricingPlanCount int64
 
+	// The seller of services provided by Amazon Web Services, their affiliates, or
+	// third-party providers selling services via Amazon Web Services Marketplace.
+	BillingEntity *string
+
 	// The new description for the pricing rule.
 	Description *string
 

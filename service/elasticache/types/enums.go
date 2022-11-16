@@ -8,6 +8,7 @@ type AuthenticationType string
 const (
 	AuthenticationTypePassword   AuthenticationType = "password"
 	AuthenticationTypeNoPassword AuthenticationType = "no-password"
+	AuthenticationTypeIam        AuthenticationType = "iam"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -17,6 +18,7 @@ func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"password",
 		"no-password",
+		"iam",
 	}
 }
 
@@ -149,6 +151,26 @@ func (DestinationType) Values() []DestinationType {
 	return []DestinationType{
 		"cloudwatch-logs",
 		"kinesis-firehose",
+	}
+}
+
+type InputAuthenticationType string
+
+// Enum values for InputAuthenticationType
+const (
+	InputAuthenticationTypePassword   InputAuthenticationType = "password"
+	InputAuthenticationTypeNoPassword InputAuthenticationType = "no-password-required"
+	InputAuthenticationTypeIam        InputAuthenticationType = "iam"
+)
+
+// Values returns all known values for InputAuthenticationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputAuthenticationType) Values() []InputAuthenticationType {
+	return []InputAuthenticationType{
+		"password",
+		"no-password-required",
+		"iam",
 	}
 }
 

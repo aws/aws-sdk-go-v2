@@ -1,0 +1,8 @@
+{
+    "id": "4ea4f8f4-35c7-4dcf-93d3-aacb9b1e6104",
+    "type": "feature",
+    "description": "This release adds new APIs - PutResourcePolicy, DeleteResourcePolicy, ListResourcePolicies for supporting resource based policies for AWS X-Ray.",
+    "modules": [
+        "service/xray"
+    ]
+}

@@ -504,6 +504,10 @@ type PricingRuleListElement struct {
 	// The pricing plans count that this pricing rule is associated with.
 	AssociatedPricingPlanCount int64
 
+	// The seller of services provided by Amazon Web Services, their affiliates, or
+	// third-party providers selling services via Amazon Web Services Marketplace.
+	BillingEntity *string
+
 	// The time when the pricing rule was created.
 	CreationTime int64
 

@@ -102,6 +102,25 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The query timeout exception.
+type QueryTimeoutException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *QueryTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *QueryTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *QueryTimeoutException) ErrorCode() string             { return "QueryTimeoutException" }
+func (e *QueryTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The resource wasn't found.
 type ResourceNotFoundException struct {
 	Message *string

@@ -777,6 +777,42 @@ func validateIncidentTemplate(v *types.IncidentTemplate) error {
 	}
 }
 
+func validateIntegration(v types.Integration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Integration"}
+	switch uv := v.(type) {
+	case *types.IntegrationMemberPagerDutyConfiguration:
+		if err := validatePagerDutyConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[pagerDutyConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntegrations(v []types.Integration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Integrations"}
+	for i := range v {
+		if err := validateIntegration(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateItemIdentifier(v *types.ItemIdentifier) error {
 	if v == nil {
 		return nil
@@ -784,9 +820,87 @@ func validateItemIdentifier(v *types.ItemIdentifier) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ItemIdentifier"}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	} else if v.Value != nil {
+		if err := validateItemValue(v.Value); err != nil {
+			invalidParams.AddNested("Value", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateItemValue(v types.ItemValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ItemValue"}
+	switch uv := v.(type) {
+	case *types.ItemValueMemberPagerDutyIncidentDetail:
+		if err := validatePagerDutyIncidentDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[pagerDutyIncidentDetail]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePagerDutyConfiguration(v *types.PagerDutyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PagerDutyConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if v.PagerDutyIncidentConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PagerDutyIncidentConfiguration"))
+	} else if v.PagerDutyIncidentConfiguration != nil {
+		if err := validatePagerDutyIncidentConfiguration(v.PagerDutyIncidentConfiguration); err != nil {
+			invalidParams.AddNested("PagerDutyIncidentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePagerDutyIncidentConfiguration(v *types.PagerDutyIncidentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PagerDutyIncidentConfiguration"}
+	if v.ServiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePagerDutyIncidentDetail(v *types.PagerDutyIncidentDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PagerDutyIncidentDetail"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -965,6 +1079,11 @@ func validateOpCreateResponsePlanInput(v *CreateResponsePlanInput) error {
 	if v.Actions != nil {
 		if err := validateActionsList(v.Actions); err != nil {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Integrations != nil {
+		if err := validateIntegrations(v.Integrations); err != nil {
+			invalidParams.AddNested("Integrations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1391,6 +1510,11 @@ func validateOpUpdateResponsePlanInput(v *UpdateResponsePlanInput) error {
 	if v.Actions != nil {
 		if err := validateActionsList(v.Actions); err != nil {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Integrations != nil {
+		if err := validateIntegrations(v.Integrations); err != nil {
+			invalidParams.AddNested("Integrations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

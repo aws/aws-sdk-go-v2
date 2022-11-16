@@ -44,7 +44,10 @@ type SearchQueuesInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return queues.
+	// The search criteria to be used to return queues. The name and description fields
+	// support "contains" queries with a minimum of 2 characters and a maximum of 25
+	// characters. Any queries with character lengths outside of this range will throw
+	// invalid results.
 	SearchCriteria *types.QueueSearchCriteria
 
 	// Filters to be applied to search results.

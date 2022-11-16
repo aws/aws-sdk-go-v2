@@ -153,6 +153,24 @@ func ExampleEventReference_outputUsage() {
 var _ *string
 var _ *string
 
+func ExampleIntegration_outputUsage() {
+	var union types.Integration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IntegrationMemberPagerDutyConfiguration:
+		_ = v.Value // Value is types.PagerDutyConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PagerDutyConfiguration
+
 func ExampleItemValue_outputUsage() {
 	var union types.ItemValue
 	// type switches can be used to check the union value
@@ -162,6 +180,9 @@ func ExampleItemValue_outputUsage() {
 
 	case *types.ItemValueMemberMetricDefinition:
 		_ = v.Value // Value is string
+
+	case *types.ItemValueMemberPagerDutyIncidentDetail:
+		_ = v.Value // Value is types.PagerDutyIncidentDetail
 
 	case *types.ItemValueMemberUrl:
 		_ = v.Value // Value is string
@@ -175,6 +196,7 @@ func ExampleItemValue_outputUsage() {
 	}
 }
 
+var _ *types.PagerDutyIncidentDetail
 var _ *string
 var _ *string
 var _ *string

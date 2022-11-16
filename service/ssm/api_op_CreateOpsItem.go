@@ -57,6 +57,14 @@ type CreateOpsItemInput struct {
 	// This member is required.
 	Title *string
 
+	// The target Amazon Web Services account where you want to create an OpsItem. To
+	// make this call, your account must be configured to work with OpsItems across
+	// accounts. For more information, see Setting up OpsCenter to work with OpsItems
+	// across accounts
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html)
+	// in the Amazon Web Services Systems Manager User Guide.
+	AccountId *string
+
 	// The time a runbook workflow ended. Currently reported only for the OpsItem type
 	// /aws/changerequest.
 	ActualEndTime *time.Time
@@ -91,8 +99,18 @@ type CreateOpsItemInput struct {
 	// in the Amazon Web Services Systems Manager User Guide.
 	OperationalData map[string]types.OpsItemDataValue
 
-	// The type of OpsItem to create. Currently, the only valid values are
-	// /aws/changerequest and /aws/issue.
+	// The type of OpsItem to create. Systems Manager supports the following types of
+	// OpsItems:
+	//
+	// * /aws/issue This type of OpsItem is used for default OpsItems
+	// created by OpsCenter.
+	//
+	// * /aws/changerequest This type of OpsItem is used by
+	// Change Manager for reviewing and approving or rejecting change requests.
+	//
+	// *
+	// /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
+	// reporting on duplicate OpsItems.
 	OpsItemType *string
 
 	// The time specified in a change request for a runbook workflow to end. Currently
@@ -129,6 +147,9 @@ type CreateOpsItemInput struct {
 }
 
 type CreateOpsItemOutput struct {
+
+	// The OpsItem Amazon Resource Name (ARN).
+	OpsItemArn *string
 
 	// The ID of the OpsItem.
 	OpsItemId *string

@@ -46,7 +46,8 @@ type CreateActivationInput struct {
 	// for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com.
 	// For more information, see Create an IAM service role for a hybrid environment
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
-	// in the Amazon Web Services Systems Manager User Guide.
+	// in the Amazon Web Services Systems Manager User Guide. You can't specify an IAM
+	// service-linked role for this parameter. You must create a unique role.
 	//
 	// This member is required.
 	IamRole *string

@@ -6,10 +6,15 @@ type AttributeName string
 
 // Enum values for AttributeName
 const (
-	AttributeNameSign      AttributeName = "SIGN"
-	AttributeNameSymptom   AttributeName = "SYMPTOM"
-	AttributeNameDiagnosis AttributeName = "DIAGNOSIS"
-	AttributeNameNegation  AttributeName = "NEGATION"
+	AttributeNameSign             AttributeName = "SIGN"
+	AttributeNameSymptom          AttributeName = "SYMPTOM"
+	AttributeNameDiagnosis        AttributeName = "DIAGNOSIS"
+	AttributeNameNegation         AttributeName = "NEGATION"
+	AttributeNamePertainsToFamily AttributeName = "PERTAINS_TO_FAMILY"
+	AttributeNameHypothetical     AttributeName = "HYPOTHETICAL"
+	AttributeNameLowConfidence    AttributeName = "LOW_CONFIDENCE"
+	AttributeNamePastHistory      AttributeName = "PAST_HISTORY"
+	AttributeNameFuture           AttributeName = "FUTURE"
 )
 
 // Values returns all known values for AttributeName. Note that this can be
@@ -21,6 +26,11 @@ func (AttributeName) Values() []AttributeName {
 		"SYMPTOM",
 		"DIAGNOSIS",
 		"NEGATION",
+		"PERTAINS_TO_FAMILY",
+		"HYPOTHETICAL",
+		"LOW_CONFIDENCE",
+		"PAST_HISTORY",
+		"FUTURE",
 	}
 }
 
@@ -66,6 +76,13 @@ const (
 	EntitySubTypeTimeToTestName       EntitySubType = "TIME_TO_TEST_NAME"
 	EntitySubTypeTimeToProcedureName  EntitySubType = "TIME_TO_PROCEDURE_NAME"
 	EntitySubTypeTimeToTreatmentName  EntitySubType = "TIME_TO_TREATMENT_NAME"
+	EntitySubTypeAmount               EntitySubType = "AMOUNT"
+	EntitySubTypeGender               EntitySubType = "GENDER"
+	EntitySubTypeRaceEthnicity        EntitySubType = "RACE_ETHNICITY"
+	EntitySubTypeAllergies            EntitySubType = "ALLERGIES"
+	EntitySubTypeTobaccoUse           EntitySubType = "TOBACCO_USE"
+	EntitySubTypeAlcoholConsumption   EntitySubType = "ALCOHOL_CONSUMPTION"
+	EntitySubTypeRecDrugUse           EntitySubType = "REC_DRUG_USE"
 )
 
 // Values returns all known values for EntitySubType. Note that this can be
@@ -111,6 +128,13 @@ func (EntitySubType) Values() []EntitySubType {
 		"TIME_TO_TEST_NAME",
 		"TIME_TO_PROCEDURE_NAME",
 		"TIME_TO_TREATMENT_NAME",
+		"AMOUNT",
+		"GENDER",
+		"RACE_ETHNICITY",
+		"ALLERGIES",
+		"TOBACCO_USE",
+		"ALCOHOL_CONSUMPTION",
+		"REC_DRUG_USE",
 	}
 }
 
@@ -118,12 +142,13 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypeMedication                 EntityType = "MEDICATION"
-	EntityTypeMedicalCondition           EntityType = "MEDICAL_CONDITION"
-	EntityTypeProtectedHealthInformation EntityType = "PROTECTED_HEALTH_INFORMATION"
-	EntityTypeTestTreatmentProcedure     EntityType = "TEST_TREATMENT_PROCEDURE"
-	EntityTypeAnatomy                    EntityType = "ANATOMY"
-	EntityTypeTimeExpression             EntityType = "TIME_EXPRESSION"
+	EntityTypeMedication                    EntityType = "MEDICATION"
+	EntityTypeMedicalCondition              EntityType = "MEDICAL_CONDITION"
+	EntityTypeProtectedHealthInformation    EntityType = "PROTECTED_HEALTH_INFORMATION"
+	EntityTypeTestTreatmentProcedure        EntityType = "TEST_TREATMENT_PROCEDURE"
+	EntityTypeAnatomy                       EntityType = "ANATOMY"
+	EntityTypeTimeExpression                EntityType = "TIME_EXPRESSION"
+	EntityTypeBehavioralEnvironmentalSocial EntityType = "BEHAVIORAL_ENVIRONMENTAL_SOCIAL"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -137,6 +162,7 @@ func (EntityType) Values() []EntityType {
 		"TEST_TREATMENT_PROCEDURE",
 		"ANATOMY",
 		"TIME_EXPRESSION",
+		"BEHAVIORAL_ENVIRONMENTAL_SOCIAL",
 	}
 }
 
@@ -224,10 +250,13 @@ type ICD10CMTraitName string
 
 // Enum values for ICD10CMTraitName
 const (
-	ICD10CMTraitNameNegation  ICD10CMTraitName = "NEGATION"
-	ICD10CMTraitNameDiagnosis ICD10CMTraitName = "DIAGNOSIS"
-	ICD10CMTraitNameSign      ICD10CMTraitName = "SIGN"
-	ICD10CMTraitNameSymptom   ICD10CMTraitName = "SYMPTOM"
+	ICD10CMTraitNameNegation         ICD10CMTraitName = "NEGATION"
+	ICD10CMTraitNameDiagnosis        ICD10CMTraitName = "DIAGNOSIS"
+	ICD10CMTraitNameSign             ICD10CMTraitName = "SIGN"
+	ICD10CMTraitNameSymptom          ICD10CMTraitName = "SYMPTOM"
+	ICD10CMTraitNamePertainsToFamily ICD10CMTraitName = "PERTAINS_TO_FAMILY"
+	ICD10CMTraitNameHypothetical     ICD10CMTraitName = "HYPOTHETICAL"
+	ICD10CMTraitNameLowConfidence    ICD10CMTraitName = "LOW_CONFIDENCE"
 )
 
 // Values returns all known values for ICD10CMTraitName. Note that this can be
@@ -239,6 +268,9 @@ func (ICD10CMTraitName) Values() []ICD10CMTraitName {
 		"DIAGNOSIS",
 		"SIGN",
 		"SYMPTOM",
+		"PERTAINS_TO_FAMILY",
+		"HYPOTHETICAL",
+		"LOW_CONFIDENCE",
 	}
 }
 
@@ -309,6 +341,7 @@ const (
 	RelationshipTypeTestUnit        RelationshipType = "TEST_UNIT"
 	RelationshipTypeDirection       RelationshipType = "DIRECTION"
 	RelationshipTypeSystemOrganSite RelationshipType = "SYSTEM_ORGAN_SITE"
+	RelationshipTypeAmount          RelationshipType = "AMOUNT"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -335,6 +368,7 @@ func (RelationshipType) Values() []RelationshipType {
 		"TEST_UNIT",
 		"DIRECTION",
 		"SYSTEM_ORGAN_SITE",
+		"AMOUNT",
 	}
 }
 
@@ -514,10 +548,15 @@ type SNOMEDCTTraitName string
 
 // Enum values for SNOMEDCTTraitName
 const (
-	SNOMEDCTTraitNameNegation  SNOMEDCTTraitName = "NEGATION"
-	SNOMEDCTTraitNameDiagnosis SNOMEDCTTraitName = "DIAGNOSIS"
-	SNOMEDCTTraitNameSign      SNOMEDCTTraitName = "SIGN"
-	SNOMEDCTTraitNameSymptom   SNOMEDCTTraitName = "SYMPTOM"
+	SNOMEDCTTraitNameNegation         SNOMEDCTTraitName = "NEGATION"
+	SNOMEDCTTraitNameDiagnosis        SNOMEDCTTraitName = "DIAGNOSIS"
+	SNOMEDCTTraitNameSign             SNOMEDCTTraitName = "SIGN"
+	SNOMEDCTTraitNameSymptom          SNOMEDCTTraitName = "SYMPTOM"
+	SNOMEDCTTraitNamePertainsToFamily SNOMEDCTTraitName = "PERTAINS_TO_FAMILY"
+	SNOMEDCTTraitNameHypothetical     SNOMEDCTTraitName = "HYPOTHETICAL"
+	SNOMEDCTTraitNameLowConfidence    SNOMEDCTTraitName = "LOW_CONFIDENCE"
+	SNOMEDCTTraitNamePastHistory      SNOMEDCTTraitName = "PAST_HISTORY"
+	SNOMEDCTTraitNameFuture           SNOMEDCTTraitName = "FUTURE"
 )
 
 // Values returns all known values for SNOMEDCTTraitName. Note that this can be
@@ -529,5 +568,10 @@ func (SNOMEDCTTraitName) Values() []SNOMEDCTTraitName {
 		"DIAGNOSIS",
 		"SIGN",
 		"SYMPTOM",
+		"PERTAINS_TO_FAMILY",
+		"HYPOTHETICAL",
+		"LOW_CONFIDENCE",
+		"PAST_HISTORY",
+		"FUTURE",
 	}
 }

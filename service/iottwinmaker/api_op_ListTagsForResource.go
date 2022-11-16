@@ -34,7 +34,8 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceARN *string
 
-	// The maximum number of results to display.
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.

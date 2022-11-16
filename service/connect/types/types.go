@@ -1428,7 +1428,10 @@ type QueueReference struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria to be used to return queues.
+// The search criteria to be used to return queues. The name and description fields
+// support "contains" queries with a minimum of 2 characters and a maximum of 25
+// characters. Any queries with character lengths outside of this range will throw
+// invalid results.
 type QueueSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.
@@ -1792,7 +1795,10 @@ type RoutingProfileReference struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria to be used to return routing profiles.
+// The search criteria to be used to return routing profiles. The name and
+// description fields support "contains" queries with a minimum of 2 characters and
+// a maximum of 25 characters. Any queries with character lengths outside of this
+// range will throw invalid results.
 type RoutingProfileSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.
@@ -1899,7 +1905,10 @@ type SecurityProfile struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria to be used to return security profiles.
+// The search criteria to be used to return security profiles. The name field
+// support "contains" queries with a minimum of 2 characters and maximum of 25
+// characters. Any queries with character lengths outside of this range will throw
+// invalid results.
 type SecurityProfileSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.
@@ -2446,10 +2455,10 @@ type UserReference struct {
 	noSmithyDocumentSerde
 }
 
-// The search criteria to be used to return users. The Username, Firstname, and
-// Lastname fields support "contains" queries with a minimum of 2 characters and a
-// maximum of 25 characters. Any queries with character lengths outside of this
-// range result in empty results.
+// The search criteria to be used to return users. The name and description fields
+// support "contains" queries with a minimum of 2 characters and a maximum of 25
+// characters. Any queries with character lengths outside of this range will throw
+// invalid results.
 type UserSearchCriteria struct {
 
 	// A list of conditions which would be applied together with an AND condition.

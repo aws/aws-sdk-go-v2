@@ -126,8 +126,9 @@ type PricingRuleScope string
 
 // Enum values for PricingRuleScope
 const (
-	PricingRuleScopeGlobal  PricingRuleScope = "GLOBAL"
-	PricingRuleScopeService PricingRuleScope = "SERVICE"
+	PricingRuleScopeGlobal        PricingRuleScope = "GLOBAL"
+	PricingRuleScopeService       PricingRuleScope = "SERVICE"
+	PricingRuleScopeBillingEntity PricingRuleScope = "BILLING_ENTITY"
 )
 
 // Values returns all known values for PricingRuleScope. Note that this can be
@@ -137,6 +138,7 @@ func (PricingRuleScope) Values() []PricingRuleScope {
 	return []PricingRuleScope{
 		"GLOBAL",
 		"SERVICE",
+		"BILLING_ENTITY",
 	}
 }
 
@@ -208,8 +210,10 @@ const (
 	ValidationExceptionReasonMultiplePricingPlanArn            ValidationExceptionReason = "MULTIPLE_PRICING_PLAN_ARN"
 	ValidationExceptionReasonIllegalChildAssociateResource     ValidationExceptionReason = "ILLEGAL_CHILD_ASSOCIATE_RESOURCE"
 	ValidationExceptionReasonCustomLineItemAssociationExists   ValidationExceptionReason = "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"
-	ValidationExceptionReasonInvalidBillingPeriodForOperation  ValidationExceptionReason = "INVALID_BILLING_PERIOD_FOR_OPERATION"
 	ValidationExceptionReasonInvalidBillingGroup               ValidationExceptionReason = "INVALID_BILLING_GROUP"
+	ValidationExceptionReasonInvalidBillingPeriodForOperation  ValidationExceptionReason = "INVALID_BILLING_PERIOD_FOR_OPERATION"
+	ValidationExceptionReasonIllegalBillingEntity              ValidationExceptionReason = "ILLEGAL_BILLING_ENTITY"
+	ValidationExceptionReasonIllegalModifierPercentage         ValidationExceptionReason = "ILLEGAL_MODIFIER_PERCENTAGE"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -263,7 +267,9 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"MULTIPLE_PRICING_PLAN_ARN",
 		"ILLEGAL_CHILD_ASSOCIATE_RESOURCE",
 		"CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS",
-		"INVALID_BILLING_PERIOD_FOR_OPERATION",
 		"INVALID_BILLING_GROUP",
+		"INVALID_BILLING_PERIOD_FOR_OPERATION",
+		"ILLEGAL_BILLING_ENTITY",
+		"ILLEGAL_MODIFIER_PERCENTAGE",
 	}
 }

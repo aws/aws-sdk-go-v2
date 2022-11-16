@@ -710,6 +710,11 @@ func awsRestjson1_serializeOpDocumentCreatePricingRuleInput(v *CreatePricingRule
 	object := value.Object()
 	defer object.Close()
 
+	if v.BillingEntity != nil {
+		ok := object.Key("BillingEntity")
+		ok.String(*v.BillingEntity)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)

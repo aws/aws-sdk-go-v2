@@ -114,6 +114,7 @@
         "api_op_ListUseCases.go",
         "api_op_ListUserHierarchyGroups.go",
         "api_op_ListUsers.go",
+        "api_op_MonitorContact.go",
         "api_op_PutUserStatus.go",
         "api_op_ReleasePhoneNumber.go",
         "api_op_ReplicateInstance.go",

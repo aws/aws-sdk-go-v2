@@ -195,6 +195,13 @@ func awsRestjson1_serializeOpDocumentCreateResponsePlanInput(v *CreateResponsePl
 		}
 	}
 
+	if v.Integrations != nil {
+		ok := object.Key("integrations")
+		if err := awsRestjson1_serializeDocumentIntegrations(v.Integrations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2186,6 +2193,13 @@ func awsRestjson1_serializeOpDocumentUpdateResponsePlanInput(v *UpdateResponsePl
 		ok.String(*v.IncidentTemplateTitle)
 	}
 
+	if v.Integrations != nil {
+		ok := object.Key("integrations")
+		if err := awsRestjson1_serializeDocumentIntegrations(v.Integrations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2607,6 +2621,40 @@ func awsRestjson1_serializeDocumentIntegerList(v []int32, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIntegration(v types.Integration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.IntegrationMemberPagerDutyConfiguration:
+		av := object.Key("pagerDutyConfiguration")
+		if err := awsRestjson1_serializeDocumentPagerDutyConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIntegrations(v []types.Integration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentIntegration(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentItemIdentifier(v *types.ItemIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2638,6 +2686,12 @@ func awsRestjson1_serializeDocumentItemValue(v types.ItemValue, value smithyjson
 	case *types.ItemValueMemberMetricDefinition:
 		av := object.Key("metricDefinition")
 		av.String(uv.Value)
+
+	case *types.ItemValueMemberPagerDutyIncidentDetail:
+		av := object.Key("pagerDutyIncidentDetail")
+		if err := awsRestjson1_serializeDocumentPagerDutyIncidentDetail(&uv.Value, av); err != nil {
+			return err
+		}
 
 	case *types.ItemValueMemberUrl:
 		av := object.Key("url")
@@ -2679,6 +2733,64 @@ func awsRestjson1_serializeDocumentNotificationTargetSet(v []types.NotificationT
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPagerDutyConfiguration(v *types.PagerDutyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.PagerDutyIncidentConfiguration != nil {
+		ok := object.Key("pagerDutyIncidentConfiguration")
+		if err := awsRestjson1_serializeDocumentPagerDutyIncidentConfiguration(v.PagerDutyIncidentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretId != nil {
+		ok := object.Key("secretId")
+		ok.String(*v.SecretId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPagerDutyIncidentConfiguration(v *types.PagerDutyIncidentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServiceId != nil {
+		ok := object.Key("serviceId")
+		ok.String(*v.ServiceId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPagerDutyIncidentDetail(v *types.PagerDutyIncidentDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoResolve != nil {
+		ok := object.Key("autoResolve")
+		ok.Boolean(*v.AutoResolve)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	if v.SecretId != nil {
+		ok := object.Key("secretId")
+		ok.String(*v.SecretId)
+	}
+
 	return nil
 }
 

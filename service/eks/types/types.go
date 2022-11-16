@@ -295,6 +295,33 @@ type ConnectorConfigResponse struct {
 	noSmithyDocumentSerde
 }
 
+// The placement configuration for all the control plane instance of your local
+// Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
+// Capacity considerations
+// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+// in the Amazon EKS User Guide
+type ControlPlanePlacementRequest struct {
+
+	// The name of the placement group for the Kubernetes control plane instances. This
+	// setting can't be changed after cluster creation.
+	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// The placement configuration for all the control plane instance of your local
+// Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
+// Capacity considerations
+// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+// in the Amazon EKS User Guide.
+type ControlPlanePlacementResponse struct {
+
+	// The name of the placement group for the Kubernetes control plane instances.
+	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
 // The encryption configuration for the cluster.
 type EncryptionConfig struct {
 
@@ -617,10 +644,8 @@ type LaunchTemplateSpecification struct {
 	// name or the launch template ID in the request, but not both.
 	Name *string
 
-	// The launch template version number, $Latest, or $Default. If the value is
-	// $Latest, Amazon EKS uses the latest version of the launch template. If the value
-	// is $Default, Amazon EKS uses the default version of the launch template.
-	// Default: The default version of the launch template.
+	// The version number of the launch template to use. If no version is specified,
+	// then the template's default version is used.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -955,32 +980,20 @@ type OidcIdentityProviderConfigRequest struct {
 }
 
 // The configuration of your local Amazon EKS cluster on an Amazon Web Services
-// Outpost. Before creating a cluster on an Outpost, review Creating a local Amazon
-// EKS cluster on an Amazon Web Services Outpost
-// (https://docs.aws.amazon.com/eks/latest/userguide/create-cluster-outpost.html)
+// Outpost. Before creating a cluster on an Outpost, review Creating a local
+// cluster on an Outpost
+// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-create.html)
 // in the Amazon EKS User Guide. This API isn't available for Amazon EKS clusters
 // on the Amazon Web Services cloud.
 type OutpostConfigRequest struct {
 
 	// The Amazon EC2 instance type that you want to use for your local Amazon EKS
-	// cluster on Outposts. The instance type that you specify is used for all
+	// cluster on Outposts. Choose an instance type based on the number of nodes that
+	// your cluster will have. For more information, see Capacity considerations
+	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+	// in the Amazon EKS User Guide. The instance type that you specify is used for all
 	// Kubernetes control plane instances. The instance type can't be changed after
-	// cluster creation. Choose an instance type based on the number of nodes that your
-	// cluster will have. If your cluster will have:
-	//
-	// * 1–20 nodes, then we recommend
-	// specifying a large instance type.
-	//
-	// * 21–100 nodes, then we recommend specifying
-	// an xlarge instance type.
-	//
-	// * 101–250 nodes, then we recommend specifying a
-	// 2xlarge instance type.
-	//
-	// For a list of the available Amazon EC2 instance types,
-	// see Compute and storage in Outposts rack features
-	// (http://aws.amazon.com/outposts/rack/features/). The control plane is not
-	// automatically scaled by Amazon EKS.
+	// cluster creation. The control plane is not automatically scaled by Amazon EKS.
 	//
 	// This member is required.
 	ControlPlaneInstanceType *string
@@ -990,6 +1003,13 @@ type OutpostConfigRequest struct {
 	//
 	// This member is required.
 	OutpostArns []string
+
+	// An object representing the placement configuration for all the control plane
+	// instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For
+	// more information, see Capacity considerations
+	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+	// in the Amazon EKS User Guide.
+	ControlPlanePlacement *ControlPlanePlacementRequest
 
 	noSmithyDocumentSerde
 }
@@ -1010,6 +1030,13 @@ type OutpostConfigResponse struct {
 	//
 	// This member is required.
 	OutpostArns []string
+
+	// An object representing the placement configuration for all the control plane
+	// instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For
+	// more information, see Capacity considerations
+	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+	// in the Amazon EKS User Guide.
+	ControlPlanePlacement *ControlPlanePlacementResponse
 
 	noSmithyDocumentSerde
 }
@@ -1167,15 +1194,8 @@ type VpcConfigRequest struct {
 	// interfaces that Amazon EKS creates to use that allow communication between your
 	// nodes and the Kubernetes control plane. If you don't specify any security
 	// groups, then familiarize yourself with the difference between Amazon EKS
-	// defaults for clusters deployed with Kubernetes:
-	//
-	// * 1.14 Amazon EKS platform
-	// version eks.2 and earlier
-	//
-	// * 1.14 Amazon EKS platform version eks.3 and
-	// later
-	//
-	// For more information, see Amazon EKS security group considerations
+	// defaults for clusters deployed with Kubernetes. For more information, see Amazon
+	// EKS security group considerations
 	// (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html) in the
 	// Amazon EKS User Guide .
 	SecurityGroupIds []string

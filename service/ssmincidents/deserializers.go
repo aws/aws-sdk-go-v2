@@ -1661,6 +1661,11 @@ func awsRestjson1_deserializeOpDocumentGetResponsePlanOutput(v **GetResponsePlan
 				return err
 			}
 
+		case "integrations":
+			if err := awsRestjson1_deserializeDocumentIntegrations(&sv.Integrations, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5345,6 +5350,78 @@ func awsRestjson1_deserializeDocumentIncidentTemplate(v **types.IncidentTemplate
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIntegration(v *types.Integration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.Integration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "pagerDutyConfiguration":
+			var mv types.PagerDutyConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPagerDutyConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.IntegrationMemberPagerDutyConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIntegrations(v *[]types.Integration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Integration
+	if *v == nil {
+		cv = []types.Integration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Integration
+		if err := awsRestjson1_deserializeDocumentIntegration(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5474,6 +5551,16 @@ loop:
 			uv = &types.ItemValueMemberMetricDefinition{Value: mv}
 			break loop
 
+		case "pagerDutyIncidentDetail":
+			var mv types.PagerDutyIncidentDetail
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPagerDutyIncidentDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ItemValueMemberPagerDutyIncidentDetail{Value: mv}
+			break loop
+
 		case "url":
 			var mv string
 			if value != nil {
@@ -5567,6 +5654,158 @@ func awsRestjson1_deserializeDocumentNotificationTargetSet(v *[]types.Notificati
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPagerDutyConfiguration(v **types.PagerDutyConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PagerDutyConfiguration
+	if *v == nil {
+		sv = &types.PagerDutyConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "pagerDutyIncidentConfiguration":
+			if err := awsRestjson1_deserializeDocumentPagerDutyIncidentConfiguration(&sv.PagerDutyIncidentConfiguration, value); err != nil {
+				return err
+			}
+
+		case "secretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPagerDutyIncidentConfiguration(v **types.PagerDutyIncidentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PagerDutyIncidentConfiguration
+	if *v == nil {
+		sv = &types.PagerDutyIncidentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "serviceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPagerDutyIncidentDetail(v **types.PagerDutyIncidentDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PagerDutyIncidentDetail
+	if *v == nil {
+		sv = &types.PagerDutyIncidentDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoResolve":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutoResolve = ptr.Bool(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "secretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SecretId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

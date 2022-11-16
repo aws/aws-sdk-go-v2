@@ -19,6 +19,19 @@ type Authentication struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the authentication mode to use.
+type AuthenticationMode struct {
+
+	// Specifies the passwords to use for authentication if Type is set to password.
+	Passwords []string
+
+	// Specifies the authentication type. Possible options are IAM authentication,
+	// password and no password.
+	Type InputAuthenticationType
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Availability Zone in which the cluster is launched.
 type AvailabilityZone struct {
 

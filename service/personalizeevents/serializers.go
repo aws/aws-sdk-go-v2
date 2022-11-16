@@ -295,6 +295,13 @@ func awsRestjson1_serializeDocumentEvent(v *types.Event, value smithyjson.Value)
 		ok.String(*v.ItemId)
 	}
 
+	if v.MetricAttribution != nil {
+		ok := object.Key("metricAttribution")
+		if err := awsRestjson1_serializeDocumentMetricAttribution(v.MetricAttribution, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Properties != nil {
 		ok := object.Key("properties")
 		ok.String(*v.Properties)
@@ -364,6 +371,18 @@ func awsRestjson1_serializeDocumentItemList(v []types.Item, value smithyjson.Val
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricAttribution(v *types.MetricAttribution, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventAttributionSource != nil {
+		ok := object.Key("eventAttributionSource")
+		ok.String(*v.EventAttributionSource)
+	}
+
 	return nil
 }
 

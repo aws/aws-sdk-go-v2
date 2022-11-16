@@ -51,16 +51,33 @@ type GetPropertyValueInput struct {
 	// The ID of the entity whose property values the operation returns.
 	EntityId *string
 
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
+	MaxResults *int32
+
+	// The string that specifies the next page of results.
+	NextToken *string
+
+	// The property group name.
+	PropertyGroupName *string
+
+	// The tabular conditions.
+	TabularConditions *types.TabularConditions
+
 	noSmithyDocumentSerde
 }
 
 type GetPropertyValueOutput struct {
 
+	// The string that specifies the next page of results.
+	NextToken *string
+
 	// An object that maps strings to the properties and latest property values in the
 	// response. Each string in the mapping must be unique to this object.
-	//
-	// This member is required.
 	PropertyValues map[string]types.PropertyLatestValue
+
+	// A table of property values.
+	TabularPropertyValues [][]map[string]types.DataValue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -159,6 +176,97 @@ func (m *endpointPrefix_opGetPropertyValueMiddleware) HandleSerialize(ctx contex
 }
 func addEndpointPrefix_opGetPropertyValueMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Insert(&endpointPrefix_opGetPropertyValueMiddleware{}, `OperationSerializer`, middleware.After)
+}
+
+// GetPropertyValueAPIClient is a client that implements the GetPropertyValue
+// operation.
+type GetPropertyValueAPIClient interface {
+	GetPropertyValue(context.Context, *GetPropertyValueInput, ...func(*Options)) (*GetPropertyValueOutput, error)
+}
+
+var _ GetPropertyValueAPIClient = (*Client)(nil)
+
+// GetPropertyValuePaginatorOptions is the paginator options for GetPropertyValue
+type GetPropertyValuePaginatorOptions struct {
+	// The maximum number of results to return at one time. The default is 25. Valid
+	// Range: Minimum value of 1. Maximum value of 250.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetPropertyValuePaginator is a paginator for GetPropertyValue
+type GetPropertyValuePaginator struct {
+	options   GetPropertyValuePaginatorOptions
+	client    GetPropertyValueAPIClient
+	params    *GetPropertyValueInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetPropertyValuePaginator returns a new GetPropertyValuePaginator
+func NewGetPropertyValuePaginator(client GetPropertyValueAPIClient, params *GetPropertyValueInput, optFns ...func(*GetPropertyValuePaginatorOptions)) *GetPropertyValuePaginator {
+	if params == nil {
+		params = &GetPropertyValueInput{}
+	}
+
+	options := GetPropertyValuePaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetPropertyValuePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetPropertyValuePaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetPropertyValue page.
+func (p *GetPropertyValuePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetPropertyValueOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetPropertyValue(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetPropertyValue(region string) *awsmiddleware.RegisterServiceMetadata {

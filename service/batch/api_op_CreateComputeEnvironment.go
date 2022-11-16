@@ -36,29 +36,30 @@ import (
 // your container instances into that Amazon ECS cluster. For more information, see
 // Launching an Amazon ECS container instance
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)
-// in the Amazon Elastic Container Service Developer Guide. Batch doesn't
-// automatically upgrade the AMIs in a compute environment after it's created. For
-// example, it also doesn't update the AMIs in your compute environment when a
-// newer version of the Amazon ECS optimized AMI is available. You're responsible
-// for the management of the guest operating system. This includes any updates and
-// security patches. You're also responsible for any additional application
-// software or utilities that you install on the compute resources. There are two
-// ways to use a new AMI for your Batch jobs. The original method is to complete
-// these steps:
+// in the Amazon Elastic Container Service Developer Guide. To create a compute
+// environment that uses EKS resources, the caller must have permissions to call
+// eks:DescribeCluster. Batch doesn't automatically upgrade the AMIs in a compute
+// environment after it's created. For example, it also doesn't update the AMIs in
+// your compute environment when a newer version of the Amazon ECS optimized AMI is
+// available. You're responsible for the management of the guest operating system.
+// This includes any updates and security patches. You're also responsible for any
+// additional application software or utilities that you install on the compute
+// resources. There are two ways to use a new AMI for your Batch jobs. The original
+// method is to complete these steps:
 //
-// * Create a new compute environment with the new AMI.
+// * Create a new compute environment with the
+// new AMI.
 //
-// * Add the
-// compute environment to an existing job queue.
+// * Add the compute environment to an existing job queue.
 //
-// * Remove the earlier compute
-// environment from your job queue.
+// * Remove the
+// earlier compute environment from your job queue.
 //
-// * Delete the earlier compute environment.
+// * Delete the earlier compute
+// environment.
 //
-// In
-// April 2022, Batch added enhanced support for updating compute environments. For
-// more information, see Updating compute environments
+// In April 2022, Batch added enhanced support for updating compute
+// environments. For more information, see Updating compute environments
 // (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html).
 // To use the enhanced updating of compute environments to update AMIs, follow
 // these rules:

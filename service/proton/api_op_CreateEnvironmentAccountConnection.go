@@ -52,10 +52,9 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// This member is required.
 	ManagementAccountId *string
 
-	// The Amazon Resource Name (ARN) of an IAM service role in the environment
-	// account. Proton uses this role to provision infrastructure resources using
-	// Amazon Web Services-managed provisioning and CloudFormation in the associated
-	// environment account.
+	// The Amazon Resource Name (ARN) of the IAM service role that's created in the
+	// environment account. Proton uses this role to provision infrastructure resources
+	// in the associated environment account.
 	//
 	// This member is required.
 	RoleArn *string
@@ -70,12 +69,12 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// CodeBuild-based provisioning in the associated environment account.
 	CodebuildRoleArn *string
 
-	// The Amazon Resource Name (ARN) of an IAM service role in the environment
-	// account. Proton uses this role to provision directly defined components in the
-	// associated environment account. It determines the scope of infrastructure that a
-	// component can provision in the account. You must specify componentRoleArn to
-	// allow directly defined components to be associated with any environments running
-	// in this account. For more information about components, see Proton components
+	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
+	// provisioning directly defined components in the associated environment account.
+	// It determines the scope of infrastructure that a component can provision in the
+	// account. You must specify componentRoleArn to allow directly defined components
+	// to be associated with any environments running in this account. For more
+	// information about components, see Proton components
 	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
 	// Proton User Guide.
 	ComponentRoleArn *string

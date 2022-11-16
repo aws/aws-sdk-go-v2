@@ -52,6 +52,10 @@ type CreatePricingRuleInput struct {
 	// This member is required.
 	Type types.PricingRuleType
 
+	// The seller of services provided by Amazon Web Services, their affiliates, or
+	// third-party providers selling services via Amazon Web Services Marketplace.
+	BillingEntity *string
+
 	// The token that's needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string

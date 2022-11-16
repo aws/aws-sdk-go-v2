@@ -51,6 +51,9 @@ type CreateUserInput struct {
 	// This member is required.
 	UserName *string
 
+	// Specifies how to authenticate the user.
+	AuthenticationMode *types.AuthenticationMode
+
 	// Indicates a password is not required for this user.
 	NoPasswordRequired *bool
 

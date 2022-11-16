@@ -262,6 +262,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "lambda.eu-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "eu-south-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "lambda.eu-south-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

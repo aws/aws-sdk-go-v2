@@ -211,6 +211,14 @@ type CloudwatchLogsExportConfiguration struct {
 // and contains changes that will be applied during the next maintenance window.
 type ClusterPendingModifiedValues struct {
 
+	// The allocated storage size in gibibytes (GiB) for all database engines except
+	// Amazon Aurora. For Aurora, AllocatedStorage always returns 1, because Aurora DB
+	// cluster storage size isn't fixed, but instead automatically adjusts as needed.
+	AllocatedStorage *int32
+
+	// The number of days for which automatic DB snapshots are retained.
+	BackupRetentionPeriod *int32
+
 	// The DBClusterIdentifier value for the DB cluster.
 	DBClusterIdentifier *string
 
@@ -220,6 +228,10 @@ type ClusterPendingModifiedValues struct {
 	// A value that indicates whether mapping of Amazon Web Services Identity and
 	// Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
+
+	// The Provisioned IOPS (I/O operations per second) value. This setting is only for
+	// non-Aurora Multi-AZ DB clusters.
+	Iops *int32
 
 	// The master credentials for the DB cluster.
 	MasterUserPassword *string
@@ -441,6 +453,9 @@ type DBCluster struct {
 	// Specifies information on the subnet group associated with the DB cluster,
 	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *string
+
+	// Reserved for future use.
+	DBSystemId *string
 
 	// Contains the name of the initial database of this DB cluster that was provided
 	// at create time, if one was specified when the DB cluster was created. This same
@@ -885,6 +900,9 @@ type DBClusterSnapshot struct {
 	// Specifies the identifier for the DB cluster snapshot.
 	DBClusterSnapshotIdentifier *string
 
+	// Reserved for future use.
+	DBSystemId *string
+
 	// Specifies the name of the database engine for this DB cluster snapshot.
 	Engine *string
 
@@ -997,6 +1015,15 @@ type DBEngineVersion struct {
 
 	// The creation time of the DB engine version.
 	CreateTime *time.Time
+
+	// JSON string that lists the installation files and parameters that RDS Custom
+	// uses to create a custom engine version (CEV). RDS Custom applies the patches in
+	// the order in which they're listed in the manifest. You can set the Oracle home,
+	// Oracle base, and UNIX/Linux user and group using the installation parameters.
+	// For more information, see JSON fields in the CEV manifest
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields)
+	// in the Amazon RDS User Guide.
+	CustomDBEngineVersionManifest *string
 
 	// The description of the database engine.
 	DBEngineDescription *string
@@ -1249,6 +1276,10 @@ type DBInstance struct {
 	// Specifies information on the subnet group associated with the DB instance,
 	// including the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup
+
+	// The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID
+	// is also the name of the CDB. This setting is valid for RDS Custom only.
+	DBSystemId *string
 
 	// Specifies the port that the DB instance listens on. If the DB instance is part
 	// of a DB cluster, this can be a different port than the DB cluster port.

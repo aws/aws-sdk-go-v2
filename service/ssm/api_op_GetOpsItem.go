@@ -44,6 +44,9 @@ type GetOpsItemInput struct {
 	// This member is required.
 	OpsItemId *string
 
+	// The OpsItem Amazon Resource Name (ARN).
+	OpsItemArn *string
+
 	noSmithyDocumentSerde
 }
 

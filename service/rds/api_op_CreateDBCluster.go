@@ -146,6 +146,9 @@ type CreateDBClusterInput struct {
 	// DB clusters and Multi-AZ DB clusters
 	DBSubnetGroupName *string
 
+	// Reserved for future use.
+	DBSystemId *string
+
 	// The name for your database of up to 64 alphanumeric characters. If you do not
 	// provide a name, Amazon RDS doesn't create a database in the DB cluster you are
 	// creating. Valid for: Aurora DB clusters and Multi-AZ DB clusters

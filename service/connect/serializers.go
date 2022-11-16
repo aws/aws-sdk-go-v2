@@ -8196,6 +8196,96 @@ func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encod
 	return nil
 }
 
+type awsRestjson1_serializeOpMonitorContact struct {
+}
+
+func (*awsRestjson1_serializeOpMonitorContact) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpMonitorContact) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*MonitorContactInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/contact/monitor")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentMonitorContactInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsMonitorContactInput(v *MonitorContactInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentMonitorContactInput(v *MonitorContactInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedMonitorCapabilities != nil {
+		ok := object.Key("AllowedMonitorCapabilities")
+		if err := awsRestjson1_serializeDocumentAllowedMonitorCapabilities(v.AllowedMonitorCapabilities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ContactId != nil {
+		ok := object.Key("ContactId")
+		ok.String(*v.ContactId)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.UserId != nil {
+		ok := object.Key("UserId")
+		ok.String(*v.UserId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutUserStatus struct {
 }
 
@@ -13315,6 +13405,17 @@ func awsRestjson1_serializeOpDocumentUpdateUserSecurityProfilesInput(v *UpdateUs
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedMonitorCapabilities(v []types.MonitorCapability, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
