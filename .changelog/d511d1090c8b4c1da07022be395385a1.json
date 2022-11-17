@@ -1,8 +1,0 @@
-{
-    "id": "d511d109-0c8b-4c1d-a070-22be395385a1",
-    "type": "feature",
-    "description": "Adds support for Internet Protocol Version 6 (IPv6) on DMS Replication Instances",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

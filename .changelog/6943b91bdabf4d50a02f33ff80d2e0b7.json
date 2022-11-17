@@ -1,8 +1,0 @@
-{
-    "id": "6943b91b-dabf-4d50-a02f-33ff80d2e0b7",
-    "type": "documentation",
-    "description": "Documentation updates for AWS Security Token Service.",
-    "modules": [
-        "service/sts"
-    ]
-}

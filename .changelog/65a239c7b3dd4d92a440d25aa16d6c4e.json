@@ -1,8 +1,0 @@
-{
-    "id": "65a239c7-b3dd-4d92-a440-d25aa16d6c4e",
-    "type": "feature",
-    "description": "Adds LoggingConfiguration APIs for IVS Chat - a feature that allows customers to store and record sent messages in a chat room to S3 buckets, CloudWatch logs, or Kinesis firehose.",
-    "modules": [
-        "service/ivschat"
-    ]
-}

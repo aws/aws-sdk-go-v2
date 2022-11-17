@@ -1,3 +1,48 @@
+# Release (2022-11-17)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.12.0](service/amplify/CHANGELOG.md#v1120-2022-11-17)
+  * **Feature**: Adds a new value (WEB_COMPUTE) to the Platform enum that allows customers to create Amplify Apps with Server-Side Rendering support.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.19.0](service/appflow/CHANGELOG.md#v1190-2022-11-17)
+  * **Feature**: AppFlow simplifies the preparation and cataloging of SaaS data into the AWS Glue Data Catalog where your data can be discovered and accessed by AWS analytics and ML services. AppFlow now also supports data field partitioning and file size optimization to improve query performance and reduce cost.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.16.0](service/appsync/CHANGELOG.md#v1160-2022-11-17)
+  * **Feature**: This release introduces the APPSYNC_JS runtime, and adds support for JavaScript in AppSync functions and AppSync pipeline resolvers.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.22.0](service/databasemigrationservice/CHANGELOG.md#v1220-2022-11-17)
+  * **Feature**: Adds support for Internet Protocol Version 6 (IPv6) on DMS Replication Instances
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.71.0](service/ec2/CHANGELOG.md#v1710-2022-11-17)
+  * **Feature**: This release adds a new optional parameter "privateIpAddress" for the CreateNatGateway API. PrivateIPAddress will allow customers to select a custom Private IPv4 address instead of having it be auto-assigned.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.18.25](service/elasticloadbalancingv2/CHANGELOG.md#v11825-2022-11-17)
+  * **Documentation**: Provides new target group attributes to turn on/off cross zone load balancing and configure target group health for Network Load Balancers and Application Load Balancers. Provides improvements to health check configuration for Network Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.4.0](service/emrserverless/CHANGELOG.md#v140-2022-11-17)
+  * **Feature**: Adds support for AWS Graviton2 based applications. You can now select CPU architecture when creating new applications or updating existing ones.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.1.0](service/ivschat/CHANGELOG.md#v110-2022-11-17)
+  * **Feature**: Adds LoggingConfiguration APIs for IVS Chat - a feature that allows customers to store and record sent messages in a chat room to S3 buckets, CloudWatch logs, or Kinesis firehose.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.25.0](service/lambda/CHANGELOG.md#v1250-2022-11-17)
+  * **Feature**: Add Node 18 (nodejs18.x) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.22.0](service/personalize/CHANGELOG.md#v1220-2022-11-17)
+  * **Feature**: This release provides support for creation and use of metric attributions in AWS Personalize
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.20.0](service/polly/CHANGELOG.md#v1200-2022-11-17)
+  * **Feature**: Add two new neural voices - Ola (pl-PL) and Hala (ar-AE).
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.8.0](service/rum/CHANGELOG.md#v180-2022-11-17)
+  * **Feature**: CloudWatch RUM now supports custom events. To use custom events, create an app monitor or update an app monitor with CustomEvent Status as ENABLED.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.26.0](service/s3control/CHANGELOG.md#v1260-2022-11-17)
+  * **Feature**: Added 34 new S3 Storage Lens metrics to support additional customer use cases.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.16.7](service/secretsmanager/CHANGELOG.md#v1167-2022-11-17)
+  * **Documentation**: Documentation updates for Secrets Manager.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.24.0](service/securityhub/CHANGELOG.md#v1240-2022-11-17)
+  * **Feature**: Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.15.0](service/servicecatalogappregistry/CHANGELOG.md#v1150-2022-11-17)
+  * **Feature**: This release adds support for tagged resource associations, which allows you to associate a group of resources with a defined resource tag key and value to the application.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.17.4](service/sts/CHANGELOG.md#v1174-2022-11-17)
+  * **Documentation**: Documentation updates for AWS Security Token Service.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.18.0](service/textract/CHANGELOG.md#v1180-2022-11-17)
+  * **Feature**: This release adds support for specifying and extracting information from documents using the Signatures feature within Analyze Document API
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.27.0](service/workspaces/CHANGELOG.md#v1270-2022-11-17)
+  * **Feature**: The release introduces CreateStandbyWorkspaces, an API that allows you to create standby WorkSpaces associated with a primary WorkSpace in another Region. DescribeWorkspaces now includes related WorkSpaces properties. DescribeWorkspaceBundles and CreateWorkspaceBundle now return more bundle details.
+
 # Release (2022-11-16)
 
 ## General Highlights

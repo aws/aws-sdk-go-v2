@@ -1,8 +1,0 @@
-{
-    "id": "63c3e770-356d-4cfe-8b06-ecd32a8b4251",
-    "type": "feature",
-    "description": "This release introduces the APPSYNC_JS runtime, and adds support for JavaScript in AppSync functions and AppSync pipeline resolvers.",
-    "modules": [
-        "service/appsync"
-    ]
-}

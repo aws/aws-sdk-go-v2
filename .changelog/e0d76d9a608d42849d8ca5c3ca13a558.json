@@ -1,8 +1,0 @@
-{
-    "id": "e0d76d9a-608d-4284-9d8c-a5c3ca13a558",
-    "type": "feature",
-    "description": "CloudWatch RUM now supports custom events. To use custom events, create an app monitor or update an app monitor with CustomEvent Status as ENABLED.",
-    "modules": [
-        "service/rum"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.1.0 (2022-11-17)
+
+* **Feature**: Adds LoggingConfiguration APIs for IVS Chat - a feature that allows customers to store and record sent messages in a chat room to S3 buckets, CloudWatch logs, or Kinesis firehose.
+
 # v1.0.21 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

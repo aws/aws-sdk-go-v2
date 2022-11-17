@@ -1,3 +1,7 @@
+# v1.4.0 (2022-11-17)
+
+* **Feature**: Adds support for AWS Graviton2 based applications. You can now select CPU architecture when creating new applications or updating existing ones.
+
 # v1.3.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

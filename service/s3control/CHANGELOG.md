@@ -1,3 +1,7 @@
+# v1.26.0 (2022-11-17)
+
+* **Feature**: Added 34 new S3 Storage Lens metrics to support additional customer use cases.
+
 # v1.25.2 (2022-11-16)
 
 * No change notes available for this release.

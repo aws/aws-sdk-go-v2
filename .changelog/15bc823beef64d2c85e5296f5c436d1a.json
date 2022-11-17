@@ -1,8 +1,0 @@
-{
-    "id": "15bc823b-eef6-4d2c-85e5-296f5c436d1a",
-    "type": "feature",
-    "description": "Add Node 18 (nodejs18.x) support to AWS Lambda.",
-    "modules": [
-        "service/lambda"
-    ]
-}

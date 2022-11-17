@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-17)
+
+* **Feature**: Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail
+
 # v1.23.8 (2022-11-11)
 
 * **Documentation**: Documentation updates for Security Hub

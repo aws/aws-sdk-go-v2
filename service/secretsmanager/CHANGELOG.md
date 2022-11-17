@@ -1,3 +1,7 @@
+# v1.16.7 (2022-11-17)
+
+* **Documentation**: Documentation updates for Secrets Manager.
+
 # v1.16.6 (2022-11-16)
 
 * No change notes available for this release.

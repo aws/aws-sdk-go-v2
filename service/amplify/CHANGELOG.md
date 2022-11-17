@@ -1,3 +1,7 @@
+# v1.12.0 (2022-11-17)
+
+* **Feature**: Adds a new value (WEB_COMPUTE) to the Platform enum that allows customers to create Amplify Apps with Server-Side Rendering support.
+
 # v1.11.20 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

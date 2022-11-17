@@ -1,8 +1,0 @@
-{
-    "id": "ded8f31b-212d-4ffc-a74b-a68e42c2c2fe",
-    "type": "feature",
-    "description": "This release adds support for tagged resource associations, which allows you to associate a group of resources with a defined resource tag key and value to the application.",
-    "modules": [
-        "service/servicecatalogappregistry"
-    ]
-}

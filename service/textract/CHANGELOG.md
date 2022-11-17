@@ -1,3 +1,7 @@
+# v1.18.0 (2022-11-17)
+
+* **Feature**: This release adds support for specifying and extracting information from documents using the Signatures feature within Analyze Document API
+
 # v1.17.0 (2022-11-01)
 
 * **Feature**: Add ocr results in AnalyzeIDResponse as blocks

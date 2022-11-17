@@ -1,8 +1,0 @@
-{
-    "id": "185543fe-3a9a-4b47-ae76-d4664acc015a",
-    "type": "feature",
-    "description": "This release provides support for creation and use of metric attributions in AWS Personalize",
-    "modules": [
-        "service/personalize"
-    ]
-}

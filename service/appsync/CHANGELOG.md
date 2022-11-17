@@ -1,3 +1,7 @@
+# v1.16.0 (2022-11-17)
+
+* **Feature**: This release introduces the APPSYNC_JS runtime, and adds support for JavaScript in AppSync functions and AppSync pipeline resolvers.
+
 # v1.15.12 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

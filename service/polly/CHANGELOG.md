@@ -1,3 +1,7 @@
+# v1.20.0 (2022-11-17)
+
+* **Feature**: Add two new neural voices - Ola (pl-PL) and Hala (ar-AE).
+
 # v1.19.0 (2022-11-08)
 
 * **Feature**: Amazon Polly adds new voices: Elin (sv-SE), Ida (nb-NO), Laura (nl-NL) and Suvi (fi-FI). They are available as neural voices only.

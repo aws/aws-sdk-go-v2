@@ -1,3 +1,7 @@
+# v1.22.0 (2022-11-17)
+
+* **Feature**: This release provides support for creation and use of metric attributions in AWS Personalize
+
 # v1.21.10 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions
