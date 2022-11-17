@@ -2285,6 +2285,15 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				sv.ApplicationId = ptr.String(jtv)
 			}
 
+		case "architecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Architecture to be of type string, got %T instead", value)
+				}
+				sv.Architecture = types.Architecture(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2466,6 +2475,15 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 
 	for key, value := range shape {
 		switch key {
+		case "architecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Architecture to be of type string, got %T instead", value)
+				}
+				sv.Architecture = types.Architecture(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)

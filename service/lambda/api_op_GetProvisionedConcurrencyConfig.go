@@ -57,7 +57,9 @@ type GetProvisionedConcurrencyConfigInput struct {
 
 type GetProvisionedConcurrencyConfigOutput struct {
 
-	// The amount of provisioned concurrency allocated.
+	// The amount of provisioned concurrency allocated. When a weighted alias is used
+	// during linear and canary deployments, this value fluctuates depending on the
+	// amount of concurrency that is provisioned for the function versions.
 	AllocatedProvisionedConcurrentExecutions *int32
 
 	// The amount of provisioned concurrency available.

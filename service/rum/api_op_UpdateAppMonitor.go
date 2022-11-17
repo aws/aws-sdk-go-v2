@@ -54,6 +54,12 @@ type UpdateAppMonitorInput struct {
 	// (https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html).
 	AppMonitorConfiguration *types.AppMonitorConfiguration
 
+	// Specifies whether this app monitor allows the web client to define and send
+	// custom events. The default is for custom events to be DISABLED. For more
+	// information about custom events, see Send custom events
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html).
+	CustomEvents *types.CustomEvents
+
 	// Data collected by RUM is kept by RUM for 30 days and then deleted. This
 	// parameter specifies whether RUM sends a copy of this telemetry data to Amazon
 	// CloudWatch Logs in your account. This enables you to keep the telemetry data for

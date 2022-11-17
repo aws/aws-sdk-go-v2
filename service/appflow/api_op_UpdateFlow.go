@@ -61,6 +61,11 @@ type UpdateFlowInput struct {
 	// A description of the flow.
 	Description *string
 
+	// Specifies the configuration that Amazon AppFlow uses when it catalogs the data
+	// that's transferred by the associated flow. When Amazon AppFlow catalogs the data
+	// from a flow, it stores metadata in a data catalog.
+	MetadataCatalogConfig *types.MetadataCatalogConfig
+
 	noSmithyDocumentSerde
 }
 

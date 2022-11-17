@@ -13181,6 +13181,13 @@ func awsRestjson1_serializeDocumentAwsLambdaFunctionDetails(v *types.AwsLambdaFu
 	object := value.Object()
 	defer object.Close()
 
+	if v.Architectures != nil {
+		ok := object.Key("Architectures")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Architectures, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Code != nil {
 		ok := object.Key("Code")
 		if err := awsRestjson1_serializeDocumentAwsLambdaFunctionCode(v.Code, ok); err != nil {
@@ -13242,6 +13249,11 @@ func awsRestjson1_serializeDocumentAwsLambdaFunctionDetails(v *types.AwsLambdaFu
 	if v.MemorySize != 0 {
 		ok := object.Key("MemorySize")
 		ok.Integer(v.MemorySize)
+	}
+
+	if v.PackageType != nil {
+		ok := object.Key("PackageType")
+		ok.String(*v.PackageType)
 	}
 
 	if v.RevisionId != nil {
@@ -22078,6 +22090,16 @@ func awsRestjson1_serializeDocumentSoftwarePackage(v *types.SoftwarePackage, val
 	if v.Remediation != nil {
 		ok := object.Key("Remediation")
 		ok.String(*v.Remediation)
+	}
+
+	if v.SourceLayerArn != nil {
+		ok := object.Key("SourceLayerArn")
+		ok.String(*v.SourceLayerArn)
+	}
+
+	if v.SourceLayerHash != nil {
+		ok := object.Key("SourceLayerHash")
+		ok.String(*v.SourceLayerHash)
 	}
 
 	if v.Version != nil {

@@ -46809,6 +46809,11 @@ func awsEc2query_serializeOpDocumentCreateNatGatewayInput(v *CreateNatGatewayInp
 		objectKey.Boolean(*v.DryRun)
 	}
 
+	if v.PrivateIpAddress != nil {
+		objectKey := object.Key("PrivateIpAddress")
+		objectKey.String(*v.PrivateIpAddress)
+	}
+
 	if v.SubnetId != nil {
 		objectKey := object.Key("SubnetId")
 		objectKey.String(*v.SubnetId)

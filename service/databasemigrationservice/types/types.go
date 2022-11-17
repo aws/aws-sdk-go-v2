@@ -438,14 +438,14 @@ type Endpoint struct {
 	EndpointType ReplicationEndpointTypeValue
 
 	// The expanded name for the engine name. For example, if the EngineName parameter
-	// is "aurora," this value would be "Amazon Aurora MySQL."
+	// is "aurora", this value would be "Amazon Aurora MySQL".
 	EngineDisplayName *string
 
 	// The database engine name. Valid values, depending on the EndpointType, include
 	// "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
-	// "opensearch", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb",
-	// "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and
-	// "neptune".
+	// "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb",
+	// "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and
+	// "babelfish".
 	EngineName *string
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
@@ -1354,8 +1354,8 @@ type OracleSettings struct {
 	ArchivedLogDestId *int32
 
 	// When this field is set to Y, DMS only accesses the archived redo logs. If the
-	// archived redo logs are stored on Oracle ASM only, the DMS user account needs to
-	// be granted ASM privileges.
+	// archived redo logs are stored on Automatic Storage Management (ASM) only, the
+	// DMS user account needs to be granted ASM privileges.
 	ArchivedLogsOnly *bool
 
 	// For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM)
@@ -1487,9 +1487,9 @@ type OracleSettings struct {
 	// in the Database Migration Service User Guide.
 	SecretsManagerAccessRoleArn *string
 
-	// Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The
-	// full ARN of the IAM role that specifies DMS as the trusted entity and grants the
-	// required permissions to access the SecretsManagerOracleAsmSecret. This
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM).
+	// The full ARN of the IAM role that specifies DMS as the trusted entity and grants
+	// the required permissions to access the SecretsManagerOracleAsmSecret. This
 	// SecretsManagerOracleAsmSecret has the secret value that allows access to the
 	// Oracle ASM of the endpoint. You can specify one of two sets of values for these
 	// permissions. You can specify the values for this setting and
@@ -1503,8 +1503,8 @@ type OracleSettings struct {
 	// in the Database Migration Service User Guide.
 	SecretsManagerOracleAsmAccessRoleArn *string
 
-	// Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The
-	// full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret
+	// Required only if your Oracle endpoint uses Automatic Storage Management (ASM).
+	// The full ARN, partial ARN, or friendly name of the SecretsManagerOracleAsmSecret
 	// that contains the Oracle ASM connection details for the Oracle endpoint.
 	SecretsManagerOracleAsmSecretId *string
 
@@ -2065,6 +2065,11 @@ type ReplicationInstance struct {
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
 	MultiAZ bool
 
+	// The type of IP address protocol used by a replication instance, such as IPv4
+	// only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not
+	// yet supported.
+	NetworkType *string
+
 	// The pending modification values.
 	PendingModifiedValues *ReplicationPendingModifiedValues
 
@@ -2101,6 +2106,9 @@ type ReplicationInstance struct {
 	//
 	// Example: myrepinstance
 	ReplicationInstanceIdentifier *string
+
+	// One or more IPv6 addresses for the replication instance.
+	ReplicationInstanceIpv6Addresses []string
 
 	// The private IP address of the replication instance.
 	//
@@ -2196,6 +2204,11 @@ type ReplicationPendingModifiedValues struct {
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
 	MultiAZ *bool
 
+	// The type of IP address protocol used by a replication instance, such as IPv4
+	// only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not
+	// yet supported.
+	NetworkType *string
+
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For more information on the settings and
 	// capacities for the available replication instance classes, see  Selecting the
@@ -2221,6 +2234,11 @@ type ReplicationSubnetGroup struct {
 
 	// The subnets that are in the subnet group.
 	Subnets []Subnet
+
+	// The IP addressing protocol supported by the subnet group. This is used by a
+	// replication instance with values such as IPv4 only or Dual-stack that supports
+	// both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
+	SupportedNetworkTypes []string
 
 	// The ID of the VPC.
 	VpcId *string
@@ -2739,7 +2757,7 @@ type S3Settings struct {
 	// an DMS CloudFormation template. The default value is 60 seconds.
 	CdcMaxBatchInterval *int32
 
-	// Minimum file size, defined in megabytes, to reach for a file output to Amazon
+	// Minimum file size, defined in kilobytes, to reach for a file output to Amazon
 	// S3. When CdcMinFileSize and CdcMaxBatchInterval are both specified, the file
 	// write is triggered by whichever parameter condition is met first within an DMS
 	// CloudFormation template. The default value is 32 MB.
@@ -3136,13 +3154,14 @@ type SupportedEndpointType struct {
 	EndpointType ReplicationEndpointTypeValue
 
 	// The expanded name for the engine name. For example, if the EngineName parameter
-	// is "aurora," this value would be "Amazon Aurora MySQL."
+	// is "aurora", this value would be "Amazon Aurora MySQL".
 	EngineDisplayName *string
 
 	// The database engine name. Valid values, depending on the EndpointType, include
 	// "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
-	// "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis",
-	// "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+	// "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb",
+	// "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and
+	// "babelfish".
 	EngineName *string
 
 	// The earliest DMS engine version that supports this endpoint engine. Note that
@@ -3199,6 +3218,19 @@ type SybaseSettings struct {
 // Provides a collection of table statistics in response to a request by the
 // DescribeTableStatistics operation.
 type TableStatistics struct {
+
+	// The number of data definition language (DDL) statements used to build and modify
+	// the structure of your tables applied on the target.
+	AppliedDdls *int64
+
+	// The number of delete actions applied on a target table.
+	AppliedDeletes *int64
+
+	// The number of insert actions applied on a target table.
+	AppliedInserts *int64
+
+	// The number of update actions applied on a target table.
+	AppliedUpdates *int64
 
 	// The data definition language (DDL) used to build and modify the structure of
 	// your tables.

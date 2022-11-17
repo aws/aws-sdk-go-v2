@@ -5639,6 +5639,11 @@ func awsAwsjson11_serializeOpDocumentCreateReplicationInstanceInput(v *CreateRep
 		ok.Boolean(*v.MultiAZ)
 	}
 
+	if v.NetworkType != nil {
+		ok := object.Key("NetworkType")
+		ok.String(*v.NetworkType)
+	}
+
 	if v.PreferredMaintenanceWindow != nil {
 		ok := object.Key("PreferredMaintenanceWindow")
 		ok.String(*v.PreferredMaintenanceWindow)
@@ -6902,6 +6907,11 @@ func awsAwsjson11_serializeOpDocumentModifyReplicationInstanceInput(v *ModifyRep
 	if v.MultiAZ != nil {
 		ok := object.Key("MultiAZ")
 		ok.Boolean(*v.MultiAZ)
+	}
+
+	if v.NetworkType != nil {
+		ok := object.Key("NetworkType")
+		ok.String(*v.NetworkType)
 	}
 
 	if v.PreferredMaintenanceWindow != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "25d2d240-c598-4522-8963-b43d843f37f4",
+    "type": "feature",
+    "description": "This release adds support for specifying and extracting information from documents using the Signatures feature within Analyze Document API",
+    "modules": [
+        "service/textract"
+    ]
+}

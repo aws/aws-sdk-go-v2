@@ -12,9 +12,7 @@ import (
 )
 
 // Modifies the health checks used when evaluating the health state of the targets
-// in the specified target group. If the protocol of the target group is TCP, TLS,
-// UDP, or TCP_UDP, you can't modify the health check protocol, interval, timeout,
-// or success codes.
+// in the specified target group.
 func (c *Client) ModifyTargetGroup(ctx context.Context, params *ModifyTargetGroupInput, optFns ...func(*Options)) (*ModifyTargetGroupOutput, error) {
 	if params == nil {
 		params = &ModifyTargetGroupInput{}
@@ -41,8 +39,7 @@ type ModifyTargetGroupInput struct {
 	HealthCheckEnabled *bool
 
 	// The approximate amount of time, in seconds, between health checks of an
-	// individual target. For TCP health checks, the supported values are 10 or 30
-	// seconds.
+	// individual target.
 	HealthCheckIntervalSeconds *int32
 
 	// [HTTP/HTTPS health checks] The destination for health checks on the targets.
@@ -72,12 +69,14 @@ type ModifyTargetGroupInput struct {
 	HealthyThresholdCount *int32
 
 	// [HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a
-	// successful response from a target.
+	// successful response from a target. For target groups with a protocol of TCP,
+	// TCP_UDP, UDP or TLS the range is 200-599. For target groups with a protocol of
+	// HTTP or HTTPS, the range is 200-499. For target groups with a protocol of
+	// GENEVE, the range is 200-399.
 	Matcher *types.Matcher
 
 	// The number of consecutive health check failures required before considering the
-	// target unhealthy. For target groups with a protocol of TCP or TLS, this value
-	// must be the same as the healthy threshold count.
+	// target unhealthy.
 	UnhealthyThresholdCount *int32
 
 	noSmithyDocumentSerde

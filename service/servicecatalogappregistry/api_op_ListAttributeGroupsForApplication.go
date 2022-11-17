@@ -48,7 +48,7 @@ type ListAttributeGroupsForApplicationInput struct {
 
 type ListAttributeGroupsForApplicationOutput struct {
 
-	// The details related to a specific AttributeGroup.
+	// The details related to a specific attribute group.
 	AttributeGroupsDetails []types.AttributeGroupDetails
 
 	// The token to use to get the next page of results after a previous API call.

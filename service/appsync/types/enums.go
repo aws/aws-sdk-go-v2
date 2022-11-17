@@ -148,6 +148,22 @@ func (AuthorizationType) Values() []AuthorizationType {
 	}
 }
 
+type BadRequestReason string
+
+// Enum values for BadRequestReason
+const (
+	BadRequestReasonCodeError BadRequestReason = "CODE_ERROR"
+)
+
+// Values returns all known values for BadRequestReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BadRequestReason) Values() []BadRequestReason {
+	return []BadRequestReason{
+		"CODE_ERROR",
+	}
+}
+
 type ConflictDetectionType string
 
 // Enum values for ConflictDetectionType
@@ -303,6 +319,22 @@ func (ResolverKind) Values() []ResolverKind {
 	return []ResolverKind{
 		"UNIT",
 		"PIPELINE",
+	}
+}
+
+type RuntimeName string
+
+// Enum values for RuntimeName
+const (
+	RuntimeNameAppsyncJs RuntimeName = "APPSYNC_JS"
+)
+
+// Values returns all known values for RuntimeName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RuntimeName) Values() []RuntimeName {
+	return []RuntimeName{
+		"APPSYNC_JS",
 	}
 }
 

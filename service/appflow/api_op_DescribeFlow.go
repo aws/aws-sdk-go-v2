@@ -77,11 +77,32 @@ type DescribeFlowOutput struct {
 	// Describes the details of the most recent flow run.
 	LastRunExecutionDetails *types.ExecutionDetails
 
+	// Describes the metadata catalog, metadata table, and data partitions that Amazon
+	// AppFlow used for the associated flow run.
+	LastRunMetadataCatalogDetails []types.MetadataCatalogDetail
+
 	// Specifies when the flow was last updated.
 	LastUpdatedAt *time.Time
 
 	// Specifies the user name of the account that performed the most recent update.
 	LastUpdatedBy *string
+
+	// Specifies the configuration that Amazon AppFlow uses when it catalogs the data
+	// that's transferred by the associated flow. When Amazon AppFlow catalogs the data
+	// from a flow, it stores metadata in a data catalog.
+	MetadataCatalogConfig *types.MetadataCatalogConfig
+
+	// The version number of your data schema. Amazon AppFlow assigns this version
+	// number. The version number increases by one when you change any of the following
+	// settings in your flow configuration:
+	//
+	// * Source-to-destination field mappings
+	//
+	// *
+	// Field data types
+	//
+	// * Partition keys
+	SchemaVersion *int64
 
 	// The configuration that controls how Amazon AppFlow retrieves data from the
 	// source connector.

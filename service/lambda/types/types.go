@@ -103,7 +103,8 @@ type AmazonManagedKafkaEventSourceConfig struct {
 	// The identifier for the Kafka consumer group to join. The consumer group ID must
 	// be unique among all your Kafka event sources. After creating a Kafka event
 	// source mapping with the consumer group ID specified, you cannot update this
-	// value. For more information, see services-msk-consumer-group-id.
+	// value. For more information, see Customizable consumer group ID
+	// (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).
 	ConsumerGroupId *string
 
 	noSmithyDocumentSerde
@@ -265,7 +266,7 @@ type EnvironmentResponse struct {
 	// Error messages for environment variables that couldn't be applied.
 	Error *EnvironmentError
 
-	// Environment variable key-value pairs.
+	// Environment variable key-value pairs. Omitted from CloudTrail logs.
 	Variables map[string]string
 
 	noSmithyDocumentSerde
@@ -331,10 +332,18 @@ type EventSourceMappingConfiguration struct {
 	// The result of the last Lambda invocation of your function.
 	LastProcessingResult *string
 
-	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
-	// that Lambda spends gathering records before invoking the function. Default: 0
-	// Related setting: When you set BatchSize to a value greater than 10, you must set
-	// MaximumBatchingWindowInSeconds to at least 1.
+	// The maximum amount of time, in seconds, that Lambda spends gathering records
+	// before invoking the function. You can configure MaximumBatchingWindowInSeconds
+	// to any value from 0 seconds to 300 seconds in increments of seconds. For streams
+	// and Amazon SQS event sources, the default batching window is 0 seconds. For
+	// Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default
+	// batching window is 500 ms. Note that because you can only change
+	// MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back
+	// to the 500 ms default batching window after you have changed it. To restore the
+	// default batching window, you must create a new event source mapping. Related
+	// setting: For streams and Amazon SQS event sources, when you set BatchSize to a
+	// value greater than 10, you must set MaximumBatchingWindowInSeconds to at least
+	// 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value
@@ -501,6 +510,7 @@ type FunctionConfiguration struct {
 
 	// The function's environment variables
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
+	// Omitted from CloudTrail logs.
 	Environment *EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but
@@ -842,7 +852,9 @@ type OnSuccess struct {
 // version.
 type ProvisionedConcurrencyConfigListItem struct {
 
-	// The amount of provisioned concurrency allocated.
+	// The amount of provisioned concurrency allocated. When a weighted alias is used
+	// during linear and canary deployments, this value fluctuates depending on the
+	// amount of concurrency that is provisioned for the function versions.
 	AllocatedProvisionedConcurrentExecutions *int32
 
 	// The amount of provisioned concurrency available.
@@ -884,7 +896,8 @@ type SelfManagedKafkaEventSourceConfig struct {
 	// The identifier for the Kafka consumer group to join. The consumer group ID must
 	// be unique among all your Kafka event sources. After creating a Kafka event
 	// source mapping with the consumer group ID specified, you cannot update this
-	// value. For more information, see services-msk-consumer-group-id.
+	// value. For more information, see Customizable consumer group ID
+	// (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).
 	ConsumerGroupId *string
 
 	noSmithyDocumentSerde
@@ -905,30 +918,32 @@ type SourceAccessConfiguration struct {
 	// key used for SASL/PLAIN authentication of your Apache Kafka brokers.
 	//
 	// *
-	// VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these
-	// subnets to fetch data from your self-managed Apache Kafka cluster.
+	// VPC_SUBNET - (Self-managed Apache Kafka) The subnets associated with your VPC.
+	// Lambda connects to these subnets to fetch data from your self-managed Apache
+	// Kafka cluster.
+	//
+	// * VPC_SECURITY_GROUP - (Self-managed Apache Kafka) The VPC
+	// security group used to manage access to your self-managed Apache Kafka
+	// brokers.
+	//
+	// * SASL_SCRAM_256_AUTH - (Self-managed Apache Kafka) The Secrets
+	// Manager ARN of your secret key used for SASL SCRAM-256 authentication of your
+	// self-managed Apache Kafka brokers.
+	//
+	// * SASL_SCRAM_512_AUTH - (Amazon MSK,
+	// Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for
+	// SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.
 	//
 	// *
-	// VPC_SECURITY_GROUP - The VPC security group used to manage access to your
-	// self-managed Apache Kafka brokers.
+	// VIRTUAL_HOST - (RabbitMQ) The name of the virtual host in your RabbitMQ broker.
+	// Lambda uses this RabbitMQ host as the event source. This property cannot be
+	// specified in an UpdateEventSourceMapping API call.
 	//
-	// * SASL_SCRAM_256_AUTH - The Secrets Manager
-	// ARN of your secret key used for SASL SCRAM-256 authentication of your
-	// self-managed Apache Kafka brokers.
-	//
-	// * SASL_SCRAM_512_AUTH - The Secrets Manager
-	// ARN of your secret key used for SASL SCRAM-512 authentication of your
-	// self-managed Apache Kafka brokers.
-	//
-	// * VIRTUAL_HOST - (Amazon MQ) The name of the
-	// virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the
-	// event source. This property cannot be specified in an UpdateEventSourceMapping
-	// API call.
-	//
-	// * CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, self-managed Apache
-	// Kafka) The Secrets Manager ARN of your secret key containing the certificate
-	// chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional)
-	// used for mutual TLS authentication of your MSK/Apache Kafka brokers.
+	// *
+	// CLIENT_CERTIFICATE_TLS_AUTH - (Amazon MSK, self-managed Apache Kafka) The
+	// Secrets Manager ARN of your secret key containing the certificate chain (X.509
+	// PEM), private key (PKCS#8 PEM), and private key password (optional) used for
+	// mutual TLS authentication of your MSK/Apache Kafka brokers.
 	//
 	// *
 	// SERVER_ROOT_CA_CERTIFICATE - (Self-managed Apache Kafka) The Secrets Manager ARN

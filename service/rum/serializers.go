@@ -322,6 +322,13 @@ func awsRestjson1_serializeOpDocumentCreateAppMonitorInput(v *CreateAppMonitorIn
 		}
 	}
 
+	if v.CustomEvents != nil {
+		ok := object.Key("CustomEvents")
+		if err := awsRestjson1_serializeDocumentCustomEvents(v.CustomEvents, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CwLogEnabled != nil {
 		ok := object.Key("CwLogEnabled")
 		ok.Boolean(*v.CwLogEnabled)
@@ -1230,6 +1237,13 @@ func awsRestjson1_serializeOpDocumentUpdateAppMonitorInput(v *UpdateAppMonitorIn
 		}
 	}
 
+	if v.CustomEvents != nil {
+		ok := object.Key("CustomEvents")
+		if err := awsRestjson1_serializeDocumentCustomEvents(v.CustomEvents, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CwLogEnabled != nil {
 		ok := object.Key("CwLogEnabled")
 		ok.Boolean(*v.CwLogEnabled)
@@ -1431,6 +1445,18 @@ func awsRestjson1_serializeDocumentAppMonitorDetails(v *types.AppMonitorDetails,
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomEvents(v *types.CustomEvents, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	return nil

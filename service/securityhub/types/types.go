@@ -6298,8 +6298,12 @@ type AwsLambdaFunctionDeadLetterConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Details about a function's configuration.
+// Details about an Lambda function's configuration.
 type AwsLambdaFunctionDetails struct {
+
+	// The instruction set architecture that the function uses. Valid values are x86_64
+	// or arm64.
+	Architectures []string
 
 	// An AwsLambdaFunctionCode object.
 	Code *AwsLambdaFunctionCode
@@ -6338,6 +6342,10 @@ type AwsLambdaFunctionDetails struct {
 
 	// The memory that is allocated to the function.
 	MemorySize int32
+
+	// The type of deployment package that's used to deploy the function code to
+	// Lambda. Set to Image for a container image and Zip for a .zip file archive.
+	PackageType *string
 
 	// The latest updated revision of the function or alias.
 	RevisionId *string
@@ -12128,6 +12136,12 @@ type SoftwarePackage struct {
 	// Describes the actions a customer can take to resolve the vulnerability in the
 	// software package.
 	Remediation *string
+
+	// The Amazon Resource Name (ARN) of the source layer.
+	SourceLayerArn *string
+
+	// The source layer hash of the vulnerable package.
+	SourceLayerHash *string
 
 	// The version of the software package.
 	Version *string

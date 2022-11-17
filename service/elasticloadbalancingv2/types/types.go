@@ -250,8 +250,8 @@ type ForwardActionConfig struct {
 	// The target group stickiness for the rule.
 	TargetGroupStickinessConfig *TargetGroupStickinessConfig
 
-	// One or more target groups. For Network Load Balancers, you can specify a single
-	// target group.
+	// The target groups. For Network Load Balancers, you can specify a single target
+	// group.
 	TargetGroups []TargetGroupTuple
 
 	noSmithyDocumentSerde
@@ -260,11 +260,11 @@ type ForwardActionConfig struct {
 // Information about a host header condition.
 type HostHeaderConditionConfig struct {
 
-	// One or more host names. The maximum size of each name is 128 characters. The
-	// comparison is case insensitive. The following wildcard characters are supported:
-	// * (matches 0 or more characters) and ? (matches exactly 1 character). If you
-	// specify multiple strings, the condition is satisfied if one of the strings
-	// matches the host name.
+	// The host names. The maximum size of each name is 128 characters. The comparison
+	// is case insensitive. The following wildcard characters are supported: * (matches
+	// 0 or more characters) and ? (matches exactly 1 character). If you specify
+	// multiple strings, the condition is satisfied if one of the strings matches the
+	// host name.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -281,14 +281,14 @@ type HttpHeaderConditionConfig struct {
 	// condition.
 	HttpHeaderName *string
 
-	// One or more strings to compare against the value of the HTTP header. The maximum
-	// size of each string is 128 characters. The comparison strings are case
-	// insensitive. The following wildcard characters are supported: * (matches 0 or
-	// more characters) and ? (matches exactly 1 character). If the same header appears
-	// multiple times in the request, we search them in order until a match is found.
-	// If you specify multiple strings, the condition is satisfied if one of the
-	// strings matches the value of the HTTP header. To require that all of the strings
-	// are a match, create one condition per string.
+	// The strings to compare against the value of the HTTP header. The maximum size of
+	// each string is 128 characters. The comparison strings are case insensitive. The
+	// following wildcard characters are supported: * (matches 0 or more characters)
+	// and ? (matches exactly 1 character). If the same header appears multiple times
+	// in the request, we search them in order until a match is found. If you specify
+	// multiple strings, the condition is satisfied if one of the strings matches the
+	// value of the HTTP header. To require that all of the strings are a match, create
+	// one condition per string.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -483,49 +483,55 @@ type LoadBalancerAddress struct {
 // Information about a load balancer attribute.
 type LoadBalancerAttribute struct {
 
-	// The name of the attribute. The following attribute is supported by all load
+	// The name of the attribute. The following attributes are supported by all load
 	// balancers:
 	//
 	// * deletion_protection.enabled - Indicates whether deletion
 	// protection is enabled. The value is true or false. The default is false.
 	//
-	// The
-	// following attributes are supported by both Application Load Balancers and
-	// Network Load Balancers:
+	// *
+	// load_balancing.cross_zone.enabled - Indicates whether cross-zone load balancing
+	// is enabled. The possible values are true and false. The default for Network Load
+	// Balancers and Gateway Load Balancers is false. The default for Application Load
+	// Balancers is true, and cannot be changed.
 	//
-	// * access_logs.s3.enabled - Indicates whether access
-	// logs are enabled. The value is true or false. The default is false.
+	// The following attributes are
+	// supported by both Application Load Balancers and Network Load Balancers:
 	//
 	// *
-	// access_logs.s3.bucket - The name of the S3 bucket for the access logs. This
-	// attribute is required if access logs are enabled. The bucket must exist in the
-	// same region as the load balancer and have a bucket policy that grants Elastic
-	// Load Balancing permissions to write to the bucket.
+	// access_logs.s3.enabled - Indicates whether access logs are enabled. The value is
+	// true or false. The default is false.
 	//
-	// * access_logs.s3.prefix -
-	// The prefix for the location in the S3 bucket for the access logs.
+	// * access_logs.s3.bucket - The name of the
+	// S3 bucket for the access logs. This attribute is required if access logs are
+	// enabled. The bucket must exist in the same region as the load balancer and have
+	// a bucket policy that grants Elastic Load Balancing permissions to write to the
+	// bucket.
+	//
+	// * access_logs.s3.prefix - The prefix for the location in the S3 bucket
+	// for the access logs.
+	//
+	// * ipv6.deny_all_igw_traffic - Blocks internet gateway
+	// (IGW) access to the load balancer. It is set to false for internet-facing load
+	// balancers and true for internal load balancers, preventing unintended access to
+	// your internal load balancer through an internet gateway.
+	//
+	// The following
+	// attributes are supported by only Application Load Balancers:
 	//
 	// *
-	// ipv6.deny_all_igw_traffic - Blocks internet gateway (IGW) access to the load
-	// balancer. It is set to false for internet-facing load balancers and true for
-	// internal load balancers, preventing unintended access to your internal load
-	// balancer through an internet gateway.
+	// idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid
+	// range is 1-4000 seconds. The default is 60 seconds.
 	//
-	// The following attributes are supported by
-	// only Application Load Balancers:
+	// *
+	// routing.http.desync_mitigation_mode - Determines how the load balancer handles
+	// requests that might pose a security risk to your application. The possible
+	// values are monitor, defensive, and strictest. The default is defensive.
 	//
-	// * idle_timeout.timeout_seconds - The idle
-	// timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60
-	// seconds.
-	//
-	// * routing.http.desync_mitigation_mode - Determines how the load
-	// balancer handles requests that might pose a security risk to your application.
-	// The possible values are monitor, defensive, and strictest. The default is
-	// defensive.
-	//
-	// * routing.http.drop_invalid_header_fields.enabled - Indicates
-	// whether HTTP headers with invalid header fields are removed by the load balancer
-	// (true) or routed to targets (false). The default is false.
+	// *
+	// routing.http.drop_invalid_header_fields.enabled - Indicates whether HTTP headers
+	// with invalid header fields are removed by the load balancer (true) or routed to
+	// targets (false). The default is false.
 	//
 	// *
 	// routing.http.preserve_host_header.enabled - Indicates whether the Application
@@ -575,13 +581,6 @@ type LoadBalancerAttribute struct {
 	// WAF-enabled load balancer to route requests to targets if it is unable to
 	// forward the request to Amazon Web Services WAF. The possible values are true and
 	// false. The default is false.
-	//
-	// The following attribute is supported by Network
-	// Load Balancers and Gateway Load Balancers:
-	//
-	// * load_balancing.cross_zone.enabled
-	// - Indicates whether cross-zone load balancing is enabled. The possible values
-	// are true and false. The default is false.
 	Key *string
 
 	// The value of the attribute.
@@ -615,11 +614,14 @@ type Matcher struct {
 	// 12.
 	GrpcCode *string
 
-	// For Application Load Balancers, you can specify values between 200 and 499, and
-	// the default value is 200. You can specify multiple values (for example,
+	// For Application Load Balancers, you can specify values between 200 and 499, with
+	// the default value being 200. You can specify multiple values (for example,
 	// "200,202") or a range of values (for example, "200-299"). For Network Load
-	// Balancers and Gateway Load Balancers, this must be "200–399". Note that when
-	// using shorthand syntax, some values such as commas need to be escaped.
+	// Balancers, you can specify values between 200 and 599, with the default value
+	// being 200-399. You can specify multiple values (for example, "200,202") or a
+	// range of values (for example, "200-299"). For Gateway Load Balancers, this must
+	// be "200–399". Note that when using shorthand syntax, some values such as commas
+	// need to be escaped.
 	HttpCode *string
 
 	noSmithyDocumentSerde
@@ -628,13 +630,13 @@ type Matcher struct {
 // Information about a path pattern condition.
 type PathPatternConditionConfig struct {
 
-	// One or more path patterns to compare against the request URL. The maximum size
-	// of each string is 128 characters. The comparison is case sensitive. The
-	// following wildcard characters are supported: * (matches 0 or more characters)
-	// and ? (matches exactly 1 character). If you specify multiple strings, the
-	// condition is satisfied if one of them matches the request URL. The path pattern
-	// is compared only to the path of the URL, not to its query string. To compare
-	// against the query string, use QueryStringConditionConfig.
+	// The path patterns to compare against the request URL. The maximum size of each
+	// string is 128 characters. The comparison is case sensitive. The following
+	// wildcard characters are supported: * (matches 0 or more characters) and ?
+	// (matches exactly 1 character). If you specify multiple strings, the condition is
+	// satisfied if one of them matches the request URL. The path pattern is compared
+	// only to the path of the URL, not to its query string. To compare against the
+	// query string, use QueryStringConditionConfig.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -647,13 +649,13 @@ type PathPatternConditionConfig struct {
 // character can be percentage encoded.
 type QueryStringConditionConfig struct {
 
-	// One or more key/value pairs or values to find in the query string. The maximum
-	// size of each string is 128 characters. The comparison is case insensitive. The
-	// following wildcard characters are supported: * (matches 0 or more characters)
-	// and ? (matches exactly 1 character). To search for a literal '*' or '?'
-	// character in a query string, you must escape these characters in Values using a
-	// '\' character. If you specify multiple key/value pairs or values, the condition
-	// is satisfied if one of them is found in the query string.
+	// The key/value pairs or values to find in the query string. The maximum size of
+	// each string is 128 characters. The comparison is case insensitive. The following
+	// wildcard characters are supported: * (matches 0 or more characters) and ?
+	// (matches exactly 1 character). To search for a literal '*' or '?' character in a
+	// query string, you must escape these characters in Values using a '\' character.
+	// If you specify multiple key/value pairs or values, the condition is satisfied if
+	// one of them is found in the query string.
 	Values []QueryStringKeyValuePair
 
 	noSmithyDocumentSerde
@@ -849,7 +851,7 @@ type RulePriorityPair struct {
 // of the client.
 type SourceIpConditionConfig struct {
 
-	// One or more source IP addresses, in CIDR format. You can use both IPv4 and IPv6
+	// The source IP addresses, in CIDR format. You can use both IPv4 and IPv6
 	// addresses. Wildcards are not supported. If you specify multiple addresses, the
 	// condition is satisfied if the source IP address of the request matches one of
 	// the CIDR blocks. This condition is not satisfied by the addresses in the
@@ -936,15 +938,18 @@ type TargetDescription struct {
 
 	// An Availability Zone or all. This determines whether the target receives traffic
 	// from the load balancer nodes in the specified Availability Zone or from all
-	// enabled Availability Zones for the load balancer. This parameter is not
-	// supported if the target type of the target group is instance or alb. If the
-	// target type is ip and the IP address is in a subnet of the VPC for the target
-	// group, the Availability Zone is automatically detected and this parameter is
-	// optional. If the IP address is outside the VPC, this parameter is required. With
-	// an Application Load Balancer, if the target type is ip and the IP address is
-	// outside the VPC for the target group, the only supported value is all. If the
-	// target type is lambda, this parameter is optional and the only supported value
-	// is all.
+	// enabled Availability Zones for the load balancer. For Application Load Balancer
+	// target groups, the specified Availability Zone value is only applicable when
+	// cross-zone load balancing is off. Otherwise the parameter is ignored and treated
+	// as all. This parameter is not supported if the target type of the target group
+	// is instance or alb. If the target type is ip and the IP address is in a subnet
+	// of the VPC for the target group, the Availability Zone is automatically detected
+	// and this parameter is optional. If the IP address is outside the VPC, this
+	// parameter is required. For Application Load Balancer target groups with
+	// cross-zone load balancing off, if the target type is ip and the IP address is
+	// outside of the VPC for the target group, this should be an Availability Zone
+	// inside the VPC for the target group. If the target type is lambda, this
+	// parameter is optional and the only supported value is all.
 	AvailabilityZone *string
 
 	// The port on which the target is listening. If the target group protocol is
@@ -1034,7 +1039,7 @@ type TargetGroup struct {
 // Information about a target group attribute.
 type TargetGroupAttribute struct {
 
-	// The name of the attribute. The following attribute is supported by all load
+	// The name of the attribute. The following attributes are supported by all load
 	// balancers:
 	//
 	// * deregistration_delay.timeout_seconds - The amount of time, in
@@ -1043,48 +1048,82 @@ type TargetGroupAttribute struct {
 	// default value is 300 seconds. If the target is a Lambda function, this attribute
 	// is not supported.
 	//
-	// The following attributes are supported by Application Load
-	// Balancers, Network Load Balancers, and Gateway Load Balancers:
+	// * stickiness.enabled - Indicates whether target stickiness is
+	// enabled. The value is true or false. The default is false.
+	//
+	// * stickiness.type -
+	// Indicates the type of stickiness. The possible values are:
+	//
+	// * lb_cookie and
+	// app_cookie for Application Load Balancers.
+	//
+	// * source_ip for Network Load
+	// Balancers.
+	//
+	// * source_ip_dest_ip and source_ip_dest_ip_proto for Gateway Load
+	// Balancers.
+	//
+	// The following attributes are supported by Application Load Balancers
+	// and Network Load Balancers:
+	//
+	// * load_balancing.cross_zone.enabled - Indicates
+	// whether cross zone load balancing is enabled. The value is true, false or
+	// use_load_balancer_configuration. The default is
+	// use_load_balancer_configuration.
 	//
 	// *
-	// stickiness.enabled - Indicates whether target stickiness is enabled. The value
-	// is true or false. The default is false.
-	//
-	// * stickiness.type - Indicates the type
-	// of stickiness. The possible values are:
-	//
-	// * lb_cookie and app_cookie for
-	// Application Load Balancers.
-	//
-	// * source_ip for Network Load Balancers.
+	// target_group_health.dns_failover.minimum_healthy_targets.count - The minimum
+	// number of targets that must be healthy. If the number of healthy targets is
+	// below this value, mark the zone as unhealthy in DNS, so that traffic is routed
+	// only to healthy zones. The possible values are off or an integer from 1 to the
+	// maximum number of targets. The default is off.
 	//
 	// *
-	// source_ip_dest_ip and source_ip_dest_ip_proto for Gateway Load Balancers.
-	//
-	// The
-	// following attributes are supported only if the load balancer is an Application
-	// Load Balancer and the target is an instance or an IP address:
-	//
-	// *
-	// load_balancing.algorithm.type - The load balancing algorithm determines how the
-	// load balancer selects targets when routing requests. The value is round_robin or
-	// least_outstanding_requests. The default is round_robin.
+	// target_group_health.dns_failover.minimum_healthy_targets.percentage - The
+	// minimum percentage of targets that must be healthy. If the percentage of healthy
+	// targets is below this value, mark the zone as unhealthy in DNS, so that traffic
+	// is routed only to healthy zones. The possible values are off or an integer from
+	// 1 to 100. The default is off.
 	//
 	// *
-	// slow_start.duration_seconds - The time period, in seconds, during which a newly
-	// registered target receives an increasing share of the traffic to the target
-	// group. After this time period ends, the target receives its full share of
-	// traffic. The range is 30-900 seconds (15 minutes). The default is 0 seconds
-	// (disabled).
+	// target_group_health.unhealthy_state_routing.minimum_healthy_targets.count - The
+	// minimum number of targets that must be healthy.
 	//
-	// * stickiness.app_cookie.cookie_name - Indicates the name of the
-	// application-based cookie. Names that start with the following prefixes are not
-	// allowed: AWSALB, AWSALBAPP, and AWSALBTG; they're reserved for use by the load
-	// balancer.
+	// If the number of healthy
+	// targets is below this value, send traffic to all targets, including unhealthy
+	// targets. The possible values are 1 to the maximum number of targets. The default
+	// is 1.
 	//
-	// * stickiness.app_cookie.duration_seconds - The time period, in
-	// seconds, during which requests from a client should be routed to the same
-	// target. After this time period expires, the application-based cookie is
+	// *
+	// target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage -
+	// The minimum percentage of targets that must be healthy. If the percentage of
+	// healthy targets is below this value, send traffic to all targets, including
+	// unhealthy targets. The possible values are off or an integer from 1 to 100. The
+	// default is off.
+	//
+	// The following attributes are supported only if the load
+	// balancer is an Application Load Balancer and the target is an instance or an IP
+	// address:
+	//
+	// * load_balancing.algorithm.type - The load balancing algorithm
+	// determines how the load balancer selects targets when routing requests. The
+	// value is round_robin or least_outstanding_requests. The default is
+	// round_robin.
+	//
+	// * slow_start.duration_seconds - The time period, in seconds,
+	// during which a newly registered target receives an increasing share of the
+	// traffic to the target group. After this time period ends, the target receives
+	// its full share of traffic. The range is 30-900 seconds (15 minutes). The default
+	// is 0 seconds (disabled).
+	//
+	// * stickiness.app_cookie.cookie_name - Indicates the
+	// name of the application-based cookie. Names that start with the following
+	// prefixes are not allowed: AWSALB, AWSALBAPP, and AWSALBTG; they're reserved for
+	// use by the load balancer.
+	//
+	// * stickiness.app_cookie.duration_seconds - The time
+	// period, in seconds, during which requests from a client should be routed to the
+	// same target. After this time period expires, the application-based cookie is
 	// considered stale. The range is 1 second to 1 week (604800 seconds). The default
 	// value is 1 day (86400 seconds).
 	//

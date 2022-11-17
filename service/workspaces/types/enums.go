@@ -62,6 +62,24 @@ func (AssociationStatus) Values() []AssociationStatus {
 	}
 }
 
+type BundleType string
+
+// Enum values for BundleType
+const (
+	BundleTypeRegular BundleType = "REGULAR"
+	BundleTypeStandby BundleType = "STANDBY"
+)
+
+// Values returns all known values for BundleType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BundleType) Values() []BundleType {
+	return []BundleType{
+		"REGULAR",
+		"STANDBY",
+	}
+}
+
 type CertificateBasedAuthStatusEnum string
 
 // Enum values for CertificateBasedAuthStatusEnum
@@ -438,6 +456,25 @@ func (SamlStatusEnum) Values() []SamlStatusEnum {
 	}
 }
 
+type StandbyWorkspaceRelationshipType string
+
+// Enum values for StandbyWorkspaceRelationshipType
+const (
+	StandbyWorkspaceRelationshipTypePrimary StandbyWorkspaceRelationshipType = "PRIMARY"
+	StandbyWorkspaceRelationshipTypeStandby StandbyWorkspaceRelationshipType = "STANDBY"
+)
+
+// Values returns all known values for StandbyWorkspaceRelationshipType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StandbyWorkspaceRelationshipType) Values() []StandbyWorkspaceRelationshipType {
+	return []StandbyWorkspaceRelationshipType{
+		"PRIMARY",
+		"STANDBY",
+	}
+}
+
 type TargetWorkspaceState string
 
 // Enum values for TargetWorkspaceState
@@ -471,6 +508,26 @@ func (Tenancy) Values() []Tenancy {
 	return []Tenancy{
 		"DEDICATED",
 		"SHARED",
+	}
+}
+
+type WorkspaceBundleState string
+
+// Enum values for WorkspaceBundleState
+const (
+	WorkspaceBundleStateAvailable WorkspaceBundleState = "AVAILABLE"
+	WorkspaceBundleStatePending   WorkspaceBundleState = "PENDING"
+	WorkspaceBundleStateError     WorkspaceBundleState = "ERROR"
+)
+
+// Values returns all known values for WorkspaceBundleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkspaceBundleState) Values() []WorkspaceBundleState {
+	return []WorkspaceBundleState{
+		"AVAILABLE",
+		"PENDING",
+		"ERROR",
 	}
 }
 

@@ -15,6 +15,7 @@
         "api_op_CreateConnectClientAddIn.go",
         "api_op_CreateConnectionAlias.go",
         "api_op_CreateIpGroup.go",
+        "api_op_CreateStandbyWorkspaces.go",
         "api_op_CreateTags.go",
         "api_op_CreateUpdatedWorkspaceImage.go",
         "api_op_CreateWorkspaceBundle.go",

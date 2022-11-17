@@ -78,8 +78,8 @@ type DeleteSecretInput struct {
 	// parameter causes the operation to skip the normal recovery window before the
 	// permanent deletion that Secrets Manager would normally impose with the
 	// RecoveryWindowInDays parameter. If you delete a secret with the
-	// ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the
-	// secret. You lose the secret permanently.
+	// ForceDeleteWithoutRecovery parameter, then you have no opportunity to recover
+	// the secret. You lose the secret permanently.
 	ForceDeleteWithoutRecovery *bool
 
 	// The number of days from 7 to 30 that Secrets Manager waits before permanently

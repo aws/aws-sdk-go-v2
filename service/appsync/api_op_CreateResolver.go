@@ -49,6 +49,10 @@ type CreateResolverInput struct {
 	// The caching configuration for the resolver.
 	CachingConfig *types.CachingConfig
 
+	// The resolver code that contains the request and response functions. When code is
+	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string
+
 	// The name of the data source for which the resolver is being created.
 	DataSourceName *string
 
@@ -80,6 +84,11 @@ type CreateResolverInput struct {
 
 	// The mapping template to use for responses from the data source.
 	ResponseMappingTemplate *string
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
+	// function. Specifies the name and version of the runtime to use. Note that if a
+	// runtime is specified, code must also be specified.
+	Runtime *types.AppSyncRuntime
 
 	// The SyncConfig for a resolver attached to a versioned data source.
 	SyncConfig *types.SyncConfig

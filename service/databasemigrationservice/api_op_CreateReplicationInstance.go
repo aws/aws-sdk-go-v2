@@ -99,6 +99,11 @@ type CreateReplicationInstanceInput struct {
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
 	MultiAZ *bool
 
+	// The type of IP address protocol used by a replication instance, such as IPv4
+	// only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not
+	// yet supported.
+	NetworkType *string
+
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: A 30-minute
 	// window selected at random from an 8-hour block of time per Amazon Web Services

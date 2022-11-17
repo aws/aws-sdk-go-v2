@@ -83,6 +83,9 @@ type CreateSolutionVersionInput struct {
 	// This member is required.
 	SolutionArn *string
 
+	// The name of the solution version.
+	Name *string
+
 	// A list of tags
 	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
 	// apply to the solution version.

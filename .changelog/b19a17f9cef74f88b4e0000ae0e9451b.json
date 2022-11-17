@@ -1,0 +1,8 @@
+{
+    "id": "b19a17f9-cef7-4f88-b4e0-000ae0e9451b",
+    "type": "feature",
+    "description": "Added 34 new S3 Storage Lens metrics to support additional customer use cases.",
+    "modules": [
+        "service/s3control"
+    ]
+}

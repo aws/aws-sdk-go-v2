@@ -895,6 +895,129 @@ func awsAwsjson11_deserializeOpErrorCreateIpGroup(response *smithyhttp.Response,
 	}
 }
 
+type awsAwsjson11_deserializeOpCreateStandbyWorkspaces struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateStandbyWorkspaces) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateStandbyWorkspaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateStandbyWorkspaces(response, &metadata)
+	}
+	output := &CreateStandbyWorkspacesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateStandbyWorkspacesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateStandbyWorkspaces(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValuesException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
+
+	case strings.EqualFold("ResourceLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpCreateTags struct {
 }
 
@@ -6084,6 +6207,9 @@ func awsAwsjson11_deserializeOpErrorModifyWorkspaceState(response *smithyhttp.Re
 	case strings.EqualFold("InvalidResourceStateException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidResourceStateException(response, errorBody)
 
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -6195,6 +6321,9 @@ func awsAwsjson11_deserializeOpErrorRebootWorkspaces(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6303,6 +6432,9 @@ func awsAwsjson11_deserializeOpErrorRebuildWorkspaces(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6548,6 +6680,9 @@ func awsAwsjson11_deserializeOpErrorRestoreWorkspace(response *smithyhttp.Respon
 
 	case strings.EqualFold("InvalidParameterValuesException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -7478,6 +7613,9 @@ func awsAwsjson11_deserializeOpErrorUpdateWorkspaceBundle(response *smithyhttp.R
 
 	case strings.EqualFold("InvalidParameterValuesException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterValuesException(response, errorBody)
+
+	case strings.EqualFold("OperationNotSupportedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotSupportedException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -9179,6 +9317,94 @@ func awsAwsjson11_deserializeDocumentDnsIpAddresses(v *[]string, value interface
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFailedCreateStandbyWorkspacesRequest(v **types.FailedCreateStandbyWorkspacesRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailedCreateStandbyWorkspacesRequest
+	if *v == nil {
+		sv = &types.FailedCreateStandbyWorkspacesRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "StandbyWorkspaceRequest":
+			if err := awsAwsjson11_deserializeDocumentStandbyWorkspace(&sv.StandbyWorkspaceRequest, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFailedCreateStandbyWorkspacesRequestList(v *[]types.FailedCreateStandbyWorkspacesRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FailedCreateStandbyWorkspacesRequest
+	if *v == nil {
+		cv = []types.FailedCreateStandbyWorkspacesRequest{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FailedCreateStandbyWorkspacesRequest
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentFailedCreateStandbyWorkspacesRequest(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentFailedCreateWorkspaceRequest(v **types.FailedCreateWorkspaceRequest, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10106,6 +10332,107 @@ func awsAwsjson11_deserializeDocumentOperationNotSupportedException(v **types.Op
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPendingCreateStandbyWorkspacesRequest(v **types.PendingCreateStandbyWorkspacesRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PendingCreateStandbyWorkspacesRequest
+	if *v == nil {
+		sv = &types.PendingCreateStandbyWorkspacesRequest{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DirectoryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectoryId to be of type string, got %T instead", value)
+				}
+				sv.DirectoryId = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceState to be of type string, got %T instead", value)
+				}
+				sv.State = types.WorkspaceState(jtv)
+			}
+
+		case "UserName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserName to be of type string, got %T instead", value)
+				}
+				sv.UserName = ptr.String(jtv)
+			}
+
+		case "WorkspaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceId to be of type string, got %T instead", value)
+				}
+				sv.WorkspaceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPendingCreateStandbyWorkspacesRequestList(v *[]types.PendingCreateStandbyWorkspacesRequest, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PendingCreateStandbyWorkspacesRequest
+	if *v == nil {
+		cv = []types.PendingCreateStandbyWorkspacesRequest{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PendingCreateStandbyWorkspacesRequest
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPendingCreateStandbyWorkspacesRequest(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentProtocolList(v *[]types.Protocol, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10135,6 +10462,107 @@ func awsAwsjson11_deserializeDocumentProtocolList(v *[]types.Protocol, value int
 			}
 			col = types.Protocol(jtv)
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRelatedWorkspaceProperties(v **types.RelatedWorkspaceProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RelatedWorkspaceProperties
+	if *v == nil {
+		sv = &types.RelatedWorkspaceProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceState to be of type string, got %T instead", value)
+				}
+				sv.State = types.WorkspaceState(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StandbyWorkspaceRelationshipType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.StandbyWorkspaceRelationshipType(jtv)
+			}
+
+		case "WorkspaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceId to be of type string, got %T instead", value)
+				}
+				sv.WorkspaceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRelatedWorkspaces(v *[]types.RelatedWorkspaceProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RelatedWorkspaceProperties
+	if *v == nil {
+		cv = []types.RelatedWorkspaceProperties{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RelatedWorkspaceProperties
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRelatedWorkspaceProperties(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -10655,6 +11083,69 @@ func awsAwsjson11_deserializeDocumentSnapshotList(v *[]types.Snapshot, value int
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStandbyWorkspace(v **types.StandbyWorkspace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StandbyWorkspace
+	if *v == nil {
+		sv = &types.StandbyWorkspace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DirectoryId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DirectoryId to be of type string, got %T instead", value)
+				}
+				sv.DirectoryId = ptr.String(jtv)
+			}
+
+		case "PrimaryWorkspaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceId to be of type string, got %T instead", value)
+				}
+				sv.PrimaryWorkspaceId = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "VolumeEncryptionKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeEncryptionKey to be of type string, got %T instead", value)
+				}
+				sv.VolumeEncryptionKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSubnetIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11024,6 +11515,11 @@ func awsAwsjson11_deserializeDocumentWorkspace(v **types.Workspace, value interf
 				return err
 			}
 
+		case "RelatedWorkspaces":
+			if err := awsAwsjson11_deserializeDocumentRelatedWorkspaces(&sv.RelatedWorkspaces, value); err != nil {
+				return err
+			}
+
 		case "RootVolumeEncryptionEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11235,6 +11731,15 @@ func awsAwsjson11_deserializeDocumentWorkspaceBundle(v **types.WorkspaceBundle, 
 				sv.BundleId = ptr.String(jtv)
 			}
 
+		case "BundleType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BundleType to be of type string, got %T instead", value)
+				}
+				sv.BundleType = types.BundleType(jtv)
+			}
+
 		case "ComputeType":
 			if err := awsAwsjson11_deserializeDocumentComputeType(&sv.ComputeType, value); err != nil {
 				return err
@@ -11311,6 +11816,15 @@ func awsAwsjson11_deserializeDocumentWorkspaceBundle(v **types.WorkspaceBundle, 
 		case "RootStorage":
 			if err := awsAwsjson11_deserializeDocumentRootStorage(&sv.RootStorage, value); err != nil {
 				return err
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkspaceBundleState to be of type string, got %T instead", value)
+				}
+				sv.State = types.WorkspaceBundleState(jtv)
 			}
 
 		case "UserStorage":
@@ -12376,6 +12890,47 @@ func awsAwsjson11_deserializeOpDocumentCreateIpGroupOutput(v **CreateIpGroupOutp
 					return fmt.Errorf("expected IpGroupId to be of type string, got %T instead", value)
 				}
 				sv.GroupId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentCreateStandbyWorkspacesOutput(v **CreateStandbyWorkspacesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateStandbyWorkspacesOutput
+	if *v == nil {
+		sv = &CreateStandbyWorkspacesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailedStandbyRequests":
+			if err := awsAwsjson11_deserializeDocumentFailedCreateStandbyWorkspacesRequestList(&sv.FailedStandbyRequests, value); err != nil {
+				return err
+			}
+
+		case "PendingStandbyRequests":
+			if err := awsAwsjson11_deserializeDocumentPendingCreateStandbyWorkspacesRequestList(&sv.PendingStandbyRequests, value); err != nil {
+				return err
 			}
 
 		default:

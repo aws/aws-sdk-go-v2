@@ -35,6 +35,9 @@ type UpdateRoomInput struct {
 	// This member is required.
 	Identifier *string
 
+	// Array of logging-configuration identifiers attached to the room.
+	LoggingConfigurationIdentifiers []string
+
 	// The maximum number of characters in a single message. Messages are expected to
 	// be UTF-8 encoded and this limit applies specifically to rune/code-point count,
 	// not number of bytes. Default: 500.
@@ -67,20 +70,26 @@ type UpdateRoomOutput struct {
 	// ARN that uniquely identifies the room.
 	Id *string
 
-	// Maximum number of characters in a single message, from the request.
+	// Array of logging configurations attached to the room, from the request (if
+	// specified).
+	LoggingConfigurationIdentifiers []string
+
+	// Maximum number of characters in a single message, from the request (if
+	// specified).
 	MaximumMessageLength int32
 
 	// Maximum number of messages per second that can be sent to the room (by all
-	// clients), from the request.
+	// clients), from the request (if specified).
 	MaximumMessageRatePerSecond int32
 
 	// Configuration information for optional review of messages.
 	MessageReviewHandler *types.MessageReviewHandler
 
-	// Room name, from the request.
+	// Room name, from the request (if specified).
 	Name *string
 
-	// Tags attached to the resource.
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value).
 	Tags map[string]string
 
 	// Time of the room’s last update. This is an ISO 8601 timestamp; note that this is

@@ -571,6 +571,11 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
 	if v.DataSourceName != nil {
 		ok := object.Key("dataSourceName")
 		ok.String(*v.DataSourceName)
@@ -604,6 +609,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 	if v.ResponseMappingTemplate != nil {
 		ok := object.Key("responseMappingTemplate")
 		ok.String(*v.ResponseMappingTemplate)
+	}
+
+	if v.Runtime != nil {
+		ok := object.Key("runtime")
+		if err := awsRestjson1_serializeDocumentAppSyncRuntime(v.Runtime, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SyncConfig != nil {
@@ -825,6 +837,11 @@ func awsRestjson1_serializeOpDocumentCreateResolverInput(v *CreateResolverInput,
 		}
 	}
 
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
 	if v.DataSourceName != nil {
 		ok := object.Key("dataSourceName")
 		ok.String(*v.DataSourceName)
@@ -860,6 +877,13 @@ func awsRestjson1_serializeOpDocumentCreateResolverInput(v *CreateResolverInput,
 	if v.ResponseMappingTemplate != nil {
 		ok := object.Key("responseMappingTemplate")
 		ok.String(*v.ResponseMappingTemplate)
+	}
+
+	if v.Runtime != nil {
+		ok := object.Key("runtime")
+		if err := awsRestjson1_serializeDocumentAppSyncRuntime(v.Runtime, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SyncConfig != nil {
@@ -1527,6 +1551,91 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateApiInput(v *DisassociateApi
 	}
 	if v.DomainName != nil {
 		if err := encoder.SetURI("domainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpEvaluateCode struct {
+}
+
+func (*awsRestjson1_serializeOpEvaluateCode) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpEvaluateCode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*EvaluateCodeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/dataplane-evaluatecode")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentEvaluateCodeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsEvaluateCodeInput(v *EvaluateCodeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentEvaluateCodeInput(v *EvaluateCodeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
+	if v.Context != nil {
+		ok := object.Key("context")
+		ok.String(*v.Context)
+	}
+
+	if v.Function != nil {
+		ok := object.Key("function")
+		ok.String(*v.Function)
+	}
+
+	if v.Runtime != nil {
+		ok := object.Key("runtime")
+		if err := awsRestjson1_serializeDocumentAppSyncRuntime(v.Runtime, ok); err != nil {
 			return err
 		}
 	}
@@ -3611,6 +3720,11 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionInput(v *UpdateFunctionInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
 	if v.DataSourceName != nil {
 		ok := object.Key("dataSourceName")
 		ok.String(*v.DataSourceName)
@@ -3644,6 +3758,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionInput(v *UpdateFunctionInput,
 	if v.ResponseMappingTemplate != nil {
 		ok := object.Key("responseMappingTemplate")
 		ok.String(*v.ResponseMappingTemplate)
+	}
+
+	if v.Runtime != nil {
+		ok := object.Key("runtime")
+		if err := awsRestjson1_serializeDocumentAppSyncRuntime(v.Runtime, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SyncConfig != nil {
@@ -3880,6 +4001,11 @@ func awsRestjson1_serializeOpDocumentUpdateResolverInput(v *UpdateResolverInput,
 		}
 	}
 
+	if v.Code != nil {
+		ok := object.Key("code")
+		ok.String(*v.Code)
+	}
+
 	if v.DataSourceName != nil {
 		ok := object.Key("dataSourceName")
 		ok.String(*v.DataSourceName)
@@ -3910,6 +4036,13 @@ func awsRestjson1_serializeOpDocumentUpdateResolverInput(v *UpdateResolverInput,
 	if v.ResponseMappingTemplate != nil {
 		ok := object.Key("responseMappingTemplate")
 		ok.String(*v.ResponseMappingTemplate)
+	}
+
+	if v.Runtime != nil {
+		ok := object.Key("runtime")
+		if err := awsRestjson1_serializeDocumentAppSyncRuntime(v.Runtime, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SyncConfig != nil {
@@ -4060,6 +4193,23 @@ func awsRestjson1_serializeDocumentAdditionalAuthenticationProviders(v []types.A
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAppSyncRuntime(v *types.AppSyncRuntime, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if v.RuntimeVersion != nil {
+		ok := object.Key("runtimeVersion")
+		ok.String(*v.RuntimeVersion)
+	}
+
 	return nil
 }
 

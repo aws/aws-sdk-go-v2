@@ -30,6 +30,24 @@ func (ApplicationState) Values() []ApplicationState {
 	}
 }
 
+type Architecture string
+
+// Enum values for Architecture
+const (
+	ArchitectureArm64 Architecture = "ARM64"
+	ArchitectureX8664 Architecture = "X86_64"
+)
+
+// Values returns all known values for Architecture. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Architecture) Values() []Architecture {
+	return []Architecture{
+		"ARM64",
+		"X86_64",
+	}
+}
+
 type JobRunState string
 
 // Enum values for JobRunState

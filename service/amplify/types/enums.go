@@ -88,6 +88,7 @@ type Platform string
 const (
 	PlatformWeb        Platform = "WEB"
 	PlatformWebDynamic Platform = "WEB_DYNAMIC"
+	PlatformWebCompute Platform = "WEB_COMPUTE"
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in
@@ -97,6 +98,7 @@ func (Platform) Values() []Platform {
 	return []Platform{
 		"WEB",
 		"WEB_DYNAMIC",
+		"WEB_COMPUTE",
 	}
 }
 

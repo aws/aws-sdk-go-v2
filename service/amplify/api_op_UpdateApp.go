@@ -105,7 +105,10 @@ type UpdateAppInput struct {
 	// in the Amplify User Guide .
 	OauthToken *string
 
-	// The platform for an Amplify app.
+	// The platform for the Amplify app. For a static app, set the platform type to
+	// WEB. For a dynamic server-side rendered (SSR) app, set the platform type to
+	// WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only,
+	// set the platform type to WEB_DYNAMIC.
 	Platform types.Platform
 
 	// The name of the repository for an Amplify app

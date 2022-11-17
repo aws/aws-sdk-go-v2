@@ -1,0 +1,8 @@
+{
+    "id": "0709d66e-172e-4829-9ccb-b9e0c12b1a0c",
+    "type": "documentation",
+    "description": "Documentation updates for Secrets Manager.",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

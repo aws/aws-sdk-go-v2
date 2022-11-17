@@ -14454,6 +14454,15 @@ func awsAwsjson11_deserializeDocumentReplicationInstance(v **types.ReplicationIn
 				sv.MultiAZ = jtv
 			}
 
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = ptr.String(jtv)
+			}
+
 		case "PendingModifiedValues":
 			if err := awsAwsjson11_deserializeDocumentReplicationPendingModifiedValues(&sv.PendingModifiedValues, value); err != nil {
 				return err
@@ -14502,6 +14511,11 @@ func awsAwsjson11_deserializeDocumentReplicationInstance(v **types.ReplicationIn
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ReplicationInstanceIdentifier = ptr.String(jtv)
+			}
+
+		case "ReplicationInstanceIpv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentReplicationInstanceIpv6AddressList(&sv.ReplicationInstanceIpv6Addresses, value); err != nil {
+				return err
 			}
 
 		case "ReplicationInstancePrivateIpAddress":
@@ -14566,6 +14580,42 @@ func awsAwsjson11_deserializeDocumentReplicationInstance(v **types.ReplicationIn
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReplicationInstanceIpv6AddressList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -14824,6 +14874,15 @@ func awsAwsjson11_deserializeDocumentReplicationPendingModifiedValues(v **types.
 				sv.MultiAZ = ptr.Bool(jtv)
 			}
 
+		case "NetworkType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NetworkType = ptr.String(jtv)
+			}
+
 		case "ReplicationInstanceClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14893,6 +14952,11 @@ func awsAwsjson11_deserializeDocumentReplicationSubnetGroup(v **types.Replicatio
 
 		case "Subnets":
 			if err := awsAwsjson11_deserializeDocumentSubnetList(&sv.Subnets, value); err != nil {
+				return err
+			}
+
+		case "SupportedNetworkTypes":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.SupportedNetworkTypes, value); err != nil {
 				return err
 			}
 
@@ -17434,6 +17498,58 @@ func awsAwsjson11_deserializeDocumentTableStatistics(v **types.TableStatistics, 
 
 	for key, value := range shape {
 		switch key {
+		case "AppliedDdls":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AppliedDdls = ptr.Int64(i64)
+			}
+
+		case "AppliedDeletes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AppliedDeletes = ptr.Int64(i64)
+			}
+
+		case "AppliedInserts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AppliedInserts = ptr.Int64(i64)
+			}
+
+		case "AppliedUpdates":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LongOptional to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AppliedUpdates = ptr.Int64(i64)
+			}
+
 		case "Ddls":
 			if value != nil {
 				jtv, ok := value.(json.Number)

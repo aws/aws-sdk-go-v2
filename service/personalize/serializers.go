@@ -511,6 +511,61 @@ func (m *awsAwsjson11_serializeOpCreateFilter) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateMetricAttribution struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateMetricAttribution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateMetricAttribution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMetricAttributionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.CreateMetricAttribution")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateMetricAttributionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateRecommender struct {
 }
 
@@ -991,6 +1046,61 @@ func (m *awsAwsjson11_serializeOpDeleteFilter) HandleSerialize(ctx context.Conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteFilterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteMetricAttribution struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteMetricAttribution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteMetricAttribution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMetricAttributionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.DeleteMetricAttribution")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteMetricAttributionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1761,6 +1871,61 @@ func (m *awsAwsjson11_serializeOpDescribeFilter) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeFilterInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeMetricAttribution struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeMetricAttribution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeMetricAttribution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeMetricAttributionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.DescribeMetricAttribution")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeMetricAttributionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2601,6 +2766,116 @@ func (m *awsAwsjson11_serializeOpListFilters) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListMetricAttributionMetrics struct {
+}
+
+func (*awsAwsjson11_serializeOpListMetricAttributionMetrics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListMetricAttributionMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMetricAttributionMetricsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.ListMetricAttributionMetrics")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListMetricAttributionMetricsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListMetricAttributions struct {
+}
+
+func (*awsAwsjson11_serializeOpListMetricAttributions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListMetricAttributions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMetricAttributionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.ListMetricAttributions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListMetricAttributionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListRecipes struct {
 }
 
@@ -3261,6 +3536,61 @@ func (m *awsAwsjson11_serializeOpUpdateCampaign) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateMetricAttribution struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateMetricAttribution) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateMetricAttribution) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateMetricAttributionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.UpdateMetricAttribution")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateMetricAttributionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateRecommender struct {
 }
 
@@ -3711,6 +4041,71 @@ func awsAwsjson11_serializeDocumentIntegerHyperParameterRanges(v []types.Integer
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMetricAttribute(v *types.MetricAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventType != nil {
+		ok := object.Key("eventType")
+		ok.String(*v.EventType)
+	}
+
+	if v.Expression != nil {
+		ok := object.Key("expression")
+		ok.String(*v.Expression)
+	}
+
+	if v.MetricName != nil {
+		ok := object.Key("metricName")
+		ok.String(*v.MetricName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricAttributes(v []types.MetricAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentMetricAttribute(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricAttributesNamesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMetricAttributionOutput(v *types.MetricAttributionOutput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.S3DataDestination != nil {
+		ok := object.Key("s3DataDestination")
+		if err := awsAwsjson11_serializeDocumentS3DataConfig(v.S3DataDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOptimizationObjective(v *types.OptimizationObjective, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4102,6 +4497,11 @@ func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatase
 		ok.String(*v.JobName)
 	}
 
+	if v.PublishAttributionMetricsToS3 != nil {
+		ok := object.Key("publishAttributionMetricsToS3")
+		ok.Boolean(*v.PublishAttributionMetricsToS3)
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -4199,6 +4599,37 @@ func awsAwsjson11_serializeOpDocumentCreateFilterInput(v *CreateFilterInput, val
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateMetricAttributionInput(v *CreateMetricAttributionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatasetGroupArn != nil {
+		ok := object.Key("datasetGroupArn")
+		ok.String(*v.DatasetGroupArn)
+	}
+
+	if v.Metrics != nil {
+		ok := object.Key("metrics")
+		if err := awsAwsjson11_serializeDocumentMetricAttributes(v.Metrics, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricsOutputConfig != nil {
+		ok := object.Key("metricsOutputConfig")
+		if err := awsAwsjson11_serializeDocumentMetricAttributionOutput(v.MetricsOutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	return nil
@@ -4317,6 +4748,11 @@ func awsAwsjson11_serializeOpDocumentCreateSolutionVersionInput(v *CreateSolutio
 	object := value.Object()
 	defer object.Close()
 
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
 	if v.SolutionArn != nil {
 		ok := object.Key("solutionArn")
 		ok.String(*v.SolutionArn)
@@ -4392,6 +4828,18 @@ func awsAwsjson11_serializeOpDocumentDeleteFilterInput(v *DeleteFilterInput, val
 	if v.FilterArn != nil {
 		ok := object.Key("filterArn")
 		ok.String(*v.FilterArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteMetricAttributionInput(v *DeleteMetricAttributionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricAttributionArn != nil {
+		ok := object.Key("metricAttributionArn")
+		ok.String(*v.MetricAttributionArn)
 	}
 
 	return nil
@@ -4560,6 +5008,18 @@ func awsAwsjson11_serializeOpDocumentDescribeFilterInput(v *DescribeFilterInput,
 	if v.FilterArn != nil {
 		ok := object.Key("filterArn")
 		ok.String(*v.FilterArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeMetricAttributionInput(v *DescribeMetricAttributionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetricAttributionArn != nil {
+		ok := object.Key("metricAttributionArn")
+		ok.String(*v.MetricAttributionArn)
 	}
 
 	return nil
@@ -4830,6 +5290,50 @@ func awsAwsjson11_serializeOpDocumentListFiltersInput(v *ListFiltersInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListMetricAttributionMetricsInput(v *ListMetricAttributionMetricsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.MetricAttributionArn != nil {
+		ok := object.Key("metricAttributionArn")
+		ok.String(*v.MetricAttributionArn)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListMetricAttributionsInput(v *ListMetricAttributionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatasetGroupArn != nil {
+		ok := object.Key("datasetGroupArn")
+		ok.String(*v.DatasetGroupArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListRecipesInput(v *ListRecipesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5050,6 +5554,39 @@ func awsAwsjson11_serializeOpDocumentUpdateCampaignInput(v *UpdateCampaignInput,
 	if v.SolutionVersionArn != nil {
 		ok := object.Key("solutionVersionArn")
 		ok.String(*v.SolutionVersionArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateMetricAttributionInput(v *UpdateMetricAttributionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddMetrics != nil {
+		ok := object.Key("addMetrics")
+		if err := awsAwsjson11_serializeDocumentMetricAttributes(v.AddMetrics, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricAttributionArn != nil {
+		ok := object.Key("metricAttributionArn")
+		ok.String(*v.MetricAttributionArn)
+	}
+
+	if v.MetricsOutputConfig != nil {
+		ok := object.Key("metricsOutputConfig")
+		if err := awsAwsjson11_serializeDocumentMetricAttributionOutput(v.MetricsOutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoveMetrics != nil {
+		ok := object.Key("removeMetrics")
+		if err := awsAwsjson11_serializeDocumentMetricAttributesNamesList(v.RemoveMetrics, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

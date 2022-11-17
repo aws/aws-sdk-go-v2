@@ -45,6 +45,9 @@ type Application struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The CPU architecture of an application.
+	Architecture Architecture
+
 	// The configuration for an application to automatically start on job submission.
 	AutoStartConfiguration *AutoStartConfig
 
@@ -112,6 +115,9 @@ type ApplicationSummary struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The CPU architecture of an application.
+	Architecture Architecture
 
 	// The name of the application.
 	Name *string

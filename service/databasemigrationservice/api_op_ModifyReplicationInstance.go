@@ -74,6 +74,11 @@ type ModifyReplicationInstanceInput struct {
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true.
 	MultiAZ *bool
 
+	// The type of IP address protocol used by a replication instance, such as IPv4
+	// only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not
+	// yet supported.
+	NetworkType *string
+
 	// The weekly time range (in UTC) during which system maintenance can occur, which
 	// might result in an outage. Changing this parameter does not result in an outage,
 	// except in the following situation, and the change is asynchronously applied as

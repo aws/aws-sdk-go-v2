@@ -33,7 +33,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Array of tags to be added or updated. See Tagging AWS Resources
+	// Array of tags to be added or updated. Array of maps, each of the form
+	// string:string (key:value). See Tagging AWS Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for details,
 	// including restrictions that apply to tags and "Tag naming limits and
 	// requirements"; Amazon IVS Chat has no constraints beyond what is documented

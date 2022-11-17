@@ -32,7 +32,8 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeCfnStack ResourceType = "CFN_STACK"
+	ResourceTypeCfnStack         ResourceType = "CFN_STACK"
+	ResourceTypeResourceTagValue ResourceType = "RESOURCE_TAG_VALUE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -41,6 +42,7 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CFN_STACK",
+		"RESOURCE_TAG_VALUE",
 	}
 }
 

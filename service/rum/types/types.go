@@ -18,6 +18,11 @@ type AppMonitor struct {
 	// The date and time that this app monitor was created.
 	Created *string
 
+	// Specifies whether this app monitor allows the web client to define and send
+	// custom events. For more information about custom events, see Send custom events
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html).
+	CustomEvents *CustomEvents
+
 	// A structure that contains information about whether this app monitor stores a
 	// copy of the telemetry data that RUM collects using CloudWatch Logs.
 	DataStorage *DataStorage
@@ -189,6 +194,16 @@ type BatchDeleteRumMetricDefinitionsError struct {
 	//
 	// This member is required.
 	MetricDefinitionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains information about custom events for this app monitor.
+type CustomEvents struct {
+
+	// Specifies whether this app monitor allows the web client to define and send
+	// custom events. The default is for custom events to be DISABLED.
+	Status CustomEventsStatus
 
 	noSmithyDocumentSerde
 }

@@ -28793,6 +28793,11 @@ func awsRestjson1_deserializeDocumentAwsLambdaFunctionDetails(v **types.AwsLambd
 
 	for key, value := range shape {
 		switch key {
+		case "Architectures":
+			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.Architectures, value); err != nil {
+				return err
+			}
+
 		case "Code":
 			if err := awsRestjson1_deserializeDocumentAwsLambdaFunctionCode(&sv.Code, value); err != nil {
 				return err
@@ -28878,6 +28883,15 @@ func awsRestjson1_deserializeDocumentAwsLambdaFunctionDetails(v **types.AwsLambd
 					return err
 				}
 				sv.MemorySize = int32(i64)
+			}
+
+		case "PackageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.PackageType = ptr.String(jtv)
 			}
 
 		case "RevisionId":
@@ -48145,6 +48159,24 @@ func awsRestjson1_deserializeDocumentSoftwarePackage(v **types.SoftwarePackage, 
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Remediation = ptr.String(jtv)
+			}
+
+		case "SourceLayerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceLayerArn = ptr.String(jtv)
+			}
+
+		case "SourceLayerHash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SourceLayerHash = ptr.String(jtv)
 			}
 
 		case "Version":

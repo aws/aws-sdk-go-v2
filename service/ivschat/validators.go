@@ -5,6 +5,7 @@ package ivschat
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivschat/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -24,6 +25,46 @@ func (m *validateOpCreateChatToken) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateChatTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLoggingConfiguration struct {
+}
+
+func (*validateOpCreateLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLoggingConfiguration struct {
+}
+
+func (*validateOpDeleteLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -84,6 +125,26 @@ func (m *validateOpDisconnectUser) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisconnectUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLoggingConfiguration struct {
+}
+
+func (*validateOpGetLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLoggingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -189,6 +250,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLoggingConfiguration struct {
+}
+
+func (*validateOpUpdateLoggingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLoggingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLoggingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLoggingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRoom struct {
 }
 
@@ -213,6 +294,14 @@ func addOpCreateChatTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChatToken{}, middleware.After)
 }
 
+func addOpCreateLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLoggingConfiguration{}, middleware.After)
+}
+
+func addOpDeleteLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLoggingConfiguration{}, middleware.After)
+}
+
 func addOpDeleteMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMessage{}, middleware.After)
 }
@@ -223,6 +312,10 @@ func addOpDeleteRoomValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisconnectUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisconnectUser{}, middleware.After)
+}
+
+func addOpGetLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLoggingConfiguration{}, middleware.After)
 }
 
 func addOpGetRoomValidationMiddleware(stack *middleware.Stack) error {
@@ -245,8 +338,86 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateLoggingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLoggingConfiguration{}, middleware.After)
+}
+
 func addOpUpdateRoomValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRoom{}, middleware.After)
+}
+
+func validateCloudWatchLogsDestinationConfiguration(v *types.CloudWatchLogsDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudWatchLogsDestinationConfiguration"}
+	if v.LogGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationConfiguration(v types.DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfiguration"}
+	switch uv := v.(type) {
+	case *types.DestinationConfigurationMemberCloudWatchLogs:
+		if err := validateCloudWatchLogsDestinationConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[cloudWatchLogs]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DestinationConfigurationMemberFirehose:
+		if err := validateFirehoseDestinationConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[firehose]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DestinationConfigurationMemberS3:
+		if err := validateS3DestinationConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFirehoseDestinationConfiguration(v *types.FirehoseDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FirehoseDestinationConfiguration"}
+	if v.DeliveryStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfiguration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateChatTokenInput(v *CreateChatTokenInput) error {
@@ -259,6 +430,40 @@ func validateOpCreateChatTokenInput(v *CreateChatTokenInput) error {
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLoggingConfigurationInput(v *CreateLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLoggingConfigurationInput"}
+	if v.DestinationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationConfiguration"))
+	} else if v.DestinationConfiguration != nil {
+		if err := validateDestinationConfiguration(v.DestinationConfiguration); err != nil {
+			invalidParams.AddNested("DestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLoggingConfigurationInput(v *DeleteLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLoggingConfigurationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -310,6 +515,21 @@ func validateOpDisconnectUserInput(v *DisconnectUserInput) error {
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLoggingConfigurationInput(v *GetLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLoggingConfigurationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -394,6 +614,26 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLoggingConfigurationInput(v *UpdateLoggingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLoggingConfigurationInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.DestinationConfiguration != nil {
+		if err := validateDestinationConfiguration(v.DestinationConfiguration); err != nil {
+			invalidParams.AddNested("DestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

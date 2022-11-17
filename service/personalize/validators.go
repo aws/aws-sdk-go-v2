@@ -190,6 +190,26 @@ func (m *validateOpCreateFilter) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMetricAttribution struct {
+}
+
+func (*validateOpCreateMetricAttribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMetricAttribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMetricAttributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMetricAttributionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRecommender struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpDeleteFilter) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMetricAttribution struct {
+}
+
+func (*validateOpDeleteMetricAttribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMetricAttribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMetricAttributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMetricAttributionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +690,26 @@ func (m *validateOpDescribeFilter) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMetricAttribution struct {
+}
+
+func (*validateOpDescribeMetricAttribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMetricAttribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMetricAttributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMetricAttributionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeRecipe struct {
 }
 
@@ -910,6 +970,26 @@ func (m *validateOpUpdateCampaign) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMetricAttribution struct {
+}
+
+func (*validateOpUpdateMetricAttribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMetricAttribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMetricAttributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMetricAttributionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRecommender struct {
 }
 
@@ -966,6 +1046,10 @@ func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
 }
 
+func addOpCreateMetricAttributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMetricAttribution{}, middleware.After)
+}
+
 func addOpCreateRecommenderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRecommender{}, middleware.After)
 }
@@ -1000,6 +1084,10 @@ func addOpDeleteEventTrackerValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFilter{}, middleware.After)
+}
+
+func addOpDeleteMetricAttributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMetricAttribution{}, middleware.After)
 }
 
 func addOpDeleteRecommenderValidationMiddleware(stack *middleware.Stack) error {
@@ -1058,6 +1146,10 @@ func addOpDescribeFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFilter{}, middleware.After)
 }
 
+func addOpDescribeMetricAttributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMetricAttribution{}, middleware.After)
+}
+
 func addOpDescribeRecipeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRecipe{}, middleware.After)
 }
@@ -1108,6 +1200,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCampaign{}, middleware.After)
+}
+
+func addOpUpdateMetricAttributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMetricAttribution{}, middleware.After)
 }
 
 func addOpUpdateRecommenderValidationMiddleware(stack *middleware.Stack) error {
@@ -1201,6 +1297,64 @@ func validateDatasetExportJobOutput(v *types.DatasetExportJobOutput) error {
 		if err := validateS3DataConfig(v.S3DataDestination); err != nil {
 			invalidParams.AddNested("S3DataDestination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricAttribute(v *types.MetricAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricAttribute"}
+	if v.EventType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricAttributes(v []types.MetricAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricAttributes"}
+	for i := range v {
+		if err := validateMetricAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricAttributionOutput(v *types.MetricAttributionOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricAttributionOutput"}
+	if v.S3DataDestination != nil {
+		if err := validateS3DataConfig(v.S3DataDestination); err != nil {
+			invalidParams.AddNested("S3DataDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1522,6 +1676,38 @@ func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	}
 }
 
+func validateOpCreateMetricAttributionInput(v *CreateMetricAttributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMetricAttributionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DatasetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	} else if v.Metrics != nil {
+		if err := validateMetricAttributes(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricsOutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricsOutputConfig"))
+	} else if v.MetricsOutputConfig != nil {
+		if err := validateMetricAttributionOutput(v.MetricsOutputConfig); err != nil {
+			invalidParams.AddNested("MetricsOutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRecommenderInput(v *CreateRecommenderInput) error {
 	if v == nil {
 		return nil
@@ -1676,6 +1862,21 @@ func validateOpDeleteFilterInput(v *DeleteFilterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFilterInput"}
 	if v.FilterArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMetricAttributionInput(v *DeleteMetricAttributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMetricAttributionInput"}
+	if v.MetricAttributionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricAttributionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1894,6 +2095,21 @@ func validateOpDescribeFilterInput(v *DescribeFilterInput) error {
 	}
 }
 
+func validateOpDescribeMetricAttributionInput(v *DescribeMetricAttributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMetricAttributionInput"}
+	if v.MetricAttributionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricAttributionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeRecipeInput(v *DescribeRecipeInput) error {
 	if v == nil {
 		return nil
@@ -2091,6 +2307,28 @@ func validateOpUpdateCampaignInput(v *UpdateCampaignInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCampaignInput"}
 	if v.CampaignArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMetricAttributionInput(v *UpdateMetricAttributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMetricAttributionInput"}
+	if v.AddMetrics != nil {
+		if err := validateMetricAttributes(v.AddMetrics); err != nil {
+			invalidParams.AddNested("AddMetrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricsOutputConfig != nil {
+		if err := validateMetricAttributionOutput(v.MetricsOutputConfig); err != nil {
+			invalidParams.AddNested("MetricsOutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "837f1d40-2c91-4aec-a0fe-b8f7c86df585",
+    "type": "feature",
+    "description": "Add two new neural voices - Ola (pl-PL) and Hala (ar-AE).",
+    "modules": [
+        "service/polly"
+    ]
+}

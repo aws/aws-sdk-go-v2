@@ -1,0 +1,8 @@
+{
+    "id": "9d08a2a6-9b98-4196-a1de-343ff14aa7c0",
+    "type": "feature",
+    "description": "The release introduces CreateStandbyWorkspaces, an API that allows you to create standby WorkSpaces associated with a primary WorkSpace in another Region. DescribeWorkspaces now includes related WorkSpaces properties. DescribeWorkspaceBundles and CreateWorkspaceBundle now return more bundle details.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

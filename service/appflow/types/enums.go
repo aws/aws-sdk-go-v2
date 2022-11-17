@@ -58,6 +58,22 @@ func (AuthenticationType) Values() []AuthenticationType {
 	}
 }
 
+type CatalogType string
+
+// Enum values for CatalogType
+const (
+	CatalogTypeGlue CatalogType = "GLUE"
+)
+
+// Values returns all known values for CatalogType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CatalogType) Values() []CatalogType {
+	return []CatalogType{
+		"GLUE",
+	}
+}
+
 type ConnectionMode string
 
 // Enum values for ConnectionMode
@@ -545,6 +561,7 @@ const (
 	OperatorPropertiesKeysSubfieldCategoryMap      OperatorPropertiesKeys = "SUBFIELD_CATEGORY_MAP"
 	OperatorPropertiesKeysExcludeSourceFieldsList  OperatorPropertiesKeys = "EXCLUDE_SOURCE_FIELDS_LIST"
 	OperatorPropertiesKeysIncludeNewFields         OperatorPropertiesKeys = "INCLUDE_NEW_FIELDS"
+	OperatorPropertiesKeysOrderedPartitionKeysList OperatorPropertiesKeys = "ORDERED_PARTITION_KEYS_LIST"
 )
 
 // Values returns all known values for OperatorPropertiesKeys. Note that this can
@@ -568,6 +585,7 @@ func (OperatorPropertiesKeys) Values() []OperatorPropertiesKeys {
 		"SUBFIELD_CATEGORY_MAP",
 		"EXCLUDE_SOURCE_FIELDS_LIST",
 		"INCLUDE_NEW_FIELDS",
+		"ORDERED_PARTITION_KEYS_LIST",
 	}
 }
 
@@ -624,6 +642,24 @@ func (Operators) Values() []Operators {
 		"VALIDATE_NON_NEGATIVE",
 		"VALIDATE_NUMERIC",
 		"NO_OP",
+	}
+}
+
+type PathPrefix string
+
+// Enum values for PathPrefix
+const (
+	PathPrefixExecutionId   PathPrefix = "EXECUTION_ID"
+	PathPrefixSchemaVersion PathPrefix = "SCHEMA_VERSION"
+)
+
+// Values returns all known values for PathPrefix. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PathPrefix) Values() []PathPrefix {
+	return []PathPrefix{
+		"EXECUTION_ID",
+		"SCHEMA_VERSION",
 	}
 }
 
@@ -1110,6 +1146,7 @@ const (
 	TaskTypePassthrough TaskType = "Passthrough"
 	TaskTypeTruncate    TaskType = "Truncate"
 	TaskTypeValidate    TaskType = "Validate"
+	TaskTypePartition   TaskType = "Partition"
 )
 
 // Values returns all known values for TaskType. Note that this can be expanded in
@@ -1126,6 +1163,7 @@ func (TaskType) Values() []TaskType {
 		"Passthrough",
 		"Truncate",
 		"Validate",
+		"Partition",
 	}
 }
 

@@ -162,6 +162,7 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// The function's environment variables
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
+	// Omitted from CloudTrail logs.
 	Environment *types.EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but

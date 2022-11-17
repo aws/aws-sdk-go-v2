@@ -756,6 +756,9 @@ type DatasetImportJob struct {
 	// The date and time (in Unix time) the dataset was last updated.
 	LastUpdatedDateTime *time.Time
 
+	// Whether the job publishes metrics to Amazon S3 for a metric attribution.
+	PublishAttributionMetricsToS3 *bool
+
 	// The ARN of the IAM role that has permissions to read from the Amazon S3 data
 	// source.
 	RoleArn *string
@@ -1217,6 +1220,109 @@ type IntegerHyperParameterRange struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information on a metric that a metric attribution reports on. For more
+// information, see Measuring impact of recommendations
+// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+type MetricAttribute struct {
+
+	// The metric's event type.
+	//
+	// This member is required.
+	EventType *string
+
+	// The attribute's expression. Available functions are SUM() or SAMPLECOUNT(). For
+	// SUM() functions, provide the dataset type (either Interactions or Items) and
+	// column to sum as a parameter. For example SUM(Items.PRICE).
+	//
+	// This member is required.
+	Expression *string
+
+	// The metric's name. The name helps you identify the metric in Amazon CloudWatch
+	// or Amazon S3.
+	//
+	// This member is required.
+	MetricName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on a metric attribution. A metric attribution creates
+// reports on the data that you import into Amazon Personalize. Depending on how
+// you import the data, you can view reports in Amazon CloudWatch or Amazon S3. For
+// more information, see Measuring impact of recommendations
+// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+type MetricAttribution struct {
+
+	// The metric attribution's creation date time.
+	CreationDateTime *time.Time
+
+	// The metric attribution's dataset group Amazon Resource Name (ARN).
+	DatasetGroupArn *string
+
+	// The metric attribution's failure reason.
+	FailureReason *string
+
+	// The metric attribution's last updated date time.
+	LastUpdatedDateTime *time.Time
+
+	// The metric attribution's Amazon Resource Name (ARN).
+	MetricAttributionArn *string
+
+	// The metric attribution's output configuration.
+	MetricsOutputConfig *MetricAttributionOutput
+
+	// The metric attribution's name.
+	Name *string
+
+	// The metric attribution's status.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// The output configuration details for a metric attribution.
+type MetricAttributionOutput struct {
+
+	// The Amazon Resource Name (ARN) of the IAM service role that has permissions to
+	// add data to your output Amazon S3 bucket and add metrics to Amazon CloudWatch.
+	// For more information, see Measuring impact of recommendations
+	// (https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html).
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The configuration details of an Amazon S3 input or output bucket.
+	S3DataDestination *S3DataConfig
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the properties of a metric attribution. For a complete
+// listing, call the DescribeMetricAttribution
+// (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeMetricAttribution.html).
+type MetricAttributionSummary struct {
+
+	// The metric attribution's creation date time.
+	CreationDateTime *time.Time
+
+	// The metric attribution's failure reason.
+	FailureReason *string
+
+	// The metric attribution's last updated date time.
+	LastUpdatedDateTime *time.Time
+
+	// The metric attribution's Amazon Resource Name (ARN).
+	MetricAttributionArn *string
+
+	// The name of the metric attribution.
+	Name *string
+
+	// The metric attribution's status.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the additional objective for the solution, such as maximizing
 // streaming minutes or increasing revenue. For more information see Optimizing a
 // solution
@@ -1571,6 +1677,9 @@ type SolutionSummary struct {
 	// The name of the solution.
 	Name *string
 
+	// The Amazon Resource Name (ARN) of the recipe used by the solution.
+	RecipeArn *string
+
 	// The Amazon Resource Name (ARN) of the solution.
 	SolutionArn *string
 
@@ -1606,6 +1715,9 @@ type SolutionVersion struct {
 
 	// The date and time (in Unix time) that the solution was last updated.
 	LastUpdatedDateTime *time.Time
+
+	// The name of the solution version.
+	Name *string
 
 	// When true, Amazon Personalize searches for the most optimal recipe according to
 	// the solution configuration. When false (the default), Amazon Personalize uses

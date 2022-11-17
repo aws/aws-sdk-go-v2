@@ -60,7 +60,7 @@ type ListSecretsInput struct {
 	// this value.
 	NextToken *string
 
-	// Lists secrets in the requested order.
+	// Secrets are listed by CreatedDate.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde

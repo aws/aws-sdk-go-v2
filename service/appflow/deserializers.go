@@ -1399,6 +1399,11 @@ func awsRestjson1_deserializeOpDocumentDescribeFlowOutput(v **DescribeFlowOutput
 				return err
 			}
 
+		case "lastRunMetadataCatalogDetails":
+			if err := awsRestjson1_deserializeDocumentMetadataCatalogDetails(&sv.LastRunMetadataCatalogDetails, value); err != nil {
+				return err
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1422,6 +1427,24 @@ func awsRestjson1_deserializeOpDocumentDescribeFlowOutput(v **DescribeFlowOutput
 					return fmt.Errorf("expected UpdatedBy to be of type string, got %T instead", value)
 				}
 				sv.LastUpdatedBy = ptr.String(jtv)
+			}
+
+		case "metadataCatalogConfig":
+			if err := awsRestjson1_deserializeDocumentMetadataCatalogConfig(&sv.MetadataCatalogConfig, value); err != nil {
+				return err
+			}
+
+		case "schemaVersion":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SchemaVersion = ptr.Int64(i64)
 			}
 
 		case "sourceFlowConfig":
@@ -3795,6 +3818,19 @@ func awsRestjson1_deserializeDocumentAggregationConfig(v **types.AggregationConf
 					return fmt.Errorf("expected AggregationType to be of type string, got %T instead", value)
 				}
 				sv.AggregationType = types.AggregationType(jtv)
+			}
+
+		case "targetFileSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetFileSize = ptr.Int64(i64)
 			}
 
 		default:
@@ -7043,6 +7079,11 @@ func awsRestjson1_deserializeDocumentExecutionRecord(v **types.ExecutionRecord, 
 				}
 			}
 
+		case "metadataCatalogDetails":
+			if err := awsRestjson1_deserializeDocumentMetadataCatalogDetails(&sv.MetadataCatalogDetails, value); err != nil {
+				return err
+			}
+
 		case "startedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7494,6 +7535,64 @@ func awsRestjson1_deserializeDocumentFlowList(v *[]types.FlowDefinition, value i
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGlueDataCatalogConfig(v **types.GlueDataCatalogConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlueDataCatalogConfig
+	if *v == nil {
+		sv = &types.GlueDataCatalogConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "databaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlueDataCatalogDatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlueDataCatalogIAMRole to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "tablePrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlueDataCatalogTablePrefix to be of type string, got %T instead", value)
+				}
+				sv.TablePrefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8170,6 +8269,135 @@ func awsRestjson1_deserializeDocumentMarketoSourceProperties(v **types.MarketoSo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMetadataCatalogConfig(v **types.MetadataCatalogConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetadataCatalogConfig
+	if *v == nil {
+		sv = &types.MetadataCatalogConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "glueDataCatalog":
+			if err := awsRestjson1_deserializeDocumentGlueDataCatalogConfig(&sv.GlueDataCatalog, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetadataCatalogDetail(v **types.MetadataCatalogDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetadataCatalogDetail
+	if *v == nil {
+		sv = &types.MetadataCatalogDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "catalogType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CatalogType to be of type string, got %T instead", value)
+				}
+				sv.CatalogType = types.CatalogType(jtv)
+			}
+
+		case "partitionRegistrationOutput":
+			if err := awsRestjson1_deserializeDocumentRegistrationOutput(&sv.PartitionRegistrationOutput, value); err != nil {
+				return err
+			}
+
+		case "tableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TableName = ptr.String(jtv)
+			}
+
+		case "tableRegistrationOutput":
+			if err := awsRestjson1_deserializeDocumentRegistrationOutput(&sv.TableRegistrationOutput, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetadataCatalogDetails(v *[]types.MetadataCatalogDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MetadataCatalogDetail
+	if *v == nil {
+		cv = []types.MetadataCatalogDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MetadataCatalogDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMetadataCatalogDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOAuth2CustomParameter(v **types.OAuth2CustomParameter, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8530,6 +8758,42 @@ func awsRestjson1_deserializeDocumentOAuthScopeList(v *[]string, value interface
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPathPrefixHierarchy(v *[]types.PathPrefix, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PathPrefix
+	if *v == nil {
+		cv = []types.PathPrefix{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PathPrefix
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PathPrefix to be of type string, got %T instead", value)
+			}
+			col = types.PathPrefix(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPrefixConfig(v **types.PrefixConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8552,6 +8816,11 @@ func awsRestjson1_deserializeDocumentPrefixConfig(v **types.PrefixConfig, value 
 
 	for key, value := range shape {
 		switch key {
+		case "pathPrefixHierarchy":
+			if err := awsRestjson1_deserializeDocumentPathPrefixHierarchy(&sv.PathPrefixHierarchy, value); err != nil {
+				return err
+			}
+
 		case "prefixFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8966,6 +9235,64 @@ func awsRestjson1_deserializeDocumentRegionList(v *[]string, value interface{}) 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRegistrationOutput(v **types.RegistrationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegistrationOutput
+	if *v == nil {
+		sv = &types.RegistrationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "result":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Result = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ExecutionStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

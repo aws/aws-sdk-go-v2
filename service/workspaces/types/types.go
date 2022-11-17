@@ -302,6 +302,22 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the Standby WorkSpace that could not be created.
+type FailedCreateStandbyWorkspacesRequest struct {
+
+	// The error code that is returned if the Standby WorkSpace could not be created.
+	ErrorCode *string
+
+	// The text of the error message that is returned if the Standby WorkSpace could
+	// not be created.
+	ErrorMessage *string
+
+	// Information about the Standby WorkSpace that could not be created.
+	StandbyWorkspaceRequest *StandbyWorkspace
+
+	noSmithyDocumentSerde
+}
+
 // Describes a WorkSpace that cannot be created.
 type FailedCreateWorkspaceRequest struct {
 
@@ -502,6 +518,28 @@ type OperatingSystem struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the Standby WorkSpace.
+type PendingCreateStandbyWorkspacesRequest struct {
+
+	// The identifier of the directory for the Standby WorkSpace.
+	DirectoryId *string
+
+	// The operational state of the Standby WorkSpace.
+	State WorkspaceState
+
+	// Describes the Standby WorkSpace that was created. Because this operation is
+	// asynchronous, the identifier returned is not immediately available for use with
+	// other operations. For example, if you call  DescribeWorkspaces
+	// (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html)
+	// before the WorkSpace is created, the information returned can be incomplete.
+	UserName *string
+
+	// The identifier of the Standby WorkSpace.
+	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the information used to reboot a WorkSpace.
 type RebootRequest struct {
 
@@ -519,6 +557,25 @@ type RebuildRequest struct {
 	// The identifier of the WorkSpace.
 	//
 	// This member is required.
+	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the related WorkSpace. The related WorkSpace could be a Standby
+// WorkSpace or Primary WorkSpace related to the specified WorkSpace.
+type RelatedWorkspaceProperties struct {
+
+	// The Region of the related WorkSpace.
+	Region *string
+
+	// Indicates the state of the WorkSpace.
+	State WorkspaceState
+
+	// Indicates the type of WorkSpace.
+	Type StandbyWorkspaceRelationshipType
+
+	// The identifier of the related WorkSpace.
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
@@ -603,6 +660,28 @@ type Snapshot struct {
 
 	// The time when the snapshot was created.
 	SnapshotTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Standby WorkSpace.
+type StandbyWorkspace struct {
+
+	// The identifier of the directory for the Standby WorkSpace.
+	//
+	// This member is required.
+	DirectoryId *string
+
+	// The identifier of the Standby WorkSpace.
+	//
+	// This member is required.
+	PrimaryWorkspaceId *string
+
+	// The tags associated with the Standby WorkSpace.
+	Tags []Tag
+
+	// The volume encryption key of the Standby WorkSpace.
+	VolumeEncryptionKey *string
 
 	noSmithyDocumentSerde
 }
@@ -702,6 +781,9 @@ type Workspace struct {
 	// The modification states of the WorkSpace.
 	ModificationStates []ModificationState
 
+	// The Standby WorkSpace or Primary WorkSpace related to the specified WorkSpace.
+	RelatedWorkspaces []RelatedWorkspaceProperties
+
 	// Indicates whether the data stored on the root volume is encrypted.
 	RootVolumeEncryptionEnabled *bool
 
@@ -775,6 +857,9 @@ type WorkspaceBundle struct {
 	// The identifier of the bundle.
 	BundleId *string
 
+	// The type of WorkSpace bundle.
+	BundleType BundleType
+
 	// The compute type of the bundle. For more information, see Amazon WorkSpaces
 	// Bundles (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
 	ComputeType *ComputeType
@@ -800,6 +885,9 @@ type WorkspaceBundle struct {
 
 	// The size of the root volume.
 	RootStorage *RootStorage
+
+	// The state of the WorkSpace bundle.
+	State WorkspaceBundleState
 
 	// The size of the user volume.
 	UserStorage *UserStorage

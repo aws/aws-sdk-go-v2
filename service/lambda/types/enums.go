@@ -286,6 +286,7 @@ const (
 	RuntimeRuby27       Runtime = "ruby2.7"
 	RuntimeProvided     Runtime = "provided"
 	RuntimeProvidedal2  Runtime = "provided.al2"
+	RuntimeNodejs18x    Runtime = "nodejs18.x"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -320,6 +321,7 @@ func (Runtime) Values() []Runtime {
 		"ruby2.7",
 		"provided",
 		"provided.al2",
+		"nodejs18.x",
 	}
 }
 

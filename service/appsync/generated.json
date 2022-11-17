@@ -26,6 +26,7 @@
         "api_op_DeleteResolver.go",
         "api_op_DeleteType.go",
         "api_op_DisassociateApi.go",
+        "api_op_EvaluateCode.go",
         "api_op_EvaluateMappingTemplate.go",
         "api_op_FlushApiCache.go",
         "api_op_GetApiAssociation.go",

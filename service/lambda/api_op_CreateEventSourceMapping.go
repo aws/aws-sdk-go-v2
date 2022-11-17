@@ -187,10 +187,18 @@ type CreateEventSourceMappingInput struct {
 	// event source mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
-	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
-	// that Lambda spends gathering records before invoking the function. Default: 0
-	// Related setting: When you set BatchSize to a value greater than 10, you must set
-	// MaximumBatchingWindowInSeconds to at least 1.
+	// The maximum amount of time, in seconds, that Lambda spends gathering records
+	// before invoking the function. You can configure MaximumBatchingWindowInSeconds
+	// to any value from 0 seconds to 300 seconds in increments of seconds. For streams
+	// and Amazon SQS event sources, the default batching window is 0 seconds. For
+	// Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default
+	// batching window is 500 ms. Note that because you can only change
+	// MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back
+	// to the 500 ms default batching window after you have changed it. To restore the
+	// default batching window, you must create a new event source mapping. Related
+	// setting: For streams and Amazon SQS event sources, when you set BatchSize to a
+	// value greater than 10, you must set MaximumBatchingWindowInSeconds to at least
+	// 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value
@@ -284,10 +292,18 @@ type CreateEventSourceMappingOutput struct {
 	// The result of the last Lambda invocation of your function.
 	LastProcessingResult *string
 
-	// (Streams and Amazon SQS standard queues) The maximum amount of time, in seconds,
-	// that Lambda spends gathering records before invoking the function. Default: 0
-	// Related setting: When you set BatchSize to a value greater than 10, you must set
-	// MaximumBatchingWindowInSeconds to at least 1.
+	// The maximum amount of time, in seconds, that Lambda spends gathering records
+	// before invoking the function. You can configure MaximumBatchingWindowInSeconds
+	// to any value from 0 seconds to 300 seconds in increments of seconds. For streams
+	// and Amazon SQS event sources, the default batching window is 0 seconds. For
+	// Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default
+	// batching window is 500 ms. Note that because you can only change
+	// MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back
+	// to the 500 ms default batching window after you have changed it. To restore the
+	// default batching window, you must create a new event source mapping. Related
+	// setting: For streams and Amazon SQS event sources, when you set BatchSize to a
+	// value greater than 10, you must set MaximumBatchingWindowInSeconds to at least
+	// 1.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value

@@ -30,6 +30,9 @@ func (c *Client) CreateRoom(ctx context.Context, params *CreateRoomInput, optFns
 
 type CreateRoomInput struct {
 
+	// Array of logging-configuration identifiers attached to the room.
+	LoggingConfigurationIdentifiers []string
+
 	// Maximum number of characters in a single message. Messages are expected to be
 	// UTF-8 encoded and this limit applies specifically to rune/code-point count, not
 	// number of bytes. Default: 500.
@@ -69,11 +72,16 @@ type CreateRoomOutput struct {
 	// ARN that uniquely identifies the room.
 	Id *string
 
-	// Maximum number of characters in a single message, from the request.
+	// Array of logging configurations attached to the room, from the request (if
+	// specified).
+	LoggingConfigurationIdentifiers []string
+
+	// Maximum number of characters in a single message, from the request (if
+	// specified).
 	MaximumMessageLength int32
 
 	// Maximum number of messages per second that can be sent to the room (by all
-	// clients), from the request.
+	// clients), from the request (if specified).
 	MaximumMessageRatePerSecond int32
 
 	// Configuration information for optional review of messages.
@@ -82,7 +90,7 @@ type CreateRoomOutput struct {
 	// Room name, from the request (if specified).
 	Name *string
 
-	// Tags attached to the resource, from the request.
+	// Tags attached to the resource, from the request (if specified).
 	Tags map[string]string
 
 	// Time of the room’s last update. This is an ISO 8601 timestamp; note that this is

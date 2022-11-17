@@ -31,6 +31,9 @@ func (c *Client) ListRooms(ctx context.Context, params *ListRoomsInput, optFns .
 
 type ListRoomsInput struct {
 
+	// Logging-configuration identifier.
+	LoggingConfigurationIdentifier *string
+
 	// Maximum number of rooms to return. Default: 50.
 	MaxResults int32
 

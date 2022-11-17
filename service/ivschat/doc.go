@@ -20,17 +20,21 @@
 // client applications (browser and Android/iOS apps) using the Amazon IVS Chat
 // Messaging API. We refer to these as clients.
 //
-// Resources The following resource
-// is part of Amazon IVS Chat:
+// Resources The following resources
+// are part of Amazon IVS Chat:
 //
-// * Room — The central Amazon IVS Chat resource
-// through which clients connect to and exchange chat messages. See the Room
-// endpoints for more information.
+// * LoggingConfiguration — A configuration that
+// allows customers to store and record sent messages in a chat room. See the
+// Logging Configuration endpoints for more information.
 //
-// Tagging A tag is a metadata label that you
-// assign to an AWS resource. A tag comprises a key and a value, both set by you.
-// For example, you might set a tag as topic:nature to label a particular video
-// category. See Tagging AWS Resources
+// * Room — The central
+// Amazon IVS Chat resource through which clients connect to and exchange chat
+// messages. See the Room endpoints for more information.
+//
+// Tagging A tag is a
+// metadata label that you assign to an AWS resource. A tag comprises a key and a
+// value, both set by you. For example, you might set a tag as topic:nature to
+// label a particular video category. See Tagging AWS Resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for more
 // information, including restrictions that apply to tags and "Tag naming limits
 // and requirements"; Amazon IVS Chat has no service-specific constraints beyond
@@ -104,40 +108,60 @@
 // # Chat Token Endpoint
 //
 // * CreateChatToken — Creates an encrypted
-// token that is used to establish an individual WebSocket connection to a room.
-// The token is valid for one minute, and a connection (session) established with
-// the token is valid for the specified duration.
+// token that is used by a chat participant to establish an individual WebSocket
+// chat connection to a room. When the token is used to connect to chat, the
+// connection is valid for the session duration specified in the request. The token
+// becomes invalid at the token-expiration timestamp included in the
+// response.
 //
 // # Room Endpoints
 //
-// * CreateRoom —
-// Creates a room that allows clients to connect and pass messages.
+// * CreateRoom — Creates a room that allows clients to
+// connect and pass messages.
 //
-// * DeleteRoom —
-// Deletes the specified room.
+// * DeleteRoom — Deletes the specified room.
 //
-// * GetRoom — Gets the specified room.
+// *
+// GetRoom — Gets the specified room.
 //
-// * ListRooms —
-// Gets summary information about all your rooms in the AWS region where the API
-// request is processed.
+// * ListRooms — Gets summary information about
+// all your rooms in the AWS region where the API request is processed.
 //
-// * UpdateRoom — Updates a room’s configuration.
+// *
+// UpdateRoom — Updates a room’s configuration.
 //
-// Tags
-// Endpoints
+// # Logging Configuration Endpoints
 //
-// * ListTagsForResource — Gets information about AWS tags for the
-// specified ARN.
+// *
+// CreateLoggingConfiguration — Creates a logging configuration that allows clients
+// to store and record sent messages.
 //
-// * TagResource — Adds or updates tags for the AWS resource with
-// the specified ARN.
+// * DeleteLoggingConfiguration — Deletes the
+// specified logging configuration.
 //
-// * UntagResource — Removes tags from the resource with the
-// specified ARN.
+// * GetLoggingConfiguration — Gets the specified
+// logging configuration.
 //
-// All the above are HTTP operations. There is a separate messaging
-// API for managing Chat resources; see the  Amazon IVS Chat Messaging API
-// Reference
+// * ListLoggingConfigurations — Gets summary information
+// about all your logging configurations in the AWS region where the API request is
+// processed.
+//
+// * UpdateLoggingConfiguration — Updates a specified logging
+// configuration.
+//
+// # Tags Endpoints
+//
+// * ListTagsForResource — Gets information about
+// AWS tags for the specified ARN.
+//
+// * TagResource — Adds or updates tags for the
+// AWS resource with the specified ARN.
+//
+// * UntagResource — Removes tags from the
+// resource with the specified ARN.
+//
+// All the above are HTTP operations. There is a
+// separate messaging API for managing Chat resources; see the  Amazon IVS Chat
+// Messaging API Reference
 // (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html).
 package ivschat

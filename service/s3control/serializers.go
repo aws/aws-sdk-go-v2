@@ -4522,6 +4522,32 @@ func awsRestxml_serializeDocumentAccountLevel(v *types.AccountLevel, value smith
 			return err
 		}
 	}
+	if v.AdvancedCostOptimizationMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AdvancedCostOptimizationMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAdvancedCostOptimizationMetrics(v.AdvancedCostOptimizationMetrics, el); err != nil {
+			return err
+		}
+	}
+	if v.AdvancedDataProtectionMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AdvancedDataProtectionMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAdvancedDataProtectionMetrics(v.AdvancedDataProtectionMetrics, el); err != nil {
+			return err
+		}
+	}
 	if v.BucketLevel != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -4535,10 +4561,55 @@ func awsRestxml_serializeDocumentAccountLevel(v *types.AccountLevel, value smith
 			return err
 		}
 	}
+	if v.DetailedStatusCodesMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DetailedStatusCodesMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentDetailedStatusCodesMetrics(v.DetailedStatusCodesMetrics, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
 func awsRestxml_serializeDocumentActivityMetrics(v *types.ActivityMetrics, value smithyxml.Value) error {
+	defer value.Close()
+	if v.IsEnabled {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentAdvancedCostOptimizationMetrics(v *types.AdvancedCostOptimizationMetrics, value smithyxml.Value) error {
+	defer value.Close()
+	if v.IsEnabled {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentAdvancedDataProtectionMetrics(v *types.AdvancedDataProtectionMetrics, value smithyxml.Value) error {
 	defer value.Close()
 	if v.IsEnabled {
 		rootAttr := []smithyxml.Attr{}
@@ -4593,6 +4664,45 @@ func awsRestxml_serializeDocumentBucketLevel(v *types.BucketLevel, value smithyx
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentActivityMetrics(v.ActivityMetrics, el); err != nil {
+			return err
+		}
+	}
+	if v.AdvancedCostOptimizationMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AdvancedCostOptimizationMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAdvancedCostOptimizationMetrics(v.AdvancedCostOptimizationMetrics, el); err != nil {
+			return err
+		}
+	}
+	if v.AdvancedDataProtectionMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "AdvancedDataProtectionMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentAdvancedDataProtectionMetrics(v.AdvancedDataProtectionMetrics, el); err != nil {
+			return err
+		}
+	}
+	if v.DetailedStatusCodesMetrics != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DetailedStatusCodesMetrics",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentDetailedStatusCodesMetrics(v.DetailedStatusCodesMetrics, el); err != nil {
 			return err
 		}
 	}
@@ -4718,6 +4828,22 @@ func awsRestxml_serializeDocumentDeleteMultiRegionAccessPointInput(v *types.Dele
 		}
 		el := value.MemberElement(root)
 		el.String(*v.Name)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentDetailedStatusCodesMetrics(v *types.DetailedStatusCodesMetrics, value smithyxml.Value) error {
+	defer value.Close()
+	if v.IsEnabled {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "IsEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.IsEnabled)
 	}
 	return nil
 }

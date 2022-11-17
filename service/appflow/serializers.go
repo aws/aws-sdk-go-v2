@@ -192,6 +192,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 		ok.String(*v.KmsArn)
 	}
 
+	if v.MetadataCatalogConfig != nil {
+		ok := object.Key("metadataCatalogConfig")
+		if err := awsRestjson1_serializeDocumentMetadataCatalogConfig(v.MetadataCatalogConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceFlowConfig != nil {
 		ok := object.Key("sourceFlowConfig")
 		if err := awsRestjson1_serializeDocumentSourceFlowConfig(v.SourceFlowConfig, ok); err != nil {
@@ -1726,6 +1733,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowInput(v *UpdateFlowInput, value s
 		ok.String(*v.FlowName)
 	}
 
+	if v.MetadataCatalogConfig != nil {
+		ok := object.Key("metadataCatalogConfig")
+		if err := awsRestjson1_serializeDocumentMetadataCatalogConfig(v.MetadataCatalogConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceFlowConfig != nil {
 		ok := object.Key("sourceFlowConfig")
 		if err := awsRestjson1_serializeDocumentSourceFlowConfig(v.SourceFlowConfig, ok); err != nil {
@@ -1757,6 +1771,11 @@ func awsRestjson1_serializeDocumentAggregationConfig(v *types.AggregationConfig,
 	if len(v.AggregationType) > 0 {
 		ok := object.Key("aggregationType")
 		ok.String(string(v.AggregationType))
+	}
+
+	if v.TargetFileSize != nil {
+		ok := object.Key("targetFileSize")
+		ok.Long(*v.TargetFileSize)
 	}
 
 	return nil
@@ -2693,6 +2712,28 @@ func awsRestjson1_serializeDocumentEventBridgeDestinationProperties(v *types.Eve
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGlueDataCatalogConfig(v *types.GlueDataCatalogConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.TablePrefix != nil {
+		ok := object.Key("tablePrefix")
+		ok.String(*v.TablePrefix)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGoogleAnalyticsConnectorProfileCredentials(v *types.GoogleAnalyticsConnectorProfileCredentials, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2961,6 +3002,20 @@ func awsRestjson1_serializeDocumentMarketoSourceProperties(v *types.MarketoSourc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMetadataCatalogConfig(v *types.MetadataCatalogConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlueDataCatalog != nil {
+		ok := object.Key("glueDataCatalog")
+		if err := awsRestjson1_serializeDocumentGlueDataCatalogConfig(v.GlueDataCatalog, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOAuth2Credentials(v *types.OAuth2Credentials, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3088,9 +3143,27 @@ func awsRestjson1_serializeDocumentOAuthScopeList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPathPrefixHierarchy(v []types.PathPrefix, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPrefixConfig(v *types.PrefixConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.PathPrefixHierarchy != nil {
+		ok := object.Key("pathPrefixHierarchy")
+		if err := awsRestjson1_serializeDocumentPathPrefixHierarchy(v.PathPrefixHierarchy, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.PrefixFormat) > 0 {
 		ok := object.Key("prefixFormat")

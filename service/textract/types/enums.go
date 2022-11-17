@@ -17,6 +17,7 @@ const (
 	BlockTypeTitle            BlockType = "TITLE"
 	BlockTypeQuery            BlockType = "QUERY"
 	BlockTypeQueryResult      BlockType = "QUERY_RESULT"
+	BlockTypeSignature        BlockType = "SIGNATURE"
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded in
@@ -35,6 +36,7 @@ func (BlockType) Values() []BlockType {
 		"TITLE",
 		"QUERY",
 		"QUERY_RESULT",
+		"SIGNATURE",
 	}
 }
 
@@ -80,9 +82,10 @@ type FeatureType string
 
 // Enum values for FeatureType
 const (
-	FeatureTypeTables  FeatureType = "TABLES"
-	FeatureTypeForms   FeatureType = "FORMS"
-	FeatureTypeQueries FeatureType = "QUERIES"
+	FeatureTypeTables     FeatureType = "TABLES"
+	FeatureTypeForms      FeatureType = "FORMS"
+	FeatureTypeQueries    FeatureType = "QUERIES"
+	FeatureTypeSignatures FeatureType = "SIGNATURES"
 )
 
 // Values returns all known values for FeatureType. Note that this can be expanded
@@ -93,6 +96,7 @@ func (FeatureType) Values() []FeatureType {
 		"TABLES",
 		"FORMS",
 		"QUERIES",
+		"SIGNATURES",
 	}
 }
 

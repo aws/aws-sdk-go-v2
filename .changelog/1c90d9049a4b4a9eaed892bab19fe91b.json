@@ -1,0 +1,8 @@
+{
+    "id": "1c90d904-9a4b-4a9e-aed8-92bab19fe91b",
+    "type": "feature",
+    "description": "Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail",
+    "modules": [
+        "service/securityhub"
+    ]
+}

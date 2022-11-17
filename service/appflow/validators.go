@@ -1017,6 +1017,27 @@ func validateEventBridgeDestinationProperties(v *types.EventBridgeDestinationPro
 	}
 }
 
+func validateGlueDataCatalogConfig(v *types.GlueDataCatalogConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueDataCatalogConfig"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TablePrefix == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TablePrefix"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGoogleAnalyticsConnectorProfileCredentials(v *types.GoogleAnalyticsConnectorProfileCredentials) error {
 	if v == nil {
 		return nil
@@ -1189,6 +1210,23 @@ func validateMarketoSourceProperties(v *types.MarketoSourceProperties) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MarketoSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataCatalogConfig(v *types.MetadataCatalogConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataCatalogConfig"}
+	if v.GlueDataCatalog != nil {
+		if err := validateGlueDataCatalogConfig(v.GlueDataCatalog); err != nil {
+			invalidParams.AddNested("GlueDataCatalog", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2058,6 +2096,11 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 			invalidParams.AddNested("Tasks", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetadataCatalogConfig != nil {
+		if err := validateMetadataCatalogConfig(v.MetadataCatalogConfig); err != nil {
+			invalidParams.AddNested("MetadataCatalogConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2327,6 +2370,11 @@ func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
 	} else if v.Tasks != nil {
 		if err := validateTasks(v.Tasks); err != nil {
 			invalidParams.AddNested("Tasks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetadataCatalogConfig != nil {
+		if err := validateMetadataCatalogConfig(v.MetadataCatalogConfig); err != nil {
+			invalidParams.AddNested("MetadataCatalogConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

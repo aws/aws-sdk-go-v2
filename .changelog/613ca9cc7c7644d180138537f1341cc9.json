@@ -1,0 +1,8 @@
+{
+    "id": "613ca9cc-7c76-44d1-8013-8537f1341cc9",
+    "type": "documentation",
+    "description": "Provides new target group attributes to turn on/off cross zone load balancing and configure target group health for Network Load Balancers and Application Load Balancers. Provides improvements to health check configuration for Network Load Balancers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

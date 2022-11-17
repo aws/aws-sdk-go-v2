@@ -93,6 +93,9 @@ func (e *ApiLimitExceededException) ErrorFault() smithy.ErrorFault { return smit
 type BadRequestException struct {
 	Message *string
 
+	Reason BadRequestReason
+	Detail *BadRequestDetail
+
 	noSmithyDocumentSerde
 }
 

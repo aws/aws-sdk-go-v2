@@ -56,7 +56,10 @@ type App struct {
 	// This member is required.
 	Name *string
 
-	// The platform for the Amplify app.
+	// The platform for the Amplify app. For a static app, set the platform type to
+	// WEB. For a dynamic server-side rendered (SSR) app, set the platform type to
+	// WEB_COMPUTE. For an app requiring Amplify Hosting's original SSR support only,
+	// set the platform type to WEB_DYNAMIC.
 	//
 	// This member is required.
 	Platform Platform

@@ -42,6 +42,9 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ClientToken *string
 
+	// The CPU architecture of an application.
+	Architecture types.Architecture
+
 	// The configuration for an application to automatically start on job submission.
 	AutoStartConfiguration *types.AutoStartConfig
 

@@ -150,6 +150,26 @@ func (m *validateOpCreateIpGroup) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStandbyWorkspaces struct {
+}
+
+func (*validateOpCreateStandbyWorkspaces) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStandbyWorkspaces) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStandbyWorkspacesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStandbyWorkspacesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTags struct {
 }
 
@@ -1078,6 +1098,10 @@ func addOpCreateIpGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIpGroup{}, middleware.After)
 }
 
+func addOpCreateStandbyWorkspacesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStandbyWorkspaces{}, middleware.After)
+}
+
 func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTags{}, middleware.After)
 }
@@ -1340,6 +1364,46 @@ func validateRebuildWorkspaceRequests(v []types.RebuildRequest) error {
 	}
 }
 
+func validateStandbyWorkspace(v *types.StandbyWorkspace) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandbyWorkspace"}
+	if v.PrimaryWorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryWorkspaceId"))
+	}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStandbyWorkspacesList(v []types.StandbyWorkspace) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StandbyWorkspacesList"}
+	for i := range v {
+		if err := validateStandbyWorkspace(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1579,6 +1643,28 @@ func validateOpCreateIpGroupInput(v *CreateIpGroupInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStandbyWorkspacesInput(v *CreateStandbyWorkspacesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStandbyWorkspacesInput"}
+	if v.PrimaryRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryRegion"))
+	}
+	if v.StandbyWorkspaces == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StandbyWorkspaces"))
+	} else if v.StandbyWorkspaces != nil {
+		if err := validateStandbyWorkspacesList(v.StandbyWorkspaces); err != nil {
+			invalidParams.AddNested("StandbyWorkspaces", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

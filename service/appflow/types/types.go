@@ -15,6 +15,12 @@ type AggregationConfig struct {
 	// or leave them unaggregated.
 	AggregationType AggregationType
 
+	// The desired file size, in MB, for each output file that Amazon AppFlow writes to
+	// the flow destination. For each file, Amazon AppFlow attempts to achieve the size
+	// that you specify. The actual file sizes might differ from this target based on
+	// the number and size of the records that each file contains.
+	TargetFileSize *int64
+
 	noSmithyDocumentSerde
 }
 
@@ -1093,6 +1099,10 @@ type ExecutionRecord struct {
 	// Specifies the time of the most recent update.
 	LastUpdatedAt *time.Time
 
+	// Describes the metadata catalog, metadata table, and data partitions that Amazon
+	// AppFlow used for the associated flow run.
+	MetadataCatalogDetails []MetadataCatalogDetail
+
 	// Specifies the start time of the flow run.
 	StartedAt *time.Time
 
@@ -1201,6 +1211,42 @@ type FlowDefinition struct {
 
 	// Specifies the type of flow trigger. This can be OnDemand, Scheduled, or Event.
 	TriggerType TriggerType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration that Amazon AppFlow uses when it catalogs your data
+// with the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores
+// metadata in Data Catalog tables. This metadata represents the data that's
+// transferred by the flow that you configure with these settings. You can
+// configure a flow with these settings only when the flow destination is Amazon
+// S3.
+type GlueDataCatalogConfig struct {
+
+	// The name of the Data Catalog database that stores the metadata tables that
+	// Amazon AppFlow creates in your Amazon Web Services account. These tables contain
+	// metadata for the data that's transferred by the flow that you configure with
+	// this parameter. When you configure a new flow with this parameter, you must
+	// specify an existing database.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The Amazon Resource Name (ARN) of an IAM role that grants Amazon AppFlow the
+	// permissions it needs to create Data Catalog tables, databases, and partitions.
+	// For an example IAM policy that has the required permissions, see Identity-based
+	// policy examples for Amazon AppFlow
+	// (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_id-based-policy-examples.html).
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A naming prefix for each Data Catalog table that Amazon AppFlow creates for the
+	// flow that you configure with this setting. Amazon AppFlow adds the prefix to the
+	// beginning of the each table name.
+	//
+	// This member is required.
+	TablePrefix *string
 
 	noSmithyDocumentSerde
 }
@@ -1458,6 +1504,47 @@ type MarketoSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the configuration that Amazon AppFlow uses when it catalogs your data.
+// When Amazon AppFlow catalogs your data, it stores metadata in a data catalog.
+type MetadataCatalogConfig struct {
+
+	// Specifies the configuration that Amazon AppFlow uses when it catalogs your data
+	// with the Glue Data Catalog.
+	GlueDataCatalog *GlueDataCatalogConfig
+
+	noSmithyDocumentSerde
+}
+
+// Describes the metadata catalog, metadata table, and data partitions that Amazon
+// AppFlow used for the associated flow run.
+type MetadataCatalogDetail struct {
+
+	// The type of metadata catalog that Amazon AppFlow used for the associated flow
+	// run. This parameter returns the following value: GLUE The metadata catalog is
+	// provided by the Glue Data Catalog. Glue includes the Glue Data Catalog as a
+	// component.
+	CatalogType CatalogType
+
+	// Describes the status of the attempt from Amazon AppFlow to register the data
+	// partitions with the metadata catalog. The data partitions organize the flow
+	// output into a hierarchical path, such as a folder path in an S3 bucket. Amazon
+	// AppFlow creates the partitions (if they don't already exist) based on your flow
+	// configuration.
+	PartitionRegistrationOutput *RegistrationOutput
+
+	// The name of the table that stores the metadata for the associated flow run. The
+	// table stores metadata that represents the data that the flow transferred. Amazon
+	// AppFlow stores the table in the metadata catalog.
+	TableName *string
+
+	// Describes the status of the attempt from Amazon AppFlow to register the metadata
+	// table with the metadata catalog. Amazon AppFlow creates or updates this table
+	// for the associated flow run.
+	TableRegistrationOutput *RegistrationOutput
+
+	noSmithyDocumentSerde
+}
+
 // The OAuth 2.0 credentials required for OAuth 2.0 authentication.
 type OAuth2Credentials struct {
 
@@ -1601,12 +1688,26 @@ type OAuthProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Determines the prefix that Amazon AppFlow applies to the destination folder
-// name. You can name your destination folders according to the flow frequency and
-// date.
+// Specifies elements that Amazon AppFlow includes in the file and folder names in
+// the flow destination.
 type PrefixConfig struct {
 
-	// Determines the level of granularity that's included in the prefix.
+	// Specifies whether the destination file path includes either or both of the
+	// following elements: EXECUTION_ID The ID that Amazon AppFlow assigns to the flow
+	// run. SCHEMA_VERSION The version number of your data schema. Amazon AppFlow
+	// assigns this version number. The version number increases by one when you change
+	// any of the following settings in your flow configuration:
+	//
+	// *
+	// Source-to-destination field mappings
+	//
+	// * Field data types
+	//
+	// * Partition keys
+	PathPrefixHierarchy []PathPrefix
+
+	// Determines the level of granularity for the date and time that's included in the
+	// prefix.
 	PrefixFormat PrefixFormat
 
 	// Determines the format of the prefix, and whether it applies to the file name,
@@ -1715,6 +1816,27 @@ type RedshiftDestinationProperties struct {
 
 // The connector metadata specific to Amazon Redshift.
 type RedshiftMetadata struct {
+	noSmithyDocumentSerde
+}
+
+// Describes the status of an attempt from Amazon AppFlow to register a resource.
+// When you run a flow that you've configured to use a metadata catalog, Amazon
+// AppFlow registers a metadata table and data partitions with that catalog. This
+// operation provides the status of that registration attempt. The operation also
+// indicates how many related resources Amazon AppFlow created or updated.
+type RegistrationOutput struct {
+
+	// Explains the status of the registration attempt from Amazon AppFlow. If the
+	// attempt fails, the message explains why.
+	Message *string
+
+	// Indicates the number of resources that Amazon AppFlow created or updated.
+	// Possible resources include metadata tables and data partitions.
+	Result *string
+
+	// Indicates the status of the registration attempt from Amazon AppFlow.
+	Status ExecutionStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -2550,9 +2672,8 @@ type UpsolverMetadata struct {
 // data when Upsolver is used as the destination.
 type UpsolverS3OutputFormatConfig struct {
 
-	// Determines the prefix that Amazon AppFlow applies to the destination folder
-	// name. You can name your destination folders according to the flow frequency and
-	// date.
+	// Specifies elements that Amazon AppFlow includes in the file and folder names in
+	// the flow destination.
 	//
 	// This member is required.
 	PrefixConfig *PrefixConfig

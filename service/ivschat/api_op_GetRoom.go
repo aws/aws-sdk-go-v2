@@ -52,6 +52,9 @@ type GetRoomOutput struct {
 	// ARN that uniquely identifies the room.
 	Id *string
 
+	// Array of logging configurations attached to the room.
+	LoggingConfigurationIdentifiers []string
+
 	// Maximum number of characters in a single message. Messages are expected to be
 	// UTF-8 encoded and this limit applies specifically to rune/code-point count, not
 	// number of bytes. Default: 500.

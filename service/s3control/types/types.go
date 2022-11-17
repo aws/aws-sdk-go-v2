@@ -53,7 +53,14 @@ type AccessPoint struct {
 	noSmithyDocumentSerde
 }
 
-// A container for the account level Amazon S3 Storage Lens configuration.
+// A container for the account-level Amazon S3 Storage Lens configuration. For more
+// information about S3 Storage Lens, see Assessing your storage activity and usage
+// with S3 Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the
+// Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3
+// Storage Lens metrics glossary
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
+// in the Amazon S3 User Guide.
 type AccountLevel struct {
 
 	// A container for the S3 Storage Lens bucket-level configuration.
@@ -61,16 +68,72 @@ type AccountLevel struct {
 	// This member is required.
 	BucketLevel *BucketLevel
 
-	// A container for the S3 Storage Lens activity metrics.
+	// A container for S3 Storage Lens activity metrics.
 	ActivityMetrics *ActivityMetrics
+
+	// A container for S3 Storage Lens advanced cost-optimization metrics.
+	AdvancedCostOptimizationMetrics *AdvancedCostOptimizationMetrics
+
+	// A container for S3 Storage Lens advanced data-protection metrics.
+	AdvancedDataProtectionMetrics *AdvancedDataProtectionMetrics
+
+	// A container for detailed status code metrics.
+	DetailedStatusCodesMetrics *DetailedStatusCodesMetrics
 
 	noSmithyDocumentSerde
 }
 
-// A container for the activity metrics.
+// The container element for Amazon S3 Storage Lens activity metrics. Activity
+// metrics show details about how your storage is requested, such as requests (for
+// example, All requests, Get requests, Put requests), bytes uploaded or
+// downloaded, and errors. For more information about S3 Storage Lens, see
+// Assessing your storage activity and usage with S3 Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the
+// Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3
+// Storage Lens metrics glossary
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
+// in the Amazon S3 User Guide.
 type ActivityMetrics struct {
 
-	// A container for whether the activity metrics are enabled.
+	// A container that indicates whether activity metrics are enabled.
+	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The container element for Amazon S3 Storage Lens advanced cost-optimization
+// metrics. Advanced cost-optimization metrics provide insights that you can use to
+// manage and optimize your storage costs, for example, lifecycle rule counts for
+// transitions, expirations, and incomplete multipart uploads. For more information
+// about S3 Storage Lens, see Assessing your storage activity and usage with S3
+// Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the
+// Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3
+// Storage Lens metrics glossary
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
+// in the Amazon S3 User Guide.
+type AdvancedCostOptimizationMetrics struct {
+
+	// A container that indicates whether advanced cost-optimization metrics are
+	// enabled.
+	IsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// The container element for Amazon S3 Storage Lens advanced data-protection
+// metrics. Advanced data-protection metrics provide insights that you can use to
+// perform audits and protect your data, for example replication rule counts within
+// and across Regions. For more information about S3 Storage Lens, see Assessing
+// your storage activity and usage with S3 Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the
+// Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3
+// Storage Lens metrics glossary
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
+// in the Amazon S3 User Guide.
+type AdvancedDataProtectionMetrics struct {
+
+	// A container that indicates whether advanced data-protection metrics are enabled.
 	IsEnabled bool
 
 	noSmithyDocumentSerde
@@ -167,13 +230,28 @@ type AwsLambdaTransformation struct {
 	noSmithyDocumentSerde
 }
 
-// A container for the bucket-level configuration.
+// A container for the bucket-level configuration for Amazon S3 Storage Lens. For
+// more information about S3 Storage Lens, see Assessing your storage activity and
+// usage with S3 Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the
+// Amazon S3 User Guide.
 type BucketLevel struct {
 
-	// A container for the bucket-level activity metrics for Amazon S3 Storage Lens
+	// A container for the bucket-level activity metrics for S3 Storage Lens.
 	ActivityMetrics *ActivityMetrics
 
-	// A container for the bucket-level prefix-level metrics for S3 Storage Lens
+	// A container for bucket-level advanced cost-optimization metrics for S3 Storage
+	// Lens.
+	AdvancedCostOptimizationMetrics *AdvancedCostOptimizationMetrics
+
+	// A container for bucket-level advanced data-protection metrics for S3 Storage
+	// Lens.
+	AdvancedDataProtectionMetrics *AdvancedDataProtectionMetrics
+
+	// A container for bucket-level detailed status code metrics for S3 Storage Lens.
+	DetailedStatusCodesMetrics *DetailedStatusCodesMetrics
+
+	// A container for the prefix-level metrics for S3 Storage Lens.
 	PrefixLevel *PrefixLevel
 
 	noSmithyDocumentSerde
@@ -229,7 +307,8 @@ type CreateMultiRegionAccessPointInput struct {
 	// information about when Amazon S3 considers a bucket or object public, see The
 	// Meaning of "Public"
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
+	// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
+	// Outposts.
 	PublicAccessBlock *PublicAccessBlockConfiguration
 
 	noSmithyDocumentSerde
@@ -244,6 +323,24 @@ type DeleteMultiRegionAccessPointInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The container element for Amazon S3 Storage Lens detailed status code metrics.
+// Detailed status code metrics generate metrics for HTTP status codes, such as 200
+// OK, 403 Forbidden, 503 Service Unavailable and others. For more information
+// about S3 Storage Lens, see Assessing your storage activity and usage with S3
+// Storage Lens
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html) in the
+// Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3
+// Storage Lens metrics glossary
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
+// in the Amazon S3 User Guide.
+type DetailedStatusCodesMetrics struct {
+
+	// A container that indicates whether detailed status code metrics are enabled.
+	IsEnabled bool
 
 	noSmithyDocumentSerde
 }
@@ -536,7 +633,7 @@ type JobOperation struct {
 	// in the manifest.
 	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
 
-	// Directs the specified job to run a PUT Object acl call on every object in the
+	// Directs the specified job to run a PutObjectAcl call on every object in the
 	// manifest.
 	S3PutObjectAcl *S3SetObjectAclOperation
 
@@ -748,7 +845,7 @@ type LifecycleRuleFilter struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	Prefix *string
 
-	//
+	// A container for a key-value name pair.
 	Tag *S3Tag
 
 	noSmithyDocumentSerde
@@ -831,7 +928,8 @@ type MultiRegionAccessPointReport struct {
 	// information about when Amazon S3 considers a bucket or object public, see The
 	// Meaning of "Public"
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
+	// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
+	// Outposts.
 	PublicAccessBlock *PublicAccessBlockConfiguration
 
 	// A collection of the Regions and buckets associated with the Multi-Region Access
@@ -1026,15 +1124,16 @@ type ProposedMultiRegionAccessPointPolicy struct {
 // information about when Amazon S3 considers a bucket or object public, see The
 // Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
+// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
+// Outposts.
 type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
 	// buckets in this account. Setting this element to TRUE causes the following
 	// behavior:
 	//
-	// * PUT Bucket acl and PUT Object acl calls fail if the specified ACL
-	// is public.
+	// * PutBucketAcl and PutObjectAcl calls fail if the specified ACL is
+	// public.
 	//
 	// * PUT Object calls fail if the request includes a public ACL.
 	//
@@ -1042,22 +1141,23 @@ type PublicAccessBlockConfiguration struct {
 	// Bucket calls fail if the request includes a public ACL.
 	//
 	// Enabling this setting
-	// doesn't affect existing policies or ACLs. This is not supported for Amazon S3 on
-	// Outposts.
+	// doesn't affect existing policies or ACLs. This property is not supported for
+	// Amazon S3 on Outposts.
 	BlockPublicAcls bool
 
 	// Specifies whether Amazon S3 should block public bucket policies for buckets in
 	// this account. Setting this element to TRUE causes Amazon S3 to reject calls to
 	// PUT Bucket policy if the specified bucket policy allows public access. Enabling
-	// this setting doesn't affect existing bucket policies. This is not supported for
-	// Amazon S3 on Outposts.
+	// this setting doesn't affect existing bucket policies. This property is not
+	// supported for Amazon S3 on Outposts.
 	BlockPublicPolicy bool
 
 	// Specifies whether Amazon S3 should ignore public ACLs for buckets in this
 	// account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs
 	// on buckets in this account and any objects that they contain. Enabling this
 	// setting doesn't affect the persistence of any existing ACLs and doesn't prevent
-	// new public ACLs from being set. This is not supported for Amazon S3 on Outposts.
+	// new public ACLs from being set. This property is not supported for Amazon S3 on
+	// Outposts.
 	IgnorePublicAcls bool
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
@@ -1066,7 +1166,7 @@ type PublicAccessBlockConfiguration struct {
 	// within this account. Enabling this setting doesn't affect previously stored
 	// bucket policies, except that public and cross-account access within any public
 	// bucket policy, including non-public delegation to specific accounts, is blocked.
-	// This is not supported for Amazon S3 on Outposts.
+	// This property is not supported for Amazon S3 on Outposts.
 	RestrictPublicBuckets bool
 
 	noSmithyDocumentSerde
@@ -1269,8 +1369,8 @@ type S3CopyObjectOperation struct {
 	TargetKeyPrefix *string
 
 	// Specifies the destination bucket ARN for the batch copy operation. For example,
-	// to copy objects to a bucket named "destinationBucket", set the TargetResource to
-	// "arn:aws:s3:::destinationBucket".
+	// to copy objects to a bucket named destinationBucket, set the TargetResource
+	// property to arn:aws:s3:::destinationBucket.
 	TargetResource *string
 
 	//
@@ -1495,8 +1595,8 @@ type S3Retention struct {
 }
 
 // Contains the configuration parameters for a Set Object ACL operation. S3 Batch
-// Operations passes every object to the underlying PUT Object acl API. For more
-// information about the parameters for this operation, see PUT Object acl
+// Operations passes every object to the underlying PutObjectAcl API. For more
+// information about the parameters for this operation, see PutObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html).
 type S3SetObjectAclOperation struct {
 
@@ -1560,14 +1660,15 @@ type S3SetObjectTaggingOperation struct {
 	noSmithyDocumentSerde
 }
 
+// A container for a key-value name pair.
 type S3Tag struct {
 
-	//
+	// Key of the tag
 	//
 	// This member is required.
 	Key *string
 
-	//
+	// Value of the tag
 	//
 	// This member is required.
 	Value *string

@@ -1,0 +1,8 @@
+{
+    "id": "e45f068a-f28a-4305-a28b-a9605b71b9a5",
+    "type": "feature",
+    "description": "Adds support for AWS Graviton2 based applications. You can now select CPU architecture when creating new applications or updating existing ones.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

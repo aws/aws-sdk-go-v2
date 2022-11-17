@@ -40,19 +40,22 @@ type CreateFunctionInput struct {
 	// This member is required.
 	DataSourceName *string
 
-	// The version of the request mapping template. Currently, the supported value is
-	// 2018-05-29.
-	//
-	// This member is required.
-	FunctionVersion *string
-
 	// The Function name. The function name does not have to be unique.
 	//
 	// This member is required.
 	Name *string
 
+	// The function code that contains the request and response functions. When code is
+	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string
+
 	// The Function description.
 	Description *string
+
+	// The version of the request mapping template. Currently, the supported value is
+	// 2018-05-29. Note that when using VTL and mapping templates, the functionVersion
+	// is required.
+	FunctionVersion *string
 
 	// The maximum batching size for a resolver.
 	MaxBatchSize int32
@@ -63,6 +66,11 @@ type CreateFunctionInput struct {
 
 	// The Function response mapping template.
 	ResponseMappingTemplate *string
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
+	// function. Specifies the name and version of the runtime to use. Note that if a
+	// runtime is specified, code must also be specified.
+	Runtime *types.AppSyncRuntime
 
 	// Describes a Sync configuration for a resolver. Specifies which Conflict
 	// Detection strategy and Resolution strategy to use when the resolver is invoked.

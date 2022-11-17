@@ -63,6 +63,15 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Includes all of the Service Catalog AppRegistry settings.
+type AppRegistryConfiguration struct {
+
+	// Includes the definition of a tagQuery.
+	TagQueryConfiguration *TagQueryConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Represents a Amazon Web Services Service Catalog AppRegistry attribute group
 // that is rich metadata which describes an application and its components.
 type AttributeGroup struct {
@@ -103,7 +112,11 @@ type AttributeGroupDetails struct {
 	// The unique identifier of the attribute group.
 	Id *string
 
-	// The name of the attribute group.
+	// This field is no longer supported. We recommend you don't use the field when
+	// using ListAttributeGroupsForApplication. The name of the attribute group.
+	//
+	// Deprecated: This field is deprecated. We recommend not using the field when
+	// using ListAttributeGroupsForApplication.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -163,6 +176,15 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+// The details related to the resource.
+type ResourceDetails struct {
+
+	// The value of the tag.
+	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
 // The information about the resource group integration.
 type ResourceGroup struct {
 
@@ -193,6 +215,12 @@ type ResourceInfo struct {
 	// The name of the resource.
 	Name *string
 
+	// The details related to the resource.
+	ResourceDetails *ResourceDetails
+
+	// Provides information about the Service Catalog App Registry resource type.
+	ResourceType ResourceType
+
 	noSmithyDocumentSerde
 }
 
@@ -201,6 +229,16 @@ type ResourceIntegrations struct {
 
 	// The information about the integration of Resource Groups.
 	ResourceGroup *ResourceGroup
+
+	noSmithyDocumentSerde
+}
+
+// The definition of tagQuery. Specifies which resources are associated with an
+// application.
+type TagQueryConfiguration struct {
+
+	// Condition in the IAM policy that associates resources to an application.
+	TagKey *string
 
 	noSmithyDocumentSerde
 }

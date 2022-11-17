@@ -203,6 +203,24 @@ type ApiKey struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
+// function. Specifies the name and version of the runtime to use. Note that if a
+// runtime is specified, code must also be specified.
+type AppSyncRuntime struct {
+
+	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
+	//
+	// This member is required.
+	Name RuntimeName
+
+	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
+	//
+	// This member is required.
+	RuntimeVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // The authorization configuration in case the HTTP endpoint requires
 // authorization.
 type AuthorizationConfig struct {
@@ -233,6 +251,16 @@ type AwsIamConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Provides further details for the reason behind the bad request. For reason type
+// CODE_ERROR, the detail will contain a list of code errors.
+type BadRequestDetail struct {
+
+	// Contains the list of errors in the request.
+	CodeErrors []CodeError
+
+	noSmithyDocumentSerde
+}
+
 // The caching configuration for a resolver that has caching activated.
 type CachingConfig struct {
 
@@ -246,6 +274,38 @@ type CachingConfig struct {
 	// entries from the $context.arguments, $context.source, and $context.identity
 	// maps.
 	CachingKeys []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an AppSync error.
+type CodeError struct {
+
+	// The type of code error. Examples include, but aren't limited to: LINT_ERROR,
+	// PARSER_ERROR.
+	ErrorType *string
+
+	// The line, column, and span location of the error in the code.
+	Location *CodeErrorLocation
+
+	// A user presentable error. Examples include, but aren't limited to: Parsing
+	// error: Unterminated string literal.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the location of the error in a code sample.
+type CodeErrorLocation struct {
+
+	// The column number in the code. Defaults to 0 if unknown.
+	Column int32
+
+	// The line number in the code. Defaults to 0 if unknown.
+	Line int32
+
+	// The span/length of the error. Defaults to -1 if unknown.
+	Span int32
 
 	noSmithyDocumentSerde
 }
@@ -416,9 +476,21 @@ type ElasticsearchDataSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the list of errors generated when attempting to evaluate a mapping
-// template.
+// Contains the list of errors generated. When using JavaScript, this will apply to
+// the request or response function evaluation.
 type ErrorDetail struct {
+
+	// The error payload.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the list of errors from a code evaluation response.
+type EvaluateCodeErrorDetail struct {
+
+	// Contains the list of CodeError objects.
+	CodeErrors []CodeError
 
 	// The error payload.
 	Message *string
@@ -429,6 +501,10 @@ type ErrorDetail struct {
 // A function is a reusable entity. You can use multiple functions to compose the
 // resolver logic.
 type FunctionConfiguration struct {
+
+	// The function code that contains the request and response functions. When code is
+	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string
 
 	// The name of the DataSource.
 	DataSourceName *string
@@ -458,6 +534,11 @@ type FunctionConfiguration struct {
 
 	// The Function response mapping template.
 	ResponseMappingTemplate *string
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
+	// function. Specifies the name and version of the runtime to use. Note that if a
+	// runtime is specified, code must also be specified.
+	Runtime *AppSyncRuntime
 
 	// Describes a Sync configuration for a resolver. Specifies which Conflict
 	// Detection strategy and Resolution strategy to use when the resolver is invoked.
@@ -715,6 +796,10 @@ type Resolver struct {
 	// The caching configuration for the resolver.
 	CachingConfig *CachingConfig
 
+	// The resolver code that contains the request and response functions. When code is
+	// used, the runtime is required. The runtime value must be APPSYNC_JS.
+	Code *string
+
 	// The resolver data source name.
 	DataSourceName *string
 
@@ -747,6 +832,11 @@ type Resolver struct {
 
 	// The response mapping template.
 	ResponseMappingTemplate *string
+
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
+	// function. Specifies the name and version of the runtime to use. Note that if a
+	// runtime is specified, code must also be specified.
+	Runtime *AppSyncRuntime
 
 	// The SyncConfig for a resolver attached to a versioned data source.
 	SyncConfig *SyncConfig

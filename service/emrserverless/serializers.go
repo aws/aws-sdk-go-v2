@@ -142,6 +142,11 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Architecture) > 0 {
+		ok := object.Key("architecture")
+		ok.String(string(v.Architecture))
+	}
+
 	if v.AutoStartConfiguration != nil {
 		ok := object.Key("autoStartConfiguration")
 		if err := awsRestjson1_serializeDocumentAutoStartConfig(v.AutoStartConfiguration, ok); err != nil {
@@ -1110,6 +1115,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateApplicationInput(v *UpdateApplica
 func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.Architecture) > 0 {
+		ok := object.Key("architecture")
+		ok.String(string(v.Architecture))
+	}
 
 	if v.AutoStartConfiguration != nil {
 		ok := object.Key("autoStartConfiguration")

@@ -92,6 +92,10 @@ type CreateDatasetImportJobInput struct {
 	// Amazon Personalize replaces any record with the same ID with the new one.
 	ImportMode types.ImportMode
 
+	// If you created a metric attribution, specify whether to publish metrics for this
+	// import job to Amazon S3
+	PublishAttributionMetricsToS3 *bool
+
 	// A list of tags
 	// (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html) to
 	// apply to the dataset import job.

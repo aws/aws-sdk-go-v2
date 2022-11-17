@@ -309,6 +309,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutConfiguration struct {
+}
+
+func (*validateOpPutConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSyncResource struct {
 }
 
@@ -467,6 +487,10 @@ func addOpListAttributeGroupsForApplicationValidationMiddleware(stack *middlewar
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutConfiguration{}, middleware.After)
 }
 
 func addOpSyncResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -739,6 +763,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutConfigurationInput(v *PutConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutConfigurationInput"}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

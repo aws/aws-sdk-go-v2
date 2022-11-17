@@ -7952,9 +7952,27 @@ func awsRestxml_deserializeDocumentAccountLevel(v **types.AccountLevel, decoder 
 				return err
 			}
 
+		case strings.EqualFold("AdvancedCostOptimizationMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentAdvancedCostOptimizationMetrics(&sv.AdvancedCostOptimizationMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("AdvancedDataProtectionMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentAdvancedDataProtectionMetrics(&sv.AdvancedDataProtectionMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("BucketLevel", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentBucketLevel(&sv.BucketLevel, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("DetailedStatusCodesMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentDetailedStatusCodesMetrics(&sv.DetailedStatusCodesMetrics, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -7979,6 +7997,110 @@ func awsRestxml_deserializeDocumentActivityMetrics(v **types.ActivityMetrics, de
 	var sv *types.ActivityMetrics
 	if *v == nil {
 		sv = &types.ActivityMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.IsEnabled = xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentAdvancedCostOptimizationMetrics(v **types.AdvancedCostOptimizationMetrics, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AdvancedCostOptimizationMetrics
+	if *v == nil {
+		sv = &types.AdvancedCostOptimizationMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.IsEnabled = xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentAdvancedDataProtectionMetrics(v **types.AdvancedDataProtectionMetrics, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AdvancedDataProtectionMetrics
+	if *v == nil {
+		sv = &types.AdvancedDataProtectionMetrics{}
 	} else {
 		sv = *v
 	}
@@ -8529,6 +8651,24 @@ func awsRestxml_deserializeDocumentBucketLevel(v **types.BucketLevel, decoder sm
 				return err
 			}
 
+		case strings.EqualFold("AdvancedCostOptimizationMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentAdvancedCostOptimizationMetrics(&sv.AdvancedCostOptimizationMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("AdvancedDataProtectionMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentAdvancedDataProtectionMetrics(&sv.AdvancedDataProtectionMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("DetailedStatusCodesMetrics", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentDetailedStatusCodesMetrics(&sv.DetailedStatusCodesMetrics, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("PrefixLevel", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentPrefixLevel(&sv.PrefixLevel, nodeDecoder); err != nil {
@@ -8775,6 +8915,58 @@ func awsRestxml_deserializeDocumentDeleteMultiRegionAccessPointInput(v **types.D
 			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentDetailedStatusCodesMetrics(v **types.DetailedStatusCodesMetrics, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DetailedStatusCodesMetrics
+	if *v == nil {
+		sv = &types.DetailedStatusCodesMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("IsEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected IsEnabled to be of type *bool, got %T instead", val)
+				}
+				sv.IsEnabled = xtv
 			}
 
 		default:

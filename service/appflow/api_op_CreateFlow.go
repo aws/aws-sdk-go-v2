@@ -71,6 +71,11 @@ type CreateFlowInput struct {
 	// the Amazon AppFlow-managed KMS key.
 	KmsArn *string
 
+	// Specifies the configuration that Amazon AppFlow uses when it catalogs the data
+	// that's transferred by the associated flow. When Amazon AppFlow catalogs the data
+	// from a flow, it stores metadata in a data catalog.
+	MetadataCatalogConfig *types.MetadataCatalogConfig
+
 	// The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
 

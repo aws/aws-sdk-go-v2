@@ -2644,6 +2644,11 @@ func awsRestjson1_deserializeDocumentAppMonitor(v **types.AppMonitor, value inte
 				sv.Created = ptr.String(jtv)
 			}
 
+		case "CustomEvents":
+			if err := awsRestjson1_deserializeDocumentCustomEvents(&sv.CustomEvents, value); err != nil {
+				return err
+			}
+
 		case "DataStorage":
 			if err := awsRestjson1_deserializeDocumentDataStorage(&sv.DataStorage, value); err != nil {
 				return err
@@ -3166,6 +3171,46 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomEvents(v **types.CustomEvents, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomEvents
+	if *v == nil {
+		sv = &types.CustomEvents{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomEventsStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.CustomEventsStatus(jtv)
 			}
 
 		default:

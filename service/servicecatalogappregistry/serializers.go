@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
@@ -782,6 +783,51 @@ func awsRestjson1_serializeOpHttpBindingsGetAttributeGroupInput(v *GetAttributeG
 	return nil
 }
 
+type awsRestjson1_serializeOpGetConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpGetConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetConfigurationInput(v *GetConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListApplications struct {
 }
 
@@ -1145,6 +1191,76 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	}
 	if v.ResourceArn != nil {
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpPutConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutConfigurationInput(v *PutConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutConfigurationInput(v *PutConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentAppRegistryConfiguration(v.Configuration, ok); err != nil {
 			return err
 		}
 	}
@@ -1538,6 +1654,32 @@ func awsRestjson1_serializeOpDocumentUpdateAttributeGroupInput(v *UpdateAttribut
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAppRegistryConfiguration(v *types.AppRegistryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TagQueryConfiguration != nil {
+		ok := object.Key("tagQueryConfiguration")
+		if err := awsRestjson1_serializeDocumentTagQueryConfiguration(v.TagQueryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagQueryConfiguration(v *types.TagQueryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TagKey != nil {
+		ok := object.Key("tagKey")
+		ok.String(*v.TagKey)
 	}
 
 	return nil

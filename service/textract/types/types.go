@@ -81,6 +81,10 @@ type Block struct {
 	// or a check box that's detected on a document page. Use the value of
 	// SelectionStatus to determine the status of the selection element.
 	//
+	// * SIGNATURE -
+	// The location and confidene score of a signature detected on a document page. Can
+	// be returned as part of a Key-Value pair or a detected cell.
+	//
 	// * QUERY - A
 	// question asked during the call of AnalyzeDocument. Contains an alias and an ID
 	// that attaches it to its answer.

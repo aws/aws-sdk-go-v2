@@ -370,6 +370,26 @@ func (m *validateOpDisassociateApi) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEvaluateCode struct {
+}
+
+func (*validateOpEvaluateCode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEvaluateCode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EvaluateCodeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEvaluateCodeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEvaluateMappingTemplate struct {
 }
 
@@ -1042,6 +1062,10 @@ func addOpDisassociateApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateApi{}, middleware.After)
 }
 
+func addOpEvaluateCodeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEvaluateCode{}, middleware.After)
+}
+
 func addOpEvaluateMappingTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEvaluateMappingTemplate{}, middleware.After)
 }
@@ -1198,6 +1222,24 @@ func validateAdditionalAuthenticationProviders(v []types.AdditionalAuthenticatio
 		if err := validateAdditionalAuthenticationProvider(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAppSyncRuntime(v *types.AppSyncRuntime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AppSyncRuntime"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RuntimeVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuntimeVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1538,8 +1580,10 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.DataSourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
 	}
-	if v.FunctionVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionVersion"))
+	if v.Runtime != nil {
+		if err := validateAppSyncRuntime(v.Runtime); err != nil {
+			invalidParams.AddNested("Runtime", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1608,6 +1652,11 @@ func validateOpCreateResolverInput(v *CreateResolverInput) error {
 	if v.CachingConfig != nil {
 		if err := validateCachingConfig(v.CachingConfig); err != nil {
 			invalidParams.AddNested("CachingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Runtime != nil {
+		if err := validateAppSyncRuntime(v.Runtime); err != nil {
+			invalidParams.AddNested("Runtime", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1783,6 +1832,31 @@ func validateOpDisassociateApiInput(v *DisassociateApiInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApiInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEvaluateCodeInput(v *EvaluateCodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateCodeInput"}
+	if v.Runtime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	} else if v.Runtime != nil {
+		if err := validateAppSyncRuntime(v.Runtime); err != nil {
+			invalidParams.AddNested("Runtime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.Context == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Context"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2280,8 +2354,10 @@ func validateOpUpdateFunctionInput(v *UpdateFunctionInput) error {
 	if v.DataSourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
 	}
-	if v.FunctionVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FunctionVersion"))
+	if v.Runtime != nil {
+		if err := validateAppSyncRuntime(v.Runtime); err != nil {
+			invalidParams.AddNested("Runtime", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2350,6 +2426,11 @@ func validateOpUpdateResolverInput(v *UpdateResolverInput) error {
 	if v.CachingConfig != nil {
 		if err := validateCachingConfig(v.CachingConfig); err != nil {
 			invalidParams.AddNested("CachingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Runtime != nil {
+		if err := validateAppSyncRuntime(v.Runtime); err != nil {
+			invalidParams.AddNested("Runtime", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
